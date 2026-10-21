@@ -148,7 +148,9 @@ export class TabletopAssets {
     let bitmap: ImageBitmap | null = null;
     try {
       bitmap = await createImageBitmap(
-        await (await this.fetchAsset('assets/tabletop/beech-albedo.png', this.abort.signal)).blob(),
+        await (
+          await this.fetchAsset('games/quoridor/tabletop/beech-albedo.png', this.abort.signal)
+        ).blob(),
         { colorSpaceConversion: 'none', imageOrientation: 'flipY' },
       );
       if (this.disposed) {

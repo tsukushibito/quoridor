@@ -20,6 +20,6 @@ The browser does not contact Poly Haven or an image generation service.
 - This is an appearance reference for fine-grained hardwood, not a claim that Gigamic uses beech.
 - The same selected grain image is tinted for board stain, wall wood, pawn paint and table wood.
 - Roughness/fine bump are independent procedural microfibers, not measured PBR data.
-- Full generation prompt and verification: [tabletop rendering report](../../../../../docs/reports/tabletop-rendering.md).
+- Full generation prompt and verification: [tabletop rendering report](../../../../../../docs/reports/tabletop-rendering.md).
 
 Unused generated variants and downloaded product reference photographs are not runtime assets.

@@ -2,8 +2,8 @@
 
 実施日: 2026-09-30。Beads: `quoridor-bh9.8`。
 管理worktree: `/workspaces/quoridor/.worktree/webapp-presentation`、ブランチ `codex/webapp-presentation`、開始点 `14dee03`。
-設計正本: [11.5〜11.8](../design/quoridor-3d-webapp-design-rust-wasm-v1.md#115-アニメーションと確定処理)。
-音源: [manifest](../../apps/web/public/assets/audio/manifest.json)、[出典・加工](../../apps/web/public/assets/audio/README.md)。
+設計正本: [11.5〜11.8](../../games/quoridor/docs/quoridor-3d-webapp-design-rust-wasm-v1.md#115-アニメーションと確定処理)。
+音源: [manifest](../../apps/web/public/games/quoridor/audio/manifest.json)、[出典・加工](../../apps/web/public/games/quoridor/audio/README.md)。
 
 ## 実装
 
@@ -26,19 +26,19 @@
 
 ## 検証
 
-| 検証 | 結果 |
-| --- | --- |
-| `npm run typecheck` | 成功 |
-| `npm run build` | release rules/AI Wasm、型、通常production build成功。既存の大きいJS chunk注意表示あり |
-| `npm run test:audio` | 設定・独立保存・破損/保存失敗の3件成功 |
-| `npm run test:render` | 既存6件成功 |
-| `node scripts/check-boundaries.mjs` / `git diff --check` | 成功 |
-| Chromium development 関連38件 | 37件成功。検証中のソース変更で1件がHMR再読込され時間切れになり、同ケースはソース固定のproductionで成功 |
-| Chromium production root | 終局/振り返り11件、関連保存/復旧6件、drag/演出中断1件の計18件成功 |
-| WebKit production root | 音声10件と結果/振り返り5件を実行。14件成功、AudioParamの観測を修正して残り1件も成功 |
-| Firefox production root（Xvfb/PulseAudio） | 音声10件と結果/振り返り4件の計14件成功 |
-| Chromium production `/quoridor/` | 音声・AI両側保存・終局AI復元・結果/振り返りの8件成功 |
-| 通常production（テスト観測口なし） | 7音源のHTTP配信とhash一致、実キーボード15手の終局、前/最初/最後の閲覧、結果/タイトル復帰、canvas 1枚、page errorなしを確認 |
+| 検証                                                     | 結果                                                                                                                       |
+| -------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `npm run typecheck`                                      | 成功                                                                                                                       |
+| `npm run build`                                          | release rules/AI Wasm、型、通常production build成功。既存の大きいJS chunk注意表示あり                                      |
+| `npm run test:audio`                                     | 設定・独立保存・破損/保存失敗の3件成功                                                                                     |
+| `npm run test:render`                                    | 既存6件成功                                                                                                                |
+| `node scripts/check-boundaries.mjs` / `git diff --check` | 成功                                                                                                                       |
+| Chromium development 関連38件                            | 37件成功。検証中のソース変更で1件がHMR再読込され時間切れになり、同ケースはソース固定のproductionで成功                     |
+| Chromium production root                                 | 終局/振り返り11件、関連保存/復旧6件、drag/演出中断1件の計18件成功                                                          |
+| WebKit production root                                   | 音声10件と結果/振り返り5件を実行。14件成功、AudioParamの観測を修正して残り1件も成功                                        |
+| Firefox production root（Xvfb/PulseAudio）               | 音声10件と結果/振り返り4件の計14件成功                                                                                     |
+| Chromium production `/quoridor/`                         | 音声・AI両側保存・終局AI復元・結果/振り返りの8件成功                                                                       |
+| 通常production（テスト観測口なし）                       | 7音源のHTTP配信とhash一致、実キーボード15手の終局、前/最初/最後の閲覧、結果/タイトル復帰、canvas 1枚、page errorなしを確認 |
 
 初回に見つけた終局復元時の一瞬のBGM再開と、結果用の盤面同期が進行中の演出を取り消す問題を修正し、保存復元・やり直し取消・演出中のタイトル往復をproductionで確認した。
 

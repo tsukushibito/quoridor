@@ -3,7 +3,7 @@ export const ENVIRONMENT_PRESETS = [
   {
     id: 'warm-room',
     label: '暖かい室内',
-    asset: 'assets/tabletop/comfy-cafe-2k.hdr',
+    asset: 'games/quoridor/tabletop/comfy-cafe-2k.hdr',
     rotationY: Math.PI / 2,
     environmentIntensity: 0.65,
     keyIntensity: 4,
@@ -12,7 +12,7 @@ export const ENVIRONMENT_PRESETS = [
   {
     id: 'dark-room',
     label: '暗めの室内',
-    asset: 'assets/environments/warm-restaurant-night-2k.hdr',
+    asset: 'games/quoridor/environments/warm-restaurant-night-2k.hdr',
     rotationY: Math.PI / 2,
     environmentIntensity: 0.35,
     keyIntensity: 1.5,
@@ -21,7 +21,7 @@ export const ENVIRONMENT_PRESETS = [
   {
     id: 'forest',
     label: '森の中',
-    asset: 'assets/environments/epping-forest-02-2k.hdr',
+    asset: 'games/quoridor/environments/epping-forest-02-2k.hdr',
     rotationY: Math.PI / 2,
     environmentIntensity: 0.55,
     keyIntensity: 2.5,
@@ -30,7 +30,7 @@ export const ENVIRONMENT_PRESETS = [
   {
     id: 'mountain',
     label: '山の上',
-    asset: 'assets/environments/qwantani-noon-2k.hdr',
+    asset: 'games/quoridor/environments/qwantani-noon-2k.hdr',
     rotationY: Math.PI / 2,
     environmentIntensity: 0.45,
     keyIntensity: 4,

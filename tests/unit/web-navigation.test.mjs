@@ -21,7 +21,7 @@ function fixture(hash = '') {
     signals = [];
   let location = hash;
   const module = {
-    mountQuoridor(root, signal) {
+    mount(root, signal) {
       signals.push(signal);
       events.push(['mount', root]);
       signal.addEventListener('abort', () => events.push(['save', 'cancel-worker', 'dispose']));
@@ -36,8 +36,9 @@ function fixture(hash = '') {
       events.push(['loading']);
       return root;
     },
-    load: () => {
+    load: (route) => {
       const pending = deferred();
+      pending.route = route;
       imports.push(pending);
       return pending.promise;
     },
@@ -63,7 +64,7 @@ test('static-host hash routes preserve the base pathname and default unknown rou
     assert.equal(new URL('#/quoridor', path).pathname, new URL(path).pathname);
   }
   assert.equal(routeFromHash('#/quoridor/'), 'quoridor');
-  assert.equal(routeFromHash('#/othello'), 'home');
+  assert.equal(routeFromHash('#/othello'), 'othello');
 });
 
 test('home does not import a game; selected entry mounts once and teardown precedes home', async () => {
@@ -121,7 +122,7 @@ test('current import failure is visible; a partially mounted game is aborted on 
     if (stage === 'import') f.imports[0].reject(new Error('load failed'));
     else
       f.imports[0].resolve({
-        mountQuoridor(root, signal) {
+        mount(root, signal) {
           signal.addEventListener('abort', () => f.events.push(['released']));
           throw new Error('load failed');
         },
@@ -130,4 +131,34 @@ test('current import failure is visible; a partially mounted game is aborted on 
     assert.deepEqual(f.events.at(-1), ['failed', 'load failed']);
     if (stage === 'mount') assert.equal(f.events.at(-2)[0], 'released');
   }
+});
+
+test('cross-game switches abort each selected game before importing only the next game', async () => {
+  const f = fixture();
+  await f.navigation.update();
+  const quoridor = f.go('#/quoridor');
+  assert.equal(f.imports[0].route, 'quoridor');
+  f.imports[0].resolve(f.module);
+  await quoridor;
+  const othello = f.go('#/othello');
+  assert.equal(f.signals[0].aborted, true);
+  assert.equal(f.imports[1].route, 'othello');
+  f.imports[1].resolve(f.module);
+  await othello;
+  await f.go('#/othello/');
+  assert.equal(f.imports.length, 2);
+  await f.go('#/');
+  assert.equal(f.signals[1].aborted, true);
+});
+
+test('late Othello import cannot attach to a newer Quoridor scope', async () => {
+  const f = fixture('#/othello');
+  const stale = f.navigation.update();
+  const current = f.go('#/quoridor');
+  f.imports[1].resolve(f.module);
+  await current;
+  f.imports[0].resolve(f.module);
+  await stale;
+  assert.equal(f.signals.length, 1);
+  f.navigation.dispose();
 });

@@ -172,7 +172,7 @@ export class AudioController {
         const buffer = await Promise.race([
           deadline,
           (async () => {
-            const response = await fetch(`${this.base}assets/audio/${FILES[asset]}`, {
+            const response = await fetch(`${this.base}games/quoridor/audio/${FILES[asset]}`, {
               signal: request.signal,
             });
             if (!response.ok) throw new Error(`Audio HTTP ${response.status}`);

@@ -2,7 +2,7 @@
 
 実施日: 2026-09-30。Beads: `quoridor-xyg`。
 作業場所: `/workspaces/quoridor/.worktree/webapp-audio`、ブランチ `codex/webapp-audio`、開始点 `2b24675`。
-設計は [11.6 サウンド](../design/quoridor-3d-webapp-design-rust-wasm-v1.md#116-サウンド2026-09-30追加)、音源の出典とハッシュは [manifest](../../apps/web/public/assets/audio/manifest.json) を参照する。
+設計は [11.6 サウンド](../../games/quoridor/docs/quoridor-3d-webapp-design-rust-wasm-v1.md#116-サウンド2026-09-30追加)、音源の出典とハッシュは [manifest](../../apps/web/public/games/quoridor/audio/manifest.json) を参照する。
 並行worktreeとmainのソースは変更していない。commit・push・mainへの統合は行っていない。
 
 ## 実装
@@ -23,18 +23,18 @@ SEは44.1kHz mono PCM16 WAV。平均レベルは駒 -24.2dBFS、壁 -24.5dBFS、
 
 ## 検証
 
-| 検証 | 結果 |
-| --- | --- |
-| `npm run typecheck` | 成功 |
-| `npm run build`（release Wasmと通常production） | 成功。既存の大きいJS chunkの注意表示あり |
-| `npm run test:audio` | 設定・独立保存・破損/サイズ/保存エラーの3件成功 |
-| `npm run test:render` | 既存6件成功 |
-| `node scripts/check-boundaries.mjs` | 成功 |
-| Chromium production root | 音声10件成功。設定復元・人間/AI・壁・終局・取消・失敗復旧・タブ復帰・タッチ/キーボード・実信号/消音を確認 |
-| WebKit development | 音声9件と実信号/消音1件成功 |
-| Firefox development（Xvfb/PulseAudio） | 音声10件成功 |
-| Firefox音声出力未提供 | resumeが8秒でblockedになり、音なしで1手進行。`artifacts/audio-device-timeout.json` |
-| 既存HUD/対局/AI/保存/描画復旧 | 34ケースを実行。時計を停止する長いケース以外の33件は初回または再確認で成功 |
+| 検証                                            | 結果                                                                                                      |
+| ----------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `npm run typecheck`                             | 成功                                                                                                      |
+| `npm run build`（release Wasmと通常production） | 成功。既存の大きいJS chunkの注意表示あり                                                                  |
+| `npm run test:audio`                            | 設定・独立保存・破損/サイズ/保存エラーの3件成功                                                           |
+| `npm run test:render`                           | 既存6件成功                                                                                               |
+| `node scripts/check-boundaries.mjs`             | 成功                                                                                                      |
+| Chromium production root                        | 音声10件成功。設定復元・人間/AI・壁・終局・取消・失敗復旧・タブ復帰・タッチ/キーボード・実信号/消音を確認 |
+| WebKit development                              | 音声9件と実信号/消音1件成功                                                                               |
+| Firefox development（Xvfb/PulseAudio）          | 音声10件成功                                                                                              |
+| Firefox音声出力未提供                           | resumeが8秒でblockedになり、音なしで1手進行。`artifacts/audio-device-timeout.json`                        |
+| 既存HUD/対局/AI/保存/描画復旧                   | 34ケースを実行。時計を停止する長いケース以外の33件は初回または再確認で成功                                |
 
 production rootとsubpathの音声検証には `VITE_PHASE1_E2E=1` で観測口を有効化したビルドを使う。通常productionでは観測口を除く。スクリーンショットは `artifacts/audio-320.png`、`audio-390.png`、`audio-1280.png` に保存する。
 

@@ -167,7 +167,7 @@ export function mountQuoridor(
     shell,
     menuDialog,
     topActions,
-    `${import.meta.env.BASE_URL}assets/ui/quoridor-title-logo.png`,
+    `${import.meta.env.BASE_URL}games/quoridor/ui/quoridor-title-logo.png`,
   );
   const ending = createResultReview(shell, layout);
   setIconButton(restart, 'restart', ja.restart);

@@ -2,12 +2,12 @@
 
 作業日: 2026-09-30。Beads: `quoridor-5kk`。
 開始点: `2b24675`。専用branch `codex/environment-presets`、worktree `/workspaces/quoridor/.worktree/environment-presets`。
-設計: [§10.2.2](../design/quoridor-3d-webapp-design-rust-wasm-v1.md#1022-ユーザー設定からの環境切替)。
+設計: [§10.2.2](../../games/quoridor/docs/quoridor-3d-webapp-design-rust-wasm-v1.md#1022-ユーザー設定からの環境切替)。
 
 ## 実装
 
 - 既定の暖かい室内に、暗い暖色室内・昼の森・晴れた山上を追加。設定・保存→表示と操作の設定→環境で切替する。
-- 3枚の実写2K HDRIを同梱し、実行時は選択した一枚だけを取得する。出所・CC0ライセンス・取得日・MD5/SHA-256は[アセット記録](../../apps/web/public/assets/environments/README.md)を参照。追加容量18,538,571 bytes。
+- 3枚の実写2K HDRIを同梱し、実行時は選択した一枚だけを取得する。出所・CC0ライセンス・取得日・MD5/SHA-256は[アセット記録](../../apps/web/public/games/quoridor/environments/README.md)を参照。追加容量18,538,571 bytes。
 - `environment-presets.ts`に安定ID、表示名、asset path、回転、照明強度をまとめる。背景とIBLは同じPMREM、DirectionalLightの向き・色は各HDRIから計算する。既存の木目、材質、geometry、GTAOと影設定は変更しない。
 - 旧環境を表示したまま候補を読み込み、準備完了時に背景・IBL・直接光を同時更新する。generationとAbortControllerで最新選択を優先し、10秒の取得制限と候補/旧資源の解放を行う。木目取得は別のlifetimeとする。
 - 失敗時は最後の成功環境を維持し、要求した選択と現在の環境をUIで伝え再読込を出す。初回失敗時は簡易背景とAmbientLightで対局を続行する。成功済みの同じIDを再選択しても取得しない。

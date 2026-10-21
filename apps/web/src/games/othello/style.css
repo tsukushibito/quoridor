@@ -1,0 +1,150 @@
+.othello {
+  color: #f6efdf;
+  background: #101b25;
+  min-height: 100dvh;
+}
+.othello .othello-page {
+  max-width: 960px;
+  margin: auto;
+  padding: 24px;
+}
+.othello header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.othello h1 {
+  margin: 0 0 16px;
+  font-size: clamp(30px, 6vw, 48px);
+}
+.othello .othello-eyebrow {
+  color: #a9dace;
+  letter-spacing: 0.15em;
+}
+.othello h2 {
+  margin-top: 0;
+}
+.othello a {
+  color: #b5e8dc;
+}
+.othello button,
+.othello select {
+  font: inherit;
+  color: inherit;
+  background: #294b51;
+  border: 1px solid #91c7ba;
+  border-radius: 8px;
+  min-height: 44px;
+  padding: 10px 14px;
+}
+.othello button {
+  cursor: pointer;
+}
+.othello button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+.othello :focus-visible {
+  outline: 3px solid #ffe394;
+  outline-offset: 3px;
+}
+.othello .othello-setup {
+  border: 1px solid #56727b;
+  border-radius: 16px;
+  padding: 20px;
+  background: #20323e;
+}
+.othello label {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0 16px 12px 0;
+}
+.othello p {
+  line-height: 1.7;
+}
+.othello .othello-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 16px 0;
+}
+.othello [hidden] {
+  display: none !important;
+}
+.othello #othello-error {
+  color: #ffd0bd;
+}
+.othello #othello-save-status {
+  overflow-wrap: anywhere;
+}
+.othello .othello-match {
+  margin-top: 28px;
+}
+.othello .othello-board {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 2px;
+  padding: 5px;
+  border-radius: 8px;
+  background: #7aa99a;
+  width: min(100%, 560px);
+  box-sizing: border-box;
+}
+.othello .othello-cell {
+  aspect-ratio: 1;
+  min-width: 0;
+  min-height: 0;
+  border-radius: 2px;
+  border: 0;
+  padding: 0;
+  background: #22604d;
+  font-size: clamp(24px, 7vw, 52px);
+  line-height: 1;
+  text-align: center;
+  position: relative;
+}
+.othello .othello-cell[data-stone='1'],
+.othello .othello-cell[data-stone='2'] {
+  font-size: 0;
+}
+.othello .othello-cell[data-stone='1']::after,
+.othello .othello-cell[data-stone='2']::after {
+  content: '';
+  position: absolute;
+  inset: 10%;
+  border-radius: 50%;
+  background: #101419;
+  border: 1px solid #05080a;
+  box-shadow: 0 2px 3px #0006;
+}
+.othello .othello-cell[data-stone='2']::after {
+  background: #fff9e9;
+  border-color: #d3d0bd;
+}
+.othello .othello-cell[data-legal='true'] {
+  background: #2d725b;
+  color: #ffdf85;
+}
+.othello .othello-cell[aria-disabled='true'] {
+  cursor: default;
+}
+.othello .othello-cell:focus-visible {
+  z-index: 1;
+  outline-offset: -3px;
+}
+@media (max-width: 480px) {
+  .othello .othello-page {
+    padding: 16px 10px;
+  }
+  .othello .othello-setup {
+    padding: 14px;
+  }
+  .othello label,
+  .othello select {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}

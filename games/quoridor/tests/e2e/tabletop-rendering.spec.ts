@@ -41,7 +41,7 @@ test('local HDRI and wood survive restart and renderer recovery, with desktop/mo
   });
   const requests: string[] = [];
   page.on('request', (request) => {
-    if (request.url().includes('/assets/tabletop/')) requests.push(request.url());
+    if (request.url().includes('/games/quoridor/tabletop/')) requests.push(request.url());
   });
   await page.setViewportSize({ width: 1440, height: 900 });
   await ready(page);
@@ -127,7 +127,7 @@ test('missing environment/wood keep play usable and a retry can restore the asse
 }) => {
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(error.message));
-  await page.route('**/assets/tabletop/**', (route) =>
+  await page.route('**/games/quoridor/tabletop/**', (route) =>
     route.fulfill({ status: 404, body: 'Missing fixture' }),
   );
   await ready(page);
@@ -143,7 +143,7 @@ test('missing environment/wood keep play usable and a retry can restore the asse
   await expect
     .poll(() => page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.state().view?.ply))
     .toBe(0);
-  await page.unroute('**/assets/tabletop/**');
+  await page.unroute('**/games/quoridor/tabletop/**');
   await page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.injectRenderFault('renderError'));
   await page.locator('#retry-renderer').click();
   await assets(page, 'ready');
@@ -159,7 +159,7 @@ test('disposing during asset download cannot revive the scene', async ({ page })
     release = resolve;
   });
   let requested = 0;
-  await page.route('**/assets/tabletop/**', async (route) => {
+  await page.route('**/games/quoridor/tabletop/**', async (route) => {
     requested++;
     await gate;
     // Requests are normally canceled by the scene's AbortController.

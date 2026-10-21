@@ -199,7 +199,7 @@ test('trusted BFCache return preserves connected product Worker-Wasm and control
         });
       });
     });
-    await page.goto('./assets/ui/quoridor-title-logo.png');
+    await page.goto('./games/quoridor/ui/quoridor-title-logo.png');
     // A restored cached document does not issue a new load event. Observe the
     // real history commit, then the trusted pageshow that proves restoration.
     await page.goBack({ waitUntil: 'commit', timeout: 15_000 });

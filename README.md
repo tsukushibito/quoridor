@@ -1,6 +1,6 @@
-# Quoridor 3D web app
+# Quoridor / Othello web app
 
-ローカルで2人対戦、または学習不要のRust B0 AIとの対戦ができます。ルールと履歴はメインスレッドのRust WebAssemblyが管理し、AI探索は別のWebAssembly Workerで動きます。盤面はThree.jsの基本描画です。実際の描画方式は「設定・保存」内の「表示と操作の設定」に表示され、GIはオフです。VXGI/TRAAの実装や実GPUでの確認は後続作業です。
+一つのゲーム選択画面からQuoridorとOthelloを開けます。Quoridorはローカル2人、または学習不要のRust B0 AIと対戦できます。ルールと履歴はメインスレッドのRust WebAssemblyが管理し、AI探索は別のWebAssembly Workerで動きます。盤面はThree.jsの基本描画です。実際の描画方式は「設定・保存」内の「表示と操作の設定」に表示され、GIはオフです。VXGI/TRAAの実装や実GPUでの確認は後続作業です。
 
 今後は一つのWebアプリのゲーム選択画面からコリドール／オセロへ進む[複数ゲーム構成](docs/design/multi-game-repository.md)を採用します。[共有依存環境とWorktree内コード参照](docs/development/rust-python-environment.md)を分離し、Web入口とゲーム別配置は設計に沿って段階適用します。現在のWeb起動方法は以下を参照してください。
 
@@ -10,7 +10,7 @@
 
 AI研究は研究方針・進行判断担当が人間の判断基準に沿って目的・仮説・比較規模と結果を判断し、方針相談窓口が人間の状況把握と解釈・方針修正の相談を担います。実行・統合担当は作業配分・実資源・通常修復・技術的受入れを扱い、Main/Git/index/Cargoの唯一writerを維持します。通常の成果は実行・統合担当へ届け、必要な境界だけタスク単位の独立確認を行います。固定ロールや定期LLM監督は使いません。人間が研究目標・重要な方向変更・機能とモデル設計を決め、配分済みの通常工程と許可範囲内の具体的なデータ選定・規模・学習条件は、実行担当が理由と結果を記録して自律継続します。方針相談や人間の返答を通常工程の追加gateにしません。競合仮説と実験は結果から見直し、小規模診断と正式棋力評価を区別します。現在のSigma同等水準は未立証です。 観測・限界・次の人間判断は[研究知見](docs/research-findings.md)へまとめます。[タスク型研究の設計](docs/design/ai-research-team.md)と[実行・記録規約](docs/development/ai-research-experiments.md)を参照してください。
 
-Webの入口はゲーム選択画面です。Quoridorを開くと既存の新規／再開画面へ進み、「ゲーム一覧」で保存・AI取消・描画終了を経て戻れます。直リンクは `#/quoridor`、サブパス配信でも同じhashを使います。OthelloのRustルールとWasm接続は実装・単体検証済みですが、画面接続は後続工程のため現在のゲーム選択では利用できません。
+Webの入口はゲーム選択画面です。Quoridorを開くと既存の新規／再開画面へ進み、「ゲーム一覧」で保存・AI取消・描画終了を経て戻れます。直リンクは `#/quoridor`、サブパス配信でも同じhashを使います。Othelloは `#/othello` からローカル2人、または簡易AI（非学習）と対戦できます。新規／続きからを選び、合法手の表示・必須パス・終局の石数を確認できます。Othelloの保存は独立した `othello.game.v1` で、Quoridorの保存・設定・音量データを変更しません。壊れた保存は勝手に削除せず、再開の再試行か明示した新規対局で扱います。
 
 ## 主要ディレクトリ
 
@@ -25,6 +25,7 @@ Webの入口はゲーム選択画面です。Quoridorを開くと既存の新規
 | その他`tools/`                                                                             | 現役の補助ツール・独立checker・整形/検査用の固定依存                                            |
 | `scripts/`, `scripts/dev/`                                                                 | ビルド・生成・検証入口と開発環境/Beads/研究通信の操作                                           |
 | `games/quoridor/tests/`, `games/quoridor/docs/`                                            | Quoridor固有のテスト・[製品仕様](games/quoridor/docs/quoridor-3d-webapp-design-rust-wasm-v1.md) |
+| `apps/web/public/games/quoridor/`                                                          | Quoridor専用の画像・HDRI・音声と出典。共通faviconはpublic直下                                   |
 | `tests/`                                                                                   | 共通Web検証・既存fixture                                                                        |
 | `docs/design/`, `development/`, `reports/`                                                 | 設計・運用規約・実施結果と限界                                                                  |
 | `research-data/ai-sigma/`                                                                  | mainのGit保存データ・設定・要約・圧縮観測                                                       |

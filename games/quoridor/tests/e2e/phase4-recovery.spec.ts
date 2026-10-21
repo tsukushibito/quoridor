@@ -524,7 +524,7 @@ test('actual back/forward-cache restoration resumes the same committed app where
   await clickCell(page, 13);
   const before = await state(page);
   // The same-origin title image is a separate document without loading another app instance.
-  await page.goto('./assets/ui/quoridor-title-logo.png');
+  await page.goto('./games/quoridor/ui/quoridor-title-logo.png');
   await page.goBack();
   const restored = await page.evaluate(
     () => (window as Window & { __CACHE_RESTORED__?: boolean }).__CACHE_RESTORED__,

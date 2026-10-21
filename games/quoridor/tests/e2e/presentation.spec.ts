@@ -376,7 +376,9 @@ test('muted and hidden terminal animations stay silent and asset failure does no
     }
     expect((await audio(page)).activeBgm).toBe(0);
   }
-  await page.route('**/assets/audio/win.wav', (route) => route.fulfill({ status: 404, body: '' }));
+  await page.route('**/games/quoridor/audio/win.wav', (route) =>
+    route.fulfill({ status: 404, body: '' }),
+  );
   await page.reload();
   await page.locator('#resume-game-choice').click();
   await expect(page.locator('#result-dialog')).toBeVisible();

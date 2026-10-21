@@ -1,7 +1,7 @@
 # VXGI導入前のテーブル空間と木材描画
 
 日付: 2026-09-30。Beads: `quoridor-29v`。
-設計正本: [§10.2](../design/quoridor-3d-webapp-design-rust-wasm-v1.md)。
+設計正本: [§10.2](../../games/quoridor/docs/quoridor-3d-webapp-design-rust-wasm-v1.md)。
 作業場所: 主チェックアウト `/workspaces/quoridor`。ユーザー希望: 暖かい照明の落ち着いた室内。
 
 初回のテーブル・材質強化、照明比較、IBL単独＋GTAO導入、その後の接地感修正を時系列で記録する。
@@ -39,12 +39,12 @@
 
 ## 採用アセット
 
-正本は [asset README](../../apps/web/public/assets/tabletop/README.md)。
+正本は [asset README](../../apps/web/public/games/quoridor/tabletop/README.md)。
 
-| ファイル | 出所 | サイズ | SHA256 |
-| --- | --- | --- | --- |
-| `comfy-cafe-2k.hdr` | Poly Haven / Sergej Majboroda、CC0 | 2048 × 1024、6,260,522 bytes | `00597d2a2174b7803c10bd2d690922e170bb614bce6c98c9c9b688698f1d234d` |
-| `beech-albedo.png` | built-in image_gen、2026-09-30生成、内容変更なし | 1254 × 1254、2,452,019 bytes | `cc1ebb9b08e6c95336b841601d9dcb4df9b7e577f4c1f1ac4dfa522f8f1f7f2e` |
+| ファイル            | 出所                                             | サイズ                       | SHA256                                                             |
+| ------------------- | ------------------------------------------------ | ---------------------------- | ------------------------------------------------------------------ |
+| `comfy-cafe-2k.hdr` | Poly Haven / Sergej Majboroda、CC0               | 2048 × 1024、6,260,522 bytes | `00597d2a2174b7803c10bd2d690922e170bb614bce6c98c9c9b688698f1d234d` |
+| `beech-albedo.png`  | built-in image_gen、2026-09-30生成、内容変更なし | 1254 × 1254、2,452,019 bytes | `cc1ebb9b08e6c95336b841601d9dcb4df9b7e577f4c1f1ac4dfa522f8f1f7f2e` |
 
 HDRI出所: [Comfy Café](https://polyhaven.com/a/comfy_cafe)。
 ライセンス: [Poly Haven CC0](https://polyhaven.com/license)。
@@ -86,16 +86,16 @@ Phase 5で盤周辺の天板を固定bounds内のGI対象へ含める方法を�
 
 ### 結果
 
-| 確認 | 結果・根拠 |
-| --- | --- |
-| strict TypeScript / boundary | `npm run typecheck`、`node scripts/check-boundaries.mjs` 成功 |
-| production `/` | 46ケース確認。初回42成功、4件は起動待機の競合と初回ソフトウェア描画の5秒制限で失敗。待機修正後、該当4ケースを再実行して4/4成功 |
-| production `/quoridor/` | 待機修正後の全46ケースが成功（6.0分） |
-| 新規アセット検証 | 両baseで3/3成功。読込・再利用・renderer復旧、404時の対局継続と再取得、取得途中の破棄を確認 |
-| 静止時の描画 | アセット描画後、submitted frame数が静止中に増加しないことを確認 |
-| 通常production | `npm run build`成功。`scripts/smoke-ordinary-production.mjs` 成功。キーボード操作、テストフック非同梱、ブラウザエラーなし |
-| 通常版の画面撮影 | 実UIで駒を移動、壁を設置して撮影。アセット2枚のHTTP 200、ブラウザエラーなし、テストフックなし |
-| 差分 | `git diff --check` 成功 |
+| 確認                         | 結果・根拠                                                                                                                     |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| strict TypeScript / boundary | `npm run typecheck`、`node scripts/check-boundaries.mjs` 成功                                                                  |
+| production `/`               | 46ケース確認。初回42成功、4件は起動待機の競合と初回ソフトウェア描画の5秒制限で失敗。待機修正後、該当4ケースを再実行して4/4成功 |
+| production `/quoridor/`      | 待機修正後の全46ケースが成功（6.0分）                                                                                          |
+| 新規アセット検証             | 両baseで3/3成功。読込・再利用・renderer復旧、404時の対局継続と再取得、取得途中の破棄を確認                                     |
+| 静止時の描画                 | アセット描画後、submitted frame数が静止中に増加しないことを確認                                                                |
+| 通常production               | `npm run build`成功。`scripts/smoke-ordinary-production.mjs` 成功。キーボード操作、テストフック非同梱、ブラウザエラーなし      |
+| 通常版の画面撮影             | 実UIで駒を移動、壁を設置して撮影。アセット2枚のHTTP 200、ブラウザエラーなし、テストフックなし                                  |
+| 差分                         | `git diff --check` 成功                                                                                                        |
 
 テストフック付き検証は、通常previewの`dist/`を保持するため
 `.artifacts/tabletop/production/{root,subpath}`を出力先、4274を検証portにした。
@@ -140,11 +140,11 @@ HUDの盤面寸法とスクロールなしを1280 × 720、1440 × 900、1920 ×
 AgX / exposure 0.9、backgroundIntensity 0.55、同じHDRIと木目を使用。
 Chromium headless / SwiftShader / WebGL 2でアセットready、ブラウザ例外なしを確認した。
 
-| 条件 | 観察 |
-| --- | --- |
-| 現在のIBL 0.7 + SpotLight 260 | 盤面右側に明るい部分があり、盤とテーブルの境目・壁の周辺に投影影がある |
-| IBL 0.7のみ（SpotLight 0） | 少し暗くなるが盤面・駒・木目は判読可能。局所的な投影影と接地感が弱くなる |
-| IBL 1.0のみ（SpotLight 0） | 明るさを確保でき、SpotLightによる局所的な明暗差が減る。接触部分の遮蔽は依然未計算 |
+| 条件                          | 観察                                                                              |
+| ----------------------------- | --------------------------------------------------------------------------------- |
+| 現在のIBL 0.7 + SpotLight 260 | 盤面右側に明るい部分があり、盤とテーブルの境目・壁の周辺に投影影がある            |
+| IBL 0.7のみ（SpotLight 0）    | 少し暗くなるが盤面・駒・木目は判読可能。局所的な投影影と接地感が弱くなる          |
+| IBL 1.0のみ（SpotLight 0）    | 明るさを確保でき、SpotLightによる局所的な明暗差が減る。接触部分の遮蔽は依然未計算 |
 
 これは照明候補の比較であり、通常previewの設定変更やAOの実装・画質検証はしていない。
 IBLだけの場合に必要なのは単純な増光だけでなく、盤とテーブル、駒の底、壁と溝の局所遮蔽。
@@ -200,12 +200,12 @@ HDRIの取得失敗時だけ既存のAmbientLightを使う。VXGIは今回実装
 1440 × 900、Chromium headless / SwiftShader / WebGL 2。
 AO有効時の出力は720 × 450。アセットはready、ブラウザ例外とconsole errorは0。
 
-| 比較領域 | 変化したpixel数 | RGB各channelの平均絶対差（0〜255） |
-| --- | --- | --- |
-| 背景（y 0〜139） | 0 | 0 |
-| 駒の接触部周辺 | 3,364 | 2.638 |
-| 盤とテーブルの接触部周辺 | 29,230 | 8.055 |
-| 壁の接触部周辺 | 7,400 | 5.442 |
+| 比較領域                 | 変化したpixel数 | RGB各channelの平均絶対差（0〜255） |
+| ------------------------ | --------------- | ---------------------------------- |
+| 背景（y 0〜139）         | 0               | 0                                  |
+| 駒の接触部周辺           | 3,364           | 2.638                              |
+| 盤とテーブルの接触部周辺 | 29,230          | 8.055                              |
+| 壁の接触部周辺           | 7,400           | 5.442                              |
 
 この差分は画質の定量評価ではなく、背景を変えずに接触部の材質照明が変わったことを示す。
 目視でも盤の底、駒の足元、壁と溝に局所的な暗さが加わることを確認した。
@@ -231,15 +231,15 @@ AO有効時の出力は720 × 450。アセットはready、ブラウザ例外と
 先行評価を含む最終構成で以下を確認した。途中の検証は環境の再起動で中断されたため、
 最終構成の関連20ケースを通常URLとサブパスで改めて実行した。全E2Eの再実行ではない。
 
-| 確認 | 結果 |
-| --- | --- |
-| `npm run build`（release WASM、型検査、通常production） | 成功。Viteのchunkサイズ警告あり |
-| 関連E2E・通常URL | 20/20成功 |
-| 同じ関連E2E・`/quoridor/`配信 | 20/20成功 |
-| AO・アセット・renderer | 半解像度resize、対局リセット時の再利用、renderer復旧、取得失敗時のfallback、取得中の破棄、静止時の描画停止を確認 |
-| 操作・HUD・復帰 | pointer/keyboard/touch、camera反転とresize、アニメーション中断、AI結果取消、対局モード切替、保存復帰・削除を確認 |
-| 通常production smoke | keyboard移動成功、テスト用globalなし、page errorなし |
-| 通常production撮影 | HDRI/木目はHTTP 200、移動と壁配置を実UIで実行、例外・console errorなし |
+| 確認                                                    | 結果                                                                                                             |
+| ------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `npm run build`（release WASM、型検査、通常production） | 成功。Viteのchunkサイズ警告あり                                                                                  |
+| 関連E2E・通常URL                                        | 20/20成功                                                                                                        |
+| 同じ関連E2E・`/quoridor/`配信                           | 20/20成功                                                                                                        |
+| AO・アセット・renderer                                  | 半解像度resize、対局リセット時の再利用、renderer復旧、取得失敗時のfallback、取得中の破棄、静止時の描画停止を確認 |
+| 操作・HUD・復帰                                         | pointer/keyboard/touch、camera反転とresize、アニメーション中断、AI結果取消、対局モード切替、保存復帰・削除を確認 |
+| 通常production smoke                                    | keyboard移動成功、テスト用globalなし、page errorなし                                                             |
+| 通常production撮影                                      | HDRI/木目はHTTP 200、移動と壁配置を実UIで実行、例外・console errorなし                                           |
 
 - [最終desktop画面（1440 × 900）](../../.artifacts/tabletop/gtao-final-desktop.png)
 - [最終mobile画面（390 × 844）](../../.artifacts/tabletop/gtao-final-mobile.png)
@@ -288,11 +288,11 @@ HDRLoaderのflipYとThreeの`equirectUV`に合わせて画素を方向へ変換�
 
 今回のComfy CaféとY軸90度回転からの結果:
 
-| 値 | 計算結果 |
-| --- | --- |
-| 盤中心から光源へ向かうworld方向 | `(0.538714, 0.544123, -0.643208)` |
-| 選択領域の余剰輝度エネルギー / 上半球の候補全体 | 約52.2% |
-| 正規化したlinear RGBの光色 | `(0.951077, 1.0, 0.998493)` |
+| 値                                              | 計算結果                          |
+| ----------------------------------------------- | --------------------------------- |
+| 盤中心から光源へ向かうworld方向                 | `(0.538714, 0.544123, -0.643208)` |
+| 選択領域の余剰輝度エネルギー / 上半球の候補全体 | 約52.2%                           |
+| 正規化したlinear RGBの光色                      | `(0.951077, 1.0, 0.998493)`       |
 
 計算方向へカメラを向け、通常のPMREM背景で天井の照明が画面中央へ来ることを目視確認した。
 今回の主光源は窓ではなく、この天井照明と推定される。
@@ -317,13 +317,13 @@ VXGIは未導入。実GPU・WebGPUの画質と負荷も未検証。
 
 ### 検証と完成画面
 
-| 確認 | 結果 |
-| --- | --- |
-| `npm run build` | release WASM・型検査・通常production成功。既存のchunkサイズ警告あり |
-| `npm run test:render` | 6/6成功: 上下半球、環境回転、seam、反対向き光源、球面面積、half float、均一/無効画像 |
+| 確認                           | 結果                                                                                        |
+| ------------------------------ | ------------------------------------------------------------------------------------------- |
+| `npm run build`                | release WASM・型検査・通常production成功。既存のchunkサイズ警告あり                         |
+| `npm run test:render`          | 6/6成功: 上下半球、環境回転、seam、反対向き光源、球面面積、half float、均一/無効画像        |
 | 関連E2E・通常URLと`/quoridor/` | 各8/8成功。復旧後の同一方向・shadow map、fallback、破棄、対局/入力、camera反転/resizeを確認 |
-| 通常production smoke | keyboard移動成功、テスト用globalなし、page errorなし |
-| 通常production撮影 | 実UIで移動・壁配置、HDRI/木目HTTP 200、例外・console errorなし |
+| 通常production smoke           | keyboard移動成功、テスト用globalなし、page errorなし                                        |
+| 通常production撮影             | 実UIで移動・壁配置、HDRI/木目HTTP 200、例外・console errorなし                              |
 
 方向のテストは`tests/render/environment-light.test.mjs`に保存し、`npm run check`にも組み込んだ。
 この修正で全てのRust検査や全E2Eを再実行したものではない。

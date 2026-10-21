@@ -1,0 +1,4400 @@
+{
+  "at": "2026-10-21T16:19:07.449722+00:00",
+  "issue": "quoridor-4lc.324.12.9.7",
+  "base": "eb38a0010de1cd30aa0ea0dd583534ef65c4623e",
+  "source_handoff": {
+    "issue": "quoridor-4lc.324.12.9.7",
+    "owner": "codex:01a15f23-0746-7953-a08b-9927d23d26f7",
+    "cwd": "/workspaces/quoridor/.worktree/othello-web129",
+    "base_source": "872068c52349acc1a7fa340912ad2a552867f39b",
+    "source_STOP": true,
+    "source_patch": {
+      "path": "/workspaces/quoridor/.worktree/othello-web129/.artifacts/othello-web129/source.patch",
+      "sha256": "ea10652f00222657b7e4153f129ced459f3bfba1992b3042e22ef030dc8a16e4",
+      "bytes": 67732,
+      "mode": "0644"
+    },
+    "source_refs": [
+      {
+        "path": "apps/web/src/app/main.ts",
+        "sha256": "ef9f287ba1c44c6273263415f2885ec728af5b710571b76ac7ed2c7a4c3981f9",
+        "bytes": 1597,
+        "mode": "0644"
+      },
+      {
+        "path": "apps/web/src/app/navigation.ts",
+        "sha256": "3f91abae6ab701e082ef27fde4a5e57900a434021f06492bd73926c133f27ba7",
+        "bytes": 1754,
+        "mode": "0644"
+      },
+      {
+        "path": "apps/web/src/pages/home/index.ts",
+        "sha256": "cdd972b99606cf23f6b49562a2968031b9764f9c26ea850c0582746d7cb4382b",
+        "bytes": 826,
+        "mode": "0644"
+      },
+      {
+        "path": "tests/e2e/web-shell.spec.ts",
+        "sha256": "f740aa544536970ef889199b7014d8d075ceb22afbb64a8799e16fb77e912294",
+        "bytes": 6408,
+        "mode": "0644"
+      },
+      {
+        "path": "tests/e2e/multi-game-shell.spec.ts",
+        "sha256": "71e61d69064afea59cdb77f3a077758c74792cbd37e84cdd4507cbe88787f0bf",
+        "bytes": 13336,
+        "mode": "0644"
+      },
+      {
+        "path": "tests/unit/web-navigation.test.mjs",
+        "sha256": "07859e2551e6216ff77720cfa17307f2e66359c9c45d5d95d365026d2ce6de2f",
+        "bytes": 5189,
+        "mode": "0644"
+      },
+      {
+        "path": "tests/unit/othello-lifecycle.test.mjs",
+        "sha256": "1a7bc2d627b4c158ebf62f9e1877fcc19d72dac9e772c339a6db9521fff2813e",
+        "bytes": 17757,
+        "mode": "0644"
+      },
+      {
+        "path": "apps/web/src/games/othello/ai-client.ts",
+        "sha256": "f159dcab65a806d8371b4c5e75cc414b7f77ae91f152136554bd2d2e64bdf306",
+        "bytes": 2709,
+        "mode": "0644"
+      },
+      {
+        "path": "apps/web/src/games/othello/ai.worker.ts",
+        "sha256": "5d7c243f503ad8cf1b507163f97507b4cbe747d320985b17ab6f090435d0ab66",
+        "bytes": 643,
+        "mode": "0644"
+      },
+      {
+        "path": "apps/web/src/games/othello/index.ts",
+        "sha256": "973f9c5b8455fc3e70b71aa32d32132a33e33ce274c900f1199b3105699953d6",
+        "bytes": 1660,
+        "mode": "0644"
+      },
+      {
+        "path": "apps/web/src/games/othello/session.ts",
+        "sha256": "3b0df51bbda3661440defebf6b897c187936b0ebd1a1a7ef6ee618bb006b5519",
+        "bytes": 7045,
+        "mode": "0644"
+      },
+      {
+        "path": "apps/web/src/games/othello/storage.ts",
+        "sha256": "17a8fd3ab3f9155567b9ce1812e03289367d0cae08936eda5db8b471dba784c9",
+        "bytes": 1827,
+        "mode": "0644"
+      },
+      {
+        "path": "apps/web/src/games/othello/style.css",
+        "sha256": "34e45b66540c079d44c3af4e14c3961df6ea83deadc8ec29d5246cef1ae9917d",
+        "bytes": 2811,
+        "mode": "0644"
+      },
+      {
+        "path": "apps/web/src/games/othello/view.ts",
+        "sha256": "a6484656365f435233cda769a394f1a95ea2fbd9575e6c582791c1227e1c5431",
+        "bytes": 7137,
+        "mode": "0644"
+      }
+    ],
+    "proposal_patch": "NONE: no common caller/config/manifest change needed",
+    "implementation": "Othello-only Japanese accessible 8x8 UI, local2player and bounded nonlearning AI Worker; Rust API rules; strict independent versioned save; pending resume protects unreadable save; route-specific lazy imports and generation cancellation; Quoridor mount/source/settings/audio/keys unchanged",
+    "PASS": {
+      "direct_source_functional": "22/22 unit-corrupt-fixed",
+      "typecheck": "typecheck-handoff: actual WT declarations plus UI and authored e2e",
+      "vite": "bundle-final, home lazy and distinct game/Worker/CSS chunks",
+      "browser_prior_source": "5/6 first attempt; repaired long cross-game flow1/1; exact source/inputs in evidence-before-corrupt-fix.json",
+      "browser_final_source": "new active-corrupt-resume regression1/1 browser-html; HTML GPU disabled by original contract",
+      "quality": "prettier-handoff; ruff-format-check+ruff-handoff, plus freeze helper final checks"
+    },
+    "UNRUN": [
+      "Rust/Clippy/real-Wasm unit acceptance already Root accepted; not replayed",
+      "Old Quoridor scientific/numerical/model/solver/training/campaign suites",
+      "Historical browser web-shell cases, not replayed",
+      "Full 7-case browser suite on final source; final session-only save-preservation delta is covered by new regression and direct-source units"
+    ],
+    "retained_failures": [
+      "browser-first cross-game test-only45s timeout; trace/context untouched; causal120s repair leaves600s safety guard unchanged",
+      "corrupt-active-original reproduced teardown overwriting unreadable save; fixed and verified",
+      "normal-collection-final collector NameError; fixed in normal-collection-final-fixed without browser replay"
+    ],
+    "actual_resources": {
+      "cpu_plan": {
+        "management": [18],
+        "commands": {
+          "implementation": [12]
+        },
+        "allocation": [12, 18],
+        "resource_CPUs": 2,
+        "worker_CPUs": 1,
+        "library_threads": 1
+      },
+      "family_limit_B": 2147483648,
+      "controller_limit_B": 67108864,
+      "child_limit_B": 2080374784,
+      "hostreserve_B": 4294967296,
+      "GPU": 0,
+      "library_threads": 1,
+      "peak_observed_family_RSS_B": 1846411264
+    },
+    "cleanup": [
+      {
+        "path": ".artifacts/othello-web129/artifact-format/command.process.json",
+        "status": "complete",
+        "wall_seconds": 0.1732693639351055,
+        "remaining": [],
+        "reaped": true,
+        "cleanup": true,
+        "handles": true
+      },
+      {
+        "path": ".artifacts/othello-web129/browser-first/command.process.json",
+        "status": "failed",
+        "wall_seconds": 70.92281379597262,
+        "remaining": [],
+        "reaped": true,
+        "cleanup": true,
+        "handles": true
+      },
+      {
+        "path": ".artifacts/othello-web129/browser-html/command.process.json",
+        "status": "complete",
+        "wall_seconds": 2.0671759539982304,
+        "remaining": [],
+        "reaped": true,
+        "cleanup": true,
+        "handles": true
+      },
+      {
+        "path": ".artifacts/othello-web129/browser-repair/command.process.json",
+        "status": "complete",
+        "wall_seconds": 58.583761451998726,
+        "remaining": [],
+        "reaped": true,
+        "cleanup": true,
+        "handles": true
+      },
+      {
+        "path": ".artifacts/othello-web129/bundle-final/command.process.json",
+        "status": "complete",
+        "wall_seconds": 1.3852504059905186,
+        "remaining": [],
+        "reaped": true,
+        "cleanup": true,
+        "handles": true
+      },
+      {
+        "path": ".artifacts/othello-web129/bundle-first/command.process.json",
+        "status": "complete",
+        "wall_seconds": 2.1515152470674366,
+        "remaining": [],
+        "reaped": true,
+        "cleanup": true,
+        "handles": true
+      },
+      {
+        "path": ".artifacts/othello-web129/collector-format/command.process.json",
+        "status": "complete",
+        "wall_seconds": 0.04584106302354485,
+        "remaining": [],
+        "reaped": true,
+        "cleanup": true,
+        "handles": true
+      },
+      {
+        "path": ".artifacts/othello-web129/collector-format-final/command.process.json",
+        "status": "complete",
+        "wall_seconds": 0.049836051068268716,
+        "remaining": [],
+        "reaped": true,
+        "cleanup": true,
+        "handles": true
+      },
+      {
+        "path": ".artifacts/othello-web129/corrupt-active-original/command.process.json",
+        "status": "failed",
+        "wall_seconds": 0.1341997430427,
+        "remaining": [],
+        "reaped": true,
+        "cleanup": true,
+        "handles": true
+      },
+      {
+        "path": ".artifacts/othello-web129/format-corrupt-fix/command.process.json",
+        "status": "complete",
+        "wall_seconds": 0.45943464303854853,
+        "remaining": [],
+        "reaped": true,
+        "cleanup": true,
+        "handles": true
+      },
+      {
+        "path": ".artifacts/othello-web129/format-final/command.process.json",
+        "status": "complete",
+        "wall_seconds": 0.641997164930217,
+        "remaining": [],
+        "reaped": true,
+        "cleanup": true,
+        "handles": true
+      },
+      {
+        "path": ".artifacts/othello-web129/format-source/command.process.json",
+        "status": "complete",
+        "wall_seconds": 0.6601504710270092,
+        "remaining": [],
+        "reaped": true,
+        "cleanup": true,
+        "handles": true
+      },
+      {
+        "path": ".artifacts/othello-web129/freeze-format/command.process.json",
+        "status": "complete",
+        "wall_seconds": 0.045640500029549,
+        "remaining": [],
+        "reaped": true,
+        "cleanup": true,
+        "handles": true
+      },
+      {
+        "path": ".artifacts/othello-web129/freeze-format-check/command.process.json",
+        "status": "complete",
+        "wall_seconds": 0.04558192007243633,
+        "remaining": [],
+        "reaped": true,
+        "cleanup": true,
+        "handles": true
+      },
+      {
+        "path": ".artifacts/othello-web129/freeze-format-check-repair/command.process.json",
+        "status": "complete",
+        "wall_seconds": 0.05107904796022922,
+        "remaining": [],
+        "reaped": true,
+        "cleanup": true,
+        "handles": true
+      },
+      {
+        "path": ".artifacts/othello-web129/freeze-quality/command.process.json",
+        "status": "complete",
+        "wall_seconds": 0.0439221520209685,
+        "remaining": [],
+        "reaped": true,
+        "cleanup": true,
+        "handles": true
+      },
+      {
+        "path": ".artifacts/othello-web129/freeze-quality-repair/command.process.json",
+        "status": "complete",
+        "wall_seconds": 0.04594329698011279,
+        "remaining": [],
+        "reaped": true,
+        "cleanup": true,
+        "handles": true
+      },
+      {
+        "path": ".artifacts/othello-web129/normal-collection/command.process.json",
+        "status": "complete",
+        "wall_seconds": 0.07361974101513624,
+        "remaining": [],
+        "reaped": true,
+        "cleanup": true,
+        "handles": true
+      },
+      {
+        "path": ".artifacts/othello-web129/normal-collection-final/command.process.json",
+        "status": "failed",
+        "wall_seconds": 0.08083027903921902,
+        "remaining": [],
+        "reaped": true,
+        "cleanup": true,
+        "handles": true
+      },
+      {
+        "path": ".artifacts/othello-web129/normal-collection-final-fixed/command.process.json",
+        "status": "complete",
+        "wall_seconds": 0.06802167498972267,
+        "remaining": [],
+        "reaped": true,
+        "cleanup": true,
+        "handles": true
+      },
+      {
+        "path": ".artifacts/othello-web129/prettier-check/command.process.json",
+        "status": "complete",
+        "wall_seconds": 0.663198180962354,
+        "remaining": [],
+        "reaped": true,
+        "cleanup": true,
+        "handles": true
+      },
+      {
+        "path": ".artifacts/othello-web129/prettier-handoff/command.process.json",
+        "status": "complete",
+        "wall_seconds": 0.6125877100275829,
+        "remaining": [],
+        "reaped": true,
+        "cleanup": true,
+        "handles": true
+      },
+      {
+        "path": ".artifacts/othello-web129/ruff-check/command.process.json",
+        "status": "complete",
+        "wall_seconds": 0.04711164196487516,
+        "remaining": [],
+        "reaped": true,
+        "cleanup": true,
+        "handles": true
+      },
+      {
+        "path": ".artifacts/othello-web129/ruff-format/command.process.json",
+        "status": "complete",
+        "wall_seconds": 0.04656445002183318,
+        "remaining": [],
+        "reaped": true,
+        "cleanup": true,
+        "handles": true
+      },
+      {
+        "path": ".artifacts/othello-web129/ruff-format-check/command.process.json",
+        "status": "complete",
+        "wall_seconds": 0.04732145194429904,
+        "remaining": [],
+        "reaped": true,
+        "cleanup": true,
+        "handles": true
+      },
+      {
+        "path": ".artifacts/othello-web129/ruff-handoff/command.process.json",
+        "status": "complete",
+        "wall_seconds": 0.04632768104784191,
+        "remaining": [],
+        "reaped": true,
+        "cleanup": true,
+        "handles": true
+      },
+      {
+        "path": ".artifacts/othello-web129/source-freeze/command.process.json",
+        "status": "failed",
+        "wall_seconds": 0.35595301794819534,
+        "remaining": [],
+        "reaped": true,
+        "cleanup": true,
+        "handles": true
+      },
+      {
+        "path": ".artifacts/othello-web129/typecheck-final/command.process.json",
+        "status": "complete",
+        "wall_seconds": 0.5273079510079697,
+        "remaining": [],
+        "reaped": true,
+        "cleanup": true,
+        "handles": true
+      },
+      {
+        "path": ".artifacts/othello-web129/typecheck-first/command.process.json",
+        "status": "complete",
+        "wall_seconds": 0.49629876599647105,
+        "remaining": [],
+        "reaped": true,
+        "cleanup": true,
+        "handles": true
+      },
+      {
+        "path": ".artifacts/othello-web129/typecheck-handoff/command.process.json",
+        "status": "complete",
+        "wall_seconds": 0.5028016229625791,
+        "remaining": [],
+        "reaped": true,
+        "cleanup": true,
+        "handles": true
+      },
+      {
+        "path": ".artifacts/othello-web129/typecheck-tests-first/command.process.json",
+        "status": "complete",
+        "wall_seconds": 0.5475271310424432,
+        "remaining": [],
+        "reaped": true,
+        "cleanup": true,
+        "handles": true
+      },
+      {
+        "path": ".artifacts/othello-web129/unit-corrupt-fixed/command.process.json",
+        "status": "complete",
+        "wall_seconds": 0.24043645698111504,
+        "remaining": [],
+        "reaped": true,
+        "cleanup": true,
+        "handles": true
+      },
+      {
+        "path": ".artifacts/othello-web129/unit-final/command.process.json",
+        "status": "complete",
+        "wall_seconds": 0.22994515602476895,
+        "remaining": [],
+        "reaped": true,
+        "cleanup": true,
+        "handles": true
+      },
+      {
+        "path": ".artifacts/othello-web129/unit-first/command.process.json",
+        "status": "complete",
+        "wall_seconds": 0.28846855694428086,
+        "remaining": [],
+        "reaped": true,
+        "cleanup": true,
+        "handles": true
+      }
+    ],
+    "browser_config_owner": "Root; WHOLESTOP first/repair/html sent; no further browser/config access planned",
+    "git": "Read commands only; no checkout/index/commit/push commands. Initial status emitted sparse-index expansion hint; subsequent Git reads use GIT_OPTIONAL_LOCKS=0.",
+    "next": "Root accepts frozen patch, integrates/tests any common-caller changes, and closes issue; worker does not self-close"
+  },
+  "exact_evidence": {
+    "source_root": "/workspaces/quoridor/.worktree/othello-web129",
+    "base_source": "872068c52349acc1a7fa340912ad2a552867f39b",
+    "source_refs": [
+      {
+        "path": "apps/web/src/app/main.ts",
+        "sha256": "ef9f287ba1c44c6273263415f2885ec728af5b710571b76ac7ed2c7a4c3981f9",
+        "bytes": 1597,
+        "mode": "0644"
+      },
+      {
+        "path": "apps/web/src/app/navigation.ts",
+        "sha256": "3f91abae6ab701e082ef27fde4a5e57900a434021f06492bd73926c133f27ba7",
+        "bytes": 1754,
+        "mode": "0644"
+      },
+      {
+        "path": "apps/web/src/pages/home/index.ts",
+        "sha256": "cdd972b99606cf23f6b49562a2968031b9764f9c26ea850c0582746d7cb4382b",
+        "bytes": 826,
+        "mode": "0644"
+      },
+      {
+        "path": "tests/e2e/web-shell.spec.ts",
+        "sha256": "f740aa544536970ef889199b7014d8d075ceb22afbb64a8799e16fb77e912294",
+        "bytes": 6408,
+        "mode": "0644"
+      },
+      {
+        "path": "tests/e2e/multi-game-shell.spec.ts",
+        "sha256": "71e61d69064afea59cdb77f3a077758c74792cbd37e84cdd4507cbe88787f0bf",
+        "bytes": 13336,
+        "mode": "0644"
+      },
+      {
+        "path": "tests/unit/web-navigation.test.mjs",
+        "sha256": "07859e2551e6216ff77720cfa17307f2e66359c9c45d5d95d365026d2ce6de2f",
+        "bytes": 5189,
+        "mode": "0644"
+      },
+      {
+        "path": "tests/unit/othello-lifecycle.test.mjs",
+        "sha256": "1a7bc2d627b4c158ebf62f9e1877fcc19d72dac9e772c339a6db9521fff2813e",
+        "bytes": 17757,
+        "mode": "0644"
+      },
+      {
+        "path": "apps/web/src/games/othello/ai-client.ts",
+        "sha256": "f159dcab65a806d8371b4c5e75cc414b7f77ae91f152136554bd2d2e64bdf306",
+        "bytes": 2709,
+        "mode": "0644"
+      },
+      {
+        "path": "apps/web/src/games/othello/ai.worker.ts",
+        "sha256": "5d7c243f503ad8cf1b507163f97507b4cbe747d320985b17ab6f090435d0ab66",
+        "bytes": 643,
+        "mode": "0644"
+      },
+      {
+        "path": "apps/web/src/games/othello/index.ts",
+        "sha256": "973f9c5b8455fc3e70b71aa32d32132a33e33ce274c900f1199b3105699953d6",
+        "bytes": 1660,
+        "mode": "0644"
+      },
+      {
+        "path": "apps/web/src/games/othello/session.ts",
+        "sha256": "3b0df51bbda3661440defebf6b897c187936b0ebd1a1a7ef6ee618bb006b5519",
+        "bytes": 7045,
+        "mode": "0644"
+      },
+      {
+        "path": "apps/web/src/games/othello/storage.ts",
+        "sha256": "17a8fd3ab3f9155567b9ce1812e03289367d0cae08936eda5db8b471dba784c9",
+        "bytes": 1827,
+        "mode": "0644"
+      },
+      {
+        "path": "apps/web/src/games/othello/style.css",
+        "sha256": "34e45b66540c079d44c3af4e14c3961df6ea83deadc8ec29d5246cef1ae9917d",
+        "bytes": 2811,
+        "mode": "0644"
+      },
+      {
+        "path": "apps/web/src/games/othello/view.ts",
+        "sha256": "a6484656365f435233cda769a394f1a95ea2fbd9575e6c582791c1227e1c5431",
+        "bytes": 7137,
+        "mode": "0644"
+      }
+    ],
+    "othello_input_refs": [
+      {
+        "path": "games/othello/bridge/wasm/othello.d.ts",
+        "sha256": "74cb6a7e8b3050fbdf628b0eb6fd05014eb013106b39336317ac34c0900ce7d4",
+        "bytes": 2320,
+        "mode": "0644"
+      },
+      {
+        "path": "games/othello/bridge/wasm/othello.js",
+        "sha256": "87edef248982897cfdf2ab40ae87413670f534ccd1e39cb4a1f4ec6fcc515f9c",
+        "bytes": 11751,
+        "mode": "0644"
+      },
+      {
+        "path": "games/othello/bridge/wasm/othello_bg.wasm",
+        "sha256": "be2feaabd1725b9885ad5a9235e506dfea20a8b96784a7d7f7aaebee5e5e77d6",
+        "bytes": 355089,
+        "mode": "0644"
+      },
+      {
+        "path": "games/othello/bridge/wasm/othello_bg.wasm.d.ts",
+        "sha256": "ea3507f1bf01dea8177c01807af1170bd2eee42e1d75ca5efa7ba963a0c25fbc",
+        "bytes": 996,
+        "mode": "0644"
+      }
+    ],
+    "legacy_input_refs": [
+      {
+        "path": "games/quoridor/bridge/wasm/ai/quoridor_ai.d.ts",
+        "sha256": "0874499222cf3b66d2c435d2b87a0c463cc61c698010905a553926f19ae861e8",
+        "bytes": 2306,
+        "mode": "0644"
+      },
+      {
+        "path": "games/quoridor/bridge/wasm/ai/quoridor_ai.js",
+        "sha256": "c84c56a6b920bad00e5399fcfc1f9fb2e2baa2dd8aa01e6a7f8be45b6ccb8462",
+        "bytes": 9810,
+        "mode": "0644"
+      },
+      {
+        "path": "games/quoridor/bridge/wasm/ai/quoridor_ai_bg.wasm",
+        "sha256": "103613b631047b93a0a3859e3bc5fc8080be3971d9bcab928ee1dfe4c30d3318",
+        "bytes": 600696,
+        "mode": "0644"
+      },
+      {
+        "path": "games/quoridor/bridge/wasm/ai/quoridor_ai_bg.wasm.d.ts",
+        "sha256": "309ab0dfe604cc76c782ddea8d009dc2e9a12b6deae41e12dffc5ee91e6094c7",
+        "bytes": 1000,
+        "mode": "0644"
+      },
+      {
+        "path": "games/quoridor/bridge/wasm/rules/quoridor_rules.d.ts",
+        "sha256": "623014b8fca2d51486d7324de4ac32e19c00c36b527767e35d88ba13fb77aada",
+        "bytes": 2702,
+        "mode": "0644"
+      },
+      {
+        "path": "games/quoridor/bridge/wasm/rules/quoridor_rules.js",
+        "sha256": "d7e450cfeef566bfb6af7de14dfb1b3b34d35f6b05cd8efa1d0af9fff8d4c19e",
+        "bytes": 12773,
+        "mode": "0644"
+      },
+      {
+        "path": "games/quoridor/bridge/wasm/rules/quoridor_rules_bg.wasm",
+        "sha256": "b428e5e53875ea76ec0012b0b26fc8c1af16d36beb33feaa87c3299ba39f15bd",
+        "bytes": 653217,
+        "mode": "0644"
+      },
+      {
+        "path": "games/quoridor/bridge/wasm/rules/quoridor_rules_bg.wasm.d.ts",
+        "sha256": "911878795b10815cad549abca9f85009a426760c348ab48d0475ab9bdf47ffaa",
+        "bytes": 1305,
+        "mode": "0644"
+      }
+    ],
+    "bundle_refs": [
+      {
+        "path": ".artifacts/othello-web129/bundle-final/assets/ai.worker-CFD2VzMg.js",
+        "sha256": "c12ac9cc3d7f5a715306f85e5b16f5067fcebcf8de70b78766dee55143f9810a",
+        "bytes": 7986,
+        "mode": "0644"
+      },
+      {
+        "path": ".artifacts/othello-web129/bundle-final/assets/ai.worker-Detl0y8a.js",
+        "sha256": "f628d13ee3827e18fe5c8613da42df3c46fdc80566316ac112dac0b056b288e7",
+        "bytes": 5969,
+        "mode": "0644"
+      },
+      {
+        "path": ".artifacts/othello-web129/bundle-final/assets/app-test-api-CJQ9wQ02.js",
+        "sha256": "b8c36c83c0680d5e765b8f6e751d68af7c414525881c83f6ca30e3f2ed72be54",
+        "bytes": 1674,
+        "mode": "0644"
+      },
+      {
+        "path": ".artifacts/othello-web129/bundle-final/assets/index-BGvMoNmx.css",
+        "sha256": "adb8f8fa88e979e8348df5003c3c3e5afee71ed60798a1c2694315b867484ce1",
+        "bytes": 786,
+        "mode": "0644"
+      },
+      {
+        "path": ".artifacts/othello-web129/bundle-final/assets/index-DFFooap-.js",
+        "sha256": "ad943e6ebc30694c7402f1cece7801823b03b906014819983b627716851b87b7",
+        "bytes": 4475,
+        "mode": "0644"
+      },
+      {
+        "path": ".artifacts/othello-web129/bundle-final/assets/noto-sans-jp-japanese-400-normal-Cy9Yahyj.woff2",
+        "sha256": "4a7b928d4d75e7fc0bace614030664a7ea7eb7d2f754fd2b2da9c3c0ed350570",
+        "bytes": 1017536,
+        "mode": "0644"
+      },
+      {
+        "path": ".artifacts/othello-web129/bundle-final/assets/noto-sans-jp-japanese-700-normal-Cy7xyTMA.woff2",
+        "sha256": "a5861823629995d9abb4b16b96a1c57139d9663d7a256209cb6b40640ed5431e",
+        "bytes": 1039792,
+        "mode": "0644"
+      },
+      {
+        "path": ".artifacts/othello-web129/bundle-final/assets/othello-BKUEIJTR.js",
+        "sha256": "a120d4dd8a52200cd29c05ad033956eef70672cd6a9b2213bf8bb2b234fd2719",
+        "bytes": 11058,
+        "mode": "0644"
+      },
+      {
+        "path": ".artifacts/othello-web129/bundle-final/assets/othello-C5IegHUW.css",
+        "sha256": "8219ea67cd753a9bee646bcf9ef3a9f2c4af2fed671ab1a220e92b9f3788793d",
+        "bytes": 2306,
+        "mode": "0644"
+      },
+      {
+        "path": ".artifacts/othello-web129/bundle-final/assets/othello-N8KUpiCq.js",
+        "sha256": "235c12bcb6f9ac33f0ea7af2927d46d4a2d63a5538d9cc6eb8f2041f921d4c25",
+        "bytes": 5044,
+        "mode": "0644"
+      },
+      {
+        "path": ".artifacts/othello-web129/bundle-final/assets/othello_bg-DG1NctSY.wasm",
+        "sha256": "be2feaabd1725b9885ad5a9235e506dfea20a8b96784a7d7f7aaebee5e5e77d6",
+        "bytes": 355089,
+        "mode": "0644"
+      },
+      {
+        "path": ".artifacts/othello-web129/bundle-final/assets/othello_bg-DstWnSqi.js",
+        "sha256": "ff1ad2e0f234542dea78705c36da90067e3719be28f5259ebe2b08303c694110",
+        "bytes": 74,
+        "mode": "0644"
+      },
+      {
+        "path": ".artifacts/othello-web129/bundle-final/assets/quoridor-B7q_llwg.css",
+        "sha256": "1b421723a4eaabf9f22b22c235b1cdb2a6c2742f6a3d2ce36df82319dab3cd70",
+        "bytes": 15821,
+        "mode": "0644"
+      },
+      {
+        "path": ".artifacts/othello-web129/bundle-final/assets/quoridor-LBoQ-sXD.js",
+        "sha256": "033f49f3db7e310f51d71e08de7d38861f0812031c8b4e09f7057d3c4aca6e5b",
+        "bytes": 1067050,
+        "mode": "0644"
+      },
+      {
+        "path": ".artifacts/othello-web129/bundle-final/assets/quoridor_ai_bg-Dn2f54bG.wasm",
+        "sha256": "103613b631047b93a0a3859e3bc5fc8080be3971d9bcab928ee1dfe4c30d3318",
+        "bytes": 600696,
+        "mode": "0644"
+      },
+      {
+        "path": ".artifacts/othello-web129/bundle-final/assets/quoridor_rules_bg-C21Eor_a.wasm",
+        "sha256": "b428e5e53875ea76ec0012b0b26fc8c1af16d36beb33feaa87c3299ba39f15bd",
+        "bytes": 653217,
+        "mode": "0644"
+      },
+      {
+        "path": ".artifacts/othello-web129/bundle-final/assets/rules-test-api-D8CwPVFB.js",
+        "sha256": "d996c63d21593be951b65569e603b495a9c359634df3570548dcd6b00e000624",
+        "bytes": 233,
+        "mode": "0644"
+      },
+      {
+        "path": ".artifacts/othello-web129/bundle-final/assets/src-UehgfMv1.js",
+        "sha256": "10d6d451b5fa5c4512aea0d055dc9beac7fabd0fa1c00603173d566eb0159499",
+        "bytes": 16485,
+        "mode": "0644"
+      }
+    ],
+    "home_entry": "index-DFFooap-.js",
+    "home_static_imports": 0,
+    "home_worker_or_wasm_init": 0,
+    "first_browser_attempt": [
+      {
+        "title": "new cross-game flow plays and saves both games, resumes legacy and Othello slots, preserves history and basepath",
+        "expected": false,
+        "results": ["timedOut"]
+      },
+      {
+        "title": "Othello-only entry remains lazy on home, keyboard play and real bounded AI use explicit human colors",
+        "expected": true,
+        "results": ["passed"]
+      },
+      {
+        "title": "Othello Worker pending cancellation terminates once and rejects a deliberately late message without mutation or legacy writes",
+        "expected": true,
+        "results": ["passed"]
+      },
+      {
+        "title": "leaving Othello during actual Wasm initialization cannot save or render the late result",
+        "expected": true,
+        "results": ["passed"]
+      },
+      {
+        "title": "bad saves are retained, retry and explicit new are available, unavailable storage is visible through exit",
+        "expected": true,
+        "results": ["passed"]
+      },
+      {
+        "title": "saved forced-pass and terminal fixtures render Rust status, wins and draw without JS rules",
+        "expected": true,
+        "results": ["passed"]
+      }
+    ],
+    "causal_timeout_repair": [
+      {
+        "title": "new cross-game flow plays and saves both games, resumes legacy and Othello slots, preserves history and basepath",
+        "expected": true,
+        "results": ["passed"]
+      }
+    ],
+    "final_source_html_regression": [
+      {
+        "title": "active Othello failed resume preserves corrupt slot on exit until explicit new choice",
+        "expected": true,
+        "results": ["passed"]
+      }
+    ],
+    "prior_render_source_manifest": {
+      "path": ".artifacts/othello-web129/evidence-before-corrupt-fix.json",
+      "sha256": "b22b808524f1856c0ad3b073252223c44e41b1ece0c6bd60799efef38673f816",
+      "bytes": 14380,
+      "mode": "0644"
+    },
+    "exact_render_scope": "First6cases on prior source; post-review save-preservation delta on final source via new HTML regression; no full-suite replay",
+    "browser_processes": [
+      {
+        "name": "browser-first",
+        "command": ["node", ".artifacts/othello-web129/browser.mjs"],
+        "status": "failed",
+        "child": {
+          "pid": 521613,
+          "start_ticks": "64641936",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [18],
+          "commands": {
+            "implementation": [12]
+          },
+          "allocation": [12, 18],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "implementation",
+        "log_bytes_seen": 3969,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "error": "cycle child failed: ['node', '.artifacts/othello-web129/browser.mjs']: 1",
+        "reason": "CycleStopped",
+        "exit_code": 1,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 3969,
+        "wall_seconds": 70.92281379597262,
+        "handle_closes_attempted": ["selector_close", "pipe_close", "pidfd_close", "log_close"],
+        "primary_error": {
+          "type": "CycleStopped",
+          "message": "cycle child failed: ['node', '.artifacts/othello-web129/browser.mjs']: 1"
+        },
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted",
+        "finalization_errors": []
+      },
+      {
+        "name": "browser-repair",
+        "command": [
+          "node",
+          ".artifacts/othello-web129/browser.mjs",
+          "--grep",
+          "new cross-game flow"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 524308,
+          "start_ticks": "64665621",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [18],
+          "commands": {
+            "implementation": [12]
+          },
+          "allocation": [12, 18],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "implementation",
+        "log_bytes_seen": 442,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 442,
+        "wall_seconds": 58.583761451998726,
+        "handle_closes_attempted": ["selector_close", "pipe_close", "pidfd_close", "log_close"],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted",
+        "finalization_errors": []
+      },
+      {
+        "name": "browser-html",
+        "command": [
+          "env",
+          "OTHELLO_BUNDLE=../../.artifacts/othello-web129/bundle-final",
+          "node",
+          ".artifacts/othello-web129/browser.mjs",
+          "--html-only",
+          "--grep",
+          "active Othello failed resume"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 527869,
+          "start_ticks": "64691353",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [18],
+          "commands": {
+            "implementation": [12]
+          },
+          "allocation": [12, 18],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "implementation",
+        "log_bytes_seen": 415,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 415,
+        "wall_seconds": 2.0671759539982304,
+        "handle_closes_attempted": ["selector_close", "pipe_close", "pidfd_close", "log_close"],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted",
+        "finalization_errors": []
+      }
+    ],
+    "rust_rules_acceptance": "Root accepted; not replayed",
+    "scientific_runs": 0,
+    "models_or_downloads": 0
+  },
+  "Root_manual_review": {
+    "scope": "Root normal technical read after reported source edits STOP; final freeze/hash receipt pending",
+    "reviewed_paths": [
+      "apps/web/src/app/main.ts",
+      "apps/web/src/app/navigation.ts",
+      "apps/web/src/pages/home/index.ts",
+      "apps/web/src/games/othello/index.ts",
+      "apps/web/src/games/othello/session.ts",
+      "apps/web/src/games/othello/storage.ts",
+      "apps/web/src/games/othello/view.ts",
+      "apps/web/src/games/othello/ai-client.ts",
+      "apps/web/src/games/othello/ai.worker.ts"
+    ],
+    "findings": [
+      "game-route import is lazy and mount has immediate abort ownership",
+      "Rust exclusively decides moves/pass/status/AI; JS checks UI state and boundary shape only",
+      "AI generation/request tags and event removal/terminate suppress stale results",
+      "session save precedes cancel on exit; unconfirmed resume preserves original slot until validated resume or explicit new",
+      "Othello versioned key is separate; Quoridor game/settings/audio keys and source unchanged",
+      "CSS/DOM/events and keyboard board ownership remain game-local"
+    ],
+    "qualification": "Manual source review only; final22direct cases/finalnewHTMLcorruption regression plus six broader pre-fix rendered cases require exact source/version mapping at frozen handoff; no final-whole-suite replay or generic scientific claim",
+    "source_mutations": false,
+    "scientific_calls": 0
+  },
+  "actual_Root_integration_checks": "Main TSC in adoption-v1 PASS; initial Vite command wrong root FAILED before app build; v2 only corrected apps/web root and build PASS; final combined asset build PASS",
+  "source_controls": {
+    "archive": {
+      "path": "research-data/othello/multi-game-workflow129/web-source-controls-v1.tar.gz",
+      "bytes": 19568744,
+      "sha256": "1fe71bbf27b0a50cc0d683a80dece8d882edef883dff36deb3db9f281c9816ff",
+      "mode": "0644"
+    },
+    "members": [
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/artifact-format/command.log",
+          "bytes": 146,
+          "sha256": "e07e6016d903594bcbed3a8e02224a7c880ed00f8f82b5b2b361d8d7d0e08edd",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/artifact-format/command.log"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/artifact-format/command.process.json",
+          "bytes": 1547,
+          "sha256": "0a20dc03e296aa5f0197a3c91b8fe4090859695fee687c5de3adedfdb97d64f7",
+          "mode": "0600"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/artifact-format/command.process.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/artifact-format/resources.json",
+          "bytes": 401,
+          "sha256": "70fa65b54896cdf3bd6aebd350eecda289dfdc606bb9469f0c85b45c4a760cc7",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/artifact-format/resources.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/browser-first/command.log",
+          "bytes": 3969,
+          "sha256": "aa5a50e68f613a2e2bbdd71ec8a040fbac4f2635463468faf28eb72906305641",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/browser-first/command.log"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/browser-first/command.process.json",
+          "bytes": 1466,
+          "sha256": "3b98cdc287bc5254d39fafd7eaf6705807edb662327a007dbb8969853895c996",
+          "mode": "0600"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/browser-first/command.process.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/browser-first/resources.json",
+          "bytes": 441,
+          "sha256": "ace19815bcaeb1a7a5a0e47bb3eae80392c51a31179212cf386ab102c604b9ea",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/browser-first/resources.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/browser-first/tmp/playwright-transform-cache-1000/5f/5fc9c33142_412695f_multigameshellspec.js",
+          "bytes": 50025,
+          "sha256": "486b087c5c9004d828ec889ed34b778e7cdd5ed7a05749746059d9dd1849555f",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/browser-first/tmp/playwright-transform-cache-1000/5f/5fc9c33142_412695f_multigameshellspec.js"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/browser-first/tmp/playwright-transform-cache-1000/5f/5fc9c33142_412695f_multigameshellspec.map",
+          "bytes": 28059,
+          "sha256": "24de3e55c0e361a5ca82cc43a9cb20343a5fa69a841ee94c58369d9e47edcbb4",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/browser-first/tmp/playwright-transform-cache-1000/5f/5fc9c33142_412695f_multigameshellspec.map"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/browser-first/tmp/playwright-transform-cache-1000/cc/cc234473a2_13325b2_playwrightconfig.js",
+          "bytes": 3916,
+          "sha256": "69317346abc4471dbe03cc7691f8449952a12a4f6f693c1f1ab579ca3c326e3d",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/browser-first/tmp/playwright-transform-cache-1000/cc/cc234473a2_13325b2_playwrightconfig.js"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/browser-first/tmp/playwright-transform-cache-1000/cc/cc234473a2_13325b2_playwrightconfig.map",
+          "bytes": 2143,
+          "sha256": "d5a229979dc38b74d457d9e3fa6cb187113f787e40756f2898a5dd5fc5dfc572",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/browser-first/tmp/playwright-transform-cache-1000/cc/cc234473a2_13325b2_playwrightconfig.map"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/browser-helper-cleanup-first.json",
+          "bytes": 70,
+          "sha256": "820f5f08bb8d617f8bfdaee7d1d61f83041a4b9ddd8c7178cf1569e9d43d7f29",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/browser-helper-cleanup-first.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/browser-helper-cleanup-html.json",
+          "bytes": 70,
+          "sha256": "820f5f08bb8d617f8bfdaee7d1d61f83041a4b9ddd8c7178cf1569e9d43d7f29",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/browser-helper-cleanup-html.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/browser-helper-cleanup.json",
+          "bytes": 70,
+          "sha256": "820f5f08bb8d617f8bfdaee7d1d61f83041a4b9ddd8c7178cf1569e9d43d7f29",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/browser-helper-cleanup.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/browser-html/command.log",
+          "bytes": 415,
+          "sha256": "921b8adae4034c932793901c51ea532fd9759f9cad4c63be281e411b392e0661",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/browser-html/command.log"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/browser-html/command.process.json",
+          "bytes": 1380,
+          "sha256": "b24ff74720c68c852569807198e736cae7c940c1af6caee96df9a8a5d9e3fa54",
+          "mode": "0600"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/browser-html/command.process.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/browser-html/resources.json",
+          "bytes": 441,
+          "sha256": "a1b776748373e05691a6c741c9777bb8f7d22186fd3fba780dbb9a0739fa5815",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/browser-html/resources.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/browser-html/tmp/playwright-transform-cache-1000/5f/5fc9c33142_7e83564_multigameshellspec.js",
+          "bytes": 54921,
+          "sha256": "dff2cce93e6349290d561c789f1bdae52455902af6db1d81d60087725a7283f3",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/browser-html/tmp/playwright-transform-cache-1000/5f/5fc9c33142_7e83564_multigameshellspec.js"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/browser-html/tmp/playwright-transform-cache-1000/5f/5fc9c33142_7e83564_multigameshellspec.map",
+          "bytes": 30747,
+          "sha256": "b25ea6cbdd342bbe145571495b4d2864711e24ce2076c3adaea403390a15341c",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/browser-html/tmp/playwright-transform-cache-1000/5f/5fc9c33142_7e83564_multigameshellspec.map"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/browser-html/tmp/playwright-transform-cache-1000/cc/cc234473a2_5934f3d_playwrightconfig.js",
+          "bytes": 4895,
+          "sha256": "a3369d786a61af30138ba7e26166e104f614d2056a61a2153f97f38136503f9f",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/browser-html/tmp/playwright-transform-cache-1000/cc/cc234473a2_5934f3d_playwrightconfig.js"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/browser-html/tmp/playwright-transform-cache-1000/cc/cc234473a2_5934f3d_playwrightconfig.map",
+          "bytes": 2717,
+          "sha256": "99f18413d5404741ac5e698eab1458ffc0bdb327888b123eda926ebde4c3fad0",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/browser-html/tmp/playwright-transform-cache-1000/cc/cc234473a2_5934f3d_playwrightconfig.map"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/browser-repair/command.log",
+          "bytes": 442,
+          "sha256": "55bf31548f88f026d2a88b8d898f324b713565c9652667d28e878dd4d6346482",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/browser-repair/command.log"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/browser-repair/command.process.json",
+          "bytes": 1274,
+          "sha256": "37e8b42f4ca4a07fd073503fe8a76e1e3e362cb553563e011cc98a98f1224c9e",
+          "mode": "0600"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/browser-repair/command.process.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/browser-repair/resources.json",
+          "bytes": 441,
+          "sha256": "19a313c35a83a3d3637951358eb5579750b8a66033ba22ae997d6d9350aea29f",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/browser-repair/resources.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/browser-repair/tmp/playwright-transform-cache-1000/5f/5fc9c33142_1775885_multigameshellspec.js",
+          "bytes": 50589,
+          "sha256": "8a01972e57cf52a5e02dfb5e470c838d52ca6c2331a7f4f3a074219050f2efd0",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/browser-repair/tmp/playwright-transform-cache-1000/5f/5fc9c33142_1775885_multigameshellspec.js"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/browser-repair/tmp/playwright-transform-cache-1000/5f/5fc9c33142_1775885_multigameshellspec.map",
+          "bytes": 28328,
+          "sha256": "8c5249b1c7d605adab90a16dd5ec44da28ba650a16f66903d20c8ffe09e4b1ba",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/browser-repair/tmp/playwright-transform-cache-1000/5f/5fc9c33142_1775885_multigameshellspec.map"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/browser-repair/tmp/playwright-transform-cache-1000/cc/cc234473a2_144fd57_playwrightconfig.js",
+          "bytes": 4010,
+          "sha256": "e06bf7c28db133d8c554d3a4761860bb83042f42208a186e213934494c152895",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/browser-repair/tmp/playwright-transform-cache-1000/cc/cc234473a2_144fd57_playwrightconfig.js"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/browser-repair/tmp/playwright-transform-cache-1000/cc/cc234473a2_144fd57_playwrightconfig.map",
+          "bytes": 2204,
+          "sha256": "d6586151d811992b0b0074a8a07f4b308eff85e015efb0265e642dc67918b527",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/browser-repair/tmp/playwright-transform-cache-1000/cc/cc234473a2_144fd57_playwrightconfig.map"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/browser-repair-request.txt",
+          "bytes": 1206,
+          "sha256": "8f3404353b89aa928444cda933cef0796c98902b39c94a8ef94cd9eab36e23d8",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/browser-repair-request.txt"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/browser-request.txt",
+          "bytes": 1033,
+          "sha256": "0aa3e5beb1cc818e86b940d5096096506b330bbe22c888c9d6f65688e05e5b80",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/browser-request.txt"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/browser-results/.last-run.json",
+          "bytes": 96,
+          "sha256": "c75086b3728d4992b41e67fe822f8aad894a41128aa40d19d1264d8945a3b718",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/browser-results/.last-run.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/browser-results/multi-game-shell-new-cross-84e7a-serves-history-and-basepath/error-context.md",
+          "bytes": 6624,
+          "sha256": "e8ce995cf17c7050717ba962742f911d635aa79bb1fec8f70e74bdce9008c273",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/browser-results/multi-game-shell-new-cross-84e7a-serves-history-and-basepath/error-context.md"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/browser-results/multi-game-shell-new-cross-84e7a-serves-history-and-basepath/othello-play.png",
+          "bytes": 15151,
+          "sha256": "9e898d94a720f66356b04e9607c7445a1ca7ee343cc04d22010eedfb5d857036",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/browser-results/multi-game-shell-new-cross-84e7a-serves-history-and-basepath/othello-play.png"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/browser-results/multi-game-shell-new-cross-84e7a-serves-history-and-basepath/trace.zip",
+          "bytes": 11000832,
+          "sha256": "729f6f2b63979610474df3341dc609583c471f8b56b1901d8b693ca7b26ea4a8",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/browser-results/multi-game-shell-new-cross-84e7a-serves-history-and-basepath/trace.zip"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/browser-results-html/.last-run.json",
+          "bytes": 45,
+          "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/browser-results-html/.last-run.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/browser-results-html.json",
+          "bytes": 3271,
+          "sha256": "75fe27c735fb6b00a9248a7ebc620f4a74b4f417ef16ad97bf3c12c7662cb992",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/browser-results-html.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/browser-results-repair/.last-run.json",
+          "bytes": 45,
+          "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/browser-results-repair/.last-run.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/browser-results-repair/multi-game-shell-new-cross-84e7a-serves-history-and-basepath/othello-play.png",
+          "bytes": 15151,
+          "sha256": "9e898d94a720f66356b04e9607c7445a1ca7ee343cc04d22010eedfb5d857036",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/browser-results-repair/multi-game-shell-new-cross-84e7a-serves-history-and-basepath/othello-play.png"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/browser-results-repair.json",
+          "bytes": 3296,
+          "sha256": "b9b8eca33278e26dd68283d18220c300d61dd1f0119838ef20b3de2009259991",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/browser-results-repair.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/browser-results.json",
+          "bytes": 10852,
+          "sha256": "77ebd7ec8c9c93afbe1326745123e43cacbfb8b260d43958a3c55a9235863f21",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/browser-results.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/browser.mjs",
+          "bytes": 2633,
+          "sha256": "703fa59a9e8ebe9f92adba3b44b240e18d9ce8770bb7d80610be72741f40761c",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/browser.mjs"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle/assets/ai.worker-CFD2VzMg.js",
+          "bytes": 7986,
+          "sha256": "c12ac9cc3d7f5a715306f85e5b16f5067fcebcf8de70b78766dee55143f9810a",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle/assets/ai.worker-CFD2VzMg.js"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle/assets/ai.worker-Detl0y8a.js",
+          "bytes": 5969,
+          "sha256": "f628d13ee3827e18fe5c8613da42df3c46fdc80566316ac112dac0b056b288e7",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle/assets/ai.worker-Detl0y8a.js"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle/assets/app-test-api-BNVaMAgg.js",
+          "bytes": 1674,
+          "sha256": "87fa05205cc6f6da9281acf55201614cd4f1c202a0d729923fb358e85ef75e30",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle/assets/app-test-api-BNVaMAgg.js"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle/assets/index-BAvevufC.js",
+          "bytes": 4475,
+          "sha256": "24c4401664b3ba8137b941d71be3cb4ae38ecda3cca23735b7f97c1132caa6e9",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle/assets/index-BAvevufC.js"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle/assets/index-BGvMoNmx.css",
+          "bytes": 786,
+          "sha256": "adb8f8fa88e979e8348df5003c3c3e5afee71ed60798a1c2694315b867484ce1",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle/assets/index-BGvMoNmx.css"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle/assets/noto-sans-jp-japanese-400-normal-Cy9Yahyj.woff2",
+          "bytes": 1017536,
+          "sha256": "4a7b928d4d75e7fc0bace614030664a7ea7eb7d2f754fd2b2da9c3c0ed350570",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle/assets/noto-sans-jp-japanese-400-normal-Cy9Yahyj.woff2"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle/assets/noto-sans-jp-japanese-700-normal-Cy7xyTMA.woff2",
+          "bytes": 1039792,
+          "sha256": "a5861823629995d9abb4b16b96a1c57139d9663d7a256209cb6b40640ed5431e",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle/assets/noto-sans-jp-japanese-700-normal-Cy7xyTMA.woff2"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle/assets/othello-C5IegHUW.css",
+          "bytes": 2306,
+          "sha256": "8219ea67cd753a9bee646bcf9ef3a9f2c4af2fed671ab1a220e92b9f3788793d",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle/assets/othello-C5IegHUW.css"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle/assets/othello-N8KUpiCq.js",
+          "bytes": 5044,
+          "sha256": "235c12bcb6f9ac33f0ea7af2927d46d4a2d63a5538d9cc6eb8f2041f921d4c25",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle/assets/othello-N8KUpiCq.js"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle/assets/othello-sndLPP00.js",
+          "bytes": 10867,
+          "sha256": "225e4dbf82b907690884248d5fc7a47851cfbbdea74187a7612222e6ed6c84ad",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle/assets/othello-sndLPP00.js"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle/assets/othello_bg-DG1NctSY.wasm",
+          "bytes": 355089,
+          "sha256": "be2feaabd1725b9885ad5a9235e506dfea20a8b96784a7d7f7aaebee5e5e77d6",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle/assets/othello_bg-DG1NctSY.wasm"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle/assets/othello_bg-DstWnSqi.js",
+          "bytes": 74,
+          "sha256": "ff1ad2e0f234542dea78705c36da90067e3719be28f5259ebe2b08303c694110",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle/assets/othello_bg-DstWnSqi.js"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle/assets/quoridor-B7q_llwg.css",
+          "bytes": 15821,
+          "sha256": "1b421723a4eaabf9f22b22c235b1cdb2a6c2742f6a3d2ce36df82319dab3cd70",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle/assets/quoridor-B7q_llwg.css"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle/assets/quoridor-BUlTiG_Q.js",
+          "bytes": 1067050,
+          "sha256": "b599910d5614b23806782c67c2d38d0e8bd106194c44581b15c450ee453e2f97",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle/assets/quoridor-BUlTiG_Q.js"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle/assets/quoridor_ai_bg-Dn2f54bG.wasm",
+          "bytes": 600696,
+          "sha256": "103613b631047b93a0a3859e3bc5fc8080be3971d9bcab928ee1dfe4c30d3318",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle/assets/quoridor_ai_bg-Dn2f54bG.wasm"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle/assets/quoridor_rules_bg-C21Eor_a.wasm",
+          "bytes": 653217,
+          "sha256": "b428e5e53875ea76ec0012b0b26fc8c1af16d36beb33feaa87c3299ba39f15bd",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle/assets/quoridor_rules_bg-C21Eor_a.wasm"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle/assets/rules-test-api-D8CwPVFB.js",
+          "bytes": 233,
+          "sha256": "d996c63d21593be951b65569e603b495a9c359634df3570548dcd6b00e000624",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle/assets/rules-test-api-D8CwPVFB.js"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle/assets/src-UehgfMv1.js",
+          "bytes": 16485,
+          "sha256": "10d6d451b5fa5c4512aea0d055dc9beac7fabd0fa1c00603173d566eb0159499",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle/assets/src-UehgfMv1.js"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle/favicon.ico",
+          "bytes": 4286,
+          "sha256": "62684312a786790ea45baa075da7ec5ef042951a49b1fde1901f5d6fe7185d09",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle/favicon.ico"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle/index.html",
+          "bytes": 499,
+          "sha256": "5844bd0c7326cf7c8d13067889e8514046fd360eb609a945dea64fb749c9a59c",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle/index.html"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/ai.worker-CFD2VzMg.js",
+          "bytes": 7986,
+          "sha256": "c12ac9cc3d7f5a715306f85e5b16f5067fcebcf8de70b78766dee55143f9810a",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/ai.worker-CFD2VzMg.js"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/ai.worker-Detl0y8a.js",
+          "bytes": 5969,
+          "sha256": "f628d13ee3827e18fe5c8613da42df3c46fdc80566316ac112dac0b056b288e7",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/ai.worker-Detl0y8a.js"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/app-test-api-CJQ9wQ02.js",
+          "bytes": 1674,
+          "sha256": "b8c36c83c0680d5e765b8f6e751d68af7c414525881c83f6ca30e3f2ed72be54",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/app-test-api-CJQ9wQ02.js"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/index-BGvMoNmx.css",
+          "bytes": 786,
+          "sha256": "adb8f8fa88e979e8348df5003c3c3e5afee71ed60798a1c2694315b867484ce1",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/index-BGvMoNmx.css"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/index-DFFooap-.js",
+          "bytes": 4475,
+          "sha256": "ad943e6ebc30694c7402f1cece7801823b03b906014819983b627716851b87b7",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/index-DFFooap-.js"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/noto-sans-jp-japanese-400-normal-Cy9Yahyj.woff2",
+          "bytes": 1017536,
+          "sha256": "4a7b928d4d75e7fc0bace614030664a7ea7eb7d2f754fd2b2da9c3c0ed350570",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/noto-sans-jp-japanese-400-normal-Cy9Yahyj.woff2"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/noto-sans-jp-japanese-700-normal-Cy7xyTMA.woff2",
+          "bytes": 1039792,
+          "sha256": "a5861823629995d9abb4b16b96a1c57139d9663d7a256209cb6b40640ed5431e",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/noto-sans-jp-japanese-700-normal-Cy7xyTMA.woff2"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/othello-BKUEIJTR.js",
+          "bytes": 11058,
+          "sha256": "a120d4dd8a52200cd29c05ad033956eef70672cd6a9b2213bf8bb2b234fd2719",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/othello-BKUEIJTR.js"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/othello-C5IegHUW.css",
+          "bytes": 2306,
+          "sha256": "8219ea67cd753a9bee646bcf9ef3a9f2c4af2fed671ab1a220e92b9f3788793d",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/othello-C5IegHUW.css"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/othello-N8KUpiCq.js",
+          "bytes": 5044,
+          "sha256": "235c12bcb6f9ac33f0ea7af2927d46d4a2d63a5538d9cc6eb8f2041f921d4c25",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/othello-N8KUpiCq.js"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/othello_bg-DG1NctSY.wasm",
+          "bytes": 355089,
+          "sha256": "be2feaabd1725b9885ad5a9235e506dfea20a8b96784a7d7f7aaebee5e5e77d6",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/othello_bg-DG1NctSY.wasm"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/othello_bg-DstWnSqi.js",
+          "bytes": 74,
+          "sha256": "ff1ad2e0f234542dea78705c36da90067e3719be28f5259ebe2b08303c694110",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/othello_bg-DstWnSqi.js"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/quoridor-B7q_llwg.css",
+          "bytes": 15821,
+          "sha256": "1b421723a4eaabf9f22b22c235b1cdb2a6c2742f6a3d2ce36df82319dab3cd70",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/quoridor-B7q_llwg.css"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/quoridor-LBoQ-sXD.js",
+          "bytes": 1067050,
+          "sha256": "033f49f3db7e310f51d71e08de7d38861f0812031c8b4e09f7057d3c4aca6e5b",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/quoridor-LBoQ-sXD.js"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/quoridor_ai_bg-Dn2f54bG.wasm",
+          "bytes": 600696,
+          "sha256": "103613b631047b93a0a3859e3bc5fc8080be3971d9bcab928ee1dfe4c30d3318",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/quoridor_ai_bg-Dn2f54bG.wasm"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/quoridor_rules_bg-C21Eor_a.wasm",
+          "bytes": 653217,
+          "sha256": "b428e5e53875ea76ec0012b0b26fc8c1af16d36beb33feaa87c3299ba39f15bd",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/quoridor_rules_bg-C21Eor_a.wasm"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/rules-test-api-D8CwPVFB.js",
+          "bytes": 233,
+          "sha256": "d996c63d21593be951b65569e603b495a9c359634df3570548dcd6b00e000624",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/rules-test-api-D8CwPVFB.js"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/src-UehgfMv1.js",
+          "bytes": 16485,
+          "sha256": "10d6d451b5fa5c4512aea0d055dc9beac7fabd0fa1c00603173d566eb0159499",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/src-UehgfMv1.js"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/command.log",
+          "bytes": 2858,
+          "sha256": "755724b3fa13e681d34df11caa3e8c3c760737bfaa9ef2a0f4862d1823f3b309",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle-final/command.log"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/command.process.json",
+          "bytes": 1433,
+          "sha256": "78503732ec7991899962f2662d6edbc836344f6f1638f4f31d2b8972dcc24227",
+          "mode": "0600"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle-final/command.process.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/favicon.ico",
+          "bytes": 4286,
+          "sha256": "62684312a786790ea45baa075da7ec5ef042951a49b1fde1901f5d6fe7185d09",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle-final/favicon.ico"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/index.html",
+          "bytes": 499,
+          "sha256": "02206beab27070bd3de8703d71eba70a7ef91793919c721c84c9e98b957125fb",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle-final/index.html"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/resources.json",
+          "bytes": 401,
+          "sha256": "2b9e2b71486da9775dd049393a060bffacc3f826cf67caaf18f1af43e850e1aa",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle-final/resources.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-first/command.log",
+          "bytes": 2744,
+          "sha256": "5fcacf49be6cf076f8452a5b4e9bd0d7e76414b42700b11389018e7afbd6ce39",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle-first/command.log"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-first/command.process.json",
+          "bytes": 1427,
+          "sha256": "807e140ea7c5bd67d247c99736c2dc485c4665df537b365e1b88cf4ac7330e74",
+          "mode": "0600"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle-first/command.process.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-first/resources.json",
+          "bytes": 401,
+          "sha256": "ac933cb153dae35203fa9c8c23ace7aa612337cfbc7ff1d454eecfb26086e4d4",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/bundle-first/resources.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/collect.py",
+          "bytes": 4294,
+          "sha256": "c2bf3833939add8e228ac52f4ed4bc8de13378b09589eaa19af697d71b87ecae",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/collect.py"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/collector-format/command.log",
+          "bytes": 19,
+          "sha256": "413a709001976657cb743636fd34e48fc41d8d302d665460d3f874b3313da127",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/collector-format/command.log"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/collector-format/command.process.json",
+          "bytes": 1347,
+          "sha256": "e4c90ee4ec73d27f2e8c6241b131a5d6aa9586666ffb78b0f7aabb1afee3df1d",
+          "mode": "0600"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/collector-format/command.process.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/collector-format/resources.json",
+          "bytes": 406,
+          "sha256": "e174d0df8bf2f91072cabe84203508cc3f46e4ebf160540257e5dc736e9176bf",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/collector-format/resources.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/collector-format/tmp/uv-cc8f3ad7aa19080a.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0666"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/collector-format/tmp/uv-cc8f3ad7aa19080a.lock"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/collector-format-final/command.log",
+          "bytes": 19,
+          "sha256": "413a709001976657cb743636fd34e48fc41d8d302d665460d3f874b3313da127",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/collector-format-final/command.log"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/collector-format-final/command.process.json",
+          "bytes": 1348,
+          "sha256": "14d1c9ca9c7e1a655ddfb504e5b028bf74697d607520350c5ec24400da5309b6",
+          "mode": "0600"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/collector-format-final/command.process.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/collector-format-final/resources.json",
+          "bytes": 406,
+          "sha256": "4a89b2af89f668155b3a45bc428a3c163e3ca13bce0c9133f114b443a7981e03",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/collector-format-final/resources.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/collector-format-final/tmp/uv-cc8f3ad7aa19080a.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0666"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/collector-format-final/tmp/uv-cc8f3ad7aa19080a.lock"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/corrupt-active-original/command.log",
+          "bytes": 1218,
+          "sha256": "c4b80cb56a50468fd022bc30c1000ac489eb812b62f412632fa7d98f041b56f0",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/corrupt-active-original/command.log"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/corrupt-active-original/command.process.json",
+          "bytes": 1750,
+          "sha256": "1e0a0fd12d664f9f3b50aa67a823193275a9b6e3981c5a4ea597703a9c679ecb",
+          "mode": "0600"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/corrupt-active-original/command.process.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/corrupt-active-original/resources.json",
+          "bytes": 373,
+          "sha256": "2c64e44f16bd1f7f504e83def5625fc9384be3213895a9e47061d77bcad205b8",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/corrupt-active-original/resources.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/evidence-before-corrupt-fix.json",
+          "bytes": 14380,
+          "sha256": "b22b808524f1856c0ad3b073252223c44e41b1ece0c6bd60799efef38673f816",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/evidence-before-corrupt-fix.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/evidence.json",
+          "bytes": 16754,
+          "sha256": "0759211bc5675fcac142c00ddc0305a6fe5b15818edeac8c501d33131c6f4079",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/evidence.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/final-review-repair.txt",
+          "bytes": 1231,
+          "sha256": "920b3a4008df17b54a670333780ba243983f9c7b78c62d87cb2e23ec8963a12a",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/final-review-repair.txt"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/first-edit.txt",
+          "bytes": 435,
+          "sha256": "ced698bc814cbe29cba4bad10725b450e1d25440e0deeb8615330aed689a74e8",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/first-edit.txt"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/first-read.txt",
+          "bytes": 654,
+          "sha256": "74a615dc6733450d059c48379c8734e3a0267a874550cf8441ffb3097d40bd58",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/first-read.txt"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/format-corrupt-fix/command.log",
+          "bytes": 235,
+          "sha256": "cecc04a5122941cef513dcfedd2cd8f4b51f0019c19c16a31a4c30fa1cafa19a",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/format-corrupt-fix/command.log"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/format-corrupt-fix/command.process.json",
+          "bytes": 1626,
+          "sha256": "40dfa5d27ccc72060bc3e54e64ca1b2b4d3b693c16842aa217c78f838ff37da3",
+          "mode": "0600"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/format-corrupt-fix/command.process.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/format-corrupt-fix/resources.json",
+          "bytes": 401,
+          "sha256": "9622a221b1a78474b8ebba4b7b6131d7aaa4a0623f7add5a8abcd458f62ed16d",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/format-corrupt-fix/resources.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/format-final/command.log",
+          "bytes": 713,
+          "sha256": "a0e47deacade60bdd850bb5eaabc17cb7baa827d373e58ad670b6f34de771be3",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/format-final/command.log"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/format-final/command.process.json",
+          "bytes": 1816,
+          "sha256": "9d285da32d8f7c804219b19907c74f8ecfa559e814edb100e4a5ffcfe4b0f534",
+          "mode": "0600"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/format-final/command.process.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/format-final/resources.json",
+          "bytes": 401,
+          "sha256": "f721561ce7d72ec14302ce1aa3b8b00caa14d497a6a04f4989e40d46f6976bff",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/format-final/resources.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/format-source/command.log",
+          "bytes": 593,
+          "sha256": "4316f4f7702e9d37a6d6412a35afd4c88da435cb4ae579cac7b5ecca11168fdb",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/format-source/command.log"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/format-source/command.process.json",
+          "bytes": 1664,
+          "sha256": "3fc3cb972659f0a33f7b31f29c2b0841e04d552156e8e715a83d247135ed8d14",
+          "mode": "0600"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/format-source/command.process.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/format-source/resources.json",
+          "bytes": 401,
+          "sha256": "89a5a853139258321d9bea412f8b9986648f73e7cd4f1a8efc9b50276e6d4cd2",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/format-source/resources.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/freeze-format/command.log",
+          "bytes": 19,
+          "sha256": "413a709001976657cb743636fd34e48fc41d8d302d665460d3f874b3313da127",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/freeze-format/command.log"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/freeze-format/command.process.json",
+          "bytes": 1344,
+          "sha256": "aba0172b86b4948c7feefd89a4205a2656c7d20e2b79a4deec7be71d166ceaf7",
+          "mode": "0600"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/freeze-format/command.process.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/freeze-format/resources.json",
+          "bytes": 406,
+          "sha256": "510c30a69b212586a13b2e0340a141a84e35ef3368028e7d5ce2b617c49017f8",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/freeze-format/resources.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/freeze-format/tmp/uv-cc8f3ad7aa19080a.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0666"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/freeze-format/tmp/uv-cc8f3ad7aa19080a.lock"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/freeze-format-check/command.log",
+          "bytes": 25,
+          "sha256": "fd2299c9f1c6dc869070883e281051bfe93aacf66c1a3b0069f45b4aa410ca50",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/freeze-format-check/command.log"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/freeze-format-check/command.process.json",
+          "bytes": 1361,
+          "sha256": "bbd91c43fab4c814faa5ed2f6767d5d1e1b4e6a1b090deb734f5be022cc0637d",
+          "mode": "0600"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/freeze-format-check/command.process.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/freeze-format-check/resources.json",
+          "bytes": 406,
+          "sha256": "42b9509a22b4557beb444f5a1d2e45186dd4bd9203ec97443591e7f83e8aadf3",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/freeze-format-check/resources.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/freeze-format-check/tmp/uv-cc8f3ad7aa19080a.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0666"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/freeze-format-check/tmp/uv-cc8f3ad7aa19080a.lock"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/freeze-format-check-repair/command.log",
+          "bytes": 25,
+          "sha256": "fd2299c9f1c6dc869070883e281051bfe93aacf66c1a3b0069f45b4aa410ca50",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/freeze-format-check-repair/command.log"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/freeze-format-check-repair/command.process.json",
+          "bytes": 1361,
+          "sha256": "de4aa9e494e6a58e697a4a842f25d21a12b3cc92f80de71eff13c512595e081f",
+          "mode": "0600"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/freeze-format-check-repair/command.process.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/freeze-format-check-repair/resources.json",
+          "bytes": 406,
+          "sha256": "4ff002038c111ba13be4f7622140bf1c3c38abc6e59e995b1a9f5ac2808dad4b",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/freeze-format-check-repair/resources.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/freeze-format-check-repair/tmp/uv-cc8f3ad7aa19080a.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0666"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/freeze-format-check-repair/tmp/uv-cc8f3ad7aa19080a.lock"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/freeze-quality/command.log",
+          "bytes": 19,
+          "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/freeze-quality/command.log"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/freeze-quality/command.process.json",
+          "bytes": 1344,
+          "sha256": "d3c0157e4d004e6733f7fadaa7a374a811aaa94fd4a2c4434b300d863b262417",
+          "mode": "0600"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/freeze-quality/command.process.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/freeze-quality/resources.json",
+          "bytes": 406,
+          "sha256": "02b93dd2184d82f0f9a9e70e75304a97adb89cc0b4395753c2cbf76c8a7c3591",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/freeze-quality/resources.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/freeze-quality/tmp/uv-cc8f3ad7aa19080a.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0666"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/freeze-quality/tmp/uv-cc8f3ad7aa19080a.lock"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/freeze-quality-repair/command.log",
+          "bytes": 19,
+          "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/freeze-quality-repair/command.log"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/freeze-quality-repair/command.process.json",
+          "bytes": 1345,
+          "sha256": "07cd736c9eec43a613918c2b6cc44d9258ec1fa78294b415b4dd819635b43cd3",
+          "mode": "0600"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/freeze-quality-repair/command.process.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/freeze-quality-repair/resources.json",
+          "bytes": 406,
+          "sha256": "76cb3b969ee4194e66b10fb654d509709af6eda033862d48a7f10851db7452a1",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/freeze-quality-repair/resources.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/freeze-quality-repair/tmp/uv-cc8f3ad7aa19080a.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0666"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/freeze-quality-repair/tmp/uv-cc8f3ad7aa19080a.lock"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/freeze.py",
+          "bytes": 6263,
+          "sha256": "41ba420daf0784fec3658160088f56a48f5ca6958473a9e4973889c2690b4c4d",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/freeze.py"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/handoff.json",
+          "bytes": 14521,
+          "sha256": "cd39253ef99997430a3c9fc23ad8c5398ac1a2696085bce93eebc4843bb3a786",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/handoff.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/normal-collection/command.log",
+          "bytes": 193,
+          "sha256": "4f38356fb21cf603749b1c30e9c20e8f420c224f0ed0e053532fd4f1a0ad040c",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/normal-collection/command.log"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/normal-collection/command.process.json",
+          "bytes": 1291,
+          "sha256": "6c09c54f28e59189812da40f993ced6ce0445c30695fd3f9f9eb341e343a7a78",
+          "mode": "0600"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/normal-collection/command.process.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/normal-collection/resources.json",
+          "bytes": 406,
+          "sha256": "8fe498c98cd0e018f5a308c4093c65741d530b15e49fd90541650609a4b98551",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/normal-collection/resources.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/normal-collection/tmp/uv-cc8f3ad7aa19080a.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0666"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/normal-collection/tmp/uv-cc8f3ad7aa19080a.lock"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/normal-collection-final/command.log",
+          "bytes": 297,
+          "sha256": "e1a2af2d2f82b243743e8df72591c95763c5f6964dd93881299f699b6d82cd8d",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/normal-collection-final/command.log"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/normal-collection-final/command.process.json",
+          "bytes": 1613,
+          "sha256": "51df2487de442f691058fb0a58d6c3285f21c42bef645fb398f4617c42203e2c",
+          "mode": "0600"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/normal-collection-final/command.process.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/normal-collection-final/resources.json",
+          "bytes": 406,
+          "sha256": "3757482a87a059bfe714be7b9b4faf803c943912068f6589dd87bfc4d5bd9aae",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/normal-collection-final/resources.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/normal-collection-final/tmp/uv-cc8f3ad7aa19080a.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0666"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/normal-collection-final/tmp/uv-cc8f3ad7aa19080a.lock"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/normal-collection-final-fixed/command.log",
+          "bytes": 193,
+          "sha256": "6e68158abe11e955193709ff18877128a29c57f2481e50e4ed178fd5be32433f",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/normal-collection-final-fixed/command.log"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/normal-collection-final-fixed/command.process.json",
+          "bytes": 1291,
+          "sha256": "2a727db5b6bb9dfcbfbdf9d339591528b9da11971d269c0a6bb77e71bf6ea3e6",
+          "mode": "0600"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/normal-collection-final-fixed/command.process.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/normal-collection-final-fixed/resources.json",
+          "bytes": 406,
+          "sha256": "2269ff14bfd86eb749739e593f94fa3e6686654609800732fa690fec775d74e4",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/normal-collection-final-fixed/resources.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/normal-collection-final-fixed/tmp/uv-cc8f3ad7aa19080a.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0666"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/normal-collection-final-fixed/tmp/uv-cc8f3ad7aa19080a.lock"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/playwright.config.ts",
+          "bytes": 1295,
+          "sha256": "e1b05822f42d2275eb51e3c9f1c25487525ee87d03d211134a8cf206884a98a6",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/playwright.config.ts"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/prettier-check/command.log",
+          "bytes": 66,
+          "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/prettier-check/command.log"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/prettier-check/command.process.json",
+          "bytes": 1852,
+          "sha256": "b94fe0a9fc1170ec8bcf97bd9208d7a139bdf5cd9ed5db2e2b1f924a03608106",
+          "mode": "0600"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/prettier-check/command.process.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/prettier-check/resources.json",
+          "bytes": 401,
+          "sha256": "742e0ff94932020fbeb993c598771611d942d1a1105ee2349bc1aca05eff61e7",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/prettier-check/resources.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/prettier-handoff/command.log",
+          "bytes": 66,
+          "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/prettier-handoff/command.log"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/prettier-handoff/command.process.json",
+          "bytes": 1853,
+          "sha256": "46e8d09514d72dcfd6a7633e5033aa511d5d2be5a50a6a48ce0c4af53f3bdbbe",
+          "mode": "0600"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/prettier-handoff/command.process.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/prettier-handoff/resources.json",
+          "bytes": 401,
+          "sha256": "b3cc2ce362dbdcf5dd482cfefaac18ec4e8ac4803cfb998c708697887e685dc0",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/prettier-handoff/resources.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/ruff-check/command.log",
+          "bytes": 19,
+          "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/ruff-check/command.log"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/ruff-check/command.process.json",
+          "bytes": 1342,
+          "sha256": "7e8a94d0a53403163414216a7a2cfddc0a90d361b44c4c0621262a97b74c45ab",
+          "mode": "0600"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/ruff-check/command.process.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/ruff-check/resources.json",
+          "bytes": 406,
+          "sha256": "2377ee49aa80b5b4534ed85c04da1e75a6e4f0433bb98e8710cdbc3275572dad",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/ruff-check/resources.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/ruff-check/tmp/uv-cc8f3ad7aa19080a.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0666"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/ruff-check/tmp/uv-cc8f3ad7aa19080a.lock"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/ruff-format/command.log",
+          "bytes": 19,
+          "sha256": "413a709001976657cb743636fd34e48fc41d8d302d665460d3f874b3313da127",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/ruff-format/command.log"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/ruff-format/command.process.json",
+          "bytes": 1343,
+          "sha256": "efc51a4db843d9e72ad2c798cd44a387951eb06ef1ef30715c72f098494ca3eb",
+          "mode": "0600"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/ruff-format/command.process.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/ruff-format/resources.json",
+          "bytes": 406,
+          "sha256": "c7799c2af7e9b70fbdc52bdf42bb225f49e573513e99966ab27f90477bdaf297",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/ruff-format/resources.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/ruff-format/tmp/uv-cc8f3ad7aa19080a.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0666"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/ruff-format/tmp/uv-cc8f3ad7aa19080a.lock"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/ruff-format-check/command.log",
+          "bytes": 26,
+          "sha256": "3bc53bf3e981a98a34a852e175bf9b77af841edea74fca595d9aedcbaf9a4938",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/ruff-format-check/command.log"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/ruff-format-check/command.process.json",
+          "bytes": 1402,
+          "sha256": "882a2797a077e2d4f599198aef9c4829552404786f6bea820b60f908bfebd39e",
+          "mode": "0600"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/ruff-format-check/command.process.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/ruff-format-check/resources.json",
+          "bytes": 406,
+          "sha256": "6662be3611a6791b63276aa107b161780e7951d962bdd5482ab85bc009144626",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/ruff-format-check/resources.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/ruff-format-check/tmp/uv-cc8f3ad7aa19080a.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0666"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/ruff-format-check/tmp/uv-cc8f3ad7aa19080a.lock"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/ruff-handoff/command.log",
+          "bytes": 19,
+          "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/ruff-handoff/command.log"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/ruff-handoff/command.process.json",
+          "bytes": 1386,
+          "sha256": "21f4061727e4e577be49cc519d731d1778c78a4e464e39da4a6cb72a8d13d32f",
+          "mode": "0600"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/ruff-handoff/command.process.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/ruff-handoff/resources.json",
+          "bytes": 406,
+          "sha256": "1411716c6b42d925c052cbcdd2ae40d455386e6e907a8095ebf0e2b991f13f6e",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/ruff-handoff/resources.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/ruff-handoff/tmp/uv-cc8f3ad7aa19080a.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0666"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/ruff-handoff/tmp/uv-cc8f3ad7aa19080a.lock"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/run.py",
+          "bytes": 3144,
+          "sha256": "28278d7faf87ea50c9f84725eaca001e1c77334189d0bf5d546471886550f883",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/run.py"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/source-freeze/command.log",
+          "bytes": 877,
+          "sha256": "f7c839b8ddfc7acf09d2f6d15f6c8bede0d7f53c4e71dedf5757cdada0816d15",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/source-freeze/command.log"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/source-freeze/command.process.json",
+          "bytes": 1610,
+          "sha256": "f4b8d1be015c1fbb8b759dc34cec975b8d39a98162fe577b016ba1eb3e90b0dc",
+          "mode": "0600"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/source-freeze/command.process.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/source-freeze/resources.json",
+          "bytes": 407,
+          "sha256": "8d1b094fd898db7298e25da00ccc9da71308a8253a22169de96dba36a1c3f0a4",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/source-freeze/resources.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/source-freeze/tmp/uv-cc8f3ad7aa19080a.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0666"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/source-freeze/tmp/uv-cc8f3ad7aa19080a.lock"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/source-freeze-repair/command.log",
+          "bytes": 845,
+          "sha256": "64b5e47dee2c18cd52037f1bc63f6860e2e883b13742f774f6c1e36b1f585b2d",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/source-freeze-repair/command.log"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/source-freeze-repair/command.process.json",
+          "bytes": 1288,
+          "sha256": "e701a45b3b14ba5fcee91a5b1e7ab903f33aea163189b1349265c64e88075139",
+          "mode": "0600"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/source-freeze-repair/command.process.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/source-freeze-repair/resources.json",
+          "bytes": 407,
+          "sha256": "1f486b1ea4657979ad15c94da8a83fd5cf2bc89c5c67b9eb4c7b17b75f4961be",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/source-freeze-repair/resources.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/source-freeze-repair/tmp/uv-cc8f3ad7aa19080a.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0666"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/source-freeze-repair/tmp/uv-cc8f3ad7aa19080a.lock"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/source-read.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/source-read.lock"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/source-stop-handoff.txt",
+          "bytes": 3622,
+          "sha256": "e1cda00d4d5c95f6d4479651b84a46c9121df56a88dbca68d7a44472a30220a2",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/source-stop-handoff.txt"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/source.patch",
+          "bytes": 67732,
+          "sha256": "ea10652f00222657b7e4153f129ced459f3bfba1992b3042e22ef030dc8a16e4",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/source.patch"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/storage-snapshot/command.log",
+          "bytes": 260,
+          "sha256": "9769deafc70701248d10b55f24cdf6909d0af1b91e24828e0bbfc05bbc4ea52d",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/storage-snapshot/command.log"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/storage-snapshot/command.process.json",
+          "bytes": 1990,
+          "sha256": "bc21188179da5b917cb3cbfed56d1f5a63ab875d647b5bc1ec0a5d7388b5d8a3",
+          "mode": "0600"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/storage-snapshot/command.process.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/storage-snapshot/resources.json",
+          "bytes": 406,
+          "sha256": "d15d44cb7bb76ebd14701f1d20fb988fb593db639b9024f09c637e5d04bfb638",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/storage-snapshot/resources.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/storage-snapshot/tmp/uv-cc8f3ad7aa19080a.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0666"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/storage-snapshot/tmp/uv-cc8f3ad7aa19080a.lock"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/storage.json",
+          "bytes": 268,
+          "sha256": "c031e1bc058afb444a1f68ed2e0267c460e04b7d5f178a081515b907ef4b9ab2",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/storage.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/typecheck-final/command.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/typecheck-final/command.log"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/typecheck-final/command.process.json",
+          "bytes": 1303,
+          "sha256": "2fd848d2b580276ecbd4291e37d1192fc03d2f3be50b3cce6b72eae70a1149a9",
+          "mode": "0600"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/typecheck-final/command.process.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/typecheck-final/resources.json",
+          "bytes": 373,
+          "sha256": "bad3a64fa305d79a65e1d9fb25b5257f7e371e1a340cf05567df46ece7d1a16d",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/typecheck-final/resources.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/typecheck-first/command.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/typecheck-first/command.log"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/typecheck-first/command.process.json",
+          "bytes": 1280,
+          "sha256": "eb9bbf3eff5cc0e529a916d33e76a53827ab1809d40588abb53e7d5dbd87530c",
+          "mode": "0600"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/typecheck-first/command.process.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/typecheck-first/resources.json",
+          "bytes": 373,
+          "sha256": "51087a8c7a98809e4eba792685333894a6f16597aa7f07121533aba1a6c36a63",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/typecheck-first/resources.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/typecheck-handoff/command.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/typecheck-handoff/command.log"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/typecheck-handoff/command.process.json",
+          "bytes": 1303,
+          "sha256": "f79c27bec319dca314883b06c6333fcc31eb37d5905a4ad4a271661ea8a49cc3",
+          "mode": "0600"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/typecheck-handoff/command.process.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/typecheck-handoff/resources.json",
+          "bytes": 373,
+          "sha256": "ab763527341c236493e3b931d04a8ee675c25247b8e0bf6af0486849042c4df4",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/typecheck-handoff/resources.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/typecheck-tests-first/command.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/typecheck-tests-first/command.log"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/typecheck-tests-first/command.process.json",
+          "bytes": 1303,
+          "sha256": "fe2e227afd53d62a9ef499a8dd594f5000a93f62d2dafe5da1dbc3cd11ad97e6",
+          "mode": "0600"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/typecheck-tests-first/command.process.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/typecheck-tests-first/resources.json",
+          "bytes": 373,
+          "sha256": "c1b838d733362020fee29d2c833f3321f5c1ed8a9c9092c5040ef71dc3e23fb5",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/typecheck-tests-first/resources.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/typecheck-tests.json",
+          "bytes": 220,
+          "sha256": "ec1caa27db9b12dbe06d2b459705932bda92651c72d7b479d2638130be21e113",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/typecheck-tests.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/unit-corrupt-fixed/command.log",
+          "bytes": 3038,
+          "sha256": "01e429fb212b32a66d0ad1257e4424dc0168c006557d683da2d2eca41d4da405",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/unit-corrupt-fixed/command.log"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/unit-corrupt-fixed/command.process.json",
+          "bytes": 1325,
+          "sha256": "d3e8eabacd708ebeea2482cfb4b86cd8b7c03002f183a818891a15b5452fecb7",
+          "mode": "0600"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/unit-corrupt-fixed/command.process.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/unit-corrupt-fixed/resources.json",
+          "bytes": 373,
+          "sha256": "3a47dad1acdaed47770356c4da9dd6276733b1d4f052cb9ebabb12368e5740ea",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/unit-corrupt-fixed/resources.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/unit-final/command.log",
+          "bytes": 2928,
+          "sha256": "d0f5bfe06cd35e1d533cef6da480c85fb881c70a4a3375a075691685cf672927",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/unit-final/command.log"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/unit-final/command.process.json",
+          "bytes": 1325,
+          "sha256": "b8fe3608671e0a9e9c151bac57cd3d556a6fff5762b3a80851ea29849b0b8eef",
+          "mode": "0600"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/unit-final/command.process.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/unit-final/resources.json",
+          "bytes": 373,
+          "sha256": "e4477e06b3230bb2f1ee7c2efb106a5416a8fa9ec4871369532a1ab205f4e190",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/unit-final/resources.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/unit-first/command.log",
+          "bytes": 2700,
+          "sha256": "336345d9a681303a0335f2cae4eceac032b3cd2d3a3fc59ff845b499e38b97bc",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/unit-first/command.log"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/unit-first/command.process.json",
+          "bytes": 1325,
+          "sha256": "97218ff74a39317fe66c58d8a02c334ba91772b71d8b7f761cf50bae87db6e14",
+          "mode": "0600"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/unit-first/command.process.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/unit-first/resources.json",
+          "bytes": 373,
+          "sha256": "bfe26c040a1cf3136592d7b0f9a297ac787259b0de52553f7098e5087b14f705",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/unit-first/resources.json"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/whole-stop-first.txt",
+          "bytes": 1061,
+          "sha256": "76e5c64b54af071ff29e07f05db69082169add3129048c7b06044141fb2a55b6",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/whole-stop-first.txt"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/whole-stop-html.txt",
+          "bytes": 1018,
+          "sha256": "5d8896f14dff0e4eed01efd5e9efcdd26f95e6b7adc44b8d02ec1fbdf0f180f6",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/whole-stop-html.txt"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/whole-stop-repair.txt",
+          "bytes": 1076,
+          "sha256": "e89221741438e5dba472969270b80b558b08a4221270e2d513e6776c33d6e37d",
+          "mode": "0644"
+        },
+        "member": "files/.worktree/othello-web129/.artifacts/othello-web129/whole-stop-repair.txt"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-intake-v1/manual-review.json",
+          "bytes": 1394,
+          "sha256": "67a46582415173c1f980cb6111a2f8314b1e7488f413b9edc802708da9f08d9b",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-web-intake-v1/manual-review.json"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v1/actual-Main-bundle.log",
+          "bytes": 1059,
+          "sha256": "b49bedb63ecac41b15a38a9cfb906030355181fd1797f2b013ae630e68cda3cc",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v1/actual-Main-bundle.log"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v1/actual-Main-typecheck.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v1/actual-Main-typecheck.log"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v1/actual-returned-STOP.json",
+          "bytes": 2433,
+          "sha256": "5c6e4c86c99a02892bf1e82baadc4c9ea8700b5531d363c7b32afec76d6401c7",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v1/actual-returned-STOP.json"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v1/apply-check.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v1/apply-check.log"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v1/apply.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v1/apply.log"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v1/collect.py",
+          "bytes": 5233,
+          "sha256": "bfd19db0bb4056b9556337282e6f999ea88bd52a5fdd1d54674c80e4f81bab70",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v1/collect.py"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v1/execution.log",
+          "bytes": 1574,
+          "sha256": "8127c19ff772967f281f1b281c12cbc46da8549b28c7a647756f5d852ddc1a36",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v1/execution.log"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v1/execution.process.json",
+          "bytes": 1904,
+          "sha256": "3326ff8996bb29311d6dda7b0285cc924e9530d79af8a26c5fe5a644d949d389",
+          "mode": "0600"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v1/execution.process.json"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v1/run_guard.py",
+          "bytes": 1852,
+          "sha256": "5a2362c54a65be099925546c4d0e46236432fe81a8b943999b4dbaefedb99bf5",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v1/run_guard.py"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v1/status-before.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v1/status-before.log"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/Root-doc---check.log",
+          "bytes": 66,
+          "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/Root-doc---check.log"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/Root-doc---write.log",
+          "bytes": 81,
+          "sha256": "4c8668fbbbf3b8c988cf7b9668f0d4bdc45906aff0db84ffc555692f8d1c0bf3",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/Root-doc---write.log"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/actual-Main-bundle.log",
+          "bytes": 3405,
+          "sha256": "f40a7d6593fbfd0a7ae9281a783ea4254d1e1e46d21ea5de0fccd7ab963b2f1e",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/actual-Main-bundle.log"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/actual-returned-STOP.json",
+          "bytes": 4149,
+          "sha256": "201969ef9033f3ee7ce50520c093478a816290512dbceb0db1a7aff84fb61d7a",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/actual-returned-STOP.json"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/collect.py",
+          "bytes": 4861,
+          "sha256": "29c2e4588d0d4a0050b994cb07e1e235cf5827c3425593d1670e543ef6017d57",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/collect.py"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/composition.json",
+          "bytes": 33796,
+          "sha256": "a0a1266724f17e49e95b7481ba39794dca9286e93bcf74bea57dae448e44d6b0",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/composition.json"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/diff-check.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/diff-check.log"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/execution.log",
+          "bytes": 90,
+          "sha256": "50a8dbd8a0b84eb86ba563e08fd5b5e682632ce34eb28fcdeba51ed4defd9e63",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/execution.log"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/execution.process.json",
+          "bytes": 1373,
+          "sha256": "9848bf0e8d1722da9a6aefe49806bd663c591cc4953befc437ab5efc39941127",
+          "mode": "0600"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/execution.process.json"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/run_guard.py",
+          "bytes": 1852,
+          "sha256": "5a2362c54a65be099925546c4d0e46236432fe81a8b943999b4dbaefedb99bf5",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/run_guard.py"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/ai.worker-BPUHtKFo.js",
+          "bytes": 7962,
+          "sha256": "98f5b6ab44e5f08d33c618056eb0a68e8697c4808f7d2071b1c26e68e3df66fe",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/ai.worker-BPUHtKFo.js"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/ai.worker-CJXmT6I1.js",
+          "bytes": 5945,
+          "sha256": "255f47cb868e08f5ef991940a97734a5fd3828099bc7514b7338718c440f69fe",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/ai.worker-CJXmT6I1.js"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/index-BGvMoNmx.css",
+          "bytes": 786,
+          "sha256": "adb8f8fa88e979e8348df5003c3c3e5afee71ed60798a1c2694315b867484ce1",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/index-BGvMoNmx.css"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/index-CHgGAcPo.js",
+          "bytes": 4419,
+          "sha256": "a8b02f64813a279bb4582c3ab51164161666fe63f22d472ac08e77afbef45b3a",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/index-CHgGAcPo.js"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/noto-sans-jp-japanese-400-normal-Cy9Yahyj.woff2",
+          "bytes": 1017536,
+          "sha256": "4a7b928d4d75e7fc0bace614030664a7ea7eb7d2f754fd2b2da9c3c0ed350570",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/noto-sans-jp-japanese-400-normal-Cy9Yahyj.woff2"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/noto-sans-jp-japanese-700-normal-Cy7xyTMA.woff2",
+          "bytes": 1039792,
+          "sha256": "a5861823629995d9abb4b16b96a1c57139d9663d7a256209cb6b40640ed5431e",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/noto-sans-jp-japanese-700-normal-Cy7xyTMA.woff2"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/othello-C-f_hC6F.js",
+          "bytes": 5032,
+          "sha256": "86e06a81e1adcb152d29fdc7cc2a3ecd5ea6aefecb8b039ea29ea9be913f636d",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/othello-C-f_hC6F.js"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/othello-C5IegHUW.css",
+          "bytes": 2306,
+          "sha256": "8219ea67cd753a9bee646bcf9ef3a9f2c4af2fed671ab1a220e92b9f3788793d",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/othello-C5IegHUW.css"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/othello-Crku3xRU.js",
+          "bytes": 11037,
+          "sha256": "3b28da87497937b99ca020fc653d230c0c8216b2f92a9af97764323288a6f610",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/othello-Crku3xRU.js"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/othello_bg-BuN2liPB.js",
+          "bytes": 62,
+          "sha256": "d44e7b70e479a60adde0b476d6168c10f65a7b10c232ac14fd7c97f3e06bb9bd",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/othello_bg-BuN2liPB.js"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/othello_bg-DG1NctSY.wasm",
+          "bytes": 355089,
+          "sha256": "be2feaabd1725b9885ad5a9235e506dfea20a8b96784a7d7f7aaebee5e5e77d6",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/othello_bg-DG1NctSY.wasm"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/quoridor-CBGlegFx.css",
+          "bytes": 15797,
+          "sha256": "a8105ee24b403a199fa6cb8fc4dce3c05434589dc40a577585e1ecc162e9c78f",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/quoridor-CBGlegFx.css"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/quoridor-D91VtipB.js",
+          "bytes": 1082170,
+          "sha256": "e24bdc2755a915da88cc6615a7d14c4b560545391c9fd11b47385e21adf63248",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/quoridor-D91VtipB.js"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/quoridor_ai_bg-Dn2f54bG.wasm",
+          "bytes": 600696,
+          "sha256": "103613b631047b93a0a3859e3bc5fc8080be3971d9bcab928ee1dfe4c30d3318",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/quoridor_ai_bg-Dn2f54bG.wasm"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/quoridor_rules_bg-C21Eor_a.wasm",
+          "bytes": 653217,
+          "sha256": "b428e5e53875ea76ec0012b0b26fc8c1af16d36beb33feaa87c3299ba39f15bd",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/quoridor_rules_bg-C21Eor_a.wasm"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/favicon.ico",
+          "bytes": 4286,
+          "sha256": "62684312a786790ea45baa075da7ec5ef042951a49b1fde1901f5d6fe7185d09",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/favicon.ico"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/index.html",
+          "bytes": 463,
+          "sha256": "30a225973a471f2deb184162524d695cb1c596bdd33778515b625b1980ad928d",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/index.html"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-runtime-config-v1/actual-returned-STOP.json",
+          "bytes": 3293,
+          "sha256": "42d2f69c0ad489a6f4cd5e9ae0715ad8fe279f41f4a11532199475e872407397",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-runtime-config-v1/actual-returned-STOP.json"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-runtime-config-v1/adopt.py",
+          "bytes": 4162,
+          "sha256": "a846fa3bb2e63cc2f756955630c22a48f765ba0f93f8ecd86a74ed4b8636e346",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-runtime-config-v1/adopt.py"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-runtime-config-v1/delivery.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-runtime-config-v1/delivery.stderr"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-runtime-config-v1/delivery.stdout",
+          "bytes": 157,
+          "sha256": "aec200ab2b252d32e533ab96821bb7dc9743b681bb2a426d6fe411fc46d4b711",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-runtime-config-v1/delivery.stdout"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-runtime-config-v1/execution.log",
+          "bytes": 1158,
+          "sha256": "899ded91b71c67e9b0cbcd48c825b084bfdd2a7b1d14f4c386f72e33e1bce2a3",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-runtime-config-v1/execution.log"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-runtime-config-v1/execution.process.json",
+          "bytes": 1385,
+          "sha256": "4b7ce479c15d2031ae35b1f782e908c49ce13daf00c7f41a7dce7300d69c86b3",
+          "mode": "0600"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-runtime-config-v1/execution.process.json"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-runtime-config-v1/guard-TMP/uv-cc8f3ad7aa19080a.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0666"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-runtime-config-v1/guard-TMP/uv-cc8f3ad7aa19080a.lock"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-runtime-config-v1/installed.json",
+          "bytes": 1011,
+          "sha256": "d50d9185ab365964795cfb00ebb88f877650fc03412dc36b6715048e1b1c1954",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-runtime-config-v1/installed.json"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-runtime-config-v1/run_guard.py",
+          "bytes": 1850,
+          "sha256": "70db5338a6433ff2a826a3aaef7fb1c0bccf4e4970f0ab65e040aa0030ca81bb",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-runtime-config-v1/run_guard.py"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-runtime-config-v1/supplied.txt",
+          "bytes": 1192,
+          "sha256": "64d4046eb56a063bddf9603e0b912c824fb86180466ca2c32dea8f46c4667640",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-runtime-config-v1/supplied.txt"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-renew-v2/actual-returned-STOP.json",
+          "bytes": 2436,
+          "sha256": "728196d45198ac6f4ecb06978526fa511d47a3a9a1de92f52116fc39e421e48f",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-renew-v2/actual-returned-STOP.json"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-renew-v2/collect.py",
+          "bytes": 4462,
+          "sha256": "defeb552c0408b93a6263beefadba59d37fbbf097124a23ffe92a6c7c339982f",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-renew-v2/collect.py"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-renew-v2/execution.log",
+          "bytes": 998,
+          "sha256": "8975d8f51427b49ff37a92f40124e323e9d5223ed0994a8f9600e060af0817c8",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-renew-v2/execution.log"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-renew-v2/execution.process.json",
+          "bytes": 1906,
+          "sha256": "9762781c43f9e64329d78a1aeb6ea88c78e8219925d17beee1b5bd21f8b12721",
+          "mode": "0600"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-renew-v2/execution.process.json"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-renew-v2/run_guard.py",
+          "bytes": 1852,
+          "sha256": "5a2362c54a65be099925546c4d0e46236432fe81a8b943999b4dbaefedb99bf5",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-renew-v2/run_guard.py"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-renew-v3/actual-returned-STOP.json",
+          "bytes": 3266,
+          "sha256": "1dc6fcdc3242b71191a4541bb39009661134a961349fdcc1048f61a27f5a9a7f",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-renew-v3/actual-returned-STOP.json"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-renew-v3/collect.py",
+          "bytes": 4468,
+          "sha256": "90ae785ae6705756723e27fd144a351b637c5eab50713e9259a665e57ff43442",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-renew-v3/collect.py"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-renew-v3/delivery.json",
+          "bytes": 157,
+          "sha256": "aec200ab2b252d32e533ab96821bb7dc9743b681bb2a426d6fe411fc46d4b711",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-renew-v3/delivery.json"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-renew-v3/delivery.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-renew-v3/delivery.stderr"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-renew-v3/execution.log",
+          "bytes": 222,
+          "sha256": "a4e7e7ddd6996115b0221d23c70c3d73c0b58d9708e0501d7a113a9c228f8178",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-renew-v3/execution.log"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-renew-v3/execution.process.json",
+          "bytes": 1376,
+          "sha256": "8ff82ae89223d53dd3f1320f34044528d0b9951b0474023deb54ecd6d3091463",
+          "mode": "0600"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-renew-v3/execution.process.json"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-renew-v3/guard-TMP/uv-cc8f3ad7aa19080a.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0666"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-renew-v3/guard-TMP/uv-cc8f3ad7aa19080a.lock"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-renew-v3/installed.json",
+          "bytes": 635,
+          "sha256": "a2f42cb7dd1381035fad7ef818520dceb0ee62e92b5dfb47ffe634ae27e9cefb",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-renew-v3/installed.json"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-renew-v3/message.md",
+          "bytes": 1154,
+          "sha256": "1ec251f73557a7fc24068edbfaa095452d3c5d1a6febdd0d2cfdd408b1f7c019",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-renew-v3/message.md"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-renew-v3/previous-lease-restored.json",
+          "bytes": 2204,
+          "sha256": "25f292fd410eefaad9081a3a0761de64d0d513f3b68b814a9d9b609092f234b7",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-renew-v3/previous-lease-restored.json"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-renew-v3/run_guard.py",
+          "bytes": 1852,
+          "sha256": "5a2362c54a65be099925546c4d0e46236432fe81a8b943999b4dbaefedb99bf5",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-renew-v3/run_guard.py"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-final-restore-v1/actual-returned-STOP.json",
+          "bytes": 3128,
+          "sha256": "6df212f96c26ce2269efd60328c421960ebab7406ee7df1604a78a2aa3bc81fb",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-final-restore-v1/actual-returned-STOP.json"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-final-restore-v1/collect.py",
+          "bytes": 1908,
+          "sha256": "bf08b2114dc1b673706baa8382c0f12251c06628e0e2b1cde6666914a01df0aa",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-final-restore-v1/collect.py"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-final-restore-v1/execution.log",
+          "bytes": 76,
+          "sha256": "518e44f58d2885c5464d00494675282f62a971571ec43689e3a774baef276d35",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-final-restore-v1/execution.log"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-final-restore-v1/execution.process.json",
+          "bytes": 1384,
+          "sha256": "b1a56d965c1b70cfd2d6f1c707e53187fc4e4213e3cf42a63846bef2a967528b",
+          "mode": "0600"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-final-restore-v1/execution.process.json"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-final-restore-v1/result.json",
+          "bytes": 4244,
+          "sha256": "2b8def8495874430a1ce1fbaa73679d1fd3fb8d66417fa5cd2c6b6ce59d5ee63",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-final-restore-v1/result.json"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-final-restore-v1/run_guard.py",
+          "bytes": 1852,
+          "sha256": "5a2362c54a65be099925546c4d0e46236432fe81a8b943999b4dbaefedb99bf5",
+          "mode": "0644"
+        },
+        "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-browser-final-restore-v1/run_guard.py"
+      }
+    ],
+    "git_reused_distribution_files": [
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle/assets/audio/README.md",
+          "bytes": 2119,
+          "sha256": "e56865888152ba4b36a7aca5122fe32eb0c4a5af582f82fd079493f4396f7056",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "87d4b4f5576a79721362c87f39c752ff3ed01738",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle/assets/audio/click.wav",
+          "bytes": 8644,
+          "sha256": "0ea6c11211783972dc5471a30b936960b0c717a6e6b5913d97b30a0be45253b7",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "ae8d60f9277af77eae03787eb4668db215ab0022",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle/assets/audio/cozy-puzzle.mp3",
+          "bytes": 2084071,
+          "sha256": "8882f4bda94cfe02495fdd023f7ce1916a065619bc6fdb33ce95f094665772b3",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "77e056be54c952fbf5b2e9620087a0b52a9853a7",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle/assets/audio/impact-sounds-license.txt",
+          "bytes": 583,
+          "sha256": "6fa7dfb432dc8aefe26116cf179e25407a46bdee5bae736decb5bd88d4a565d2",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "6f18fa940e2d0b7bd0e356cb388c25351e1df522",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle/assets/audio/interface-sounds-license.txt",
+          "bytes": 550,
+          "sha256": "1a2d0f1e2926b1de6f90c843c27a3101cf212ec29fb07d563cbc339a2329ea81",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "6a9c34c22ffd1900e36b0ef6a0f0f1b9355a8fb1",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle/assets/audio/lose.wav",
+          "bytes": 141198,
+          "sha256": "660be9eba786b98aa5385af4b55823bcb70eb5c1b6a38b11d65bbc0a5059d64c",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "62dd177d51f2e1156c4f7f205cd08bad5432b22c",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle/assets/audio/manifest.json",
+          "bytes": 4732,
+          "sha256": "29a7951f9a33df0dc14bca3a3554ba72497af67cf826d38794b59b400c86120f",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "a9cd9edede82628400ac02653b53c2467d8d4932",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle/assets/audio/pawn.wav",
+          "bytes": 23248,
+          "sha256": "846df720ff3453449751bb3db89e4894e19edae9eb96c2488506ae1389ff137c",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "abc18bb54c5bea63a9d82029a1704f6053e3ac66",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle/assets/audio/undo.wav",
+          "bytes": 5456,
+          "sha256": "4a0bf0c30f935218874cbe4cbbb02528d04797d4899308f28e3acadc0c95073c",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "53defb3c6662d697b3c4b158f3feab45bc01c2ed",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle/assets/audio/wall.wav",
+          "bytes": 29164,
+          "sha256": "f05cf60507297b0abe67c899d1f6b5b30ef8509045dc4e6e1b1711e50c5798c3",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "51123cf5e3b4643908c271c00da1397ac740c4a1",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle/assets/audio/win.wav",
+          "bytes": 158838,
+          "sha256": "2878f500853fcf4dbfe239f1c03dd57324d0b1a3c12ba17d66236611b8534f24",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "bfb3b5810c8cd7c73f50df31531c27e61e8c7d9a",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle/assets/environments/README.md",
+          "bytes": 1798,
+          "sha256": "457f9524fe5c119c1fb4b00c351b18962bc5a841f69fafa4395ac2aa7634992d",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "c34e8164b3c43ceedb128bc4e0781d5b82884261",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle/assets/environments/epping-forest-02-2k.hdr",
+          "bytes": 7070422,
+          "sha256": "d47f6f2c789d44d2b6502523ba93c8cc85d791f2683dea404d608ee73c4a23fb",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "6ceeb64c01128d67af1b7864d3b612b391ca5092",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle/assets/environments/qwantani-noon-2k.hdr",
+          "bytes": 5757155,
+          "sha256": "6a36c0fd63f8a11788c84a514bfbb840b17400f24a55166d358b454accbc91a8",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "e7d74ffcd465912917288e82f7375ee51bf5719a",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle/assets/environments/warm-restaurant-night-2k.hdr",
+          "bytes": 5710994,
+          "sha256": "115fdee7807078798e72277357d40df9671eb65e7667d79ece813f4e06b5d92a",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "fb05a1d67ccc13aaa474f6d98500eb7908e47420",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle/assets/tabletop/README.md",
+          "bytes": 1397,
+          "sha256": "674f8bcd9556f5a9640aa80952e84b4afb0ac5e6b53d683a175f4dcb6f9d0ec3",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "a143b1177f973ec995ad5167b8b97318393d3d71",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle/assets/tabletop/beech-albedo.png",
+          "bytes": 2452019,
+          "sha256": "cc1ebb9b08e6c95336b841601d9dcb4df9b7e577f4c1f1ac4dfa522f8f1f7f2e",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "10f3ec1e6ccd44fee1ab07dde1d976041cc2a337",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle/assets/tabletop/comfy-cafe-2k.hdr",
+          "bytes": 6260522,
+          "sha256": "00597d2a2174b7803c10bd2d690922e170bb614bce6c98c9c9b688698f1d234d",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "09e72ffd2c7144aecb51a5578fa022a3846fa63a",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle/assets/ui/README.md",
+          "bytes": 1706,
+          "sha256": "6f16b3cc9871a558b647d20ebaa1363b17826a5eda956b559cd797d628b69499",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "7d07ecf2d5eabdd4fdc2c738707a43c5f681caeb",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle/assets/ui/quoridor-title-logo.png",
+          "bytes": 796815,
+          "sha256": "669c8423640114c05a0d492ebcedf0eb58da9f1b4c0ff26557f34c5e5dfaa23b",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "f74d87e7d8790a6e1023d326f592cf82caa67835",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/audio/README.md",
+          "bytes": 2119,
+          "sha256": "e56865888152ba4b36a7aca5122fe32eb0c4a5af582f82fd079493f4396f7056",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "87d4b4f5576a79721362c87f39c752ff3ed01738",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/audio/click.wav",
+          "bytes": 8644,
+          "sha256": "0ea6c11211783972dc5471a30b936960b0c717a6e6b5913d97b30a0be45253b7",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "ae8d60f9277af77eae03787eb4668db215ab0022",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/audio/cozy-puzzle.mp3",
+          "bytes": 2084071,
+          "sha256": "8882f4bda94cfe02495fdd023f7ce1916a065619bc6fdb33ce95f094665772b3",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "77e056be54c952fbf5b2e9620087a0b52a9853a7",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/audio/impact-sounds-license.txt",
+          "bytes": 583,
+          "sha256": "6fa7dfb432dc8aefe26116cf179e25407a46bdee5bae736decb5bd88d4a565d2",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "6f18fa940e2d0b7bd0e356cb388c25351e1df522",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/audio/interface-sounds-license.txt",
+          "bytes": 550,
+          "sha256": "1a2d0f1e2926b1de6f90c843c27a3101cf212ec29fb07d563cbc339a2329ea81",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "6a9c34c22ffd1900e36b0ef6a0f0f1b9355a8fb1",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/audio/lose.wav",
+          "bytes": 141198,
+          "sha256": "660be9eba786b98aa5385af4b55823bcb70eb5c1b6a38b11d65bbc0a5059d64c",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "62dd177d51f2e1156c4f7f205cd08bad5432b22c",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/audio/manifest.json",
+          "bytes": 4732,
+          "sha256": "29a7951f9a33df0dc14bca3a3554ba72497af67cf826d38794b59b400c86120f",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "a9cd9edede82628400ac02653b53c2467d8d4932",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/audio/pawn.wav",
+          "bytes": 23248,
+          "sha256": "846df720ff3453449751bb3db89e4894e19edae9eb96c2488506ae1389ff137c",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "abc18bb54c5bea63a9d82029a1704f6053e3ac66",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/audio/undo.wav",
+          "bytes": 5456,
+          "sha256": "4a0bf0c30f935218874cbe4cbbb02528d04797d4899308f28e3acadc0c95073c",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "53defb3c6662d697b3c4b158f3feab45bc01c2ed",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/audio/wall.wav",
+          "bytes": 29164,
+          "sha256": "f05cf60507297b0abe67c899d1f6b5b30ef8509045dc4e6e1b1711e50c5798c3",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "51123cf5e3b4643908c271c00da1397ac740c4a1",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/audio/win.wav",
+          "bytes": 158838,
+          "sha256": "2878f500853fcf4dbfe239f1c03dd57324d0b1a3c12ba17d66236611b8534f24",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "bfb3b5810c8cd7c73f50df31531c27e61e8c7d9a",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/environments/README.md",
+          "bytes": 1798,
+          "sha256": "457f9524fe5c119c1fb4b00c351b18962bc5a841f69fafa4395ac2aa7634992d",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "c34e8164b3c43ceedb128bc4e0781d5b82884261",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/environments/epping-forest-02-2k.hdr",
+          "bytes": 7070422,
+          "sha256": "d47f6f2c789d44d2b6502523ba93c8cc85d791f2683dea404d608ee73c4a23fb",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "6ceeb64c01128d67af1b7864d3b612b391ca5092",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/environments/qwantani-noon-2k.hdr",
+          "bytes": 5757155,
+          "sha256": "6a36c0fd63f8a11788c84a514bfbb840b17400f24a55166d358b454accbc91a8",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "e7d74ffcd465912917288e82f7375ee51bf5719a",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/environments/warm-restaurant-night-2k.hdr",
+          "bytes": 5710994,
+          "sha256": "115fdee7807078798e72277357d40df9671eb65e7667d79ece813f4e06b5d92a",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "fb05a1d67ccc13aaa474f6d98500eb7908e47420",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/tabletop/README.md",
+          "bytes": 1397,
+          "sha256": "674f8bcd9556f5a9640aa80952e84b4afb0ac5e6b53d683a175f4dcb6f9d0ec3",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "a143b1177f973ec995ad5167b8b97318393d3d71",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/tabletop/beech-albedo.png",
+          "bytes": 2452019,
+          "sha256": "cc1ebb9b08e6c95336b841601d9dcb4df9b7e577f4c1f1ac4dfa522f8f1f7f2e",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "10f3ec1e6ccd44fee1ab07dde1d976041cc2a337",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/tabletop/comfy-cafe-2k.hdr",
+          "bytes": 6260522,
+          "sha256": "00597d2a2174b7803c10bd2d690922e170bb614bce6c98c9c9b688698f1d234d",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "09e72ffd2c7144aecb51a5578fa022a3846fa63a",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/ui/README.md",
+          "bytes": 1706,
+          "sha256": "6f16b3cc9871a558b647d20ebaa1363b17826a5eda956b559cd797d628b69499",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "7d07ecf2d5eabdd4fdc2c738707a43c5f681caeb",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".worktree/othello-web129/.artifacts/othello-web129/bundle-final/assets/ui/quoridor-title-logo.png",
+          "bytes": 796815,
+          "sha256": "669c8423640114c05a0d492ebcedf0eb58da9f1b4c0ff26557f34c5e5dfaa23b",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "f74d87e7d8790a6e1023d326f592cf82caa67835",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/audio/README.md",
+          "bytes": 2119,
+          "sha256": "e56865888152ba4b36a7aca5122fe32eb0c4a5af582f82fd079493f4396f7056",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "87d4b4f5576a79721362c87f39c752ff3ed01738",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/audio/click.wav",
+          "bytes": 8644,
+          "sha256": "0ea6c11211783972dc5471a30b936960b0c717a6e6b5913d97b30a0be45253b7",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "ae8d60f9277af77eae03787eb4668db215ab0022",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/audio/cozy-puzzle.mp3",
+          "bytes": 2084071,
+          "sha256": "8882f4bda94cfe02495fdd023f7ce1916a065619bc6fdb33ce95f094665772b3",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "77e056be54c952fbf5b2e9620087a0b52a9853a7",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/audio/impact-sounds-license.txt",
+          "bytes": 583,
+          "sha256": "6fa7dfb432dc8aefe26116cf179e25407a46bdee5bae736decb5bd88d4a565d2",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "6f18fa940e2d0b7bd0e356cb388c25351e1df522",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/audio/interface-sounds-license.txt",
+          "bytes": 550,
+          "sha256": "1a2d0f1e2926b1de6f90c843c27a3101cf212ec29fb07d563cbc339a2329ea81",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "6a9c34c22ffd1900e36b0ef6a0f0f1b9355a8fb1",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/audio/lose.wav",
+          "bytes": 141198,
+          "sha256": "660be9eba786b98aa5385af4b55823bcb70eb5c1b6a38b11d65bbc0a5059d64c",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "62dd177d51f2e1156c4f7f205cd08bad5432b22c",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/audio/manifest.json",
+          "bytes": 4732,
+          "sha256": "29a7951f9a33df0dc14bca3a3554ba72497af67cf826d38794b59b400c86120f",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "a9cd9edede82628400ac02653b53c2467d8d4932",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/audio/pawn.wav",
+          "bytes": 23248,
+          "sha256": "846df720ff3453449751bb3db89e4894e19edae9eb96c2488506ae1389ff137c",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "abc18bb54c5bea63a9d82029a1704f6053e3ac66",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/audio/undo.wav",
+          "bytes": 5456,
+          "sha256": "4a0bf0c30f935218874cbe4cbbb02528d04797d4899308f28e3acadc0c95073c",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "53defb3c6662d697b3c4b158f3feab45bc01c2ed",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/audio/wall.wav",
+          "bytes": 29164,
+          "sha256": "f05cf60507297b0abe67c899d1f6b5b30ef8509045dc4e6e1b1711e50c5798c3",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "51123cf5e3b4643908c271c00da1397ac740c4a1",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/audio/win.wav",
+          "bytes": 158838,
+          "sha256": "2878f500853fcf4dbfe239f1c03dd57324d0b1a3c12ba17d66236611b8534f24",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "bfb3b5810c8cd7c73f50df31531c27e61e8c7d9a",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/environments/README.md",
+          "bytes": 1798,
+          "sha256": "457f9524fe5c119c1fb4b00c351b18962bc5a841f69fafa4395ac2aa7634992d",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "c34e8164b3c43ceedb128bc4e0781d5b82884261",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/environments/epping-forest-02-2k.hdr",
+          "bytes": 7070422,
+          "sha256": "d47f6f2c789d44d2b6502523ba93c8cc85d791f2683dea404d608ee73c4a23fb",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "6ceeb64c01128d67af1b7864d3b612b391ca5092",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/environments/qwantani-noon-2k.hdr",
+          "bytes": 5757155,
+          "sha256": "6a36c0fd63f8a11788c84a514bfbb840b17400f24a55166d358b454accbc91a8",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "e7d74ffcd465912917288e82f7375ee51bf5719a",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/environments/warm-restaurant-night-2k.hdr",
+          "bytes": 5710994,
+          "sha256": "115fdee7807078798e72277357d40df9671eb65e7667d79ece813f4e06b5d92a",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "fb05a1d67ccc13aaa474f6d98500eb7908e47420",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/tabletop/README.md",
+          "bytes": 1397,
+          "sha256": "674f8bcd9556f5a9640aa80952e84b4afb0ac5e6b53d683a175f4dcb6f9d0ec3",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "a143b1177f973ec995ad5167b8b97318393d3d71",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/tabletop/beech-albedo.png",
+          "bytes": 2452019,
+          "sha256": "cc1ebb9b08e6c95336b841601d9dcb4df9b7e577f4c1f1ac4dfa522f8f1f7f2e",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "10f3ec1e6ccd44fee1ab07dde1d976041cc2a337",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/tabletop/comfy-cafe-2k.hdr",
+          "bytes": 6260522,
+          "sha256": "00597d2a2174b7803c10bd2d690922e170bb614bce6c98c9c9b688698f1d234d",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "09e72ffd2c7144aecb51a5578fa022a3846fa63a",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/ui/README.md",
+          "bytes": 1706,
+          "sha256": "6f16b3cc9871a558b647d20ebaa1363b17826a5eda956b559cd797d628b69499",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "7d07ecf2d5eabdd4fdc2c738707a43c5f681caeb",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      },
+      {
+        "original": {
+          "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-web-adoption-v2/web-dist/assets/ui/quoridor-title-logo.png",
+          "bytes": 796815,
+          "sha256": "669c8423640114c05a0d492ebcedf0eb58da9f1b4c0ff26557f34c5e5dfaa23b",
+          "mode": "0644"
+        },
+        "restore": {
+          "git_blob": "f74d87e7d8790a6e1023d326f592cf82caa67835",
+          "mode": "0644"
+        },
+        "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+      }
+    ],
+    "one_forward_stream": "PASS exact names/bytes/SHA/modes and gzip EOF/CRC, no extraction"
+  },
+  "render_scope": "Six broader new rendered cases PASS on pinned pre-save-preservation-fix source. Final session-only guard delta has final22direct units plus new actual HTML corrupt-active-resume regression PASS. No final7case rendered suite or old scientific/browser suite claim. Subsequent Quoridor-only9asset URL literals preserve AST/13binary assets and root/subpath HTTP distribution; UI/lifecycle behavior otherwise unchanged.",
+  "browser_original_absence_restored": {
+    "at": "2026-10-21T16:01:50.468108+00:00",
+    "original_absence_restored": true,
+    "path": "/workspaces/quoridor/artifacts/playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/SwiftShader.ini",
+    "removed_exact_sha": "c30e9e654ace933b1cf2a0e10720a7f86aacdc1a0c97c3184731189ae94f3e2f",
+    "actual_owned_browser_normal_collection": [
+      {
+        "path": "/workspaces/quoridor/.worktree/othello-web129/.artifacts/othello-web129/browser-repair/command.process.json",
+        "process": {
+          "command": [
+            "node",
+            ".artifacts/othello-web129/browser.mjs",
+            "--grep",
+            "new cross-game flow"
+          ],
+          "status": "complete",
+          "child": {
+            "pid": 524308,
+            "start_ticks": "64665621",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "launch_policy": {
+            "no_new_privs_requested": false,
+            "verified_before_exec": null
+          },
+          "cpu_plan": {
+            "management": [18],
+            "commands": {
+              "implementation": [12]
+            },
+            "allocation": [12, 18],
+            "resource_CPUs": 2,
+            "worker_CPUs": 1,
+            "library_threads": 1
+          },
+          "command_cpu_scope": "implementation",
+          "log_bytes_seen": 442,
+          "scope": "session group and periodically recorded descendants; no daemon adoption",
+          "exit_code": 0,
+          "remaining": [],
+          "direct_child_reaped": true,
+          "descendant_visibility": "observed",
+          "cleanup_complete": true,
+          "log_bytes_retained": 442,
+          "wall_seconds": 58.583761451998726,
+          "handle_closes_attempted": ["selector_close", "pipe_close", "pidfd_close", "log_close"],
+          "primary_error": null,
+          "process_cleanup_complete": true,
+          "handle_closes_complete": true,
+          "signal_mask_restoration": "pending",
+          "final_record_persist": "attempted",
+          "finalization_errors": []
+        }
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/othello-web129/.artifacts/othello-web129/normal-collection/command.process.json",
+        "process": {
+          "command": [
+            "bash",
+            "scripts/dev/project-env.sh",
+            "python",
+            "-B",
+            ".artifacts/othello-web129/collect.py"
+          ],
+          "status": "complete",
+          "child": {
+            "pid": 525335,
+            "start_ticks": "64674770",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "launch_policy": {
+            "no_new_privs_requested": false,
+            "verified_before_exec": null
+          },
+          "cpu_plan": {
+            "management": [18],
+            "commands": {
+              "implementation": [12]
+            },
+            "allocation": [12, 18],
+            "resource_CPUs": 2,
+            "worker_CPUs": 1,
+            "library_threads": 1
+          },
+          "command_cpu_scope": "implementation",
+          "log_bytes_seen": 193,
+          "scope": "session group and periodically recorded descendants; no daemon adoption",
+          "exit_code": 0,
+          "remaining": [],
+          "direct_child_reaped": true,
+          "descendant_visibility": "observed",
+          "cleanup_complete": true,
+          "log_bytes_retained": 193,
+          "wall_seconds": 0.07361974101513624,
+          "handle_closes_attempted": ["selector_close", "pipe_close", "pidfd_close", "log_close"],
+          "primary_error": null,
+          "process_cleanup_complete": true,
+          "handle_closes_complete": true,
+          "signal_mask_restoration": "pending",
+          "final_record_persist": "attempted",
+          "finalization_errors": []
+        }
+      }
+    ],
+    "source_of_wholeSTOP": "original worker12.9.7 reported returned preview/test/collector, no further browser/config reads; source14/productinput12 bound in worker evidence.json",
+    "prior5PASS_and_first_timeout_retained": true,
+    "repaired_new_cross_game_case_PASS": true,
+    "scientific_claim": false,
+    "no_future_hostquiet": true
+  },
+  "ROOT_failure_records": "v1 Main Vite missed apps/web root; prior MainTSC/source apply reused without replay. Browser-renew-v2 refused renamed cleanup receipt before configuration mutation; v3 used preserved exact first receipt and closed/reopened lease.",
+  "new_features": "one home#/ with Quoridor#/quoridor and Othello#/othello; new/resume/local2player/simple nonlearning AI Worker; independent validated othello.game.v1; save-before-cancel/terminate and stale init/reply guards; corrupted active resume cannot overwrite unreadable slot until validated retry or explicit new",
+  "Quoridor_original_game_settings_audio_keys_unchanged": true,
+  "scientific_calls": 0,
+  "model_RAW_sealed_reads": 0,
+  "pauses_seals_defaults_unchanged": true,
+  "late_admin_retirement_separate": true,
+  "fullfees_globalactual_tails": "UNKNOWN"
+}

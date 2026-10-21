@@ -11,12 +11,12 @@ async function home(page: Page): Promise<void> {
   await expect(page.locator('#choose-quoridor')).toBeVisible();
 }
 
-test('home loads no game resources and honestly lists unavailable Othello', async ({ page }) => {
+test('home loads no game resources and offers both games', async ({ page }) => {
   const requests: string[] = [];
   page.on('request', (request) => requests.push(request.url()));
   await page.goto('./?forceWebGL=1');
   await expect(page.locator('#choose-quoridor')).toBeVisible();
-  await expect(page.getByRole('button', { name: '準備中' })).toBeDisabled();
+  await expect(page.locator('#choose-othello')).toBeVisible();
   expect(requests.some((url) => /wasm|quoridor-|ai.worker|three|\.hdr|\.mp3|\.ogg/.test(url))).toBe(
     false,
   );
@@ -31,7 +31,7 @@ test('home stays lazy, existing slot resumes, game teardown and base-path histor
   page.on('request', (request) => requests.push(request.url()));
   await page.goto('./?forceWebGL=1');
   await expect(page.locator('#choose-quoridor')).toBeVisible();
-  await expect(page.getByRole('button', { name: '準備中' })).toBeDisabled();
+  await expect(page.locator('#choose-othello')).toBeVisible();
   expect(requests.some((url) => /wasm|quoridor-title|\.hdr|\.mp3|\.ogg/.test(url))).toBe(false);
   expect(await page.evaluate(() => window.__QUORIDOR_DIAGNOSTICS__)).toBeUndefined();
   const homeStyle = await page.locator('.home-page').evaluate((element) => ({

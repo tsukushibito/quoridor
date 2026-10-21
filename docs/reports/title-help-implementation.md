@@ -1,6 +1,6 @@
 # タイトル・遊び方・PC操作の改善
 
-対象issue: `quoridor-bh9.7`。作業場所: `.worktree/webapp-title-help`、ブランチ `codex/webapp-title-help`。共通開始点: `2b24675ae7ce10140482b36ea117e1e2e61e743f`。背景担当によるmain統合後、13ファイルが凍結版と一致することを確認し、タイトルbranchのbaseを `ac0070e61deea3432e5d7d68e9a39da62c724ad2` へ進めた。作業ファイル210件のhashは前後で保持されている。設計正本は[Webアプリ設計 §11.7](../design/quoridor-3d-webapp-design-rust-wasm-v1.md#117-タイトル画面と遊び方)。実装時はmainへの統合・pushを対象外としていた。後続のユーザー指示でmain統合と、その後のpushが承認された。
+対象issue: `quoridor-bh9.7`。作業場所: `.worktree/webapp-title-help`、ブランチ `codex/webapp-title-help`。共通開始点: `2b24675ae7ce10140482b36ea117e1e2e61e743f`。背景担当によるmain統合後、13ファイルが凍結版と一致することを確認し、タイトルbranchのbaseを `ac0070e61deea3432e5d7d68e9a39da62c724ad2` へ進めた。作業ファイル210件のhashは前後で保持されている。設計正本は[Webアプリ設計 §11.7](../../games/quoridor/docs/quoridor-3d-webapp-design-rust-wasm-v1.md#117-タイトル画面と遊び方)。実装時はmainへの統合・pushを対象外としていた。後続のユーザー指示でmain統合と、その後のpushが承認された。
 
 ## 実装
 
@@ -10,7 +10,7 @@
 
 ## ロゴ
 
-組み込み `image_gen.imagegen` で生成した英字 `QUORIDOR` の透過PNG。採用ファイルは[quoridor-title-logo.png](../../apps/web/public/assets/ui/quoridor-title-logo.png)、生成promptと出典は[資産README](../../apps/web/public/assets/ui/README.md)。2020 × 778、RGBA。ブラウザで画像の復号と隅のalpha=0を確認した。生成原本も保存しており、画像そのものの後加工はしていない。
+組み込み `image_gen.imagegen` で生成した英字 `QUORIDOR` の透過PNG。採用ファイルは[quoridor-title-logo.png](../../apps/web/public/games/quoridor/ui/quoridor-title-logo.png)、生成promptと出典は[資産README](../../apps/web/public/games/quoridor/ui/README.md)。2020 × 778、RGBA。ブラウザで画像の復号と隅のalpha=0を確認した。生成原本も保存しており、画像そのものの後加工はしていない。
 
 表示時の一度だけのフェードと光の演出はCSSで制御する。`prefers-reduced-motion` とアプリの省モーション設定で停止し、取得失敗時はHTML文字へ切り替える。
 
@@ -28,17 +28,17 @@ production rootの初回は71/73成功。保存済み対局の開始障害から
 
 最終結果:
 
-| 検証 | 結果・根拠 |
-| --- | --- |
-| `npm run typecheck` | 成功。`final-typecheck.log` |
-| `npm run test:audio` / `npm run test:render` | 設定3件・光源方向6件成功 |
-| `node scripts/check-boundaries.mjs` | 成功 |
-| release Wasm + Vite production build | root / subpath成功。JS chunkの既存サイズ注意表示あり |
-| production root全73ケース | 初回71成功、上記2件の修正後再確認は2/2成功（20.1秒）。`production-root-first.log` / `production-root-recheck.log` |
-| production `/quoridor/`全73ケース | 73/73成功（13.8分）。`production-subpath.log` |
-| 保存操作の入口整理後、関連10ケースを両パスで再確認 | root 10/10・subpath 10/10成功（各1.8分）。`final-root-related.log` / `final-subpath-related.log` |
-| 観測APIを除いた通常production | root / subpath両方で、キーボード着手・テストglobal非公開・page/console errorなし。`normal-root-smoke.log` / `normal-subpath.log` |
-| 最終画面撮影 | 下記15枚。`final-capture.log` は `errors: []` |
+| 検証                                               | 結果・根拠                                                                                                                       |
+| -------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `npm run typecheck`                                | 成功。`final-typecheck.log`                                                                                                      |
+| `npm run test:audio` / `npm run test:render`       | 設定3件・光源方向6件成功                                                                                                         |
+| `node scripts/check-boundaries.mjs`                | 成功                                                                                                                             |
+| release Wasm + Vite production build               | root / subpath成功。JS chunkの既存サイズ注意表示あり                                                                             |
+| production root全73ケース                          | 初回71成功、上記2件の修正後再確認は2/2成功（20.1秒）。`production-root-first.log` / `production-root-recheck.log`                |
+| production `/quoridor/`全73ケース                  | 73/73成功（13.8分）。`production-subpath.log`                                                                                    |
+| 保存操作の入口整理後、関連10ケースを両パスで再確認 | root 10/10・subpath 10/10成功（各1.8分）。`final-root-related.log` / `final-subpath-related.log`                                 |
+| 観測APIを除いた通常production                      | root / subpath両方で、キーボード着手・テストglobal非公開・page/console errorなし。`normal-root-smoke.log` / `normal-subpath.log` |
+| 最終画面撮影                                       | 下記15枚。`final-capture.log` は `errors: []`                                                                                    |
 
 ログと確認済みruntime・資産・テストのSHA-256一覧 `verified-runtime-manifest.json` は `.artifacts/title-help/` に保持する。通常productionは `VITE_PHASE1_E2E=0`、観測が必要なE2Eは `VITE_PHASE1_E2E=1` でビルドした。rootの初回一括実行は2件で終了したため、subpathは別途明示的にビルド・全体実行した。初回一括成功と表現しない。
 
@@ -61,10 +61,10 @@ PLAYWRIGHT_BROWSERS_PATH=./artifacts/playwright SMOKE_BASE_URL=http://127.0.0.1:
 
 ## 画面の証拠
 
-| PC解像度 | タイトル | 遊び方 | 対局 |
-| --- | --- | --- | --- |
-| 1280 × 720 | [画像](../../.artifacts/title-help/title-1280x720.png) | [画像](../../.artifacts/title-help/help-1280x720.png) | [画像](../../.artifacts/title-help/match-1280x720.png) |
-| 1440 × 900 | [画像](../../.artifacts/title-help/title-1440x900.png) | [画像](../../.artifacts/title-help/help-1440x900.png) | [画像](../../.artifacts/title-help/match-1440x900.png) |
+| PC解像度    | タイトル                                                | 遊び方                                                 | 対局                                                    |
+| ----------- | ------------------------------------------------------- | ------------------------------------------------------ | ------------------------------------------------------- |
+| 1280 × 720  | [画像](../../.artifacts/title-help/title-1280x720.png)  | [画像](../../.artifacts/title-help/help-1280x720.png)  | [画像](../../.artifacts/title-help/match-1280x720.png)  |
+| 1440 × 900  | [画像](../../.artifacts/title-help/title-1440x900.png)  | [画像](../../.artifacts/title-help/help-1440x900.png)  | [画像](../../.artifacts/title-help/match-1440x900.png)  |
 | 1920 × 1080 | [画像](../../.artifacts/title-help/title-1920x1080.png) | [画像](../../.artifacts/title-help/help-1920x1080.png) | [画像](../../.artifacts/title-help/match-1920x1080.png) |
 
 背景別タイトル: [暖かい室内](../../.artifacts/title-help/title-warm-room.png)、[暗めの室内](../../.artifacts/title-help/title-dark-room.png)、[森の中](../../.artifacts/title-help/title-forest.png)、[山の上](../../.artifacts/title-help/title-mountain.png)。

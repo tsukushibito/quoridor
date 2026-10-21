@@ -193,8 +193,10 @@ test('hidden tab stops sources and resumes music position without duplicate loop
 });
 
 test('asset HTTP/decode failure is recoverable and does not stop the game', async ({ page }) => {
-  await page.route('**/assets/audio/pawn.wav', (route) => route.fulfill({ status: 404, body: '' }));
-  await page.route('**/assets/audio/cozy-puzzle.mp3', (route) =>
+  await page.route('**/games/quoridor/audio/pawn.wav', (route) =>
+    route.fulfill({ status: 404, body: '' }),
+  );
+  await page.route('**/games/quoridor/audio/cozy-puzzle.mp3', (route) =>
     route.fulfill({ status: 200, body: 'invalid audio' }),
   );
   await ready(page);
@@ -205,8 +207,8 @@ test('asset HTTP/decode failure is recoverable and does not stop the game', asyn
   await page.locator('#close-menu').click();
   await move(page, 13);
   expect((await state(page)).view?.ply).toBe(1);
-  await page.unroute('**/assets/audio/pawn.wav');
-  await page.unroute('**/assets/audio/cozy-puzzle.mp3');
+  await page.unroute('**/games/quoridor/audio/pawn.wav');
+  await page.unroute('**/games/quoridor/audio/cozy-puzzle.mp3');
   await page.locator('#open-menu').click();
   await page.locator('#sound-retry').click();
   await expect.poll(() => audio(page).then((value) => value.status)).toBe('ready');
