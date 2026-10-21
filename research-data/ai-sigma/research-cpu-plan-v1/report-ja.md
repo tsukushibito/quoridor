@@ -1,0 +1,17 @@
+# 通常ジョブのCPU計画と実process検証
+
+対象は `quoridor-4lc.324.32`。通常設定から一つのCPUPlanを解決し、管理、laneの検索command、必要なteam、collection/finalizeの範囲を同じ結果から派生させた。検索worker数、推論library thread数、管理込みresource CPU数は別々に保持する。無効CPU、SMT競合、役割重複はpayload前に拒否する。
+
+親jobは登録configと実PID/start/boot/親子関係から外部peerを判別し、別laneの次batchも実所有関係で扱う。子は自分の許可範囲、親生存・取消、RAMと実threadを監視する。sequenceはprepare、inner、batch切替、finalize/collection、cleanupまで管理範囲を維持する。広いincoming maskの無条件復元、子ごとのhost再配分、環境変数だけの免除、新schedulerや予約DBは導入していない。
+
+限定試験は19の異なる定義を確認した。元13定義のうち旧fixtureの2件が失敗し、必要なfixtureだけを修正して失敗selectorを再実行した。続く設定件数集計1件、inner所有権2件、例外終了証拠3件を追加した。成功した旧bodyは再演していない。新規3件には実際の小さいPython子の失敗・取消と、保存失敗の注入、不完全な終了証拠での削除拒否が含まれる。人工metadata試験を実並列成功へ読み替えていない。
+
+実process smokeは通常のjob/cohort/sequence/Popen/command/finalizeを使った。科学data ownerだけを明示syntheticへ一時差替えし、CPU・権限・資源・取消・回収を実ownerのまま通した。正常2lane×2operationは最初のbodyの実時間重複と、body生存中の親authority更新を確認し、1lane×2operationも通った。範囲外CPU、SMT、役割重複は起動前に拒否した。実threadの範囲外移動、子失敗、親cancel CLIでは子孫を停止・回収し、無断の次operationや再実行はなかった。管理0/18、検索8/10の異なる物理core、合計4GiB（outer64MiBを含む）、host reserve4GiB、GPU0を使った。
+
+最初の親config参照欠落と、inner commandをsequence本人と取り違える拒否は、元の失敗・費を保存して修正した。その後の8caseではCPU/process条件は確認できたが、失敗時に6個の空TMPが残り、coordinatorはexit1だった。下層guardのfinally後の証拠が上層へ届かず、正常returnだけを要求する掃除が拒否していたためである。実in-memory終了証拠を別channelで渡し、正常return=NULL・capture未完了・原失敗を維持した。実directwait/reap、process/handle closure、残子孫なし、signal復元・保存完了、finalization errorなしの場合だけ空owned directoryを除去する。不明・不完全な証拠や内容のあるdirectoryは削除しない。
+
+修復後は失敗した3caseだけを再実行し、全て通過、TMPと残子孫は空になった。以前の成功5caseはsource対応と元receiptで再利用した。元8caseのexit1や元の空TMP、FAILED/NULL/capture/mask/persist記録を成功へ上書きしていない。最後のguardはexit0、temporary canonical sourceはbyteとmodeを完全復元し、全ての保存された実PID/start/bootはfresh確認で不在または別identityだった。各invocation単独の結果と、Rootが対応を確認した全8caseの資格を分けている。
+
+normal outerの実秒は最初から順に1.001108658、5.064095334、69.454138119、24.348454836を各一度だけ保持する。nested lane/command秒は加算しない。全費はUNKNOWNであり、科学Search/model/arena/RNGは0。本検証は通常CPU・所有権・process終了経路のdummy検証で、歴史的MPC拒否の全原因、修復後の実対局、性能・棋力・既定採用を証明しない。
+
+[資格・全分母・source/review/test/実STOP](qualification-v1.json)と[停止済みsource・限定試験・実process証拠archive](source-review-tests-real-smoke-v1.tar.gz)を保存した。archiveはbyte/hash/modeの復元確認だけを行い、試験・科学を再演していない。旧ETC208とMPC256の結論・失敗・費は変更せず、新ETC33は別の依頼として準備する。USERPAUSE、seals、models/weights、既定、foreign変更、50GB上限は維持する。

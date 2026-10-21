@@ -438,7 +438,6 @@ impl SearchSession {
     fn observation_compatible(&self, limits: &SearchLimits) -> bool {
         self.probcut.is_none()
             && self.probcut_samples == 0
-            && self.etc == EtcMode::Off
             && self.static_enabled == StaticMode::CheapControl
             && self.lmr
             && self.lmr_method == LmrMethod::DepthRank
@@ -476,7 +475,6 @@ impl SearchSession {
             None,
             SearchInvocation {
                 probcut: None,
-                etc: EtcMode::Off,
                 probcut_samples: 0,
                 #[cfg(not(target_arch = "wasm32"))]
                 worker_budget: None,
@@ -572,7 +570,6 @@ impl SearchSession {
             None,
             SearchInvocation {
                 probcut: None,
-                etc: EtcMode::Off,
                 probcut_samples: 0,
                 #[cfg(not(target_arch = "wasm32"))]
                 worker_budget: None,
@@ -821,7 +818,6 @@ mod trial_tests {
             None,
             SearchInvocation {
                 probcut: None,
-                etc: EtcMode::Off,
                 probcut_samples: 0,
                 #[cfg(not(target_arch = "wasm32"))]
                 worker_budget: None,

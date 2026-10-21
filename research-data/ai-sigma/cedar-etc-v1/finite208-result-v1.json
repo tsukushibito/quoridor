@@ -1,0 +1,101 @@
+{
+  "issue": "quoridor-4lc.324.31",
+  "status": "INDEPENDENT_CONCLUSION_CLEAR_ACCEPTED",
+  "decision": "RETAIN_OFF_NO_FINITE_SUPPORT",
+  "actual_calls": 208,
+  "actual_nodes": 11474501,
+  "sessions": 48,
+  "fixed_probe_inclusive_Search_ratio": 0.9999752678500198,
+  "fixed_ratio_gate": false,
+  "fixed_repeat_gate": false,
+  "actual_ETC": {
+    "fixed_D4": {
+      "opportunities": 138,
+      "child_probes": 138,
+      "qualified_hits": 0,
+      "terminal_proofs": 0,
+      "cuts": 0
+    },
+    "clock100ms5": {
+      "opportunities": 23706,
+      "child_probes": 34098,
+      "qualified_hits": 0,
+      "terminal_proofs": 2753,
+      "cuts": 0
+    }
+  },
+  "clock_gate": true,
+  "requested_D64_unfinished": "100TimeLimit UNKNOWN retained",
+  "conditional_games": "INELIGIBLE_UNISSUED_NO_GAMES",
+  "default": "OFF retained",
+  "strength": "UNMEASURED",
+  "qualification": "Finite three-family/six-series correlated observation only; no general no-effect, equivalence, inferiority, strength or adoption claim.",
+  "minimum": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-etc-v1/normal208-v2/analysis-v1/minimum-result.json",
+    "sha256": "7c7b1bcf183dde8488f3fb9f65735899f90ce0dc9f86e4a102f57a834b9f7c19",
+    "bytes": 3183,
+    "mode": "0644"
+  },
+  "report": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-etc-v1/normal208-v2/analysis-v1/report-ja.md",
+    "sha256": "f25b4fed83ec74f171019d9fcd44418911b395d5aa0fada9d31df77e9f7e1929",
+    "bytes": 6876,
+    "mode": "0644"
+  },
+  "source_STOP": {
+    "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-etc-v1/normal208-v2/analysis-v1/analysis-source-admin-STOP.json",
+    "sha256": "7dcf02fd97965fc05d938a21f50e9559dda9af9c2099b3b9a2b6c00f6829b0de",
+    "bytes": 4185,
+    "mode": "0644"
+  },
+  "archive": "finite208-saved-analysis-v1.tar.gz",
+  "original_normal": "qualified-source-and-normal208-v1.json",
+  "costs": {
+    "outer_command_seconds_once": 129.55972973397002,
+    "accepted_inclusive_seconds_alternative": 131.326525,
+    "nested_children_and_native_not_added": true,
+    "prior_failed_command_seconds_once": 7.382441982044838,
+    "prior_failed_accepted_inclusive_alternative": 9.170955,
+    "fees_globalactual_later_tails": "UNKNOWN"
+  },
+  "future_tails_fees_globalactual": "UNKNOWN",
+  "original_failure_NULL_masks_pauses_seals_models_defaults_foreign_50GB": "PRESERVED",
+  "independent_review": {
+    "minimum.json": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-etc-review-v1/finite-result-v1/minimum.json",
+      "sha256": "d5ac41b787d6c5d67780a182d2e34c3942f5949756dfe8a7f755017292873b8c",
+      "bytes": 4344,
+      "mode": "0644"
+    },
+    "control.json": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-etc-review-v1/finite-result-v1/control.json",
+      "sha256": "4655555c934a4142de0ef8770abccb8df0de6e2077c364bdb27d246a4c61ad16",
+      "bytes": 846,
+      "mode": "0644"
+    },
+    "saved-correspondence.json": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-etc-review-v1/finite-result-v1/saved-correspondence.json",
+      "sha256": "358260d1292f4382a8b655f9a8fa9864622c73086ab92343652763de52326772",
+      "bytes": 4577,
+      "mode": "0644"
+    },
+    "reader-STOP.json": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-etc-review-v1/finite-result-v1/reader-STOP.json",
+      "sha256": "e65dceafafb144a98f8b6dbb7cd72c3dcffbddfcd10842699fdca186acabdb3e",
+      "bytes": 3272,
+      "mode": "0644"
+    },
+    "returned-STOP.json": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-etc-review-v1/finite-result-v1/returned-STOP.json",
+      "sha256": "4c580f9a7365011d8eb7d6e132474301505c11379c51995c2ebc3935a345ddaf",
+      "bytes": 920,
+      "mode": "0644"
+    }
+  },
+  "Root_acceptance": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/cedar-etc-v1/finite-review-v1/Root-final-acceptance.json",
+    "sha256": "76dc5ec9c4e39104ec99d167555ed0beaa51a6e1e99fac70f5dbd1cadc7961bf",
+    "bytes": 2413,
+    "mode": "0644"
+  }
+}

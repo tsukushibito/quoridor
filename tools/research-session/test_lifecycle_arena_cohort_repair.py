@@ -273,7 +273,9 @@ class CohortRepairBoundary(unittest.TestCase):
             member = self.cohort["members"][lane]
             config_ref = lc.document(self.specs[lane]["experiment"])["config"]
             config = lc.document(config_ref)
-            config.update(run_id=f"unit-lane-{lane}", output=str(self.root / f"lane-{lane}/data"))
+            config.update(
+                games=32, run_id=f"unit-lane-{lane}", output=str(self.root / f"lane-{lane}/data")
+            )
             config["arena"]["book"] = dict(
                 openings=[
                     dict(
@@ -332,9 +334,7 @@ class CohortRepairBoundary(unittest.TestCase):
             )
         with (
             self.kernel(),
-            patch.object(
-                lc.process, "execute", side_effect=RuntimeError("one send failure")
-            ) as send,
+            patch.object(lc.process, "execute", side_effect=RuntimeError("one send failure")) as send,
         ):
             lc.arena_cohort_progress(self.specs[0])
             packet = json.loads((self.shared / "first-progress.json").read_text())
@@ -352,6 +352,146 @@ class CohortRepairBoundary(unittest.TestCase):
             self.assertEqual(len(lc.document(packet["complete_pair_identities"])), 30)
             lc.arena_cohort_progress(self.specs[1])
             self.assertEqual(send.call_count, 1)
+
+    def test_configured_progress_counts_and_missing_native_census(self):
+        """Configured slots never imply entry, completion, retained outcomes or native census."""
+        self.current = 200
+        counts = ((1, 2), (3, 4), (5,))
+        config_paths = []
+        for lane, planned in enumerate(counts):
+            templates = []
+            for index, games in enumerate(planned):
+                template = copy.deepcopy(self.settings[lane]["runs"][0])
+                config = lc.document(lc.document(template["experiment"])["config"])
+                config.update(
+                    games=games,
+                    run_id=f"small-{lane}-{index}",
+                    output=str(self.root / f"native-{lane}-{index}"),
+                )
+                config["arena"]["book"] = dict(openings=[])
+                config_path = self.root / f"config-{lane}-{index}.json"
+                config_ref = self.save(config_path, config)
+                experiment = lc.document(template["experiment"])
+                experiment["config"] = config_ref
+                template["experiment"] = self.save(
+                    self.root / f"experiment-{lane}-{index}.json", experiment
+                )
+                templates.append(template)
+                config_paths.append(config_path)
+            self.settings[lane]["runs"] = templates
+            self.specs[lane]["experiment"] = templates[0]["experiment"]
+            self.save(
+                Path(self.cohort["members"][lane]["output"]) / "run-000/operation/manifest.json",
+                dict(status="PASS", cleanup_complete=True),
+            )
+        # A real phase directory is inflight, while the other configured second RUN is unentered.
+        (Path(self.cohort["members"][0]["output"]) / "run-001").mkdir(parents=True)
+        self.rebind_settings()
+        publications = []
+        for lane, games, completed, unknown in ((0, 1, 1, 0), (2, 5, 4, 1)):
+            config = lc.document(lc.document(self.settings[lane]["runs"][0]["experiment"])["config"])
+            path = Path(config["output"]) / "result.json"
+            value = dict(
+                outcome_count=games,
+                report=dict(
+                    run_id=config["run_id"],
+                    planned=games,
+                    arena_summary=dict(
+                        census=dict(
+                            planned_games=games,
+                            started_games=games,
+                            completed_games=completed,
+                            unknown_games=unknown,
+                            complete_pairs=0,
+                        ),
+                        pairs=[],
+                    ),
+                ),
+            )
+            self.save(path, value)
+            publications.append((path, value))
+
+        def remove_packet():
+            for name in (
+                "first-progress.json",
+                "first-progress-pairs.json",
+                "first-progress-retained.json",
+                "first-progress.txt",
+                "first-progress-notification.json",
+                "first-progress-notification.full.log",
+            ):
+                (self.shared / name).unlink(missing_ok=True)
+
+        with (
+            self.kernel(),
+            patch.object(lc.process, "execute", side_effect=RuntimeError("unit notification failure")),
+        ):
+            # Bound config counts must be positive integers, never bool, omitted or coerced.
+            original = lc.document(lc.bound(config_paths[0])[0])
+            for invalid in (None, True, 0, -1, 1.0, "1"):
+                with self.subTest(games=invalid):
+                    changed = {**original, "games": invalid}
+                    self.save(config_paths[0], changed)
+                    experiment_path = Path(self.settings[0]["runs"][0]["experiment"]["path"])
+                    experiment = json.loads(experiment_path.read_text())
+                    experiment["config"] = lc.bound(config_paths[0])[0]
+                    self.settings[0]["runs"][0]["experiment"] = self.save(experiment_path, experiment)
+                    self.specs[0]["experiment"] = self.settings[0]["runs"][0]["experiment"]
+                    self.rebind_settings()
+                    with self.assertRaisesRegex(lc.Refused, "configured positive-int games"):
+                        lc.arena_cohort_progress(self.specs[0])
+            self.save(config_paths[0], original)
+            experiment = json.loads(experiment_path.read_text())
+            experiment["config"] = lc.bound(config_paths[0])[0]
+            self.settings[0]["runs"][0]["experiment"] = self.save(experiment_path, experiment)
+            self.specs[0]["experiment"] = self.settings[0]["runs"][0]["experiment"]
+            self.rebind_settings()
+            path, good = publications[0]
+            for mutate in ("planned", "census", "retained", "run_id"):
+                with self.subTest(publication=mutate):
+                    bad = copy.deepcopy(good)
+                    if mutate == "planned":
+                        bad["report"]["planned"] += 1
+                    elif mutate == "census":
+                        bad["report"]["arena_summary"]["census"]["planned_games"] += 1
+                    elif mutate == "retained":
+                        bad["outcome_count"] += 1
+                    else:
+                        bad["report"]["run_id"] = "other-run"
+                    self.save(path, bad)
+                    with self.assertRaisesRegex(lc.Refused, "actual saved local native census"):
+                        lc.arena_cohort_progress(self.specs[0])
+                    self.assertFalse((self.shared / "first-progress.json").exists())
+            self.save(path, good)
+            lc.arena_cohort_progress(self.specs[0])
+            packet = json.loads((self.shared / "first-progress.json").read_text())
+            actual = packet["counts"]
+            for key, value in dict(
+                planned_games=15,
+                terminal_planned_games=9,
+                inflight_slots=2,
+                unentered_slots=4,
+                native_started_games_known=6,
+                completed_games_known=5,
+                unknown_games_known=1,
+                retained_games_known=6,
+                terminal_native_census_unknown_slots=3,
+                retained_count_unknown_slots=3,
+                scientific_outcome_UNKNOWN_slots=10,
+                complete_pairs_known=0,
+            ).items():
+                self.assertEqual(actual[key], value, key)
+            self.assertEqual(packet["overall_target"], 15)
+            self.assertEqual(packet["conditional_remaining_seconds"], 12.0)
+            remove_packet()
+            # Without ANY native publication, no zero-completion inference from the configured plan.
+            for path, _ in publications:
+                path.unlink()
+            lc.arena_cohort_progress(self.specs[0])
+            missing = json.loads((self.shared / "first-progress.json").read_text())["counts"]
+            self.assertEqual(missing["completed_games_known"], 0)
+            self.assertEqual(missing["terminal_native_census_unknown_slots"], 9)
+            self.assertEqual(missing["scientific_outcome_UNKNOWN_slots"], 15)
 
     def rebind_settings(self):
         for lane, member in enumerate(self.cohort["members"]):
@@ -396,14 +536,32 @@ class CohortRepairBoundary(unittest.TestCase):
 
     def test_job_supervisor_resource_callback_covers_pre_spawn_and_wait(self):
         from contextlib import ExitStack
+        from datetime import datetime, timezone
         import signal
         import subprocess
 
         source = Path(__file__).resolve().parents[2] / "scripts/dev/research-job.py"
         tree = ast.parse(source.read_text())
-        execute = next(
-            n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == "execute"
+        execute = next(n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == "execute")
+        parent_command = next(
+            n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == "cohort_parent_command"
         )
+        helpers = [
+            next(n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == name)
+            for name in ("now", "internal_cohort_failure")
+        ]
+        read_seconds = ast.literal_eval(
+            next(
+                n.value
+                for n in tree.body
+                if isinstance(n, ast.Assign)
+                and any(isinstance(t, ast.Name) and t.id == "CONTROL_READ_SECONDS" for t in n.targets)
+            )
+        )
+
+        def unentered_lifecycle(*args):
+            raise AssertionError("isolated RSS/cancel fixture must not enter CPU/cohort loader")
+
         for refusal_at in (1, 3):
             directory = self.root / f"job-case-{refusal_at}"
             directory.mkdir()
@@ -482,13 +640,24 @@ class CohortRepairBoundary(unittest.TestCase):
                 signal_members=lambda *args: None,
                 time=SimpleNamespace(monotonic=lambda: 0.0, sleep=lambda seconds: None),
                 ExitStack=ExitStack,
+                datetime=datetime,
+                timezone=timezone,
+                CONTROL_READ_SECONDS=read_seconds,
+                lifecycle_module=unentered_lifecycle,
+                Path=Path,
                 configured_arena_resources=configured,
+                configured_cpu_control=lambda *args: (None, False),
                 sys=sys,
                 json=json,
                 JobError=ValueError,
             )
             exec(
-                compile(ast.Module(body=[execute], type_ignores=[]), str(source), "exec"), namespace
+                compile(
+                    ast.Module(body=[parent_command, *helpers, execute], type_ignores=[]),
+                    str(source),
+                    "exec",
+                ),
+                namespace,
             )
             config = dict(
                 argv=["UNIT-NOT-EXECUTED"],
@@ -512,7 +681,7 @@ class CohortRepairBoundary(unittest.TestCase):
                 self.assertIn("pipe-close", events)
                 self.assertIn("pidfd-close", events)
 
-    def test_outer_startup_factory_and_peer_need_the_original_live_chain(self):
+    def test_outer_startup_factory_and_parent_accounting_need_the_original_live_chain(self):
         source = Path(__file__).resolve().parents[2] / "scripts/dev/research-job.py"
         node = next(
             n
@@ -535,6 +704,7 @@ class CohortRepairBoundary(unittest.TestCase):
                 )
             ),
             JobError=ValueError,
+            lifecycle_module=lambda root: lc,
         )
         exec(compile(ast.Module(body=[node], type_ignores=[]), str(source), "exec"), namespace)
         member = self.cohort["members"][0]
@@ -562,34 +732,16 @@ class CohortRepairBoundary(unittest.TestCase):
             for lane in range(3):
                 self.add_inner(lane)
             self.current = 300
-            proc = self.root / "proc"
-            native = proc / "401"
-            native.mkdir(parents=True)
-            (native / "cmdline").write_bytes(
-                b"\0".join(x.encode() for x in self.specs[1]["argv"]) + b"\0"
-            )
-            (native / "task/401").mkdir(parents=True)
-
-            def path(value):
-                actual = Path(value)
-                return (
-                    proc / actual.relative_to("/proc") if actual.is_relative_to("/proc") else actual
-                )
-
-            def affinity(pid):
-                return {12} if pid == 301 else {0} if pid == 201 else {8}
-
-            with (
-                patch.object(lc, "Path", side_effect=path),
-                patch.object(lc.os, "sched_getaffinity", side_effect=affinity),
-            ):
-                self.assertTrue(lc.arena_cohort_peer(self.specs[0], 401))
-                peer_state_path = Path(self.cohort["members"][1]["job_runtime"]) / "state.json"
-                peer_state = json.loads(peer_state_path.read_text())
-                peer_state["job_id"] = "same-actor-settings-another-original-job"
-                self.save(peer_state_path, peer_state)
-                with self.assertRaisesRegex(lc.Refused, "actual lane origin"):
-                    lc.arena_cohort_peer(self.specs[0], 401)
+            # The parent accounting path retains exact original job custody;
+            # child-local independent sibling peer reconstruction is retired.
+            lifetime = lc.arena_cohort_lifetime(self.specs[0])
+            self.assertIn(1, lifetime["origins"])
+            peer_state_path = Path(self.cohort["members"][1]["job_runtime"]) / "state.json"
+            peer_state = json.loads(peer_state_path.read_text())
+            peer_state["job_id"] = "same-actor-settings-another-original-job"
+            self.save(peer_state_path, peer_state)
+            with self.assertRaisesRegex(lc.Refused, "actual lane origin"):
+                lc.arena_cohort_lifetime(self.specs[0])
 
     def test_sequence_publishes_pre_inner_terminal_before_notice_and_keeps_pause(self):
         self.current = 200
@@ -624,6 +776,7 @@ class CohortRepairBoundary(unittest.TestCase):
             self.kernel(),
             patch.object(lc, "project_python", return_value=Path(sys.executable)),
             patch.object(lc, "originating_job", return_value=self.origins[0]),
+            patch.object(lc, "apply_controller_cpu_plan", lambda plan: None),
             patch.object(lc, "physical_and_quiet", side_effect=lc.Refused("unit before inner")),
             patch.object(lc, "arena_cohort_progress", side_effect=notice),
         ):

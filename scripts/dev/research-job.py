@@ -340,6 +340,58 @@ def configured_arena_resources(directory, config, root, resources):
         yield lifecycle.ArenaCohortResources(projected, outer_runtime=str(directory))
 
 
+def configured_cpu_control(directory, config, root):
+    """One owning job plan; local children inherit only authenticated allocations."""
+    if config["argv"][:3] != [
+        sys.executable,
+        "-B",
+        str(root / "scripts/dev/research-lifecycle.py"),
+    ]:
+        return (
+            None,
+            False,
+        )  # Unchanged arbitrary jobs have no implicit CPU allocation authority.
+    lifecycle = lifecycle_module(root)
+    state = read(directory, "state.json") if (directory / "state.json").exists() else {}
+    launch_plan = state.get("cpu_launch")
+    if launch_plan is not None:
+        if (
+            launch_plan["config_sha256"]
+            != hashlib.sha256(json.dumps(config, sort_keys=True).encode()).hexdigest()
+            or state.get("launch", {}).get("owner") != launch_plan["owner"]
+        ):
+            raise JobError("CPU plan launch lacks exact submit/config/owner custody")
+        plan = lifecycle.process.CPUPlan.from_record(launch_plan["plan"])
+    else:
+        with lifecycle.lease(shared=True):
+            plan = lifecycle.configured_job_cpu_plan(config)
+    if plan is None:
+        return None, False
+    plan.check_host(lifecycle.process.available_cpus())
+    delegated = config.get("authority_parent")
+    if delegated is not None:
+        binding = lifecycle.cohort_job_authority(config, directory)
+        lifecycle.cohort_parent_check(binding)
+        allowed = lifecycle.arena_cohort_cpus(lifecycle.document(delegated["cohort"]))
+        owns_peers = False
+    elif os.environ.get("QUORIDOR_RESEARCH_JOB_DIR"):
+        parent = lifecycle.current_cpu_owner()
+        allowed = parent["allocation"]
+        owns_peers = False
+    else:
+        allowed = (
+            launch_plan["plan"]["allocation"]
+            if launch_plan is not None
+            else os.sched_getaffinity(0)
+        )
+        owns_peers = True
+    if not set(plan.all) <= set(allowed):
+        raise JobError("normal job CPU plan outside assigned parent/launch scope")
+    plan.apply()
+    return plan, owns_peers
+
+
+
 def internal_cohort_failure(directory, config, root):
     """Recognize only an internally stopped, separately published original cohort failure."""
     if not cohort_parent_command(config, root) or not (directory / "cancel.json").exists():
@@ -423,7 +475,25 @@ def execute(directory, config, root, backend, *, resources=None):
     controls = ExitStack()
     parent_command = cohort_parent_command(config, root)
     delegated = None
+    cpu_plan, owns_cpu_peers = None, False
     command, child, known, next_scan, started = None, None, [], 0, None
+
+    def cpu_control():
+        if cpu_plan is not None:
+            cpu_plan.apply()
+            if owns_cpu_peers:
+                names = {
+                    "cargo",
+                    "rustc",
+                    "cc1plus",
+                    "quoridor-runner",
+                    "terminal-cache",
+                    "chromium",
+                    "chrome",
+                }
+                lifecycle_module(root).process.compute_peers(
+                    runtime.process_identity(os.getpid()), cpu_plan.all, names
+                )
 
     def local_control():
         nonlocal known, next_scan
@@ -453,6 +523,12 @@ def execute(directory, config, root, backend, *, resources=None):
 
     try:
         try:
+            cpu_plan, owns_cpu_peers = configured_cpu_control(directory, config, root)
+            if cpu_plan is not None:
+                state["cpu_plan"] = cpu_plan.record()
+                write(directory, "state.json", state)
+                controls.callback(cpu_plan.apply)
+            cpu_control()
             resources = controls.enter_context(
                 configured_arena_resources(directory, config, root, resources)
             )
@@ -548,6 +624,7 @@ def execute(directory, config, root, backend, *, resources=None):
                         outcome = "timed_out"
                         break
                     if time.monotonic() >= next_control:
+                        cpu_control()
                         read_budget = CONTROL_READ_SECONDS
                         if config["max_runtime_seconds"] is not None:
                             read_budget = min(
@@ -1032,6 +1109,25 @@ def submit(path, directory, root, backend, *, supervisor_handles=None):
     )
     if deadline_reached(config["end_at"]):
         raise JobError("Cannot submit an expired job")
+    launch_plan = None
+    if config["argv"][:3] == [
+        sys.executable,
+        "-B",
+        str(root / "scripts/dev/research-lifecycle.py"),
+    ]:
+        lifecycle = lifecycle_module(root)
+        with lifecycle.lease(shared=True):
+            launch_plan = lifecycle.configured_job_cpu_plan(config)
+        if launch_plan is not None:
+            launch_plan.check_host(lifecycle.process.available_cpus())
+            parent = (
+                lifecycle.current_cpu_owner()
+                if os.environ.get("QUORIDOR_RESEARCH_JOB_DIR")
+                else None
+            )
+            allowed = parent["allocation"] if parent else os.sched_getaffinity(0)
+            if not set(launch_plan.all) <= set(allowed):
+                raise JobError("configured CPU launch outside actual submit owner allocation")
     directory.mkdir(parents=True, exist_ok=False)
     write(directory, "config.json", config)
     write(
@@ -1049,9 +1145,21 @@ def submit(path, directory, root, backend, *, supervisor_handles=None):
             ).hexdigest(),
         },
     )
+    if launch_plan is not None:
+        state = read(directory, "state.json")
+        state["cpu_launch"] = dict(
+            plan=launch_plan.record(),
+            owner=runtime.process_identity(os.getpid()),
+            config_sha256=state["config_sha256"],
+        )
+        write(directory, "state.json", state)
+    launcher_prefix = (
+        [] if launch_plan is None else ["taskset", "-c", ",".join(map(str, launch_plan.controller))]
+    )
     with (directory / "supervisor.log").open("ab") as log:
         supervisor = subprocess.Popen(
             [
+                *launcher_prefix,
                 "bash",
                 str(Path(__file__).with_name("project-env.sh")),
                 "python",

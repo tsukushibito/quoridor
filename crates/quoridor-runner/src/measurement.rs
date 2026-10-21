@@ -62,12 +62,6 @@ struct RootInput {
 struct Settings {
     #[serde(
         default,
-        deserialize_with = "crate::config::deserialize_etc",
-        skip_serializing_if = "Option::is_none"
-    )]
-    etc: Option<crate::config::EtcConfig>,
-    #[serde(
-        default,
         deserialize_with = "crate::config::deserialize_probcut",
         skip_serializing_if = "Option::is_none"
     )]
@@ -182,28 +176,6 @@ fn default_zero_stock_approx_method() -> String {
 }
 
 fn validate(settings: &Settings, requests: &[Request]) -> Result<()> {
-    if settings.etc == Some(crate::config::EtcConfig::Depth3Top2)
-        && (settings.profile != Profile::Control
-            || settings.search_threads.unwrap_or(1) != 1
-            || !settings.use_tt
-            || !settings.use_pvs
-            || settings.lmr_method != "depth_rank"
-            || settings.probcut.is_some()
-            || settings.probcut_samples != 0
-            || settings.zero_stock_approx_min_root_walls.is_some()
-            || settings.neighbour_opportunity.is_some()
-            || settings.root_ordering_quality.is_some()
-            || settings.history_provenance.is_some()
-            || requests.iter().any(|r| r.observe_lmr))
-    {
-        return Err(
-            "ETC requires ordinary N1 Control/TT/PVS/depth_rank, MPC/observers/approximation OFF"
-                .into(),
-        );
-    }
-    if settings.etc.is_some() && settings.profile != Profile::Control {
-        return Err("explicit ETC research setting requires Control".into());
-    }
     if (settings.probcut.is_some() || settings.probcut_samples != 0)
         && (settings.probcut_samples > 8
             || (settings.probcut.is_some() && settings.probcut_samples != 0)
@@ -631,11 +603,6 @@ impl Target for SearchTarget {
                 .transpose()?,
         )?;
         session.set_probcut_samples(self.settings.probcut_samples)?;
-        session.set_etc(
-            self.settings
-                .etc
-                .map_or(alphabeta::EtcMode::Off, |p| p.resolve()),
-        )?;
         session.set_smp_sharing_provenance(self.settings.smp_sharing_provenance);
         let method = session.namespace().selectivity.clone();
         let lmr = session.lmr_enabled();
@@ -798,8 +765,6 @@ impl Target for SearchTarget {
             )
         });
         row["actual_selectivity"] = json!(session.namespace().selectivity);
-        row["etc_requested"] = json!(self.settings.etc);
-        row["etc_effective"] = json!(session.etc_mode().name());
         row["time_reserve_ms"] = json!(self.settings.time_reserve_ms);
         row["lmr_method_requested"] = json!(self.settings.lmr_method);
         row["lmr_rule"] = json!(session.lmr_method().map(LmrMethod::id));
@@ -1423,10 +1388,6 @@ fn safe_path_work(work: &mut Value, s: &alphabeta::SearchStats) {
         work[name] = json!(count);
     }
 }
-#[cfg(test)]
-#[path = "etc_consumer_tests.rs"]
-mod etc_consumer_tests;
-
 fn observed_work(s: &alphabeta::SearchStats) -> Value {
     let mut work = json!({"nodes":s.nodes,"evaluations":s.evaluations,"terminal":s.terminal,"cutoffs":s.cutoffs,"TT_hits":s.tt_hits,"TT_probes":s.tt_probes,"TT_exact_hits":s.tt_exact_hits,"TT_key_builds":s.tt_key_builds,"tt_context_initial_items":s.tt_context_initial_items,"tt_context_transitions":s.tt_context_transitions,"tt_board_hash_reads":s.tt_board_hash_reads,"tt_board_hash_updates":s.tt_board_hash_updates,"tt_context_matches":s.tt_context_matches,"tt_context_misses":s.tt_context_misses,"tt_order_context_mismatch":s.tt_order_context_mismatch,"tt_hash_collisions":s.tt_hash_collisions,"tt_index_collisions":s.tt_index_collisions,"TT_hashes":s.tt_hashes,"TT_usable_depth":s.tt_usable_depth,"TT_order_only":s.tt_order_only,"TT_collisions":s.tt_collisions,"TT_replacements":s.tt_replacements,"TT_capacity_skips":s.tt_capacity_skips,"TT_illegal_moves":s.tt_illegal_moves,"TT_retained_bytes":s.tt_retained_bytes,"TT_generation":s.tt_generation,"TT_cutoffs":s.tt_cutoffs,"PVS_researches":s.pvs_researches,"delta_updates":s.delta_updates,"policy_calls":s.policy_calls});
     work["LMR_attempts"] = json!(s.lmr_attempts);
@@ -1449,9 +1410,6 @@ fn observed_work(s: &alphabeta::SearchStats) -> Value {
     work["safe_race_proven_leaves"] = json!(s.safe_race_proven_leaves);
     if let Some(p) = &s.probcut {
         work["probcut"] = crate::config::probcut_report(p);
-    }
-    if let Some(report) = &s.etc {
-        work["etc"] = crate::config::etc_report(report);
     }
     safe_path_work(&mut work, s);
     work

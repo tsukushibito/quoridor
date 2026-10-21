@@ -80,7 +80,7 @@ Beadsの権限読取りは、wrapperの最大60秒の共有DBロック待ちと�
 
 新しいturnはpause・閉じたissue・所有変更・期限後には開始しない。Activeの通知待ちは短いPython待機だけでLLMを起こさない。issueを自動claim/closeしたり、モデル/effort・担当の指示を変更したりしない。既存の共通dispatch lockを使う。
 
-通知が`recipient_not_idle`やdispatch競合で保留されていても、元jobの実`result.json`が届いた場合は、現在の担当turnで元結果の未完了回収を一度だけ続ける。担当自身のidle化や通知再配送を待ち条件にせず、commandを再実行しない。回収helperが元operationの`physical_and_quiet`を使う場合は、元specが要求するCPU affinityをwrapperへ渡す。CPU一個に固定したmetadata用wrapperで元宣言との不一致を作らない。通常finalize・実子回収・source STOP・artifact/設定対応は保持し、数値入場へ新しい独自確認gateは加えない。
+通知が`recipient_not_idle`やdispatch競合で保留されていても、元jobの実`result.json`が届いた場合は、現在の担当turnで元結果の未完了回収を一度だけ続ける。担当自身のidle化や通知再配送を待ち条件にせず、commandを再実行しない。CPUは通常設定から解決した一つの `CPUPlan` をjobが所有する。`native_cpu_cores(spec)` は同じplanのpayload scopeを返すfactory用projectionで、library threads・search workers・management込みresource CPU数を混同しない。sequenceはprepare→inner→次batch→finalize/collection→cleanupまでplanのmanagement scopeを保ち、起動時の広いmaskへ戻さない。別collectorは元intentから同じmanagement scopeを導き、旧test payloadの三CPU scopeを要求しない。通常CLI `finalize --operation ... --job-result ... --sha256 ...` のjob `resource_contract` は元operation intentへ結ぶ。親jobがconfig hash・実PID/start/boot/ancestryで外部peerを判別し、子は自分の割当・親生存/cancel・RAMを検査する。envや自己申告だけでpeerを免除せず、子ごとの独立whole-host scanは行わない。失敗・取消では正常returnと別のguard finally後の実回収証拠を使い、空owned TMPだけを掃除する。不完全な終了証拠は削除を拒否し、原失敗・capture不成立をPASSへ変えない。通常finalize・実子回収・source STOP・artifact/設定対応は保持し、数値入場へ新しい独自確認gateは加えない。
 
 `run`のsupervisorは実commandの回収・result保存後も通知loopに残り得る。元commandとguardianの直接wait/reap・handles・source leaseの返却を確認したうえで、この実通知寿命を別に記録する。通知用supervisorの消滅や宛先ACKをsource reader終了条件へ追加しない。未回収のcommandを通知processと見なして済ませたり、将来のhost quietを主張したりはしない。
 

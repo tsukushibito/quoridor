@@ -43,7 +43,6 @@ fn state<'a>(
     table: &'a mut Table,
 ) -> Search<'a, false> {
     Search {
-        etc: EtcMode::Off,
         probcut: probcut::State {
             parameters: Some(parameters()),
             non_pv: true,

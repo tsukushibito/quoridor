@@ -22,6 +22,138 @@ class CycleStopped(RuntimeError):
     pass
 
 
+class CPUPlan:
+    """An assigned operation's scopes, never a host allocator or reservation."""
+
+    def __init__(self, management, commands, *, library_threads=1):
+        def cpus(values):
+            if (
+                not isinstance(values, (list, tuple))
+                or not values
+                or any(type(c) is not int or c < 0 for c in values)
+                or len(set(values)) != len(values)
+            ):
+                raise ValueError("explicit nonempty unique CPU scope required")
+            return tuple(sorted(values))
+
+        self.management = cpus(management)
+        self.commands = {name: cpus(values) for name, values in commands.items()}
+        self.controller = self.commands.get("controller", self.management)
+        if not set(self.controller) <= set(self.management):
+            raise ValueError("controller scope outside declared management roles")
+        if not self.commands or type(library_threads) is not int or library_threads != 1:
+            raise ValueError("explicit command scopes and independent library_threads=1")
+        self.library_threads = library_threads
+        self.all = tuple(sorted(set(self.management).union(*self.commands.values())))
+
+    def check_host(self, available):
+        if not set(self.all) <= set(available):
+            raise ValueError("assigned CPUs unavailable in owning launch scope")
+        physical = []
+        for cpu in self.all:
+            path = Path(f"/sys/devices/system/cpu/cpu{cpu}/topology")
+            try:
+                physical.append(
+                    tuple(
+                        (path / k).read_text().strip() for k in ("physical_package_id", "core_id")
+                    )
+                )
+            except OSError as error:
+                raise ValueError(f"assigned CPU {cpu} is unavailable") from error
+        if len(set(physical)) != len(physical):
+            raise ValueError("assigned CPU roles overlap a physical/SMT core")
+
+    def apply(self, scope="management"):
+        cores = self.controller if scope == "management" else self.commands[scope]
+        os.sched_setaffinity(0, cores)
+        if os.sched_getaffinity(0) != set(cores):
+            raise ValueError("actual CPU scope differs from assigned plan")
+
+    def record(self):
+        return dict(
+            management=list(self.management),
+            commands={k: list(v) for k, v in self.commands.items()},
+            allocation=list(self.all),
+            resource_CPUs=len(self.all),
+            worker_CPUs=len(set(self.all) - set(self.management)),
+            library_threads=self.library_threads,
+        )
+
+    @classmethod
+    def from_record(cls, record):
+        plan = cls(
+            record["management"], record["commands"], library_threads=record["library_threads"]
+        )
+        if plan.record() != record:
+            raise ValueError("resolved CPU plan record differs from its scopes/counts")
+        return plan
+
+
+def available_cpus():
+    """Kernel online/cgroup scope, independent of a temporarily pinned controller."""
+
+    def parse(text):
+        result = set()
+        for part in text.strip().split(","):
+            if part:
+                lo, _, hi = part.partition("-")
+                result.update(range(int(lo), int(hi or lo) + 1))
+        return result
+
+    online = parse(Path("/sys/devices/system/cpu/online").read_text())
+    for line in Path("/proc/self/cgroup").read_text().splitlines():
+        hierarchy, controllers, name = line.split(":", 2)
+        if hierarchy == "0" and not controllers:
+            directory = Path("/sys/fs/cgroup") / name.lstrip("/")
+            while directory.is_relative_to("/sys/fs/cgroup"):
+                effective = directory / "cpuset.cpus.effective"
+                if effective.exists() and effective.read_text().strip():
+                    return online & parse(effective.read_text())
+                if directory == Path("/sys/fs/cgroup"):
+                    break
+                directory = directory.parent
+    return online & os.sched_getaffinity(0)
+
+
+def compute_peers(root, allocation, names):
+    """Owning job checks external named compute and its own exact descendant masks."""
+    owned = {tuple(p[k] for k in ("pid", "start_ticks", "boot_id")) for p in members(root, [])}
+    allowed = set(allocation)
+    for entry in Path("/proc").iterdir():
+        if not entry.name.isdigit():
+            continue
+        try:
+            argv = [os.fsdecode(a) for a in (entry / "cmdline").read_bytes().split(b"\0") if a]
+            if not argv or (
+                Path(argv[0]).name not in names
+                and not Path(argv[0]).name.startswith("quoridor-runner-")
+            ):
+                continue
+            info = process_info(int(entry.name))
+            if info is None or info["state"] == "Z":
+                continue
+            exact = identity(info)
+            matched = tuple(exact[k] for k in ("pid", "start_ticks", "boot_id")) in owned
+            # A legitimate next batch can spawn after the tree snapshot. Join
+            # that exact live ancestry instead of classifying it as external.
+            chain, current = set(), info
+            while not matched and current is not None and len(chain) < 128:
+                key = tuple(current[k] for k in ("pid", "start_ticks", "boot_id"))
+                if key in chain:
+                    break
+                chain.add(key)
+                matched = identity(current) == root and alive(root)
+                current = process_info(current["parent"]) if not matched else None
+            if not matched:
+                raise CycleStopped(f"external compute peer active: {exact}")
+            for thread in (entry / "task").iterdir():
+                if not os.sched_getaffinity(int(thread.name)) <= allowed:
+                    raise CycleStopped(f"owned compute outside assigned CPU plan: {exact}")
+        except (FileNotFoundError, ProcessLookupError):
+            continue
+
+
+
 @contextmanager
 def cancellation_signals():
     def cancel(signum, _frame):
@@ -258,10 +390,17 @@ def execute(
     output_sink=None,
     cpu_cores=None,
     no_new_privs=False,
+    cpu_plan=None,
+    cpu_scope="run",
 ):
     """Always TERM→KILL→wait; retain a bounded tail plus exact cleanup evidence."""
     if type(no_new_privs) is not bool:
         raise ValueError("no_new_privs must be a boolean")
+    if cpu_plan is not None:
+        if cpu_core is not None or cpu_cores is not None:
+            raise ValueError("one resolved CPU plan, not competing command CPU arrays")
+        cpu_plan.check_host(available_cpus())
+        cpu_cores = list(cpu_plan.commands[cpu_scope])
     if resources:
         resources.check()
     elif deadline is not None and time.monotonic() >= deadline:
@@ -276,6 +415,8 @@ def execute(
             "no_new_privs_requested": no_new_privs,
             "verified_before_exec": None,
         },
+        "cpu_plan": cpu_plan.record() if cpu_plan is not None else None,
+        "command_cpu_scope": cpu_scope if cpu_plan is not None else None,
         "log_bytes_seen": 0,
         "scope": "session group and periodically recorded descendants; no daemon adoption",
     }
@@ -381,6 +522,18 @@ def execute(
         next_log = 0
         while child.poll() is None:
             owned = members(root, owned)
+            if cpu_plan is not None:
+                for member in owned:
+                    if not alive(member):
+                        continue
+                    try:
+                        for task in Path(f"/proc/{member['pid']}/task").iterdir():
+                            if not os.sched_getaffinity(int(task.name)) <= set(cpu_cores):
+                                raise CycleStopped(
+                                    "owned child/thread outside assigned command CPU scope"
+                                )
+                    except (FileNotFoundError, ProcessLookupError):
+                        continue
             if resources:
                 resources.check(owned)
             elif deadline is not None and time.monotonic() >= deadline:
@@ -573,9 +726,15 @@ def execute(
         errors = ([failure] if failure is not None else []) + [error for _, error in final_errors]
         group = BaseExceptionGroup("cycle primary/finalization failures", errors)
         group.add_note("nonrecursive cycle fallback facts: " + json.dumps(record, allow_nan=False))
+        group.cycle_cleanup_outcome = {"normal_return": False, "record": dict(record)}
         raise group
     if failure:
+        failure.cycle_cleanup_outcome = {"normal_return": False, "record": dict(record)}
         raise failure
     if resources:
-        resources.check()
+        try:
+            resources.check()
+        except BaseException as error:
+            error.cycle_cleanup_outcome = {"normal_return": False, "record": dict(record)}
+            raise
     return record

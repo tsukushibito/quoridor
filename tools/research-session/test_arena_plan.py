@@ -773,6 +773,9 @@ class ArenaPlanTests(unittest.TestCase):
                     "completed_snapshot_validation_failed": False,
                     "authority_receipt_ns": 10,
                     "drain_finished_ns": 10,
+                    "actual_zero_stock_safe_race_enabled": True,
+                    "requested_zero_stock_safe_race_method": "path_tail",
+                    "actual_zero_stock_safe_race_method_id": "zero-stock431-one-path-tail-E-two-keys-v1",
                 },
             }
             row = {"game": 0, "moves": [13, 13], "observations": [obs]}
@@ -810,7 +813,12 @@ class ArenaPlanTests(unittest.TestCase):
             ledger = []
             with self.assertRaises(lc.Refused):
                 lc.command(
-                    {"limits": {"log_B": 128, "worker_cpu": 4}, "cwd": str(self.root), "env": {}},
+                    {
+                        "kind": "build",
+                        "limits": {"log_B": 128, "worker_cpu": 4, "guardian_cpu": 6},
+                        "cwd": str(self.root),
+                        "env": {},
+                    },
                     {"name": "fake-guardian", "argv": ["NOT_EXECUTED"]},
                     directory,
                     None,
@@ -843,6 +851,7 @@ class EvaluationOwnershipTests(unittest.TestCase):
             "management_cpu_core": 13,
             "inference_cpu_core": None,
             "arena": {"comparison": "whole_wall_time"},
+            "engines": [{"kind": "distance"}, {"kind": "distance"}],
         }
         experiment = {"phase": "arena", "config": self.ref("config.json", config)}
         support = {
@@ -861,14 +870,19 @@ class EvaluationOwnershipTests(unittest.TestCase):
             "child_cpu_cores": [11, 12, 13],
             "experiment": self.ref("experiment.json", experiment),
             "support": self.ref("support.json", support),
-            "limits": {"worker_cpu": 11, "guardian_cpu": 13, "log_B": 1024},
+            "limits": {
+                "worker_cpu": 11,
+                "guardian_cpu": 13,
+                "log_B": 1024,
+                "family_B": 3 * 1024**3,
+            },
             "cwd": str(self.root),
             "env": {},
         }
 
     def test_two_ai_374_launch_cpu_roles_require_actual_selected_support(self):
         spec = self.spec()
-        self.assertEqual(lc.arena_cpu_cores(spec), [11, 12, 13])
+        self.assertEqual(lc.native_cpu_cores(spec), [11, 12, 13])
         self.assertEqual(lc.issued_family_upper(spec, lc.document(spec["support"])), 3 * 1024**3)
         for change in [
             lambda s: s.update(child_cpu_cores=[11]),
@@ -878,14 +892,15 @@ class EvaluationOwnershipTests(unittest.TestCase):
             wrong = copy.deepcopy(spec)
             change(wrong)
             with self.assertRaises(lc.Refused):
-                lc.arena_cpu_cores(wrong)
+                lc.native_cpu_cores(wrong)
         support = lc.document(spec["support"])
-        for issue, cpu in [("quoridor-4lc.374", 1), ("quoridor-4lc.362", 3)]:
-            support["issue"] = issue
-            support["resources"]["CPU"] = cpu
+        for field, invalid in [("CPU", 1), ("threads", 2)]:
+            support["resources"]["CPU"] = 3
+            support["resources"]["threads"] = 1
+            support["resources"][field] = invalid
             spec["support"] = self.ref("wrong-support.json", support)
             with self.assertRaises(lc.Refused):
-                lc.arena_cpu_cores(spec)
+                lc.native_cpu_cores(spec)
 
     def test_two_ai_374_actual_command_cpu_set_and_source_bound_test_handover(self):
         spec = self.spec()
@@ -914,8 +929,7 @@ class EvaluationOwnershipTests(unittest.TestCase):
             None,
             executor=executor,
         )
-        self.assertIsNone(calls[-1]["cpu_core"])
-        self.assertEqual(calls[-1]["cpu_cores"], [11, 12, 13])
+        self.assertEqual(list(calls[-1]["cpu_plan"].commands[calls[-1]["cpu_scope"]]), [11, 12, 13])
         spec = {
             "kind": "build",
             "test_cpu_cores": [11, 12, 13],
@@ -931,7 +945,7 @@ class EvaluationOwnershipTests(unittest.TestCase):
             None,
             executor=executor,
         )
-        self.assertEqual(calls[-1]["cpu_cores"], [11, 12, 13])
+        self.assertEqual(list(calls[-1]["cpu_plan"].commands[calls[-1]["cpu_scope"]]), [11, 12, 13])
         lc.command(
             spec,
             {"name": "release", "role": "build", "argv": ["SYNTHETIC_NOT_EXECUTED"]},
@@ -939,11 +953,11 @@ class EvaluationOwnershipTests(unittest.TestCase):
             None,
             executor=executor,
         )
-        self.assertEqual(calls[-1]["cpu_core"], 11)
+        self.assertEqual(list(calls[-1]["cpu_plan"].commands[calls[-1]["cpu_scope"]]), [11])
         self.assertNotIn("cpu_cores", calls[-1])
         spec["target_handover"] = self.ref("wrong-handover.json", {})
         with self.assertRaises(lc.Refused):
-            lc.build_test_cpu_cores(spec)
+            lc.operation_cpu_plan(spec)
 
     def test_two_ai_374_alpha_zero_work_fallback_uses_receipt_not_late_terminal(self):
         config = {

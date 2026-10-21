@@ -1190,5 +1190,219 @@ class ParentRepairCleanupBudgetTests(MetadataFixture, unittest.TestCase):
                     self.temp.cleanup()
 
 
+class RegisteredInnerAuthorityTests(MetadataFixture, unittest.TestCase):
+    """Artificial identities and real bound metadata only; not real parallel qualification."""
+
+    def setUp(self):
+        self.setup_metadata()
+        self.member = self.cohort["members"][0]
+        self.lane_runtime = Path(self.member["job_runtime"])
+        self.selected = Path(self.member["output"]) / "run-000"
+        self.inner_runtime = self.selected / "runtime"
+
+        def proc(pid, parent):
+            value = dict(pid=pid, start_ticks=str(pid + 1000), boot_id="boot")
+            self.processes[pid] = {**value, "parent": parent, "state": "S", "rss": 1000}
+            return value
+
+        self.lane_supervisor = proc(110, 101)
+        self.sequence = proc(111, 110)
+        self.launcher = proc(112, 101)
+        self.inner_child = proc(113, 111)
+        proc(114, 999)  # Foreign process with the same readable paths is never the owner.
+        proc(211, 210)
+        proc(213, 211)  # Sibling lane child, not lane0's registered command.
+        declared = self.children[0]
+        fingerprint = lc.sha(json.dumps(declared, sort_keys=True).encode())
+        self.lane_state = dict(
+            job_id="actual-lane",
+            issue="work",
+            thread_id="target",
+            phase="running",
+            config_sha256=fingerprint,
+            supervisor=self.lane_supervisor,
+            child=self.sequence,
+            launch=dict(
+                owner=self.controller,
+                supervisor=self.lane_supervisor,
+                launcher=self.launcher,
+                job_id="actual-lane",
+                config_sha256=fingerprint,
+            ),
+        )
+        fresh_file(self.lane_runtime / "config.json", declared)
+        fresh_file(self.lane_runtime / "state.json", self.lane_state)
+        settings_ref = lc.bound(Path(self.member["settings_path"]))[0]
+        self.intent = dict(
+            kind="run",
+            settings=settings_ref,
+            arena_cohort=self.cohort_ref,
+            selection_index=0,
+            output=str(self.selected / "operation"),
+        )
+        intent_ref = fresh_file(self.selected / "intent.json", self.intent)
+        self.inner_config = {
+            **declared,
+            "argv": [
+                sys.executable,
+                "-B",
+                str(lc.ROOT / "scripts/dev/research-lifecycle.py"),
+                "run",
+                "--intent",
+                intent_ref["path"],
+                "--sha256",
+                intent_ref["sha256"],
+            ],
+        }
+        self.inner_state = dict(
+            job_id="actual-inner",
+            issue="work",
+            thread_id="target",
+            phase="running",
+            supervisor=self.sequence,
+            child=self.inner_child,
+            config_sha256=lc.sha(json.dumps(self.inner_config, sort_keys=True).encode()),
+            cpu_plan=dict(allocation=[0, 8]),
+        )
+        fresh_file(self.inner_runtime / "config.json", self.inner_config)
+        fresh_file(self.inner_runtime / "state.json", self.inner_state)
+
+    def test_registered_sequence_supervisor_and_inner_child_share_actual_binding(self):
+        for pid, config, runtime in (
+            (101, self.children[0], self.lane_runtime),
+            (110, self.children[0], self.lane_runtime),
+            (111, self.children[0], self.lane_runtime),
+            (111, self.inner_config, self.inner_runtime),
+            (113, self.inner_config, self.inner_runtime),
+        ):
+            with (
+                self.subTest(pid=pid, caller=config["argv"][3]),
+                patch.object(lc.os, "getpid", return_value=pid),
+            ):
+                binding = lc.cohort_job_authority(config, runtime)
+                self.assertEqual(binding["delegated_lane"], 0)
+                self.assertEqual(binding["delegated_config_sha256"], lc.canonical_sha(config))
+                self.assertEqual(binding["origin"], self.origin)
+        with (
+            patch.object(lc.os, "getpid", return_value=113),
+            patch.dict(lc.os.environ, {"QUORIDOR_RESEARCH_JOB_DIR": str(self.inner_runtime)}),
+        ):
+            # Actual common consumer, not a replacement returning authority.
+            self.assertEqual(lc.current_cpu_owner(), self.inner_state["cpu_plan"])
+
+    def test_foreign_sibling_config_ancestry_phase_and_cancel_refuse(self):
+        import copy
+
+        cases = (
+            "foreign",
+            "sibling",
+            "wrong_directory",
+            "missing_directory",
+            "argv_kind",
+            "argv_hash",
+            "wrong_config_file",
+            "inner_config_hash",
+            "registered_owner",
+            "outer_config_file",
+            "inner_parent",
+            "sequence_parent",
+            "stale_child",
+            "inner_phase",
+            "outer_phase",
+            "parent_deadline",
+            "parent_cancel",
+            "lane_cancel",
+            "inner_cancel",
+            "wrong_settings",
+            "wrong_index",
+            "wrong_intent_path",
+        )
+        for fault in cases:
+            with self.subTest(fault=fault):
+                config = copy.deepcopy(self.inner_config)
+                lane = copy.deepcopy(self.lane_state)
+                inner = copy.deepcopy(self.inner_state)
+                parent = copy.deepcopy(self.state)
+                processes = copy.deepcopy(self.processes)
+                pid = 113
+                directory = self.inner_runtime
+                actual_config = copy.deepcopy(config)
+                actual_outer = copy.deepcopy(self.children[0])
+                intent = copy.deepcopy(self.intent)
+                if fault == "foreign":
+                    pid = 114
+                elif fault == "sibling":
+                    pid = 213
+                elif fault == "wrong_directory":
+                    directory = Path(self.cohort["members"][1]["job_runtime"])
+                elif fault == "missing_directory":
+                    directory = None
+                elif fault == "argv_kind":
+                    config["argv"][3] = "sequence"
+                elif fault == "argv_hash":
+                    config["argv"][7] = "wrong-hash"
+                elif fault == "wrong_config_file":
+                    actual_config["request_timeout_seconds"] = 999
+                elif fault == "inner_config_hash":
+                    inner["config_sha256"] = "wrong-hash"
+                elif fault == "registered_owner":
+                    lane["launch"]["owner"] = dict(pid=999, start_ticks="x", boot_id="boot")
+                elif fault == "outer_config_file":
+                    actual_outer["request_timeout_seconds"] = 999
+                elif fault == "inner_parent":
+                    processes[113]["parent"] = 211
+                elif fault == "sequence_parent":
+                    processes[111]["parent"] = 999
+                elif fault == "stale_child":
+                    inner["child"] = {**self.inner_child, "start_ticks": "old"}
+                elif fault == "inner_phase":
+                    inner["phase"] = "finished"
+                elif fault == "outer_phase":
+                    lane["phase"] = "finished"
+                elif fault == "parent_deadline":
+                    parent["authority_valid_until_monotonic"] = -1
+                elif fault == "wrong_settings":
+                    intent["settings"] = lc.bound(Path(self.cohort["members"][1]["settings_path"]))[
+                        0
+                    ]
+                elif fault == "wrong_index":
+                    intent["selection_index"] = True
+                if fault in {"wrong_settings", "wrong_index", "wrong_intent_path"}:
+                    path = self.selected / (
+                        "foreign-intent.json" if fault == "wrong_intent_path" else "intent.json"
+                    )
+                    reference = fresh_file(path, intent)
+                    config["argv"][5] = reference["path"]
+                    config["argv"][7] = reference["sha256"]
+                    actual_config = copy.deepcopy(config)
+                    inner["config_sha256"] = lc.sha(json.dumps(config, sort_keys=True).encode())
+                fresh_file(self.state_path, parent)
+                fresh_file(self.lane_runtime / "state.json", lane)
+                fresh_file(self.lane_runtime / "config.json", actual_outer)
+                fresh_file(self.inner_runtime / "state.json", inner)
+                fresh_file(self.inner_runtime / "config.json", actual_config)
+                cancel_path = None
+                if fault in {"parent_cancel", "lane_cancel", "inner_cancel"}:
+                    runtime = {
+                        "parent_cancel": Path(self.parent["runtime"]),
+                        "lane_cancel": self.lane_runtime,
+                        "inner_cancel": self.inner_runtime,
+                    }[fault]
+                    cancel_path = runtime / "cancel.json"
+                    fresh_file(cancel_path, dict(requested=True))
+                try:
+                    with (
+                        patch.object(lc.os, "getpid", return_value=pid),
+                        patch.object(self, "processes", processes),
+                    ):
+                        with self.assertRaises(lc.Refused):
+                            lc.cohort_job_authority(config, directory)
+                finally:
+                    if cancel_path is not None:
+                        cancel_path.unlink()
+                    # Every next subcase starts from the same original bound intent.
+                    fresh_file(self.selected / "intent.json", self.intent)
+
+
 if __name__ == "__main__":
     unittest.main()

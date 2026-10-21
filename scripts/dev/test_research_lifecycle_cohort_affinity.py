@@ -28,7 +28,7 @@ class CohortControllerAffinity(unittest.TestCase):
             ):
                 root = Path(tmp)
                 affinity = set(incoming)
-                expected = {0, 18} if cohort else wide
+                expected = {0, 18} if cohort else {18}
                 observed = []
 
                 def save(path, value):
@@ -42,7 +42,7 @@ class CohortControllerAffinity(unittest.TestCase):
                     kind="sequence",
                     owner=tmp,
                     output=str(root / "execution"),
-                    runs=[{}],
+                    runs=[{}, {}],
                 )
                 if cohort:
                     settings["arena_cohort"] = {"synthetic": True}
@@ -58,7 +58,10 @@ class CohortControllerAffinity(unittest.TestCase):
 
                 def prepare(*args):
                     check("prepare")
-                    directory = root / "selected"
+                    directory = root / (
+                        "selected-"
+                        + str(len([p for p in root.iterdir() if p.name.startswith("selected-")]))
+                    )
                     directory.mkdir()
                     operation = directory / "operation"
                     operation.mkdir()
@@ -94,6 +97,7 @@ class CohortControllerAffinity(unittest.TestCase):
                     check("physical_entry")
                     # The maintained guard narrows its current controller temporarily.
                     set_affinity(0, {18})
+                    return lc.process.CPUPlan([18], {"run": [8, 18]})
 
                 job = SimpleNamespace(
                     authority=lambda *args, **kwargs: check("authority"),
@@ -121,23 +125,26 @@ class CohortControllerAffinity(unittest.TestCase):
                         ("ArenaCohortResources", lambda *args: resources),
                         ("arena_cohort_progress", lambda *args: check("progress")),
                         ("physical_and_quiet", physical),
+                        (
+                            "sequence_cpu_plan",
+                            lambda *args: lc.process.CPUPlan(sorted(expected), {"run": [8, 18]}),
+                        ),
+                        ("current_cpu_owner", lambda: None),
                     ):
                         stack.enter_context(patch.object(lc, name, value))
                     stack.enter_context(
-                        patch.object(
-                            lc.os, "sched_getaffinity", lambda pid: set(affinity)
-                        )
+                        patch.object(lc.os, "sched_getaffinity", lambda pid: set(affinity))
+                    )
+                    stack.enter_context(patch.object(lc.os, "sched_setaffinity", set_affinity))
+                    stack.enter_context(
+                        patch.object(lc.process.CPUPlan, "check_host", lambda *args: None)
                     )
                     stack.enter_context(
-                        patch.object(lc.os, "sched_setaffinity", set_affinity)
+                        patch.object(lc.process, "available_cpus", lambda: set(wide))
                     )
-                    stack.enter_context(
-                        patch.object(lc.signal, "signal", return_value=None)
-                    )
+                    stack.enter_context(patch.object(lc.signal, "signal", return_value=None))
                     if cohort and not {0, 18} <= incoming:
-                        with self.assertRaisesRegex(
-                            lc.Refused, "management CPUs outside launch"
-                        ):
+                        with self.assertRaisesRegex(lc.Refused, "outside owning launch scope"):
                             lc.sequence(
                                 settings_ref,
                                 job_module=job,
@@ -156,8 +163,9 @@ class CohortControllerAffinity(unittest.TestCase):
                         complete=complete,
                     )
                 self.assertEqual(result["status"], "PASS")
-                self.assertEqual(
-                    result["operations"][0]["launch_affinity"], sorted(expected)
+                self.assertEqual(result["completed_operations"], 2)
+                self.assertTrue(
+                    all(r["launch_affinity"] == sorted(expected) for r in result["operations"])
                 )
                 self.assertEqual(result["launch_affinity_restored"], sorted(expected))
                 self.assertEqual(affinity, expected)

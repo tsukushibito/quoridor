@@ -165,7 +165,6 @@ pub(super) fn with_state<T>(
     let mut table = Table::new(0).unwrap();
     let mut state = Search {
         probcut: probcut::State::default(),
-        etc: EtcMode::Off,
         #[cfg(not(target_arch = "wasm32"))]
         worker_budget: None,
         #[cfg(feature = "research-diagnostics")]

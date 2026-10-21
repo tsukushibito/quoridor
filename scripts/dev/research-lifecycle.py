@@ -236,9 +236,15 @@ def resolve_arena_parallel(config):
         and len(set(operations)) == len(operations),
         "finite unique original operation order, not native family IDs",
     )
-    for key in ("lane_family_B", "lane_storage_B", "common_family_B", "shared_storage_B"):
+    for key in (
+        "lane_family_B",
+        "lane_storage_B",
+        "common_family_B",
+        "shared_storage_B",
+    ):
         require(
-            type(config[key]) is int and config[key] > 0, "explicit positive runtime/holding bounds"
+            type(config[key]) is int and config[key] > 0,
+            "explicit positive runtime/holding bounds",
         )
     require(
         config["lane_family_B"] > 64 * 1024**2 and config["common_family_B"] >= 64 * 1024**2,
@@ -253,7 +259,7 @@ def resolve_arena_parallel(config):
         shared_storage_B=config["shared_storage_B"],
         family_RAM_B=count * config["lane_family_B"] + config["common_family_B"],
         whole_B=count * config["lane_storage_B"] + config["shared_storage_B"],
-        CPU=count + 2,
+        CPU=len(process.CPUPlan(managers, {"run": pool[2 : 2 + count]}).all),
         members=[
             dict(
                 lane=lane,
@@ -270,8 +276,9 @@ def resolve_arena_parallel(config):
     )
 
 
-def arena_cohort_cpus(cohort):
+def arena_cohort_cpus(cohort, *, management=False):
     """Only explicit management sharing and identical same-game AI bindings overlap."""
+    require(type(management) is bool, "CPU management projection must be boolean")
     members = cohort["members"]
     require(
         isinstance(members, list)
@@ -321,7 +328,7 @@ def arena_cohort_cpus(cohort):
             ),
             "bound normal cohort consumes the one resolved parallel config",
         )
-    return sorted(occupied)
+    return list(pool) if management else sorted(occupied)
 
 
 def arena_cohort(spec):
@@ -567,13 +574,30 @@ def cohort_job_authority(config, directory=None):
                 "registered supervisor executes its own declared lane",
             )
         else:
-            require(
-                own == state.get("child") and state["phase"] == "running",
-                "inner operation caller is the registered running lane sequence",
-            )
+            sequence = state.get("child")
+            require(state["phase"] == "running", "registered running lane sequence required")
+            if config == declared:
+                require(
+                    own == sequence,
+                    "inner operation caller is the registered running lane sequence",
+                )
             if config != declared:
                 # The sequence contract stays settings; the selected RUN spec is
                 # the maintained --intent argument, as in sequence's child_config.
+                require(
+                    isinstance(config["argv"], list)
+                    and len(config["argv"]) == 8
+                    and config["argv"][:5]
+                    == [
+                        sys.executable,
+                        "-B",
+                        str(ROOT / "scripts/dev/research-lifecycle.py"),
+                        "run",
+                        "--intent",
+                    ]
+                    and config["argv"][6] == "--sha256",
+                    "inner operation uses the canonical registered run caller",
+                )
                 settings_ref = bound(Path(member["settings_path"]))[0]
                 intent_ref = bound(Path(config["argv"][5]))[0]
                 intent = document(intent_ref)
@@ -597,10 +621,36 @@ def cohort_job_authority(config, directory=None):
                 inner = json.loads(bound(inner_runtime / "state.json")[1])
                 require(
                     (directory is None or Path(directory) == inner_runtime)
-                    and inner["supervisor"] == own
+                    and inner["supervisor"] == sequence
                     and inner["config_sha256"] == sha(json.dumps(config, sort_keys=True).encode()),
                     "assigned inner originating job",
                 )
+                if own != sequence:
+                    # The command child is distinct from the sequence that
+                    # executes its normal job. Admit only that registered child,
+                    # never an arbitrary descendant or an environment claim.
+                    require(
+                        directory is not None
+                        and Path(directory) == inner_runtime
+                        and document(bound(runtime / "config.json")[0]) == declared
+                        and state["config_sha256"]
+                        == sha(json.dumps(declared, sort_keys=True).encode())
+                        and document(bound(inner_runtime / "config.json")[0]) == config
+                        and inner["issue"] == config["issue"]
+                        and inner["thread_id"] == config["thread_id"]
+                        and inner["phase"] == "running"
+                        and inner.get("child") == own
+                        and sequence is not None
+                        and process.alive(sequence)
+                        and process.alive(state["supervisor"])
+                        and process.alive(own)
+                        and process.process_info(sequence["pid"])["parent"]
+                        == state["supervisor"]["pid"]
+                        and process.process_info(own["pid"])["parent"] == sequence["pid"]
+                        and not (runtime / "cancel.json").exists()
+                        and not (inner_runtime / "cancel.json").exists(),
+                        "registered inner child/config/live ancestry and uncancelled lane",
+                    )
     binding["delegated_config_sha256"] = canonical_sha(config)
     binding["delegated_lane"] = lane
     return binding
@@ -620,6 +670,8 @@ def cohort_sequence(settings_ref, *, job_module=None, backend=None):
     )
     origin = originating_job(settings_ref, settings)
     require(origin["runtime"] == parent["runtime"], "original parent runtime")
+    cpu_plan = sequence_cpu_plan(settings_ref)
+    apply_controller_cpu_plan(cpu_plan)
     output = owned(parent["output"], cohort["owner"])
     output.mkdir(exist_ok=False)
     new_json(output / "parent-origin.json", dict(cohort=cohort_ref, originating_job=origin))
@@ -737,7 +789,8 @@ def cohort_sequence(settings_ref, *, job_module=None, backend=None):
                 result_path = runtime / "result.json"
                 if result_path.exists():
                     records[lane] = dict(
-                        result=bound(result_path)[0], state=bound(runtime / "state.json")[0]
+                        result=bound(result_path)[0],
+                        state=bound(runtime / "state.json")[0],
                     )
                     terminal = document(records[lane]["result"])
                     if terminal["outcome"] != "succeeded" or not terminal["cleanup_complete"]:
@@ -835,7 +888,12 @@ def cohort_sequence(settings_ref, *, job_module=None, backend=None):
                     exit_code=code,
                     directwait_reaped=reaped,
                     remaining=(
-                        [dict(pid=child.pid, identity="owned Popen; live or unresolved")]
+                        [
+                            dict(
+                                pid=child.pid,
+                                identity="owned Popen; live or unresolved",
+                            )
+                        ]
                         if running is not False
                         else []
                     ),
@@ -1311,99 +1369,6 @@ def operation_lease(spec, lock):
             yield
 
 
-def arena_cohort_peer(spec, pid):
-    """Accept only an actual native descendant of an exact sibling operation's guardian."""
-    selected = arena_cohort(spec)
-    if selected is None:
-        return False
-    cohort, member = selected
-    lifetime = arena_cohort_lifetime(spec)
-    chain = set()
-    current = process.process_info(pid)
-    while current is not None and len(chain) < 32:
-        key = (current["pid"], current["start_ticks"], current["boot_id"])
-        if key in chain:
-            break
-        chain.add(key)
-        current = process.process_info(current["parent"])
-    for peer in cohort["members"]:
-        if peer["lane"] == member["lane"]:
-            continue
-        for index in range(32):
-            phase = Path(peer["output"]) / f"run-{index:03d}"
-            marker = phase / "operation" / "INCOMPLETE"
-            if not marker.exists():
-                continue
-            try:
-                custody = document(bound(marker)[0])
-                origin = custody["originating_job"]
-                outer = lifetime["origins"].get(peer["lane"])
-                require(
-                    outer is not None
-                    and origin["supervisor"] == outer["child"]
-                    and tuple(outer["child"][k] for k in ("pid", "start_ticks", "boot_id"))
-                    in chain,
-                    "peer joins the declared original outer job/runtime/child chain",
-                )
-                child = origin["child"]
-                if (child["pid"], child["start_ticks"], child["boot_id"]) not in chain:
-                    continue
-                peer_spec = document(custody["intent"])
-                bound_cohort, bound_member = arena_cohort(peer_spec)
-                require(
-                    bound_cohort == cohort and bound_member == peer,
-                    "same bound sibling, not a self-declared peer",
-                )
-                cfg = document(origin["config"])
-                runtime = phase / "runtime"
-                state = json.loads(bound(runtime / "state.json")[1])
-                require(
-                    origin["runtime"] == str(runtime)
-                    and origin["config"] == bound(runtime / "config.json")[0]
-                    and cfg["argv"]
-                    == [
-                        sys.executable,
-                        "-B",
-                        str(ROOT / "scripts/dev/research-lifecycle.py"),
-                        "run",
-                        "--intent",
-                        custody["intent"]["path"],
-                        "--sha256",
-                        custody["intent"]["sha256"],
-                    ]
-                    and cfg["resource_contract"] == peer["settings_path"]
-                    and cfg["cwd"] == peer_spec["cwd"]
-                    and cfg["issue"] == cohort["issue"]
-                    and cfg["thread_id"] == cohort["thread_id"]
-                    and state["config_sha256"] == sha(json.dumps(cfg, sort_keys=True).encode())
-                    and state["job_id"] == origin["job_id"]
-                    and state["supervisor"] == origin["supervisor"]
-                    and state["phase"] in {"starting", "running"}
-                    and process.alive(child)
-                    and process.alive(origin["supervisor"]),
-                    "actual sibling job/config/source/guardian custody",
-                )
-                actual = [
-                    os.fsdecode(a)
-                    for a in (Path("/proc") / str(pid) / "cmdline").read_bytes().split(b"\0")
-                    if a
-                ]
-                peer_cores = {*peer["AI_workers"], peer["main_cpu"]}
-                require(
-                    actual == peer_spec["argv"]
-                    and os.sched_getaffinity(child["pid"]) == {peer["main_cpu"]}
-                    and os.sched_getaffinity(origin["supervisor"]["pid"])
-                    == set(cohort.get("management_cpu_pool", [cohort["global_controller_cpu"]]))
-                    and all(
-                        os.sched_getaffinity(int(t.name)) <= peer_cores
-                        for t in (Path("/proc") / str(pid) / "task").iterdir()
-                    ),
-                    "actual sibling native argv/thread cores and controller roles",
-                )
-                return True
-            except (OSError, KeyError, TypeError, ValueError):
-                continue
-    return False
 
 
 def arena_cohort_progress(spec):
@@ -1418,10 +1383,17 @@ def arena_cohort_progress(spec):
         return
     lifetime = arena_cohort_lifetime(spec)
     lanes = []
+    planned_games = 0
     for member in cohort["members"]:
         output = Path(member["output"])
         settings_ref = bound(member["settings_path"])[0]
         settings = document(settings_ref)
+        configs = [document(document(run["experiment"])["config"]) for run in settings["runs"]]
+        require(
+            all(type(config.get("games")) is int and config["games"] > 0 for config in configs),
+            "configured positive-int games per operation",
+        )
+        planned_games += sum(config["games"] for config in configs)
         terminal = None
         if (output / "result.json").exists():
             terminal_ref = bound(output / "result.json")[0]
@@ -1463,6 +1435,7 @@ def arena_cohort_progress(spec):
             dict(
                 member=member,
                 settings=settings,
+                configs=configs,
                 terminal=terminal,
                 terminal_ref=terminal_ref if terminal is not None else None,
                 outer_failure=outer_failure,
@@ -1474,7 +1447,7 @@ def arena_cohort_progress(spec):
         if packet_path.exists():
             return
         counts = dict(
-            planned_games=3072,
+            planned_games=planned_games,
             terminal_planned_games=0,
             inflight_slots=0,
             unentered_slots=0,
@@ -1488,7 +1461,7 @@ def arena_cohort_progress(spec):
         )
         evidence, pairs, initial_failures = [], [], []
         for lane in lanes:
-            member, settings = lane["member"], lane["settings"]
+            member = lane["member"]
             if lane["initial_failed"]:
                 initial_failures.append(
                     dict(
@@ -1497,7 +1470,8 @@ def arena_cohort_progress(spec):
                         outer_failure=lane["outer_failure"],
                     )
                 )
-            for index, template in enumerate(settings["runs"]):
+            for index, config in enumerate(lane["configs"]):
+                games = config["games"]
                 phase = Path(member["output"]) / f"run-{index:03d}"
                 operation = phase / "operation"
                 manifest_path = operation / "manifest.json"
@@ -1510,13 +1484,12 @@ def arena_cohort_progress(spec):
                     inner_result is not None and inner_result.get("cleanup_complete") is True
                 )
                 lane_terminal = lane["terminal"] is not None or lane["outer_failure"] is not None
-                config = document(document(template["experiment"])["config"])
                 publication_path = Path(config["output"]) / "result.json"
                 native_owned = operation.exists()
                 if terminal and not native_owned:
-                    counts["unentered_slots"] += 32
+                    counts["unentered_slots"] += games
                 elif terminal or (lane_terminal and native_owned):
-                    counts["terminal_planned_games"] += 32
+                    counts["terminal_planned_games"] += games
                     if publication_path.exists():
                         publication_ref = bound(publication_path)[0]
                         publication = document(publication_ref)
@@ -1525,8 +1498,8 @@ def arena_cohort_progress(spec):
                         census = summary["census"]
                         require(
                             native["run_id"] == config["run_id"]
-                            and native["planned"] == census["planned_games"] == 32
-                            and 0 <= publication["outcome_count"] <= 32,
+                            and native["planned"] == census["planned_games"] == games
+                            and 0 <= publication["outcome_count"] <= games,
                             "actual saved local native census/config and retained outcomes",
                         )
                         counts["native_started_games_known"] += census["started_games"]
@@ -1568,21 +1541,21 @@ def arena_cohort_progress(spec):
                             )
                         )
                     else:
-                        counts["terminal_native_census_unknown_slots"] += 32
-                        counts["retained_count_unknown_slots"] += 32
+                        counts["terminal_native_census_unknown_slots"] += games
+                        counts["retained_count_unknown_slots"] += games
                 elif lane_terminal:
                     # No operation ownership marker and no inner job means no native entry.
-                    counts["unentered_slots"] += 32
+                    counts["unentered_slots"] += games
                 elif phase.exists():
-                    counts["inflight_slots"] += 32
+                    counts["inflight_slots"] += games
                 else:
-                    counts["unentered_slots"] += 32
+                    counts["unentered_slots"] += games
         require(
             counts["terminal_planned_games"] + counts["inflight_slots"] + counts["unentered_slots"]
-            == 3072,
+            == planned_games,
             "disjoint terminal/inflight/unentered planned slot domains",
         )
-        counts["scientific_outcome_UNKNOWN_slots"] = 3072 - counts["completed_games_known"]
+        counts["scientific_outcome_UNKNOWN_slots"] = planned_games - counts["completed_games_known"]
         elapsed = time.monotonic() - lifetime["clock"]
         require(elapsed > 0, "actual common launch-to-pre-publication snapshot clock")
         pair_path = control / "first-progress-pairs.json"
@@ -1601,11 +1574,11 @@ def arena_cohort_progress(spec):
             at=now.isoformat(),
             at_JST=now.astimezone(timezone(timedelta(hours=9))).isoformat(),
             counts=counts,
-            overall_target=3072,
+            overall_target=planned_games,
             launch_to_pre_publication_snapshot_seconds=elapsed,
             clock_endpoint="Snapshot before packet/body/sender publication; no publication-complete clock claimed",
             completed_games_per_second=counts["completed_games_known"] / elapsed,
-            conditional_remaining_seconds=(3072 - counts["terminal_planned_games"])
+            conditional_remaining_seconds=(planned_games - counts["terminal_planned_games"])
             * elapsed
             / counts["completed_games_known"]
             if counts["completed_games_known"] > 0 and not initial_failures
@@ -2092,7 +2065,7 @@ class Limits(process.CycleResources):
                 )
 
 
-def build_test_cpu_cores(spec):
+def _build_test_cpu_cores(spec):
     """The owning BUILD handover can issue the three-core NN0 integration scope."""
     cores = spec.get("test_cpu_cores")
     require(
@@ -2109,7 +2082,7 @@ def build_test_cpu_cores(spec):
     return cores
 
 
-def native_cpu_cores(spec):
+def _native_cpu_cores(spec):
     """Bind native measurement or serial arena to its admitted search/main roles."""
     require(spec["kind"] == "run", "native CPU allocation belongs to RUN")
     experiment = document(spec["experiment"])
@@ -2162,7 +2135,10 @@ def native_cpu_cores(spec):
         maximum = 1
         for index, engine in enumerate(config["engines"]):
             threads = engine.get("search_threads", 1)
-            require(type(threads) is int and threads > 0, "positive total engine search_threads")
+            require(
+                type(threads) is int and threads > 0,
+                "positive total engine search_threads",
+            )
             if "search_cpu_cores" not in engine:
                 require(threads == 1, "complete multiworker engine team required")
                 continue
@@ -2209,78 +2185,194 @@ def native_cpu_cores(spec):
     return cores
 
 
-def physical_and_quiet(spec):
+def operation_cpu_plan(spec):
+    """One typed operation allocation, shared by execute and terminal collection."""
     cfg = spec["limits"]
-    cohort = arena_cohort(spec)
+    require(spec["kind"] in {"build", "run"}, "CPU plan belongs to a normal BUILD/RUN")
+    require(
+        cfg["worker_cpu"] != cfg["guardian_cpu"],
+        "worker and management CPU roles overlap",
+    )
+    cores = [cfg["worker_cpu"]]
+    test = cores
+    if spec["kind"] == "build" and "test_cpu_cores" in spec:
+        test = _build_test_cpu_cores(spec)
+    if spec["kind"] == "run":
+        if document(spec["experiment"])["phase"] == "corpus":
+            cores = spec["child_cpu_cores"]
+            require(
+                isinstance(cores, list)
+                and len(cores) >= 3
+                and cfg["worker_cpu"] in cores
+                and cfg["guardian_cpu"] in cores,
+                "declared corpus CPU scope",
+            )
+        else:
+            cores = _native_cpu_cores(spec)
+    return process.CPUPlan([cfg["guardian_cpu"]], {"run": cores, "test": test})
+
+
+def native_cpu_cores(spec):
+    """Public normal-factory projection of the operation plan, not a second resolver."""
+    require(spec["kind"] == "run", "native CPU allocation belongs to RUN")
+    return list(operation_cpu_plan(spec).commands["run"])
+
+
+def sequence_cpu_plan(settings_ref):
+    settings = document(settings_ref)
+    if settings.get("arena_cohort") is not None:
+        cohort = document(settings["arena_cohort"])
+        all_cores = arena_cohort_cpus(cohort)
+        managers = arena_cohort_cpus(cohort, management=True)
+        if settings["kind"] == "cohort":
+            commands = {
+                str(m["lane"]): sorted({*m["AI_workers"], m["main_cpu"]}) for m in cohort["members"]
+            }
+        else:
+            member = cohort["members"][settings["arena_lane"]]
+            commands = {"run": sorted({*member["AI_workers"], member["main_cpu"]})}
+        if cohort.get("management_cpu_pool") is None:
+            commands["controller"] = [
+                cohort["global_controller_cpu"]
+                if settings["kind"] == "cohort"
+                else member["main_cpu"]
+            ]
+        plan = process.CPUPlan(managers, commands)
+        require(set(plan.all) <= set(all_cores), "resolved cohort role scope")
+        return plan
+    templates = settings.get("runs", []) or settings.get("measurements", [])
+    if settings.get("arena") is not None:
+        templates = [*templates, settings["arena"]["template"]]
+    require(bool(templates), "finite sequence CPU plan needs operation templates")
+    plans = [operation_cpu_plan(t) for t in templates]
+    management = {c for p in plans for c in p.management}
+    if settings.get("limits") is not None:
+        management.add(settings["limits"]["guardian_cpu"])
+    workers = {c for p in plans for c in set(p.all) - set(p.management)}
+    require(
+        not management.intersection(workers),
+        "sequence manager overlaps a search/test worker",
+    )
+    return process.CPUPlan(sorted(management), {str(i): list(p.all) for i, p in enumerate(plans)})
+
+
+def apply_controller_cpu_plan(plan):
+    plan.check_host(process.available_cpus())
+    owner = current_cpu_owner()
+    available = owner["allocation"] if owner is not None else os.sched_getaffinity(0)
+    require(
+        set(plan.all) <= set(available),
+        "controller CPU plan outside owning launch scope",
+    )
+    plan.apply()
+
+
+def configured_job_cpu_plan(config):
+    """The standard job resolves only its actual hashed common entry/settings."""
+    argv = config["argv"]
+    if (
+        len(argv) in {10, 14}
+        and argv[:5]
+        == [
+            sys.executable,
+            "-B",
+            str(ROOT / "scripts/dev/research-lifecycle.py"),
+            "finalize",
+            "--operation",
+        ]
+        and argv[6] == "--job-result"
+        and argv[8] == "--sha256"
+    ):
+        directory = Path(argv[5])
+        custody = document(
+            bound(
+                directory
+                / ("candidate.json" if (directory / "candidate.json").exists() else "INCOMPLETE")
+            )[0]
+        )
+        require(
+            config["resource_contract"] == custody["intent"]["path"],
+            "collector resource contract is original operation intent",
+        )
+        plan = operation_cpu_plan(document(custody["intent"]))
+        return process.CPUPlan(list(plan.management), {"run": list(plan.management)})
+    if not (
+        len(argv) == 8
+        and argv[:3] == [sys.executable, "-B", str(ROOT / "scripts/dev/research-lifecycle.py")]
+        and argv[3] in {"sequence", "cohort", "run", "build"}
+        and argv[4] == "--intent"
+        and argv[6] == "--sha256"
+    ):
+        return None
+    reference = bound(Path(argv[5]))[0]
+    require(reference["sha256"] == argv[7], "job CPU plan binds actual intent hash")
+    if argv[3] in {"sequence", "cohort"}:
+        require(config["resource_contract"] == reference["path"], "job CPU settings owner")
+        return sequence_cpu_plan(reference)
+    return operation_cpu_plan(document(reference))
+
+
+def current_cpu_owner():
+    """Join a running normal owner by config hash, exact child and actual ancestry."""
+    runtime = Path(os.environ.get("QUORIDOR_RESEARCH_JOB_DIR", ""))
+    if not runtime.is_absolute():
+        return None
+    config = document(bound(runtime / "config.json")[0])
+    state = document(bound(runtime / "state.json")[0])
+    own = process.identity(process.process_info(os.getpid()))
+    require(
+        (state.get("child") == own or (state["phase"] == "starting" and state.get("child") is None))
+        and state["phase"] in {"starting", "running"}
+        and process.alive(state["supervisor"])
+        and process.process_info(own["pid"])["parent"] == state["supervisor"]["pid"]
+        and state["config_sha256"] == sha(json.dumps(config, sort_keys=True).encode()),
+        "actual running CPU owner/config/child ancestry",
+    )
+    if config.get("authority_parent") is not None:
+        cohort_parent_check(cohort_job_authority(config, runtime))
+    require(state.get("cpu_plan") is not None, "owning job has no resolved CPU plan")
+    return state["cpu_plan"]
+
+
+
+def physical_and_quiet(spec, *, collection=False):
+    cfg = spec["limits"]
+    plan = operation_cpu_plan(spec)
+    if collection:
+        plan = process.CPUPlan(list(plan.management), {"run": list(plan.management)})
+    plan.check_host(process.available_cpus())
     require(
         process.available_memory() >= cfg["family_B"] + cfg["host_reserve_B"],
         "physical RAM admission",
     )
-    cores = [cfg["worker_cpu"], cfg["guardian_cpu"]]
-    if spec["kind"] == "build" and "test_cpu_cores" in spec:
-        cores = build_test_cpu_cores(spec)
-    if "child_cpu_cores" in spec:
-        cores = spec["child_cpu_cores"]
-        if spec["kind"] == "run" and document(spec["experiment"])["phase"] == "corpus":
-            require(
-                isinstance(cores, list)
-                and len(cores) >= 3
-                and all(type(c) is int and c >= 0 for c in cores)
-                and len(set(cores)) == len(cores)
-                and cfg["worker_cpu"] in cores
-                and cfg["guardian_cpu"] in cores,
-                "declared corpus workers and distinct physical reserve cores",
-            )
-        else:
-            cores = native_cpu_cores(spec)
-    if cohort is None:
-        require(set(cores) <= os.sched_getaffinity(0), "CPU affinity admission")
-    else:
-        declaration, member = cohort
-        all_cores = arena_cohort_cpus(declaration)
+    owner = current_cpu_owner()
+    if owner is not None:
         require(
-            set(cores) == set([*member["AI_workers"], member["main_cpu"]])
-            and os.sched_getaffinity(0) <= set(all_cores),
-            "actual configured cohort CPU roles",
+            set(plan.all) <= set(owner["allocation"]),
+            "child operation outside actual owner CPU plan",
         )
-        cores = all_cores
-    identities = []
-    for core in cores:
-        p = Path(f"/sys/devices/system/cpu/cpu{core}/topology")
-        identities.append(((p / "physical_package_id").read_text(), (p / "core_id").read_text()))
-    require(
-        len(set(identities)) == len(identities),
-        "worker/guardian/reserves must be distinct physical cores",
-    )
-    # One instantaneous named scan. Lifetime conflicts serialize through the shared lease.
-    for entry in Path("/proc").iterdir():
-        if not entry.name.isdigit() or int(entry.name) == os.getpid():
-            continue
-        try:
-            args = (entry / "cmdline").read_bytes().split(b"\0")
-        except OSError:
-            continue
-        name = Path(os.fsdecode(args[0])).name if args else ""
-        if name in {
-            "cargo",
-            "rustc",
-            "cc1plus",
-            "quoridor-runner",
-            "terminal-cache",
-            "chromium",
-            "chrome",
-        } or (
-            cohort is not None
-            and (
-                name.startswith("quoridor-runner-")
-                or name == Path(cohort[0]["artifact"]["path"]).name
-            )
-        ):
-            if cohort is None:
-                raise Refused("named compute peer active: " + entry.name)
-            if not arena_cohort_peer(spec, int(entry.name)):
-                raise Refused("unrelated compute peer active: " + entry.name)
-    os.sched_setaffinity(0, {cfg["guardian_cpu"]})
+    else:
+        # A separate terminal collector has its own explicit plan and no live
+        # delegated exemption; its owning job performs the conflict check.
+        require(
+            os.sched_getaffinity(0) <= set(plan.all),
+            "collector outside assigned CPU scope",
+        )
+        process.compute_peers(
+            process.identity(process.process_info(os.getpid())),
+            plan.all,
+            {
+                "cargo",
+                "rustc",
+                "cc1plus",
+                "quoridor-runner",
+                "terminal-cache",
+                "chromium",
+                "chrome",
+            },
+        )
+    plan.apply()
+    return plan
 
 
 class Capture:
@@ -2374,15 +2466,9 @@ def command(spec, row, directory, resources, executor=process.execute, *, ledger
                 # All commands in this operation share this deadline and cleanup reserve.
                 resources.deadline = time.monotonic() + budget
         capture = Capture(directory / (row["name"] + ".full.log"), spec["limits"]["log_B"])
-        cpu_args = {"cpu_core": spec["limits"]["worker_cpu"]}
-        if spec.get("kind") == "build" and row.get("role") == "test" and "test_cpu_cores" in spec:
-            cpu_args = {"cpu_core": None, "cpu_cores": build_test_cpu_cores(spec)}
-        if "child_cpu_cores" in spec:
-            if spec["kind"] == "run" and document(spec["experiment"])["phase"] == "corpus":
-                cores = spec["child_cpu_cores"]
-            else:
-                cores = native_cpu_cores(spec)
-            cpu_args = {"cpu_core": None, "cpu_cores": cores}
+        plan = getattr(resources, "cpu_plan", None) or operation_cpu_plan(spec)
+        scope = "test" if row.get("role") == "test" else "run"
+        cpu_args = {"cpu_plan": plan, "cpu_scope": scope}
         if spec.get("perf") is not None and row.get("role", "run") == "run":
             require(
                 spec["kind"] == "run" and row["argv"] == spec["argv"],
@@ -2403,6 +2489,25 @@ def command(spec, row, directory, resources, executor=process.execute, *, ledger
         settled(record)
     except BaseException as error:
         primary = error
+        # This is an actual exception after execute's finally, not a normal
+        # guardian return or evidence reconstructed from a pre-final disk record.
+        outcome = getattr(error, "cycle_cleanup_outcome", None)
+        if outcome is not None:
+            if (
+                isinstance(outcome, dict)
+                and outcome.get("normal_return") is False
+                and isinstance(outcome.get("record"), dict)
+                and outcome["record"].get("command") == [str(arg) for arg in row["argv"]]
+            ):
+                check["guardian_exception_outcome"] = outcome
+            else:
+                check["secondary"].append(
+                    {
+                        "stage": "guardian_exception_outcome",
+                        "type": "Refused",
+                        "message": "exception cleanup does not join this actual command",
+                    }
+                )
     if capture is not None:
         try:
             capture.close()
@@ -2601,41 +2706,6 @@ def numerical_fields(experiment, manifest):
     }
 
 
-def resolved_etc(config, profile, *, supported=True):
-    if "etc" not in config:
-        return "off"
-    mode = config["etc"]
-    require(
-        supported and profile == "control" and type(mode) is str and mode in {"off", "depth3_top2"},
-        "typed research ETC setting",
-    )
-    if mode != "off":
-        require(
-            config.get("search_threads", 1) == 1
-            and config.get("probcut") is None
-            and config.get("probcut_samples", 0) == 0
-            and config.get("lmr_method", "depth_rank") == "depth_rank"
-            and config.get("zero_stock_approx_min_root_walls") is None
-            and all(
-                config.get(k) is None
-                for k in ("neighbour_opportunity", "root_ordering_quality", "history_provenance")
-            ),
-            "ETC ordinary N1/depth_rank, MPC/observers/approximation OFF",
-        )
-    return mode
-
-
-def etc_correspondence(config, record, *, profile, namespace):
-    mode = resolved_etc(config, profile)
-    require(type(namespace) is str, "ETC namespace string")
-    require(
-        record.get("etc_requested") == config.get("etc")
-        and record.get("etc_effective") == mode
-        and namespace.startswith("etc-depth3-top2-v1:") == (mode != "off"),
-        "ETC requested/effective/namespace correspondence",
-    )
-
-
 def resolved_lmr_parameters(config, profile, *, supported=True):
     """Typed coefficient box shared by preparation and normal data correspondence.
 
@@ -2675,7 +2745,6 @@ def measurement_config(experiment):
         <= {
             "inference",
             "probcut",
-            "etc",
             "probcut_samples",
             "search_threads",
             "smp_sharing_provenance",
@@ -2716,14 +2785,6 @@ def measurement_config(experiment):
         <= set(config),
         "measurement settings shape",
     )
-    etc = resolved_etc(config, config["profile"])
-    if etc != "off":
-        require(
-            config["use_tt"]
-            and config["use_pvs"]
-            and all(not r.get("observe_lmr", False) for r in requests),
-            "ETC excludes LMR observation/trial custody",
-        )
     if "probcut" in config or "probcut_samples" in config:
         p = config.get("probcut")
         samples = config.get("probcut_samples", 0)
@@ -3285,18 +3346,6 @@ def measurement_evidence(spec, experiment, values, *, files=()):
                     "measurement count type: " + key,
                 )
         require(isinstance(result.get("errors"), list), "measurement errors array")
-    etc_config = document(experiment["config"])
-    for row in rows:
-        measured = row.get("measurement", {})
-        namespace = measured.get("actual_selectivity", "")
-        if (
-            "etc" in etc_config
-            or "etc_effective" in measured
-            or namespace.startswith("etc-depth3-top2-v1:")
-        ):
-            etc_correspondence(
-                etc_config, measured, profile=etc_config["profile"], namespace=namespace
-            )
     raw_refs = [ref for ref in files if spec.get("perf") and ref["path"] == spec["perf"]["output"]]
     if result is not None and spec.get("perf"):
         result = {**result, "perf_RAW": raw_refs}
@@ -5001,15 +5050,6 @@ def arena_plan_check(experiment, plan):
         else:
             require(engine.get("claustrophobia") is None, "unused Claustrophobia settings")
         require("shallow_main_history" not in engine, "retired arena setting")
-        etc_mode = resolved_etc(
-            engine,
-            engine.get("ordering_profile"),
-            supported=engine["kind"] in {"nnue", "distance"} and a["comparison"] != "functional",
-        )
-        require(
-            etc_mode == "off" or a["comparison"] in {"search_wall_time", "search_fixed_work"},
-            "ETC same-evaluator search comparison only",
-        )
         resolved_lmr_parameters(
             engine,
             engine.get("ordering_profile"),
@@ -5587,16 +5627,6 @@ def arena_observation(config, row):
                     else obs["returned_ns"] == receipt
                 ),
                 "main receipt/terminal drain",
-            )
-        namespace = counters.get("actual_search_namespace") or {}
-        selectivity = namespace.get("selectivity", "")
-        if (
-            "etc" in engine
-            or "etc_effective" in counters
-            or selectivity.startswith("etc-depth3-top2-v1:")
-        ):
-            etc_correspondence(
-                engine, counters, profile=engine.get("ordering_profile"), namespace=selectivity
             )
         accepted.append(obs["action"])
     if not config["arena"].get("decision_only", False):
@@ -7192,9 +7222,22 @@ def originating_job(spec_ref, spec):
     }
 
 
-def remove_empty_owned_tmp(path, owner, guardian_return):
+def remove_empty_owned_tmp(path, owner, guardian_return, *, exception_outcome=None):
     """Remove only empty owned directories after the actual child and handles closed."""
     path = owned(path, owner)
+    if guardian_return is None:
+        require(
+            isinstance(exception_outcome, dict) and exception_outcome.get("normal_return") is False,
+            "owned TMP cleanup requires actual exception cleanup transport",
+        )
+        guardian_return = exception_outcome.get("record")
+        require(
+            isinstance(guardian_return, dict)
+            and guardian_return.get("signal_mask_restoration") == "completed"
+            and guardian_return.get("final_record_persist") == "completed"
+            and guardian_return.get("finalization_errors", []) == [],
+            "exception guardian finalization incomplete",
+        )
     require(
         isinstance(guardian_return, dict)
         and guardian_return.get("direct_child_reaped") is True
@@ -7269,9 +7312,10 @@ def execute(
     refs = []
     try:
         result["originating_job"] = originating_job(spec_ref, spec)
-        guard(spec)
+        plan = guard(spec)
         with operation_lease(spec, lock):
             resources = resource_factory(spec)
+            resources.cpu_plan = plan
             budget = spec.get("command_timeout_seconds")
             if budget is not None:
                 # Preparation inside an entered worker also consumes its finite budget.
@@ -7467,6 +7511,9 @@ def execute(
                             spec["TMP"],
                             spec["owner"],
                             result["checks"][-1].get("guardian_return")
+                            if result["checks"]
+                            else None,
+                            exception_outcome=result["checks"][-1].get("guardian_exception_outcome")
                             if result["checks"]
                             else None,
                         )
@@ -7994,9 +8041,10 @@ def finalize(
         owned(directory, spec["owner"]) == Path(spec["output"]),
         "finalization operation ownership",
     )
-    guard(spec)
+    plan = guard(spec, collection=True) if guard is physical_and_quiet else guard(spec)
     with operation_lease(spec, lock):
         resources = resource_factory(spec)
+        resources.cpu_plan = plan
         resources.check()
         failure = (
             None
@@ -8098,9 +8146,6 @@ def comparison_conditions(common):
     for variant in variants:
         if "lmr_parameters" in common:
             variant["lmr_parameters"] = copy.deepcopy(common["lmr_parameters"])
-        if "etc" in common:
-            variant["etc"] = common["etc"]
-        resolved_etc(variant, variant["profile"])
         resolved_lmr_parameters(variant, variant["profile"])
     return variants
 
@@ -8122,11 +8167,6 @@ def apply_comparison_cost(config, common, variant):
     else:
         config.pop("lmr_parameters", None)
 
-    if "etc" in variant:
-        config["etc"] = variant["etc"]
-    else:
-        config.pop("etc", None)
-    resolved_etc(config, config["profile"])
     config["zero_stock_safe_race"] = variant["zero_stock_safe_race"]
     config["zero_stock_safe_race_method"] = variant["zero_stock_safe_race_method"]
 
@@ -8156,11 +8196,6 @@ def apply_comparison_arena(config, common, pair):
             engine["lmr_parameters"] = copy.deepcopy(variant["lmr_parameters"])
         else:
             engine.pop("lmr_parameters", None)
-        if "etc" in variant:
-            engine["etc"] = variant["etc"]
-        else:
-            engine.pop("etc", None)
-        resolved_etc(engine, engine["ordering_profile"])
         engine["zero_stock_safe_race"] = variant["zero_stock_safe_race"]
         engine["zero_stock_safe_race_method"] = variant["zero_stock_safe_race_method"]
         for key in ("depth", "max_nodes", "time_ms"):
@@ -9025,14 +9060,12 @@ def sequence(
         backend = job_module.runtime.AppBackend(ROOT)
     output.mkdir(parents=True)
     if settings.get("arena_cohort") is not None:
-        new_json(output / "lane-origin.json", dict(settings=settings_ref, originating_job=origin))
-    initial_affinity = os.sched_getaffinity(0)
-    if settings.get("arena_cohort") is not None:
-        cohort, _ = arena_cohort(arena_cohort_spec(settings_ref))
-        management = set(cohort.get("management_cpu_pool", [cohort["global_controller_cpu"]]))
-        require(management <= initial_affinity, "cohort management CPUs outside launch affinity")
-        initial_affinity = management
-        os.sched_setaffinity(0, initial_affinity)
+        new_json(
+            output / "lane-origin.json",
+            dict(settings=settings_ref, originating_job=origin),
+        )
+    cpu_plan = sequence_cpu_plan(settings_ref)
+    apply_controller_cpu_plan(cpu_plan)
     active = None
     active_spec = None
     stopped = False
@@ -9040,6 +9073,7 @@ def sequence(
         "settings": settings_ref,
         "originating_job": origin,
         "operations": [],
+        "cpu_plan": cpu_plan.record(),
         "primary": None,
         "secondary": [],
     }
@@ -9091,12 +9125,16 @@ def sequence(
             require(not stopped, "finite controller cancelled; remaining work UNKNOWN")
             job_module.authority(config, ROOT, backend, horizon=config["end_at"])
             read_ref(settings_ref)
-            os.sched_setaffinity(0, initial_affinity)
+            cpu_plan.apply()
             spec_ref = prepare(settings_ref, kind, index)
             spec = document(spec_ref)
             active_spec = spec
-            physical_and_quiet(spec)
-            os.sched_setaffinity(0, initial_affinity)
+            operation_plan = physical_and_quiet(spec)
+            require(
+                set(operation_plan.all) <= set(cpu_plan.all),
+                "selected operation outside sequence CPU plan",
+            )
+            cpu_plan.apply()
             active = Path(spec_ref["path"]).parent / "runtime"
             active.mkdir()
             child_config = job_module.validate(
@@ -9149,7 +9187,7 @@ def sequence(
             entry["job_result"] = bound(active / "result.json")[0]
             operation = Path(spec["output"])
             if (operation / "INCOMPLETE").exists():
-                os.sched_setaffinity(0, initial_affinity)
+                cpu_plan.apply()
                 completion = complete(operation, entry["job_result"])
                 entry["manifest"] = bound(operation / "manifest.json")[0]
                 require(
@@ -9172,7 +9210,7 @@ def sequence(
             entry["completed"] = True
             entry["reader_STOP"] = stamp()
             active = None
-            os.sched_setaffinity(0, initial_affinity)
+            cpu_plan.apply()
             progress()
         require(not stopped, "finite controller cancelled after terminal collection")
     except BaseException as error:
@@ -9184,7 +9222,7 @@ def sequence(
             except BaseException as error:
                 result["secondary"].append({"stage": "signal_restore", **error_fact(error)})
         try:
-            os.sched_setaffinity(0, initial_affinity)
+            cpu_plan.apply()
         except BaseException as error:
             result["secondary"].append({"stage": "affinity_restore", **error_fact(error)})
         child_results = []
@@ -9228,7 +9266,10 @@ def sequence(
                     file=sys.stderr,
                 )
     if settings.get("arena_cohort") is not None:
-        require(not stopped, "cancelled at terminal notification; saved execution result retained")
+        require(
+            not stopped,
+            "cancelled at terminal notification; saved execution result retained",
+        )
     require(result["status"] == "PASS", "finite execution stopped; see its original result")
     return result
 

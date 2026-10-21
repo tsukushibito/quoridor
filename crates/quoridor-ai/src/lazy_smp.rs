@@ -1,5 +1,5 @@
 //! Native-only Lazy SMP. One exact-capacity TT, never N private tables.
-use super::{Entry, EtcMode, Result, SearchError, SearchStats};
+use super::{Entry, Result, SearchError, SearchStats};
 use std::sync::{
     Mutex,
     atomic::{AtomicU64, Ordering},
@@ -280,11 +280,6 @@ impl SearchSession {
                 "native SMP excludes diagnostic sessions".into(),
             ));
         }
-        if threads > 1 && self.etc != EtcMode::Off {
-            return Err(SearchError::Limits(
-                "ETC finite candidate requires N1".into(),
-            ));
-        }
         if threads == 1 && self.native_workers.is_none() {
             return Ok(());
         }
@@ -346,7 +341,6 @@ impl SearchSession {
     fn fork_worker(&self, shared: Arc<SharedTable>, writer: usize) -> Result<Self> {
         Ok(Self {
             probcut: None,
-            etc: EtcMode::Off,
             probcut_samples: 0,
             namespace: self.namespace.clone(),
             native_workers: None,

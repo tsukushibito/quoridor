@@ -48,7 +48,7 @@ MPC-OFFの深い参照は同じ選択探索の局所参照で、真のWDLでは�
 
 324.30の初回実測は1/3・実残深さ3の一候補で、校正196 Exact組の一度のfitを確認前に凍結した。別family確認では47判定可能予測／0誤cut／0予測UNKNOWN・9予測family、固定104全完了のprobe込みSearch総和ON/OFF0.954221285、clock104の凍結安全条件も通過した。同Maxは条件付き対局への有限支持だけを確認した。局所OFF参照・相関・異なる選択仕事とTimeLimit horizon UNKNOWNを保持し、一般速度・棋力・既定の支持へ拡張しない。[非対局の有限結果・費用・限界](../../research-data/ai-sigma/probcut-single-pair-v1/finite-calibration-confirmation-all208-v1.json)。続く元256局／128 familyの条件付き比較はFAILED_INCOMPLETEで終了した。native保存完走128局のうち通常資格は64局、開始済み部分batchの64slotは個別仕事UNKNOWN、残る64slotは未実行で、全256の得点・最終CI・棋力支持は得られない。残り再送／refill／後付けfinalizeを行わず既定OFFを維持し、追加pairやMulti-ProbCut fit／sweepは発行しない。[未完了対局の保存結論](../../research-data/ai-sigma/probcut-single-pair-v1/arena256-failed-incomplete-v1.json)。
 
-人間の別依頼324.31ではETCを独立に検証する。MPC OFF・aspiration OFFを固定し、先頭の通常手の後に既に順序付けられた最大2候補をkey-onlyで調べる。子はstrict残深さD−1／完全history-context／ExactかUpper≤−betaを要し、Lowerや浅いleaf種別を数値権威へ流用しない。初回案はD4 ABBA104＋100ms BAAB104、元512 calls／512M内。probe実費込みの反復全費、全要求完了、重大局面退行、時計と真の先頭以外のcut機会を確認し、支持時だけ元条件付き最大256局へ進む。私有sourceの関連R1は解消したがsoftware／実測は未完了であり、MPCとの同時tuningや既定採用は含めない。
+人間の別依頼324.31ではETCを独立に検証した。MPC OFF・aspiration OFFを固定し、先頭の通常手の後に既に順序付けられた最大2候補をkey-onlyで調べる。子はstrict残深さD−1／完全history-context／ExactかUpper≤−betaを要し、Lowerや浅いleaf種別を数値権威へ流用しない。新しい真正imageで元D4 ABBA104＋100ms BAAB104を完了したが、probe込み時間比0.999975268は凍結条件≤0.98を満たさず、反復条件も不支持、資格を満たすTT hit／ETC cutoffは0だった。時計・重大退行の条件通過を採用支持へ置換せず、この候補は有限支持なし・既定OFF維持とし、条件付き256局は不適格かつ未発行。要求D64未完了100件と相関を残し、一般無効果・劣位・棋力の結論や追加設定探索へ広げない。比較専用ETCコードを19対象の疎な差分で撤去し、新しい通常BUILDの影響Clippy／型検査・真正releaseまで完了した。証拠とGit22d23276の復元元を維持する。[有限結果・条件別表・費用](../../research-data/ai-sigma/cedar-etc-v1/finite208-result-v1.json)、[撤去と新baseline](../../research-data/ai-sigma/cedar-etc-v1/purpose-end-retirement-v1.json)。
 
 ## 評価器の精度と学習
 

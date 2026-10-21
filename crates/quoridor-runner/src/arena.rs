@@ -251,7 +251,6 @@ impl ArenaConfig {
             return Err("arena explicit colour order or retained outcome bound".into());
         }
         for engine in &c.engines {
-            crate::runtime::arena_etc(engine, Some(self)).map_err(|e| e.to_string())?;
             crate::runtime::arena_lmr_method(engine).map_err(|e| e.to_string())?;
             crate::runtime::arena_lmr_parameters(engine, Some(self)).map_err(|e| e.to_string())?;
             crate::runtime::arena_safe_race(engine, Some(self)).map_err(|e| e.to_string())?;
@@ -940,12 +939,6 @@ fn validate_observations(
                     return Err("arena Sigma receipt/drain/completed simulation".into());
                 }
                 continue;
-            }
-            let etc = crate::runtime::arena_etc(engine, Some(a))?;
-            if obs.counters["etc_requested"] != serde_json::json!(engine.etc)
-                || obs.counters["etc_effective"] != etc.name()
-            {
-                return Err("arena requested/effective ETC correspondence".into());
             }
             let (enabled, method) = crate::runtime::arena_safe_race(engine, Some(a))?;
             if obs.counters["actual_zero_stock_safe_race_enabled"] != enabled

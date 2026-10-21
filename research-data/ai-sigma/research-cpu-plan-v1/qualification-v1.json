@@ -1,0 +1,220 @@
+{
+  "issue": "quoridor-4lc.324.32",
+  "status": "IMPLEMENTED_INTEGRATED_LIMITED_TESTS_AND_REAL_NORMAL_PROCESS_SMOKE_QUALIFIED",
+  "common_owner": "One existing CPUPlan shared by job/controller/native command/sequence/collection scopes; worker count, library threads and total resource CPUs distinct",
+  "source_reconstruction_base": "22d23276a0651004059b741f69901d8b7188317f",
+  "source_reviews": [
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/research-cpu-plan-v1/source-review-v1/Root-source-acceptance.json",
+      "sha256": "90ba73f85b942b01811ebbbd292e0d467439e780a00a3726a502c7f5c00b2315",
+      "bytes": 2485,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/research-cpu-plan-v1/inner-authority-review-v1/Root-source-acceptance.json",
+      "sha256": "34eeca1a7ddeedf85d59136aae91b284236d22444fd01f33052a93403e240feb",
+      "bytes": 1835,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/research-cpu-plan-v1/exception-cleanup-review-v1/Root-fullscope-source-acceptance.json",
+      "sha256": "26370c43ad011b35a7d169493e35ca98f219631623460abc3514a932c7420cf9",
+      "bytes": 1965,
+      "mode": "0644"
+    }
+  ],
+  "limited_tests_distinct": 19,
+  "successful_test_bodies_not_replayed": true,
+  "tests": [
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/research-cpu-plan-v1/software-v1/result.json",
+      "sha256": "982b4165071948f13ac164dac889ad97f01c3b61529b0199a96b78b722c8fe86",
+      "bytes": 1805,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/research-cpu-plan-v1/software-v2/result.json",
+      "sha256": "1040fb675c8ccd360090011f067df36be95b2d024188280d3bf68565ef929b67",
+      "bytes": 838,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/research-cpu-plan-v1/software-v3/result.json",
+      "sha256": "d4a1fe0aed656a376a1f3dcdccea444b35051119dca9f2edffd6d686ed32bb9a",
+      "bytes": 988,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/research-cpu-plan-v1/progress-software-v1/result.json",
+      "sha256": "abdd4c776f1a2e4f550750f0d2d3efba93098f40aefee0650b69bf73f141b4e5",
+      "bytes": 382,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/research-cpu-plan-v1/inner-authority-software-v1/result.json",
+      "sha256": "13f28ffdf40d375ad3943c1be562246cb79a6713e76e4a33a674b3d6f5daa448",
+      "bytes": 534,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/research-cpu-plan-v1/exception-cleanup-software-v1/result.json",
+      "sha256": "609543524ed17959d75f9a87defa11fab6defee7f275d4fecdfdbb8d1fea139a",
+      "bytes": 689,
+      "mode": "0644"
+    }
+  ],
+  "real_process_smoke": {
+    "cases": [
+      {
+        "label": "two_lane",
+        "assessment": {
+          "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/research-cpu-plan-v1/smoke-fixture-v3/runs/Root-normal-smoke-v2/two_lane/assessment.json",
+          "sha256": "42379ab91833e0efc60a30fb38bb1c22a14484ee4e4585cf6203e44525bec901",
+          "bytes": 11191,
+          "mode": "0644"
+        },
+        "invocation": "original5_not_replayed"
+      },
+      {
+        "label": "single_lane",
+        "assessment": {
+          "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/research-cpu-plan-v1/smoke-fixture-v3/runs/Root-normal-smoke-v2/single_lane/assessment.json",
+          "sha256": "47db13f68ca4b8d6a36587021e0f1fe439af6038281d30e684279c8a88393b92",
+          "bytes": 5375,
+          "mode": "0644"
+        },
+        "invocation": "original5_not_replayed"
+      },
+      {
+        "label": "bad_unavailable",
+        "assessment": {
+          "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/research-cpu-plan-v1/smoke-fixture-v3/runs/Root-normal-smoke-v2/bad_unavailable/assessment.json",
+          "sha256": "52e30a3a4209d99efa73c5277031ca5a8bd16f6bcb390030cfcb30b50c151967",
+          "bytes": 393,
+          "mode": "0644"
+        },
+        "invocation": "original5_not_replayed"
+      },
+      {
+        "label": "bad_smt",
+        "assessment": {
+          "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/research-cpu-plan-v1/smoke-fixture-v3/runs/Root-normal-smoke-v2/bad_smt/assessment.json",
+          "sha256": "0aaab8e23ec97070b3b11ecb9b5efee242c30c9ff711c7f327561bb32bcaa3a6",
+          "bytes": 383,
+          "mode": "0644"
+        },
+        "invocation": "original5_not_replayed"
+      },
+      {
+        "label": "bad_overlap",
+        "assessment": {
+          "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/research-cpu-plan-v1/smoke-fixture-v3/runs/Root-normal-smoke-v2/bad_overlap/assessment.json",
+          "sha256": "59bc367545a90c159407e26d7d02768ea95a880acb300d6c8d4a46ab956f0b25",
+          "bytes": 398,
+          "mode": "0644"
+        },
+        "invocation": "original5_not_replayed"
+      },
+      {
+        "label": "outside_thread",
+        "assessment": {
+          "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/research-cpu-plan-v1/smoke-fixture-v4/runs/Root-normal-cleanup-v1/outside_thread/assessment.json",
+          "sha256": "6b603dbcd95637cac5750b364943a02aa4d8bdeb21dd27ddcbb3b9ea19e75b33",
+          "bytes": 7276,
+          "mode": "0644"
+        },
+        "invocation": "repaired3"
+      },
+      {
+        "label": "child_failure",
+        "assessment": {
+          "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/research-cpu-plan-v1/smoke-fixture-v4/runs/Root-normal-cleanup-v1/child_failure/assessment.json",
+          "sha256": "73f1bca9fdba41f0a42aab960e6cd57de26e1ac4eacf56925f8591bcd46917e7",
+          "bytes": 7514,
+          "mode": "0644"
+        },
+        "invocation": "repaired3"
+      },
+      {
+        "label": "parent_cancel",
+        "assessment": {
+          "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/research-cpu-plan-v1/smoke-fixture-v4/runs/Root-normal-cleanup-v1/parent_cancel/assessment.json",
+          "sha256": "b956552fb93c89e95376632e8cca801c6a3f8fbc0d6159a5d8fd7be0caf5b349",
+          "bytes": 6781,
+          "mode": "0644"
+        },
+        "invocation": "repaired3"
+      }
+    ],
+    "genuine_two_lane_two_operation_overlap": true,
+    "real_parent_authority_renewal": true,
+    "single_lane": true,
+    "invalid_CPU_SMT_role_overlap_refused_before_payload": true,
+    "outside_thread_child_failure_parent_cancel_stopped": true,
+    "no_unauthorized_next_operation": true,
+    "original5_not_replayed": true,
+    "original_failed_all8_not_restamped": true,
+    "actual_source_STOP": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/research-cpu-plan-v1/real-smoke-v4/collection-v1/normal-source-STOP.json",
+      "sha256": "833bf577b2965094cfe0bf825c8ba86af4c9d4fff66b036b83b821112b85d6c3",
+      "bytes": 13601,
+      "mode": "0644"
+    },
+    "actual_collector_return": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/research-cpu-plan-v1/real-smoke-v4/collection-v1/actual-returned-STOP.json",
+      "sha256": "d2d2e6d4d309a99c688a68aa541d035f1c2d18f6e372663a44fa0b730fac674a",
+      "bytes": 2600,
+      "mode": "0644"
+    }
+  },
+  "current_source": [
+    {
+      "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+      "sha256": "9a044d44d678c60d556b480354c3d39527596587cbf6c730eb4d303ddbfca41e",
+      "bytes": 393052,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/scripts/dev/research-job.py",
+      "sha256": "13a2b22afe5509a21485e66167cbf6fe9a03cad0b634555c227ec7028a563e89",
+      "bytes": 55037,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/python/quoridor_training/cycle_process.py",
+      "sha256": "e88f019cb86f0738ec2f50af8c5cc54e3ce668cd011d936d0f48aff23b2d3f55",
+      "bytes": 30809,
+      "mode": "0644"
+    }
+  ],
+  "scientific_Search_model_arena_RNG": 0,
+  "cost": {
+    "normal_outer_seconds_once": [
+      1.0011086580343544,
+      5.064095334033482,
+      69.45413811889011,
+      24.3484548360575
+    ],
+    "nested_not_added": true,
+    "full_fees": "UNKNOWN"
+  },
+  "historical_MPC_cause_or_fixed_arena_success": false,
+  "old_MPC256": "FAILED_INCOMPLETE_UNCHANGED",
+  "old_ETC208": "RETAIN_OFF_NO_FINITE_SUPPORT_RETIRED_CLOSED_UNCHANGED",
+  "new_ETC33": "Separate newly authorized private preparation; no old quota reuse",
+  "original_FAILED_NULL_capture_masks_UNKNOWN_preserved": true,
+  "archive": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/research-cpu-plan-v1/source-review-tests-real-smoke-v1.tar.gz",
+    "sha256": "6aaf7f3ae47296009d10d17ca5888c073ca1d4b818ed0af5f765a9571608fa54",
+    "bytes": 1702200,
+    "mode": "0644"
+  },
+  "archive_manifest": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/research-cpu-plan-v1/source-review-tests-real-smoke-v1.tar.gz.manifest.json",
+    "sha256": "2672c2a8ccad92bbe30c306f10f62d0a3422e9681cd032faca243cc9017f3ef1",
+    "bytes": 666578,
+    "mode": "0644"
+  },
+  "source_leases": [],
+  "futurehostquiet": false
+}
