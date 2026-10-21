@@ -1,6 +1,6 @@
 # Othello 外部 baseline と Python 対戦接続
 
-`quoridor-n96.1.2` の初期接続。要求正本は [strong-ai.md](strong-ai.md)。実対局は **UNRUN**。
+`quoridor-n96.1.2` の初期接続。要求正本は [strong-ai.md](strong-ai.md)。原16局は終局まで完了した。[公開済み接続・費用結果](../../../research-data/othello/strong-ai-n96/protocol-smoke-v1.json)を参照する。棋力の一般判定ではない。
 起動・単一探索・protocol software test は棋力比較ではない。Root が自作 Rust image、実資源、
 公平な時計条件を束縛した有限 job にだけ対局設定を渡す。
 
@@ -105,7 +105,7 @@ bit63-index へ変換し STM engine board を渡す。`reset` は active TT を�
 score は STM、終局の空きを勝者へ割り当てる engine 規約。Rust の実黒白石差とは別である。
 heuristic/selective 値を exact と呼ばず、対局勝敗には一切使わない。
 
-## Python 接続と未実行 smoke
+## Python 接続と初回16局結果
 
 入口は `games/othello/python/othello_arena`、test は `games/othello/tests/python/test_arena.py`。
 Root は既存 `CPUPlan.from_record` / `CycleResources` / `execute` 内で次の有限 argv を実行する。
@@ -140,7 +140,7 @@ train/dev/final data 自体は未作成なので、その分割適用は Root �
 `550b87377274b202056925a39bcfa4164aaf0dff3ff17bb993b6d43517be8975`、712232B、0755）に束縛した。
 四 family の Rust replay、Edax 全盤面、fixed frontend の合法手/手番/forced pass/空きのある終局が一致し、
 実 native search と fixed frontend の単一要求が合法手を返した。根拠は OWN `native-integration.json`。
-`launchBinding` は null のまま。実終局対局と fair resource job は **UNRUN**。
+元の未実行snapshotでは `launchBinding` がnullであり、その記録は変更しない。Rootが別のbound configを固定した原job9640c488は16/16終局・illegal/IOtimeout/crash0で完了した。v1対Edax1W7L、対Console7.8.1-engine＋fixed-time adapter0W1D7L。outer519.312600811秒にinner518.971820150秒を加算しない。要求1秒＋100ms transport、activeTT上限32MiB、nativeのみの小protocol/cost確認である。成功guardから未保存RSS peakを復元・推定せずUNKNOWNとし、単独probeを実pilot peakへ代入しない。[固定config・全16局・時計と限界](../../../research-data/othello/strong-ai-n96/protocol-smoke-v1.json)。
 初期 untrained heuristic の敗北でも棋力の結論にはしない。
 既存簡易 policy を比較するときは Root が config の `candidate.simple` を true にした別設定を束縛する。
 

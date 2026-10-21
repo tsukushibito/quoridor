@@ -1,0 +1,539 @@
+{
+  "scope": "First weak-simple game-outcome pattern pipeline and candidate export only; no strength/model-default adoption",
+  "source_commit": "e87be49a8627901c8fe0a290ab330b7ed5970b7c",
+  "data": {
+    "games": 24,
+    "trainFamilies": 16,
+    "validationFamilies": 8,
+    "rows": 300,
+    "trainRows": 196,
+    "validationRows": 104,
+    "phaseRows": {
+      "0": 47,
+      "1": 92,
+      "2": 92,
+      "3": 69
+    },
+    "duplicateExclusions": {
+      "crossSplit": 0,
+      "withinSplit": 0
+    },
+    "earlyTerminal": "one training family has1 observation, other23families13 each; no refill",
+    "labels": "actual reached-game STM discDifference*100 from weak simple policy, not minimax or external teacher truth",
+    "data": {
+      "path": "/workspaces/quoridor/.worktree/assets/data/othello-pattern-pilot-n96-v1/games/training.jsonl",
+      "bytes": 101414,
+      "mode": "0644",
+      "sha256": "ca16f29d8873baa7921c42a3869c5dcf1cdb8f09a7373d1178f2e89147adec73",
+      "device": 2144,
+      "inode": 3701962
+    },
+    "terminalEvidence": {
+      "path": "/workspaces/quoridor/.worktree/assets/data/othello-pattern-pilot-n96-v1/games/terminal-evidence.json",
+      "bytes": 70468,
+      "mode": "0644",
+      "sha256": "5af33388e6888edcd63610a4690a5ec8fe120dc483a3c09255ef90c178636181",
+      "device": 2144,
+      "inode": 3701961
+    },
+    "actualFrozenOpenings": {
+      "path": "/workspaces/quoridor/.worktree/assets/data/othello-pattern-pilot-n96-v1/openings/openings.json",
+      "bytes": 11716,
+      "mode": "0644",
+      "sha256": "ed240db78bebc9b6a7790eedf9f49ed1608bbca64a5a20af90ba2736b71ae316",
+      "device": 2144,
+      "inode": 3701898
+    },
+    "preLabelBinding": {
+      "path": "/workspaces/quoridor/.worktree/assets/data/othello-pattern-pilot-n96-v1/pre-label-binding.json",
+      "bytes": 1208,
+      "mode": "0644",
+      "sha256": "edeac0524c540fe7c045ca444c96fb360bf9a1730317b740ed97b091a1203a10",
+      "device": 2144,
+      "inode": 3701942
+    },
+    "verification": "all retained states/labels independently re-applied from saved24 game actions via Rust, no new policy-generated games"
+  },
+  "training": {
+    "parameters": 2912,
+    "modelShapes": 2,
+    "phases": 4,
+    "maxEpochs": 64,
+    "learningRate": 0.1,
+    "ridge": 0.001,
+    "patience": 8,
+    "bestEpoch": 13,
+    "completedEpoch": 21,
+    "stop": "validationPlateau",
+    "rowUpdates": 4116,
+    "initialQuantizedValidationMSE": 2160000.0,
+    "bestQuantizedValidationMSE": 1802340.2596153845,
+    "lastQuantizedValidationMSE": 1883352.0865384615,
+    "metric": "row-weighted centidisc-squared V loss, V used for model selection; not independent strength/generalization",
+    "metadata": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/othello-pattern-pilot-n96-v1/metadata.json",
+      "bytes": 32367,
+      "mode": "0644",
+      "sha256": "45257ee00bab7034c65a3a1751d46d78c3a53ed824d3343b52c9b5fc26565753",
+      "device": 2144,
+      "inode": 3701978
+    },
+    "config": {
+      "path": "/workspaces/quoridor/.worktree/assets/data/othello-pattern-pilot-n96-v1/training-config.json",
+      "bytes": 26007,
+      "mode": "0644",
+      "sha256": "4b377006f4adda7e6a22551a5ad05089051948d0b3b893ea9930423f2a55aac1",
+      "device": 2144,
+      "inode": 3701941
+    },
+    "curves": [
+      {
+        "epoch": 0,
+        "trainMSE": 5187602.040816327,
+        "validationMSE": 2160000.0,
+        "quantizedValidationMSE": 2160000.0
+      },
+      {
+        "epoch": 1,
+        "trainMSE": 3511377.7680365727,
+        "validationMSE": 2042923.5700455615,
+        "quantizedValidationMSE": 2043225.798076923
+      },
+      {
+        "epoch": 2,
+        "trainMSE": 2706372.5702558863,
+        "validationMSE": 1905466.8088012864,
+        "quantizedValidationMSE": 1904280.8557692308
+      },
+      {
+        "epoch": 3,
+        "trainMSE": 2249415.6667482406,
+        "validationMSE": 1874701.5405395376,
+        "quantizedValidationMSE": 1874795.951923077
+      },
+      {
+        "epoch": 4,
+        "trainMSE": 1982095.2953481742,
+        "validationMSE": 1860770.4972563903,
+        "quantizedValidationMSE": 1860058.9903846155
+      },
+      {
+        "epoch": 5,
+        "trainMSE": 1783414.9281922178,
+        "validationMSE": 1869277.2690617463,
+        "quantizedValidationMSE": 1867945.625
+      },
+      {
+        "epoch": 6,
+        "trainMSE": 1673865.5787649762,
+        "validationMSE": 1874168.9888846187,
+        "quantizedValidationMSE": 1873169.0
+      },
+      {
+        "epoch": 7,
+        "trainMSE": 1565424.754592708,
+        "validationMSE": 1895369.698916407,
+        "quantizedValidationMSE": 1894471.25
+      },
+      {
+        "epoch": 8,
+        "trainMSE": 1493022.1642435917,
+        "validationMSE": 1869152.6165989006,
+        "quantizedValidationMSE": 1869897.5192307692
+      },
+      {
+        "epoch": 9,
+        "trainMSE": 1433659.776875778,
+        "validationMSE": 1828360.451212291,
+        "quantizedValidationMSE": 1828000.451923077
+      },
+      {
+        "epoch": 10,
+        "trainMSE": 1396758.433722836,
+        "validationMSE": 1838413.8870229744,
+        "quantizedValidationMSE": 1838925.451923077
+      },
+      {
+        "epoch": 11,
+        "trainMSE": 1350308.2576795598,
+        "validationMSE": 1861683.122204408,
+        "quantizedValidationMSE": 1861539.0673076923
+      },
+      {
+        "epoch": 12,
+        "trainMSE": 1314923.4509089428,
+        "validationMSE": 1841759.1270949373,
+        "quantizedValidationMSE": 1841858.5192307692
+      },
+      {
+        "epoch": 13,
+        "trainMSE": 1294846.2651809088,
+        "validationMSE": 1801645.465046031,
+        "quantizedValidationMSE": 1802340.2596153845
+      },
+      {
+        "epoch": 14,
+        "trainMSE": 1279575.3228337285,
+        "validationMSE": 1829757.323345738,
+        "quantizedValidationMSE": 1829813.1057692308
+      },
+      {
+        "epoch": 15,
+        "trainMSE": 1237981.5847956028,
+        "validationMSE": 1828325.0039152873,
+        "quantizedValidationMSE": 1828380.2115384615
+      },
+      {
+        "epoch": 16,
+        "trainMSE": 1233928.0802271687,
+        "validationMSE": 1866581.334035534,
+        "quantizedValidationMSE": 1866331.0865384615
+      },
+      {
+        "epoch": 17,
+        "trainMSE": 1221349.895123528,
+        "validationMSE": 1840626.9899271836,
+        "quantizedValidationMSE": 1840485.5
+      },
+      {
+        "epoch": 18,
+        "trainMSE": 1195829.4697131116,
+        "validationMSE": 1872556.1026925193,
+        "quantizedValidationMSE": 1872230.3653846155
+      },
+      {
+        "epoch": 19,
+        "trainMSE": 1186518.790348634,
+        "validationMSE": 1880239.479861303,
+        "quantizedValidationMSE": 1880329.076923077
+      },
+      {
+        "epoch": 20,
+        "trainMSE": 1170364.281158465,
+        "validationMSE": 1867294.152142838,
+        "quantizedValidationMSE": 1867941.5576923077
+      },
+      {
+        "epoch": 21,
+        "trainMSE": 1158104.063673431,
+        "validationMSE": 1883643.4343460726,
+        "quantizedValidationMSE": 1883352.0865384615
+      }
+    ]
+  },
+  "parity": {
+    "raw": "All4 phases each one ACTUAL data state plus one counterfactual STM-swapped state;8 raw Python/native/Wasm values agree, actual learned weights SHA bound",
+    "search": "actual learned weights supplied to1 selected existing new search-parity case,4 artificial phase0 positions including exact forcedpass/terminal independence; no toy-model case replay",
+    "result": {
+      "learnedModelSHA256": "87f388a213e05745a357745c7ed293a402cf6f06e5b19c4df28de72c3ff5feb9",
+      "allPhaseSTMPairs": 4,
+      "rawScoresCompared": 8,
+      "PythonNativeWasm": "PASS",
+      "strengthClaim": false
+    }
+  },
+  "candidate": {
+    "model": {
+      "path": "/workspaces/quoridor/.worktree/assets/models/othello-pattern-pilot-n96-v1/pattern-v1.json",
+      "bytes": 13976,
+      "mode": "0644",
+      "sha256": "87f388a213e05745a357745c7ed293a402cf6f06e5b19c4df28de72c3ff5feb9",
+      "device": 2144,
+      "inode": 3701976
+    },
+    "fpCheckpoint": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/othello-pattern-pilot-n96-v1/best-fp.npy",
+      "bytes": 23424,
+      "mode": "0644",
+      "sha256": "90ae7dc281959129b42370589c94e874865dc03f4b40c19c5f925e5e071d2365",
+      "device": 2144,
+      "inode": 3701975
+    },
+    "modelJSONBytes": 13976,
+    "weightsAdoptedToProduct": false,
+    "oldCurrentCustody": {
+      "reason": "Actual pipeline/job all children returned/reaped, no remaining model reader; classify experimental model/export and FP checkpoint on same persistent volume. No source/model default adoption or compatibility symlink. Original configs/commands retain historical paths.",
+      "moves": [
+        {
+          "original": {
+            "path": "/workspaces/quoridor/.worktree/assets/data/othello-pattern-pilot-n96-v1/fit/best-pattern.json",
+            "bytes": 13976,
+            "mode": "0644",
+            "sha256": "87f388a213e05745a357745c7ed293a402cf6f06e5b19c4df28de72c3ff5feb9",
+            "device": 2144,
+            "inode": 3701976
+          },
+          "current": {
+            "path": "/workspaces/quoridor/.worktree/assets/models/othello-pattern-pilot-n96-v1/pattern-v1.json",
+            "bytes": 13976,
+            "mode": "0644",
+            "sha256": "87f388a213e05745a357745c7ed293a402cf6f06e5b19c4df28de72c3ff5feb9",
+            "device": 2144,
+            "inode": 3701976
+          }
+        },
+        {
+          "original": {
+            "path": "/workspaces/quoridor/.worktree/assets/data/othello-pattern-pilot-n96-v1/fit/best-fp.npy",
+            "bytes": 23424,
+            "mode": "0644",
+            "sha256": "90ae7dc281959129b42370589c94e874865dc03f4b40c19c5f925e5e071d2365",
+            "device": 2144,
+            "inode": 3701975
+          },
+          "current": {
+            "path": "/workspaces/quoridor/.worktree/assets/checkpoints/othello-pattern-pilot-n96-v1/best-fp.npy",
+            "bytes": 23424,
+            "mode": "0644",
+            "sha256": "90ae7dc281959129b42370589c94e874865dc03f4b40c19c5f925e5e071d2365",
+            "device": 2144,
+            "inode": 3701975
+          }
+        }
+      ],
+      "originalFitDirectory": "/workspaces/quoridor/.worktree/assets/data/othello-pattern-pilot-n96-v1/fit",
+      "currentFitDirectory": "/workspaces/quoridor/.worktree/assets/checkpoints/othello-pattern-pilot-n96-v1"
+    }
+  },
+  "cost": {
+    "outerJobSeconds": 1.0198328209808096,
+    "stages": [
+      {
+        "name": "games",
+        "wall_seconds": 0.20151142997201532
+      },
+      {
+        "name": "verify-data",
+        "wall_seconds": 0.18178473401349038
+      },
+      {
+        "name": "fit",
+        "wall_seconds": 0.2632575499592349
+      },
+      {
+        "name": "prepare-parity",
+        "wall_seconds": 0.06730599899310619
+      },
+      {
+        "name": "learned-allphase-parity",
+        "wall_seconds": 0.04273755301255733
+      },
+      {
+        "name": "learned-search-parity",
+        "wall_seconds": 0.13590420398395509
+      }
+    ],
+    "innerFitReportedSeconds": 0.159898009034805,
+    "accounting": "all nested stage/innerfit clocks included in outer job, do not add as independent cost",
+    "RSSpeak_B": null,
+    "limits": "CPU0/G18/F1GiB incl64MiB controller/host4GiB/GPU0/library1; whole180s perstage and internalSGD120s (not whole-operation bound)"
+  },
+  "retention": {
+    "logical_B": 634994,
+    "allocated_B": 786432,
+    "entries": 83,
+    "cap_B": 33554432,
+    "scope": "ONE complete NEW tiny pilot data/control + classified2checkpoint/model roots, inode dedup; existing assets/holdings not walked/recharged. Final collection tails/globalactual/fullfeesUNKNOWN; no refund/unusedquota lending."
+  },
+  "archive": {
+    "path": "research-data/othello/strong-ai-n96/tiny-pattern-learning-v1-checks.tar.gz",
+    "bytes": 13183,
+    "sha256": "c23c6d2fbca5a48ecd226de6702c009fb462f0f41fe396b0f6961f3392bba693",
+    "members": [
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/boundary-review-v1/reviewer/admin-close-receipt.json",
+        "bytes": 15135,
+        "sha256": "0c920027e0db574e0fbdc2d032fee0fa5385f5c62e73d3385ddcc16555f2ebfc",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/checkpoints/othello-pattern-pilot-n96-v1/curves.json",
+        "bytes": 3265,
+        "sha256": "ade0cdf40f9d9679100594c975cdabb4c7ea20e71c81280c77a91a41b70e3509",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-pattern-pilot-n96-v1/affected-once.json",
+        "bytes": 325,
+        "sha256": "22e42dba9fdf4425593dcdec6057b2d2708d53599cd2955229f8d33bd98d2407",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-pattern-pilot-n96-v1/completed-stages.json",
+        "bytes": 469,
+        "sha256": "49c2dd07d33cb8538bf8192f0feea54b4a988b7881bd9b0dc79172f7d6d39afa",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-pattern-pilot-n96-v1/current-custody.json",
+        "bytes": 1823,
+        "sha256": "e036cca59b4c0c49d6f94fd0123a3b66b5cfa37904eb5444fe2750bf072c3427",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-pattern-pilot-n96-v1/fit.process.json",
+        "bytes": 1606,
+        "sha256": "c20ccb4a55c54b2088e1134bec23fe1aa509413d4f878085897a7ea3502103f1",
+        "mode": "0600"
+      },
+      {
+        "member": ".worktree/assets/data/othello-pattern-pilot-n96-v1/fit.returned.json",
+        "bytes": 3508,
+        "sha256": "10950972be830b2178dc710538acab6888486b34d0569738cfbcb21ab8ad6bec",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-pattern-pilot-n96-v1/games-config-ref.json",
+        "bytes": 221,
+        "sha256": "c1df99cbddcc62bada6bbe5ac9b236a3cd2308517dc735a3517d855d970935ad",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-pattern-pilot-n96-v1/games-fit-resources.json",
+        "bytes": 1062,
+        "sha256": "a007ac7b4fdbc7d228c86c39308f84fa72a9d702b6f27e44b9f4bf487e8bd9d0",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-pattern-pilot-n96-v1/games.process.json",
+        "bytes": 1784,
+        "sha256": "ac5008a4a22674ce4be2a045fc41a02f2917c12e81f87de3edcd033df765ab08",
+        "mode": "0600"
+      },
+      {
+        "member": ".worktree/assets/data/othello-pattern-pilot-n96-v1/games.returned.json",
+        "bytes": 3852,
+        "sha256": "0e8da3d69a2f77611b2f1fbc623912cdcaabf0dd1bc689f8c272e91d0d7a726f",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-pattern-pilot-n96-v1/learned-allphase-parity.log",
+        "bytes": 181,
+        "sha256": "53e93d93cf78d8aa359e79fdd71239e0118a5b58de65c6d648f19bc681be72de",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-pattern-pilot-n96-v1/learned-allphase-parity.process.json",
+        "bytes": 1267,
+        "sha256": "5b320872cfa9e446204951928031bcef5c78dc55a0188507098d8fa3ffad004d",
+        "mode": "0600"
+      },
+      {
+        "member": ".worktree/assets/data/othello-pattern-pilot-n96-v1/learned-allphase-parity.returned.json",
+        "bytes": 2798,
+        "sha256": "b1906c39e9437ff96b3aa91702426a911366526f60758ae552884004264c874d",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-pattern-pilot-n96-v1/learned-parity.mjs",
+        "bytes": 2233,
+        "sha256": "78637a50af88cdfeffdd3c5e7d14a7c2f0be02c7e823647697148e2d5b20d58d",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-pattern-pilot-n96-v1/learned-search-parity.log",
+        "bytes": 216,
+        "sha256": "38b1a1bd272565ee220ee71623a40ab09771f1eb75b9355efee6862414684543",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-pattern-pilot-n96-v1/learned-search-parity.process.json",
+        "bytes": 1329,
+        "sha256": "df60adc63870ccdcd04591bed04ac6962e75c627d30527ffeb49cbd69f240156",
+        "mode": "0600"
+      },
+      {
+        "member": ".worktree/assets/data/othello-pattern-pilot-n96-v1/learned-search-parity.returned.json",
+        "bytes": 2934,
+        "sha256": "4cc558178ad7eec4715b8139b2a0e9236435ed2af249e441397bb8ff446e5100",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-pattern-pilot-n96-v1/openings-config-ref.json",
+        "bytes": 224,
+        "sha256": "22d8778ad97ea4e255440f23844c458bb694ffeb15dcb9f9658e9575cca8ad72",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-pattern-pilot-n96-v1/openings-returned-STOP.json",
+        "bytes": 3872,
+        "sha256": "a8d6e0fc43eed5ce983533d6dfe50b44bb26418cdd9fbecf5bb9eb0b92cec1be",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-pattern-pilot-n96-v1/pre-label-binding.json",
+        "bytes": 1208,
+        "sha256": "edeac0524c540fe7c045ca444c96fb360bf9a1730317b740ed97b091a1203a10",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-pattern-pilot-n96-v1/prepare-parity.process.json",
+        "bytes": 1331,
+        "sha256": "a4a33fa6a552061dafff8a160f035e4f0e709fdce43502deda36e4f73390347d",
+        "mode": "0600"
+      },
+      {
+        "member": ".worktree/assets/data/othello-pattern-pilot-n96-v1/prepare-parity.py",
+        "bytes": 1191,
+        "sha256": "e657c47dc49d24b91e487ae1d592e4a402b4b7d7ee6ca0d4a78faf08858658db",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-pattern-pilot-n96-v1/prepare-parity.returned.json",
+        "bytes": 2930,
+        "sha256": "fa4b32a0f4f253019aaf29b8c6b784cac53510a0017bddc685722de72ac7afa3",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-pattern-pilot-n96-v1/run-games-fit.py",
+        "bytes": 4606,
+        "sha256": "ceabab14957ba39ba75db868f1bf3772af341a7506eb8438b2e431883b423a3e",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-pattern-pilot-n96-v1/run-openings.py",
+        "bytes": 2431,
+        "sha256": "aef4b9937b9d758a06ad4a8616bd69cf6df65922e047588c1a0db6819457c325",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-pattern-pilot-n96-v1/runtime-games-fit/result.json",
+        "bytes": 530,
+        "sha256": "ba1791249423b17419ad03830147400de0fc4bca2fed80a1fdf7dc31b7b57c1c",
+        "mode": "0600"
+      },
+      {
+        "member": ".worktree/assets/data/othello-pattern-pilot-n96-v1/runtime-openings/result.json",
+        "bytes": 523,
+        "sha256": "479f313de7627be2afe8a441bcb3a475cc8ee8e9d791d1b389425dc645d9216c",
+        "mode": "0600"
+      },
+      {
+        "member": ".worktree/assets/data/othello-pattern-pilot-n96-v1/verified-data.json",
+        "bytes": 657,
+        "sha256": "c36aa5936b6b9c14342266b7f9c57770b576ea2f7b98abd42eaf7650d9ac9e81",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-pattern-pilot-n96-v1/verify-data.process.json",
+        "bytes": 1330,
+        "sha256": "4a5abdf2226b3a7bfcea208d3e26a065000e6bcd6c08845cf50a77ef6ccca612",
+        "mode": "0600"
+      },
+      {
+        "member": ".worktree/assets/data/othello-pattern-pilot-n96-v1/verify-data.py",
+        "bytes": 4042,
+        "sha256": "a1bd92def0918a1a5a483084accfb3dc8b1db2a008c4723fb085129469e4780f",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-pattern-pilot-n96-v1/verify-data.returned.json",
+        "bytes": 2928,
+        "sha256": "67b965bfc9842fc6c4264644826e571b89d13c4924647cd136210cdfcef4122e",
+        "mode": "0644"
+      }
+    ],
+    "verification": "one new forward exactbytes/modes/names/EOF CRC PASS no extraction"
+  },
+  "next": "Fixed strong-engine teacherEstimate labels on new128opening families T96/V16/H16, max8 observed positions/family, max1024 teacherattempts, H unlabeled; first source/config prep within same goal, no new seed rescue or repeat weak-fit sweep"
+}
