@@ -56,7 +56,11 @@ Rust主体UIは同じ既存コア担当が別の有限source作業として並�
 
 強教師V-BESTを現v1 heuristicと同じnative image2678で比較する入口を追加した。評価器以外は同じPVS/TT/時計/厳密終盤とし、1探索thread・1000ms＋100ms返却許容・TT上限32MiB・depth64/exact12・book/ponder OFFを固定する。新dev16familyの両色32局を予定し、seed2026102202、既存smoke4/tiny24/teacher128のD4/色・STM同値rootを除外する。H16はラベル/特徴/loss/selectorへ使わない。実開始state/configは対局前に凍結する。
 
-原32局/16完全pairとsetup/cleanup/identity/時計がすべて正常の場合だけ、family平均をMT19937 seed2026102203・10000回でresampleしR7の95%区間を報告する。下端>.5はこの有限dev条件の改善支持、上端<.5は不支持、それ以外は未決着。不完全なら予定32分母とUNKNOWN込み得点範囲を残し、完成pairだけのCIを出さない。補充/結果後seed追加なし。現時点はsourceの13新規fake/analytic検査だけで、実16root生成/32局はUNRUN。[対応source証拠](../../../research-data/othello/strong-ai-n96/native-comparison-software-v1.json)。現v1/defaultと一般棋力判断は維持する。
+原32局/16完全pairとsetup/cleanup/identity/時計がすべて正常の場合だけ、family平均をMT19937 seed2026102203・10000回でresampleしR7の95%区間を報告する。下端>.5はこの有限dev条件の改善支持、上端<.5は不支持、それ以外は未決着。不完全なら予定32分母とUNKNOWN込み得点範囲を残し、完成pairだけのCIを出さない。補充/結果後seed追加なし。[結果前の対応source証拠](../../../research-data/othello/strong-ai-n96/native-comparison-software-v1.json)にある当時のUNRUNは凍結記録として保持する。
+
+実行した原32局は全件正常終局、16完全pair、学習候補3勝2分27敗、得点率12.5%だった。原arenaが一度計算したfamily95%区間は[3.125%,23.4375%]で、上端<50%の事前条件に従い、このnative開発条件で候補の改善は不支持とする。独立確認は同じ原記録・設定・全分母・時計・cleanup・統計法を認めた。現v1と製品defaultを維持し、同等・一般的なpattern学習の不可能性・敗因・browser棋力へ広げない。[原結果・独立確認・復元証拠](../../../research-data/othello/strong-ai-n96/native-comparison-result-v1.json)。
+
+対局outer1159.073003907秒にはcommand1158.709165507秒を含み、加算しない。後続の1961保存遷移のRustルールreplayと独立レビューは別工程で、新しいsearch/game/bootstrapは行っていない。16familyは旧root同値を除いた開発開始であり、共有prefix・後の到達局面まで独立とは証明しない。RSS peakはUNKNOWN。返却探索scoreのzeroや深さ差は記述値で、静的評価や敗因の因果証拠ではない。H16はroot identity排除だけに用い、trajectory/ラベル/feature/loss/selectorへ入れていない。同じ896行への追加fit、seed救済、追加教師、同じ32局の再演は発行しない。
 
 ## Rust主体UIの実動作
 

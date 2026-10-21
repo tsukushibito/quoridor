@@ -1,0 +1,749 @@
+{
+  "scope": "Original same-image native evaluator comparison:32 games/16 development families; no new games, search, fit or bootstrap.",
+  "sourceCommit": "cd5527c3182796a77d4be1bf462ac1fcaa567632",
+  "software": {
+    "path": "/workspaces/quoridor/research-data/othello/strong-ai-n96/native-comparison-software-v1.json",
+    "bytes": 6971,
+    "mode": "0644",
+    "sha256": "5af3b491bde1cab964feebdad073678bdb961678b94e3f8dffffe3f9e61a2f54"
+  },
+  "originalInputs": [
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/data/othello-native-comparison-n96-v1/matches/games.jsonl",
+      "bytes": 602853,
+      "mode": "0644",
+      "sha256": "6cedf76fb5d47d9408a08dcf41d0e0a1f975fce45df34c6888eb77a03ca10d35"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/data/othello-native-comparison-n96-v1/matches/result.json",
+      "bytes": 9328,
+      "mode": "0644",
+      "sha256": "6a03acd4f628a74b55afed05980f29d64b4e5ca589120e21a7c630e879309525"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/data/othello-native-comparison-n96-v1/matches-config.json",
+      "bytes": 5182,
+      "mode": "0644",
+      "sha256": "dbd33d6b7d856c541558bc0ef499c661c1719ad3e9a79c56473081d0632cbcf3"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/data/othello-native-comparison-n96-v1/matches-bindings.json",
+      "bytes": 2958,
+      "mode": "0644",
+      "sha256": "68116a15a0b7d6c86520d49e715ae35bd9a971712535117f6a3e7879420f569f"
+    }
+  ],
+  "originalJob": {
+    "job_id": "07789c7f-edfa-4d01-9e10-2d3bba8c55ad",
+    "outcome": "succeeded",
+    "error": null,
+    "error_notes": [],
+    "exit_code": 0,
+    "finished_at": "2026-10-21T21:06:02.527593+00:00",
+    "wall_seconds": 1159.0730039069895,
+    "remaining": [],
+    "direct_child_reaped": true,
+    "descendant_visibility": "observed",
+    "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+    "cleanup_complete": true,
+    "cleanup_errors": [],
+    "log_bytes_seen": 0,
+    "log_bytes_retained": 0
+  },
+  "originalCommand": {
+    "returned": {
+      "command": [
+        "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+        "-B",
+        "-m",
+        "othello_arena",
+        "--config",
+        "/workspaces/quoridor/.worktree/assets/data/othello-native-comparison-n96-v1/matches-config.json",
+        "--output",
+        "/workspaces/quoridor/.worktree/assets/data/othello-native-comparison-n96-v1/matches"
+      ],
+      "status": "complete",
+      "child": {
+        "pid": 1074384,
+        "start_ticks": "66388864",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "cpu_plan": {
+        "management": [18],
+        "commands": {
+          "pilot": [16]
+        },
+        "allocation": [16, 18],
+        "resource_CPUs": 2,
+        "worker_CPUs": 1,
+        "library_threads": 1
+      },
+      "command_cpu_scope": "pilot",
+      "log_bytes_seen": 0,
+      "scope": "session group and periodically recorded descendants; no daemon adoption",
+      "exit_code": 0,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "cleanup_complete": true,
+      "log_bytes_retained": 0,
+      "wall_seconds": 1158.7091655069962,
+      "handle_closes_attempted": ["selector_close", "pipe_close", "pidfd_close", "log_close"],
+      "primary_error": null,
+      "process_cleanup_complete": true,
+      "handle_closes_complete": true,
+      "signal_mask_restoration": "completed",
+      "final_record_persist": "completed",
+      "finalization_errors": []
+    },
+    "error": null,
+    "disk": {
+      "command": [
+        "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+        "-B",
+        "-m",
+        "othello_arena",
+        "--config",
+        "/workspaces/quoridor/.worktree/assets/data/othello-native-comparison-n96-v1/matches-config.json",
+        "--output",
+        "/workspaces/quoridor/.worktree/assets/data/othello-native-comparison-n96-v1/matches"
+      ],
+      "status": "complete",
+      "child": {
+        "pid": 1074384,
+        "start_ticks": "66388864",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "cpu_plan": {
+        "management": [18],
+        "commands": {
+          "pilot": [16]
+        },
+        "allocation": [16, 18],
+        "resource_CPUs": 2,
+        "worker_CPUs": 1,
+        "library_threads": 1
+      },
+      "command_cpu_scope": "pilot",
+      "log_bytes_seen": 0,
+      "scope": "session group and periodically recorded descendants; no daemon adoption",
+      "exit_code": 0,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "cleanup_complete": true,
+      "log_bytes_retained": 0,
+      "wall_seconds": 1158.7091655069962,
+      "handle_closes_attempted": ["selector_close", "pipe_close", "pidfd_close", "log_close"],
+      "primary_error": null,
+      "process_cleanup_complete": true,
+      "handle_closes_complete": true,
+      "signal_mask_restoration": "pending",
+      "final_record_persist": "attempted",
+      "finalization_errors": []
+    }
+  },
+  "contract": {
+    "image": "2678ba8e2ff207a4f1d1f2f1047a345964fafad4375e9abcf5d9d6b34debc71d",
+    "imageBytes": 800888,
+    "imageMode": "0755",
+    "model": "7ed9fa38218f591d80cfa10f985d510635eaddcd9e2f530e3f778b16b052bd9a",
+    "modelBytes": 16161,
+    "identityBinding": "callerVerified",
+    "opponent": "no-args v1Heuristic, same native image/search implementation",
+    "nominalMs": 1000,
+    "outerRequestMs": 1100,
+    "thread": 1,
+    "TTupperMiB": 32,
+    "maxDepth": 64,
+    "exactEmpties": 12,
+    "book": false,
+    "ponder": false,
+    "aggregateNodeCap": null,
+    "openingSeed": 2026102202,
+    "originalFamilies": 16,
+    "originalGames": 32,
+    "excludedRootIdentities": 156,
+    "H": "Only root identity exclusion; no trajectories/labels/features/loss/selector."
+  },
+  "summary": {
+    "planned": 32,
+    "attempted": 32,
+    "completed": 32,
+    "failures": [],
+    "unrun": 0,
+    "wins": 3,
+    "draws": 2,
+    "losses": 27,
+    "points": 4.0,
+    "scoreRateBoundsIncludingUnknown": [0.125, 0.125],
+    "superiorityClaim": false,
+    "plannedPairs": 16,
+    "knownGames": 32,
+    "unknownGames": 0,
+    "knownPoints": 4.0,
+    "invalidResults": [],
+    "ciEligible": true,
+    "acceptance": false,
+    "conclusion": "unsupported",
+    "familyMeanScore": 0.125,
+    "familyMeans": {
+      "development/native-evaluator-n96-v1/family-001": 0.0,
+      "development/native-evaluator-n96-v1/family-002": 0.5,
+      "development/native-evaluator-n96-v1/family-003": 0.25,
+      "development/native-evaluator-n96-v1/family-004": 0.0,
+      "development/native-evaluator-n96-v1/family-005": 0.5,
+      "development/native-evaluator-n96-v1/family-006": 0.0,
+      "development/native-evaluator-n96-v1/family-007": 0.0,
+      "development/native-evaluator-n96-v1/family-008": 0.0,
+      "development/native-evaluator-n96-v1/family-009": 0.0,
+      "development/native-evaluator-n96-v1/family-010": 0.0,
+      "development/native-evaluator-n96-v1/family-011": 0.5,
+      "development/native-evaluator-n96-v1/family-012": 0.0,
+      "development/native-evaluator-n96-v1/family-013": 0.0,
+      "development/native-evaluator-n96-v1/family-014": 0.0,
+      "development/native-evaluator-n96-v1/family-015": 0.25,
+      "development/native-evaluator-n96-v1/family-016": 0.0
+    },
+    "familyBootstrap95": [0.03125, 0.234375],
+    "bootstrap": {
+      "seed": 2026102203,
+      "resamples": 10000,
+      "unit": "16 original family means, both colors per family",
+      "rng": "Python random.Random MT19937; randrange(16) with replacement",
+      "percentile": "linear sorted index (10000-1)*p, p=0.025/0.975 (R7)"
+    }
+  },
+  "games": [
+    {
+      "family": "development/native-evaluator-n96-v1/family-001",
+      "candidateSide": 1,
+      "candidateScore": 0,
+      "blackMinusWhite": -22,
+      "terminal": true,
+      "black": 21,
+      "white": 43,
+      "recordedTransitions": 60
+    },
+    {
+      "family": "development/native-evaluator-n96-v1/family-001",
+      "candidateSide": 2,
+      "candidateScore": 0,
+      "blackMinusWhite": 28,
+      "terminal": true,
+      "black": 46,
+      "white": 18,
+      "recordedTransitions": 61
+    },
+    {
+      "family": "development/native-evaluator-n96-v1/family-002",
+      "candidateSide": 1,
+      "candidateScore": 1,
+      "blackMinusWhite": 10,
+      "terminal": true,
+      "black": 37,
+      "white": 27,
+      "recordedTransitions": 62
+    },
+    {
+      "family": "development/native-evaluator-n96-v1/family-002",
+      "candidateSide": 2,
+      "candidateScore": 0,
+      "blackMinusWhite": 40,
+      "terminal": true,
+      "black": 52,
+      "white": 12,
+      "recordedTransitions": 67
+    },
+    {
+      "family": "development/native-evaluator-n96-v1/family-003",
+      "candidateSide": 1,
+      "candidateScore": 0.5,
+      "blackMinusWhite": 0,
+      "terminal": true,
+      "black": 32,
+      "white": 32,
+      "recordedTransitions": 61
+    },
+    {
+      "family": "development/native-evaluator-n96-v1/family-003",
+      "candidateSide": 2,
+      "candidateScore": 0,
+      "blackMinusWhite": 40,
+      "terminal": true,
+      "black": 52,
+      "white": 12,
+      "recordedTransitions": 61
+    },
+    {
+      "family": "development/native-evaluator-n96-v1/family-004",
+      "candidateSide": 1,
+      "candidateScore": 0,
+      "blackMinusWhite": -2,
+      "terminal": true,
+      "black": 31,
+      "white": 33,
+      "recordedTransitions": 60
+    },
+    {
+      "family": "development/native-evaluator-n96-v1/family-004",
+      "candidateSide": 2,
+      "candidateScore": 0,
+      "blackMinusWhite": 6,
+      "terminal": true,
+      "black": 35,
+      "white": 29,
+      "recordedTransitions": 61
+    },
+    {
+      "family": "development/native-evaluator-n96-v1/family-005",
+      "candidateSide": 1,
+      "candidateScore": 0,
+      "blackMinusWhite": -26,
+      "terminal": true,
+      "black": 19,
+      "white": 45,
+      "recordedTransitions": 60
+    },
+    {
+      "family": "development/native-evaluator-n96-v1/family-005",
+      "candidateSide": 2,
+      "candidateScore": 1,
+      "blackMinusWhite": -8,
+      "terminal": true,
+      "black": 28,
+      "white": 36,
+      "recordedTransitions": 60
+    },
+    {
+      "family": "development/native-evaluator-n96-v1/family-006",
+      "candidateSide": 1,
+      "candidateScore": 0,
+      "blackMinusWhite": -28,
+      "terminal": true,
+      "black": 18,
+      "white": 46,
+      "recordedTransitions": 60
+    },
+    {
+      "family": "development/native-evaluator-n96-v1/family-006",
+      "candidateSide": 2,
+      "candidateScore": 0,
+      "blackMinusWhite": 32,
+      "terminal": true,
+      "black": 48,
+      "white": 16,
+      "recordedTransitions": 63
+    },
+    {
+      "family": "development/native-evaluator-n96-v1/family-007",
+      "candidateSide": 1,
+      "candidateScore": 0,
+      "blackMinusWhite": -58,
+      "terminal": true,
+      "black": 3,
+      "white": 61,
+      "recordedTransitions": 62
+    },
+    {
+      "family": "development/native-evaluator-n96-v1/family-007",
+      "candidateSide": 2,
+      "candidateScore": 0,
+      "blackMinusWhite": 38,
+      "terminal": true,
+      "black": 51,
+      "white": 13,
+      "recordedTransitions": 61
+    },
+    {
+      "family": "development/native-evaluator-n96-v1/family-008",
+      "candidateSide": 1,
+      "candidateScore": 0,
+      "blackMinusWhite": -24,
+      "terminal": true,
+      "black": 20,
+      "white": 44,
+      "recordedTransitions": 63
+    },
+    {
+      "family": "development/native-evaluator-n96-v1/family-008",
+      "candidateSide": 2,
+      "candidateScore": 0,
+      "blackMinusWhite": 44,
+      "terminal": true,
+      "black": 54,
+      "white": 10,
+      "recordedTransitions": 65
+    },
+    {
+      "family": "development/native-evaluator-n96-v1/family-009",
+      "candidateSide": 1,
+      "candidateScore": 0,
+      "blackMinusWhite": -36,
+      "terminal": true,
+      "black": 14,
+      "white": 50,
+      "recordedTransitions": 61
+    },
+    {
+      "family": "development/native-evaluator-n96-v1/family-009",
+      "candidateSide": 2,
+      "candidateScore": 0,
+      "blackMinusWhite": 34,
+      "terminal": true,
+      "black": 49,
+      "white": 15,
+      "recordedTransitions": 61
+    },
+    {
+      "family": "development/native-evaluator-n96-v1/family-010",
+      "candidateSide": 1,
+      "candidateScore": 0,
+      "blackMinusWhite": -20,
+      "terminal": true,
+      "black": 22,
+      "white": 42,
+      "recordedTransitions": 60
+    },
+    {
+      "family": "development/native-evaluator-n96-v1/family-010",
+      "candidateSide": 2,
+      "candidateScore": 0,
+      "blackMinusWhite": 8,
+      "terminal": true,
+      "black": 36,
+      "white": 28,
+      "recordedTransitions": 60
+    },
+    {
+      "family": "development/native-evaluator-n96-v1/family-011",
+      "candidateSide": 1,
+      "candidateScore": 0,
+      "blackMinusWhite": -24,
+      "terminal": true,
+      "black": 20,
+      "white": 44,
+      "recordedTransitions": 61
+    },
+    {
+      "family": "development/native-evaluator-n96-v1/family-011",
+      "candidateSide": 2,
+      "candidateScore": 1,
+      "blackMinusWhite": -38,
+      "terminal": true,
+      "black": 13,
+      "white": 51,
+      "recordedTransitions": 62
+    },
+    {
+      "family": "development/native-evaluator-n96-v1/family-012",
+      "candidateSide": 1,
+      "candidateScore": 0,
+      "blackMinusWhite": -24,
+      "terminal": true,
+      "black": 20,
+      "white": 44,
+      "recordedTransitions": 60
+    },
+    {
+      "family": "development/native-evaluator-n96-v1/family-012",
+      "candidateSide": 2,
+      "candidateScore": 0,
+      "blackMinusWhite": 14,
+      "terminal": true,
+      "black": 39,
+      "white": 25,
+      "recordedTransitions": 61
+    },
+    {
+      "family": "development/native-evaluator-n96-v1/family-013",
+      "candidateSide": 1,
+      "candidateScore": 0,
+      "blackMinusWhite": -10,
+      "terminal": true,
+      "black": 27,
+      "white": 37,
+      "recordedTransitions": 61
+    },
+    {
+      "family": "development/native-evaluator-n96-v1/family-013",
+      "candidateSide": 2,
+      "candidateScore": 0,
+      "blackMinusWhite": 14,
+      "terminal": true,
+      "black": 39,
+      "white": 25,
+      "recordedTransitions": 60
+    },
+    {
+      "family": "development/native-evaluator-n96-v1/family-014",
+      "candidateSide": 1,
+      "candidateScore": 0,
+      "blackMinusWhite": -22,
+      "terminal": true,
+      "black": 21,
+      "white": 43,
+      "recordedTransitions": 61
+    },
+    {
+      "family": "development/native-evaluator-n96-v1/family-014",
+      "candidateSide": 2,
+      "candidateScore": 0,
+      "blackMinusWhite": 42,
+      "terminal": true,
+      "black": 53,
+      "white": 11,
+      "recordedTransitions": 63
+    },
+    {
+      "family": "development/native-evaluator-n96-v1/family-015",
+      "candidateSide": 1,
+      "candidateScore": 0,
+      "blackMinusWhite": -16,
+      "terminal": true,
+      "black": 24,
+      "white": 40,
+      "recordedTransitions": 60
+    },
+    {
+      "family": "development/native-evaluator-n96-v1/family-015",
+      "candidateSide": 2,
+      "candidateScore": 0.5,
+      "blackMinusWhite": 0,
+      "terminal": true,
+      "black": 32,
+      "white": 32,
+      "recordedTransitions": 61
+    },
+    {
+      "family": "development/native-evaluator-n96-v1/family-016",
+      "candidateSide": 1,
+      "candidateScore": 0,
+      "blackMinusWhite": -24,
+      "terminal": true,
+      "black": 20,
+      "white": 44,
+      "recordedTransitions": 61
+    },
+    {
+      "family": "development/native-evaluator-n96-v1/family-016",
+      "candidateSide": 2,
+      "candidateScore": 0,
+      "blackMinusWhite": 14,
+      "terminal": true,
+      "black": 39,
+      "white": 25,
+      "recordedTransitions": 61
+    }
+  ],
+  "setupShutdown": [
+    {
+      "launchValidationMs": 0.513073056936264,
+      "launchWallMs": 0.34869101364165545,
+      "readyWallMs": 0.940000987611711,
+      "shutdownWallMs": 0.18058600835502148
+    },
+    {
+      "launchValidationMs": 0.4523950628936291,
+      "launchWallMs": 0.644319923594594,
+      "readyWallMs": 0.7942419033497572,
+      "shutdownWallMs": 0.24386798031628132
+    },
+    {
+      "launchValidationMs": 0.46318303793668747,
+      "launchWallMs": 0.4981949459761381,
+      "readyWallMs": 0.6356739904731512,
+      "shutdownWallMs": 1.4136719983071089
+    }
+  ],
+  "cleanup": [
+    {
+      "exitCode": -15,
+      "unexpectedExit": false,
+      "directReaped": true,
+      "bytesSeen": 1297784,
+      "bytesRetained": 65536,
+      "errors": []
+    },
+    {
+      "exitCode": -15,
+      "unexpectedExit": false,
+      "directReaped": true,
+      "bytesSeen": 479901,
+      "bytesRetained": 65536,
+      "errors": []
+    },
+    {
+      "exitCode": -15,
+      "unexpectedExit": false,
+      "directReaped": true,
+      "bytesSeen": 381476,
+      "bytesRetained": 65536,
+      "errors": []
+    }
+  ],
+  "wholeSeconds": 1159.0730039069895,
+  "costMeaning": "Original job whole includes its1158.709165507s command. Do not add nested clocks. Later recorded-move audit and review are separate costs.",
+  "recordedMoveAudit": {
+    "transitions": 1961,
+    "searchCalls": 0,
+    "newGames": 0,
+    "RNG": 0,
+    "qualification": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/native-comparison-collection-v1/qualification.json",
+      "bytes": 10644,
+      "mode": "0644",
+      "sha256": "608ddc13782a7f878f99429141631d4d19a558d9a404e65e1c91d6cb75bf6a6d"
+    }
+  },
+  "independentReview": {
+    "report": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/native-comparison-review-v1/reviewer/report.md",
+      "bytes": 15749,
+      "mode": "0644",
+      "sha256": "156c4ea56c6e75f141e045ea2a8bfada3fe9052d2078b8707de0069745b8dc00"
+    },
+    "receipt": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/native-comparison-review-v1/reviewer/receipt.json",
+      "bytes": 44019,
+      "mode": "0644",
+      "sha256": "0447a6c5b0ee20194a72c4262a482f46f40819cfd55a529e5175b7aac8c98460"
+    },
+    "verdict": "QUALIFIED_FOR_LIMITED_DEV_CONCLUSION",
+    "sourceAndOriginalRecordsOnly": true,
+    "bootstrapRegenerated": false
+  },
+  "phaseDiagnostics": [
+    {
+      "role": "candidate",
+      "phase": 0,
+      "searches": 112,
+      "sumWallMs": 112138.71819339693,
+      "maxWallMs": 1001.8575449939817,
+      "medianCompletedDepth": 11.0,
+      "nodes": 397970430,
+      "proven": 0,
+      "normalBudgetTimedOut": 112,
+      "heuristicCount": 112,
+      "zeroHeuristicSearchScores": 9
+    },
+    {
+      "role": "candidate",
+      "phase": 1,
+      "searches": 240,
+      "sumWallMs": 240303.39110747445,
+      "maxWallMs": 1004.2575430124998,
+      "medianCompletedDepth": 11.0,
+      "nodes": 852785803,
+      "proven": 0,
+      "normalBudgetTimedOut": 240,
+      "heuristicCount": 240,
+      "zeroHeuristicSearchScores": 4
+    },
+    {
+      "role": "candidate",
+      "phase": 2,
+      "searches": 240,
+      "sumWallMs": 221040.02226889133,
+      "maxWallMs": 1003.8734719855711,
+      "medianCompletedDepth": 14.0,
+      "nodes": 886136473,
+      "proven": 36,
+      "normalBudgetTimedOut": 204,
+      "heuristicCount": 204,
+      "zeroHeuristicSearchScores": 0
+    },
+    {
+      "role": "candidate",
+      "phase": 3,
+      "searches": 225,
+      "sumWallMs": 4456.402036943473,
+      "maxWallMs": 344.67212203890085,
+      "medianCompletedDepth": 8,
+      "nodes": 13316447,
+      "proven": 225,
+      "normalBudgetTimedOut": 0,
+      "heuristicCount": 0,
+      "zeroHeuristicSearchScores": 0
+    },
+    {
+      "role": "v1Heuristic",
+      "phase": 0,
+      "searches": 112,
+      "sumWallMs": 112140.67071978934,
+      "maxWallMs": 1002.7100730221719,
+      "medianCompletedDepth": 12.0,
+      "nodes": 432236189,
+      "proven": 0,
+      "normalBudgetTimedOut": 112,
+      "heuristicCount": 112,
+      "zeroHeuristicSearchScores": 2
+    },
+    {
+      "role": "v1Heuristic",
+      "phase": 1,
+      "searches": 240,
+      "sumWallMs": 240304.53456705436,
+      "maxWallMs": 1004.3661249801517,
+      "medianCompletedDepth": 11.0,
+      "nodes": 970223177,
+      "proven": 0,
+      "normalBudgetTimedOut": 240,
+      "heuristicCount": 240,
+      "zeroHeuristicSearchScores": 0
+    },
+    {
+      "role": "v1Heuristic",
+      "phase": 2,
+      "searches": 240,
+      "sumWallMs": 222878.60385503154,
+      "maxWallMs": 1003.1705950386822,
+      "medianCompletedDepth": 14.0,
+      "nodes": 1005906981,
+      "proven": 31,
+      "normalBudgetTimedOut": 209,
+      "heuristicCount": 209,
+      "zeroHeuristicSearchScores": 1
+    },
+    {
+      "role": "v1Heuristic",
+      "phase": 3,
+      "searches": 255,
+      "sumWallMs": 5035.935670719482,
+      "maxWallMs": 264.20660910662264,
+      "medianCompletedDepth": 8,
+      "nodes": 15963572,
+      "proven": 255,
+      "normalBudgetTimedOut": 0,
+      "heuristicCount": 0,
+      "zeroHeuristicSearchScores": 0
+    }
+  ],
+  "diagnosticLimit": "Returned search scores combine evaluator, horizon and exact results; zeros are not static evaluations or a causal loss explanation.",
+  "RSSpeak_B": null,
+  "browserStrength": "UNVERIFIED",
+  "defaultModelChanged": false,
+  "decision": "Candidate improvement unsupported in these fixed native development conditions; retain v1/product defaults.",
+  "limits": [
+    "16 empirical family clusters and shared prefixes/paths do not prove IID or lifetime-unseen positions.",
+    "Percentile95% interval is the original once-computed MT19937 seed2026102203/10000-family-resample/R7 statistic, not guaranteed population coverage.",
+    "No equivalence, general pattern-learning impossibility, universal inferiority, external-engine superiority or browser-strength conclusion.",
+    "No additional seed, fit, teacher query, replacement game or campaign issued from this result."
+  ],
+  "archive": {
+    "path": "/workspaces/quoridor/research-data/othello/strong-ai-n96/native-comparison-result-v1-checks.tar.gz",
+    "bytes": 21481,
+    "mode": "0644",
+    "sha256": "cf9ebde21634cfd0b080bae7cffe0de86876fbb7a0edd1b2107c640d75a9b790"
+  },
+  "archiveMemberCount": 12,
+  "preserved": "Original training/teacher/raw games/model files and previous FAILED/NULL/UNKNOWN costs remain private and unchanged."
+}

@@ -1,5 +1,7 @@
 # NNUE研究の知見と次の判断
 
+Othello強教師pattern候補7ed9と現v1を、同じnative image2678・同じPVS/TT/厳密終盤・1thread/1000ms＋100ms返却許容で比較した原32局は全件正常終局した。新dev16familyの両色をすべて含め、候補3勝2分27敗、得点率12.5%、原arenaが一度だけ計算したfamily95%区間は[3.125%,23.4375%]だった。独立確認も全原分母・identity/時計/setup/cleanupと事前統計法を認めたため、**この有限native開発条件で候補の改善は不支持、現v1/default維持**とする。同等・一般的なpattern学習の不可能性・敗因・browser棋力は結論しない。共有prefix/到達局面の相関、16family percentile区間の限界、RSS peak UNKNOWNを保持する。[原結果・設定・独立確認](../research-data/othello/strong-ai-n96/native-comparison-result-v1.json)。outer1159.073003907秒だけを包括対局費とし、内包command秒を加算しない。後続の1961保存遷移replayはルール確認だけで、新Search/game/RNGではない。H16は未使用のまま、同じ896行の追加fitや結果後seed/対局補充を行わない。次の量・表現の変更判断はこの結果を基に扱い、未観測parameterや返却探索scoreのzeroを敗因と断定しない。
+
 OthelloのUI状態・確認・再開検証・保存資格・AI応答tokenをRustへ移し、TSはDOM/storage/Worker effect実行へ限定した。新Rust8、actual Wasm7、実生成型/Web型/Vite、実ブラウザ5ケースが通り、取消・古い応答拒否と破損/読み込み中の保存保持を確認した。[統合証拠](../research-data/othello/strong-ai-n96/rust-ui-v1.json)。公開AIは従来の簡易policyのままで、学習候補の棋力/desktop browser1秒資格とは別である。
 
 ## 追加目標と未確定点（2026-10-22 JST）
