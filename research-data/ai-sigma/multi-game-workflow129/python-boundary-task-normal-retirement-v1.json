@@ -1,0 +1,1335 @@
+{
+  "at": "2026-10-21T15:15:12.614054+00:00",
+  "issue": "quoridor-4lc.324.12.9.4",
+  "source_acceptance": "2dfe353c173345f073d5d9e4f018f924bbf072f7",
+  "same_owner_closed": {
+    "issue": "quoridor-4lc.324.12.9.4",
+    "status": "closed",
+    "assignee": "codex:01a15ede-a06e-7f20-b831-b42d41baaa76",
+    "exact_reason": true,
+    "close_reason": "Root accepted and pushed2dfe353c173345f073d5d9e4f018f924bbf072f7, canonical research-data/ai-sigma/multi-game-workflow129/python-boundary-acceptance-v1.json/source-controls archive.96 moved source/config files,76 original bytes;88 Python AST identities under declared imports/root-depth substitutions, snapshot bytes identical/cycle_process AST identical. Actual Main5+WT-onlyskip and task entry/sentinel1, sparse fixture1, caller membership1, synthetic no-sync boundary1, metadata verification and affected Runner/Data all-targetClippy compile warnings0 accepted. Existing environment/lock/defaults and models/RAW/seals/USERPAUSE unchanged, no old alias or Main fallback. Initial readonly-before-context deviation and all original stopped/failed records preserved; Root lateTMP cleanup is separate from original failed postcheck, no successfulcommand replay. No scientific/model/runtime native release/strength/Othello qualification inferred. Source/own helpers returned/reaped/handles/TMP/sourceleases[]; parent12.9 game boundary/Othello work remains separate.",
+    "normal_close_count": 1,
+    "actions": [
+      {
+        "action": "ready",
+        "returncode": 0,
+        "stderr": ""
+      },
+      {
+        "action": "show",
+        "returncode": 0,
+        "stderr": ""
+      },
+      {
+        "action": "update",
+        "returncode": 0,
+        "stderr": ""
+      },
+      {
+        "action": "backup",
+        "returncode": 0,
+        "stderr": ""
+      },
+      {
+        "action": "close",
+        "returncode": 0,
+        "stderr": ""
+      },
+      {
+        "action": "show",
+        "returncode": 0,
+        "stderr": ""
+      },
+      {
+        "action": "backup",
+        "returncode": 0,
+        "stderr": ""
+      }
+    ],
+    "TMP": [],
+    "source_leases": [],
+    "source_writes": 0,
+    "successful_checks_replayed": 0,
+    "administrative_context_turn": "01a15f01-d818-7140-bacb-4a2ea7494534"
+  },
+  "source_custody": "python-boundary-source-controls-v1.tar.gz",
+  "late_control_archive": "research-data/ai-sigma/multi-game-workflow129/python-boundary-final-control-tail-v1.tar.gz",
+  "new_members": [
+    {
+      "original": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/admin-close-receipt.json",
+      "member": "worker/admin-close-receipt.json",
+      "bytes": 2004,
+      "sha256": "61b58abd82affac63ad9f748ca4e6d9861ac66f41079c9990c997becfeda2e94",
+      "mode": "0644"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/admin-close-stop.md",
+      "member": "worker/admin-close-stop.md",
+      "bytes": 1078,
+      "sha256": "b17729c96786561dc729ef1dcac7a2638122e8da41230a3d30f4835816e59fdf",
+      "mode": "0644"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/admin-close.log",
+      "member": "worker/admin-close.log",
+      "bytes": 399,
+      "sha256": "4c60609f081edb02a71795e7ec08e1307c106d951308f09183895f077ed5f9c6",
+      "mode": "0644"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/admin-close.process.json",
+      "member": "worker/admin-close.process.json",
+      "bytes": 5316,
+      "sha256": "bbaed5257bbabd32686eccd00f37c804a3864e572da3c3615a3726674124c619",
+      "mode": "0600"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/admin-delivery-return.json",
+      "member": "worker/admin-delivery-return.json",
+      "bytes": 1483,
+      "sha256": "e260900e01611d99d20823d2592e1e91a030f941e644cefb2fc9097742f20161",
+      "mode": "0644"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/admin-delivery.log",
+      "member": "worker/admin-delivery.log",
+      "bytes": 157,
+      "sha256": "427fb3b5353c7e0c804e738a1ba4d87136ef558a1e74138b85aa37b55ea412f0",
+      "mode": "0644"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/admin-delivery.process.json",
+      "member": "worker/admin-delivery.process.json",
+      "bytes": 1583,
+      "sha256": "8b8ebe6ca322bd5bd7d0d58a4db1d05fe22bd3bf9366fa91e27373f0e57344f6",
+      "mode": "0600"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/admin-final-receipt.log",
+      "member": "worker/admin-final-receipt.log",
+      "bytes": 1207,
+      "sha256": "1348a9cdbcb91ef48510b6c8df7574c58ff4e0d3f80e88ea08d7e5b71f0166ec",
+      "mode": "0644"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/admin-final-receipt.process.json",
+      "member": "worker/admin-final-receipt.process.json",
+      "bytes": 3833,
+      "sha256": "8c07bf3b09deb2c1efdb041dc9eb00a7fc2a9246979dca76c8b0766af4f096e6",
+      "mode": "0600"
+    }
+  ],
+  "reused_control_members": [
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/abnormal-caller.log",
+        "bytes": 6291,
+        "sha256": "214b64f077f694b9ead574fd2b9a8bf5138e5c6c928d0c44409bfd9b8cc54135",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/abnormal-caller.log"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/abnormal-caller.process.json",
+        "bytes": 1460,
+        "sha256": "6b8d5dbc508e7161688aea013419d6f9d236a39116ddc1e5ef385a448715858a",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/abnormal-caller.process.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/actual-imports.json",
+        "bytes": 1127,
+        "sha256": "849dc4744783c9ededc7c68d43ba29ea4f8aba538acbc7f976771a1c63b3b01e",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/actual-imports.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/audit.log",
+        "bytes": 9215,
+        "sha256": "33c13ff89dd78f212fd73b36a47cbf0be71fce4db14d82671cd0d08a06528ba3",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/audit.log"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/audit.process.json",
+        "bytes": 1968,
+        "sha256": "55a6ebdac531c726a3cd6b927d253a322e0032d56f675622de4cb4f9be5b5f48",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/audit.process.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/boundary-child.log",
+        "bytes": 13,
+        "sha256": "be4d639b469dff94354a97c439c449d5466904cd0c500a1bf28e9ec0abbf18ee",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/boundary-child.log"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/boundary-child.process.json",
+        "bytes": 1347,
+        "sha256": "f8cb9ebd7168e8fa32cb6fcad6cda1b96ddf0f8633f7621f074b58d982df8df7",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/boundary-child.process.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/boundary.log",
+        "bytes": 234,
+        "sha256": "1e7a54bcf9f8f0766ffa9514d03b4d43000bfbd6fd3ca8c11490291f5e8b7e9a",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/boundary.log"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/boundary.process.json",
+        "bytes": 1311,
+        "sha256": "8d2d189882bfd56fc249ebb7a55818d42b811f81edb4c52285d34736004b726a",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/boundary.process.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/caller-authority.log",
+        "bytes": 9341,
+        "sha256": "461fa9eddd4eb93baf971e81e5d8f90815bd256b65f0228dd96d3e7d643bc0a2",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/caller-authority.log"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/caller-authority.process.json",
+        "bytes": 3231,
+        "sha256": "2bce09cc56e97525a2d27b558af1e8a9d7a74aeffc9fde2de7b12f061c9e510b",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/caller-authority.process.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/callers.log",
+        "bytes": 21707,
+        "sha256": "af943fe3123dbad094a8b940338ab6b4dcbcb8eca97a6125c906e5d592ca87f8",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/callers.log"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/callers.process.json",
+        "bytes": 1923,
+        "sha256": "1251e82956a11f3ab0b511b859942a35d3d88c5ea36ba7952f3542fe17541161",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/callers.process.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/cancel-child.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/cancel-child.log"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/cancel-child.process.json",
+        "bytes": 1416,
+        "sha256": "3f827b3e3eb9ce5a6bb69cdb852917828fe3c26f5aa1b4698ac7a1eeb2b66533",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/cancel-child.process.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/common-caller-proposal.patch",
+        "bytes": 66266,
+        "sha256": "fbd1572bcb0ef815ecfaa4d403e3a21bc0c7023ded8b524f80c03567dd6e22ac",
+        "mode": "0444"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/common-caller-proposal.patch"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/content-changed.json",
+        "bytes": 1590,
+        "sha256": "bf17bd7e96c8ac6e761841679fba76b8fafbecd27c8e921133062379d5fa688d",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/content-changed.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/extend.log",
+        "bytes": 1375,
+        "sha256": "60bab1af70806e7eddac0a33a972737b2ab83bf53d699ff916690653dbcfcadd",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/extend.log"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/extend.process.json",
+        "bytes": 1314,
+        "sha256": "16d9dec3f44591ca80827747d318ac11d62670143270b70a8a4b05c44c847eb2",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/extend.process.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/extend_proposal.py",
+        "bytes": 7765,
+        "sha256": "25d3086ee3d4071bfbaa4387e143cb679a99d19225af1c2ef1b999a77bb4bc07",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/extend_proposal.py"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/extra-callers.log",
+        "bytes": 20512,
+        "sha256": "8f81cce9c47c0fe9cd778bbfaee9f6534865e0dcac4e89e95a63313fdc7deb1d",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/extra-callers.log"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/extra-callers.process.json",
+        "bytes": 2058,
+        "sha256": "63305e7d045c69b8e51c3d8bbd282304df4bed173caa4d24dee5544118b05482",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/extra-callers.process.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/final-callers.log",
+        "bytes": 13506,
+        "sha256": "637b84cd5bcfdb8a1a6a5026e3e16d466a1ae47edb04124ff06e7300baf530ab",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/final-callers.log"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/final-callers.process.json",
+        "bytes": 1985,
+        "sha256": "f7e419caab75383224d1a656edf3705ba1eb478578e479ee880d6e46ce2689e4",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/final-callers.process.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/final-quality.log",
+        "bytes": 6503,
+        "sha256": "b29da624e3767f497d7776196e255bba973c1e679da3b484152f2b05c6f4214b",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/final-quality.log"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/final-quality.process.json",
+        "bytes": 1670,
+        "sha256": "731264682f9c848e84a562d711dd46df6c52e20748cd3b894114976ddba8848d",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/final-quality.process.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/finish-format.log",
+        "bytes": 528,
+        "sha256": "d4abea22d3ac13e50012cefa6507abed027340dcafaa3bd74e825e46181502c7",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/finish-format.log"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/finish-format.process.json",
+        "bytes": 2089,
+        "sha256": "1c6249ad34641b8924e88307cf9e9d2e0aab72addbc4954e8fb9cedb9aecc08f",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/finish-format.process.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/finish-observation.log",
+        "bytes": 1268,
+        "sha256": "1585d6860b35491a61de194856bc06bc8df529e41f978e6ee9c156b52218f8c9",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/finish-observation.log"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/finish-observation.process.json",
+        "bytes": 4312,
+        "sha256": "1bed7cebe058d4fe4c225b23e77957fef83a976aaee606dbe81997e4ec644822",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/finish-observation.process.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/first-read.md",
+        "bytes": 1138,
+        "sha256": "480a8becd7440e8c1e83049bd8fdad82dadc2d28a5713c2c12f8c3d7dbd31244",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/first-read.md"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/fixups.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/fixups.log"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/fixups.process.json",
+        "bytes": 2334,
+        "sha256": "b55d0a25bd660683c056537800a0865fa6f29ee018f297cbd576aba851b5e78c",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/fixups.process.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/format-2024.log",
+        "bytes": 216,
+        "sha256": "640b92a42c93c3bc48c5e5e630fda5946dd64ec4ff72f978a29671f38eb420fe",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/format-2024.log"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/format-2024.process.json",
+        "bytes": 3635,
+        "sha256": "176fdc6505aa089d8d84342930092a9ed15e655b4174a3d549d14818c2582803",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/format-2024.process.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/format-corrected.log",
+        "bytes": 946,
+        "sha256": "9388aa20b04b521c46eae01b7974ab619d2e125aa6fad220e7686b1e943a4eab",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/format-corrected.log"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/format-corrected.process.json",
+        "bytes": 3524,
+        "sha256": "3802b7b627deb6f0af89cc5efbdac3d11f327d2f9944d07bc077201bbe38b56f",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/format-corrected.process.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/format.log",
+        "bytes": 7127,
+        "sha256": "86ae03650fc01deb4c582399c0205b69bfe837582c9efd6d85fd1f65e538c6c7",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/format.log"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/format.process.json",
+        "bytes": 4437,
+        "sha256": "4bee76078d7d99a6138d7b9d469ebcecb00e73457848b7ba7c5d2dba379f661d",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/format.process.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/formatting-final.log",
+        "bytes": 56,
+        "sha256": "431867bfc544f98232afc77e81e728c0e0e61b6956cca07ca387fc4ff3f0799c",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/formatting-final.log"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/formatting-final.process.json",
+        "bytes": 1844,
+        "sha256": "5659402686f36f62a6c27a85e048d1f7880ff675716ff0f1b575aac75ac05d40",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/formatting-final.process.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/freeze.log",
+        "bytes": 849,
+        "sha256": "dc54a9fd09a3d078a12d968a459ee9d7c28311062a582d79ed327deb3c43b109",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/freeze.log"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/freeze.process.json",
+        "bytes": 1303,
+        "sha256": "e56110d54ffde48ad0d5df0c8993f1332d97d0fa24e5d897cabf52d76851e9ed",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/freeze.process.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/freeze.py",
+        "bytes": 4059,
+        "sha256": "e25f084e04539c79a1ce95ac7fe26702cd34f98a83898fc0d3913025a71277d5",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/freeze.py"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/guard.py",
+        "bytes": 1438,
+        "sha256": "6f9327428dfd41d723662add373d657af978414d0e16255f9d2092fd9ea0cb5b",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/guard.py"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/handoff-delivery.json",
+        "bytes": 157,
+        "sha256": "433b01abd2fe9e5ea6b48b173430c70ba0e74c6534b2bffbec30d516ee624964",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/handoff-delivery.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/handoff.md",
+        "bytes": 7976,
+        "sha256": "fbe709a28cfaa94e24e6fd0c2a512337341fcaa45bcee7bd77b68912ddc8471e",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/handoff.md"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/initial.log",
+        "bytes": 5363,
+        "sha256": "f2e8b7b4659818265f874ee4f3a2cfdeac2b0d8da43f91acb07d577ce7513613",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/initial.log"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/initial.process.json",
+        "bytes": 1606,
+        "sha256": "02ff8f1550f756ccd299d4d14337e2aeddd1d43cc6b80836497918911665a9b9",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/initial.process.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/inspect-proposal.log",
+        "bytes": 3186,
+        "sha256": "d8dcacaf6ae74357b506eba62579cdd6409f9d125bae280cc493475f04e3e717",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/inspect-proposal.log"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/inspect-proposal.process.json",
+        "bytes": 1866,
+        "sha256": "3e461c3e267a852b19ed35a21604511b948113a93bfa5af09abd2cc1a127ae9a",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/inspect-proposal.process.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/lint-fix.log",
+        "bytes": 39,
+        "sha256": "6f4e3c8cb6a43f32a8b47add0b65207f17bd814c84308623b3720ad789c0d769",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/lint-fix.log"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/lint-fix.process.json",
+        "bytes": 1380,
+        "sha256": "44c532a543597a1146d18b4c9cee23d0f81a5213d3eaafefb047bbfaa2f4c9e2",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/lint-fix.process.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/migrate.log",
+        "bytes": 1340,
+        "sha256": "d023875e760b55727e2c09403636eae29a168c783ee75087bc815d8ee649a2c5",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/migrate.log"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/migrate.process.json",
+        "bytes": 1307,
+        "sha256": "00aa98ecf1f134102c197699e10e4c72d33acab5aa7a3caae5880053f7754f60",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/migrate.process.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/migrate.py",
+        "bytes": 4342,
+        "sha256": "4a959fc575216bfb398e50196b1f4e0a741ae8bc89b379f5a874c88888e1ae56",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/migrate.py"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/more.log",
+        "bytes": 19105,
+        "sha256": "b3bd231e1ad930cf6f09819bb5d5060858f259313f0135709c51c412bf9ae769",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/more.log"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/more.process.json",
+        "bytes": 2061,
+        "sha256": "524683680672133f166b08645cf2ed3a42773b10edc61f503473df47cfdc6357",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/more.process.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/paths.log",
+        "bytes": 16307,
+        "sha256": "239a0f7517036bac5287386d2ef8da6b4140f773c692a6cd7dbecdc4cab83f14",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/paths.log"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/paths.process.json",
+        "bytes": 2001,
+        "sha256": "be3a62c21f5ae4ffa84fa406b29dbab9bcb98de9bc2663140b36a2fd9b468645",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/paths.process.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/README.md",
+        "bytes": 15364,
+        "sha256": "ac536814561de1259f363f3221f1c175491be1b89df43adaf83bfcbc3f45794c",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/README.md"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/docs/development/ai-research-code.md",
+        "bytes": 28654,
+        "sha256": "e8eaa6b76a942d436e8aaab9963160e5da9b635e9bc3bab657ab17c83a7f27a2",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/docs/development/ai-research-code.md"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/docs/development/rust-ai.md",
+        "bytes": 30129,
+        "sha256": "7e33c068139d61412b0ed59750774ddeb5164f413ac988c7528a8871b4fbb7bf",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/docs/development/rust-ai.md"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/docs/development/rust-python-environment.md",
+        "bytes": 6906,
+        "sha256": "9ee0e4ea2d12f188143b403f7534f0e8fb082fdde3bc2244355a54bb0551212c",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/docs/development/rust-python-environment.md"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/games/quoridor/crates/README.md",
+        "bytes": 1806,
+        "sha256": "a6764593910d6eaaa27558618cfe52ea58c7fb6f4c70edaec9d48d3e83d91429",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/games/quoridor/crates/README.md"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/games/quoridor/crates/quoridor-data/README.md",
+        "bytes": 1052,
+        "sha256": "21cd3d1fc430cb799a998f33b8eb634ae01fd7ae7ba8f96010c1931cdc04730b",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/games/quoridor/crates/quoridor-data/README.md"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/python/tests/test_claustrophobia_arena.py",
+        "bytes": 5018,
+        "sha256": "7a42eee26085bf37c62a7d963481a89777026b425b81b53b74d7fe03db4efa78",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/python/tests/test_claustrophobia_arena.py"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/python/tests/test_claustrophobia_file_request.py",
+        "bytes": 7852,
+        "sha256": "d5450aba1612dad27f34982f9ac7eaf1871107d2cf141c89f26287692a8b50f4",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/python/tests/test_claustrophobia_file_request.py"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/python/tests/test_claustrophobia_publisher.py",
+        "bytes": 4895,
+        "sha256": "57b015b1da02eb891535f937f37887de76180ea05473b77612be8c623cb17ede",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/python/tests/test_claustrophobia_publisher.py"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/python/tests/test_public_static_prepare.py",
+        "bytes": 7801,
+        "sha256": "23d5e4f198cd5573c2cde1c5c5f28449c722d552cbd25c3b406d89628333e353",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/python/tests/test_public_static_prepare.py"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/python/tests/test_static_config_settings.py",
+        "bytes": 19245,
+        "sha256": "7a26700e2b7711294db3486bd28257bacaf86bddc6a1f02129441831cc51b515",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/python/tests/test_static_config_settings.py"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/scripts/dev/check-research.py",
+        "bytes": 10235,
+        "sha256": "cbf37c398f32852d8537d6675a19aa0b024ab04ac9822b82422332a2d953a160",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/scripts/dev/check-research.py"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/scripts/dev/manage_worktree.sh",
+        "bytes": 4095,
+        "sha256": "ded8b85f072174922ae435d750fad2cb45dbd36823186e8f11e1e0a1ae8236f1",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/scripts/dev/manage_worktree.sh"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/scripts/dev/project-env.sh",
+        "bytes": 4698,
+        "sha256": "a8d9a87eaa714ae4df425fb8120cb06c32b6a34aef12e5396f9fe3e09735bbaa",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/scripts/dev/project-env.sh"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/scripts/dev/research-lifecycle.py",
+        "bytes": 393021,
+        "sha256": "17927014cc083145d61c9c100266711bedf5978acc7adb5abbfd17e89ba2f133",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/scripts/dev/research-lifecycle.py"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/scripts/dev/setup-project.sh",
+        "bytes": 1644,
+        "sha256": "c28cc6505947e7f2cf804a62b8db85811c6017d43521d1a359b57caf5edf8da7",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/scripts/dev/setup-project.sh"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/scripts/dev/test_manage_worktree.py",
+        "bytes": 5481,
+        "sha256": "f132c2ae6c0c28daa5fa573099a74a512a22002ae23dd179d7bd714f0c329e07",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/scripts/dev/test_manage_worktree.py"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/scripts/dev/test_project_env.py",
+        "bytes": 8250,
+        "sha256": "45f3f461cc133e89a1b71f57c9b8365241db1ea4c5ff4a2e606d74e1cc716f5b",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/scripts/dev/test_project_env.py"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/scripts/dev/test_research_cpu_plan.py",
+        "bytes": 8340,
+        "sha256": "986b38198723835e1a70c37ace063b49c4f5322150eebc1c2e7069f0cd5ce022",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/scripts/dev/test_research_cpu_plan.py"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/scripts/dev/test_research_lifecycle.py",
+        "bytes": 32283,
+        "sha256": "f3fd2a6a5c8a721fff86bd4e0c91ece555f8221b455228987c1f749e7a002a2f",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/scripts/dev/test_research_lifecycle.py"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/tools/research-session/test_arena_plan.py",
+        "bytes": 42175,
+        "sha256": "be9035ce70fd9197724ba12cb13acc44f8283d0d9755dd6ac0fbca015711a415",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/tools/research-session/test_arena_plan.py"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/tools/research-session/test_claustrophobia_publication.py",
+        "bytes": 13890,
+        "sha256": "98d06aea570e65641d46df1a31a5ddab12ba5be4ffaa95ecd72f80ffdf29688b",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/tools/research-session/test_claustrophobia_publication.py"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/tools/research-session/test_lifecycle.py",
+        "bytes": 91204,
+        "sha256": "f5871637edbe418d00b6b6e47716e6db0a06e25b77094fbc2cb508b1db9b707d",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/tools/research-session/test_lifecycle.py"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/tools/research-session/test_lifecycle_abnormal_exit.py",
+        "bytes": 26846,
+        "sha256": "a855e8bb443ac59528e3a27a1f69f5a191dadfd8cecb95bbf0a92a6b79d92e77",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/tools/research-session/test_lifecycle_abnormal_exit.py"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/tools/research-session/test_lifecycle_storage.py",
+        "bytes": 11899,
+        "sha256": "461b47332ebb37c4710a28fb2f6d07e8c328f352a09ebb174ae8e7688a3d5377",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/tools/research-session/test_lifecycle_storage.py"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/tools/research-session/test_observed_cohort_coverage.py",
+        "bytes": 5338,
+        "sha256": "61edcdf31488d15501255d5c7f9361bdfca485d758db504f04b83cd84c5ee861",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/tools/research-session/test_observed_cohort_coverage.py"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/tools/research-session/test_perf_launch_policy.py",
+        "bytes": 9715,
+        "sha256": "a3f1b4feccecc3314ad2e97047b7e4b55c1c0452441c6b5f1343fe2ed51f6729",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/tools/research-session/test_perf_launch_policy.py"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/tools/research-session/test_project_environment.py",
+        "bytes": 11606,
+        "sha256": "e87d7c359b0435529b5883c1ee9d9f466ef2de9f525d29ab45a2784258d858dd",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/tools/research-session/test_project_environment.py"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/tools/research-session/test_runtime_provenance.py",
+        "bytes": 14529,
+        "sha256": "89e082f242953bf3adc121f21876f8ba5165a305452c34e3ead1ab45e249db6a",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/tools/research-session/test_runtime_provenance.py"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/tools/research-session/test_selected_abnormal_contract.py",
+        "bytes": 7950,
+        "sha256": "8a97ffc28b92738311139064856bba78004a4d0461056e460d22a477d6c4640f",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal/tools/research-session/test_selected_abnormal_contract.py"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal-before.json",
+        "bytes": 925266,
+        "sha256": "9013079ec18db5cd592c48232d4af9ef9c28d6d7d654118c7a58b0719a4170cd",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal-before.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal-boundary.log",
+        "bytes": 1433,
+        "sha256": "c76b7281179c0e0750ea8f9e0841e140c48ee3321a0abf156e28a32998e0d419",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal-boundary.log"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal-boundary.process.json",
+        "bytes": 1314,
+        "sha256": "434122e77f64dabb8c1511afb7b65c843e4ba8087218dc0fed98d11c1b666cec",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal-boundary.process.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal-lint-fix.log",
+        "bytes": 38,
+        "sha256": "aac3a0503d8b95052cc85fb9f1717dc82b74aa55853a5aa9749b41e30275d472",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal-lint-fix.log"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal-lint-fix.process.json",
+        "bytes": 1380,
+        "sha256": "80d8f4a8d5848730ee2ad529fdc756b96836dba04c8d42a9bd88591f45eb1655",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/proposal-lint-fix.process.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/propose.log",
+        "bytes": 357,
+        "sha256": "d55b9c60a896fca07a50d98ac96ed2d3eeac5a26e23fa04bdce7e965091248d3",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/propose.log"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/propose.process.json",
+        "bytes": 1305,
+        "sha256": "568711585e90494545a4e9043ad0a79e099a3c64a18967c1769cf47e9c741dbf",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/propose.process.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/propose.py",
+        "bytes": 6990,
+        "sha256": "9fbac9b617e8a2e6aa8148488f6b7e8f0595dd51537ccc3f4ef033c37df029d7",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/propose.py"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/quality-accepted.log",
+        "bytes": 275,
+        "sha256": "659e52da69e83a6e7d5ba1006521f649f3d81c65756f85a27ce89fd57cba7abf",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/quality-accepted.log"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/quality-accepted.process.json",
+        "bytes": 1303,
+        "sha256": "0cf23f097f09bb265b80c67ac99cc5feb5fe9cf8bb86ea615a814bacd0df83db",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/quality-accepted.process.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/quality-final.log",
+        "bytes": 275,
+        "sha256": "6ab4a2cede526eb6d2556b4a8d98b35b9be3a26d0b963e2f232e8f50b0d9e3dd",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/quality-final.log"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/quality-final.process.json",
+        "bytes": 1303,
+        "sha256": "b146153bbc2aac94503093cf3dfdec9d85e48fea9d628f562ca6790abc8212db",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/quality-final.process.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/quality.log",
+        "bytes": 6545,
+        "sha256": "eafab0febad49e51d197b0d102d3114897b69c38350ab7be52f1722dc4182cb2",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/quality.log"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/quality.process.json",
+        "bytes": 1669,
+        "sha256": "27b021258d90a932e3d64a381757ed2d0c045b01cbf07a61390b56ba6c69e75c",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/quality.process.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/quality.py",
+        "bytes": 2105,
+        "sha256": "77f6c0a840bbd670d75bd7664f74048a95827b18702fcefc5e8fee76505b5200",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/quality.py"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/relative-evidence-fix.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/relative-evidence-fix.log"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/relative-evidence-fix.process.json",
+        "bytes": 1827,
+        "sha256": "b10d99ea780c9a218e89d3d877e1a2518c38cb85ae565adbfb4a914675dde568",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/relative-evidence-fix.process.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/review-diff.log",
+        "bytes": 35380,
+        "sha256": "ed7922f3bac6dac6920b8c1d7719168d20570902ca8131307741ea317385e54a",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/review-diff.log"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/review-diff.process.json",
+        "bytes": 1313,
+        "sha256": "2e858239cae97ef1d5f4f43fe09c9409dc0e8272f625dd98b84d52da42d6c979",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/review-diff.process.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/review_diff.py",
+        "bytes": 1236,
+        "sha256": "a23213f98892a4bc961fe871a9e4e557be2e1a4006320a88abede2ce5addfd6e",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/review_diff.py"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/root-reads.log",
+        "bytes": 13909,
+        "sha256": "788857791fe194dc93a2b8e82092bf4f8db945ca370bd0620d776e2d8270da66",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/root-reads.log"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/root-reads.process.json",
+        "bytes": 3871,
+        "sha256": "d0cd5c390bdad53e2d13e1fa00c0d5293b79857c4648416a92e475ec83c2b50b",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/root-reads.process.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/run.sh",
+        "bytes": 577,
+        "sha256": "65f544b3b7471799a8c2e28cead58502172e87095cee268a9f840eb241a82e5a",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/run.sh"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/semantic-identity.log",
+        "bytes": 129,
+        "sha256": "55806a5d8ab14f3bfc493ea5aad0421794597979037514dc564b879438133340",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/semantic-identity.log"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/semantic-identity.process.json",
+        "bytes": 1312,
+        "sha256": "a86d9723864879109e492064836088d1a6054d2b2f1500a8b110bd2cfef0db28",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/semantic-identity.process.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/source-before.json",
+        "bytes": 1865486,
+        "sha256": "48b9500512054506266fed656d1e7b01cad515d1f8260485b3daaaa040bab887",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/source-before.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/source-identity.json",
+        "bytes": 46424,
+        "sha256": "0578cd0ad8510d8affae495b8f3ba0072c9a5426e056da594e35ecbb92ea68e8",
+        "mode": "0444"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/source-identity.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/source-migration.patch",
+        "bytes": 50167,
+        "sha256": "27036550a7c87129508a91d7999abd4af0cefe201b1c67bf0b0de7533b93f32d",
+        "mode": "0444"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/source-migration.patch"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/stop-evidence.log",
+        "bytes": 527,
+        "sha256": "8db7e7e42770adeac96afc8da3b8838bce8535b4c8982a3672e04b18e4148e9b",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/stop-evidence.log"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/stop-evidence.process.json",
+        "bytes": 2283,
+        "sha256": "f0fbbf7681979783c7f226265a449c2e486769c7365a91455ae758837c0bb533",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/stop-evidence.process.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/string-callers.log",
+        "bytes": 16480,
+        "sha256": "531401a285b280380198a6fab59093e5483680ed60d61035cb89b5cffe023c16",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/string-callers.log"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/string-callers.process.json",
+        "bytes": 1729,
+        "sha256": "abc244c4cb3add9f750a139d304d3deadbae021c10147ceece8213a6444a37eb",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/string-callers.process.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/test-path-detail.log",
+        "bytes": 18891,
+        "sha256": "980ab717cfdde0a22f48b4da8e5265a21383b3c3181906d909bc3920ce80e0bf",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/test-path-detail.log"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/test-path-detail.process.json",
+        "bytes": 1884,
+        "sha256": "c466f5aa5d8427633bf70d5415e053c3c573198d7d0ebec9c6c6c0384d54f9a3",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/test-path-detail.process.json"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/verify_boundary.py",
+        "bytes": 6772,
+        "sha256": "2b17de63826a9f5d0ec050c67a54cfb94997fcb00760dcab2634ce5a1390a4d7",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/verify_boundary.py"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/verify_proposal.py",
+        "bytes": 4037,
+        "sha256": "3e5660bacf0d2afa4e43a34fa8168b77b5f4080eda18e969440f5ffdea86beeb",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/verify_proposal.py"
+    },
+    {
+      "original": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-python-layout129/.artifacts/python-layout129/verify_semantics.py",
+        "bytes": 2251,
+        "sha256": "0e0d2ddd0873a2c771b6ebebe3e2aebc0f8b293dc604b9d2be98db641a281f59",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-python-layout129/.artifacts/python-layout129/verify_semantics.py"
+    }
+  ],
+  "new_archive_one_stream_reconstruction": true,
+  "config": {
+    "config.worktree": "[core]\n\tsparseCheckout = true\n\tsparseCheckoutCone = true\n[index]\n\tsparse = true\n",
+    "info/sparse-checkout": "/*\n!/*/\n/docs/\n!/docs/*/\n/games/\n!/games/*/\n/tools/\n!/tools/*/\n/configs/\n/docs/design/\n/docs/development/\n/games/quoridor/\n/python/\n/scripts/\n/shared/\n/tests/\n/tools/research-quality/\n/tools/research-session/\n"
+  },
+  "flags": ["H", "S"],
+  "index_staged_changes": 0,
+  "branch_retained": "610f11c8ed50ac20ff7accbe2d73ea8cae8a4872",
+  "normal_managed_remove_exit_code": 0,
+  "managed_output": "",
+  "session_before": {
+    "turn": "01a15f01-d818-7140-bacb-4a2ea7494534",
+    "status": "completed",
+    "thread_status": {
+      "type": "idle"
+    }
+  },
+  "session_archive": {
+    "turn": "01a15f01-d818-7140-bacb-4a2ea7494534",
+    "status": "completed",
+    "thread_status": {
+      "type": "idle"
+    },
+    "actual_archive_response": {}
+  },
+  "Root_supplied_entry_source_bodies_in_acceptance_commit": true,
+  "affected_current_extent_once": {
+    "at": "2026-10-21T15:15:12.335399+00:00",
+    "roots": [
+      "/workspaces/quoridor/games/quoridor/python",
+      "/workspaces/quoridor/games/quoridor/configs",
+      "/workspaces/quoridor/shared/python",
+      "/workspaces/quoridor/.artifacts/research-team/integration324/multi-game-migration-v1/python-adoption-v1",
+      "/workspaces/quoridor/.artifacts/research-team/integration324/multi-game-migration-v1/python-entrychecks-v1",
+      "/workspaces/quoridor/.artifacts/research-team/integration324/multi-game-migration-v1/python-entrychecks-v2",
+      "/workspaces/quoridor/.artifacts/research-team/integration324/multi-game-migration-v1/python-checks-collection-v1",
+      "/workspaces/quoridor/.artifacts/research-team/integration324/multi-game-migration-v1/python-acceptance-v1",
+      "/workspaces/quoridor/.artifacts/research-team/integration324/multi-game-migration-v1/python-acceptance-v2",
+      "/workspaces/quoridor/.artifacts/research-team/integration324/multi-game-migration-v1/game-boundaries-entry-v1",
+      "/workspaces/quoridor/research-data/ai-sigma/multi-game-workflow129/python-boundary-acceptance-v1.json",
+      "/workspaces/quoridor/research-data/ai-sigma/multi-game-workflow129/python-boundary-source-controls-v1.tar.gz"
+    ],
+    "allocated_B": 4284416,
+    "logical_B": 3856814,
+    "entries": 207,
+    "scope": "ONE affected-current-extent point for this new Root Python unit only; Main relocated source is current extent, not new growth. Worker prior4.48MB point reused separately; shared target/cache, previousRoot holdings and active two checkouts NOT rewalked/recharged. New late tail/publication after this point, globalactual/fullfees UNKNOWN; no refund/lending."
+  },
+  "next_two_actual_first_useful_reads": {
+    "test_docs": {
+      "issue": "quoridor-4lc.324.12.9.5",
+      "actual_useful_read": "18Quoridor Python tests classified; common navigation/shell and single common ts-fixture retained; product spec HUD reference identified.",
+      "actual_context": "gpt6.1-sol/high/exactcwd/fullnever",
+      "ordering_deviation": "Runtime skill read before saved turn_context; no product writes before confirmation.",
+      "CPUPlan": "90446edc/493B/0644; CPU2/G18/F2G/host4/G0"
+    },
+    "othello": {
+      "issue": "quoridor-4lc.324.12.9.6",
+      "actual_useful_read": "No existing Othello; current manifest/lock pins inspected read-only and official WOF primary rules read. Only owned product source and Root proposal follow.",
+      "actual_context": "gpt6.1-sol/high/exactcwd/fullnever",
+      "ordering_deviation": "Initial pwd/read-only setup before saved context; no source mutation before confirmation. Initial missingpython127 correctedmetadata-python3; cloudstatus tool unavailable, not a source/science refusal.",
+      "CPUPlan": "b704b111/489B/0644; CPU16/G18/F2G/host4/G0"
+    }
+  },
+  "protected_original4_and_active_two_preserved": true,
+  "prior_archives_removals_successful_checks_not_replayed": true,
+  "science_models_RAW_sealed_or_paused_resume": 0,
+  "unknown_process_visibility_not_allhost_quiet": true,
+  "late_tail_globalactual_fullfees": "UNKNOWN"
+}
