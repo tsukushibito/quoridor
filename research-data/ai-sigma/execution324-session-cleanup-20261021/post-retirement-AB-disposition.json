@@ -1,0 +1,335 @@
+{
+  "at": "2026-10-21T12:09:03.244278+00:00",
+  "decisions": [
+    {
+      "thread_id": "01a11004-79f3-7c20-872c-432a2c347664",
+      "name": "A",
+      "assignments": [
+        {
+          "id": "quoridor-4lc.324.30",
+          "title": "Calibrate and evaluate a single-pair ProbCut before limited MPC extension",
+          "status": "in_progress",
+          "priority": 1,
+          "issue_type": "task",
+          "assignee": "codex:01a11004-79f3-7c20-872c-432a2c347664",
+          "owner": "tsukushibito@gmail.com",
+          "created_at": "2026-10-20T23:26:12Z",
+          "created_by": "codex:01a1376a-bfd3-75d2-bd64-61e9416b3b13",
+          "updated_at": "2026-10-21T02:43:36Z",
+          "started_at": "2026-10-20T23:27:33Z",
+          "lease_expires_at": "2026-10-20T23:32:33Z",
+          "heartbeat_at": "2026-10-20T23:27:33Z",
+          "labels": [
+            "continuation-active",
+            "current-priorities",
+            "dashboard",
+            "frame22",
+            "frame23",
+            "frame24",
+            "frame25"
+          ],
+          "dependencies": [
+            {
+              "issue_id": "quoridor-4lc.324.30",
+              "depends_on_id": "quoridor-4lc.324",
+              "type": "parent-child",
+              "created_at": "2026-10-20T23:26:12Z",
+              "created_by": "codex:01a1376a-bfd3-75d2-bd64-61e9416b3b13",
+              "metadata": "{}"
+            }
+          ],
+          "dependency_count": 0,
+          "dependent_count": 0,
+          "comment_count": 0,
+          "parent": "quoridor-4lc.324"
+        },
+        {
+          "id": "quoridor-4lc.376.1",
+          "title": "Implement fixed cheap static ordering and one bounded assessment",
+          "status": "in_progress",
+          "priority": 1,
+          "issue_type": "task",
+          "assignee": "codex:01a11004-79f3-7c20-872c-432a2c347664",
+          "owner": "tsukushibito@gmail.com",
+          "created_at": "2026-10-12T11:04:44Z",
+          "created_by": "codex:01a1153d-7900-7740-837f-c300ca54764f",
+          "updated_at": "2026-10-13T15:23:08Z",
+          "metadata": {
+            "dashboard": {
+              "stage": "Fixed80 interpretation and bounded cost inspection delivered; current349 source accepted",
+              "wait_kind": "dependency",
+              "next_action": "Await current349 finite measurement results or concrete assigned optimization scope",
+              "wait_reason": "No optimization is selected; original80 adoptionFAIL and intermediate pruning/correctness evidence retained",
+              "runtime_dirs": [],
+              "evidence_paths": [
+                "/workspaces/quoridor/.worktree/cheap-static-ordering376/.artifacts/cheap-static-ordering376-v1/adopted379-preparation-v1/common-image-binding-v1/handoff.json",
+                "/workspaces/quoridor/.artifacts/research-team/integration324/374-no-cost-prediction-v1/prepare376-delivery-v2.json"
+              ]
+            }
+          },
+          "labels": [
+            "continuation-active",
+            "current-priorities",
+            "dashboard",
+            "frame22",
+            "frame23",
+            "frame24",
+            "frame25"
+          ],
+          "dependencies": [
+            {
+              "issue_id": "quoridor-4lc.376.1",
+              "depends_on_id": "quoridor-4lc.376",
+              "type": "parent-child",
+              "created_at": "2026-10-12T11:04:44Z",
+              "created_by": "codex:01a1153d-7900-7740-837f-c300ca54764f",
+              "metadata": "{}"
+            }
+          ],
+          "dependency_count": 0,
+          "dependent_count": 0,
+          "comment_count": 15,
+          "parent": "quoridor-4lc.376"
+        },
+        {
+          "id": "quoridor-4lc.324.27",
+          "title": "Lazy SMP後続:共有TT置換から一因子ずつ改善し有限比較する",
+          "status": "in_progress",
+          "priority": 2,
+          "issue_type": "task",
+          "assignee": "codex:01a11004-79f3-7c20-872c-432a2c347664",
+          "owner": "tsukushibito@gmail.com",
+          "created_at": "2026-10-20T06:19:58Z",
+          "created_by": "codex:01a1376a-bfd3-75d2-bd64-61e9416b3b13",
+          "updated_at": "2026-10-20T08:44:40Z",
+          "started_at": "2026-10-20T06:38:00Z",
+          "lease_expires_at": "2026-10-20T06:43:00Z",
+          "heartbeat_at": "2026-10-20T06:38:00Z",
+          "dependency_count": 0,
+          "dependent_count": 0,
+          "comment_count": 0
+        },
+        {
+          "id": "quoridor-4lc.324.12.4",
+          "title": "Retire completed history-tie ordering candidates",
+          "status": "in_progress",
+          "priority": 2,
+          "issue_type": "task",
+          "assignee": "codex:01a11004-79f3-7c20-872c-432a2c347664",
+          "owner": "tsukushibito@gmail.com",
+          "created_at": "2026-10-19T10:53:23Z",
+          "created_by": "codex:01a1376a-bfd3-75d2-bd64-61e9416b3b13",
+          "updated_at": "2026-10-19T11:09:05Z",
+          "started_at": "2026-10-19T10:57:41Z",
+          "lease_expires_at": "2026-10-19T11:02:41Z",
+          "heartbeat_at": "2026-10-19T10:57:41Z",
+          "labels": [
+            "continuation-active",
+            "current-priorities",
+            "dashboard",
+            "frame22",
+            "frame23",
+            "frame24",
+            "frame25"
+          ],
+          "dependencies": [
+            {
+              "issue_id": "quoridor-4lc.324.12.4",
+              "depends_on_id": "quoridor-4lc.324.12",
+              "type": "parent-child",
+              "created_at": "2026-10-19T10:53:23Z",
+              "created_by": "codex:01a1376a-bfd3-75d2-bd64-61e9416b3b13",
+              "metadata": "{}"
+            }
+          ],
+          "dependency_count": 0,
+          "dependent_count": 0,
+          "comment_count": 0,
+          "parent": "quoridor-4lc.324.12"
+        },
+        {
+          "id": "quoridor-4lc.349",
+          "title": "現行BEST43探索全体のPerf計測で最適化対象を選ぶ",
+          "status": "in_progress",
+          "priority": 3,
+          "issue_type": "task",
+          "assignee": "codex:01a11004-79f3-7c20-872c-432a2c347664",
+          "owner": "tsukushibito@gmail.com",
+          "created_at": "2026-10-09T01:59:02Z",
+          "created_by": "codex:01a1153d-7900-7740-837f-c300ca54764f",
+          "updated_at": "2026-10-13T15:23:58Z",
+          "started_at": "2026-10-13T01:49:05Z",
+          "metadata": {
+            "dashboard": {
+              "stage": "Common measurement and lower-privilege correction accepted in genuine compatible image",
+              "wait_kind": "dependency",
+              "next_action": "Await serial finite measurement results or a concrete assigned repair; no further source implementation pending",
+              "wait_reason": "Remaining30 calls are configured in integration finite job; current numerical runtime belongs to quoridor-4lc.324",
+              "runtime_dirs": [],
+              "evidence_paths": [
+                "/workspaces/quoridor/.artifacts/research-team/integration324/376-fixed80-admission-v1/optional-storage-integration-result.json",
+                "/workspaces/quoridor/.artifacts/research-team/integration324/376-fixed80-admission-v1/common-measurement-selected.md",
+                "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/primary-controls-two-ai-v1/batch-005/request-STOP-binding.json",
+                "/workspaces/quoridor/.artifacts/research-team/integration324/arena-entry-v1/perf-sampled1-submit-return.json",
+                "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/primary-controls-two-ai-v1/batch-006/request-STOP-binding.json",
+                "/workspaces/quoridor/.worktree/cheap-static-ordering376/.artifacts/current-search-perf349-v1/configured-entry-v2/runs/01-A-sampled/collection-v2/collection-result.json"
+              ]
+            },
+            "dispatch_now": true,
+            "dashboard.stage": "Supported current Perf inlet source implementation",
+            "runtime_admitted": false,
+            "dashboard.wait_kind": "none",
+            "dashboard.next_action": "Implement truthful six-call projection and authentic standard-perf origin; fixed source assessment then actual custody/software36",
+            "dashboard.wait_reason": ""
+          },
+          "labels": ["dashboard", "deferred", "no-execution", "planning-only"],
+          "dependencies": [
+            {
+              "issue_id": "quoridor-4lc.349",
+              "depends_on_id": "quoridor-4lc.348.2",
+              "type": "blocks",
+              "created_at": "2026-10-09T01:59:02Z",
+              "created_by": "codex:01a1153d-7900-7740-837f-c300ca54764f",
+              "metadata": "{}"
+            },
+            {
+              "issue_id": "quoridor-4lc.349",
+              "depends_on_id": "quoridor-4lc",
+              "type": "parent-child",
+              "created_at": "2026-10-09T01:59:02Z",
+              "created_by": "codex:01a1153d-7900-7740-837f-c300ca54764f",
+              "metadata": "{}"
+            }
+          ],
+          "dependency_count": 1,
+          "dependent_count": 0,
+          "comment_count": 7,
+          "parent": "quoridor-4lc"
+        }
+      ],
+      "latest_turn": "01a15e54-015c-7c01-a9cc-aa0bb9a22497",
+      "latest_status": "completed",
+      "latest_error": null,
+      "current_status": {
+        "type": "idle"
+      },
+      "current_jobs": [],
+      "decision": "KEEP_CONCRETE_CURRENT_ASSIGNMENTS_OR_UNRETURNED_LIFETIME"
+    },
+    {
+      "thread_id": "01a11062-b120-73a1-8aa3-fe2cb922c7c0",
+      "name": "B",
+      "assignments": [
+        {
+          "id": "quoridor-4lc.324.33",
+          "title": "ETC: normal TT positive and all-child opportunity diagnosis",
+          "status": "in_progress",
+          "priority": 1,
+          "issue_type": "task",
+          "assignee": "codex:01a11062-b120-73a1-8aa3-fe2cb922c7c0",
+          "owner": "tsukushibito@gmail.com",
+          "created_at": "2026-10-21T05:07:13Z",
+          "created_by": "codex:01a1376a-bfd3-75d2-bd64-61e9416b3b13",
+          "updated_at": "2026-10-21T09:00:46Z",
+          "started_at": "2026-10-21T05:07:57Z",
+          "lease_expires_at": "2026-10-21T05:12:57Z",
+          "heartbeat_at": "2026-10-21T05:07:57Z",
+          "dependency_count": 0,
+          "dependent_count": 0,
+          "comment_count": 0
+        },
+        {
+          "id": "quoridor-4lc.324.25",
+          "title": "Compare half shallow negative main-history bonus and early ordering utility",
+          "status": "in_progress",
+          "priority": 1,
+          "issue_type": "task",
+          "assignee": "codex:01a11062-b120-73a1-8aa3-fe2cb922c7c0",
+          "owner": "tsukushibito@gmail.com",
+          "created_at": "2026-10-20T05:20:35Z",
+          "created_by": "codex:01a1376a-bfd3-75d2-bd64-61e9416b3b13",
+          "updated_at": "2026-10-20T07:58:01Z",
+          "started_at": "2026-10-20T05:24:27Z",
+          "lease_expires_at": "2026-10-20T05:29:27Z",
+          "heartbeat_at": "2026-10-20T05:24:27Z",
+          "labels": [
+            "continuation-active",
+            "current-priorities",
+            "dashboard",
+            "frame22",
+            "frame23",
+            "frame24",
+            "frame25"
+          ],
+          "dependencies": [
+            {
+              "issue_id": "quoridor-4lc.324.25",
+              "depends_on_id": "quoridor-4lc.324",
+              "type": "parent-child",
+              "created_at": "2026-10-20T05:20:35Z",
+              "created_by": "codex:01a1376a-bfd3-75d2-bd64-61e9416b3b13",
+              "metadata": "{}"
+            }
+          ],
+          "dependency_count": 0,
+          "dependent_count": 0,
+          "comment_count": 0,
+          "parent": "quoridor-4lc.324"
+        },
+        {
+          "id": "quoridor-4lc.324.10",
+          "title": "対局並列数の設定化と同一局AIの探索core共有",
+          "status": "in_progress",
+          "priority": 2,
+          "issue_type": "feature",
+          "assignee": "codex:01a11062-b120-73a1-8aa3-fe2cb922c7c0",
+          "owner": "tsukushibito@gmail.com",
+          "created_at": "2026-10-18T07:37:47Z",
+          "created_by": "codex:01a1376a-bfd3-75d2-bd64-61e9416b3b13",
+          "updated_at": "2026-10-18T11:08:12Z",
+          "started_at": "2026-10-18T07:44:56Z",
+          "lease_expires_at": "2026-10-18T07:49:56Z",
+          "heartbeat_at": "2026-10-18T07:44:56Z",
+          "labels": [
+            "continuation-active",
+            "current-priorities",
+            "dashboard",
+            "frame22",
+            "frame23",
+            "frame24",
+            "frame25"
+          ],
+          "dependencies": [
+            {
+              "issue_id": "quoridor-4lc.324.10",
+              "depends_on_id": "quoridor-4lc.324",
+              "type": "parent-child",
+              "created_at": "2026-10-18T07:37:48Z",
+              "created_by": "codex:01a1376a-bfd3-75d2-bd64-61e9416b3b13",
+              "metadata": "{}"
+            }
+          ],
+          "dependency_count": 0,
+          "dependent_count": 0,
+          "comment_count": 0,
+          "parent": "quoridor-4lc.324"
+        }
+      ],
+      "latest_turn": "01a15e54-197c-7461-aef0-554d152200da",
+      "latest_status": "completed",
+      "latest_error": null,
+      "current_status": {
+        "type": "idle"
+      },
+      "current_jobs": [],
+      "decision": "KEEP_CONCRETE_CURRENT_ASSIGNMENTS_OR_UNRETURNED_LIFETIME"
+    }
+  ],
+  "job_visibility": {
+    "observed": [],
+    "denied_cmdline_pids": [],
+    "scope": "One bounded current process-command snapshot plus explicit job config only; no runtime/global walk or all-host quiet claim"
+  },
+  "previous_four_archives_not_replayed": true,
+  "protected_three_main_windows_paused_learner_adapter_and_current_review_untouched": true
+}
