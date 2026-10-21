@@ -319,17 +319,15 @@ fn phase_shape(e: &Experiment) -> bool {
                     ]
         }
         "compare" if e.argv.get(1).is_some_and(|a| a == "measure") => {
-            if e.models.len() == 1 {
-                true
-            } else {
-                #[cfg(feature = "measurement")]
-                {
-                    e.models.is_empty() && crate::measurement::validate_evaluator_binding(e).is_ok()
-                }
-                #[cfg(not(feature = "measurement"))]
-                {
-                    false
-                }
+            #[cfg(feature = "measurement")]
+            {
+                e.models.len() == 1
+                    || (e.models.is_empty()
+                        && crate::measurement::validate_evaluator_binding(e).is_ok())
+            }
+            #[cfg(not(feature = "measurement"))]
+            {
+                e.models.len() == 1
             }
         }
         "compare" if e.argv.get(1).is_some_and(|a| a == "decisions") => {

@@ -5422,14 +5422,19 @@ def arena_observation(config, row):
                 and obs["admission_checked_ns"] < obs["deadline_ns"]
                 and obs["completed_depth"] is None
                 and obs["pv"] == []
-                and counters["direct_child_reaped"] is True
+                and counters["child_lifetime"] == "engine-session"
+                and counters["session_reply_received"] is True
+                and type(counters["session_sequence"]) is int
+                and counters["session_sequence"] > 0
+                and counters["direct_child_reaped"] is False
+                and counters["inflight_after_drain"] == 0
                 and counters["secondary"] == []
                 and counters["authority_legal"] is True
                 and type(counters["completed_simulations"]) is int
                 and counters["completed_simulations"] == settings["simulations"]
                 and type(counters["head_calls"]) is int
                 and 0 < counters["head_calls"] <= settings["max_head_calls"],
-                "original Claustrophobia completed call/clock/direct cleanup",
+                "original Claustrophobia matched session reply within caller clock",
             )
             accepted.append(obs["action"])
             continue
@@ -5760,7 +5765,48 @@ def arena_reference_report(config, files, values=None, expected_build=None):
             row["failure"] = attribution
         rows.append(row)
     manifest = strict(values["native_manifest"])
-    if any(engine["kind"] == "claustrophobia" for engine in config["engines"]):
+    c_engines = {
+        index
+        for index, engine in enumerate(config["engines"])
+        if engine["kind"] == "claustrophobia"
+    }
+    c_sessions = {}
+    if c_engines:
+        for closed in report["pump"]["upstream_sessions"]:
+            index = closed["engine_index"]
+            require(
+                type(index) is int
+                and index in c_engines
+                and index not in c_sessions
+                and closed["direct_child_reaped"] is True
+                and type(closed["exit_code"]) is int
+                and closed["exit_code"] == 0
+                and closed["stdout_eof"] is True
+                and closed["stderr_eof"] is True
+                and closed["errors"] == []
+                and closed["unconsumed_stdout"] == ""
+                and closed["success"] is True
+                and type(closed["seconds"]) in (int, float)
+                and math.isfinite(closed["seconds"])
+                and closed["seconds"] >= 0,
+                "each persistent C child closed by EOF, direct reap and final drain",
+            )
+            c_sessions[index] = closed
+        require(set(c_sessions) == c_engines, "missing C engine session cleanup")
+        for index, closed in c_sessions.items():
+            calls = [
+                obs for row in rows for obs in row["observations"] if obs["engine_index"] == index
+            ]
+            require(
+                type(closed["turns_requested"]) is int
+                and closed["turns_requested"] == len(calls)
+                and all(
+                    type(obs["counters"].get("session_sequence")) is int
+                    and obs["counters"]["session_sequence"] == sequence
+                    for sequence, obs in enumerate(calls, 1)
+                ),
+                "C engine matching ordered one-reply sequence; no missing call",
+            )
         require(
             type(config.get("management_cpu_core")) is int and config["management_cpu_core"] >= 0,
             "explicit Claustrophobia main CPU owner required",
@@ -5807,7 +5853,26 @@ def arena_reference_report(config, files, values=None, expected_build=None):
                         "actual Claustrophobia main/direct-child ownership required",
                     )
                     core = config["cpu_cores"][observation["engine_index"]]
-                    for point in (execution["started"], execution["returned"]):
+                    closed = c_sessions[observation["engine_index"]]
+                    ready = counters.get("session_ready")
+                    require(
+                        isinstance(ready, dict)
+                        and ready == closed["ready"]
+                        and ready.get("session") == "ready"
+                        and ready.get("upstream") == "ae093653e62ad700e201706fa5ed767093d0d68e"
+                        and closed["child_pid"] == child
+                        and ready["head"]["logical_rows_attempted"] == 0
+                        and ready["head"]["constructor_model_calls"] == 0
+                        and type(ready["setup_seconds"]) in (int, float)
+                        and math.isfinite(ready["setup_seconds"])
+                        and ready["setup_seconds"] >= 0,
+                        "same actual engine initialization, no setup model forward",
+                    )
+                    for point in (
+                        ready["execution"],
+                        execution["started"],
+                        execution["returned"],
+                    ):
                         require(
                             isinstance(point, dict)
                             and set(point) == {"pid", "ppid", "tid", "core", "affinity"}
@@ -5823,35 +5888,43 @@ def arena_reference_report(config, files, values=None, expected_build=None):
                         )
                     times = [
                         observation["caller_started_ns"],
-                        counters.get("child_handle_acquired_ns"),
-                        counters.get("child_reaped_ns"),
-                        counters.get("child_pipes_drained_ns"),
                         observation["returned_ns"],
+                        observation["admission_checked_ns"],
+                        observation["accepted_ns"],
                     ]
                     require(
                         all(type(t) is int and t >= 0 for t in times)
                         and times == sorted(times)
-                        and counters.get("direct_child_reaped") is True
-                        and type(counters.get("exit_code")) is int
-                        and counters["exit_code"] == 0
+                        and counters.get("child_lifetime") == "engine-session"
+                        and counters.get("session_reply_received") is True
+                        and counters.get("direct_child_reaped") is False
+                        and counters.get("exit_code") is None
                         and counters.get("secondary") == []
-                        and counters.get("child_stdout_eof") is True
-                        and counters.get("child_stderr_eof") is True
+                        and counters.get("child_stdout_eof") is False
+                        and counters.get("child_stderr_eof") is False
+                        and all(
+                            counters.get(field) is None
+                            for field in (
+                                "child_handle_acquired_ns",
+                                "child_reaped_ns",
+                                "child_pipes_drained_ns",
+                            )
+                        )
                         and type(counters.get("inflight_after_drain")) is int
                         and counters["inflight_after_drain"] == 0
                         and type(counters.get("authority_receipt_ns")) is int
                         and counters["authority_receipt_ns"] == observation["returned_ns"]
                         and type(counters.get("drain_finished_ns")) is int
                         and counters["drain_finished_ns"] == observation["returned_ns"]
-                        and counters.get("initialization_in_clock") is True
-                        and counters.get("fresh_search_and_model_per_turn") is True
+                        and counters.get("initialization_in_clock") is False
+                        and counters.get("fresh_search_and_model_per_turn") is False
                         and observation["stop"] == "completed_upstream_call"
                         and observation["completed_depth"] is None
                         and "last_completed_iteration_ns" in observation
                         and observation["last_completed_iteration_ns"] is None
                         and "completed_iteration_counters" in observation
                         and observation["completed_iteration_counters"] is None,
-                        "Claustrophobia whole-caller completion/reap/drain, not depth callbacks",
+                        "C framed whole-caller completion; session EOF/reap belongs final cleanup",
                     )
                     continue
                 require(

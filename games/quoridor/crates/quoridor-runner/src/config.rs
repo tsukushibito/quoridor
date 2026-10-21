@@ -526,6 +526,7 @@ impl Config {
                     })
                     || engine.model.is_none()
                     || engine.time_ms.is_none()
+                    || self.wall_seconds.is_none()
                     || engine.simd
                     || engine.lmr
                     || engine.lmr_method.is_some()

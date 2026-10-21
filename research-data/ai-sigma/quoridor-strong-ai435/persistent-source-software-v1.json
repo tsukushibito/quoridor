@@ -1,0 +1,518 @@
+{
+  "scope": "435 persistent Claustrophobia ownership and H/J source integration only, no actual model/clock/game/teacher/fit qualification",
+  "baseCommit": "2b05de1f2214b8c1d7a1dde43a0272703733b4d7",
+  "MainSource": [
+    {
+      "path": "games/quoridor/crates/quoridor-runner/src/claustrophobia.rs",
+      "bytes": 9141,
+      "sha256": "58501ea3401cbc74dbf0a238f19d7a49886f4878c7caa655f42242735faa18c6",
+      "mode": "0644"
+    },
+    {
+      "path": "games/quoridor/crates/quoridor-runner/src/arena.rs",
+      "bytes": 88327,
+      "sha256": "6439b7065845520555cbd5bb2a943f4c0a49b118b21dbb777aea32134bfae8df",
+      "mode": "0644"
+    },
+    {
+      "path": "games/quoridor/crates/quoridor-runner/src/arena_manifest.rs",
+      "bytes": 48561,
+      "sha256": "8baceb3103cd59defa0b0cca4f88e98e3edfd857e31b3d58acdfe8e5aa24e071",
+      "mode": "0644"
+    },
+    {
+      "path": "games/quoridor/crates/quoridor-runner/src/config.rs",
+      "bytes": 46633,
+      "sha256": "cbdd025621a8e49a612cb7c3d62901a0001ebbeab95e2a9f74b16ebbe32de22d",
+      "mode": "0644"
+    },
+    {
+      "path": "games/quoridor/python/quoridor_training/claustrophobia.py",
+      "bytes": 13641,
+      "sha256": "8b415b93a79e7df61f7fb0c1a4dc173ee70c8190962ad6df6ae7d35c9d610e2d",
+      "mode": "0644"
+    },
+    {
+      "path": "games/quoridor/python/quoridor_training/public_static_prepare.py",
+      "bytes": 20072,
+      "sha256": "eea51b91ca086fb015c33b2e642381c5b2cc44476b18c21f4ebef7ebf20cd169",
+      "mode": "0644"
+    },
+    {
+      "path": "games/quoridor/python/quoridor_training/train.py",
+      "bytes": 140906,
+      "sha256": "0bf56388112e896f6c333a29ab054eab6e25800aeb35dd31d5e307970b3380e9",
+      "mode": "0644"
+    },
+    {
+      "path": "games/quoridor/python/quoridor_training/policy_value_training.py",
+      "bytes": 14811,
+      "sha256": "8969a25f9b75551e7206402811938b3f735b3bb57d5de7a105fe9163b4b49ae1",
+      "mode": "0644"
+    },
+    {
+      "path": "games/quoridor/python/quoridor_training/test_claustrophobia_session.py",
+      "bytes": 3163,
+      "sha256": "05ccd79f8c2e371986b6c83d772fa72acb02f9c6cd6d27aeb66878367d0c04aa",
+      "mode": "0644"
+    },
+    {
+      "path": "games/quoridor/python/quoridor_training/test_prefix_family_partition.py",
+      "bytes": 3029,
+      "sha256": "2a8376d22191f97b5ca1d03599863894c6ea4b32a4b79d1b983e3c50e7809b90",
+      "mode": "0644"
+    },
+    {
+      "path": "games/quoridor/python/quoridor_training/test_joint_stopping.py",
+      "bytes": 2752,
+      "sha256": "f4bf11630b1c88fa37ad811d9c09691df7399114f37bcef5ea88730a068d5c3e",
+      "mode": "0644"
+    },
+    {
+      "path": "games/quoridor/configs/arena/claustrophobia.engine.example.json",
+      "bytes": 721,
+      "sha256": "34c96dcb72c36c69d972fc81d8081c2b3b472386e7559f811a46ea92849ff71e",
+      "mode": "0644"
+    },
+    {
+      "path": "games/quoridor/configs/training/joint-policy-value-head.json",
+      "bytes": 2133,
+      "sha256": "a186931e8335a03d2834ada19f3db01179594a99bb31eb3ffffdd7984a282e53",
+      "mode": "0644"
+    },
+    {
+      "path": "games/quoridor/configs/training/joint-policy-value-joint.json",
+      "bytes": 2479,
+      "sha256": "906e8e555abad76bb90ac54ad98efac811115108737b1b21cdbd00597c3a48e5",
+      "mode": "0644"
+    },
+    {
+      "path": "games/quoridor/crates/quoridor-runner/src/resources.rs",
+      "bytes": 21261,
+      "sha256": "81f73f5aa2a2da607a64820d74af54be616b243a61c5851518297e488dfa0def",
+      "mode": "0644"
+    },
+    {
+      "path": "games/quoridor/crates/quoridor-runner/src/claustrophobia/session.rs",
+      "bytes": 28186,
+      "sha256": "d6cfe01a6dd0f9f31928ef43cb3a4119d52a0725e831ad09bb56100b1174ba14",
+      "mode": "0644"
+    },
+    {
+      "path": "games/quoridor/crates/quoridor-runner/src/runtime.rs",
+      "bytes": 320984,
+      "sha256": "b0abe35daee30aabea898abbe441265bd8e1182761f5763bc75d39863022e420",
+      "mode": "0644"
+    },
+    {
+      "path": "games/quoridor/crates/quoridor-runner/src/research_manifest.rs",
+      "bytes": 81456,
+      "sha256": "64dca16aa2df8ed7229e12e161d23f4a98d26f1ffa4d9b29cc6a09080d18cdbd",
+      "mode": "0644"
+    },
+    {
+      "path": "scripts/dev/research-lifecycle.py",
+      "bytes": 396563,
+      "sha256": "fd1e27e9bcc9096b0dfcc0d319c0ec1f8edc475c4c21900ad718fd920b068a7c",
+      "mode": "0644",
+      "RootRuff100SemanticIdentity": true
+    }
+  ],
+  "nativeImage": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/software-v6/image-f3ae2647aaf499d17caa1e9390cd3a011c0545c9594059bd4b89559f1015f791/quoridor-runner",
+    "sha256": "f3ae2647aaf499d17caa1e9390cd3a011c0545c9594059bd4b89559f1015f791",
+    "bytes": 9715240,
+    "mode": "0755"
+  },
+  "software": {
+    "job": {
+      "job_id": "e5bd753f-de5c-4eb3-86d8-1af33f498959",
+      "outcome": "succeeded",
+      "error": null,
+      "error_notes": [],
+      "exit_code": 0,
+      "finished_at": "2026-10-21T20:07:19.880719+00:00",
+      "wall_seconds": 133.80528880504426,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+      "cleanup_complete": true,
+      "cleanup_errors": [],
+      "log_bytes_seen": 864,
+      "log_bytes_retained": 864
+    },
+    "commands": [
+      {
+        "name": "R1-exited-leader-pipe-holder",
+        "exit_code": 0,
+        "wall_seconds": 7.331788716954179
+      },
+      {
+        "name": "O1-cleanup-failure-classification",
+        "exit_code": 0,
+        "wall_seconds": 0.06939301802776754
+      },
+      {
+        "name": "related-nominal-changed-close",
+        "exit_code": 0,
+        "wall_seconds": 0.05766521696932614
+      },
+      {
+        "name": "runner-clippy",
+        "exit_code": 0,
+        "wall_seconds": 5.955575280007906
+      },
+      {
+        "name": "measurement-cfg-check",
+        "exit_code": 0,
+        "wall_seconds": 8.04478197300341
+      },
+      {
+        "name": "runner-release",
+        "exit_code": 0,
+        "wall_seconds": 112.05257487809286
+      }
+    ],
+    "source22BoundBeforeAfter": true,
+    "newTests": "one exited-shell-leader/same-group-pipe-holder fault, one cleanup-versus-thread-panic/primary-error case, related normal changed-close cat regression;1test each",
+    "compile": "runner Clippy alltargets warnings-as-errors, measurement feature compile and release PASS",
+    "tensorMetric": "unchanged a034923f actual synthetic CPU tensor1PASS reused, not replayed",
+    "math": "No upstreamMCTS/StaticHead/residual/Alpha/Sigma worker body mathematical change; caller/session ownership and reporting changed",
+    "RootFeatureCfg": "Equivalent existing research_manifest default/measurement bool style, body/caller helpers retained under measurement cfg, no allow suppression"
+  },
+  "sourceReview": {
+    "original": "SOURCE_NOT_CLEAR R1/O1 report3901da2764635f88256f672218c98eb09a426b02a37c02e0ffffe36895e9ae3d preserved",
+    "causalFollowup": "SOURCE_CLEAR source-only report76de00c5b57db27343006994c9828b8731954b22e9f262009d1f6d044586317a",
+    "scope": "unreaped direct-child PID/group anchor, group/pipe settlement+final wait and failure cache, no postreap stale group signal; only actual join panic ->worker_panicked, C cleanup/poison ->upstream_cleanup_failed, primary retained",
+    "limit": "same-group Linux custody, no escaped-daemon/universal quiet or model-strength proof",
+    "reviewIssueClosed": "quoridor-4lc.435.2 closed once same actor/exact Root reason; parent execution continues"
+  },
+  "commonCaller": {
+    "proposalSHA256": "ddec12ef60558724cafa324af49cd4c710a80ef793049dad8fd04cb43eb46efb",
+    "changedSemanticOwners": ["arena_observation", "arena_reference_report"],
+    "allOtherTopLevelASTExact": true,
+    "finalSHA256": "fd1e27e9bcc9096b0dfcc0d319c0ec1f8edc475c4c21900ad718fd920b068a7c",
+    "meaning": "per-turn session sequence/reply accepted within clock separately from final persistent child EOF/group/direct-reap closure; old per-turn reaped qualification is not reused"
+  },
+  "formatter": {
+    "originalRootCheck": "adopted-python-format-check FAILED for7files; preserved. Worker --config pyproject.toml has no Ruff config and source style differs from shared research-quality Ruff100/py311.",
+    "normalized": [
+      {
+        "path": "/workspaces/quoridor/games/quoridor/python/quoridor_training/claustrophobia.py",
+        "qualifiedWTBeforeSHA256": "af0b180a01b21266c368638d847a19efcc31bafa9f9c8b2031e08864fcae9406",
+        "MainAfterSHA256": "8b415b93a79e7df61f7fb0c1a4dc173ee70c8190962ad6df6ae7d35c9d610e2d",
+        "bytes": 13641,
+        "ASTExact": true
+      },
+      {
+        "path": "/workspaces/quoridor/games/quoridor/python/quoridor_training/public_static_prepare.py",
+        "qualifiedWTBeforeSHA256": "4b70ae0b4a803613681eba7ba175d38e791bd8978b170c29696ebd3b6912ee00",
+        "MainAfterSHA256": "eea51b91ca086fb015c33b2e642381c5b2cc44476b18c21f4ebef7ebf20cd169",
+        "bytes": 20072,
+        "ASTExact": true
+      },
+      {
+        "path": "/workspaces/quoridor/games/quoridor/python/quoridor_training/train.py",
+        "qualifiedWTBeforeSHA256": "0a599e06583eda689d6410548cf30ce6fd97e9cdc66f2c72da598e583302f493",
+        "MainAfterSHA256": "0bf56388112e896f6c333a29ab054eab6e25800aeb35dd31d5e307970b3380e9",
+        "bytes": 140906,
+        "ASTExact": true
+      },
+      {
+        "path": "/workspaces/quoridor/games/quoridor/python/quoridor_training/policy_value_training.py",
+        "qualifiedWTBeforeSHA256": "41809acad1eeeb41b542a2f72c324c9c6095aa15f47df36b0fea3c3d76007b91",
+        "MainAfterSHA256": "8969a25f9b75551e7206402811938b3f735b3bb57d5de7a105fe9163b4b49ae1",
+        "bytes": 14811,
+        "ASTExact": true
+      },
+      {
+        "path": "/workspaces/quoridor/games/quoridor/python/quoridor_training/test_claustrophobia_session.py",
+        "qualifiedWTBeforeSHA256": "e549685194d05c5db60afbce0b04a02fb8c630414de3d907c2d8700179dae663",
+        "MainAfterSHA256": "05ccd79f8c2e371986b6c83d772fa72acb02f9c6cd6d27aeb66878367d0c04aa",
+        "bytes": 3163,
+        "ASTExact": true
+      },
+      {
+        "path": "/workspaces/quoridor/games/quoridor/python/quoridor_training/test_prefix_family_partition.py",
+        "qualifiedWTBeforeSHA256": "d5a1fab51d84a36074137c2fc5de93160edd5d29bd6a72cd3ed2e6eaa3e2eca8",
+        "MainAfterSHA256": "2a8376d22191f97b5ca1d03599863894c6ea4b32a4b79d1b983e3c50e7809b90",
+        "bytes": 3029,
+        "ASTExact": true
+      },
+      {
+        "path": "/workspaces/quoridor/games/quoridor/python/quoridor_training/test_joint_stopping.py",
+        "qualifiedWTBeforeSHA256": "15d0c93d48c9212dcb8b5992f59378d032741843cd91f8f3658ecf8af0267a93",
+        "MainAfterSHA256": "f4bf11630b1c88fa37ad811d9c09691df7399114f37bcef5ea88730a068d5c3e",
+        "bytes": 2752,
+        "ASTExact": true
+      }
+    ],
+    "behavior": "AST exact, only whitespace/style, no successful numerical/software suite replay"
+  },
+  "failures": {
+    "softwareV1": "explicit stableCargo initially selected old rustc via PATH; automatic old toolchain download and --check-cfg failure preserved",
+    "softwareV2": "runtime json macro recursion limit, fixed split20+26 fields, no crate limit change",
+    "softwareV3": "wrong --bin filter selected0tests, required count assertion correctly FAILED",
+    "softwareV4": "four old fixture struct constructors missing new closure field;4line fix only",
+    "softwareV5": "old nominal-cat1PASS then Clippy existing feature bool warning; old cat not currentclose PASS",
+    "integrationFormat": "Root format check found7 adopted files not shared Ruff100; Main normalized, full Python AST exact and new hashes recorded, qualified Rust/source behavior not replayed"
+  },
+  "cost": {
+    "successfulSoftwareOuterSeconds": 133.80528880504426,
+    "nestedCommands": "included in outer, not added",
+    "priorFailures": "original runtime outer values retained in archive individually, never converted/refunded",
+    "RSSpeak_B": null
+  },
+  "jointSource": {
+    "familyUpper": 512,
+    "plannedSplit": {
+      "T": 384,
+      "V": 64,
+      "H": 64
+    },
+    "observationsPerFamilyUpper": 64,
+    "originalRowsUpper": 32768,
+    "trueLROrientationsUpper": 65536,
+    "HLabels": 0,
+    "headPhase": "Cedar shared/value warmstart held; fresh policy209 seed fixed in actual later config; freeze=value LR1e-3 up to4T",
+    "jointPhase": "same Cedar shared/value plus saved head, freeze=none freshAdam LR3e-5 MSE+.1legalCE min8Tmax64T",
+    "status": "examples and stopper/metrics/source only; no family/history/H-exclusion input custody, teacher labels, optimizer fit or candidate produced"
+  },
+  "remaining": {
+    "A": "Bind current unsealed models and distinctdev4families; actual persistent setup and100ms/5ms 8games/200ply normal path UNRUN. No5s extension/fallback/strength claim.",
+    "B": "Prefer fresh legal family trajectories if oldunsealed independence not proved; actual split/draws/limits/storage/resources must resolve before teacher/fit. No18.2five-row reuse as realpilot.",
+    "C": "Later samejointvalue MCTS-vs-alpha and alpha-vs-Cedar finite contrasts only; no ordering/grid/hybrid yet"
+  },
+  "protected": "Cedar/default/models and all USERPAUSE323/342.17/prep/pipeline/seals/newE/oldfits96/RAWFAILEDNULLUNKNOWN, decimal50GB unchanged",
+  "archive": {
+    "path": "research-data/ai-sigma/quoridor-strong-ai435/persistent-source-software-v1-checks.tar.gz",
+    "bytes": 20159,
+    "sha256": "73b8690fdc05bcb33cfc5c383c2aad74517fb5229b5f6ade3795408e78f0dbed",
+    "members": [
+      {
+        "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/software-v1/runtime/result.json",
+        "bytes": 522,
+        "sha256": "18c0d8005d14f46d05444d8df394750987a5a3599526b4c4826ee6863f817079",
+        "mode": "0600"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/software-v1/runtime/output.log",
+        "bytes": 740,
+        "sha256": "acb38d488530cebb2a4f90ba46a5535becea8a7e6778b75db563439c85f52856",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/software-v2/runtime/result.json",
+        "bytes": 522,
+        "sha256": "09e367abf75ccdbb5e489e1dadd76a5f3592897664f3bfcc58b0b557d7657285",
+        "mode": "0600"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/software-v2/runtime/output.log",
+        "bytes": 740,
+        "sha256": "5ef76617aa3e89eb3823689bb74ac7fbbd76fd984fb94a56980b26d0eb747b27",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/software-v3/runtime/result.json",
+        "bytes": 522,
+        "sha256": "2b3d49d488682067b93a7d7ca165d101756a09aa2bea7effbf1a0a613216ef9f",
+        "mode": "0600"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/software-v3/runtime/output.log",
+        "bytes": 326,
+        "sha256": "9fa6f423fd285922706e6fdec2622ec589d3d5b5c3fbbc0861c6aa9937c248b8",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/software-v4/runtime/result.json",
+        "bytes": 522,
+        "sha256": "a40c8132da4aa9383d889d936bc6ae573c06f2a8cd5b765d39278b36a538f0cc",
+        "mode": "0600"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/software-v4/runtime/output.log",
+        "bytes": 721,
+        "sha256": "0930ec1a0215bf9223dc4daec3e2f8ce2ca3840052a909740201013a7e986482",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/software-v5/runtime/result.json",
+        "bytes": 523,
+        "sha256": "7ea1ad969084980d64a079805370c26e024b3438dadfd7375fddab414e6b5866",
+        "mode": "0600"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/software-v5/runtime/output.log",
+        "bytes": 619,
+        "sha256": "c4440027b9d8f751385f90540f36f21c403ca23a2d0bffe2e1433a6446899bc7",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/software-v6/runtime/result.json",
+        "bytes": 526,
+        "sha256": "d1b1492c1b41e22e86c39cd95ed92465ab56ba5b6907a00f2e82ed98d4892945",
+        "mode": "0600"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/software-v6/runtime/output.log",
+        "bytes": 864,
+        "sha256": "258c29b95a1355b465172e78aa1630bf52e44704a21ae92cfe4bef450d102b1b",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/software-v6/qualification.json",
+        "bytes": 7615,
+        "sha256": "ea531656e62fe1af2c275025f73d2a305badc991a743798082d51a37e97e2b79",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/software-v6/collection.json",
+        "bytes": 20977,
+        "sha256": "2734c9d785960712edaab818c704477c401fbb7872e7b8b7fd60f6f8fc10f8b6",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/tensor-metric-software-v1/qualification.json",
+        "bytes": 4638,
+        "sha256": "438e35822cd603658afff780f14754a58a38ce5fa986601f34ec2e4775c1a725",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/tensor-metric-software-v1/runtime/result.json",
+        "bytes": 524,
+        "sha256": "b31589570ba481e63e803bda490664662b4add384dc88fb117e13e11a66ad59a",
+        "mode": "0600"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/common-feature-cfg-v1/binding.json",
+        "bytes": 1839,
+        "sha256": "66d5d084c1c66b89a89706909f49b81215982bf02404d3341d01f7e3945b8737",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/source-adoption-v1/adoption.json",
+        "bytes": 10779,
+        "sha256": "ca896d33194511c7c465c12d8221ea4733542a810716f03a6779f942e600a3ae",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/source-adoption-v1/adopted-python-format-check.log",
+        "bytes": 584,
+        "sha256": "731a3f5c2c0bc1a2cf6a9d1e6c7e78791c423a3021924e447f04609390590a8a",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/source-adoption-v1/adopted-python-format-check.returned.json",
+        "bytes": 4667,
+        "sha256": "3ea5e7078268778a844c936709c9068445a5f521fabde8b9b0cda182a0aa6301",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/software-v6/R1-exited-leader-pipe-holder.log",
+        "bytes": 1228,
+        "sha256": "8d1258a81b5be0bc3e09258165cdd3bf6b64fa7d0cc1e28e0b4556e090bfe17c",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/software-v6/R1-exited-leader-pipe-holder.returned.json",
+        "bytes": 3562,
+        "sha256": "1deec800680657c68023bfd1fac713637212105d39acd43dd54802f2bdac8fdc",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/software-v6/O1-cleanup-failure-classification.log",
+        "bytes": 515,
+        "sha256": "35cf661364017a5252443fed0c55518703d07bb4421ecc473965b3228a90ae6d",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/software-v6/O1-cleanup-failure-classification.returned.json",
+        "bytes": 3580,
+        "sha256": "b1aecedc2b742d4a366560ee00ae5db00818f371760ae8afe682e97786be2207",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/software-v6/related-nominal-changed-close.log",
+        "bytes": 485,
+        "sha256": "c350ab4040baf9dd7029f921f98bc8d75d03143f0fe1ee43d16964ae6a6e7a41",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/software-v6/related-nominal-changed-close.returned.json",
+        "bytes": 3520,
+        "sha256": "99d248494ba9db2c5cedefb4f9adb2791425b8acf2da87b91eacac985e6ef09a",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/software-v6/runner-clippy.log",
+        "bytes": 186,
+        "sha256": "675da14d69952821c6b027df5798971cfcf2f89efce02b9dda8b09d23f8ac24c",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/software-v6/runner-clippy.returned.json",
+        "bytes": 3264,
+        "sha256": "cb75dfcad3b09bb2662a104dea86f571fea1b7ce40624b7530e5d48148866e18",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/software-v6/measurement-cfg-check.log",
+        "bytes": 802,
+        "sha256": "40e24627ea6896dc6ed5763aadc2c6c64dd80d2a6d0808b6e4227c3abbbee38b",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/software-v6/measurement-cfg-check.returned.json",
+        "bytes": 3258,
+        "sha256": "1cb27129470e977138cefc697043626a58480cff407fd5787776af9cbfc0a796",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/software-v6/runner-release.log",
+        "bytes": 994,
+        "sha256": "17d23c0058953d45b835aa3ba9af73311d45d61a280caee5d4bc10d9585871d4",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/software-v6/runner-release.returned.json",
+        "bytes": 3172,
+        "sha256": "818fed4595f8f8edbed4206d067107cbe90e4a1887ae5e3bc1d5b082b7949b6a",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/persistent-boundary-review-v1/reviewer/report.md",
+        "bytes": 4810,
+        "sha256": "3901da2764635f88256f672218c98eb09a426b02a37c02e0ffffe36895e9ae3d",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/persistent-boundary-review-v1/reviewer/receipt.json",
+        "bytes": 8520,
+        "sha256": "60de9705d6e4ed32ae85139ed5431bcad8f6a7fa9187f41e930326e438a9a975",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/persistent-boundary-review-v1/reviewer/R1-O1-followup-v5/report.md",
+        "bytes": 4638,
+        "sha256": "76de00c5b57db27343006994c9828b8731954b22e9f262009d1f6d044586317a",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/persistent-boundary-review-v1/reviewer/R1-O1-followup-v5/receipt.json",
+        "bytes": 4757,
+        "sha256": "cf5e09e1ad45c7f14edeee2c6c313b7eede1dd6097cacaf7b176a9f2990f041c",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/persistent-boundary-review-v1/reviewer/accepted-close-v1/closure-receipt.json",
+        "bytes": 8119,
+        "sha256": "6551deb2432e4327469c2f2b8c59b9345e932112de1c0bbef3849865014792df",
+        "mode": "0644"
+      }
+    ],
+    "validation": "one forward exact bytes/modes/names/CRC/EOF PASS; no extraction; source/software evidence only, no model/data payload"
+  }
+}

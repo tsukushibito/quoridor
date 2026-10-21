@@ -164,7 +164,10 @@ def prepare_statistics(cache, output):
         write(output / "result.json", result)
         return result
     write(output / "train-only-scale.json", {**statistics, "binding": binding})
-    write(output / "train-only-constant.json", {"row_mean_constant": constant, "binding": binding})
+    write(
+        output / "train-only-constant.json",
+        {"row_mean_constant": constant, "binding": binding},
+    )
     result = {
         **binding,
         "scale_sha": sha(output / "train-only-scale.json"),
@@ -185,7 +188,10 @@ def _finalize_training(output, actions, primary_error, facts, *, prior_failures=
         before = len(failures)
         _attempt_finalization(stage, action, failures)
         stages.append(
-            {"stage": stage, "status": "FAILED" if len(failures) > before else "COMPLETED"}
+            {
+                "stage": stage,
+                "status": "FAILED" if len(failures) > before else "COMPLETED",
+            }
         )
     if not failures:
         return
@@ -1190,6 +1196,9 @@ def train(
             measured = StaticMeasurements(corpus.pairs)
             actual_rows = 0
             joint_policy_sse = joint_mass = 0.0
+            joint_diagnostics = dict(
+                teacher_entropy=0.0, policy_kl=0.0, policy_top1=0.0, policy_top3=0.0
+            )
             for (
                 pair,
                 orientation,
@@ -1222,6 +1231,15 @@ def train(
                     mass = float(weight.sum())
                     joint_policy_sse += float(terms["policy_cross_entropy"].cpu()) * mass
                     joint_mass += mass
+                    from .policy_value_training import policy_diagnostics
+
+                    for key, value in policy_diagnostics(
+                        logits,
+                        torch.from_numpy(probability).to(device),
+                        torch.from_numpy(legal).to(device),
+                        torch.from_numpy(weight).to(device),
+                    ).items():
+                        joint_diagnostics[key] += value * mass
                 else:
                     result = model(*inputs)
                 sync()
@@ -1240,6 +1258,7 @@ def train(
             }
             if joint_mode:
                 report["policy_cross_entropy"] = joint_policy_sse / joint_mass
+                report.update({k: v / joint_mass for k, v in joint_diagnostics.items()})
                 report["joint_objective"] = (
                     joint["settings"]["value_weight"] * report["target_mse"]
                     + joint["settings"]["policy_weight"] * report["policy_cross_entropy"]
@@ -1664,6 +1683,22 @@ def train(
                         stop = stop and training_seen >= static_controls["minimum_training_draws"]
                         if scheduler is not None:
                             scheduler.step(loss)
+                        if joint_mode:
+                            from .policy_value_training import observe_joint_overfit
+
+                            stop = (
+                                observe_joint_overfit(
+                                    static_controls,
+                                    static_progress,
+                                    loss,
+                                    record["train"]["joint_objective"],
+                                    training_seen,
+                                )
+                                or stop
+                            )
+                            record["joint_overfit_observations"] = static_progress[
+                                "joint_overfit_observations"
+                            ]
                     improved = loss < best_loss
                     panel = record["train"]["target_mse"]
                     if static_progress["initial_Tpanel_mse"] is None:
@@ -2589,7 +2624,10 @@ def compact_measurements(
         for dimension, codes in [
             ("source", source),
             ("phase", phase),
-            ("original_train_input_known", corpus.train_known_groups[groups].astype(np.int8)),
+            (
+                "original_train_input_known",
+                corpus.train_known_groups[groups].astype(np.int8),
+            ),
         ]:
             for code in np.unique(codes):
                 mask = codes == code
@@ -2903,7 +2941,8 @@ def training_statistics(corpus, indices, column, size=4096):
             {
                 "mu_f32": mu64.astype(np.float32).tolist(),
                 "sigma_f32": np.maximum(
-                    np.sqrt(squared / len(indices)).astype(np.float32), np.float32(0.0001)
+                    np.sqrt(squared / len(indices)).astype(np.float32),
+                    np.float32(0.0001),
                 ).tolist(),
                 "distance_input_units": "canonical-integer-D/80",
                 "fit_partition": "train",
@@ -3079,7 +3118,11 @@ def guarded_train(config_path):
         from .public_replay import admit
 
         admit(cfg["cache"], cfg["fit_config"], cfg.get("input_binding"), fit_config)
-    from quoridor_runtime.cycle_process import GPUResources, cancellation_signals, execute
+    from quoridor_runtime.cycle_process import (
+        GPUResources,
+        cancellation_signals,
+        execute,
+    )
 
     for path, digest in cfg["expected_files_sha256"].items():
         if sha(path) != digest:

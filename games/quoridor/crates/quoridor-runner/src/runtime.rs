@@ -967,6 +967,8 @@ pub struct PumpProfile {
     pub evaluator_initialization_seconds: f64,
     pub backend_initialization_seconds: f64,
     pub backend_cleanup_seconds: f64,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub upstream_sessions: Vec<serde_json::Value>,
     pub queue_wait_seconds_sum: f64,
     pub queue_wait_seconds_max: f64,
     pub queued_requests_peak: usize,
@@ -2476,7 +2478,7 @@ enum EvaluationEvent {
     Stopped(usize, Option<InferenceCounters>, f64),
 }
 struct EvaluationWorker {
-    core: usize,
+    upstream: Option<std::sync::Mutex<crate::claustrophobia::Session>>,
     commands: Sender<EvaluationCommand>,
     handle: Option<thread::JoinHandle<()>>,
 }
@@ -2502,12 +2504,14 @@ struct EvaluationWorkers {
     workers: Vec<EvaluationWorker>,
     events: mpsc::Receiver<EvaluationEvent>,
     cancel: Arc<AtomicBool>,
+    upstream_closures: Vec<serde_json::Value>,
 }
 impl EvaluationWorkers {
     fn start(
         config: &Config,
         admission: &crate::resources::Admission,
         mut provided: Option<Box<dyn InferenceBackend>>,
+        run_start: Instant,
     ) -> Result<(Self, Vec<EvaluatorIdentity>, f64, f64)> {
         if provided.is_some() && config.engines.iter().filter(|e| e.kind == "mcts").count() != 1 {
             return Err("supplied backend needs exactly one owning Sigma engine".into());
@@ -2523,6 +2527,7 @@ impl EvaluationWorkers {
             workers: Vec::new(),
             events: rx,
             cancel,
+            upstream_closures: Vec::new(),
         };
         for engine in 0..config.engines.len() {
             let (commands, requests) = mpsc::channel();
@@ -2535,6 +2540,68 @@ impl EvaluationWorkers {
             } else {
                 None
             };
+            if c.engines[engine].kind == "claustrophobia" {
+                // The existing engine owner retains ONE direct child. Its ready
+                // handshake/model setup is outside move clocks and is measured.
+                let initialized = Instant::now();
+                let result = (|| -> Result<_> {
+                    let e = &c.engines[engine];
+                    let evaluator = evaluator(e, &c)?;
+                    let evaluator_seconds = initialized.elapsed().as_secs_f64();
+                    let setup = Instant::now();
+                    let seconds = c.wall_seconds.ok_or(
+                        "Claustrophobia persistent session requires finite normal run wall",
+                    )?;
+                    let turns = if c.engines.len() == 2 {
+                        (c.max_plies as u64).div_ceil(2)
+                    } else {
+                        c.max_plies as u64
+                    };
+                    let settings = e.claustrophobia.as_ref().unwrap();
+                    let limit = (c.games as u64)
+                        .checked_mul(turns)
+                        .and_then(|n| n.checked_mul(settings.max_head_calls))
+                        .ok_or("Claustrophobia cumulative head bound overflow")?;
+                    let session = crate::claustrophobia::Session::start(
+                        settings,
+                        e.model.as_ref().unwrap(),
+                        core,
+                        limit,
+                        run_start + Duration::from_secs_f64(seconds),
+                        || {
+                            cancelled.load(Ordering::Relaxed)
+                                || guard(&c, run_start, admission.memory_limit).is_some()
+                        },
+                    )?;
+                    Ok((
+                        session,
+                        evaluator.identity,
+                        evaluator_seconds,
+                        setup.elapsed().as_secs_f64(),
+                    ))
+                })();
+                match result {
+                    Ok((session, identity, e_seconds, setup_seconds)) => {
+                        owned.workers.push(EvaluationWorker {
+                            commands,
+                            handle: None,
+                            upstream: Some(std::sync::Mutex::new(session)),
+                        });
+                        tx.send(EvaluationEvent::Ready(
+                            engine,
+                            Ok((identity, e_seconds, setup_seconds)),
+                        ))?;
+                    }
+                    Err(error) => {
+                        let (joined, _) = owned.close();
+                        return Err(Box::new(EvaluationInitializationFailure {
+                            primary: error,
+                            joined,
+                        }));
+                    }
+                }
+                continue;
+            }
             let handle = thread::spawn(move || {
                 // Pin before construction: ORT and NNUE are constructed and
                 // destroyed by the same AI owner that executes their calls.
@@ -2883,7 +2950,7 @@ impl EvaluationWorkers {
                 ));
             });
             owned.workers.push(EvaluationWorker {
-                core,
+                upstream: None,
                 commands,
                 handle: Some(handle),
             });
@@ -2898,7 +2965,7 @@ impl EvaluationWorkers {
                     match result {
                         Ok(identity) => identities[index] = Some(identity),
                         Err(error) => {
-                            let joined = owned.close();
+                            let (joined, _) = owned.close();
                             return Err(Box::new(EvaluationInitializationFailure {
                                 primary: error,
                                 joined,
@@ -2908,9 +2975,10 @@ impl EvaluationWorkers {
                 }
                 Err(mpsc::RecvTimeoutError::Timeout) => {
                     if owned.workers.iter().enumerate().any(|(i, w)| {
-                        identities[i].is_none() && w.handle.as_ref().unwrap().is_finished()
+                        identities[i].is_none()
+                            && w.handle.as_ref().is_some_and(|h| h.is_finished())
                     }) {
-                        let joined = owned.close();
+                        let (joined, _) = owned.close();
                         return Err(Box::new(EvaluationInitializationFailure {
                             primary: "initialization:AI worker stopped without identity".into(),
                             joined,
@@ -2918,7 +2986,7 @@ impl EvaluationWorkers {
                     }
                 }
                 _ => {
-                    let joined = owned.close();
+                    let (joined, _) = owned.close();
                     return Err(Box::new(EvaluationInitializationFailure {
                         primary: "initialization:unexpected AI reply".into(),
                         joined,
@@ -2939,20 +3007,97 @@ impl EvaluationWorkers {
             .collect();
         Ok((owned, identities, evaluator_seconds, backend_seconds))
     }
-    fn close(&mut self) -> bool {
+    fn close(&mut self) -> (bool, bool) {
         self.cancel.store(true, Ordering::Relaxed);
         for worker in &self.workers {
             let _ = worker.commands.send(EvaluationCommand::Shutdown);
         }
-        let mut joined = true;
-        for worker in &mut self.workers {
+        let mut threads_joined = true;
+        let mut upstream_closed =
+            evaluation_cleanup_failure(true, &self.upstream_closures).is_none();
+        for (engine, worker) in self.workers.iter_mut().enumerate() {
+            if let Some(session) = worker.upstream.take() {
+                let (mut session, poisoned) = match session.into_inner() {
+                    Ok(session) => (session, false),
+                    Err(error) => (error.into_inner(), true),
+                };
+                let mut closure = session.close();
+                closure["engine_index"] = engine.into();
+                if poisoned {
+                    closure["owner_error"] = "upstream session mutex poisoned".into();
+                }
+                upstream_closed &= closure["success"] == true && !poisoned;
+                self.upstream_closures.push(closure);
+            }
             if let Some(handle) = worker.handle.take() {
-                joined &= handle.join().is_ok();
+                threads_joined &= handle.join().is_ok();
             }
         }
-        joined
+        (threads_joined && upstream_closed, threads_joined)
     }
 }
+fn evaluation_cleanup_failure(
+    threads_joined: bool,
+    upstream_closures: &[serde_json::Value],
+) -> Option<&'static str> {
+    if !threads_joined {
+        Some("worker_panicked")
+    } else if upstream_closures
+        .iter()
+        .any(|closed| closed["success"] != true || closed.get("owner_error").is_some())
+    {
+        Some("upstream_cleanup_failed")
+    } else {
+        None
+    }
+}
+
+#[cfg(test)]
+mod upstream_cleanup_failure_tests {
+    use super::*;
+
+    #[test]
+    fn claustrophobia435_cleanup_failure_is_distinct_from_thread_panic_and_keeps_primary() {
+        let failed = serde_json::json!({
+            "engine_index":0, "success":false, "errors":["actual cleanup refusal"],
+        });
+        assert_eq!(
+            evaluation_cleanup_failure(true, std::slice::from_ref(&failed)),
+            Some("upstream_cleanup_failed")
+        );
+        assert_eq!(
+            evaluation_cleanup_failure(false, std::slice::from_ref(&failed)),
+            Some("worker_panicked")
+        );
+        assert_eq!(
+            evaluation_cleanup_failure(true, &[serde_json::json!({"success":true})]),
+            None
+        );
+        assert_eq!(
+            evaluation_cleanup_failure(
+                true,
+                &[serde_json::json!({"success":true,"owner_error":"mutex poisoned"})]
+            ),
+            Some("upstream_cleanup_failed")
+        );
+        let mut stopped = Some("original first primary".to_owned());
+        if let Some(reason) = evaluation_cleanup_failure(true, &[failed]) {
+            stopped.get_or_insert_with(|| reason.into());
+        }
+        assert_eq!(stopped.as_deref(), Some("original first primary"));
+        // No live AI/session/model exists in this synthetic owner fixture.
+        let (_, events) = mpsc::channel();
+        let mut owners = EvaluationWorkers {
+            node_budget: None,
+            workers: vec![],
+            events,
+            cancel: Arc::new(AtomicBool::new(false)),
+            upstream_closures: vec![serde_json::json!({"success":false})],
+        };
+        assert_eq!(owners.close(), (false, true)); // Earlier C failure stays failed; no thread panic.
+    }
+}
+
 impl Drop for EvaluationWorkers {
     fn drop(&mut self) {
         self.close();
@@ -3553,7 +3698,7 @@ fn evaluate_serial_games(
     // Workers inherit the admitted three-core launch affinity and pin before
     // constructing their evaluator/backend. Main then narrows to its own core.
     let (mut owners, identities, evaluator_seconds, backend_seconds) =
-        EvaluationWorkers::start(config, admission, provided)?;
+        EvaluationWorkers::start(config, admission, provided, start)?;
     crate::resources::pin(
         admission
             .management_core
@@ -3703,15 +3848,21 @@ fn evaluate_serial_games(
         }
         .record(outcome, rows);
     }
-    let joined = owners.close();
+    let (joined, threads_joined) = owners.close();
+    pump.upstream_sessions = std::mem::take(&mut owners.upstream_closures);
+    pump.backend_cleanup_seconds += pump
+        .upstream_sessions
+        .iter()
+        .filter_map(|record| record["seconds"].as_f64())
+        .sum::<f64>();
     pump.arena_node_budget = owners.node_budget.as_ref().map(|budget| {
         let cap = config.arena.as_ref().unwrap().max_total_nodes.unwrap();
         serde_json::json!({"cap":cap,"remaining":budget.remaining(),
             "charged_nodes_including_opaque_reservations":cap-budget.remaining(),
             "scope":"one operation; terminal node work is nested, not added again"})
     });
-    if !joined {
-        stopped.get_or_insert_with(|| "worker_panicked".into());
+    if let Some(reason) = evaluation_cleanup_failure(threads_joined, &pump.upstream_sessions) {
+        stopped.get_or_insert_with(|| reason.into());
     }
     for event in owners.events.try_iter() {
         if let EvaluationEvent::Stopped(_engine, work, seconds) = event {
@@ -6030,6 +6181,7 @@ mod research_threefold_runtime_tests {
         assert_eq!(budget.reserve(1).unwrap(), 1); // opaque prior work stays charged
         let (_, events) = mpsc::channel();
         let owners = EvaluationWorkers {
+            upstream_closures: Vec::new(),
             node_budget: Some(budget),
             workers: vec![], // dispatch would fail: there is deliberately no AI/model
             events,
@@ -6839,6 +6991,7 @@ mod two_ai_374_tests {
         );
         let (_, rx) = mpsc::channel();
         let owners = EvaluationWorkers {
+            upstream_closures: Vec::new(),
             node_budget: None,
             workers: vec![],
             events: rx,
@@ -6946,6 +7099,7 @@ mod two_ai_374_tests {
         assert!(started.elapsed() >= Duration::from_millis(110));
         let (_, events) = mpsc::channel();
         let owners = EvaluationWorkers {
+            upstream_closures: Vec::new(),
             node_budget: None,
             workers: vec![],
             events,
@@ -7077,6 +7231,7 @@ mod sigma_value_runtime_tests {
         let board = game.context.position();
         let (_, receiver) = mpsc::channel();
         let owners = EvaluationWorkers {
+            upstream_closures: Vec::new(),
             node_budget: None,
             workers: vec![],
             events: receiver,
@@ -7556,14 +7711,10 @@ fn evaluation_claustrophobia_turn(
         .claustrophobia
         .as_ref()
         .ok_or("Claustrophobia settings")?;
-    let model = config.engines[engine]
-        .model
-        .as_ref()
-        .ok_or("Claustrophobia model")?;
     let arena = config.arena.as_ref().ok_or("Claustrophobia arena")?;
     // Full ordered opening + committed moves, never unordered history counts.
-    let legal = game.context.legal_ids();
     let started = Instant::now();
+    let legal = game.context.legal_ids();
     let authority_tid_at_start = unsafe { libc::syscall(libc::SYS_gettid) };
     let authority_core_at_start = unsafe { libc::sched_getcpu() };
     let deadline = started
@@ -7576,23 +7727,20 @@ fn evaluation_claustrophobia_turn(
         .checked_sub(Duration::from_millis(arena.return_reserve_ms))
         .ok_or("Claustrophobia reserve")?;
     let mut guard_error = None;
-    let call = crate::claustrophobia::run(
-        settings,
-        model,
-        &game.prefix,
-        &legal,
-        owners.workers[engine].core,
-        stop_at,
-        || {
+    let call = owners.workers[engine]
+        .upstream
+        .as_ref()
+        .ok_or("Claustrophobia engine session missing")?
+        .lock()
+        .map_err(|_| "Claustrophobia session poisoned")?
+        .turn(&game.prefix, &legal, stop_at, || {
             if let Some(reason) = guard(config, run_start, memory_limit) {
                 guard_error.get_or_insert(reason);
                 owners.cancel.store(true, Ordering::Relaxed);
             }
             owners.cancel.load(Ordering::Relaxed)
-        },
-    )
-    .map_err(|error| error.to_string())?;
-    let returned = Instant::now(); // Child has been directly reaped before any commit.
+        });
+    let returned = Instant::now(); // Matching complete frame; child stays owned until session close.
     let action = call.reply.as_ref().map(|reply| reply.action);
     let authority_legal = action.is_some_and(|action| game.context.play(action).is_ok());
     let checked = Instant::now();
@@ -7625,7 +7773,7 @@ fn evaluation_claustrophobia_turn(
         game.nn += reply.head_calls;
         *inference_seconds += reply.head["head_seconds"].as_f64().unwrap();
     }
-    let counters = serde_json::json!({
+    let mut counters = serde_json::json!({
         "entry":"original-Claustrophobia-mcts::run_mcts",
         "upstream":"ae093653e62ad700e201706fa5ed767093d0d68e",
         "requested_simulations":settings.simulations,"requested_c_puct":settings.c_puct,
@@ -7643,6 +7791,8 @@ fn evaluation_claustrophobia_turn(
         "authority_tid":unsafe {libc::syscall(libc::SYS_gettid)},
         "authority_core":unsafe {libc::sched_getcpu()},
         "child_parent_pid":std::process::id(),
+    });
+    let serde_json::Value::Object(details) = serde_json::json!({
         "child_execution":call.reply.as_ref().and_then(|r| r.execution.as_ref()),
         "child_handle_acquired_ns":call.child_handle_acquired_at.map(ns),
         "child_reaped_ns":call.child_reaped_at.map(ns),
@@ -7653,11 +7803,19 @@ fn evaluation_claustrophobia_turn(
         "helper_stdout":call.stdout,
         "authority_legal":authority_legal,"authority_receipt_ns":ns(returned),
         "drain_finished_ns":ns(returned),"inflight_after_drain":call.inflight_after_drain(),
-        "initialization_in_clock":true,"fresh_search_and_model_per_turn":true,
+        "initialization_in_clock":false,"fresh_search_and_model_per_turn":false,
+        "session_sequence":call.session_sequence,
+        "session_reply_received":call.session_reply_received,
+        "session_ready":call.session_ready,
+        "child_lifetime":"engine-session",
+        "per_turn_scope":"input+forward+original run_mcts+matching reply; setup/drop separate",
         "parallel_search":false,"ponder":false,
         "requested_alpha_depth_not_applicable":config.engines[engine].depth,
         "requested_alpha_nodes_not_applicable":config.engines[engine].max_nodes,
-    });
+    }) else {
+        unreachable!("counter details are an object literal");
+    };
+    counters.as_object_mut().unwrap().extend(details);
     game.observations.push(crate::arena_clock::MoveObservation {
         ply: game.context.total_ply(),
         side: game.context.position().turn,

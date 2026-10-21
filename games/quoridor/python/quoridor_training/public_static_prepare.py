@@ -56,13 +56,22 @@ def file_identity(path):
 def prefix_fixture_rows(source):
     """Validate explicit isolated fixture histories without generating new states."""
     rows = source.get("fixed_prefixes")
-    if not isinstance(rows, list) or not 1 <= len(rows) <= 64:
+    if not isinstance(rows, list) or not 1 <= len(rows) <= 32768:
         raise ValueError("bounded fixed prefix fixture required")
+    # Explicit family IDs bind related prefixes before native replay/model load.
+    # Their presence is not proof of independent games: the bound source owns
+    # that lineage, and the publication keeps independent_validation false.
+    family_mode = any(isinstance(row, dict) and "family" in row for row in rows)
+    fields = {"fixture", "history", "functional_split"} | ({"family"} if family_mode else set())
+    if len(rows) > 64 and not family_mode:
+        raise ValueError("more than64 prefixes requires actual bounded family lineage")
+    family_splits = {}
+    family_histories = {}
     seen = set()
     for row in rows:
         if (
             not isinstance(row, dict)
-            or set(row) != {"fixture", "history", "functional_split"}
+            or set(row) != fields
             or type(row["fixture"]) is not int
             or row["fixture"] < 0
             or row["fixture"] in seen
@@ -72,6 +81,18 @@ def prefix_fixture_rows(source):
             or row["functional_split"] not in ("T", "V")
         ):
             raise ValueError("unique fixture IDs, actual core action histories and explicit T/V")
+        if family_mode:
+            family = row["family"]
+            if type(family) is not int or family < 0:
+                raise ValueError("recorded nonnegative integer prefix family required")
+            if family in family_splits and family_splits[family] != row["functional_split"]:
+                raise ValueError("prefix family crosses explicit T/V")
+            family_splits[family] = row["functional_split"]
+            histories = family_histories.setdefault(family, set())
+            history = tuple(row["history"])
+            if history in histories or len(histories) >= 64 or len(family_splits) > 512:
+                raise ValueError("at most512 families/64 unique prefixes each; no duplicate refill")
+            histories.add(history)
         seen.add(row["fixture"])
     if {r["functional_split"] for r in rows} != {"T", "V"}:
         raise ValueError("both functional partitions are required")
@@ -112,6 +133,13 @@ def native_prefix_keys(rows, library):
     """Call the sole native legal replay/STM/true-LR/packed-key owner."""
     import ctypes
 
+    if len(rows) > 64:
+        # Preserve the existing native ABI's 64-history bound, with no new replay owner.
+        return [
+            pair
+            for first in range(0, len(rows), 64)
+            for pair in native_prefix_keys(rows[first : first + 64], library)
+        ]
     actions = [a for row in rows for a in row["history"]]
     offsets = [0]
     for row in rows:
@@ -148,9 +176,14 @@ def prepare_prefix_fixture(config):
     """
     from .static_public import accumulate_inputs
 
-    if set(config) != {"prefix_fixture", "native_library", "output", "max_sqlite_bytes"}:
+    if set(config) != {
+        "prefix_fixture",
+        "native_library",
+        "output",
+        "max_sqlite_bytes",
+    }:
         raise ValueError("prefix fixture and full-public settings cannot be mixed")
-    source_raw = bound_file_bytes(config["prefix_fixture"], 65536)
+    source_raw = bound_file_bytes(config["prefix_fixture"], 64 * 1024**2)
     source = json.loads(source_raw)
     rows = prefix_fixture_rows(source)
     bound_file_bytes(config["native_library"], 64 * 1024**2)
@@ -201,6 +234,15 @@ def prepare_prefix_fixture(config):
             "split": {
                 "algorithm": "explicit configured functional T/V; reject same/trueLR pair across partitions",
                 "independent_validation": False,
+                **(
+                    {
+                        "declared_family_partition": {
+                            str(row["family"]): row["functional_split"] for row in rows
+                        }
+                    }
+                    if "family" in rows[0]
+                    else {}
+                ),
             },
             "value_semantics": "native canonical local STM; no outcome/teacher labels created",
             "full_history": "genuine prefix replay; class key remains board-only",

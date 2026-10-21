@@ -891,7 +891,13 @@ fn validate_observations(
                     || obs
                         .deadline_ns
                         .is_none_or(|d| obs.admission_checked_ns >= d)
-                    || obs.counters["direct_child_reaped"] != true
+                    || obs.counters["child_lifetime"] != "engine-session"
+                    || obs.counters["session_reply_received"] != true
+                    || obs.counters["session_sequence"]
+                        .as_u64()
+                        .is_none_or(|n| n == 0)
+                    || obs.counters["direct_child_reaped"] != false
+                    || obs.counters["inflight_after_drain"] != 0
                     || obs.counters["secondary"] != serde_json::json!([])
                     || obs.counters["completed_simulations"] != settings.simulations
                     || obs.counters["authority_legal"] != true

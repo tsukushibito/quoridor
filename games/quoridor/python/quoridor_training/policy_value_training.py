@@ -282,3 +282,60 @@ def export_joint(model, cfg, statistics, distance_fit, path, joint, *, initial=F
             os.replace(fresh / name, head / name)
     joint.setdefault("exported_identities", {})[str(path)] = identity
     return head / "manifest.json"
+
+
+def observe_joint_overfit(settings, state, loss, panel, draws):
+    """Use the existing persisted static_progress at each completed full V."""
+    if any(not math.isfinite(v) or v < 0 for v in (loss, panel)):
+        raise ValueError("finite nonnegative joint V/Tpanel observations required")
+    previous = state.get("joint_previous_observation")
+    if previous is not None and draws <= previous["draws"]:
+        raise ValueError("one genuinely new joint V observation per draw position")
+    worsening = previous is not None and (
+        loss
+        > previous["validation"]
+        + max(
+            settings["overfit_validation_absolute"],
+            settings["overfit_validation_relative"] * previous["validation"],
+        )
+        and panel
+        < previous["train"]
+        - max(
+            settings["overfit_training_absolute"],
+            settings["overfit_training_relative"] * previous["train"],
+        )
+    )
+    stale = state.get("joint_overfit_observations", 0) + 1 if worsening else 0
+    state["joint_overfit_observations"] = stale
+    state["joint_previous_observation"] = dict(validation=loss, train=panel, draws=draws)
+    stop = (
+        settings["overfit_observations"] > 0
+        and stale >= settings["overfit_observations"]
+        and draws >= settings["minimum_training_draws"]
+    )
+    if stop:
+        state["joint_stop_reason"] = "TRAIN_IMPROVES_VALIDATION_WORSENS"
+    return stop
+
+
+def policy_diagnostics(logits, target, legal, weights):
+    """Descriptive metrics from the already performed joint forward, no call."""
+    import torch
+
+    logp = torch.log_softmax(logits.masked_fill(~legal, -torch.inf), dim=1)
+    logp = logp.masked_fill(~legal, 0)
+    entropy_rows = -(target * target.clamp_min(torch.finfo(target.dtype).tiny).log()).sum(1)
+    ce_rows = -(target * logp).sum(1)
+    teacher_top = target.argmax(1)
+    top = logits.masked_fill(~legal, -torch.inf).topk(3, dim=1).indices
+    mass = weights.sum()
+
+    def mean(rows):
+        return float(((rows * weights).sum() / mass).detach().cpu())
+
+    return dict(
+        teacher_entropy=mean(entropy_rows),
+        policy_kl=mean(ce_rows - entropy_rows),
+        policy_top1=mean((top[:, 0] == teacher_top).to(weights.dtype)),
+        policy_top3=mean((top == teacher_top[:, None]).any(1).to(weights.dtype)),
+    )

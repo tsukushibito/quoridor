@@ -227,3 +227,9 @@ first32中心を固定した8対照は256局/128完全pair、全normal manifest/
 固定prefix入口の新Rust2・publisher1・affected Clippy・新cdylibが実PASSとなり、prefix_keysを含む4公開symbolと実STOPを確認した。旧成功定義の再演はない。これにより元c27に無かった真正fixture入口のsoftware依存を解決したが、actual class manifest・現model stat・normal Experimentと最大16教師/TOTAL2更新の機能smokeは未完である。[software結果と範囲](../research-findings.md#固定prefixからjoint学習fixtureへの実software接続3241822026-10-19)。
 
 18.2の環境構築は一度の真正機能smokeまで完了した。固定4prefix/4 classes/5向き、C教師5行、実step1中断とLAST/statusからTOTAL2更新へのrestart、native shared/policy fingerprintとexportの対応を保存した。既存Cedar/value-only/製品経路は維持し、機能確認モデルの研究採用や本学習・全件教師を発行しない。[実結果と限界](../research-findings.md#claustrophobia単体教師のjoint学習接続環境を機能確認3241822026-10-19)。
+
+### 435永続接続の限定software到達点
+
+[435のsource/software記録](../../research-data/ai-sigma/quoridor-strong-ai435/persistent-source-software-v1.json)は、persistent子の一回初期化と各手reply、最後のEOF/group/direct-waitを分離し、R1/O1修復後の3関連検査・Clippy・measurement compile・releaseを記録する。旧FAILEDと旧sourceでのcat成功は保持し、今回のモデル応答や棋力へ資格を転用しない。PythonのMain統合は共通Ruff100へ整形し、author sourceとの全AST一致を確認した。
+
+Bの出発上限はT384/V64/H64、各family64 unique観測、32768元行（trueLR込み65536向き、H無ラベルならT/V向き57344）。wall11..20を半分、5..10と0..4を各四分の一の目安とし、独立fullhistory/family・LR重複/共有prefix除外の根拠と不足を教師前に固定する。例Hは元Cedar shared/value固定＋fresh policy209、freeze=value/LR1e-3/max4T。Jは同Cedar＋保存headからfreeze=none/freshAdam3e-5、value MSE＋.1legal CE、min8T/max64T。fresh Adamとphase境界を完全resumeと呼ばず、実T・batch1024・draw/ceil/tail・有意改善/LR半減/過学習/plateau STOP・V選択を入場configで確定する。H/J合計fit900秒・teacher1200秒は出発案で、上限停止を収束成功に変換せず、既存models/defaultを維持する。現時点でこの入力・教師・fitは未発行。

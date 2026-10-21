@@ -1,4 +1,4 @@
-"""One bounded upstream MCTS call, owned/reaped by the common arena worker.
+"""Bounded upstream MCTS calls in one engine-owned process/model session.
 
 The pinned native callback library owns upstream replay, encode20, legal mask,
 canonical policy and original sequential run_mcts. This module owns the existing
@@ -21,7 +21,15 @@ MAX_REQUEST = 65536
 
 
 def validate(request):
-    fields = {"prefix", "legal", "simulations", "c_puct", "max_head_calls", "library", "model"}
+    fields = {
+        "prefix",
+        "legal",
+        "simulations",
+        "c_puct",
+        "max_head_calls",
+        "library",
+        "model",
+    }
     if set(request) != fields:
         raise ValueError("exact Claustrophobia request fields")
     for name in ("prefix", "legal"):
@@ -107,7 +115,7 @@ def execution_point():
     }
 
 
-def run(request):
+def run(request, *, runtime=None):
     validate(request)  # Before importing/loading any ML/native asset.
     execution_started = execution_point()
     import numpy as np
@@ -115,13 +123,17 @@ def run(request):
 
     from .static_teacher_heads import StaticHead
 
-    torch.set_num_threads(1)
-    torch.set_num_interop_threads(1)
-    library = C.CDLL(request["library"])
-    library.quoridor_claustrophobia_commit_v1.restype = C.c_char_p
-    if library.quoridor_claustrophobia_commit_v1().decode("ascii") != UPSTREAM:
-        raise ValueError("fixed upstream source identity")
-    head = None  # Native root/prefix/legal correspondence precedes model load.
+    if runtime is None:
+        torch.set_num_threads(1)
+        torch.set_num_interop_threads(1)
+        library = C.CDLL(request["library"])
+        library.quoridor_claustrophobia_commit_v1.restype = C.c_char_p
+        if library.quoridor_claustrophobia_commit_v1().decode("ascii") != UPSTREAM:
+            raise ValueError("fixed upstream source identity")
+        head = None  # One-shot root/legal correspondence still precedes model load.
+    else:
+        library, head = runtime
+    before = None if head is None else head.facts()
     failures = []
     callback_type = C.CFUNCTYPE(
         C.c_int,
@@ -200,7 +212,9 @@ def run(request):
                 "available head facts (not a completed search): " + json.dumps(head.facts())
             )
         raise error
-    if head is None or head.facts()["logical_rows_attempted"] != output.head_calls:
+    facts = None if head is None else head.facts()
+    prior = 0 if before is None else before["logical_rows_attempted"]
+    if facts is None or facts["logical_rows_attempted"] - prior != output.head_calls:
         raise ValueError("native callback and actual joint-head attempt counts disagree")
     result = checked_result(
         request,
@@ -210,7 +224,17 @@ def run(request):
         value=output.root_value,
         legal=[a for a, enabled in enumerate(output.legal_absolute) if enabled],
     )
-    result["head"] = head.facts()
+    result["head"] = dict(facts)
+    if before is not None:
+        for field in (
+            "calls_attempted",
+            "logical_rows_attempted",
+            "finite_rows_returned",
+            "failed_attempted_rows",
+            "head_seconds",
+        ):
+            result["head"][field] -= before[field]
+        result["head_lifetime"] = facts
     try:
         execution_returned = execution_point()
     except BaseException as error:
@@ -220,15 +244,103 @@ def run(request):
     return result
 
 
+def session_runtime(assets):
+    import torch
+    from .static_teacher_heads import StaticHead
+
+    torch.set_num_threads(1)
+    torch.set_num_interop_threads(1)
+    library = C.CDLL(assets["library"])
+    library.quoridor_claustrophobia_commit_v1.restype = C.c_char_p
+    if library.quoridor_claustrophobia_commit_v1().decode("ascii") != UPSTREAM:
+        raise ValueError("fixed upstream source identity")
+    head = StaticHead(
+        "claustrophobia",
+        assets["model"],
+        device="cpu",
+        batch_rows=1,
+        max_attempted_rows=assets["max_head_calls"],
+    )
+    return library, head
+
+
+def session():
+    """One owned stdin/stdout child; model lifetime ends at EOF, never a daemon."""
+    import time
+
+    started = time.monotonic()
+    raw = sys.stdin.buffer.readline(MAX_REQUEST + 1)
+    if len(raw) > MAX_REQUEST or not raw.endswith(b"\n"):
+        raise ValueError("bounded complete session initialization")
+    assets = json.loads(raw)
+    if (
+        not isinstance(assets, dict)
+        or set(assets) != {"library", "model", "max_head_calls"}
+        or any(
+            not isinstance(assets[k], str) or not Path(assets[k]).is_absolute()
+            for k in ("library", "model")
+        )
+        or type(assets["max_head_calls"]) is not int
+        or not 0 < assets["max_head_calls"] < 2**64
+    ):
+        raise ValueError("explicit fixed session assets and cumulative attempted head bound")
+    library, head = session_runtime(assets)
+    print(
+        json.dumps(
+            {
+                "session": "ready",
+                "upstream": UPSTREAM,
+                "execution": execution_point(),
+                "head": head.facts(),
+                "setup_seconds": time.monotonic() - started,
+            },
+            allow_nan=False,
+        ),
+        flush=True,
+    )
+    sequence = 0
+    while raw := sys.stdin.buffer.readline(MAX_REQUEST + 1):
+        if len(raw) > MAX_REQUEST or not raw.endswith(b"\n"):
+            raise ValueError("bounded complete session turn")
+        message = json.loads(raw)
+        sequence += 1
+        if (
+            not isinstance(message, dict)
+            or set(message) != {"sequence", "request"}
+            or not isinstance(message["request"], dict)
+            or type(message["sequence"]) is not int
+            or message["sequence"] != sequence
+            or message["request"].get("model") != assets["model"]
+            or message["request"].get("library") != assets["library"]
+        ):
+            raise ValueError("matching session sequence and fixed assets")
+        result = run(message["request"], runtime=(library, head))
+        print(
+            json.dumps({"sequence": sequence, "result": result}, allow_nan=False),
+            flush=True,
+        )
+    # Normal EOF and process exit, followed by the parent's direct wait, own drop.
+    del head
+    del library
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     sources = parser.add_mutually_exclusive_group()
     sources.add_argument("--request", type=Path, help="absolute bounded request file")
+    sources.add_argument("--session", action="store_true", help="one owned engine/model session")
     sources.add_argument(
-        "--stdin", action="store_true", help="read the arena request from stdin (default)"
+        "--stdin",
+        action="store_true",
+        help="read the arena request from stdin (default)",
     )
     parser.add_argument("--request-sha256", help="SHA256 of the exact request file bytes")
     args = parser.parse_args()
+    if args.session:
+        if args.request_sha256 is not None:
+            parser.error("--session does not accept a request-file hash")
+        session()
+        return
     if (args.request is None) != (args.request_sha256 is None):
         parser.error("--request and --request-sha256 are required together")
     if args.request is not None and (

@@ -578,6 +578,7 @@ mod alternating_evaluation_core_tests {
     }
 }
 
+#[cfg(feature = "measurement")]
 pub(crate) fn process_cpu_seconds() -> Option<f64> {
     let raw = fs::read_to_string("/proc/self/stat").ok()?;
     let end = raw.rfind(')')?;
@@ -592,6 +593,7 @@ pub(crate) fn process_cpu_seconds() -> Option<f64> {
     (hz > 0).then(|| ticks as f64 / hz as f64)
 }
 
+#[cfg(feature = "measurement")]
 pub(crate) fn process_peak_rss_bytes() -> Option<u64> {
     let raw = fs::read_to_string("/proc/self/status").ok()?;
     raw.lines()
