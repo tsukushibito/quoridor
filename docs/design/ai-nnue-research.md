@@ -4,6 +4,24 @@
 
 ## 到達経路と設計の位置付け
 
+### 2026-10-22の直接依頼：本家比較とjoint policy/value
+
+人間の「コリドールも最強AIへ」という追加依頼を、既存goal内の新しい具体工程として採用する。Othello強化とは別goalで、source準備は並行し、shared Cargo・GPU教師/学習・公平な時間対局だけを実行・統合担当が調整する。Cedar BEST58305（`35cbb…`）、Control/LMR/path_tail、製品defaultを対照として保持する。323/342.17のprep/pipeline USERPAUSE、newE/oldfits96/sealsは新工程にも使用しない。
+
+到達経路は **固定教師の模倣 → 同じ評価器による探索比較 → 有望候補の有限自己対局学習 → 独立比較** とする。最初にhybridの切替閾値を実装したり、大規模gridを回したりしない。旧18.2の4prefix・5教師行・2更新は機能確認であり、実学習や棋力の証拠ではない。
+
+本家Claustrophobiaは固定v1.3.1のterminal `mcts::run_mcts` とそのweightsへ束縛する。Python/Torch/StaticHeadを毎手cold起動する費用を100ms比較へ無自覚に混ぜず、既存のengine/session ownerで一度準備して保持する最小の接続を優先する。起動・初回準備費は別に保存し、着手ごとの入力・推論・探索・返却を共通caller時計へ含める。独自常駐サービスは作らない。上流内部がboard-onlyなら履歴を認識する探索と同一とは呼ばず、goal-first/threefold/完全履歴の最終裁定は共通arenaが担う。最初の接続確認は別の未封印dev開始4family・両色8局、100ms/5ms、1探索thread、book/ponder OFF、200ply。cap到達を確定drawへ変えない。完成した合法結果をこの時計で返せない場合は不足を保存し、5秒や極端なsimulation制限を十分な100ms本家比較と呼ばない。1秒は別条件とする。
+
+初回joint学習の出発案は、未封印の最大512 game/opening familyを結果前にT384/V64/H64へ分け、各family最大64の異なる非終局観測、最大32,768元観測とする。LR siblingsは同split、trueLRを加える教師attemptは最大65,536向き行。高残壁11..20を約半分、5..10と0..4を各約1/4の抽出目安とし、不足をコピーで補充しない。canonical局面/LR/共有祖先prefixの跨ぎを教師結果前に処理し、family根拠のない旧row bankのrandom splitを独立検証と呼ばない。Hはtrainer/selectorから隔離し、初回教師付与を必須にしない。事前学習への露出と今回未使用を区別する。
+
+教師は固定Claustrophobia単体の同一joint forward、FP32の合法mask後temperature1 policyとraw STM value。visit分布π・探索q・終局zをこの静的出力と混同しない。Cedarの312特徴・32/32 shared/valueと尺度をwarmstartし、policy209だけを固定seedの未学習headから始める。既存trainer/exportを使い、fresh Adam beta(.9,.999)/eps1e-8/decay0、batch1024、既存multiplicityとLR反転0.5を明示する。旧optimizerの完全resumeではない。
+
+一本の候補を2段階で学習する。head準備段は`freeze=value`、LR1e-3、最大4T相当。joint段はそのheadと同じCedar重みから`freeze=none`、fresh Adam LR3e-5、value MSE＋0.1×合法policy CEとする。joint段は最低8T・最大64T相当、約1Tごとに全Vと固定Tpanelを観測し、実draws・ceil・tailを入場前に解決する。有意改善deltaはmax(1e-5,1e-4×significant-best)、3回非改善でLR半減、floor1e-6、6回連続非改善でplateau STOP。T改善/V悪化が3観測続けば過学習STOP、非有限・資源・取消は即STOP。strict V joint最小BESTを選び、改善中の上限STOPも未収束pilotとして残す。教師1200秒、両fit段の独占wall合計900秒を出発上限案とし、必要な修正は結果前に実入力・資源と理由からconfigへ確定する。INITIAL/BEST/LASTと必要restartの実保持を算出して50GBへ結合する。value MSE、CE、teacher entropyとの差KL、合法top1/top3、層別coverage、draws/更新/LR/全費を別に保存する。
+
+学習BESTの最初の探索比較は、同じnew valueによるMCTS(learned prior)対αβ(policy orderingなし)、およびそのαβ対旧Cedar αβの2対照を出発案とする。dev32family両色・各64局/計128局、100ms/5ms、同CPU/memoryと固定Control/LMR/path_tailで、実c_puct・上限・初期化/TT/resetを結果前に確定する。64局は大差と費用を見る規模であり、小差の決着を保証しない。orderingは必要なら同joint重みの別dev32familyで一つのON/OFFを確認する。新value・ordering・探索を一括変更した勝ちをMCTSの純因果とはしない。有望な一候補だけを未使用Hまたは追加固定した独立familyでSigma・固定Clausへ比較し、最終局数・family区間・停止はpilotの差・分散・費用から結果前に決める。
+
+次の自己対局cycleはB/Cの自然結果から一世代・一学習・一独立比較へ有限化する。この段階では生成件数をまだ発行しない。完全履歴、game/opening/世代/model/search/seed/時間、温度処理前後のvisit π、定義付きroot STM q、実終局zを分離して保存する。新世代/旧best/教師anchor比率はcoverage・忘却・費用から一案を選び、独立同時間対局で更新を採否する。打切り・違法・timeout/UNKNOWNを勝敗へ捏造せず、native結果をbrowser優位へ読み替えない。実設定・担当・状態は既存configとBeads `quoridor-4lc.435`、観測は[研究知見](../research-findings.md)へ集約する。
+
 最終目標はNNUE型で最強のQuoridor AI。NNUEは局面評価ネットワークの設計であり、探索方式ではない。NNUE評価＋αβ探索を主候補とし、必要ならNNUEを用いる他の探索も比較する。既存の方策・価値NN＋MCTSは、まずSigma同等を確かめる基準、学習データ生成、NNUEとの比較に使う。
 
 現在の主軸はRustのNNUE評価＋αβとPython学習を用いる実装・学習・棋力比較。確認済みのSigma MCTSと既モデルは教師生成・基準・対照として再利用し、モデル差と探索差を切り分ける。重要な研究方向・データ・学習方式・特徴・モデルの変更は人間が選び、Rootが受入れ済み方針とタスクの許可範囲で配分する。自前PVモデルの完成をNNUE研究の開始条件にしない。

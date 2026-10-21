@@ -1,5 +1,13 @@
 # NNUE研究の知見と次の判断
 
+## 追加目標と未確定点（2026-10-22 JST）
+
+人間はOthelloの最強Rust/browser AIと、既存Quoridorの最強化に向けた新しい具体工程を別goalとして直接依頼した。Othelloは[設計正本](../games/othello/docs/strong-ai.md)、Quoridorは[本家比較・joint学習の設計](design/ai-nnue-research.md#2026-10-22の直接依頼本家比較とjoint-policyvalue)へ集約する。旧Quoridor USERPAUSE323/342.17、seals/newE/oldfits96、Cedar/defaultと元FAILED/NULL/UNKNOWN費は維持する。sourceは並行し、同じhardwareの公平時計・重いbuild/教師/学習だけを実行・統合担当が調整する。
+
+Quoridor旧Cedar対Sigma originalMCTSの6W10L/8family/100msは探索的小標本、五LMR設定512局の249W263L/48.6328%（CI45.3125–51.953125%）はその固定比較で基準維持を支持した事実である。教師品質不足、NNUE表現不足、MCTS一般優位、探索改善不能までは結論しない。joint経路18.2の4prefix/5教師行/2更新も機能確認に限る。新しい問いは、固定本家Clausを同じ履歴・規則・実caller時計で比較できるか、およびCedar valueを保つwarmstartからpolicyを実学習して同じ評価器で探索方式を比較するとどうなるかである。毎手のPython/Torch/head cold初期化があるsource事実と、旧54b/45a0等FAILEDの原因特定は区別する。
+
+Othelloの[初期native/Wasm software記録](../research-data/othello/strong-ai-n96/core-native-wasm-v1.json)は、bitboard/ray・perft・小終盤oracleと既存11ルール/JSONを含む24library検査、修復後CLI、Clippy、実Wasm/native一致を記録する。実装と正しさの限定資格であり、棋力の証拠ではない。次の小pattern評価器も、終局の実石差とraw heuristic、学習済み重みと検証用数学fixtureを区別する。初回対外16局はnativeのprotocol/費用確認に限り、browser同士の条件や優位性へ移さない。Edax4.7と公式Console7.8.1-engine＋固定時間adapterは版・時計・active/virtual memoryが異なるため、その限界を結果とともに示す。未学習評価器の敗北だけでbitboard/学習方式を棄却せず、予定した少量自前学習・export・Python/native/Wasm parityへつなぐ。
+
 ## 資源方針の更新（2026-10-08）
 
 人間は未来保存上限50GB decimal（50,000,000,000B）と、CPU/RAM/VRAMの固定小枠廃止を採択した。[typed whole-phase支持](../research-data/ai-sigma/execution-resources-20261008.json)で承認済みの棋力評価、perf、ordering、solver、contact距離、value成分診断、dashboard/Web検証へ配分した。旧12.5GiB coverageは保守的に保持し、未来支持との合算は50GB未満。これは測定済み現在使用量ではない。旧job/失敗/最大値の資格を変えず、実source/private/compilerの一致と安全なavailabilityは各entryで確認する。

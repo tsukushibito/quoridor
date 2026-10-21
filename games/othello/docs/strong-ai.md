@@ -26,6 +26,12 @@ CLIは1行1JSON要求/応答、stdoutはJSONのみ、diagnosticsはstderr。`op`
 
 ## 少量学習と改善
 
+最初のpipeline pilotは、小さな自前の簡易policy到達対局の結果で学習・export・parityを一巡させる。これは固定外部教師やminimax真値の代用資格ではない。出発設定は24個のD4/色・STM同値を除いた開始familyをT16/V8へ分離し、4個のprotocol-smoke familyとその同値開始を除外、最終評価namespaceを別に保持する。実際の24開始stateとsplitを終局ラベル生成前に固定する。Rustが合法遷移・パス・終局・実石差を確認し、非終局のplacement8..60を4刻みで観測する。行にはgameId/openingFamily/state/labelKind=gameOutcome/targetCentidiscsを持たせ、実終局黒白石差を観測手番へ符号変換して100倍する。trainerの跨行整合確認だけで真の終局到達を認定しない。対称重複のcross-split排除を事前に決め、欠損を再抽出で補わない。
+
+最初の評価器は2個の6cell shape、全8D4 occurrence、4phaseの共有tableで、STM centidiscsを16lookupの和から[-6400,6400]へclampする。ternaryはempty0/STM1/opponent2、shape-listを下位tritから符号化する。phaseはmin(3,clamp(occupied-4,0,60)//15)。expanded tableは[4][2][729]、色反転で符号が反転する2912独立parameterを用い、量子化はties-even・scale1、反対称性を表現できるi16範囲[-32767,32767]とする。modelは128KiB以内の厳密schemaをload時に一度検証し、探索へ明示的に借用する。baselineとimmutable pattern ownerを分け、隠れたglobal evaluatorの変更やnodeごとのJSON/hash処理を行わない。nativeの宣言modelIdはcallerVerifiedであり、実ファイルSHA/bytesと実imageの束縛は起動側が担う。終盤の証明済み実石差は学習評価から独立させる。
+
+初回trainerはfloat64 normalized SGD、seed20261022、max64epoch、LR.1、ridge.001、validation非改善patience8を出発固定とし、trainだけで更新する。epoch0を含む実quantized/clamped V-MSE最小のFPとexportを保存し、checkpointはbest-fpとbest-patternの2個に限る。非有限・範囲違反・時間/資源/取消で停止する。入力4096行/16MiB、学習600秒以内を実configで小さく解決し、全体32MiB以内の有限データ・終局証拠・2checkpointを最初の支持案とする。loss低下やparity成功を棋力改善へ読み替えない。実データ・fitの入場条件と結論は通常の資源制御・結果記録で管理する。
+
 最初の学習方式は対称性を共有するphase別pattern table。小さな合法到達系列と固定外部教師/厳密小終盤からPython学習・export・共通Rust利用を一巡させる。教師推定値、対局結果、厳密値を区別し、STM・board向き・色反転・phase・石差規約を固定する。game/opening系列単位split、対称局面の重複を把握し、random row splitだけで独立と呼ばない。既存重みも条件・format・phase・視点の対応確認後に利用できるが、少量自前学習とPython/native/Wasm parityを省略しない。
 
 量・時間・容量・checkpoint寿命・plateau/非有限STOPを小pilotのconfigへ結果前に固定する。大型data、NNUE、並列探索、選択pruningを初回に同時投入しない。改善候補は仮説→最小変更→開発集合比較→未使用familyで最終判断。NPS/depth/lossだけで棋力採用しない。各段階で動く最良版、失敗・費・未検証を保持し、最強目標の未達を明記する。
