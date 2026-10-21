@@ -152,7 +152,7 @@ Python は共通 Ruff、100桁で対象だけ format/check/lint を行う。
 ## 固定 teacher 用の source 接続
 
 原16局の protocol/cost 結果と旧未実行snapshotを区別する。
-tiny outcome pipeline も24局を完了した。この節の新128 family の生成・teacher・fit は **UNRUN**。
+tiny outcome pipeline も24局を完了した。この節のsource引渡し時には新128 family の生成・teacher・fitはUNRUNだった。後続の[固定強教師実結果](../../../research-data/othello/strong-ai-n96/strong-teacher-pattern-v1.json)は128開始/896観測/一回のfitと実学習parityを記録する。棋力比較はなお未実施。
 以前の保存枠32MiBや単独 RSS probe は、新 teacher job の保存許可・RAM 保証には引き継がない。
 
 既存 `generation.run(config_FileRef, new_output, cancelled=current_callback)` を次の順に使う。
@@ -206,7 +206,7 @@ probability/depth から証明や bound を推定せず、常に teacherEstimate
 
 返却 `elapsedMs` は clog・探索取消/join を含む既存 search 全体。
 初期化・reset・外側要求・shutdown は個別に計測するが、transport と cancelJoin の個別値は protocol に無く null。
-新 fake row は Root 供給の同一 WT strict loader を通した。実生成ラベルの loader qualification は未実施。
+新fake rowはRoot供給の同一WT strict loaderを通した。後続896実ラベルも同じsourceのloaderでT768/V128・H0・STM/scale/identity/全phase・凍結観測との対応を確認した。外部値の二種類は通常推定518件と空き勝者配分終盤値378件で、双方をteacherEstimateとして保持する。
 
 `limits` は新たに Root が指定する正の `openingAttempts/teacherAttempts/rows/inputBytes/evidenceBytes/retainedBytes`。
 teacherAttempts は1024以下、scheduled rows は896以下、input は共通 loader と同じ16MiB以下。

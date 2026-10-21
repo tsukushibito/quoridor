@@ -41,3 +41,13 @@ CLIは1行1JSON要求/応答、stdoutはJSONのみ、diagnosticsはstderr。`op`
 量・時間・容量・checkpoint寿命・plateau/非有限STOPを小pilotのconfigへ結果前に固定する。大型data、NNUE、並列探索、選択pruningを初回に同時投入しない。改善候補は仮説→最小変更→開発集合比較→未使用familyで最終判断。NPS/depth/lossだけで棋力採用しない。各段階で動く最良版、失敗・費・未検証を保持し、最強目標の未達を明記する。
 
 既存のmanaged Worktree・Beads・CPUPlan/CycleResources・job取消/回収/完了通知を再用し、専用manager・常駐監督・全員ACKを増やさない。50GB decimalは共通基盤と両ゲームの合計。Quoridor USERPAUSE323/342.17、seals/newE/oldfits96、models/defaults、原RAW/FAILED/NULL/UNKNOWN費を維持する。
+
+## 強教師一巡後の評価器比較
+
+固定128開始・896教師ラベル・一回のfit/export/parityは[実結果](../../../research-data/othello/strong-ai-n96/strong-teacher-pattern-v1.json)へ保存した。学習済みBESTはepoch10で、Vは選択集合のまま、未観測parameterも残る。weak outcomeとteacher estimateのV-MSEは別標的なので数値の大小だけで教材や棋力を順位付けしない。現v1と製品defaultを維持する。
+
+次は一候補の強教師量子化V-BEST対v1 heuristicを、同一native image・共通PVS/TT/反復/厳密終盤で評価器だけ明示的に切り替え、新dev16family両色32局で比較する。opening seed2026102202、旧smoke4/tiny24/教師128のD4・色/STM同値から分離し、全開始stateと割当を結果前に固定する。H16は候補選びへ使わない。1000ms＋100ms transport、1探索thread、TT上限32MiB、maxDepth64/exactEmpties12、book/ponder OFF、モデル・process初期化一回を別費とし、各手実費を残す。恣意node上限を足さず、outer出発案2400秒は実入場前に固定する。
+
+原32局・16個の完全両色pairがすべて正常資格の場合に限り、family平均の得点率と一度の95%family区間を出す。bootstrap出発案は10000回/seed2026102203で、具体的なRNG・percentile法もconfigへ固定する。下端>.5ならその有限dev条件で改善支持、.5を跨げば未決着、上端<.5なら不支持。失敗・UNKNOWN・未入場があれば予定分母32の得点範囲と失敗を報告し、完成pairだけを選んで採否用CIを出さない。追加seed・同じ32局の再演・結果後補充で救済せず、同等や一般最強を認定しない。
+
+Rust主体UIは同じ既存コア担当が別の有限source作業として並行する。Rustが確認済み状態・保存可否・resume/new・view/effectsと応答tokenを所有し、TSをDOM/storage/Workerの薄いhostへ移す。同期Wasmの取消をpostMessageだけで済ませず、Workerの終了・再生成と古い応答の無効化を実browserで確認する。chooser/Quoridor/defaultを維持し、native棋力や学習lossをUI source開始条件にしない。

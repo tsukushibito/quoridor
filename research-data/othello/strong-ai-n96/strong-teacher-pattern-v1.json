@@ -1,0 +1,592 @@
+{
+  "scope": "One finite fixed external teacherEstimate learning/export/parity candidate. No strength or production/default adoption.",
+  "source_commit": "9eb3b0585e4ebe76f8785f05639268ffff8223c0",
+  "teacher": {
+    "engine": "Console7.8.1-engine + fixed-time adapter",
+    "commit": "570d5e0a478c9d720d75de06a5d31995f412704a",
+    "timeMs": 1000,
+    "outerRequestMs": 1100,
+    "searchWorkers": 1,
+    "book": false,
+    "ponder": false,
+    "initializationOnce": true,
+    "activeTTUpper_B": 33554432,
+    "scheduled": 896,
+    "attempted": 896,
+    "searchIssued": 896,
+    "complete": 896,
+    "failed": 0,
+    "unrun": 0,
+    "kind": "teacherEstimate",
+    "value": "reported root STM engine-disc *100, no white reflip; engine winner-empty allocation distinct from own actual-disc solver",
+    "reportedScoreKinds": {
+      "engine_estimate_stm": 518,
+      "engine_exact_winner_empties_stm": 378
+    },
+    "bound": "UNKNOWN for all896, external proof flag preserved, not own exact truth",
+    "requestWallMs": {
+      "sum": 560256.9432078162,
+      "median": 1000.482858507894,
+      "maximum": 1014.5866259699687
+    },
+    "initializationWallMs": 986.4952639909461,
+    "shutdownWallMs": 64.32721600867808,
+    "resetWallMs": {
+      "sum": 2144.2211681278422,
+      "maximum": 10.507906903512776
+    },
+    "transportMs": null,
+    "cancelJoinMs": null
+  },
+  "data": {
+    "openings": {
+      "path": "/workspaces/quoridor/.worktree/assets/data/othello-strong-teacher-n96-v1/openings/openings.json",
+      "bytes": 55983,
+      "mode": "0644",
+      "sha256": "47d651fb541afb1c9990bc947e5b24bb3550b0c15ce2e58c74929ec74587ce44"
+    },
+    "trainFamilies": 96,
+    "validationFamilies": 16,
+    "holdoutFamilies": 16,
+    "holdoutTraversed": 0,
+    "holdoutLabels": 0,
+    "trajectories": 112,
+    "trajectoryTerminalGames": 0,
+    "trajectoryMeaning": "Rust simple-policy legal paths stop at sampled placement52; not112 terminal games",
+    "placementSchedule": [8, 12, 20, 24, 36, 40, 48, 52],
+    "rows": 896,
+    "trainRows": 768,
+    "validationRows": 128,
+    "phaseRows": {
+      "0": 224,
+      "1": 224,
+      "2": 224,
+      "3": 224
+    },
+    "duplicateExclusions": {
+      "crossSplit": 0,
+      "withinSplit": 0
+    },
+    "deficit": 0,
+    "exclusions": "Prior4 protocol-smoke +24 tiny opening D4/color/STM equivalence; actual128 roots frozen before trajectories; actual896 observations frozen before labels",
+    "observations": {
+      "path": "/workspaces/quoridor/.worktree/assets/data/othello-strong-teacher-n96-v1/trajectories/observations.json",
+      "bytes": 327372,
+      "mode": "0644",
+      "sha256": "1f9350fa077edadc61a85ea89b3c68b1e6a7853e5eaf29d99d602196f8f0858e"
+    },
+    "input": {
+      "path": "/workspaces/quoridor/.worktree/assets/data/othello-strong-teacher-n96-v1/teacher-v2/training.jsonl",
+      "bytes": 607021,
+      "mode": "0644",
+      "sha256": "b453ab1b5937a7a140dd756f4661dac3f12e4294c37f61f2d79c4da939c63660"
+    },
+    "qualification": {
+      "path": "/workspaces/quoridor/.worktree/assets/data/othello-strong-teacher-n96-v1/teacher-qualification.json",
+      "bytes": 2237,
+      "mode": "0644",
+      "sha256": "efb39687aa2e4c05296dc2884e3d319a078edb6d24b578d32d84e702d3bc998b"
+    },
+    "prelabelBinding": {
+      "path": "/workspaces/quoridor/.worktree/assets/data/othello-strong-teacher-n96-v1/training-and-teacher-prelabel-binding.json",
+      "bytes": 1725,
+      "mode": "0644",
+      "sha256": "84c01788e3e7eab2443c887d57ed23407af2c289b2a123f328a69eb23aa49038"
+    },
+    "openingFamilies": 128
+  },
+  "learning": {
+    "parameters": 2912,
+    "shapes": 2,
+    "phases": 4,
+    "initializer": "zero, not tiny warmstart",
+    "seed": 20261022,
+    "optimizer": "normalized float64 SGD",
+    "maxEpochs": 64,
+    "learningRate": 0.1,
+    "ridge": 0.001,
+    "patience": 8,
+    "innerRowPolledSeconds": 180,
+    "wholeFitGuardianSeconds": 240,
+    "bestEpoch": 10,
+    "completedEpoch": 18,
+    "stop": "validationPlateau",
+    "rowUpdates": 13824,
+    "initialQuantizedValidationMSE": 4347265.625,
+    "bestQuantizedValidationMSE": 2770099.53125,
+    "lastQuantizedValidationMSE": 2801140.8359375,
+    "selection": "earliest strict quantized/clamped V-BEST including epoch0; V is model selection, no independent strength test",
+    "featureQuantizationCoverage": {
+      "trainObservedParameters": 1018,
+      "trainUnobservedParameters": 1894,
+      "trainObservedParametersByPhase": {
+        "0": 46,
+        "1": 190,
+        "2": 369,
+        "3": 413
+      },
+      "selectedFloatNonzero": 1018,
+      "quantizedZeroFromNonzeroFloat": 0,
+      "quantizedExpandedNonzero": 2036,
+      "bestEpoch": 10,
+      "initialQuantizedValidationMSE": 4347265.625,
+      "explanation": "Training feature coverage and selected FP/quantization only; all-phase actual states separate from synthetic opposite-STM counterparts, no strength inference."
+    },
+    "curves": [
+      {
+        "epoch": 0,
+        "trainMSE": 5998268.229166667,
+        "validationMSE": 4347265.625,
+        "quantizedValidationMSE": 4347265.625
+      },
+      {
+        "epoch": 1,
+        "trainMSE": 2934013.80302914,
+        "validationMSE": 3159364.203056318,
+        "quantizedValidationMSE": 3159391.03125
+      },
+      {
+        "epoch": 2,
+        "trainMSE": 2243847.265992611,
+        "validationMSE": 3104267.9200379993,
+        "quantizedValidationMSE": 3105234.0390625
+      },
+      {
+        "epoch": 3,
+        "trainMSE": 1885556.573837099,
+        "validationMSE": 3072683.6648424,
+        "quantizedValidationMSE": 3072309.6328125
+      },
+      {
+        "epoch": 4,
+        "trainMSE": 1654166.0806048724,
+        "validationMSE": 3032378.84966345,
+        "quantizedValidationMSE": 3031818.40625
+      },
+      {
+        "epoch": 5,
+        "trainMSE": 1478694.937191256,
+        "validationMSE": 2874996.2152888654,
+        "quantizedValidationMSE": 2874876.65625
+      },
+      {
+        "epoch": 6,
+        "trainMSE": 1350617.5036473088,
+        "validationMSE": 2859094.96986199,
+        "quantizedValidationMSE": 2858603.1640625
+      },
+      {
+        "epoch": 7,
+        "trainMSE": 1260020.0950634924,
+        "validationMSE": 2888652.417359342,
+        "quantizedValidationMSE": 2889428.6640625
+      },
+      {
+        "epoch": 8,
+        "trainMSE": 1182179.6869714232,
+        "validationMSE": 2868069.553111632,
+        "quantizedValidationMSE": 2867716.7109375
+      },
+      {
+        "epoch": 9,
+        "trainMSE": 1113882.4594028306,
+        "validationMSE": 2796906.2547745323,
+        "quantizedValidationMSE": 2797062.4296875
+      },
+      {
+        "epoch": 10,
+        "trainMSE": 1067929.1573909998,
+        "validationMSE": 2770095.535770675,
+        "quantizedValidationMSE": 2770099.53125
+      },
+      {
+        "epoch": 11,
+        "trainMSE": 1023593.1695742555,
+        "validationMSE": 2861187.621579867,
+        "quantizedValidationMSE": 2861298.0859375
+      },
+      {
+        "epoch": 12,
+        "trainMSE": 985418.4101755461,
+        "validationMSE": 2842966.6731009884,
+        "quantizedValidationMSE": 2842977.4609375
+      },
+      {
+        "epoch": 13,
+        "trainMSE": 957091.3412768436,
+        "validationMSE": 2841619.5334471166,
+        "quantizedValidationMSE": 2841073.1015625
+      },
+      {
+        "epoch": 14,
+        "trainMSE": 925200.4723414177,
+        "validationMSE": 2783486.1406808505,
+        "quantizedValidationMSE": 2783582.7734375
+      },
+      {
+        "epoch": 15,
+        "trainMSE": 892550.8216182794,
+        "validationMSE": 2856204.2816509763,
+        "quantizedValidationMSE": 2857250.7734375
+      },
+      {
+        "epoch": 16,
+        "trainMSE": 880282.184826836,
+        "validationMSE": 2843100.3690115004,
+        "quantizedValidationMSE": 2843981.3046875
+      },
+      {
+        "epoch": 17,
+        "trainMSE": 844829.5627904494,
+        "validationMSE": 2853032.3133489257,
+        "quantizedValidationMSE": 2852348.9921875
+      },
+      {
+        "epoch": 18,
+        "trainMSE": 819181.7814178556,
+        "validationMSE": 2801238.9737107605,
+        "quantizedValidationMSE": 2801140.8359375
+      }
+    ],
+    "model": {
+      "path": "/workspaces/quoridor/.worktree/assets/models/othello-strong-teacher-n96-v1/pattern-v1.json",
+      "bytes": 16161,
+      "mode": "0644",
+      "sha256": "7ed9fa38218f591d80cfa10f985d510635eaddcd9e2f530e3f778b16b052bd9a",
+      "device": 2144,
+      "inode": 3704810
+    },
+    "floatCheckpoint": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/othello-strong-teacher-n96-v1/best-fp.npy",
+      "bytes": 23424,
+      "mode": "0644",
+      "sha256": "d13293bb32dae55ddbf9aa0e8e151b1cbc5311400bcaf050622e3f13ec002d63",
+      "device": 2144,
+      "inode": 3704809
+    },
+    "checkpointsRetained": 2,
+    "config": {
+      "path": "/workspaces/quoridor/.worktree/assets/data/othello-strong-teacher-n96-v1/training-config.json",
+      "bytes": 60889,
+      "mode": "0644",
+      "sha256": "cb2b22654ef5bea37e36671bdeee4be841d736a0711398093837a96d197f07a3"
+    },
+    "metadataPrivate": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/othello-strong-teacher-n96-v1/metadata.json",
+      "bytes": 173585,
+      "mode": "0644",
+      "sha256": "4515e8666328fd57d624383e20d91ec6be0991e5621d63adf9b42040463b8c9d"
+    },
+    "labelMeaning": "Not comparable numerically with prior weak-outcome V-MSE; different targets"
+  },
+  "parity": {
+    "PythonNativeWasm": "PASS",
+    "actualLearnedModelSHA256": "7ed9fa38218f591d80cfa10f985d510635eaddcd9e2f530e3f778b16b052bd9a",
+    "actualDataPhases": 4,
+    "syntheticOppositeSTM": "4 additional counterparts separately constructed for antisymmetry",
+    "rawScores": 8,
+    "learnedSearchAndExactIndependenceTests": 1,
+    "oldToySuitesReplayed": false,
+    "nativeImageSHA256": "2678ba8e2ff207a4f1d1f2f1047a345964fafad4375e9abcf5d9d6b34debc71d"
+  },
+  "cost": {
+    "successfulTeacherOuterSeconds": 564.0166126829572,
+    "previousIdentityConfigurationFailureOuterSeconds": 0.2590263789752498,
+    "successfulFitParityOuterSeconds": 1.2271032719872892,
+    "failedRootQualifierOuterSeconds": 0.21852361992932856,
+    "failedDetachedSubmitGuardiansSeconds": [
+      2.891450091963634, 2.8464305569650605
+    ],
+    "accounting": "Retain distinct failed/preparation calls; nested teacher563.731660099s, five stage and innerfit times are inside their respective outer jobs and not added. Successful-run RSSpeak unpersisted/UNKNOWN.",
+    "RSSpeak_B": null
+  },
+  "failures": {
+    "teacherInitialConfig": "weights identity list rejected before external teacher init/search, corrected object only; original attempt0/UNRUN896 retained",
+    "fitSubmit1And2": "Root erroneously wrapped intentional detached research-job submit in another descendant guardian; both not_started/no fit or model, retained. Standard direct submit fixed caller use; no DB corruption conclusion or lock/schema mutation.",
+    "firstActualLabelQualifier": "Root omitted already-supported engine_exact_winner_empties_stm; original FAILED retained, new version accepts the two existing contract kinds. Same actual labels untouched; no teacher requery or seed/refill."
+  },
+  "retention": {
+    "aggregateCap_B": 67108864,
+    "point": {
+      "path": "/workspaces/quoridor/.worktree/assets/data/othello-strong-teacher-n96-v1/affected-storage-after-fit.json",
+      "bytes": 732,
+      "mode": "0644",
+      "sha256": "9f39e74c2d14a52d6a48e35874873333cb010853d06c511a46c1d3629db8bd3e"
+    },
+    "rawDataAndWeightsInGit": false,
+    "modelClassification": "Same inode rename after actual model readers STOP; original commands/paths retained as history, no shim"
+  },
+  "archive": {
+    "path": "research-data/othello/strong-ai-n96/strong-teacher-pattern-v1-checks.tar.gz",
+    "bytes": 41575,
+    "sha256": "8e616db4b1f464df199619b9983243e11203a9c10a973df24b51a40708e5cf4a",
+    "members": [
+      {
+        "member": ".worktree/assets/data/othello-strong-teacher-n96-v1/collected-result.json",
+        "bytes": 15828,
+        "sha256": "51ddc2d3d284f3497bebcc11a9eb14a4f779be09bee179a415bb336a7896d66e",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-strong-teacher-n96-v1/teacher-qualification.json",
+        "bytes": 2237,
+        "sha256": "efb39687aa2e4c05296dc2884e3d319a078edb6d24b578d32d84e702d3bc998b",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-strong-teacher-n96-v1/current-custody.json",
+        "bytes": 1732,
+        "sha256": "1b995f9056bca4a23faba8e00318bf22613829c029e1b10316b36211bb60598d",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-strong-teacher-n96-v1/affected-storage-after-fit.json",
+        "bytes": 732,
+        "sha256": "9f39e74c2d14a52d6a48e35874873333cb010853d06c511a46c1d3629db8bd3e",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-strong-teacher-n96-v1/teacher-v2/result.json",
+        "bytes": 6161,
+        "sha256": "7845a0164bdb5171768d960734e90efba499fc98afe102b9a6acb5a6822d44bc",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-strong-teacher-n96-v1/teacher-v2-returned-STOP.json",
+        "bytes": 3886,
+        "sha256": "6b6b9ef578411062272447597bb6ac16c79c737a9f65a5008a172613c77efda2",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-strong-teacher-n96-v1/teacher-v2-resources.json",
+        "bytes": 6512,
+        "sha256": "90fc6a936aebbe8abcc8ff14f32e43b722921fd6794228fdbb7b6d47db0eb6e9",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-strong-teacher-n96-v1/runtime-teacher-v2/result.json",
+        "bytes": 521,
+        "sha256": "45b070633b1c3bb20dfe599df7b98a18d8d9e6ab4287f59119943c9f6d3fb89b",
+        "mode": "0600"
+      },
+      {
+        "member": ".worktree/assets/data/othello-strong-teacher-n96-v1/runtime-teacher-v2/config.json",
+        "bytes": 686,
+        "sha256": "ffdb6aece8914c6b2821380f86e1f70d1a3e9b001ee7e0ddbd674d568be5ee9d",
+        "mode": "0600"
+      },
+      {
+        "member": ".worktree/assets/data/othello-strong-teacher-n96-v1/runtime-fit-parity/result.json",
+        "bytes": 598,
+        "sha256": "97c301a44a87f711f71dfd146b1c284136ca9716f5c8be5e5edc1895a90220e8",
+        "mode": "0600"
+      },
+      {
+        "member": ".worktree/assets/data/othello-strong-teacher-n96-v1/runtime-fit-parity-v2/result.json",
+        "bytes": 381,
+        "sha256": "54bba2f9f27a2f3a24e1af3ba3fc88c052500d065693ae06bb098d5b45e999de",
+        "mode": "0600"
+      },
+      {
+        "member": ".worktree/assets/data/othello-strong-teacher-n96-v1/runtime-fit-parity-v3/result.json",
+        "bytes": 524,
+        "sha256": "72f58befd807f89c4e895167408e2d43d81f3f05c1ae89bf2ad3ed5b2ecf4e78",
+        "mode": "0600"
+      },
+      {
+        "member": ".worktree/assets/data/othello-strong-teacher-n96-v1/runtime-fit-parity-v3/output.log",
+        "bytes": 500,
+        "sha256": "a4016cffef3114d4d08cdbf4ad7d29ac7a387c8e59a7bdb1676445a39eb8c835",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-strong-teacher-n96-v1/runtime-fit-parity-v4/result.json",
+        "bytes": 530,
+        "sha256": "271517c25ae482b920f5dea3e8891b124f30bdb6970d8830974f51ba5ccddf7e",
+        "mode": "0600"
+      },
+      {
+        "member": ".worktree/assets/data/othello-strong-teacher-n96-v1/runtime-fit-parity-v4/config.json",
+        "bytes": 689,
+        "sha256": "4a56833b426558b1fe429c4c8f445c07ff1c7dfc54115f8df5d45680cb647ed1",
+        "mode": "0600"
+      },
+      {
+        "member": ".worktree/assets/data/othello-strong-teacher-n96-v1/qualifier-score-kind-repair.json",
+        "bytes": 1003,
+        "sha256": "65d29e792614d8132f1fb8409baf478185c9f9e121a2c827c7cd8f074d6c7b40",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-strong-teacher-n96-v1/verify-teacher.py",
+        "bytes": 5284,
+        "sha256": "54a378c076a777859774ada8c6262c50721f04931c700e70e21e128a39cd3abb",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-strong-teacher-n96-v1/verify-teacher-v2.py",
+        "bytes": 5407,
+        "sha256": "54f8b8330fa1da3ef35f056515c36112b9faad64aed9ce09662140c29e29fe38",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-strong-teacher-n96-v1/run-fit-parity.py",
+        "bytes": 4269,
+        "sha256": "7b7551dda3a11f825b914ebbcc554d0261bf856d2508d20b72d775526401227c",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-strong-teacher-n96-v1/run-fit-parity-v2.py",
+        "bytes": 4278,
+        "sha256": "81036a3fbf657b3129ebe5ea1e76b0e44f499e087bf50c25bd8e00c64bd77038",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-strong-teacher-n96-v1/prepare-parity.py",
+        "bytes": 2482,
+        "sha256": "cdfcb6090943012dcd26b415ec8a107532ee02c165ee04347ae426d41702fa53",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-strong-teacher-n96-v1/learned-parity.mjs",
+        "bytes": 2338,
+        "sha256": "0fb217a9387044e34b4227b3187bcf4fb9506c1b709e0f93c7ce98335113e14e",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-strong-teacher-n96-v1/qualify-teacher.log",
+        "bytes": 278,
+        "sha256": "0969b1e3c23da49482d9e6e7beee2bd0a9f8163035f70bf69eea2f4bf78a2a95",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-strong-teacher-n96-v1/qualify-teacher.process.json",
+        "bytes": 1806,
+        "sha256": "ebc1cef81fa283cff69701ec0b639ced4b46d781d7b580776f78bea2ee9cc314",
+        "mode": "0600"
+      },
+      {
+        "member": ".worktree/assets/data/othello-strong-teacher-n96-v1/qualify-teacher.returned.json",
+        "bytes": 2214,
+        "sha256": "0c291e70513dda2884be14f11e1234579263f657544056def4abd2575d0ee59d",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-strong-teacher-n96-v1/learned-allphase-parity.log",
+        "bytes": 181,
+        "sha256": "91af71cc1474de9811e70474e120a0c713980f5abfa4a5db4f2fe8948e6bf311",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-strong-teacher-n96-v1/learned-search-parity.log",
+        "bytes": 215,
+        "sha256": "53e959b7b32b01f40e31c5e98486d6feaa7c32bc8c41c619e1baa31d5e05b39e",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-strong-teacher-n96-v1/fit-parity-resources.json",
+        "bytes": 1090,
+        "sha256": "d3a9885af23719811d67e5c8d524cd35378a359bdb8a297fa260f5c5862040bd",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-strong-teacher-n96-v1/completed-stages.json",
+        "bytes": 407,
+        "sha256": "7606d8f5d1d83abde7a19f425f5f9a48ea1b2d36bf2fb04559650a9400fc28d5",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-strong-teacher-n96-v1/qualify-teacher-v2.returned.json",
+        "bytes": 2950,
+        "sha256": "f53dfcbef3e031a100bbee91b44f285f450ec0d31178e8962861dff6b06a9fe8",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-strong-teacher-n96-v1/fit.returned.json",
+        "bytes": 3530,
+        "sha256": "bf76be4c7614136562cad9be42e8e79cd80ca7fef9a742eda8e3cc0e77ffe207",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-strong-teacher-n96-v1/prepare-parity.returned.json",
+        "bytes": 2936,
+        "sha256": "4a1b874fd7e58bbfb4a3e686affccd65913be06ab137bc0fcea4606a1440e738",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-strong-teacher-n96-v1/learned-allphase-parity.returned.json",
+        "bytes": 2804,
+        "sha256": "93d7ce482593d4c2fca8272684ceb0ca519205ae3d26d0553b30dacae2bdac36",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/data/othello-strong-teacher-n96-v1/learned-search-parity.returned.json",
+        "bytes": 2938,
+        "sha256": "e4286d584f230daa2a825039f55a01bd1034f2eeccff381fb1280f2ab4695cb9",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/checkpoints/othello-strong-teacher-n96-v1/curves.json",
+        "bytes": 2779,
+        "sha256": "6b518eb92578b22cb0196ec310318db94e226b2bf2e4c7f2170d7ca2c5cada90",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/checkpoints/othello-strong-teacher-n96-v1/feature-quantization-coverage.json",
+        "bytes": 524,
+        "sha256": "bc7ef670007eacb8b7a8ae9309ee21905e00af788adc25e8c03ddfd673ec2380",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/strong-fit-entry-v1/submit.returned.json",
+        "bytes": 1856,
+        "sha256": "38bf9dba0236fe4e2f7485a7ef6e87a4b0737ef4f4abcc134bc7632cf0d38331",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/strong-fit-entry-v2/submit.returned.json",
+        "bytes": 1860,
+        "sha256": "eeed5f7c31fd2b100018a5f06d0f410f1f4cc5c6b6cf01bcd2e33b91262ca416",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/strong-fit-entry-v2/actual-cause-correction.json",
+        "bytes": 6547,
+        "sha256": "e8dbbeec3e610b466f8f5547744d577906f5a4b14688dd745d9bdb3e94b9d8df",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/teacher-boundary-review-v1/reviewer/report.md",
+        "bytes": 13414,
+        "sha256": "1744e3fb64fe8cddf9e9c3fb95825e505db3ce248b70741cf51d62a909b0de62",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/teacher-boundary-review-v1/reviewer/receipt.json",
+        "bytes": 63661,
+        "sha256": "115523c2f4d007c4620cc83ffb35140356f6a81e4141a215ae1fb23e08fb7b07",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/teacher-boundary-review-v1/reviewer/admin-close-receipt.json",
+        "bytes": 15993,
+        "sha256": "a48e6f4d770876d4075c14ea12765222a5ff2df29a4db12567919fbe995313fe",
+        "mode": "0644"
+      }
+    ],
+    "validation": "one forward exact bytes/modes/names/CRC/EOF PASS; no extraction; no model/training data/actual opening payload included"
+  },
+  "next": {
+    "status": "No comparison issued",
+    "question": "one strong-teacher V-BEST versus v1 heuristic with SAME native image, newdev16families/bothcolors32games",
+    "conditions": "1000ms +100ms transport,1worker,TTupper32MiB,maxDepth64,exactEmpties12,book/ponderOFF",
+    "openingSeed": 2026102202,
+    "bootstrap": {
+      "resamples": 10000,
+      "seed": 2026102203,
+      "eligibility": "Only all original32 qualified/16complete exact both-color pairs. Incomplete -> no adoption CI, planned denominator/UNKNOWN score bounds and failures; never select only completed pairs."
+    },
+    "holdoutUse": "H16 unused for candidate selection, later external confirmation only",
+    "default": "v1/product unchanged; loss/parity not strength"
+  }
+}
