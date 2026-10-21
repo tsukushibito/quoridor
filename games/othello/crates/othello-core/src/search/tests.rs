@@ -11,8 +11,9 @@ fn state(cells: &[(usize, u8)], side: u8) -> GameState {
     serde_json::from_value(json!({"version":1,"board":board,"toMove":side})).unwrap()
 }
 
-fn engine(slots: usize) -> Engine<impl FnMut() -> f64, impl FnMut() -> bool> {
+fn engine(slots: usize) -> Engine<'static, impl FnMut() -> f64, impl FnMut() -> bool> {
     Engine {
+        evaluator: Evaluator::V1Heuristic,
         table: Table {
             slots: vec![None; slots],
         },
@@ -275,6 +276,7 @@ fn terminal_empty_board_and_early_end_use_actual_disc_difference() {
                 ..Default::default()
             },
             || 0.0,
+            Evaluator::V1Heuristic,
         )
         .unwrap();
         assert_eq!(result.score, disc_difference(&ray));
@@ -303,6 +305,7 @@ fn forced_pass_preserves_depth_and_root_pass_is_null() {
             ..Default::default()
         },
         || 0.0,
+        Evaluator::V1Heuristic,
     )
     .unwrap();
     assert_eq!(found.score, -300);
@@ -316,6 +319,7 @@ fn forced_pass_preserves_depth_and_root_pass_is_null() {
             ..Default::default()
         },
         || 0.0,
+        Evaluator::V1Heuristic,
     )
     .unwrap();
     assert_eq!(
@@ -347,6 +351,7 @@ fn exact_small_endgames_match_independent_ray_oracle() {
                 ..Default::default()
             },
             || 0.0,
+            Evaluator::V1Heuristic,
         )
         .unwrap();
         assert!(result.proven, "family {family}");
@@ -374,6 +379,7 @@ fn zero_budget_cancellation_and_deadline_keep_legal_completed_fallback() {
             ..options
         },
         || 0.0,
+        Evaluator::V1Heuristic,
     )
     .unwrap();
     assert!(result.timed_out && !result.proven);
@@ -381,7 +387,8 @@ fn zero_budget_cancellation_and_deadline_keep_legal_completed_fallback() {
         (result.completed_depth, result.nodes, result.r#move),
         (0, 0, Some(19))
     );
-    let result = search_with_control(&ray, options, || 0.0, || true).unwrap();
+    let result =
+        search_with_control(&ray, options, || 0.0, || true, Evaluator::V1Heuristic).unwrap();
     assert!(result.cancelled && !result.timed_out);
     assert_eq!((result.completed_depth, result.nodes), (0, 0));
 
@@ -398,15 +405,21 @@ fn zero_budget_cancellation_and_deadline_keep_legal_completed_fallback() {
             tick.set(tick.get() + 1);
             0.0
         },
+        Evaluator::V1Heuristic,
     )
     .unwrap();
     let boundary = ticks.get() - 1; // exclude final elapsed-time read
     for cutoff in [boundary - 1, boundary, boundary + 1, boundary + 4] {
         let mut call = 0;
-        let found = search(&ray, options, || {
-            call += 1;
-            if call > cutoff { 1000.0 } else { 0.0 }
-        })
+        let found = search(
+            &ray,
+            options,
+            || {
+                call += 1;
+                if call > cutoff { 1000.0 } else { 0.0 }
+            },
+            Evaluator::V1Heuristic,
+        )
         .unwrap();
         assert!(found.timed_out && !found.proven);
         assert!(found.completed_depth <= 1);
@@ -424,6 +437,7 @@ fn zero_budget_cancellation_and_deadline_keep_legal_completed_fallback() {
             checks += 1;
             checks > boundary
         },
+        Evaluator::V1Heuristic,
     )
     .unwrap();
     assert!(cancelled.cancelled && !cancelled.timed_out && !cancelled.proven);
@@ -436,6 +450,7 @@ fn interrupted_node_never_enters_tt_as_completed() {
     let pos = Position::from(&GameState::new());
     let mut checks = 0;
     let mut search = Engine {
+        evaluator: Evaluator::V1Heuristic,
         table: Table::new(1),
         clock: || 0.0,
         cancel: || {
@@ -497,6 +512,7 @@ fn native_clock_actually_bounds_search() {
             tt_mi_b: 0,
             ..Default::default()
         },
+        Evaluator::V1Heuristic,
     )
     .unwrap();
     assert!(result.timed_out);

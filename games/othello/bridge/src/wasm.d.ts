@@ -8,6 +8,12 @@ declare module '*wasm/othello.js' {
   export function status_json(state: string): string;
   export function choose_move_json(state: string): string;
   export function search_json(state: string, options: string): string;
+  export class PatternModel {
+    constructor(model: string);
+    evaluate_json(state: string): string;
+    search_json(state: string, options: string): string;
+    free(): void;
+  }
 }
 
 declare module '*wasm/othello_bg.wasm?url' {

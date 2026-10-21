@@ -29,6 +29,13 @@ export type SearchResult = {
   cancelled: boolean;
   proven: boolean;
 };
+export type EvaluationResult = { score: number; scoreKind: 'heuristic'; proven: false };
+export type PatternEvaluator = {
+  readonly kind: 'patternV1';
+  evaluate(state: GameState): EvaluationResult;
+  search(state: GameState, options?: SearchOptions): SearchResult;
+  free(): void;
+};
 
 type Wasm = typeof import('../wasm/othello.js');
 let loaded: Promise<Wasm> | undefined;
@@ -84,6 +91,13 @@ export async function chooseMove(state: GameState): Promise<number | null> {
 // This awaits synchronous Wasm. Worker lifecycle cancellation belongs to the UI
 // host; postMessage alone does not interrupt this search inside that Worker.
 export async function search(state: GameState, options: SearchOptions = {}): Promise<SearchResult> {
+  const encodedOptions = optionsJson(options);
+  return JSON.parse(
+    (await load()).search_json(JSON.stringify(state), encodedOptions),
+  ) as SearchResult;
+}
+
+function optionsJson(options: SearchOptions): string {
   for (const [name, maximum] of [
     ['timeMs', Number.MAX_SAFE_INTEGER],
     ['ttMiB', 128],
@@ -95,7 +109,35 @@ export async function search(state: GameState, options: SearchOptions = {}): Pro
       throw new RangeError(`${name} must be an integer in 0..${maximum}`);
     }
   }
-  return JSON.parse(
-    (await load()).search_json(JSON.stringify(state), JSON.stringify(options)),
-  ) as SearchResult;
+  return JSON.stringify(options);
+}
+
+/** Parse once into an explicit Wasm owner; never change baseline search globally.
+ * Methods run synchronously in the owning Worker. Host owns artifact identity.
+ */
+export async function loadPattern(modelJson: string): Promise<PatternEvaluator> {
+  const model = new (await load()).PatternModel(modelJson);
+  let freed = false;
+  const check = () => {
+    if (freed) throw new Error('pattern model has been freed');
+  };
+  return {
+    kind: 'patternV1',
+    evaluate(state) {
+      check();
+      return JSON.parse(model.evaluate_json(JSON.stringify(state))) as EvaluationResult;
+    },
+    search(state, options = {}) {
+      check();
+      return JSON.parse(
+        model.search_json(JSON.stringify(state), optionsJson(options)),
+      ) as SearchResult;
+    },
+    free() {
+      if (!freed) {
+        freed = true;
+        model.free();
+      }
+    },
+  };
 }

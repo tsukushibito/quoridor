@@ -1,0 +1,692 @@
+{
+  "scope": "Reviewed pattern software and fixed native comparison connector only, not a learned checkpoint, actual fit, browser qualification or superiority",
+  "source_base": "44afe3e1843e59e53fb07db2fec2cee57d2126bf",
+  "integration_base": "ba14732daa7103d3a53c567fe3da19fe9f5be03d",
+  "source": [
+    {
+      "path": "games/othello/crates/othello-core/src/lib.rs",
+      "sha256": "296c072eb5da450bdc95610b0fc8d2b9ffcd7a5e57bc067b9425118b76158718",
+      "bytes": 6809,
+      "mode": "0644"
+    },
+    {
+      "path": "games/othello/crates/othello-core/src/bitboard.rs",
+      "sha256": "c995c904587deaf33d3b27c762b7e73ed579b2e9ff8a3a731cf5b58001771fd4",
+      "bytes": 4172,
+      "mode": "0644"
+    },
+    {
+      "path": "games/othello/crates/othello-core/src/heuristic.rs",
+      "sha256": "6dd62ea17ff06675c1e2d8d5a0453530e32588d469bf6aaae5a14e72ab5244b8",
+      "bytes": 815,
+      "mode": "0644"
+    },
+    {
+      "path": "games/othello/crates/othello-core/src/search.rs",
+      "sha256": "f1aba1d56a9779ef3f63f34e6ff8711accf3c812c8801eb1ca30be08216285a9",
+      "bytes": 12105,
+      "mode": "0644"
+    },
+    {
+      "path": "games/othello/crates/othello-core/src/search/tests.rs",
+      "sha256": "82f54e1f7c785cc77d54b021b35f8a57e557bf9b0c3823b0f57658788678e068",
+      "bytes": 15048,
+      "mode": "0644"
+    },
+    {
+      "path": "games/othello/crates/othello-core/src/pattern.rs",
+      "sha256": "c9941b2d8dcffe3c5d62feb9432e8cfd6801eb55863d18f5e8503d8d06f412eb",
+      "bytes": 12628,
+      "mode": "0644"
+    },
+    {
+      "path": "games/othello/crates/othello-core/src/bin/othello-engine.rs",
+      "sha256": "ed16ca0f4a16c392de0944240818a624ff1158aee17b03d9fcc9518fde00d74b",
+      "bytes": 8296,
+      "mode": "0644"
+    },
+    {
+      "path": "games/othello/crates/othello-wasm/src/lib.rs",
+      "sha256": "b6e0872b8bd105a2da21f91b675556547779bd0756e213206a500d7195d0c2ff",
+      "bytes": 3474,
+      "mode": "0644"
+    },
+    {
+      "path": "games/othello/bridge/src/index.ts",
+      "sha256": "c577f6f31f2a83128397973e38696ea9052017e223e9ac6142371ec9b601dafd",
+      "bytes": 4630,
+      "mode": "0644"
+    },
+    {
+      "path": "games/othello/bridge/src/wasm.d.ts",
+      "sha256": "810a080dd4a82423180f16d37a2a2cd96e60d471143c2ca0c9309f5db8ce8ddb",
+      "bytes": 905,
+      "mode": "0644"
+    },
+    {
+      "path": "games/othello/bridge/test/pattern-wasm.test.mjs",
+      "sha256": "fc3e61ba7c58422260ee5002aa04dd088212c68dd90ae5678629e6b9cab88d7e",
+      "bytes": 6932,
+      "mode": "0644"
+    },
+    {
+      "path": "games/othello/python/othello_training/parity.py",
+      "sha256": "3faaa08dfef350ae68cfaa79bbc76e890d4438ca3818f960c5ed7de78140ef7d",
+      "bytes": 886,
+      "mode": "0644"
+    },
+    {
+      "path": "games/othello/python/othello_training/pattern.py",
+      "sha256": "c4cccb742b0ff1967c04a2a4405689ef24440760b9fbaed1a08a500cfc38d93c",
+      "bytes": 7145,
+      "mode": "0644"
+    },
+    {
+      "path": "games/othello/python/othello_training/data.py",
+      "sha256": "efd8ec4a2e29daa400d1a867683e7c4d8d485045499a8831bf7b37a698805863",
+      "bytes": 6940,
+      "mode": "0644"
+    },
+    {
+      "path": "games/othello/python/othello_training/train.py",
+      "sha256": "0c579f99cca8dd51f006c981c6b53b86404c20b1f376d05ae3144bf1b14a3d36",
+      "bytes": 6520,
+      "mode": "0644"
+    },
+    {
+      "path": "games/othello/bridge/test/pattern-facade.test.mjs",
+      "sha256": "ef61434b36666df93becdec0c2165f43589bfe65c675027e4424a3702081fb67",
+      "bytes": 3593,
+      "mode": "0644"
+    },
+    {
+      "path": "games/othello/bridge/README.md",
+      "sha256": "2472e4f72574427ce09bbc85f35a33cc514ac6cfacc50ddab5a7cdc913cdd4b3",
+      "bytes": 12839,
+      "mode": "0644"
+    },
+    {
+      "path": "games/othello/python/othello_training/README.md",
+      "sha256": "c36d727ea559a5712ff6711a602ea8cc4e8914536e64ea92848ad5c3c4de2613",
+      "bytes": 4635,
+      "mode": "0644"
+    },
+    {
+      "path": "games/othello/python/othello_training/__init__.py",
+      "sha256": "09148c51d437e123608201297c42eaa709202342d93178c563663fdb511f74ff",
+      "bytes": 85,
+      "mode": "0644"
+    },
+    {
+      "path": "games/othello/tests/python/test_pattern_data.py",
+      "sha256": "aac63e55b78b2730ad3537590e33116905dcb7caa5950972dafb70e605e7dc06",
+      "bytes": 4754,
+      "mode": "0644"
+    },
+    {
+      "path": "games/othello/tests/python/test_pattern_features.py",
+      "sha256": "a89c9f148dd36b400f08800571aa700bfe08b0beb3dcfe74981caffe28718f59",
+      "bytes": 5935,
+      "mode": "0644"
+    },
+    {
+      "path": "games/othello/tests/python/test_pattern_parity.py",
+      "sha256": "93872d5b604c57ca5748ce2158134d7ae2802162e8e57ac51d98d52b6efff081",
+      "bytes": 1807,
+      "mode": "0644"
+    },
+    {
+      "path": "games/othello/tests/python/test_pattern_update.py",
+      "sha256": "8109c1072ca10331d200654ca5821a9cac1e14db075e8b3887b5db3e5fca7d3b",
+      "bytes": 1076,
+      "mode": "0644"
+    },
+    {
+      "path": "games/othello/python/othello_arena/__init__.py",
+      "sha256": "813061130e7ec86296c13c8e303b628597514ca628a45f7ab12ae9393a2bd116",
+      "bytes": 687,
+      "mode": "0644"
+    },
+    {
+      "path": "games/othello/python/othello_arena/__main__.py",
+      "sha256": "ea8b49afe28915dfc0441646caba61c091fce20fc6293f89f27424d12d3d0427",
+      "bytes": 5843,
+      "mode": "0644"
+    },
+    {
+      "path": "games/othello/python/othello_arena/protocol.py",
+      "sha256": "e4206d028854113c533df4ba0d678ba053d570d06745b9a026719b7136773cfc",
+      "bytes": 8345,
+      "mode": "0644"
+    },
+    {
+      "path": "games/othello/python/othello_arena/engines.py",
+      "sha256": "648a410f4c0b2451fe0278c44a5ec74f3d87182e4e39114d2d0f1f34e0867d33",
+      "bytes": 3986,
+      "mode": "0644"
+    },
+    {
+      "path": "games/othello/python/othello_arena/matches.py",
+      "sha256": "a9a82bd99011a16667348c12955e039c08d8c8e30db22ceb575ceb8695d541ee",
+      "bytes": 5604,
+      "mode": "0644"
+    },
+    {
+      "path": "games/othello/tests/python/test_arena.py",
+      "sha256": "8868360f1611f9c01a3e2f405b86a547c83c0a8ec38bf8667b73d3bbe6d075df",
+      "bytes": 9512,
+      "mode": "0644"
+    },
+    {
+      "path": "games/othello/docs/baselines.md",
+      "sha256": "446f9af2da5cf31b8643d3ad7252ed1401e8aed9a4ede18572516b6a5bb63709",
+      "bytes": 12366,
+      "mode": "0644"
+    }
+  ],
+  "generated": [
+    {
+      "path": "games/othello/bridge/wasm/othello.js",
+      "sha256": "5993890b7b2612318d95e8171cda8b1a15683cd566d906d72b6fab61bcd49e84",
+      "bytes": 16400,
+      "previous_sha256": "c1c18b38bec0d9c827df1f2baf0d622222e4160d400ef72be604044552055fc9"
+    },
+    {
+      "path": "games/othello/bridge/wasm/othello.d.ts",
+      "sha256": "854653ec05c0a27d0d5984e3b5ced9d2911b3a7a8b49f9fcc30ad67c7604dd72",
+      "bytes": 3623,
+      "previous_sha256": "8ba11965b0d391c436fe8839819c9c88266fd069a7680f40fca0a1321d1ea93e"
+    },
+    {
+      "path": "games/othello/bridge/wasm/othello_bg.wasm",
+      "sha256": "35dfd6563b0b851b2f6a9ae05bb79cc984b816f51660050bdb0393407b9cf7b7",
+      "bytes": 640018,
+      "previous_sha256": "a7a110b3ca94246dcf46541da4f8650674807acad199c8c96581419d0fffb575"
+    },
+    {
+      "path": "games/othello/bridge/wasm/othello_bg.wasm.d.ts",
+      "sha256": "d853d3b74bca094367b3a768a8574af4f04e5c1e3c3e04f15d20eac4642a6ce8",
+      "bytes": 1501,
+      "previous_sha256": "9bb3089a8f4b6fd74fc956c68909b53fc0aef3fbc78ae7cc988e9ca6f6de7f6f"
+    }
+  ],
+  "native": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/pattern-software-v1/image-2678ba8e2ff207a4f1d1f2f1047a345964fafad4375e9abcf5d9d6b34debc71d/othello-engine",
+    "sha256": "2678ba8e2ff207a4f1d1f2f1047a345964fafad4375e9abcf5d9d6b34debc71d",
+    "bytes": 800888,
+    "mode": "0755"
+  },
+  "checks": {
+    "patternRust": "5 new PASS",
+    "patternNative": "1 new PASS",
+    "clippyRelease": "affected PASS",
+    "actualPatternWasm": "2 new Python/native/Wasm PASS, mathematical fixture phase0 only",
+    "generatedTypes": "normal new generated declarations PASS; prior stale v1 TS2339 and failed dispatch retained",
+    "arena": "8 fake protocol cases and actual pinned version/board/legal one-search probes, no full games or strength acceptance"
+  },
+  "review": {
+    "issue": "quoridor-n96.1.3",
+    "report_sha256": "f61c88c04e88c1f33e319cf78391d8c3aa6916a813775a2a33c7b889bae95b87",
+    "disposition": "No blocking defect for small software pilot; actual generator/split/file binding responsibilities remain",
+    "conditions": [
+      "Root must bind actual24 opening states, exclude4 smoke D4/color families, whole-game splits and eventual final state identities",
+      "Rust generation must prove actual reachability/replay/nonterminal samples/terminal outcome; loader only infers cross-row final score",
+      "Fitted checkpoint and all-phase Python/native/Wasm parity remain UNRUN",
+      "Internal maxTrainSeconds polls SGD rows, not all final validation/export; existing outer whole-operation deadline authoritative, no stronger inner hard-cap claim"
+    ]
+  },
+  "artifact": {
+    "path": "research-data/othello/strong-ai-n96/pattern-native-wasm-v1-checks.tar.gz",
+    "bytes": 387409,
+    "sha256": "16bc02fb4bc01fb735b20aad3c4f25de4197c47e817ed29886cfad4086207aff",
+    "members": [
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/boundary-review-v1/reviewer/receipt.json",
+        "bytes": 18400,
+        "sha256": "d06e1e9dc58f1ffd563b29e430993584592f5fb8b397719b0dfffe33b5be3676",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/boundary-review-v1/reviewer/report.md",
+        "bytes": 12893,
+        "sha256": "f61c88c04e88c1f33e319cf78391d8c3aa6916a813775a2a33c7b889bae95b87",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-software-v1/435-direction.json",
+        "bytes": 508,
+        "sha256": "4b07fe9d475a65130241d363a2ffb39c7776a846ccba9b28670448f1ba30c01f",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-software-v1/actual-returned-STOP.json",
+        "bytes": 2557,
+        "sha256": "604ea9ed295cdbb681a2c1d8a085ac5f238efa60f00573dffb3cc3d0d7b6aeb9",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-software-v1/affected-once.json",
+        "bytes": 371,
+        "sha256": "591763362ce8e0bab3901ee63d0b9c4398ad512efea2170edc61896a35ece75e",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-software-v1/compile.py",
+        "bytes": 7133,
+        "sha256": "92ea855547ed55dc3f0bf529f2925570e886ce19222bdff9a92c291e17138216",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-software-v1/completed-commands.json",
+        "bytes": 409,
+        "sha256": "13df520f23ab9474e7857dad72650f6f3d777fe5e5e640789f3b87e0ce5bece6",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-software-v1/core-hold.json",
+        "bytes": 614,
+        "sha256": "58604593936f322ccf0b75166b5c7236154f5e39e8774382ba5a6184f9e214f5",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-software-v1/dispatch.py",
+        "bytes": 2760,
+        "sha256": "4dffa49f64d582f8d643346e5b0a8c42b1f00015e4c4094e68147722afa79ed1",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-software-v1/execution.log",
+        "bytes": 628,
+        "sha256": "674296b234b50dd67b0ffdfb566d4f92e76706333b2bfe7d3f9e0c1c064e85dc",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-software-v1/execution.process.json",
+        "bytes": 1886,
+        "sha256": "557842fc1a6ed1b92c1aca2ed791f6d58241b6ccc46a34eced013f5361ab27a0",
+        "mode": "0600"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-software-v1/job.json",
+        "bytes": 728,
+        "sha256": "fb2da6be4a457e0059732fc224167aedebc9d28a6d5962d5126b001a47db0a81",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-software-v1/pattern-clippy.log",
+        "bytes": 294,
+        "sha256": "61a64c3d56f331246ff41c5dc0de31dca95d30055da6582896b60fd188f00fa0",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-software-v1/pattern-clippy.process.json",
+        "bytes": 1504,
+        "sha256": "029d3bb9ec2b93da5c52802155605f8a6eb20453abdbde19efd9f6b210fcd650",
+        "mode": "0600"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-software-v1/pattern-clippy.returned.json",
+        "bytes": 3324,
+        "sha256": "ef033a43729badbc066ddc9366e3e135a610a47fa2c3612d8150340ef926e2dd",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-software-v1/pattern-native-boundary.log",
+        "bytes": 597,
+        "sha256": "6afa8d32543c010679fc6635e630c2299196ced3e2a840df06b2dbd9aff55a76",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-software-v1/pattern-native-boundary.process.json",
+        "bytes": 1515,
+        "sha256": "ad56e61e57dccf6cff153e1d7c9f1d31a523ed980ca9e5bf14625525158e5abb",
+        "mode": "0600"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-software-v1/pattern-native-boundary.returned.json",
+        "bytes": 3342,
+        "sha256": "acd9a362021ee3379efbc0fbd003f36de8a70711fbe6dc3f481b73dd1d82bc27",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-software-v1/pattern-native-release.log",
+        "bytes": 179,
+        "sha256": "cafb84105a13069b70eb50a67d92f4fb7b9d9b178caba296266250e42a7cac61",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-software-v1/pattern-native-release.process.json",
+        "bytes": 1467,
+        "sha256": "5ecfcfb90c858bebb5705ce0803675600b0790d0e9f040451712112ea6ede117",
+        "mode": "0600"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-software-v1/pattern-native-release.returned.json",
+        "bytes": 3238,
+        "sha256": "4a36c529ac6591a6e8b0cdb3b955af6ef882d52be642cea1a3eee1b532824e77",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-software-v1/pattern-unit.log",
+        "bytes": 930,
+        "sha256": "ce3ed3dff7f2ed725e75179f6fedebf71e67405cd6ada1f72c87895d4307e01a",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-software-v1/pattern-unit.process.json",
+        "bytes": 1484,
+        "sha256": "8acba0609856350ded1c12348f9b0883ec278b0cdcd1bd75fd6a4a011b5aa5bd",
+        "mode": "0600"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-software-v1/pattern-unit.returned.json",
+        "bytes": 3276,
+        "sha256": "931c4490d4df37d6b44839dc98536281911478cd6f52975b6ed9c14a920b2386",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-software-v1/qualification.json",
+        "bytes": 3360,
+        "sha256": "058b9e0d248db6e6c18ee838ff1c27e29caac2ca240429e92dd0581d6e1b273b",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-software-v1/quoridor-4lc.435.json",
+        "bytes": 1124053,
+        "sha256": "8ace179c21e86995f4b189f4aa08851bc88a07a4448b9ca6f26db71c2aff4134",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-software-v1/quoridor-n96.1.json",
+        "bytes": 21717,
+        "sha256": "f50292aa40aa418d5b19042854ba3bac41339314e5815399b5d7ac0e845ed643",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-software-v1/ready-projection.json",
+        "bytes": 3,
+        "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-software-v1/ready.json",
+        "bytes": 141,
+        "sha256": "0a82e87ca5a53b009b60e87f8fdb8eef5271204deee6458b173b0017d6c23e14",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-software-v1/resources.json",
+        "bytes": 779,
+        "sha256": "162393e917e2d3c7026a84d50257f09a152e6d52836c60231d983d066771ad75",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-software-v1/run_guard.py",
+        "bytes": 1853,
+        "sha256": "1309065b4657aec6d113579469bcdc448c786f550fe43e09bc1ab72138d458d4",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-software-v1/runtime/result.json",
+        "bytes": 524,
+        "sha256": "313fdbbbb17529cedc4d83da34231d2cc242d9f699c8317f4766d3c07bb0758c",
+        "mode": "0600"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-software-v1/source-before.json",
+        "bytes": 1943,
+        "sha256": "fb610466e0b3b8e4dfb202b630fbb4fd171d8e73aea6291013033d2df795e156",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-wasm-v1/completed.json",
+        "bytes": 252,
+        "sha256": "1ce2937b18053d1aacf0f10c3047eaec9f6d15e6c4b99af372b65a4a295b9c63",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-wasm-v1/generated-inputs.json",
+        "bytes": 1504,
+        "sha256": "823a9164483fa5017991acb902178f402fc94a0e47a621f3dc8afbf95b5becd9",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-wasm-v1/job.json",
+        "bytes": 720,
+        "sha256": "b74a5de3fc0d8935f5d9adc63ad4dc179ed1757c292460e235a32bf4558603a5",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-wasm-v1/qualification.json",
+        "bytes": 5730,
+        "sha256": "d04bd8eff223ff66a946695172a92ed5c44284977c4fbb6549d2e41d07f5cd3f",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-wasm-v1/qualify.py",
+        "bytes": 6999,
+        "sha256": "44c0805a03cf6cdfa1b9176699f11797de995ad82d62a74737563b874522ce7c",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-wasm-v1/real-generated-typecheck.log",
+        "bytes": 5709,
+        "sha256": "e792e66eb37138341c1fae6657eb9d1ca81144848123a47f6ceb39ab861302c8",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-wasm-v1/real-generated-typecheck.process.json",
+        "bytes": 1363,
+        "sha256": "dccc40c3c400947071d55525efa9eb1166d3d04497ceed83145813bfa0fdd15f",
+        "mode": "0600"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-wasm-v1/real-generated-typecheck.returned.json",
+        "bytes": 2998,
+        "sha256": "4b1b7555c6b5d7001ddd36298d20d4c701f1bfaacdb496a8baa02526f27df7db",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-wasm-v1/real-wasm-native-parity.log",
+        "bytes": 316,
+        "sha256": "83f49fe6becfa2f8433ed612c8c1a1d4240c0b8c2c45458e8182d5493cab3e17",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-wasm-v1/real-wasm-native-parity.process.json",
+        "bytes": 1291,
+        "sha256": "2a587c8b79b48c69253569ea97e67cda83fd10f58396c5e08f748a090253b831",
+        "mode": "0600"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-wasm-v1/real-wasm-native-parity.returned.json",
+        "bytes": 2850,
+        "sha256": "bc21b713f13f66a1f2418382fba9657e439d3c62434cf946091b26f68e07b5c7",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-wasm-v1/resources.json",
+        "bytes": 792,
+        "sha256": "287088840de4f938c39e9ec0e509c19b5818c59eb3d22c83168cac1430012b47",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-wasm-v1/runtime/result.json",
+        "bytes": 528,
+        "sha256": "500396608fcdaa9c15eb8bd2bc787781928f36b1bb6b7f63582d17340b0e0978",
+        "mode": "0600"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-wasm-v1/source.json",
+        "bytes": 1175,
+        "sha256": "0fddcba4c0cc2236ed20d73bd9b7e6dc758c3e1fb58b01ab14d6f6e6a2463b87",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-wasm-v1/tsconfig.json",
+        "bytes": 448,
+        "sha256": "6a0656a57f3bc5365b694b2e4cff2085eba6d2b20cf2ea94283549709bda5feb",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-wasm-v1/wasm-build.log",
+        "bytes": 742,
+        "sha256": "750f18d8d80c740d27a2640e6b6c4bc7cac55f906aa598e1ee8e12e2d777d7d5",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-wasm-v1/wasm-build.process.json",
+        "bytes": 1532,
+        "sha256": "5ddf915c450825855ea533fcef40a5c16af452026dbfa204691768ef8dd87349",
+        "mode": "0600"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/pattern-wasm-v1/wasm-build.returned.json",
+        "bytes": 3368,
+        "sha256": "f1517e2c027c36c2e416df77fa82354fa750a9d2977923d5a12a6b6f0fb41697",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/assets/tools/othello-baselines-n96-v1/provenance.json",
+        "bytes": 11108,
+        "sha256": "8056576cdd20898eaa9e2652b4d1abc6f6e9bf15b8d8e0c04b541e6fbc97c027",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/othello-baselines-n96/.artifacts/othello-baselines-n96/handoff.md",
+        "bytes": 5504,
+        "sha256": "9d7abbc0eebc17bec2b18cfddbad033a7ca14b01860be515080365ae1e90dabe",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/othello-baselines-n96/.artifacts/othello-baselines-n96/native-integration.json",
+        "bytes": 8771,
+        "sha256": "9eca41808e43156080f7729dabfe652aebf0ae5819a5fa86c3140b47b39eeb55",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/othello-baselines-n96/.artifacts/othello-baselines-n96/smoke-config.unrun.json",
+        "bytes": 10484,
+        "sha256": "1fb5c7c3f46910a3cb2b66471dbcd9bd054ffd881e14253fe102c6cecb9164d5",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/othello-baselines-n96/.artifacts/othello-baselines-n96/storage-cleanup-summary.json",
+        "bytes": 319,
+        "sha256": "a5d48b803baf3e0f298d3fee2edc5ac150140082cafebe5fab1f0544b2e58afe",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/othello-baselines-n96/.artifacts/othello-baselines-n96/tests-final-scope.log",
+        "bytes": 1104,
+        "sha256": "c08caa1476e343642a6273bdfe0d9fc349a6d6c6182e50c35f708e7de7f5bcdb",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/othello-baselines-n96/.artifacts/othello-baselines-n96/tests-final-scope.process.json",
+        "bytes": 1376,
+        "sha256": "3846ef43961770f747d2e523f59c7bdb2bf0589d12e5e386b71625d7428604ca",
+        "mode": "0600"
+      },
+      {
+        "member": ".worktree/othello-baselines-n96/.artifacts/othello-baselines-n96/tests-final-scope.rss.json",
+        "bytes": 64,
+        "sha256": "177d7cf572155a62fbde27e28519f74afb818b26578d155bef910d1bb1db0a75",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/othello-core-n96/.artifacts/othello-core-n96/pattern-data-stm-consistency-v3/check.log",
+        "bytes": 252,
+        "sha256": "dbd8836bc09a4e7c38700a4ba5e6d13affa772d54ef6512f2a9b4b0588c35fde",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/othello-core-n96/.artifacts/othello-core-n96/pattern-data-stm-consistency-v3/check.process.json",
+        "bytes": 1332,
+        "sha256": "8a0402297a9fc26e371a18d28253ece8d4039d1cfcd48b01f40e5bd42c11222f",
+        "mode": "0600"
+      },
+      {
+        "member": ".worktree/othello-core-n96/.artifacts/othello-core-n96/pattern-data-stm-consistency-v3/entry.json",
+        "bytes": 486,
+        "sha256": "146c777ade0e9d62c9d019ca82cc38cec25671150869e193da138993b459ef18",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/othello-core-n96/.artifacts/othello-core-n96/pattern-integrate-facade-v1/check.log",
+        "bytes": 589,
+        "sha256": "8219ec430cee84f35bbbc119f356b8627b60fef1ec04da00744cef028d4c9e84",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/othello-core-n96/.artifacts/othello-core-n96/pattern-integrate-facade-v1/check.process.json",
+        "bytes": 1293,
+        "sha256": "e5a754f248e76ed8de34fb2f27596c11c0c33108dbb65774a79baa0ffcfb5f36",
+        "mode": "0600"
+      },
+      {
+        "member": ".worktree/othello-core-n96/.artifacts/othello-core-n96/pattern-integrate-facade-v1/entry.json",
+        "bytes": 486,
+        "sha256": "3c13f20ff4046ea53bbd2f728ae3f8d1803df69dbd419189ebbcdac238c9b7e3",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/othello-core-n96/.artifacts/othello-core-n96/pattern-integrate-python-parity-v1/check.log",
+        "bytes": 442,
+        "sha256": "a82ff4474a89211ff5fc7aabdfba93d2179bce9fae15fe15ff69493f86139116",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/othello-core-n96/.artifacts/othello-core-n96/pattern-integrate-python-parity-v1/check.process.json",
+        "bytes": 1263,
+        "sha256": "924d6da294bc16dc6a3216776e67573f0377d3e83518e80d842712eebd15927f",
+        "mode": "0600"
+      },
+      {
+        "member": ".worktree/othello-core-n96/.artifacts/othello-core-n96/pattern-integrate-python-parity-v1/entry.json",
+        "bytes": 486,
+        "sha256": "a0c3486383f915ea9819b48eb71b19cb3b3a2eaf96d267b5a791736b4c002976",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/othello-core-n96/.artifacts/othello-core-n96/pattern-integrate-types-v1/check.log",
+        "bytes": 206,
+        "sha256": "ec05d0ced28637de1091c836c91d1f28de18b7d7ee05e609bc2fbd288d8b6ee2",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/othello-core-n96/.artifacts/othello-core-n96/pattern-integrate-types-v1/check.process.json",
+        "bytes": 2156,
+        "sha256": "dba45e5a9793b4c39becb196b37a122c61b04be6351d535760aee98695a117ba",
+        "mode": "0600"
+      },
+      {
+        "member": ".worktree/othello-core-n96/.artifacts/othello-core-n96/pattern-integrate-types-v1/entry.json",
+        "bytes": 486,
+        "sha256": "b3fe7fc48442a3ef191617f7197d47cab4df8bde0e5c0790b19286a2f7228824",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/othello-core-n96/.artifacts/othello-core-n96/pattern-python-tests-v2/check.log",
+        "bytes": 1981,
+        "sha256": "d7d452ad86a9c2337ef0887506ec61341a88a21f5a2f6c27eb1aa85ef0e6b0fc",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/othello-core-n96/.artifacts/othello-core-n96/pattern-python-tests-v2/check.process.json",
+        "bytes": 1333,
+        "sha256": "66039f407e824c924c6e5153071921bfc6f43e868c0cdb39d6693f8a32c231ff",
+        "mode": "0600"
+      },
+      {
+        "member": ".worktree/othello-core-n96/.artifacts/othello-core-n96/pattern-python-tests-v2/entry.json",
+        "bytes": 486,
+        "sha256": "f21f7b63c52c521fb43a280f300a9a89ccd87314e2c5b18725c25bf904388056",
+        "mode": "0644"
+      }
+    ],
+    "verification": "one new forward stream exact bytes/mode/name/EOF CRC PASS without extraction"
+  },
+  "pending": "Native16-game protocol/cost job9640c488 remains independently collected; new generation.py prep same actor not part of this adoption",
+  "product": "weak simple policy and existing UI remain control; no model/default change, Quoridor pauses/seals maintained"
+}

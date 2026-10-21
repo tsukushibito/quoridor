@@ -94,6 +94,49 @@ native CLIは1行1JSON、stateを各要求に含めるstateless接続。
 search結果は`ok:true`とSearchResultの全fieldをtop-levelに返す。
 失敗は`{ok:false,error:string}`で次行の処理を続ける。stdoutはJSONだけ。
 
+### 明示的なpatternモデル
+
+`PatternWeights::from_json`はversion1の小さなpatternを一度だけ検査・ロードする。
+共通探索は借用した`Evaluator::V1Heuristic`または`Evaluator::Pattern(&weights)`を
+探索開始時に受け取り、独自pluginやnodeごとのJSON処理を挟まない。
+TTは各探索の所有で、別モデルへ共有されない。exact終盤の実石差は評価器に依存しない。
+初期pattern schemaと学習入力は`../python/othello_training/README.md`を参照する。
+
+nativeは引数なしならv1 heuristic。明示する場合は
+`othello-engine --pattern MODEL.json --model-id sha256:HEX64`で起動し、一度だけ読み込む。
+imageとweightの実SHA・bytes・source版はRootの既存guardで起動前に束縛する。
+CLIは独自hash実装・依存を追加せず、modelIdを`identityBinding:"callerVerified"`として
+実読込modelBytesとともにsearch/evaluate応答の`evaluation`へ返す。
+これはengine内部がSHAを計算・検証したという主張ではない。
+`{op:"evaluate",state}`は選択した評価器のraw値を返し、常に
+`scoreKind:"heuristic",proven:false`（terminal局面の入力でも同様）。
+通常のsearchではterminalを既存の実石差で判定し、scoreKind/provenを維持する。
+simple policyと保存GameStateはモデル指定によって変わらない。
+
+Wasmは`new PatternModel(modelJson)`が所有する明示的なobject。
+`.evaluate_json(state)`と`.search_json(state,options)`が利用し、`.free()`で解放する。
+複数objectは独立し、従来の`search_json`を隠れたglobalモデルへ切り替えない。
+TSは`loadPattern(modelJson): Promise<PatternEvaluator>`を提供する。
+ロード後の`evaluate`・`search`は同期であり、所有Worker内で呼ぶ。
+hostがweight identityと寿命を管理する。未来のRust UIも同じRust model ownerを利用できる。
+
+変更patternだけのRoot受入れselector:
+
+```bash
+cargo test --locked -p othello-core --lib pattern::tests
+cargo test --locked -p othello-core --bin othello-engine pattern_native_boundary
+cargo clippy --locked -p othello-core -p othello-wasm --all-targets -- -D warnings
+cargo build --locked --release -p othello-core --bin othello-engine
+node --experimental-vm-modules --test games/othello/bridge/test/pattern-facade.test.mjs
+OTHELLO_NATIVE_ENGINE=/absolute/new-image OTHELLO_PATTERN_PYTHON=/absolute/prepared-python node --test games/othello/bridge/test/pattern-wasm.test.mjs
+```
+
+実Wasm生成はRootの既存Othello専用入口を使う。新parity検査はnative/Pythonの指定を必須にし、
+暗黙skipを作らない。既定は一時的な数学検査fixtureであり、学習済みモデルではない。
+Rootの実fit後は`OTHELLO_PATTERN_WEIGHTS=/absolute/frozen-export.json`も指定し、
+同じfileのPython/native/Wasm値と探索結果を照合する。TMPは検査終了時に回収する。
+source workerはCargo/実Wasmを実行せず、成功済みの無関係・未変更v1 suiteを再演しない。
+
 ```json
 { "op": "new" }
 ```
