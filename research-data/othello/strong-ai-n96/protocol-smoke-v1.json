@@ -1,0 +1,717 @@
+{
+  "scope": "Initial untrained native protocol/cost pilot, not superiority/equivalence/browser comparison",
+  "config": {
+    "purpose": "protocol_cost",
+    "superiorityClaim": false,
+    "executionStatus": "UNRUN",
+    "timeMs": 1000,
+    "overheadMs": 100,
+    "threads": 1,
+    "ttMiB": 32,
+    "memoryInterpretation": "common upper32MiB activeTT, not identical allocation; process/familyRSS independently bounded",
+    "book": false,
+    "ponder": false,
+    "warmup": "startup and board synchronization outside move clock; no search warmup; persistent processes; external reset behavior recorded",
+    "splitPolicy": "All four protocol-smoke families and their D4/color-equivalent opening states excluded from train/dev/final. Root must bind those exclusions when datasets are created; no train/dev/final data generated here.",
+    "families": [
+      {
+        "id": "protocol-smoke-01",
+        "moves": [44, 43, 50, 21, 34, 52, 20, 26],
+        "state": {
+          "version": 1,
+          "board": [
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 0, 0, 0, 0, 2, 2, 2,
+            0, 0, 0, 0, 0, 1, 2, 2, 0, 0, 0, 0, 0, 0, 1, 2, 0, 0, 0, 0, 0, 1, 0, 2, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0
+          ],
+          "toMove": 1
+        },
+        "symmetryColorFamilySha256": "85c875fd7a1a1036383155d8105306a581801260abf74aaa3f708ad790392a7a",
+        "split": "protocol-smoke-only",
+        "source": "official Console7.8.1 legal seeded opening; fixed Rust same-source replay PASS in native-integration.json before launch"
+      },
+      {
+        "id": "protocol-smoke-02",
+        "moves": [26, 18, 44, 25, 9, 53, 32, 19],
+        "state": {
+          "version": 1,
+          "board": [
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 0, 0, 0, 0, 0, 1, 2, 2, 1,
+            0, 0, 0, 1, 0, 0, 2, 1, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0
+          ],
+          "toMove": 1
+        },
+        "symmetryColorFamilySha256": "1c05f1892d6af89eed7b81d8a390ee37cda22258021e95bcb1906bd03a835191",
+        "split": "protocol-smoke-only",
+        "source": "official Console7.8.1 legal seeded opening; fixed Rust same-source replay PASS in native-integration.json before launch"
+      },
+      {
+        "id": "protocol-smoke-03",
+        "moves": [19, 18, 37, 43, 34, 20, 9, 44],
+        "state": {
+          "version": 1,
+          "board": [
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 2, 0, 0, 0, 0, 0, 0, 1, 2,
+            0, 0, 0, 0, 0, 1, 1, 2, 1, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0
+          ],
+          "toMove": 1
+        },
+        "symmetryColorFamilySha256": "82a3e875fbc530a8ab2b63ebcd72a009776b8f13d05038e57cca061bdbcd7d8b",
+        "split": "protocol-smoke-only",
+        "source": "official Console7.8.1 legal seeded opening; fixed Rust same-source replay PASS in native-integration.json before launch"
+      },
+      {
+        "id": "protocol-smoke-04",
+        "moves": [26, 34, 41, 21, 44, 33, 25, 16],
+        "state": {
+          "version": 1,
+          "board": [
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 2, 1, 1, 2,
+            0, 0, 0, 0, 1, 2, 2, 2, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0
+          ],
+          "toMove": 1
+        },
+        "symmetryColorFamilySha256": "e5ada4f630aa4365f23bdeaf1bf5ce88bf30ca7affa0eaaf6938d82180cb0d7d",
+        "split": "protocol-smoke-only",
+        "source": "official Console7.8.1 legal seeded opening; fixed Rust same-source replay PASS in native-integration.json before launch"
+      }
+    ],
+    "rules": {
+      "argv": [
+        "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/core-software-v3/image-550b87377274b202056925a39bcfa4164aaf0dff3ff17bb993b6d43517be8975/othello-engine"
+      ],
+      "cwd": "/workspaces/quoridor/.worktree/othello-baselines-n96",
+      "binary": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/core-software-v3/image-550b87377274b202056925a39bcfa4164aaf0dff3ff17bb993b6d43517be8975/othello-engine",
+        "bytes": 712232,
+        "mode": "0755",
+        "sha256": "550b87377274b202056925a39bcfa4164aaf0dff3ff17bb993b6d43517be8975"
+      }
+    },
+    "candidate": {
+      "argv": [
+        "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/core-software-v3/image-550b87377274b202056925a39bcfa4164aaf0dff3ff17bb993b6d43517be8975/othello-engine"
+      ],
+      "cwd": "/workspaces/quoridor/.worktree/othello-baselines-n96",
+      "binary": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/core-software-v3/image-550b87377274b202056925a39bcfa4164aaf0dff3ff17bb993b6d43517be8975/othello-engine",
+        "bytes": 712232,
+        "mode": "0755",
+        "sha256": "550b87377274b202056925a39bcfa4164aaf0dff3ff17bb993b6d43517be8975"
+      },
+      "simple": false
+    },
+    "launchBinding": {
+      "owner": "codex:01a1376a-bfd3-75d2-bd64-61e9416b3b13",
+      "source": [
+        {
+          "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/games/othello/python/othello_arena/__init__.py",
+          "sha256": "813061130e7ec86296c13c8e303b628597514ca628a45f7ab12ae9393a2bd116",
+          "bytes": 687,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/games/othello/python/othello_arena/__main__.py",
+          "sha256": "ea8b49afe28915dfc0441646caba61c091fce20fc6293f89f27424d12d3d0427",
+          "bytes": 5843,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/games/othello/python/othello_arena/protocol.py",
+          "sha256": "e4206d028854113c533df4ba0d678ba053d570d06745b9a026719b7136773cfc",
+          "bytes": 8345,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/games/othello/python/othello_arena/engines.py",
+          "sha256": "648a410f4c0b2451fe0278c44a5ec74f3d87182e4e39114d2d0f1f34e0867d33",
+          "bytes": 3986,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/games/othello/python/othello_arena/matches.py",
+          "sha256": "a9a82bd99011a16667348c12955e039c08d8c8e30db22ceb575ceb8695d541ee",
+          "bytes": 5604,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/games/othello/tests/python/test_arena.py",
+          "sha256": "8868360f1611f9c01a3e2f405b86a547c83c0a8ec38bf8667b73d3bbe6d075df",
+          "bytes": 9512,
+          "mode": "0644"
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/games/othello/docs/baselines.md",
+          "sha256": "446f9af2da5cf31b8643d3ad7252ed1401e8aed9a4ede18572516b6a5bb63709",
+          "bytes": 12366,
+          "mode": "0644"
+        }
+      ],
+      "candidateAcceptedCommit": "44afe3e1843e59e53fb07db2fec2cee57d2126bf",
+      "CPUPlan": {
+        "management": [18],
+        "commands": {
+          "arena": [0]
+        },
+        "library_threads": 1
+      },
+      "familyB": 2147483648,
+      "controllerB": 67108864,
+      "childFamilyMaxB": 2080374784,
+      "hostReserveB": 4294967296,
+      "GPU": 0,
+      "resourceContract": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/protocol-smoke-v1/resources.json",
+      "runtimeBinding": "Root holds existing exclusive arena-software-writer.lock through returned guardian; heavy Cargo/teacher/training/render not issued concurrently. Source/light checks continue; no global-host-quiet claim.",
+      "normalReplayReceipt": {
+        "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-baselines-n96/native-integration.json",
+        "sha256": "9eca41808e43156080f7729dabfe652aebf0ae5819a5fa86c3140b47b39eeb55"
+      },
+      "conditions": "native versus external native only, NOT browser versus browser or superiority. Same1searchworker/1s requested/100ms protocol allowance/activeTTupper32MiB, external table layouts differ. Full family memory2GiB includes Python/controller/rules/candidate/opponent; no256MiB external claim.",
+      "edaxClock": "time_settings1 0 1 + time_left eachmove setslevel60, -nps0. Startup-l1/unused internal startupbook excluded move time, book-usage/ponderOFF.",
+      "egaroucidClock": "Console7.8.1-engine + fixed-time adapter calls unchanged tree_search_legal1000ms; no per-game allocator. Depth5 clog + async cancellation/join may overrun; outermonotonic >1100ms is retainedSTOP, no silently extended clock. Upstream high_resolution not monotonic.",
+      "memory": "Edax~27MiB activeTT, Ega25165872B activeTT and805306416B staticvirtualtable, actual lastprobeRSS1368186880B; no identical allocation claim.",
+      "terminal": "Rust authority actual disc counts, no empty-square winner allocation. First failure retains planned denominators/unrun and stops; no refill/retry.",
+      "safety": "3600s guard only for whole16game finite protocol/cost pilot, not move budget; no node cap. Expected under20min but not deadline claim."
+    },
+    "opponents": [
+      {
+        "id": "edax-v4.7",
+        "engine": "edax",
+        "protocol": "gtp",
+        "argv": [
+          "/workspaces/quoridor/.worktree/assets/tools/othello-baselines-n96-v1/edax/bin/lEdax-x86-64-v3",
+          "-gtp",
+          "-n",
+          "1",
+          "-h",
+          "20",
+          "-book-usage",
+          "off",
+          "-ponder",
+          "off",
+          "-move-time",
+          "1",
+          "-l",
+          "1",
+          "-verbose",
+          "0",
+          "-nps",
+          "0"
+        ],
+        "cwd": "/workspaces/quoridor/.worktree/assets/tools/othello-baselines-n96-v1/edax/bin",
+        "binary": {
+          "path": "/workspaces/quoridor/.worktree/assets/tools/othello-baselines-n96-v1/edax/bin/lEdax-x86-64-v3",
+          "bytes": 618576,
+          "mode": "0755",
+          "sha256": "1f63846be66155a5728ab94ce20f21880dc525d1dc8ce6166a886482326387f8"
+        },
+        "assets": [
+          {
+            "path": "/workspaces/quoridor/.worktree/assets/tools/othello-baselines-n96-v1/edax/bin/data/eval.dat",
+            "bytes": 13952436,
+            "mode": "0644",
+            "sha256": "f8b2299612d9fa4414157e70e932636e33111c2602d0c2fc382a7d90ef21b792"
+          }
+        ]
+      },
+      {
+        "id": "egaroucid-console7.8.1-fixed",
+        "engine": "egaroucid",
+        "protocol": "fixed_jsonl",
+        "argv": [
+          "/workspaces/quoridor/.worktree/assets/tools/othello-baselines-n96-v1/fixed-time/egaroucid_fixed_time",
+          "/workspaces/quoridor/.worktree/assets/tools/othello-baselines-n96-v1/egaroucid/bin/resources/eval.egev2",
+          "/workspaces/quoridor/.worktree/assets/tools/othello-baselines-n96-v1/egaroucid/bin/resources/eval_move_ordering_end.egev"
+        ],
+        "cwd": "/workspaces/quoridor/.worktree/assets/tools/othello-baselines-n96-v1/fixed-time",
+        "binary": {
+          "path": "/workspaces/quoridor/.worktree/assets/tools/othello-baselines-n96-v1/fixed-time/egaroucid_fixed_time",
+          "bytes": 782072,
+          "mode": "0755",
+          "sha256": "abf3e68901aca0fdd58a7731c805b3078458f9a3e826afb1c99bd0b8a58f2c0e"
+        },
+        "assets": [
+          {
+            "path": "/workspaces/quoridor/.worktree/assets/tools/othello-baselines-n96-v1/egaroucid/bin/resources/eval.egev2",
+            "bytes": 38243826,
+            "mode": "0644",
+            "sha256": "0a8acbcbc23067933627f1bcc83c3f7ae6b7ff3e603d174a3364271fcaeeef2f"
+          },
+          {
+            "path": "/workspaces/quoridor/.worktree/assets/tools/othello-baselines-n96-v1/egaroucid/bin/resources/eval_move_ordering_end.egev",
+            "bytes": 472392,
+            "mode": "0644",
+            "sha256": "bd908885e8bb85e72a9be2b0399f8ca52ed40a138bcaaecca3d13710945b9a93"
+          }
+        ]
+      }
+    ],
+    "stopPolicy": "first illegal/timeout/EOF/crash/cancel/resource/rules/protocol error stops the finite job; result and planned denominator preserved, no replacements or automatic rerun",
+    "provenance": {
+      "path": "/workspaces/quoridor/.worktree/assets/tools/othello-baselines-n96-v1/provenance.json",
+      "bytes": 11108,
+      "mode": "0644",
+      "sha256": "8056576cdd20898eaa9e2652b4d1abc6f6e9bf15b8d8e0c04b541e6fbc97c027"
+    }
+  },
+  "planned": 16,
+  "completed": 16,
+  "failed": 0,
+  "unrun": 0,
+  "byOpponent": {
+    "edax-v4.7": {
+      "planned": 8,
+      "attempted": 8,
+      "completed": 8,
+      "failures": [],
+      "unrun": 0,
+      "wins": 1,
+      "draws": 0,
+      "losses": 7,
+      "points": 1,
+      "scoreRateBoundsIncludingUnknown": [0.125, 0.125],
+      "superiorityClaim": false
+    },
+    "egaroucid-console7.8.1-fixed": {
+      "planned": 8,
+      "attempted": 8,
+      "completed": 8,
+      "failures": [],
+      "unrun": 0,
+      "wins": 0,
+      "draws": 1,
+      "losses": 7,
+      "points": 0.5,
+      "scoreRateBoundsIncludingUnknown": [0.0625, 0.0625],
+      "superiorityClaim": false
+    }
+  },
+  "games": [
+    {
+      "opponent": "edax-v4.7",
+      "family": "protocol-smoke-01",
+      "candidateSide": 1,
+      "candidateScore": 0,
+      "blackMinusWhite": -6,
+      "transitions": 62
+    },
+    {
+      "opponent": "edax-v4.7",
+      "family": "protocol-smoke-01",
+      "candidateSide": 2,
+      "candidateScore": 0,
+      "blackMinusWhite": 39,
+      "transitions": 63
+    },
+    {
+      "opponent": "edax-v4.7",
+      "family": "protocol-smoke-02",
+      "candidateSide": 1,
+      "candidateScore": 0,
+      "blackMinusWhite": -48,
+      "transitions": 66
+    },
+    {
+      "opponent": "edax-v4.7",
+      "family": "protocol-smoke-02",
+      "candidateSide": 2,
+      "candidateScore": 0,
+      "blackMinusWhite": 15,
+      "transitions": 59
+    },
+    {
+      "opponent": "edax-v4.7",
+      "family": "protocol-smoke-03",
+      "candidateSide": 1,
+      "candidateScore": 0,
+      "blackMinusWhite": -52,
+      "transitions": 62
+    },
+    {
+      "opponent": "edax-v4.7",
+      "family": "protocol-smoke-03",
+      "candidateSide": 2,
+      "candidateScore": 1,
+      "blackMinusWhite": -8,
+      "transitions": 61
+    },
+    {
+      "opponent": "edax-v4.7",
+      "family": "protocol-smoke-04",
+      "candidateSide": 1,
+      "candidateScore": 0,
+      "blackMinusWhite": -38,
+      "transitions": 64
+    },
+    {
+      "opponent": "edax-v4.7",
+      "family": "protocol-smoke-04",
+      "candidateSide": 2,
+      "candidateScore": 0,
+      "blackMinusWhite": 18,
+      "transitions": 61
+    },
+    {
+      "opponent": "egaroucid-console7.8.1-fixed",
+      "family": "protocol-smoke-01",
+      "candidateSide": 1,
+      "candidateScore": 0,
+      "blackMinusWhite": -16,
+      "transitions": 60
+    },
+    {
+      "opponent": "egaroucid-console7.8.1-fixed",
+      "family": "protocol-smoke-01",
+      "candidateSide": 2,
+      "candidateScore": 0,
+      "blackMinusWhite": 39,
+      "transitions": 63
+    },
+    {
+      "opponent": "egaroucid-console7.8.1-fixed",
+      "family": "protocol-smoke-02",
+      "candidateSide": 1,
+      "candidateScore": 0,
+      "blackMinusWhite": -54,
+      "transitions": 64
+    },
+    {
+      "opponent": "egaroucid-console7.8.1-fixed",
+      "family": "protocol-smoke-02",
+      "candidateSide": 2,
+      "candidateScore": 0,
+      "blackMinusWhite": 12,
+      "transitions": 61
+    },
+    {
+      "opponent": "egaroucid-console7.8.1-fixed",
+      "family": "protocol-smoke-03",
+      "candidateSide": 1,
+      "candidateScore": 0,
+      "blackMinusWhite": -54,
+      "transitions": 62
+    },
+    {
+      "opponent": "egaroucid-console7.8.1-fixed",
+      "family": "protocol-smoke-03",
+      "candidateSide": 2,
+      "candidateScore": 0.5,
+      "blackMinusWhite": 0,
+      "transitions": 61
+    },
+    {
+      "opponent": "egaroucid-console7.8.1-fixed",
+      "family": "protocol-smoke-04",
+      "candidateSide": 1,
+      "candidateScore": 0,
+      "blackMinusWhite": -30,
+      "transitions": 60
+    },
+    {
+      "opponent": "egaroucid-console7.8.1-fixed",
+      "family": "protocol-smoke-04",
+      "candidateSide": 2,
+      "candidateScore": 0,
+      "blackMinusWhite": 22,
+      "transitions": 61
+    }
+  ],
+  "timing": {
+    "edax-v4.7/candidate": {
+      "calls": 215,
+      "sum_ms": 143091.8084626319,
+      "median_ms": 1001.1598730925471,
+      "max_ms": 1002.8395659755915
+    },
+    "edax-v4.7/opponent": {
+      "calls": 219,
+      "sum_ms": 113110.85553502198,
+      "median_ms": 916.042890981771,
+      "max_ms": 992.3593919957057
+    },
+    "egaroucid-console7.8.1-fixed/candidate": {
+      "calls": 212,
+      "sum_ms": 141123.77422722057,
+      "median_ms": 1001.1863259715028,
+      "max_ms": 1002.1742379758507
+    },
+    "egaroucid-console7.8.1-fixed/opponent": {
+      "calls": 216,
+      "sum_ms": 118762.87350978237,
+      "median_ms": 1001.0506794787943,
+      "max_ms": 1004.519728012383
+    }
+  },
+  "outer_job_wall_seconds": 519.3126008110121,
+  "inner_arena_wall_seconds": 518.9718201500364,
+  "cost_accounting": "inner included in outer, do not add",
+  "memory": {
+    "family_cap_B": 2147483648,
+    "controller_allowance_B": 67108864,
+    "host_reserve_B": 4294967296,
+    "guard": "existing CycleResources enforced aggregateRSS/CPU/hostreserve throughout",
+    "observed_peak_RSS_B": null,
+    "peak_limitation": "CycleResources does not persist successful-run RSS peaks; earlier Ega probe1368186880B is separate, not this pilot peak"
+  },
+  "qualification": "16 Rust-authoritative complete games, no illegal/IOtimeout/crash; <=1100ms outer per-request acceptance. Nominal1s search+100ms transport, activeTTupper32MiB not identical layouts. Native timedOut completed iteration is normal, distinct from failed IOtimeout",
+  "cleanup": {
+    "command": [
+      "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+      "-B",
+      "-m",
+      "othello_arena",
+      "--config",
+      "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/protocol-smoke-v1/bound-config.json",
+      "--output",
+      "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/protocol-smoke-v1/games"
+    ],
+    "status": "complete",
+    "child": {
+      "pid": 623060,
+      "start_ticks": "65390526",
+      "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+    },
+    "launch_policy": {
+      "no_new_privs_requested": false,
+      "verified_before_exec": null
+    },
+    "cpu_plan": {
+      "management": [18],
+      "commands": {
+        "arena": [0]
+      },
+      "allocation": [0, 18],
+      "resource_CPUs": 2,
+      "worker_CPUs": 1,
+      "library_threads": 1
+    },
+    "command_cpu_scope": "arena",
+    "log_bytes_seen": 0,
+    "scope": "session group and periodically recorded descendants; no daemon adoption",
+    "exit_code": 0,
+    "remaining": [],
+    "direct_child_reaped": true,
+    "descendant_visibility": "observed",
+    "cleanup_complete": true,
+    "log_bytes_retained": 0,
+    "wall_seconds": 518.9718201500364,
+    "handle_closes_attempted": ["selector_close", "pipe_close", "pidfd_close", "log_close"],
+    "primary_error": null,
+    "process_cleanup_complete": true,
+    "handle_closes_complete": true,
+    "signal_mask_restoration": "completed",
+    "final_record_persist": "completed",
+    "finalization_errors": []
+  },
+  "scientific_interpretation": "v1 vsEdax1W7L, vsConsole7.8.1engine+fixedadapter0W1D7L;4families each smallselected smoke, no confidence interval or general inferiority claim. Continue preauthorized tiny pattern learning, no candidate/default promotion",
+  "generation_source": {
+    "utc": "2026-10-21T18:16:00.090238+00:00",
+    "original7Unchanged": true,
+    "suppliedTrainingPackageUnchanged": true,
+    "acceptedDependencyCommit": "1a44ff5af4e5bd65bed2001902f80acd08bf54ec",
+    "source": [
+      {
+        "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/games/othello/python/othello_arena/generation.py",
+        "sha256": "76ddb47f98bfe25c93420bd0d3ec9acf48b6fe5fa35af0e2b9120531086d6516",
+        "bytes": 19729,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/games/othello/tests/python/test_arena_generation.py",
+        "sha256": "72ec75b8fd03fc91ccfd29e3126e338a2a30ef355ad1cf0a655b127bf65bb0d6",
+        "bytes": 4831,
+        "mode": "0644"
+      }
+    ],
+    "checks": [
+      "new4 focused fixture/canonical integration PASS",
+      "Ruff100 scoped format/check/lint PASS"
+    ],
+    "realOpenings": "UNRUN",
+    "realGames": "UNRUN",
+    "search": "UNRUN",
+    "fit": "UNRUN",
+    "sourceReaders": "STOP",
+    "lightCheckCPU": [18]
+  },
+  "generation_scope": "New2software files,4 focused fake/canonical checks PASS; actual openings/games/data/fit UNRUN until newRoot-bound config. Original7 unchanged.",
+  "archive": {
+    "path": "research-data/othello/strong-ai-n96/protocol-smoke-v1-evidence.tar.gz",
+    "sha256": "2a886a0ef0bdb114bed0fe592c28f74666b962fdfc2fc6e4de47ac9638724175",
+    "bytes": 63075,
+    "members": [
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/protocol-smoke-v1/actual-returned-STOP.json",
+        "bytes": 3411,
+        "sha256": "4a5c3025062047e576f25c8e9fcf62df471c44da0c2ecf7f275dfad45378e3ec",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/protocol-smoke-v1/affected-once.json",
+        "bytes": 209,
+        "sha256": "363ebcf55a0fdc217b0dfa20852828ee0c0c3a42426ed8c81bea6430d50eb409",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/protocol-smoke-v1/arena.process.json",
+        "bytes": 1535,
+        "sha256": "3b3a2c16486ee6b24a4096861d36bc63eaeff5085182110912f72e51938704ad",
+        "mode": "0600"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/protocol-smoke-v1/bound-config.json",
+        "bytes": 14823,
+        "sha256": "d73accf3cd4ad10caf4c62104d21275eaf8253574bbc3f207368a17e5d8b90f2",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/protocol-smoke-v1/games/candidate-edax-v4.7.log",
+        "bytes": 65536,
+        "sha256": "d1c29509c099fed2b3f07a0e59b90cb2d1a5901b01f71ffa77ff629a29495483",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/protocol-smoke-v1/games/candidate-edax-v4.7.log.json",
+        "bytes": 123,
+        "sha256": "e092a00f5a7a813e3242863e0c902a9b9c46c085244b89d676c8660ebc549c8a",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/protocol-smoke-v1/games/candidate-egaroucid-console7.8.1-fixed.log",
+        "bytes": 65536,
+        "sha256": "ebfa6793bf616fac1ae8bf185997678a7ed936f7dc36fd8b649b715c29d2482c",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/protocol-smoke-v1/games/candidate-egaroucid-console7.8.1-fixed.log.json",
+        "bytes": 123,
+        "sha256": "0e463b9b55acd58e7086cae91a0e12ad414be5e5c7b3163a81f98bdb1aa9cd52",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/protocol-smoke-v1/games/config.json",
+        "bytes": 14823,
+        "sha256": "d73accf3cd4ad10caf4c62104d21275eaf8253574bbc3f207368a17e5d8b90f2",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/protocol-smoke-v1/games/edax-v4.7.log",
+        "bytes": 31682,
+        "sha256": "18ec2e744500230f3a1cacd1c4ba1461887151776165c0ff2b4a9c10f279cd6f",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/protocol-smoke-v1/games/edax-v4.7.log.json",
+        "bytes": 123,
+        "sha256": "2f83a48afaecd23808e9ea1052e458bcbf48393e65cb42ef2fde4c53fd754dca",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/protocol-smoke-v1/games/egaroucid-console7.8.1-fixed.log",
+        "bytes": 65536,
+        "sha256": "7a17eac14f97515926e927b04e940472e634f5a347efc3debccb570723513998",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/protocol-smoke-v1/games/egaroucid-console7.8.1-fixed.log.json",
+        "bytes": 123,
+        "sha256": "363af13802a3d21bc238296c686576557780992f034339ceb8102b85ed08008d",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/protocol-smoke-v1/games/games.jsonl",
+        "bytes": 177250,
+        "sha256": "e5541a567495ee1eac8cec78e07005081a4d5c54ee714a0bf6708552058b2519",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/protocol-smoke-v1/games/result.json",
+        "bytes": 1799,
+        "sha256": "5b3e521f32a50cb7b33d488e4b5c9c5411727f2b483d3df9b2ee28854693fd04",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/protocol-smoke-v1/games/rules-edax-v4.7.log",
+        "bytes": 65536,
+        "sha256": "25e0ab43b9cd45fae3ed4666b659b219dcffc58c7703d11a7bd06829c46464f3",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/protocol-smoke-v1/games/rules-edax-v4.7.log.json",
+        "bytes": 124,
+        "sha256": "5e7b0cc2cb137e68433f631c98b66d09f809b31b2eb0939419ef9a3722ea0c82",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/protocol-smoke-v1/games/rules-egaroucid-console7.8.1-fixed.log",
+        "bytes": 65536,
+        "sha256": "966fd553ec6d9458b82d053fed62d430a4944b5a0b95b1ce4f6577c616fa3f79",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/protocol-smoke-v1/games/rules-egaroucid-console7.8.1-fixed.log.json",
+        "bytes": 124,
+        "sha256": "242e71a226eb937a902e8a8d95031a813b1bba1bc938bf6ff49fa3966d038e22",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/protocol-smoke-v1/job.json",
+        "bytes": 720,
+        "sha256": "bb7128664b7a3e186459a29356c3a4c5ed5e69d22d455e4d70dfc1a0266cafdc",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/protocol-smoke-v1/resources.json",
+        "bytes": 958,
+        "sha256": "dd45f55ed7383691a2757aa8ea70c4381a97c637ab589084000e7130ba8f724d",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/protocol-smoke-v1/run.py",
+        "bytes": 4125,
+        "sha256": "87e78c019661fecbceaed57e58d2241be5752dafa64e078a31af6d43f0165ca1",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/protocol-smoke-v1/runtime/output.log",
+        "bytes": 69,
+        "sha256": "2ec1cabe459d1db0ea175fa165d340bac03475500df27ce3a7db86133eb41f8c",
+        "mode": "0644"
+      },
+      {
+        "member": ".artifacts/research-team/integration324/othello-strong-ai-n96/protocol-smoke-v1/runtime/result.json",
+        "bytes": 523,
+        "sha256": "1b293c7f67bb6ff1ab837d7e6616967e32bebf16540d53a83d3f217b5fabdfba",
+        "mode": "0600"
+      },
+      {
+        "member": ".worktree/othello-baselines-n96/.artifacts/othello-baselines-n96/generation-ready-format-check.log",
+        "bytes": 26,
+        "sha256": "3bc53bf3e981a98a34a852e175bf9b77af841edea74fca595d9aedcbaf9a4938",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/othello-baselines-n96/.artifacts/othello-baselines-n96/generation-ready-lint.log",
+        "bytes": 141,
+        "sha256": "60e43949d9eb2a9c512aed906a47f424940ca71f54a851cb253be8f2819cae08",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/othello-baselines-n96/.artifacts/othello-baselines-n96/generation-ready-tests.log",
+        "bytes": 732,
+        "sha256": "3921a1ec0f2689fae7064ea95769267a74fecd992ea7e655ec0e05a2602f5204",
+        "mode": "0644"
+      },
+      {
+        "member": ".worktree/othello-baselines-n96/.artifacts/othello-baselines-n96/generation-source-result.json",
+        "bytes": 1002,
+        "sha256": "7977d036bae23961c082fcd5badf30a8d14103be64fd58b09167949e629bfef5",
+        "mode": "0644"
+      }
+    ],
+    "validation": "one new forward exactbytes/modes/names/CRC/EOF PASS, no extraction"
+  }
+}

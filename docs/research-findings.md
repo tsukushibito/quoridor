@@ -2,6 +2,8 @@
 
 ## 追加目標と未確定点（2026-10-22 JST）
 
+Othello初回native protocol/cost pilotは4開始family両色・各相手8局/計16局が終局し、違法・I/O timeout・crashなしだった。未学習v1はEdax4.7に1勝7敗、公式Console7.8.1-engine＋固定時間adapterに0勝1分7敗。1秒要求/100ms transport allowance、1探索thread、active TT上限32MiBで、native同士の小接続確認であり、一般劣位・同等・優位やbrowser棋力を判定しない。outer519.312600811秒にinner518.971820150秒を加算しない。2GiB familyのguardは正常終了したが、そのrunのRSS peakは保存されておらずUNKNOWN、過去probeを代入しない。[全16局・時計・原結果と限界](../research-data/othello/strong-ai-n96/protocol-smoke-v1.json)。予定した小pattern学習を継続し、この敗北だけで方式や学習を棄却しない。
+
 人間はOthelloの最強Rust/browser AIと、既存Quoridorの最強化に向けた新しい具体工程を別goalとして直接依頼した。Othelloは[設計正本](../games/othello/docs/strong-ai.md)、Quoridorは[本家比較・joint学習の設計](design/ai-nnue-research.md#2026-10-22の直接依頼本家比較とjoint-policyvalue)へ集約する。旧Quoridor USERPAUSE323/342.17、seals/newE/oldfits96、Cedar/defaultと元FAILED/NULL/UNKNOWN費は維持する。sourceは並行し、同じhardwareの公平時計・重いbuild/教師/学習だけを実行・統合担当が調整する。
 
 Quoridor旧Cedar対Sigma originalMCTSの6W10L/8family/100msは探索的小標本、五LMR設定512局の249W263L/48.6328%（CI45.3125–51.953125%）はその固定比較で基準維持を支持した事実である。教師品質不足、NNUE表現不足、MCTS一般優位、探索改善不能までは結論しない。joint経路18.2の4prefix/5教師行/2更新も機能確認に限る。新しい問いは、固定本家Clausを同じ履歴・規則・実caller時計で比較できるか、およびCedar valueを保つwarmstartからpolicyを実学習して同じ評価器で探索方式を比較するとどうなるかである。毎手のPython/Torch/head cold初期化があるsource事実と、旧54b/45a0等FAILEDの原因特定は区別する。
