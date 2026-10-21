@@ -18,7 +18,7 @@ import zipfile
 import numpy as np
 
 from .cache import sha
-from .snapshot import write_json as write
+from quoridor_runtime.snapshot import write_json as write
 
 from .public_features import (
     RECORD,
@@ -522,13 +522,13 @@ def main():
             raise ValueError("fixed producer/native/source changed before compute")
     os.sched_setaffinity(0, {2, 3})
     if args.worker:
-        from .cycle_process import cancellation_signals
+        from quoridor_runtime.cycle_process import cancellation_signals
 
         with cancellation_signals():
             prepare(config)
     else:
         import sys
-        from .cycle_process import CycleResources, cancellation_signals, execute
+        from quoridor_runtime.cycle_process import CycleResources, cancellation_signals, execute
 
         root = Path(config["output"]).parent
         resources = CycleResources(

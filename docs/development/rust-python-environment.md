@@ -27,7 +27,7 @@ bash scripts/dev/research-job.sh --help
 
 共通入口は依存metadataのMainをGit common-dirから解決し、`uv run --locked --offline --no-sync --no-python-downloads`で既設環境を使う。Python指定は共通環境のbinaryへ正規化し、明示した別Python・欠落環境・異なる版を拒否する。通常runはpackageをdownload/syncしない。Pythonスクリプトの曖昧なsystem shebangと専用training wrapperは撤去する。
 
-コード参照は、実行した `scripts/dev/project-env.sh` 自身が属するcheckoutを `git -C <入口のディレクトリ> rev-parse --show-toplevel` で解決して `QUORIDOR_CODE_ROOT` に設定する。`PYTHONPATH` はそのcheckoutの `python` 一つへ置き換え、callerから継承したMainや別環境のpathは追加しない。選択先の `python` が欠落していれば停止し、Mainへfallbackしない。通常実行では `PYTHONSAFEPATH=1` によりcwd・スクリプトのディレクトリの暗黙追加も止める。ローカルpackageはこの `python` 以下からimportし、隣接する管理helperは既存の明示pathで読み込む。既存の明示TensorRT exportでは `QUORIDOR_TENSORRT_ROOT/python` のisolated backend bindingsだけを先頭へ追加する。これは別venvやfallbackではなく、既存のoptional native backend配置を保つ。
+コード参照は、実行した `scripts/dev/project-env.sh` 自身が属するcheckoutを `git -C <入口のディレクトリ> rev-parse --show-toplevel` で解決して `QUORIDOR_CODE_ROOT` に設定する。`PYTHONPATH` はそのcheckoutの `games/quoridor/python` と `shared/python` だけへ置き換え、callerから継承したMainや別環境のpathは追加しない。選択先のgame package又はshared runtimeの実sourceが欠落していれば停止し、Mainへfallbackしない。通常実行では `PYTHONSAFEPATH=1` によりcwd・スクリプトのディレクトリの暗黙追加も止める。ローカルpackageはこのgame/shared source以下からimportし、隣接する管理helperは既存の明示pathで読み込む。既存の明示TensorRT exportでは `QUORIDOR_TENSORRT_ROOT/python` のisolated backend bindingsだけを先頭へ追加する。これは別venvやfallbackではなく、既存のoptional native backend配置を保つ。
 
 Worktreeを選ぶには、そのWorktreeの入口を指定する。cwdだけを変更してMainの入口を呼んでもMainコードを選ぶ。スクリプト引数のpathは従来どおりcallerのcwdから解釈されるため、別cwdから使う場合は対象Worktreeのスクリプトも絶対pathで指定する。
 

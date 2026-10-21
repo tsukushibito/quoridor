@@ -26,8 +26,8 @@ import uuid
 import zlib
 
 ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT / "python"))
-from quoridor_training import cycle_process as process  # noqa: E402
+sys.path[:0] = [str(ROOT / "games/quoridor/python"), str(ROOT / "shared/python")]
+from quoridor_runtime import cycle_process as process  # noqa: E402
 
 LEASE = Path("/workspaces/quoridor/.artifacts/rust-migration/target/arena-software-writer.lock")
 BUILD_SCHEMA = "quoridor.research.build-manifest.v1"
@@ -2653,8 +2653,6 @@ FIT_IMPORTS = (
     "sampling",
     "supply",
     "plotting",
-    "snapshot",
-    "cycle_process",
 )
 
 
@@ -3483,7 +3481,9 @@ def common_training_environment(spec):
     require(
         spec["cwd"] == str(ROOT)
         and spec["env"].get("PYTHONDONTWRITEBYTECODE") == "1"
-        and spec["env"].get("PYTHONPATH") == str(ROOT / "python")
+        and spec["env"].get("PYTHONPATH")
+        == os.pathsep.join(str(ROOT / p) for p in ("games/quoridor/python", "shared/python"))
+        and spec["env"].get("PYTHONSAFEPATH") == "1"
         and all(
             spec["env"].get(k) == "1"
             for k in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS")
@@ -3634,16 +3634,20 @@ def caller_source_refs(spec, experiment):
     paths = {
         ROOT / "scripts/dev/research-lifecycle.py",
         ROOT / "scripts/dev/research-job.py",
-        ROOT / "python/quoridor_training/cycle_process.py",
-        ROOT / "python/quoridor_training/snapshot.py",
+        ROOT / "shared/python/quoridor_runtime/__init__.py",
+        ROOT / "shared/python/quoridor_runtime/cycle_process.py",
+        ROOT / "shared/python/quoridor_runtime/snapshot.py",
     }
     if experiment["phase"] in {"fit", "software-qualification"}:
-        paths |= {ROOT / "python/quoridor_training" / (name + ".py") for name in FIT_IMPORTS}
+        paths |= {
+            ROOT / "games/quoridor/python/quoridor_training" / (name + ".py")
+            for name in FIT_IMPORTS
+        }
         if (
             experiment["phase"] == "fit"
             and document(experiment["config"])["experiment"]["study"] == "mixed-outcome"
         ):
-            paths.add(ROOT / "python/quoridor_training/public_replay.py")
+            paths.add(ROOT / "games/quoridor/python/quoridor_training/public_replay.py")
         if experiment["phase"] == "software-qualification":
             config = document(experiment["config"])
             paths |= {
@@ -3658,7 +3662,7 @@ def caller_source_refs(spec, experiment):
             require(spec["argv"][1] == "-B", "pinned normal arena analysis")
         else:
             paths |= {
-                ROOT / "python/quoridor_training/research355" / (name + ".py")
+                ROOT / "games/quoridor/python/quoridor_training/research355" / (name + ".py")
                 for name in (
                     "stream355",
                     "lifecycle355",
@@ -3672,7 +3676,7 @@ def caller_source_refs(spec, experiment):
                 len(spec["argv"]) > 2
                 and spec["argv"][1] == "-B"
                 and spec["argv"][2]
-                == str(ROOT / "python/quoridor_training/research355/stream355.py"),
+                == str(ROOT / "games/quoridor/python/quoridor_training/research355/stream355.py"),
                 "current maintained analysis entry",
             )
     if experiment["phase"] == "arena" or (
@@ -3681,8 +3685,8 @@ def caller_source_refs(spec, experiment):
         config = document(experiment["config"])
         if any(e["kind"] == "claustrophobia" for e in config["engines"]):
             paths |= {
-                ROOT / "python/quoridor_training/claustrophobia.py",
-                ROOT / "python/quoridor_training/static_teacher_heads.py",
+                ROOT / "games/quoridor/python/quoridor_training/claustrophobia.py",
+                ROOT / "games/quoridor/python/quoridor_training/static_teacher_heads.py",
                 project_python().resolve(strict=True),
                 project_python().parent.parent / "pyvenv.cfg",
             }

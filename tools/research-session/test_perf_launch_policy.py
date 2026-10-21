@@ -16,8 +16,8 @@ from unittest.mock import patch
 HERE = Path(__file__).resolve().parents[2]
 MAIN = Path(os.environ["RESEARCH_TEST_ROOT"])
 cycle_loader = importlib.util.spec_from_file_location(
-    "quoridor_training.perf_policy_subject",
-    HERE / "python/quoridor_training/cycle_process.py",
+    "quoridor_runtime.perf_policy_subject",
+    HERE / "shared/python/quoridor_runtime/cycle_process.py",
 )
 cycle = importlib.util.module_from_spec(cycle_loader)
 sys.modules[cycle_loader.name] = cycle

@@ -33,7 +33,7 @@ class ProjectEnvironment(unittest.TestCase):
         # Each entry must establish its own binding, even with inherited Main paths.
         env.pop("PYTHONSAFEPATH", None)
         env.pop("QUORIDOR_TENSORRT_ROOT", None)
-        env["PYTHONPATH"] = str(MAIN / "python")
+        env["PYTHONPATH"] = f"{MAIN}/games/quoridor/python:{MAIN}/shared/python"
         env["QUORIDOR_CODE_ROOT"] = str(MAIN)
         env.update(extra_env or {})
         return subprocess.run(
@@ -48,8 +48,8 @@ class ProjectEnvironment(unittest.TestCase):
     @unittest.skipIf(ROOT == MAIN, "Worktree-only sentinel acceptance needs a managed worktree")
     def test_actual_worktree_sentinel_and_import_file(self):
         name = "_quoridor_project_env_" + uuid.uuid4().hex
-        sentinel = ROOT / "python" / (name + ".py")
-        self.assertFalse((MAIN / "python" / sentinel.name).exists())
+        sentinel = ROOT / "games/quoridor/python" / (name + ".py")
+        self.assertFalse((MAIN / "games/quoridor/python" / sentinel.name).exists())
         try:
             with sentinel.open("x") as stream:
                 stream.write("TOKEN = " + repr(name) + "\n")
@@ -57,17 +57,31 @@ class ProjectEnvironment(unittest.TestCase):
                 "python",
                 "-B",
                 "-c",
-                f"import {name} as sentinel, quoridor_training, json, os, sys; "
+                f"import {name} as sentinel, quoridor_training, quoridor_runtime, json, os, sys; "
+                "from quoridor_runtime import cycle_process as process, snapshot; "
                 "print(json.dumps(dict(sentinel=sentinel.__file__, token=sentinel.TOKEN, "
+                "runtime=quoridor_runtime.__file__, process=process.__file__, snapshot=snapshot.__file__, "
                 "package=quoridor_training.__file__, code=os.environ['QUORIDOR_CODE_ROOT'], "
                 "metadata=os.environ['QUORIDOR_PROJECT_ROOT'], environment=sys.prefix)))",
-                cwd=MAIN / "python",
+                cwd=MAIN / "games/quoridor/python",
             )
             self.assertEqual(result.returncode, 0, result.stderr)
             report = json.loads(result.stdout)
             self.assertEqual(Path(report["sentinel"]), sentinel)
             self.assertEqual(report["token"], name)
-            self.assertEqual(Path(report["package"]), ROOT / "python/quoridor_training/__init__.py")
+            self.assertEqual(
+                Path(report["package"]),
+                ROOT / "games/quoridor/python/quoridor_training/__init__.py",
+            )
+            self.assertEqual(
+                Path(report["runtime"]), ROOT / "shared/python/quoridor_runtime/__init__.py"
+            )
+            self.assertEqual(
+                Path(report["process"]), ROOT / "shared/python/quoridor_runtime/cycle_process.py"
+            )
+            self.assertEqual(
+                Path(report["snapshot"]), ROOT / "shared/python/quoridor_runtime/snapshot.py"
+            )
             self.assertEqual(Path(report["code"]), ROOT)
             self.assertEqual(Path(report["metadata"]), MAIN)
             self.assertEqual(Path(report["environment"]), Path(sys.prefix))
@@ -84,14 +98,17 @@ class ProjectEnvironment(unittest.TestCase):
             entry=MAIN / "scripts/dev/project-env.sh",
         )
         self.assertEqual(result.returncode, 0, result.stderr)
-        self.assertEqual(Path(result.stdout.strip()), MAIN / "python/quoridor_training/__init__.py")
+        self.assertEqual(
+            Path(result.stdout.strip()),
+            MAIN / "games/quoridor/python/quoridor_training/__init__.py",
+        )
         print("ACTUAL_MAIN_IMPORT " + result.stdout.strip(), flush=True)
 
     def test_missing_worktree_module_cannot_fall_back_to_main_cwd(self):
-        # Main has a top-level candidate at this cwd; selected worktree/python
+        # Main has a top-level candidate at this cwd; selected game/shared source
         # has no top-level snapshot module. Establish that the candidate is real.
-        main_package = MAIN / "python/quoridor_training"
-        self.assertFalse((ROOT / "python/snapshot.py").exists())
+        main_package = MAIN / "shared/python/quoridor_runtime"
+        self.assertFalse((ROOT / "games/quoridor/python/snapshot.py").exists())
         control = subprocess.run(
             [sys.executable, "-B", "-E", "-c", "import snapshot; print(snapshot.__file__)"],
             cwd=main_package,
@@ -161,7 +178,10 @@ class ProjectEnvironment(unittest.TestCase):
                 extra_env={"QUORIDOR_TENSORRT_ROOT": str(backend)},
             )
             self.assertEqual(result.returncode, 0, result.stderr)
-            self.assertEqual(result.stdout.strip(), f"{backend}/python:{ROOT}/python")
+            self.assertEqual(
+                result.stdout.strip(),
+                f"{backend}/python:{ROOT}/games/quoridor/python:{ROOT}/shared/python",
+            )
         self.assertFalse(backend.exists())
 
 

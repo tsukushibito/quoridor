@@ -6,7 +6,7 @@ import gzip
 import importlib.util
 import io
 import json
-from .snapshot import atomic_text
+from quoridor_runtime.snapshot import atomic_text
 import os
 from pathlib import Path
 import sys

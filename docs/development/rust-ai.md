@@ -50,7 +50,7 @@ CUDAは`cuda-aoti`、TensorRTは`tensorrt`のCargo featureを明示する。`QUO
 
 `nnue` engineはmanifestから対応するfloat/距離残差loaderを選択し、既存の評価器へ接続する。`model-check --model MANIFEST`は対応形式・署名・サイズを推論前に検査する。2 engineのarenaは色交換ペア単位で分割し、明示した奇数の分割境界は開始前に拒否する。
 
-arenaのbook・時計・pair集計・保存検査は[runnerのarena手順](../../games/quoridor/crates/quoridor-runner/README.md)と[preset案内](../../configs/arena/README.md)を使う。色交換pairは同じ全履歴prefixから開始し、全予定slotと未知/取消を記録する。主集計は完了pair、補助に全予定分母の範囲を残す。`arena --audit OUTPUT` は来歴・保存SHA・集計を照合し、`--recover OUTPUT` は未完了journalの記録済みslotを読み取る。比較する探索版はsource/compiler/flags/lock/private ELFとmodel/scale/inputを別々に束縛する。同時間Sigmaのmaintained adapterを実装した。実backend/caller資格と棋力結果はsource/softwareの成功とは別に確認する。αβのnative時計はcaller setup・探索・返却・合法履歴検査後の受理を測り、完了depthのtimestampとcounterを全呼出しのcounterから分ける。既存のpersistent TTを使うSearchSessionは最後に完成した合法depthを返し、後続のengine errorを旧completionで救済しない。terminal/cancel/no-completion/lateは別結果で、期限前のcompletionがあっても期限後の受理を許可しない。研究用100ms/手ではsetupと5ms return reserveを差し引くが、硬い返却保証ではない。要求TT65536でも現persistent policyの実容量は最大4096 slots/1MiBで、manifestのsource見込みとruntime実容量/retained snapshotを区別する。
+arenaのbook・時計・pair集計・保存検査は[runnerのarena手順](../../games/quoridor/crates/quoridor-runner/README.md)と[preset案内](../../games/quoridor/configs/arena/README.md)を使う。色交換pairは同じ全履歴prefixから開始し、全予定slotと未知/取消を記録する。主集計は完了pair、補助に全予定分母の範囲を残す。`arena --audit OUTPUT` は来歴・保存SHA・集計を照合し、`--recover OUTPUT` は未完了journalの記録済みslotを読み取る。比較する探索版はsource/compiler/flags/lock/private ELFとmodel/scale/inputを別々に束縛する。同時間Sigmaのmaintained adapterを実装した。実backend/caller資格と棋力結果はsource/softwareの成功とは別に確認する。αβのnative時計はcaller setup・探索・返却・合法履歴検査後の受理を測り、完了depthのtimestampとcounterを全呼出しのcounterから分ける。既存のpersistent TTを使うSearchSessionは最後に完成した合法depthを返し、後続のengine errorを旧completionで救済しない。terminal/cancel/no-completion/lateは別結果で、期限前のcompletionがあっても期限後の受理を許可しない。研究用100ms/手ではsetupと5ms return reserveを差し引くが、硬い返却保証ではない。要求TT65536でも現persistent policyの実容量は最大4096 slots/1MiBで、manifestのsource見込みとruntime実容量/retained snapshotを区別する。
 
 Sigmaのtimed MCTSはengineの`time_ms`とarenaの`comparison:"whole_wall_time"`を明示し、`workers=1/active_games=1/max_batch=1`で実行する。caller時計はfull-history Search clone/setupの前から始まり、features・queue・同期推論・探索・choice・合法返却・最終受理を含む。研究用100ms/5ms reserveでは95msまでの完成simulationを保持し、同期in-flight応答を待った後のlate valid replyは破棄する。cancel/guardと元backend errorを別に記録し、旧completionでerrorを救済しない。K64/tau1/tree256MiB等の既存設定は保持し、K上限の早期停止を理由付きで記録する。Kやneural-call倍率を同時間の代替にしない。model/session初期化は一度だけ別計測しwhole jobへ含める。
 
@@ -66,7 +66,7 @@ benchmarkは時間制限を含む場合`fixed_work=false`とし、depth/node/tim
 
 `dataset cache`はRustで特徴をまとめて展開し、mmap可能なfloat tensorを作る。Pythonの学習loopで盤面再生やJSON解析を繰り返さない。通常cacheはtest shardを開かない。候補freeze後だけ`--allow-test`を明示し、そのtestを設定選定へ戻さない。OSの閲覧禁止を主張する仕組みではなく、APIと実行手順の分離である。
 
-`python/quoridor_training`内のモデル/設定定義を使い、低stepを含むtrain/validation曲線・gradient・checkpoint・native f32重み・ONNXを出す。学習量や容量の変更は版付き設定で行う。train-only距離尺度、game等重み、定数/距離基準と未見testを分けて確認する。
+`games/quoridor/python/quoridor_training`内のモデル/設定定義を使い、低stepを含むtrain/validation曲線・gradient・checkpoint・native f32重み・ONNXを出す。学習量や容量の変更は版付き設定で行う。train-only距離尺度、game等重み、定数/距離基準と未見testを分けて確認する。
 
 学習の `--cache` は単一cacheディレクトリ、または `quoridor-sharded-training-cache-v1` のJSON manifestを受ける。後者は元train cacheをSHA付きで参照し、namespaceとfamily単位のtrain/validation割当、全行の資格maskを明示する。元tensorや終局ラベルを複製・書換せず、testや未来ラベルを取り込まない。`cache.load` はCorpusを返し、binding、row_count、遅延metadata、索引付きbatch取得とchunk走査を一つの入口にする。特徴はshardごとにread-only mmapし、必要なbatchだけを展開する。全dense特徴の結合や全行辞書の常駐はしない。metadataの行offsetとgroup/split/資格/labelのコンパクト索引は行数に比例するが、元tensor・ラベル・分割・samplingを変更しない。hash、正確な長さ、STM順、疎特徴と距離の対応は入力時にchunk単位で検査する。
 
@@ -152,6 +152,6 @@ TTのtargetは同playerが合法な二手を進めたdepth2の局面。`tt/cold_
 
 現役診断入口は `nnue-diagnose --config CONFIG`。`mode:"correspondence"` は独立期待値を持つ16 ordered rowsのpacketと必須 `input_sha256`、モデルmanifest/weight SHAを検査し、QF1両視点・STM順D・native side0/Torch side1・finite/shapeを維持してScalar/Simd FTの対応と実head guard/backend経路を報告する。FP32 alertはabs1e-5+rel1e-4で、FT bitsの比較と区別する。feature-only入力から合法履歴や棋力を資格せず、全体の `qualification_complete` はfalseのまま。合法prefix/full-delta/親undo・caller/対局は別境界で確認する。packet/診断例は停止済みの研究証拠であり、準備済みであることだけから新しいforwardや既定モデル採用を許可しない。
 
-`mode:"prepare_arena_book"` はengine指定を拒否するNN0入口。全候補/却下の分母、seed・全Action/history・turn/stocks・非終局検査・共通lineageを保存し、不完全/重複bookを拒否する。8 familyの一先後pair/16 slotでは固定bookを結果前に束縛し、候補の勝敗で再選択しない。`configs/arena/best51-book-preparation.json` は人間が受け入れたseed32710001/lengths0..14の準備設定であり、対局実行やSigmaの同時間資格ではない。
+`mode:"prepare_arena_book"` はengine指定を拒否するNN0入口。全候補/却下の分母、seed・全Action/history・turn/stocks・非終局検査・共通lineageを保存し、不完全/重複bookを拒否する。8 familyの一先後pair/16 slotでは固定bookを結果前に束縛し、候補の勝敗で再選択しない。`games/quoridor/configs/arena/best51-book-preparation.json` は人間が受け入れたseed32710001/lengths0..14の準備設定であり、対局実行やSigmaの同時間資格ではない。
 
 診断Configの `wall_seconds` は必須nullableで、省略は拒否、明示nullはwhole-job wall guardなし、positive有限値は明示guardとなる。一般runner Configは省略時の既存300秒既定と明示nullを区別する。いずれもNN/processed/node/RAM/取消・個別caller deadlineの条件を置き換えず、見積り400/480秒を科学deadlineにしない。実運用の採用sourceとprivate compiled版・trained correspondence・default/棋力採用は別のreceiptで確認する。

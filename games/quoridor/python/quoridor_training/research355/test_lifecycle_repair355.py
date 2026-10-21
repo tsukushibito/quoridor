@@ -16,7 +16,7 @@ import lifecycle355 as life
 import stream355 as stream
 
 MAIN = Path("/workspaces/quoridor")
-OWN = Path(__file__).resolve().parents[3]
+OWN = Path(__file__).resolve().parents[5]
 EVIDENCE = OWN / ".artifacts/lifecycle-consumer-n3l7-v1"
 spec = importlib.util.spec_from_file_location(
     "consumer_test_publisher", MAIN / "scripts/dev/research-lifecycle.py"

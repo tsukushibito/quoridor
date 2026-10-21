@@ -116,7 +116,7 @@ case "${1:-}" in
   create-sparse)
     [[ $# -ge 5 ]] || { usage; exit 2; }
     create_worktree "$2" "$3" "$4" no-checkout
-    git -C "$managed_root/$2" sparse-checkout set --cone --sparse-index -- "${@:5}"
+    git -C "$managed_root/$2" sparse-checkout set --cone --sparse-index -- "${@:5}" scripts/dev games/quoridor/python shared/python
     git -C "$managed_root/$2" read-tree -mu HEAD
     ;;
   lock-existing)

@@ -22,8 +22,8 @@ def module(name, path):
 
 lc = module("cohort_coverage_lc", SOURCE / "scripts/dev/research-lifecycle.py")
 lc.process = module(
-    "quoridor_training.cohort_coverage_process",
-    SOURCE / "python/quoridor_training/cycle_process.py",
+    "quoridor_runtime.cohort_coverage_process",
+    SOURCE / "shared/python/quoridor_runtime/cycle_process.py",
 )
 fixture = module("cohort_coverage_fixture", ROOT / "tools/research-session/test_cohort_control.py")
 fixture.lc = lc

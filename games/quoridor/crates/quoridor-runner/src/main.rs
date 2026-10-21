@@ -332,7 +332,14 @@ fn execute() -> Result<()> {
                 .arg(config_path)
                 .arg("--runner")
                 .arg(exe)
-                .env("PYTHONPATH", repo.join("python"))
+                .env(
+                    "PYTHONPATH",
+                    std::env::join_paths([
+                        repo.join("games/quoridor/python"),
+                        repo.join("shared/python"),
+                    ])?,
+                )
+                .env("PYTHONSAFEPATH", "1")
                 .status()?;
             if !status.success() {
                 return Err(format!("learning cycle failed: {status}").into());

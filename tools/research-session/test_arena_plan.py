@@ -19,7 +19,7 @@ import unittest
 from unittest.mock import patch
 
 ROOT = Path(os.environ.get("ARENA_361_MAIN_ROOT", Path(__file__).resolve().parents[2]))
-sys.path.insert(0, str(ROOT / "python"))
+sys.path.insert(0, str(ROOT / "shared/python"))
 SOURCE = Path(os.environ.get("ARENA_361_LIFECYCLE", ROOT / "scripts/dev/research-lifecycle.py"))
 module = importlib.util.spec_from_file_location("arena361_lifecycle", SOURCE)
 lc = importlib.util.module_from_spec(module)

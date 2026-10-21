@@ -96,7 +96,7 @@ class StaticHead:
         if kind == "sigma":
             # The already maintained graph/weights/value formula is the sole
             # body. New batched runtime still requires its finite actual parity.
-            path = Path(__file__).resolve().parents[2] / "tools/model-export/folded_sigma.py"
+            path = Path(__file__).resolve().parents[4] / "tools/model-export/folded_sigma.py"
             spec = importlib.util.spec_from_file_location("quoridor_fixed_sigma_body", path)
             module = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(module)

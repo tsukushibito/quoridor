@@ -7,18 +7,14 @@ from pathlib import Path
 import tempfile
 import unittest
 from unittest.mock import patch
-import quoridor_training
+import quoridor_runtime
 
 ROOT = Path(os.environ.get("RESEARCH_TEST_ROOT", Path(__file__).resolve().parents[2]))
 SOURCE = Path(
-    os.environ.get(
-        "RESEARCH_LIFECYCLE_SOURCE", ROOT / "scripts/dev/research-lifecycle.py"
-    )
+    os.environ.get("RESEARCH_LIFECYCLE_SOURCE", ROOT / "scripts/dev/research-lifecycle.py")
 )
 if os.environ.get("RESEARCH_CYCLE_SOURCE"):
-    quoridor_training.__path__.insert(
-        0, str(Path(os.environ["RESEARCH_CYCLE_SOURCE"]).parent)
-    )
+    quoridor_runtime.__path__.insert(0, str(Path(os.environ["RESEARCH_CYCLE_SOURCE"]).parent))
 module = importlib.util.spec_from_file_location("whole_storage_lifecycle", SOURCE)
 lc = importlib.util.module_from_spec(module)
 module.loader.exec_module(lc)
@@ -51,9 +47,7 @@ class WholeStorageTests(unittest.TestCase):
             "support": {"sha256": "0" * 64},
         }
         handover = self.root / "handover.json"
-        handover.write_text(
-            json.dumps({"fresh_private_root": str(self.destination.parent)})
-        )
+        handover.write_text(json.dumps({"fresh_private_root": str(self.destination.parent)}))
         self.spec["target_handover"] = lc.bound(handover)[0]
 
     def resources(self):
@@ -199,9 +193,7 @@ class WholeStorageTests(unittest.TestCase):
         resources = self.resources()
         with patch.object(lc.process.CycleResources, "check", return_value=None):
             lc.private_copy_check(self.spec, self.source, resources=resources)
-            actual = lc.copy_artifact(
-                self.source, self.destination, resources=resources
-            )
+            actual = lc.copy_artifact(self.source, self.destination, resources=resources)
         self.assertEqual({**actual, "path": str(self.source)}, expected)
         with self.assertRaises(FileExistsError):
             lc.copy_artifact(self.source, self.destination)

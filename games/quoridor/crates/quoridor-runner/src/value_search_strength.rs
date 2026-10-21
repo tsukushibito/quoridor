@@ -671,7 +671,7 @@ mod tests {
     #[test]
     fn strength355_config_colour_order_changes_mapping_and_saved_slots_together() {
         let mut c: Config =
-            serde_json::from_str(include_str!("../../../../../configs/arena/smoke.json")).unwrap();
+            serde_json::from_str(include_str!("../../../configs/arena/smoke.json")).unwrap();
         c.arena.as_mut().unwrap().first_candidate_colors = vec![1];
         assert_eq!(candidate_color(&c, 0), 1);
         assert_eq!(candidate_color(&c, 1), 0);
@@ -688,7 +688,7 @@ mod tests {
     #[test]
     fn strength355_oversized_capture_refuses_without_truncation_or_relabel() {
         let mut c: Config =
-            serde_json::from_str(include_str!("../../../../../configs/arena/smoke.json")).unwrap();
+            serde_json::from_str(include_str!("../../../configs/arena/smoke.json")).unwrap();
         c.arena.as_mut().unwrap().retained_outcome_bytes = Some(4096);
         let mut o = crate::runtime::Outcome {
             game: 0,
@@ -894,7 +894,7 @@ mod tests {
     #[test]
     fn strength355_batch_forecast_keeps_four_copies_and_metadata_reserve() {
         let mut c: Config =
-            serde_json::from_str(include_str!("../../../../../configs/arena/smoke.json")).unwrap();
+            serde_json::from_str(include_str!("../../../configs/arena/smoke.json")).unwrap();
         c.games = 32;
         c.max_output_bytes = BATCH_OUTPUT_BYTES;
         c.arena.as_mut().unwrap().retained_outcome_bytes = Some(OUTCOME_BYTES);

@@ -9,8 +9,8 @@ import unittest
 from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT / "python"))
-from quoridor_training import cycle_process as process  # noqa:E402
+sys.path.insert(0, str(ROOT / "shared/python"))
+from quoridor_runtime import cycle_process as process  # noqa:E402
 
 
 def lifecycle():

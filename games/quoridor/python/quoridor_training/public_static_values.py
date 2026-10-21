@@ -19,7 +19,7 @@ from .common import bound_file_bytes
 from .compact_cache import IndexedPublicCorpus
 from .public_features import reflected_keys
 from .public_static_prepare import file_ref, file_identity
-from .snapshot import write_json
+from quoridor_runtime.snapshot import write_json
 from .static_public import PAIR, ClassObservations
 from .static_teacher_heads import StaticHead
 from .static_teacher_inputs import StaticInputs
@@ -1178,7 +1178,7 @@ def main():
     parser.add_argument("mode", choices=("qualify", "labels", "policy-values"))
     parser.add_argument("--config", required=True)
     args = parser.parse_args()
-    from .cycle_process import cancellation_signals
+    from quoridor_runtime.cycle_process import cancellation_signals
 
     with cancellation_signals():
         config = json.loads(Path(args.config).read_bytes())

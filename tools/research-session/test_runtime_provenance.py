@@ -102,8 +102,9 @@ class RuntimeProvenanceTests(unittest.TestCase):
             for name in (
                 "scripts/dev/research-lifecycle.py",
                 "scripts/dev/research-job.py",
-                "python/quoridor_training/cycle_process.py",
-                "python/quoridor_training/snapshot.py",
+                "shared/python/quoridor_runtime/__init__.py",
+                "shared/python/quoridor_runtime/cycle_process.py",
+                "shared/python/quoridor_runtime/snapshot.py",
             )
         ]
         self.experiment = {

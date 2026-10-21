@@ -44,7 +44,7 @@ fn outcome(s: &Slot, status: &str, winner: Option<u8>) -> Outcome {
     }
 }
 fn functional_config() -> Config {
-    serde_json::from_str(include_str!("../../../../../configs/arena/smoke.json")).unwrap()
+    serde_json::from_str(include_str!("../../../configs/arena/smoke.json")).unwrap()
 }
 #[test]
 fn legal_replay_binds_every_history_state_walls_side_and_terminal() {

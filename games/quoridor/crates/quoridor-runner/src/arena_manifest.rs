@@ -805,7 +805,7 @@ mod tests {
     fn three_engine_374_lossless_reference_publication_partial_torn_and_io_refuse() {
         // File/codec/publication only: no evaluator, geometry, search or child process.
         let mut c: Config =
-            serde_json::from_str(include_str!("../../../../../configs/arena/smoke.json")).unwrap();
+            serde_json::from_str(include_str!("../../../configs/arena/smoke.json")).unwrap();
         c.games = 2;
         c.max_output_bytes = 16 * 1024 * 1024;
         c.output = std::env::temp_dir().join(format!(
@@ -917,7 +917,7 @@ mod tests {
     #[test]
     fn reconstructs_sibling_history_and_invalid_prefix_without_engine_execution() {
         let mut c: Config =
-            serde_json::from_str(include_str!("../../../../../configs/arena/smoke.json")).unwrap();
+            serde_json::from_str(include_str!("../../../configs/arena/smoke.json")).unwrap();
         let family = format!("{}-family-000000", c.run_id);
         let prefix = c.arena.as_ref().unwrap().book.openings[0].prefix.clone();
         let planned = vec![
@@ -943,7 +943,7 @@ mod tests {
     #[test]
     fn recovery_keeps_unique_slots_partial_pair_unknown_and_incomplete_tail() {
         let mut c: Config =
-            serde_json::from_str(include_str!("../../../../../configs/arena/smoke.json")).unwrap();
+            serde_json::from_str(include_str!("../../../configs/arena/smoke.json")).unwrap();
         c.output = std::env::temp_dir().join(format!(
             "arena-journal-{}-{}",
             std::process::id(),

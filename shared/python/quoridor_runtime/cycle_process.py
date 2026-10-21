@@ -153,7 +153,6 @@ def compute_peers(root, allocation, names):
             continue
 
 
-
 @contextmanager
 def cancellation_signals():
     def cancel(signum, _frame):

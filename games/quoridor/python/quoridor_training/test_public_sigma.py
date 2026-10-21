@@ -142,7 +142,7 @@ class PublicSigmaContracts(unittest.TestCase):
 
     def test_worker_signal_raises_through_prepare_finally(self):
         from . import public_sigma
-        from .cycle_process import CycleStopped
+        from quoridor_runtime.cycle_process import CycleStopped
 
         finalized = []
 

@@ -421,11 +421,19 @@ print(
         .arg(binding_path)
         .env(
             "PYTHONPATH",
-            Path::new(env!("CARGO_MANIFEST_DIR"))
-                .join("../../../../python")
-                .canonicalize()
-                .unwrap(),
+            std::env::join_paths([
+                Path::new(env!("CARGO_MANIFEST_DIR"))
+                    .join("../../python")
+                    .canonicalize()
+                    .unwrap(),
+                Path::new(env!("CARGO_MANIFEST_DIR"))
+                    .join("../../../../shared/python")
+                    .canonicalize()
+                    .unwrap(),
+            ])
+            .unwrap(),
         )
+        .env("PYTHONSAFEPATH", "1")
         .env("OMP_NUM_THREADS", "1")
         .env("MKL_NUM_THREADS", "1")
         .env("CUDA_VISIBLE_DEVICES", "")

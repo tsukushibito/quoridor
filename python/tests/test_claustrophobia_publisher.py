@@ -93,12 +93,13 @@ class ClaustrophobiaPublisherTests(unittest.TestCase):
             base = {
                 root / "scripts/dev/research-lifecycle.py",
                 root / "scripts/dev/research-job.py",
-                root / "python/quoridor_training/cycle_process.py",
-                root / "python/quoridor_training/snapshot.py",
+                root / "shared/python/quoridor_runtime/__init__.py",
+                root / "shared/python/quoridor_runtime/cycle_process.py",
+                root / "shared/python/quoridor_runtime/snapshot.py",
             }
             all_paths = base | {
-                root / "python/quoridor_training/claustrophobia.py",
-                root / "python/quoridor_training/static_teacher_heads.py",
+                root / "games/quoridor/python/quoridor_training/claustrophobia.py",
+                root / "games/quoridor/python/quoridor_training/static_teacher_heads.py",
                 python.resolve(),
                 root / "env/pyvenv.cfg",
             }

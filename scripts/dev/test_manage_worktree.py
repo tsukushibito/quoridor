@@ -22,7 +22,11 @@ class WorktreeTests(unittest.TestCase):
         self.script.parent.mkdir(parents=True)
         shutil.copyfile(SOURCE, self.script)
         (self.root / ".gitignore").write_text(".worktree/\n.artifacts/\n", encoding="utf-8")
-        self.run_git("add", "scripts/dev/manage_worktree.sh", ".gitignore")
+        for directory in ("games/quoridor/python", "shared/python"):
+            source = self.root / directory / "sentinel.py"
+            source.parent.mkdir(parents=True)
+            source.write_text("TOKEN = 'fixture'\n")
+        self.run_git("add", "scripts/dev/manage_worktree.sh", ".gitignore", "games", "shared")
         self.run_git("commit", "--quiet", "-m", "fixture")
 
     def run_git(self, *args):
@@ -103,6 +107,8 @@ class WorktreeTests(unittest.TestCase):
         self.helper("create-sparse", "sparse", "fixture/sparse", "HEAD", "scripts", checkout=first)
         sparse = self.root / ".worktree/sparse"
         self.assertTrue((sparse / "scripts/dev/manage_worktree.sh").is_file())
+        self.assertTrue((sparse / "games/quoridor/python/sentinel.py").is_file())
+        self.assertTrue((sparse / "shared/python/sentinel.py").is_file())
         self.helper("verify", checkout=sparse)
 
     def test_invalid_names_refused(self):

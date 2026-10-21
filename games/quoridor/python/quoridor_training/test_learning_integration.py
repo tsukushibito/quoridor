@@ -13,7 +13,9 @@ from unittest.mock import patch
 
 import numpy as np
 
-from . import cache, cycle_process, train
+from quoridor_runtime import cycle_process
+
+from . import cache, train
 from .common import resolve_config
 from .compact_cache import CompactCorpus
 from .public_features import RECORD, SCHEMA

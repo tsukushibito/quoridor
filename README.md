@@ -14,20 +14,20 @@ Webの入口はゲーム選択画面です。Quoridorを開くと既存の新規
 
 ## 主要ディレクトリ
 
-| 現在の配置                                                                  | 役割                                                                                            |
-| --------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `apps/web/`                                                                 | 製品Web UI・Three.js描画・Worker側の連携                                                        |
-| `games/quoridor/bridge/`                                                   | TypeScriptとRust/Wasmを結ぶプロトコル・bridge                                                   |
+| 現在の配置                                                                                 | 役割                                                                                            |
+| ------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| `apps/web/`                                                                                | 製品Web UI・Three.js描画・Worker側の連携                                                        |
+| `games/quoridor/bridge/`                                                                   | TypeScriptとRust/Wasmを結ぶプロトコル・bridge                                                   |
 | `games/quoridor/crates/quoridor-core/`, `quoridor-nnue/`, `quoridor-ai/`, `quoridor-wasm/` | Rustのルール・差分評価・αβ/PVS/TT・MCTS・CPU/Wasm公開境界                                       |
 | `games/quoridor/crates/quoridor-inference/`, `quoridor-data/`, `quoridor-runner/`          | 常駐CPU/GPU推論・Arrowデータ・並列生成/arena/学習cycle入口                                      |
-| `python/quoridor_training/`, `tools/model-export/`                          | bulk入力のPyTorch学習・曲線/freeze/test・nativeモデル変換                                       |
-| その他`tools/`                                                              | 現役の補助ツール・独立checker・整形/検査用の固定依存                                            |
-| `scripts/`, `scripts/dev/`                                                  | ビルド・生成・検証入口と開発環境/Beads/研究通信の操作                                           |
-| `tests/`                                                                    | 製品のrender/audio/e2e検証・fixture                                                             |
-| `docs/design/`, `development/`, `reports/`                                  | 設計・運用規約・実施結果と限界                                                                  |
-| `research-data/ai-sigma/`                                                   | mainのGit保存データ・設定・要約・圧縮観測                                                       |
-| `.artifacts/`, `artifacts/`                                                 | ローカル運用/出力・データ展開・一時物、Playwrightブラウザ等。研究の出力は`.artifacts/ai-sigma/` |
-| `research-paths.json`で参照する実験モデル・外部cache                        | 研究モデルと共有依存。保存先/配布条件は[保存方針](.devcontainer/storage-policy.md)参照          |
+| `games/quoridor/python/quoridor_training/`, `tools/model-export/`                          | bulk入力のPyTorch学習・曲線/freeze/test・nativeモデル変換                                       |
+| その他`tools/`                                                                             | 現役の補助ツール・独立checker・整形/検査用の固定依存                                            |
+| `scripts/`, `scripts/dev/`                                                                 | ビルド・生成・検証入口と開発環境/Beads/研究通信の操作                                           |
+| `tests/`                                                                                   | 製品のrender/audio/e2e検証・fixture                                                             |
+| `docs/design/`, `development/`, `reports/`                                                 | 設計・運用規約・実施結果と限界                                                                  |
+| `research-data/ai-sigma/`                                                                  | mainのGit保存データ・設定・要約・圧縮観測                                                       |
+| `.artifacts/`, `artifacts/`                                                                | ローカル運用/出力・データ展開・一時物、Playwrightブラウザ等。研究の出力は`.artifacts/ai-sigma/` |
+| `research-paths.json`で参照する実験モデル・外部cache                                       | 研究モデルと共有依存。保存先/配布条件は[保存方針](.devcontainer/storage-policy.md)参照          |
 
 main `/workspaces/quoridor` が持続的研究の統合正本です。並行変更・比較にはmanaged worktreeを使い、指示・docs・現役sourceを恒常mirrorしません。必要なモデル・checkpoint・入力は同じ永続volumeの`.worktree/assets/`で保持し、コードcheckoutと分離します。共有DB・lockと作業中worktreeを保持し、旧checkoutの撤去は情報保全・復元確認と読者停止後に行います。旧runの絶対pathは移動対応manifestで追跡し、互換symlinkや旧source一式を残しません。コードと永続入力の参照は[`research-paths.json`](research-paths.json)、機能境界・実入口・凍結recipe・保存/検査手順は[研究コードの保守案内](docs/development/ai-research-code.md)にまとめています。文書を探す入口は[AGENTS.mdのインデックス](AGENTS.md#文書インデックス)。
 

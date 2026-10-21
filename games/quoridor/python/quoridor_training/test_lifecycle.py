@@ -10,7 +10,7 @@ from types import SimpleNamespace
 import unittest
 from unittest.mock import Mock, patch
 
-from .snapshot import atomic_text, write_json
+from quoridor_runtime.snapshot import atomic_text, write_json
 
 SOURCE = Path(__file__).with_name("train.py")
 
@@ -53,7 +53,7 @@ class LifecycleTests(unittest.TestCase):
                 self.assertEqual(path.read_bytes(), before)
                 self.assertEqual(list(Path(directory).glob("*.tmp")), [])
                 with patch(
-                    "quoridor_training.snapshot.os.replace", side_effect=OSError("replace fixture")
+                    "quoridor_runtime.snapshot.os.replace", side_effect=OSError("replace fixture")
                 ):
                     with self.assertRaisesRegex(OSError, "replace fixture"):
                         writer(path, {"new": 3})
@@ -78,7 +78,7 @@ class LifecycleTests(unittest.TestCase):
             imports = [
                 node
                 for node in tree.body
-                if isinstance(node, ast.ImportFrom) and node.module == "snapshot"
+                if isinstance(node, ast.ImportFrom) and node.module == "quoridor_runtime.snapshot"
             ]
             self.assertTrue(
                 any(

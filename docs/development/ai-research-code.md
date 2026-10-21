@@ -8,19 +8,19 @@ Linuxネイティブを主経路とし、評価・探索・対局・推論queue�
 
 ## 配置と依存
 
-| 配置                                    | 責任                                                               |
-| --------------------------------------- | ------------------------------------------------------------------ |
-| `games/quoridor/crates/quoridor-core`                  | ルール、局面、合法手、距離、履歴                                   |
-| `games/quoridor/crates/quoridor-nnue`                  | QF1特徴、重み、差分評価、SIMD/量子化                               |
-| `games/quoridor/crates/quoridor-ai`                    | αβとSigma MCTS、探索の取消・完了結果                               |
-| `games/quoridor/crates/quoridor-inference`             | 常駐CPU/GPU推論、共有batch queue、要求所有                         |
-| `games/quoridor/crates/quoridor-data`                  | 教師、Arrow shard、分割/露出、mmap tensor                          |
-| `games/quoridor/crates/quoridor-runner`                | native selfplay/arena/benchmark/学習cycleと回収                    |
-| `games/quoridor/crates/quoridor-wasm`                  | 製品用Wasm境界。同じRust評価・探索を使用                           |
-| `python/quoridor_training`              | モデル、設定、尺度、指標、学習曲線、freeze/test                    |
-| `tools/model-export`                    | ONNX/AOTI/TensorRTへのオフライン変換                               |
-| `tools/research-session`・`scripts/dev` | 明示thread宛のタスク通信、非同期jobの回収・完了通知、Git保存と容量 |
-| `tools/research-quality`                | Node用Prettierと共通PythonのRuff・保守テスト                       |
+| 配置                                       | 責任                                                               |
+| ------------------------------------------ | ------------------------------------------------------------------ |
+| `games/quoridor/crates/quoridor-core`      | ルール、局面、合法手、距離、履歴                                   |
+| `games/quoridor/crates/quoridor-nnue`      | QF1特徴、重み、差分評価、SIMD/量子化                               |
+| `games/quoridor/crates/quoridor-ai`        | αβとSigma MCTS、探索の取消・完了結果                               |
+| `games/quoridor/crates/quoridor-inference` | 常駐CPU/GPU推論、共有batch queue、要求所有                         |
+| `games/quoridor/crates/quoridor-data`      | 教師、Arrow shard、分割/露出、mmap tensor                          |
+| `games/quoridor/crates/quoridor-runner`    | native selfplay/arena/benchmark/学習cycleと回収                    |
+| `games/quoridor/crates/quoridor-wasm`      | 製品用Wasm境界。同じRust評価・探索を使用                           |
+| `games/quoridor/python/quoridor_training`  | モデル、設定、尺度、指標、学習曲線、freeze/test                    |
+| `tools/model-export`                       | ONNX/AOTI/TensorRTへのオフライン変換                               |
+| `tools/research-session`・`scripts/dev`    | 明示thread宛のタスク通信、非同期jobの回収・完了通知、Git保存と容量 |
+| `tools/research-quality`                   | Node用Prettierと共通PythonのRuff・保守テスト                       |
 
 NodeはWeb/Vite/TypeScript、Wasm製品ビルド・検証、品質とソース書き出しに必要。研究の対局・探索・推論・生成をNodeへ委譲しない。旧Node実装、互換shim、実験別コピー、旧Python学習recipe、旧実装との比較テストは削除済み。移行前コードはGit `54a294a`、[撤去manifest](../../research-data/ai-sigma/retired-code-cleanup/removed-source.json.gz)と[検証](../../research-data/ai-sigma/retired-code-cleanup/verification.json)で追跡する。[AGENTS.md](../../AGENTS.md)の方針に従い、保守コストを優先し、互換性維持を目的とした旧経路は保持しない。実施中・具体的に予定した直接比較に必要な旧版だけは比較専用に保持し、対象・用途・撤去条件を明示する。比較時にGitから復元する手順は挟まず、終了後に不要分を削除する。
 
@@ -101,7 +101,7 @@ ONNX Runtime 1.30.0はtelemetry初期化時に`:memory:.ses`を生成する。`p
 
 既存 `research-lifecycle.py::comparison_conditions(common)` が通常研究の省略を解決し、`lmr_values`省略ならONだけ、`lmr_method`省略なら`depth_rank`を条件へ明示する。`apply_comparison_cost` / `apply_comparison_arena` はその条件を同じ既存measurement/engine設定fieldへ書く。明示`lmr_values`やmethodは保持する。live preparation helperが標準の解決ownerであり、artifactの古いrecipeや別preset registryを正本にしない。
 
-この研究準備と、汎用設定reader・製品・実generatorのenable既定は別である。直接measurement/Engine JSONやSearchSessionでenableを省略してもOFFのまま。method省略はAIのtyped `LmrMethod::default()` = `DepthRank`へ揃えるが、method選択だけではONにならない。measurementのmethod null/未知名/型違い拒否、Engineの既存Optionとarena planの型規則を変えない。typed method・namespace/reset正本はAIだけで、Pythonは設定名を解決しID/suffixを再構築しない。既存`configs/arena/distance-control-*`は明示source SHAを持つ調整用D/D例であり、この標準を理由に凍結値をretargetしない。
+この研究準備と、汎用設定reader・製品・実generatorのenable既定は別である。直接measurement/Engine JSONやSearchSessionでenableを省略してもOFFのまま。method省略はAIのtyped `LmrMethod::default()` = `DepthRank`へ揃えるが、method選択だけではONにならない。measurementのmethod null/未知名/型違い拒否、Engineの既存Optionとarena planの型規則を変えない。typed method・namespace/reset正本はAIだけで、Pythonは設定名を解決しID/suffixを再構築しない。既存`games/quoridor/configs/arena/distance-control-*`は明示source SHAを持つ調整用D/D例であり、この標準を理由に凍結値をretargetしない。
 
 各runは解決した`lmr` / `lmr_method`、実methodとnamespace、実image/Build、入力、費用・結果・UNKNOWNを保存する。410/411の発行済み比較は元LMR OFF/imageのまま保持し、この既定更新を混入しない。412追加対局も真正408の同一imageを用い、A固定1手/B深さ順位を両方明示するため、新しいdefault imageへ合わせた再buildや元成功局の再演を要求しない。旧400/402/408の有限判断は当時の設定として保持する。
 

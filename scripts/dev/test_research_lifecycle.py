@@ -26,9 +26,7 @@ class LifecycleDataAndPaths(unittest.TestCase):
             native_memory_bytes=2684354560,
         )
         experiment = dict(phase="compare", argv=["/native", "measure"], config=config)
-        resources = dict(
-            CPU=3, threads=1, GPU=0, controller_included=True, family_RAM_B=4294967296
-        )
+        resources = dict(CPU=3, threads=1, GPU=0, controller_included=True, family_RAM_B=4294967296)
         spec = dict(
             kind="run",
             experiment=experiment,
@@ -80,7 +78,6 @@ class LifecycleDataAndPaths(unittest.TestCase):
             with self.assertRaises(lc.Refused):
                 lc.native_cpu_cores(spec)
 
-
     def test_measurement_and_callback_arena_caller_membership(self):
         lc = load_lifecycle()
         root = lc.ROOT
@@ -89,8 +86,9 @@ class LifecycleDataAndPaths(unittest.TestCase):
             for name in (
                 "scripts/dev/research-lifecycle.py",
                 "scripts/dev/research-job.py",
-                "python/quoridor_training/cycle_process.py",
-                "python/quoridor_training/snapshot.py",
+                "shared/python/quoridor_runtime/__init__.py",
+                "shared/python/quoridor_runtime/cycle_process.py",
+                "shared/python/quoridor_runtime/snapshot.py",
             )
         ]
         # Membership fixtures leave production read_ref and byte/hash checks intact.
@@ -101,8 +99,12 @@ class LifecycleDataAndPaths(unittest.TestCase):
             measurement = dict(phase="compare", argv=["/fake/native", "measure"], config=config_ref)
             self.assertEqual(lc.caller_source_refs(dict(caller_sources=base), measurement), base)
             callback = base + [
-                dict(path=str(root / "python/quoridor_training/claustrophobia.py")),
-                dict(path=str(root / "python/quoridor_training/static_teacher_heads.py")),
+                dict(path=str(root / "games/quoridor/python/quoridor_training/claustrophobia.py")),
+                dict(
+                    path=str(
+                        root / "games/quoridor/python/quoridor_training/static_teacher_heads.py"
+                    )
+                ),
                 dict(path=str(lc.project_python().resolve(strict=True))),
                 dict(path=str(lc.project_python().parent.parent / "pyvenv.cfg")),
             ]
@@ -547,7 +549,6 @@ class ConfiguredArenaPlanSelection(unittest.TestCase):
                 self.assertEqual(lc.approved_plan(legacy_spec, experiment), expected)
                 self.assertIsInstance(lc.Limits(legacy_spec), lc.Limits)
 
-
     def test_arena_probcut_actual_fp32_namespace_and_off_correspondence(self):
         import copy
 
@@ -564,9 +565,7 @@ class ConfiguredArenaPlanSelection(unittest.TestCase):
         )
         # Literal native FP32 namespace: this expectation does not call the reader helper.
         base = "distance-tanh-f32:sha256:" + "b" * 64 + ":simd=false"
-        suffix = (
-            ":probcut13-v1:3f800000:bca3d70a:3dcccccd:3f800000:40000000:" + "a" * 64
-        )
+        suffix = ":probcut13-v1:3f800000:bca3d70a:3dcccccd:3f800000:40000000:" + "a" * 64
         typed = dict(p, intercept=-0.019999999552965164, margin=0.10000000149011612)
         report = {
             k: 0
@@ -723,23 +722,16 @@ class ConfiguredArenaPlanSelection(unittest.TestCase):
                 requested_probcut=typed if enabled else None,
                 actual_probcut=typed if enabled else None,
             )
-            c["actual_search_namespace"]["evaluator"] = base + (
-                suffix if enabled else ""
-            )
+            c["actual_search_namespace"]["evaluator"] = base + (suffix if enabled else "")
             lc.arena_observation(clock_config, dict(observations=[fallback]))
             if not enabled:
                 legacy_fallback = copy.deepcopy(fallback)
                 for key in ("requested_probcut", "actual_probcut"):
                     del legacy_fallback["counters"][key]
                 lc.arena_observation(clock_config, dict(observations=[legacy_fallback]))
-                legacy_fallback["counters"]["whole_search"]["probcut"] = copy.deepcopy(
-                    report
-                )
+                legacy_fallback["counters"]["whole_search"]["probcut"] = copy.deepcopy(report)
                 with self.assertRaises(lc.Refused):
-                    lc.arena_observation(
-                        clock_config, dict(observations=[legacy_fallback])
-                    )
-
+                    lc.arena_observation(clock_config, dict(observations=[legacy_fallback]))
 
 
 if __name__ == "__main__":

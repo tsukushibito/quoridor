@@ -62,10 +62,13 @@ if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
       ;;
   esac
   export VIRTUAL_ENV="$QUORIDOR_PROJECT_ENV"
-  [[ -d "$QUORIDOR_CODE_ROOT/python" ]] || {
+  [[ -f "$QUORIDOR_CODE_ROOT/games/quoridor/python/quoridor_training/__init__.py" && \
+     -f "$QUORIDOR_CODE_ROOT/shared/python/quoridor_runtime/__init__.py" && \
+     -f "$QUORIDOR_CODE_ROOT/shared/python/quoridor_runtime/cycle_process.py" && \
+     -f "$QUORIDOR_CODE_ROOT/shared/python/quoridor_runtime/snapshot.py" ]] || {
     echo "Selected checkout Python source is missing; no Main fallback" >&2; exit 2;
   }
-  export PYTHONPATH="$QUORIDOR_CODE_ROOT/python"
+  export PYTHONPATH="$QUORIDOR_CODE_ROOT/games/quoridor/python:$QUORIDOR_CODE_ROOT/shared/python"
   # Exclude cwd/script-directory injection, including a caller in Main/python.
   export PYTHONSAFEPATH=1
   if [[ -n "${QUORIDOR_TENSORRT_ROOT:-}" ]]; then

@@ -16,7 +16,7 @@ import numpy as np
 from .cache import sha
 from .common import bound_file_bytes
 from .public_sigma import REVISION, NativeCompact, download, opened_observations
-from .snapshot import write_json
+from quoridor_runtime.snapshot import write_json
 from .static_public import (
     PAIR,
     ClassObservations,
@@ -413,7 +413,7 @@ def main():
     args = parser.parse_args()
     # The normal guardian wraps this finite worker; never pin a legacy CPU2/3
     # controller or establish a second scheduler/resource framework here.
-    from .cycle_process import cancellation_signals
+    from quoridor_runtime.cycle_process import cancellation_signals
 
     with cancellation_signals():
         result = prepare(json.loads(Path(args.config).read_bytes()))

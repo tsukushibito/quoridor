@@ -15,7 +15,12 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[2]
-PY_ROOTS = ("python/quoridor_training", "python/tests", "tools/model-export")
+PY_ROOTS = (
+    "games/quoridor/python/quoridor_training",
+    "shared/python/quoridor_runtime",
+    "python/tests",
+    "tools/model-export",
+)
 PY_FILES = (
     "scripts/dev/research-save.py",
     "scripts/dev/research-storage.py",
@@ -100,7 +105,7 @@ def sources():
 def check_boundaries(py):
     for file in py:
         tree = ast.parse(file.read_text(), filename=str(file))
-        if file.is_relative_to(ROOT / "python/quoridor_training"):
+        if file.is_relative_to(ROOT / "games/quoridor/python/quoridor_training"):
             for node in ast.walk(tree):
                 if isinstance(node, ast.ImportFrom) and (node.module or "").startswith("frame"):
                     raise ValueError(f"Generic API imports frame recipe: {file}: {node.module}")
@@ -142,7 +147,10 @@ def main():
             cwd=ROOT,
             env={
                 **os.environ,
-                "PYTHONPATH": str(ROOT / "python"),
+                "PYTHONPATH": os.pathsep.join(
+                    str(ROOT / p) for p in ("games/quoridor/python", "shared/python")
+                ),
+                "PYTHONSAFEPATH": "1",
                 "ORT_DISABLE_TELEMETRY": "1",
             },
             check=True,
@@ -202,7 +210,10 @@ def main():
         parser.error("Existing project environment required for tensor-loader contracts")
     env = {
         **os.environ,
-        "PYTHONPATH": str(ROOT / "python"),
+        "PYTHONPATH": os.pathsep.join(
+            str(ROOT / p) for p in ("games/quoridor/python", "shared/python")
+        ),
+        "PYTHONSAFEPATH": "1",
         "ORT_DISABLE_TELEMETRY": "1",
     }
     subprocess.run(
@@ -248,7 +259,7 @@ def main():
         "unittest",
         "discover",
         "-s",
-        ROOT / "python/quoridor_training/research355",
+        ROOT / "games/quoridor/python/quoridor_training/research355",
         "-p",
         "test_lifecycle*.py",
     )

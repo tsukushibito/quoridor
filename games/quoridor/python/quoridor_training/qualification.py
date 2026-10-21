@@ -15,7 +15,7 @@ import numpy as np
 
 from .cache import load, sha
 from .common import resolve_config
-from .cycle_process import DeviceMemory
+from quoridor_runtime.cycle_process import DeviceMemory
 from .train import build_model, export, write
 
 
@@ -297,7 +297,7 @@ def main():
         qualify(cfg)
     else:
         import sys
-        from .cycle_process import (
+        from quoridor_runtime.cycle_process import (
             CycleResources,
             cancellation_signals,
             execute,

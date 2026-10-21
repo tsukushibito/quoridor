@@ -17,7 +17,7 @@ TMP = Path(
         "LIFECYCLE_REPAIR_TMP", MAIN / ".artifacts/research-lifecycle-maintenance/test-TMP"
     )
 )
-sys.path.insert(0, str(MAIN / "python"))
+sys.path.insert(0, str(SOURCE.resolve().parents[2] / "shared/python"))
 loader = importlib.util.spec_from_file_location("selected_abnormal_lifecycle", SOURCE)
 lc = importlib.util.module_from_spec(loader)
 loader.loader.exec_module(lc)

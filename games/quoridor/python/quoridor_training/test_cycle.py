@@ -13,7 +13,7 @@ import time
 import unittest
 from unittest.mock import MagicMock, Mock, patch
 
-from . import cycle_process as processes
+from quoridor_runtime import cycle_process as processes
 from .cycle import cycle
 from . import cycle as cycle_module
 
@@ -420,7 +420,7 @@ class CycleProcessTests(unittest.TestCase):
         descendant_path = self.root / "descendant.json"
         source = (
             "import os,json,signal,time; from pathlib import Path; "
-            "from quoridor_training.cycle_process import process_info,identity; "
+            "from quoridor_runtime.cycle_process import process_info,identity; "
             "signal.signal(signal.SIGTERM,signal.SIG_IGN); "
             f"Path({str(descendant_path)!r}).write_text(json.dumps(identity(process_info(os.getpid())))); "
             "time.sleep(10)"
@@ -459,7 +459,7 @@ class CycleProcessTests(unittest.TestCase):
                     )
                 )
                 code = (
-                    "from quoridor_training import cycle_process; cycle_process.TERM_SECONDS=.15; "
+                    "from quoridor_runtime import cycle_process; cycle_process.TERM_SECONDS=.15; "
                     "from quoridor_training.cycle import cycle; "
                     f"cycle({str(config)!r},{str(runner)!r})"
                 )

@@ -826,7 +826,7 @@ def prepare_fits(config):
     from .common import bound_file_bytes
     from .cache import load
     from .public_static_prepare import file_ref
-    from .snapshot import write_json
+    from quoridor_runtime.snapshot import write_json
 
     bank_ref = config["teacher_values"]
     bank = json.loads(bound_file_bytes(bank_ref, 131072))
@@ -935,7 +935,7 @@ def prepare_policy_fit(config):
     from .scaled_model import validate_statistics
     from .static_public_corpus import StaticTeacherCorpus
     from .public_static_prepare import file_ref
-    from .snapshot import write_json
+    from quoridor_runtime.snapshot import write_json
     from .policy_value_training import settings
 
     if set(config) != {
@@ -1029,7 +1029,7 @@ def main():
     import argparse
     import json
     from pathlib import Path
-    from .cycle_process import cancellation_signals
+    from quoridor_runtime.cycle_process import cancellation_signals
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", required=True)

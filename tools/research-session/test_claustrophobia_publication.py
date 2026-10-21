@@ -215,7 +215,8 @@ class ClaustrophobiaPublicationTests(unittest.TestCase):
     def test_self_observed_point_needs_no_ml_import(self):
         before = {name: sys.modules.get(name) for name in ("torch", "numpy")}
         helper = module(
-            "future_C_execution_point", SOURCE / "python/quoridor_training/claustrophobia.py"
+            "future_C_execution_point",
+            SOURCE / "games/quoridor/python/quoridor_training/claustrophobia.py",
         )
         point = helper.execution_point()
         self.assertEqual(point["pid"], os.getpid())

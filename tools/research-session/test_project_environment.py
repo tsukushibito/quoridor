@@ -28,8 +28,21 @@ class CommonEnvironmentTests(unittest.TestCase):
         (project / ".git").mkdir()
         (project / "pyproject.toml").write_text('[project]\nname="synthetic"\n')
         (project / "uv.lock").write_text("synthetic canonical lock\n")
+        for relative in (
+            "games/quoridor/python/quoridor_training/__init__.py",
+            "shared/python/quoridor_runtime/__init__.py",
+            "shared/python/quoridor_runtime/cycle_process.py",
+            "shared/python/quoridor_runtime/snapshot.py",
+        ):
+            source = project / relative
+            source.parent.mkdir(parents=True, exist_ok=True)
+            source.write_text("# synthetic source marker\n")
         binary = root / "tools"
-        executable(binary / "git", '#!/bin/sh\nprintf "%s\\n" "$FAKE_MAIN/.git"\n')
+        executable(
+            binary / "git",
+            '#!/bin/sh\ncase "$*" in *--show-toplevel*) printf "%s\\n" "$FAKE_MAIN";; '
+            '*--git-common-dir*) printf "%s\\n" "$FAKE_MAIN/.git";; *) exit 2;; esac\n',
+        )
         executable(
             binary / "uv",
             """#!/bin/bash
@@ -96,7 +109,11 @@ fi
             )
             self.assertEqual(
                 (root / "context").read_text().splitlines(),
-                [str(cwd), str(environment), str(project / "python")],
+                [
+                    str(cwd),
+                    str(environment),
+                    f"{project}/games/quoridor/python:{project}/shared/python",
+                ],
             )
             self.assertNotIn("sync", args)
             self.assertNotIn("install", args)
@@ -195,7 +212,9 @@ fi
             self.assertEqual(result.returncode, 0, result.stderr)
             context = (root / "context").read_text().splitlines()
             self.assertEqual(context[1], str(environment))
-            self.assertEqual(context[2], f"{bindings}:{project / 'python'}")
+            self.assertEqual(
+                context[2], f"{bindings}:{project}/games/quoridor/python:{project}/shared/python"
+            )
             (root / "args").unlink()
             bindings.rmdir()
             result = self.run_entry(root, altered, "python", "-B", "export.py")

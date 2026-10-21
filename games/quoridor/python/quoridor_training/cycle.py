@@ -7,8 +7,8 @@ import os
 import time
 from pathlib import Path
 
-from .snapshot import write_json as write
-from .cycle_process import CycleResources, cancellation_signals, execute
+from quoridor_runtime.snapshot import write_json as write
+from quoridor_runtime.cycle_process import CycleResources, cancellation_signals, execute
 
 
 def cycle(config_path, runner):

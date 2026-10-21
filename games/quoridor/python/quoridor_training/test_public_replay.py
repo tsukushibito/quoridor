@@ -305,7 +305,7 @@ class MixtureBoundaries(unittest.TestCase):
     def test_all_work_output_cancel_and_partial_finalizer_semantics(self):
         from quoridor_training.public_replay import WorkBudget
         from quoridor_training.train import _finalize_training
-        from quoridor_training.cycle_process import CycleStopped, cancellation_signals
+        from quoridor_runtime.cycle_process import CycleStopped, cancellation_signals
         import signal
 
         with tempfile.TemporaryDirectory(dir=TMP) as directory:

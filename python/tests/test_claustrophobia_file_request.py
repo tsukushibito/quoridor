@@ -14,9 +14,12 @@ from types import SimpleNamespace
 import unittest
 from unittest import mock
 
-from quoridor_training import cycle_process
+from quoridor_runtime import cycle_process
 
-MODULE_PATH = Path(__file__).resolve().parents[1] / "quoridor_training/claustrophobia.py"
+MODULE_PATH = (
+    Path(__file__).resolve().parents[2]
+    / "games/quoridor/python/quoridor_training/claustrophobia.py"
+)
 SPEC = importlib.util.spec_from_file_location("claustrophobia_file_boundary", MODULE_PATH)
 boundary = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(boundary)

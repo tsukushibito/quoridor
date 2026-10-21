@@ -56,7 +56,7 @@ class PreparationPublication(unittest.TestCase):
                 )
             )
         )
-        snapshot = types.ModuleType("quoridor_training.snapshot")
+        snapshot = types.ModuleType("quoridor_runtime.snapshot")
 
         def write(path, value):
             Path(path).write_text(json.dumps(value) + "\n")

@@ -16,7 +16,7 @@ import strength355 as s
 
 class IndexDecoderBoundary(unittest.TestCase):
     def test_original_bound_index_and_context_specific_file_map(self):
-        phase = Path(__file__).resolve().parents[3] / (
+        phase = Path(__file__).resolve().parents[5] / (
             ".artifacts/value-search-strength355-analysis-v1/index-decoder-repair-v21"
         )
         tmp = phase / "TMP"

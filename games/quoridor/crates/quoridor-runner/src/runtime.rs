@@ -6476,7 +6476,7 @@ mod three_engine_374_failure_tests {
     fn fixture() -> (Config, RunReport) {
         // Owning file/publication ports only. No evaluator/model/geometry/Search/backend.
         let mut config: Config =
-            serde_json::from_str(include_str!("../../../../../configs/arena/smoke.json")).unwrap();
+            serde_json::from_str(include_str!("../../../configs/arena/smoke.json")).unwrap();
         config.games = 1;
         config.max_output_bytes = 16 * 1024 * 1024;
         config.output = std::env::temp_dir().join(format!(

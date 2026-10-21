@@ -15,7 +15,7 @@ import test_lifecycle_repair355 as fixture
 
 class ArenaInputIntegration(unittest.TestCase):
     def test_bound_owed_inventory_deduplicates_only_within_its_operation(self):
-        evidence = Path(__file__).resolve().parents[3] / (
+        evidence = Path(__file__).resolve().parents[5] / (
             ".artifacts/value-search-strength355-analysis-v1/owed-inventory-repair-v20/TMP"
         )
         evidence.mkdir(exist_ok=True)
@@ -242,7 +242,7 @@ class ArenaInputIntegration(unittest.TestCase):
                     f.doCleanups()
 
     def test_finalized_journal_result_context_and_partial_provenance(self):
-        evidence = Path(__file__).resolve().parents[3] / (
+        evidence = Path(__file__).resolve().parents[5] / (
             ".artifacts/value-search-strength355-analysis-v1/arena-consumer-repair-v18/TMP"
         )
         evidence.mkdir(exist_ok=True)

@@ -285,7 +285,7 @@ class WorkBudget:
         self.returned_training = self.returned_measurement = 0
 
     def check(self):
-        from .cycle_process import CycleStopped, directory_bytes
+        from quoridor_runtime.cycle_process import CycleStopped, directory_bytes
 
         if self.seconds is not None and time.monotonic() - self.start >= self.seconds:
             raise CycleStopped("configured fit time limit")
@@ -524,7 +524,7 @@ def train_mixture(cache, output, config_path, input_binding, cfg):
         append_curve_record,
         _exception_record,
     )
-    from .cycle_process import cancellation_signals
+    from quoridor_runtime.cycle_process import cancellation_signals
 
     device = configure_framework(cfg)
     output = Path(output)

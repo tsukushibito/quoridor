@@ -10,13 +10,13 @@ from pathlib import Path
 import subprocess
 import sys
 import tempfile
-import quoridor_training
+import quoridor_runtime
 import unittest
 from unittest.mock import patch
 
 ROOT = Path(os.environ.get("RESEARCH_TEST_ROOT", Path(__file__).resolve().parents[2]))
 if os.environ.get("RESEARCH_CYCLE_SOURCE"):
-    quoridor_training.__path__.insert(0, str(Path(os.environ["RESEARCH_CYCLE_SOURCE"]).parent))
+    quoridor_runtime.__path__.insert(0, str(Path(os.environ["RESEARCH_CYCLE_SOURCE"]).parent))
 spec = importlib.util.spec_from_file_location(
     "research_lifecycle",
     os.environ.get("RESEARCH_LIFECYCLE_SOURCE", ROOT / "scripts/dev/research-lifecycle.py"),
@@ -153,8 +153,9 @@ class LifecycleTests(unittest.TestCase):
                 for name in (
                     "scripts/dev/research-lifecycle.py",
                     "scripts/dev/research-job.py",
-                    "python/quoridor_training/cycle_process.py",
-                    "python/quoridor_training/snapshot.py",
+                    "shared/python/quoridor_runtime/__init__.py",
+                    "shared/python/quoridor_runtime/cycle_process.py",
+                    "shared/python/quoridor_runtime/snapshot.py",
                 )
             ],
             "owner": str(self.root),
@@ -1620,8 +1621,9 @@ class LifecycleTests(unittest.TestCase):
         caller = self.file("scripts/dev/research-lifecycle.py", b"current adopted caller v1")
         for name in (
             "scripts/dev/research-job.py",
-            "python/quoridor_training/cycle_process.py",
-            "python/quoridor_training/snapshot.py",
+            "shared/python/quoridor_runtime/__init__.py",
+            "shared/python/quoridor_runtime/cycle_process.py",
+            "shared/python/quoridor_runtime/snapshot.py",
         ):
             self.file(name, b"current adopted helper")
         self.generation_e = self.generation_fixture()
@@ -1665,7 +1667,7 @@ class LifecycleTests(unittest.TestCase):
         self.current_caller_fixture()
         e = copy.deepcopy(self.generation_e)
         e.update(phase="analysis", numerical_qualification=self.json("numerical", {}))
-        script = self.root / "python/quoridor_training/research355/stream355.py"
+        script = self.root / "games/quoridor/python/quoridor_training/research355/stream355.py"
         e["argv"] = [str(self.tool), "-B", str(script), "--experiment", "@EXPERIMENT@"]
         for name in (
             "stream355",
@@ -1676,7 +1678,7 @@ class LifecycleTests(unittest.TestCase):
             "strength355",
         ):
             p = self.file(
-                "python/quoridor_training/research355/" + name + ".py",
+                "games/quoridor/python/quoridor_training/research355/" + name + ".py",
                 b"current analysis module",
             )
             self.spec["caller_sources"].append(ref(p))

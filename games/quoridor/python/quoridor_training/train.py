@@ -16,7 +16,7 @@ import time
 import tempfile
 import os
 from pathlib import Path
-from .snapshot import atomic_text
+from quoridor_runtime.snapshot import atomic_text
 from .common import (
     resolve_config,
     selected_teacher_types,
@@ -3079,7 +3079,7 @@ def guarded_train(config_path):
         from .public_replay import admit
 
         admit(cfg["cache"], cfg["fit_config"], cfg.get("input_binding"), fit_config)
-    from .cycle_process import GPUResources, cancellation_signals, execute
+    from quoridor_runtime.cycle_process import GPUResources, cancellation_signals, execute
 
     for path, digest in cfg["expected_files_sha256"].items():
         if sha(path) != digest:

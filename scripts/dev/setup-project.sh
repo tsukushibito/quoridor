@@ -26,5 +26,5 @@ uv python install 3.14.7
 uv sync --project "$QUORIDOR_PROJECT_ROOT" --locked --all-groups \
   --python 3.14.7 --managed-python --no-python-downloads
 # Verify while the same exclusive writer is held; avoid nested reader-lock admission.
-PYTHONPATH="$QUORIDOR_PROJECT_ROOT/python" "$QUORIDOR_PROJECT_ENV/bin/python" -B \
+PYTHONSAFEPATH=1 PYTHONPATH="$QUORIDOR_CODE_ROOT/games/quoridor/python:$QUORIDOR_CODE_ROOT/shared/python" "$QUORIDOR_PROJECT_ENV/bin/python" -B \
   "$script_dir/verify-python-environment.py" --output "$QUORIDOR_ENV_REPORT_DIR/python-environment.json"

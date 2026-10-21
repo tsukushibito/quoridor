@@ -20,7 +20,7 @@ TMP = Path(
         "LIFECYCLE_REPAIR_TMP", MAIN / ".artifacts/research-lifecycle-maintenance/test-TMP"
     )
 )
-sys.path.insert(0, str(MAIN / "python"))
+sys.path.insert(0, str(SOURCE.resolve().parents[2] / "shared/python"))
 loader = importlib.util.spec_from_file_location("lc_abnormal", SOURCE)
 lc = importlib.util.module_from_spec(loader)
 loader.loader.exec_module(lc)
@@ -38,8 +38,8 @@ while True:time.sleep(1)
 
 WORKER = """
 import json,pathlib,sys,subprocess,signal,os,time
-sys.path.insert(0,'/workspaces/quoridor/python')
-from quoridor_training import cycle_process as proc
+sys.path.insert(0,os.environ['QUORIDOR_CODE_ROOT']+'/shared/python')
+from quoridor_runtime import cycle_process as proc
 p=pathlib.Path(sys.argv[1]);d=json.loads((p/'intent.json').read_text())
 while 'originating_job' not in json.loads((pathlib.Path(d['output'])/'INCOMPLETE').read_text()):time.sleep(.01)\nnative=subprocess.Popen(d['argv'],start_new_session=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
 def stop(sig,frame):
@@ -53,9 +53,9 @@ while True:time.sleep(1)
 """
 
 CONTROLLER = """
-import json,pathlib,sys,subprocess,time,hashlib
-sys.path.insert(0,'/workspaces/quoridor/python')
-from quoridor_training import cycle_process as proc
+import json,pathlib,sys,subprocess,time,hashlib,os
+sys.path.insert(0,os.environ['QUORIDOR_CODE_ROOT']+'/shared/python')
+from quoridor_runtime import cycle_process as proc
 p=pathlib.Path(sys.argv[1]);cfg=json.loads((p/'runtime/config.json').read_text())
 
 # A is a real earlier same-intent child which exits before it claims the operation.
