@@ -178,6 +178,13 @@ pub fn canonical_prefix(prefix: &[u16]) -> Result<Vec<u16>> {
 }
 
 fn candidate(rng: &mut Rng, length: u16) -> Result<(Vec<u16>, SigmaContext)> {
+    candidate_observed(rng, length, |_, _| Ok(()))
+}
+fn candidate_observed(
+    rng: &mut Rng,
+    length: u16,
+    mut observe: impl FnMut(&[u16], &SigmaContext) -> Result<()>,
+) -> Result<(Vec<u16>, SigmaContext)> {
     let mut context = SigmaContext::from_prefix_with_rules(&[], Ruleset::Standard2pThreefold)
         .map_err(|error| format!("pilot initial state: {error:?}"))?;
     let mut prefix = Vec::with_capacity(usize::from(length));
@@ -195,6 +202,7 @@ fn candidate(rng: &mut Rng, length: u16) -> Result<(Vec<u16>, SigmaContext)> {
             .make_move(action)
             .map_err(|error| format!("pilot legal transition: {error:?}"))?;
         prefix.push(action);
+        observe(&prefix, &context)?;
     }
     Ok((prefix, context))
 }

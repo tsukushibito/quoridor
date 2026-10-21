@@ -168,6 +168,106 @@ def native_prefix_keys(rows, library):
     ]
 
 
+def series_fixture_rows(source, holdout, partition):
+    """Project a bound native component partition; H remains exclusion-only."""
+    schema = "quoridor-prefix-series-observations-v1"
+    if (
+        source.get("schema") != schema
+        or holdout.get("schema") != schema
+        or source.get("teacher_labels") is not False
+        or holdout.get("teacher_labels") is not False
+        or source.get("partition") != holdout.get("partition")
+        or not isinstance(source.get("source_observations"), dict)
+        or source.get("source_observations") != holdout.get("source_observations")
+    ):
+        raise ValueError("matching unlabelled native fit/holdout partition required")
+    assignments = partition["partition"]["assignments"]
+    sources = partition["source_series"]
+    by_id = {a["game"]: a for a in assignments}
+    if len(by_id) != len(assignments) or set(sources) != set(by_id):
+        raise ValueError("complete unique native component/source assignments required")
+    series = sorted(set(sources.values()))
+    if not 1 <= len(series) <= 512:
+        raise ValueError("bounded native source series required")
+    series_ids = {value: i for i, value in enumerate(series)}
+    family_splits, source_families, seen = {}, {}, set()
+    projected = [[], []]
+    for group, manifest in enumerate((source, holdout)):
+        for row in manifest["observations"]:
+            identity = row["id"]
+            a = by_id.get(identity)
+            if (
+                identity in seen
+                or a is None
+                or row["prefix"] != a["prefix"]
+                or row["family"] != a["family"]
+                or row["split"] != a["split"]
+                or row["source_series"] != sources[identity]
+                or row["split"] not in (("train", "validation") if group == 0 else ("test",))
+            ):
+                raise ValueError("fit/H observation differs from native component assignment")
+            if (
+                not row["prefix"]
+                or len(row["prefix"]) > 200
+                or any(type(action) is not int or not 0 <= action < 209 for action in row["prefix"])
+            ):
+                raise ValueError("noninitial complete native prefix required")
+            family, split = row["family"], row["split"]
+            if family in family_splits and family_splits[family] != split:
+                raise ValueError("native component crosses fit/holdout partition")
+            family_splits[family] = split
+            source_id = row["source_series"]
+            if source_id in source_families and source_families[source_id] != family:
+                raise ValueError("one source series cannot cross native components")
+            source_families[source_id] = family
+            seen.add(identity)
+            projected[group].append(
+                {
+                    "fixture": len(seen) - 1,
+                    "history": row["prefix"],
+                    "family": series_ids[source_id],
+                    "functional_split": "T" if split == "train" else "V",
+                }
+            )
+    if seen != set(by_id):
+        raise ValueError("native fit/H observation census incomplete")
+    actual = {
+        name: sum(split == name for split in family_splits.values())
+        for name in ("train", "validation", "test")
+    }
+    if actual != partition["actual"] or any(
+        partition["requested"][name] - actual[name] != partition["deficits"][name]
+        or partition["deficits"][name] < 0
+        for name in actual
+    ):
+        raise ValueError("native component counts/deficits differ")
+    # Only T/V is passed to the existing class publisher. H has no labels/classes.
+    rows = prefix_fixture_rows({"fixed_prefixes": projected[0]})
+    return (
+        rows,
+        projected[1],
+        {
+            "native_partition": source["partition"],
+            "native_full_history_source": source["source_observations"],
+            "holdout_observations": len(projected[1]),
+            "native_component_counts": actual,
+            "native_component_deficits": partition["deficits"],
+            "H_teacher_labels": False,
+        },
+    )
+
+
+def reject_holdout_keys(assignments, pairs):
+    """Native true-LR keys only; no Python board/reflection formula."""
+    blocked = set()
+    for pair in pairs:
+        if len(pair) != 2 or any(type(key) is not bytes or len(key) != 28 for key in pair):
+            raise ValueError("native holdout original/LR keys required")
+        blocked.add(min(pair))
+    if blocked.intersection(assignments):
+        raise ValueError("fit class collides with native holdout exact/true-LR key")
+
+
 def prepare_prefix_fixture(config):
     """Small configured source ingress into the existing PAIR37 publisher.
 
@@ -176,19 +276,38 @@ def prepare_prefix_fixture(config):
     """
     from .static_public import accumulate_inputs
 
-    if set(config) != {
-        "prefix_fixture",
-        "native_library",
-        "output",
-        "max_sqlite_bytes",
-    }:
+    expected = {"prefix_fixture", "native_library", "output", "max_sqlite_bytes"}
+    if "holdout_exclusion" in config:
+        expected.add("holdout_exclusion")
+    if set(config) != expected:
         raise ValueError("prefix fixture and full-public settings cannot be mixed")
     source_raw = bound_file_bytes(config["prefix_fixture"], 64 * 1024**2)
     source = json.loads(source_raw)
-    rows = prefix_fixture_rows(source)
+    lineage = None
+    extra_sources = []
+    holdout_rows = []
+    if "holdout_exclusion" in config:
+        holdout_raw = bound_file_bytes(config["holdout_exclusion"], 64 * 1024**2)
+        partition_raw = bound_file_bytes(source["partition"], 64 * 1024**2)
+        rows, holdout_rows, lineage = series_fixture_rows(
+            source, json.loads(holdout_raw), json.loads(partition_raw)
+        )
+        extra_sources = [
+            (config["holdout_exclusion"], holdout_raw),
+            (source["partition"], partition_raw),
+        ]
+    else:
+        rows = prefix_fixture_rows(source)
     bound_file_bytes(config["native_library"], 64 * 1024**2)
     pairs = native_prefix_keys(rows, config["native_library"]["path"])
     assignments, observations, provenance = prefix_fixture_partition(rows, pairs)
+    if lineage is not None:
+        reject_holdout_keys(
+            assignments,
+            native_prefix_keys(holdout_rows, config["native_library"]["path"])
+            if holdout_rows
+            else [],
+        )
     output = Path(config["output"])
     output.mkdir(exist_ok=False)
     marker = output / "INCOMPLETE"
@@ -217,8 +336,11 @@ def prepare_prefix_fixture(config):
                 raise ValueError("fixture virtual observations differ")
         finally:
             mapped._mmap.close()
-        if bound_file_bytes(config["prefix_fixture"], 65536) != source_raw:
+        if bound_file_bytes(config["prefix_fixture"], 64 * 1024**2) != source_raw:
             raise ValueError("fixture source changed during publication")
+        for reference, original in extra_sources:
+            if bound_file_bytes(reference, 64 * 1024**2) != original:
+                raise ValueError("native partition/holdout source changed during publication")
         result = {
             "schema": "quoridor-public-static-input-classes-v1",
             "status": "COMPLETE",
@@ -247,6 +369,14 @@ def prepare_prefix_fixture(config):
             "value_semantics": "native canonical local STM; no outcome/teacher labels created",
             "full_history": "genuine prefix replay; class key remains board-only",
             "old_label_payload_read": False,
+            **(
+                {
+                    "source_lineage": lineage,
+                    "holdout_exclusion": config["holdout_exclusion"],
+                }
+                if lineage is not None
+                else {}
+            ),
         }
         write_json(output / "cache.json", result)
         connection.close()

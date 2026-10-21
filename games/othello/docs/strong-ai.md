@@ -62,6 +62,8 @@ Rust主体UIは同じ既存コア担当が別の有限source作業として並�
 
 対局outer1159.073003907秒にはcommand1158.709165507秒を含み、加算しない。後続の1961保存遷移のRustルールreplayと独立レビューは別工程で、新しいsearch/game/bootstrapは行っていない。16familyは旧root同値を除いた開発開始であり、共有prefix・後の到達局面まで独立とは証明しない。RSS peakはUNKNOWN。返却探索scoreのzeroや深さ差は記述値で、静的評価や敗因の因果証拠ではない。H16はroot identity排除だけに用い、trajectory/ラベル/feature/loss/selectorへ入れていない。同じ896行への追加fit、seed救済、追加教師、同じ32局の再演は発行しない。
 
+次は保存済みT768/V128の896教師行と原32局の最大1961 pre-move状態だけで、スコア規約、phase付きsigned featureの同一表現、coverage、候補とv1の実静的評価を一度診断する。最大2857状態/各一評価・合計5714静的評価、新Search/教師/fit/game/RNG/CIは0、H特徴は読まない。T/V別・phase/教師scoreKind別の誤差/符号/range/飽和、同一表現内の教師値の広がり、Tで未観測のfeatureへの到達と相殺/静的zeroを分ける。これは選択済みVと既に開発で観測した32局の保存診断で、独立棋力や敗因の証明ではない。結果を受けて増量と表現変更の一案を選び、重要なモデル変更・次の有限fit/比較は別に解決する。
+
 ## Rust主体UIの実動作
 
 OthelloUiが確認済みGameState、確認/再開、保存可否、generation/requestとAI応答受理を所有し、薄いTS hostがDOM/storage/Worker effectを実行する。同期Wasmへcancelメッセージが届くことに依存せず、取消/新規/再開/setup/disposeでWorkerをterminateして所有権を破棄する。

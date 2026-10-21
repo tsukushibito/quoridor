@@ -230,6 +230,12 @@ first32中心を固定した8対照は256局/128完全pair、全normal manifest/
 
 ### 435永続接続の限定software到達点
 
+追加の[履歴系列・分割・publisher境界](../../research-data/ai-sigma/quoridor-strong-ai435/trajectory-input-software-v1.json)は、既存InputConfigへ任意の有限trajectoryを接続し、native完全履歴/ContextRecord、壁層quota、exact/LR重複と同系列/prefix/endpoint componentを分割前にまとめる。H=Testの全native keyを教師/cache前に排除し、欠損・衝突・実T/V/Hを残す。既存single-root/4:1経路は現役のまま。512×200は生成pathの上限案であり、prefix再生・native key・二乗component joinを含む全仕事の上限ではない。実bulk保持/全工程CPU・期限と実分割を凍結してから教師へ入場する。
+
+独立source確認はSOURCE_CLEAR、新Rust4・関連Clippy・measurement compile・releaseも通った。元E0282 compile失敗はテスト未実行のまま保持し、新fixtureの2型注記だけを直した。software outer169.397484997秒へ内包command秒を加算しない。MainのPythonはRuff100の整形差だけで作者版と全AST一致。最終の同source再検査上限を初回と同じ64MiBに揃える修復も一度含む。実512系列・教師・H/J fitの成功ではない。
+
+本家正常接続用の新dev4根は旧single-root入口で4/4生成済み。Root回収コードが入れ子JSONを誤読した外側FAILEDと、正常native出力を分け、同じ保存出力を再抽選せず回収した。feature callbackライブラリのcompile/symbol資格は実モデルロード/forward/100ms返答とは区別する。次の8局はその実モデル/setup/同時計の正常入口を束縛し、Cedar/defaultを維持する。
+
 [435のsource/software記録](../../research-data/ai-sigma/quoridor-strong-ai435/persistent-source-software-v1.json)は、persistent子の一回初期化と各手reply、最後のEOF/group/direct-waitを分離し、R1/O1修復後の3関連検査・Clippy・measurement compile・releaseを記録する。旧FAILEDと旧sourceでのcat成功は保持し、今回のモデル応答や棋力へ資格を転用しない。PythonのMain統合は共通Ruff100へ整形し、author sourceとの全AST一致を確認した。
 
 Bの出発上限はT384/V64/H64、各family64 unique観測、32768元行（trueLR込み65536向き、H無ラベルならT/V向き57344）。wall11..20を半分、5..10と0..4を各四分の一の目安とし、独立fullhistory/family・LR重複/共有prefix除外の根拠と不足を教師前に固定する。例Hは元Cedar shared/value固定＋fresh policy209、freeze=value/LR1e-3/max4T。Jは同Cedar＋保存headからfreeze=none/freshAdam3e-5、value MSE＋.1legal CE、min8T/max64T。fresh Adamとphase境界を完全resumeと呼ばず、実T・batch1024・draw/ceil/tail・有意改善/LR半減/過学習/plateau STOP・V選択を入場configで確定する。H/J合計fit900秒・teacher1200秒は出発案で、上限停止を収束成功に変換せず、既存models/defaultを維持する。現時点でこの入力・教師・fitは未発行。

@@ -1,0 +1,299 @@
+{
+  "scope": "Existing trajectory/native-component/fit-H publication owners; source/software only, no512-series generation or training.",
+  "source": [
+    {
+      "worker": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-strong435/games/quoridor/crates/quoridor-runner/src/teacher_pilot.rs",
+        "sha256": "4b40572eb82e26dd5cfb7b4ba05ebd2da02fb9ad546fe48a3e9fc0818ca48372",
+        "bytes": 9791,
+        "mode": "0644"
+      },
+      "Main": {
+        "path": "/workspaces/quoridor/games/quoridor/crates/quoridor-runner/src/teacher_pilot.rs",
+        "bytes": 9791,
+        "mode": "0644",
+        "sha256": "4b40572eb82e26dd5cfb7b4ba05ebd2da02fb9ad546fe48a3e9fc0818ca48372"
+      },
+      "relation": "BYTE_EXACT"
+    },
+    {
+      "worker": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-strong435/games/quoridor/crates/quoridor-runner/src/teacher_pilot/depth6.rs",
+        "sha256": "00078a87a61181652d11273bde2c679c9a248226b15256261af750ba189d001e",
+        "bytes": 35589,
+        "mode": "0644"
+      },
+      "Main": {
+        "path": "/workspaces/quoridor/games/quoridor/crates/quoridor-runner/src/teacher_pilot/depth6.rs",
+        "bytes": 35589,
+        "mode": "0644",
+        "sha256": "00078a87a61181652d11273bde2c679c9a248226b15256261af750ba189d001e"
+      },
+      "relation": "BYTE_EXACT"
+    },
+    {
+      "worker": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-strong435/games/quoridor/python/quoridor_training/public_static_prepare.py",
+        "sha256": "25d7171bdf005d0326651d59d19b15ac6d6678d07fcc64e1468c614100789f9c",
+        "bytes": 26772,
+        "mode": "0644"
+      },
+      "Main": {
+        "path": "/workspaces/quoridor/games/quoridor/python/quoridor_training/public_static_prepare.py",
+        "bytes": 26024,
+        "mode": "0644",
+        "sha256": "c4414ce368cc19956521bfb84b61c6a357da7caf3421ada83de8767ea30c0545"
+      },
+      "relation": "AST_EXACT_FORMAT_ONLY"
+    },
+    {
+      "worker": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-strong435/games/quoridor/python/quoridor_training/test_prefix_series_projection.py",
+        "sha256": "70a7dd57409a9884d313cb5ce866a58bf6b9652592e3bf4b567e34e7662aced1",
+        "bytes": 4278,
+        "mode": "0644"
+      },
+      "Main": {
+        "path": "/workspaces/quoridor/games/quoridor/python/quoridor_training/test_prefix_series_projection.py",
+        "bytes": 4216,
+        "mode": "0644",
+        "sha256": "ec5f8ad7acf4b52d27b5871970de7d2df01faab4e65f6cb3713757d010579911"
+      },
+      "relation": "AST_EXACT_FORMAT_ONLY"
+    },
+    {
+      "worker": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-strong435/games/quoridor/crates/quoridor-data/src/terminal.rs",
+        "sha256": "5f67246caff768a8e3d6c8d3d47d3ab792d7c696cdab6275cced7da3290667ae",
+        "bytes": 21499,
+        "mode": "0644"
+      },
+      "Main": {
+        "path": "/workspaces/quoridor/games/quoridor/crates/quoridor-data/src/terminal.rs",
+        "bytes": 21499,
+        "mode": "0644",
+        "sha256": "5f67246caff768a8e3d6c8d3d47d3ab792d7c696cdab6275cced7da3290667ae"
+      },
+      "relation": "BYTE_EXACT"
+    },
+    {
+      "worker": {
+        "path": "/workspaces/quoridor/.worktree/quoridor-strong435/games/quoridor/python/quoridor_training/test_prefix_fixture_size.py",
+        "sha256": "6efe67e6f54a1abf5a227c7afe505ff1c6da27e92eaac2ca552a6accc02d17ee",
+        "bytes": 6854,
+        "mode": "0644"
+      },
+      "Main": {
+        "path": "/workspaces/quoridor/games/quoridor/python/quoridor_training/test_prefix_fixture_size.py",
+        "bytes": 6720,
+        "mode": "0644",
+        "sha256": "aa7fbc9ce97f0d22ad1d2bd5fd89154d44dad55420d5bfbfaf04a4f6f10d484f"
+      },
+      "relation": "AST_EXACT_FORMAT_ONLY"
+    }
+  ],
+  "sourcePacket": {
+    "path": "/workspaces/quoridor/.worktree/quoridor-strong435/.artifacts/quoridor-strong435/trajectory-input-v3/packet.json",
+    "bytes": 5683,
+    "mode": "0644",
+    "sha256": "d28a4ae7f97ac22e9ac4120b2b100265b4e32ddaf717953a307b130e766c2f95"
+  },
+  "fixtureRepair": {
+    "path": "/workspaces/quoridor/.worktree/quoridor-strong435/.artifacts/quoridor-strong435/trajectory-fixture-type-repair-v4/binding-replacement.json",
+    "bytes": 2739,
+    "mode": "0644",
+    "sha256": "a1f7082f5332c64fe180885bcc611e77f2a2396d9f3f968a41bb5eec11219cbe"
+  },
+  "composition": "Sparse Root canonical patch plus two fixture-only type annotations. Python Main AST matches held tested owners after scoped Ruff100 formatting.",
+  "software": {
+    "qualification": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/trajectory-software-v2/qualification.json",
+      "bytes": 8121,
+      "mode": "0644",
+      "sha256": "6f1e6e067bdfaf4245f62f71901de540705ca1fc8d83740361fb8a9785826fd4"
+    },
+    "checks": [
+      {
+        "name": "new-test-1",
+        "returned": {
+          "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/trajectory-software-v2/new-test-1.returned.json",
+          "bytes": 1780,
+          "mode": "0644",
+          "sha256": "a6125890953fa458cbf10e417697cfe0629f97080e58a83ca0e702139dd6a3c2"
+        },
+        "wholeSeconds": 2.0299734119325876
+      },
+      {
+        "name": "new-test-2",
+        "returned": {
+          "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/trajectory-software-v2/new-test-2.returned.json",
+          "bytes": 1785,
+          "mode": "0644",
+          "sha256": "aee5b8484341aecb9b2318e3d689a6295b9438888a475d07444565ed9b2413eb"
+        },
+        "wholeSeconds": 0.0570543899666518
+      },
+      {
+        "name": "new-test-3",
+        "returned": {
+          "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/trajectory-software-v2/new-test-3.returned.json",
+          "bytes": 1799,
+          "mode": "0644",
+          "sha256": "963332cee1a3095c134aee6affbafda4d866be41eb7a6740a43f4ddff5245914"
+        },
+        "wholeSeconds": 9.136074941954575
+      },
+      {
+        "name": "new-test-4",
+        "returned": {
+          "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/trajectory-software-v2/new-test-4.returned.json",
+          "bytes": 1797,
+          "mode": "0644",
+          "sha256": "62bf9a0fbeb550d9c0533aa8af86b26b97ee43eb8ed8a30ab134499e7c174e66"
+        },
+        "wholeSeconds": 0.059273957973346114
+      },
+      {
+        "name": "affected-clippy",
+        "returned": {
+          "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/trajectory-software-v2/affected-clippy.returned.json",
+          "bytes": 1681,
+          "mode": "0644",
+          "sha256": "c6d637af73b259ec46a5027bb2ed4c09ddcc1b2dbda0a5690905790c23be3def"
+        },
+        "wholeSeconds": 8.020779313985258
+      },
+      {
+        "name": "measurement-check",
+        "returned": {
+          "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/trajectory-software-v2/measurement-check.returned.json",
+          "bytes": 1620,
+          "mode": "0644",
+          "sha256": "047288855ebbeedb29179d2031eb5d579f0eac4deb9cd5c6b87c1eda4236ae2b"
+        },
+        "wholeSeconds": 3.30144475994166
+      },
+      {
+        "name": "runner-release",
+        "returned": {
+          "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/trajectory-software-v2/runner-release.returned.json",
+          "bytes": 1642,
+          "mode": "0644",
+          "sha256": "026c3cab239b99b04b16e09e121af64db630b666771d8c0969bf6e6335425a69"
+        },
+        "wholeSeconds": 146.49063913198188
+      }
+    ],
+    "newRustTests": 4,
+    "successfulOldSuiteReplayed": false,
+    "originalJob": {
+      "job_id": "eb98e683-10c1-4717-8bc8-173602315cec",
+      "outcome": "succeeded",
+      "error": null,
+      "error_notes": [],
+      "exit_code": 0,
+      "finished_at": "2026-10-21T21:31:13.236846+00:00",
+      "wall_seconds": 169.39748499705456,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+      "cleanup_complete": true,
+      "cleanup_errors": [],
+      "log_bytes_seen": 0,
+      "log_bytes_retained": 0
+    },
+    "wholeSeconds": 169.39748499705456,
+    "nestedSecondsAdditive": false,
+    "image": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/trajectory-software-v2/image-dce8630195f0cee0e495ddcf2395642bcb11943222ac74435e9faed3a0603ed3/quoridor-runner",
+      "bytes": 9822296,
+      "sha256": "dce8630195f0cee0e495ddcf2395642bcb11943222ac74435e9faed3a0603ed3",
+      "mode": "0755"
+    }
+  },
+  "review": {
+    "report": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/trajectory-review-v1/reviewer/report.md",
+      "bytes": 6045,
+      "mode": "0644",
+      "sha256": "b617d9b05fccb2a17915b02f4b07010ee5f325b0e1a5889240581391b1fbd750"
+    },
+    "receipt": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/trajectory-review-v1/reviewer/receipt.json",
+      "bytes": 6399,
+      "mode": "0644",
+      "sha256": "e251768f207ec72467a1ff80747980188fa37fbce777aa31737b8d3219af85ad"
+    },
+    "verdict": "SOURCE_CLEAR for unchanged production boundary; fixture annotation changes no assertion/production expression."
+  },
+  "originalFailure": {
+    "job_id": "2b053d32-1abd-41a4-9e97-ab8b0f1fa82e",
+    "outcome": "failed",
+    "error": null,
+    "error_notes": [],
+    "exit_code": 1,
+    "finished_at": "2026-10-21T21:16:24.802293+00:00",
+    "wall_seconds": 1.2494276140350848,
+    "remaining": [],
+    "direct_child_reaped": true,
+    "descendant_visibility": "observed",
+    "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+    "cleanup_complete": true,
+    "cleanup_errors": [],
+    "log_bytes_seen": 741,
+    "log_bytes_retained": 741
+  },
+  "failureMeaning": "E0282 in new fixture before test execution. Original FAILED/cost retained; only type annotation repaired, all4 new tests first executed in v2.",
+  "inputBoundary": [
+    "One bounded trajectory per source, full native ContextRecord/history and noninitial nonterminal observations.",
+    "Result-blind wall quotas, exact/nativeLR dedup and same-source/prefix/endpoint components before explicit Train/Validation/Test ceilings.",
+    "Requested/actual/collision/deficit counts retained; no duplicate/seed refill or512 independent-family claim.",
+    "Complete native fit/H census; all H exact/LR keys excluded before T/V teacher/cache publication.",
+    "Legacy single-root and4:1 path remain active; optional trajectory only.",
+    "Final unchanged-source size recheck now64MiB, matching initial bound; old refusal/INCOMPLETE behavior retained."
+  ],
+  "dev4": {
+    "recovery": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/dev4-inputs-v1/recovered-qualification.json",
+      "bytes": 5137,
+      "mode": "0644",
+      "sha256": "a28c1fc8a60199c7b834bf2442ac0e982694299b4c713420d7c4dcdc6e72b784"
+    },
+    "actualRoots": 4,
+    "nativeComplete": true,
+    "searchCalls": 0,
+    "outer": "FAILED after successful native generation: Root misread nested result. Original output qualified without native/RNG retry.",
+    "protocolCostRoots": true,
+    "finalEvaluation": false
+  },
+  "callback": {
+    "qualification": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/callback-build-v1/qualification.json",
+      "bytes": 4864,
+      "mode": "0644",
+      "sha256": "0daef252cc93bda353630446846d4338d168fe7db4b1eee21f4b54c01f55bd79"
+    },
+    "library": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/callback-build-v1/image-57eee135e551d96bbe2a106d370c8012b003653b42b20a069fef4c7797d52dbd/libquoridor_inference.so",
+      "bytes": 470592,
+      "sha256": "57eee135e551d96bbe2a106d370c8012b003653b42b20a069fef4c7797d52dbd",
+      "mode": "0755"
+    },
+    "meaning": "Current feature library compile/symbol qualification only; model not loaded, no inference/timing grant."
+  },
+  "remaining": [
+    "Freeze actual full-history inputs/components/T-V-H/collisions/deficits before teacher.",
+    "Resolve actual retained bulk, RAM and all-operation replay/quadratic-join cost before512-series entry; path-action bound is not whole-work bound.",
+    "Current actual model warm setup,100ms response and original finite8-game entry remain UNRUN.",
+    "Teacher/H-J fit/new weights/strength remain UNRUN; Cedar and product defaults unchanged."
+  ],
+  "archive": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/quoridor-strong-ai435/trajectory-input-software-v1-checks.tar.gz",
+    "bytes": 30450,
+    "mode": "0644",
+    "sha256": "52b3a18146c2d0a6707e77c3fe7aab3ecc586d82a91291b09d668d4b734f7dcf"
+  },
+  "archiveMemberCount": 40,
+  "preserved": "Original FAILED/NULL/UNKNOWN, USERPAUSE323/342.17/seals/newE/oldfits96/model/default/decimal50GB unchanged."
+}
