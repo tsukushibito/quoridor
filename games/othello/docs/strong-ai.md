@@ -51,3 +51,9 @@ CLIは1行1JSON要求/応答、stdoutはJSONのみ、diagnosticsはstderr。`op`
 原32局・16個の完全両色pairがすべて正常資格の場合に限り、family平均の得点率と一度の95%family区間を出す。bootstrap出発案は10000回/seed2026102203で、具体的なRNG・percentile法もconfigへ固定する。下端>.5ならその有限dev条件で改善支持、.5を跨げば未決着、上端<.5なら不支持。失敗・UNKNOWN・未入場があれば予定分母32の得点範囲と失敗を報告し、完成pairだけを選んで採否用CIを出さない。追加seed・同じ32局の再演・結果後補充で救済せず、同等や一般最強を認定しない。
 
 Rust主体UIは同じ既存コア担当が別の有限source作業として並行する。Rustが確認済み状態・保存可否・resume/new・view/effectsと応答tokenを所有し、TSをDOM/storage/Workerの薄いhostへ移す。同期Wasmの取消をpostMessageだけで済ませず、Workerの終了・再生成と古い応答の無効化を実browserで確認する。chooser/Quoridor/defaultを維持し、native棋力や学習lossをUI source開始条件にしない。
+
+## 初回学習候補の同一image比較
+
+強教師V-BESTを現v1 heuristicと同じnative image2678で比較する入口を追加した。評価器以外は同じPVS/TT/時計/厳密終盤とし、1探索thread・1000ms＋100ms返却許容・TT上限32MiB・depth64/exact12・book/ponder OFFを固定する。新dev16familyの両色32局を予定し、seed2026102202、既存smoke4/tiny24/teacher128のD4/色・STM同値rootを除外する。H16はラベル/特徴/loss/selectorへ使わない。実開始state/configは対局前に凍結する。
+
+原32局/16完全pairとsetup/cleanup/identity/時計がすべて正常の場合だけ、family平均をMT19937 seed2026102203・10000回でresampleしR7の95%区間を報告する。下端>.5はこの有限dev条件の改善支持、上端<.5は不支持、それ以外は未決着。不完全なら予定32分母とUNKNOWN込み得点範囲を残し、完成pairだけのCIを出さない。補充/結果後seed追加なし。現時点はsourceの13新規fake/analytic検査だけで、実16root生成/32局はUNRUN。[対応source証拠](../../../research-data/othello/strong-ai-n96/native-comparison-software-v1.json)。現v1/defaultと一般棋力判断は維持する。

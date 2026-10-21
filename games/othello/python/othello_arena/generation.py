@@ -5,6 +5,10 @@ Config explicitly selects labelKind=gameOutcome or teacherEstimate. Outcome uses
 roots, frozen by Root BEFORE any teacher result, then112 T/V simple trajectories,
 then a separately frozen observation FileRef for fixed external estimates. H roots
 are held only: no trajectory/teacher/selector. No search/selfplay/trainer framework.
+Unlabeled native_evaluator_comparison openings use labelKind:null,16 D families,
+seed2026102202, samplePlacements:[], all4+24+128 prior root exclusions (incl H).
+Only opening preparation is allowed; Root resolves its finite attempt cap before
+any results. Existing Rust preparation/canonical/immutable-input helpers are reused.
 
 Required common config: stage, labelKind, purpose, explicit seed, development
 namespace, slots, engine, source, canonicalSource, openingExclusions (list of
@@ -80,14 +84,28 @@ def _read(reference, maximum):
 
 def _validate(config):
     kind = config["labelKind"]
-    if kind not in ("gameOutcome", "teacherEstimate") or type(config["seed"]) is not int:
+    comparison = config.get("purpose") == "native_evaluator_comparison"
+    if (
+        kind not in ((None,) if comparison else ("gameOutcome", "teacherEstimate"))
+        or type(config["seed"]) is not int
+    ):
         raise GenerationStop("explicit labelKind and seed required")
     stages = (
-        ("openings", "games") if kind == "gameOutcome" else ("openings", "trajectories", "teacher")
+        ("openings",)
+        if comparison
+        else ("openings", "games")
+        if kind == "gameOutcome"
+        else ("openings", "trajectories", "teacher")
     )
     if config["stage"] not in stages or not config.get("launchBinding") or not config["purpose"]:
         raise GenerationStop("Root must bind explicit stage/purpose/resources")
-    expected = {"T": 16, "V": 8} if kind == "gameOutcome" else {"T": 96, "V": 16, "H": 16}
+    expected = (
+        {"D": 16}
+        if comparison
+        else {"T": 16, "V": 8}
+        if kind == "gameOutcome"
+        else {"T": 96, "V": 16, "H": 16}
+    )
     slots = config["slots"]
     if len(slots) != sum(expected.values()) or Counter(s["split"] for s in slots) != expected:
         raise GenerationStop("wrong whole-family split count")
@@ -109,12 +127,24 @@ def _validate(config):
     if config["duplicatePolicy"] != DUPLICATE_POLICY:
         raise GenerationStop("duplicate policy must be fixed before labels")
     limits = config["limits"]
-    required = ("openingAttempts", "rows", "inputBytes", "evidenceBytes", "retainedBytes")
+    required = ("openingAttempts", "inputBytes", "evidenceBytes", "retainedBytes")
+    if not comparison:
+        required += ("rows",)
     if any(type(limits[k]) is not int or limits[k] <= 0 for k in required):
         raise GenerationStop("fresh concrete positive limits required")
     if limits["inputBytes"] > 16 * 1024**2:
         raise GenerationStop("input cap exceeds shared loader16MiB limit")
-    if kind == "teacherEstimate":
+    if comparison:
+        if (
+            config["seed"] != 2026102202
+            or config["samplePlacements"] != []
+            or limits["openingAttempts"] > 4096
+            or sorted(x["count"] for x in config["openingExclusions"]) != [4, 24, 128]
+        ):
+            raise GenerationStop(
+                "native comparison requires16 unlabeled roots and all prior exclusions"
+            )
+    elif kind == "teacherEstimate":
         if (
             config["samplePlacements"] != [8, 12, 20, 24, 36, 40, 48, 52]
             or config["samplePassPolicy"] != "after-mandatory-pass"
@@ -240,6 +270,11 @@ def _frozen_openings(config, canonical, excluded):
     ):
         if frozen.get(field) != config[field]:
             raise GenerationStop("frozen opening source/exclusion/policy binding changed")
+    if (
+        config.get("purpose") == "native_evaluator_comparison"
+        and frozen.get("purpose") != config["purpose"]
+    ):
+        raise GenerationStop("frozen opening purpose differs")
     if (
         config["labelKind"] == "teacherEstimate"
         and frozen.get("samplePassPolicy") != config["samplePassPolicy"]
@@ -535,6 +570,8 @@ def run(config_ref, output, *, cancelled=lambda: False):
             openings[field] = config[field]
         if config["labelKind"] == "teacherEstimate":
             openings["samplePassPolicy"] = config["samplePassPolicy"]
+        if config["purpose"] == "native_evaluator_comparison":
+            openings["purpose"] = config["purpose"]
         canonical = _canonical(config)
         excluded = _excluded_keys(config, canonical)
         frozen = (
@@ -674,7 +711,7 @@ def run(config_ref, output, *, cancelled=lambda: False):
                 report.setdefault("secondaryFailures", []).append(fact)
 
         if validated and (
-            len(rows) > limits["rows"]
+            len(rows) > limits.get("rows", 0)
             or input_bytes > limits["inputBytes"]
             or evidence_bytes > limits["evidenceBytes"]
         ):

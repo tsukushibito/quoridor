@@ -215,3 +215,7 @@ config 自体は256KiB以下。各 stage の結果に実 row/evidence bytes、re
 Root は config・開局/観測・replay/raw証拠・ログと後続 checkpoint を含む新しい保存枠を決め、
 実 family2GiB・host reserve4GiB・公平な CPU 時計を入場時に再確認する。helper のサイズ検査を実資源の代用にしない。
 STOP は caller が非ゼロに写し、partial training と失敗を成功扱いしない。
+
+## 自作nativeの評価器比較入口
+
+外部16局のprotocol/costとは別に、同じimage2678のpattern候補対no-args v1 heuristicを接続した。起動evaluateと毎手searchの評価器identityを実asset FileRefに結び、persistent process/modelの初期化は一回、各探索TTはimage内で独立する。guard/launch/inclusive-ready/shutdownと毎手wall/native search metadataを保存し、失敗rawを残してfirst-error STOPする。ready費をモデルparse専用費とは呼ばない。原32/16完全pair正常時だけfamily CIを出す。[ソフトウェア証拠](../../../research-data/othello/strong-ai-n96/native-comparison-software-v1.json)。実新16開始/32対局・棋力結果はまだUNRUNであり、外部engineやbrowser優位の資格ではない。

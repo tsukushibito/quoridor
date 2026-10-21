@@ -188,7 +188,15 @@ class Native:
 
     def request(self, op, *, deadline, **fields):
         result = self.process.json_request(dict(op=op, **fields), deadline=deadline)
-        key = "status" if op == "status" else "move" if op in ("search", "simple") else "state"
+        key = (
+            "status"
+            if op == "status"
+            else "move"
+            if op in ("search", "simple")
+            else "score"
+            if op == "evaluate"
+            else "state"
+        )
         if key not in result:
             raise EngineError("protocol", f"native response missing {key}")
         if key == "status" and (

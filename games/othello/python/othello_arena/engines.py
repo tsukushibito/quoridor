@@ -1,5 +1,6 @@
 """GTP adapters for the pinned official external builds."""
 
+import math
 import re
 import time
 
@@ -62,12 +63,46 @@ class GTP:
             raise EngineError("protocol", str(error)) from error
 
 
+def validate_native_search(response, evaluation):
+    """Known native contract; timedOut is normal budget exhaustion, cancelled is not."""
+    if not isinstance(response, dict) or response.get("ok") is not True:
+        raise EngineError("protocol", "missing successful native search response")
+    if response.get("evaluation") != evaluation:
+        raise EngineError("identity", "native evaluator response differs from bound identity")
+    if (
+        type(response.get("move")) is not int
+        or not 0 <= response["move"] < 64
+        or type(response.get("score")) is not int
+        or response.get("scoreKind") not in ("heuristic", "discDifference")
+        or type(response.get("completedDepth")) is not int
+        or not 0 <= response["completedDepth"] <= 64
+        or type(response.get("nodes")) is not int
+        or response["nodes"] < 0
+        or type(response.get("elapsedMs")) not in (int, float)
+        or not math.isfinite(response["elapsedMs"])
+        or response["elapsedMs"] < 0
+        or type(response.get("timedOut")) is not bool
+        or type(response.get("proven")) is not bool
+        or response.get("cancelled") is not False
+    ):
+        raise EngineError("protocol", "incomplete/invalid native search evidence")
+
+
 class NativePlayer:
-    def __init__(self, native, *, simple=False, time_ms=1000, tt_mib=32):
+    def __init__(self, native, *, simple=False, time_ms=1000, tt_mib=32, evaluation=None):
         self.native = native
         self.simple = simple
         self.time_ms = time_ms
         self.tt_mib = tt_mib
+        self.evaluation = evaluation
+
+    def initialize(self, *, deadline):
+        """Once after process/model load, outside game clocks; no search or TT reuse."""
+        state = self.native.request("new", deadline=deadline)["state"]
+        response = self.native.request("evaluate", state=state, deadline=deadline)
+        if response.get("evaluation") != self.evaluation:
+            raise EngineError("identity", "native initialization evaluator identity mismatch")
+        return response
 
     def reset(self, *, deadline):
         pass
@@ -79,10 +114,20 @@ class NativePlayer:
         pass
 
     def choose(self, state, *, deadline):
-        move = self.native.choose(
-            state, deadline=deadline, simple=self.simple, time_ms=self.time_ms, tt_mib=self.tt_mib
-        )
-        self.last_search = self.native.last_response
+        self.last_search = None
+        self.native.last_response = None
+        try:
+            move = self.native.choose(
+                state,
+                deadline=deadline,
+                simple=self.simple,
+                time_ms=self.time_ms,
+                tt_mib=self.tt_mib,
+            )
+        finally:
+            self.last_search = self.native.last_response
+        if self.evaluation is not None:
+            validate_native_search(self.last_search, self.evaluation)
         return move
 
 
