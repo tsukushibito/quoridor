@@ -537,7 +537,7 @@ learnerは通常の`train --cache --output --config`に`experiment.study="mixed-
 
 上記1280生成・新fit・256評価は未開始である。抽出64対全行、public-V非悪化selector、bulk容量／部分停止と欠測は未選択差分として一度提示する。1280は開始request上限であり、LR/extension/endpoint衝突をまとめた実独立family数とT/V数は入力準備で記録する。独立1280なら1024T/256Vとなるが、衝突で減った群をoutcomeから再分割・補充しない。source/softwareの準備完了から科学設定を無断選択しない。
 
-実行を選択した場合の出力先案は `.worktree/assets/data/fixed-d-sigma-mixture380-v1/`（schedule/partition・generation・compact）、`.worktree/assets/checkpoints/fixed-d-sigma-mixture380-v1/`（候補と曲線）、`.worktree/arena-evaluation/.artifacts/fixed-d-sigma-mixture380-v1/`（evaluation/analysis）とする。現時点では作成しない。各段階の記録単位は**実設定snapshot＋結果の一組**で、モデル・入力・RAWは結果内の参照、progressは同じ結果のjournalに保存する。別のsource一覧・control/acceptance証明・バッチ毎手書き台帳を必須成果物にしない。
+実行を選択した場合の出力先案は `.worktree/assets/data/fixed-d-sigma-mixture380-v1/`（schedule/partition・generation・compact）、`.worktree/assets/checkpoints/fixed-d-sigma-mixture380-v1/`（候補と曲線）、`.worktree/assets/perf/fixed-d-sigma-mixture380-v1/`（evaluation/analysis）とする。現時点では作成しない。各段階の記録単位は**実設定snapshot＋結果の一組**で、モデル・入力・RAWは結果内の参照、progressは同じ結果のjournalに保存する。別のsource一覧・control/acceptance証明・バッチ毎手書き台帳を必須成果物にしない。
 
 次の人間判断は、この1280/64-row/50:50/batch2048/LR1e-4/最大8 newD露出/上記BEST条件/256局/whole8GiBと未完了方針を一回案として選ぶか、どの重要設定を変えるかである。計画leafの完了は新生成・fit・対局・任意N配分の発行ではない。既承認の374診断/349解釈と元RAW/FAILED/費用、models/defaults/N/seals/fits96/323pauseは保持する。
 

@@ -1,0 +1,428 @@
+{
+  "issue": "quoridor-4lc.327",
+  "stage": "CURRENT_FIXED_D_COMPLETE_VERSION_LOCAL",
+  "census": {
+    "planned_games": 16,
+    "started_games": 16,
+    "completed_games": 16,
+    "complete_pairs": 8,
+    "incomplete_pairs": 0,
+    "unknown_games": 0,
+    "unknown_reasons": {}
+  },
+  "candidate": {
+    "wins": 3,
+    "losses": 13,
+    "draws": 0,
+    "wins_by_color": {
+      "0": 1,
+      "1": 2
+    }
+  },
+  "complete_pair_mean": 0.1875,
+  "planned_score_range": [
+    0.1875,
+    0.1875
+  ],
+  "pairs": [
+    {
+      "cohort": "Initial",
+      "family": "best51-current-D-100ms-initial-327-v1-family-000000",
+      "lineage": "common-initial/PRNG32710001",
+      "score": 0.0
+    },
+    {
+      "cohort": "Main",
+      "family": "best51-current-D-100ms-main-327-v1-family-000000",
+      "lineage": "common-initial/PRNG32710001",
+      "score": 0.0
+    },
+    {
+      "cohort": "Main",
+      "family": "best51-current-D-100ms-main-327-v1-family-000001",
+      "lineage": "common-initial/PRNG32710001",
+      "score": 0.0
+    },
+    {
+      "cohort": "Main",
+      "family": "best51-current-D-100ms-main-327-v1-family-000002",
+      "lineage": "common-initial/PRNG32710001",
+      "score": 0.0
+    },
+    {
+      "cohort": "Main",
+      "family": "best51-current-D-100ms-main-327-v1-family-000003",
+      "lineage": "common-initial/PRNG32710001",
+      "score": 0.5
+    },
+    {
+      "cohort": "Main",
+      "family": "best51-current-D-100ms-main-327-v1-family-000004",
+      "lineage": "common-initial/PRNG32710001",
+      "score": 0.5
+    },
+    {
+      "cohort": "Main",
+      "family": "best51-current-D-100ms-main-327-v1-family-000005",
+      "lineage": "common-initial/PRNG32710001",
+      "score": 0.0
+    },
+    {
+      "cohort": "Main",
+      "family": "best51-current-D-100ms-main-327-v1-family-000006",
+      "lineage": "common-initial/PRNG32710001",
+      "score": 0.5
+    }
+  ],
+  "bootstrap": {
+    "seed": 327,
+    "resamples": 2000,
+    "unit": "complete family pair",
+    "percentile_95": [
+      0.0625,
+      0.375
+    ],
+    "scope": "conditional fixed eight correlated families; lineage dependence not corrected, no population precision or sequential stopping assurance",
+    "algorithm": "maintained xorshift64/rejection sampling/order-statistic indexes; main7 interval independently matched"
+  },
+  "cohorts": {
+    "initial": {
+      "summary": {
+        "bootstrap": {
+          "limitations": [
+            "Fixed sample, complete pairs only; missingness may bias the primary score.",
+            "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+            "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+            "Repeated inspection of this interval is not a sequential stopping rule.",
+            "Fewer than two complete pairs: no uncertainty interval is reported."
+          ],
+          "percentile_95": null,
+          "resamples": 2000,
+          "seed": 327,
+          "unit": "complete family pair"
+        },
+        "by_cohort": {
+          "Initial": {
+            "complete_pairs": 1,
+            "completed_games": 2,
+            "incomplete_pairs": 0,
+            "planned_games": 2,
+            "started_games": 2,
+            "unknown_games": 0,
+            "unknown_reasons": {}
+          }
+        },
+        "census": {
+          "complete_pairs": 1,
+          "completed_games": 2,
+          "incomplete_pairs": 0,
+          "planned_games": 2,
+          "started_games": 2,
+          "unknown_games": 0,
+          "unknown_reasons": {}
+        },
+        "complete_pair_mean": 0.0,
+        "pairs": [
+          {
+            "cohort": "Initial",
+            "family": "best51-current-D-100ms-initial-327-v1-family-000000",
+            "lineage": "common-initial/PRNG32710001",
+            "score": 0.0
+          }
+        ],
+        "planned_score_range": [
+          0.0,
+          0.0
+        ],
+        "schema": "quoridor-arena-v2",
+        "valid_game_score_secondary": 0.0
+      },
+      "evaluator_load_seconds": 0.000226605,
+      "backend_warmup_NN": 0,
+      "manifest_SHA256": "ea20b81ce4509965bcd3bf1b01e6ed9338956e8a5ce41fb6c99e38fb7b22cbfa",
+      "report_nn_calls_field": 0,
+      "report_nn_calls_scope": "Sigma inference field; zero does not mean native NNUE work was zero"
+    },
+    "main": {
+      "summary": {
+        "bootstrap": {
+          "limitations": [
+            "Fixed sample, complete pairs only; missingness may bias the primary score.",
+            "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+            "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+            "Repeated inspection of this interval is not a sequential stopping rule.",
+            "Shared lineages are present."
+          ],
+          "percentile_95": [
+            0.07142857142857142,
+            0.42857142857142855
+          ],
+          "resamples": 2000,
+          "seed": 327,
+          "unit": "complete family pair"
+        },
+        "by_cohort": {
+          "Main": {
+            "complete_pairs": 7,
+            "completed_games": 14,
+            "incomplete_pairs": 0,
+            "planned_games": 14,
+            "started_games": 14,
+            "unknown_games": 0,
+            "unknown_reasons": {}
+          }
+        },
+        "census": {
+          "complete_pairs": 7,
+          "completed_games": 14,
+          "incomplete_pairs": 0,
+          "planned_games": 14,
+          "started_games": 14,
+          "unknown_games": 0,
+          "unknown_reasons": {}
+        },
+        "complete_pair_mean": 0.21428571428571427,
+        "pairs": [
+          {
+            "cohort": "Main",
+            "family": "best51-current-D-100ms-main-327-v1-family-000000",
+            "lineage": "common-initial/PRNG32710001",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "best51-current-D-100ms-main-327-v1-family-000001",
+            "lineage": "common-initial/PRNG32710001",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "best51-current-D-100ms-main-327-v1-family-000002",
+            "lineage": "common-initial/PRNG32710001",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "best51-current-D-100ms-main-327-v1-family-000003",
+            "lineage": "common-initial/PRNG32710001",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "best51-current-D-100ms-main-327-v1-family-000004",
+            "lineage": "common-initial/PRNG32710001",
+            "score": 0.5
+          },
+          {
+            "cohort": "Main",
+            "family": "best51-current-D-100ms-main-327-v1-family-000005",
+            "lineage": "common-initial/PRNG32710001",
+            "score": 0.0
+          },
+          {
+            "cohort": "Main",
+            "family": "best51-current-D-100ms-main-327-v1-family-000006",
+            "lineage": "common-initial/PRNG32710001",
+            "score": 0.5
+          }
+        ],
+        "planned_score_range": [
+          0.21428571428571427,
+          0.21428571428571427
+        ],
+        "schema": "quoridor-arena-v2",
+        "valid_game_score_secondary": 0.21428571428571427
+      },
+      "evaluator_load_seconds": 0.000265522,
+      "backend_warmup_NN": 0,
+      "manifest_SHA256": "c9db96944b094533963e7e5975a09739fd8953438aab3e698e41d86b07583187",
+      "report_nn_calls_field": 0,
+      "report_nn_calls_scope": "Sigma inference field; zero does not mean native NNUE work was zero"
+    }
+  },
+  "engines": [
+    {
+      "engine_index": 0,
+      "kind": "BEST51_NNUE",
+      "moves": 375,
+      "stop_reasons": {
+        "internal_time_limit": 373,
+        "depth_cap": 2
+      },
+      "whole_invocation_counter_sums": {
+        "cutoffs": 3112083,
+        "delta_updates": 15458267,
+        "nodes": 15460897,
+        "policy_calls": 0,
+        "pvs_researches": 11682,
+        "static_evaluations": 11202131,
+        "terminal": 197610,
+        "tt_bound_cutoffs": 28486,
+        "tt_capacity_skips": 3666280,
+        "tt_collisions": 1260917,
+        "tt_exact_hits": 1276,
+        "tt_hashes": 8091451,
+        "tt_history_items": 165655016,
+        "tt_illegal_moves": 0,
+        "tt_key_builds": 4063544,
+        "tt_key_history_capacity_bytes": 5268432552,
+        "tt_key_hits": 64178,
+        "tt_order_only": 30967,
+        "tt_probes": 4061156,
+        "tt_replacements": 199905,
+        "tt_usable_depth": 33211
+      },
+      "nonadditive_state_fields_not_summed": [
+        "tt_generation",
+        "tt_retained_bytes"
+      ],
+      "capacity_byte_counter_meaning": "sum of ephemeral history-key capacities is allocation work, not resident RAM",
+      "completed_depth_min_max": [
+        3,
+        64
+      ],
+      "whole_caller_max_ms": 96.379935,
+      "whole_caller_total_seconds": 35.47520892,
+      "minimum_accepted_deadline_slack_ms": 3.620065,
+      "TT_requested_slots": 65536,
+      "TT_effective_slots": 4096,
+      "TT_byte_cap": 1048576,
+      "TT_retained_observed_profile_peak_B": 1048576,
+      "physical_NN_head_FT_kernel_counts": null,
+      "leaf_counter": null,
+      "FT_mode": "Scalar",
+      "PVS_actual": true,
+      "MPC_actual": false
+    },
+    {
+      "engine_index": 1,
+      "kind": "D_a0_b8",
+      "moves": 380,
+      "stop_reasons": {
+        "internal_time_limit": 378,
+        "depth_cap": 2
+      },
+      "whole_invocation_counter_sums": {
+        "cutoffs": 5990417,
+        "delta_updates": 0,
+        "nodes": 27895234,
+        "policy_calls": 0,
+        "pvs_researches": 7988,
+        "static_evaluations": 20045953,
+        "terminal": 267443,
+        "tt_bound_cutoffs": 480,
+        "tt_capacity_skips": 7299818,
+        "tt_collisions": 3861015,
+        "tt_exact_hits": 642,
+        "tt_hashes": 15160445,
+        "tt_history_items": 292510184,
+        "tt_illegal_moves": 0,
+        "tt_key_builds": 7584691,
+        "tt_key_history_capacity_bytes": 9299287800,
+        "tt_key_hits": 20949,
+        "tt_order_only": 20270,
+        "tt_probes": 7581838,
+        "tt_replacements": 188711,
+        "tt_usable_depth": 679
+      },
+      "nonadditive_state_fields_not_summed": [
+        "tt_generation",
+        "tt_retained_bytes"
+      ],
+      "capacity_byte_counter_meaning": "sum of ephemeral history-key capacities is allocation work, not resident RAM",
+      "completed_depth_min_max": [
+        3,
+        64
+      ],
+      "whole_caller_max_ms": 95.596507,
+      "whole_caller_total_seconds": 35.946269234,
+      "minimum_accepted_deadline_slack_ms": 4.403493,
+      "TT_requested_slots": 65536,
+      "TT_effective_slots": 4096,
+      "TT_byte_cap": 1048576,
+      "TT_retained_observed_profile_peak_B": 1048576,
+      "physical_NN_head_FT_kernel_counts": null,
+      "leaf_counter": null,
+      "FT_mode": "Scalar",
+      "PVS_actual": true,
+      "MPC_actual": false
+    }
+  ],
+  "native_NNUE_head_API_pipelines_from_leaf_static_evaluations": 11202131,
+  "NN_accounting_scope": "successful candidate static evaluator/head pipelines, partial iterations included; root/delta FT APIs and physical kernels not counted as this statistic; prior native98/Torch16 charged separately",
+  "game_head_selected_route": "not instrumented per game; runtime AVX2 available and guard selects noFMA fast/scalar branches; saved32 qualification inputs observedfast route",
+  "all_moves_accepted_before_deadline": true,
+  "audit_recover": {
+    "both_audits_summary_match": true,
+    "both_recover_processes_exit0": true,
+    "durable_journal_equals_direct_report": true,
+    "manifest_journal_f32_value_bit_identity": true,
+    "recover_stdout_bounded_tail": true,
+    "extra_models_or_searches": 0
+  },
+  "history_side_checks": {
+    "exact_replayed_family_pairs": 8,
+    "unique_scheduled_slots": 16
+  },
+  "compiled_source_expected": {
+    "Cargo.lock": "5b448d049178c9227ba2d51a784918f1ab192574a4c79f92cb61187f6f1732fe",
+    "runner/Cargo.toml": "1b6ee35b55b28ae339900872dcdabe3b689641f543e31115f4d7c44b41609acd",
+    "runner/main.rs": "4d0ec3b1ab7941023ff91f270191105ca69d0150d86b62f5c12dbb78ff66423b",
+    "runner/lib.rs": "73daaff7359061a545f0547635c5a5454f40caabaeed66d1e1762b3bd68aa92e",
+    "runner/runtime.rs": "a982cc90a9b19b6f48a66ba8371e8fce5f07205fd5512fe2c349b5c57d089450",
+    "runner/config.rs": "c73fd406b41bac730edb8cd2022f179cdae68343c65a29040fd01bf86a9b6ddd",
+    "runner/resources.rs": "867ffd82d05e1e777cee220c9f9fd7321e3b83370a85ffb2547ae8ff69042fb2",
+    "runner/native_input.rs": "335d29824083aa9ffc05693c64bdb5357850fd6a31c24cceb46942efbffde264",
+    "runner/arena_book.rs": "5dde8c7625c35488e27255fd7fbed740a6fa80b9da37cb82880eafca261b5bf8",
+    "runner/nnue-diagnose.rs": "6ad84c52e28503378aa0f90cbc8329b5567a731909dfc65f7a5686bbff8f521a",
+    "runner/arena.rs": "e7d5632474a250af065d587242c71c6ebdac693cd7bd78a95ae62a14452df4b1",
+    "runner/arena_clock.rs": "a7a4f60b51167b05d1bafe1b119a9fa2ab061684c1903d85e28a09fe0f18ea8c",
+    "runner/arena_statistics.rs": "7d48611bc32199c751e1d8e53986f3eaac6a8b82c0f90dc59c4f83b4866888f2",
+    "runner/arena_manifest.rs": "1e684606d8c640de3d6841ab78d3ade4a056cfdbbe3e43fddc335d0439949b7f",
+    "core/lib.rs": "c41814c97164d8c59a3bfd45685b54b21942bdbb8acc035cf0d4d809b7741f3b",
+    "core/game.rs": "543995676fb46cc4e80d0fccb650875eb901a4b4d71187788ee09dfbaf01a420",
+    "core/position.rs": "6cb132a4e3f68c7cb739a926aad1ae5f0c8ad12ca8df60d22fb8fcc1c1aa173a",
+    "core/research.rs": "c4aaf1ed318be17e6755d54ed9940e02eb9bbeca5e3a8dcdab8a7ad0274ec3b5",
+    "ai/lib.rs": "31b128dd0ae781e6916b6f8993cc39ef57b5a65238e4a5cd567b4957176efe6d",
+    "ai/alphabeta.rs": "c402422e3c26a2a5408e90262f33a7804b6f7f86341e0dafa4d4cce2755f74a3",
+    "ai/sigma_mcts.rs": "dd59988dd7ddae090e1d71b7a17e1ef4f1772151db295c716a1375d84de67eee",
+    "nnue/lib.rs": "95df6793add8fc846ca27b7e8ba4e3a440343bd6c1c732c52fe1d8d947887c8a",
+    "nnue/features.rs": "80e1d95af972510b4f161d9fe028069a5498952d6d64a221e56977e5f4fb0b71",
+    "nnue/simd.rs": "1731f69385649ff5eb6d75f5cbbaf2fd046a2907ec968801cae8ac033b17d02a",
+    "nnue/residual.rs": "a2b9c4ed9db95166dfc1ea27395a99de85136d274f62d5b113397c8b6c70585b",
+    "nnue/quantized.rs": "2553767bb6f045f5312d8759e185da518dbc2b211c2849b1b23f93d964c046d6",
+    "inference/lib.rs": "d7656d85ba0e00fa2e4b2ac40ebfdc0b2c5fa56aca5a52d1e2e4d79f463cfc0f",
+    "inference/cuda.rs": "f4c8816d15e60d4631b660085f56ff6bf5ff12d257d0866a217b25df1cf8bdac",
+    "inference/tensorrt.rs": "f32699f7065e7518c475d806a558f97d9305b23d3e057e530537441f815b78e3",
+    "data/lib.rs": "5cc55727b40fb1350f83518a5d6fe9ea5a532ad044ab6308253f8b99e6326ed1"
+  },
+  "model_weight_SHA256": "9ca438e43b0c105ac5f802a302946f2ba71623ea2bc443b9c54cc9a8468b75b0",
+  "private_ELF_SHA256": "25e54c65bfd2efd5dc85c1f4cc2084471e95d9815be1683754bd7176ef288344",
+  "freeze_protocol_SHA256": "77436c64b41deb8206894f730256f75ceaed794b9a049619777773313427b97f",
+  "raw_artifacts_SHA256": {
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/trained-reference-v1/native-current-v1/distance-current-v1/run-initial/admission.json": "49d9231b44794f1b24c705cd126c9000b5604901374178ef710fabc9b995217d",
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/trained-reference-v1/native-current-v1/distance-current-v1/run-initial/completed.jsonl": "6aad56e4e4c372f88b65b943c1484eef55d063d72d9ccefb4ea58802af0e22cf",
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/trained-reference-v1/native-current-v1/distance-current-v1/run-initial/config.json": "bf786685579636d2d9fb4027c323a8e4a6ed36cde18bb4c6fb08d8062ff2cc2e",
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/trained-reference-v1/native-current-v1/distance-current-v1/run-initial/evaluator-identities.json": "77868e44edaa7530a5a63122587e50aa4e4b0568a8d81225a3bb36cceec5fc8d",
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/trained-reference-v1/native-current-v1/distance-current-v1/run-initial/games.csv": "630fc947a8c4d8ba9b38b58b2e7304506717d6a403c156bdc4c3f8b86a94c972",
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/trained-reference-v1/native-current-v1/distance-current-v1/run-initial/moves.jsonl.gz": "fc477a67e2337156921bec0e4b8764878b7df91c07d022936e4cac6a2ad951f6",
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/trained-reference-v1/native-current-v1/distance-current-v1/run-initial/planned.json": "63baf81d3547f8aec33f6c7a6a49a3e7fbf2653e8f8a1531ba74b85b23e61406",
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/trained-reference-v1/native-current-v1/distance-current-v1/run-initial/result.json": "30d829486efbdc4d2efcd3eac58035a18986838a27555240fe962ceac24e075e",
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/trained-reference-v1/native-current-v1/distance-current-v1/run-main/admission.json": "5fe69e1d25ad8e1f5c781c8af64d44f77a331e00ac82dd3f8369cd5bc0081624",
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/trained-reference-v1/native-current-v1/distance-current-v1/run-main/completed.jsonl": "dd54256bc7dee51ebc38d4a0b8df5bca84c3d0db86fe73fd3cce5825d546196c",
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/trained-reference-v1/native-current-v1/distance-current-v1/run-main/config.json": "5799c96aa054d54cab98c54a57cf5efd2361d95e4725a6701d9ba9128dc4ab48",
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/trained-reference-v1/native-current-v1/distance-current-v1/run-main/evaluator-identities.json": "77868e44edaa7530a5a63122587e50aa4e4b0568a8d81225a3bb36cceec5fc8d",
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/trained-reference-v1/native-current-v1/distance-current-v1/run-main/games.csv": "e98d524e269005359db0d67561ebee22ef0b637e9acb93e46e780d136c0afbd1",
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/trained-reference-v1/native-current-v1/distance-current-v1/run-main/moves.jsonl.gz": "00d1c2f4abd381d5ae2f4518a8ae0aad16e493b16a6825dc67d7b150a5dd182a",
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/trained-reference-v1/native-current-v1/distance-current-v1/run-main/planned.json": "3d7b7fc33c51602d25810b7bdd6e82107d1029f71903822cb6677457a7f3010f",
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/trained-reference-v1/native-current-v1/distance-current-v1/run-main/result.json": "ffa5ae242024396e23d298aaae7cea7bff6a8b7beacfc1d8c261dd7f4da2c9a2"
+  },
+  "limitations": [
+    "only fixed D opponent/current version/eight-family correlated book; no Sigma/general strength/Elo",
+    "all completed here; unknown remains typed for future runs, not draw",
+    "runtime uses maintained PVS=true/MPCoff equally; D-only clock fixture disabled PVS, actual games record PVS work and caller acceptance",
+    "physicalNN/FT and continuousstorage/RAM/TT peaks UNKNOWN; sampled values and configured caps separate",
+    "final adopted326 version requires its own boundary qualification and separate fixed16; current outcomes not transferred",
+    "no new game/modelforward/compile during collection; old errors/raw/fees/caps/assets/UNKNOWN retained"
+  ]
+}

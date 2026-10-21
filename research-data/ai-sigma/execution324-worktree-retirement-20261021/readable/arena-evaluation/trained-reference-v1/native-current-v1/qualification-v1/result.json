@@ -1,0 +1,279 @@
+{
+  "started": "2026-10-07T15:36:42.826975+00:00",
+  "commands": [
+    {
+      "name": "correspondence",
+      "command": [
+        "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/trained-reference-v1/native-current-v1/software-v1/private/nnue-diagnose",
+        "--config",
+        "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/trained-reference-v1/native-current-v1/qualification-v1/correspondence-config.json"
+      ],
+      "status": "complete",
+      "child": {
+        "pid": 2290565,
+        "start_ticks": "64053875",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "log_bytes_seen": 70,
+      "scope": "session group and periodically recorded descendants; no daemon adoption",
+      "exit_code": 0,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "cleanup_complete": true,
+      "log_bytes_retained": 70,
+      "wall_seconds": 0.013804811984300613,
+      "handle_closes_attempted": [
+        "selector_close",
+        "pipe_close",
+        "pidfd_close",
+        "log_close"
+      ],
+      "primary_error": null,
+      "process_cleanup_complete": true,
+      "handle_closes_complete": true,
+      "signal_mask_restoration": "completed",
+      "final_record_persist": "completed",
+      "finalization_errors": []
+    },
+    {
+      "name": "legal",
+      "command": [
+        "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/trained-reference-v1/native-current-v1/software-v1/private/nnue-diagnose",
+        "--config",
+        "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/trained-reference-v1/native-current-v1/qualification-v1/legal-config-v2.json"
+      ],
+      "status": "complete",
+      "child": {
+        "pid": 2290567,
+        "start_ticks": "64053876",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "log_bytes_seen": 62,
+      "scope": "session group and periodically recorded descendants; no daemon adoption",
+      "exit_code": 0,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "cleanup_complete": true,
+      "log_bytes_retained": 62,
+      "wall_seconds": 0.01160900795366615,
+      "handle_closes_attempted": [
+        "selector_close",
+        "pipe_close",
+        "pidfd_close",
+        "log_close"
+      ],
+      "primary_error": null,
+      "process_cleanup_complete": true,
+      "handle_closes_complete": true,
+      "signal_mask_restoration": "completed",
+      "final_record_persist": "completed",
+      "finalization_errors": []
+    },
+    {
+      "name": "book",
+      "command": [
+        "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/trained-reference-v1/native-current-v1/software-v1/private/nnue-diagnose",
+        "--config",
+        "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/trained-reference-v1/native-current-v1/qualification-v1/book-config.json"
+      ],
+      "status": "complete",
+      "child": {
+        "pid": 2290568,
+        "start_ticks": "64053877",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "log_bytes_seen": 75,
+      "scope": "session group and periodically recorded descendants; no daemon adoption",
+      "exit_code": 0,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "cleanup_complete": true,
+      "log_bytes_retained": 75,
+      "wall_seconds": 0.02755318197887391,
+      "handle_closes_attempted": [
+        "selector_close",
+        "pipe_close",
+        "pidfd_close",
+        "log_close"
+      ],
+      "primary_error": null,
+      "process_cleanup_complete": true,
+      "handle_closes_complete": true,
+      "signal_mask_restoration": "completed",
+      "final_record_persist": "completed",
+      "finalization_errors": []
+    }
+  ],
+  "physical_kernel_counts": "UNKNOWN",
+  "scope": "current compiled8a755/privatecce724; fixed BEST51; no Torch/fit/export/game",
+  "qualified": true,
+  "native_head_API_completed": 96,
+  "native_FT_API_completed": 96,
+  "previously_completed_synthetic_head": 2,
+  "previously_completed_synthetic_FT": 1,
+  "legal_selected_actions": {
+    "0": [
+      3,
+      5,
+      13,
+      81,
+      145
+    ],
+    "1": [
+      67,
+      75,
+      77,
+      81,
+      145
+    ]
+  },
+  "actual_AVX2": true,
+  "observed_routes": [
+    {
+      "range_permitted": true,
+      "selected": "avx2_lane8_no_fma"
+    },
+    {
+      "range_permitted": true,
+      "selected": "avx2_lane8_no_fma"
+    },
+    {
+      "range_permitted": true,
+      "selected": "avx2_lane8_no_fma"
+    },
+    {
+      "range_permitted": true,
+      "selected": "avx2_lane8_no_fma"
+    },
+    {
+      "range_permitted": true,
+      "selected": "avx2_lane8_no_fma"
+    },
+    {
+      "range_permitted": true,
+      "selected": "avx2_lane8_no_fma"
+    },
+    {
+      "range_permitted": true,
+      "selected": "avx2_lane8_no_fma"
+    },
+    {
+      "range_permitted": true,
+      "selected": "avx2_lane8_no_fma"
+    },
+    {
+      "range_permitted": true,
+      "selected": "avx2_lane8_no_fma"
+    },
+    {
+      "range_permitted": true,
+      "selected": "avx2_lane8_no_fma"
+    },
+    {
+      "range_permitted": true,
+      "selected": "avx2_lane8_no_fma"
+    },
+    {
+      "range_permitted": true,
+      "selected": "avx2_lane8_no_fma"
+    },
+    {
+      "range_permitted": true,
+      "selected": "avx2_lane8_no_fma"
+    },
+    {
+      "range_permitted": true,
+      "selected": "avx2_lane8_no_fma"
+    },
+    {
+      "range_permitted": true,
+      "selected": "avx2_lane8_no_fma"
+    },
+    {
+      "range_permitted": true,
+      "selected": "avx2_lane8_no_fma"
+    },
+    {
+      "range_permitted": true,
+      "selected": "avx2_lane8_no_fma"
+    },
+    {
+      "range_permitted": true,
+      "selected": "avx2_lane8_no_fma"
+    },
+    {
+      "range_permitted": true,
+      "selected": "avx2_lane8_no_fma"
+    },
+    {
+      "range_permitted": true,
+      "selected": "avx2_lane8_no_fma"
+    },
+    {
+      "range_permitted": true,
+      "selected": "avx2_lane8_no_fma"
+    },
+    {
+      "range_permitted": true,
+      "selected": "avx2_lane8_no_fma"
+    },
+    {
+      "range_permitted": true,
+      "selected": "avx2_lane8_no_fma"
+    },
+    {
+      "range_permitted": true,
+      "selected": "avx2_lane8_no_fma"
+    },
+    {
+      "range_permitted": true,
+      "selected": "avx2_lane8_no_fma"
+    },
+    {
+      "range_permitted": true,
+      "selected": "avx2_lane8_no_fma"
+    },
+    {
+      "range_permitted": true,
+      "selected": "avx2_lane8_no_fma"
+    },
+    {
+      "range_permitted": true,
+      "selected": "avx2_lane8_no_fma"
+    },
+    {
+      "range_permitted": true,
+      "selected": "avx2_lane8_no_fma"
+    },
+    {
+      "range_permitted": true,
+      "selected": "avx2_lane8_no_fma"
+    },
+    {
+      "range_permitted": true,
+      "selected": "avx2_lane8_no_fma"
+    },
+    {
+      "range_permitted": true,
+      "selected": "avx2_lane8_no_fma"
+    }
+  ],
+  "input_legal_qualified": true,
+  "book_preparation_SHA256": "9edf1395c4a7cbd7a9c7a20970032c0df4bc3d3ce7c6406a60ea020cf90be1e2",
+  "ended": "2026-10-07T15:36:42.883222+00:00",
+  "whole_seconds": 0.05627595691476017,
+  "error": null,
+  "all_direct_children_reaped": true,
+  "cleanup_complete": true,
+  "remaining": [],
+  "RAMfamily_sampled_including_controller_B": 89333760,
+  "own_output_sampled_peak_B": 163840,
+  "actual_games": 0,
+  "clock_or_strength_qualified": false,
+  "input_qualification_scope": "16 correlated open-originalV targetblind rows, two legal prefixes only; no wholemodel accuracy bound",
+  "authority_SHA256": "ad767319afed874e6ee056d0206e2df8b035699325fcefaa451475272ac3c9e8",
+  "admission_SHA256": "ed65634d4f1bdac0f150f2d6f9d98352a7c5a14ae4212480ec031bbf34e6b579"
+}

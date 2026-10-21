@@ -1,0 +1,1040 @@
+{
+  "schema": "quoridor.research.build-manifest.v1",
+  "kind": "build",
+  "status": "PASS",
+  "intent": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/build-provenance379-v1/software-build-v3/intent.json",
+    "sha256": "2a7c78613363bf6e0710cd2cbc5a6a9a76628604087460f22f103cca5b61c537",
+    "bytes": 10363,
+    "mode": "0644"
+  },
+  "started_at": "2026-10-12T18:43:34.307680+00:00",
+  "checks": [
+    {
+      "name": "version-cargo",
+      "role": "version",
+      "argv": [
+        "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+        "--version"
+      ],
+      "status": "PASS",
+      "guardian_return": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "--version"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 191441,
+          "start_ticks": "108390002",
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        "log_bytes_seen": 36,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 36,
+        "wall_seconds": 0.007725212024524808,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "full_log": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/build-provenance379-v1/software-build-v3/operation-v3/version-cargo.full.log",
+        "sha256": "1f88eaf7fe1aaec83184752cf4c944cd22f00184136ff36a3e4c318cc60ef566",
+        "bytes": 36,
+        "mode": "0644"
+      },
+      "persisted_process_receipt": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/build-provenance379-v1/software-build-v3/operation-v3/version-cargo.process.json",
+        "sha256": "539d618b1e124d6afb0c63dfc47463977f30e9d3af98cf2f3da9b3442888f783",
+        "bytes": 891,
+        "mode": "0600"
+      },
+      "capture_complete": true,
+      "secondary": [],
+      "primary": null
+    },
+    {
+      "name": "version-rustc",
+      "role": "version",
+      "argv": [
+        "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustc",
+        "--version"
+      ],
+      "status": "PASS",
+      "guardian_return": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustc",
+          "--version"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 191442,
+          "start_ticks": "108390016",
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        "log_bytes_seen": 36,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 36,
+        "wall_seconds": 0.07525348383933306,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "full_log": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/build-provenance379-v1/software-build-v3/operation-v3/version-rustc.full.log",
+        "sha256": "8dc912acd5bfeafc70b01b1d2a2afb0844afa02f5dba2f1ae8d5c212d005afb6",
+        "bytes": 36,
+        "mode": "0644"
+      },
+      "persisted_process_receipt": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/build-provenance379-v1/software-build-v3/operation-v3/version-rustc.process.json",
+        "sha256": "a72ae4e0f68b36344fe6242461fcfca6753d97b691270a017a84686717c495a1",
+        "bytes": 890,
+        "mode": "0600"
+      },
+      "capture_complete": true,
+      "secondary": [],
+      "primary": null
+    },
+    {
+      "name": "version-rustdoc",
+      "role": "version",
+      "argv": [
+        "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustdoc",
+        "--version"
+      ],
+      "status": "PASS",
+      "guardian_return": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustdoc",
+          "--version"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 191445,
+          "start_ticks": "108390037",
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        "log_bytes_seen": 38,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 38,
+        "wall_seconds": 0.009547144873067737,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "full_log": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/build-provenance379-v1/software-build-v3/operation-v3/version-rustdoc.full.log",
+        "sha256": "a37aafb914b7e4b94fbc9c7221a19ea3fd4d089bc6b6a9b398c079de321f3b6a",
+        "bytes": 38,
+        "mode": "0644"
+      },
+      "persisted_process_receipt": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/build-provenance379-v1/software-build-v3/operation-v3/version-rustdoc.process.json",
+        "sha256": "ff505c86f6f6ae657bf752bea322c1b47581ad1bf3feb0e6a77ce6679b2d89e1",
+        "bytes": 893,
+        "mode": "0600"
+      },
+      "capture_complete": true,
+      "secondary": [],
+      "primary": null
+    },
+    {
+      "name": "version-cc",
+      "role": "version",
+      "argv": [
+        "/usr/bin/x86_64-linux-gnu-gcc-12",
+        "--version"
+      ],
+      "status": "PASS",
+      "guardian_return": {
+        "command": [
+          "/usr/bin/x86_64-linux-gnu-gcc-12",
+          "--version"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 191446,
+          "start_ticks": "108390050",
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        "log_bytes_seen": 260,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 260,
+        "wall_seconds": 0.007333232089877129,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "full_log": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/build-provenance379-v1/software-build-v3/operation-v3/version-cc.full.log",
+        "sha256": "ba4aa3688542d944b584afa84a6332469bed71c19d3c72e5bbdb069972d6db1d",
+        "bytes": 260,
+        "mode": "0644"
+      },
+      "persisted_process_receipt": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/build-provenance379-v1/software-build-v3/operation-v3/version-cc.process.json",
+        "sha256": "ab973c1ef470fef25112cd1b57b09ad9ec4a5bf758ee9776315c1bfb043272dc",
+        "bytes": 855,
+        "mode": "0600"
+      },
+      "capture_complete": true,
+      "secondary": [],
+      "primary": null
+    },
+    {
+      "name": "version-cxx",
+      "role": "version",
+      "argv": [
+        "/usr/bin/x86_64-linux-gnu-g++-12",
+        "--version"
+      ],
+      "status": "PASS",
+      "guardian_return": {
+        "command": [
+          "/usr/bin/x86_64-linux-gnu-g++-12",
+          "--version"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 191447,
+          "start_ticks": "108390065",
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        "log_bytes_seen": 260,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 260,
+        "wall_seconds": 0.012694316916167736,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "full_log": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/build-provenance379-v1/software-build-v3/operation-v3/version-cxx.full.log",
+        "sha256": "44c362af33f02d0f97e55219a8e35ba8374b0bf61352141287b86ac131355d36",
+        "bytes": 260,
+        "mode": "0644"
+      },
+      "persisted_process_receipt": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/build-provenance379-v1/software-build-v3/operation-v3/version-cxx.process.json",
+        "sha256": "4bfc41873dd91da2a542c9653695ac09d8cfd5c62494e6a406161c1b98a1ea97",
+        "bytes": 855,
+        "mode": "0600"
+      },
+      "capture_complete": true,
+      "secondary": [],
+      "primary": null
+    },
+    {
+      "name": "version-ar",
+      "role": "version",
+      "argv": [
+        "/usr/bin/x86_64-linux-gnu-ar",
+        "--version"
+      ],
+      "status": "PASS",
+      "guardian_return": {
+        "command": [
+          "/usr/bin/x86_64-linux-gnu-ar",
+          "--version"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 191472,
+          "start_ticks": "108390083",
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        "log_bytes_seen": 283,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 283,
+        "wall_seconds": 0.008788390085101128,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "full_log": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/build-provenance379-v1/software-build-v3/operation-v3/version-ar.full.log",
+        "sha256": "d47749e5767b07210b628729d75fba5e16927cb4a7fd943cd6da87f60a335874",
+        "bytes": 283,
+        "mode": "0644"
+      },
+      "persisted_process_receipt": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/build-provenance379-v1/software-build-v3/operation-v3/version-ar.process.json",
+        "sha256": "3a1186466d343e280a7488e92227b0a5b9ef89f205f2290449d1f37bb68c1e27",
+        "bytes": 851,
+        "mode": "0600"
+      },
+      "capture_complete": true,
+      "secondary": [],
+      "primary": null
+    },
+    {
+      "name": "version-python",
+      "role": "version",
+      "argv": [
+        "/home/vscode/.cache/inference/python/cpython-3.14.7-linux-x86_64-gnu/bin/python3.14",
+        "--version"
+      ],
+      "status": "PASS",
+      "guardian_return": {
+        "command": [
+          "/home/vscode/.cache/inference/python/cpython-3.14.7-linux-x86_64-gnu/bin/python3.14",
+          "--version"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 191494,
+          "start_ticks": "108390102",
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        "log_bytes_seen": 14,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 14,
+        "wall_seconds": 0.00978322303853929,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "full_log": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/build-provenance379-v1/software-build-v3/operation-v3/version-python.full.log",
+        "sha256": "0366d77cc1f1ac88ea458231ba4f639323d5caf34de0d50b7618277fd4395f1f",
+        "bytes": 14,
+        "mode": "0644"
+      },
+      "persisted_process_receipt": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/build-provenance379-v1/software-build-v3/operation-v3/version-python.process.json",
+        "sha256": "ed332bd14311b01934beeb862e1b5f1dcaf3a2bf56b329a3ac4eb5e88ef8a51f",
+        "bytes": 903,
+        "mode": "0600"
+      },
+      "capture_complete": true,
+      "secondary": [],
+      "primary": null
+    },
+    {
+      "name": "affected-fixed80-schedule-build379",
+      "role": "test",
+      "argv": [
+        "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "/workspaces/quoridor/Cargo.toml",
+        "-j1",
+        "--message-format=json-render-diagnostics",
+        "-p",
+        "quoridor-runner",
+        "--lib",
+        "--features",
+        "ordering-assessment",
+        "ordering_assessment::cheap376_tests::ordering376_fixed80_two_independent_sweeps_masks_and_finite_denominators",
+        "--",
+        "--exact",
+        "--test-threads=1"
+      ],
+      "status": "PASS",
+      "guardian_return": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "test",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "/workspaces/quoridor/Cargo.toml",
+          "-j1",
+          "--message-format=json-render-diagnostics",
+          "-p",
+          "quoridor-runner",
+          "--lib",
+          "--features",
+          "ordering-assessment",
+          "ordering_assessment::cheap376_tests::ordering376_fixed80_two_independent_sweeps_masks_and_finite_denominators",
+          "--",
+          "--exact",
+          "--test-threads=1"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 191495,
+          "start_ticks": "108390117",
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        "log_bytes_seen": 85241,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 85241,
+        "wall_seconds": 8.356534054037184,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "full_log": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/build-provenance379-v1/software-build-v3/operation-v3/affected-fixed80-schedule-build379.full.log",
+        "sha256": "485b959f707b5c58a205bedc02c00d3df4e2e010139348fbf215a32dff646041",
+        "bytes": 85241,
+        "mode": "0644"
+      },
+      "persisted_process_receipt": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/build-provenance379-v1/software-build-v3/operation-v3/affected-fixed80-schedule-build379.process.json",
+        "sha256": "2e68188ed0aaf38bcb24ae737ad1f69077c496c8716bb31de5f0181c36e05cd0",
+        "bytes": 1300,
+        "mode": "0600"
+      },
+      "capture_complete": true,
+      "secondary": [],
+      "primary": null,
+      "cargo": {
+        "artifacts": [
+          {
+            "reason": "compiler-artifact",
+            "package_id": "path+file:///workspaces/quoridor/crates/quoridor-runner#0.1.0",
+            "manifest_path": "/workspaces/quoridor/crates/quoridor-runner/Cargo.toml",
+            "target": {
+              "kind": [
+                "lib"
+              ],
+              "crate_types": [
+                "lib"
+              ],
+              "name": "quoridor_runner",
+              "src_path": "/workspaces/quoridor/crates/quoridor-runner/src/lib.rs",
+              "edition": "2024",
+              "doc": true,
+              "doctest": true,
+              "test": true
+            },
+            "profile": {
+              "opt_level": "0",
+              "debuginfo": 0,
+              "debug_assertions": true,
+              "overflow_checks": true,
+              "test": true
+            },
+            "features": [
+              "default",
+              "ordering-assessment"
+            ],
+            "filenames": [
+              "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target/debug/deps/quoridor_runner-7e7af0e37ecd9661"
+            ],
+            "executable": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target/debug/deps/quoridor_runner-7e7af0e37ecd9661",
+            "fresh": false
+          }
+        ],
+        "warning_count": 0
+      }
+    },
+    {
+      "name": "clippy-build379",
+      "role": "lint",
+      "argv": [
+        "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+        "clippy",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "/workspaces/quoridor/Cargo.toml",
+        "-j1",
+        "--message-format=json-render-diagnostics",
+        "--keep-going",
+        "-p",
+        "quoridor-ai",
+        "-p",
+        "quoridor-data",
+        "-p",
+        "quoridor-inference",
+        "-p",
+        "quoridor-nnue",
+        "-p",
+        "quoridor-runner",
+        "--lib",
+        "--bin",
+        "quoridor-runner",
+        "--tests",
+        "--features",
+        "quoridor-runner/ordering-assessment",
+        "--no-deps",
+        "--",
+        "-Dwarnings"
+      ],
+      "status": "PASS",
+      "guardian_return": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "clippy",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "/workspaces/quoridor/Cargo.toml",
+          "-j1",
+          "--message-format=json-render-diagnostics",
+          "--keep-going",
+          "-p",
+          "quoridor-ai",
+          "-p",
+          "quoridor-data",
+          "-p",
+          "quoridor-inference",
+          "-p",
+          "quoridor-nnue",
+          "-p",
+          "quoridor-runner",
+          "--lib",
+          "--bin",
+          "quoridor-runner",
+          "--tests",
+          "--features",
+          "quoridor-runner/ordering-assessment",
+          "--no-deps",
+          "--",
+          "-Dwarnings"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 191634,
+          "start_ticks": "108390969",
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        "log_bytes_seen": 118600,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 118600,
+        "wall_seconds": 8.029454770963639,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "full_log": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/build-provenance379-v1/software-build-v3/operation-v3/clippy-build379.full.log",
+        "sha256": "c6e894b9d6ae3caf38fea020b0ed8295a219634d9e589a7b7b6aa8e6adbd38b2",
+        "bytes": 118600,
+        "mode": "0644"
+      },
+      "persisted_process_receipt": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/build-provenance379-v1/software-build-v3/operation-v3/clippy-build379.process.json",
+        "sha256": "4fc8b7b5bb198d31da26779e415e1599ea2bd120d05ae25ae003b112c770a1d5",
+        "bytes": 1397,
+        "mode": "0600"
+      },
+      "capture_complete": true,
+      "secondary": [],
+      "primary": null,
+      "cargo": {
+        "artifacts": [],
+        "warning_count": 0
+      }
+    },
+    {
+      "name": "release-build379",
+      "role": "build",
+      "argv": [
+        "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+        "build",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "/workspaces/quoridor/Cargo.toml",
+        "-j1",
+        "--message-format=json-render-diagnostics",
+        "--release",
+        "-p",
+        "quoridor-runner",
+        "--bin",
+        "quoridor-runner",
+        "--features",
+        "ordering-assessment"
+      ],
+      "status": "PASS",
+      "guardian_return": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "build",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "/workspaces/quoridor/Cargo.toml",
+          "-j1",
+          "--message-format=json-render-diagnostics",
+          "--release",
+          "-p",
+          "quoridor-runner",
+          "--bin",
+          "quoridor-runner",
+          "--features",
+          "ordering-assessment"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 191884,
+          "start_ticks": "108391785",
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        "log_bytes_seen": 87617,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 87617,
+        "wall_seconds": 76.98493041913025,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "full_log": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/build-provenance379-v1/software-build-v3/operation-v3/release-build379.full.log",
+        "sha256": "4d7c9076e381e21b370df594c06620fb4956fae206d02108472385d76fe0e3a0",
+        "bytes": 87617,
+        "mode": "0644"
+      },
+      "persisted_process_receipt": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/build-provenance379-v1/software-build-v3/operation-v3/release-build379.process.json",
+        "sha256": "6d033465880d73df37a356c6f41eafa0656986a0ee8d857e007a06069b7bfda4",
+        "bytes": 1175,
+        "mode": "0600"
+      },
+      "capture_complete": true,
+      "secondary": [],
+      "primary": null,
+      "cargo": {
+        "artifacts": [
+          {
+            "reason": "compiler-artifact",
+            "package_id": "path+file:///workspaces/quoridor/crates/quoridor-runner#0.1.0",
+            "manifest_path": "/workspaces/quoridor/crates/quoridor-runner/Cargo.toml",
+            "target": {
+              "kind": [
+                "bin"
+              ],
+              "crate_types": [
+                "bin"
+              ],
+              "name": "quoridor-runner",
+              "src_path": "/workspaces/quoridor/crates/quoridor-runner/src/main.rs",
+              "edition": "2024",
+              "doc": true,
+              "doctest": false,
+              "test": true
+            },
+            "profile": {
+              "opt_level": "3",
+              "debuginfo": 0,
+              "debug_assertions": false,
+              "overflow_checks": false,
+              "test": false
+            },
+            "features": [
+              "default",
+              "ordering-assessment"
+            ],
+            "filenames": [
+              "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target/release/quoridor-runner"
+            ],
+            "executable": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target/release/quoridor-runner",
+            "fresh": false
+          }
+        ],
+        "warning_count": 0
+      }
+    }
+  ],
+  "primary": null,
+  "secondary": [],
+  "cleanup_complete": true,
+  "remaining": [],
+  "owed_finalizers": [],
+  "originating_job": {
+    "runtime": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/build-provenance379-v1/software-build-v3/runtime-v3",
+    "job_id": "3c00bece-61b8-428d-952b-dc6ed775eb9c",
+    "config": {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/build-provenance379-v1/software-build-v3/runtime-v3/config.json",
+      "sha256": "b1dcfb94d48dc1372d0c15c983d7db10c5793ae94bd2b303b1463433085a02d2",
+      "bytes": 880,
+      "mode": "0600"
+    },
+    "config_sha256": "9cb6c9285a7dd28bdc11580d5d53622f864cad6ae8e48d6322a24e47ae1e0293",
+    "supervisor": {
+      "pid": 191262,
+      "start_ticks": "108389196",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child": {
+      "pid": 191322,
+      "start_ticks": "108389449",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    }
+  },
+  "active_command": null,
+  "cargo_artifact": {
+    "reason": "compiler-artifact",
+    "package_id": "path+file:///workspaces/quoridor/crates/quoridor-runner#0.1.0",
+    "manifest_path": "/workspaces/quoridor/crates/quoridor-runner/Cargo.toml",
+    "target": {
+      "kind": [
+        "bin"
+      ],
+      "crate_types": [
+        "bin"
+      ],
+      "name": "quoridor-runner",
+      "src_path": "/workspaces/quoridor/crates/quoridor-runner/src/main.rs",
+      "edition": "2024",
+      "doc": true,
+      "doctest": false,
+      "test": true
+    },
+    "profile": {
+      "opt_level": "3",
+      "debuginfo": 0,
+      "debug_assertions": false,
+      "overflow_checks": false,
+      "test": false
+    },
+    "features": [
+      "default",
+      "ordering-assessment"
+    ],
+    "filenames": [
+      "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target/release/quoridor-runner"
+    ],
+    "executable": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target/release/quoridor-runner",
+    "fresh": false
+  },
+  "artifact": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner379-v1",
+    "sha256": "875a49bcade5f4a0234a41eee07ea07d3d5561bdb8f344f5ac3173687e260a9d",
+    "bytes": 9628256,
+    "mode": "0755"
+  },
+  "artifact_target": "quoridor-runner",
+  "source": {
+    "workspace": "/workspaces/quoridor",
+    "commit": "b54c836870b657d2172562a2f8963b7e6003f530",
+    "patch": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/379-loop-repair-v1/current-uncommitted-delta.patch",
+      "sha256": "b03d8f2d6225f555b95a436e7d68b4bbd823a39fd849f5d82e9109669bb540fa",
+      "bytes": 577,
+      "mode": "0644"
+    },
+    "untracked_inputs": [],
+    "manifest": {
+      "path": "/workspaces/quoridor/Cargo.toml",
+      "sha256": "6cbcf3b38c98492322761e78db908195789021216be51aa37de2888cacd0ab0b",
+      "bytes": 284,
+      "mode": "0644"
+    },
+    "lock": {
+      "path": "/workspaces/quoridor/Cargo.lock",
+      "sha256": "aa938a8537b68f62f383f3ae1538ee335f294f336173ea1ea06eb57503ebb38a",
+      "bytes": 27359,
+      "mode": "0644"
+    },
+    "cargo_configs": [
+      {
+        "path": "/.cargo/config",
+        "file": null
+      },
+      {
+        "path": "/.cargo/config.toml",
+        "file": null
+      },
+      {
+        "path": "/usr/local/cargo/config",
+        "file": null
+      },
+      {
+        "path": "/usr/local/cargo/config.toml",
+        "file": null
+      },
+      {
+        "path": "/workspaces/.cargo/config",
+        "file": null
+      },
+      {
+        "path": "/workspaces/.cargo/config.toml",
+        "file": null
+      },
+      {
+        "path": "/workspaces/quoridor/.cargo/config",
+        "file": null
+      },
+      {
+        "path": "/workspaces/quoridor/.cargo/config.toml",
+        "file": null
+      }
+    ]
+  },
+  "source_adoption": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/build-provenance379/source-adoption-v3.json",
+    "sha256": "1e4bb0b63daa589485e2ca6b4998d1eadfc423995f89d40ecb1d670cd33b910d",
+    "bytes": 7186,
+    "mode": "0644"
+  },
+  "tools": {
+    "CARGO": {
+      "file": {
+        "path": "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+        "sha256": "e951141cc55a6cd7b9876d187bd30a3720e6086b99413af95e3b8de1cdd72f14",
+        "bytes": 36160240,
+        "mode": "0775"
+      },
+      "version_args": [
+        "--version"
+      ],
+      "version": "cargo 1.99.0 (5f94df478 2026-08-27)"
+    },
+    "RUSTC": {
+      "file": {
+        "path": "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustc",
+        "sha256": "f3834d26669b03f6855fa54bd2381443123e860167bc0c7a8dd137e5cf6e5e4f",
+        "bytes": 647376,
+        "mode": "0775"
+      },
+      "version_args": [
+        "--version"
+      ],
+      "version": "rustc 1.99.0 (b940084d7 2026-09-28)"
+    },
+    "RUSTDOC": {
+      "file": {
+        "path": "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustdoc",
+        "sha256": "a1321a60578a6b2e3e0ff428201b8618bbd9a9fbcd475c0d0f151bbf17cb0a9e",
+        "bytes": 12568360,
+        "mode": "0775"
+      },
+      "version_args": [
+        "--version"
+      ],
+      "version": "rustdoc 1.99.0 (b940084d7 2026-09-28)"
+    },
+    "CC": {
+      "file": {
+        "path": "/usr/bin/x86_64-linux-gnu-gcc-12",
+        "sha256": "75e997ec62297a6484f491bae28ab0ccb489daba23e398fd10fe68e9e6f0def8",
+        "bytes": 1301496,
+        "mode": "0755"
+      },
+      "version_args": [
+        "--version"
+      ],
+      "version": "x86_64-linux-gnu-gcc-12 (Debian 12.2.0-14+deb12u1) 12.2.0\nCopyright (C) 2022 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."
+    },
+    "CXX": {
+      "file": {
+        "path": "/usr/bin/x86_64-linux-gnu-g++-12",
+        "sha256": "dd91977c184e327710578363ad93ebb175c3a457b6236b874fd3911b7c055c65",
+        "bytes": 1305592,
+        "mode": "0755"
+      },
+      "version_args": [
+        "--version"
+      ],
+      "version": "x86_64-linux-gnu-g++-12 (Debian 12.2.0-14+deb12u1) 12.2.0\nCopyright (C) 2022 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."
+    },
+    "AR": {
+      "file": {
+        "path": "/usr/bin/x86_64-linux-gnu-ar",
+        "sha256": "3acbee2794e3668a74bcb90f2eaf7d981211fb95288ab940f0e3ac380e8f6023",
+        "bytes": 52400,
+        "mode": "0755"
+      },
+      "version_args": [
+        "--version"
+      ],
+      "version": "GNU ar (GNU Binutils for Debian) 2.40\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis program is free software; you may redistribute it under the terms of\nthe GNU General Public License version 3 or (at your option) any later version.\nThis program has absolutely no warranty."
+    },
+    "PYTHON": {
+      "file": {
+        "path": "/home/vscode/.cache/inference/python/cpython-3.14.7-linux-x86_64-gnu/bin/python3.14",
+        "sha256": "5a91882290532b2719eaca77c0f3a7448bd73b9214e56df57bc59004560a80c6",
+        "bytes": 32418544,
+        "mode": "0755"
+      },
+      "version_args": [
+        "--version"
+      ],
+      "version": "Python 3.14.7"
+    }
+  },
+  "env": {
+    "PATH": "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin:/usr/bin:/bin",
+    "HOME": "/home/vscode",
+    "CARGO_HOME": "/usr/local/cargo",
+    "RUSTUP_HOME": "/usr/local/rustup",
+    "RUSTUP_AUTO_INSTALL": "0",
+    "CARGO_NET_OFFLINE": "true",
+    "CARGO_TARGET_DIR": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target",
+    "TMPDIR": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/build-provenance379-v1/software-build-v3/TMP-v3",
+    "CARGO_BUILD_JOBS": "1",
+    "CARGO_INCREMENTAL": "0",
+    "CARGO_PROFILE_RELEASE_OPT_LEVEL": "3",
+    "CARGO_PROFILE_RELEASE_DEBUG": "0",
+    "CARGO_PROFILE_DEV_DEBUG": "0",
+    "CARGO_PROFILE_TEST_DEBUG": "0",
+    "RUSTFLAGS": "-C debuginfo=0",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "RUSTC": "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustc",
+    "RUSTDOC": "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustdoc",
+    "CC": "/usr/bin/x86_64-linux-gnu-gcc-12",
+    "CXX": "/usr/bin/x86_64-linux-gnu-g++-12",
+    "AR": "/usr/bin/x86_64-linux-gnu-ar",
+    "CARGO_PROFILE_DEV_OPT_LEVEL": "0",
+    "CARGO_PROFILE_TEST_OPT_LEVEL": "0",
+    "CUDA_VISIBLE_DEVICES": "",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "ORT_DISABLE_TELEMETRY": "1"
+  },
+  "finished_at": "2026-10-12T18:45:17.487944+00:00",
+  "process_cleanup_complete": true,
+  "outer_job_state": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/build-provenance379-v1/software-build-v3/runtime-v3/state.json",
+    "sha256": "3fc1764690fdf6730a502de439770c11c423684b905ef891e1d1bf5653f2d248",
+    "bytes": 709,
+    "mode": "0600"
+  },
+  "outer_job_result": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/build-provenance379-v1/software-build-v3/runtime-v3/result.json",
+    "sha256": "d7bf276c8dddf3bd683c91159428cc06f89851382ed5b64df219c7b19aae63c5",
+    "bytes": 501,
+    "mode": "0600"
+  },
+  "authoritative_finished_at": "2026-10-12T18:45:52.254314+00:00"
+}
