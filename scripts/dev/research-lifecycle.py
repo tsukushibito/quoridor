@@ -5144,6 +5144,14 @@ def arena_plan_check(experiment, plan):
         book["complete"] is True and book["rules"] == plan["rules"],
         "complete bound book",
     )
+    require(
+        all(
+            type(f.get(key)) is int and 0 <= f[key] < 2**64
+            for f in book["families"]
+            for key in ("seed", "attempt_id")
+        ),
+        "native book unsigned seed/attempt identity required",
+    )
     families = {f["family_id"]: f for f in book["families"]}
     require(
         len(families) == len(book["families"]) and set(plan["family_ids"]) <= families.keys(),

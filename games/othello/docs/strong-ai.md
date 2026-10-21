@@ -1,85 +1,77 @@
-# ブラウザ内Rust Othello AIの強化
+# Egaroucid互換Rust Othelloコアの設計
 
-2026-10-22 JSTの人間の直接依頼「最強オセロAIを作成して。」を採用する。[添付要求仕様](strong-ai-requirements-ja.txt)を原文のまま保存した（15,857B、SHA256 `e1a866a06ce3feee0078e91e11254c4ef2bd7f71aa3a3b092425dc657e9b2fb1`）。本書はOthello強化の設計正本で、担当・状態・依存はBeads `quoridor-n96` / `quoridor-n96.1` に置く。研究観測は `research-data/othello/` へ保存する。既存Quoridor研究の再開・予算転用・モデル採用を含まない。
+2026-10-22 JSTの[人間直接方針変更の原文](full-clone-request-20261022-ja.md)を採用する。最初の最低到達目標は、Egaroucid Console7.8.1と同じ全パターン・placement別重み・実効探索手法を持つ高性能なsinglethread Rust cloneである。実装完了と同棋力・優越の実証は別に判定する。旧二形状/四phaseの増量・救済fitと未採択residual案を最初の目標にはしない。residualへの人間回答待ちはこの明示選択で解消し、新source/fit/対局を発行しない。
 
-## 目標と判定
+[最初の要求原文](strong-ai-requirements-ja.txt)と実行済み研究は履歴として保持する。本書を到達構成の正本、[研究知見](../../../docs/research-findings.md)を観測・限界・次判断の正本とし、担当・進行・依存はBeadsに置く。既存QuoridorのUSERPAUSE323/342.17、seals/newE/oldfits96、モデル/default、RAW/FAILED/NULL/UNKNOWN費とdecimal50GBを変更しない。
 
-主評価はdesktop browser内の自作Rust/Wasm、探索1thread、1秒/手、book OFF、ponder OFF。同じ実時間と事前に固定したメモリ上限で終局まで対局する。native対native、Wasm対外部native、利用可能な公式browser版との比較を区別する。初期配布目安はエンジンと重み合計16MiB以内、TT32MiB、探索Worker全体256MiB以内とし、実測と実機の制約から変更理由を残す。初期source作業はGPU0、各実装family2GiB（controller64MiBを含む）、host reserve4GiB。実CPU/RAM/VRAMは各入場で既存制御が確認する。
+## 固定する原実装と資産
 
-正しく動くこと、強豪と比較可能なこと、事前同等幅で同等と判定されたこと、優位性が支持されたことを別に報告する。優位の主指標は相手ごとの得点率と開始family単位の95%区間。両相手それぞれで下端>.5を必要とし、片方のみ・区間が.5を含む・不完全を隠さない。同等幅は本評価前に別に定める。現在の簡易policyや実装完了を優位の根拠にはしない。
+第一基準はtag `console_v7.8.1`、commit `570d5e0a478c9d720d75de06a5d31995f412704a` のEgaroucid Console7.8.1。GUI7.8.3、master、Edaxのパターン・重み・scoreを混ぜない。Edax4.7は独立した比較/参照相手として残す。
 
-## 共通コアと境界
+既存の保存先は `.worktree/assets/tools/othello-baselines-n96-v1/` のprovenance.json、egaroucid-ref.json、selected-members.json、egaroucid/src/engine/、egaroucid/bin/resources/。元版・導出元・必要noticesとsource/weight/book/data各条件を別に記録する。sourceはGPL3-or-later、weightはrepository licenseの存在と別grant未確認を区別してきた。今回の指示はRust port・format調査・ローカル同値確認を進める許可であり、未確認weightの公開/製品再配布を認定するものではない。その具体的な利用条件を調べつつ実装を進め、全法務調査や追加承認をclone全体のgateにしない。原C++は外部oracleとしてのみ使い、配布する自作エンジンに隠して組み込まない。
 
-現GameStateの64要素board、version1、黒1/白2、row-major index、合法手・パス・終局・保存JSONを維持する。Vec/ray参照とcorner/flip/ID簡易policyを独立参照・初期対照として使う。新しいu64盤面、PVS/Negamax、TT、反復深化、時計、厳密終盤は同じRustコアをnative/Wasmから使う。TTは深さ・bound・探索modeを区別し、未完了結果を厳密値として保存しない。パスは着手深さを消費せず、双方着手不能なら空きが残っても終局。原規約の実石差と、外部engineの評価値・空き割当規約は別に対応付ける。厳密終盤に確率pruningを使わない。
+既存 `eval.egev2` は38,243,826B、SHA256 `0a8acbcbc23067933627f1bcc83c3f7ae6b7ff3e603d174a3364271fcaeeef2f`。終盤orderingの `eval_move_ordering_end.egev` は472,392B。現物のformatとdecoderを固定sourceに対応させ、学習済weightで強い初期版へ最短接続する。再download・恒常mirror・不用なweightコピーは作らない。自前学習が必要でも全パターン/全60段階を維持し、coverageと十分な量を別の有限configへ解決する。
 
-最初にbitboard/ray照合、軽いperft、小終盤の独立全探索、native/Wasmと時計・中断を確認する。GameStateの公開境界を変更する場合は、既存Othelloのルール・パス・終局・JSON・非法入力テストも関連する通常software検査として、新しい探索テストと一緒に一度確認する。無関係なQuoridor科学・移行suiteは再演しない。中断時は最後の完了反復の合法手へ戻す。同期WasmへpostMessageするだけで取消できるとは扱わず、内部時計とWorker終了・再生成で遅延結果を無効化する。Quoridorと共通chooserは維持し、OthelloのUI・対局制御をRust主体へ移す。JS/TSはWasm起動とブラウザAPIの最小接続に限る。
+## 到達構成
 
-## 最初のnative接続仕様
+共通Rust coreがルール、bitboard、評価器、incremental特徴、探索、score/proof意味を所有する。native CLIとbrowser Workerは同じcoreと同じweight意味を使う。現GameStateの黒1/白2、row-major64cell、play/pass/terminal、version1保存境界とRust主体UIを再用する。JS/TSはload・Worker・DOM/storage接続に限る。
 
-CLIは1行1JSON要求/応答、stdoutはJSONのみ、diagnosticsはstderr。`op` は `new`, `status`, `play`, `pass`, `simple`, `search`。new以外は既存GameStateの `state`、playは `move`。応答は `ok` と `state` / `status` / `move`、失敗は `ok:false,error`。search要求は `timeMs`（暫定1000）、`ttMiB`（32）、`maxDepth`（64）、`exactEmpties`（12）。search応答はmoveに加えて `score`, `scoreKind`, `completedDepth`, `nodes`, `elapsedMs`, `timedOut`, `proven` を返す。heuristic値と証明済み最終石差を明示的に分ける。native専用I/O・時計とWasmブラウザ時計は外側、探索と評価は共通Rust。実装時の必要な追加fieldはcallerと同時に記録する。
+大きなweightは初期化時に一度だけdecodeしてimmutable ownerへ保持し、探索はborrowする。パターン長ごとの実長/offsetを使い、最大長へのpadding・対称tableの不要重複・複数の全weightコピーを避ける。node hotpathへheap、JSON、hash、全盤面再scanを足さない。着手・反転・undo・passの特徴index差分更新を実装し、full recomputeを検証参照にする。scalarを正しさの基準として先に完成し、SIMDはnative/Wasmそれぞれの実環境で効果と演算一致を確認して追加する。
 
-## baselineと小評価
+## 評価・phase・終局の契約
 
-一次資料は[Edax](https://github.com/abulmo/edax-reversi)、[Egaroucid](https://github.com/Nyanyan/Egaroucid)、[技術解説](https://www.egaroucid.nyanyan.dev/ja/technology/explanation/)、[公開学習データ](https://www.egaroucid.nyanyan.dev/ja/technology/train-data/)。取得済release metadataはEdax v4.7、Egaroucid GUI v7.8.3。console案内7.8.1と混同せず、最初に起動できる公式Console7.8.1または固定source buildを選び、実commit・source/weight/book/dataそれぞれの条件、hash、起動args、1thread/時計/無book/無ponderを実確認する。公開dataは再配布禁止で本文をGitへ入れない。原C/C++engineを自作Rust runtimeへ隠して配布しない。
+固定sourceの `evaluate_common.hpp` はN_PATTERNS16、MAX_PATTERN_CELLS10、N_PATTERN_FEATURES64、N_PHASES60、PHASE_N_DISCS1、STEP32。 `evaluate_generic.hpp` のfeature_to_coord全64配置、feature_to_pattern、pattern_sizes、桁順・色反転・対称、eval_num_arr、付加項、四つの終盤moveordering patternを対応させる。元genericとSIMDのpacking/丸めの違いは明示し、名前だけ同じ近似へ置換しない。
 
-初期smokeは各相手4開始family×両色=8局。目的はprotocol・合法終局・費用の確認で、優位性判定には使わない。未学習の簡易評価器が強豪に大敗しても、その結果だけでbitboard方式や学習方針を不支持とせず、予定した少量pattern学習・export・parityへ進む。簡易policyへの勝利も強豪超えの根拠にしない。最小native接続を、Rust UIや全工程の完成待ちにしない。Rustルールを対戦制御の正本とし、違法手・timeout・crashも結果へ残す。時間対局に恣意的aggregate node capを足して未完了にしない。学習/調整familyと最終判定familyを分け、最終局数・停止・判定はpilot費用と分散から結果前に固定する。fair timing中は重いbuild/学習/対局/IO競合を調整する。
+pattern_sizesは `[8,9,8,9,8,9,7,10,10,10,10,10,10,10,10,10]`。元の列挙順で `res=res*3+digit` とし、player0/opponent1/empty2、swap_player_idxは0/1を交換して2を保持する。A1bit63の元向きとcoreのA1bit0を明示対応させる。旧tinyのLSB-first符号化や強制反対称性を移植先へ課さない。pattern和と `eval_num_arr[phase][own-count]` を足し、符号別±16、C++同様の0方向整数除算32、SCORE_MAX clampを行う。全64indexとraw和も照合し、丸め後だけ合う誤りを見逃さない。終盤orderingは別table・別clamp資格である。
 
-## 少量学習と改善
+一視点の実要素は1phase612425 i16（pattern＋追加65項）、全60phaseで36,745,500要素＝73,491,000B、終盤orderingは472,392Bというsource算術を出発支持とする。これはRSS/復号peakや新quotaの実測ではない。入力とdecode出力の二重保持、視点別全tableコピー、最大長paddingを避け、実ロード時の保持とpeakを確認する。
 
-最初のpipeline pilotは、小さな自前の簡易policy到達対局の結果で学習・export・parityを一巡させる。これは固定外部教師やminimax真値の代用資格ではない。出発設定は24個のD4/色・STM同値を除いた開始familyをT16/V8へ分離し、4個のprotocol-smoke familyとその同値開始を除外、最終評価namespaceを別に保持する。実際の24開始stateとsplitを終局ラベル生成前に固定する。Rustが合法遷移・パス・終局・実石差を確認し、非終局のplacement8..60を4刻みで観測する。行にはgameId/openingFamily/state/labelKind=gameOutcome/targetCentidiscsを持たせ、実終局黒白石差を観測手番へ符号変換して100倍する。trainerの跨行整合確認だけで真の終局到達を認定しない。対称重複のcross-split排除を事前に決め、欠損を再抽出で補わない。
+phaseは元 `search.hpp::phase()` 同様 `(n_discs-4)/PHASE_N_DISCS`。placement数に対応する60段階で、passでは進めない。phase0..59の元呼出資格、phase59と満盤/双方着手不能の境界をAPIへ明記し、無条件にphaseをclampしたり共有/補間して4phaseへ縮約しない。terminalは独立した終局経路へ送る。
 
-最初の評価器は2個の6cell shape、全8D4 occurrence、4phaseの共有tableで、STM centidiscsを16lookupの和から[-6400,6400]へclampする。ternaryはempty0/STM1/opponent2、shape-listを下位tritから符号化する。phaseはmin(3,clamp(occupied-4,0,60)//15)。expanded tableは[4][2][729]、色反転で符号が反転する2912独立parameterを用い、量子化はties-even・scale1、反対称性を表現できるi16範囲[-32767,32767]とする。modelは128KiB以内の厳密schemaをload時に一度検証し、探索へ明示的に借用する。baselineとimmutable pattern ownerを分け、隠れたglobal evaluatorの変更やnodeごとのJSON/hash処理を行わない。nativeの宣言modelIdはcallerVerifiedであり、実ファイルSHA/bytesと実imageの束縛は起動側が担う。終盤の証明済み実石差は学習評価から独立させる。
+STM/盤面向き/色、raw STEP単位、disc単位、丸め、clamp段階と外向けscore単位を型と入出力で区別する。元engineのwinner-empties評価規約、自作の実石差、WDLを混同しない。選択cutの結果をproven exactとしない。固定source/weightの同値を先に確立し、旧tinyのcentidisc・反対称i16 table契約をそのまま流用しない。
 
-初回trainerはfloat64 normalized SGD、seed20261022、max64epoch、LR.1、ridge.001、validation非改善patience8を出発固定とし、trainだけで更新する。epoch0を含む実quantized/clamped V-MSE最小のFPとexportを保存し、checkpointはbest-fpとbest-patternの2個に限る。非有限・範囲違反・時間/資源/取消で停止する。入力4096行/16MiB、学習600秒以内を実configで小さく解決し、全体32MiB以内の有限データ・終局証拠・2checkpointを最初の支持案とする。loss低下やparity成功を棋力改善へ読み替えない。実データ・fitの入場条件と結論は通常の資源制御・結果記録で管理する。
+## 探索port
 
-最初の学習方式は対称性を共有するphase別pattern table。小さな合法到達系列と固定外部教師/厳密小終盤からPython学習・export・共通Rust利用を一巡させる。教師推定値、対局結果、厳密値を区別し、STM・board向き・色反転・phase・石差規約を固定する。game/opening系列単位split、対称局面の重複を把握し、random row splitだけで独立と呼ばない。既存重みも条件・format・phase・視点の対応確認後に利用できるが、少量自前学習とPython/native/Wasm parityを省略しない。
+同じ固定版の実際に有効な処理を移す。PVS/反復深化だけの名前上のcloneにせず、次の対応をsource位置・有効条件・port状況・差の理由を持つ短い表へ整理する。
 
-次の固定強豪教師pilotは新128開始familyをT96/V16/H16へ分け、既存4smokeと24tiny開始のD4/色・STM同値を除外した実state・splitをラベル取得前に固定する。Hは開始stateの排除確認だけに使い、今回のtrajectory・教師・fit・selectorへ入れない。placement8,12,20,24,36,40,48,52の各最大8観測を出発案とし、T/Vの予定上限896件、教師attemptの絶対上限1024件を区別する。欠損を新seedや重複で補充しない。固定Console7.8.1-engine＋既存fixed-time adapterは1秒・1探索thread・book/ponder OFF、初期化は一度、独立局面のTT resetは別計測、要求のmonotonic上限1100msを維持する。途中反復・取消join・輸送を実protocolが分離できなければUNKNOWN/nullのまま残す。実RAM、全体期限、serializerと保持量は新configへ入場前に解決し、tinyの32MiB/F1GiBを引き継がない。
+- TTのdepth/bound/selective資格・replacementと実moveordering、浅いordering評価。
+- 潜在mobility、準偶数順、終盤ordering、確定石cut、ETC。
+- ProbCut/MultiProbCutの元確率table・適用資格と、小空き終盤最適化。
+- 実時間管理、最後の完了反復、取消と未完了の扱い。
 
-静的教師rowは `teacherEstimate` とし、固定idに束縛したraw STM engine-disc値×100をtargetへ保存する。Egaroucidの勝者空き割当は自作Rustの実石差と異なり、教師推定を終局zや自作のexact値へ変換しない。kindごとに条件を分け、gameOutcomeだけが同一gameの終局値整合を要求する。rowの教師metadataはid/rawSTMScore/scorePerspective/scoreUnits/scaleToCentidiscs/bound/provenと5個の任意計測値に限定し、reportedBudgetMs/nodes/scoreKind等は生の応答証拠へ保持する。報告depth/probabilityからprovenやboundを推定しない。T/V/H parserとmetadataの[限定software資格](../../../research-data/othello/strong-ai-n96/teacher-label-software-v1.json)は、実教師・学習・棋力の証拠ではない。
+元設定でinactiveの機能を必須の有効処理と偽らない。同じ評価/score単位なら元MPC係数と条件を初期値として使い、追加校正campaignを先行条件にしない。重要な差を加える場合は理由と範囲を保存する。最初はsinglethreadを完成させ、threadpool丸写しや独自scheduler/汎用探索frameworkを先に作らない。pass/厳密終盤/early terminalの規約は独立に確認し、selective結果とsolverの証明を分ける。
 
-量・時間・容量・checkpoint寿命・plateau/非有限STOPを小pilotのconfigへ結果前に固定する。大型data、NNUE、並列探索、選択pruningを初回に同時投入しない。改善候補は仮説→最小変更→開発集合比較→未使用familyで最終判断。NPS/depth/lossだけで棋力採用しない。各段階で動く最良版、失敗・費・未検証を保持し、最強目標の未達を明記する。
+固定setting.hppではEND parity/stability、MID ETC/MPCはON、LAST4 stability/aspiration negascout/killer-orderingはOFF。YBWCの定義があってもsinglethread/pool0で実効しない並列を必須移植へ増やさない。実console/fixedadapterのcompile条件・runtime選択を対応表へ結び、宣言の存在を有効性やport完了と扱わない。
 
-既存のmanaged Worktree・Beads・CPUPlan/CycleResources・job取消/回収/完了通知を再用し、専用manager・常駐監督・全員ACKを増やさない。50GB decimalは共通基盤と両ゲームの合計。Quoridor USERPAUSE323/342.17、seals/newE/oldfits96、models/defaults、原RAW/FAILED/NULL/UNKNOWN費を維持する。
+## 最初の受入単位と検証
 
-## 強教師一巡後の評価器比較
+最初の一まとまりは「全16形状・64配置・60段階のRust評価器、実weight読込、incremental更新、原engineとの数値一致」。同じ課題の既存core作者と基準接続作者を再用し、共通format/phase境界を先に固定する。core作者はRust実装、基準接続作者は外部static oracle・format/由来を担当する。sourceの実編集から進め、設計完成・親close・Root/人間ACKを入口にしない。
 
-固定128開始・896教師ラベル・一回のfit/export/parityは[実結果](../../../research-data/othello/strong-ai-n96/strong-teacher-pattern-v1.json)へ保存した。学習済みBESTはepoch10で、Vは選択集合のまま、未観測parameterも残る。weak outcomeとteacher estimateのV-MSEは別標的なので数値の大小だけで教材や棋力を順位付けしない。現v1と製品defaultを維持する。
+受入れでは同じ実weightで全phase、盤面向き/色反転、pass、terminal近傍を含む静的照合、full recompute対incremental、packing/符号/丸め/clampを確認する。native/Wasmで同じweightと演算意味を確認する。厳密小終盤は独立全探索/外部参照でWDL・実石差・early terminal・empty割当を分ける。固定深さ・選択pruningOFFのscore差から順に切り分け、tieの別着手を数値不一致と扱わない。
 
-次は一候補の強教師量子化V-BEST対v1 heuristicを、同一native image・共通PVS/TT/反復/厳密終盤で評価器だけ明示的に切り替え、新dev16family両色32局で比較する。opening seed2026102202、旧smoke4/tiny24/教師128のD4・色/STM同値から分離し、全開始stateと割当を結果前に固定する。H16は候補選びへ使わない。1000ms＋100ms transport、1探索thread、TT上限32MiB、maxDepth64/exactEmpties12、book/ponder OFF、モデル・process初期化一回を別費とし、各手実費を残す。恣意node上限を足さず、outer出発案2400秒は実入場前に固定する。
+最初の入力はHを使わず、二つ程度の既観測・完全合法系列から各phase0..59の非終局state、D4/色手番、pass/phase59/満盤/early terminal境界を結果前に固定する案とする。総case数・oracle初期化・RAMは実装者と324が普通softwareの有限configへ具体化し、旧perft・教師896・原32局や成功suite全体を再演しない。
 
-原32局・16個の完全両色pairがすべて正常資格の場合に限り、family平均の得点率と一度の95%family区間を出す。bootstrap出発案は10000回/seed2026102203で、具体的なRNG・percentile法もconfigへ固定する。下端>.5ならその有限dev条件で改善支持、.5を跨げば未決着、上端<.5なら不支持。失敗・UNKNOWN・未入場があれば予定分母32の得点範囲と失敗を報告し、完成pairだけを選んで採否用CIを出さない。追加seed・同じ32局の再演・結果後補充で救済せず、同等や一般最強を認定しない。
+重要な評価/検索・score境界には固定差分の独立確認を使う。各parameter/runへの重複review、旧parity・教師896・旧32局・既成功suiteの再演を一般条件にしない。新規または実変更された境界だけを検証する。
 
-Rust主体UIは同じ既存コア担当が別の有限source作業として並行する。Rustが確認済み状態・保存可否・resume/new・view/effectsと応答tokenを所有し、TSをDOM/storage/Workerの薄いhostへ移す。同期Wasmの取消をpostMessageだけで済ませず、Workerの終了・再生成と古い応答の無効化を実browserで確認する。chooser/Quoridor/defaultを維持し、native棋力や学習lossをUI source開始条件にしない。
+## 性能・棋力・browserへの接続
 
-## 初回学習候補の同一image比較
+評価単位の成立後、初期化を再用した連続探索でSearch時間、NPS、完成深度、全仕事、メモリを記録する。同実時間対局を主要評価とし、まず小さいprotocol/評価一致、次に未使用開始familyの両色で固定EgaroucidとEdaxへ進む。1thread・同TT上限・book/ponder OFF・実時計を固定adapterに結合する。原engineより弱くても小型評価へ戻さず、評価一致・探索条件・処理速度を分けて改善する。新たな対局量/停止/判定は入口ごとの実費と資源で結果前に固定し、設定だけから優越を主張しない。
 
-強教師V-BESTを現v1 heuristicと同じnative image2678で比較する入口を追加した。評価器以外は同じPVS/TT/時計/厳密終盤とし、1探索thread・1000ms＋100ms返却許容・TT上限32MiB・depth64/exact12・book/ponder OFFを固定する。新dev16familyの両色32局を予定し、seed2026102202、既存smoke4/tiny24/teacher128のD4/色・STM同値rootを除外する。H16はラベル/特徴/loss/selectorへ使わない。実開始state/configは対局前に凍結する。
+初期の16MiB配布/Worker256MiBは設計目安で、fullweight/TT/復号peak/ロード時間を実測して理由付きで見直せる。50GBと実host RAM安全枠は維持する。既存Rust UIの確認/保存/再開とgeneration/request所有を再用し、新規/中断/局面変更で古い返信を適用しない。同期WasmのpostMessage取消だけに依存せず、Worker終了/再生成を使う。nativeでの一致/棋力をbrowserの速度/棋力へ読み替えない。製品defaultは別の受入判断まで維持する。
 
-原32局/16完全pairとsetup/cleanup/identity/時計がすべて正常の場合だけ、family平均をMT19937 seed2026102203・10000回でresampleしR7の95%区間を報告する。下端>.5はこの有限dev条件の改善支持、上端<.5は不支持、それ以外は未決着。不完全なら予定32分母とUNKNOWN込み得点範囲を残し、完成pairだけのCIを出さない。補充/結果後seed追加なし。[結果前の対応source証拠](../../../research-data/othello/strong-ai-n96/native-comparison-software-v1.json)にある当時のUNRUNは凍結記録として保持する。
+source/light prepはQuoridor435と並行する。soleMain/Git/index/sharedCargoは実行・統合324。実build/GPU/大きいIO/公平時計だけを実STOP・実CPU/RAMで調停し、新しい恒久roleや監視frameworkを設けない。source作業は明示CPUPlan、GPU0、library1、各family2GiB/host reserve4GiBを既存CycleResources/executeへ結合する。大容量段階の具体保持は50GB内で別に解決する。
 
-実行した原32局は全件正常終局、16完全pair、学習候補3勝2分27敗、得点率12.5%だった。原arenaが一度計算したfamily95%区間は[3.125%,23.4375%]で、上端<50%の事前条件に従い、このnative開発条件で候補の改善は不支持とする。独立確認は同じ原記録・設定・全分母・時計・cleanup・統計法を認めた。現v1と製品defaultを維持し、同等・一般的なpattern学習の不可能性・敗因・browser棋力へ広げない。[原結果・独立確認・復元証拠](../../../research-data/othello/strong-ai-n96/native-comparison-result-v1.json)。
+## 既往の結果と退役境界
 
-対局outer1159.073003907秒にはcommand1158.709165507秒を含み、加算しない。後続の1961保存遷移のRustルールreplayと独立レビューは別工程で、新しいsearch/game/bootstrapは行っていない。16familyは旧root同値を除いた開発開始であり、共有prefix・後の到達局面まで独立とは証明しない。RSS peakはUNKNOWN。返却探索scoreのzeroや深さ差は記述値で、静的評価や敗因の因果証拠ではない。H16はroot identity排除だけに用い、trajectory/ラベル/feature/loss/selectorへ入れていない。同じ896行への追加fit、seed救済、追加教師、同じ32局の再演は発行しない。
+以下は完了済みの履歴で、cloneの将来指示や再実行条件ではない。元RAW/モデル/入力/FAILED/UNKNOWN費とGit上の旧設計は保存する。
 
-保存済みT768/V128の896教師行と原32局の1961 pre-move状態、合計2857状態の候補/v1各一回、5714静的評価を完了した。新Search/教師/fit/game/RNG/CIは0、H特徴も読んでいない。既存のdecoded状態cacheがなかったため、Rust new32/play1920/pass41で保存状態だけを復元し、status/legal/oracle/終局資格の監査は再演しなかった。[保存診断の定義・集計・証拠](../../../research-data/othello/strong-ai-n96/saved-pattern-diagnostic-v1.json)。
+| 到達事実                            | 根拠と限界                                                                                                                                                                                                                                                                            |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 固定外部16局を全終局                | [protocol smoke](../../../research-data/othello/strong-ai-n96/protocol-smoke-v1.json)。Edax1W7L/Ega0W1D7L、outer519.312600811秒。比較接続/費用であり一般棋力の判定ではない。                                                                                                          |
+| 旧二形状・四phaseのtiny outcome学習 | [tiny learning](../../../research-data/othello/strong-ai-n96/tiny-pattern-learning-v1.json)。24終局、T196/V104、4116更新、全4phase parity。実装接続を受け入れ、製品評価は置換しなかった。                                                                                             |
+| 旧896教師とfit                      | [strong teacher](../../../research-data/othello/strong-ai-n96/strong-teacher-pattern-v1.json)。T768/V128、quantized BEST10、plateau18、全4phase一致。winner-empties378行もteacherEstimateで、own solver truthではない。                                                               |
+| 旧学習候補7ed9対v1                  | [原32局](../../../research-data/othello/strong-ai-n96/native-comparison-result-v1.json)。3W2D27L、得点.125、原一度のfamily区間[.03125,.234375]。このdev条件で改善不支持、現v1維持。一般のpattern学習の不可能性や敗因とはしない。                                                      |
+| 保存診断                            | [有限診断](../../../research-data/othello/strong-ai-n96/saved-pattern-diagnostic-v1.json)。2857状態/5714静的評価、V-MSE改善とMAE/符号悪化、alias/空vector/未観測を区別。新Search/教師/fit/RNG0。原32局は開発で観測済みで最終独立集合に再利用しない。                                  |
+| Rust主体UIと任意v1探索              | [UI](../../../research-data/othello/strong-ai-n96/rust-ui-v1.json)、[browser search](../../../research-data/othello/strong-ai-n96/browser-search-v1.json)。Rust8/Wasm7と描画5、追加Rust7/Wasm3/描画2。malformed GameStateのCancel→Retry制限、nominal clockとbrowser棋力未資格を保持。 |
 
-全896 targetはraw STM engine-disc×100と一致し、white再反転はない。教師518推定値と378外部winner-empties値をteacherEstimateとして保ち、自作exactの実石差/単位と区別した。候補V-MSE2,770,099.53125は元BESTと一致してv1の3,063,322.03125より小さいが、V-MAEは1,310.546875対1,228.453125、三値の符号一致は78/128対84/128で悪かった。T/V別・phase/教師scoreKind別の範囲・誤差・境界値も保存した。選択済みVでのMSE改善を独立棋力へ変換しない。
-
-phase0の実signed sparse vector＋phaseはT192状態で92表現、V32状態で21表現、空vectorはT30/V3だった。T121状態が21同一表現群、V15状態が4群に属し、教師値rangeの最大はT3200/V2300 centidiscだった。pattern union外の内部セルが異なる4群8状態を少数のprivate例として保存したが、その内部差だけが教師差や敗因を作ったとは証明しない。同一表現内の経験的教師分散は、真最善値の分散ではない。
-
-Tが触れたparameterは1018/2912、phase別46/190/369/413、signed directionは1554で、反対符号は同じ反対称parameterを共有する。原対局のphase別状態数480/480/480/521のうち、T未観測parameterを含む状態は7/98/203/221だった。候補のstatic0は255/1961で、空vector254、非空だが全lookup項0が1、非零重み項の完全相殺0だった。phase別static0は候補235/20/0/0、v1は66/4/0/0。実candidate探索前のstatic0と原返却heuristic Search0も別であり、Search0をroot/leaf static0や敗因へ読み替えない。
-
-analysis outer0.710086400秒はbody0.679073524秒とnative評価計測を内包する。数値だけのsummary0.047531848秒は別工程。原attempt scoreKindの別の過去hash根拠が見つからず、一度のcurrent stream snapshotをparse/evaluate前に固定して896件をstate/raw scoreで照合した事実と限界を残す。primary final returned dictは未捕捉で、diskのmask pending/persist attemptedを完了へ変更しない。元データ・モデル・private例・大きい状態別集計は公開archiveへ複製しない。
-
-原32局は開発で観測済みで、最終独立確認には再利用しない。不採用候補の救済fitや同32局/seed反復を行わず、次の一案として固定v1 heuristic＋既存二形状の学習residualを検討する。空/未観測patternでも既存mobility/corner/phase-disc情報を残す仮説で、alias自体を解消する案ではない。これはまだ採択・実装・fitしていない重要なmodel/feature設計判断であり、基準identity/STM centidisc/zero residual時のv1対応・clamp/exportと次の有限入力/費用を別に解決する。
-
-## Rust主体UIの実動作
-
-OthelloUiが確認済みGameState、確認/再開、保存可否、generation/requestとAI応答受理を所有し、薄いTS hostがDOM/storage/Worker effectを実行する。同期Wasmへcancelメッセージが届くことに依存せず、取消/新規/再開/setup/disposeでWorkerをterminateして所有権を破棄する。
-
-Rust8・actual Wasm7・生成型/Web型/Viteと新規実ブラウザ5ケースを確認した。破損/読み込み中/読み込み失敗のslotは明示newまたは有効resumeまで保持し、古い実Worker応答は盤面/保存へ反映しない。テストの通信/Storage barrierは明示した実装境界の検査で、探索時間・棋力測定ではない。malformed GameState応答はCancel→Retryを要する回復制限を残す。[実証と制限](../../../research-data/othello/strong-ai-n96/rust-ui-v1.json)。
-
-その後、利用者が明示選択できる非学習v1探索を接続した。既定は簡易policyのまま、`searchV1`は同じRust探索を1000ms/TT32MiB/depth64/exact12でWorker実行する。Rustがconfirmed/draft/saved strategy、token、盤面とraw SearchResultを所有し、不整合・cancelled・不正な手を保存前に拒否する。既存保存でstrategyだけが欠ける場合はSimpleを復元し、明示null/未知値は拒否する。設定変更/新規/再開/取消/disposeでWorkerを同期終了し、旧返信を適用しない。
-
-新Rust7、actual Wasm3（実baseline探索1回＋transport fixture2）、関連Clippy、実生成型/Web型/bundle、実ブラウザ2ケースと限定strategy境界確認を通した。最初の描画2失敗はテストBlobのfetch基準URLによるもので、元FAILEDを保持し、製品・bundleを変えずテストだけ直して失敗2件を確認した。既成功suite/旧描画5件は再演していない。nominal1000msはbrowserの厳密な外側停止保証ではなく、Worker peak256MiBやbrowser棋力も未資格。学習モデルをloadせず、製品default・Quoridor/home/chooserを変えない。[任意探索のsource・実検証・元失敗](../../../research-data/othello/strong-ai-n96/browser-search-v1.json)、[利用境界](browser-search.md)。
+旧residualは提案段階で採択/実装/fitされず、今回の人間選択で先行案から退けた。二形状専用model API・trainer/export・専用試験/未採用案は、具体的な直接比較用途が無ければ新core境界の統合時にGit履歴へ退役する。比較が必要な部分だけ対象/終了条件を定め、恒久shimや実験ID別のtrainerを残さない。現役のルール・UI・取消/保存・正しさの検査と、Gitだけでは復元できない科学データを削除対象へ混ぜない。

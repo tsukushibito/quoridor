@@ -1,0 +1,35 @@
+# 人間直接方針変更: まず強豪の忠実なRust版を作る
+
+2026-10-22 JST、人間の原文:
+「最初は強豪と同じパターン設計の評価器を作って。ply毎に重みが別ね。パターン形状と種類も同じ。探索器も強豪と同じ手法で良いから高性能なものとする。強豪のクローンをまず最初に作るようにして。多分、それでも最初は強豪よりも弱くなるだろうから、最低限の目標をそこに置いて進めて。」
+
+これは重要な評価器/特徴/探索方針の人間による明示選択である。旧2shape/4phase/896row路線と未採択residual案を最初の到達目標にしない。residual新source/fit/gameとその人間質問待ちはこの選択で置換し、追加の同趣旨承認を求めない。実行済み旧学習/32局/診断/FAILED/原要件は履歴として保持し改稿しない。既入場の他仕事を無断killせず自然な実STOPでsourceを切り替える。
+
+## 固定する基準
+
+第一基準を、既に取得・起動・clock adapter・教師利用の実績があるEgaroucid Console7.8.1に統一する。タグ console_v7.8.1、commit570d5e0a478c9d720d75de06a5d31995f412704a。GUI7.8.3/masterやEdaxの形状/score/重みを混ぜない。Edax4.7は独立対戦/参照相手として維持。
+
+既存正本: .worktree/assets/tools/othello-baselines-n96-v1/{provenance.json,egaroucid-ref.json,selected-members.json,egaroucid/src/engine/,egaroucid/bin/resources/}。
+ローカル元source確認: evaluate_common.hpp N_PATTERNS16/MAX_PATTERN_CELLS10/N_PATTERN_FEATURES64/N_PHASES60/PHASE_N_DISCS1/STEP32。evaluate_generic.hpp のfeature_to_coord全64行、feature_to_pattern、pattern_sizes、対称/色反転、eval_num_arr、四つの終盤moveordering patternをそのまま対応させる。search.hpp::phase()=(n_discs-4)/PHASE_N_DISCS。今回のply別とは本家同様placement数に対応する60段階で、passでphaseを進めず、双方着手不可/満盤は終局経路へ送る。phase59/terminal境界の範囲と元コードの呼出資格を明記し、4phase近似やphase共有/補間へ勝手に縮約しない。
+
+既存評価weight eval.egev2 38243826B SHA0a8acbcbc23067933627f1bcc83c3f7ae6b7ff3e603d174a3364271fcaeeef2f、終盤ordering eval_move_ordering_end.egev472392Bを再用可能性確認。元provenanceはsourceGPL3-or-later/weightはrepositorylicense存在・別grant未確認/従来externalonlyでproduct再配布未採用、と区別している。この人間依頼でRust portと必要weightformat調査/ローカル同値確認を進める。source/weight/book/dataの帰属・ライセンス・導出元/必要noticesを正しく記録し、外部C++runtimeを自作エンジン本体へ隠して配布しない。確認できる範囲で元学習済weightから強い初期版に最短で接続する。利用条件が未確定のweightの公開を勝手に認定せず、その点だけを具体化するが、clone実装全体を追加の承認/全法務調査gateで止めない。必要な自前学習がある場合も同じ全パターン/全60段階を維持し十分なcoverage/データ規模を解決する。
+
+## 実装の必須到達点
+
+1. 評価器: 全16形状と64配置・桁順・色/盤面向き・phase・付加項・丸め/スコア単位/clamp・学習済weightのdecodeを忠実にRustへ移す。hotpathにheap/JSON/hash/全局面scanを足さず、着手/反転/undo/pass時の特徴index差分更新を共通native/Wasmコアに入れる。元generic/simdの差を区別しscalar正しさを先に確立、SIMDなどはnative/Wasmの実環境で効果を測って導入する。全表を最大長へ無駄にpadding/重複copyしない。
+
+2. 探索器: 同じ固定EgaroucidソースのPVS/反復深化/TT(depth/bound/selective条件とreplacement)/実moveordering/浅いordering評価/潜在mobility/準偶数順・終盤ordering/確定石によるcut/ETC/ProbCut・MultiProbCutの確率tableと適用資格/小空き終盤最適化/実時間管理を読み、実際に有効なものを対応させる。単なる手法名だけを列挙したPVSに留めない。元設定でinactiveのものをbaselineの必須機能と偽らず、port済/未port/性能差の原因候補を少数の対応表へ残す。singlethread版を最初に完成し、原threadpool丸写しや独自scheduler/一般searchframeworkを先に作らない。元と同じ評価器/score単位なら元のMPC係数と条件を初期値として利用し、勝手な追加校正campaignを初期到達の前提にしない。差を入れる場合は理由と範囲を記録する。
+
+3. 正しさ: 同じweightで元engineと静的評価を全phase・向き/色反転・pass/terminal近傍にまたがり照合。full recomputeとincrementalの比較、元src由来のpacking/rounding/符号を含める。厳密小終盤は独立全探索/外部参照でWDL/石差/earlyterminal/empty割当規約を分けて照合。選択cutの結果をproven exactとしない。固定深さ/選択pruningOFFのscore差から順に切り分け、tieでの別着手を数値不一致と混同しない。native/Wasmで同じ実weightと演算意味を確認する。
+
+4. 高性能と棋力: 初期化再用の連続探索でSearch時間/NPS/完成深度/全仕事/メモリを確認し、同時間対局を主要評価とする。元engineとRust版が同一実時間/1thread/同TT上限/bookponderOFFになるよう固定adapterを再用。まず小さいprotocol動作と評価一致を通し、次に別開始family/両色でEgaroucidとEdaxへ比較。元より弱いことを理由に縮小モデル路線へ戻さず、評価・検索条件・処理速度の差を分けて改善する。同一アルゴリズム実装完了と同棋力/優越の実証は別判定とする。
+
+5. 製品: 同じRust core/評価weightsをnativeCLIとbrowserWorkerで使う。Rust主体UI/取消/保存・Quoridor/chooser境界は再利用、同期WasmへのpostMessageだけを中断保証にしない。初期配布16MiB/Worker256MiBは設計目安で、今回のfullweight/TT/復号peakとロード時間を実測して理由付きで見直し可。これを少数shapeや4phaseに戻す口実にせず、50GBdecimal/実hostRAM安全枠は維持。大きな重みは起動時一度loadしborrow再用、不要copy/cacheを避ける。
+
+## 段階と担当
+
+現在のn96.1にこの新scopeを採用し、その子に具体sourceownerを置く。既存core作者/基準接続作者を目的に応じ再利用し、共通evalformat/phase境界を先に固定したらevalportとsearchport・baseline oracleを並行化できる。必要な最大2程度の具体実装actorから始め、常設設計/検証roleや多段reviewを追加しない。重要な対応・検索/ラベル境界には固定差分の独立確認、各parameter/runへ同じreview/suiteは反復しない。soleMain/Git/index/sharedCargoは324、課題worktreeは担当writer。source/lightprepはQuoridor435と並行、heavybuild/GPU/公平時計だけ実資源で調停する。Othelloの全工程や435parentclose、人間/RootACKを通常stageのgateにしない。
+
+最初の一まとまりは「同じ全パターン・全phaseのRust評価器＋実weight読込と元engine数値一致」まで。その次に元探索器の有効手法を揃え連続探索・同時間対局へ進む。人間の最低目標はこの高性能Rustクローン基盤で、最初から元より強くなる保証や意味ではない。この最低目標が実現してから自前学習/独自特徴/residual/別NNへ発展する。
+
+Main正本games/othello/docs/strong-ai.mdを到達構成中心に書き直し、旧tinyの過去記録・原failed/32結果を消さず将来指示から分離。sourceorweight利用の由来・復元版を保存し、用途を失ったtiny専用modelAPI/試験・未採用案を、具体旧比較用途が無ければGit履歴へ退役する。新旧比較が必要なら対象/終了条件を限定し恒久shimを残さない。実変更されたscope/元版/最初source着手と次の受入条件を通常記録で返し、通知専用helperや重複全件hash/全域auditを作らない。50GB、Quoridor323/342.17USERPAUSE/seals/newE/oldfits96/models/defaults/原RAWFAILEDNULL費は維持する。

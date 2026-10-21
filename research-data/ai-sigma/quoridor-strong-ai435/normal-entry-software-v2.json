@@ -1,0 +1,227 @@
+{
+  "scope": "Narrow normal arena book identity preflight repair; no native/Cargo/model/forward/game/RNG replay.",
+  "source": [
+    {
+      "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+      "bytes": 397180,
+      "mode": "0644",
+      "sha256": "1c5e658b551ed008c84d4f2ca1ef8c38e894ea893fae53f33812db4b48077b4d"
+    },
+    {
+      "path": "/workspaces/quoridor/scripts/dev/test_arena_config.py",
+      "bytes": 26484,
+      "mode": "0644",
+      "sha256": "31d243b64a90f4a4992be0e49e0ba0f63f92c947c4c933c68ff0e0eed2a9b535"
+    }
+  ],
+  "change": "Require actual unsigned integer seed and attempt_id for all native ArenaInputBook families before equality correspondence. Null==null no longer passes. Fixture adds the already-required attempt_id field; original assertions unchanged.",
+  "checks": {
+    "new_focused_fixture": "1PASS .023s in actual guard .249432776s, synthetic metadata only; old successful suite not replayed",
+    "format": "Final shared tools/research-quality/ruff.toml format/lint PASS; AST exact to passed focused test. Existing fixture assertions unchanged; formatting only elsewhere.",
+    "lint": "F/E9 PASS",
+    "failure_retained": "Initial selector could not import scripts namespace; no new test body ran. Corrected explicit existing module path first actual1PASS."
+  },
+  "original_entry_failures": {
+    "a44_not_started": {
+      "job_id": "a44a8690-e0f8-4b09-9939-95b528d17780",
+      "outcome": "not_started",
+      "error": "cycle memory_limit",
+      "error_notes": [
+        "{\"snapshot\": \"same validated sequence check; not a continuous peak\", \"role\": \"management\", \"rss_B\": 351428608, \"limit_B\": 67108864, \"member_count\": 2, \"members\": [{\"pid\": 1479730, \"start_ticks\": \"67030141\", \"boot_id\": \"6c2e177d-29e9-4a05-ad60-026060b53fb9\", \"rss_B\": 57782272, \"role\": \"management\"}, {\"pid\": 1479732, \"start_ticks\": \"67030166\", \"boot_id\": \"6c2e177d-29e9-4a05-ad60-026060b53fb9\", \"rss_B\": 293646336, \"role\": \"management\"}], \"members_omitted\": 0}"
+      ],
+      "exit_code": null,
+      "finished_at": "2026-10-21T22:33:37.112264+00:00",
+      "cleanup_complete": true
+    },
+    "v2_failed": {
+      "job_id": "1d78abcb-075d-47a9-a316-b2e6a974e109",
+      "outcome": "failed",
+      "error": null,
+      "error_notes": [],
+      "exit_code": 1,
+      "finished_at": "2026-10-21T22:48:44.340386+00:00",
+      "wall_seconds": 6.8473869420122355,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+      "cleanup_complete": true,
+      "cleanup_errors": [],
+      "log_bytes_seen": 729,
+      "log_bytes_retained": 729
+    },
+    "native_refusal": "invalid type: null, expected u64 at line8column18",
+    "actual_native_process": 1,
+    "model_setup": 0,
+    "forward": 0,
+    "games": 0,
+    "UNRUN": 8,
+    "cleanup": "Outer/sequence/native process cleanup complete. Operation manifest cleanup/process_cleanup false remains unmodified due unavailable guardian_return and absent scientific data finalization; no second finalize."
+  },
+  "resource_resolution": "Within unchanged total2GiB, management768MiB/native1280MiB, hostreserve4GiB. Original351428608B is a snapshot, not continuous peak or hostOOM proof. No process hidden/reclassified.",
+  "corrected_input": {
+    "binding": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/normal-entry-binding-v1/normal8-v3/book-repair-binding.json",
+      "bytes": 3811,
+      "mode": "0644",
+      "sha256": "6b6c97243b94d05a9b97e29a2b25b2b8936e18b6dd4831f8deebe730f27576e4"
+    },
+    "origin": "Existing schedule prefix_seed435102201 + request IDs, existing depth6::seed SHA256->LEu64; attempt_id copied from original successful exactprefix attempt. No RNG initialized or advanced. Same prefix/root/fullhistory/family/slots/image/models/clocks; original null-seed projection preserved.",
+    "local_by_reference": true
+  },
+  "cost": "v2 outer6.8473869420122355s includes inner2.0653896969743073/nativeguard.2868174520554021s, not added. a44 original result has no wall_seconds: UNKNOWN retained.",
+  "qualification": "No actual current-model100ms/8games/strength/default acceptance. Corrected input ready for distinct normal entry after actual resources/authority; no unchanged automatic resend.",
+  "protected": "Original RAW/FAILED/NULL/UNKNOWN, pauses/seals/newE/oldfits96/Cedar/default/model and50GB unchanged.",
+  "archive": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/quoridor-strong-ai435/normal-entry-software-v2-checks.tar.gz",
+    "bytes": 103535,
+    "mode": "0644",
+    "sha256": "ceeb942c2690715617ed9e04644ce98ff5e42e3ee70d87f7a5a52982f40f2c6f"
+  },
+  "archive_members": [
+    {
+      "member": "scripts/dev/research-lifecycle.py",
+      "bytes": 397180,
+      "mode": "0644",
+      "sha256": "1c5e658b551ed008c84d4f2ca1ef8c38e894ea893fae53f33812db4b48077b4d"
+    },
+    {
+      "member": "scripts/dev/test_arena_config.py",
+      "bytes": 26484,
+      "mode": "0644",
+      "sha256": "31d243b64a90f4a4992be0e49e0ba0f63f92c947c4c933c68ff0e0eed2a9b535"
+    },
+    {
+      "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/normal-entry-binding-v1/normal8-v1/runtime/result.json",
+      "bytes": 759,
+      "mode": "0600",
+      "sha256": "7b668472cb6513eae7c28f2db1a079c734aa44628abe5f7d05bf923dc5ff9fb1"
+    },
+    {
+      "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/normal-entry-binding-v1/normal8-v1/completion-a44a8690/collection.json",
+      "bytes": 5681,
+      "mode": "0644",
+      "sha256": "3d0e2f6b08c37f6a76db5788c1886ca8e16f576f450352c663ccebd037983585"
+    },
+    {
+      "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/normal-entry-binding-v1/normal8-v2/runtime/result.json",
+      "bytes": 523,
+      "mode": "0600",
+      "sha256": "efc17904c5790d6f50257aaf06d6e9afab4fedc0629a0935ce44fc1640a36cd1"
+    },
+    {
+      "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/normal-entry-binding-v1/normal8-v2/runtime/output.log",
+      "bytes": 729,
+      "mode": "0644",
+      "sha256": "41f356faebf6b5971528a4918f6c575169a43f5f8adbd586578c7fdcdc4299d3"
+    },
+    {
+      "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/normal-entry-binding-v1/normal8-v2/execution/sequence/run-000/operation/run.full.log",
+      "bytes": 53,
+      "mode": "0644",
+      "sha256": "631f47056bfd47931c25284a97f00690282f300d6df9a7a28342b54a5ec176b5"
+    },
+    {
+      "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/normal-entry-binding-v1/normal8-v2/execution/sequence/run-000/operation/run.process.json",
+      "bytes": 2662,
+      "mode": "0600",
+      "sha256": "1577b2c4164718762687363ab456a5573615233d27e64de7b1521166aefe2702"
+    },
+    {
+      "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/normal-entry-binding-v1/normal8-v2/completion-1d78abcb/collection.json",
+      "bytes": 6176,
+      "mode": "0644",
+      "sha256": "a6d3358313e2fc4ace69c014c056dc42178c02ccf00ead721c29c24a3853cb44"
+    },
+    {
+      "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/normal-entry-binding-v1/normal8-v3/book-repair-binding.json",
+      "bytes": 3811,
+      "mode": "0644",
+      "sha256": "6b6c97243b94d05a9b97e29a2b25b2b8936e18b6dd4831f8deebe730f27576e4"
+    },
+    {
+      "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/normal-entry-binding-v1/normal8-v2/completion-1d78abcb/guard-format.log",
+      "bytes": 42,
+      "mode": "0644",
+      "sha256": "10869b88a75066aa23546ef1f95fcd4678c3fb92a56ed46ef91688052b67976a"
+    },
+    {
+      "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/normal-entry-binding-v1/normal8-v2/completion-1d78abcb/guard-format.returned.json",
+      "bytes": 3006,
+      "mode": "0644",
+      "sha256": "0ef6fd2b517167d5d696590d8c5b69352bdd2a2dfabef14ce4f9d34028155cd7"
+    },
+    {
+      "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/normal-entry-binding-v1/normal8-v2/completion-1d78abcb/guard-lint.log",
+      "bytes": 141,
+      "mode": "0644",
+      "sha256": "60e43949d9eb2a9c512aed906a47f424940ca71f54a851cb253be8f2819cae08"
+    },
+    {
+      "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/normal-entry-binding-v1/normal8-v2/completion-1d78abcb/guard-lint.returned.json",
+      "bytes": 3072,
+      "mode": "0644",
+      "sha256": "35dc07abecab14cffe5ddb9c7a30ff326e05c8c3a17d3399fdb1b31ecfd7e99e"
+    },
+    {
+      "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/normal-entry-binding-v1/normal8-v2/completion-1d78abcb/new-typed-book-fixture.log",
+      "bytes": 679,
+      "mode": "0644",
+      "sha256": "9d106bf3f0d0b6eb33d91c30d6b9310837be267324e68abe04acb04f33669313"
+    },
+    {
+      "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/normal-entry-binding-v1/normal8-v2/completion-1d78abcb/new-typed-book-fixture.returned.json",
+      "bytes": 2381,
+      "mode": "0644",
+      "sha256": "54c9847d128ddb6b7064ba75a035e23b269bcadafbaa4652c4f91d4aa00fc691"
+    },
+    {
+      "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/normal-entry-binding-v1/normal8-v2/completion-1d78abcb/new-typed-book-fixture-v2.log",
+      "bytes": 289,
+      "mode": "0644",
+      "sha256": "2db4ffd385109bff5e47f46e57afe35fc26073ee9126dacf4f5f6e6fab21954b"
+    },
+    {
+      "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/normal-entry-binding-v1/normal8-v2/completion-1d78abcb/new-typed-book-fixture-v2.returned.json",
+      "bytes": 3486,
+      "mode": "0644",
+      "sha256": "22a55e1d82bc0ff4a2ca9d3bf8400646add31c18535198cc8b621df6a78b2a9a"
+    },
+    {
+      "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/normal-entry-binding-v1/normal8-v2/completion-1d78abcb/scoped-test-format.log",
+      "bytes": 96,
+      "mode": "0644",
+      "sha256": "3e3f28037ba3a4cfea64959f3f505113f2a8ba350e1fb0cf376c7782db8bc554"
+    },
+    {
+      "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/normal-entry-binding-v1/normal8-v2/completion-1d78abcb/scoped-test-format.returned.json",
+      "bytes": 3506,
+      "mode": "0644",
+      "sha256": "f4325358f7bec544596f4e77cc2dc1800f8cef2fca6fea9b57635a58d37140ee"
+    },
+    {
+      "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/normal-entry-binding-v1/normal8-v2/completion-1d78abcb/prepare-corrected-book.log",
+      "bytes": 1233,
+      "mode": "0644",
+      "sha256": "af60a622e38358b7e3e582651396572a9a92376c243b9760bb3d3b46424f6f52"
+    },
+    {
+      "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/normal-entry-binding-v1/normal8-v2/completion-1d78abcb/prepare-corrected-book.returned.json",
+      "bytes": 15970,
+      "mode": "0644",
+      "sha256": "7bd5e8900ffc320e3436919dddfe41c73ab912ea18786461be3bd9d4abcaa4d4"
+    },
+    {
+      "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/normal-entry-binding-v1/normal8-v2/completion-1d78abcb/shared-style-final.log",
+      "bytes": 136,
+      "mode": "0644",
+      "sha256": "a25b9e79234be94c64b064ea235decf7326de6eb1ecdcfe608e59ffce050a49a"
+    },
+    {
+      "member": ".artifacts/research-team/integration324/quoridor-strong-ai435/normal-entry-binding-v1/normal8-v2/completion-1d78abcb/shared-style-final.returned.json",
+      "bytes": 4078,
+      "mode": "0644",
+      "sha256": "aacea383ecd0a75c943f5918dee155f1758890ef7b6451d2217e5b0f6ff3c118"
+    }
+  ]
+}

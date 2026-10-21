@@ -32,15 +32,14 @@ class ConfiguredArenaTests(unittest.TestCase):
         p.write_text(json.dumps(data))
         return lc.bound(p)[0]
 
-    def fixture(
-        self, families, ids, mode="evaluator_fixed_depth", off=False, decision=False
-    ):
+    def fixture(self, families, ids, mode="evaluator_fixed_depth", off=False, decision=False):
         width = 1 if decision else 2
         fams = [
             {
                 "family_id": f,
                 "id": f"parent-{f}",
                 "seed": f + 1,
+                "attempt_id": 0,
                 "prefix": [13 + i],
                 "root_key": "FAKE",
                 "history_counts": [["FAKE", 1]],
@@ -48,8 +47,7 @@ class ConfiguredArenaTests(unittest.TestCase):
             for i, f in enumerate(families)
         ]
         openings = [
-            {"id": f["id"], "prefix": f["prefix"], "original_seed": f["seed"]}
-            for f in fams
+            {"id": f["id"], "prefix": f["prefix"], "original_seed": f["seed"]} for f in fams
         ]
         book = self.store(
             {
@@ -112,9 +110,7 @@ class ConfiguredArenaTests(unittest.TestCase):
                 for o, f in zip(local_openings, fams):
                     o["reference"] = {
                         "source_sha256": book["sha256"],
-                        "settings": {
-                            k: f[k] for k in ("family_id", "root_key", "history_counts")
-                        },
+                        "settings": {k: f[k] for k in ("family_id", "root_key", "history_counts")},
                     }
             c = {
                 "run_id": f"synthetic-{batch}",
@@ -143,12 +139,8 @@ class ConfiguredArenaTests(unittest.TestCase):
             }
             cref = self.store(c, "config")
             configs.append(c)
-            matchups.append(
-                {"id": identity, "engines": engines, "evaluator_sha256": hashes}
-            )
-            batches.append(
-                {"batch": batch, "matchup": identity, "config": cref, "slots": slots}
-            )
+            matchups.append({"id": identity, "engines": engines, "evaluator_sha256": hashes})
+            batches.append({"batch": batch, "matchup": identity, "config": cref, "slots": slots})
         sr = self.store(schedule, "schedule")
         plan = {
             "schema": "quoridor.research.arena-plan.v1",
@@ -181,9 +173,7 @@ class ConfiguredArenaTests(unittest.TestCase):
             "config": batches[0]["config"],
             "dynamic_libraries": [],
             "canonical_plan_sha256": pref["sha256"],
-            "build_manifest": self.store(
-                {"synthetic_only": True}, "not-a-native-qualification"
-            ),
+            "build_manifest": self.store({"synthetic_only": True}, "not-a-native-qualification"),
             **{
                 k: plan[k]
                 for k in (
@@ -199,6 +189,41 @@ class ConfiguredArenaTests(unittest.TestCase):
         }
         return plan, pref, exp, configs
 
+    def test_native_family_seed_and_attempt_types_refuse_matching_null_metadata(self):
+        missing = object()
+        cases = [(0, 0), (2**64 - 1, 2**64 - 1)]
+        cases += [(v, 0) for v in (None, False, True, -1, 2**64)]
+        cases += [(0, v) for v in (missing, None, False, True, -1, 2**64)]
+        for seed, attempt in cases:
+            with self.subTest(seed=seed, attempt=attempt):
+                plan, _, exp, configs = self.fixture([0], [0])
+                book = lc.document(plan["book"])
+                family = book["families"][0]
+                family["seed"] = seed
+                if attempt is missing:
+                    family.pop("attempt_id")
+                else:
+                    family["attempt_id"] = attempt
+                book_ref = self.store(book, "typed-book")
+                plan["book"] = book_ref
+                plan["inputs"] = exp["inputs"] = [book_ref]
+                opening = configs[0]["arena"]["book"]["openings"][0]
+                opening["original_seed"] = seed
+                opening["reference"]["source_sha256"] = book_ref["sha256"]
+                config_ref = self.store(configs[0], "typed-config")
+                plan["batches"][0]["config"] = exp["config"] = config_ref
+                exp["canonical_plan_sha256"] = self.store(plan, "typed-plan")["sha256"]
+                if (
+                    type(seed) is int
+                    and 0 <= seed < 2**64
+                    and type(attempt) is int
+                    and 0 <= attempt < 2**64
+                ):
+                    lc.arena_plan_check(exp, plan)
+                else:
+                    with self.assertRaisesRegex(lc.Refused, "unsigned seed/attempt identity"):
+                        lc.arena_plan_check(exp, plan)
+
     def analysis(self, plan, pref, base):
         config = {
             "schema": "quoridor.arena-analysis.v1",
@@ -208,9 +233,7 @@ class ConfiguredArenaTests(unittest.TestCase):
             "bootstrap_resamples": 7,
             "bootstrap_seed": 19,
             "central_interval": "80%",
-            "batches": [
-                {"batch": b["batch"], "completion": None} for b in plan["batches"]
-            ],
+            "batches": [{"batch": b["batch"], "completion": None} for b in plan["batches"]],
             "decision_batches": [],
         }
         c = self.store(config, "analysis")
@@ -270,17 +293,15 @@ class ConfiguredArenaTests(unittest.TestCase):
                     selected = {**e, "batch": batch["batch"], "config": batch["config"]}
                     rows, c = lc.arena_plan_check(selected, plan)
                     self.assertEqual(len(rows), 2 * len(families))
-                    self.assertEqual(
-                        c["engines"], plan["matchups"][batch["batch"]]["engines"]
-                    )
+                    self.assertEqual(c["engines"], plan["matchups"][batch["batch"]]["engines"])
                 bad = copy.deepcopy(plan)
                 bad["batches"][0]["slots"][1] = bad["batches"][0]["slots"][0]
                 with self.assertRaises(lc.Refused):
                     lc.arena_plan_check(e, bad)
                 c = copy.deepcopy(configs[0])
-                c["arena"]["book"]["openings"][0]["reference"]["settings"][
-                    "history_counts"
-                ] = [["DRIFT", 1]]
+                c["arena"]["book"]["openings"][0]["reference"]["settings"]["history_counts"] = [
+                    ["DRIFT", 1]
+                ]
                 cref = self.store(c)
                 altered = copy.deepcopy(plan)
                 altered["batches"][0]["config"] = cref
@@ -288,9 +309,7 @@ class ConfiguredArenaTests(unittest.TestCase):
                     lc.arena_plan_check({**e, "config": cref}, altered)
 
     def test_decision_census_above_old_caps_and_completed_depth(self):
-        plan, _, e, _ = self.fixture(
-            list(range(100, 197)), [73, 2, 900, 11], decision=True
-        )
+        plan, _, e, _ = self.fixture(list(range(100, 197)), [73, 2, 900, 11], decision=True)
         rows, _ = lc.arena_decision_plan_check(e, plan)
         self.assertEqual(len(rows), 97)
         self.assertEqual(e["planned_slots"], 388)
@@ -366,9 +385,7 @@ class ConfiguredArenaTests(unittest.TestCase):
         )
         e = {**e, "config": self.store(config), "inputs": [pref, dref, selection]}
         spec["experiment"] = self.store(e)
-        spec["settings"] = self.store(
-            {"kind": "sequence", "runs": [copy.deepcopy(spec)]}
-        )
+        spec["settings"] = self.store({"kind": "sequence", "runs": [copy.deepcopy(spec)]})
         result, _ = lc.arena_analysis(spec, e)
         self.assertEqual(result["diagnostic_planned"], 4)
         self.assertEqual(result["diagnostics"]["missing"], 4)
@@ -431,9 +448,7 @@ class ConfiguredArenaTests(unittest.TestCase):
             "inputs": [pref, cref, intent, origin["experiment"], base["config"]],
         }
         spec["experiment"] = self.store(e)
-        spec["settings"] = self.store(
-            {"kind": "sequence", "runs": [copy.deepcopy(spec)]}
-        )
+        spec["settings"] = self.store({"kind": "sequence", "runs": [copy.deepcopy(spec)]})
         summary, _ = lc.arena_analysis(spec, e)
         self.assertEqual(len(summary["errors"]), 1)
         self.assertEqual(summary["matchups"][0]["counts"]["unknown"], 4)
@@ -578,9 +593,7 @@ class ConfiguredArenaTests(unittest.TestCase):
                         },
                         {},
                     )
-                table = lc.arena_score_tables(
-                    plan, lc.document(plan["schedule"]), rows, config
-                )[0]
+                table = lc.arena_score_tables(plan, lc.document(plan["schedule"]), rows, config)[0]
                 self.assertEqual(table["complete_colour_pairs"], 1)
                 self.assertEqual(table["complete_pair_mean"], 0.5)
                 self.assertIsNone(table["conditional_complete_pair_interval"])
@@ -618,9 +631,7 @@ class ConfiguredArenaTests(unittest.TestCase):
         )
         e = {**e, "config": self.store(config), "inputs": [pref, dref, selection]}
         spec["experiment"] = self.store(e)
-        spec["settings"] = self.store(
-            {"kind": "sequence", "runs": [copy.deepcopy(spec)]}
-        )
+        spec["settings"] = self.store({"kind": "sequence", "runs": [copy.deepcopy(spec)]})
         summary, report = lc.arena_analysis(spec, e)
         self.assertEqual(summary["diagnostic_selection_relation"], "OPAQUE_UNVERIFIED")
         self.assertIn("opaque/unverified", report)
