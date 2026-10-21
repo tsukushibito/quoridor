@@ -2,7 +2,10 @@
   "extends": "../../packages/engine-bridge/tsconfig.base.json",
   "compilerOptions": {
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "types": ["vite/client", "@webgpu/types", "node"]
+    "types": ["vite/client", "@webgpu/types", "node"],
+    "paths": {
+      "@quoridor/engine-bridge": ["../../packages/engine-bridge/src/index.ts"]
+    }
   },
-  "include": ["src/main.ts", "src/render/**/*.ts", "src/test-support/**/*.ts", "vite.config.ts"]
+  "include": ["src/**/*.ts", "*.config.ts"]
 }

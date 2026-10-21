@@ -193,3 +193,30 @@ test('more than ten thousand cancellation acknowledgements retain bounded recent
   assert.equal(f.terminated(), 0);
   assert.equal(f.freed(), 10005);
 });
+
+test('dispose terminates a pending Worker and late queued responses cannot restart or settle it', async () => {
+  const f = await fixture();
+  await f.ready();
+  let progress = 0;
+  const pending = f.client.search({
+    ...context,
+    onProgress: () => {
+      progress++;
+    },
+  });
+  const rejected = assert.rejects(pending, /invalidated/);
+  await Promise.resolve();
+  await f.dispatch();
+  for (const [id, fn] of f.tasks) {
+    f.tasks.delete(id);
+    fn();
+  }
+  f.client.dispose();
+  f.client.dispose();
+  f.deliver();
+  await rejected;
+  assert.equal(f.terminated(), 1);
+  assert.equal(f.client.isReady, false);
+  assert.equal(progress, 0);
+  await assert.rejects(f.client.startWorker(), /disposed/);
+});

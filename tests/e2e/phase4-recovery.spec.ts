@@ -15,7 +15,7 @@ async function clickCell(page: Page, cell: number): Promise<void> {
   await page.mouse.click(point.x, point.y);
 }
 async function ready(page: Page): Promise<void> {
-  await page.goto('./?forceWebGL=1');
+  await page.goto('./?forceWebGL=1#/quoridor');
   await startDefaultMatch(page);
   await expect.poll(() => state(page).then((x) => x.phase)).toBe('humanTurn');
 }
@@ -25,7 +25,7 @@ test('controlled renderer and rules startup failures recover through visible UI'
 }) => {
   const unexpected: string[] = [];
   page.on('pageerror', (error) => unexpected.push(error.message));
-  await page.goto('./?forceWebGL=1&testRenderStartupFailure=1');
+  await page.goto('./?forceWebGL=1&testRenderStartupFailure=1#/quoridor');
   await expect(page.locator('#fault-title')).toHaveText('描画を停止しました');
   expect(await page.locator('#board canvas').count()).toBe(0);
   await page.getByRole('button', { name: '描画を再試行' }).click();
@@ -35,7 +35,7 @@ test('controlled renderer and rules startup failures recover through visible UI'
   await clickCell(page, 13);
   expect((await state(page)).view?.ply).toBe(1);
   await page.evaluate(() => localStorage.clear());
-  await page.goto('./?forceWebGL=1&testRulesStartupFailure=1');
+  await page.goto('./?forceWebGL=1&testRulesStartupFailure=1#/quoridor');
   await page.locator('#startup-new-game').click();
   await page.locator('#dialog-start').click();
   await expect(page.locator('#fault-title')).toHaveText('ルールエンジンを開始できません');
@@ -192,7 +192,7 @@ test('rules startup failure inside saved new-match dialog exposes retry and keep
   await clickCell(page, 13);
   const gameKey = await page.evaluate(() => window.__QUORIDOR_PERSISTENCE_TEST_API__!.GAME_KEY);
   const stored = await page.evaluate((key) => localStorage.getItem(key), gameKey);
-  await page.goto('./?forceWebGL=1&testRulesStartupFailure=1');
+  await page.goto('./?forceWebGL=1&testRulesStartupFailure=1#/quoridor');
   await expect(page.locator('#startup-dialog')).toBeVisible();
   let navigations = 0;
   page.on('framenavigated', (frame) => {

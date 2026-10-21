@@ -131,7 +131,7 @@ test('trusted BFCache return preserves connected product Worker-Wasm and control
           observation.shows.push({ trusted: event.isTrusted, persisted: event.persisted });
       });
     });
-    await page.goto('./?forceWebGL=1');
+    await page.goto('./?forceWebGL=1#/quoridor');
     await expect(page.locator('#startup-new-game')).toBeEnabled();
     await expect
       .poll(() =>

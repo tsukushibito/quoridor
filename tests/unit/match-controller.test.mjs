@@ -11,9 +11,12 @@ class RulesBridgeError extends Error {
     this.code = code;
   }
 }
-const strings = await loadTs(new URL('../../apps/web/src/ui/strings.ts', import.meta.url), {});
+const strings = await loadTs(
+  new URL('../../apps/web/src/games/quoridor/ui/strings.ts', import.meta.url),
+  {},
+);
 const { MatchUiController, installPageLifecycle } = await loadTs(
-  new URL('../../apps/web/src/ui/match-controller.ts', import.meta.url),
+  new URL('../../apps/web/src/games/quoridor/ui/match-controller.ts', import.meta.url),
   {
     '@quoridor/engine-bridge': { RulesBridgeError },
     '../persistence/local-state': { makeSavedMatch: (replay, match) => ({ replay, match }) },
@@ -367,6 +370,7 @@ function actualStartup(f) {
     audio: { setMusicActive() {} },
     diagnostics: {},
     settings: { reducedMotion: false, environmentId: 'forest' },
+    disposed: false,
     settingsWarning: '',
     renderFault: null,
     rulesFault: false,
@@ -389,7 +393,10 @@ function actualStartup(f) {
     listeners: new AbortController(),
     syncActivity: () => f.ports.render.syncActivity(),
   };
-  const source = readFileSync(new URL('../../apps/web/src/main.ts', import.meta.url), 'utf8');
+  const source = readFileSync(
+    new URL('../../apps/web/src/games/quoridor/index.ts', import.meta.url),
+    'utf8',
+  );
   const render = source.slice(
     source.indexOf('  const renderUi = '),
     source.indexOf('  const onSession = '),

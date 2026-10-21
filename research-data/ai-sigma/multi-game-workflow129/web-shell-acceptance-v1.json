@@ -1,0 +1,2085 @@
+{
+  "at": "2026-10-21T13:07:20.533956+00:00",
+  "issue": "quoridor-4lc.324.12.9.2",
+  "worker_frozen": {
+    "cwd": "/workspaces/quoridor/.worktree/web-game-shell129",
+    "base_HEAD": "d83d64dc532bb5665f7192f8c5bdbf85b91ee5d3",
+    "frozen_at_UTC": "2026-10-21T12:58:08.445334+00:00",
+    "source_STOP": true,
+    "patch": {
+      "path": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/frozen-source.patch",
+      "bytes": 707426,
+      "sha256": "0e668fbecd2017c8b0140b9dac7a048961b6c25e748e172ce04590ddd04666b7"
+    },
+    "entries": [
+      {
+        "path": "apps/web/index.html",
+        "status": "present",
+        "bytes": 377,
+        "sha256": "9358cc19872b4ad1c03a95e133fd1703706ffb7b4a42ad3e32fae40aade5199b"
+      },
+      {
+        "path": "apps/web/playwright.shell.config.ts",
+        "status": "present",
+        "bytes": 1322,
+        "sha256": "cbf96a5e186076af5d57fa1ba4d4d19350bc2c301fb75d530e652fb2c3a3e30d"
+      },
+      {
+        "path": "apps/web/src/app/main.ts",
+        "status": "present",
+        "bytes": 1303,
+        "sha256": "efa4625f363a1c2f4d611fbf9a560085bb184972dffde625e71d665a2d24b285"
+      },
+      {
+        "path": "apps/web/src/app/navigation.ts",
+        "status": "present",
+        "bytes": 1574,
+        "sha256": "670375fbc31633a2a18fcaf729b25673eef9f575e4710b8f1e83eee3d14b6189"
+      },
+      {
+        "path": "apps/web/src/app/style.css",
+        "status": "present",
+        "bytes": 226,
+        "sha256": "095e9cb57e18a65ff0f400817f377abf268d370afcee454f653cb01fa43685a5"
+      },
+      {
+        "path": "apps/web/src/audio/audio-controller.ts",
+        "status": "deleted",
+        "bytes": 0,
+        "sha256": null
+      },
+      {
+        "path": "apps/web/src/audio/audio-controls.ts",
+        "status": "deleted",
+        "bytes": 0,
+        "sha256": null
+      },
+      {
+        "path": "apps/web/src/audio/audio-settings.ts",
+        "status": "deleted",
+        "bytes": 0,
+        "sha256": null
+      },
+      {
+        "path": "apps/web/src/environment-presets.ts",
+        "status": "deleted",
+        "bytes": 0,
+        "sha256": null
+      },
+      {
+        "path": "apps/web/src/games/quoridor/audio/audio-controller.ts",
+        "status": "present",
+        "bytes": 13038,
+        "sha256": "585df51378e9a59b3be49a7986d4cd9cc56c7cf70f4d85c82debe26dbf752d30"
+      },
+      {
+        "path": "apps/web/src/games/quoridor/audio/audio-controls.ts",
+        "status": "present",
+        "bytes": 8218,
+        "sha256": "72ca1c930352ce71025ca2dc176397f28d7adf55f356d4409d991d016ec2b5cd"
+      },
+      {
+        "path": "apps/web/src/games/quoridor/audio/audio-settings.ts",
+        "status": "present",
+        "bytes": 2465,
+        "sha256": "144bca3302447c6bb6137bcb13043f38ddb9ecf6b5a102cf738fed4133cc898b"
+      },
+      {
+        "path": "apps/web/src/games/quoridor/environment-presets.ts",
+        "status": "present",
+        "bytes": 1481,
+        "sha256": "efaa8288fda176df660299489a009037bce3ae73078a62908eaf870de8799801"
+      },
+      {
+        "path": "apps/web/src/games/quoridor/index.ts",
+        "status": "present",
+        "bytes": 49276,
+        "sha256": "9385f80e8c2bd8bae6a59e8b47b9ec43dea1fbeef0df1d552abfee6ba3f5ae0e"
+      },
+      {
+        "path": "apps/web/src/games/quoridor/input/input-router.ts",
+        "status": "present",
+        "bytes": 8603,
+        "sha256": "c0ebf764cd0f1910193abd3ce0c6482c0cf1e533199f2afa5a07c6d969e6796f"
+      },
+      {
+        "path": "apps/web/src/games/quoridor/persistence/local-state.ts",
+        "status": "present",
+        "bytes": 6434,
+        "sha256": "a4e2a7c9736a5a0c29cbcbe08217e507a0fa8fc8d8a38c4f7274c11cb1cbce8f"
+      },
+      {
+        "path": "apps/web/src/games/quoridor/render/ambient-occlusion.ts",
+        "status": "present",
+        "bytes": 3689,
+        "sha256": "110393042a10303e8f3f5067e9df613b8f3f6c1a77a8c16b7b80f2666d707b23"
+      },
+      {
+        "path": "apps/web/src/games/quoridor/render/board-coordinates.ts",
+        "status": "present",
+        "bytes": 1229,
+        "sha256": "7abe4f6ae94f450d9ee7aa754ea6884dd7852110966b92b8d69325d591beab4a"
+      },
+      {
+        "path": "apps/web/src/games/quoridor/render/board-scene.ts",
+        "status": "present",
+        "bytes": 13686,
+        "sha256": "3d04ab3978b357b69ced00706be6bf329434a11c1c2f81142cddcd7ddefaf18c"
+      },
+      {
+        "path": "apps/web/src/games/quoridor/render/environment-light.ts",
+        "status": "present",
+        "bytes": 4108,
+        "sha256": "956e488bed946f35233bdfb026e8da07ea1032c3a9cafe99478e6ab50506f095"
+      },
+      {
+        "path": "apps/web/src/games/quoridor/render/tabletop-assets.ts",
+        "status": "present",
+        "bytes": 9171,
+        "sha256": "3a081cb01a836ae82d652007b3ab1414b06e8db1441adf8f8190246aaf3cc93c"
+      },
+      {
+        "path": "apps/web/src/games/quoridor/render/three-context.ts",
+        "status": "present",
+        "bytes": 14556,
+        "sha256": "44b9a92172945b2313fdccfce3efb9fbaf8502c1bfc5f189de0c94de748d343a"
+      },
+      {
+        "path": "apps/web/src/games/quoridor/session/review-controller.ts",
+        "status": "present",
+        "bytes": 3046,
+        "sha256": "80002a7737d8c0d6cb4bbc04d036c1357d811c0da29a267fdd1f3635b8affa9b"
+      },
+      {
+        "path": "apps/web/src/games/quoridor/session/session-controller.ts",
+        "status": "present",
+        "bytes": 14697,
+        "sha256": "05de9c92cc79fe8734bf2fccfe9fbd90925a6379453e4e1d964359f019fe3d99"
+      },
+      {
+        "path": "apps/web/src/games/quoridor/style.css",
+        "status": "present",
+        "bytes": 14509,
+        "sha256": "f5b23ac1c2639f76897132fd7b785d39700bb4b363fa899ff05f2a7c4944b3ed"
+      },
+      {
+        "path": "apps/web/src/games/quoridor/test-support/app-test-api.ts",
+        "status": "present",
+        "bytes": 4898,
+        "sha256": "8d2287e7346905cdbaa89fb3c004d57abe5123b9585193c35417235188f0373b"
+      },
+      {
+        "path": "apps/web/src/games/quoridor/test-support/rules-test-api.ts",
+        "status": "present",
+        "bytes": 687,
+        "sha256": "1d707831e25d39961b5bd1a85a98911bea5eb76c47fde755da277639e575e4ea"
+      },
+      {
+        "path": "apps/web/src/games/quoridor/ui/icons.ts",
+        "status": "present",
+        "bytes": 1282,
+        "sha256": "738264d46bd8ceda2c3ca5d6e90c072deb4e6f4453d0a93b06693fcf121b50a1"
+      },
+      {
+        "path": "apps/web/src/games/quoridor/ui/match-controller.ts",
+        "status": "present",
+        "bytes": 12932,
+        "sha256": "e9fce8e4d0077424535f47af784d659e0af760631e159d246ec9658e952ea046"
+      },
+      {
+        "path": "apps/web/src/games/quoridor/ui/result-review.ts",
+        "status": "present",
+        "bytes": 3080,
+        "sha256": "79770e37c38072c5735d4e056f6e87a85a4c3f4a6df76fbe57ebb87746caa7b0"
+      },
+      {
+        "path": "apps/web/src/games/quoridor/ui/strings.ts",
+        "status": "present",
+        "bytes": 7559,
+        "sha256": "77ed9a47383e00ec394d292d900d7333e901bc87a5e7f02cbbe4661350c5c39c"
+      },
+      {
+        "path": "apps/web/src/games/quoridor/ui/title-help.css",
+        "status": "present",
+        "bytes": 4716,
+        "sha256": "becb72636385c5455680e4afde6268d14413264ef63225b079bbd60467d2c3ab"
+      },
+      {
+        "path": "apps/web/src/games/quoridor/ui/title-help.ts",
+        "status": "present",
+        "bytes": 7385,
+        "sha256": "2e5f72765a2680edcf70e9e24b082277c1b60091f86aaaf070088c072fc13ad0"
+      },
+      {
+        "path": "apps/web/src/input/input-router.ts",
+        "status": "deleted",
+        "bytes": 0,
+        "sha256": null
+      },
+      {
+        "path": "apps/web/src/main.ts",
+        "status": "deleted",
+        "bytes": 0,
+        "sha256": null
+      },
+      {
+        "path": "apps/web/src/pages/home/index.ts",
+        "status": "present",
+        "bytes": 732,
+        "sha256": "b0fe00de158b8a6df162ab884678a0e61607631bccd1a0342e49195081e161a8"
+      },
+      {
+        "path": "apps/web/src/pages/home/style.css",
+        "status": "present",
+        "bytes": 739,
+        "sha256": "d2b54f8e03e715a7dd45f4af106c8cc472603b51cce5f5651e714a37dde8f056"
+      },
+      {
+        "path": "apps/web/src/persistence/local-state.ts",
+        "status": "deleted",
+        "bytes": 0,
+        "sha256": null
+      },
+      {
+        "path": "apps/web/src/render/ambient-occlusion.ts",
+        "status": "deleted",
+        "bytes": 0,
+        "sha256": null
+      },
+      {
+        "path": "apps/web/src/render/board-coordinates.ts",
+        "status": "deleted",
+        "bytes": 0,
+        "sha256": null
+      },
+      {
+        "path": "apps/web/src/render/board-scene.ts",
+        "status": "deleted",
+        "bytes": 0,
+        "sha256": null
+      },
+      {
+        "path": "apps/web/src/render/environment-light.ts",
+        "status": "deleted",
+        "bytes": 0,
+        "sha256": null
+      },
+      {
+        "path": "apps/web/src/render/tabletop-assets.ts",
+        "status": "deleted",
+        "bytes": 0,
+        "sha256": null
+      },
+      {
+        "path": "apps/web/src/render/three-context.ts",
+        "status": "deleted",
+        "bytes": 0,
+        "sha256": null
+      },
+      {
+        "path": "apps/web/src/session/review-controller.ts",
+        "status": "deleted",
+        "bytes": 0,
+        "sha256": null
+      },
+      {
+        "path": "apps/web/src/session/session-controller.ts",
+        "status": "deleted",
+        "bytes": 0,
+        "sha256": null
+      },
+      {
+        "path": "apps/web/src/style.css",
+        "status": "deleted",
+        "bytes": 0,
+        "sha256": null
+      },
+      {
+        "path": "apps/web/src/test-support/app-test-api.ts",
+        "status": "deleted",
+        "bytes": 0,
+        "sha256": null
+      },
+      {
+        "path": "apps/web/src/test-support/rules-test-api.ts",
+        "status": "deleted",
+        "bytes": 0,
+        "sha256": null
+      },
+      {
+        "path": "apps/web/src/ui/icons.ts",
+        "status": "deleted",
+        "bytes": 0,
+        "sha256": null
+      },
+      {
+        "path": "apps/web/src/ui/match-controller.ts",
+        "status": "deleted",
+        "bytes": 0,
+        "sha256": null
+      },
+      {
+        "path": "apps/web/src/ui/result-review.ts",
+        "status": "deleted",
+        "bytes": 0,
+        "sha256": null
+      },
+      {
+        "path": "apps/web/src/ui/strings.ts",
+        "status": "deleted",
+        "bytes": 0,
+        "sha256": null
+      },
+      {
+        "path": "apps/web/src/ui/title-help.css",
+        "status": "deleted",
+        "bytes": 0,
+        "sha256": null
+      },
+      {
+        "path": "apps/web/src/ui/title-help.ts",
+        "status": "deleted",
+        "bytes": 0,
+        "sha256": null
+      },
+      {
+        "path": "apps/web/tsconfig.json",
+        "status": "present",
+        "bytes": 341,
+        "sha256": "1a619c8091900b8d09a4940b6c726f161879eb8b4861d8033a3f39a9ce3eb71e"
+      },
+      {
+        "path": "apps/web/vite.config.ts",
+        "status": "present",
+        "bytes": 1194,
+        "sha256": "bb27e51f1a761566dfd5949338c37fbfd0510a8318b0646a86317e7fa34e60d4"
+      },
+      {
+        "path": "tests/audio/settings.test.mjs",
+        "status": "present",
+        "bytes": 2597,
+        "sha256": "8f1231cd045a0395227a9fdc392e44959771dce9c8041b10e3481f9c0fe655c8"
+      },
+      {
+        "path": "tests/e2e/audio.spec.ts",
+        "status": "present",
+        "bytes": 15264,
+        "sha256": "db5f7038d83dbc7f5167317160a3bb275eec2a1a4ba6f78bb0c17600d7ceedf0"
+      },
+      {
+        "path": "tests/e2e/environment-presets.spec.ts",
+        "status": "present",
+        "bytes": 13725,
+        "sha256": "8dd707ac6615186b22259f177d8cfdcaa3be4307659ab3fd4906ef9b5b1149be"
+      },
+      {
+        "path": "tests/e2e/phase0.spec.ts",
+        "status": "present",
+        "bytes": 4910,
+        "sha256": "a5e4278a794ee81e767509aa3347cc9ee8ffc949a28d0678c45451e3c9d3f721"
+      },
+      {
+        "path": "tests/e2e/phase1-rules.spec.ts",
+        "status": "present",
+        "bytes": 8166,
+        "sha256": "0c10a5751e2905077263cff739d0c338d5754992612dae65096556cc9258e367"
+      },
+      {
+        "path": "tests/e2e/phase2-local-play.spec.ts",
+        "status": "present",
+        "bytes": 14680,
+        "sha256": "836cac23867272b4f7456a3f7732cbc6210dc230816cf2664617feac75120336"
+      },
+      {
+        "path": "tests/e2e/phase3-ai.spec.ts",
+        "status": "present",
+        "bytes": 11236,
+        "sha256": "73a2dbb2d84272c05b2fbb7b82a5246d13fedc1488ecaaf287587c4b78780bd8"
+      },
+      {
+        "path": "tests/e2e/phase3-performance.spec.ts",
+        "status": "present",
+        "bytes": 5294,
+        "sha256": "55d8910e04ce3ad9a57d7219ef9c4a3950ecd3dc267eafcd74f988ec0bd3fbf1"
+      },
+      {
+        "path": "tests/e2e/phase3-transport.spec.ts",
+        "status": "present",
+        "bytes": 20773,
+        "sha256": "0101b1276cb92bbf3544dfa263c9d6b1b6d12d6c449c054245b2d5b03f7272b5"
+      },
+      {
+        "path": "tests/e2e/phase4-persistence.spec.ts",
+        "status": "present",
+        "bytes": 13630,
+        "sha256": "abb230db15c3cda9962aec1b62e9f33fee65426aeb4a284b7e5aee7a0d7673e4"
+      },
+      {
+        "path": "tests/e2e/phase4-recovery.spec.ts",
+        "status": "present",
+        "bytes": 22480,
+        "sha256": "fe60431dd724a527d871827d350b34d2400f17db213f6da9dbe04b7b386c503d"
+      },
+      {
+        "path": "tests/e2e/presentation.spec.ts",
+        "status": "present",
+        "bytes": 24170,
+        "sha256": "5e2904a25c06904fb508f46721813e7f52f05b206a7b9baff8e5a3c727a7a707"
+      },
+      {
+        "path": "tests/e2e/tabletop-rendering.spec.ts",
+        "status": "present",
+        "bytes": 7122,
+        "sha256": "78dd78d8bd32b77059646e7276d60b8866ca8c7384683d697766046614e31c96"
+      },
+      {
+        "path": "tests/e2e/title-help.spec.ts",
+        "status": "present",
+        "bytes": 12117,
+        "sha256": "3b27fcfe15db4113f02aa7e3607d0e99043277e8f263f0d9f981ddec139f6d3a"
+      },
+      {
+        "path": "tests/e2e/ux-hud.spec.ts",
+        "status": "present",
+        "bytes": 17657,
+        "sha256": "d14c848e92db8511f61e97980493dd4a9040492f86670cff32935f5a984d7e46"
+      },
+      {
+        "path": "tests/e2e/web-shell.spec.ts",
+        "status": "present",
+        "bytes": 6459,
+        "sha256": "b30a7241581fcac5fed7e62c0549a3a0f431f6629718731093aff24fda1f7694"
+      },
+      {
+        "path": "tests/product/product-bfcache-worker.spec.mjs",
+        "status": "present",
+        "bytes": 13166,
+        "sha256": "ba788b3e44f8a9a8885227a5c1a3d1f707df6def6e2a85ea597958983e346685"
+      },
+      {
+        "path": "tests/render/environment-light.test.mjs",
+        "status": "present",
+        "bytes": 2827,
+        "sha256": "22b7668173baa578ff974fdb52c95040e5ad08fa1e14157875bbff7cda74a287"
+      },
+      {
+        "path": "tests/unit/match-controller.test.mjs",
+        "status": "present",
+        "bytes": 15965,
+        "sha256": "8ca1eb5a361c59bd3e1be412d00747d3e70b7e349f2c4ace0e374fbd38c5fcb1"
+      },
+      {
+        "path": "tests/unit/quoridor-session-lifecycle.test.mjs",
+        "status": "present",
+        "bytes": 6053,
+        "sha256": "b60cb29f7b8fa930bca98ee1eebd11722ab946e82e63f975d93f4b26aa58f2a7"
+      },
+      {
+        "path": "tests/unit/renderer-startup-lifecycle.test.mjs",
+        "status": "present",
+        "bytes": 2308,
+        "sha256": "80e66a195bc2c3abd64e84e4e278f8b6c23d0327d858ab85f54f3de165589145"
+      },
+      {
+        "path": "tests/unit/web-navigation.test.mjs",
+        "status": "present",
+        "bytes": 4198,
+        "sha256": "450def1737a22021a1d56fb498acb2c0753e858f29c35be9c5bb47ed4fcc624d"
+      },
+      {
+        "path": "tests/unit/worker-lifecycle.test.mjs",
+        "status": "present",
+        "bytes": 5969,
+        "sha256": "ccec8ae462da28ca9dbc8b6c9c2f80db05e61bb9072c45af4f0f50baff3bc517"
+      }
+    ]
+  },
+  "worker_verification": {
+    "result": "implementation ready for Root technical acceptance; issue remains open/in_progress",
+    "scope": "single Web home and Quoridor lifecycle only; Othello unavailable, both-game acceptance not claimed",
+    "source_manifest": "frozen-source.json",
+    "source_patch": "frozen-source.patch",
+    "source_paths_evidence": "bundle-source-evidence.json",
+    "checks": [
+      {
+        "name": "final-prettier-pass",
+        "status": "complete",
+        "exit_code": 0,
+        "wall_seconds": 1.9893144819652662,
+        "remaining": [],
+        "reaped": true,
+        "handles_closed": true
+      },
+      {
+        "name": "final-typecheck-pass",
+        "status": "complete",
+        "exit_code": 0,
+        "wall_seconds": 0.4626158248865977,
+        "remaining": [],
+        "reaped": true,
+        "handles_closed": true
+      },
+      {
+        "name": "final-focused-unit",
+        "status": "complete",
+        "exit_code": 0,
+        "wall_seconds": 0.7577891980763525,
+        "remaining": [],
+        "reaped": true,
+        "handles_closed": true
+      },
+      {
+        "name": "final-worker-unit",
+        "status": "complete",
+        "exit_code": 0,
+        "wall_seconds": 0.15967555507086217,
+        "remaining": [],
+        "reaped": true,
+        "handles_closed": true
+      },
+      {
+        "name": "final-bundle-source",
+        "status": "complete",
+        "exit_code": 0,
+        "wall_seconds": 1.2384901469340548,
+        "remaining": [],
+        "reaped": true,
+        "handles_closed": true
+      },
+      {
+        "name": "final-subpath-build",
+        "status": "complete",
+        "exit_code": 0,
+        "wall_seconds": 0.9431512239389122,
+        "remaining": [],
+        "reaped": true,
+        "handles_closed": true
+      },
+      {
+        "name": "browser-home1",
+        "status": "complete",
+        "exit_code": 0,
+        "wall_seconds": 2.3819283630000427,
+        "remaining": [],
+        "reaped": true,
+        "handles_closed": true
+      },
+      {
+        "name": "browser-render-final",
+        "status": "complete",
+        "exit_code": 0,
+        "wall_seconds": 111.20278123999014,
+        "remaining": [],
+        "reaped": true,
+        "handles_closed": true
+      },
+      {
+        "name": "artifact-python-check",
+        "status": "complete",
+        "exit_code": 0,
+        "wall_seconds": 0.01091153104789555,
+        "remaining": [],
+        "reaped": true,
+        "handles_closed": true
+      },
+      {
+        "name": "artifact-python-format-check",
+        "status": "complete",
+        "exit_code": 0,
+        "wall_seconds": 0.009379620081745088,
+        "remaining": [],
+        "reaped": true,
+        "handles_closed": true
+      }
+    ],
+    "unit_count": 31,
+    "browser_results": {
+      "prior_accepted_no_render": 2,
+      "final_rendered": 2,
+      "not_replayed": "prior accepted no-render cases",
+      "retained_failures": [
+        "browser1",
+        "browser2",
+        "browser3",
+        "renderer-trace",
+        "browser-render1"
+      ],
+      "diagnostic_pass": "browser-render-diagnose",
+      "test_bound_adjustment": "Explicit native URL check before home chooser; 30s expectations/90s case limit for single-CPU software renderer. No product defaults/cap change."
+    },
+    "resources": {
+      "cpu_plan_file": "/workspaces/quoridor/.artifacts/research-team/integration324/multi-game-migration-v1/web-entry-v1/cpu-plan.json",
+      "cpu_plan_sha256": "13b109af84fb435291323d525c8a6a7a2c630e0e31ab49ddb5fd08063e795d86",
+      "management": [18],
+      "implementation": [12],
+      "library_threads": 1,
+      "family_B": 2147483648,
+      "maintained_CycleResources_max_B_including_controller": 2080374784,
+      "controller_endpoint_RSS_cap_B": 67108864,
+      "host_reserve_B": 4294967296,
+      "GPU": 0,
+      "deadline_per_execute_seconds": 240,
+      "cancel_file": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/CANCEL",
+      "launch_cleanup": "maintained execute TERM/KILL/direct wait/reap/handle records; per-command tasklocal TMP deleted"
+    },
+    "browser_STOP": "browser-whole-stop.json; sent through existing Root route before report/admin; worker will not read shared browser config again",
+    "ordinary_storage": "recorded after final artifact generation in storage.json",
+    "limitations": [
+      "Vite reports the existing game/Three chunk over500kB; selected-game import remains lazy.",
+      "Common docs/Root adoption and optional root .gitignore symlink ignore proposal are Root-owned.",
+      "Two old main.ts strings in tools/research-quality/test_export.mjs are synthetic fixture paths, not actual UI callers; left unchanged.",
+      "Only focused product tests run; no old research/full heavyweight suite, no Rust/Wasm rebuild, model/inference/training change."
+    ],
+    "git": "No staging/commit/push/branch/checkout/removal commands. Read-only status/diff/show used; initial status emitted sparse-index expansion hint, later Git reads use GIT_OPTIONAL_LOCKS=0.",
+    "helpers_agents": "none; no delegation or new session",
+    "handoff": "Source writer STOP at manifest freeze. Same session available for causal repairs. Root technical acceptance required before close."
+  },
+  "source_controls": {
+    "path": "research-data/ai-sigma/multi-game-workflow129/web-shell-source-controls-v1.tar.gz",
+    "bytes": 311784,
+    "sha256": "3bdfafe86b05ead059551102e20c6b88ab0f06084148a74bfd2a6ece968433ba",
+    "members": [
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/apps/web/index.html",
+        "member": "source/apps/web/index.html",
+        "bytes": 377,
+        "mode": 420,
+        "sha256": "9358cc19872b4ad1c03a95e133fd1703706ffb7b4a42ad3e32fae40aade5199b"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/apps/web/playwright.shell.config.ts",
+        "member": "source/apps/web/playwright.shell.config.ts",
+        "bytes": 1322,
+        "mode": 420,
+        "sha256": "cbf96a5e186076af5d57fa1ba4d4d19350bc2c301fb75d530e652fb2c3a3e30d"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/apps/web/src/app/main.ts",
+        "member": "source/apps/web/src/app/main.ts",
+        "bytes": 1303,
+        "mode": 420,
+        "sha256": "efa4625f363a1c2f4d611fbf9a560085bb184972dffde625e71d665a2d24b285"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/apps/web/src/app/navigation.ts",
+        "member": "source/apps/web/src/app/navigation.ts",
+        "bytes": 1574,
+        "mode": 420,
+        "sha256": "670375fbc31633a2a18fcaf729b25673eef9f575e4710b8f1e83eee3d14b6189"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/apps/web/src/app/style.css",
+        "member": "source/apps/web/src/app/style.css",
+        "bytes": 226,
+        "mode": 420,
+        "sha256": "095e9cb57e18a65ff0f400817f377abf268d370afcee454f653cb01fa43685a5"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/apps/web/src/games/quoridor/audio/audio-controller.ts",
+        "member": "source/apps/web/src/games/quoridor/audio/audio-controller.ts",
+        "bytes": 13038,
+        "mode": 420,
+        "sha256": "585df51378e9a59b3be49a7986d4cd9cc56c7cf70f4d85c82debe26dbf752d30"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/apps/web/src/games/quoridor/audio/audio-controls.ts",
+        "member": "source/apps/web/src/games/quoridor/audio/audio-controls.ts",
+        "bytes": 8218,
+        "mode": 420,
+        "sha256": "72ca1c930352ce71025ca2dc176397f28d7adf55f356d4409d991d016ec2b5cd"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/apps/web/src/games/quoridor/audio/audio-settings.ts",
+        "member": "source/apps/web/src/games/quoridor/audio/audio-settings.ts",
+        "bytes": 2465,
+        "mode": 420,
+        "sha256": "144bca3302447c6bb6137bcb13043f38ddb9ecf6b5a102cf738fed4133cc898b"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/apps/web/src/games/quoridor/environment-presets.ts",
+        "member": "source/apps/web/src/games/quoridor/environment-presets.ts",
+        "bytes": 1481,
+        "mode": 420,
+        "sha256": "efaa8288fda176df660299489a009037bce3ae73078a62908eaf870de8799801"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/apps/web/src/games/quoridor/index.ts",
+        "member": "source/apps/web/src/games/quoridor/index.ts",
+        "bytes": 49276,
+        "mode": 420,
+        "sha256": "9385f80e8c2bd8bae6a59e8b47b9ec43dea1fbeef0df1d552abfee6ba3f5ae0e"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/apps/web/src/games/quoridor/input/input-router.ts",
+        "member": "source/apps/web/src/games/quoridor/input/input-router.ts",
+        "bytes": 8603,
+        "mode": 420,
+        "sha256": "c0ebf764cd0f1910193abd3ce0c6482c0cf1e533199f2afa5a07c6d969e6796f"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/apps/web/src/games/quoridor/persistence/local-state.ts",
+        "member": "source/apps/web/src/games/quoridor/persistence/local-state.ts",
+        "bytes": 6434,
+        "mode": 420,
+        "sha256": "a4e2a7c9736a5a0c29cbcbe08217e507a0fa8fc8d8a38c4f7274c11cb1cbce8f"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/apps/web/src/games/quoridor/render/ambient-occlusion.ts",
+        "member": "source/apps/web/src/games/quoridor/render/ambient-occlusion.ts",
+        "bytes": 3689,
+        "mode": 420,
+        "sha256": "110393042a10303e8f3f5067e9df613b8f3f6c1a77a8c16b7b80f2666d707b23"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/apps/web/src/games/quoridor/render/board-coordinates.ts",
+        "member": "source/apps/web/src/games/quoridor/render/board-coordinates.ts",
+        "bytes": 1229,
+        "mode": 420,
+        "sha256": "7abe4f6ae94f450d9ee7aa754ea6884dd7852110966b92b8d69325d591beab4a"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/apps/web/src/games/quoridor/render/board-scene.ts",
+        "member": "source/apps/web/src/games/quoridor/render/board-scene.ts",
+        "bytes": 13686,
+        "mode": 420,
+        "sha256": "3d04ab3978b357b69ced00706be6bf329434a11c1c2f81142cddcd7ddefaf18c"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/apps/web/src/games/quoridor/render/environment-light.ts",
+        "member": "source/apps/web/src/games/quoridor/render/environment-light.ts",
+        "bytes": 4108,
+        "mode": 420,
+        "sha256": "956e488bed946f35233bdfb026e8da07ea1032c3a9cafe99478e6ab50506f095"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/apps/web/src/games/quoridor/render/tabletop-assets.ts",
+        "member": "source/apps/web/src/games/quoridor/render/tabletop-assets.ts",
+        "bytes": 9171,
+        "mode": 420,
+        "sha256": "3a081cb01a836ae82d652007b3ab1414b06e8db1441adf8f8190246aaf3cc93c"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/apps/web/src/games/quoridor/render/three-context.ts",
+        "member": "source/apps/web/src/games/quoridor/render/three-context.ts",
+        "bytes": 14556,
+        "mode": 420,
+        "sha256": "44b9a92172945b2313fdccfce3efb9fbaf8502c1bfc5f189de0c94de748d343a"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/apps/web/src/games/quoridor/session/review-controller.ts",
+        "member": "source/apps/web/src/games/quoridor/session/review-controller.ts",
+        "bytes": 3046,
+        "mode": 420,
+        "sha256": "80002a7737d8c0d6cb4bbc04d036c1357d811c0da29a267fdd1f3635b8affa9b"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/apps/web/src/games/quoridor/session/session-controller.ts",
+        "member": "source/apps/web/src/games/quoridor/session/session-controller.ts",
+        "bytes": 14697,
+        "mode": 420,
+        "sha256": "05de9c92cc79fe8734bf2fccfe9fbd90925a6379453e4e1d964359f019fe3d99"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/apps/web/src/games/quoridor/style.css",
+        "member": "source/apps/web/src/games/quoridor/style.css",
+        "bytes": 14509,
+        "mode": 420,
+        "sha256": "f5b23ac1c2639f76897132fd7b785d39700bb4b363fa899ff05f2a7c4944b3ed"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/apps/web/src/games/quoridor/test-support/app-test-api.ts",
+        "member": "source/apps/web/src/games/quoridor/test-support/app-test-api.ts",
+        "bytes": 4898,
+        "mode": 420,
+        "sha256": "8d2287e7346905cdbaa89fb3c004d57abe5123b9585193c35417235188f0373b"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/apps/web/src/games/quoridor/test-support/rules-test-api.ts",
+        "member": "source/apps/web/src/games/quoridor/test-support/rules-test-api.ts",
+        "bytes": 687,
+        "mode": 420,
+        "sha256": "1d707831e25d39961b5bd1a85a98911bea5eb76c47fde755da277639e575e4ea"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/apps/web/src/games/quoridor/ui/icons.ts",
+        "member": "source/apps/web/src/games/quoridor/ui/icons.ts",
+        "bytes": 1282,
+        "mode": 420,
+        "sha256": "738264d46bd8ceda2c3ca5d6e90c072deb4e6f4453d0a93b06693fcf121b50a1"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/apps/web/src/games/quoridor/ui/match-controller.ts",
+        "member": "source/apps/web/src/games/quoridor/ui/match-controller.ts",
+        "bytes": 12932,
+        "mode": 420,
+        "sha256": "e9fce8e4d0077424535f47af784d659e0af760631e159d246ec9658e952ea046"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/apps/web/src/games/quoridor/ui/result-review.ts",
+        "member": "source/apps/web/src/games/quoridor/ui/result-review.ts",
+        "bytes": 3080,
+        "mode": 420,
+        "sha256": "79770e37c38072c5735d4e056f6e87a85a4c3f4a6df76fbe57ebb87746caa7b0"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/apps/web/src/games/quoridor/ui/strings.ts",
+        "member": "source/apps/web/src/games/quoridor/ui/strings.ts",
+        "bytes": 7559,
+        "mode": 420,
+        "sha256": "77ed9a47383e00ec394d292d900d7333e901bc87a5e7f02cbbe4661350c5c39c"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/apps/web/src/games/quoridor/ui/title-help.css",
+        "member": "source/apps/web/src/games/quoridor/ui/title-help.css",
+        "bytes": 4716,
+        "mode": 420,
+        "sha256": "becb72636385c5455680e4afde6268d14413264ef63225b079bbd60467d2c3ab"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/apps/web/src/games/quoridor/ui/title-help.ts",
+        "member": "source/apps/web/src/games/quoridor/ui/title-help.ts",
+        "bytes": 7385,
+        "mode": 420,
+        "sha256": "2e5f72765a2680edcf70e9e24b082277c1b60091f86aaaf070088c072fc13ad0"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/apps/web/src/pages/home/index.ts",
+        "member": "source/apps/web/src/pages/home/index.ts",
+        "bytes": 732,
+        "mode": 420,
+        "sha256": "b0fe00de158b8a6df162ab884678a0e61607631bccd1a0342e49195081e161a8"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/apps/web/src/pages/home/style.css",
+        "member": "source/apps/web/src/pages/home/style.css",
+        "bytes": 739,
+        "mode": 420,
+        "sha256": "d2b54f8e03e715a7dd45f4af106c8cc472603b51cce5f5651e714a37dde8f056"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/apps/web/tsconfig.json",
+        "member": "source/apps/web/tsconfig.json",
+        "bytes": 341,
+        "mode": 420,
+        "sha256": "1a619c8091900b8d09a4940b6c726f161879eb8b4861d8033a3f39a9ce3eb71e"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/apps/web/vite.config.ts",
+        "member": "source/apps/web/vite.config.ts",
+        "bytes": 1194,
+        "mode": 420,
+        "sha256": "bb27e51f1a761566dfd5949338c37fbfd0510a8318b0646a86317e7fa34e60d4"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/tests/audio/settings.test.mjs",
+        "member": "source/tests/audio/settings.test.mjs",
+        "bytes": 2597,
+        "mode": 420,
+        "sha256": "8f1231cd045a0395227a9fdc392e44959771dce9c8041b10e3481f9c0fe655c8"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/tests/e2e/audio.spec.ts",
+        "member": "source/tests/e2e/audio.spec.ts",
+        "bytes": 15264,
+        "mode": 420,
+        "sha256": "db5f7038d83dbc7f5167317160a3bb275eec2a1a4ba6f78bb0c17600d7ceedf0"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/tests/e2e/environment-presets.spec.ts",
+        "member": "source/tests/e2e/environment-presets.spec.ts",
+        "bytes": 13725,
+        "mode": 420,
+        "sha256": "8dd707ac6615186b22259f177d8cfdcaa3be4307659ab3fd4906ef9b5b1149be"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/tests/e2e/phase0.spec.ts",
+        "member": "source/tests/e2e/phase0.spec.ts",
+        "bytes": 4910,
+        "mode": 420,
+        "sha256": "a5e4278a794ee81e767509aa3347cc9ee8ffc949a28d0678c45451e3c9d3f721"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/tests/e2e/phase1-rules.spec.ts",
+        "member": "source/tests/e2e/phase1-rules.spec.ts",
+        "bytes": 8166,
+        "mode": 420,
+        "sha256": "0c10a5751e2905077263cff739d0c338d5754992612dae65096556cc9258e367"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/tests/e2e/phase2-local-play.spec.ts",
+        "member": "source/tests/e2e/phase2-local-play.spec.ts",
+        "bytes": 14680,
+        "mode": 420,
+        "sha256": "836cac23867272b4f7456a3f7732cbc6210dc230816cf2664617feac75120336"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/tests/e2e/phase3-ai.spec.ts",
+        "member": "source/tests/e2e/phase3-ai.spec.ts",
+        "bytes": 11236,
+        "mode": 420,
+        "sha256": "73a2dbb2d84272c05b2fbb7b82a5246d13fedc1488ecaaf287587c4b78780bd8"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/tests/e2e/phase3-performance.spec.ts",
+        "member": "source/tests/e2e/phase3-performance.spec.ts",
+        "bytes": 5294,
+        "mode": 420,
+        "sha256": "55d8910e04ce3ad9a57d7219ef9c4a3950ecd3dc267eafcd74f988ec0bd3fbf1"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/tests/e2e/phase3-transport.spec.ts",
+        "member": "source/tests/e2e/phase3-transport.spec.ts",
+        "bytes": 20773,
+        "mode": 420,
+        "sha256": "0101b1276cb92bbf3544dfa263c9d6b1b6d12d6c449c054245b2d5b03f7272b5"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/tests/e2e/phase4-persistence.spec.ts",
+        "member": "source/tests/e2e/phase4-persistence.spec.ts",
+        "bytes": 13630,
+        "mode": 420,
+        "sha256": "abb230db15c3cda9962aec1b62e9f33fee65426aeb4a284b7e5aee7a0d7673e4"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/tests/e2e/phase4-recovery.spec.ts",
+        "member": "source/tests/e2e/phase4-recovery.spec.ts",
+        "bytes": 22480,
+        "mode": 420,
+        "sha256": "fe60431dd724a527d871827d350b34d2400f17db213f6da9dbe04b7b386c503d"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/tests/e2e/presentation.spec.ts",
+        "member": "source/tests/e2e/presentation.spec.ts",
+        "bytes": 24170,
+        "mode": 420,
+        "sha256": "5e2904a25c06904fb508f46721813e7f52f05b206a7b9baff8e5a3c727a7a707"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/tests/e2e/tabletop-rendering.spec.ts",
+        "member": "source/tests/e2e/tabletop-rendering.spec.ts",
+        "bytes": 7122,
+        "mode": 420,
+        "sha256": "78dd78d8bd32b77059646e7276d60b8866ca8c7384683d697766046614e31c96"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/tests/e2e/title-help.spec.ts",
+        "member": "source/tests/e2e/title-help.spec.ts",
+        "bytes": 12117,
+        "mode": 420,
+        "sha256": "3b27fcfe15db4113f02aa7e3607d0e99043277e8f263f0d9f981ddec139f6d3a"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/tests/e2e/ux-hud.spec.ts",
+        "member": "source/tests/e2e/ux-hud.spec.ts",
+        "bytes": 17657,
+        "mode": 420,
+        "sha256": "d14c848e92db8511f61e97980493dd4a9040492f86670cff32935f5a984d7e46"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/tests/e2e/web-shell.spec.ts",
+        "member": "source/tests/e2e/web-shell.spec.ts",
+        "bytes": 6459,
+        "mode": 420,
+        "sha256": "b30a7241581fcac5fed7e62c0549a3a0f431f6629718731093aff24fda1f7694"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/tests/product/product-bfcache-worker.spec.mjs",
+        "member": "source/tests/product/product-bfcache-worker.spec.mjs",
+        "bytes": 13166,
+        "mode": 420,
+        "sha256": "ba788b3e44f8a9a8885227a5c1a3d1f707df6def6e2a85ea597958983e346685"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/tests/render/environment-light.test.mjs",
+        "member": "source/tests/render/environment-light.test.mjs",
+        "bytes": 2827,
+        "mode": 420,
+        "sha256": "22b7668173baa578ff974fdb52c95040e5ad08fa1e14157875bbff7cda74a287"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/tests/unit/match-controller.test.mjs",
+        "member": "source/tests/unit/match-controller.test.mjs",
+        "bytes": 15965,
+        "mode": 420,
+        "sha256": "8ca1eb5a361c59bd3e1be412d00747d3e70b7e349f2c4ace0e374fbd38c5fcb1"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/tests/unit/quoridor-session-lifecycle.test.mjs",
+        "member": "source/tests/unit/quoridor-session-lifecycle.test.mjs",
+        "bytes": 6053,
+        "mode": 420,
+        "sha256": "b60cb29f7b8fa930bca98ee1eebd11722ab946e82e63f975d93f4b26aa58f2a7"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/tests/unit/renderer-startup-lifecycle.test.mjs",
+        "member": "source/tests/unit/renderer-startup-lifecycle.test.mjs",
+        "bytes": 2308,
+        "mode": 420,
+        "sha256": "80e66a195bc2c3abd64e84e4e278f8b6c23d0327d858ab85f54f3de165589145"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/tests/unit/web-navigation.test.mjs",
+        "member": "source/tests/unit/web-navigation.test.mjs",
+        "bytes": 4198,
+        "mode": 420,
+        "sha256": "450def1737a22021a1d56fb498acb2c0753e858f29c35be9c5bb47ed4fcc624d"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/tests/unit/worker-lifecycle.test.mjs",
+        "member": "source/tests/unit/worker-lifecycle.test.mjs",
+        "bytes": 5969,
+        "mode": 420,
+        "sha256": "ccec8ae462da28ca9dbc8b6c9c2f80db05e61bb9072c45af4f0f50baff3bc517"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/affected-settings-render.log",
+        "member": "worker/affected-settings-render.log",
+        "bytes": 936,
+        "mode": 420,
+        "sha256": "ee754a4451462ea1ee53ca53af5e199d8f54bd03f4593dcf2990b2ab8254581c"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/affected-settings-render.process.json",
+        "member": "worker/affected-settings-render.process.json",
+        "bytes": 1286,
+        "mode": 384,
+        "sha256": "c4262663897949126ba6b0f160160313275a02e6564388273600d911c0e8bda8"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/artifact-python-check.log",
+        "member": "worker/artifact-python-check.log",
+        "bytes": 19,
+        "mode": 420,
+        "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/artifact-python-check.process.json",
+        "member": "worker/artifact-python-check.process.json",
+        "bytes": 1356,
+        "mode": 384,
+        "sha256": "7705b8574ae9a1f91a573228b76e148f2c0616058a432b2e0b56b239b1e266af"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/artifact-python-format-check.log",
+        "member": "worker/artifact-python-format-check.log",
+        "bytes": 25,
+        "mode": 420,
+        "sha256": "fd2299c9f1c6dc869070883e281051bfe93aacf66c1a3b0069f45b4aa410ca50"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/artifact-python-format-check.process.json",
+        "member": "worker/artifact-python-format-check.process.json",
+        "bytes": 1373,
+        "mode": 384,
+        "sha256": "06f8f03366cfdddcd3d7d4b99a548f123de599c7a4d1e2c004db3781bf12acda"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/artifact-python-format.log",
+        "member": "worker/artifact-python-format.log",
+        "bytes": 19,
+        "mode": 420,
+        "sha256": "413a709001976657cb743636fd34e48fc41d8d302d665460d3f874b3313da127"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/artifact-python-format.process.json",
+        "member": "worker/artifact-python-format.process.json",
+        "bytes": 1357,
+        "mode": 384,
+        "sha256": "0cb73ce9324675833c5d661ad06bcc56b8e0802c3146302b0fc42e986b93d805"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/beads-backup.log",
+        "member": "worker/beads-backup.log",
+        "bytes": 24,
+        "mode": 420,
+        "sha256": "e25eaf3fee4906a157abedf56b882de4a536f6df1d01e5a0ddc0ae0b3084f09b"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/beads-backup.process.json",
+        "member": "worker/beads-backup.process.json",
+        "bytes": 1240,
+        "mode": 384,
+        "sha256": "7a6d24ba97f0bd6a899ef96232465bbe0539562ab330d929e8ce5c620a7583a9"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/beads-final-note.log",
+        "member": "worker/beads-final-note.log",
+        "bytes": 96,
+        "mode": 420,
+        "sha256": "8a3eccc877caf58c61d25ded72bb7656ff070a0c81c6c3270a59f7f423815b4d"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/beads-final-note.process.json",
+        "member": "worker/beads-final-note.process.json",
+        "bytes": 1437,
+        "mode": 384,
+        "sha256": "2e7230e4375d208d8ed89ebe471936c1073d00d1070c7cc9e5251672aa01b553"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/beads-note.txt",
+        "member": "worker/beads-note.txt",
+        "bytes": 2971,
+        "mode": 420,
+        "sha256": "1fab5b86b38658da6d38b83fd51076648fcb09675513a8dd27f79cc877585173"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/browser-home-result.log",
+        "member": "worker/browser-home-result.log",
+        "bytes": 157,
+        "mode": 420,
+        "sha256": "2428dca87a7d9d706508b315e3dec70ef8988faea7bccb1c17cf6ad606148b15"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/browser-home-result.process.json",
+        "member": "worker/browser-home-result.process.json",
+        "bytes": 1510,
+        "mode": 384,
+        "sha256": "13145e51c2b5be5c569ef7cd08109844ff47088500de4e60fe10a152f181804f"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/browser-home-result.txt",
+        "member": "worker/browser-home-result.txt",
+        "bytes": 690,
+        "mode": 420,
+        "sha256": "8d40b522543b42d8df2b22a9a7e9f45a8c381c316a657520866e17d89f190f3d"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/browser-home1.log",
+        "member": "worker/browser-home1.log",
+        "bytes": 649,
+        "mode": 420,
+        "sha256": "9b1ae3a24a39646505e17dc4903f21263e0445e391b0aa4c534d884d8f8ee4a6"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/browser-home1.process.json",
+        "member": "worker/browser-home1.process.json",
+        "bytes": 1469,
+        "mode": 384,
+        "sha256": "59d7289c5759e91b1feb23e247c01942d24204436d3e393e8d620bceda036c1e"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/browser-limit.log",
+        "member": "worker/browser-limit.log",
+        "bytes": 157,
+        "mode": 420,
+        "sha256": "2428dca87a7d9d706508b315e3dec70ef8988faea7bccb1c17cf6ad606148b15"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/browser-limit.process.json",
+        "member": "worker/browser-limit.process.json",
+        "bytes": 1504,
+        "mode": 384,
+        "sha256": "d8ec3ddd8402bc3a1b542f51d3fc3d540a6a0f7eac32236ad1c4813c9dc2b698"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/browser-limit.txt",
+        "member": "worker/browser-limit.txt",
+        "bytes": 741,
+        "mode": 420,
+        "sha256": "22e2651adfdc35a9177cc107df981ecdf6de2806e535e667eac22a40e6d491df"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/browser-render-diagnose-results/.last-run.json",
+        "member": "worker/browser-render-diagnose-results/.last-run.json",
+        "bytes": 45,
+        "mode": 420,
+        "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/browser-render-diagnose.log",
+        "member": "worker/browser-render-diagnose.log",
+        "bytes": 586,
+        "mode": 420,
+        "sha256": "fc7e1dc7b54ab7983438c6b2d79eb098185d66f2161db68b680de30a12989b31"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/browser-render-diagnose.process.json",
+        "member": "worker/browser-render-diagnose.process.json",
+        "bytes": 1508,
+        "mode": 384,
+        "sha256": "8cb65749c9d89d9eadc7d780eb92db4a479f8dfe682209c8f474f57311f93841"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/browser-render-final-results/.last-run.json",
+        "member": "worker/browser-render-final-results/.last-run.json",
+        "bytes": 45,
+        "mode": 420,
+        "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/browser-render-final.log",
+        "member": "worker/browser-render-final.log",
+        "bytes": 675,
+        "mode": 420,
+        "sha256": "84ac863fa0415b9a9aa2372875a394d368da012217629370de445349bef12588"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/browser-render-final.process.json",
+        "member": "worker/browser-render-final.process.json",
+        "bytes": 1534,
+        "mode": 384,
+        "sha256": "451cedb5186648b7872026cc717c9fddd959db7e9ed6b47b1f267a9c49e691c3"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/browser-render1-results/.last-run.json",
+        "member": "worker/browser-render1-results/.last-run.json",
+        "bytes": 145,
+        "mode": 420,
+        "sha256": "e915be65f10200803af36708bbf90a1670d03bc07b401f5b32cd09c29a77e744"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/browser-render1-results/web-shell-home-stays-lazy--962ee--and-base-path-history-work/error-context.md",
+        "member": "worker/browser-render1-results/web-shell-home-stays-lazy--962ee--and-base-path-history-work/error-context.md",
+        "bytes": 7065,
+        "mode": 420,
+        "sha256": "3c2508e53dbe2b7789c421f60e7c0a70c12ed6a005bab12218a95630d76f03be"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/browser-render1-results/web-shell-switching-during-8c269-er-and-ignores-late-results/error-context.md",
+        "member": "worker/browser-render1-results/web-shell-switching-during-8c269-er-and-ignores-late-results/error-context.md",
+        "bytes": 7125,
+        "mode": 420,
+        "sha256": "2189463c2cd19f0c148ec6ecf59065a509707585a0d0f7067d41d03c89a49126"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/browser-render1.log",
+        "member": "worker/browser-render1.log",
+        "bytes": 3433,
+        "mode": 420,
+        "sha256": "dc10672c7bd8b22a76058cc64a5d8caed5ecb9e6ca0032322851e1a53608914e"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/browser-render1.process.json",
+        "member": "worker/browser-render1.process.json",
+        "bytes": 2282,
+        "mode": 384,
+        "sha256": "081310d26b4b13b18eed9074d0a73dc8c40b3dd2e78d950fcc9b1fd8e7b4e5ca"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/browser-whole-stop-notice.log",
+        "member": "worker/browser-whole-stop-notice.log",
+        "bytes": 157,
+        "mode": 420,
+        "sha256": "2428dca87a7d9d706508b315e3dec70ef8988faea7bccb1c17cf6ad606148b15"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/browser-whole-stop-notice.process.json",
+        "member": "worker/browser-whole-stop-notice.process.json",
+        "bytes": 1509,
+        "mode": 384,
+        "sha256": "991db941445f40c8a8bd0a8b01dc8456b3fa806d92fa8837bdf2d70de86cd6aa"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/browser-whole-stop.json",
+        "member": "worker/browser-whole-stop.json",
+        "bytes": 474,
+        "mode": 420,
+        "sha256": "1c7158daab60522769b82eebd54363376c8b7984fa886871801ff45cf51c5e30"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/browser-whole-stop.txt",
+        "member": "worker/browser-whole-stop.txt",
+        "bytes": 954,
+        "mode": 420,
+        "sha256": "bed880dd9fc5c22575a300cc0f9a2f678f5c88af45c3525c9625045df995d025"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/browser1.log",
+        "member": "worker/browser1.log",
+        "bytes": 387,
+        "mode": 420,
+        "sha256": "225b33a37d1ca357529157d7cb730d329ff77f054d1af8cc1713461f0ceeb648"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/browser1.process.json",
+        "member": "worker/browser1.process.json",
+        "bytes": 1584,
+        "mode": 384,
+        "sha256": "a8ac2338a60b74e3d263856c33ca7c7a5607cb046799611747efecaec0bac2d9"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/browser2.log",
+        "member": "worker/browser2.log",
+        "bytes": 387,
+        "mode": 420,
+        "sha256": "1ff9deb06e723bfd5abb7640e4270f1be84040dd4bdd9d201ab1bb9c90359e1f"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/browser2.process.json",
+        "member": "worker/browser2.process.json",
+        "bytes": 1630,
+        "mode": 384,
+        "sha256": "e1e1179644e53be908da97d92d2187bb80f2cd083574e5d7507a1571eb0ece13"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/browser3.log",
+        "member": "worker/browser3.log",
+        "bytes": 387,
+        "mode": 420,
+        "sha256": "f52158f5a5850a53238dee2c531cef7dd5af3a13ad16f5fbd07965eff069d626"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/browser3.process.json",
+        "member": "worker/browser3.process.json",
+        "bytes": 1630,
+        "mode": 384,
+        "sha256": "d5bd43144607eaf528553897be8015f1c4c29ecb9f3a7c9347e47be01e07436a"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/build-evidence.mjs",
+        "member": "worker/build-evidence.mjs",
+        "bytes": 1436,
+        "mode": 420,
+        "sha256": "f31d5dcfa4838e344618ad5340ffec08a759ce455fda5333e99676adc86c9df3"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/build-root1.log",
+        "member": "worker/build-root1.log",
+        "bytes": 1711,
+        "mode": 420,
+        "sha256": "d8a928504109c455f0f97041f59c3715b39f3d6b6373a8ea94979a236b69a07e"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/build-root1.process.json",
+        "member": "worker/build-root1.process.json",
+        "bytes": 1747,
+        "mode": 384,
+        "sha256": "7d4aaa7ad91321d19f91d3623136203cdd27c23dbbf24247704c079a33554f4e"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/build-root2.log",
+        "member": "worker/build-root2.log",
+        "bytes": 2046,
+        "mode": 420,
+        "sha256": "d3def051b4e47e7c782f87ee75b2e8c4fcbf7b8d9bedf7aa1e514f803a2128dd"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/build-root2.process.json",
+        "member": "worker/build-root2.process.json",
+        "bytes": 1342,
+        "mode": 384,
+        "sha256": "606f0006926335636a0945b4ed2c9f678e79b8ad254d2642af43edd6f8bd36ba"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/build-subpath-final1.log",
+        "member": "worker/build-subpath-final1.log",
+        "bytes": 2285,
+        "mode": 420,
+        "sha256": "c6c6f3a32497316bf362c81b6a9f03e10ab3caf5a40610ffc149d7e3d0aa293f"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/build-subpath-final1.process.json",
+        "member": "worker/build-subpath-final1.process.json",
+        "bytes": 1406,
+        "mode": 384,
+        "sha256": "028f7aeb419133d5907203ed3ddc7764f0fa2a8ace3922b884f37a8e20099e0d"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/build-subpath1.log",
+        "member": "worker/build-subpath1.log",
+        "bytes": 2285,
+        "mode": 420,
+        "sha256": "0efc4d3a9d5d73c57181f9866e52bb8b5a5a610d382c1a3c5ef054fd87a20ba7"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/build-subpath1.process.json",
+        "member": "worker/build-subpath1.process.json",
+        "bytes": 1407,
+        "mode": 384,
+        "sha256": "684529c97c8fb9dad000f5875d65f9dadcacb12eb1dc8e9dc91e9067d1f4668a"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/bundle-evidence.log",
+        "member": "worker/bundle-evidence.log",
+        "bytes": 2046,
+        "mode": 420,
+        "sha256": "3e38b5027a6817e3aaf2d936f096d21b161a0689713f470d73d1abc3d2e352a2"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/bundle-evidence.process.json",
+        "member": "worker/bundle-evidence.process.json",
+        "bytes": 1245,
+        "mode": 384,
+        "sha256": "d597e048113b73132243b5a906ab88255792d1d79c6a92f0bb3fe8a3fb6affca"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/bundle-source-evidence.json",
+        "member": "worker/bundle-source-evidence.json",
+        "bytes": 1421,
+        "mode": 420,
+        "sha256": "c8520dc456e1ed78d95526e663ae809571ae344fac03da43335c375d1a605228"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/common-proposal.patch",
+        "member": "worker/common-proposal.patch",
+        "bytes": 220,
+        "mode": 420,
+        "sha256": "a68086724884b0a6c15b2252b758710b364e258700cc254a011ea7da1c8cfd3d"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/final-bundle-source.log",
+        "member": "worker/final-bundle-source.log",
+        "bytes": 2046,
+        "mode": 420,
+        "sha256": "ee356eb9d03f5c34276078386deb4b4c1651e40e0bc22e7fc529577c3176363c"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/final-bundle-source.process.json",
+        "member": "worker/final-bundle-source.process.json",
+        "bytes": 1245,
+        "mode": 384,
+        "sha256": "2e609d9323e1b1423a3fbe3b611320978f4590ff3a4274cb64be5bbe42833d0e"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/final-focused-unit.log",
+        "member": "worker/final-focused-unit.log",
+        "bytes": 4280,
+        "mode": 420,
+        "sha256": "12543fc907f00c78acad72c108110d20a819e0de2193d1015b058c1ee0a66e44"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/final-focused-unit.process.json",
+        "member": "worker/final-focused-unit.process.json",
+        "bytes": 1515,
+        "mode": 384,
+        "sha256": "5fcf2b68b791cf836bb5490908eba10037d5b4174cff24df5f6e82ab442d61c3"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/final-format3.log",
+        "member": "worker/final-format3.log",
+        "bytes": 87,
+        "mode": 420,
+        "sha256": "39d8c6293e029c4b791ef7b2fca51a23455083b769ad03f47a54ae219044193e"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/final-format3.process.json",
+        "member": "worker/final-format3.process.json",
+        "bytes": 1430,
+        "mode": 384,
+        "sha256": "5f6a65370b27912cdaad9fe04fb3f4266316f1bf72f9240da211d0084e0cee51"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/final-prettier-pass.log",
+        "member": "worker/final-prettier-pass.log",
+        "bytes": 66,
+        "mode": 420,
+        "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/final-prettier-pass.process.json",
+        "member": "worker/final-prettier-pass.process.json",
+        "bytes": 1859,
+        "mode": 384,
+        "sha256": "ea9e3858f499762a4679044b03885eaf5de593c5c73fc8e7c9d4683a2fe0a5dd"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/final-stop.json",
+        "member": "worker/final-stop.json",
+        "bytes": 492,
+        "mode": 420,
+        "sha256": "ab756e7365e87bb3b2ecf08d8f4257094f1137115b583ede66fe24542e27033e"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/final-subpath-build.log",
+        "member": "worker/final-subpath-build.log",
+        "bytes": 2285,
+        "mode": 420,
+        "sha256": "eff8273251939ba7bd4651ba8eb8a7855791c67cc9c292e45e72f11fb1a2424b"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/final-subpath-build.process.json",
+        "member": "worker/final-subpath-build.process.json",
+        "bytes": 1407,
+        "mode": 384,
+        "sha256": "67d730e1711aa0880b856948648f28cf782faa0a1512e3e5b794c31ed17a9032"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/final-typecheck-pass.log",
+        "member": "worker/final-typecheck-pass.log",
+        "bytes": 0,
+        "mode": 420,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/final-typecheck-pass.process.json",
+        "member": "worker/final-typecheck-pass.process.json",
+        "bytes": 1279,
+        "mode": 384,
+        "sha256": "a239e9a004aa3c6a44b01d6135d3bd5d5284a77e63df1119299c1c0b822f4ab8"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/final-worker-unit.log",
+        "member": "worker/final-worker-unit.log",
+        "bytes": 509,
+        "mode": 420,
+        "sha256": "33f350a2c537973764656c83c18f091fd25e78209f80fd5b0dfb2650e9bdf450"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/final-worker-unit.process.json",
+        "member": "worker/final-worker-unit.process.json",
+        "bytes": 1333,
+        "mode": 384,
+        "sha256": "2c718f0e6d1311ba121669eb71ccc6769ec6aeaae3ebfb78af7388c20a2e8c39"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/first-edit.log",
+        "member": "worker/first-edit.log",
+        "bytes": 157,
+        "mode": 420,
+        "sha256": "2428dca87a7d9d706508b315e3dec70ef8988faea7bccb1c17cf6ad606148b15"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/first-edit.process.json",
+        "member": "worker/first-edit.process.json",
+        "bytes": 1501,
+        "mode": 384,
+        "sha256": "aa0648e71519cb0f9f3e41efb3ffca0e45efcaa29d0d3dcfef46cd17eb75e145"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/first-edit.txt",
+        "member": "worker/first-edit.txt",
+        "bytes": 815,
+        "mode": 420,
+        "sha256": "b7e828c660db5de8d934fcb0fd89e9ca51bce576c0ff845685fbf42f1c3d8312"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/first-read-retry.log",
+        "member": "worker/first-read-retry.log",
+        "bytes": 157,
+        "mode": 420,
+        "sha256": "2428dca87a7d9d706508b315e3dec70ef8988faea7bccb1c17cf6ad606148b15"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/first-read-retry.process.json",
+        "member": "worker/first-read-retry.process.json",
+        "bytes": 1502,
+        "mode": 384,
+        "sha256": "fbe1b2598ae5f4a76f3f412efff49642dba6edc483b55a9ab35d251717aad25a"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/first-read.log",
+        "member": "worker/first-read.log",
+        "bytes": 252,
+        "mode": 420,
+        "sha256": "fb35d06627262f0f03b92662bc991c3f9d5c7f323b400bd66d93de5fc298d8c2"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/first-read.process.json",
+        "member": "worker/first-read.process.json",
+        "bytes": 2065,
+        "mode": 384,
+        "sha256": "c2351fb76595152281333ede7cf2c9f5d3c7ca41948871f9d8b21951fb5d4b17"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/first-read.txt",
+        "member": "worker/first-read.txt",
+        "bytes": 677,
+        "mode": 420,
+        "sha256": "15cc678f5deb63564126eec296189928538f7eff14a1e3224cbea2d4b89d4c44"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/format-final1.log",
+        "member": "worker/format-final1.log",
+        "bytes": 3093,
+        "mode": 420,
+        "sha256": "1cc0215cd766066a0dd326668e3c8b757a6ee765e752603c31163b1ae3b75341"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/format-final1.process.json",
+        "member": "worker/format-final1.process.json",
+        "bytes": 1863,
+        "mode": 384,
+        "sha256": "a7062dad1c9a596c63e479424bffa284a96ec450f644293fadeb07b824d95bdc"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/format1.log",
+        "member": "worker/format1.log",
+        "bytes": 2231,
+        "mode": 420,
+        "sha256": "f632d68d8007008f7bbb579fa014766d8c3b3cd7bf2f29347bc62419d67dfbd4"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/format1.process.json",
+        "member": "worker/format1.process.json",
+        "bytes": 1543,
+        "mode": 384,
+        "sha256": "db6ab8f87e6d82c4b7624a3bebf8830ffa877ee537fcd861b24178a33d0aa66c"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/frozen-source.json",
+        "member": "worker/frozen-source.json",
+        "bytes": 14904,
+        "mode": 420,
+        "sha256": "47e58c72e7dc20b9af03676b48855c2390a86072f41afc2cfc962013f1053369"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/frozen-source.patch",
+        "member": "worker/frozen-source.patch",
+        "bytes": 707426,
+        "mode": 420,
+        "sha256": "0e668fbecd2017c8b0140b9dac7a048961b6c25e748e172ce04590ddd04666b7"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/lifecycle-unit1.log",
+        "member": "worker/lifecycle-unit1.log",
+        "bytes": 2744,
+        "mode": 420,
+        "sha256": "c62fb88f60befc9f92a05df0ba6f159c652f4c0a5b45a5fc56b1da7ac967172b"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/lifecycle-unit1.process.json",
+        "member": "worker/lifecycle-unit1.process.json",
+        "bytes": 1378,
+        "mode": 384,
+        "sha256": "f8920a4d966f89b54f3735cb29a535c3179e6dc52cd12fe2c54c89da0f8197ba"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/original-start-match.ts",
+        "member": "worker/original-start-match.ts",
+        "bytes": 572,
+        "mode": 420,
+        "sha256": "2ca2dce08e51c5894d16381b0c4a9fd36de1bb77f6efb6d3c389332d5426a3aa"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/prettier-check-final.log",
+        "member": "worker/prettier-check-final.log",
+        "bytes": 142,
+        "mode": 420,
+        "sha256": "47ad37f21e781a3e4613f3dfe8e00e1a3485177250eaba0a0359ef9a0dde9d6e"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/prettier-check-final.process.json",
+        "member": "worker/prettier-check-final.process.json",
+        "bytes": 3229,
+        "mode": 384,
+        "sha256": "86c3783b7f57dbad8ed80df27c395d397aff56d08db7ae9dad717be74f9f4527"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/rendered-flow-failure.log",
+        "member": "worker/rendered-flow-failure.log",
+        "bytes": 157,
+        "mode": 420,
+        "sha256": "2428dca87a7d9d706508b315e3dec70ef8988faea7bccb1c17cf6ad606148b15"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/rendered-flow-failure.process.json",
+        "member": "worker/rendered-flow-failure.process.json",
+        "bytes": 1512,
+        "mode": 384,
+        "sha256": "c6400602830c7b3cdcad02a958ecc78c7e7daf8fc0868eb8ea0ededeae15a296"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/rendered-flow-failure.txt",
+        "member": "worker/rendered-flow-failure.txt",
+        "bytes": 809,
+        "mode": 420,
+        "sha256": "5fc463fe425134eb8eedb1c1ac9ee8b1ddb3a84e49c5cea35c9992764abb82be"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/renderer-trace-result.txt",
+        "member": "worker/renderer-trace-result.txt",
+        "bytes": 1655,
+        "mode": 420,
+        "sha256": "6619847d05282e94ce43690dadedffaaf50176f459c549c8bea8922c2fe5e9c4"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/renderer-trace.log",
+        "member": "worker/renderer-trace.log",
+        "bytes": 386,
+        "mode": 420,
+        "sha256": "f99a5c64033741d5c6bd99301c369dc28bef032d61c68b6cd34d8d02c30af6c3"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/renderer-trace.process.json",
+        "member": "worker/renderer-trace.process.json",
+        "bytes": 1780,
+        "mode": 384,
+        "sha256": "92d3cb5f8288b3689475371c2b8f6c33a0582f4e1f163a4e394af7fb9bfa621d"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/renderer-trace.txt",
+        "member": "worker/renderer-trace.txt",
+        "bytes": 153615,
+        "mode": 420,
+        "sha256": "545da508e01c4bc013ac73fa37a979cddc3d14895d78932067e44757dc2565ae"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/run.py",
+        "member": "worker/run.py",
+        "bytes": 1900,
+        "mode": 420,
+        "sha256": "437627821be672a79ed42c301589242ca07e66994cd62e5573b1b8efbba4fa9d"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/scoped-format2.log",
+        "member": "worker/scoped-format2.log",
+        "bytes": 55,
+        "mode": 420,
+        "sha256": "610f8326be4fd3dc48f4b35d36b159efbb40687e6d4672c987aa881ccd36f99a"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/scoped-format2.process.json",
+        "member": "worker/scoped-format2.process.json",
+        "bytes": 1395,
+        "mode": 384,
+        "sha256": "6b41cdbaa8e0cb2baeb88c3ac57752d7d521764c8a7da5ebe6ebe06533a95ed5"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/session-unit1.log",
+        "member": "worker/session-unit1.log",
+        "bytes": 1818,
+        "mode": 420,
+        "sha256": "437e8fc38ca2bcc08d0a006193a3c9a2987b8f57c3e38125db074dd2aed14012"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/session-unit1.process.json",
+        "member": "worker/session-unit1.process.json",
+        "bytes": 1619,
+        "mode": 384,
+        "sha256": "23d35e420ef30edcb3fed51cd99bbdc7efdd9928c05f7dc9a498ee63bd6321da"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/session-worker-unit2.log",
+        "member": "worker/session-worker-unit2.log",
+        "bytes": 1223,
+        "mode": 420,
+        "sha256": "9708dd5c98438ff9de6cc67cf471a657c6a46c6aacc1bc3afb00ba98330e5253"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/session-worker-unit2.process.json",
+        "member": "worker/session-worker-unit2.process.json",
+        "bytes": 1406,
+        "mode": 384,
+        "sha256": "5cc389d5c2ffa34c8b579b05e3184ce164f71892644f5e0232dd9b8d736be934"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/stale-task-build-cleanup.json",
+        "member": "worker/stale-task-build-cleanup.json",
+        "bytes": 1261,
+        "mode": 420,
+        "sha256": "1a745da23dd21e0c63189318dfbf02bf369b89953dd10ecd1413651d2419acd7"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/storage.json",
+        "member": "worker/storage.json",
+        "bytes": 378,
+        "mode": 420,
+        "sha256": "532ae51bac1df36ce492df04fb03b89c6c199a1aaf4f59e55e4d9601e9dae6fb"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/tooling-question.log",
+        "member": "worker/tooling-question.log",
+        "bytes": 157,
+        "mode": 420,
+        "sha256": "2428dca87a7d9d706508b315e3dec70ef8988faea7bccb1c17cf6ad606148b15"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/tooling-question.process.json",
+        "member": "worker/tooling-question.process.json",
+        "bytes": 1507,
+        "mode": 384,
+        "sha256": "f089c8d4783bc40dfc71f3d5aa10bdb90457abfe179c4a74b5c3033a9015e6dc"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/tooling-question.txt",
+        "member": "worker/tooling-question.txt",
+        "bytes": 852,
+        "mode": 420,
+        "sha256": "2be5bd595215898fe8fab7d63af10c07a6c9bbe0e517a7a221d4205cef7509f4"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/trace-result.log",
+        "member": "worker/trace-result.log",
+        "bytes": 157,
+        "mode": 420,
+        "sha256": "2428dca87a7d9d706508b315e3dec70ef8988faea7bccb1c17cf6ad606148b15"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/trace-result.process.json",
+        "member": "worker/trace-result.process.json",
+        "bytes": 1512,
+        "mode": 384,
+        "sha256": "fdb966ab1e0d48a68a61128703070fc9b139a0ff76ed9ad74f1004a92de213c0"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/typecheck-final1.log",
+        "member": "worker/typecheck-final1.log",
+        "bytes": 0,
+        "mode": 420,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/typecheck-final1.process.json",
+        "member": "worker/typecheck-final1.process.json",
+        "bytes": 1280,
+        "mode": 384,
+        "sha256": "f4c73f74e6643ab2cfe5bc43166396402037628d7fe4a4623ec56609bc874603"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/typecheck-final2.log",
+        "member": "worker/typecheck-final2.log",
+        "bytes": 0,
+        "mode": 420,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/typecheck-final2.process.json",
+        "member": "worker/typecheck-final2.process.json",
+        "bytes": 1280,
+        "mode": 384,
+        "sha256": "35a15757ecc96adc2aa436f62daf0b27fb095a5cde003888475d4190eaf51cfb"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/typecheck1.log",
+        "member": "worker/typecheck1.log",
+        "bytes": 358,
+        "mode": 420,
+        "sha256": "65a0de6ee5deb79f00765e812b7a90c6897615d31b4bbb8426f880a8d9c37661"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/typecheck1.process.json",
+        "member": "worker/typecheck1.process.json",
+        "bytes": 1591,
+        "mode": 384,
+        "sha256": "9827b469baf1cd5ad937744673f7c3c64ecdbc3c0647dcaed177aa8c4d70e9d2"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/typecheck2.log",
+        "member": "worker/typecheck2.log",
+        "bytes": 0,
+        "mode": 420,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/typecheck2.process.json",
+        "member": "worker/typecheck2.process.json",
+        "bytes": 1279,
+        "mode": 384,
+        "sha256": "7dc942f03fe9ca773d474cc02a870fa92055cdad0fe328fcf30fd4c243fdc691"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/unit-existing.log",
+        "member": "worker/unit-existing.log",
+        "bytes": 1578,
+        "mode": 420,
+        "sha256": "7dc438a23b2535b3b12691a92ae0b87de04ca98e59da3d1b7312e8bed179893a"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/unit-existing.process.json",
+        "member": "worker/unit-existing.process.json",
+        "bytes": 1281,
+        "mode": 384,
+        "sha256": "2ece65af3f386a83dd67e26ccddcab7b739da9a9d007687ccd3ea40a8ac0fe36"
+      },
+      {
+        "original": "/workspaces/quoridor/.worktree/web-game-shell129/.artifacts/web-game-shell129/verification.json",
+        "member": "worker/verification.json",
+        "bytes": 5008,
+        "mode": 420,
+        "sha256": "7d4aa9f0cc4e17e9441b3bf4de516880c46f076e768eb73d7ce551921e23be51"
+      },
+      {
+        "original": "/workspaces/quoridor/.artifacts/research-team/integration324/multi-game-migration-v1/browser-runtime-config-v1/actual-returned-STOP.json",
+        "member": "Root/browser-runtime-config-v1/actual-returned-STOP.json",
+        "bytes": 3271,
+        "mode": 420,
+        "sha256": "d3f4bb2165042646ccb7662d982971af6f898ddfbf09eaef596f4098a3def521"
+      },
+      {
+        "original": "/workspaces/quoridor/.artifacts/research-team/integration324/multi-game-migration-v1/browser-runtime-config-v1/adopt.py",
+        "member": "Root/browser-runtime-config-v1/adopt.py",
+        "bytes": 4253,
+        "mode": 420,
+        "sha256": "2460530731908aeae19776811df7a5675f74c0be3b19ddd6c31f58001fe3beb8"
+      },
+      {
+        "original": "/workspaces/quoridor/.artifacts/research-team/integration324/multi-game-migration-v1/browser-runtime-config-v1/delivery.stderr",
+        "member": "Root/browser-runtime-config-v1/delivery.stderr",
+        "bytes": 0,
+        "mode": 420,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "original": "/workspaces/quoridor/.artifacts/research-team/integration324/multi-game-migration-v1/browser-runtime-config-v1/delivery.stdout",
+        "member": "Root/browser-runtime-config-v1/delivery.stdout",
+        "bytes": 157,
+        "mode": 420,
+        "sha256": "5287f23b0b52e65a1b80eef1a6a92a0767be4632d33c83a9358ab541e0cbe324"
+      },
+      {
+        "original": "/workspaces/quoridor/.artifacts/research-team/integration324/multi-game-migration-v1/browser-runtime-config-v1/execution.log",
+        "member": "Root/browser-runtime-config-v1/execution.log",
+        "bytes": 1086,
+        "mode": 420,
+        "sha256": "b11d0f65c084e84a8ab393a657c18ac902d95eb604ce3ea0a40acf29e9370fd8"
+      },
+      {
+        "original": "/workspaces/quoridor/.artifacts/research-team/integration324/multi-game-migration-v1/browser-runtime-config-v1/execution.process.json",
+        "member": "Root/browser-runtime-config-v1/execution.process.json",
+        "bytes": 1378,
+        "mode": 384,
+        "sha256": "f8a7b77ad91e15c890d05c39f166746b8abcf1b183320747a2356e5e773c47f7"
+      },
+      {
+        "original": "/workspaces/quoridor/.artifacts/research-team/integration324/multi-game-migration-v1/browser-runtime-config-v1/installed.json",
+        "member": "Root/browser-runtime-config-v1/installed.json",
+        "bytes": 939,
+        "mode": 420,
+        "sha256": "f82192d6376428595a820eeb63ccdf7a28eb12abe89c60b17b487b74ea8f3ba0"
+      },
+      {
+        "original": "/workspaces/quoridor/.artifacts/research-team/integration324/multi-game-migration-v1/browser-runtime-config-v1/run_guard.py",
+        "member": "Root/browser-runtime-config-v1/run_guard.py",
+        "bytes": 1851,
+        "mode": 420,
+        "sha256": "7b8ce0b0c1bd9b6851b9ed803ddc9e8fd08cca0c2e5f7d547838940370db71ee"
+      },
+      {
+        "original": "/workspaces/quoridor/.artifacts/research-team/integration324/multi-game-migration-v1/browser-runtime-config-v1/supplied.txt",
+        "member": "Root/browser-runtime-config-v1/supplied.txt",
+        "bytes": 1267,
+        "mode": 420,
+        "sha256": "5eaaa5b7977ba6ff1e7c77aacabcd7a302490045c8d819c8411b9eb8613ac510"
+      },
+      {
+        "original": "/workspaces/quoridor/.artifacts/research-team/integration324/multi-game-migration-v1/browser-runtime-restore-v1/actual-returned-STOP.json",
+        "member": "Root/browser-runtime-restore-v1/actual-returned-STOP.json",
+        "bytes": 3118,
+        "mode": 420,
+        "sha256": "6304b6d6e30e725a5668ef32ad95098da0d2dcda3e5b0551e07c7e738cb4d7a1"
+      },
+      {
+        "original": "/workspaces/quoridor/.artifacts/research-team/integration324/multi-game-migration-v1/browser-runtime-restore-v1/adopt.py",
+        "member": "Root/browser-runtime-restore-v1/adopt.py",
+        "bytes": 1837,
+        "mode": 420,
+        "sha256": "0bd78bba96266d2660113bfc31b60951362a14aa91f04b3977b36ae721b82a12"
+      },
+      {
+        "original": "/workspaces/quoridor/.artifacts/research-team/integration324/multi-game-migration-v1/browser-runtime-restore-v1/execution.log",
+        "member": "Root/browser-runtime-restore-v1/execution.log",
+        "bytes": 164,
+        "mode": 420,
+        "sha256": "c1660204986f82098fa030b4ce1fa60fe161c9ebe1dde37174f43d6dff8f2026"
+      },
+      {
+        "original": "/workspaces/quoridor/.artifacts/research-team/integration324/multi-game-migration-v1/browser-runtime-restore-v1/execution.process.json",
+        "member": "Root/browser-runtime-restore-v1/execution.process.json",
+        "bytes": 1379,
+        "mode": 384,
+        "sha256": "5247e2f24a050d8da40be9e5584f5fd03d540bdef8167180c95a276eb0848ce4"
+      },
+      {
+        "original": "/workspaces/quoridor/.artifacts/research-team/integration324/multi-game-migration-v1/browser-runtime-restore-v1/result.json",
+        "member": "Root/browser-runtime-restore-v1/result.json",
+        "bytes": 2719,
+        "mode": 420,
+        "sha256": "623d2cbc0597e28ff996451eee31d38a775592569deb3224f01975f2d2a316d0"
+      },
+      {
+        "original": "/workspaces/quoridor/.artifacts/research-team/integration324/multi-game-migration-v1/browser-runtime-restore-v1/run_guard.py",
+        "member": "Root/browser-runtime-restore-v1/run_guard.py",
+        "bytes": 1851,
+        "mode": 420,
+        "sha256": "7b8ce0b0c1bd9b6851b9ed803ddc9e8fd08cca0c2e5f7d547838940370db71ee"
+      }
+    ],
+    "one_new_stream_reconstruction": true
+  },
+  "Root_checks": [
+    "Main TypeScript app+config",
+    "current boundary checker",
+    "ordinary smoke caller syntax",
+    "scoped common Prettier",
+    "diff check"
+  ],
+  "Root_changed_callers": [
+    ".gitignore",
+    "scripts/smoke-ordinary-production.mjs",
+    "README.md",
+    "docs/design/multi-game-repository.md"
+  ],
+  "temporary_browser_original_absence_restored": {
+    "at": "2026-10-21T12:56:59.535314+00:00",
+    "original_absence_restored": true,
+    "path": "/workspaces/quoridor/artifacts/playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/SwiftShader.ini",
+    "removed_exact_sha256": "c30e9e654ace933b1cf2a0e10720a7f86aacdc1a0c97c3184731189ae94f3e2f",
+    "actual_browser_collector_STOP": {
+      "browser_whole_STOP": true,
+      "named_browser_preview_pids": [],
+      "access_denied_pids_UNKNOWN": [
+        1, 7, 5767, 9541, 9547, 9648, 397268, 2470305, 2470311
+      ],
+      "owned_remaining": [],
+      "direct_child_reaped": true,
+      "process_cleanup_complete": true,
+      "handle_closes_complete": true,
+      "temporary_directories_remaining": [],
+      "Root_config_still_immutable_sha256": "c30e9e654ace933b1cf2a0e10720a7f86aacdc1a0c97c3184731189ae94f3e2f"
+    },
+    "final_returned_process": {
+      "command": [
+        "env",
+        "PLAYWRIGHT_BROWSERS_PATH=/workspaces/quoridor/artifacts/playwright",
+        "node",
+        "node_modules/@playwright/test/cli.js",
+        "test",
+        "--config",
+        "apps/web/playwright.shell.config.ts",
+        "--grep",
+        "home stays lazy|switching during pending AI",
+        "--output",
+        ".artifacts/web-game-shell129/browser-render-final-results"
+      ],
+      "status": "complete",
+      "child": {
+        "pid": 394919,
+        "start_ticks": "63550445",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "cpu_plan": {
+        "management": [18],
+        "commands": {
+          "implementation": [12]
+        },
+        "allocation": [12, 18],
+        "resource_CPUs": 2,
+        "worker_CPUs": 1,
+        "library_threads": 1
+      },
+      "command_cpu_scope": "implementation",
+      "log_bytes_seen": 675,
+      "scope": "session group and periodically recorded descendants; no daemon adoption",
+      "exit_code": 0,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "cleanup_complete": true,
+      "log_bytes_retained": 675,
+      "wall_seconds": 111.20278123999014,
+      "handle_closes_attempted": [
+        "selector_close",
+        "pipe_close",
+        "pidfd_close",
+        "log_close"
+      ],
+      "primary_error": null,
+      "process_cleanup_complete": true,
+      "handle_closes_complete": true,
+      "signal_mask_restoration": "pending",
+      "final_record_persist": "attempted",
+      "finalization_errors": []
+    },
+    "shared_browser_executable_libraries_unchanged": true,
+    "earlier_failures_or_config_records_not_restamped": true,
+    "no_future_quiet_or_scientific_success_claim": true
+  },
+  "qualification": "Common home/Quoridor lifecycle only. Othello unavailable; no whole multi-game completion or scientific qualification.",
+  "scientific_calls": 0,
+  "prior_tests_and_failures_not_replayed": true,
+  "late_worker_administration_and_retirement_separate": true
+}
