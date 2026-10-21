@@ -9,6 +9,34 @@ use othello_core::{
 use serde::Serialize;
 use wasm_bindgen::prelude::*;
 
+mod ui;
+
+/// Per-mount UI owner. All confirmed state, save eligibility and request tokens
+/// live in Rust; the host only executes the returned browser effects.
+#[wasm_bindgen]
+pub struct OthelloUi {
+    controller: ui::Controller,
+}
+
+#[wasm_bindgen]
+impl OthelloUi {
+    #[wasm_bindgen(constructor)]
+    pub fn new() -> OthelloUi {
+        Self {
+            controller: ui::Controller::default(),
+        }
+    }
+    pub fn dispatch_json(&mut self, input: &str) -> String {
+        self.controller.dispatch(input)
+    }
+}
+
+impl Default for OthelloUi {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 fn js_error(error: impl std::fmt::Display) -> JsValue {
     JsValue::from_str(&error.to_string())
 }

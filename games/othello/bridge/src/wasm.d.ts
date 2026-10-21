@@ -8,6 +8,11 @@ declare module '*wasm/othello.js' {
   export function status_json(state: string): string;
   export function choose_move_json(state: string): string;
   export function search_json(state: string, options: string): string;
+  export class OthelloUi {
+    constructor();
+    dispatch_json(action: string): string;
+    free(): void;
+  }
   export class PatternModel {
     constructor(model: string);
     evaluate_json(state: string): string;

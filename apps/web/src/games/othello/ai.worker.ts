@@ -6,14 +6,14 @@ const scope = self as unknown as {
   postMessage(response: AIResponse): void;
 };
 scope.onmessage = (event) => {
-  const { id, generation, state } = event.data;
+  const { token, state } = event.data;
   void chooseMove(state).then(
-    (move) => scope.postMessage({ id, generation, ok: true, move }),
+    (move) => scope.postMessage({ token, state, move, error: null }),
     (error: unknown) =>
       scope.postMessage({
-        id,
-        generation,
-        ok: false,
+        token,
+        state,
+        move: null,
         error: error instanceof Error ? error.message : String(error),
       }),
   );

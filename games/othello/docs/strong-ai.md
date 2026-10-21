@@ -57,3 +57,9 @@ Rust主体UIは同じ既存コア担当が別の有限source作業として並�
 強教師V-BESTを現v1 heuristicと同じnative image2678で比較する入口を追加した。評価器以外は同じPVS/TT/時計/厳密終盤とし、1探索thread・1000ms＋100ms返却許容・TT上限32MiB・depth64/exact12・book/ponder OFFを固定する。新dev16familyの両色32局を予定し、seed2026102202、既存smoke4/tiny24/teacher128のD4/色・STM同値rootを除外する。H16はラベル/特徴/loss/selectorへ使わない。実開始state/configは対局前に凍結する。
 
 原32局/16完全pairとsetup/cleanup/identity/時計がすべて正常の場合だけ、family平均をMT19937 seed2026102203・10000回でresampleしR7の95%区間を報告する。下端>.5はこの有限dev条件の改善支持、上端<.5は不支持、それ以外は未決着。不完全なら予定32分母とUNKNOWN込み得点範囲を残し、完成pairだけのCIを出さない。補充/結果後seed追加なし。現時点はsourceの13新規fake/analytic検査だけで、実16root生成/32局はUNRUN。[対応source証拠](../../../research-data/othello/strong-ai-n96/native-comparison-software-v1.json)。現v1/defaultと一般棋力判断は維持する。
+
+## Rust主体UIの実動作
+
+OthelloUiが確認済みGameState、確認/再開、保存可否、generation/requestとAI応答受理を所有し、薄いTS hostがDOM/storage/Worker effectを実行する。同期Wasmへcancelメッセージが届くことに依存せず、取消/新規/再開/setup/disposeでWorkerをterminateして所有権を破棄する。
+
+Rust8・actual Wasm7・生成型/Web型/Viteと新規実ブラウザ5ケースを確認した。破損/読み込み中/読み込み失敗のslotは明示newまたは有効resumeまで保持し、古い実Worker応答は盤面/保存へ反映しない。テストの通信/Storage barrierは明示した実装境界の検査で、探索時間・棋力測定ではない。malformed GameState応答はCancel→Retryを要する回復制限を残す。[実証と制限](../../../research-data/othello/strong-ai-n96/rust-ui-v1.json)。UIのAIは既存簡易policyのまま。

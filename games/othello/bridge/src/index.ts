@@ -1,4 +1,6 @@
 // No Wasm import or initialization runs until an exported operation is requested.
+import type { UiController } from './ui';
+export type { UiAction, UiController, UiEffect, UiMode, UiOutput, UiToken, UiView } from './ui';
 export type Side = 1 | 2;
 type Row = [number, number, number, number, number, number, number, number];
 export type Board = [...Row, ...Row, ...Row, ...Row, ...Row, ...Row, ...Row, ...Row];
@@ -59,6 +61,23 @@ function load(): Promise<Wasm> {
 
 export async function newGame(): Promise<GameState> {
   return JSON.parse((await load()).new_game_json()) as GameState;
+}
+
+export async function createUI(): Promise<UiController> {
+  const owner = new (await load()).OthelloUi();
+  let freed = false;
+  return {
+    dispatch(action) {
+      if (freed) throw new Error('Othello UI has been freed');
+      return JSON.parse(owner.dispatch_json(JSON.stringify(action)));
+    },
+    free() {
+      if (!freed) {
+        freed = true;
+        owner.free();
+      }
+    },
+  };
 }
 
 export async function legalMoves(state: GameState): Promise<number[]> {

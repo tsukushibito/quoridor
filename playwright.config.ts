@@ -6,6 +6,7 @@ export default defineConfig({
   testMatch: [
     fileURLToPath(new URL('./tests/e2e/**/*.spec.ts', import.meta.url)),
     fileURLToPath(new URL('./games/quoridor/tests/e2e/**/*.spec.ts', import.meta.url)),
+    fileURLToPath(new URL('./games/othello/tests/e2e/**/*.spec.ts', import.meta.url)),
   ],
   use: {
     baseURL: process.env.E2E_BASE_URL || 'http://127.0.0.1:5173/',

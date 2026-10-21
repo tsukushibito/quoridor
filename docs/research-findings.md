@@ -1,5 +1,7 @@
 # NNUE研究の知見と次の判断
 
+OthelloのUI状態・確認・再開検証・保存資格・AI応答tokenをRustへ移し、TSはDOM/storage/Worker effect実行へ限定した。新Rust8、actual Wasm7、実生成型/Web型/Vite、実ブラウザ5ケースが通り、取消・古い応答拒否と破損/読み込み中の保存保持を確認した。[統合証拠](../research-data/othello/strong-ai-n96/rust-ui-v1.json)。公開AIは従来の簡易policyのままで、学習候補の棋力/desktop browser1秒資格とは別である。
+
 ## 追加目標と未確定点（2026-10-22 JST）
 
 Quoridor435の永続Claus接続は、直接子が終了しても同groupのpipe holderが残るR1と、cleanup拒否をthread panicへ誤分類するO1を修復した。新しい実障害・純分類・変更close正常回帰の各1検査、Clippy、measurement compile、releaseが同じ22source束縛で通った。外側133.805288805秒は内部commandを含み、旧v1〜v5失敗や旧cat成功と区別する。Main共通callerはCの2ownerだけを意味変更し、他ASTを保持した。H/Jの設定例・stopper・同forward診断もsourceに接続したが、本家モデルの実setup/100ms応答・8局、独立family入力・教師・fitはまだUNRUN。[固定source・実検査・元failure・限界](../research-data/ai-sigma/quoridor-strong-ai435/persistent-source-software-v1.json)。Cedar/defaultと全pause/sealを維持し、次は本家正常経路と実family入力を束縛する。

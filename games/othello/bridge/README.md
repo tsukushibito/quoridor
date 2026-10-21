@@ -51,6 +51,11 @@ cornerがなければ他の合法手を同じ反転数・row-major順で選ぶ�
 同時要求は同じinitを共有し、init失敗後は次の要求で再試行できる。
 module評価時にWasmやWorkerを起動しない。Worker所有とUI/lifecycle統合はWeb担当の範囲。
 
+Rust主体の製品UIは`createUI(): Promise<UiController>`でmountごとの`OthelloUi`を所有する。
+確定状態・開始/再開・保存検査・非同期tokenはRust、TSはDOM/storage/Worker effectのhost。
+境界・保存保持・同期Worker取消・変更箇所だけの受入れ手順は
+[Rust UIノート](../docs/rust-ui.md)を参照する。
+
 ## 共通Rust探索とnative JSONL
 
 `othello-core::search`はbitboard上の単一thread PVS/negamax、反復深化、TTを実装する。
