@@ -80,3 +80,5 @@ node /workspaces/quoridor/node_modules/typescript/bin/tsc --noEmit --strict --ta
 
 RootはCPU/RAM/TMP・取消・子回収を既存の実行管理で適用する。
 この検査は新製品の有限functional検査であり、研究実験や対局campaignではない。
+
+Othello強化の要求・設計は[ブラウザ内Rust AI](../docs/strong-ai.md)を参照する。既存の簡易policyは初期対照であり、Edax/Egaroucidへの優位は未測定。
