@@ -494,7 +494,7 @@ default/model・旧assets/fee/UNKNOWNは保持する。
 
 ## 壁在庫ゼロのopt-in有限solver（2026-10-08）
 
-両者の壁在庫がゼロのときだけ使う明示的な `endgame` featureをmainへ統合した。genuine prefixから共有canonical規則の履歴を構成し、position・絶対ply・全履歴countを含むinvocation-local memoとbounded explicit-stack minimaxで証明する。UnknownをDrawへ変換せず、存在するLoss子からWinを、全子の解決後だけLoss/Drawを返す。通常探索の既定経路は変更しない。[契約と適用条件](../crates/quoridor-ai/endgame-solver-contract.md)が現役入口の規約である。
+両者の壁在庫がゼロのときだけ使う明示的な `endgame` featureをmainへ統合した。genuine prefixから共有canonical規則の履歴を構成し、position・絶対ply・全履歴countを含むinvocation-local memoとbounded explicit-stack minimaxで証明する。UnknownをDrawへ変換せず、存在するLoss子からWinを、全子の解決後だけLoss/Drawを返す。通常探索の既定経路は変更しない。[契約と適用条件](../games/quoridor/crates/quoridor-ai/endgame-solver-contract.md)が現役入口の規約である。
 
 source/APIの条件付き独立確認、25件の限定native tests、owned Clippy、固定7根×cold/freshの14呼出しを受け入れた。loss56、draw60、turn57、terminal draw61、terminal goal58の5根は各2回、参照と一致するProvenだった。独立Win certificateがあるnear34とobstructed34は各2回ともUnknown/MemoLimitで、capを上げたり結果を救済したりしていない。ID順DFSがmemo256を使い切ることと、terminalでも約1.075MBを予約することは実際のcoverage・費用上の制約である。
 

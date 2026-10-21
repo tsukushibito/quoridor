@@ -35,14 +35,8 @@ class BoundaryTests(unittest.TestCase):
 
     def test_multiline_separation_and_current_source(self):
         boundary.check_boundary(self.manifest)
-        # Current maintained manifest remains unchanged by this repair.
-        main = Path(__file__).resolve()
-        while not (main / "crates/quoridor-wasm/Cargo.toml").is_file():
-            parent = main.parent
-            if parent == main:
-                self.fail("Current Wasm manifest not found")
-            main = parent
-        with (main / "crates/quoridor-wasm/Cargo.toml").open("rb") as source:
+        # Bind the maintained manifest to this checkout; missing source must fail.
+        with (ROOT / "games/quoridor/crates/quoridor-wasm/Cargo.toml").open("rb") as source:
             boundary.check_boundary(tomllib.load(source))
 
     def test_direct_transitive_dependency_feature_and_default_inclusion_refused(self):

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { loadTs } from './ts-fixture.mjs';
 
 const protocol = await loadTs(
-  new URL('../../packages/engine-bridge/src/protocol.ts', import.meta.url),
+  new URL('../../games/quoridor/bridge/src/protocol.ts', import.meta.url),
   {},
 );
 const context = {
@@ -61,7 +61,7 @@ async function fixture() {
     }
   }
   await loadTs(
-    new URL('../../packages/engine-bridge/src/ai.worker.ts', import.meta.url),
+    new URL('../../games/quoridor/bridge/src/ai.worker.ts', import.meta.url),
     {
       '../wasm/ai/quoridor_ai.js': {
         default: async () => ({ memory: { buffer: { byteLength: 1024 } } }),
@@ -92,7 +92,7 @@ async function fixture() {
     },
   };
   const { AiClient } = await loadTs(
-    new URL('../../packages/engine-bridge/src/ai-client.ts', import.meta.url),
+    new URL('../../games/quoridor/bridge/src/ai-client.ts', import.meta.url),
     { './protocol': protocol },
   );
   const client = new AiClient(() => host);

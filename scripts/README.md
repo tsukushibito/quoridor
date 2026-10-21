@@ -1,6 +1,6 @@
 # 操作・検査・保存の入口
 
-実装本体の検索は[crates](../crates/README.md)と[Python](../python/quoridor_training/README.md)へ切り替える。ここはmainを操作する開発scriptで、旧worktreeへの恒常mirrorやframe別AI実装を置く場所ではない。
+実装本体の検索は[crates](../games/quoridor/crates/README.md)と[Python](../python/quoridor_training/README.md)へ切り替える。ここはmainを操作する開発scriptで、旧worktreeへの恒常mirrorやframe別AI実装を置く場所ではない。
 
 | 操作                             | 入口・正本文書                                                                                                                                               |
 | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -14,4 +14,4 @@
 
 `bash scripts/dev/project-env.sh python scripts/dev/check-research.py --syntax-only`は科学を起動しない。full品質確認、Cargo/build、環境取得、task session/job start、生成/対局/学習はそれぞれ別操作。実行系は所有・pause・現期限/資源・明示configを確認する。index/commitは並行writerの単一統合ownerだけが扱う。
 
-`export-fresh-source.mjs --scope product` は現構成の `apps/`・`packages/`・`crates/` と列挙した開発sourceを書き出す。廃止されたroot直下の `web/`・`src/`・`public/`・`index.html`・`vite.config.*` を互換用途で含めない。directory entryは末尾 `/` の範囲、root file entryは完全一致で選び、`README.md.saved` 等の別fileを暗黙に取り込まない。限定した個別sourceには既存の `--paths-file` を使う。元source・未保存file・過去RAWを削除する操作ではなく、過去版はGit履歴から特定する。
+`export-fresh-source.mjs --scope product` は現構成の `apps/`・`games/quoridor/bridge/`・`games/quoridor/crates/` と列挙した開発sourceを書き出す。廃止されたroot直下の `web/`・`src/`・`public/`・`index.html`・`vite.config.*` を互換用途で含めない。directory entryは末尾 `/` の範囲、root file entryは完全一致で選び、`README.md.saved` 等の別fileを暗黙に取り込まない。限定した個別sourceには既存の `--paths-file` を使う。元source・未保存file・過去RAWを削除する操作ではなく、過去版はGit履歴から特定する。

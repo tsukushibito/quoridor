@@ -43,7 +43,7 @@ PY_FILES = (
     "tools/research-quality/test_maintenance.py",
     "tools/research-quality/test_quality_entrypoints.py",
 )
-CALLERS = ("crates/quoridor-wasm/tests/nnue-runtime.cjs",)
+CALLERS = ("games/quoridor/crates/quoridor-wasm/tests/nnue-runtime.cjs",)
 # Enumerate the NN0 contracts; never discover an opt-in model test accidentally.
 NN0_TESTS = (
     "quoridor_training.test_contracts",

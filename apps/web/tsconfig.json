@@ -1,10 +1,10 @@
 {
-  "extends": "../../packages/engine-bridge/tsconfig.base.json",
+  "extends": "../../games/quoridor/bridge/tsconfig.base.json",
   "compilerOptions": {
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "types": ["vite/client", "@webgpu/types", "node"],
     "paths": {
-      "@quoridor/engine-bridge": ["../../packages/engine-bridge/src/index.ts"]
+      "@quoridor/engine-bridge": ["../../games/quoridor/bridge/src/index.ts"]
     }
   },
   "include": ["src/**/*.ts", "*.config.ts"]

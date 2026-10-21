@@ -1,7 +1,7 @@
 import { startDefaultMatch } from './start-match';
 import { expect, test } from '@playwright/test';
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
-import type { GameView } from '../../packages/engine-bridge/src/rules-client';
+import type { GameView } from '../../games/quoridor/bridge/src/rules-client';
 
 type Fixture = { name: string; actions: number[]; view: GameView };
 const fixtures = JSON.parse(

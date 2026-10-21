@@ -45,7 +45,9 @@ class BuildProvenanceTests(unittest.TestCase):
         self.source_info["patch"] = self.file("source-delta.patch", delta)
         self.source_info["patch"] = fixture.ref(self.source_info["patch"])
         lc.source_check(self.source_info)
-        extra = self.file("crates/new_module.rs", b"fn actual_untracked_input() {}\n")
+        extra = self.file(
+            "games/quoridor/crates/new_module.rs", b"fn actual_untracked_input() {}\n"
+        )
         with self.assertRaisesRegex(lc.Refused, "untracked Cargo inputs drift"):
             lc.source_check(self.source_info)
         self.source_info["untracked_inputs"] = [fixture.ref(extra)]
@@ -70,9 +72,7 @@ class BuildProvenanceTests(unittest.TestCase):
         self.assertTrue(result["cleanup_complete"])
         self.assertEqual(result["cargo_artifact"]["target"]["name"], "quoridor-runner")
         self.assertEqual(
-            lc.accepted_build(fixture.ref(self.root / "operation/manifest.json"))[
-                "artifact"
-            ],
+            lc.accepted_build(fixture.ref(self.root / "operation/manifest.json"))["artifact"],
             fixture.ref(self.private),
         )
 
@@ -82,9 +82,7 @@ class BuildProvenanceTests(unittest.TestCase):
         (self.root / "operation/candidate.json").write_text(lc.json.dumps(candidate))
         result = self.finalize(self.root / "operation", self.job(candidate))
         self.assertEqual(result["status"], "FAILED")
-        self.assertTrue(
-            any(e["stage"] == "command_return" for e in result["secondary"])
-        )
+        self.assertTrue(any(e["stage"] == "command_return" for e in result["secondary"]))
         self.assertNotIn("compiled_sources", result)
         with self.assertRaises(lc.Refused):
             lc.accepted_build(fixture.ref(self.root / "operation/manifest.json"))
@@ -95,9 +93,7 @@ class BuildProvenanceTests(unittest.TestCase):
         result = self.finalize(self.root / "operation", self.job(candidate))
         self.assertEqual(result["status"], "FAILED")
         self.assertFalse(result["cleanup_complete"])
-        self.assertTrue(
-            any(e["stage"] == "final_artifact_source" for e in result["secondary"])
-        )
+        self.assertTrue(any(e["stage"] == "final_artifact_source" for e in result["secondary"]))
         self.assertEqual(candidate["artifact"], result["artifact"])
         with self.assertRaises(lc.Refused):
             lc.accepted_build(fixture.ref(self.root / "operation/manifest.json"))

@@ -17,9 +17,9 @@ Webの入口はゲーム選択画面です。Quoridorを開くと既存の新規
 | 現在の配置                                                                  | 役割                                                                                            |
 | --------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
 | `apps/web/`                                                                 | 製品Web UI・Three.js描画・Worker側の連携                                                        |
-| `packages/engine-bridge/`                                                   | TypeScriptとRust/Wasmを結ぶプロトコル・bridge                                                   |
-| `crates/quoridor-core/`, `quoridor-nnue/`, `quoridor-ai/`, `quoridor-wasm/` | Rustのルール・差分評価・αβ/PVS/TT・MCTS・CPU/Wasm公開境界                                       |
-| `crates/quoridor-inference/`, `quoridor-data/`, `quoridor-runner/`          | 常駐CPU/GPU推論・Arrowデータ・並列生成/arena/学習cycle入口                                      |
+| `games/quoridor/bridge/`                                                   | TypeScriptとRust/Wasmを結ぶプロトコル・bridge                                                   |
+| `games/quoridor/crates/quoridor-core/`, `quoridor-nnue/`, `quoridor-ai/`, `quoridor-wasm/` | Rustのルール・差分評価・αβ/PVS/TT・MCTS・CPU/Wasm公開境界                                       |
+| `games/quoridor/crates/quoridor-inference/`, `quoridor-data/`, `quoridor-runner/`          | 常駐CPU/GPU推論・Arrowデータ・並列生成/arena/学習cycle入口                                      |
 | `python/quoridor_training/`, `tools/model-export/`                          | bulk入力のPyTorch学習・曲線/freeze/test・nativeモデル変換                                       |
 | その他`tools/`                                                              | 現役の補助ツール・独立checker・整形/検査用の固定依存                                            |
 | `scripts/`, `scripts/dev/`                                                  | ビルド・生成・検証入口と開発環境/Beads/研究通信の操作                                           |
@@ -76,4 +76,4 @@ PREVIEW_PORT=4273 npm run verify:production   # テストフック付き本番�
 
 生成物を含まないソース検証では、明示した新しい出力先へ `node scripts/export-fresh-source.mjs --scope product --destination <新出力先> --max-bytes 67108864` で書き出します。main内なら `.artifacts/` 配下、外部なら既存親directoryを使い、既存出力先は拒否します。現在WTの選択sourceとSHA256を `source-manifest.json` に保存し、モデル・科学データ・runtime・一時sessionを含めません。研究sourceのみなら `--scope research`、限定集合なら `--paths-file <相対path配列.json>` を使います。全成果保存の代用ではなく、未コミットsourceを含むため `git archive HEAD` とも異なります。製品検証は書き出したdirectoryで、上記の `source scripts/dev/project-env.sh`、`npm ci`、`npm run check`、`npm run build`、`npm run verify:production` を実行できます。研究の軽量検査は別入口で、製品buildを起動しません。生成Wasm、`target/`、`node_modules/`、`dist/`、スクリーンショットはGitから除外します。
 
-Rust DTOの正本は`crates/quoridor-wasm/src/wire.rs`です。変更した場合は`npm run codegen:protocol`とfixture生成スクリプトを実行し、`npm run check`で差分が残らないことを確かめてください。新しい盤面HUDと保存開始フローの検証は[UI/UX改善報告](docs/reports/ui-ux-improvement.md)、従来のM1自動検証結果と制限は[受入報告](docs/reports/m1-acceptance.md)、AI探索は[Phase3報告](docs/reports/phase3-baseline-ai.md)、描画互換性は[Phase0報告](docs/reports/compatibility-baseline.md)に記録します。独立した`tools/webgpu-smoke`はこのnpmワークスペースに含めていません。
+Rust DTOの正本は`games/quoridor/crates/quoridor-wasm/src/wire.rs`です。変更した場合は`npm run codegen:protocol`とfixture生成スクリプトを実行し、`npm run check`で差分が残らないことを確かめてください。新しい盤面HUDと保存開始フローの検証は[UI/UX改善報告](docs/reports/ui-ux-improvement.md)、従来のM1自動検証結果と制限は[受入報告](docs/reports/m1-acceptance.md)、AI探索は[Phase3報告](docs/reports/phase3-baseline-ai.md)、描画互換性は[Phase0報告](docs/reports/compatibility-baseline.md)に記録します。独立した`tools/webgpu-smoke`はこのnpmワークスペースに含めていません。

@@ -285,7 +285,10 @@ test('current scopes omit retired Web roots and require exact root filenames', a
     'apps/web/index.html',
     'apps/web/src/main.ts',
     'apps/web/vite.config.ts',
-    'packages/engine-bridge/src/index.ts',
+    'games/quoridor/bridge/src/index.ts',
+    'games/quoridor/crates/quoridor-core/src/lib.rs',
+    'crates/retired/src/lib.rs',
+    'packages/engine-bridge/retired.ts',
     'Cargo.toml',
     'Cargo.toml.saved',
     'package.json',
@@ -344,8 +347,9 @@ test('current scopes omit retired Web roots and require exact root filenames', a
       'apps/web/index.html',
       'apps/web/src/main.ts',
       'apps/web/vite.config.ts',
+      'games/quoridor/bridge/src/index.ts',
+      'games/quoridor/crates/quoridor-core/src/lib.rs',
       'package.json',
-      'packages/engine-bridge/src/index.ts',
     ],
   );
   const research = exporter.exportSource({
@@ -358,6 +362,7 @@ test('current scopes omit retired Web roots and require exact root filenames', a
     [
       'Cargo.toml',
       'README.md',
+      'games/quoridor/crates/quoridor-core/src/lib.rs',
       'pyproject.toml',
       'python/quoridor_training/current.py',
       'tools/model-export/export.py',

@@ -6,11 +6,11 @@
 
 正本main `3664ad6a54652cdf9e34532f6cbe2a3f7515b91b`を調査した。学習基盤328の実main統合・関連47NN0・CLI/import・commit受入れとSTOP後に開始した設計であり、学習pauseを解除しない。現行モデル・value尺度・FP32・ルール・全履歴・TT key/namespace・window/PVS・depth・合法手集合を変えない。並び替えによりαβの正規cutoffは変わり得るが、score閾値による手の除外、beam、選択的pruningは対象外。
 
-[alphabeta.rs](../../crates/quoridor-ai/src/alphabeta.rs)の`ordered`は、全合法手を生成し、TT/PV、killer2本、任意policy、action history、最後にAction IDで並べる。policyは既定で未使用。`MoveOrderer::scores(context, legal)`は全legalに有限scoreを返す入口で、親FT accumulatorは受け取らない。現在historyは209個のu64で、cutoff手へdepth²を加算する。TT boundの深さ・合法性・全履歴判定はorderingと別である。
+[alphabeta.rs](../../games/quoridor/crates/quoridor-ai/src/alphabeta.rs)の`ordered`は、全合法手を生成し、TT/PV、killer2本、任意policy、action history、最後にAction IDで並べる。policyは既定で未使用。`MoveOrderer::scores(context, legal)`は全legalに有限scoreを返す入口で、親FT accumulatorは受け取らない。現在historyは209個のu64で、cutoff手へdepth²を加算する。TT boundの深さ・合法性・全履歴判定はorderingと別である。
 
 Action ID容量は209（pawn目的地81＋壁128）。実際のpawn合法候補は方向・跳び・履歴で絞られ、policy側の方向表現は8なので、209は同時に209手が合法という意味ではない。壁は幾何判定・WallPostsによるcycle証明・必要時の両者到達性判定を経る。FIRST案はこの合法手生成費を減らさない。128壁を毎候補BFSで採点する近道も使わない。
 
-[features.rs](../../crates/quoridor-nnue/src/features.rs)のQF1はP2を180度回転する。Sigma入力のP2正規化は上下反転なので、両者のaction変換を同一視しない。現NNUEはFT32/H32、2view、STM距離2、reserved route4が0。pawn移動は既存WallMapsを共有できるが、壁変更には新しい距離mapが必要。採用済SIMD/head guardを使ってもこの壁側費用が消えるとは限らない。最新326のwhole/profile結果は本設計の測定として使わない。
+[features.rs](../../games/quoridor/crates/quoridor-nnue/src/features.rs)のQF1はP2を180度回転する。Sigma入力のP2正規化は上下反転なので、両者のaction変換を同一視しない。現NNUEはFT32/H32、2view、STM距離2、reserved route4が0。pawn移動は既存WallMapsを共有できるが、壁変更には新しい距離mapが必要。採用済SIMD/head guardを使ってもこの壁側費用が消えるとは限らない。最新326のwhole/profile結果は本設計の測定として使わない。
 
 ## 一次資料から移せるものと移せないもの
 
@@ -20,7 +20,7 @@ Action ID容量は209（pawn目的地81＋壁128）。実際のpawn合法候補�
 
 [Lc0 af8ae6afのclassic search](https://github.com/LeelaChessZero/lc0/blob/af8ae6af504e61cca4c1481486c5b07fc02d705e/src/search/classic/search.cc#L448)はpolicyとQ/PUCTを使う。[AlphaZero論文v1](https://arxiv.org/pdf/1712.01815v1)はpolicy/value NNとMCTS、探索分布πへのCEとvalue outcomeへのMSEを組み合わせる。これらはαβの候補を安く並べる方式の速度証明ではない。root訪問分布、prior、cutoffを起こす手、minimax最善手も別の量である。
 
-[Sigma75118634 dual_network](https://github.com/bartolomeo3000/SigmaQuoridor/blob/751186344fc52ad0c29bc65922e62c6fa915f006/dual_network.py#L1)は8×9×9入力からpolicy/valueを返す。[action定義](https://github.com/bartolomeo3000/SigmaQuoridor/blob/751186344fc52ad0c29bc65922e62c6fa915f006/game.py#L979)の136 logitsはpawn方向8＋壁128であり、Rust209 Actionへstate依存の跳び・方向・P2変換が必要。[現Sigma MCTS](../../crates/quoridor-ai/src/sigma_mcts.rs)は実context legalだけを写像しsoftmaxする。この現役写像を正本にする。AlphaZero/Lc0と同じpolicy容量・入力だと仮定しない。
+[Sigma75118634 dual_network](https://github.com/bartolomeo3000/SigmaQuoridor/blob/751186344fc52ad0c29bc65922e62c6fa915f006/dual_network.py#L1)は8×9×9入力からpolicy/valueを返す。[action定義](https://github.com/bartolomeo3000/SigmaQuoridor/blob/751186344fc52ad0c29bc65922e62c6fa915f006/game.py#L979)の136 logitsはpawn方向8＋壁128であり、Rust209 Actionへstate依存の跳び・方向・P2変換が必要。[現Sigma MCTS](../../games/quoridor/crates/quoridor-ai/src/sigma_mcts.rs)は実context legalだけを写像しsoftmaxする。この現役写像を正本にする。AlphaZero/Lc0と同じpolicy容量・入力だと仮定しない。
 
 一次repositoryのcommit/file SHAと行位置、現main source SHAはtask evidenceに固定した。外部sourceの恒常mirrorは作らない。以下の算量と選択は本設計の推論・仮定で、外部engineの実測値ではない。
 

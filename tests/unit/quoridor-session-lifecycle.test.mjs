@@ -1,15 +1,15 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import * as wasm from '../../packages/engine-bridge/wasm/rules/quoridor_rules.js';
+import * as wasm from '../../games/quoridor/bridge/wasm/rules/quoridor_rules.js';
 import { loadTs } from './ts-fixture.mjs';
 
 const protocol = await loadTs(
-  new URL('../../packages/engine-bridge/src/protocol.ts', import.meta.url),
+  new URL('../../games/quoridor/bridge/src/protocol.ts', import.meta.url),
   {},
 );
 const rules = await loadTs(
-  new URL('../../packages/engine-bridge/src/rules-client.ts', import.meta.url),
+  new URL('../../games/quoridor/bridge/src/rules-client.ts', import.meta.url),
   {
     '../wasm/rules/quoridor_rules.js': {
       ...wasm,
@@ -17,7 +17,7 @@ const rules = await loadTs(
         wasm.default({
           module_or_path: readFileSync(
             new URL(
-              '../../packages/engine-bridge/wasm/rules/quoridor_rules_bg.wasm',
+              '../../games/quoridor/bridge/wasm/rules/quoridor_rules_bg.wasm',
               import.meta.url,
             ),
           ),

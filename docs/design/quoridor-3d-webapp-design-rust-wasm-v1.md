@@ -169,9 +169,9 @@ M1のヒューリスティックAIは機能検証用のB0であり、M2を達成
 
 ### 4.1 全体
 
-`apps/web`をWeb製品、`packages/engine-bridge`をWasmとの境界、`crates`をRust実装の置き場にする。npmとCargoのworkspaceルートは同じリポジトリ直下に置く。
+`apps/web`をWeb製品、`games/quoridor/bridge`をWasmとの境界、`games/quoridor/crates`をRust実装の置き場にする。npmとCargoのworkspaceルートは同じリポジトリ直下に置く。
 
-以下は責務の配置先を示す設計図である。**最初に全ファイルと空の抽象クラスを作る指示ではない。必要になるPhaseで追加する。** `quoridor-tools`はM2準備で追加する。
+以下は初期設計時の責務図である。現役配置は `crates/` → `games/quoridor/crates/`、`packages/engine-bridge/` → `games/quoridor/bridge/` へ移行した。UIの正本は `apps/web/src/games/quoridor/` とし、Python・configs・ゲーム文書の移動は後続境界で扱う。**最初に全ファイルと空の抽象クラスを作る指示ではない。必要になるPhaseで追加する。** `quoridor-tools`はM2準備で追加する。
 
 ```text
 quoridor-3d/
@@ -361,7 +361,7 @@ quoridor-3d/
 ### 4.2 依存方向
 
 ```text
-apps/web ──────────────→ packages/engine-bridge
+apps/web ──────────────→ games/quoridor/bridge
                                   │
                            wasm-bindgen API
                                   │
@@ -379,7 +379,7 @@ apps/web ──────────────→ packages/engine-bridge
 
 ### 4.3 生成物と手書きコード
 
-`packages/engine-bridge/wasm/**`、`target/`、`node_modules/`、`dist/`、採用前のモデル・学習チェックポイント、`artifacts/`はGit管理しない。Wasm glueを手で修正してはならない。
+`games/quoridor/bridge/wasm/**`、`target/`、`node_modules/`、`dist/`、採用前のモデル・学習チェックポイント、`artifacts/`はGit管理しない。Wasm glueを手で修正してはならない。
 
 Rust DTOから生成する`src/generated/protocol/**`はGit管理し、ローカルの`npm run check`で再生成後に差分がないことを確認する。
 
@@ -781,11 +781,11 @@ AI Workerは1つ、探索は単一スレッド、先読みなし、GPU推論な�
 ```text
 rules build
   quoridor-wasm[rules] → quoridor-core
-  → packages/engine-bridge/wasm/rules/
+  → games/quoridor/bridge/wasm/rules/
 
 ai build
   quoridor-wasm[ai] → quoridor-ai → quoridor-core
-  → packages/engine-bridge/wasm/ai/
+  → games/quoridor/bridge/wasm/ai/
 
 neural build（M2）
   ai build + 任意依存のニューラル推論backend
@@ -801,7 +801,7 @@ AI依存をoptionalにし、ルール用Wasmへ推論ランタイムを含めな
 概念的な初期化は次のとおり。実際の`init`引数は、使用中のwasm-bindgenが生成する型に合わせて確定する。
 
 ```ts
-// packages/engine-bridge/src/rules-client.ts の初期化部分の例
+// games/quoridor/bridge/src/rules-client.ts の初期化部分の例
 import init from '../wasm/rules/quoridor_rules.js';
 import wasmUrl from '../wasm/rules/quoridor_rules_bg.wasm?url';
 

@@ -85,7 +85,11 @@ def check_boundary(manifest):
 
 
 def main():
-    path = Path(sys.argv[1]) if len(sys.argv) == 2 else Path("crates/quoridor-wasm/Cargo.toml")
+    path = (
+        Path(sys.argv[1])
+        if len(sys.argv) == 2
+        else Path("games/quoridor/crates/quoridor-wasm/Cargo.toml")
+    )
     with path.open("rb") as source:
         check_boundary(tomllib.load(source))
     print("Wasm feature boundary: rules/default cannot enable optional AI dependencies.")

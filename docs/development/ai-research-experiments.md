@@ -77,7 +77,7 @@ mainが持続的研究の統合正本で、managed worktreeは並行変更・比
 
 | 境界                                   | 現在の配置と保守ルール                                                                                                                                                                   |
 | -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ルール・特徴・NNUE・探索・native arena | `crates/quoridor-core`・`quoridor-nnue`・`quoridor-ai`・`quoridor-runner`。Linux主経路、Wasmは製品経路                                                                                   |
+| ルール・特徴・NNUE・探索・native arena | `games/quoridor/crates/quoridor-core`・`quoridor-nnue`・`quoridor-ai`・`quoridor-runner`。Linux主経路、Wasmは製品経路                                                                                   |
 | 教師生成・推論queue・回収              | `quoridor-runner`・`quoridor-inference`。モデル/版/予算/所有をrun設定へ結び付ける                                                                                                        |
 | 学習入力・学習入口                     | `quoridor-data`のArrow/mmapと`python/quoridor_training/`。モデル/設定/尺度も同packageが所有                                                                                              |
 | 独立検証・旧recipe                     | 旧Node実装・比較コードは削除済み。旧recipeは記録Git版から復元する。移行前一式は`54a294a`、[撤去manifest](../../research-data/ai-sigma/retired-code-cleanup/removed-source.json.gz)を参照 |

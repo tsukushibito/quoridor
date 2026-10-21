@@ -19,7 +19,7 @@ export default defineConfig(({ command }) => {
     base: process.env.APP_BASE || '/',
     resolve: {
       alias: {
-        '@quoridor/engine-bridge': resolve(webRoot, '../../packages/engine-bridge/src/index.ts'),
+        '@quoridor/engine-bridge': resolve(webRoot, '../../games/quoridor/bridge/src/index.ts'),
       },
     },
     // Only these fixed verification directories are owned scratch outside the Vite root.

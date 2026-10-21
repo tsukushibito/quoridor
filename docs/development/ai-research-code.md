@@ -2,7 +2,7 @@
 
 Linuxネイティブを主経路とし、評価・探索・対局・推論queue・教師生成はRust、学習・解析・モデル変換はPythonを使う。具体的なビルドとrun設定は[運用手順](rust-ai.md)、学習は[学習手順](nnue-training.md)を参照する。コード正本はmain。モデル・checkpoint・入力は`research-paths.json`に示す`.worktree/assets/`の永続資産であり、コードcheckoutから分離する。移行中の使用資産は自然停止まで旧pathを保護する。旧runの参照は移動対応manifestで追跡し、原結果を書換えない。
 
-主要ディレクトリの責務と検索の切替点は[crates](../../crates/README.md)、[tools](../../tools/README.md)、[scripts](../../scripts/README.md)、[docs](../README.md)、[保存データ](../../research-data/README.md)から選ぶ。主要構成・公開入口を移す変更では、担当ownerが対応READMEとこの案内も更新する。全階層への案内配置や新しい全資料必読・定期全体監査を義務にしない。
+主要ディレクトリの責務と検索の切替点は[crates](../../games/quoridor/crates/README.md)、[tools](../../tools/README.md)、[scripts](../../scripts/README.md)、[docs](../README.md)、[保存データ](../../research-data/README.md)から選ぶ。主要構成・公開入口を移す変更では、担当ownerが対応READMEとこの案内も更新する。全階層への案内配置や新しい全資料必読・定期全体監査を義務にしない。
 
 対局の同時数は通常cohortの`parallel`設定で解決する。`parallel_games`、物理CPU候補列、元operation順、lane/commonのRAMとholdingを一度解決し、1/3/8とも同じnormal sequence・job・取消・回収へ渡す。二AI ownerは保持し、同一局の`cpu_cores`を同じ論理CPUへ明示的に重ねる場合だけ交互探索を時分割する。異局とSMT siblingの探索core共有は禁止し、管理core共有はcohortの明示poolに限る。未測定の速度・deadline・棋力同等性を仮定せず、新構成の実運用は固有の有限recipe・真正image・全RAM/全保持・通常entryに結合する。
 
@@ -10,13 +10,13 @@ Linuxネイティブを主経路とし、評価・探索・対局・推論queue�
 
 | 配置                                    | 責任                                                               |
 | --------------------------------------- | ------------------------------------------------------------------ |
-| `crates/quoridor-core`                  | ルール、局面、合法手、距離、履歴                                   |
-| `crates/quoridor-nnue`                  | QF1特徴、重み、差分評価、SIMD/量子化                               |
-| `crates/quoridor-ai`                    | αβとSigma MCTS、探索の取消・完了結果                               |
-| `crates/quoridor-inference`             | 常駐CPU/GPU推論、共有batch queue、要求所有                         |
-| `crates/quoridor-data`                  | 教師、Arrow shard、分割/露出、mmap tensor                          |
-| `crates/quoridor-runner`                | native selfplay/arena/benchmark/学習cycleと回収                    |
-| `crates/quoridor-wasm`                  | 製品用Wasm境界。同じRust評価・探索を使用                           |
+| `games/quoridor/crates/quoridor-core`                  | ルール、局面、合法手、距離、履歴                                   |
+| `games/quoridor/crates/quoridor-nnue`                  | QF1特徴、重み、差分評価、SIMD/量子化                               |
+| `games/quoridor/crates/quoridor-ai`                    | αβとSigma MCTS、探索の取消・完了結果                               |
+| `games/quoridor/crates/quoridor-inference`             | 常駐CPU/GPU推論、共有batch queue、要求所有                         |
+| `games/quoridor/crates/quoridor-data`                  | 教師、Arrow shard、分割/露出、mmap tensor                          |
+| `games/quoridor/crates/quoridor-runner`                | native selfplay/arena/benchmark/学習cycleと回収                    |
+| `games/quoridor/crates/quoridor-wasm`                  | 製品用Wasm境界。同じRust評価・探索を使用                           |
 | `python/quoridor_training`              | モデル、設定、尺度、指標、学習曲線、freeze/test                    |
 | `tools/model-export`                    | ONNX/AOTI/TensorRTへのオフライン変換                               |
 | `tools/research-session`・`scripts/dev` | 明示thread宛のタスク通信、非同期jobの回収・完了通知、Git保存と容量 |
@@ -24,7 +24,7 @@ Linuxネイティブを主経路とし、評価・探索・対局・推論queue�
 
 NodeはWeb/Vite/TypeScript、Wasm製品ビルド・検証、品質とソース書き出しに必要。研究の対局・探索・推論・生成をNodeへ委譲しない。旧Node実装、互換shim、実験別コピー、旧Python学習recipe、旧実装との比較テストは削除済み。移行前コードはGit `54a294a`、[撤去manifest](../../research-data/ai-sigma/retired-code-cleanup/removed-source.json.gz)と[検証](../../research-data/ai-sigma/retired-code-cleanup/verification.json)で追跡する。[AGENTS.md](../../AGENTS.md)の方針に従い、保守コストを優先し、互換性維持を目的とした旧経路は保持しない。実施中・具体的に予定した直接比較に必要な旧版だけは比較専用に保持し、対象・用途・撤去条件を明示する。比較時にGitから復元する手順は挟まず、終了後に不要分を削除する。
 
-2026-10-18の保守では、現役入口・import・manifest・設定の利用先から主要領域を確認した。`apps/web`はUI/session/render/input/audio/persistence、[engine-bridge](../../packages/engine-bridge/README.md)はRust/Wasmとworkerの接続を所有する。Webの重複したstrict/worker設定と未使用の初期局面投影APIを撤去し、既存bridgeのstrict設定・worker設定と`RulesClient.createGame`へ寄せた。rootのtypecheckはbridgeのDOM/workerとWebのDOMを各ownerで確認する。ルール/履歴の保証が異なるvalidatorやRust/Wasmの生成DTOは共通化・移動しない。
+2026-10-18の保守では、現役入口・import・manifest・設定の利用先から主要領域を確認した。`apps/web`はUI/session/render/input/audio/persistence、[engine-bridge](../../games/quoridor/bridge/README.md)はRust/Wasmとworkerの接続を所有する。Webの重複したstrict/worker設定と未使用の初期局面投影APIを撤去し、既存bridgeのstrict設定・worker設定と`RulesClient.createGame`へ寄せた。rootのtypecheckはbridgeのDOM/workerとWebのDOMを各ownerで確認する。ルール/履歴の保証が異なるvalidatorやRust/Wasmの生成DTOは共通化・移動しない。
 
 Pythonの学習/解析、モデル変換、scriptsの運用CLI、toolsの品質/通信は既存ownerを保つ。`check-research.py`は共通project環境を一度解決して各品質工程へ渡し、途中で別interpreterへ切り替えない。モデルexportの案内も同じ`project-env.sh`/`QUORIDOR_PROJECT_ENV`を使う。rootのCargo/Node/Python manifestと既存依存の配置を維持し、core/AI/NNUE/data/inference/runnerは数学・SDK・寿命・serializerが異なるため統合しない。arenaのrun固有条件は既存typed設定/manifestに残し、見た目の似た時計・履歴・資源契約をmergeするDSLは加えない。
 
@@ -48,7 +48,7 @@ Rustのbuild依存管理はCargo/rustcを正本とする。同じbuildを認定�
 
 ## 品質確認
 
-arena/decisionsと保存解析の現役ownerは既存plan/configを消費し、family/slot/matchup/engine順序・model/history・depth/time/reserve・ordering設定と予定分母を照合する。解析seed/resamples/central intervalは選択configから取り、engine IDをSigma/Alphaの意味へ固定しない。選択authorityは実親job/Run/settings又は既存issued admissionで、二つの可変fileが相互一致するだけでは代用できない。元native publicationは元Build/imageに束縛したまま、解析toolの版と混同しない。詳細と未対応backend/modeは[runner手順](../../crates/quoridor-runner/README.md#configured-research-plans-and-saved-analysis)を参照する。
+arena/decisionsと保存解析の現役ownerは既存plan/configを消費し、family/slot/matchup/engine順序・model/history・depth/time/reserve・ordering設定と予定分母を照合する。解析seed/resamples/central intervalは選択configから取り、engine IDをSigma/Alphaの意味へ固定しない。選択authorityは実親job/Run/settings又は既存issued admissionで、二つの可変fileが相互一致するだけでは代用できない。元native publicationは元Build/imageに束縛したまま、解析toolの版と混同しない。詳細と未対応backend/modeは[runner手順](../../games/quoridor/crates/quoridor-runner/README.md#configured-research-plans-and-saved-analysis)を参照する。
 
 generation-onlyの固定plan/hash・件数は、その明示issued generation subjectの入口に残る。generic arena解析の128/768/三engine等とは別のcallerで、既承認生成や381の選択をarena保守だけで変更しない。保存解析/NN0 metadata試験の成功はmodel/backend/実棋力資格ではない。
 

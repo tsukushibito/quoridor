@@ -1,5 +1,5 @@
 import { AiClient, RulesClient } from '@quoridor/engine-bridge';
-import { RulesGame } from '../../../../../../packages/engine-bridge/wasm/rules/quoridor_rules.js';
+import { RulesGame } from '../../../../../../games/quoridor/bridge/wasm/rules/quoridor_rules.js';
 
 declare global {
   interface Window {

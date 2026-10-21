@@ -1369,8 +1369,6 @@ def operation_lease(spec, lock):
             yield
 
 
-
-
 def arena_cohort_progress(spec):
     """One natural snapshot, including pre-inner refusals and retained native facts."""
     selected = arena_cohort(spec)
@@ -2334,7 +2332,6 @@ def current_cpu_owner():
     return state["cpu_plan"]
 
 
-
 def physical_and_quiet(spec, *, collection=False):
     cfg = spec["limits"]
     plan = operation_cpu_plan(spec)
@@ -2624,7 +2621,7 @@ def source_check(source):
         "Cargo.toml",
         "Cargo.lock",
         ".cargo",
-        "crates",
+        "games/quoridor/crates",
     )
     paths = {str(workspace / os.fsdecode(p)) for p in untracked.split(b"\0") if p}
     require(
@@ -2735,202 +2732,6 @@ def resolved_lmr_parameters(config, profile, *, supported=True):
     return dict(value, intercept=0.0 if value["intercept"] == 0 else value["intercept"])
 
 
-def etc_opportunity_setting(config, requests):
-    if "etc_opportunity" not in config:
-        return None
-    require(
-        type(config["etc_opportunity"]) is str and config["etc_opportunity"] == "before_first_v1",
-        "typed ETC opportunity setting",
-    )
-    require(
-        config.get("profile") == "control"
-        and type(config.get("search_threads")) is int
-        and config["search_threads"] == 1
-        and config.get("use_tt") is True
-        and config.get("use_pvs") is True
-        and config.get("lmr_method", "depth_rank") == "depth_rank"
-        and config.get("probcut") is None
-        and config.get("probcut_samples", 0) == 0
-        and config.get("zero_stock_approx_min_root_walls") is None
-        and all(
-            config.get(k) is None
-            for k in (
-                "neighbour_opportunity",
-                "root_ordering_quality",
-                "history_provenance",
-                "time_reserve_ms",
-            )
-        ),
-        "ETC shadow exclusive plain N1 Control/TT/PVS, MPC/observers/approximation OFF",
-    )
-    require(
-        all(
-            r.get("time_limit_ms") is None
-            and type(r.get("depth")) is int
-            and 1 <= r["depth"] <= 5
-            and type(r.get("node_cap")) is int
-            and 0 < r["node_cap"] <= 1000000
-            and all(
-                not r.get(k, False)
-                for k in ("diagnostic", "observe_lmr", "observe_completed_depths", "warmup")
-            )
-            for r in requests
-        ),
-        "ETC shadow bounded fixed-depth requests",
-    )
-    return config["etc_opportunity"]
-
-
-def etc_opportunity_correspondence(config, measured):
-    work = measured.get("work", {})
-    report = work.get("etc_opportunity") if isinstance(work, dict) else None
-    if "etc_opportunity" not in config:
-        require(
-            "etc_opportunity_requested" not in measured and report is None,
-            "no hidden ETC shadow on ordinary invocation",
-        )
-        return None
-    require(
-        measured.get("etc_opportunity_requested") == config["etc_opportunity"],
-        "actual ETC shadow request correspondence",
-    )
-    if measured.get("returned") != "Ok":
-        require(report is None, "unreturned ETC shadow cannot invent complete data")
-        return None
-    require(
-        isinstance(report, dict)
-        and report.get("protocol") == "before-first-all-legal-v1"
-        and report.get("shadow_only") is True
-        and report.get("parent_limit") == 8
-        and report.get("child_limit") == 1672,
-        "actual bounded ETC shadow report",
-    )
-    for key in ("cutoff_returns", "TT_writes", "history_updates", "extra_evaluations"):
-        require(
-            type(report.get(key)) is int and report[key] == 0, "ETC shadow immutable work " + key
-        )
-    require(
-        isinstance(measured.get("actual_selectivity"), str) and measured["actual_selectivity"],
-        "actual ordinary namespace retained by shadow",
-    )
-    namespace = report.get("actual_namespace")
-    require(
-        isinstance(namespace, dict)
-        and set(namespace) == {"evaluator", "rules", "selectivity"}
-        and all(type(value) is str and value for value in namespace.values())
-        and namespace["evaluator"] == config["namespace"]["evaluator"]
-        and namespace["selectivity"] == measured["actual_selectivity"]
-        and namespace["rules"] == config["namespace"]["rules"],
-        "actual single-owner TT namespace correspondence",
-    )
-    parents = report.get("parents")
-    require(isinstance(parents, list) and len(parents) == 8, "eight fixed ETC parent strata")
-    capacity = report.get("capacity_unready")
-    require(
-        isinstance(capacity, list)
-        and len(capacity) == 8
-        and all(type(n) is int and n >= 0 for n in capacity),
-        "ETC unready retained-slot counts",
-    )
-    windows = report.get("infinite_window")
-    require(
-        isinstance(windows, list)
-        and len(windows) == 8
-        and all(type(n) is int and n >= 0 for n in windows),
-        "ETC preselection infinite-window counts",
-    )
-    strata = [(3, 0), (4, 0), (2, 1), (3, 1), (4, 1), (2, 2), (3, 2), (2, 3)]
-    counts = (
-        "attempted_children",
-        "legal_count",
-        "children",
-        "terminal_proofs",
-        "terminal_cuts",
-        "lookups",
-        "slot_absent",
-        "board_mismatch",
-        "context_mismatch",
-        "depth_mismatch",
-        "excluded_bound",
-        "nonfinite_value",
-        "illegal_or_missing_best",
-        "qualified_noncut",
-        "true_tt_cuts",
-    )
-    for index, parent in enumerate(parents):
-        require(
-            isinstance(parent, dict)
-            and type(parent.get("selected")) is bool
-            and type(parent.get("complete")) is bool
-            and parent.get("slot") == index
-            and all(type(parent.get(k)) is int and parent[k] >= 0 for k in counts),
-            "typed ETC parent counts",
-        )
-        require(
-            parent["children"] <= parent["attempted_children"] <= parent["legal_count"] <= 209,
-            "all-legal ETC parent bounds",
-        )
-        require(
-            parent["terminal_proofs"] + parent["lookups"] == parent["children"]
-            and parent["terminal_cuts"] <= parent["terminal_proofs"]
-            and parent["slot_absent"] <= parent["lookups"]
-            and parent["qualified_noncut"] + parent["true_tt_cuts"]
-            <= parent["lookups"] - parent["slot_absent"],
-            "ETC count identities",
-        )
-        require(
-            all(
-                parent[k] <= parent["lookups"] - parent["slot_absent"]
-                for k in (
-                    "board_mismatch",
-                    "context_mismatch",
-                    "depth_mismatch",
-                    "excluded_bound",
-                    "nonfinite_value",
-                    "illegal_or_missing_best",
-                )
-            ),
-            "overlapping ETC rejection denominators",
-        )
-        if parent["selected"]:
-            require(
-                (parent.get("depth"), parent.get("ply")) == strata[index]
-                and type(parent.get("stock")) is int
-                and 0 <= parent["stock"] <= 20,
-                "predeclared ETC parent depth/ply and actual both-stock sum",
-            )
-            if parent["complete"]:
-                require(
-                    parent["children"] == parent["legal_count"],
-                    "whole all-child ETC parent observation",
-                )
-        else:
-            require(
-                not parent["complete"] and all(parent[k] == 0 for k in counts),
-                "unobserved ETC parent stays absent",
-            )
-        require(
-            isinstance(parent.get("witnesses"), list) and len(parent["witnesses"]) == 2,
-            "bounded ETC witnesses",
-        )
-    for key in ("child_transitions", "child_lookups", "parent_returns"):
-        require(
-            type(report.get(key)) is int and 0 <= report[key] <= 1672,
-            "typed actual ETC total " + key,
-        )
-    require(
-        sum(p["children"] for p in parents)
-        <= report["child_transitions"]
-        <= sum(p["attempted_children"] for p in parents)
-        and sum(p["lookups"] for p in parents)
-        <= report["child_lookups"]
-        <= report["child_transitions"]
-        and report["parent_returns"] == sum(p["complete"] for p in parents),
-        "ETC completed/partial transition correspondence",
-    )
-    return report
-
-
 def measurement_config(experiment):
     """Functional shapes only; settings and input order belong to the run."""
     config = document(experiment["config"])
@@ -2942,7 +2743,6 @@ def measurement_config(experiment):
             "inference",
             "probcut",
             "probcut_samples",
-            "etc_opportunity",
             "search_threads",
             "smp_sharing_provenance",
             "search_cpu_cores",
@@ -2982,7 +2782,6 @@ def measurement_config(experiment):
         <= set(config),
         "measurement settings shape",
     )
-    etc_opportunity_setting(config, requests)
     if "probcut" in config or "probcut_samples" in config:
         p = config.get("probcut")
         samples = config.get("probcut_samples", 0)
@@ -3544,9 +3343,6 @@ def measurement_evidence(spec, experiment, values, *, files=()):
                     "measurement count type: " + key,
                 )
         require(isinstance(result.get("errors"), list), "measurement errors array")
-    shadow_config = document(experiment["config"])
-    for row in rows:
-        etc_opportunity_correspondence(shadow_config, row.get("measurement", {}))
     raw_refs = [ref for ref in files if spec.get("perf") and ref["path"] == spec["perf"]["output"]]
     if result is not None and spec.get("perf"):
         result = {**result, "perf_RAW": raw_refs}
@@ -5480,9 +5276,7 @@ def arena_probcut_suffix(engine, counters, completed):
     )
 
     def typed(p):
-        require(
-            isinstance(p, dict) and set(p) == keys, "complete arena ProbCut parameters"
-        )
+        require(isinstance(p, dict) and set(p) == keys, "complete arena ProbCut parameters")
         require(
             type(p["shallow_depth"]) is int
             and p["shallow_depth"] == 1
@@ -5524,8 +5318,7 @@ def arena_probcut_suffix(engine, counters, completed):
     )
     if configured is None:
         require(
-            counters["requested_probcut"] is None
-            and counters["actual_probcut"] is None,
+            counters["requested_probcut"] is None and counters["actual_probcut"] is None,
             "arena ProbCut OFF requested/effective",
         )
         suffix = ""
@@ -5536,8 +5329,7 @@ def arena_probcut_suffix(engine, counters, completed):
             require(
                 actual == expected
                 and all(
-                    struct.pack(">f", actual[k]) == struct.pack(">f", expected[k])
-                    for k in floats
+                    struct.pack(">f", actual[k]) == struct.pack(">f", expected[k]) for k in floats
                 ),
                 "configured/actual arena ProbCut FP32 correspondence",
             )
@@ -5553,8 +5345,7 @@ def arena_probcut_suffix(engine, counters, completed):
             configured is None
             or (
                 index == 1
-                and counters.get("selection_reason")
-                == "legal_fallback_no_completed_iteration"
+                and counters.get("selection_reason") == "legal_fallback_no_completed_iteration"
             )
         ):
             continue
@@ -5563,9 +5354,7 @@ def arena_probcut_suffix(engine, counters, completed):
             require("probcut" not in work, "OFF arena cannot publish ProbCut work")
         else:
             report = work.get("probcut")
-            require(
-                isinstance(report, dict), "ON arena must report actual ProbCut work"
-            )
+            require(isinstance(report, dict), "ON arena must report actual ProbCut work")
             names = (
                 "eligible_after_TT",
                 "matching_nonPV_after_TT",
@@ -5676,9 +5465,7 @@ def arena_observation(config, row):
         counters = obs["counters"]
         engine = config["engines"][index]
         probcut_suffix = (
-            arena_probcut_suffix(
-                engine, counters, obs.get("completed_iteration_counters")
-            )
+            arena_probcut_suffix(engine, counters, obs.get("completed_iteration_counters"))
             if "probcut" in engine
             or "requested_probcut" in counters
             or "actual_probcut" in counters
@@ -5732,8 +5519,7 @@ def arena_observation(config, row):
                         for k in ("actual_lmr_method_id", "lmr_reduction_rule")
                     )
                 )
-                and counters.get("requested_lmr_parameters")
-                == engine.get("lmr_parameters")
+                and counters.get("requested_lmr_parameters") == engine.get("lmr_parameters")
                 and "actual_lmr_parameters" in counters
                 and counters["actual_lmr_parameters"]
                 == (
@@ -5758,9 +5544,7 @@ def arena_observation(config, row):
                     or ("manhattan" if a["comparison"] == "functional" else "path_tail")
                 )
                 and (
-                    isinstance(
-                        counters.get("actual_zero_stock_safe_race_method_id"), str
-                    )
+                    isinstance(counters.get("actual_zero_stock_safe_race_method_id"), str)
                     and bool(counters["actual_zero_stock_safe_race_method_id"])
                     if enabled
                     else counters.get("actual_zero_stock_safe_race_method_id") is None
@@ -5773,9 +5557,7 @@ def arena_observation(config, row):
                 a["comparison"] == "search_wall_time"
                 and config.get("management_cpu_core") is not None
             )
-        ) and counters.get(
-            "selection_reason"
-        ) == "legal_fallback_no_completed_iteration"
+        ) and counters.get("selection_reason") == "legal_fallback_no_completed_iteration"
         require(
             counters["completed_snapshot_validation_failed"] is False
             and (
@@ -5814,10 +5596,7 @@ def arena_observation(config, row):
                 and receipt < obs["deadline_ns"]
                 and counters["drain_finished_ns"] == obs["returned_ns"]
                 and (
-                    (
-                        obs["returned_ns"] >= receipt
-                        and counters["inflight_after_drain"] == 0
-                    )
+                    (obs["returned_ns"] >= receipt and counters["inflight_after_drain"] == 0)
                     if (
                         a["comparison"] == "whole_wall_time"
                         or (
@@ -5833,8 +5612,7 @@ def arena_observation(config, row):
     if not config["arena"].get("decision_only", False):
         opening = config["arena"]["book"]["openings"][row["game"] // 2]["prefix"]
         require(
-            row["moves"][: len(opening)] == opening
-            and accepted == row["moves"][len(opening) :],
+            row["moves"][: len(opening)] == opening and accepted == row["moves"][len(opening) :],
             "full opening/accepted actions/durable moves",
         )
 
@@ -8544,8 +8322,7 @@ def parameter_coordinate_seed(control, recipe):
             and set(declared) == {"coordinate", "value", "selection", "acceptance"}
             and declared["coordinate"] == coordinate
             and type(declared["value"]) is int
-            and declared["value"]
-            in [recipe["baseline"][coordinate], *stage["candidates"]],
+            and declared["value"] in [recipe["baseline"][coordinate], *stage["candidates"]],
             "ordered configured coordinate decision",
         )
         selection = document(declared["selection"])
@@ -8554,8 +8331,7 @@ def parameter_coordinate_seed(control, recipe):
             type(selection) is dict
             and type(acceptance) is dict
             and selection["selected_" + coordinate] == declared["value"]
-            and acceptance.get("selection", acceptance.get("result"))
-            == declared["selection"]
+            and acceptance.get("selection", acceptance.get("result")) == declared["selection"]
             and acceptance.get(
                 "selected_" + coordinate, acceptance.get("selected", {}).get(coordinate)
             )
@@ -8563,10 +8339,7 @@ def parameter_coordinate_seed(control, recipe):
             "accepted immutable coordinate selection correspondence",
         )
         require(
-            all(
-                selection.get("selected_" + key) == value
-                for key, value in integers.items()
-            ),
+            all(selection.get("selected_" + key) == value for key, value in integers.items()),
             "coordinate choices keep preceding accepted integers",
         )
         integers[coordinate] = declared["value"]

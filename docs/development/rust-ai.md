@@ -50,7 +50,7 @@ CUDAは`cuda-aoti`、TensorRTは`tensorrt`のCargo featureを明示する。`QUO
 
 `nnue` engineはmanifestから対応するfloat/距離残差loaderを選択し、既存の評価器へ接続する。`model-check --model MANIFEST`は対応形式・署名・サイズを推論前に検査する。2 engineのarenaは色交換ペア単位で分割し、明示した奇数の分割境界は開始前に拒否する。
 
-arenaのbook・時計・pair集計・保存検査は[runnerのarena手順](../../crates/quoridor-runner/README.md)と[preset案内](../../configs/arena/README.md)を使う。色交換pairは同じ全履歴prefixから開始し、全予定slotと未知/取消を記録する。主集計は完了pair、補助に全予定分母の範囲を残す。`arena --audit OUTPUT` は来歴・保存SHA・集計を照合し、`--recover OUTPUT` は未完了journalの記録済みslotを読み取る。比較する探索版はsource/compiler/flags/lock/private ELFとmodel/scale/inputを別々に束縛する。同時間Sigmaのmaintained adapterを実装した。実backend/caller資格と棋力結果はsource/softwareの成功とは別に確認する。αβのnative時計はcaller setup・探索・返却・合法履歴検査後の受理を測り、完了depthのtimestampとcounterを全呼出しのcounterから分ける。既存のpersistent TTを使うSearchSessionは最後に完成した合法depthを返し、後続のengine errorを旧completionで救済しない。terminal/cancel/no-completion/lateは別結果で、期限前のcompletionがあっても期限後の受理を許可しない。研究用100ms/手ではsetupと5ms return reserveを差し引くが、硬い返却保証ではない。要求TT65536でも現persistent policyの実容量は最大4096 slots/1MiBで、manifestのsource見込みとruntime実容量/retained snapshotを区別する。
+arenaのbook・時計・pair集計・保存検査は[runnerのarena手順](../../games/quoridor/crates/quoridor-runner/README.md)と[preset案内](../../configs/arena/README.md)を使う。色交換pairは同じ全履歴prefixから開始し、全予定slotと未知/取消を記録する。主集計は完了pair、補助に全予定分母の範囲を残す。`arena --audit OUTPUT` は来歴・保存SHA・集計を照合し、`--recover OUTPUT` は未完了journalの記録済みslotを読み取る。比較する探索版はsource/compiler/flags/lock/private ELFとmodel/scale/inputを別々に束縛する。同時間Sigmaのmaintained adapterを実装した。実backend/caller資格と棋力結果はsource/softwareの成功とは別に確認する。αβのnative時計はcaller setup・探索・返却・合法履歴検査後の受理を測り、完了depthのtimestampとcounterを全呼出しのcounterから分ける。既存のpersistent TTを使うSearchSessionは最後に完成した合法depthを返し、後続のengine errorを旧completionで救済しない。terminal/cancel/no-completion/lateは別結果で、期限前のcompletionがあっても期限後の受理を許可しない。研究用100ms/手ではsetupと5ms return reserveを差し引くが、硬い返却保証ではない。要求TT65536でも現persistent policyの実容量は最大4096 slots/1MiBで、manifestのsource見込みとruntime実容量/retained snapshotを区別する。
 
 Sigmaのtimed MCTSはengineの`time_ms`とarenaの`comparison:"whole_wall_time"`を明示し、`workers=1/active_games=1/max_batch=1`で実行する。caller時計はfull-history Search clone/setupの前から始まり、features・queue・同期推論・探索・choice・合法返却・最終受理を含む。研究用100ms/5ms reserveでは95msまでの完成simulationを保持し、同期in-flight応答を待った後のlate valid replyは破棄する。cancel/guardと元backend errorを別に記録し、旧completionでerrorを救済しない。K64/tau1/tree256MiB等の既存設定は保持し、K上限の早期停止を理由付きで記録する。Kやneural-call倍率を同時間の代替にしない。model/session初期化は一度だけ別計測しwhole jobへ含める。
 
@@ -91,9 +91,9 @@ cargo test --workspace --features quoridor-wasm/nnue,quoridor-core/research-diag
 cargo clippy --workspace --features quoridor-wasm/nnue,quoridor-core/research-diagnostics,quoridor-ai/research-diagnostics --all-targets -- -D warnings
 bash scripts/dev/project-env.sh python -B scripts/dev/check-research.py
 cargo check -p quoridor-wasm --features nnue --target wasm32-unknown-unknown
-wasm-pack build crates/quoridor-wasm --target nodejs --dev \
+wasm-pack build games/quoridor/crates/quoridor-wasm --target nodejs --dev \
   --out-dir "$PWD/.artifacts/rust-ai/wasm" -- --features nnue
-node crates/quoridor-wasm/tests/nnue-runtime.cjs \
+node games/quoridor/crates/quoridor-wasm/tests/nnue-runtime.cjs \
   .artifacts/rust-ai/wasm/quoridor_wasm.js
 ```
 

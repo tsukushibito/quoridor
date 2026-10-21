@@ -8,10 +8,25 @@ if (mode !== 'dev' && mode !== 'release') {
   console.error('Usage: node scripts/build-wasm.mjs dev|release');
   process.exit(2);
 }
-for (const [feature, name] of [['rules', 'quoridor_rules'], ['ai', 'quoridor_ai']]) {
-  const args = ['build', '--target', 'web', mode === 'release' ? '--release' : '--dev',
-    '--out-dir', resolve(root, `packages/engine-bridge/wasm/${feature}`), '--out-name', name,
-    resolve(root, 'crates/quoridor-wasm'), '--locked', '--no-default-features', '--features', feature];
+for (const [feature, name] of [
+  ['rules', 'quoridor_rules'],
+  ['ai', 'quoridor_ai'],
+]) {
+  const args = [
+    'build',
+    '--target',
+    'web',
+    mode === 'release' ? '--release' : '--dev',
+    '--out-dir',
+    resolve(root, `games/quoridor/bridge/wasm/${feature}`),
+    '--out-name',
+    name,
+    resolve(root, 'games/quoridor/crates/quoridor-wasm'),
+    '--locked',
+    '--no-default-features',
+    '--features',
+    feature,
+  ];
   const result = spawnSync('wasm-pack', args, { cwd: root, stdio: 'inherit', env: process.env });
   if (result.status !== 0) process.exit(result.status ?? 1);
 }
