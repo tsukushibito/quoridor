@@ -1,0 +1,142 @@
+{
+  "issue": "quoridor-4lc.376.1",
+  "scope": "Original fixed80 ABBA completed once; stopped saved-only interpretation target",
+  "status": "STOPPED_PENDING_RELATED_RESULT_INTERPRETATION",
+  "report": {
+    "path": "/workspaces/quoridor/.worktree/cheap-static-ordering376/.artifacts/cheap-static-ordering376-v1/adopted379-preparation-v1/execution-v1/fixed-result-report.md",
+    "sha256": "d43753be66306e65ef026ef8e84d2a9d1602dc51c883b3eaca47f7850b8e3338",
+    "bytes": 6212,
+    "mode": "0644"
+  },
+  "question": {
+    "path": "/workspaces/quoridor/.worktree/cheap-static-ordering376/.artifacts/cheap-static-ordering376-v1/adopted379-preparation-v1/execution-v1/fixed-result-question.md",
+    "sha256": "f69948c2744a0af5856d232b88c404ebacf177595ced09b8b2d3b89753c9b841",
+    "bytes": 963,
+    "mode": "0644"
+  },
+  "collection": {
+    "path": "/workspaces/quoridor/.worktree/cheap-static-ordering376/.artifacts/cheap-static-ordering376-v1/adopted379-preparation-v1/future-fixed80-collection.json",
+    "sha256": "301466f5ee6fb5ed53dd91dad4a8b0646d0bd3b7917317b352dc23b63b58a14b",
+    "bytes": 34904,
+    "mode": "0644"
+  },
+  "method": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/cheap-static-ordering376/assessment-method-v1.json",
+    "sha256": "1f5e429aa633b392806df57ae4c7da0a2ae63c0daaaa24e850b48d7418eff579",
+    "bytes": 4164,
+    "mode": "0644"
+  },
+  "schedule": {
+    "path": "/workspaces/quoridor/.worktree/cheap-static-ordering376/.artifacts/cheap-static-ordering376-v1/final-source-v2/schedule.json",
+    "sha256": "bed9101637b27840fb96095fc2b98b75898ad4cb338901d5ac5354ca4e4fbd1a",
+    "bytes": 25021,
+    "mode": "0644"
+  },
+  "four_original_STOPs": [
+    {
+      "path": "/workspaces/quoridor/.worktree/cheap-static-ordering376/.artifacts/cheap-static-ordering376-v1/adopted379-preparation-v1/execution-v1/process-00-A/collected-STOP.json",
+      "sha256": "386587a82fdb0b9064864e29e3ce3088dd73261321b1638ed72bc1014a1e6da7",
+      "bytes": 5689,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/cheap-static-ordering376/.artifacts/cheap-static-ordering376-v1/adopted379-preparation-v1/execution-v1/process-01-B/collected-STOP.json",
+      "sha256": "1b3fcdd4d2f33ea14b9913b594819c6d3fc820375f559ec0317ec3c2779972fc",
+      "bytes": 5689,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/cheap-static-ordering376/.artifacts/cheap-static-ordering376-v1/adopted379-preparation-v1/execution-v1/process-02-B/collected-STOP.json",
+      "sha256": "4ac67e0386a6cdfcbef9d538c56a546ed96a545e658a5728e88e960c16b835ec",
+      "bytes": 5689,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/cheap-static-ordering376/.artifacts/cheap-static-ordering376-v1/adopted379-preparation-v1/execution-v1/process-03-A/collected-STOP.json",
+      "sha256": "3e59bb62d2472e7b214e7d18831e35f1d5ad77fc2a87f9df8216890ee4834af9",
+      "bytes": 5689,
+      "mode": "0644"
+    }
+  ],
+  "saved_collection_metadata_STOP": {
+    "path": "/workspaces/quoridor/.worktree/cheap-static-ordering376/.artifacts/cheap-static-ordering376-v1/adopted379-preparation-v1/execution-v1/saved-collection-v1/metadata-completion-STOP.json",
+    "sha256": "968eb3908db24b71d184108b79cfaa3a581722c77189303836e7feac350a9343",
+    "bytes": 3695,
+    "mode": "0644"
+  },
+  "selected_before_map": {
+    "path": "/workspaces/quoridor/.worktree/cheap-static-ordering376/.artifacts/cheap-static-ordering376-v1/adopted379-preparation-v1/execution-v1/selected-before-map.json",
+    "sha256": "1356039ecc29cfdcbdbc08660ea3513bb7224306be1f1e00c09022131b077dc4",
+    "bytes": 8832,
+    "mode": "0644"
+  },
+  "selected_after_map": {
+    "path": "/workspaces/quoridor/.worktree/cheap-static-ordering376/.artifacts/cheap-static-ordering376-v1/adopted379-preparation-v1/execution-v1/selected-after-map.json",
+    "sha256": "1356039ecc29cfdcbdbc08660ea3513bb7224306be1f1e00c09022131b077dc4",
+    "bytes": 8832,
+    "mode": "0644"
+  },
+  "selected_SHA_size_mode_unchanged": true,
+  "selected_count": 29,
+  "counts": {
+    "planned": 80,
+    "attempted": 80,
+    "actual_Search_invocations": 80,
+    "completed_requested_depth": 80,
+    "UNKNOWN": 0,
+    "Err": 0,
+    "sessions": 56,
+    "plain": 72,
+    "diagnostic": 8,
+    "reserved_nodes": 256000000,
+    "actual_nodes": 114824148
+  },
+  "prebound_native_gate": "PREBOUND_NUMERICAL_FAIL",
+  "strata": {
+    "cold": {
+      "nodes": 1.0018162434870168,
+      "evaluations": 1.0035246361834478,
+      "whole_root_seconds": 1.4332611625380638
+    },
+    "warm": {
+      "nodes": 0.9958368613629054,
+      "evaluations": 0.9941798126840162,
+      "whole_root_seconds": 1.3723455770085344
+    }
+  },
+  "both_B_adverse_any": true,
+  "valuebits_action_agreement_all20_groups": true,
+  "exactPV_agreement_groups": 18,
+  "legalPV_difference_groups": 2,
+  "formal_adoption": "UNSUPPORTED_PENDING_REVIEW_ROOT_ACCEPTANCE; NO_DEFAULT_CHANGE",
+  "numerical_controller_seconds_once_decimal": "255.961599059868595",
+  "nested_clocks": "NOT_ADDED",
+  "saved_collector_seconds_separate": 0.13919583009555936,
+  "post_saved_verification_admin_LLM_costs": "SEPARATE_UNKNOWN",
+  "wrapper_admin_error_preserved": {
+    "type": "TypeError",
+    "message": "tuple indices must be integers or slices, not str",
+    "point": "after lc.command returned (record, capture.path); check['status'] assumed a dict",
+    "outer_exit_code": 1,
+    "collector_replayed": false
+  },
+  "returned_saved_guardian_record": "NOT_RETAINED_BY_WRAPPER; do not substitute persisted receipt",
+  "original_persisted_signal_mask_restoration": "pending",
+  "original_persisted_final_record_persist": "attempted",
+  "actual_final_scientific_reader_STOP": "2026-10-13T00:38:38.306500+00:00",
+  "actual_packet_metadata_reader_writer_STOP": "2026-10-13T00:40:23.796199+00:00",
+  "owned_readers": [],
+  "children": [],
+  "jobs": [],
+  "TMP": [],
+  "leases_remaining": [],
+  "current_next_reservation": "NONE",
+  "new_runtime_cargo_model_head_geometry_Search_calls": 0,
+  "new_extra_collectors": 0,
+  "grant_B": 0,
+  "refund_B": 0,
+  "borrow_B": 0,
+  "continuous_peak": "UNKNOWN",
+  "review": "Root routes existing SAME376.2 final1MiB held withinreview8MiB; author no dispatch",
+  "Beads": "in_progress until required accepted result/preservation workflow; no parent/Policy ACK gate"
+}

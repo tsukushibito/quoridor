@@ -451,7 +451,7 @@ Actual exposures are12800added versus6400added+6400public, both200updates; reduc
 
 8局pilotの293適格行の偏り、371のTrain低下とValidation悪化・replayによる相対的緩和は[既存の結果](../research-findings.md#fixed-public-replay371-comparison-completed-2026-10-12)を参照する。多様化で悪化が解消すること、50:50が最適なこと、公開Sigmaに必要局面が欠けることは未証明である。370の有限341-key照合は新しい1280系列の非重複や公開データの棋譜系列独立性を証明しない。
 
-374の[保存対局結果](../../.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/saved-results-v1/report.md)は762 validated games/381色交換pairs、元768 slotsとの差6をFAILED/UNKNOWNとして保持する。家族・色・image/control cohortを区別した局所観測を原因分析へ利用できるが、モデルの一般棋力や改善原因の採用は別である。349の[保存profile](../../.worktree/cheap-static-ordering376/.artifacts/current-search-perf349-v1/saved-profile-v1/report.md)は36 calls完了、ordering/sortとBのedge-queryを候補に絞る一方、validate_maps/prepareの別時間寄与は未解決である。これらの分析完了を生成の前提にしない。
+374の[保存対局結果](../../.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/saved-results-v1/report.md)は762 validated games/381色交換pairs、元768 slotsとの差6をFAILED/UNKNOWNとして保持する。家族・色・image/control cohortを区別した局所観測を原因分析へ利用できるが、モデルの一般棋力や改善原因の採用は別である。349の[保存profile](../../research-data/ai-sigma/execution324-worktree-retirement-20261021/readable/cheap-static-ordering376/current-search-perf349-v1/saved-profile-v1/report.md)は36 calls完了、ordering/sortとBのedge-queryを候補に絞る一方、validate_maps/prepareの別時間寄与は未解決である。これらの分析完了を生成の前提にしない。
 
 ### 生成・分割・教師の推奨設定
 
@@ -625,7 +625,7 @@ Tだけを残壁16..20/8..15/1..7/0の各層からchronological等間隔で最�
 
 候補凍結後の確認は、事前bookから最大6親×4評価器のD4/LMR OFF、24calls/48M nodesと、M/Cそれぞれ対BEST43/Dの128局/64色pair・全1G arena nodesに限る。後者はControl/PVS/TT1M/LMR ON-depth_rank、100ms authority receipt/5ms reserve/各手1M/200ply。共有16系列・選択的深さと異軌跡を保持し、MSE、有限候補差、同時間scoreを分ける。科学出力whole256MiB・decimal50GBを維持し、普通source/buildに別の事前枠を足さない。旧fits・製品/generator既定・モデル/特徴の正式変更や自動昇格、追加seed/fit/対局・414実装へ拡張しない。
 
-[固定spec](../../.worktree/arena-generalization377/.artifacts/research-team/nnue-diverse421-analysis-v1/spec.json)は生成手番4Mを事前選択した。seedは生成42120261015、評価42120261016、両fit42120261017、左右反転18、公開stream19、新T cycling20、arena/bootstrap21、公開T8192 panel22（後六つも421202610を先頭に持つspec整数）。既存family partitionの未指定seedは324が別途42120261023へ解決し、[入力解決の追記](../../.artifacts/research-team/integration324/nnue-diverse421-v1/input-resolution-addendum.json)に束縛した。spec原物は変更せず、新規prefix・結果の前に固定する。64 unique時の51T/13V・U<=51と、衝突を含む保守的R<=2048/U<=64を区別する。小Rの端数による多数露出も実行結果に残す。共有INITIALと両重み計128状態/1024 logical以内の必要照合を含むforward設計上限は4,013,502で、6Mの余りを追加科学へ転用しない。入力の衝突資格は既存native prefix/partition ownerに保持し、独自Python判定や結果依存補充へ置換しない。
+[固定spec](../../research-data/ai-sigma/execution324-worktree-retirement-20261021/readable/arena-generalization377/research-team/nnue-diverse421-analysis-v1/spec.json)は生成手番4Mを事前選択した。seedは生成42120261015、評価42120261016、両fit42120261017、左右反転18、公開stream19、新T cycling20、arena/bootstrap21、公開T8192 panel22（後六つも421202610を先頭に持つspec整数）。既存family partitionの未指定seedは324が別途42120261023へ解決し、[入力解決の追記](../../.artifacts/research-team/integration324/nnue-diverse421-v1/input-resolution-addendum.json)に束縛した。spec原物は変更せず、新規prefix・結果の前に固定する。64 unique時の51T/13V・U<=51と、衝突を含む保守的R<=2048/U<=64を区別する。小Rの端数による多数露出も実行結果に残す。共有INITIALと両重み計128状態/1024 logical以内の必要照合を含むforward設計上限は4,013,502で、6Mの余りを追加科学へ転用しない。入力の衝突資格は既存native prefix/partition ownerに保持し、独自Python判定や結果依存補充へ置換しない。
 
 ### 421実cacheの設定と直接静的評価422（2026-10-16）
 

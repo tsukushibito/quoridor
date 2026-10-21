@@ -196,7 +196,7 @@ cold中央値はnodes1.001816243/evaluations1.003524636/whole1.433261163、warm�
 
 人間が選んだ変更は、合法手取得・既存採点・stable sort・必要な診断を読み分ける構造整理と、合法手ごとのPV／即goal／killer順位を一度だけ求める削減である。順位と診断は一つの内部定義を使い、policyなし／ありをsort前に分岐する。ありの場合の`total_cmp`（正負zeroを含む）、history/static score、ActionID tieを保つ。診断OFFでは専用snapshot・copy・scanを行わず、追加heap allocationを入れない。map検証・係数・continuation更新・TT/PVS・評価数学・合法集合・取消/error/undoは変更しない。段階MovePickerへの変更や旧372削減の一括復活は含めない。
 
-現役measureのControl/Cheapと製品constructorを保ち、三つの旧test-only研究profileを撤去する。現在のcorrectness定義は製品constructorと既存private設定へ移す。構造整理と削減は別commitとし、削減だけを逆適用できる。停止済み[382.1 source packet](../../.worktree/cheap-static-ordering376/.artifacts/ordering-structure382-v1/source-STOP.json)は静的整形・forward/inverse確認までで、native型検査・assertion・image・性能は未検証である。独立確認は変更した順序とfactory境界に一度限定し、通常修復や各runの追加レビューを要求しない。
+現役measureのControl/Cheapと製品constructorを保ち、三つの旧test-only研究profileを撤去する。現在のcorrectness定義は製品constructorと既存private設定へ移す。構造整理と削減は別commitとし、削減だけを逆適用できる。停止済み[382.1 source packet](../../research-data/ai-sigma/execution324-worktree-retirement-20261021/readable/cheap-static-ordering376/ordering-structure382-v1/source-STOP.json)は静的整形・forward/inverse確認までで、native型検査・assertion・image・性能は未検証である。独立確認は変更した順序とfactory境界に一度限定し、通常修復や各runの追加レビューを要求しない。
 
 承認された比較はControlのO→N→N→O、続いてCheapのO→N→N→Oの8process／48calls／24sessionsである。各processは既存349のcold D4 family102、cold D6 family34、warm family0のlocal ply0→2→4→6を使う。coldはfresh、warmだけ同一sessionのTT/historyを保持する。2M D4／8M D6、合計144M nodes上限、TT4096/PVS/BEST43・full history・rulesを固定し、sampling・補充・旧80/36再演をしない。Oは比較専用の真正なreadonly fbd0 artifact、Nは必要なaffected softwareと実BUILD後に参照する。結果は実設定snapshotと各operationの結果／RAW参照で残す。
 

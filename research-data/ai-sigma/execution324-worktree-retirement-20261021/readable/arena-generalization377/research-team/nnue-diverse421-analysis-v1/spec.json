@@ -1,0 +1,111 @@
+{
+  "issue": "quoridor-4lc.421.1",
+  "status": "FIXED_PROSPECTIVE_PROTOCOL_NO_NEW_NUMERICAL_RESULT",
+  "model": "gpt-6.1-sol",
+  "effort": "max",
+  "contract_sha256": "e3cb5b300e545e1e64010f187151b8e81bc741f1423ce0cba6114fd924e18033",
+  "contract_bytes": 16326,
+  "seeds": {
+    "generation_prefixes": 42120261015,
+    "evaluation_prefixes": 42120261016,
+    "training_both_arms": 42120261017,
+    "augmentation_both_arms": 42120261018,
+    "public_uniform_stream_both_arms": 42120261019,
+    "added_shuffled_cycling": 42120261020,
+    "arena_and_native_family_bootstrap": 42120261021,
+    "public_T8192_panel": 42120261022
+  },
+  "input": {
+    "generation_requests_max": 64,
+    "evaluation_slots_max": 16,
+    "opening_lengths_round_robin": [4, 8, 12, 16],
+    "candidates_per_slot": 32,
+    "family_owner": "existing quoridor_data::terminal::partition_families",
+    "split": "existing whole-family floor(4F/5) T, remaining V; actual F, request and eligible-game counts separate",
+    "evaluation_exclusions": "generation T/V and existing evaluation-book collision families, including LR, prefix extensions and endpoint closure; existing owner, not numeric ID independence",
+    "failed_or_colliding_slots": "preserve missing; no extra request, outcome-based selection or refill",
+    "finite_search_parent_selection": "first min(6,E) actually qualified evaluation slots by original ID, frozen before model/game results"
+  },
+  "generation": {
+    "teacher": "actual outcome z in side-to-move perspective",
+    "evaluator": "distance(0,8,tanh)",
+    "ordering_profile": "control",
+    "pvs": true,
+    "tt_entries": 1048576,
+    "lmr": true,
+    "lmr_method": "depth_rank",
+    "zero_stock_approx": false,
+    "zero_stock_safe_race": false,
+    "nominal_depth": 6,
+    "max_nodes_per_move": 4000000,
+    "global_node_cap": 1000000000,
+    "total_ply_cap_including_prefix": 200,
+    "workers": "one actual entry-time width in 1..8 distinct physical cores, one worker/two per-colour sessions per game",
+    "eligibility": "normal converter accepted GOAL or genuine threefold only; no z for UNKNOWN/cap/error/cancel/incomplete game; no raw-q +/-2 mask",
+    "cap_choice_evidence": "completed-d6-cap-evidence.json: original408 distance/control/depth_rank cold family34 nominal D6 COMPLETE at cumulative1431825 nodes, repeated identically twice; this is one root, not new-root guarantee or optimal cap",
+    "cap_choice_rationale": "choose4M once before421 results for headroom above saved1.432M and initial2M; retain1G overall, no later increase/refill"
+  },
+  "T_view": {
+    "train_stock_strata": [
+      { "min": 16, "max": 20, "rows": 8 },
+      { "min": 8, "max": 15, "rows": 8 },
+      { "min": 1, "max": 7, "rows": 8 },
+      { "min": 0, "max": 0, "rows": 8 }
+    ],
+    "train_family_row_cap": null,
+    "chronological_selection": "n<=8:all; n>8:indices floor(i*(n-1)/7), i=0..7; chronological within each game/stratum",
+    "stock_source": "existing geometry stocks plus row_game_codes; pre-action row, no detailed Game JSON in training",
+    "empty_stratum": "leave empty, never transfer quota",
+    "V": "all otherwise eligible rows, no T stratum subsampling",
+    "selection_uses_outcome_prediction_error": false
+  },
+  "learning": {
+    "start": "same immutable actual BEST43 fresh353 weights046fe/descriptor46ec/evaluator96a5; FT32 H32 QF1 Zero4 FP32 tanh, existing T-only distance scale and bypassOFF",
+    "C": { "public_rows_per_step": 256, "added_rows_per_step": 0 },
+    "M": { "public_rows_per_step": 128, "added_rows_per_step": 128 },
+    "batch": 256,
+    "updates": "U=min(64,ceil(4R/128)) from actual selected new T rows R, identical U in C/M",
+    "optimizer": "fresh independent Adam; betas(.9,.999),eps1e-8,weight_decay0",
+    "learning_rate": 0.0001,
+    "warmup": "W=min(10,U); update j=1..W uses lr=1e-4*j/W, then constant",
+    "augmentation": "existing correct train-only LR reflection probability0.5; evaluation never augmented",
+    "public_sampling": "same seeded uniform-replacement RNG stream; nth public draw identical, C consumes256/step and M128/step, so update-aligned examples need not coincide",
+    "added_sampling": "existing shuffled cycling; record actual per-row counts, 4R<=128U<4R+128 when cap not binding; small R may imply more than4/5 visits per row",
+    "empty_input": "if normal admitted newT or newV empty, preserve stopped outcome; no extra generation, fit or alternate split"
+  },
+  "measurement_and_selection": {
+    "steps": "unique {0,ceil(U/4),ceil(2U/4),ceil(3U/4),U}, at most5 per arm",
+    "banks": [
+      "full opened-publicV419150",
+      "all eligible newV",
+      "fixed publicT8192 panel",
+      "selected newT panel"
+    ],
+    "shared_INITIAL": "one actual saved prediction/metric record with exact model/descriptor/scale/bank identities; both arms reference it, no duplicated forward",
+    "added_metric": "family_mse: compute SSE/count within each actual newV family then arithmetic mean over nonempty families",
+    "public_non_regression": false,
+    "BEST": "min newV family-MSE among measured checkpoints including0; exact ties earliest step; publicV separate monitor; never choose from arena",
+    "retained": "shared INITIAL, each selected BEST and actual LAST; existing owner may alias identical frozen weights",
+    "calibration": "existing value metric semantics;10 fixed equal-width bins on p=(v+1)/2, target t=(z+1)/2, draw target.5; final bin includes1; count/mean-p/mean-t and gaps from same predictions, no additional forwards",
+    "sign": "non-draw sign agreement denominator z=+/-1; prediction0 not a correct decisive sign; draw count/absolute value reported separately",
+    "forward_cap": 6000000,
+    "changed_weight_parity_cap": "at most128 deterministic states total and1024 logical row-forwards across both changed models, including Python/native full/delta/undo/scale evaluations actually needed; reuse unchanged qualified models"
+  },
+  "finite_confirmation": {
+    "search": "first<=6 frozen evaluation parents x BEST43/C/M/D; D4,LMROFF,Control/PVS/TT1M,approx/safeOFF,no time,<=24calls*2M=48M nodes",
+    "arena": "M/BEST43,C/BEST43,M/D,C/D x <=16 frozen families x2colours;<=128games/64pairs, shared families,100ms receipt/5ms reserve/1M per move/200totalply/1G totalnodes;Control/PVS/TT1M/LMRON depth_rank/approx-safeOFF",
+    "primary": "M versus frozen BEST43; C continuation control, D practical contrasts; no direct M-versus-C strength test",
+    "duplicates": "share genuinely identical successful measurements only when all semantic input/model/method/budget identities match; retain condition labels and actual unique call/forward denominators",
+    "uncertainty": "existing family-unit summaries/native intervals, shared-family and multi-contrast dependence; no refill, superiority/Elo/noninferiority/default promotion"
+  },
+  "storage": {
+    "whole_bulk_B": 268435456,
+    "global_decimal_cap_B": 50000000000,
+    "prior419_upper_B": 49420488704,
+    "actual_global": "UNKNOWN",
+    "pending420_increment": "Root resolves actual affected positive increment before science; no old holding recharge/refund/delete",
+    "stop": "existing whole guard may stop partially; maximum requests/games are not completion promises"
+  },
+  "implementation_boundary": "reuse current owners; no schema/history hotpath, namespace duplicate, extra scheduler, teacher loop, model/features/scale/loss change or production default change",
+  "later_dependency": "same421.1 waits for original admitted saved inputs/results after this fixed design; no ACK/parent-close gate, no self wake"
+}

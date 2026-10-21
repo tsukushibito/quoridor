@@ -1,0 +1,357 @@
+{
+  "schema": "quoridor.research.tests-only-result.v1",
+  "issue": "quoridor-4lc.376.1",
+  "status": "VERIFIED_FIVE_AI_FOUR_RUNNER_ASSERTIONS_PASS",
+  "job_id": "2ce8de8b-7f73-4606-96df-bdbea6f185b2",
+  "source_adoption": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/cheap-static-ordering376/source-adoption-v1.json",
+    "sha256": "53141deaa312a46c19c547bbb4e9fe675843c52aa25a8cfe7ec199db12e67365",
+    "bytes": 10963,
+    "mode": "0644"
+  },
+  "applied_context": {
+    "timestamp": "2026-10-12T17:41:24.155Z",
+    "turn": "01a13134-7628-7883-973d-07b0de49aacd",
+    "cwd": "/workspaces/quoridor/.worktree/search-optimization",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "sandbox": "danger-full-access",
+    "approval_policy": "never"
+  },
+  "selected_refs": [
+    {
+      "path": "/workspaces/quoridor/.worktree/cheap-static-ordering376/.artifacts/cheap-static-ordering376-v1/tests-only-v1/prepared-control.json",
+      "sha256": "3e5395784e47edadbe621ae9a550d5c2190c976021129d318c9b54fc475454ca",
+      "bytes": 2612,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/cheap-static-ordering376/.artifacts/cheap-static-ordering376-v1/tests-only-v1/settings.json",
+      "sha256": "5c1c93ac346ec433ca3ff9bdf96e2b95f91b396ffc1edf7cdd7578eae96f9c4a",
+      "bytes": 18565,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/cheap-static-ordering376/.artifacts/cheap-static-ordering376-v1/tests-only-v1/test-worker-v2.py",
+      "sha256": "c01e525300613b72da551460404e057c2330d2992234c4950e42e57f6ca5f471",
+      "bytes": 14237,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/cheap-static-ordering376/.artifacts/cheap-static-ordering376-v1/tests-only-v1/runtime-v1/config.json",
+      "sha256": "27593386b95d01330dbe6eb659f9196875283a1b65ad787a375ccb7ac0999932",
+      "bytes": 841,
+      "mode": "0600"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/cheap-static-ordering376/.artifacts/cheap-static-ordering376-v1/tests-only-v1/runtime-v1/result.json",
+      "sha256": "e625b171c1612c4aedbc06934c84f3b5f82b132358e1e41404dcce27b4028592",
+      "bytes": 505,
+      "mode": "0600"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/cheap-static-ordering376/.artifacts/cheap-static-ordering376-v1/tests-only-v1/runtime-v1/state.json",
+      "sha256": "c25fb198def90e977859b5918c67c9825bc8766beee7f1d05c42a29c8cec5f28",
+      "bytes": 709,
+      "mode": "0600"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/cheap-static-ordering376/.artifacts/cheap-static-ordering376-v1/tests-only-v1/test-STOP.json",
+      "sha256": "8ee2c5c21d101f174973b71631ebc638a9d49a55d7e5380e0d9d10edb5014dd7",
+      "bytes": 29652,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/cheap-static-ordering376/.artifacts/cheap-static-ordering376-v1/tests-only-v1/runtime-v1/output.log",
+      "sha256": "d7877c2370a3bb6f3bf66bfa63b90a699251eb5cd515c935b484b1e94037502b",
+      "bytes": 204,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/cheap-static-ordering376/.artifacts/cheap-static-ordering376-v1/tests-only-v1/operation/test-cheap376-new.full.log",
+      "sha256": "44f2469cc5382e40306a6981383ffbd238989a4c7e069153b3ed91d9e91b0c0c",
+      "bytes": 68153,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/cheap-static-ordering376/.artifacts/cheap-static-ordering376-v1/tests-only-v1/operation/test-cheap376-new.process.json",
+      "sha256": "b1143610ce3471a8ab9b0e5f47a49d3b33b5f862a622c64e486ee6509c775975",
+      "bytes": 1181,
+      "mode": "0600"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/cheap-static-ordering376/.artifacts/cheap-static-ordering376-v1/tests-only-v1/operation/test-ordering376-new.full.log",
+      "sha256": "bc4fa05d0cf4455f8e51a25ad4a18e251ebd3fb2ec6451d42599f2ab65692dc5",
+      "bytes": 85623,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/cheap-static-ordering376/.artifacts/cheap-static-ordering376-v1/tests-only-v1/operation/test-ordering376-new.process.json",
+      "sha256": "81c029f214e2f1f293b37f7a73d1bcb304a1681930fde09845ee833784c300ec",
+      "bytes": 1188,
+      "mode": "0600"
+    }
+  ],
+  "checks": [
+    {
+      "name": "test-cheap376-new",
+      "argv": [
+        "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "/workspaces/quoridor/Cargo.toml",
+        "-j1",
+        "--message-format=json-render-diagnostics",
+        "-p",
+        "quoridor-ai",
+        "--lib",
+        "--features",
+        "research-diagnostics",
+        "cheap376_",
+        "--",
+        "--test-threads=1"
+      ],
+      "actual_names": [
+        "alphabeta::cheap_static_ordering::tests::cheap376_complete_depth1_matches_independent_no_tt_and_observer_is_only_observation",
+        "alphabeta::cheap_static_ordering::tests::cheap376_exact_integer_terms_orientations_colours_missing_and_borrowed_maps",
+        "alphabeta::cheap_static_ordering::tests::cheap376_fixed_tables_cover_footprints_boundary_points_once_and_signed_jump",
+        "alphabeta::cheap_static_ordering::tests::cheap376_invalid_claimed_cache_and_control_errors_publish_no_partial_result",
+        "alphabeta::cheap_static_ordering::tests::cheap376_tiers_legal_set_id_ties_parent_reentry_and_returned_child_error"
+      ],
+      "passed": 5,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered_out": 79,
+      "complete_full_log": {
+        "path": "/workspaces/quoridor/.worktree/cheap-static-ordering376/.artifacts/cheap-static-ordering376-v1/tests-only-v1/operation/test-cheap376-new.full.log",
+        "sha256": "44f2469cc5382e40306a6981383ffbd238989a4c7e069153b3ed91d9e91b0c0c",
+        "bytes": 68153,
+        "mode": "0644"
+      },
+      "guardian_return": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "test",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "/workspaces/quoridor/Cargo.toml",
+          "-j1",
+          "--message-format=json-render-diagnostics",
+          "-p",
+          "quoridor-ai",
+          "--lib",
+          "--features",
+          "research-diagnostics",
+          "cheap376_",
+          "--",
+          "--test-threads=1"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 148596,
+          "start_ticks": "108005830",
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        "log_bytes_seen": 68153,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 65536,
+        "wall_seconds": 2.14791160216555,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "persisted_receipt": {
+        "path": "/workspaces/quoridor/.worktree/cheap-static-ordering376/.artifacts/cheap-static-ordering376-v1/tests-only-v1/operation/test-cheap376-new.process.json",
+        "sha256": "b1143610ce3471a8ab9b0e5f47a49d3b33b5f862a622c64e486ee6509c775975",
+        "bytes": 1181,
+        "mode": "0600"
+      },
+      "persisted_signal_mask_restoration": "pending",
+      "persisted_final_record_persist": "attempted",
+      "raw_failure_history_not_relabelled": true
+    },
+    {
+      "name": "test-ordering376-new",
+      "argv": [
+        "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "/workspaces/quoridor/Cargo.toml",
+        "-j1",
+        "--message-format=json-render-diagnostics",
+        "-p",
+        "quoridor-runner",
+        "--lib",
+        "--features",
+        "ordering-assessment",
+        "ordering376_",
+        "--",
+        "--test-threads=1"
+      ],
+      "actual_names": [
+        "ordering_assessment::cheap376_tests::ordering376_authority_algorithm_role_masks_caps_and_old20_scope_refuse_drift",
+        "ordering_assessment::cheap376_tests::ordering376_fixed80_two_independent_sweeps_masks_and_finite_denominators",
+        "ordering_assessment::cheap376_tests::ordering376_return_validation_captures_exact_legal_set_without_another_search",
+        "ordering_assessment::cheap376_tests::ordering376_typed_metadata_rejects_unknown_duplicate_and_local_census_mismatch"
+      ],
+      "passed": 4,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered_out": 151,
+      "complete_full_log": {
+        "path": "/workspaces/quoridor/.worktree/cheap-static-ordering376/.artifacts/cheap-static-ordering376-v1/tests-only-v1/operation/test-ordering376-new.full.log",
+        "sha256": "bc4fa05d0cf4455f8e51a25ad4a18e251ebd3fb2ec6451d42599f2ab65692dc5",
+        "bytes": 85623,
+        "mode": "0644"
+      },
+      "guardian_return": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "test",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "/workspaces/quoridor/Cargo.toml",
+          "-j1",
+          "--message-format=json-render-diagnostics",
+          "-p",
+          "quoridor-runner",
+          "--lib",
+          "--features",
+          "ordering-assessment",
+          "ordering376_",
+          "--",
+          "--test-threads=1"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 148643,
+          "start_ticks": "108006067",
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        "log_bytes_seen": 85623,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 65536,
+        "wall_seconds": 7.899979352019727,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "persisted_receipt": {
+        "path": "/workspaces/quoridor/.worktree/cheap-static-ordering376/.artifacts/cheap-static-ordering376-v1/tests-only-v1/operation/test-ordering376-new.process.json",
+        "sha256": "81c029f214e2f1f293b37f7a73d1bcb304a1681930fde09845ee833784c300ec",
+        "bytes": 1188,
+        "mode": "0600"
+      },
+      "persisted_signal_mask_restoration": "pending",
+      "persisted_final_record_persist": "attempted",
+      "raw_failure_history_not_relabelled": true
+    }
+  ],
+  "controller_START": "2026-10-12T17:39:37.966323+00:00",
+  "worker_START": "2026-10-12T17:39:38.164472+00:00",
+  "actual_source_environment_TMP_STOP": "2026-10-12T17:39:48.931591+00:00",
+  "worker_metadata_STOP": "2026-10-12T17:39:48.933022+00:00",
+  "controller_STOP": "2026-10-12T17:39:49.138164+00:00",
+  "controller_whole_seconds": 11.172254492063075,
+  "nested_command_seconds": [
+    2.14791160216555,
+    7.899979352019727
+  ],
+  "nested_not_added_to_controller": true,
+  "source_before_after_exact_count": 33,
+  "actual_target_before_B": 1387720704,
+  "actual_target_after_B": 1388646400,
+  "observed_target_growth_B": 925696,
+  "target_absolute_cap_B": 1531248640,
+  "private_growth_B": 0,
+  "TMP_before_removal_allocated_B": 4096,
+  "TMP_absent": true,
+  "exact_own_identity_observations": [
+    {
+      "identity": {
+        "pid": 148546,
+        "start_ticks": "108005779",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "same_live_identity": false,
+      "observation": "absent"
+    },
+    {
+      "identity": {
+        "pid": 148518,
+        "start_ticks": "108005505",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "same_live_identity": false,
+      "observation": "absent"
+    },
+    {
+      "identity": {
+        "pid": 148596,
+        "start_ticks": "108005830",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "same_live_identity": false,
+      "observation": "absent"
+    },
+    {
+      "identity": {
+        "pid": 148643,
+        "start_ticks": "108006067",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "same_live_identity": false,
+      "observation": "absent"
+    }
+  ],
+  "model_real_heads": 0,
+  "bounded_scoring_context_upper": 58,
+  "scoring_bound_is_reviewed_definition_bound_not_instrumented_census": true,
+  "continuous_peak_RSS": "UNKNOWN",
+  "no_private_Build_Clippy_release_model_or_science80_qualification": true,
+  "all_old_failure_raw_masks_UNKNOWN_floors_and_fees": "HELD_NO_REFUND_OR_RESET",
+  "selected_output_metadata_sample_B": 483328,
+  "inclusive_collection_forward_B": 131072,
+  "controls_cap_B": 2097152,
+  "collector_reader_STOP": "2026-10-12T17:42:48.140511+00:00",
+  "owned_collectors_readers_children_jobs_TMP_remaining": [],
+  "current_next_reservation": null,
+  "hardware_lease_taken_by_saved_metadata_collector": false,
+  "remaining_prerequisites": "Actual adopted379 owning Build/Run interface, genuine single-image Build and currentmodel/input/source/custody/fair/physical guards before the original fixed80. Independent9 tests complete, no whole379/all374games/parentACK gate."
+}
