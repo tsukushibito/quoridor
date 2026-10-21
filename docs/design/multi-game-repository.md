@@ -1,6 +1,6 @@
 # 単一Web入口とゲーム別リポジトリ構成
 
-2026-10-21の人間の直接決定として、一つのWebアプリのランディングページからコリドール／オセロを選ぶ構成を採用する。本書は到達構成と移行方針の正本である。今回保存するのは文書とBeadsの依存関係で、ディレクトリ移動、コード・依存環境の切替、オセロ実装はまだ開始しない。現在の配置と起動方法は[README](../../README.md)、既存コリドールの製品仕様は[アプリ設計](quoridor-3d-webapp-design-rust-wasm-v1.md)を参照する。
+2026-10-21の人間の直接決定として、一つのWebアプリのランディングページからコリドール／オセロを選ぶ構成を採用する。本書は到達構成と移行方針の正本である。最初の実装境界はWorktree内Pythonコードと共有依存環境の分離とし、ディレクトリ移動、Web入口変更、オセロ実装へは広げない。現在の配置と起動方法は[README](../../README.md)、既存コリドールの製品仕様は[アプリ設計](quoridor-3d-webapp-design-rust-wasm-v1.md)を参照する。
 
 実施状態・担当・依存はBeadsで管理する。文書化は `quoridor-4lc.324.12.7`、後続移行は `quoridor-4lc.324.12.9`。移行はWorktree整理 `quoridor-4lc.324.12.6` とセッション整理 `quoridor-4lc.324.12.8` の実完了に依存する。本書に別の進捗表やTODOを置かない。
 
@@ -75,9 +75,13 @@ research-data/othello/
 
 以下は後続移行で適用する到達運用である。現在のworkerが全てこの構成へ切替済みとは扱わない。[現行のタスク型研究設計](ai-research-team.md)と[Beads運用](../development/beads-workflow.md)に従って作業を継続し、移行した境界で現役手順も更新する。
 
+方針相談・研究方針判断・実行統合の既存3窓口を維持し、実装は課題別の1〜2セッションで進める。限定レビューは具体的な必要がある場合だけ追加し、常駐監督や固定ゲーム別の役割は作らない。終了した担当は成果受入れと実writer・reader・job・未回収通知の終了を確認して、ユーザーの整理許可に従ってアーカイブする。USERPAUSE、未完了adapter、現在の通知先など具体的用途のあるセッションは保護する。
+
 Worktreeは「課題ごと・一writer」に割り当てる。同じ課題の継続・修復は同じsessionとWorktreeを再用し、独立して並行する課題には別のWorktreeを使う。readonly分析・reviewに専用checkoutを一律作らず、固定した対象と証拠だけを渡す。恒久のゲーム別・役割別Worktreeやセッションは増やさない。
 
-workerは指定Worktreeの実ソースを編集し、担当範囲を整形・検証する。依存処理系や再利用可能なcacheは共有できるが、参照するPython・Rust・Wasmコードと作業出力は対象Worktreeに結び付ける。現行 `scripts/dev/project-env.sh` はGit common-dirからMainを解決し、Mainの `python` を `PYTHONPATH` に固定するため、この到達運用をまだ満たしていない。適用時に共有の依存環境とWorktree固有のコード参照を分離し、単にcwdを変えただけでWorktree側を検証したと扱わない。今回はこのscriptや環境を切り替えない。
+workerは指定Worktreeの実ソースを編集し、担当範囲を整形・検証する。依存処理系や再利用可能なcacheは共有できるが、参照するPython・Rust・Wasmコードと作業出力は対象Worktreeに結び付ける。
+
+最初のPython境界では `scripts/dev/project-env.sh` 自身の所属checkoutを `QUORIDOR_CODE_ROOT` とし、その `python` を `PYTHONPATH` に束縛する。cwdだけの変更やMain入口の呼出しをWorktree側の検証と扱わない。`PYTHONSAFEPATH=1` でcwd・スクリプト所在からの暗黙importを抑え、選択先sourceの欠落時は停止してMainへfallbackしない。Main入口はMainコードを選ぶ。`QUORIDOR_PROJECT_ROOT` はMainの依存metadata・共通配置という既存の意味を維持し、Mainのmanifest/lockと一つの既設環境をoffline/no-syncで消費する。明示setupのwriter lock、別環境・別Pythonの拒否、source時のtool pathと明示TensorRT bindingsを維持する。利用手順と実Worktree sentinel/importの限定検証は[共通Python環境](../development/rust-python-environment.md)を参照する。この境界は依存導入・lock更新、Cargo、Rust/Wasmの参照切替、配置移動、Web/Othello変更を含まない。
 
 統合担当は現在のMainからmanaged helperで課題Worktreeを作り、Beadsに目的・担当・write範囲・cwd・実資源・停止条件・検証を記録する。workerの実装後に技術受入れとMain統合を行い、必要証拠を保全し、実readerの終了を確認してからmanaged helperで撤去する。Main、Git/index/commit/push、共有Cargo書込み、共通manifest・lockの反映は引き続き統合担当の単独管理とする。現在はRoot324がこの所有者である。
 

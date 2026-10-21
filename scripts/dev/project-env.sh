@@ -15,8 +15,13 @@ export QUORIDOR_ENV_REPORT_DIR="${QUORIDOR_ENV_REPORT_DIR:-$HOME/.local/share/qu
 # Suppress ORT telemetry initialization and its :memory:.ses session sidecar.
 export ORT_DISABLE_TELEMETRY=1
 
-# Canonical Main project metadata and one persistent environment across worktrees.
+# Main owns dependency metadata; this entry selects its own checkout source.
 project_script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+project_code_root="$(git -C "$project_script_dir" rev-parse --show-toplevel)" || {
+  echo "Project code checkout is missing" >&2
+  return 2 2>/dev/null || exit 2
+}
+export QUORIDOR_CODE_ROOT="$project_code_root"
 project_common_dir="$(git -C "$project_script_dir" rev-parse --path-format=absolute --git-common-dir)"
 export QUORIDOR_PROJECT_ROOT="$(dirname -- "$project_common_dir")"
 project_bound_env="$(jq -er '.environments.project | select(type == "string" and startswith("/"))' "$QUORIDOR_PROJECT_ROOT/research-paths.json")" || { echo "Canonical project environment is missing" >&2; return 2 2>/dev/null || exit 2; }
@@ -57,7 +62,12 @@ if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
       ;;
   esac
   export VIRTUAL_ENV="$QUORIDOR_PROJECT_ENV"
-  export PYTHONPATH="$QUORIDOR_PROJECT_ROOT/python"
+  [[ -d "$QUORIDOR_CODE_ROOT/python" ]] || {
+    echo "Selected checkout Python source is missing; no Main fallback" >&2; exit 2;
+  }
+  export PYTHONPATH="$QUORIDOR_CODE_ROOT/python"
+  # Exclude cwd/script-directory injection, including a caller in Main/python.
+  export PYTHONSAFEPATH=1
   if [[ -n "${QUORIDOR_TENSORRT_ROOT:-}" ]]; then
     [[ "$QUORIDOR_TENSORRT_ROOT" == /* && -d "$QUORIDOR_TENSORRT_ROOT/python" ]] || {
       echo "Explicit TensorRT backend Python bindings are missing" >&2; exit 2;

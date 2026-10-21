@@ -25,7 +25,20 @@ bash scripts/dev/research-session.sh list
 bash scripts/dev/research-job.sh --help
 ```
 
-共通入口はMainをGit common-dirから解決し、`uv run --locked --offline --no-sync --no-python-downloads`で既設環境を使う。Python指定は共通環境のbinaryへ正規化し、明示した別Python・欠落環境・異なる版を拒否する。通常runはpackageをdownload/syncしない。Pythonスクリプトの曖昧なsystem shebangと専用training wrapperは撤去する。`PYTHONPATH`はMainの`python`を使い、別環境のsite-packagesを注入しない。既存の明示TensorRT exportでは`QUORIDOR_TENSORRT_ROOT/python`のisolated backend bindingsだけを追加する。これは別venvやfallbackではなく、既存のoptional native backend配置を保つ。
+共通入口は依存metadataのMainをGit common-dirから解決し、`uv run --locked --offline --no-sync --no-python-downloads`で既設環境を使う。Python指定は共通環境のbinaryへ正規化し、明示した別Python・欠落環境・異なる版を拒否する。通常runはpackageをdownload/syncしない。Pythonスクリプトの曖昧なsystem shebangと専用training wrapperは撤去する。
+
+コード参照は、実行した `scripts/dev/project-env.sh` 自身が属するcheckoutを `git -C <入口のディレクトリ> rev-parse --show-toplevel` で解決して `QUORIDOR_CODE_ROOT` に設定する。`PYTHONPATH` はそのcheckoutの `python` 一つへ置き換え、callerから継承したMainや別環境のpathは追加しない。選択先の `python` が欠落していれば停止し、Mainへfallbackしない。通常実行では `PYTHONSAFEPATH=1` によりcwd・スクリプトのディレクトリの暗黙追加も止める。ローカルpackageはこの `python` 以下からimportし、隣接する管理helperは既存の明示pathで読み込む。既存の明示TensorRT exportでは `QUORIDOR_TENSORRT_ROOT/python` のisolated backend bindingsだけを先頭へ追加する。これは別venvやfallbackではなく、既存のoptional native backend配置を保つ。
+
+Worktreeを選ぶには、そのWorktreeの入口を指定する。cwdだけを変更してMainの入口を呼んでもMainコードを選ぶ。スクリプト引数のpathは従来どおりcallerのcwdから解釈されるため、別cwdから使う場合は対象Worktreeのスクリプトも絶対pathで指定する。
+
+```bash
+# 対象Worktree内から、その入口と管理スクリプトを実行する。
+bash scripts/dev/project-env.sh python -B scripts/dev/verify-python-environment.py
+# 別cwdからは対象Worktreeの入口を明示する。-mのimportもそのcheckoutを使う。
+bash /path/to/managed-worktree/scripts/dev/project-env.sh python -B -c 'import quoridor_training; print(quoridor_training.__file__)'
+```
+
+`QUORIDOR_PROJECT_ROOT` は引き続きMainの依存metadata・共通配置を示す。setupと環境verifier、lifecycleの共有環境解決が使う意味を変えず、asset/environmentの共通pathをコード選択のためにWorktreeへ付け替えない。環境をsourceした場合も二つのrootとtool pathは設定するが、既存shellの `PYTHONPATH`・`PYTHONSAFEPATH` は変更せず、Python実行や同期・lock取得は行わない。
 
 共有環境のreaderは実行期間だけshared flockを持つ。非同期jobのsupervisorも同じ入口を通る。明示setupは同じlockのexclusive nonblocking writerで、readerがいる間は同期を拒否する。これは環境writer/readersの排他であり、status registry・scheduler・科学runの追加許可ではない。旧launcherの消費者は新lockを持たないため、最初のcutoverでは実停止を別途確認する。
 
@@ -38,6 +51,9 @@ bash scripts/dev/research-job.sh --help
 bash scripts/dev/project-env.sh python -B scripts/dev/verify-python-environment.py
 # 別途supported smokeで実importを確認; weights/fit/game/CUDA初期化はしない。
 bash scripts/dev/project-env.sh python -B scripts/dev/verify-python-environment.py --imports
+# managed worktree内での実コード選択、Main入口、Main cwdへの漏れ、sourceと明示guard。
+# 一時sentinelは対象Worktree/pythonにだけ作成して回収する。
+bash scripts/dev/project-env.sh python -B scripts/dev/test_project_env.py
 ```
 
 管理入口は科学moduleをlazyのまま扱う。metadata/import smokeは数値資格やモデルPASSではない。native BuildのPythonツール由来記録と、現在Python phaseが使うregular binary/venv/pyvenv.cfgは別入力として束縛する。過去のnative imageをPython caller移行のためだけにrebuildしない。現役fit/analysisのExperimentはcurrent regular binaryと`pyvenv.cfg`をordered inputsへ加え、venv `bin/python`をargvとし、元のmodel/input/recipe/rules/numerical guardsを維持する。

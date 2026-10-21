@@ -2,7 +2,7 @@
 
 ローカルで2人対戦、または学習不要のRust B0 AIとの対戦ができます。ルールと履歴はメインスレッドのRust WebAssemblyが管理し、AI探索は別のWebAssembly Workerで動きます。盤面はThree.jsの基本描画です。実際の描画方式は「設定・保存」内の「表示と操作の設定」に表示され、GIはオフです。VXGI/TRAAの実装や実GPUでの確認は後続作業です。
 
-今後は一つのWebアプリのゲーム選択画面からコリドール／オセロへ進む[複数ゲーム構成](docs/design/multi-game-repository.md)を採用します。Worktree・セッションの先行整理後に段階適用する方針で、現在の配置・起動方法はまだ変更していません。
+今後は一つのWebアプリのゲーム選択画面からコリドール／オセロへ進む[複数ゲーム構成](docs/design/multi-game-repository.md)を採用します。[共有依存環境とWorktree内コード参照](docs/development/rust-python-environment.md)を分離し、Web入口とゲーム別配置は設計に沿って段階適用します。現在のWeb起動方法は以下を参照してください。
 
 実写の室内HDRIを背景と材質の環境光・反射に使い、木製テーブルの上に木製盤を置いた空間を表示します。生成木目、面取り、塗膜、GTAOによる接触部の遮蔽を組み合わせています。IBLに、HDRIの主光源方向から計算したDirectionalLightと影を加えています。採用アセットの出所・ライセンス・生成プロンプトと検証結果は[テーブル空間の描画強化報告](docs/reports/tabletop-rendering.md)に記録します。
 
