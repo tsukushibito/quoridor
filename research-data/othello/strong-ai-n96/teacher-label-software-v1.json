@@ -1,0 +1,138 @@
+{
+  "schema": "othello-teacher-label-software-v1",
+  "issue": "quoridor-n96.1",
+  "source": [
+    {
+      "relative": "games/othello/python/othello_training/data.py",
+      "source": {
+        "path": "/workspaces/quoridor/.worktree/othello-core-n96/games/othello/python/othello_training/data.py",
+        "bytes": 13283,
+        "mode": "0644",
+        "sha256": "58c04c927021eb53fa9d12ab07042848ee37146e7a28cf81ba470b0f9a331ce1"
+      },
+      "before": {
+        "path": "/workspaces/quoridor/games/othello/python/othello_training/data.py",
+        "bytes": 6940,
+        "mode": "0644",
+        "sha256": "efd8ec4a2e29daa400d1a867683e7c4d8d485045499a8831bf7b37a698805863"
+      }
+    },
+    {
+      "relative": "games/othello/python/othello_training/train.py",
+      "source": {
+        "path": "/workspaces/quoridor/.worktree/othello-core-n96/games/othello/python/othello_training/train.py",
+        "bytes": 7548,
+        "mode": "0644",
+        "sha256": "c1dd05aa9c4fb45976edf14a5cb01784f5d7f4bec894a3bfd28d5ed5921bd309"
+      },
+      "before": {
+        "path": "/workspaces/quoridor/games/othello/python/othello_training/train.py",
+        "bytes": 6520,
+        "mode": "0644",
+        "sha256": "0c579f99cca8dd51f006c981c6b53b86404c20b1f376d05ae3144bf1b14a3d36"
+      }
+    },
+    {
+      "relative": "games/othello/tests/python/test_pattern_data.py",
+      "source": {
+        "path": "/workspaces/quoridor/.worktree/othello-core-n96/games/othello/tests/python/test_pattern_data.py",
+        "bytes": 5606,
+        "mode": "0644",
+        "sha256": "332a6ebaa0ba308ed9cb4cb5e4829549148f0846ccc70236d764317625c6058a"
+      },
+      "before": {
+        "path": "/workspaces/quoridor/games/othello/tests/python/test_pattern_data.py",
+        "bytes": 4754,
+        "mode": "0644",
+        "sha256": "aac63e55b78b2730ad3537590e33116905dcb7caa5950972dafb70e605e7dc06"
+      }
+    },
+    {
+      "relative": "games/othello/tests/python/test_pattern_teacher.py",
+      "source": {
+        "path": "/workspaces/quoridor/.worktree/othello-core-n96/games/othello/tests/python/test_pattern_teacher.py",
+        "bytes": 7941,
+        "mode": "0644",
+        "sha256": "15a5b5169cd871f7018f504ed6b7ae5cef6617afb8e3b06d1d46d6eb20f642af"
+      },
+      "before": null
+    },
+    {
+      "relative": "games/othello/python/othello_training/README.md",
+      "source": {
+        "path": "/workspaces/quoridor/.worktree/othello-core-n96/games/othello/python/othello_training/README.md",
+        "bytes": 9286,
+        "mode": "0644",
+        "sha256": "4a9cd56c5ddb1aeb04e1176a5bb81f169ada30330b125f5d8947b1cee8338f76"
+      },
+      "before": {
+        "path": "/workspaces/quoridor/games/othello/python/othello_training/README.md",
+        "bytes": 4635,
+        "mode": "0644",
+        "sha256": "c36d727ea559a5712ff6711a602ea8cc4e8914536e64ea92848ad5c3c4de2613"
+      }
+    }
+  ],
+  "checks": [
+    {
+      "name": "teacher-parser-tests-v1",
+      "scope": "actual worker source-only result reused without replay",
+      "process": {
+        "path": "/workspaces/quoridor/.worktree/othello-core-n96/.artifacts/othello-core-n96/teacher-parser-tests-v1/check.process.json",
+        "bytes": 1292,
+        "mode": "0600",
+        "sha256": "fe74f6e3e77aad20637827073dba855bae58ad838577109b0d2cd362841acf56"
+      },
+      "diskSignalRestoration": "pending"
+    },
+    {
+      "name": "teacher-parser-lint-v1",
+      "scope": "actual worker source-only result reused without replay",
+      "process": {
+        "path": "/workspaces/quoridor/.worktree/othello-core-n96/.artifacts/othello-core-n96/teacher-parser-lint-v1/check.process.json",
+        "bytes": 1484,
+        "mode": "0600",
+        "sha256": "93d1e4f9d6516a11fb93a99b54e21fa44e7cf33d1e27c14375567fc0a2e1a484"
+      },
+      "diskSignalRestoration": "pending"
+    },
+    {
+      "name": "teacher-parser-format-check-v1",
+      "scope": "actual worker source-only result reused without replay",
+      "process": {
+        "path": "/workspaces/quoridor/.worktree/othello-core-n96/.artifacts/othello-core-n96/teacher-parser-format-check-v1/check.process.json",
+        "bytes": 1493,
+        "mode": "0600",
+        "sha256": "0b32b0181b4087da51ffedbdb0bf394c71a939028708cfdc98ee5e0f5ee05aac"
+      },
+      "diskSignalRestoration": "pending"
+    },
+    {
+      "name": "teacher-parser-readme-format-check-v1",
+      "scope": "actual worker source-only result reused without replay",
+      "process": {
+        "path": "/workspaces/quoridor/.worktree/othello-core-n96/.artifacts/othello-core-n96/teacher-parser-readme-format-check-v1/check.process.json",
+        "bytes": 1410,
+        "mode": "0600",
+        "sha256": "28f828a32c909db99cb0f4583f4e1208f29de4cbce559c39a14c920c285c6359"
+      },
+      "diskSignalRestoration": "pending"
+    }
+  ],
+  "archive": {
+    "path": "/workspaces/quoridor/research-data/othello/strong-ai-n96/teacher-label-software-v1-checks.tar.gz",
+    "bytes": 2133,
+    "mode": "0644",
+    "sha256": "ebfd6f4d6c3bb0937afd9c86e57192f6a1ed015a2e597ce8181a932975dcd2a8"
+  },
+  "software_scope": "Explicit kind/STM engine-disc scale/provenance, dynamic T/V/H counts, H exclusion before features and fit selector; source-only related12 tests. Runtime/features/optimizer math/model shape unchanged.",
+  "row_contract": "Seven required teacher fields plus exactly five optional completedDepth/reportedProbability/internalElapsedMs/outerWallMs/requestedTimeMs. Producer-only reportedBudgetMs/nodes/scoreKind retained in raw attempts, not trainer rows.",
+  "unverified": [
+    "actual producer/loader integrated row before real generation",
+    "actual128 openings/exclusions and prelabel binding",
+    "fixed strong teacher actual estimates/resources/storage",
+    "new related independent teacher score/label boundary confirmation",
+    "strong-teacher fit, learned checkpoint/parity and strength/browser"
+  ],
+  "limits": "Previous tiny32MiB andF1GiB not transferred. Existing inner trainSeconds row polling remains; wholeoperation Root guardian authoritative. No fit/search/generation/probe/model/default adoption from this software integration."
+}

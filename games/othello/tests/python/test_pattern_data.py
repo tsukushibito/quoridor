@@ -7,10 +7,13 @@ from unittest.mock import patch
 from othello_training import data, pattern
 
 
-def inputs():
+def inputs(train=16, validation=8, holdout=0):
     """Synthetic parser fixtures only: no rules, games, training data or fit."""
     rng = random.Random(20261022)
-    families = [f"development/{i:02}" for i in range(24)]
+    total = train + validation + holdout
+    families = [
+        f"development/{i:02}" if i < train + validation else f"final/{i:02}" for i in range(total)
+    ]
     openings, rows = [], []
     for index, family in enumerate(families):
         board = [0] * 64
@@ -19,24 +22,31 @@ def inputs():
             board[cell] = 1 if j < 8 else 2
         position = dict(version=1, board=board, toMove=1)
         openings.append(dict(openingFamily=family, state=position))
-        rows.append(
-            dict(
-                gameId=f"game/{index}",
-                openingFamily=family,
-                state=position,
-                labelKind="gameOutcome",
-                targetCentidiscs=200,
+        if index < train + validation:
+            rows.append(
+                dict(
+                    gameId=f"game/{index}",
+                    openingFamily=family,
+                    state=position,
+                    labelKind="gameOutcome",
+                    targetCentidiscs=200,
+                )
             )
-        )
     config = dict(
         version=1,
         seed=20261022,
-        trainFamilies=families[:16],
-        validationFamilies=families[16:],
+        trainFamilies=families[:train],
+        validationFamilies=families[train : train + validation],
+        holdoutFamilies=families[train + validation :],
+        familyCounts=dict(train=train, validation=validation, holdout=holdout),
+        maxFamilies=total,
         openings=openings,
         finalEvaluationNamespace="final/",
         labelSource="weak-simple-policy-game-outcome",
+        labelKind="gameOutcome",
+        teacher=None,
         samplePlacements=list(range(8, 61, 4)),
+        maxObservationsPerFamily=14,
         maxEpochs=64,
         learningRate=0.1,
         ridge=0.001,
@@ -49,7 +59,7 @@ def inputs():
 
 
 def load(config, rows):
-    payload = ("\n".join(json.dumps(row) for row in rows) + "\n").encode()
+    payload = ("\n".join(json.dumps(row) for row in rows) + ("\n" if rows else "")).encode()
     with patch.object(data, "bounded_bytes", return_value=payload):
         return data.load_dataset("in-memory-synthetic-parser-fixture", config)
 
@@ -103,15 +113,22 @@ class PatternData(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "multiple families"):
             load(config, rows)
 
-    def test_bad_target_schedule_and_missing_family_reject(self):
+    def test_bad_target_schedule_and_missing_family_coverage(self):
         for target in [True, 1.5, 200.0, 201, 6500]:
             config, rows = inputs()
             rows[0]["targetCentidiscs"] = target
             with self.assertRaises(ValueError):
                 load(config, rows)
         config, rows = inputs()
-        with self.assertRaisesRegex(ValueError, "all24"):
-            load(config, rows[:-1])
+        parsed = load(config, rows[:-1])
+        self.assertEqual(len(parsed.validation), 7)
+        self.assertEqual(
+            parsed.coverage["validation"][config["validationFamilies"][-1]],
+            dict(observed=0, unobservedCapacity=14),
+        )
+        data.validate_fit_splits(parsed, config)
+        with self.assertRaisesRegex(ValueError, "nonempty"):
+            data.validate_fit_splits(load(config, []), config)
         bad = copy.deepcopy(rows[0])
         bad["gameId"] = "other-game"
         with self.assertRaisesRegex(ValueError, "duplicate"):

@@ -1,4 +1,4 @@
-"""Deterministic tiny normalized SGD on supplied outcome JSONL; no generation."""
+"""Deterministic normalized SGD on explicit outcome/teacher JSONL; no generation."""
 
 import argparse
 import hashlib
@@ -52,6 +52,7 @@ def sgd_step(parameters, sparse, target, learning_rate=0.1, ridge=0.001):
 def fit(dataset, config):
     """Validation selects best quantized/clamped loss; only train rows update."""
     data.validate_config(config)
+    data.validate_fit_splits(dataset, config)
     deadline = time.monotonic() + config["maxTrainSeconds"]
     rng = np.random.Generator(np.random.PCG64(config["seed"]))
     parameters = np.zeros(pattern.PARAMETERS, dtype=np.float64)
@@ -146,9 +147,7 @@ def main(argv=None):
             parameterCount=pattern.PARAMETERS,
             trainRows=len(dataset.train),
             validationRows=len(dataset.validation),
-            inferredFinalBlackMinusWhite=dataset.inferred_final_black_minus_white,
-            labelProvenance="weak simple-policy reached-game outcome supplied by Rust generation; not minimax or external teacher truth",
-            terminalVerification="trainer checks cross-row STM consistency only; actual rules/termination evidence belongs to generating Rust service",
+            **label_metadata(dataset, config),
             elapsedSeconds=time.monotonic() - started,
             checkpoints={
                 p.name: dict(
@@ -167,6 +166,33 @@ def main(argv=None):
             json.dumps(dict(error=str(error), type=type(error).__name__), indent=2) + "\n"
         )
         raise
+
+
+def label_metadata(dataset, config):
+    """Label meaning follows declared kind, never run ID, depth or probability."""
+    result = dict(
+        labelProvenance=dict(labelKind=config["labelKind"], labelSource=config["labelSource"]),
+        familyCoverage=dataset.coverage,
+    )
+    if config["labelKind"] == "gameOutcome":
+        result["inferredFinalBlackMinusWhite"] = dataset.inferred_final_black_minus_white
+        result["terminalVerification"] = (
+            "cross-row STM consistency only; actual rules/reached termination evidence belongs to generating Rust service"
+        )
+    else:
+        result["labelProvenance"]["teacherId"] = config["teacher"]["id"]
+        result["teacherVerification"] = (
+            "caller-fixed source/weights/adapter/args in config; preserved reported bounds/bool-or-null proof; engine empty-award estimates are not our exact actual-disc solver truth"
+        )
+        rows = dataset.train + dataset.validation
+        result["teacherMetadataAvailability"] = {
+            key: dict(
+                reported=sum(row.teacher[key] not in (None, "UNKNOWN") for row in rows),
+                unknown=sum(row.teacher[key] in (None, "UNKNOWN") for row in rows),
+            )
+            for key in sorted(data.TEACHER_OPTIONAL)
+        }
+    return result
 
 
 if __name__ == "__main__":
