@@ -29,14 +29,14 @@ class NoResources:
     def __init__(self, _spec):
         pass
 
-    def check(self):
-        pass
+    def check(self, *, extra_B=0):
+        assert type(extra_B) is int and extra_B >= 0
 
 
 class ConsumerPublisherIntegration(unittest.TestCase):
     def setUp(self):
         tmp = EVIDENCE / "TMP"
-        tmp.mkdir(exist_ok=True)
+        tmp.mkdir(parents=True, exist_ok=True)
         self.tmp = tempfile.TemporaryDirectory(prefix="synthetic-consumer-", dir=tmp)
         self.addCleanup(self.tmp.cleanup)
         self.root = Path(self.tmp.name)
@@ -57,8 +57,9 @@ class ConsumerPublisherIntegration(unittest.TestCase):
             "manifest": manifest,
             "lock": lock,
             "cargo_configs": [],
+            "compiled_sources": self.compiled,
         }
-        self.artifact = self.file("private/runner", b"SYNTHETIC artifact, never executed")
+        self.artifact = self.file("target/private/runner", b"SYNTHETIC artifact, never executed")
         # Saved adapter tests use synthetic compiler/Git facts; the actual owning
         # BUILD checks are covered by test_build_provenance.py, never claimed here.
         source_port = mock.patch.object(publisher, "source_check", return_value=None)
@@ -165,7 +166,12 @@ class ConsumerPublisherIntegration(unittest.TestCase):
                 "source": self.source_info,
                 "tools": {},
                 "env": {},
-                "target": str(self.root),
+                "target": str(self.root / "target"),
+                "private": self.artifact["path"],
+                "TMP": str(self.root / "TMP"),
+                "data_root": str(self.root / "synthetic-native-output"),
+                "finalizers": [],
+                "limits": {"owned_B": 1048576},
             },
         )
         runtime = self.root / f"job-{self.serial}"
@@ -273,9 +279,23 @@ class ConsumerPublisherIntegration(unittest.TestCase):
             "owed_finalizers": owed or [],
         }
         if kind == "build":
+            # Synthetic metadata for the maintained finalizer's current adoption
+            # contract. No prior software receipt or actual BUILD is asserted.
+            source_adoption = self.document(
+                prefix + "/source-adoption.json",
+                {
+                    "schema": "quoridor.research.source-adoption.v1",
+                    "status": "ACCEPTED",
+                    "source": self.source_info,
+                    "prior_software": None,
+                    "limitation": "SYNTHETIC finalizer fixture; no source qualification",
+                },
+            )
             candidate.update(
                 artifact=self.artifact,
                 source=self.source_info,
+                source_adoption=source_adoption,
+                compiled_sources=self.compiled_hashes,
                 cargo_artifact=cargo_artifact,
                 artifact_target="quoridor-runner",
                 tools={},
@@ -528,7 +548,7 @@ class ConsumerPublisherIntegration(unittest.TestCase):
 
     def test_stopped_generation_publisher_through_consumer_keeps_failed_origin(self):
         producer_path = Path(
-            "/workspaces/quoridor/.worktree/research-lifecycle-maintenance/scripts/dev/research-lifecycle.py"
+            "/workspaces/quoridor/tools/research-session/stopped_generation_publisher_v2.py"
         )
         self.assertEqual(
             hashlib.sha256(producer_path.read_bytes()).hexdigest(),
@@ -537,6 +557,12 @@ class ConsumerPublisherIntegration(unittest.TestCase):
         spec = importlib.util.spec_from_file_location("combined_stopped_publisher", producer_path)
         actual = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(actual)
+        # The stopped owner requires its exact arena34/research35 key domains.
+        # Populate only synthetic metadata hashes, never real source/model data.
+        self.compiled = {key: self.source for key in actual.RESEARCH_SOURCE_KEYS}
+        self.compiled_hashes = {key: ref["sha256"] for key, ref in self.compiled.items()}
+        self.source_info["compiled_sources"] = self.compiled
+        self.build_ref, self.build = self.operation("build")
         # Canonical plan is small source metadata only; no actual book/model/artifact read.
         plan = actual.bound(
             "/workspaces/quoridor/research-data/ai-sigma/value-search-strength355/plan-v1.json",
@@ -658,7 +684,7 @@ class ConsumerPublisherIntegration(unittest.TestCase):
             ],
         }
         data = actual.collect_data(generation_spec, experiment)
-        self.assertEqual(data["status"], "PASS")  # Metadata correspondence only.
+        self.assertEqual(data["status"], "PASS", data["errors"])  # Metadata correspondence only.
         data["status"] = "FAILED"
         data["errors"] = [
             {"stage": "generation_metadata", "message": "original arena34/research35 mismatch"}
@@ -720,7 +746,7 @@ class ConsumerPublisherIntegration(unittest.TestCase):
     def test_current_caller_intent_membership_and_originating_errors_remain(self):
         # Exact stopped interface shape; this is synthetic source metadata, not RUN admission.
         interface_path = Path(
-            "/workspaces/quoridor/.worktree/research-lifecycle-maintenance/.artifacts/generation-bootstrap355-v1/caller-repair-v2/interface.json"
+            "/workspaces/quoridor/tools/research-session/fixtures/stopped-caller-interface-v2.json"
         )
         raw_interface = interface_path.read_bytes()
         self.assertEqual(
