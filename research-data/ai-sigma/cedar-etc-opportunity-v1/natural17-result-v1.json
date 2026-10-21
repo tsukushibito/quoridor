@@ -1,0 +1,124 @@
+{
+  "issue": "quoridor-4lc.324.33",
+  "status": "ACCEPTED_FINITE_OPPORTUNITY_INSUFFICIENT_STOP_NO_CANDIDATE",
+  "minimum": {
+    "issue": "quoridor-4lc.324.33",
+    "decision": "FINITE_OPPORTUNITY_INSUFFICIENT_STOP_NO_CANDIDATE",
+    "candidate": null,
+    "normal_manifest_data": "PASS",
+    "D5_DepthComplete": 17,
+    "UNKNOWN": 0,
+    "calls": 17,
+    "sessions": 4,
+    "nodes": 3185895,
+    "selected_parents": 130,
+    "child_lookups": 12867,
+    "occupied_slots": 4094,
+    "witnessed_true_TT_cuts": 1,
+    "distinct_cut_roots": [16],
+    "required_cuts": 2,
+    "required_roots": 2,
+    "confirmation72": "UNISSUED",
+    "games": "UNISSUED",
+    "original_native_result": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-etc-opportunity-v1/discovery17-v1/native/run-000/result.json",
+      "sha256": "f27e1ee859bc4ff51d2724ad8447ae1cbf71c7a6d416b12470d746713db2e9a8",
+      "bytes": 233633,
+      "mode": "0644"
+    },
+    "summary": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-etc-opportunity-v1/discovery17-v1/analysis-v1/summary.json",
+      "sha256": "a8ce03211b0e391d1cb742fff9dee9643bd8b65c5f1763cf3015461482f1d5e5",
+      "bytes": 10177,
+      "mode": "0644"
+    },
+    "witness": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-etc-opportunity-v1/discovery17-v1/analysis-v1/true-cut-witnesses.json",
+      "sha256": "00c35014f03f274e52501cf148abebe3e21ce0aff420b04214ffa8acaae7b1d2",
+      "bytes": 6345,
+      "mode": "0644"
+    },
+    "report": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-etc-opportunity-v1/discovery17-v1/analysis-v1/report-ja.md",
+      "sha256": "9cb40ddaf63253420308290f69956247caaade16af66b306bfa1ae7218da464f",
+      "bytes": 2718,
+      "mode": "0644"
+    },
+    "actual_whole_STOP": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-etc-opportunity-v1/discovery17-v1/collection-v1/native-normal-source-STOP.json",
+      "sha256": "0aeb96d72926adf8b390292156cbb63d6deedd817cee6978bb86fb5a94f840d1",
+      "bytes": 2098,
+      "mode": "0644"
+    },
+    "ended_holding": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-etc-opportunity-v1/discovery17-v1/collection-v1/ended-holding.json",
+      "sha256": "de4334248881256cf2e5adf2aa2a4ef45cb93fa744a39033e8524f3e65b8f504",
+      "bytes": 551,
+      "mode": "0644"
+    },
+    "interpretation": "One natural strict Upper cut establishes finite possibility; insufficient preregistered eligibility, no new candidate/performance/games. No impossibility/strength/default claim.",
+    "outer_seconds_once": 23.97606525500305,
+    "nested_added": 0,
+    "fullfees": "UNKNOWN"
+  },
+  "independent_review": {
+    "issue": "quoridor-4lc.324.33.2",
+    "at": "2026-10-21T08:45:16.293718+00:00",
+    "status": "ROOT_ACCEPTED_FIXED_FINITE_INTERPRETATION",
+    "target_sha256": "33c11ee91954390dc0bb2751a047bd0caf46a3e520a337ace5812a4fc8b9453b",
+    "review_verdict": "CONCLUSION_CLEAR",
+    "essential": 0,
+    "ordinary": 0,
+    "review_evidence": [
+      {
+        "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/cedar-etc-opportunity-review-v1/finite17-v1/minimum.json",
+        "sha256": "10b19f1fd574e88f65d20751effcd8e008bcf2a0fb38220a9f51b2caf9f356af",
+        "bytes": 3583,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/cedar-etc-opportunity-review-v1/finite17-v1/control.json",
+        "sha256": "00fced386196278d1c94b33a70f9993815e586c15f25b147ec3435ca5e89bbb5",
+        "bytes": 1935,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/cedar-etc-opportunity-review-v1/finite17-v1/source-free-correspondence.json",
+        "sha256": "75f5b12857d52e985ee84ce1b97c6067a89543633624e4f0be23a362359881f3",
+        "bytes": 6489,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/cedar-etc-opportunity-review-v1/finite17-v1/reader-STOP.json",
+        "sha256": "7ef24f1d3d5f0a5e171b3bdb1ce46183686eb9e6980029a1321c0e775af72fb2",
+        "bytes": 9046,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/cedar-etc-opportunity-review-v1/finite17-v1/returned-STOP.json",
+        "sha256": "7c19d7771744a5fa63ae0ba3e0b6d872a7a55fc07dbf11f85cdd5bcb4f6b82eb",
+        "bytes": 1850,
+        "mode": "0644"
+      }
+    ],
+    "conclusion": "FINITE_OPPORTUNITY_INSUFFICIENT_STOP_NO_CANDIDATE",
+    "candidate": null,
+    "unique_trueTTcuts": 1,
+    "distinct_cut_roots": [16],
+    "duplicate_witness_slots_are_not_two_cuts": true,
+    "required_cuts": 2,
+    "required_roots": 2,
+    "confirmation72": "UNISSUED",
+    "games": "UNISSUED",
+    "limits": "One finite natural strict Upper possibility at rank0; no demonstrated benefit beyond first child, no general impossibility/speed/strength/default/IID/no-harm or new rights. All17 D5 complete/3185895 nodes; overlapping flags distinct denominators. Old31/MPC/failures/NULL/masks/UNKNOWN fees unchanged.",
+    "exact_reviewer_close_reason": "Root accepted10b19f1f CONCLUSION_CLEAR e0/o0 for fixed33c11ee9 original natural17 finite interpretation: one strict Upper event/root16 normalrank0, duplicate witness slots not two cuts; frozen2cuts/2roots unmet. FINITE_OPPORTUNITY_INSUFFICIENT_STOP_NO_CANDIDATE, candidateNULL/confirmation72/gamesUNISSUED. No benefit/speed/strength/default/general impossibility or new science rights. Original failures/NULL/masks/costUNKNOWN preserved. Root acceptance .artifacts/research-team/integration324/cedar-etc-opportunity-v1/finite17-review-v1/Root-final-acceptance.json",
+    "administration_not_gate": true
+  },
+  "archive": "research-data/ai-sigma/cedar-etc-opportunity-v1/natural17-evidence-v1.tar.gz",
+  "manifest": "research-data/ai-sigma/cedar-etc-opportunity-v1/natural17-evidence-manifest-v1.json",
+  "unique_true_cut_witnesses": 1,
+  "duplicate_witness_slots_not_independent": true,
+  "no_new_science_or_refill": true,
+  "comparison_only_source_retirement": "Private preparation returned; Root adoption and necessary limited software/current baseline remain separate",
+  "old_ETC31_MPC256_failures_pauses_defaults_models": "UNCHANGED"
+}
