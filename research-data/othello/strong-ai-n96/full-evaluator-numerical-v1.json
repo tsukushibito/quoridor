@@ -1,0 +1,186 @@
+{
+  "schema": "othello.full-evaluator-numerical.v1",
+  "engineCommit": "570d5e0a478c9d720d75de06a5d31995f412704a",
+  "sourceCommit": "b6ecd5f3",
+  "job": "0921ca04-cda9-46a8-8218-593881d63009",
+  "acceptance": "Full16-shape/64-occurrence/60-placement-phase scalar evaluator with original real weights; original generic equality and native/Wasm/incremental accepted",
+  "result": {
+    "scope": "First full scalar evaluator/realweight decode/native-Wasm incremental unit accepted, not full search clone/strength/actual upstream SIMD execution",
+    "sourceCommit": "b6ecd5f3",
+    "engineCommit": "570d5e0a478c9d720d75de06a5d31995f412704a",
+    "counts": {
+      "cases": 2032,
+      "base": 127,
+      "phases": [
+        32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32,
+        32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32,
+        32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 80
+      ],
+      "terminal": 64,
+      "mustPass": 32,
+      "H": 0,
+      "weightsRead": 0,
+      "purpose": "frozen source numerical fixtures, development-observed series plus stated synthetic boundaries"
+    },
+    "realWeights": [
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/tools/othello-baselines-n96-v1/egaroucid/bin/resources/eval.egev2",
+        "bytes": 38243826,
+        "mode": "0644",
+        "sha256": "0a8acbcbc23067933627f1bcc83c3f7ae6b7ff3e603d174a3364271fcaeeef2f"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/tools/othello-baselines-n96-v1/egaroucid/bin/resources/eval_move_ordering_end.egev",
+        "bytes": 472392,
+        "mode": "0644",
+        "sha256": "bd908885e8bb85e72a9be2b0399f8ca52ed40a138bcaaecca3d13710945b9a93"
+      }
+    ],
+    "nativeOracle": {
+      "completed": 2032,
+      "failed": 0,
+      "UNRUN": 0,
+      "interpretation": "original generic"
+    },
+    "nativeWasm": {
+      "comparisons": 4064,
+      "interpretations": ["generic", "scalar SIMD table interpretation"]
+    },
+    "actualWeightIncremental": "2 recorded complete series;120 placements+1pass, exact full recompute/play/undo/reapply in both table interpretations PASS",
+    "genericVsScalarSimdValuesDifferentOnTheseCases": 0,
+    "wholeSecondsOnce": 4.834016124019399,
+    "refs": [
+      {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-evaluator-numerical-v1/config.json",
+        "bytes": 11536,
+        "mode": "0644",
+        "sha256": "0e01692ee10246ed39207f609d40113059976cd37bba74c538ec80ad9ae3d1b5"
+      },
+      {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-evaluator-numerical-v1/cases.json",
+        "bytes": 469522,
+        "mode": "0644",
+        "sha256": "00ee3448ee97274335d32c2cc01a65bd02098c907c004de616891dbbf63fc07e"
+      },
+      {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-evaluator-numerical-v1/case-census.json",
+        "bytes": 710,
+        "mode": "0644",
+        "sha256": "b7e931978dee6fae9a1a6becf6a9b528bbc4dd3e0156dd861b4ddcdf86679da4"
+      },
+      {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-evaluator-numerical-v1/preweight-freeze.json",
+        "bytes": 1268,
+        "mode": "0644",
+        "sha256": "7d67d44a55e05619896b2137f41108c38f58cd19d620075b2a3900fcbea37572"
+      },
+      {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-evaluator-numerical-v1/native-oracle.jsonl",
+        "bytes": 7018784,
+        "mode": "0644",
+        "sha256": "e27d458033738e047166482bd104c31c50a3c2a7438b03851e6ad2d356b43999"
+      },
+      {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-evaluator-numerical-v1/native-result.json",
+        "bytes": 883,
+        "mode": "0644",
+        "sha256": "7c20c551923491be94c2b9a37b278ca18fa887f80e933e637cb6e76d5e6275e7"
+      },
+      {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-evaluator-numerical-v1/wasm.jsonl",
+        "bytes": 3230720,
+        "mode": "0644",
+        "sha256": "31de4f8420a386468461da9583947f44992471bc56f72e54123d360a74cc2a73"
+      },
+      {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-evaluator-numerical-v1/wasm-result.json",
+        "bytes": 189,
+        "mode": "0644",
+        "sha256": "d93416412da8cab2d08478d28288f234b2bd34de7adccc95ac163cc688ad288e"
+      },
+      {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-evaluator-numerical-v1/actual-weight-incremental.log",
+        "bytes": 637,
+        "mode": "0644",
+        "sha256": "f139e25fa4a6cc59bb104287fe68552062b56704d58986758d9f6d67084d7199"
+      },
+      {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-evaluator-numerical-v1/qualification.json",
+        "bytes": 14435,
+        "mode": "0644",
+        "sha256": "229348de8ce71d4bd220bdacc7be569ffad65ebded184bd44f0d0b7aae6016e3"
+      },
+      {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-evaluator-numerical-v1/runtime/result.json",
+        "bytes": 525,
+        "mode": "0600",
+        "sha256": "563ef654c865ff0aded0d73556f62a21e0db2cfbb2254ad0a3219b6f158d1ddb"
+      },
+      {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-evaluator-numerical-v1/runtime/output.log",
+        "bytes": 826,
+        "mode": "0644",
+        "sha256": "39514bf649d1fd9f5b79c2b8e4bb4426a74941a2f679c904a2a8a621e08be3af"
+      }
+    ],
+    "retainedBytesAtJob": 10972729,
+    "sourceReview": "04bf6873 SOURCE_CLEAR for fixed11",
+    "RSSPeak": null,
+    "provenance": "Case census frozen before actual weight hash/read/decode; Root required source/image/weight identities checked by original pipeline; no H/teacher/fit/RNG/search/new games",
+    "archive": "deferred until actual435timedSTOP; rawOWN refs remain held",
+    "priorResults": "tiny/896/32game3W2D27L/.125/rejected and defaults unchanged"
+  },
+  "fixture": {
+    "recordedCompleteSeries": 2,
+    "recordedPlacements": 120,
+    "recordedPasses": 1,
+    "baseStates": 127,
+    "originalRecordStates": 123,
+    "explicitSyntheticBoundaryStates": 4,
+    "D4": 8,
+    "colorVariants": 2,
+    "cases": 2032,
+    "terminal": 64,
+    "mustPass": 32,
+    "H": 0,
+    "frozenBeforeWeightRead": true
+  },
+  "actualCommands": 4,
+  "wholeSecondsOnce": 4.834016124019399,
+  "nestedTimesAdded": false,
+  "tableBytes": {
+    "encodedMidgame": 38243826,
+    "encodedOrdering": 472392,
+    "encodedTotal": 38716218,
+    "decodedMidgame": 73491000,
+    "decodedOrdering": 472392,
+    "decodedTotal": 73963392
+  },
+  "runtimeRSSPeak": null,
+  "limits": [
+    "Actual upstream SIMD/AVX callable parity remains UNRUN; scalar SIMD table interpretation is explicit",
+    "Full faithful search port, performance, strength and rendered browser fullweight load remain UNRUN",
+    "No H, teacher/fit/search/new game/RNG/CI execution; no old successful suite replay",
+    "No product/default change or permission claim for weight publication/redistribution",
+    "Decoded byte count is not runtime RSS/peak or a Worker256MiB guarantee",
+    "Full64 terminal path skips midgame table; early-terminal winner-empties differs from own actual-disc exact"
+  ],
+  "software": {
+    "path": "/workspaces/quoridor/research-data/othello/strong-ai-n96/full-evaluator-software-v1.json",
+    "bytes": 8236,
+    "mode": "0644",
+    "sha256": "6558d3c60733d9f22e76b679ca2aca451a1cf5abb9988ea3c0d68a59e43e4c76"
+  },
+  "archive": {
+    "path": "/workspaces/quoridor/research-data/othello/strong-ai-n96/full-evaluator-numerical-v1-checks.tar.gz",
+    "bytes": 547964,
+    "mode": "0644",
+    "sha256": "57ce89f7e1ca34f8732fffc6ba453a0b9fc2acd1dfe1303a6b95cca5ffff6a06"
+  },
+  "archiveMembers": 40,
+  "archiveContainsWeightBodies": false,
+  "provenance": "Two already development-observed complete series plus explicit boundary fixtures. Inputs frozen before original one-time hash/read/decode. Software and numerical clocks are separate stages.",
+  "finalization": "All four original returned receipts have direct reap, handles, signal restoration and final persistence complete; original disk snapshots retain pending/attempted separately",
+  "administrative": "Source-only review .1.15 normally closed once by original assignee; separate Root numerical acceptance",
+  "priorResults": "Old tiny/896/32game3W2D27L/.125 rejection and FAILED/UNKNOWN costs unchanged"
+}

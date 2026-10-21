@@ -49,6 +49,10 @@ STM/盤面向き/色、raw STEP単位、disc単位、丸め、clamp段階と外�
 
 同一のraw tableに対しgenericは元i16値を読み、scalar SIMD解釈は元loader同様main項を±4092、ordering項を±16380へ制限する。auxiliary項は変更しない。外部oracleはgeneric専用であり、SIMDとの数値一致と呼ばない。port由来sourceのGPL-3.0-or-later帰属と[原GPL本文](../LICENSE.Egaroucid)を保持し、weightの公開・製品再配布条件は未認定のままとする。
 
+[最初の実weight数値資格](../../../research-data/othello/strong-ai-n96/full-evaluator-numerical-v1.json)では、既観測の完全合法2系列と明示した境界fixtureから結果前に2032件を固定し、全60phase・D4・色手番・pass・終局近傍で元genericと64index、raw和、追加項、丸め、clamp、ordering、終局規約を照合した。不一致0。120着手と1passのfull recompute/play/undo/reapply、および同じ実weightのnative/Wasm計4064比較も一致した。H・教師再照会・fit・新Search/対局/RNGは使っていない。数値工程の包括4.834016124秒はsoftware工程と別で、内包時計を加算しない。
+
+これで最初のscalar評価器単位を受け入れる。scalar SIMD table解釈のnative/Wasm一致は、元AVX実装の呼出一致ではない。元SIMD oracleと忠実なsinglethread探索の実source移植を既存2作者が並行し、変更した境界だけを次に資格化する。探索port完了・処理速度・棋力・browser全weight動作・製品default採用はまだ認定しない。
+
 ## 最初の受入単位と検証
 
 最初の一まとまりは「全16形状・64配置・60段階のRust評価器、実weight読込、incremental更新、原engineとの数値一致」。同じ課題の既存core作者と基準接続作者を再用し、共通format/phase境界を先に固定する。core作者はRust実装、基準接続作者は外部static oracle・format/由来を担当する。sourceの実編集から進め、設計完成・親close・Root/人間ACKを入口にしない。
@@ -63,7 +67,7 @@ STM/盤面向き/色、raw STEP単位、disc単位、丸め、clamp段階と外�
 
 評価単位の成立後、初期化を再用した連続探索でSearch時間、NPS、完成深度、全仕事、メモリを記録する。同実時間対局を主要評価とし、まず小さいprotocol/評価一致、次に未使用開始familyの両色で固定EgaroucidとEdaxへ進む。1thread・同TT上限・book/ponder OFF・実時計を固定adapterに結合する。原engineより弱くても小型評価へ戻さず、評価一致・探索条件・処理速度を分けて改善する。新たな対局量/停止/判定は入口ごとの実費と資源で結果前に固定し、設定だけから優越を主張しない。
 
-初期の16MiB配布/Worker256MiBは設計目安で、fullweight/TT/復号peak/ロード時間を実測して理由付きで見直せる。50GBと実host RAM安全枠は維持する。既存Rust UIの確認/保存/再開とgeneration/request所有を再用し、新規/中断/局面変更で古い返信を適用しない。同期WasmのpostMessage取消だけに依存せず、Worker終了/再生成を使う。nativeでの一致/棋力をbrowserの速度/棋力へ読み替えない。製品defaultは別の受入判断まで維持する。
+実weightの符号化入力は合計38,716,218B、compact復号tableは73,963,392Bであり、旧16MiB配布目安を今回の構成へ適用できない。weight公開条件を確認した上で、この実サイズを配布設計の出発点とする。復号byte数はRSS/peakではなく、Worker256MiB目安の成立も未測定である。TT・入力の二重保持・ロード時間を含む実browser計測で見直す。50GBと実host RAM安全枠は維持する。既存Rust UIの確認/保存/再開とgeneration/request所有を再用し、新規/中断/局面変更で古い返信を適用しない。同期WasmのpostMessage取消だけに依存せず、Worker終了/再生成を使う。nativeでの一致/棋力をbrowserの速度/棋力へ読み替えない。製品defaultは別の受入判断まで維持する。
 
 source/light prepはQuoridor435と並行する。soleMain/Git/index/sharedCargoは実行・統合324。実build/GPU/大きいIO/公平時計だけを実STOP・実CPU/RAMで調停し、新しい恒久roleや監視frameworkを設けない。source作業は明示CPUPlan、GPU0、library1、各family2GiB/host reserve4GiBを既存CycleResources/executeへ結合する。大容量段階の具体保持は50GB内で別に解決する。
 
