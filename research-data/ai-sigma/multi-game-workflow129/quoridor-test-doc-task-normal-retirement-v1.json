@@ -1,0 +1,1187 @@
+{
+  "at": "2026-10-21T15:49:44.671588+00:00",
+  "issue": "quoridor-4lc.324.12.9.5",
+  "source_acceptance": "68100f946a9c368be2490d04fd9a8e97f520a520",
+  "same_owner_closed": {
+    "status": "closed",
+    "assignee": "codex:01a15f01-fe83-7c11-8a55-35cd2764abd8",
+    "close_reason": "Root accepts Quoridor test/document integration68100f946a9c368be2490d04fd9a8e97f520a520; canonical research-data/ai-sigma/multi-game-workflow129/quoridor-test-doc-acceptance-v1.json. 42 relocations/43 source rows,64 Python methods and48 product assertion sites retained. Actual Main15E2E/1product/5unit/1audio/1render discovery and11 changed links/scoped formatting pass; task15 functional cases and bridge/Web typecheck reused, no scientific/browser/native replay. Common helper/home/navigation remain common, frozen fixtures protected. Runtime-skill/context ordering deviation and original pending signal disk records preserved without invented restoration proof. Source and owned command cleanup returned; parent12.9 continues independently."
+  },
+  "session_before": {
+    "turn": "01a15f19-784a-7e02-bf0b-0f103271e70e",
+    "status": "completed",
+    "thread_status": {
+      "type": "idle"
+    }
+  },
+  "session_after": {
+    "turn": "01a15f19-784a-7e02-bf0b-0f103271e70e",
+    "status": "completed",
+    "thread_status": {
+      "type": "idle"
+    },
+    "actual_archive_response": {}
+  },
+  "normal_remove": "",
+  "branch_preserved": "2dfe353c173345f073d5d9e4f018f924bbf072f7",
+  "config_sparse_preserved": {
+    "config.worktree": "[core]\n\tsparseCheckout = true\n\tsparseCheckoutCone = true\n[index]\n\tsparse = true\n",
+    "info/sparse-checkout": "/*\n!/*/\n/apps/\n!/apps/*/\n/docs/\n!/docs/*/\n/games/\n!/games/*/\n/python/\n!/python/*/\n/shared/\n!/shared/*/\n/tools/\n!/tools/*/\n/apps/web/\n/docs/design/\n/docs/development/\n/games/quoridor/\n/python/tests/\n/scripts/\n/shared/python/\n/tests/\n/tools/research-quality/\n/tools/research-session/\n"
+  },
+  "index_flags": ["H", "S"],
+  "late_control_archive": "research-data/ai-sigma/multi-game-workflow129/quoridor-test-doc-final-control-tail-v1.tar.gz",
+  "new_members": [
+    {
+      "original": "/workspaces/quoridor/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/admin-close-final-parent.json",
+      "member": "worker/admin-close-final-parent.json",
+      "bytes": 5115,
+      "sha256": "420d527e2e31a104768e6d3917411d52c564a9715bde2d4d402e6465827d2b2b",
+      "mode": "0644"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/admin-close-transaction.json",
+      "member": "worker/admin-close-transaction.json",
+      "bytes": 55282,
+      "sha256": "171d0d4c801cb096917c3c290ed3d9cc9613c8aa1fb214e94807079932759934",
+      "mode": "0644"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/admin-close.log",
+      "member": "worker/admin-close.log",
+      "bytes": 1019,
+      "sha256": "c95f87e1488a0e333b1c19338f5e9d4b036ab05fa0726604ddefd31ddc0c9dfd",
+      "mode": "0644"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/admin-close.process.json",
+      "member": "worker/admin-close.process.json",
+      "bytes": 1488,
+      "sha256": "b188bf60194347cd44b704c5da13794e09d38605de5c03782fa17f30fdd6972c",
+      "mode": "0600"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/admin-close.py",
+      "member": "worker/admin-close.py",
+      "bytes": 3134,
+      "sha256": "9e025ef18666fe9db7a3dfe6d3cc90d5f2529e6251cc67fe9714c7958df22265",
+      "mode": "0644"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/admin-read.log",
+      "member": "worker/admin-read.log",
+      "bytes": 1208,
+      "sha256": "fedc925c9db8598b74e0501a90d6502d0c8b55ee9f9bed93868f3d0a5d154808",
+      "mode": "0644"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/admin-read.process.json",
+      "member": "worker/admin-read.process.json",
+      "bytes": 1836,
+      "sha256": "cdb812704e8f217e1314a27c7cb6ef37febc4c5f9cf2a0b924a2c373179f2ce5",
+      "mode": "0600"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/admin-stop.log",
+      "member": "worker/admin-stop.log",
+      "bytes": 310,
+      "sha256": "4780cb7df7a699b7c40e3682c196570d4719dd1f16a5c8d1ec9253645e101181",
+      "mode": "0644"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/admin-stop.process.json",
+      "member": "worker/admin-stop.process.json",
+      "bytes": 1968,
+      "sha256": "160e4666ebd7495337c1e6ea024f9c8292944889ef4e21ad481c969bf2271348",
+      "mode": "0600"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/admin-stop.returned.json",
+      "member": "worker/admin-stop.returned.json",
+      "bytes": 1970,
+      "sha256": "d0020c80a13c4277c0210a3afcb2237fea810d8dd33263a841ca54ae2cfeed60",
+      "mode": "0644"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/run.py",
+      "member": "worker/run.py",
+      "bytes": 2150,
+      "sha256": "4c97d541646967d84fd3d57e73b9c7d5a740ab5c8f19bcdee47e5f5c0fe9c47c",
+      "mode": "0644"
+    }
+  ],
+  "reused_original_archive_members": [
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/caller-metadata.log",
+        "bytes": 1936,
+        "sha256": "5495b53d0a427d3cfdb135640101f87272091c5dee362b4032f235f61bbc1e24",
+        "mode": "0444"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/caller-metadata.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/caller-metadata.process.json",
+        "bytes": 1280,
+        "sha256": "26e3b116aa16337b96b6e80306d1d3ad71ffa58cff285c136d8adab6a4e3e04e",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/caller-metadata.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/caller-read.log",
+        "bytes": 5483,
+        "sha256": "3c05f73433d647ae5d9e44e7dc4026bbbaf9a712c098f5e0bc6672785611efc3",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/caller-read.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/caller-read.process.json",
+        "bytes": 1720,
+        "sha256": "a6d98bcd916251c4db50287093201eb87a4dab358c82152eea6d9509fa9ae24f",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/caller-read.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/classify.log",
+        "bytes": 8778,
+        "sha256": "a5b1a1dbc16318ea1d423988cb1301ff143da7e8f4cc87db991520fe82365ff3",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/classify.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/classify.process.json",
+        "bytes": 1720,
+        "sha256": "e0c366e7f5720f8d5cb7b000684b9f410562bda7f8a06914cc410ab18ba78a58",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/classify.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/common-before.json",
+        "bytes": 1260,
+        "sha256": "7a1ff54e929833aa8f101122b23787cfe62c19add3556370832fcaec0352ab94",
+        "mode": "0444"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/common-before.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/common-caller-proposal.patch",
+        "bytes": 13269,
+        "sha256": "bba7b04b0327088fb538b7aa117e3a44dc67782c4f20fb306ca4423e249048f9",
+        "mode": "0444"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/common-caller-proposal.patch"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/discovery-api.log",
+        "bytes": 654,
+        "sha256": "34c7ae69d46d185d777f165dad122e51bf2f54d5427ddb676994d16d57cd163b",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/discovery-api.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/discovery-api.process.json",
+        "bytes": 1550,
+        "sha256": "b87a9f0df86dd88ef06c831928c1edd58a1d7bf1d1901710a410282b1b469790",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/discovery-api.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/discovery-api2.log",
+        "bytes": 1132,
+        "sha256": "9f9dbcaf71c9a05a440c368833c0cadced8f2b019a140ba5996f14dc4453bd69",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/discovery-api2.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/discovery-api2.process.json",
+        "bytes": 1485,
+        "sha256": "bec4a9eb41f5b84f57a1b4c63d792c7d61c5499e7f630e77932022b63ddbf1cc",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/discovery-api2.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/discovery-api3.log",
+        "bytes": 4972,
+        "sha256": "e429c39ea41598ebc62d315e6a0b82644e1483c1b540684dad965bd7a0cc36eb",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/discovery-api3.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/discovery-api3.process.json",
+        "bytes": 1435,
+        "sha256": "6be790c1f1d3093bd4190d0532f52e58857c767a9b99cfc2e933f4f06e61ea8a",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/discovery-api3.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/environment.log",
+        "bytes": 265,
+        "sha256": "30f688828378058bc7c280c9756753daf43735a86d3166b5b3a520324da1faea",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/environment.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/environment.process.json",
+        "bytes": 1409,
+        "sha256": "e32caf395ef24c644f5fdceaec4401b74ae289ab074137c09afacb004c92d91c",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/environment.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/extra-product-original.tar",
+        "bytes": 20480,
+        "sha256": "7efea820e3fe83dcffedba63086ee2cc11acece0480c196c3f3243754c7fe2d8",
+        "mode": "0444"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/extra-product-original.tar"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/extra-product-preservation.json",
+        "bytes": 186,
+        "sha256": "d923d91b03f6245b36970f9c43cac011c63542b5c28b345145314b06b1e947ed",
+        "mode": "0444"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/extra-product-preservation.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/extra-product.log",
+        "bytes": 252,
+        "sha256": "fa5466a630342304037a7b9c3f457d487bf5188bee0d2c7614a7a4b50bc9a9cd",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/extra-product.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/extra-product.process.json",
+        "bytes": 1255,
+        "sha256": "97d3c5fcd7686ba59668bd2113d9a66372cdfd0159d65bc4e0133a21f080d49b",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/extra-product.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/extra-product.py",
+        "bytes": 1321,
+        "sha256": "f0e13fd3e6562aeea7f947d01d7faae67e70c675a014300fecfde33021c2e5bf",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/extra-product.py"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/final-helper-format.log",
+        "bytes": 63,
+        "sha256": "1aec55b79fc982a77449657e5dd46f1711952e6133fa6a91ad17ed2378c263b8",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/final-helper-format.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/final-helper-format.process.json",
+        "bytes": 1540,
+        "sha256": "8737f473f1ef139ecbbedba9c9f4885febe3450bb5d9c2e2be568b15f751a1b6",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/final-helper-format.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/finalize.log",
+        "bytes": 1410,
+        "sha256": "e14f546d26bd6321070009bbf3f53dbbacb402b2a537d902971bcefd4fe546fe",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/finalize.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/finalize.process.json",
+        "bytes": 1253,
+        "sha256": "3a978f518c172e181b2b1fd5326ef30f484d1cdf3d74c228739361a5669bd0ba",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/finalize.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/finalize.py",
+        "bytes": 7188,
+        "sha256": "d31e467d95dcaeed35f484e2e57cf7acbb53478b9747b2138d90487a0f298c01",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/finalize.py"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/first-read.txt",
+        "bytes": 794,
+        "sha256": "adda532c7b39b86ba0b6d9ddd3b856dd3c765ce02da6c116ab371345244abbd9",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/first-read.txt"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/format-check.log",
+        "bytes": 190,
+        "sha256": "428574a93aa599648edfbf2e5a91478f8765a59228ba26aaee4cdd1dae8d2925",
+        "mode": "0444"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/format-check.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/format-check.process.json",
+        "bytes": 2512,
+        "sha256": "fad6d5fc8e469ede96ec6bbb1c6800d8564f81c755020f10fee587508da6d2e7",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/format-check.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/format.log",
+        "bytes": 1389,
+        "sha256": "fafa9bc891232ad62c6d06bd799df8e26f3c1d1ec52a828dd6482cfa31915a94",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/format.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/format.process.json",
+        "bytes": 1797,
+        "sha256": "9eab5af34fed1d4776688c468ba4ace0101998f3bf9e130293cb1623f0748d68",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/format.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/formatting-final.log",
+        "bytes": 445,
+        "sha256": "2a66571d56b0e83aaf26e41cb1f52f6ef710d2f11db104cb70f32446b53acfbb",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/formatting-final.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/formatting-final.process.json",
+        "bytes": 1961,
+        "sha256": "7ae10afc702f1c0f623671533cf04e118e3317d5593c5a28a45aa0db2b42ae1e",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/formatting-final.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/freeze.log",
+        "bytes": 40,
+        "sha256": "7fee77257de43c00a76ebd655f4caee960fb2d584c17790ec0c08b9bb938e584",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/freeze.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/freeze.process.json",
+        "bytes": 1246,
+        "sha256": "cb92c46dae1de9b1eef3cff77a98f6f6d2dad8cd687b76d42e8fbde3f06dae91",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/freeze.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/freeze.py",
+        "bytes": 2850,
+        "sha256": "ce9050cde9108e7f9575d8670957822e36d6a8031e009385f70b34cf24c0ffda",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/freeze.py"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/functional.log",
+        "bytes": 2283,
+        "sha256": "780ee181238918123e0872f65519652dc583657f28e0b9a6303592500bbc7ebd",
+        "mode": "0444"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/functional.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/functional.process.json",
+        "bytes": 1352,
+        "sha256": "e54bebe13b7154846afafc4d6cfead483d469cf7bcb05f8dd64c1b301d911ea3",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/functional.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/handoff-metadata.log",
+        "bytes": 113,
+        "sha256": "cfc55c36caadd97a9fc7a03a804812112e54887fa63c34d98693ffff66456a27",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/handoff-metadata.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/handoff-metadata.process.json",
+        "bytes": 2176,
+        "sha256": "ec2c75626adf060d95bf13d8b8f240b36086108a222d49613be0b75b9d9bf6dc",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/handoff-metadata.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/handoff.json",
+        "bytes": 15805,
+        "sha256": "09c1fc49a7d5b0ae09e612335010458cd815041dcb5568f484501c899e6c8aec",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/handoff.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/interim.log",
+        "bytes": 157,
+        "sha256": "427fb3b5353c7e0c804e738a1ba4d87136ef558a1e74138b85aa37b55ea412f0",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/interim.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/interim.process.json",
+        "bytes": 2954,
+        "sha256": "1612b71c1e70ae2da97a6678b1e060faf963a33019ac98ed4a13c9bd16be5228",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/interim.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/interim.txt",
+        "bytes": 1430,
+        "sha256": "81b5871b028d15350c4ef27c1c2cd266611afa79e96b83214e0c95ca8e6e6db9",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/interim.txt"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/manifest.json",
+        "bytes": 17670,
+        "sha256": "52470c81efbf19e2618c4468a5d24f93e15ae73f0e8cb393f2aecb56eb5b0e93",
+        "mode": "0444"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/manifest.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/manifest41.json",
+        "bytes": 17239,
+        "sha256": "a292dd599da854cca8c6872dad286e6266af157105b21d39e62dea128ff7b7c5",
+        "mode": "0444"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/manifest41.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/migrate.log",
+        "bytes": 500,
+        "sha256": "a5ba2c43fc996886e79cdfcbb90454fead2f7cb7fd6634995e878fac2892a5b8",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/migrate.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/migrate.process.json",
+        "bytes": 1249,
+        "sha256": "1183a4a81a8ed0617f431c85581db7a2c75b283d73346a6263736180bb9a91c7",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/migrate.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/migrate.py",
+        "bytes": 3577,
+        "sha256": "087c8e10c3cd0b12fb60035130e1117c60dc4945b4322389b22c526e6e2df47a",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/migrate.py"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/originals.tar",
+        "bytes": 849920,
+        "sha256": "04dc4d607d34916e24c337001f795d50c48ce8a4e6122fc6982453b449f01be9",
+        "mode": "0444"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/originals.tar"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/patch-check.log",
+        "bytes": 2196,
+        "sha256": "2028567460c28a7ae454c7b094b08f1a79df0ca1345f888e531ca2d875b03032",
+        "mode": "0444"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/patch-check.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/patch-check.process.json",
+        "bytes": 1675,
+        "sha256": "47d70c42d8f1c1b99497ece73bb47223c5a7c504d41f4f6f8ae78f20171580db",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/patch-check.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/patch-review.log",
+        "bytes": 18220,
+        "sha256": "5c286b4e18abf55f5f8a6a50b4d3576fd359b545279d5d073f8387731956007e",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/patch-review.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/patch-review.process.json",
+        "bytes": 1543,
+        "sha256": "df4c4a33f0bd4bee9c90072f7c0f2bfd94cdcbe4c02122257629c7a98c8b9410",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/patch-review.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/preservation.json",
+        "bytes": 10131,
+        "sha256": "2c17df6ab2514d37b2e75b3653ece3f32380aca359e02e41cc9c8084650c374c",
+        "mode": "0444"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/preservation.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/preservation.log",
+        "bytes": 480,
+        "sha256": "6f50c62e8c944afe21a421946a44f5ce8cac03b4b4ef32d39b161f3a4ae32870",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/preservation.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/preservation.process.json",
+        "bytes": 1503,
+        "sha256": "95b5e4ddc32dc3c718a856d95214b028000f1e4d618b2ea1fa85ea7937477540",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/preservation.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/preservation2.log",
+        "bytes": 713,
+        "sha256": "827f2f9a0829f44d0edcc3b45e0e19b2a5893310201956230f787070d41e5e77",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/preservation2.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/preservation2.process.json",
+        "bytes": 1503,
+        "sha256": "9f4b522be1bc48379c575181baf0fb2a254bf465d3c9834b285c3b0b7a60715b",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/preservation2.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/preservation3.log",
+        "bytes": 1477,
+        "sha256": "84757b4037c72515391c0c4cd2f2cae08534aeffc853612d8a632ac912208c59",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/preservation3.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/preservation3.process.json",
+        "bytes": 1506,
+        "sha256": "5636f717165dd85f49bab7979e3a95ec7ed22dab126c0dc5adba211cf8b18b09",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/preservation3.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/preservation4.log",
+        "bytes": 2537,
+        "sha256": "6f16458c6535702df9d6d5332e66d7f10bb1361a957525950f2c9a03fa4fbab5",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/preservation4.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/preservation4.process.json",
+        "bytes": 1248,
+        "sha256": "d6897c69e91ef3d8df357926519f547e4e58ba88c6cdd72fed90faf815fb209e",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/preservation4.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/product-callers.log",
+        "bytes": 1125,
+        "sha256": "1a193c259f5a08001c3feef10fcd06fffe35a54387a3081c514cc5ea57ed8271",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/product-callers.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/product-callers.process.json",
+        "bytes": 1585,
+        "sha256": "2449405ecaac8243ddee67d601ec974cf1b34cf2df703735da498f5c4f4a7266",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/product-callers.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/proposal/AGENTS.md",
+        "bytes": 10390,
+        "sha256": "f68646578ea4ee6dee6c4b1e18cb6595d5a0b23a877be5f1b59cb7c476468c5a",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/proposal/AGENTS.md"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/proposal/docs/README.md",
+        "bytes": 4696,
+        "sha256": "2a80ce868d324be677a197a1b62d00661218f688b1df0bab9739ece70b6f8908",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/proposal/docs/README.md"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/proposal/docs/design/ai-sigma-research-goal.md",
+        "bytes": 7208,
+        "sha256": "84379283d3a34cc4758728721524767a74b15d09e2849b4118dbe019184f29f8",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/proposal/docs/design/ai-sigma-research-goal.md"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/proposal/docs/design/multi-game-repository.md",
+        "bytes": 13269,
+        "sha256": "045187ec10ac92974f45da19d0deed142f2995650fc34f458574f866a7514a36",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/proposal/docs/design/multi-game-repository.md"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/proposal/package.json",
+        "bytes": 3313,
+        "sha256": "f081ae0b88d791e898383290d67ee1a634cd262c10b0e88edefab08e8f29133b",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/proposal/package.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/proposal/playwright.config.ts",
+        "bytes": 782,
+        "sha256": "0cfe04d8603c58fe278d703011d801260048b35f2927833dae22c3e5b71bee25",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/proposal/playwright.config.ts"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/proposal/scripts/dev/check-research.py",
+        "bytes": 10265,
+        "sha256": "2cd417183e4682a9db8453d07a1070c5d12968a69c25ba766b63fb63b1d439cb",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/proposal/scripts/dev/check-research.py"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/proposal/tests/product/playwright.config.mjs",
+        "bytes": 809,
+        "sha256": "cd96a732176ba0a56989a9c6f5846637744d2c8073e4ac8d790ae4fe14842ab6",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/proposal/tests/product/playwright.config.mjs"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/proposal-extra.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/proposal-extra.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/proposal-extra.process.json",
+        "bytes": 1245,
+        "sha256": "ced3550669ae2620cdf9a4b5b0a0fbead1fc6e05e9c21c02bcd519b61eed9d91",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/proposal-extra.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/proposal.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/proposal.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/proposal.process.json",
+        "bytes": 1245,
+        "sha256": "eb11a5588806ea1cce68e3fe7a3c57600777e34f624f450b7490a2f007496a1a",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/proposal.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/propose.py",
+        "bytes": 3096,
+        "sha256": "dd48ce5d089b679c50770311d2f525fceea597b1cb02c0441526acae7fd70fd4",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/propose.py"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/rename.patch",
+        "bytes": 27780,
+        "sha256": "6b3a2ac67316c956bac3387228c4b443807308526f809d1e703939e18b842180",
+        "mode": "0444"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/rename.patch"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/source-status.txt",
+        "bytes": 4203,
+        "sha256": "5ced4d3e89ee1649775475a3e8714d7fcddc4d9ae550e11005b0c94083079009",
+        "mode": "0444"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/source-status.txt"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/ts-api.log",
+        "bytes": 103,
+        "sha256": "b8dfd54fd57e16a7043d7008113b27eb662a0a6d9bc5f17242d3164c137dfe57",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/ts-api.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/ts-api.process.json",
+        "bytes": 1341,
+        "sha256": "1fb0932480b996b00c5a66a588a90892b863c96cc8bf5c2eeb228a9bbf965fd6",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/ts-api.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/typecheck.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": "0444"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/typecheck.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/typecheck.process.json",
+        "bytes": 1341,
+        "sha256": "9d6b9195021f647781ef1e0651f40cc38a9ca1641d7c741b139a28ae1e1d78e2",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/typecheck.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/verify-callers.mjs",
+        "bytes": 3307,
+        "sha256": "4f8e9669f6f33746876d9badd59b4ecd0606e17e2bbb216545f8c18b25ec0912",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/verify-callers.mjs"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/verify-tokens.mjs",
+        "bytes": 2653,
+        "sha256": "52fcb33866e2c525abb944df06c9cfa965553a6685fdad51db9776a4a15ceaf3",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/verify-tokens.mjs"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/verify.py",
+        "bytes": 4823,
+        "sha256": "76861a49b40777da7c678bba926ffb8530e9b29bb52b7b8dc7a0be53499b987f",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-tests-docs129/.artifacts/quoridor-test-doc129/verify.py"
+    }
+  ],
+  "new_tail_one_stream": "PASS exact bytes/SHA/modes/names without extraction",
+  "worker_actual_process_cleanup": [
+    {
+      "name": "admin-close.process.json",
+      "status": "complete",
+      "exit_code": 0,
+      "signal_disk": "pending",
+      "exact_child": "absent"
+    },
+    {
+      "name": "admin-read.process.json",
+      "status": "complete",
+      "exit_code": 0,
+      "signal_disk": "pending",
+      "exact_child": "absent"
+    },
+    {
+      "name": "admin-stop.process.json",
+      "status": "complete",
+      "exit_code": 0,
+      "signal_disk": "pending",
+      "exact_child": "absent"
+    },
+    {
+      "name": "caller-metadata.process.json",
+      "status": "complete",
+      "exit_code": 0,
+      "signal_disk": "pending",
+      "exact_child": "absent"
+    },
+    {
+      "name": "caller-read.process.json",
+      "status": "complete",
+      "exit_code": 0,
+      "signal_disk": "pending",
+      "exact_child": "absent"
+    },
+    {
+      "name": "classify.process.json",
+      "status": "complete",
+      "exit_code": 0,
+      "signal_disk": "pending",
+      "exact_child": "absent"
+    },
+    {
+      "name": "discovery-api.process.json",
+      "status": "complete",
+      "exit_code": 0,
+      "signal_disk": "pending",
+      "exact_child": "absent"
+    },
+    {
+      "name": "discovery-api2.process.json",
+      "status": "complete",
+      "exit_code": 0,
+      "signal_disk": "pending",
+      "exact_child": "absent"
+    },
+    {
+      "name": "discovery-api3.process.json",
+      "status": "complete",
+      "exit_code": 0,
+      "signal_disk": "pending",
+      "exact_child": "absent"
+    },
+    {
+      "name": "environment.process.json",
+      "status": "complete",
+      "exit_code": 0,
+      "signal_disk": "pending",
+      "exact_child": "absent"
+    },
+    {
+      "name": "extra-product.process.json",
+      "status": "complete",
+      "exit_code": 0,
+      "signal_disk": "pending",
+      "exact_child": "absent"
+    },
+    {
+      "name": "final-helper-format.process.json",
+      "status": "complete",
+      "exit_code": 0,
+      "signal_disk": "pending",
+      "exact_child": "absent"
+    },
+    {
+      "name": "finalize.process.json",
+      "status": "complete",
+      "exit_code": 0,
+      "signal_disk": "pending",
+      "exact_child": "absent"
+    },
+    {
+      "name": "format-check.process.json",
+      "status": "complete",
+      "exit_code": 0,
+      "signal_disk": "pending",
+      "exact_child": "absent"
+    },
+    {
+      "name": "format.process.json",
+      "status": "complete",
+      "exit_code": 0,
+      "signal_disk": "pending",
+      "exact_child": "absent"
+    },
+    {
+      "name": "formatting-final.process.json",
+      "status": "complete",
+      "exit_code": 0,
+      "signal_disk": "pending",
+      "exact_child": "absent"
+    },
+    {
+      "name": "freeze.process.json",
+      "status": "complete",
+      "exit_code": 0,
+      "signal_disk": "pending",
+      "exact_child": "absent"
+    },
+    {
+      "name": "functional.process.json",
+      "status": "complete",
+      "exit_code": 0,
+      "signal_disk": "pending",
+      "exact_child": "absent"
+    },
+    {
+      "name": "handoff-metadata.process.json",
+      "status": "complete",
+      "exit_code": 0,
+      "signal_disk": "pending",
+      "exact_child": "absent"
+    },
+    {
+      "name": "interim.process.json",
+      "status": "complete",
+      "exit_code": 0,
+      "signal_disk": "pending",
+      "exact_child": "absent"
+    },
+    {
+      "name": "migrate.process.json",
+      "status": "complete",
+      "exit_code": 0,
+      "signal_disk": "pending",
+      "exact_child": "absent"
+    },
+    {
+      "name": "patch-check.process.json",
+      "status": "complete",
+      "exit_code": 0,
+      "signal_disk": "pending",
+      "exact_child": "absent"
+    },
+    {
+      "name": "patch-review.process.json",
+      "status": "complete",
+      "exit_code": 0,
+      "signal_disk": "pending",
+      "exact_child": "absent"
+    },
+    {
+      "name": "preservation.process.json",
+      "status": "failed",
+      "exit_code": 1,
+      "signal_disk": "pending",
+      "exact_child": "absent"
+    },
+    {
+      "name": "preservation2.process.json",
+      "status": "failed",
+      "exit_code": 1,
+      "signal_disk": "pending",
+      "exact_child": "absent"
+    },
+    {
+      "name": "preservation3.process.json",
+      "status": "failed",
+      "exit_code": 1,
+      "signal_disk": "pending",
+      "exact_child": "absent"
+    },
+    {
+      "name": "preservation4.process.json",
+      "status": "complete",
+      "exit_code": 0,
+      "signal_disk": "pending",
+      "exact_child": "absent"
+    },
+    {
+      "name": "product-callers.process.json",
+      "status": "complete",
+      "exit_code": 0,
+      "signal_disk": "pending",
+      "exact_child": "absent"
+    },
+    {
+      "name": "proposal-extra.process.json",
+      "status": "complete",
+      "exit_code": 0,
+      "signal_disk": "pending",
+      "exact_child": "absent"
+    },
+    {
+      "name": "proposal.process.json",
+      "status": "complete",
+      "exit_code": 0,
+      "signal_disk": "pending",
+      "exact_child": "absent"
+    },
+    {
+      "name": "ts-api.process.json",
+      "status": "complete",
+      "exit_code": 0,
+      "signal_disk": "pending",
+      "exact_child": "absent"
+    },
+    {
+      "name": "typecheck.process.json",
+      "status": "complete",
+      "exit_code": 0,
+      "signal_disk": "pending",
+      "exact_child": "absent"
+    }
+  ],
+  "signal_facts": "Original pending disk records immutable; available actual returned admin restoration kept in late archive separately. No blanket restoration or allhost quiet claim.",
+  "generated_verification_input_recipes": [
+    {
+      "source": "/workspaces/quoridor/games/quoridor/bridge/wasm/rules/quoridor_rules.js",
+      "destination": "/workspaces/quoridor/.worktree/quoridor-tests-docs129/games/quoridor/bridge/wasm/rules/quoridor_rules.js",
+      "bytes": 12773,
+      "sha256": "d7e450cfeef566bfb6af7de14dfb1b3b34d35f6b05cd8efa1d0af9fff8d4c19e",
+      "mode": "0644"
+    },
+    {
+      "source": "/workspaces/quoridor/games/quoridor/bridge/wasm/rules/quoridor_rules.d.ts",
+      "destination": "/workspaces/quoridor/.worktree/quoridor-tests-docs129/games/quoridor/bridge/wasm/rules/quoridor_rules.d.ts",
+      "bytes": 2702,
+      "sha256": "623014b8fca2d51486d7324de4ac32e19c00c36b527767e35d88ba13fb77aada",
+      "mode": "0644"
+    },
+    {
+      "source": "/workspaces/quoridor/games/quoridor/bridge/wasm/rules/quoridor_rules_bg.wasm",
+      "destination": "/workspaces/quoridor/.worktree/quoridor-tests-docs129/games/quoridor/bridge/wasm/rules/quoridor_rules_bg.wasm",
+      "bytes": 653217,
+      "sha256": "b428e5e53875ea76ec0012b0b26fc8c1af16d36beb33feaa87c3299ba39f15bd",
+      "mode": "0644"
+    },
+    {
+      "source": "/workspaces/quoridor/games/quoridor/bridge/wasm/rules/quoridor_rules_bg.wasm.d.ts",
+      "destination": "/workspaces/quoridor/.worktree/quoridor-tests-docs129/games/quoridor/bridge/wasm/rules/quoridor_rules_bg.wasm.d.ts",
+      "bytes": 1305,
+      "sha256": "911878795b10815cad549abca9f85009a426760c348ab48d0475ab9bdf47ffaa",
+      "mode": "0644"
+    },
+    {
+      "source": "/workspaces/quoridor/games/quoridor/bridge/wasm/ai/quoridor_ai.js",
+      "destination": "/workspaces/quoridor/.worktree/quoridor-tests-docs129/games/quoridor/bridge/wasm/ai/quoridor_ai.js",
+      "bytes": 9810,
+      "sha256": "c84c56a6b920bad00e5399fcfc1f9fb2e2baa2dd8aa01e6a7f8be45b6ccb8462",
+      "mode": "0644"
+    },
+    {
+      "source": "/workspaces/quoridor/games/quoridor/bridge/wasm/ai/quoridor_ai.d.ts",
+      "destination": "/workspaces/quoridor/.worktree/quoridor-tests-docs129/games/quoridor/bridge/wasm/ai/quoridor_ai.d.ts",
+      "bytes": 2306,
+      "sha256": "0874499222cf3b66d2c435d2b87a0c463cc61c698010905a553926f19ae861e8",
+      "mode": "0644"
+    },
+    {
+      "source": "/workspaces/quoridor/games/quoridor/bridge/wasm/ai/quoridor_ai_bg.wasm",
+      "destination": "/workspaces/quoridor/.worktree/quoridor-tests-docs129/games/quoridor/bridge/wasm/ai/quoridor_ai_bg.wasm",
+      "bytes": 600696,
+      "sha256": "103613b631047b93a0a3859e3bc5fc8080be3971d9bcab928ee1dfe4c30d3318",
+      "mode": "0644"
+    },
+    {
+      "source": "/workspaces/quoridor/games/quoridor/bridge/wasm/ai/quoridor_ai_bg.wasm.d.ts",
+      "destination": "/workspaces/quoridor/.worktree/quoridor-tests-docs129/games/quoridor/bridge/wasm/ai/quoridor_ai_bg.wasm.d.ts",
+      "bytes": 1000,
+      "sha256": "309ab0dfe604cc76c782ddea8d009dc2e9a12b6deae41e12dffc5ee91e6094c7",
+      "mode": "0644"
+    }
+  ],
+  "Root_affected_point": "test-doc-publication-v1/affected-point.json or othello-publication-v1/affected-once.json already observed once; no repeated point, late tail/globalactual/fullfees UNKNOWN",
+  "USERPAUSE_assets_DB_seals_models_defaults_preserved": true,
+  "scientific_calls": 0,
+  "whole_parent_complete": false
+}

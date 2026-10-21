@@ -1,0 +1,174 @@
+{
+  "at": "2026-10-21T15:54:44.415216+00:00",
+  "issue": "quoridor-4lc.324.12.9.6",
+  "source_acceptance": "872068c52349acc1a7fa340912ad2a552867f39b",
+  "same_owner_closed": {
+    "status": "closed",
+    "assignee": "codex:01a15f02-3229-7ba3-be7a-8d20079a6212",
+    "close_reason": "Root accepts independent Othello product rules/Wasm integration872068c52349acc1a7fa340912ad2a552867f39b; canonical research-data/othello/multi-game-workflow129/rules-acceptance-v1.json. New standard8x8 rules and deterministic corner/flip-count/row-major simple nonlearning policy:11Rust functional tests, all-target Clippy warnings0, generated devWasm2functional units and actual generated declaration typecheck PASS. Five source-facade units reused. Only2local Cargo lock additions, no existing dependency upgrades. UI remains separate/unavailable until Web task acceptance, no science/strength/Search/RNG/model claim. Worker startup ordering/pending disk facts and original failures retained, Root9checks then late lock assertion failed preserved and fixed-Git lock comparison collected without replay. Actual owned cleanup/sourceSTOP returned; parent12.9 continues independently."
+  },
+  "session_before": {
+    "turn": "01a15f23-73e0-75b1-8627-9f9bd824de87",
+    "status": "completed",
+    "thread_status": {
+      "type": "idle"
+    }
+  },
+  "session_after": {
+    "turn": "01a15f23-73e0-75b1-8627-9f9bd824de87",
+    "status": "completed",
+    "thread_status": {
+      "type": "idle"
+    },
+    "actual_archive_response": {}
+  },
+  "normal_remove": "",
+  "branch_preserved": "2dfe353c173345f073d5d9e4f018f924bbf072f7",
+  "config_sparse_preserved": {
+    "config.worktree": "[core]\n\tsparseCheckout = true\n\tsparseCheckoutCone = true\n[index]\n\tsparse = true\n",
+    "info/sparse-checkout": "/*\n!/*/\n/docs/\n!/docs/*/\n/games/\n!/games/*/\n/games/quoridor/\n!/games/quoridor/*/\n/shared/\n!/shared/*/\n/tools/\n!/tools/*/\n/docs/design/\n/docs/development/\n/games/othello/\n/games/quoridor/bridge/\n/games/quoridor/crates/\n/games/quoridor/python/\n/scripts/\n/shared/python/\n/tools/research-quality/\n"
+  },
+  "index_flags": ["H", "S"],
+  "late_control_archive": {
+    "path": "research-data/othello/multi-game-workflow129/rules-final-control-tail-v1.tar.gz",
+    "bytes": 24997,
+    "sha256": "a49b2573abea6952f63d55e163d6d59b97742726fd95f788c21fbff49ce14081",
+    "mode": "0644"
+  },
+  "new_tail_member_mapping": "worker/<original path relative to .artifacts/othello-rules129>; TAR embeds every original file name/bytes/mode, original source-control members reused per v1. Full new-tail stream reconstruction passed in v1 before later cache-type assertion. v2 reclaimed OWN after mapping; v3 does not reread/decompress/reconstruct that successful archive or original source.",
+  "Root_failed_controls_archive": "research-data/othello/multi-game-workflow129/rules-retirement-controls-v1.tar.gz",
+  "Root_failed_controls_members": [
+    {
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/game-boundary-retirement-v1/actual-returned-STOP.json",
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/game-boundary-retirement-v1/actual-returned-STOP.json",
+        "bytes": 2446,
+        "sha256": "22d74798b417940eb0d77cdc20497a820e0da684c9e4295a214b73067ac6a373",
+        "mode": "0644"
+      }
+    },
+    {
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/game-boundary-retirement-v1/collect.py",
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/game-boundary-retirement-v1/collect.py",
+        "bytes": 14195,
+        "sha256": "5af4df9180d93dca1f6d0625e770002ddbb2a518cc1532b19404916c14335c04",
+        "mode": "0644"
+      }
+    },
+    {
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/game-boundary-retirement-v1/commands.log",
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/game-boundary-retirement-v1/commands.log",
+        "bytes": 66166,
+        "sha256": "afb6e5092315cd497e7567ef2d9d5b89ca0ce684616642aa6535d922ad01a288",
+        "mode": "0644"
+      }
+    },
+    {
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/game-boundary-retirement-v1/execution.log",
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/game-boundary-retirement-v1/execution.log",
+        "bytes": 438,
+        "sha256": "79aa74a8167ab0fe4333a1735a560e87b55bb219beff73e6dc7d2a26af6f1129",
+        "mode": "0644"
+      }
+    },
+    {
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/game-boundary-retirement-v1/execution.process.json",
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/game-boundary-retirement-v1/execution.process.json",
+        "bytes": 1913,
+        "sha256": "be3197bd6a99cfcbca355d71b4cb050836c759065a586b7797aa366c154a0f91",
+        "mode": "0600"
+      }
+    },
+    {
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/game-boundary-retirement-v1/run_guard.py",
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/game-boundary-retirement-v1/run_guard.py",
+        "bytes": 1852,
+        "sha256": "5a2362c54a65be099925546c4d0e46236432fe81a8b943999b4dbaefedb99bf5",
+        "mode": "0644"
+      }
+    },
+    {
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/game-boundary-retirement-v2/actual-returned-STOP.json",
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/game-boundary-retirement-v2/actual-returned-STOP.json",
+        "bytes": 2446,
+        "sha256": "8d2594ed33e32078918193c71d1b75d1e84d18180fa278abbf57b894663880ad",
+        "mode": "0644"
+      }
+    },
+    {
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/game-boundary-retirement-v2/collect.py",
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/game-boundary-retirement-v2/collect.py",
+        "bytes": 8936,
+        "sha256": "d52940785077c4206d20a72d4d41dd390785ab446952c1a5c2e0371126bf2df2",
+        "mode": "0644"
+      }
+    },
+    {
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/game-boundary-retirement-v2/commands.log",
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/game-boundary-retirement-v2/commands.log",
+        "bytes": 15399,
+        "sha256": "cb8be937448a7b9dffee865c17ea9e1fc0f59faf2db4ff129f4fade64f3dfb4c",
+        "mode": "0644"
+      }
+    },
+    {
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/game-boundary-retirement-v2/execution.log",
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/game-boundary-retirement-v2/execution.log",
+        "bytes": 452,
+        "sha256": "b7665ebddba00664b6bc9078b205eeb167b49975b5aaf40cfedd4d1f831c151b",
+        "mode": "0644"
+      }
+    },
+    {
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/game-boundary-retirement-v2/execution.process.json",
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/game-boundary-retirement-v2/execution.process.json",
+        "bytes": 1913,
+        "sha256": "4de4314cb58aa88881eacc638aefa0393284def697a0bc03a29feaa9cc6958aa",
+        "mode": "0600"
+      }
+    },
+    {
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/game-boundary-retirement-v2/run_guard.py",
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/game-boundary-retirement-v2/run_guard.py",
+        "bytes": 1852,
+        "sha256": "5a2362c54a65be099925546c4d0e46236432fe81a8b943999b4dbaefedb99bf5",
+        "mode": "0644"
+      }
+    }
+  ],
+  "Root_controls_one_stream": "PASS exact bytes/SHA/mode/name",
+  "Root_failures": "v1 successfully retired12.9.5 and reconstructed12.9.6 newtail, then refused empty node_modules/.cache/prettier directory as non-symlink. v2 removed exact empty dirs/OWN and refused remaining task-generated Ruff cache. v3 removes only known3 cache files/2dirs and continues the unentered managedremove/archive/publication. Originals remain FAILED; no earlier successful science/proof/retirement re-executed.",
+  "discarded_generated_cache": [
+    {
+      "path": ".ruff_cache/.gitignore",
+      "bytes": 35,
+      "mode": "0644"
+    },
+    {
+      "path": ".ruff_cache/0.13.1/10957441594778157466",
+      "bytes": 207,
+      "mode": "0600"
+    },
+    {
+      "path": ".ruff_cache/CACHEDIR.TAG",
+      "bytes": 43,
+      "mode": "0644"
+    }
+  ],
+  "signal_facts": "Worker actual returned admin object not observed; disk pending retained in tail. No invented restoration/allhost quiet claim.",
+  "affected_point": "othello-publication-v1/affected-once.json used once; no second point/globalwalk/recharge/refund; late tails/globalactual/fullfees UNKNOWN",
+  "USERPAUSE_assets_DB_seals_models_defaults_preserved": true,
+  "scientific_calls": 0,
+  "whole_parent_complete": false
+}
