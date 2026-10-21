@@ -1,0 +1,209 @@
+{
+  "schema": "othello.full-evaluator-software.v1",
+  "engineCommit": "570d5e0a478c9d720d75de06a5d31995f412704a",
+  "source": [
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/lib.rs",
+      "bytes": 6828,
+      "mode": "0644",
+      "sha256": "7c8a5b3a0f2f800c9cd5578ee1c53e0ecfe9df6c52c3e1db8e6f2de76f9f39f2",
+      "previousSha256": "296c072eb5da450bdc95610b0fc8d2b9ffcd7a5e57bc067b9425118b76158718"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_eval/features.rs",
+      "bytes": 5598,
+      "mode": "0644",
+      "sha256": "c9f529ee47e95d865886335c807544d121a1257e70e27082a72e0a1bd22d4c87",
+      "previousSha256": null
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_eval/geometry.rs",
+      "bytes": 7211,
+      "mode": "0644",
+      "sha256": "86ed88b4962ae945b403c55d1aa8a6abaa89c95411bc1288ce0b4bd7f20f6e84",
+      "previousSha256": null
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_eval/mod.rs",
+      "bytes": 8150,
+      "mode": "0644",
+      "sha256": "5e344e5f95717c1177804587f1e4e09ba93ad3a7cd6f5a1c84b283dcfee88861",
+      "previousSha256": null
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_eval/tests.rs",
+      "bytes": 7752,
+      "mode": "0644",
+      "sha256": "08dc0495bb72347ef1010da1a5d2d84d75ba37a3bb7b65e6853fbcd3d5667c71",
+      "previousSha256": null
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_eval/weights.rs",
+      "bytes": 3583,
+      "mode": "0644",
+      "sha256": "3cd789631165524f26bc243ffaca6d7036b86edf1b584e540bf55f8a931ee3e6",
+      "previousSha256": null
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/bin/othello-full-eval.rs",
+      "bytes": 3748,
+      "mode": "0644",
+      "sha256": "783958f3fc6fcfbd63fc667084dceb94c919c9f4d5442ded2eca454995172b95",
+      "previousSha256": null
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-wasm/src/lib.rs",
+      "bytes": 5379,
+      "mode": "0644",
+      "sha256": "0047930110ca04b65900bae2dfde6214e45244409444dd9a5ada6f8e187921cc",
+      "previousSha256": "53f23616a2506c66a28c0300cc6ae5beabf735207748f1eee816527d6433108c"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/tools/egaroucid-eval-oracle.cpp",
+      "bytes": 11568,
+      "mode": "0644",
+      "sha256": "b100b538c09c47a79789a64c8272f03c6f3faa5a734f3f0b41c3d3b544a7dc87",
+      "previousSha256": null
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/tests/egaroucid_eval_oracle_test.cpp",
+      "bytes": 7627,
+      "mode": "0644",
+      "sha256": "77ffa3dd7c123d80d71ac8e01eacf6d4acda1a3f9bc15d63e208ce0393919fd4",
+      "previousSha256": null
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/tests/fixtures/egaroucid-eval-oracle-v1.schema.json",
+      "bytes": 8492,
+      "mode": "0644",
+      "sha256": "762d5472dafc6a858230834a144824a80a32d85e4e86e800b17175551ba1386c",
+      "previousSha256": null
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/tests/full_eval_recorded.rs",
+      "bytes": 10066,
+      "mode": "0644",
+      "sha256": "06b2ac5a927e44429f34ffad4e1eccbafd266ec179b263e81b37357db217287c",
+      "previousSha256": null
+    }
+  ],
+  "images": [
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-evaluator-software-v1/othello-full-eval",
+      "bytes": 635472,
+      "mode": "0755",
+      "sha256": "03c7880c7e1063d67bcffc493d146fcd154550db39450bfd1a5e062e0b5929d4"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-evaluator-software-v1/egaroucid-eval-oracle",
+      "bytes": 317296,
+      "mode": "0755",
+      "sha256": "9f58ed13c1c60cf27a6d3c08b8ab4b558327fc3c466eadb7a48646807622c9ac"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-evaluator-software-v1/egaroucid-eval-oracle-test",
+      "bytes": 394712,
+      "mode": "0755",
+      "sha256": "881c2b469dbd958426da8addc3c4b58ef0b5de05651e3ea85d23226956426313"
+    }
+  ],
+  "runtime": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-evaluator-software-v1/runtime/result.json",
+    "bytes": 526,
+    "mode": "0600",
+    "sha256": "a4e70223598d72f68613a9008b27c0407c8645a23b61fe1c738000f7029bf1ce"
+  },
+  "qualification": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-evaluator-software-v1/qualification.json",
+    "bytes": 5007,
+    "mode": "0644",
+    "sha256": "c02febf71b6af3b10f327f90aa668fc1c60663f2cd4b06694d98164dd86de5e1"
+  },
+  "archive": {
+    "path": "/workspaces/quoridor/research-data/othello/strong-ai-n96/full-evaluator-software-v1-checks.tar.gz",
+    "bytes": 826383,
+    "mode": "0644",
+    "sha256": "fe737cad081da03d95892fb099f4bfa36a1380e4c0ee299b39915b92e00e273b"
+  },
+  "archiveMembers": 60,
+  "checks": {
+    "newRustTests": 6,
+    "originalCoreTestDefinitions": 5,
+    "originalNativeBoundaryDefinition": 1,
+    "externalCppFixture": "new protocol/synthetic term/decoder executable",
+    "affectedClippy": "PASS",
+    "nativeRelease": "PASS",
+    "genericOracleBuild": "PASS",
+    "wasmGeneration": "PASS"
+  },
+  "sourceReview": {
+    "verdict": "SOURCE_CLEAR",
+    "essential": 0,
+    "ordinary": 0,
+    "report": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-evaluator-boundary-review-v1/reviewer/report.md",
+      "bytes": 7451,
+      "mode": "0644",
+      "sha256": "04bf6873842955647449184f5b1753019f097160e2232b6ec951470c5242c4ca"
+    },
+    "receipt": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-evaluator-boundary-review-v1/reviewer/receipt.json",
+      "bytes": 7434,
+      "mode": "0644",
+      "sha256": "457085db32fc00da1b1fb55af76dac2e2a7b212da6f55fcff7abb862ffd5fa42"
+    }
+  },
+  "scope": "Full16 shapes/64 occurrences/60 placement phases compact decoder/incremental/explicit native+Wasm scalar boundary. Source/synthetic/build qualification only.",
+  "wholeSecondsOnce": 22.691710681072436,
+  "nestedNotAdded": [
+    {
+      "name": "core-five-tests",
+      "wall_seconds": 0.7902857369044796
+    },
+    {
+      "name": "native-one-test",
+      "wall_seconds": 0.40441135002765805
+    },
+    {
+      "name": "affected-clippy",
+      "wall_seconds": 1.1236129880417138
+    },
+    {
+      "name": "native-release",
+      "wall_seconds": 8.802576614893042
+    },
+    {
+      "name": "generic-oracle-build",
+      "wall_seconds": 4.824770917999558
+    },
+    {
+      "name": "oracle-fixture-build",
+      "wall_seconds": 5.321138149942271
+    },
+    {
+      "name": "oracle-new-fixtures",
+      "wall_seconds": 0.014969873009249568
+    },
+    {
+      "name": "wasm-generation",
+      "wall_seconds": 1.059434870025143
+    }
+  ],
+  "weightBodyReadInSoftwareJob": false,
+  "realWeightNumerical": "UNRUN in this software qualification; separate finite job0921ca04",
+  "searchPort": "UNRUN",
+  "strength": "UNRUN",
+  "defaults": "unchanged",
+  "licensing": {
+    "source": "Derived GPL-3.0-or-later / Egaroucid by Takuto Yamana",
+    "notice": "games/othello/LICENSE.Egaroucid",
+    "weight": "repository license exists; separate grant unconfirmed; local use authorized; no public/product weight redistribution certified",
+    "cpp": "External comparison tool only; not product engine"
+  },
+  "limitations": [
+    "Original generic and scalar SIMD clipping are separate; no actual upstream SIMD numerical parity from this build.",
+    "Actual fullweight native/Wasm and incremental numerical tests belong to separate frozen finite entry.",
+    "Returned finalization completed; original disk mask pending/persist attempted retained separately."
+  ],
+  "contextDeviation": "First guarded result collection preceded explicit latest context read; immediately verified actualSol6.1/high/Main/fullnever before further work; recorded in collection"
+}

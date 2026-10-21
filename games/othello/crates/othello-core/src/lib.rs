@@ -4,6 +4,7 @@ use serde::{Deserialize, Deserializer, Serialize, de::Error as _};
 use std::fmt;
 
 pub mod bitboard;
+pub mod full_eval;
 pub mod heuristic;
 pub mod pattern;
 pub mod search;

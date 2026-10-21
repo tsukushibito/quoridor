@@ -1,0 +1,56 @@
+{
+  "schema": "quoridor.normal-entry-software.v3",
+  "source": [
+    {
+      "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+      "bytes": 398345,
+      "mode": "0644",
+      "sha256": "901c4ebb79a007e93b68727108ae699b3d0f03895c4e0357a055f661bc4d2d18"
+    },
+    {
+      "path": "/workspaces/quoridor/scripts/dev/test_arena_config.py",
+      "bytes": 28181,
+      "mode": "0644",
+      "sha256": "073a2dfbad76f59544c4cd4cccab231497f1814300ad0b19fbb563f4f90f55d3"
+    }
+  ],
+  "archive": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/quoridor-strong-ai435/normal-entry-software-v3-checks.tar.gz",
+    "bytes": 101757,
+    "mode": "0644",
+    "sha256": "adc30a24dd166c09017b3cd322d42e9598f91022eaab0144868c17c6035c8c9e"
+  },
+  "archiveMembers": 19,
+  "originalFailure": {
+    "job": "94f5ff70-4bcf-4dc1-94ce-62b292f28987",
+    "wholeSecondsOnce": 5.962368592037819,
+    "collection": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/normal-entry-binding-v1/normal8-v3/completion-94f5ff70/collection.json",
+      "bytes": 5446,
+      "mode": "0644",
+      "sha256": "b0ef996c736716ef6867b09d952be2d403e8be00b14e8a184d05002641184d2c"
+    },
+    "reason": "Family deny_unknown_fields rejects producer canonical_prefix",
+    "planned": 8,
+    "completed": 0,
+    "UNRUN": 8,
+    "nativeProcess": true,
+    "modelOrForward": false
+  },
+  "repair": "Existing arena_plan_check validates exact seven native Family keys and unsigned/string/list/tuple primitive ABI; native rules/history/model/clock checks unchanged. Producer-only metadata remains at top-level parent FileRef.",
+  "newFocusedTest": {
+    "name": "ConfiguredArenaTests.test_native_family_shape_refuses_producer_only_fields_before_entry",
+    "result": "PASS 1 definition, .019s",
+    "guardianWholeSeconds": 0.18955243402160704,
+    "syntheticOnly": true,
+    "oldSuitesReplayed": false
+  },
+  "projection": {
+    "path": "/workspaces/quoridor/.worktree/quoridor-strong435/.artifacts/quoridor-strong435/native-book-projection-v6/book.json",
+    "bytes": 8407,
+    "mode": "0644",
+    "sha256": "88447805a68d6ba054942ece9836c72349b73af473900e84fd07aa98ec29a3b4"
+  },
+  "next": "Root caller/config rebinding and actual admission remain separate; no new job submitted here",
+  "preserved": "v1 not_started/v2 nullseed/v3 unknown field failures, original finalization/cleanup domains, pauses/seals/models/defaults"
+}

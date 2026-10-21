@@ -143,3 +143,39 @@ impl PatternModel {
         search_selected(input, options, Evaluator::Pattern(&self.weights))
     }
 }
+
+/// Explicit full Console7.8.1 evaluator owner. No model/global/default adoption,
+/// and no search binding to the existing centidisc / actual-disc exact solver.
+/// The host retains identity/provenance of the supplied original weight bytes.
+#[wasm_bindgen]
+pub struct FullEvaluation {
+    weights: othello_core::full_eval::FullWeights,
+    interpretation: othello_core::full_eval::TableInterpretation,
+}
+
+#[wasm_bindgen]
+impl FullEvaluation {
+    #[wasm_bindgen(constructor)]
+    pub fn new(
+        midgame: &[u8],
+        ordering: &[u8],
+        interpretation: &str,
+    ) -> Result<FullEvaluation, JsValue> {
+        Ok(Self {
+            interpretation: interpretation.parse().map_err(js_error)?,
+            weights: othello_core::full_eval::FullWeights::from_bytes(midgame, ordering)
+                .map_err(js_error)?,
+        })
+    }
+
+    pub fn evaluate_json(&self, input: &str) -> Result<String, JsValue> {
+        let features = othello_core::full_eval::FeatureState::new(Position::from(&state(input)?));
+        let evaluator =
+            othello_core::full_eval::FullEvaluator::new(&self.weights, self.interpretation);
+        json(&evaluator.trace(&features).map_err(js_error)?)
+    }
+
+    pub fn decoded_bytes(&self) -> usize {
+        self.weights.decoded_bytes()
+    }
+}

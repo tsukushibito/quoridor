@@ -224,6 +224,41 @@ class ConfiguredArenaTests(unittest.TestCase):
                     with self.assertRaisesRegex(lc.Refused, "unsigned seed/attempt identity"):
                         lc.arena_plan_check(exp, plan)
 
+    def test_native_family_shape_refuses_producer_only_fields_before_entry(self):
+        changes = [
+            None,
+            {"canonical_prefix": []},
+            {"id": None},
+            {"root_key": 0},
+            {"prefix": None},
+            {"prefix": [2**16]},
+            {"history_counts": "not-a-list"},
+            {"history_counts": [["FAKE", 2**16]]},
+            {"history_counts": [["FAKE", 1, 2]]},
+            {"family_id": True},
+        ]
+        for change in changes:
+            with self.subTest(change=change):
+                plan, _, exp, configs = self.fixture([0], [0])
+                book = lc.document(plan["book"])
+                producer = self.store({"synthetic_producer": True}, "producer")
+                book["producer_source"] = producer
+                if change:
+                    book["families"][0].update(change)
+                book_ref = self.store(book, "projected-native-book")
+                plan["book"] = book_ref
+                plan["inputs"] = exp["inputs"] = [book_ref, producer]
+                opening = configs[0]["arena"]["book"]["openings"][0]
+                opening["reference"]["source_sha256"] = book_ref["sha256"]
+                config_ref = self.store(configs[0], "projected-native-config")
+                plan["batches"][0]["config"] = exp["config"] = config_ref
+                exp["canonical_plan_sha256"] = self.store(plan, "projected-native-plan")["sha256"]
+                if change is None:
+                    lc.arena_plan_check(exp, plan)
+                else:
+                    with self.assertRaisesRegex(lc.Refused, "native book family fields"):
+                        lc.arena_plan_check(exp, plan)
+
     def analysis(self, plan, pref, base):
         config = {
             "schema": "quoridor.arena-analysis.v1",

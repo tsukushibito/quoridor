@@ -4936,6 +4936,31 @@ def arena_game_ids(config):
     return selected
 
 
+def native_arena_family_fields(family):
+    """JSON field/type boundary of the current 64-bit native Family, not game rules."""
+    return (
+        set(family)
+        == {"family_id", "id", "attempt_id", "seed", "prefix", "root_key", "history_counts"}
+        and all(
+            type(family[key]) is int and 0 <= family[key] < 2**64
+            for key in ("family_id", "attempt_id", "seed")
+        )
+        and isinstance(family["id"], str)
+        and isinstance(family["root_key"], str)
+        and isinstance(family["prefix"], list)
+        and all(type(action) is int and 0 <= action < 2**16 for action in family["prefix"])
+        and isinstance(family["history_counts"], list)
+        and all(
+            isinstance(pair, list)
+            and len(pair) == 2
+            and isinstance(pair[0], str)
+            and type(pair[1]) is int
+            and 0 <= pair[1] < 2**16
+            for pair in family["history_counts"]
+        )
+    )
+
+
 def arena_plan_check(experiment, plan):
     """One explicit JSON arena plan; config files own engines and search/clock limits."""
     require(
@@ -5144,6 +5169,7 @@ def arena_plan_check(experiment, plan):
         book["complete"] is True and book["rules"] == plan["rules"],
         "complete bound book",
     )
+    require(all(isinstance(f, dict) for f in book["families"]), "native book family fields")
     require(
         all(
             type(f.get(key)) is int and 0 <= f[key] < 2**64
@@ -5151,6 +5177,9 @@ def arena_plan_check(experiment, plan):
             for key in ("seed", "attempt_id")
         ),
         "native book unsigned seed/attempt identity required",
+    )
+    require(
+        all(native_arena_family_fields(f) for f in book["families"]), "native book family fields"
     )
     families = {f["family_id"]: f for f in book["families"]}
     require(

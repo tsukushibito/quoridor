@@ -43,6 +43,12 @@ STM/盤面向き/色、raw STEP単位、disc単位、丸め、clamp段階と外�
 
 固定setting.hppではEND parity/stability、MID ETC/MPCはON、LAST4 stability/aspiration negascout/killer-orderingはOFF。YBWCの定義があってもsinglethread/pool0で実効しない並列を必須移植へ増やさない。実console/fixedadapterのcompile条件・runtime選択を対応表へ結び、宣言の存在を有効性やport完了と扱わない。
 
+## 評価器の限定software資格
+
+全16形状・64配置・60placement段階のscalar実装、compactな実weight decoder、play/flip/undo/passの差分更新と明示native/Wasm入口を実装した。[限定software資格](../../../research-data/othello/strong-ai-n96/full-evaluator-software-v1.json)は新Rust6定義、関連Clippy、native release、外部generic oracleと合成fixture、Wasm生成の8commandを記録する。包括22.691710681秒に内包時計を加算しない。固定差分の独立確認はSOURCE_CLEARであり、実weight数値一致・全探索port・棋力の資格とは区別する。
+
+同一のraw tableに対しgenericは元i16値を読み、scalar SIMD解釈は元loader同様main項を±4092、ordering項を±16380へ制限する。auxiliary項は変更しない。外部oracleはgeneric専用であり、SIMDとの数値一致と呼ばない。port由来sourceのGPL-3.0-or-later帰属と[原GPL本文](../LICENSE.Egaroucid)を保持し、weightの公開・製品再配布条件は未認定のままとする。
+
 ## 最初の受入単位と検証
 
 最初の一まとまりは「全16形状・64配置・60段階のRust評価器、実weight読込、incremental更新、原engineとの数値一致」。同じ課題の既存core作者と基準接続作者を再用し、共通format/phase境界を先に固定する。core作者はRust実装、基準接続作者は外部static oracle・format/由来を担当する。sourceの実編集から進め、設計完成・親close・Root/人間ACKを入口にしない。

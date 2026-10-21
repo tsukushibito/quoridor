@@ -1,0 +1,237 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:quoridor:egaroucid-static-eval-v1",
+  "title": "External pinned Console7.8.1 static oracle response",
+  "oneOf": [
+    { "$ref": "#/$defs/evaluation" },
+    { "$ref": "#/$defs/info" },
+    { "$ref": "#/$defs/error" }
+  ],
+  "$defs": {
+    "state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version", "board", "toMove"],
+      "properties": {
+        "version": { "const": 1 },
+        "board": {
+          "type": "array",
+          "minItems": 64,
+          "maxItems": 64,
+          "items": { "type": "integer", "minimum": 0, "maximum": 2 }
+        },
+        "toMove": { "enum": [1, 2] }
+      }
+    },
+    "nullableInteger": { "type": ["integer", "null"] },
+    "indices": {
+      "type": "array",
+      "minItems": 64,
+      "maxItems": 64,
+      "items": { "type": "integer", "minimum": 0, "maximum": 59048 }
+    },
+    "terms": {
+      "type": "array",
+      "minItems": 64,
+      "maxItems": 64,
+      "items": { "type": "integer", "minimum": -32768, "maximum": 32767 }
+    },
+    "sums": {
+      "type": "array",
+      "minItems": 16,
+      "maxItems": 16,
+      "items": { "type": "integer" }
+    },
+    "ordering": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rawTotalStep", "roundingBiasStep", "discScore", "clamped"],
+      "properties": {
+        "rawTotalStep": { "type": "integer" },
+        "roundingBiasStep": { "enum": [-16, 16] },
+        "discScore": { "type": "integer" },
+        "clamped": { "const": false }
+      }
+    },
+    "evaluation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ok",
+        "protocol",
+        "engineCommit",
+        "state",
+        "scorePerspective",
+        "scoreUnits",
+        "stepPerDisc",
+        "occupied",
+        "phase",
+        "tablePhase",
+        "terminal",
+        "mustPass",
+        "stmDiscCount",
+        "stmActualDiscDifference",
+        "evaluationKind",
+        "patternIndices",
+        "patternTermsStep",
+        "patternSumsStep",
+        "patternSumStep",
+        "discCountTermStep",
+        "rawTotalStep",
+        "roundingBiasStep",
+        "biasedTotalStep",
+        "roundedDiscScore",
+        "cappedDiscScore",
+        "score",
+        "endOrdering"
+      ],
+      "properties": {
+        "ok": { "const": true },
+        "protocol": { "const": "egaroucid-static-eval-v1" },
+        "engineCommit": { "const": "570d5e0a478c9d720d75de06a5d31995f412704a" },
+        "state": { "$ref": "#/$defs/state" },
+        "scorePerspective": { "const": "state.toMove" },
+        "scoreUnits": { "const": "engine-disc" },
+        "stepPerDisc": { "const": 32 },
+        "occupied": { "type": "integer", "minimum": 4, "maximum": 64 },
+        "phase": { "type": "integer", "minimum": 0, "maximum": 60 },
+        "tablePhase": { "type": ["integer", "null"], "minimum": 0, "maximum": 59 },
+        "terminal": { "type": "boolean" },
+        "mustPass": { "type": "boolean" },
+        "stmDiscCount": { "type": "integer", "minimum": 0, "maximum": 64 },
+        "stmActualDiscDifference": { "type": "integer", "minimum": -64, "maximum": 64 },
+        "evaluationKind": { "enum": ["heuristic", "terminal_winner_empties"] },
+        "patternIndices": { "oneOf": [{ "$ref": "#/$defs/indices" }, { "type": "null" }] },
+        "patternTermsStep": { "oneOf": [{ "$ref": "#/$defs/terms" }, { "type": "null" }] },
+        "patternSumsStep": { "oneOf": [{ "$ref": "#/$defs/sums" }, { "type": "null" }] },
+        "patternSumStep": { "$ref": "#/$defs/nullableInteger" },
+        "discCountTermStep": { "$ref": "#/$defs/nullableInteger" },
+        "rawTotalStep": { "$ref": "#/$defs/nullableInteger" },
+        "roundingBiasStep": { "enum": [-16, 16, null] },
+        "biasedTotalStep": { "$ref": "#/$defs/nullableInteger" },
+        "roundedDiscScore": { "$ref": "#/$defs/nullableInteger" },
+        "cappedDiscScore": { "type": ["integer", "null"], "minimum": -64, "maximum": 64 },
+        "score": { "type": "integer", "minimum": -64, "maximum": 64 },
+        "endOrdering": { "oneOf": [{ "$ref": "#/$defs/ordering" }, { "type": "null" }] }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "terminal": { "const": false } } },
+          "then": {
+            "properties": {
+              "evaluationKind": { "const": "heuristic" },
+              "tablePhase": { "type": "integer" },
+              "patternIndices": { "$ref": "#/$defs/indices" },
+              "patternTermsStep": { "$ref": "#/$defs/terms" },
+              "patternSumsStep": { "$ref": "#/$defs/sums" },
+              "patternSumStep": { "type": "integer" },
+              "discCountTermStep": { "type": "integer" },
+              "rawTotalStep": { "type": "integer" },
+              "roundingBiasStep": { "enum": [-16, 16] },
+              "biasedTotalStep": { "type": "integer" },
+              "roundedDiscScore": { "type": "integer" },
+              "cappedDiscScore": { "type": "integer" },
+              "endOrdering": { "$ref": "#/$defs/ordering" }
+            }
+          },
+          "else": {
+            "properties": {
+              "evaluationKind": { "const": "terminal_winner_empties" },
+              "mustPass": { "const": false },
+              "tablePhase": { "type": "null" },
+              "patternIndices": { "type": "null" },
+              "patternTermsStep": { "type": "null" },
+              "patternSumsStep": { "type": "null" },
+              "patternSumStep": { "type": "null" },
+              "discCountTermStep": { "type": "null" },
+              "rawTotalStep": { "type": "null" },
+              "roundingBiasStep": { "type": "null" },
+              "biasedTotalStep": { "type": "null" },
+              "roundedDiscScore": { "type": "null" },
+              "cappedDiscScore": { "type": "null" },
+              "endOrdering": { "type": "null" }
+            }
+          }
+        }
+      ]
+    },
+    "weight": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "bytes", "sha256"],
+      "properties": {
+        "path": { "type": "string" },
+        "bytes": { "type": "integer" },
+        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      }
+    },
+    "info": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ok",
+        "protocol",
+        "label",
+        "engineCommit",
+        "engineTag",
+        "evaluationImplementation",
+        "search",
+        "book",
+        "ponder",
+        "workerPool",
+        "libraryThreads",
+        "stepPerDisc",
+        "patterns",
+        "occurrences",
+        "phases",
+        "identityVerification",
+        "expectedWeights",
+        "initialization"
+      ],
+      "properties": {
+        "ok": { "const": true },
+        "protocol": { "const": "egaroucid-static-eval-v1" },
+        "label": { "const": "Console7.8.1-engine + scalar static-evaluation oracle" },
+        "engineCommit": { "const": "570d5e0a478c9d720d75de06a5d31995f412704a" },
+        "engineTag": { "const": "console_v7.8.1" },
+        "evaluationImplementation": { "const": "evaluate_generic.hpp" },
+        "search": { "const": false },
+        "book": { "const": false },
+        "ponder": { "const": false },
+        "workerPool": { "const": 0 },
+        "libraryThreads": { "const": 1 },
+        "stepPerDisc": { "const": 32 },
+        "patterns": { "const": 16 },
+        "occurrences": { "const": 64 },
+        "phases": { "const": 60 },
+        "identityVerification": { "const": "caller-must-verify-FileRef-before-launch" },
+        "expectedWeights": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": { "$ref": "#/$defs/weight" }
+        },
+        "initialization": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["setupMs", "loadMs", "totalMs"],
+          "properties": {
+            "setupMs": { "type": "number", "minimum": 0 },
+            "loadMs": { "type": "number", "minimum": 0 },
+            "totalMs": { "type": "number", "minimum": 0 }
+          }
+        }
+      }
+    },
+    "error": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ok", "protocol", "error"],
+      "properties": {
+        "ok": { "const": false },
+        "protocol": { "const": "egaroucid-static-eval-v1" },
+        "error": { "type": "string" }
+      }
+    }
+  }
+}
