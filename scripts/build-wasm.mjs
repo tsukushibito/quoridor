@@ -8,9 +8,10 @@ if (mode !== 'dev' && mode !== 'release') {
   console.error('Usage: node scripts/build-wasm.mjs dev|release');
   process.exit(2);
 }
-for (const [feature, name] of [
-  ['rules', 'quoridor_rules'],
-  ['ai', 'quoridor_ai'],
+for (const [game, feature, name] of [
+  ['quoridor', 'rules', 'quoridor_rules'],
+  ['quoridor', 'ai', 'quoridor_ai'],
+  ['othello', '', 'othello'],
 ]) {
   const args = [
     'build',
@@ -18,16 +19,15 @@ for (const [feature, name] of [
     'web',
     mode === 'release' ? '--release' : '--dev',
     '--out-dir',
-    resolve(root, `games/quoridor/bridge/wasm/${feature}`),
+    resolve(root, `games/${game}/bridge/wasm/${feature}`),
     '--out-name',
     name,
-    resolve(root, 'games/quoridor/crates/quoridor-wasm'),
+    resolve(root, `games/${game}/crates/${game}-wasm`),
     '--locked',
     '--no-default-features',
-    '--features',
-    feature,
+    ...(feature ? ['--features', feature] : []),
   ];
   const result = spawnSync('wasm-pack', args, { cwd: root, stdio: 'inherit', env: process.env });
   if (result.status !== 0) process.exit(result.status ?? 1);
 }
-console.log(`Built ${mode} rules and AI Wasm with separate features.`);
+console.log(`Built ${mode} Quoridor rules/AI and Othello Wasm.`);

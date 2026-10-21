@@ -52,6 +52,11 @@ class BuildProvenanceTests(unittest.TestCase):
             lc.source_check(self.source_info)
         self.source_info["untracked_inputs"] = [fixture.ref(extra)]
         lc.source_check(self.source_info)
+        othello = self.file("games/othello/crates/new_module.rs", b"fn othello_input() {}\n")
+        with self.assertRaisesRegex(lc.Refused, "untracked Cargo inputs drift"):
+            lc.source_check(self.source_info)
+        self.source_info["untracked_inputs"].append(fixture.ref(othello))
+        lc.source_check(self.source_info)
         extra.write_bytes(b"fn untracked_drift() {}\n")
         with self.assertRaises(lc.Refused):
             lc.source_check(self.source_info)

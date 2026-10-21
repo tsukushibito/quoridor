@@ -16,7 +16,11 @@ import { fileURLToPath } from 'node:url';
 const scopes = {
   research: [
     'games/quoridor/crates/',
-    'python/',
+    'games/othello/crates/',
+    'games/quoridor/python/',
+    'shared/python/',
+    'games/quoridor/configs/',
+    'games/quoridor/tests/python/',
     'tools/model-export/',
     'tools/research-session/',
     'pyproject.toml',
@@ -37,6 +41,13 @@ const scopes = {
   product: [
     'apps/',
     'games/quoridor/bridge/',
+    'games/quoridor/python/',
+    'shared/python/',
+    'games/othello/bridge/',
+    'games/othello/crates/',
+    'games/quoridor/configs/',
+    'games/quoridor/tests/',
+    'games/quoridor/docs/',
     'tests/',
     'rust-toolchain.toml',
     'playwright.config.ts',

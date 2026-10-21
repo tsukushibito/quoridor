@@ -2622,6 +2622,7 @@ def source_check(source):
         "Cargo.lock",
         ".cargo",
         "games/quoridor/crates",
+        "games/othello/crates",
     )
     paths = {str(workspace / os.fsdecode(p)) for p in untracked.split(b"\0") if p}
     require(

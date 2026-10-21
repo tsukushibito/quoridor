@@ -10,13 +10,14 @@
 
 AI研究は研究方針・進行判断担当が人間の判断基準に沿って目的・仮説・比較規模と結果を判断し、方針相談窓口が人間の状況把握と解釈・方針修正の相談を担います。実行・統合担当は作業配分・実資源・通常修復・技術的受入れを扱い、Main/Git/index/Cargoの唯一writerを維持します。通常の成果は実行・統合担当へ届け、必要な境界だけタスク単位の独立確認を行います。固定ロールや定期LLM監督は使いません。人間が研究目標・重要な方向変更・機能とモデル設計を決め、配分済みの通常工程と許可範囲内の具体的なデータ選定・規模・学習条件は、実行担当が理由と結果を記録して自律継続します。方針相談や人間の返答を通常工程の追加gateにしません。競合仮説と実験は結果から見直し、小規模診断と正式棋力評価を区別します。現在のSigma同等水準は未立証です。 観測・限界・次の人間判断は[研究知見](docs/research-findings.md)へまとめます。[タスク型研究の設計](docs/design/ai-research-team.md)と[実行・記録規約](docs/development/ai-research-experiments.md)を参照してください。
 
-Webの入口はゲーム選択画面です。Quoridorを開くと既存の新規／再開画面へ進み、「ゲーム一覧」で保存・AI取消・描画終了を経て戻れます。直リンクは `#/quoridor`、サブパス配信でも同じhashを使います。Othelloは現在利用できません。
+Webの入口はゲーム選択画面です。Quoridorを開くと既存の新規／再開画面へ進み、「ゲーム一覧」で保存・AI取消・描画終了を経て戻れます。直リンクは `#/quoridor`、サブパス配信でも同じhashを使います。OthelloのRustルールとWasm接続は実装・単体検証済みですが、画面接続は後続工程のため現在のゲーム選択では利用できません。
 
 ## 主要ディレクトリ
 
 | 現在の配置                                                                                 | 役割                                                                                            |
 | ------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
 | `apps/web/`                                                                                | 製品Web UI・Three.js描画・Worker側の連携                                                        |
+| `games/othello/crates/`, `games/othello/bridge/`                                           | Othelloのルールと簡易AI（非学習）・[Wasm API](games/othello/bridge/README.md)                   |
 | `games/quoridor/bridge/`                                                                   | TypeScriptとRust/Wasmを結ぶプロトコル・bridge                                                   |
 | `games/quoridor/crates/quoridor-core/`, `quoridor-nnue/`, `quoridor-ai/`, `quoridor-wasm/` | Rustのルール・差分評価・αβ/PVS/TT・MCTS・CPU/Wasm公開境界                                       |
 | `games/quoridor/crates/quoridor-inference/`, `quoridor-data/`, `quoridor-runner/`          | 常駐CPU/GPU推論・Arrowデータ・並列生成/arena/学習cycle入口                                      |

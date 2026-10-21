@@ -1,0 +1,2017 @@
+{
+  "at": "2026-10-21T15:41:49.170218+00:00",
+  "issue": "quoridor-4lc.324.12.9.6",
+  "base": "68100f946a9c368be2490d04fd9a8e97f520a520",
+  "worker_source_manifest": {
+    "source_stop_utc": "2026-10-21T15:22:22.665507+00:00",
+    "base": "2dfe353c173345f073d5d9e4f018f924bbf072f7",
+    "source_files": [
+      {
+        "path": "games/othello/bridge/README.md",
+        "before": "ABSENT",
+        "after": {
+          "sha256": "d02089e49ba69e94bd4a87b0cee602f780d2af68c68783c1b0e8acdf43aa7bf8",
+          "bytes": 5552,
+          "mode": "0644"
+        }
+      },
+      {
+        "path": "games/othello/bridge/src/index.ts",
+        "before": "ABSENT",
+        "after": {
+          "sha256": "4c96e8c1b4993ac6c4d7122189299cfaf374d7ca6fda08a84a2aa9b4f1ecfe86",
+          "bytes": 2227,
+          "mode": "0644"
+        }
+      },
+      {
+        "path": "games/othello/bridge/src/wasm.d.ts",
+        "before": "ABSENT",
+        "after": {
+          "sha256": "699ceeb629d3f4081c3cfda93a400cc159589b5746e50e527e1608fa900cd286",
+          "bytes": 651,
+          "mode": "0644"
+        }
+      },
+      {
+        "path": "games/othello/bridge/test/facade.test.mjs",
+        "before": "ABSENT",
+        "after": {
+          "sha256": "d7330bbf442741ead8e21656bcecfabd1e4b7cb7673032e60aa6cb4e24966db5",
+          "bytes": 4791,
+          "mode": "0644"
+        }
+      },
+      {
+        "path": "games/othello/bridge/test/wasm.test.mjs",
+        "before": "ABSENT",
+        "after": {
+          "sha256": "29228a987473e7499a0daa216eb777fa1d8b7ce45650cd8da5800d595e97c439",
+          "bytes": 2518,
+          "mode": "0644"
+        }
+      },
+      {
+        "path": "games/othello/crates/othello-core/Cargo.toml",
+        "before": "ABSENT",
+        "after": {
+          "sha256": "ce5a682bba612d8e8522ba8d47578eef8cac12dbae5c798aa09f46527f1cb8ef",
+          "bytes": 163,
+          "mode": "0644"
+        }
+      },
+      {
+        "path": "games/othello/crates/othello-core/src/lib.rs",
+        "before": "ABSENT",
+        "after": {
+          "sha256": "1dba4d498b1cc98a0f4e9fc4ea4c8a8be8ad3fe0296235ec4e67cb4b909b4128",
+          "bytes": 6738,
+          "mode": "0644"
+        }
+      },
+      {
+        "path": "games/othello/crates/othello-core/src/tests.rs",
+        "before": "ABSENT",
+        "after": {
+          "sha256": "9af17c6553079fda66ab74142d24aec7f27fdcb5cdd07429588db075ff7da7f0",
+          "bytes": 10231,
+          "mode": "0644"
+        }
+      },
+      {
+        "path": "games/othello/crates/othello-wasm/Cargo.toml",
+        "before": "ABSENT",
+        "after": {
+          "sha256": "9eb4d81ad3ae51b194ba4ab21f4e32e91d67bcc32aa75aca8d98a9eeb68ca9bb",
+          "bytes": 272,
+          "mode": "0644"
+        }
+      },
+      {
+        "path": "games/othello/crates/othello-wasm/src/lib.rs",
+        "before": "ABSENT",
+        "after": {
+          "sha256": "a701bc7500106fd6018a10365bff36632c91a8c77335d0dab62fe1ed166c00a6",
+          "bytes": 1313,
+          "mode": "0644"
+        }
+      }
+    ],
+    "common_callers_unchanged": true,
+    "common_proposal": {
+      "sha256": "81c8dd0006843b4beabcecd1396bb80ed258624d559664b26f1fa73333c97f7b",
+      "bytes": 1871,
+      "mode": "0644"
+    },
+    "protected_after_only": {
+      "Cargo.lock": {
+        "sha256": "e660913aa85fefd7974d8b2d807698aa96325a6c16067053b6bf1e0a80b1a5de",
+        "bytes": 27581,
+        "mode": "0644"
+      },
+      "package.json": {
+        "sha256": "2e28e28f7b629dec003d36b5e38022eddec84a65a3762d6d7e680f0cec69d81d",
+        "bytes": 3246,
+        "mode": "0644"
+      },
+      "package-lock.json": {
+        "sha256": "862bcaf68d896746cefae2d65cb19e3f60adb54bfd052673d843fa4421c7394c",
+        "bytes": 44067,
+        "mode": "0644"
+      }
+    },
+    "rust_unit_definitions": 11,
+    "rust_compile_tests": "UNRUN",
+    "real_wasm": "UNRUN",
+    "prior_bounded_records": [
+      {
+        "path": "proposalsyntax.process.json",
+        "status": "complete",
+        "exit_code": 0
+      },
+      {
+        "path": "wasmtestsyntax.process.json",
+        "status": "complete",
+        "exit_code": 0
+      },
+      {
+        "path": "finalizerformatcheck.process.json",
+        "status": "complete",
+        "exit_code": 0
+      },
+      {
+        "path": "ruffcheck.process.json",
+        "status": "complete",
+        "exit_code": 0
+      },
+      {
+        "path": "finalmanifest.process.json",
+        "status": "failed",
+        "exit_code": 1
+      },
+      {
+        "path": "ruffformatcheck.process.json",
+        "status": "complete",
+        "exit_code": 0
+      },
+      {
+        "path": "handoffcheck.process.json",
+        "status": "complete",
+        "exit_code": 0
+      },
+      {
+        "path": "tsc.process.json",
+        "status": "complete",
+        "exit_code": 0
+      },
+      {
+        "path": "rustfmtcheck.process.json",
+        "status": "complete",
+        "exit_code": 0
+      },
+      {
+        "path": "proposaljsformat.process.json",
+        "status": "complete",
+        "exit_code": 0
+      },
+      {
+        "path": "proposalfinal2.process.json",
+        "status": "complete",
+        "exit_code": 0
+      },
+      {
+        "path": "finalizerlint2.process.json",
+        "status": "complete",
+        "exit_code": 0
+      },
+      {
+        "path": "patchdryrun.process.json",
+        "status": "complete",
+        "exit_code": 0
+      },
+      {
+        "path": "facade.process.json",
+        "status": "complete",
+        "exit_code": 0
+      },
+      {
+        "path": "finalizerformat2.process.json",
+        "status": "complete",
+        "exit_code": 0
+      },
+      {
+        "path": "rustfmt.process.json",
+        "status": "complete",
+        "exit_code": 0
+      },
+      {
+        "path": "prettiercheck.process.json",
+        "status": "complete",
+        "exit_code": 0
+      },
+      {
+        "path": "proposalfinal.process.json",
+        "status": "complete",
+        "exit_code": 0
+      },
+      {
+        "path": "finalizerlint.process.json",
+        "status": "complete",
+        "exit_code": 0
+      },
+      {
+        "path": "proposalformat.process.json",
+        "status": "complete",
+        "exit_code": 0
+      },
+      {
+        "path": "helperformat.process.json",
+        "status": "complete",
+        "exit_code": 0
+      },
+      {
+        "path": "proposalprepare.process.json",
+        "status": "complete",
+        "exit_code": 0
+      },
+      {
+        "path": "handoffformat.process.json",
+        "status": "complete",
+        "exit_code": 0
+      },
+      {
+        "path": "prettier.process.json",
+        "status": "complete",
+        "exit_code": 0
+      },
+      {
+        "path": "proposaljsformat2.process.json",
+        "status": "complete",
+        "exit_code": 0
+      },
+      {
+        "path": "finalizerformat.process.json",
+        "status": "complete",
+        "exit_code": 0
+      }
+    ]
+  },
+  "current_source": [
+    {
+      "path": ".gitignore",
+      "bytes": 335,
+      "sha256": "e3c6a8299cf2a10be7dc11d82286aad4de8c4138789b04b7076e6a93b949e200",
+      "mode": "0644"
+    },
+    {
+      "path": "Cargo.lock",
+      "bytes": 27809,
+      "sha256": "34a1b67c91690d3b83a6b0e3734029e0d815e23f78b26444b60095e5511084d5",
+      "mode": "0644"
+    },
+    {
+      "path": "Cargo.toml",
+      "bytes": 465,
+      "sha256": "7c2fbb4e536c3ff1803dd0a0fe4e1025e286922a1de33cae07beb898611a94e3",
+      "mode": "0644"
+    },
+    {
+      "path": "README.md",
+      "bytes": 15903,
+      "sha256": "6a293f6b028d66a80687a377b2a1cdbe2b1a000143e4d045d61876d5b68da403",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/design/multi-game-repository.md",
+      "bytes": 13416,
+      "sha256": "c8d8deaaeedd7e8900ebdc19f2b50bb659b7586238d34eec405808db8c62db5c",
+      "mode": "0644"
+    },
+    {
+      "path": "games/othello/bridge/README.md",
+      "bytes": 5552,
+      "sha256": "d02089e49ba69e94bd4a87b0cee602f780d2af68c68783c1b0e8acdf43aa7bf8",
+      "mode": "0644"
+    },
+    {
+      "path": "games/othello/bridge/src/index.ts",
+      "bytes": 2227,
+      "sha256": "4c96e8c1b4993ac6c4d7122189299cfaf374d7ca6fda08a84a2aa9b4f1ecfe86",
+      "mode": "0644"
+    },
+    {
+      "path": "games/othello/bridge/src/wasm.d.ts",
+      "bytes": 651,
+      "sha256": "699ceeb629d3f4081c3cfda93a400cc159589b5746e50e527e1608fa900cd286",
+      "mode": "0644"
+    },
+    {
+      "path": "games/othello/bridge/test/facade.test.mjs",
+      "bytes": 4791,
+      "sha256": "d7330bbf442741ead8e21656bcecfabd1e4b7cb7673032e60aa6cb4e24966db5",
+      "mode": "0644"
+    },
+    {
+      "path": "games/othello/bridge/test/wasm.test.mjs",
+      "bytes": 2518,
+      "sha256": "29228a987473e7499a0daa216eb777fa1d8b7ce45650cd8da5800d595e97c439",
+      "mode": "0644"
+    },
+    {
+      "path": "games/othello/crates/othello-core/Cargo.toml",
+      "bytes": 163,
+      "sha256": "ce5a682bba612d8e8522ba8d47578eef8cac12dbae5c798aa09f46527f1cb8ef",
+      "mode": "0644"
+    },
+    {
+      "path": "games/othello/crates/othello-core/src/lib.rs",
+      "bytes": 6738,
+      "sha256": "1dba4d498b1cc98a0f4e9fc4ea4c8a8be8ad3fe0296235ec4e67cb4b909b4128",
+      "mode": "0644"
+    },
+    {
+      "path": "games/othello/crates/othello-core/src/tests.rs",
+      "bytes": 10231,
+      "sha256": "9af17c6553079fda66ab74142d24aec7f27fdcb5cdd07429588db075ff7da7f0",
+      "mode": "0644"
+    },
+    {
+      "path": "games/othello/crates/othello-wasm/Cargo.toml",
+      "bytes": 272,
+      "sha256": "9eb4d81ad3ae51b194ba4ab21f4e32e91d67bcc32aa75aca8d98a9eeb68ca9bb",
+      "mode": "0644"
+    },
+    {
+      "path": "games/othello/crates/othello-wasm/src/lib.rs",
+      "bytes": 1313,
+      "sha256": "a701bc7500106fd6018a10365bff36632c91a8c77335d0dab62fe1ed166c00a6",
+      "mode": "0644"
+    },
+    {
+      "path": "scripts/build-wasm.mjs",
+      "bytes": 1112,
+      "sha256": "d78f67bd98673c2dcea4e0770edb4421740563b571e8348da2df8bf2db005a7a",
+      "mode": "0644"
+    },
+    {
+      "path": "scripts/dev/research-lifecycle.py",
+      "bytes": 393053,
+      "sha256": "cb8049b09d957f5df3d519e7374c17c42f982ed0868e78ab28f44835f2874609",
+      "mode": "0644"
+    },
+    {
+      "path": "scripts/export-fresh-source.mjs",
+      "bytes": 9330,
+      "sha256": "397a33d86baa056373669e292849b896f7b26a0406e58a50ac66339188f8218d",
+      "mode": "0644"
+    },
+    {
+      "path": "tools/research-quality/test_export.mjs",
+      "bytes": 14977,
+      "sha256": "5db701050a77b8b4b75a7c62d4e26cddffcf9364028728cd5b0c8a61069d7d1a",
+      "mode": "0644"
+    },
+    {
+      "path": "tools/research-session/test_build_provenance.py",
+      "bytes": 5562,
+      "sha256": "ce0ae1f1e6a9f19870ab67045cf5dfd429c3282ad4e4b51539524306e8b248d6",
+      "mode": "0644"
+    }
+  ],
+  "source_controls": {
+    "path": "research-data/othello/multi-game-workflow129/rules-source-controls-v1.tar.gz",
+    "bytes": 151214,
+    "sha256": "84f65d31b483086ae6cf4b6f0857880bf2dabaae9b93fa6c477a5d5233c4155e",
+    "mode": "0644"
+  },
+  "members": [
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/affected-storage.json",
+        "bytes": 463,
+        "sha256": "e2c89165f16e480be2ffb84aaa644422c36328f83d2f40cc0eefd61b1f488dc5",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/affected-storage.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/bounded.py",
+        "bytes": 2109,
+        "sha256": "8d278521491f166320362aa4ff392177a1e1213edd5e249a40aa39902aef90db",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/bounded.py"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/common-caller-proposal.patch",
+        "bytes": 1871,
+        "sha256": "81c8dd0006843b4beabcecd1396bb80ed258624d559664b26f1fa73333c97f7b",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/common-caller-proposal.patch"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/common-caller-references.json",
+        "bytes": 860,
+        "sha256": "5aee9e640ff8c3b4788a6962b8b3c61ad1900901755584de10cc94647b43e0f1",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/common-caller-references.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/facade.log",
+        "bytes": 799,
+        "sha256": "fa09ca68288cbc3223527f98514e6c445c8f580a7c03845603d37421e4254155",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/facade.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/facade.process.json",
+        "bytes": 1285,
+        "sha256": "1c18a66fe0eacccff9bb2eb16763d13de4d3e6424834e1479d510fc47098ecd3",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/facade.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/finalize.py",
+        "bytes": 3777,
+        "sha256": "5a3810e9129a8ae7c270c647a58f06e69a2a60471c997a6aafebd675eab07318",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/finalize.py"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/finalizerformat.log",
+        "bytes": 19,
+        "sha256": "413a709001976657cb743636fd34e48fc41d8d302d665460d3f874b3313da127",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/finalizerformat.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/finalizerformat.process.json",
+        "bytes": 1363,
+        "sha256": "a4a8c228984998e2d0a0fb3963d13d1a9d29c1dc34a13fe97f3d3d4ec8e0ce36",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/finalizerformat.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/finalizerformat2.log",
+        "bytes": 22,
+        "sha256": "d807f3580f2470a7fe15ad89e1a6c08e4166ffe1e33d94152d605f0c46d21bfa",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/finalizerformat2.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/finalizerformat2.process.json",
+        "bytes": 1362,
+        "sha256": "61ac4138a2b3f5a829771bc2f5b944da89ee8ee96b907c0936fe1ed647319f0e",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/finalizerformat2.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/finalizerformatcheck.log",
+        "bytes": 25,
+        "sha256": "fd2299c9f1c6dc869070883e281051bfe93aacf66c1a3b0069f45b4aa410ca50",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/finalizerformatcheck.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/finalizerformatcheck.process.json",
+        "bytes": 1377,
+        "sha256": "3a98c92e372b0337097594925b69e685f64587d4bd7b4eb2034c0f74618b547d",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/finalizerformatcheck.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/finalizerlint.log",
+        "bytes": 19,
+        "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/finalizerlint.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/finalizerlint.process.json",
+        "bytes": 1361,
+        "sha256": "9422643501247d951002fd51f90b573e3accef1f82ed692905f3b6cef92fbde6",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/finalizerlint.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/finalizerlint2.log",
+        "bytes": 19,
+        "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/finalizerlint2.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/finalizerlint2.process.json",
+        "bytes": 1361,
+        "sha256": "218ddb2b2a040cde9eab1c0e63a9b06b5b2f1e083a5fd53361c063b89c5215e3",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/finalizerlint2.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/finalmanifest.log",
+        "bytes": 311,
+        "sha256": "3385fe6f2e118a323ebe38ddbdd9b463830a821941de7bf6e0aadd5fbfd3433e",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/finalmanifest.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/finalmanifest.process.json",
+        "bytes": 1671,
+        "sha256": "dad4a63c2037a3ec3fab1266038b0d3988506b1616963c4a9003bc90594ede64",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/finalmanifest.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/finalmanifest2.log",
+        "bytes": 302,
+        "sha256": "9721f25e2ade48f4e9fd6eb804b9a81cfcde9c7a98307dfbca1f58f7def536ba",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/finalmanifest2.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/finalmanifest2.process.json",
+        "bytes": 1306,
+        "sha256": "a7ed3023e5b0d5fcf0a436297c3a530fdc854318aa67392d45eabffd65c0b22b",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/finalmanifest2.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/first-read.md",
+        "bytes": 1101,
+        "sha256": "3db2341d1506fa18aa6bf190a03c4c1f3fb522ee92aa7ea11ff10733f4b3610d",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/first-read.md"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/handoff.md",
+        "bytes": 6496,
+        "sha256": "59903eafefa7dd4f75fd89d1a10cf87ae3b0908304a9225440ad83e2166ce94f",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/handoff.md"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/handoffcheck.log",
+        "bytes": 66,
+        "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/handoffcheck.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/handoffcheck.process.json",
+        "bytes": 1415,
+        "sha256": "d750229a10b6cff61181909ab4e9a27a5dbc81d5837a870bb9e73811b5b7be9f",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/handoffcheck.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/handoffformat.log",
+        "bytes": 189,
+        "sha256": "7d06e9e1c006ddbb37c49c7166086a6541a058edc87cb2d268f6f49be2f5b62c",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/handoffformat.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/handoffformat.process.json",
+        "bytes": 1531,
+        "sha256": "a73e77cfdbddfbbd327d35797541138ebd081cf5d32d0537b3c0967369184794",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/handoffformat.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/helperformat.log",
+        "bytes": 19,
+        "sha256": "413a709001976657cb743636fd34e48fc41d8d302d665460d3f874b3313da127",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/helperformat.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/helperformat.process.json",
+        "bytes": 1361,
+        "sha256": "aaf8d93c208cc0c48156488c7cd979cf492765e42ac840628b3449bac3316fd0",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/helperformat.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/patchdryrun.log",
+        "bytes": 87,
+        "sha256": "25997bd3776b18c54b139fd1892a4b1df50197cb534f2968742d62a574baaa20",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/patchdryrun.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/patchdryrun.process.json",
+        "bytes": 1306,
+        "sha256": "6eed0187bc969b9c0d66300449edf7170fd1caf644b1b8b26ca7422243ab05a5",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/patchdryrun.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/prettier.log",
+        "bytes": 230,
+        "sha256": "155db55a5d8b91e54187eb12909463cd5189585cde58a6a6a69c3eea946fd10a",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/prettier.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/prettier.process.json",
+        "bytes": 1550,
+        "sha256": "7bd9d492066bc96fd6ff0d4bc0788dce7e36acce872ffbb7108329732d01ba9b",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/prettier.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/prettiercheck.log",
+        "bytes": 66,
+        "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/prettiercheck.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/prettiercheck.process.json",
+        "bytes": 1644,
+        "sha256": "f9c1c61391ce8ec0fc644413638ad5b87d8198b7aeb168899facda7494d887d9",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/prettiercheck.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/proposal.py",
+        "bytes": 3195,
+        "sha256": "fd37434c63e339bd90f22394a1af7f01666ac28d8bc7e0f6efc1d169e2647cba",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/proposal.py"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/proposalfinal.log",
+        "bytes": 76,
+        "sha256": "11d8cf7fe8ea7e494440cd888ee2e3ef502069231ff2984657cb26055c7c9842",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/proposalfinal.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/proposalfinal.process.json",
+        "bytes": 1320,
+        "sha256": "b1d56e15d7f839b97ab59cc8d47d9acf9c830839c3be4baf1d24618ac3031067",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/proposalfinal.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/proposalfinal2.log",
+        "bytes": 76,
+        "sha256": "11d8cf7fe8ea7e494440cd888ee2e3ef502069231ff2984657cb26055c7c9842",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/proposalfinal2.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/proposalfinal2.process.json",
+        "bytes": 1320,
+        "sha256": "0c0c0a577869285ce3513651752705caa1ca92e16464c544b94f632c183814e6",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/proposalfinal2.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/proposalformat.log",
+        "bytes": 19,
+        "sha256": "413a709001976657cb743636fd34e48fc41d8d302d665460d3f874b3313da127",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/proposalformat.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/proposalformat.process.json",
+        "bytes": 1361,
+        "sha256": "157f355516a22ff7ddad43fb121f21c9f7c427bf178de12a13bc6b9018770e10",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/proposalformat.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/proposaljsformat.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/proposaljsformat.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/proposaljsformat.process.json",
+        "bytes": 1388,
+        "sha256": "c34eddbdb2d1c9cb7b9137c8f3ac47a00357b8cb33604fa5a4cf709f5f730f3b",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/proposaljsformat.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/proposaljsformat2.log",
+        "bytes": 69,
+        "sha256": "17fd76f5af9162379dceb70c84ded7959d75530b3fbb587c2004eb6c6f7592ac",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/proposaljsformat2.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/proposaljsformat2.process.json",
+        "bytes": 1428,
+        "sha256": "ff55039f0eae1b21cd29b9eb99ebad8e4cad6e84161ea2bafd8e8db027356389",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/proposaljsformat2.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/proposalprepare.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/proposalprepare.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/proposalprepare.process.json",
+        "bytes": 1317,
+        "sha256": "5b42ed556fa80f60b3352397d4453f567a68d4a9a719bfcc151414607e9815f3",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/proposalprepare.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/proposalsyntax.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/proposalsyntax.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/proposalsyntax.process.json",
+        "bytes": 1260,
+        "sha256": "4451f6c3b868bc679d9f22b7a3a6f66cd63cc77c67a5c37891546ce53bc66fed",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/proposalsyntax.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/ruffcheck.log",
+        "bytes": 19,
+        "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/ruffcheck.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/ruffcheck.process.json",
+        "bytes": 1407,
+        "sha256": "b47cfdbc1e8817e23519152aefdf96818078678bbeff28459ef5fe632e065c79",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/ruffcheck.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/ruffformatcheck.log",
+        "bytes": 26,
+        "sha256": "3bc53bf3e981a98a34a852e175bf9b77af841edea74fca595d9aedcbaf9a4938",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/ruffformatcheck.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/ruffformatcheck.process.json",
+        "bytes": 1423,
+        "sha256": "0874161b1b2a86de8df6b35e7e84d64966d78644aa1d77190841425495f0be67",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/ruffformatcheck.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/rustfmt.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/rustfmt.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/rustfmt.process.json",
+        "bytes": 1396,
+        "sha256": "dcd923b6d49a90a7b35dcda9f248d9f172c6e19011393b512a936964a59bb4fa",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/rustfmt.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/rustfmtcheck.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/rustfmtcheck.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/rustfmtcheck.process.json",
+        "bytes": 1412,
+        "sha256": "b4b58584046a6f117a730200fb203927cc961e3f781f99d7b6955b8c7225271a",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/rustfmtcheck.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/source-manifest.json",
+        "bytes": 6227,
+        "sha256": "5e9bf731a0d74470b1a357910f63fc286c2097b0f0eaaa0c3b8b49032eccdefe",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/source-manifest.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/tsc.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/tsc.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/tsc.process.json",
+        "bytes": 1491,
+        "sha256": "8ceddb8997c5ac0dc8e107af8903ac2eabd7ed6de3bf8279aeb17a5ad5f8f035",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/tsc.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/wasmtestsyntax.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/wasmtestsyntax.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/othello-rules129/.artifacts/othello-rules129/wasmtestsyntax.process.json",
+        "bytes": 1248,
+        "sha256": "49f41204541358a0f46dad0ad634364b56518f48e3f44a415d5a833047ad4de5",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/othello-rules129/.artifacts/othello-rules129/wasmtestsyntax.process.json"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-adoption-v1/actual-returned-STOP.json",
+        "bytes": 3102,
+        "sha256": "f84382168ecbd91543d40bd93949f581931d9cb9a0f8743aeccd07a80b32fd0a",
+        "mode": "0644"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-adoption-v1/actual-returned-STOP.json"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-adoption-v1/collect.py",
+        "bytes": 5409,
+        "sha256": "7dc45e35d763f7fe9e7f006a4825207185063ee7a879b8417c42e0bec1a66812",
+        "mode": "0644"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-adoption-v1/collect.py"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-adoption-v1/composition.json",
+        "bytes": 7770,
+        "sha256": "0548a55adcb5602000dc2e70e24a908e9c7756859f7d49ca4e754c29a233139f",
+        "mode": "0644"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-adoption-v1/composition.json"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-adoption-v1/execution.log",
+        "bytes": 90,
+        "sha256": "581973ada39b304143fe76d66ee612d29135c3899abd2b2a5b67a42b2d0da9d3",
+        "mode": "0644"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-adoption-v1/execution.log"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-adoption-v1/execution.process.json",
+        "bytes": 1371,
+        "sha256": "298974c6128811ac20f4f2ad8fa39e125ef2a17fb3051aca23ecf9251a98a7a1",
+        "mode": "0600"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-adoption-v1/execution.process.json"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-adoption-v1/run_guard.py",
+        "bytes": 1852,
+        "sha256": "5a2362c54a65be099925546c4d0e46236432fe81a8b943999b4dbaefedb99bf5",
+        "mode": "0644"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-adoption-v1/run_guard.py"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/Cargo-untracked-discriminator.log",
+        "bytes": 273,
+        "sha256": "4158945a9569b5ecef8e67901daf75051b08fd9b63ae864386cadfc24650c720",
+        "mode": "0644"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/Cargo-untracked-discriminator.log"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/Cargo-untracked-discriminator.process.json",
+        "bytes": 1449,
+        "sha256": "bca084bbcced76239a42f16ff67b4fa730db7e008c60f9bb7a3360d06a2de38a",
+        "mode": "0600"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/Cargo-untracked-discriminator.process.json"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/Cargo.lock.before",
+        "bytes": 27809,
+        "sha256": "34a1b67c91690d3b83a6b0e3734029e0d815e23f78b26444b60095e5511084d5",
+        "mode": "0644"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/Cargo.lock.before"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/Root-prettier-check.log",
+        "bytes": 66,
+        "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20",
+        "mode": "0644"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/Root-prettier-check.log"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/Root-prettier-check.process.json",
+        "bytes": 1425,
+        "sha256": "64d0e5440fde58bc04ff7d064f71d197da8da3ba7d7c419976426c0842bffc7c",
+        "mode": "0600"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/Root-prettier-check.process.json"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/Root-prettier-write.log",
+        "bytes": 145,
+        "sha256": "fe3a83d2cf9ea0f0a0603f085def2f4cbbd11da89d1beae7c49be7ebede7053a",
+        "mode": "0644"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/Root-prettier-write.log"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/Root-prettier-write.process.json",
+        "bytes": 1428,
+        "sha256": "538a924a3b35bafdac6e9b0cd0e49641cd24ffc51d6ba9af7a59c1fe9e6a39b8",
+        "mode": "0600"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/Root-prettier-write.process.json"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/Root-ruff-format.log",
+        "bytes": 23,
+        "sha256": "43affe539ba0ae8b202b306a3294d04f3b7fc062316c1c825399076d966c8f2d",
+        "mode": "0644"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/Root-ruff-format.log"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/Root-ruff-format.process.json",
+        "bytes": 1379,
+        "sha256": "d827520d8d0c8ed3534fe3264f21ee933aa669fd837cdb34d68380c6979053a2",
+        "mode": "0600"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/Root-ruff-format.process.json"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/Root-ruff-lint.log",
+        "bytes": 19,
+        "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "mode": "0644"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/Root-ruff-lint.log"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/Root-ruff-lint.process.json",
+        "bytes": 1397,
+        "sha256": "ed964cb302966a61ceba5bf14c87e46d3274b286164e3d8dc84e1c829cde80ed",
+        "mode": "0600"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/Root-ruff-lint.process.json"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/export-current-scopes.log",
+        "bytes": 203,
+        "sha256": "e232a2b3f32b9a75a6528197eab322ca2365112b59c3dbbb4b2e2d5a8c5119bf",
+        "mode": "0644"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/export-current-scopes.log"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/export-current-scopes.process.json",
+        "bytes": 1271,
+        "sha256": "c777d71deadc183ad91ab15605f59cbc1d561ff17ff90301e30d402fa1bc80eb",
+        "mode": "0600"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/export-current-scopes.process.json"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/generated-wasm/.gitignore",
+        "bytes": 1,
+        "sha256": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1",
+        "mode": "0644"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/generated-wasm/.gitignore"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/generated-wasm/othello.d.ts",
+        "bytes": 2320,
+        "sha256": "74cb6a7e8b3050fbdf628b0eb6fd05014eb013106b39336317ac34c0900ce7d4",
+        "mode": "0644"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/generated-wasm/othello.d.ts"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/generated-wasm/othello.js",
+        "bytes": 11751,
+        "sha256": "87edef248982897cfdf2ab40ae87413670f534ccd1e39cb4a1f4ec6fcc515f9c",
+        "mode": "0644"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/generated-wasm/othello.js"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/generated-wasm/othello_bg.wasm",
+        "bytes": 355089,
+        "sha256": "be2feaabd1725b9885ad5a9235e506dfea20a8b96784a7d7f7aaebee5e5e77d6",
+        "mode": "0644"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/generated-wasm/othello_bg.wasm"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/generated-wasm/othello_bg.wasm.d.ts",
+        "bytes": 996,
+        "sha256": "ea3507f1bf01dea8177c01807af1170bd2eee42e1d75ca5efa7ba963a0c25fbc",
+        "mode": "0644"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/generated-wasm/othello_bg.wasm.d.ts"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/generated-wasm/package.json",
+        "bytes": 243,
+        "sha256": "e9a45a568e36b0ed38ac9d397d6a978b13b7f837cb1228e4cd92ea9e3f00a463",
+        "mode": "0644"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/generated-wasm/package.json"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/new-Othello-Wasm.log",
+        "bytes": 697,
+        "sha256": "dde424a5c3fdbe41fb354bb1330ff17c1e359d83c2a11d2ebcf05caadf64ee99",
+        "mode": "0644"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/new-Othello-Wasm.log"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/new-Othello-Wasm.process.json",
+        "bytes": 1508,
+        "sha256": "79dea579137025530a2ff824739106ec5819d471d595639920bfc33ea8fc6ec1",
+        "mode": "0600"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/new-Othello-Wasm.process.json"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/new-Othello-clippy.log",
+        "bytes": 273,
+        "sha256": "f76d9bc83566cdf76ef5b2b6dddea7d65dff43d5e746fa829d066b9292ab59a1",
+        "mode": "0644"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/new-Othello-clippy.log"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/new-Othello-clippy.process.json",
+        "bytes": 1409,
+        "sha256": "3dd91cda85a2d72ae59f28f4a8646a703ac4ff3a287adca1b7d62ba9ac923ff3",
+        "mode": "0600"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/new-Othello-clippy.process.json"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/new-Othello-rust-tests.log",
+        "bytes": 34874,
+        "sha256": "697bf6c3ff759f32ac4617dee87c6c625799ffa838786ed1ee9b2ac1aeed645e",
+        "mode": "0644"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/new-Othello-rust-tests.log"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/new-Othello-rust-tests.process.json",
+        "bytes": 1386,
+        "sha256": "6197be0fc6f805e5611f50f4aec659e1e7cc9d2382893831585befefbf872099",
+        "mode": "0600"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/new-Othello-rust-tests.process.json"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/result.json",
+        "bytes": 19615,
+        "sha256": "3d957b33fd36aeec63dc7203b7045f9cb075fb9f51648bd792eb8bc737bb297c",
+        "mode": "0644"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/result.json"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/returned-commands.json",
+        "bytes": 17982,
+        "sha256": "eb8fee40822c0241544cd62c821b3f718af09397ade544422bbeef0819dc225f",
+        "mode": "0644"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/returned-commands.json"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/run.py",
+        "bytes": 8834,
+        "sha256": "64507c0b509e0c12ed2be4eeca5281f75db44344019abe7388318acd2dfb6a26",
+        "mode": "0644"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/run.py"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/wasm-url.d.ts",
+        "bytes": 71,
+        "sha256": "38b4d13d03b7ee8cdb31e95278672f21183d3b7958a0f8bae41c1b75c304e6f4",
+        "mode": "0644"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/wasm-url.d.ts"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-collection-v2/actual-generated-Wasm.log",
+        "bytes": 274,
+        "sha256": "c4265bd2a2c3841dab7a37245087c7cc3e9c346babcd085ac35f4f7814406d11",
+        "mode": "0644"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-collection-v2/actual-generated-Wasm.log"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-collection-v2/actual-generated-types.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": "0644"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-collection-v2/actual-generated-types.log"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-collection-v2/actual-returned-STOP.json",
+        "bytes": 3118,
+        "sha256": "54b833d16cd85e2b8c7a6fb6d3ddd0b096f3292955244fb635524bbde3d43d80",
+        "mode": "0644"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-collection-v2/actual-returned-STOP.json"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-collection-v2/binding-checks.json",
+        "bytes": 699,
+        "sha256": "288d2ea2ec31c2c8ff3de8345de07478117c471c0a3848f29e81da47830179c5",
+        "mode": "0644"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-collection-v2/binding-checks.json"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-collection-v2/collect.py",
+        "bytes": 3955,
+        "sha256": "b76a38781500eb6649b5726a5526d5c5f8a8198ebd7bbfb7ed718eb916724d21",
+        "mode": "0644"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-collection-v2/collect.py"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-collection-v2/collected.json",
+        "bytes": 20449,
+        "sha256": "8a07009ec94edba59f1a342dbef5bc0604669b240905c9d786142c2432ebf043",
+        "mode": "0644"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-collection-v2/collected.json"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-collection-v2/execution.log",
+        "bytes": 88,
+        "sha256": "53643408499bc05cf95285f35873453d8863ecb4c3f6ba9b970c43a616cd48cd",
+        "mode": "0644"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-collection-v2/execution.log"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-collection-v2/execution.process.json",
+        "bytes": 1379,
+        "sha256": "783c9e727c50017251c58e94c263f39b6e493fd04d9346e3fa04d8845e6204ac",
+        "mode": "0600"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-collection-v2/execution.process.json"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-collection-v2/lock-additions.json",
+        "bytes": 611,
+        "sha256": "8cc5459e443eaa8245a04ec51bc37c0344dd9b1f4f0745fb53ea857896d364fd",
+        "mode": "0644"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-collection-v2/lock-additions.json"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-collection-v2/run_guard.py",
+        "bytes": 1852,
+        "sha256": "5a2362c54a65be099925546c4d0e46236432fe81a8b943999b4dbaefedb99bf5",
+        "mode": "0644"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-collection-v2/run_guard.py"
+    },
+    {
+      "original": {
+        "path": ".artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-collection-v2/supplied-generated-files.json",
+        "bytes": 666,
+        "sha256": "ef51890dff1adb05b8a6ce9aa67efd64df53f1728851b76e4f1d7e51c255d2ae",
+        "mode": "0644"
+      },
+      "member": "files/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-collection-v2/supplied-generated-files.json"
+    }
+  ],
+  "one_forward_stream_restore": "PASS exact bytes/SHA/modes/names without extraction",
+  "actual_Root_checks": {
+    "prior9_actual_returned": [
+      {
+        "name": "Root-prettier-write",
+        "argv": [
+          "/workspaces/quoridor/tools/research-quality/node_modules/.bin/prettier",
+          "--config",
+          "tools/research-quality/.prettierrc.json",
+          "--write",
+          "scripts/build-wasm.mjs",
+          "scripts/export-fresh-source.mjs",
+          "tools/research-quality/test_export.mjs"
+        ],
+        "record": {
+          "command": [
+            "/workspaces/quoridor/tools/research-quality/node_modules/.bin/prettier",
+            "--config",
+            "tools/research-quality/.prettierrc.json",
+            "--write",
+            "scripts/build-wasm.mjs",
+            "scripts/export-fresh-source.mjs",
+            "tools/research-quality/test_export.mjs"
+          ],
+          "status": "complete",
+          "child": {
+            "pid": 510378,
+            "start_ticks": "64538975",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "launch_policy": {
+            "no_new_privs_requested": false,
+            "verified_before_exec": null
+          },
+          "cpu_plan": {
+            "management": [18],
+            "commands": {
+              "check": [0]
+            },
+            "allocation": [0, 18],
+            "resource_CPUs": 2,
+            "worker_CPUs": 1,
+            "library_threads": 1
+          },
+          "command_cpu_scope": "check",
+          "log_bytes_seen": 145,
+          "scope": "session group and periodically recorded descendants; no daemon adoption",
+          "exit_code": 0,
+          "remaining": [],
+          "direct_child_reaped": true,
+          "descendant_visibility": "observed",
+          "cleanup_complete": true,
+          "log_bytes_retained": 145,
+          "wall_seconds": 0.22808240493759513,
+          "handle_closes_attempted": ["selector_close", "pipe_close", "pidfd_close", "log_close"],
+          "primary_error": null,
+          "process_cleanup_complete": true,
+          "handle_closes_complete": true,
+          "signal_mask_restoration": "completed",
+          "final_record_persist": "completed",
+          "finalization_errors": []
+        }
+      },
+      {
+        "name": "Root-prettier-check",
+        "argv": [
+          "/workspaces/quoridor/tools/research-quality/node_modules/.bin/prettier",
+          "--config",
+          "tools/research-quality/.prettierrc.json",
+          "--check",
+          "scripts/build-wasm.mjs",
+          "scripts/export-fresh-source.mjs",
+          "tools/research-quality/test_export.mjs"
+        ],
+        "record": {
+          "command": [
+            "/workspaces/quoridor/tools/research-quality/node_modules/.bin/prettier",
+            "--config",
+            "tools/research-quality/.prettierrc.json",
+            "--check",
+            "scripts/build-wasm.mjs",
+            "scripts/export-fresh-source.mjs",
+            "tools/research-quality/test_export.mjs"
+          ],
+          "status": "complete",
+          "child": {
+            "pid": 510389,
+            "start_ticks": "64539000",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "launch_policy": {
+            "no_new_privs_requested": false,
+            "verified_before_exec": null
+          },
+          "cpu_plan": {
+            "management": [18],
+            "commands": {
+              "check": [0]
+            },
+            "allocation": [0, 18],
+            "resource_CPUs": 2,
+            "worker_CPUs": 1,
+            "library_threads": 1
+          },
+          "command_cpu_scope": "check",
+          "log_bytes_seen": 66,
+          "scope": "session group and periodically recorded descendants; no daemon adoption",
+          "exit_code": 0,
+          "remaining": [],
+          "direct_child_reaped": true,
+          "descendant_visibility": "observed",
+          "cleanup_complete": true,
+          "log_bytes_retained": 66,
+          "wall_seconds": 0.2358378090430051,
+          "handle_closes_attempted": ["selector_close", "pipe_close", "pidfd_close", "log_close"],
+          "primary_error": null,
+          "process_cleanup_complete": true,
+          "handle_closes_complete": true,
+          "signal_mask_restoration": "completed",
+          "final_record_persist": "completed",
+          "finalization_errors": []
+        }
+      },
+      {
+        "name": "Root-ruff-format",
+        "argv": [
+          "bash",
+          "scripts/dev/project-env.sh",
+          "ruff",
+          "format",
+          "--config",
+          "tools/research-quality/ruff.toml",
+          "scripts/dev/research-lifecycle.py",
+          "tools/research-session/test_build_provenance.py"
+        ],
+        "record": {
+          "command": [
+            "bash",
+            "scripts/dev/project-env.sh",
+            "ruff",
+            "format",
+            "--config",
+            "tools/research-quality/ruff.toml",
+            "scripts/dev/research-lifecycle.py",
+            "tools/research-session/test_build_provenance.py"
+          ],
+          "status": "complete",
+          "child": {
+            "pid": 510400,
+            "start_ticks": "64539025",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "launch_policy": {
+            "no_new_privs_requested": false,
+            "verified_before_exec": null
+          },
+          "cpu_plan": {
+            "management": [18],
+            "commands": {
+              "check": [0]
+            },
+            "allocation": [0, 18],
+            "resource_CPUs": 2,
+            "worker_CPUs": 1,
+            "library_threads": 1
+          },
+          "command_cpu_scope": "check",
+          "log_bytes_seen": 23,
+          "scope": "session group and periodically recorded descendants; no daemon adoption",
+          "exit_code": 0,
+          "remaining": [],
+          "direct_child_reaped": true,
+          "descendant_visibility": "observed",
+          "cleanup_complete": true,
+          "log_bytes_retained": 23,
+          "wall_seconds": 0.07030377408955246,
+          "handle_closes_attempted": ["selector_close", "pipe_close", "pidfd_close", "log_close"],
+          "primary_error": null,
+          "process_cleanup_complete": true,
+          "handle_closes_complete": true,
+          "signal_mask_restoration": "completed",
+          "final_record_persist": "completed",
+          "finalization_errors": []
+        }
+      },
+      {
+        "name": "Root-ruff-lint",
+        "argv": [
+          "bash",
+          "scripts/dev/project-env.sh",
+          "ruff",
+          "check",
+          "--no-cache",
+          "--config",
+          "tools/research-quality/ruff.toml",
+          "scripts/dev/research-lifecycle.py",
+          "tools/research-session/test_build_provenance.py"
+        ],
+        "record": {
+          "command": [
+            "bash",
+            "scripts/dev/project-env.sh",
+            "ruff",
+            "check",
+            "--no-cache",
+            "--config",
+            "tools/research-quality/ruff.toml",
+            "scripts/dev/research-lifecycle.py",
+            "tools/research-session/test_build_provenance.py"
+          ],
+          "status": "complete",
+          "child": {
+            "pid": 510416,
+            "start_ticks": "64539033",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "launch_policy": {
+            "no_new_privs_requested": false,
+            "verified_before_exec": null
+          },
+          "cpu_plan": {
+            "management": [18],
+            "commands": {
+              "check": [0]
+            },
+            "allocation": [0, 18],
+            "resource_CPUs": 2,
+            "worker_CPUs": 1,
+            "library_threads": 1
+          },
+          "command_cpu_scope": "check",
+          "log_bytes_seen": 19,
+          "scope": "session group and periodically recorded descendants; no daemon adoption",
+          "exit_code": 0,
+          "remaining": [],
+          "direct_child_reaped": true,
+          "descendant_visibility": "observed",
+          "cleanup_complete": true,
+          "log_bytes_retained": 19,
+          "wall_seconds": 0.059156027040444314,
+          "handle_closes_attempted": ["selector_close", "pipe_close", "pidfd_close", "log_close"],
+          "primary_error": null,
+          "process_cleanup_complete": true,
+          "handle_closes_complete": true,
+          "signal_mask_restoration": "completed",
+          "final_record_persist": "completed",
+          "finalization_errors": []
+        }
+      },
+      {
+        "name": "export-current-scopes",
+        "argv": [
+          "node",
+          "--test",
+          "--test-name-pattern=current scopes",
+          "tools/research-quality/test_export.mjs"
+        ],
+        "record": {
+          "command": [
+            "node",
+            "--test",
+            "--test-name-pattern=current scopes",
+            "tools/research-quality/test_export.mjs"
+          ],
+          "status": "complete",
+          "child": {
+            "pid": 510431,
+            "start_ticks": "64539039",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "launch_policy": {
+            "no_new_privs_requested": false,
+            "verified_before_exec": null
+          },
+          "cpu_plan": {
+            "management": [18],
+            "commands": {
+              "check": [0]
+            },
+            "allocation": [0, 18],
+            "resource_CPUs": 2,
+            "worker_CPUs": 1,
+            "library_threads": 1
+          },
+          "command_cpu_scope": "check",
+          "log_bytes_seen": 203,
+          "scope": "session group and periodically recorded descendants; no daemon adoption",
+          "exit_code": 0,
+          "remaining": [],
+          "direct_child_reaped": true,
+          "descendant_visibility": "observed",
+          "cleanup_complete": true,
+          "log_bytes_retained": 203,
+          "wall_seconds": 0.10655460203997791,
+          "handle_closes_attempted": ["selector_close", "pipe_close", "pidfd_close", "log_close"],
+          "primary_error": null,
+          "process_cleanup_complete": true,
+          "handle_closes_complete": true,
+          "signal_mask_restoration": "completed",
+          "final_record_persist": "completed",
+          "finalization_errors": []
+        }
+      },
+      {
+        "name": "Cargo-untracked-discriminator",
+        "argv": [
+          "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tools/research-session",
+          "-p",
+          "test_build_provenance.py",
+          "-k",
+          "test_build379_standard_git_revision_delta_and_untracked_input",
+          "-v"
+        ],
+        "record": {
+          "command": [
+            "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+            "-B",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tools/research-session",
+            "-p",
+            "test_build_provenance.py",
+            "-k",
+            "test_build379_standard_git_revision_delta_and_untracked_input",
+            "-v"
+          ],
+          "status": "complete",
+          "child": {
+            "pid": 510444,
+            "start_ticks": "64539050",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "launch_policy": {
+            "no_new_privs_requested": false,
+            "verified_before_exec": null
+          },
+          "cpu_plan": {
+            "management": [18],
+            "commands": {
+              "check": [0]
+            },
+            "allocation": [0, 18],
+            "resource_CPUs": 2,
+            "worker_CPUs": 1,
+            "library_threads": 1
+          },
+          "command_cpu_scope": "check",
+          "log_bytes_seen": 273,
+          "scope": "session group and periodically recorded descendants; no daemon adoption",
+          "exit_code": 0,
+          "remaining": [],
+          "direct_child_reaped": true,
+          "descendant_visibility": "observed",
+          "cleanup_complete": true,
+          "log_bytes_retained": 273,
+          "wall_seconds": 0.214075391064398,
+          "handle_closes_attempted": ["selector_close", "pipe_close", "pidfd_close", "log_close"],
+          "primary_error": null,
+          "process_cleanup_complete": true,
+          "handle_closes_complete": true,
+          "signal_mask_restoration": "completed",
+          "final_record_persist": "completed",
+          "finalization_errors": []
+        }
+      },
+      {
+        "name": "new-Othello-rust-tests",
+        "argv": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "test",
+          "--offline",
+          "-j1",
+          "--message-format=json-render-diagnostics",
+          "-p",
+          "othello-core",
+          "-p",
+          "othello-wasm"
+        ],
+        "record": {
+          "command": [
+            "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+            "test",
+            "--offline",
+            "-j1",
+            "--message-format=json-render-diagnostics",
+            "-p",
+            "othello-core",
+            "-p",
+            "othello-wasm"
+          ],
+          "status": "complete",
+          "child": {
+            "pid": 510477,
+            "start_ticks": "64539072",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "launch_policy": {
+            "no_new_privs_requested": false,
+            "verified_before_exec": null
+          },
+          "cpu_plan": {
+            "management": [18],
+            "commands": {
+              "check": [0]
+            },
+            "allocation": [0, 18],
+            "resource_CPUs": 2,
+            "worker_CPUs": 1,
+            "library_threads": 1
+          },
+          "command_cpu_scope": "check",
+          "log_bytes_seen": 34874,
+          "scope": "session group and periodically recorded descendants; no daemon adoption",
+          "exit_code": 0,
+          "remaining": [],
+          "direct_child_reaped": true,
+          "descendant_visibility": "observed",
+          "cleanup_complete": true,
+          "log_bytes_retained": 34874,
+          "wall_seconds": 3.0885621750494465,
+          "handle_closes_attempted": ["selector_close", "pipe_close", "pidfd_close", "log_close"],
+          "primary_error": null,
+          "process_cleanup_complete": true,
+          "handle_closes_complete": true,
+          "signal_mask_restoration": "completed",
+          "final_record_persist": "completed",
+          "finalization_errors": []
+        }
+      },
+      {
+        "name": "new-Othello-clippy",
+        "argv": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "clippy",
+          "--locked",
+          "--offline",
+          "-j1",
+          "-p",
+          "othello-core",
+          "-p",
+          "othello-wasm",
+          "--all-targets",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "record": {
+          "command": [
+            "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+            "clippy",
+            "--locked",
+            "--offline",
+            "-j1",
+            "-p",
+            "othello-core",
+            "-p",
+            "othello-wasm",
+            "--all-targets",
+            "--",
+            "-D",
+            "warnings"
+          ],
+          "status": "complete",
+          "child": {
+            "pid": 510647,
+            "start_ticks": "64539381",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "launch_policy": {
+            "no_new_privs_requested": false,
+            "verified_before_exec": null
+          },
+          "cpu_plan": {
+            "management": [18],
+            "commands": {
+              "check": [0]
+            },
+            "allocation": [0, 18],
+            "resource_CPUs": 2,
+            "worker_CPUs": 1,
+            "library_threads": 1
+          },
+          "command_cpu_scope": "check",
+          "log_bytes_seen": 273,
+          "scope": "session group and periodically recorded descendants; no daemon adoption",
+          "exit_code": 0,
+          "remaining": [],
+          "direct_child_reaped": true,
+          "descendant_visibility": "observed",
+          "cleanup_complete": true,
+          "log_bytes_retained": 273,
+          "wall_seconds": 0.5215819559525698,
+          "handle_closes_attempted": ["selector_close", "pipe_close", "pidfd_close", "log_close"],
+          "primary_error": null,
+          "process_cleanup_complete": true,
+          "handle_closes_complete": true,
+          "signal_mask_restoration": "completed",
+          "final_record_persist": "completed",
+          "finalization_errors": []
+        }
+      },
+      {
+        "name": "new-Othello-Wasm",
+        "argv": [
+          "/usr/local/cargo/bin/wasm-pack",
+          "build",
+          "games/othello/crates/othello-wasm",
+          "--target",
+          "web",
+          "--dev",
+          "--out-dir",
+          "/workspaces/quoridor/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/generated-wasm",
+          "--out-name",
+          "othello",
+          "--locked",
+          "--no-default-features"
+        ],
+        "record": {
+          "command": [
+            "/usr/local/cargo/bin/wasm-pack",
+            "build",
+            "games/othello/crates/othello-wasm",
+            "--target",
+            "web",
+            "--dev",
+            "--out-dir",
+            "/workspaces/quoridor/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/generated-wasm",
+            "--out-name",
+            "othello",
+            "--locked",
+            "--no-default-features"
+          ],
+          "status": "complete",
+          "child": {
+            "pid": 510672,
+            "start_ticks": "64539434",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "launch_policy": {
+            "no_new_privs_requested": false,
+            "verified_before_exec": null
+          },
+          "cpu_plan": {
+            "management": [18],
+            "commands": {
+              "check": [0]
+            },
+            "allocation": [0, 18],
+            "resource_CPUs": 2,
+            "worker_CPUs": 1,
+            "library_threads": 1
+          },
+          "command_cpu_scope": "check",
+          "log_bytes_seen": 697,
+          "scope": "session group and periodically recorded descendants; no daemon adoption",
+          "exit_code": 0,
+          "remaining": [],
+          "direct_child_reaped": true,
+          "descendant_visibility": "observed",
+          "cleanup_complete": true,
+          "log_bytes_retained": 697,
+          "wall_seconds": 2.6860636440105736,
+          "handle_closes_attempted": ["selector_close", "pipe_close", "pidfd_close", "log_close"],
+          "primary_error": null,
+          "process_cleanup_complete": true,
+          "handle_closes_complete": true,
+          "signal_mask_restoration": "completed",
+          "final_record_persist": "completed",
+          "finalization_errors": []
+        }
+      }
+    ],
+    "new_checks": [
+      {
+        "name": "actual-generated-Wasm",
+        "argv": ["node", "--test", "games/othello/bridge/test/wasm.test.mjs"],
+        "code": 0
+      },
+      {
+        "name": "actual-generated-types",
+        "argv": [
+          "node",
+          "node_modules/typescript/bin/tsc",
+          "--noEmit",
+          "--strict",
+          "--target",
+          "ES2022",
+          "--module",
+          "ESNext",
+          "--moduleResolution",
+          "Bundler",
+          "--lib",
+          "ES2022,DOM",
+          "games/othello/bridge/src/index.ts",
+          "/workspaces/quoridor/.artifacts/research-team/integration324/multi-game-migration-v1/othello-checks-v1/wasm-url.d.ts",
+          "games/othello/bridge/wasm/othello.d.ts"
+        ],
+        "code": 0
+      }
+    ],
+    "Rust_unit_tests": 11,
+    "real_Wasm_units": 2,
+    "generated_type_declarations": "actual generated .d.ts; fallback src/wasm.d.ts deliberately excluded",
+    "existing_Quoridor_test_replays": 0,
+    "scientific_calls": 0,
+    "sourceleases": [],
+    "prior_failed_postcondition_retained": true
+  },
+  "simple_policy": "corner then immediate flips then row-major; bounded deterministic nonlearning/no tree Search/solver/models/RNG",
+  "frontend": "UNIMPLEMENTED; chooser honestly unavailable; UI ownership remains separate",
+  "Root_additional_current_callers": [
+    "scripts/export-fresh-source.mjs",
+    "scripts/dev/research-lifecycle.py",
+    "tools/research-session/test_build_provenance.py",
+    "tools/research-quality/test_export.mjs"
+  ],
+  "lock": {
+    "packages": [
+      {
+        "name": "othello-core",
+        "version": "0.1.0",
+        "dependencies": ["serde", "serde_json"]
+      },
+      {
+        "name": "othello-wasm",
+        "version": "0.1.0",
+        "dependencies": ["othello-core", "serde", "serde_json", "wasm-bindgen"]
+      }
+    ],
+    "comparison": "fixed accepted68100f9 Git lock; no existing dependency/version drift",
+    "observed_precommand_refresh": "initial v1 lock snapshot already contains additions; earlier metadata refresh cause not observed; v1 post-check assertion FAILED retained"
+  },
+  "deviations": "Worker readonly setup before saved context; initial missingpython and evidence-writer self-record failure retained. Original disk signal restoration pending unchanged; actual Root execute returns completed separately. Root post-check lock assertion failed after9 successful checks; fixed-Git comparison resolves exact two local crate additions; earlier metadata refresh source unobserved, no success replay.",
+  "qualification": "New standard8x8 product rule functional validation only:11Rust units, Clippy warnings0, real dev Wasm2units, actual generated declaration typecheck; source-only5facade units reused. No rendered UI/browser/strength/scientific qualification.",
+  "scientific_calls": 0,
+  "model_RAW_sealed_reads": 0,
+  "USERPAUSE323_34217_defaults_seals_preserved": true,
+  "fullfees_globalactual_late_tails": "UNKNOWN",
+  "late_admin_retirement_separate": true
+}

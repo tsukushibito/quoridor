@@ -1,6 +1,6 @@
 # 単一Web入口とゲーム別リポジトリ構成
 
-2026-10-21の人間の直接決定として、一つのWebアプリのランディングページからコリドール／オセロを選ぶ構成を採用する。本書は到達構成と移行方針の正本である。Worktree内Pythonコードと共有依存環境を分離し、共通Web入口とQuoridorの起動・終了境界を適用した。現在は `#/` の選択画面から `#/quoridor` を遅延読込する。QuoridorのRust／bridge・Python・preset・ゲーム固有テスト・製品文書は `games/quoridor` へ分離した。Othelloは未実装として表示し、Othello機能は後続工程で段階適用する。現在の配置と起動方法は[README](../../README.md)、既存コリドールの製品仕様は[アプリ設計](../../games/quoridor/docs/quoridor-3d-webapp-design-rust-wasm-v1.md)を参照する。
+2026-10-21の人間の直接決定として、一つのWebアプリのランディングページからコリドール／オセロを選ぶ構成を採用する。本書は到達構成と移行方針の正本である。Worktree内Pythonコードと共有依存環境を分離し、共通Web入口とQuoridorの起動・終了境界を適用した。現在は `#/` の選択画面から `#/quoridor` を遅延読込する。QuoridorのRust／bridge・Python・preset・ゲーム固有テスト・製品文書は `games/quoridor` へ分離した。Othelloのルール・簡易AI（非学習）・Wasm APIは独立実装し、製品の単体検証を終えた。Web側は未接続のため選択画面では利用不可を表示し、画面と保存・起動終了は後続工程で適用する。現在の配置と起動方法は[README](../../README.md)、既存コリドールの製品仕様は[アプリ設計](../../games/quoridor/docs/quoridor-3d-webapp-design-rust-wasm-v1.md)を参照する。
 
 実施状態・担当・依存はBeadsで管理する。文書化は `quoridor-4lc.324.12.7`、後続移行は `quoridor-4lc.324.12.9`。移行はWorktree整理 `quoridor-4lc.324.12.6` とセッション整理 `quoridor-4lc.324.12.8` の実完了に依存する。本書に別の進捗表やTODOを置かない。
 
