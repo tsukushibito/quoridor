@@ -2,6 +2,7 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { before, test } from 'node:test';
+import { spawnSync } from 'node:child_process';
 import {
   initSync,
   new_game_json,
@@ -10,6 +11,7 @@ import {
   pass_turn_json,
   status_json,
   choose_move_json,
+  search_json,
 } from '../wasm/othello.js';
 
 before(() => {
@@ -68,4 +70,97 @@ test('real Wasm reports invalid JSON, invalid moves and invalid pass as JS failu
   }
   assert.throws(() => pass_turn_json(state));
   assert.equal(state, new_game_json());
+});
+
+test('real Wasm search uses a browser clock and retains legal zero-budget fallback', () => {
+  const initial = new_game_json();
+  const zero = JSON.parse(search_json(initial, JSON.stringify({ timeMs: 0, ttMiB: 0 })));
+  assert.equal(zero.move, 19);
+  assert.equal(zero.completedDepth, 0);
+  assert.equal(zero.nodes, 0);
+  assert.equal(zero.scoreKind, 'heuristic');
+  assert.equal(zero.proven, false);
+  assert.equal(zero.timedOut, true);
+  assert.equal(zero.cancelled, false);
+  assert.ok(zero.elapsedMs >= 0 && Number.isFinite(zero.elapsedMs));
+  const searched = JSON.parse(
+    search_json(initial, JSON.stringify({ timeMs: 1000, ttMiB: 0, maxDepth: 2 })),
+  );
+  assert.ok([19, 26, 37, 44].includes(searched.move));
+  assert.equal(searched.completedDepth, 2);
+  assert.equal(searched.proven, false);
+  assert.equal(searched.timedOut, false);
+  assert.ok(searched.nodes > 0);
+  assert.throws(() => search_json(initial, '{'));
+  assert.throws(() => search_json(initial, JSON.stringify({ ttMiB: 129 })));
+  assert.throws(() => search_json('{}', '{}'));
+});
+
+test('real Wasm exact early end and forced pass preserve actual disc scoring', () => {
+  const board = Array(64).fill(0);
+  board[0] = 1;
+  board[1] = 2;
+  const forced = JSON.stringify({ version: 1, board, toMove: 2 });
+  const options = JSON.stringify({ timeMs: 1000, ttMiB: 0, exactEmpties: 64 });
+  const result = JSON.parse(search_json(forced, options));
+  assert.equal(result.move, null);
+  assert.equal(result.proven, true);
+  assert.equal(result.scoreKind, 'discDifference');
+  assert.equal(result.score, -3);
+  board[1] = 1;
+  const terminal = JSON.parse(
+    search_json(JSON.stringify({ version: 1, board, toMove: 1 }), '{"timeMs":0}'),
+  );
+  assert.equal(terminal.score, 2);
+  assert.equal(terminal.proven, true);
+  assert.equal(terminal.move, null);
+  assert.equal(terminal.completedDepth, 0);
+});
+
+test('real native/Wasm search JSON parity', { skip: !process.env.OTHELLO_NATIVE_ENGINE }, () => {
+  const initial = JSON.parse(new_game_json());
+  const forced = { version: 1, board: Array(64).fill(0), toMove: 2 };
+  forced.board[0] = 1;
+  forced.board[1] = 2;
+  const terminal = { ...forced, board: [...forced.board], toMove: 1 };
+  terminal.board[1] = 1;
+  const cases = [
+    [initial, { timeMs: 1000, ttMiB: 0, maxDepth: 3 }],
+    [
+      JSON.parse(apply_move_json(JSON.stringify(initial), 19)),
+      { timeMs: 1000, ttMiB: 0, maxDepth: 3 },
+    ],
+    [initial, { timeMs: 0, ttMiB: 0 }],
+    [forced, { timeMs: 1000, ttMiB: 0, exactEmpties: 64 }],
+    [terminal, { timeMs: 0, ttMiB: 0 }],
+  ];
+  const input = cases.map(([state, options]) =>
+    JSON.stringify({ op: 'search', state, ...options }),
+  );
+  const native = spawnSync(process.env.OTHELLO_NATIVE_ENGINE, [], {
+    input: input.join('\n') + '\n',
+    encoding: 'utf8',
+    timeout: 10000,
+    maxBuffer: 1024 * 1024,
+  });
+  assert.ifError(native.error);
+  assert.equal(native.status, 0, native.stderr);
+  const responses = native.stdout.trim().split('\n').map(JSON.parse);
+  assert.equal(responses.length, cases.length);
+  for (const [index, [state, options]] of cases.entries()) {
+    const wasm = JSON.parse(search_json(JSON.stringify(state), JSON.stringify(options)));
+    assert.equal(responses[index].ok, true);
+    for (const key of [
+      'move',
+      'score',
+      'scoreKind',
+      'completedDepth',
+      'nodes',
+      'timedOut',
+      'cancelled',
+      'proven',
+    ]) {
+      assert.equal(wasm[key], responses[index][key], `case ${index} field ${key}`);
+    }
+  }
 });

@@ -1,6 +1,6 @@
 //! JSON-only browser boundary. The core owns all game semantics.
 
-use othello_core::GameState;
+use othello_core::{GameState, search::SearchOptions};
 use serde::Serialize;
 use wasm_bindgen::prelude::*;
 
@@ -51,4 +51,25 @@ pub fn choose_move_json(input: &str) -> Result<String, JsValue> {
     json(&Choice {
         r#move: state(input)?.choose_move(),
     })
+}
+
+#[cfg(target_arch = "wasm32")]
+#[wasm_bindgen]
+extern "C" {
+    #[wasm_bindgen(js_namespace = performance, js_name = now)]
+    fn browser_now() -> f64;
+}
+
+/// Synchronous, internally time-bounded search. A Worker message cannot cancel
+/// this call while it owns the event loop; the caller must terminate/recreate
+/// the Worker and discard stale responses for immediate external cancellation.
+#[wasm_bindgen]
+pub fn search_json(input: &str, options: &str) -> Result<String, JsValue> {
+    let state = state(input)?;
+    let options: SearchOptions = serde_json::from_str(options).map_err(js_error)?;
+    #[cfg(target_arch = "wasm32")]
+    let result = othello_core::search::search(&state, options, browser_now);
+    #[cfg(not(target_arch = "wasm32"))]
+    let result = othello_core::search::search_native(&state, options);
+    json(&result.map_err(js_error)?)
 }

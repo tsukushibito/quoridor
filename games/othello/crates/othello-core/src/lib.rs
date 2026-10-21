@@ -3,6 +3,10 @@
 use serde::{Deserialize, Deserializer, Serialize, de::Error as _};
 use std::fmt;
 
+pub mod bitboard;
+pub mod heuristic;
+pub mod search;
+
 pub const BLACK: u8 = 1;
 pub const WHITE: u8 = 2;
 const DIRECTIONS: [(i32, i32); 8] = [

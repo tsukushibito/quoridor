@@ -14,6 +14,17 @@ const status = {
   terminal: false,
   winner: null,
 };
+const searchResult = {
+  move: 12,
+  score: 125,
+  scoreKind: 'heuristic',
+  completedDepth: 3,
+  nodes: 145,
+  elapsedMs: 10,
+  timedOut: true,
+  cancelled: false,
+  proven: false,
+};
 
 async function facade({ failInit = false, failRule = false, move = 12 } = {}) {
   const calls = [];
@@ -38,6 +49,7 @@ async function facade({ failInit = false, failRule = false, move = 12 } = {}) {
     pass_turn_json: record('pass', next),
     status_json: record('status', status),
     choose_move_json: record('choose', { move }),
+    search_json: record('search', searchResult),
   };
   const source = stripTypeScriptTypes(
     await readFile(new URL('../src/index.ts', import.meta.url), 'utf8'),
@@ -130,4 +142,36 @@ test('initialization failure permits a later request to retry', async () => {
   await assert.rejects(() => loaded.api.newGame(), /init failed/);
   assert.deepEqual(await loaded.api.newGame(), state);
   assert.equal(loaded.initializations(), 2);
+});
+
+test('search forwards state/options and preserves score provenance and timing', async () => {
+  const loaded = await facade();
+  const options = { timeMs: 25, ttMiB: 0, maxDepth: 4, exactEmpties: 6 };
+  assert.deepEqual(await loaded.api.search(state, options), searchResult);
+  assert.deepEqual(await loaded.api.search(state), searchResult);
+  assert.deepEqual(loaded.calls, [
+    ['search', JSON.stringify(state), JSON.stringify(options)],
+    ['search', JSON.stringify(state), '{}'],
+  ]);
+  const failed = await facade({ failRule: true });
+  await assert.rejects(
+    () => failed.api.search(state),
+    (error) => error === 'core rejected state',
+  );
+});
+
+test('invalid search transport options fail before Wasm loading', async () => {
+  const loaded = await facade();
+  for (const options of [
+    { timeMs: -1 },
+    { timeMs: 0.5 },
+    { timeMs: Infinity },
+    { timeMs: 2 ** 53 },
+    { ttMiB: 129 },
+    { maxDepth: 65 },
+    { exactEmpties: NaN },
+  ]) {
+    await assert.rejects(() => loaded.api.search(state, options), RangeError);
+  }
+  assert.equal(loaded.imports(), 0);
 });

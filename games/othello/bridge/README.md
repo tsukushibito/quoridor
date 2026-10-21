@@ -21,14 +21,15 @@ Quoridorのルール・履歴・特徴・研究経路とは独立している。
 `play`後は必ず相手手番となり、必要なpassは呼出側が明示して行う。
 終局後のpassはエラー。
 
-| Wasm export                     | JSON出力                                                                   | TS façade                                    |
-| ------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------- |
-| `new_game_json()`               | `GameState`                                                                | `newGame(): Promise<GameState>`              |
-| `legal_moves_json(state)`       | `number[]`（row-major順）                                                  | `legalMoves(state): Promise<number[]>`       |
-| `apply_move_json(state, index)` | `GameState`、indexはu32                                                    | `play(state, index): Promise<GameState>`     |
-| `pass_turn_json(state)`         | `GameState`                                                                | `pass(state): Promise<GameState>`            |
-| `status_json(state)`            | `{ black, white, legalMoves, mustPass, terminal, winner: 1 \| 2 \| null }` | `status(state): Promise<Status>`             |
-| `choose_move_json(state)`       | `{ move: number \| null }`                                                 | `chooseMove(state): Promise<number \| null>` |
+| Wasm export                     | JSON出力                                                                   | TS façade                                        |
+| ------------------------------- | -------------------------------------------------------------------------- | ------------------------------------------------ |
+| `new_game_json()`               | `GameState`                                                                | `newGame(): Promise<GameState>`                  |
+| `legal_moves_json(state)`       | `number[]`（row-major順）                                                  | `legalMoves(state): Promise<number[]>`           |
+| `apply_move_json(state, index)` | `GameState`、indexはu32                                                    | `play(state, index): Promise<GameState>`         |
+| `pass_turn_json(state)`         | `GameState`                                                                | `pass(state): Promise<GameState>`                |
+| `status_json(state)`            | `{ black, white, legalMoves, mustPass, terminal, winner: 1 \| 2 \| null }` | `status(state): Promise<Status>`                 |
+| `choose_move_json(state)`       | `{ move: number \| null }`                                                 | `chooseMove(state): Promise<number \| null>`     |
+| `search_json(state, options)`   | `SearchResult`（後述）                                                     | `search(state, options?): Promise<SearchResult>` |
 
 `winner`は未終局・引分けのどちらもnull。
 `mustPass`は現在の手番に合法手がなく、相手には合法手があるときだけtrue。
@@ -49,6 +50,56 @@ cornerがなければ他の合法手を同じ反転数・row-major順で選ぶ�
 初回のAPI要求でのみ生成JSとWasm URLを動的importしてinitする。
 同時要求は同じinitを共有し、init失敗後は次の要求で再試行できる。
 module評価時にWasmやWorkerを起動しない。Worker所有とUI/lifecycle統合はWeb担当の範囲。
+
+## 共通Rust探索とnative JSONL
+
+`othello-core::search`はbitboard上の単一thread PVS/negamax、反復深化、TTを実装する。
+既存GameState/rayと簡易policyは独立した参照・弱い対照として維持する。
+確率pruning、選択pruning、学習重み、book、ponderは含まない。
+nativeは`othello-core/src/bin/othello-engine.rs`、Wasmは同じ探索関数を使う。
+nativeホストだけが`Instant`を使い、wasm32は`performance.now()`を呼ぶ。
+
+探索optionsのJSONは`{ timeMs?: number, ttMiB?: number, maxDepth?: number, exactEmpties?: number }`。
+既定は1000ms/32MiB/64/12。timeMsは非負整数、ttMiBは0..128（0でTT無効）、
+maxDepth/exactEmptiesは0..64。JSのtimeMsはsafe integerまで。
+maxDepth=0は探索を無効化して合法fallbackを返す。
+通常は着手数で反復深化し、passは深さを消費しない。
+残り空きがexactEmpties以下なら、完成した1plyの後の次反復で終局まで厳密に読む。
+この厳密反復はheuristic用maxDepthを超えてよい（maxDepth>=2の場合）。
+残り1空きの1ply、および通常反復が残り空き数へ達した場合も厳密読みとなる。
+双方着手不能なら空きを勝者へ配分せず、実石差で終局する。
+
+`SearchResult`は`{ move, score, scoreKind, completedDepth, nodes, elapsedMs, timedOut, cancelled, proven }`。
+moveはrow-major index、合法手なしはnull（forced passとterminalはstatusで区別）。
+scoreは要求時のSTM視点。`scoreKind:"heuristic"`は初期非学習評価のcentidisc尺度、
+`"discDifference"`は証明済みの実石差（-64..64）、後者だけproven=true。
+terminalは予算0でも直接石数から証明でき、completedDepth=0。
+その他は未完了反復の値を公開せず、最後の完成反復、なければrow-major最初の合法手と
+root heuristicを返す。TTは盤面と手番の全一致、深さ、探索mode、upper/lower/exact boundを検査し、
+中断したnodeを完成値として保存しない。heuristic内のexact boundは終盤証明を意味しない。
+
+初期評価は`heuristic.rs`へ分離し、phase=occupied discs（0..64）、
+STM視点のmobility差×100 + corner差×800 + 実石差×w。
+wはphase<48で1、それ以降20。heuristic探索中のterminal leafは実石差×100。
+これは初期動作確認用の手書き評価で、学習済み評価や棋力優位の主張ではない。
+
+内部時計をnode入口と完成時に検査する。`timedOut`は予算による中断、
+`cancelled`は同期cancel callbackによる中断（native/Wasm JSON入口ではfalse）。
+同期Wasm呼出中にpostMessageだけでcancelすることはできない。
+UI側はWorker終了・再生成とrequest世代の照合で古い応答を無効化する。
+
+native CLIは1行1JSON、stateを各要求に含めるstateless接続。
+`new`だけstate不要、それ以外は`{op,state}`、playは`move`、searchは上記optionsを
+要求のtop-levelへ置く。成功は`ok:true`とstate/status/move。
+search結果は`ok:true`とSearchResultの全fieldをtop-levelに返す。
+失敗は`{ok:false,error:string}`で次行の処理を続ける。stdoutはJSONだけ。
+
+```json
+{ "op": "new" }
+```
+
+native binaryのbuild/testと実Wasm受入れはRootが実行する。
+sourceだけのparse/formatとmock façade検証は実行可能であり、実Rust/実Wasmの成功とは区別する。
 
 生成物の契約は`bridge/wasm/othello.js`と`bridge/wasm/othello_bg.wasm`。
 `src/wasm.d.ts`は生成前の型確認用の宣言だけであり、実装ではない。
@@ -71,9 +122,14 @@ Rootが実際に実行した結果とこのUNRUN記録は区別する。
 ```bash
 # workspace追加後、Rootが共有lockを更新し、続いてlockedで実行する。
 cargo test --locked -p othello-core -p othello-wasm
+cargo test --locked -p othello-core search::tests
+cargo test --locked -p othello-core --bin othello-engine
+cargo build --locked --release -p othello-core --bin othello-engine
 cargo clippy --locked -p othello-core -p othello-wasm -- -D warnings
 node scripts/build-wasm.mjs dev
 node --test games/othello/bridge/test/wasm.test.mjs
+# 新search exportのnative/Wasm parity（同じsource版の実binaryを指定）
+OTHELLO_NATIVE_ENGINE=/absolute/path/to/othello-engine node --test games/othello/bridge/test/wasm.test.mjs
 # 実生成宣言でもfacadeを確認する。
 node /workspaces/quoridor/node_modules/typescript/bin/tsc --noEmit --strict --target ES2022 --module ESNext --moduleResolution Bundler --lib ES2022,DOM games/othello/bridge/src/index.ts games/othello/bridge/src/wasm.d.ts
 ```

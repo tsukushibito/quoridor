@@ -7,6 +7,7 @@ declare module '*wasm/othello.js' {
   export function pass_turn_json(state: string): string;
   export function status_json(state: string): string;
   export function choose_move_json(state: string): string;
+  export function search_json(state: string, options: string): string;
 }
 
 declare module '*wasm/othello_bg.wasm?url' {

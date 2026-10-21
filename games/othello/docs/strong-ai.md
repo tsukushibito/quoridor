@@ -12,7 +12,7 @@
 
 現GameStateの64要素board、version1、黒1/白2、row-major index、合法手・パス・終局・保存JSONを維持する。Vec/ray参照とcorner/flip/ID簡易policyを独立参照・初期対照として使う。新しいu64盤面、PVS/Negamax、TT、反復深化、時計、厳密終盤は同じRustコアをnative/Wasmから使う。TTは深さ・bound・探索modeを区別し、未完了結果を厳密値として保存しない。パスは着手深さを消費せず、双方着手不能なら空きが残っても終局。原規約の実石差と、外部engineの評価値・空き割当規約は別に対応付ける。厳密終盤に確率pruningを使わない。
 
-最初にbitboard/ray照合、軽いperft、小終盤の独立全探索、native/Wasmと時計・中断を確認する。中断時は最後の完了反復の合法手へ戻す。同期WasmへpostMessageするだけで取消できるとは扱わず、内部時計とWorker終了・再生成で遅延結果を無効化する。Quoridorと共通chooserは維持し、OthelloのUI・対局制御をRust主体へ移す。JS/TSはWasm起動とブラウザAPIの最小接続に限る。
+最初にbitboard/ray照合、軽いperft、小終盤の独立全探索、native/Wasmと時計・中断を確認する。GameStateの公開境界を変更する場合は、既存Othelloのルール・パス・終局・JSON・非法入力テストも関連する通常software検査として、新しい探索テストと一緒に一度確認する。無関係なQuoridor科学・移行suiteは再演しない。中断時は最後の完了反復の合法手へ戻す。同期WasmへpostMessageするだけで取消できるとは扱わず、内部時計とWorker終了・再生成で遅延結果を無効化する。Quoridorと共通chooserは維持し、OthelloのUI・対局制御をRust主体へ移す。JS/TSはWasm起動とブラウザAPIの最小接続に限る。
 
 ## 最初のnative接続仕様
 
@@ -22,7 +22,7 @@ CLIは1行1JSON要求/応答、stdoutはJSONのみ、diagnosticsはstderr。`op`
 
 一次資料は[Edax](https://github.com/abulmo/edax-reversi)、[Egaroucid](https://github.com/Nyanyan/Egaroucid)、[技術解説](https://www.egaroucid.nyanyan.dev/ja/technology/explanation/)、[公開学習データ](https://www.egaroucid.nyanyan.dev/ja/technology/train-data/)。取得済release metadataはEdax v4.7、Egaroucid GUI v7.8.3。console案内7.8.1と混同せず、最初に起動できる公式Console7.8.1または固定source buildを選び、実commit・source/weight/book/dataそれぞれの条件、hash、起動args、1thread/時計/無book/無ponderを実確認する。公開dataは再配布禁止で本文をGitへ入れない。原C/C++engineを自作Rust runtimeへ隠して配布しない。
 
-初期smokeは各相手4開始family×両色=8局。目的はprotocol・合法終局・費用の確認で、優位性判定には使わない。Rustルールを対戦制御の正本とし、違法手・timeout・crashも結果へ残す。時間対局に恣意的aggregate node capを足して未完了にしない。学習/調整familyと最終判定familyを分け、最終局数・停止・判定はpilot費用と分散から結果前に固定する。fair timing中は重いbuild/学習/対局/IO競合を調整する。
+初期smokeは各相手4開始family×両色=8局。目的はprotocol・合法終局・費用の確認で、優位性判定には使わない。未学習の簡易評価器が強豪に大敗しても、その結果だけでbitboard方式や学習方針を不支持とせず、予定した少量pattern学習・export・parityへ進む。簡易policyへの勝利も強豪超えの根拠にしない。最小native接続を、Rust UIや全工程の完成待ちにしない。Rustルールを対戦制御の正本とし、違法手・timeout・crashも結果へ残す。時間対局に恣意的aggregate node capを足して未完了にしない。学習/調整familyと最終判定familyを分け、最終局数・停止・判定はpilot費用と分散から結果前に固定する。fair timing中は重いbuild/学習/対局/IO競合を調整する。
 
 ## 少量学習と改善
 

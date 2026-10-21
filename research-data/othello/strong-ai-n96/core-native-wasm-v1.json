@@ -1,0 +1,464 @@
+{
+  "scope": "Initial nonselective u64/PVS/TT/iterative/time/exact-endgame native/Wasm implementation and software acceptance only; no gameplay superiority/equivalence, browser-play or learned model claim",
+  "source_base": "1b55f1fc4834c618c232b4630b16f9357010bd22",
+  "source": [
+    {
+      "path": "/workspaces/quoridor/.worktree/othello-core-n96/games/othello/crates/othello-core/src/lib.rs",
+      "sha256": "451943acd93b73aab78d6e819bcdf12771b2985bdd7055bd9759a37bb446629b",
+      "bytes": 6792,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/othello-core-n96/games/othello/crates/othello-core/src/bitboard.rs",
+      "sha256": "c995c904587deaf33d3b27c762b7e73ed579b2e9ff8a3a731cf5b58001771fd4",
+      "bytes": 4172,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/othello-core-n96/games/othello/crates/othello-core/src/heuristic.rs",
+      "sha256": "6dd62ea17ff06675c1e2d8d5a0453530e32588d469bf6aaae5a14e72ab5244b8",
+      "bytes": 815,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/othello-core-n96/games/othello/crates/othello-core/src/search.rs",
+      "sha256": "7f971fbeb5c550e4e2d981a9fcb45fdfee2194c83628d6e554f4c7e7355ba968",
+      "bytes": 11267,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/othello-core-n96/games/othello/crates/othello-core/src/search/tests.rs",
+      "sha256": "98db4711d1ba929e394204edb89c36f2243b4c825056d3cdd632f0d10936c11b",
+      "bytes": 14562,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/othello-core-n96/games/othello/crates/othello-core/src/bin/othello-engine.rs",
+      "sha256": "a3af29b62e6c3b1474e4cdd09d775cc3889c39c63cc04b916d52af926f2e75b2",
+      "bytes": 3740,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/othello-core-n96/games/othello/crates/othello-wasm/src/lib.rs",
+      "sha256": "440be7018f8df4628c1892d6a00eedd2d312dd17e5ca9d7446c21c461d6a459a",
+      "bytes": 2201,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/othello-core-n96/games/othello/bridge/src/index.ts",
+      "sha256": "a1da079f83cb294941ccd8b99e83625188e0f1503ac8a80ac51479f5084d38b6",
+      "bytes": 3346,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/othello-core-n96/games/othello/bridge/src/wasm.d.ts",
+      "sha256": "801bef72a6f9b60ea4e9fbf96bb88dea42548d03ea1c11aef363a342176207a6",
+      "bytes": 722,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/othello-core-n96/games/othello/bridge/test/facade.test.mjs",
+      "sha256": "c1af1a687d75a9e38d4f4a31fa72d74a0f0a4f7e36d6f542b3fdacd4c65dd7cf",
+      "bytes": 6118,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/othello-core-n96/games/othello/bridge/test/wasm.test.mjs",
+      "sha256": "40ce275143e6482571a4da5bf228ed323e672e2e9b01cbbf5dce197969c5327b",
+      "bytes": 6111,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/othello-core-n96/games/othello/bridge/README.md",
+      "sha256": "a98d69f68a92880fa8c9bf21e57f5edb1c7575e06059660259e80a8465f94030",
+      "bytes": 9760,
+      "mode": "0644"
+    }
+  ],
+  "generated": [
+    {
+      "destination": "games/othello/bridge/wasm/othello.js",
+      "old_generated_sha256": "87edef248982897cfdf2ab40ae87413670f534ccd1e39cb4a1f4ec6fcc515f9c",
+      "new_generated_sha256": "c1c18b38bec0d9c827df1f2baf0d622222e4160d400ef72be604044552055fc9",
+      "bytes": 13026
+    },
+    {
+      "destination": "games/othello/bridge/wasm/othello.d.ts",
+      "old_generated_sha256": "74cb6a7e8b3050fbdf628b0eb6fd05014eb013106b39336317ac34c0900ce7d4",
+      "new_generated_sha256": "8ba11965b0d391c436fe8839819c9c88266fd069a7680f40fca0a1321d1ea93e",
+      "bytes": 2742
+    },
+    {
+      "destination": "games/othello/bridge/wasm/othello_bg.wasm",
+      "old_generated_sha256": "be2feaabd1725b9885ad5a9235e506dfea20a8b96784a7d7f7aaebee5e5e77d6",
+      "new_generated_sha256": "a7a110b3ca94246dcf46541da4f8650674807acad199c8c96581419d0fffb575",
+      "bytes": 454018
+    },
+    {
+      "destination": "games/othello/bridge/wasm/othello_bg.wasm.d.ts",
+      "old_generated_sha256": "ea3507f1bf01dea8177c01807af1170bd2eee42e1d75ca5efa7ba963a0c25fbc",
+      "new_generated_sha256": "9bb3089a8f4b6fd74fc956c68909b53fc0aef3fbc78ae7cc988e9ca6f6de7f6f",
+      "bytes": 1104
+    }
+  ],
+  "native": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/core-software-v3/image-550b87377274b202056925a39bcfa4164aaf0dff3ff17bb993b6d43517be8975/othello-engine",
+    "sha256": "550b87377274b202056925a39bcfa4164aaf0dff3ff17bb993b6d43517be8975",
+    "bytes": 712232,
+    "mode": "0755"
+  },
+  "checks": {
+    "core_library": "actual24 PASS,13 new + existing11 ray/rules/JSON/pass/terminal/illegal input; once in v1",
+    "cli": "initial strict-unit-variant request failure; empty struct New{} repair, then actual1 PASS in v3",
+    "clippy": "core+wasm all-target warnings-as-errors PASS",
+    "release": "genuine native release image built",
+    "wasm": "actual5 tests PASS including original JSON/illegal input + clock/fallback/exact/native parity, none skipped",
+    "types": "actual generated declarations selected, fallback excluded"
+  },
+  "failures": {
+    "cli": "original failed test retained",
+    "root_v2": "Root preparation kept old CLI SHA; refused before Cargo, v3 exact SHA correction only",
+    "worker_control_loss": "Root sparse-add materialization removed ignored task OWN; source intact, original disk checks absent,51 original saved tool/context records recovered by exact lines; not original-disk restoration or replay",
+    "recovery_record": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/core-software-v1/sparse-output-loss-and-recovery.json"
+  },
+  "artifact": {
+    "path": "research-data/othello/strong-ai-n96/core-native-wasm-v1-checks.tar.gz",
+    "sha256": "03119cf20e7e0cfaf36e73ec8a28bca00c00677e457de43efdaa4b04f223eca1",
+    "bytes": 23649,
+    "members": [
+      {
+        "member": "core-software-v1/compile.py",
+        "sha256": "c0ac6bbe35512299c7b3b2844df72944e421eb95038ad0500249b2d74f6d9902",
+        "bytes": 6431,
+        "mode": "0644"
+      },
+      {
+        "member": "core-software-v1/completed-commands.json",
+        "sha256": "1354925ed312e2143794694884b7ba5c8713eb5c5a388a9af3f3df9c89241851",
+        "bytes": 96,
+        "mode": "0644"
+      },
+      {
+        "member": "core-software-v1/job.json",
+        "sha256": "6eb6a8096d2b77dc6f1fa6b0b52ae6f59ee15753d09e016aa5413dbca7c68939",
+        "bytes": 722,
+        "mode": "0644"
+      },
+      {
+        "member": "core-software-v1/metadata.log",
+        "sha256": "bce142e499a36530cf94d074f7bd75cbeae053f0bffb8055ef245ed1c8f47fc6",
+        "bytes": 33048,
+        "mode": "0644"
+      },
+      {
+        "member": "core-software-v1/metadata.process.json",
+        "sha256": "3704d4dc5b0ac55a5867de73a6e1c011484fbac46c7f61032cbc3a39d174f1d6",
+        "bytes": 1433,
+        "mode": "0600"
+      },
+      {
+        "member": "core-software-v1/metadata.returned.json",
+        "sha256": "063f8301228693364349d4449b0b140592e12b760154196e00c149c941a1bc9c",
+        "bytes": 3158,
+        "mode": "0644"
+      },
+      {
+        "member": "core-software-v1/related-core-tests.log",
+        "sha256": "2ced1a436f8ba5258aeaefeac6799429cbbf7d5a2d6e4ef6178149fef888e97c",
+        "bytes": 3328,
+        "mode": "0644"
+      },
+      {
+        "member": "core-software-v1/related-core-tests.process.json",
+        "sha256": "790f3bf42b0bc4fc795b10c878f145bdcebac2783244e262eb4e1cf9d027fbb2",
+        "bytes": 2131,
+        "mode": "0600"
+      },
+      {
+        "member": "core-software-v1/related-core-tests.returned.json",
+        "sha256": "73bf0e15f758a0e495c7196b7c1708317b3c78bfabd15cec77f4d4dcad4b77fb",
+        "bytes": 2652,
+        "mode": "0644"
+      },
+      {
+        "member": "core-software-v1/resources.json",
+        "sha256": "4d02393438886104c6f97c3bf9096108e214558a0a84ebc60263d641bed9b0f2",
+        "bytes": 824,
+        "mode": "0644"
+      },
+      {
+        "member": "core-software-v1/runtime/result.json",
+        "sha256": "8b61f144ac38de4cacf8732fb503145f5d2b5bb4d63df5802c29d41f86517bc0",
+        "bytes": 522,
+        "mode": "0600"
+      },
+      {
+        "member": "core-software-v1/source-before.json",
+        "sha256": "a7135fd46f16f111778be00d65cd4e8407eaf3878a11f56c1d0400fecc7e4d0b",
+        "bytes": 1464,
+        "mode": "0644"
+      },
+      {
+        "member": "core-software-v1/sparse-output-loss-and-recovery.json",
+        "sha256": "82a90637e57ed6c1dfc698d2812dcd146412989d04e3cf1d1935a44800e1991a",
+        "bytes": 1559,
+        "mode": "0644"
+      },
+      {
+        "member": "core-software-v2/compile.py",
+        "sha256": "e0c96b86646394e1a050ff268d0d811b288d16707c9616764f62924d0fe6e1f4",
+        "bytes": 6358,
+        "mode": "0644"
+      },
+      {
+        "member": "core-software-v2/job.json",
+        "sha256": "4591733e95213eadf884cd3b94f23742ebad98fde26f37dedf0c5efe308feffa",
+        "bytes": 722,
+        "mode": "0644"
+      },
+      {
+        "member": "core-software-v2/resources.json",
+        "sha256": "799e8e775f7b7b502dac506445d7c105aa903000d686afc78270a13d9be49f96",
+        "bytes": 758,
+        "mode": "0644"
+      },
+      {
+        "member": "core-software-v2/runtime/result.json",
+        "sha256": "d12749379327142506939a6e967edcec9840bf0d9443d774283390fa34731ef9",
+        "bytes": 524,
+        "mode": "0600"
+      },
+      {
+        "member": "core-software-v3/causal-continuation.json",
+        "sha256": "854a1fc35d059870d51c416c4a1c50d2edc6fa6d120d86ecb04b4fe0946f27b5",
+        "bytes": 344,
+        "mode": "0644"
+      },
+      {
+        "member": "core-software-v3/compile.py",
+        "sha256": "a4533eae526a3c3077b3de8be5cd1ff945db63583bfb641203c3413b569b9ab1",
+        "bytes": 6358,
+        "mode": "0644"
+      },
+      {
+        "member": "core-software-v3/completed-commands.json",
+        "sha256": "232e1d8286aa6f8dd6ca5683236318bb5e203ccb5ead060dec5b786c79fa0322",
+        "bytes": 295,
+        "mode": "0644"
+      },
+      {
+        "member": "core-software-v3/core-clippy.log",
+        "sha256": "edde8023dfa23f4f70bf0941c61bc08aca44fcf194e738d3c8bcca57c1cf4fbd",
+        "bytes": 205,
+        "mode": "0644"
+      },
+      {
+        "member": "core-software-v3/core-clippy.process.json",
+        "sha256": "98aeab8bc7c24babf9187ddb1c90f7405e8785b7721f43eef049075cb50cccf4",
+        "bytes": 1474,
+        "mode": "0600"
+      },
+      {
+        "member": "core-software-v3/core-clippy.returned.json",
+        "sha256": "0873e2d9ad7651dbdc9f80e32b5704e0800c43c74982c161dc06b1bf5055e15c",
+        "bytes": 3256,
+        "mode": "0644"
+      },
+      {
+        "member": "core-software-v3/job.json",
+        "sha256": "4c8b1137811061c97c6e2702d0dcf9b85b962a48929583c62e6a01e7ed5cde76",
+        "bytes": 722,
+        "mode": "0644"
+      },
+      {
+        "member": "core-software-v3/native-cli-test.log",
+        "sha256": "5746d696e4356bdc8900b310c3579f7781d3417282f0665753af21e6224bb7b5",
+        "bytes": 587,
+        "mode": "0644"
+      },
+      {
+        "member": "core-software-v3/native-cli-test.process.json",
+        "sha256": "649319d469dcc94319c6594bc05be77bebcf291917cbadf06f34d111abf30687",
+        "bytes": 1485,
+        "mode": "0600"
+      },
+      {
+        "member": "core-software-v3/native-cli-test.returned.json",
+        "sha256": "f93f281c02190b8138cd12482366f4365ca7167e005de2976550828693ccecf3",
+        "bytes": 3278,
+        "mode": "0644"
+      },
+      {
+        "member": "core-software-v3/native-release.log",
+        "sha256": "f180ea39e55a85d4da9f20b05f42d385c2e93b40cefb72a86ca9b2597293b437",
+        "bytes": 360,
+        "mode": "0644"
+      },
+      {
+        "member": "core-software-v3/native-release.process.json",
+        "sha256": "ad2d0e4dd8892133ed65df30b05ca64189e3683144769372c419afa841c2ea89",
+        "bytes": 1467,
+        "mode": "0600"
+      },
+      {
+        "member": "core-software-v3/native-release.returned.json",
+        "sha256": "6000dedbc1b6d1cc4a9201c3b6327b1e3ed37dca25b8e12b256a97142fd739c1",
+        "bytes": 3238,
+        "mode": "0644"
+      },
+      {
+        "member": "core-software-v3/qualification.json",
+        "sha256": "8204c43c1ce474a88b5eba2e6a1d2bd31ae14bb44dd7353b521de2666f6a7b8c",
+        "bytes": 2738,
+        "mode": "0644"
+      },
+      {
+        "member": "core-software-v3/resources.json",
+        "sha256": "799e8e775f7b7b502dac506445d7c105aa903000d686afc78270a13d9be49f96",
+        "bytes": 758,
+        "mode": "0644"
+      },
+      {
+        "member": "core-software-v3/runtime/result.json",
+        "sha256": "97c68191d55aff7f4486496cfd7b95c0bddb1d0b6ffcbf787061a25ebcae0fee",
+        "bytes": 525,
+        "mode": "0600"
+      },
+      {
+        "member": "core-software-v3/source-before.json",
+        "sha256": "db1815d9919ae2608089b3cd3d3988820c7c27791529ffe2c2d005acca961159",
+        "bytes": 1464,
+        "mode": "0644"
+      },
+      {
+        "member": "wasm-software-v1/completed.json",
+        "sha256": "4e255577af509fe9a720d217117f17475405aad9e5c0082566e1f56ef3545a88",
+        "bytes": 329,
+        "mode": "0644"
+      },
+      {
+        "member": "wasm-software-v1/generated-inputs.json",
+        "sha256": "67483dd9de41b420b3a58433fcdaa8e2fcaddf31fc3b182797388736f5c91adc",
+        "bytes": 1508,
+        "mode": "0644"
+      },
+      {
+        "member": "wasm-software-v1/job.json",
+        "sha256": "3b73b1b6903472abbd032513bda8e32750bcff7ece70b1c277e927bd87495fde",
+        "bytes": 722,
+        "mode": "0644"
+      },
+      {
+        "member": "wasm-software-v1/qualification.json",
+        "sha256": "d9188028c7a8547a83a4e5ee98c1d8adf7ad17f8382a8cfdcf6a2ed0e59ac8c9",
+        "bytes": 5493,
+        "mode": "0644"
+      },
+      {
+        "member": "wasm-software-v1/qualify.py",
+        "sha256": "7c82ca30d903379caf658e8422563b39663fe2b74a4caf498adcc02df3f97f4e",
+        "bytes": 7060,
+        "mode": "0644"
+      },
+      {
+        "member": "wasm-software-v1/real-generated-typecheck.log",
+        "sha256": "3195adaa9808c08ab7a0149ff9dcff4e66ee54dfdab025d470e7521ca6e74354",
+        "bytes": 5710,
+        "mode": "0644"
+      },
+      {
+        "member": "wasm-software-v1/real-generated-typecheck.process.json",
+        "sha256": "63b9797700c8ae11bab109ea26d008289aaeeb7d55ab8aa03faf751105bfb409",
+        "bytes": 1364,
+        "mode": "0600"
+      },
+      {
+        "member": "wasm-software-v1/real-generated-typecheck.returned.json",
+        "sha256": "07e2c73142c934c76a337aa19704cacba373582b2fd965de011b16090b5edd07",
+        "bytes": 3000,
+        "mode": "0644"
+      },
+      {
+        "member": "wasm-software-v1/real-wasm-native-parity.log",
+        "sha256": "d5e7e3c392e13d7b12a3445f24dab7d91ee43e62a5d80fecfea464bd463776e4",
+        "bytes": 508,
+        "mode": "0644"
+      },
+      {
+        "member": "wasm-software-v1/real-wasm-native-parity.process.json",
+        "sha256": "b58b893ce66d66868f082edec9be35c01c940ec10c422840a8e1712ddb490aa2",
+        "bytes": 1284,
+        "mode": "0600"
+      },
+      {
+        "member": "wasm-software-v1/real-wasm-native-parity.returned.json",
+        "sha256": "a955632654cf8460210910c9d7490154d494175e01a1eca36a626974bbfa7819",
+        "bytes": 2836,
+        "mode": "0644"
+      },
+      {
+        "member": "wasm-software-v1/resources.json",
+        "sha256": "799e8e775f7b7b502dac506445d7c105aa903000d686afc78270a13d9be49f96",
+        "bytes": 758,
+        "mode": "0644"
+      },
+      {
+        "member": "wasm-software-v1/runtime/result.json",
+        "sha256": "7cf2fad47a318bfdc631db97dd688fa12c807cce90b2821bd32aad3128cb4c5b",
+        "bytes": 528,
+        "mode": "0600"
+      },
+      {
+        "member": "wasm-software-v1/source.json",
+        "sha256": "1ea1261c428e70518f371de8c4bc3a8d98d9fc1bd6320b02a634c59642168372",
+        "bytes": 1381,
+        "mode": "0644"
+      },
+      {
+        "member": "wasm-software-v1/tsconfig.json",
+        "sha256": "f44930db81cde6fe13420bb6350397812a70315416968ed515bf186241567bd7",
+        "bytes": 449,
+        "mode": "0644"
+      },
+      {
+        "member": "wasm-software-v1/wasm-build.log",
+        "sha256": "370c5b92dfe22e1b222f2306343ed5c77c86a07f83df1d1de58acbcd55089f33",
+        "bytes": 743,
+        "mode": "0644"
+      },
+      {
+        "member": "wasm-software-v1/wasm-build.process.json",
+        "sha256": "3d7b6d8ca41cd71f64db9916e7f7d1becefd13c0fba6a0858c18d8dd4d6fea8b",
+        "bytes": 1533,
+        "mode": "0600"
+      },
+      {
+        "member": "wasm-software-v1/wasm-build.returned.json",
+        "sha256": "30c12994b01985b452cf6f9ccacea551137b92384afbbe29b4183f63644c1f15",
+        "bytes": 3370,
+        "mode": "0644"
+      },
+      {
+        "member": "wasm-software-v1/wasm-clippy.log",
+        "sha256": "ce43193d0ad5cfd62ebf2d7e1e0b1a6d8d834505bee204fae8c308ce346eaffa",
+        "bytes": 294,
+        "mode": "0644"
+      },
+      {
+        "member": "wasm-software-v1/wasm-clippy.process.json",
+        "sha256": "ddd30b42a349afc4f4d6e75eb9184dfd76bb22cb7e831b2205478c933af17595",
+        "bytes": 1475,
+        "mode": "0600"
+      },
+      {
+        "member": "wasm-software-v1/wasm-clippy.returned.json",
+        "sha256": "8f81da937c8575d97f7e9fca62176c7ca9b37b3f3d5386d10e05f52cb3825bcd",
+        "bytes": 3258,
+        "mode": "0644"
+      }
+    ],
+    "restoration": "one forward tar/gzip exact bytes/modes/names and EOF/CRC PASS without extraction"
+  },
+  "product": "existing simple Othello choice/UI remains initial control; new search explicit API only, Quoridor defaults/models/pauses untouched",
+  "limits": "GPU0/thread1; Root CPU0+management18/F4GiB incl64MiB controller/hostreserve4GiB;50GB global; no old scientific replay"
+}

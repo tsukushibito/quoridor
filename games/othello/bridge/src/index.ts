@@ -12,6 +12,24 @@ export type Status = {
   winner: Side | null;
 };
 
+export type SearchOptions = {
+  timeMs?: number;
+  ttMiB?: number;
+  maxDepth?: number;
+  exactEmpties?: number;
+};
+export type SearchResult = {
+  move: number | null;
+  score: number;
+  scoreKind: 'heuristic' | 'discDifference';
+  completedDepth: number;
+  nodes: number;
+  elapsedMs: number;
+  timedOut: boolean;
+  cancelled: boolean;
+  proven: boolean;
+};
+
 type Wasm = typeof import('../wasm/othello.js');
 let loaded: Promise<Wasm> | undefined;
 
@@ -61,4 +79,23 @@ export async function chooseMove(state: GameState): Promise<number | null> {
     move: number | null;
   };
   return choice.move;
+}
+
+// This awaits synchronous Wasm. Worker lifecycle cancellation belongs to the UI
+// host; postMessage alone does not interrupt this search inside that Worker.
+export async function search(state: GameState, options: SearchOptions = {}): Promise<SearchResult> {
+  for (const [name, maximum] of [
+    ['timeMs', Number.MAX_SAFE_INTEGER],
+    ['ttMiB', 128],
+    ['maxDepth', 64],
+    ['exactEmpties', 64],
+  ] as const) {
+    const value = options[name];
+    if (value !== undefined && (!Number.isSafeInteger(value) || value < 0 || value > maximum)) {
+      throw new RangeError(`${name} must be an integer in 0..${maximum}`);
+    }
+  }
+  return JSON.parse(
+    (await load()).search_json(JSON.stringify(state), JSON.stringify(options)),
+  ) as SearchResult;
 }
