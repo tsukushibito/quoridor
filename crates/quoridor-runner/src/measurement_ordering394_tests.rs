@@ -77,6 +77,7 @@ fn measurement394_completed_callback_preserves_cumulative_and_final_partial_scop
         .unwrap();
         let mut target = SearchTarget {
             settings: Settings {
+                etc_opportunity: None,
                 probcut: None,
                 probcut_samples: 0,
                 search_threads: None,

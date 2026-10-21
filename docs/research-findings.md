@@ -3014,3 +3014,11 @@ clock104の合法主結果・復元・時計条件は通り、main receipt最大
 限定試験19定義と、通常入口の実dummy processで2lane×2operationの重複実行・親authority更新、1lane×2operation、不正CPU/SMT/重複の起動前拒否、範囲外thread・子失敗・親取消の停止/回収/次operation未実行を確認した。最初の親config参照欠落、inner command本人の所有権照合漏れ、失敗時の空TMP回収漏れは元失敗を保全して修正した。最後の3caseだけ再実行し、成功済み5caseと旧test成功は再演していない。失敗の正常guardian return=NULL/capture未完了を維持し、finally後の別の実回収証拠が揃う場合だけ空owned TMPを掃除する。元8caseのexit1や歴史記録は上書きしない。
 
 最後の実guardはexit0/directwait/reap/handles/残子孫・TMPなし、temporary sourceはbyte/mode完全復元済み。normal outer1.001108658/5.064095334/69.454138119/24.348454836秒を各一度だけ保存し、nested秒は加算せず全費UNKNOWNを維持する。科学Search/model/arena/RNGは0で、歴史的MPCの全原因や修復後の実対局・性能/棋力資格ではない。旧31の有限結果・撤去を維持し、新33は通常探索由来TT正例と全合法子shadowの別依頼として準備する。[資格と保存証拠](../research-data/ai-sigma/research-cpu-plan-v1/qualification-v1.json)、[検証範囲・元失敗・費用](../research-data/ai-sigma/research-cpu-plan-v1/report-ja.md)。
+
+### 新ETC機会診断のソフト境界（324.33）
+
+旧31を再開せず、通常探索が生成した子TTをbefore-firstで読む正例と、全合法子のshadow診断を別の有限依頼として実装した。子要求深さD−1へのstrict一致、完全history/context、同じevaluator/table namespace、合法best、ExactまたはUpper≤−beta、goal優先threefoldを維持する。shadowは親自身のTTで返らなかった節点で通常探索前に照合し、cut・手順変更・TT書込み・履歴学習・追加評価を行わない。off時の追加scanはなく、key-only make/undoで復元し、資格不一致は重なりを保持する。最初のoccupied非cutで後のtrue-TT-cut witnessを失う問題、per-row evaluatorの照合不足、無関係なLMR観測／Sigmaのsafe-raceガード差分は関連source確認で修復した。
+
+限定検証は、通常Search由来TTの正例を含む元AI3定義の成功を因果的なbyte対応で再利用し、新しいno-Search witness回帰、変更したPython metadata負例、修復したRunner consumerを確認した。Core／AI／Runnerのall-target Clippy・型検査は警告0、真正releaseのCargo記録はfresh=false、image SHAは87ea4af1である。controlled fixtureの8 Search／400,000 nodes上限（実node総数未抽出）は、自然なETC成立率の標本へ混ぜない。コンパイル／fixtureの元4失敗・NULL／capture／cleanupの各資格は保存し、成功済みの試験本体や旧科学を再演しなかった。最終softwareのouter110.363436171秒を一度だけ記録し、nested秒は加算せず全費UNKNOWNを保持する。通常finalize・実process cleanup・source STOPは完了した。
+
+自然17root／4本の完全な時系列、D5・時間制限なし・各1Mの事前案はまだ未入場で、実用候補はNULL、性能・棋力の支持は未判定である。新依頼の512 calls／512M nodes上限と、旧31の208不支持・撤去、原MPC256のFAILED_INCOMPLETEは別に維持する。比較専用コードはこの具体的な正例／shadow／機会診断にだけ必要なものとし、用途終了時にGit・元データからの再構成元を残して撤去する。[ソフト資格と元失敗・復元証拠](../research-data/ai-sigma/cedar-etc-opportunity-v1/software-qualification-v1.json)。

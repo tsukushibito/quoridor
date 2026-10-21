@@ -539,6 +539,12 @@ impl SigmaContext {
         self.overlay.truncate(undo.overlay_len);
         Ok(())
     }
+    /// Diagnostic admission only: a canonical make/unmake can reuse this slot.
+    /// Does not reserve, alter history, or perform a speculative transition.
+    #[cfg(feature = "research-diagnostics")]
+    pub fn has_reserved_path_slot(&self) -> bool {
+        self.overlay.len() < self.overlay.capacity()
+    }
     /// Exclusive path bytes; the immutable history base is shared by clones.
     pub fn path_allocated_bytes(&self) -> usize {
         self.overlay.capacity() * std::mem::size_of::<HistoryKey>()

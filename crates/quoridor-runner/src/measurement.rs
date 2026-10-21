@@ -62,6 +62,12 @@ struct RootInput {
 struct Settings {
     #[serde(
         default,
+        deserialize_with = "deserialize_etc_opportunity",
+        skip_serializing_if = "Option::is_none"
+    )]
+    etc_opportunity: Option<EtcOpportunitySetting>,
+    #[serde(
+        default,
         deserialize_with = "crate::config::deserialize_probcut",
         skip_serializing_if = "Option::is_none"
     )]
@@ -175,7 +181,46 @@ fn default_zero_stock_approx_method() -> String {
     ZeroStockApproxMethod::default().name().into()
 }
 
+#[derive(Clone, Copy, Debug, Deserialize, Serialize)]
+#[serde(rename_all = "snake_case")]
+enum EtcOpportunitySetting {
+    BeforeFirstV1,
+}
+fn deserialize_etc_opportunity<'de, D: serde::Deserializer<'de>>(
+    deserializer: D,
+) -> std::result::Result<Option<EtcOpportunitySetting>, D::Error> {
+    EtcOpportunitySetting::deserialize(deserializer).map(Some)
+}
+
 fn validate(settings: &Settings, requests: &[Request]) -> Result<()> {
+    if settings.etc_opportunity.is_some()
+        && (settings.profile != Profile::Control
+            || settings.search_threads != Some(1)
+            || !settings.use_tt
+            || !settings.use_pvs
+            || settings.lmr_method != "depth_rank"
+            || settings.probcut.is_some()
+            || settings.probcut_samples != 0
+            || settings.zero_stock_approx_min_root_walls.is_some()
+            || settings.neighbour_opportunity.is_some()
+            || settings.root_ordering_quality.is_some()
+            || settings.history_provenance.is_some()
+            || settings.time_reserve_ms.is_some()
+            || requests.iter().any(|r| {
+                r.time_limit_ms.is_some()
+                    || r.depth > 5
+                    || r.node_cap > 1_000_000
+                    || r.diagnostic
+                    || r.observe_lmr
+                    || r.observe_completed_depths
+                    || r.warmup
+            }))
+    {
+        return Err(
+            "ETC opportunity requires bounded plain N1 Control/timeNone, MPC/other observers OFF"
+                .into(),
+        );
+    }
     if (settings.probcut.is_some() || settings.probcut_samples != 0)
         && (settings.probcut_samples > 8
             || (settings.probcut.is_some() && settings.probcut_samples != 0)
@@ -702,7 +747,9 @@ impl Target for SearchTarget {
         let search_started = Instant::now();
         let mut completed_depths = Vec::new();
         let mut main_completed_receipt = None;
-        let result = if let Some(observation) = opportunity.as_mut() {
+        let result = if self.settings.etc_opportunity.is_some() {
+            session.search_etc_opportunity(root, &limits, cancel)
+        } else if let Some(observation) = opportunity.as_mut() {
             session.search_neighbour_opportunity(root, &limits, cancel, observation)
         } else if let Some(observation) = lmr_observation.as_deref_mut() {
             session.search_with_lmr_observation(root, &limits, cancel, observation)
@@ -765,6 +812,15 @@ impl Target for SearchTarget {
             )
         });
         row["actual_selectivity"] = json!(session.namespace().selectivity);
+        if let Some(requested) = self.settings.etc_opportunity {
+            row["etc_opportunity_requested"] = json!(requested);
+            if let Some(report) = row
+                .get_mut("work")
+                .and_then(|w| w.get_mut("etc_opportunity"))
+            {
+                report["actual_namespace"] = json!({"evaluator":session.namespace().evaluator,"rules":session.namespace().rules,"selectivity":session.namespace().selectivity});
+            }
+        }
         row["time_reserve_ms"] = json!(self.settings.time_reserve_ms);
         row["lmr_method_requested"] = json!(self.settings.lmr_method);
         row["lmr_rule"] = json!(session.lmr_method().map(LmrMethod::id));
@@ -1410,6 +1466,9 @@ fn observed_work(s: &alphabeta::SearchStats) -> Value {
     work["safe_race_proven_leaves"] = json!(s.safe_race_proven_leaves);
     if let Some(p) = &s.probcut {
         work["probcut"] = crate::config::probcut_report(p);
+    }
+    if let Some(report) = &s.etc_opportunity {
+        work["etc_opportunity"] = etc_opportunity_output(report);
     }
     safe_path_work(&mut work, s);
     work
@@ -3323,3 +3382,37 @@ mod probcut_lmr_admission_tests {
         assert!(validate(&settings, std::slice::from_ref(&observed)).is_ok());
     }
 }
+
+fn etc_opportunity_output(report: &alphabeta::EtcOpportunityReport) -> Value {
+    let parents: Vec<Value> = report.parents.iter().enumerate().map(|(slot, p)| {
+        let witnesses: Vec<Option<Value>> = p.witnesses.iter().map(|w| w.map(|w| {
+            let f = w.facts;
+            json!({"child":w.child,"legal_index":w.legal_index,"normal_rank":w.normal_rank,
+                "terminal":f.terminal,"terminal_cut":f.terminal_cut,"terminal_value_bits":f.terminal_value_bits,
+                "slot_present":f.slot_present,"board_match":f.board_match,"context_match":f.context_match,
+                "depth_match":f.depth_match,"numeric_bound":f.numeric_bound,"finite_value":f.finite_value,
+                "legal_best":f.legal_best,"satisfies_window":f.satisfies_window,"qualified_noncut":f.qualified_noncut,
+                "true_tt_cut":f.true_tt_cut,"stored_depth":f.stored_depth,"stored_value_bits":f.stored_value_bits,
+                "stored_bound":f.stored_bound,"stored_generation":f.stored_generation})
+        })).collect();
+        json!({"slot":slot,"selected":p.selected,"complete":p.complete,"attempted_children":p.attempted_children,"legal_count":p.legal_count,
+            "depth":p.depth,"ply":p.ply,"stock":p.stock,"alpha_bits":p.alpha_bits,"beta_bits":p.beta_bits,
+            "generation":p.generation,"tt_first":p.tt_first,"pv_first":p.pv_first,"path":&p.path[..p.path_len],
+            "children":p.children,"terminal_proofs":p.terminal_proofs,"terminal_cuts":p.terminal_cuts,
+            "lookups":p.lookups,"slot_absent":p.slot_absent,"board_mismatch":p.board_mismatch,
+            "context_mismatch":p.context_mismatch,"depth_mismatch":p.depth_mismatch,"excluded_bound":p.excluded_bound,
+            "nonfinite_value":p.nonfinite_value,"illegal_or_missing_best":p.illegal_or_missing_best,
+            "qualified_noncut":p.qualified_noncut,"true_tt_cuts":p.true_tt_cuts,"witnesses":witnesses})
+    }).collect();
+    json!({"protocol":alphabeta::ETC_OPPORTUNITY_PROTOCOL,"parent_limit":alphabeta::ETC_PARENT_LIMIT,
+        "child_limit":alphabeta::ETC_CHILD_LIMIT,"parents":parents,"capacity_unready":report.capacity_unready,"infinite_window":report.infinite_window,
+        "child_lookups":report.child_lookups,"child_transitions":report.child_transitions,"parent_returns":report.parent_returns,
+        "namespace_qualification":"actual single SearchSession table owner; not stored separately per Entry",
+        "bound_codes":["Exact","Lower","Upper","ApproxLeaf","SafeRaceLeaf"],
+        "predicate_scope":"overlapping slot-entry conditions; conditional on present slot, not first-return causal attribution",
+        "rank_scope":"exact root ordered rank or internal TT-first rank0; otherwise UNKNOWN without extra sorting",
+        "shadow_only":true,"cutoff_returns":0,"TT_writes":0,"history_updates":0,"extra_evaluations":0})
+}
+#[cfg(test)]
+#[path = "etc_opportunity_consumer_tests.rs"]
+mod etc_opportunity_consumer_tests;

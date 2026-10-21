@@ -1,0 +1,453 @@
+{
+  "issue": "quoridor-4lc.324.33",
+  "status": "STAGE1_SOFTWARE_QUALIFIED_NATURAL_DISCOVERY_UNENTERED",
+  "software_manifest": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/cedar-etc-opportunity-v1/software-v5/operation-release/manifest.json",
+    "sha256": "bfe83000ca5291ee81dd27a32392b22c1339024e3484fef252925d078887d605",
+    "bytes": 49768,
+    "mode": "0644"
+  },
+  "genuine_image": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/cedar-etc-opportunity-v1/software-v5/private-image-release/quoridor-runner",
+    "sha256": "87ea4af1a82be970eb51e1d2fb5921bb8849fcf76a9fb1ef2d0353c44cb6ffb1",
+    "bytes": 10379288,
+    "mode": "0755"
+  },
+  "cargo_artifact": {
+    "reason": "compiler-artifact",
+    "package_id": "path+file:///workspaces/quoridor/crates/quoridor-runner#0.1.0",
+    "manifest_path": "/workspaces/quoridor/crates/quoridor-runner/Cargo.toml",
+    "target": {
+      "kind": ["bin"],
+      "crate_types": ["bin"],
+      "name": "quoridor-runner",
+      "src_path": "/workspaces/quoridor/crates/quoridor-runner/src/main.rs",
+      "edition": "2024",
+      "doc": true,
+      "doctest": false,
+      "test": true
+    },
+    "profile": {
+      "opt_level": "3",
+      "debuginfo": 0,
+      "debug_assertions": false,
+      "overflow_checks": false,
+      "test": false
+    },
+    "features": ["default", "measurement"],
+    "filenames": [
+      "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target/release/quoridor-runner"
+    ],
+    "executable": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target/release/quoridor-runner",
+    "fresh": false
+  },
+  "actual_release_fresh": false,
+  "actual_source_stop": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/cedar-etc-opportunity-v1/software-v5/collection-v1/completion-and-STOP.json",
+    "sha256": "62b486d2d69b8dede3807193f138b63cbc262e7c33356a461ff55d97f072de45",
+    "bytes": 15846,
+    "mode": "0644"
+  },
+  "collector_return": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/cedar-etc-opportunity-v1/software-v5/collection-v1/actual-returned-STOP.json",
+    "sha256": "5d5685230624cc1e3b2576cb175e8a886020a26cce1e69d01e819f6bef609229",
+    "bytes": 2606,
+    "mode": "0644"
+  },
+  "source_only_acceptance": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/cedar-etc-opportunity-v1/source-review-v1/Root-source-acceptance.json",
+    "sha256": "0306059a42f6fca9f085f8def249cff02c3aec1ad1481b79db0a92ce6c0aeb7e",
+    "bytes": 3018,
+    "mode": "0644"
+  },
+  "current_source": [
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-ai/src/alphabeta.rs",
+      "before": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/cedar-etc-opportunity-v1/source-integration-v1/current-before/crates/quoridor-ai/src/alphabeta.rs",
+        "sha256": "db3f14513f251f6d6af3f0e6306957348fce4ee4b2dfcb4e0d6881dff4b4b24e",
+        "bytes": 245275,
+        "mode": "0644"
+      },
+      "actual": {
+        "path": "/workspaces/quoridor/crates/quoridor-ai/src/alphabeta.rs",
+        "sha256": "d078bd668f969442a87c59e031e29f9db489bb892576c024362d5b8413412fee",
+        "bytes": 247660,
+        "mode": "0644"
+      }
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-ai/src/etc_opportunity.rs",
+      "before": null,
+      "actual": {
+        "path": "/workspaces/quoridor/crates/quoridor-ai/src/etc_opportunity.rs",
+        "sha256": "846bfa7201ba2cf9930fe30b7c5af2f8736b168b2a9106413e690098da7c3012",
+        "bytes": 13447,
+        "mode": "0644"
+      }
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-ai/src/etc_opportunity_tests.rs",
+      "before": null,
+      "actual": {
+        "path": "/workspaces/quoridor/crates/quoridor-ai/src/etc_opportunity_tests.rs",
+        "sha256": "2dc0a6100a8b5d2bd54ac3582e666c4bc84b5c6c1cb5a6474ce3713b96acee44",
+        "bytes": 16942,
+        "mode": "0644"
+      }
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-ai/src/lmr_observation.rs",
+      "before": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/cedar-etc-opportunity-v1/source-integration-v1/current-before/crates/quoridor-ai/src/lmr_observation.rs",
+        "sha256": "b140dcb54929b2c54716322e61bacb4ad31671cf5316c96725a319c86a90102d",
+        "bytes": 42456,
+        "mode": "0644"
+      },
+      "actual": {
+        "path": "/workspaces/quoridor/crates/quoridor-ai/src/lmr_observation.rs",
+        "sha256": "b5824ffab0e751be9a8bdadd7731abc1fa52bc8ab1edac35c496bd882de6bec8",
+        "bytes": 42576,
+        "mode": "0644"
+      }
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-core/src/research.rs",
+      "before": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/cedar-etc-opportunity-v1/source-integration-v1/current-before/crates/quoridor-core/src/research.rs",
+        "sha256": "0b87fb3e269278516d84674c21ad0a351288e1f9c2f4a7e219f14345f0e708fe",
+        "bytes": 34167,
+        "mode": "0644"
+      },
+      "actual": {
+        "path": "/workspaces/quoridor/crates/quoridor-core/src/research.rs",
+        "sha256": "ad0d9d676d8a3cf9a25b91f4fb1142914f7fe3836f839d2f7431d8187b1e72fa",
+        "bytes": 34480,
+        "mode": "0644"
+      }
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-runner/src/etc_opportunity_consumer_tests.rs",
+      "before": null,
+      "actual": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/etc_opportunity_consumer_tests.rs",
+        "sha256": "91b37ffde673b8bad804fc057b399b27c3f979c79518f6c4661aabf339e28d6d",
+        "bytes": 6137,
+        "mode": "0644"
+      }
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-runner/src/measurement.rs",
+      "before": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/cedar-etc-opportunity-v1/source-integration-v1/current-before/crates/quoridor-runner/src/measurement.rs",
+        "sha256": "6e0d92a5ce3324983caa98cd97f9ebfd93ebe3d955658a2b012f9adbdd63b430",
+        "bytes": 149172,
+        "mode": "0644"
+      },
+      "actual": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/measurement.rs",
+        "sha256": "5201ffd43a2269994738757c605b530f06ab8ea679192d2c2864797ee8f20d9a",
+        "bytes": 154532,
+        "mode": "0644"
+      }
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-runner/src/measurement_ordering394_tests.rs",
+      "before": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/cedar-etc-opportunity-v1/source-integration-v1/current-before/crates/quoridor-runner/src/measurement_ordering394_tests.rs",
+        "sha256": "199f1a4338af3172a6e3cbf78f0e80ddb52ef6049ac93f04f4beba494a93d8df",
+        "bytes": 5706,
+        "mode": "0644"
+      },
+      "actual": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/measurement_ordering394_tests.rs",
+        "sha256": "e436bfa37c359fff7032daf560545bb4b625a877320259fcdbceec59d2a491e7",
+        "bytes": 5745,
+        "mode": "0644"
+      }
+    },
+    {
+      "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+      "before": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/cedar-etc-opportunity-v1/source-integration-v1/current-before/scripts/dev/research-lifecycle.py",
+        "sha256": "9a044d44d678c60d556b480354c3d39527596587cbf6c730eb4d303ddbfca41e",
+        "bytes": 393052,
+        "mode": "0644"
+      },
+      "actual": {
+        "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+        "sha256": "617151316b8f0bcdcc9880d5ee85a4b30f02770e65155df8feb8333358cfbbab",
+        "bytes": 400802,
+        "mode": "0644"
+      }
+    },
+    {
+      "path": "/workspaces/quoridor/scripts/dev/test_research_lifecycle_etc_opportunity.py",
+      "before": null,
+      "actual": {
+        "path": "/workspaces/quoridor/scripts/dev/test_research_lifecycle_etc_opportunity.py",
+        "sha256": "4bd03add0f258498806435a1bd5f9bd07c90d20d5d3112ba219fae6eae053ab4",
+        "bytes": 6879,
+        "mode": "0644"
+      }
+    }
+  ],
+  "controlled_positive": "Ordinary Search-generated child TT leads to strict child Exact/Upper ETC beta-cut proof before first move; parent own-TT direct-return is separated. This controlled warming is not natural opportunity data.",
+  "shadow": "Read-only all-legal child key/context/depth/bound/legal qualification before first normal child, with overlapping rejection facts and first true-TT witness retained; no cutoff/reordering/TT write/history learning/additional evaluator call.",
+  "tests": {
+    "distinct_definitions": 6,
+    "prior_AI3": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/cedar-etc-opportunity-v1/software-v2/collection-v1/completion-and-STOP.json",
+      "sha256": "a8518263541ddef2e96012de324efa0ef11532fa56ee11f98ddbd11a74f627e0",
+      "bytes": 24490,
+      "mode": "0644"
+    },
+    "prior_no_Search_R1": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/cedar-etc-opportunity-v1/software-v3/collection-v1/completion-and-STOP.json",
+      "sha256": "d944fc677c71318183d90c3adeed60ceb49889ff56ee36619c655ad17c98acac",
+      "bytes": 13834,
+      "mode": "0644"
+    },
+    "final_Runner": {
+      "name": "etc33-related-quoridor-runner-1",
+      "role": "test",
+      "argv": [
+        "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "/workspaces/quoridor/Cargo.toml",
+        "-j1",
+        "--message-format=json-render-diagnostics",
+        "--release",
+        "-p",
+        "quoridor-runner",
+        "--features",
+        "measurement,quoridor-inference/claustrophobia",
+        "--lib",
+        "measurement::etc_opportunity_consumer_tests::etc33_measurement_typed_shadow_and_actual_report_roundtrip",
+        "--",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "status": "PASS",
+      "guardian_return": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "test",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "/workspaces/quoridor/Cargo.toml",
+          "-j1",
+          "--message-format=json-render-diagnostics",
+          "--release",
+          "-p",
+          "quoridor-runner",
+          "--features",
+          "measurement,quoridor-inference/claustrophobia",
+          "--lib",
+          "measurement::etc_opportunity_consumer_tests::etc33_measurement_typed_shadow_and_actual_report_roundtrip",
+          "--",
+          "--exact",
+          "--nocapture",
+          "--test-threads=1"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 142676,
+          "start_ticks": "61527582",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [16],
+          "commands": {
+            "run": [12],
+            "test": [12]
+          },
+          "allocation": [12, 16],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "test",
+        "log_bytes_seen": 89242,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 89242,
+        "wall_seconds": 49.688649450894445,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "full_log": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/cedar-etc-opportunity-v1/software-v5/operation-release/etc33-related-quoridor-runner-1.full.log",
+        "sha256": "dc6e6b2688aa70b441e4ea5a7d2ebeac113062bdb5dcd82e493d086cf855ca1c",
+        "bytes": 89242,
+        "mode": "0644"
+      },
+      "persisted_process_receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/cedar-etc-opportunity-v1/software-v5/operation-release/etc33-related-quoridor-runner-1.process.json",
+        "sha256": "7b6cb3874a29ffb713c11834ba4070e6e8cf679962fa050c7e869e505e6b6c9a",
+        "bytes": 1752,
+        "mode": "0600"
+      },
+      "capture_complete": true,
+      "secondary": [],
+      "primary": null,
+      "cargo": {
+        "artifacts": [
+          {
+            "reason": "compiler-artifact",
+            "package_id": "path+file:///workspaces/quoridor/crates/quoridor-runner#0.1.0",
+            "manifest_path": "/workspaces/quoridor/crates/quoridor-runner/Cargo.toml",
+            "target": {
+              "kind": ["lib"],
+              "crate_types": ["lib"],
+              "name": "quoridor_runner",
+              "src_path": "/workspaces/quoridor/crates/quoridor-runner/src/lib.rs",
+              "edition": "2024",
+              "doc": true,
+              "doctest": true,
+              "test": true
+            },
+            "profile": {
+              "opt_level": "3",
+              "debuginfo": 0,
+              "debug_assertions": false,
+              "overflow_checks": false,
+              "test": true
+            },
+            "features": ["default", "measurement"],
+            "filenames": [
+              "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target/release/deps/quoridor_runner-d92dbaf7bca95e40"
+            ],
+            "executable": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target/release/deps/quoridor_runner-d92dbaf7bca95e40",
+            "fresh": false
+          }
+        ],
+        "warning_count": 0
+      }
+    },
+    "changed_Python1": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/cedar-etc-opportunity-v1/python-software-v2/result.json",
+      "sha256": "245b34ffff14e10e57cd7256687a4c9901b40fdcb7ffedec937e67f620aaaeb6",
+      "bytes": 148,
+      "mode": "0644"
+    },
+    "qualification": "Saved successful definitions reused only through accepted causal byte correspondence; not all bodies rerun against the final image."
+  },
+  "alltarget_Clippy": [
+    {
+      "log": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/cedar-etc-opportunity-v1/software-v5/operation-release/etc33-affected-quoridor-core-Clippy.full.log",
+        "sha256": "f66e3bc2e090ed7ad65a1d1d1492c69ce71a0ed1ddee239a78a44936690b6215",
+        "bytes": 9981,
+        "mode": "0644"
+      },
+      "process": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/cedar-etc-opportunity-v1/software-v5/operation-release/etc33-affected-quoridor-core-Clippy.process.json",
+        "sha256": "19ad3817c5001d545d49e8ebb801cf55b431def39eddc30a6b4b6621b8150761",
+        "bytes": 1598,
+        "mode": "0600"
+      }
+    },
+    {
+      "log": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/cedar-etc-opportunity-v1/software-v5/operation-release/etc33-affected-quoridor-ai-Clippy.full.log",
+        "sha256": "f54e933575f5fed936ba59a8c53d197aa9d9628c10291cd8db80d09dfcbbe95f",
+        "bytes": 68479,
+        "mode": "0644"
+      },
+      "process": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/cedar-etc-opportunity-v1/software-v5/operation-release/etc33-affected-quoridor-ai-Clippy.process.json",
+        "sha256": "d9cd0eb019ceab5df8ed06327dc45baa85cdc7ccf3c8785713f9624570446a5f",
+        "bytes": 1597,
+        "mode": "0600"
+      }
+    },
+    {
+      "log": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/cedar-etc-opportunity-v1/software-v5/operation-release/etc33-affected-quoridor-runner-Clippy.full.log",
+        "sha256": "e52d6c10efe55a2441380da3c1e32add066ff41649495481bdc92ce54d7c2ed3",
+        "bytes": 89239,
+        "mode": "0644"
+      },
+      "process": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/cedar-etc-opportunity-v1/software-v5/operation-release/etc33-affected-quoridor-runner-Clippy.process.json",
+        "sha256": "c23d9eeeecd57652ff90e5573ea624e0b977adb314953723b5a5a57d48c38327",
+        "bytes": 1626,
+        "mode": "0600"
+      }
+    }
+  ],
+  "software_Search_entered": 8,
+  "software_nodes_upper": 400000,
+  "actual_software_nodes": "NOT_EXTRACTED",
+  "natural_diagnostic_calls": 0,
+  "practical_candidate": null,
+  "performance_strength_default_support": "UNKNOWN_NOT_MEASURED",
+  "games": 0,
+  "finite_native_call_node_cap": {
+    "calls": 512,
+    "nodes": 512000000
+  },
+  "discovery_proposal": {
+    "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/cedar-etc-opportunity-v1/discovery-controls-v1/prepared.json",
+    "sha256": "b02f296aab60c8f0503cf563a41027e7f4e51dc7d7cd0352e1a18df952e990b6",
+    "bytes": 5077,
+    "mode": "0644"
+  },
+  "discovery_scope": "Frozen17 roots/4whole chronological series/D5/no time limit/<=17M, current normal image/factory/physical/whole/origin admission still required; no new warmup/refill. Proposal is NOT_RUNNABLE, not native admission.",
+  "cost": {
+    "outer_seconds_once_by_version": [
+      5.85353700700216, 46.89715377998073, 90.82193859596737, 53.0931721549714,
+      110.36343617097009
+    ],
+    "nested_added": 0,
+    "full_fees": "UNKNOWN"
+  },
+  "old_ETC31": "CLOSED_RETIRED_208_RETAIN_OFF_NO_FINITE_SUPPORT_UNCHANGED",
+  "original_MPC256": "FAILED_INCOMPLETE_UNCHANGED",
+  "original_failures_NULL_masks_UNKNOWN_preserved": true,
+  "comparison_code_purpose": "Only this specifically authorized positive/shadow/opportunity study; retire comparison-only code after its final disposition, reconstruct source from Git and this archive.",
+  "archive": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/cedar-etc-opportunity-v1/source-review-software-v1.tar.gz",
+    "sha256": "c7699b364af3756bb03437375e81f29f1538c53838754396003c4be1dffc6d6c",
+    "bytes": 963373,
+    "mode": "0644"
+  },
+  "archive_manifest": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/cedar-etc-opportunity-v1/source-review-software-v1.tar.gz.manifest.json",
+    "sha256": "3b2db3b2854b19e689c9e3e938461eb857b4344fb8f576bee63feef2c1113c62",
+    "bytes": 194666,
+    "mode": "0644"
+  },
+  "affected_source_software_union_point_once": {
+    "allocated_B": 476598272,
+    "inodes": 2162,
+    "stopped_debug_B": 0
+  },
+  "no_overlapping_point_recharge_refund_lending": true,
+  "source_leases": [],
+  "host_future_quiet": false
+}

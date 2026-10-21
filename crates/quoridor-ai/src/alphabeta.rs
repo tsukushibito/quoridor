@@ -13,6 +13,15 @@ use std::{
     time::Duration,
 };
 
+#[cfg(feature = "research-diagnostics")]
+#[path = "etc_opportunity.rs"]
+mod etc_opportunity;
+#[cfg(feature = "research-diagnostics")]
+pub use etc_opportunity::{
+    ETC_CHILD_LIMIT, ETC_OPPORTUNITY_PROTOCOL, ETC_PARENT_LIMIT, EtcChildFacts,
+    EtcOpportunityReport, EtcParentSample, EtcWitness,
+};
+
 #[path = "continuation_history.rs"]
 mod continuation_history;
 pub use continuation_history::OrderingProfile;
@@ -792,6 +801,8 @@ fn permit_zero_stock_approx(threshold: Option<u8>, root_walls: u16, max_depth: u
 
 #[derive(Debug, Default, Clone)]
 pub struct SearchStats {
+    #[cfg(feature = "research-diagnostics")]
+    pub etc_opportunity: Option<Box<EtcOpportunityReport>>,
     pub probcut: Option<ProbCutReport>,
     /// One per-Search snapshot; method selection alone does not enable LMR.
     pub lmr_enabled: bool,
@@ -1356,7 +1367,14 @@ impl Table {
         let entry = if SMP {
             &shared_entry.as_ref()?.0
         } else {
-            self.slots[(hash % self.slots.len() as u64) as usize].as_ref()?
+            #[cfg(feature = "research-diagnostics")]
+            {
+                self.local_candidate(hash)?
+            }
+            #[cfg(not(feature = "research-diagnostics"))]
+            {
+                self.slots[(hash % self.slots.len() as u64) as usize].as_ref()?
+            }
         };
         if entry.key != *key {
             stats.tt_collisions += 1;
@@ -2663,6 +2681,10 @@ impl<
             return Ok(predicted_lower);
         }
         let legal = legal.unwrap_or_else(|| c.legal_ids());
+        #[cfg(feature = "research-diagnostics")]
+        if self.stats.etc_opportunity.is_some() {
+            self.etc_shadow_parent(c, &legal, depth, [alpha, beta], ply, [tt_move, None])?;
+        }
         // The verified TT move already outranks every other tier. Only the
         // Shared signed targets without a provider defer preparing siblings.
         let mut first_tt = if self.shared_signed_ordering() {
@@ -3139,6 +3161,10 @@ impl<
                 self.context.map(|c| c.0),
             );
         }
+        #[cfg(feature = "research-diagnostics")]
+        let etc_pv_first = previous;
+        #[cfg(feature = "research-diagnostics")]
+        let mut etc_tt_first = None;
         let mut previous = previous;
         let mut legal = None;
         if self.limits.use_tt {
@@ -3169,6 +3195,10 @@ impl<
                 if best.is_some_and(|action| {
                     legal.get_or_insert_with(|| c.legal_ids()).contains(&action)
                 }) {
+                    #[cfg(feature = "research-diagnostics")]
+                    {
+                        etc_tt_first = best;
+                    }
                     let tt_promoted = previous.is_none();
                     previous = previous.or(best);
                     #[cfg(feature = "research-diagnostics")]
@@ -3245,6 +3275,17 @@ impl<
             work.sorted_size = Some(moves.len());
         }
         self.control()?;
+        #[cfg(feature = "research-diagnostics")]
+        if self.stats.etc_opportunity.is_some() {
+            self.etc_shadow_parent(
+                c,
+                &moves,
+                depth,
+                [f32::NEG_INFINITY, f32::INFINITY],
+                0,
+                [etc_tt_first, etc_pv_first],
+            )?;
+        }
         let mut value = f32::NEG_INFINITY;
         let mut best = None;
         for (i, &action) in moves.iter().enumerate() {
@@ -4342,6 +4383,8 @@ type SearchTableAndDomain<'table, 'history> = (
 );
 
 struct SearchInvocation<'a> {
+    #[cfg(feature = "research-diagnostics")]
+    etc_opportunity: bool,
     probcut: Option<&'a ProbCutParameters>,
     probcut_samples: u8,
     #[cfg(not(target_arch = "wasm32"))]
@@ -4361,6 +4404,8 @@ struct SearchInvocation<'a> {
 impl<'a> SearchInvocation<'a> {
     fn root(on_completed: &'a mut dyn FnMut(&SearchResult)) -> Self {
         Self {
+            #[cfg(feature = "research-diagnostics")]
+            etc_opportunity: false,
             probcut: None,
             probcut_samples: 0,
             on_completed,
@@ -4451,6 +4496,22 @@ fn search_in_table_observed<
     {
         return Err(SearchError::Limits(
             "opportunity observation ownership mismatch".into(),
+        ));
+    }
+    #[cfg(feature = "research-diagnostics")]
+    if invocation.etc_opportunity
+        && (OBSERVE
+            || TRACE
+            || OPPORTUNITY
+            || SMP
+            || HISTORY
+            || invocation.forced_root.is_some()
+            || invocation.probcut.is_some()
+            || invocation.probcut_samples != 0
+            || opportunity.is_some())
+    {
+        return Err(SearchError::Limits(
+            "ETC shadow invocation custody mismatch".into(),
         ));
     }
     let start = {
@@ -4587,6 +4648,8 @@ fn search_in_table_observed<
         deadline,
         table,
         stats: SearchStats {
+            #[cfg(feature = "research-diagnostics")]
+            etc_opportunity: invocation.etc_opportunity.then(Box::default),
             probcut: (invocation.probcut.is_some() || invocation.probcut_samples != 0)
                 .then(ProbCutReport::default),
             #[cfg(not(target_arch = "wasm32"))]
@@ -6572,3 +6635,7 @@ mod session_residual_owner_tests {
 #[cfg(test)]
 #[path = "probcut_tests.rs"]
 mod probcut_tests;
+
+#[cfg(all(test, feature = "research-diagnostics"))]
+#[path = "etc_opportunity_tests.rs"]
+mod etc_opportunity_tests;

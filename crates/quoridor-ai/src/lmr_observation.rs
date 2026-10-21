@@ -474,6 +474,7 @@ impl SearchSession {
             cancel,
             None,
             SearchInvocation {
+                etc_opportunity: false,
                 probcut: None,
                 probcut_samples: 0,
                 #[cfg(not(target_arch = "wasm32"))]
@@ -569,6 +570,7 @@ impl SearchSession {
             cancel,
             None,
             SearchInvocation {
+                etc_opportunity: false,
                 probcut: None,
                 probcut_samples: 0,
                 #[cfg(not(target_arch = "wasm32"))]
@@ -817,6 +819,7 @@ mod trial_tests {
             &AtomicBool::new(false),
             None,
             SearchInvocation {
+                etc_opportunity: false,
                 probcut: None,
                 probcut_samples: 0,
                 #[cfg(not(target_arch = "wasm32"))]
