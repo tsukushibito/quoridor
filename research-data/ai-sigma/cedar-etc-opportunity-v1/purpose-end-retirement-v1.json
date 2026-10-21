@@ -1,0 +1,418 @@
+{
+  "at": "2026-10-21T14:26:23.332494+00:00",
+  "issue": "quoridor-4lc.324.33",
+  "status": "PURPOSE_ENDED_SOURCE_RETIRED_BASELINE_SOFTWARE_QUALIFIED_UNMEASURED",
+  "source_commit": "ee35ac749040b57b5b64425889951575715377de",
+  "composition": [
+    {
+      "original": "crates/quoridor-ai/src/alphabeta.rs",
+      "current": "games/quoridor/crates/quoridor-ai/src/alphabeta.rs",
+      "action": "three_way_merge",
+      "layout_current_sha256": "d078bd668f969442a87c59e031e29f9db489bb892576c024362d5b8413412fee",
+      "retirement_before": {
+        "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/cedar-etc-opportunity-v1/purpose-end-retirement-v1/before/crates/quoridor-ai/src/alphabeta.rs",
+        "sha256": "d078bd668f969442a87c59e031e29f9db489bb892576c024362d5b8413412fee",
+        "bytes": 247660,
+        "mode": "0644"
+      },
+      "retirement_post": {
+        "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/cedar-etc-opportunity-v1/purpose-end-retirement-v1/post/crates/quoridor-ai/src/alphabeta.rs",
+        "sha256": "db3f14513f251f6d6af3f0e6306957348fce4ee4b2dfcb4e0d6881dff4b4b24e",
+        "bytes": 245275,
+        "mode": "0644"
+      },
+      "actual_sha256": "db3f14513f251f6d6af3f0e6306957348fce4ee4b2dfcb4e0d6881dff4b4b24e"
+    },
+    {
+      "original": "crates/quoridor-ai/src/etc_opportunity.rs",
+      "current": "games/quoridor/crates/quoridor-ai/src/etc_opportunity.rs",
+      "action": "delete",
+      "before": {
+        "path": "/workspaces/quoridor/crates/quoridor-ai/src/etc_opportunity.rs",
+        "sha256": "846bfa7201ba2cf9930fe30b7c5af2f8736b168b2a9106413e690098da7c3012",
+        "bytes": 13447,
+        "mode": "0644"
+      }
+    },
+    {
+      "original": "crates/quoridor-ai/src/etc_opportunity_tests.rs",
+      "current": "games/quoridor/crates/quoridor-ai/src/etc_opportunity_tests.rs",
+      "action": "delete",
+      "before": {
+        "path": "/workspaces/quoridor/crates/quoridor-ai/src/etc_opportunity_tests.rs",
+        "sha256": "2dc0a6100a8b5d2bd54ac3582e666c4bc84b5c6c1cb5a6474ce3713b96acee44",
+        "bytes": 16942,
+        "mode": "0644"
+      }
+    },
+    {
+      "original": "crates/quoridor-ai/src/lmr_observation.rs",
+      "current": "games/quoridor/crates/quoridor-ai/src/lmr_observation.rs",
+      "action": "three_way_merge",
+      "layout_current_sha256": "b5824ffab0e751be9a8bdadd7731abc1fa52bc8ab1edac35c496bd882de6bec8",
+      "retirement_before": {
+        "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/cedar-etc-opportunity-v1/purpose-end-retirement-v1/before/crates/quoridor-ai/src/lmr_observation.rs",
+        "sha256": "b5824ffab0e751be9a8bdadd7731abc1fa52bc8ab1edac35c496bd882de6bec8",
+        "bytes": 42576,
+        "mode": "0644"
+      },
+      "retirement_post": {
+        "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/cedar-etc-opportunity-v1/purpose-end-retirement-v1/post/crates/quoridor-ai/src/lmr_observation.rs",
+        "sha256": "b140dcb54929b2c54716322e61bacb4ad31671cf5316c96725a319c86a90102d",
+        "bytes": 42456,
+        "mode": "0644"
+      },
+      "actual_sha256": "b140dcb54929b2c54716322e61bacb4ad31671cf5316c96725a319c86a90102d"
+    },
+    {
+      "original": "crates/quoridor-core/src/research.rs",
+      "current": "games/quoridor/crates/quoridor-core/src/research.rs",
+      "action": "three_way_merge",
+      "layout_current_sha256": "ad0d9d676d8a3cf9a25b91f4fb1142914f7fe3836f839d2f7431d8187b1e72fa",
+      "retirement_before": {
+        "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/cedar-etc-opportunity-v1/purpose-end-retirement-v1/before/crates/quoridor-core/src/research.rs",
+        "sha256": "ad0d9d676d8a3cf9a25b91f4fb1142914f7fe3836f839d2f7431d8187b1e72fa",
+        "bytes": 34480,
+        "mode": "0644"
+      },
+      "retirement_post": {
+        "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/cedar-etc-opportunity-v1/purpose-end-retirement-v1/post/crates/quoridor-core/src/research.rs",
+        "sha256": "0b87fb3e269278516d84674c21ad0a351288e1f9c2f4a7e219f14345f0e708fe",
+        "bytes": 34167,
+        "mode": "0644"
+      },
+      "actual_sha256": "0b87fb3e269278516d84674c21ad0a351288e1f9c2f4a7e219f14345f0e708fe"
+    },
+    {
+      "original": "crates/quoridor-runner/src/etc_opportunity_consumer_tests.rs",
+      "current": "games/quoridor/crates/quoridor-runner/src/etc_opportunity_consumer_tests.rs",
+      "action": "delete",
+      "before": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/etc_opportunity_consumer_tests.rs",
+        "sha256": "91b37ffde673b8bad804fc057b399b27c3f979c79518f6c4661aabf339e28d6d",
+        "bytes": 6137,
+        "mode": "0644"
+      }
+    },
+    {
+      "original": "crates/quoridor-runner/src/measurement.rs",
+      "current": "games/quoridor/crates/quoridor-runner/src/measurement.rs",
+      "action": "three_way_merge",
+      "layout_current_sha256": "5201ffd43a2269994738757c605b530f06ab8ea679192d2c2864797ee8f20d9a",
+      "retirement_before": {
+        "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/cedar-etc-opportunity-v1/purpose-end-retirement-v1/before/crates/quoridor-runner/src/measurement.rs",
+        "sha256": "5201ffd43a2269994738757c605b530f06ab8ea679192d2c2864797ee8f20d9a",
+        "bytes": 154532,
+        "mode": "0644"
+      },
+      "retirement_post": {
+        "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/cedar-etc-opportunity-v1/purpose-end-retirement-v1/post/crates/quoridor-runner/src/measurement.rs",
+        "sha256": "6e0d92a5ce3324983caa98cd97f9ebfd93ebe3d955658a2b012f9adbdd63b430",
+        "bytes": 149172,
+        "mode": "0644"
+      },
+      "actual_sha256": "6e0d92a5ce3324983caa98cd97f9ebfd93ebe3d955658a2b012f9adbdd63b430"
+    },
+    {
+      "original": "crates/quoridor-runner/src/measurement_ordering394_tests.rs",
+      "current": "games/quoridor/crates/quoridor-runner/src/measurement_ordering394_tests.rs",
+      "action": "three_way_merge",
+      "layout_current_sha256": "e436bfa37c359fff7032daf560545bb4b625a877320259fcdbceec59d2a491e7",
+      "retirement_before": {
+        "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/cedar-etc-opportunity-v1/purpose-end-retirement-v1/before/crates/quoridor-runner/src/measurement_ordering394_tests.rs",
+        "sha256": "e436bfa37c359fff7032daf560545bb4b625a877320259fcdbceec59d2a491e7",
+        "bytes": 5745,
+        "mode": "0644"
+      },
+      "retirement_post": {
+        "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/cedar-etc-opportunity-v1/purpose-end-retirement-v1/post/crates/quoridor-runner/src/measurement_ordering394_tests.rs",
+        "sha256": "bfa6140ced3483e3a7831249f728520472d4108d36093f7bb576646adbb055b3",
+        "bytes": 8293,
+        "mode": "0644"
+      },
+      "actual_sha256": "bfa6140ced3483e3a7831249f728520472d4108d36093f7bb576646adbb055b3"
+    },
+    {
+      "original": "scripts/dev/research-lifecycle.py",
+      "current": "scripts/dev/research-lifecycle.py",
+      "action": "three_way_merge",
+      "layout_current_sha256": "42109646a9572de44cf28581563d53d6f4a8fd38236bb3aebb121718932467f8",
+      "retirement_before": {
+        "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/cedar-etc-opportunity-v1/purpose-end-retirement-v1/before/scripts/dev/research-lifecycle.py",
+        "sha256": "617151316b8f0bcdcc9880d5ee85a4b30f02770e65155df8feb8333358cfbbab",
+        "bytes": 400802,
+        "mode": "0644"
+      },
+      "retirement_post": {
+        "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/cedar-etc-opportunity-v1/purpose-end-retirement-v1/post/scripts/dev/research-lifecycle.py",
+        "sha256": "9a044d44d678c60d556b480354c3d39527596587cbf6c730eb4d303ddbfca41e",
+        "bytes": 393052,
+        "mode": "0644"
+      },
+      "actual_sha256": "99af75cb1bb8d2f137ec9f6096ccd57f4602054ad580bb3452574cd44dd1f9aa"
+    },
+    {
+      "original": "scripts/dev/test_research_lifecycle_etc_opportunity.py",
+      "current": "scripts/dev/test_research_lifecycle_etc_opportunity.py",
+      "action": "delete",
+      "before": {
+        "path": "/workspaces/quoridor/scripts/dev/test_research_lifecycle_etc_opportunity.py",
+        "sha256": "4bd03add0f258498806435a1bd5f9bd07c90d20d5d3112ba219fae6eae053ab4",
+        "bytes": 6879,
+        "mode": "0644"
+      }
+    }
+  ],
+  "software": {
+    "status": "PASS_RELOCATED_WORKSPACE_CLIPPY_AND_RETIRED33_GENUINE_RELEASE_SOURCE_STOP",
+    "at": "2026-10-21T14:20:32.199471+00:00",
+    "issue": "quoridor-4lc.324.12.9",
+    "software_manifest": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/multi-game-migration-v1/layout-software-v1/operation-release/manifest.json",
+      "sha256": "e4ee62b1179db94f0f1dead69372202e55dc47350453577a97d011bd522dd90b",
+      "bytes": 40437,
+      "mode": "0644"
+    },
+    "outer": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/multi-game-migration-v1/layout-software-v1/build-runtime-v1/result.json",
+      "sha256": "25f43b24ec8660d725a985f3d1a0313bc111445bcca636fc882d0e7f57060b88",
+      "bytes": 522,
+      "mode": "0600"
+    },
+    "outer_seconds_once": 104.73183672304731,
+    "nested_added": 0,
+    "checks": [
+      {
+        "name": "layout-alltarget-rules-Clippy",
+        "role": "lint",
+        "full_log": {
+          "path": "/workspaces/quoridor/.artifacts/research-team/integration324/multi-game-migration-v1/layout-software-v1/operation-release/layout-alltarget-rules-Clippy.full.log",
+          "sha256": "b87b7702f9c8e91da74259a54c4edb007ae70f35b44411515c7d51a61bb94d4f",
+          "bytes": 166484,
+          "mode": "0644"
+        },
+        "process": {
+          "path": "/workspaces/quoridor/.artifacts/research-team/integration324/multi-game-migration-v1/layout-software-v1/operation-release/layout-alltarget-rules-Clippy.process.json",
+          "sha256": "75c0d82b40a9ad046069816c851afcd5a5dd457380e2747580745bab72a9236b",
+          "bytes": 1677,
+          "mode": "0600"
+        },
+        "warnings": 0
+      },
+      {
+        "name": "layout-alltarget-ai-Clippy",
+        "role": "lint",
+        "full_log": {
+          "path": "/workspaces/quoridor/.artifacts/research-team/integration324/multi-game-migration-v1/layout-software-v1/operation-release/layout-alltarget-ai-Clippy.full.log",
+          "sha256": "6e06b40b785ac0d55ca700039843a6bb5ad27c0431c59b21c0d0f4eb5f26302b",
+          "bytes": 163111,
+          "mode": "0644"
+        },
+        "process": {
+          "path": "/workspaces/quoridor/.artifacts/research-team/integration324/multi-game-migration-v1/layout-software-v1/operation-release/layout-alltarget-ai-Clippy.process.json",
+          "sha256": "554d61a584ea5e57b1d4086c576f5f9d0a73b0bc1998146f0e96425c85040317",
+          "bytes": 1674,
+          "mode": "0600"
+        },
+        "warnings": 0
+      },
+      {
+        "name": "layout-retired33-genuine-baseline-release",
+        "role": "build",
+        "full_log": {
+          "path": "/workspaces/quoridor/.artifacts/research-team/integration324/multi-game-migration-v1/layout-software-v1/operation-release/layout-retired33-genuine-baseline-release.full.log",
+          "sha256": "516db26be8aa11100571286f6cb16d39db18c63ec0a84ee786eca41f4917c7a5",
+          "bytes": 90579,
+          "mode": "0644"
+        },
+        "process": {
+          "path": "/workspaces/quoridor/.artifacts/research-team/integration324/multi-game-migration-v1/layout-software-v1/operation-release/layout-retired33-genuine-baseline-release.process.json",
+          "sha256": "f3c4832ff84a91fd5ab40dac0d30c29195422cddf12d5f82968d207d50966cee",
+          "bytes": 1592,
+          "mode": "0600"
+        },
+        "warnings": 0
+      }
+    ],
+    "artifact": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/multi-game-migration-v1/layout-software-v1/private-image-release/quoridor-runner",
+      "sha256": "5d8f393fbdd0363b0c4527ef360b55b919fe0cf1c844e1a23e4bd3ff1713f193",
+      "bytes": 10343936,
+      "mode": "0755"
+    },
+    "cargo_artifact": {
+      "reason": "compiler-artifact",
+      "package_id": "path+file:///workspaces/quoridor/games/quoridor/crates/quoridor-runner#0.1.0",
+      "manifest_path": "/workspaces/quoridor/games/quoridor/crates/quoridor-runner/Cargo.toml",
+      "target": {
+        "kind": ["bin"],
+        "crate_types": ["bin"],
+        "name": "quoridor-runner",
+        "src_path": "/workspaces/quoridor/games/quoridor/crates/quoridor-runner/src/main.rs",
+        "edition": "2024",
+        "doc": true,
+        "doctest": false,
+        "test": true
+      },
+      "profile": {
+        "opt_level": "3",
+        "debuginfo": 0,
+        "debug_assertions": false,
+        "overflow_checks": false,
+        "test": false
+      },
+      "features": ["default", "measurement"],
+      "filenames": [
+        "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target/release/quoridor-runner"
+      ],
+      "executable": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target/release/quoridor-runner",
+      "fresh": false
+    },
+    "prior_software_scope": "Actual old Runner1 admission check reused only for retained legacy LMR/Sigma guard assertions/configuration, not whole relocated source. Current config.rs bytes exactly match its qualified source; original33 composition preserves the same legacy admission assertions while moving them into active measurement_ordering394_tests. No test/native Search replay or new function execution is claimed. New relocated caller behavior has fresh actual task-source4+4 Node lifecycle tests, tracked in the task handoff.",
+    "actual_new_test_bodies": 0,
+    "Search": 0,
+    "model_forward": 0,
+    "games": 0,
+    "qualification": "Two separate all-target rules/ai Clippy variants and one genuine unmeasured baseline image. Product Wasm builds and optional nnue compile remain separate. No speed, strength or scientific admission.",
+    "known_exact_processes_absent_or_different": [
+      {
+        "expected": {
+          "pid": 443928,
+          "start_ticks": "63894055",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "fresh": null
+      },
+      {
+        "expected": {
+          "pid": 443929,
+          "start_ticks": "63894058",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "fresh": null
+      },
+      {
+        "expected": {
+          "pid": 443931,
+          "start_ticks": "63894064",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "fresh": null
+      },
+      {
+        "expected": {
+          "pid": 443932,
+          "start_ticks": "63894066",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "fresh": null
+      },
+      {
+        "expected": {
+          "pid": 443933,
+          "start_ticks": "63894069",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "fresh": null
+      },
+      {
+        "expected": {
+          "pid": 443934,
+          "start_ticks": "63894070",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "fresh": null
+      },
+      {
+        "expected": {
+          "pid": 443935,
+          "start_ticks": "63894084",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "fresh": null
+      },
+      {
+        "expected": {
+          "pid": 443936,
+          "start_ticks": "63894086",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "fresh": null
+      },
+      {
+        "expected": {
+          "pid": 444755,
+          "start_ticks": "63897056",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "fresh": null
+      },
+      {
+        "expected": {
+          "pid": 444793,
+          "start_ticks": "63897132",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "fresh": null
+      },
+      {
+        "expected": {
+          "pid": 443896,
+          "start_ticks": "63894030",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "fresh": null
+      },
+      {
+        "expected": {
+          "pid": 443850,
+          "start_ticks": "63893737",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "fresh": null
+      },
+      {
+        "expected": {
+          "pid": 443803,
+          "start_ticks": "63893553",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "fresh": null
+      },
+      {
+        "expected": {
+          "pid": 443837,
+          "start_ticks": "63893731",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "fresh": null
+      }
+    ],
+    "source_leases": [],
+    "TMP": [],
+    "remaining_owned": [],
+    "whole_build_and_normal_collection_source_STOP": true,
+    "host_future_quiet": false,
+    "current_retention_point": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/multi-game-migration-v1/layout-software-v1/operation-release/storage-usage.json",
+      "sha256": "b3c6bdd5f401ad183516dc3c08b92ae9a58b78cd7e6683158fbcc6ffe8ea7860",
+      "bytes": 680,
+      "mode": "0644"
+    },
+    "fees_globalactual_later_tails": "UNKNOWN",
+    "no_refund_lending": true
+  },
+  "preserved_source_controls": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/multi-game-workflow129/quoridor-layout-source-controls-v1.tar.gz",
+    "bytes": 2592097,
+    "sha256": "17745758907f4d28718008877fa0b77c3616adcacdf85c25ba68d63dab5d826e",
+    "mode": "0644"
+  },
+  "natural_result": "FINITE_OPPORTUNITY_INSUFFICIENT_STOP_NO_CANDIDATE; one unique strict Upper at root16, normal_rank0; frozen >=2cuts/>=2roots unmet. CandidateNULL; confirmation72/games UNISSUED.",
+  "legacy_LMR_Sigma_guards_retained": true,
+  "default_relaxation": false,
+  "old_scientific_test_bodies_replayed": 0,
+  "new_Search": 0,
+  "no_speed_strength_or_default_claim": true,
+  "costs": "New outer104.73183672304731s once/nested0; original natural23.97606525500305s and software8<=400k upper/actualnodesNOT_EXTRACTED stay separate; all original FAILED/NULL/UNKNOWN fees retained."
+}
