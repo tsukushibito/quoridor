@@ -42,16 +42,17 @@
 
 作業に関係する項目から参照する。全資料を毎回読むことや、ここに全ファイルを列挙することは求めない。
 
-| 確認したいこと                             | 案内                                                                                                                                 |
-| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
-| 起動・主要ディレクトリ・製品の現状         | [README](README.md)                                                                                                                  |
-| 製品の機能・Rust/Wasm・AIの設計条件        | [アプリ設計](docs/design/quoridor-3d-webapp-design-rust-wasm-v1.md)                                                                  |
-| 担当・状態・依存・引渡し                   | [Beads運用](docs/development/beads-workflow.md)とwrapperの現在issue                                                                  |
-| 研究の目標・現在の許可枠                   | [研究目標](docs/design/ai-sigma-research-goal.md)、[現行実行枠](docs/design/ai-sigma-continuation-20261001.md)、担当契約             |
-| 研究の分担・通信・ジョブ運用               | [タスク型研究の設計](docs/design/ai-research-team.md)、[ジョブ運用](docs/development/research-jobs.md)                               |
-| 再実行・コード版・データ・配置境界         | [研究実行と記録](docs/development/ai-research-experiments.md)、[現役入口・機能境界・保存/検査](docs/development/ai-research-code.md) |
-| Rust評価/探索・CPU/GPU生成・学習cycle      | [Rust AI運用](docs/development/rust-ai.md)、[crateとモデル境界](docs/design/ai-rust-migration.md)                                    |
-| worktree・モデル・依存・保存先の変更や整理 | [保存方針](.devcontainer/storage-policy.md)                                                                                          |
+| 確認したいこと                                     | 案内                                                                                                                                 |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| 起動・主要ディレクトリ・製品の現状                 | [README](README.md)                                                                                                                  |
+| 製品の機能・Rust/Wasm・AIの設計条件                | [アプリ設計](docs/design/quoridor-3d-webapp-design-rust-wasm-v1.md)                                                                  |
+| 整理後に適用する複数ゲーム構成・課題別Worktree運用 | [単一Web入口とゲーム別リポジトリ構成](docs/design/multi-game-repository.md)（方針決定済み・構成移行は未実施）                        |
+| 担当・状態・依存・引渡し                           | [Beads運用](docs/development/beads-workflow.md)とwrapperの現在issue                                                                  |
+| 研究の目標・現在の許可枠                           | [研究目標](docs/design/ai-sigma-research-goal.md)、[現行実行枠](docs/design/ai-sigma-continuation-20261001.md)、担当契約             |
+| 研究の分担・通信・ジョブ運用                       | [タスク型研究の設計](docs/design/ai-research-team.md)、[ジョブ運用](docs/development/research-jobs.md)                               |
+| 再実行・コード版・データ・配置境界                 | [研究実行と記録](docs/development/ai-research-experiments.md)、[現役入口・機能境界・保存/検査](docs/development/ai-research-code.md) |
+| Rust評価/探索・CPU/GPU生成・学習cycle              | [Rust AI運用](docs/development/rust-ai.md)、[crateとモデル境界](docs/design/ai-rust-migration.md)                                    |
+| worktree・モデル・依存・保存先の変更や整理         | [保存方針](.devcontainer/storage-policy.md)                                                                                          |
 
 mainが持続的研究の統合正本。並行変更・比較にはmanaged worktreeを使い、必要なモデル・checkpoint・入力は同じ永続volumeの`.worktree/assets/`へ分類する。共有Beads DB・lockと作業中worktreeを保護し、旧checkoutは未保存情報の保全・復元確認と読者停止後に管理helperで撤去する。指示・文書・現役sourceの恒常mirrorは作らない。並行writerのGit index/commitは一人の統合担当だけが操作し、変更pathと停止を引き渡す。
 
