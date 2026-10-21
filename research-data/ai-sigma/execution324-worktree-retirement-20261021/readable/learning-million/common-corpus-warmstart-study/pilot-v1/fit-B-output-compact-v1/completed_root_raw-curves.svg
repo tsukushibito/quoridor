@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="720" viewBox="0 0 1120 720">
+<title>Common-family completed_root_raw MSE; INITIAL is frozen BEST43</title>
+<desc>Markers are recorded measurements. Lines only guide between recorded points, not measured interpolation. No heldout labels are read.</desc>
+<rect width="1120" height="720" fill="#fff"/>
+<style>text{font-family:system-ui,sans-serif;fill:#233247} .tick{font-size:12px} .legend{font-size:13px} .axis{stroke:#718096;stroke-width:1} .grid{stroke:#e6ebf1;stroke-width:1}</style>
+<text x="58" y="34" font-size="21" font-weight="600">Common-family completed_root_raw MSE; INITIAL is frozen BEST43</text>
+<text x="58" y="58" font-size="13">Actual epochs (completed + partial); exposure labels below are recorded values.</text>
+<g class="panel" data-metric="target_game_equal_mse">
+<text x="84" y="102" font-size="17" font-weight="600">Group / family-equal MSE</text>
+<line class="grid" x1="84" x2="522" y1="456.00" y2="456.00"/>
+<text class="tick y-tick" x="72" y="460.00" text-anchor="end">0</text>
+<line class="grid" x1="84" x2="522" y1="373.50" y2="373.50"/>
+<text class="tick y-tick" x="72" y="377.50" text-anchor="end">0.1</text>
+<line class="grid" x1="84" x2="522" y1="291.00" y2="291.00"/>
+<text class="tick y-tick" x="72" y="295.00" text-anchor="end">0.2</text>
+<line class="grid" x1="84" x2="522" y1="208.50" y2="208.50"/>
+<text class="tick y-tick" x="72" y="212.50" text-anchor="end">0.3</text>
+<line class="grid" x1="84" x2="522" y1="126.00" y2="126.00"/>
+<text class="tick y-tick" x="72" y="130.00" text-anchor="end">0.4</text>
+<line class="grid" x1="84.00" x2="84.00" y1="126" y2="456"/>
+<text class="tick x-tick" x="84.00" y="478" text-anchor="middle">0</text>
+<line class="grid" x1="193.50" x2="193.50" y1="126" y2="456"/>
+<text class="tick x-tick" x="193.50" y="478" text-anchor="middle">50</text>
+<line class="grid" x1="303.00" x2="303.00" y1="126" y2="456"/>
+<text class="tick x-tick" x="303.00" y="478" text-anchor="middle">100</text>
+<line class="grid" x1="412.50" x2="412.50" y1="126" y2="456"/>
+<text class="tick x-tick" x="412.50" y="478" text-anchor="middle">150</text>
+<line class="grid" x1="522.00" x2="522.00" y1="126" y2="456"/>
+<text class="tick x-tick" x="522.00" y="478" text-anchor="middle">200</text>
+<path class="axis" d="M84 126V456H522" fill="none"/>
+<text x="303.0" y="503" text-anchor="middle" font-size="14">Actual optimizer steps</text>
+<text transform="translate(26,291.0) rotate(-90)" text-anchor="middle" font-size="13">Recorded MSE</text>
+<text class="tick exposure-tick" data-step="0" x="84.00" y="116" text-anchor="start">seen 0 / 0 epochs</text>
+<text class="tick exposure-tick" data-step="120" x="346.80" y="116" text-anchor="start">seen 6,510 / 30 epochs</text>
+<polyline class="baseline" data-scope="full_train" data-kind="distance" points="84.00,442.06 127.80,442.06 171.60,442.06 215.40,442.06 259.20,442.06 303.00,442.06 346.80,442.06 390.60,442.06 434.40,442.06 478.20,442.06 522.00,442.06" fill="none" stroke="#0079a8" stroke-opacity=".45" stroke-dasharray="2 5"/>
+<polyline class="baseline" data-scope="full_train" data-kind="constant" points="84.00,375.07 127.80,375.07 171.60,375.07 215.40,375.07 259.20,375.07 303.00,375.07 346.80,375.07 390.60,375.07 434.40,375.07 478.20,375.07 522.00,375.07" fill="none" stroke="#0079a8" stroke-opacity=".45" stroke-dasharray="8 5"/>
+<polyline class="baseline" data-scope="full_selector" data-kind="distance" points="84.00,423.48 127.80,423.48 171.60,423.48 215.40,423.48 259.20,423.48 303.00,423.48 346.80,423.48 390.60,423.48 434.40,423.48 478.20,423.48 522.00,423.48" fill="none" stroke="#ce3945" stroke-opacity=".45" stroke-dasharray="2 5"/>
+<polyline class="baseline" data-scope="full_selector" data-kind="constant" points="84.00,322.65 127.80,322.65 171.60,322.65 215.40,322.65 259.20,322.65 303.00,322.65 346.80,322.65 390.60,322.65 434.40,322.65 478.20,322.65 522.00,322.65" fill="none" stroke="#ce3945" stroke-opacity=".45" stroke-dasharray="8 5"/>
+<path class="measured-point" data-scope="full_train" data-step="0" data-seen="0" d="M84.00,177.94l5,5 -5,5 -5,-5z" fill="#0079a8"/>
+<path class="measured-point" data-scope="full_train" data-step="20" data-seen="1085" d="M127.80,181.79l5,5 -5,5 -5,-5z" fill="#0079a8"/>
+<path class="measured-point" data-scope="full_train" data-step="40" data-seen="2170" d="M171.60,188.55l5,5 -5,5 -5,-5z" fill="#0079a8"/>
+<path class="measured-point" data-scope="full_train" data-step="60" data-seen="3255" d="M215.40,195.56l5,5 -5,5 -5,-5z" fill="#0079a8"/>
+<path class="measured-point" data-scope="full_train" data-step="80" data-seen="4340" d="M259.20,203.22l5,5 -5,5 -5,-5z" fill="#0079a8"/>
+<path class="measured-point" data-scope="full_train" data-step="100" data-seen="5425" d="M303.00,212.59l5,5 -5,5 -5,-5z" fill="#0079a8"/>
+<path class="measured-point" data-scope="full_train" data-step="120" data-seen="6510" d="M346.80,224.55l5,5 -5,5 -5,-5z" fill="#0079a8"/>
+<path class="measured-point" data-scope="full_train" data-step="140" data-seen="7595" d="M390.60,235.98l5,5 -5,5 -5,-5z" fill="#0079a8"/>
+<path class="measured-point" data-scope="full_train" data-step="160" data-seen="8680" d="M434.40,243.55l5,5 -5,5 -5,-5z" fill="#0079a8"/>
+<path class="measured-point" data-scope="full_train" data-step="180" data-seen="9765" d="M478.20,248.67l5,5 -5,5 -5,-5z" fill="#0079a8"/>
+<path class="measured-point" data-scope="full_train" data-step="200" data-seen="10850" d="M522.00,253.07l5,5 -5,5 -5,-5z" fill="#0079a8"/>
+<polyline class="recorded-guide" data-scope="full_selector" points="84.00,157.17 127.80,158.51 171.60,161.43 215.40,165.21 259.20,169.18 303.00,173.35 346.80,177.29 390.60,181.33 434.40,184.74 478.20,188.31 522.00,192.26" fill="none" stroke="#ce3945" stroke-width="1.8"/>
+<circle class="measured-point" data-scope="full_selector" data-step="0" data-seen="0" cx="84.00" cy="157.17" r="3" fill="#ce3945"/>
+<circle class="measured-point" data-scope="full_selector" data-step="20" data-seen="1085" cx="127.80" cy="158.51" r="3" fill="#ce3945"/>
+<circle class="measured-point" data-scope="full_selector" data-step="40" data-seen="2170" cx="171.60" cy="161.43" r="3" fill="#ce3945"/>
+<circle class="measured-point" data-scope="full_selector" data-step="60" data-seen="3255" cx="215.40" cy="165.21" r="3" fill="#ce3945"/>
+<circle class="measured-point" data-scope="full_selector" data-step="80" data-seen="4340" cx="259.20" cy="169.18" r="3" fill="#ce3945"/>
+<circle class="measured-point" data-scope="full_selector" data-step="100" data-seen="5425" cx="303.00" cy="173.35" r="3" fill="#ce3945"/>
+<circle class="measured-point" data-scope="full_selector" data-step="120" data-seen="6510" cx="346.80" cy="177.29" r="3" fill="#ce3945"/>
+<circle class="measured-point" data-scope="full_selector" data-step="140" data-seen="7595" cx="390.60" cy="181.33" r="3" fill="#ce3945"/>
+<circle class="measured-point" data-scope="full_selector" data-step="160" data-seen="8680" cx="434.40" cy="184.74" r="3" fill="#ce3945"/>
+<circle class="measured-point" data-scope="full_selector" data-step="180" data-seen="9765" cx="478.20" cy="188.31" r="3" fill="#ce3945"/>
+<circle class="measured-point" data-scope="full_selector" data-step="200" data-seen="10850" cx="522.00" cy="192.26" r="3" fill="#ce3945"/>
+<circle class="selected-marker" data-step="200" cx="522.00" cy="192.26" r="7" fill="none" stroke="#202a38" stroke-width="2"/>
+<text class="selected-label" x="514.00" y="179.26" text-anchor="end" font-size="12">Selected step 200</text>
+</g>
+<g class="panel" data-metric="target_mse">
+<text x="634" y="102" font-size="17" font-weight="600">Row MSE</text>
+<line class="grid" x1="634" x2="1072" y1="456.00" y2="456.00"/>
+<text class="tick y-tick" x="622" y="460.00" text-anchor="end">0</text>
+<line class="grid" x1="634" x2="1072" y1="390.00" y2="390.00"/>
+<text class="tick y-tick" x="622" y="394.00" text-anchor="end">0.1</text>
+<line class="grid" x1="634" x2="1072" y1="324.00" y2="324.00"/>
+<text class="tick y-tick" x="622" y="328.00" text-anchor="end">0.2</text>
+<line class="grid" x1="634" x2="1072" y1="258.00" y2="258.00"/>
+<text class="tick y-tick" x="622" y="262.00" text-anchor="end">0.3</text>
+<line class="grid" x1="634" x2="1072" y1="192.00" y2="192.00"/>
+<text class="tick y-tick" x="622" y="196.00" text-anchor="end">0.4</text>
+<line class="grid" x1="634" x2="1072" y1="126.00" y2="126.00"/>
+<text class="tick y-tick" x="622" y="130.00" text-anchor="end">0.5</text>
+<line class="grid" x1="634.00" x2="634.00" y1="126" y2="456"/>
+<text class="tick x-tick" x="634.00" y="478" text-anchor="middle">0</text>
+<line class="grid" x1="743.50" x2="743.50" y1="126" y2="456"/>
+<text class="tick x-tick" x="743.50" y="478" text-anchor="middle">50</text>
+<line class="grid" x1="853.00" x2="853.00" y1="126" y2="456"/>
+<text class="tick x-tick" x="853.00" y="478" text-anchor="middle">100</text>
+<line class="grid" x1="962.50" x2="962.50" y1="126" y2="456"/>
+<text class="tick x-tick" x="962.50" y="478" text-anchor="middle">150</text>
+<line class="grid" x1="1072.00" x2="1072.00" y1="126" y2="456"/>
+<text class="tick x-tick" x="1072.00" y="478" text-anchor="middle">200</text>
+<path class="axis" d="M634 126V456H1072" fill="none"/>
+<text x="853.0" y="503" text-anchor="middle" font-size="14">Actual optimizer steps</text>
+<text transform="translate(576,291.0) rotate(-90)" text-anchor="middle" font-size="13">Recorded MSE</text>
+<text class="tick exposure-tick" data-step="0" x="634.00" y="116" text-anchor="start">seen 0 / 0 epochs</text>
+<text class="tick exposure-tick" data-step="120" x="896.80" y="116" text-anchor="start">seen 6,510 / 30 epochs</text>
+<polyline class="baseline" data-scope="full_train" data-kind="distance" points="634.00,444.28 677.80,444.28 721.60,444.28 765.40,444.28 809.20,444.28 853.00,444.28 896.80,444.28 940.60,444.28 984.40,444.28 1028.20,444.28 1072.00,444.28" fill="none" stroke="#0079a8" stroke-opacity=".45" stroke-dasharray="2 5"/>
+<polyline class="baseline" data-scope="full_train" data-kind="constant" points="634.00,396.71 677.80,396.71 721.60,396.71 765.40,396.71 809.20,396.71 853.00,396.71 896.80,396.71 940.60,396.71 984.40,396.71 1028.20,396.71 1072.00,396.71" fill="none" stroke="#0079a8" stroke-opacity=".45" stroke-dasharray="8 5"/>
+<polyline class="baseline" data-scope="full_selector" data-kind="distance" points="634.00,434.49 677.80,434.49 721.60,434.49 765.40,434.49 809.20,434.49 853.00,434.49 896.80,434.49 940.60,434.49 984.40,434.49 1028.20,434.49 1072.00,434.49" fill="none" stroke="#ce3945" stroke-opacity=".45" stroke-dasharray="2 5"/>
+<polyline class="baseline" data-scope="full_selector" data-kind="constant" points="634.00,370.95 677.80,370.95 721.60,370.95 765.40,370.95 809.20,370.95 853.00,370.95 896.80,370.95 940.60,370.95 984.40,370.95 1028.20,370.95 1072.00,370.95" fill="none" stroke="#ce3945" stroke-opacity=".45" stroke-dasharray="8 5"/>
+<path class="measured-point" data-scope="full_train" data-step="0" data-seen="0" d="M634.00,236.71l5,5 -5,5 -5,-5z" fill="#0079a8"/>
+<path class="measured-point" data-scope="full_train" data-step="20" data-seen="1085" d="M677.80,239.94l5,5 -5,5 -5,-5z" fill="#0079a8"/>
+<path class="measured-point" data-scope="full_train" data-step="40" data-seen="2170" d="M721.60,245.63l5,5 -5,5 -5,-5z" fill="#0079a8"/>
+<path class="measured-point" data-scope="full_train" data-step="60" data-seen="3255" d="M765.40,251.53l5,5 -5,5 -5,-5z" fill="#0079a8"/>
+<path class="measured-point" data-scope="full_train" data-step="80" data-seen="4340" d="M809.20,257.95l5,5 -5,5 -5,-5z" fill="#0079a8"/>
+<path class="measured-point" data-scope="full_train" data-step="100" data-seen="5425" d="M853.00,265.58l5,5 -5,5 -5,-5z" fill="#0079a8"/>
+<path class="measured-point" data-scope="full_train" data-step="120" data-seen="6510" d="M896.80,274.97l5,5 -5,5 -5,-5z" fill="#0079a8"/>
+<path class="measured-point" data-scope="full_train" data-step="140" data-seen="7595" d="M940.60,283.97l5,5 -5,5 -5,-5z" fill="#0079a8"/>
+<path class="measured-point" data-scope="full_train" data-step="160" data-seen="8680" d="M984.40,290.11l5,5 -5,5 -5,-5z" fill="#0079a8"/>
+<path class="measured-point" data-scope="full_train" data-step="180" data-seen="9765" d="M1028.20,294.55l5,5 -5,5 -5,-5z" fill="#0079a8"/>
+<path class="measured-point" data-scope="full_train" data-step="200" data-seen="10850" d="M1072.00,298.32l5,5 -5,5 -5,-5z" fill="#0079a8"/>
+<polyline class="recorded-guide" data-scope="full_selector" points="634.00,199.27 677.80,200.37 721.60,202.77 765.40,205.92 809.20,209.21 853.00,212.68 896.80,215.92 940.60,219.20 984.40,221.83 1028.20,224.53 1072.00,227.62" fill="none" stroke="#ce3945" stroke-width="1.8"/>
+<circle class="measured-point" data-scope="full_selector" data-step="0" data-seen="0" cx="634.00" cy="199.27" r="3" fill="#ce3945"/>
+<circle class="measured-point" data-scope="full_selector" data-step="20" data-seen="1085" cx="677.80" cy="200.37" r="3" fill="#ce3945"/>
+<circle class="measured-point" data-scope="full_selector" data-step="40" data-seen="2170" cx="721.60" cy="202.77" r="3" fill="#ce3945"/>
+<circle class="measured-point" data-scope="full_selector" data-step="60" data-seen="3255" cx="765.40" cy="205.92" r="3" fill="#ce3945"/>
+<circle class="measured-point" data-scope="full_selector" data-step="80" data-seen="4340" cx="809.20" cy="209.21" r="3" fill="#ce3945"/>
+<circle class="measured-point" data-scope="full_selector" data-step="100" data-seen="5425" cx="853.00" cy="212.68" r="3" fill="#ce3945"/>
+<circle class="measured-point" data-scope="full_selector" data-step="120" data-seen="6510" cx="896.80" cy="215.92" r="3" fill="#ce3945"/>
+<circle class="measured-point" data-scope="full_selector" data-step="140" data-seen="7595" cx="940.60" cy="219.20" r="3" fill="#ce3945"/>
+<circle class="measured-point" data-scope="full_selector" data-step="160" data-seen="8680" cx="984.40" cy="221.83" r="3" fill="#ce3945"/>
+<circle class="measured-point" data-scope="full_selector" data-step="180" data-seen="9765" cx="1028.20" cy="224.53" r="3" fill="#ce3945"/>
+<circle class="measured-point" data-scope="full_selector" data-step="200" data-seen="10850" cx="1072.00" cy="227.62" r="3" fill="#ce3945"/>
+<circle class="selected-marker" data-step="200" cx="1072.00" cy="227.62" r="7" fill="none" stroke="#202a38" stroke-width="2"/>
+<text class="selected-label" x="1064.00" y="214.62" text-anchor="end" font-size="12">Selected step 200</text>
+</g>
+<circle cx="84" cy="528" r="4" fill="#0079a8"/>
+<text class="legend" x="97" y="532">Train: full corpus (separate scope)</text>
+<circle cx="634" cy="528" r="4" fill="#ce3945"/>
+<text class="legend" x="647" y="532">Validation: full selector</text>
+<text class="legend" x="84" y="614">Reference guides: dotted = analytic D; dashed = train-only constant; colors retain measurement scope.</text>
+<text class="legend" x="84" y="642">Executed: step 200, seen 10850, epochs 50 | Selected: step 200, seen 10850</text>
+<text class="legend" x="84" y="665">Recorded validation row sign accuracy: 0.6316; group sign not supplied</text>
+<text x="84" y="690" font-size="12">Lines guide recorded points only. Input groups do not establish independent games; validation selection is not heldout strength.</text>
+</svg>
