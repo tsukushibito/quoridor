@@ -11,7 +11,7 @@ import unittest
 from quoridor_runtime import cycle_process
 
 MODULE_PATH = (
-    Path(__file__).resolve().parents[2]
+    Path(__file__).resolve().parents[4]
     / "games/quoridor/python/quoridor_training/claustrophobia.py"
 )
 SPEC = importlib.util.spec_from_file_location("claustrophobia_boundary", MODULE_PATH)

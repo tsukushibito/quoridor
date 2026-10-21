@@ -175,7 +175,7 @@ class ConfiguredStaticBoundaries(unittest.TestCase):
 
     def test_notification_matches_same_resolved_conditions_for_S_and_C(self):
         path = (
-            Path(__file__).resolve().parents[2] / "games/quoridor/python/quoridor_training/train.py"
+            Path(__file__).resolve().parents[4] / "games/quoridor/python/quoridor_training/train.py"
         )
         tree = ast.parse(path.read_text())
         train = next(n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == "train")

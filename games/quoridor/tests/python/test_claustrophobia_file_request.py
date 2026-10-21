@@ -17,13 +17,13 @@ from unittest import mock
 from quoridor_runtime import cycle_process
 
 MODULE_PATH = (
-    Path(__file__).resolve().parents[2]
+    Path(__file__).resolve().parents[4]
     / "games/quoridor/python/quoridor_training/claustrophobia.py"
 )
 SPEC = importlib.util.spec_from_file_location("claustrophobia_file_boundary", MODULE_PATH)
 boundary = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(boundary)
-OWN = Path(__file__).resolve().parents[3]
+OWN = Path(__file__).resolve().parents[5]
 
 
 def request():

@@ -7,7 +7,7 @@ import tempfile
 import unittest
 
 HERE = Path(__file__).resolve()
-POST = HERE.parents[2]
+POST = HERE.parents[4]
 PUBLISHER = POST / "scripts/dev/research-lifecycle.py"
 
 

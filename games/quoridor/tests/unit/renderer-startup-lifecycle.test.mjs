@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { loadTs } from './ts-fixture.mjs';
+import { loadTs } from '../../../../tests/unit/ts-fixture.mjs';
 
 test('abort during actual BoardRenderer.create removes local resources and releases late backend', async () => {
   const events = [];
@@ -45,7 +45,7 @@ test('abort during actual BoardRenderer.create removes local resources and relea
     }
   }
   const { BoardRenderer } = await loadTs(
-    new URL('../../apps/web/src/games/quoridor/render/three-context.ts', import.meta.url),
+    new URL('../../../../apps/web/src/games/quoridor/render/three-context.ts', import.meta.url),
     {
       'three/webgpu': {
         WebGPURenderer,

@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { DataUtils, Euler, Vector3 } from 'three/webgpu';
-import { environmentLight } from '../../apps/web/src/games/quoridor/render/environment-light.ts';
+import { environmentLight } from '../../../../apps/web/src/games/quoridor/render/environment-light.ts';
 
 function panorama() {
   const width = 128,

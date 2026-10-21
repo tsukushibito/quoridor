@@ -6,7 +6,7 @@ if (!process.env.E2E_BASE_URL || !process.env.N3L_RAW_DIR)
   throw new Error('Owned preview URL and output directory must be bound before discovery');
 export default defineConfig({
   ...maintained,
-  testDir: '.',
+  testDir: '../../games/quoridor/tests/product',
   testMatch: 'product-bfcache-worker.spec.mjs',
   workers: 1,
   retries: 0,

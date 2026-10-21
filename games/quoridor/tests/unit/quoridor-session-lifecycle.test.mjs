@@ -1,38 +1,29 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import * as wasm from '../../games/quoridor/bridge/wasm/rules/quoridor_rules.js';
-import { loadTs } from './ts-fixture.mjs';
+import * as wasm from '../../bridge/wasm/rules/quoridor_rules.js';
+import { loadTs } from '../../../../tests/unit/ts-fixture.mjs';
 
-const protocol = await loadTs(
-  new URL('../../games/quoridor/bridge/src/protocol.ts', import.meta.url),
-  {},
-);
-const rules = await loadTs(
-  new URL('../../games/quoridor/bridge/src/rules-client.ts', import.meta.url),
-  {
-    '../wasm/rules/quoridor_rules.js': {
-      ...wasm,
-      default: () =>
-        wasm.default({
-          module_or_path: readFileSync(
-            new URL(
-              '../../games/quoridor/bridge/wasm/rules/quoridor_rules_bg.wasm',
-              import.meta.url,
-            ),
-          ),
-        }),
-    },
-    '../wasm/rules/quoridor_rules_bg.wasm?url': { default: 'owned-product-input.wasm' },
-    './protocol': protocol,
+const protocol = await loadTs(new URL('../../bridge/src/protocol.ts', import.meta.url), {});
+const rules = await loadTs(new URL('../../bridge/src/rules-client.ts', import.meta.url), {
+  '../wasm/rules/quoridor_rules.js': {
+    ...wasm,
+    default: () =>
+      wasm.default({
+        module_or_path: readFileSync(
+          new URL('../../bridge/wasm/rules/quoridor_rules_bg.wasm', import.meta.url),
+        ),
+      }),
   },
-);
+  '../wasm/rules/quoridor_rules_bg.wasm?url': { default: 'owned-product-input.wasm' },
+  './protocol': protocol,
+});
 const environment = await loadTs(
-  new URL('../../apps/web/src/games/quoridor/environment-presets.ts', import.meta.url),
+  new URL('../../../../apps/web/src/games/quoridor/environment-presets.ts', import.meta.url),
   {},
 );
 const storage = await loadTs(
-  new URL('../../apps/web/src/games/quoridor/persistence/local-state.ts', import.meta.url),
+  new URL('../../../../apps/web/src/games/quoridor/persistence/local-state.ts', import.meta.url),
   {
     '@quoridor/engine-bridge': rules,
     '../environment-presets': environment,
@@ -61,7 +52,7 @@ class HeldAi {
   }
 }
 const { SessionController } = await loadTs(
-  new URL('../../apps/web/src/games/quoridor/session/session-controller.ts', import.meta.url),
+  new URL('../../../../apps/web/src/games/quoridor/session/session-controller.ts', import.meta.url),
   { '@quoridor/engine-bridge': { ...rules, AiClient: HeldAi } },
 );
 
@@ -109,7 +100,10 @@ test('dispose during rules bootstrap releases late-created game without changing
     resolve = yes;
   });
   const { SessionController: PendingSession } = await loadTs(
-    new URL('../../apps/web/src/games/quoridor/session/session-controller.ts', import.meta.url),
+    new URL(
+      '../../../../apps/web/src/games/quoridor/session/session-controller.ts',
+      import.meta.url,
+    ),
     {
       '@quoridor/engine-bridge': {
         ...rules,

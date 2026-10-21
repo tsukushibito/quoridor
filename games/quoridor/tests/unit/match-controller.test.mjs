@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import { stripTypeScriptTypes } from 'node:module';
 import vm from 'node:vm';
 import assert from 'node:assert/strict';
-import { loadTs } from './ts-fixture.mjs';
+import { loadTs } from '../../../../tests/unit/ts-fixture.mjs';
 
 class RulesBridgeError extends Error {
   constructor(code) {
@@ -12,11 +12,11 @@ class RulesBridgeError extends Error {
   }
 }
 const strings = await loadTs(
-  new URL('../../apps/web/src/games/quoridor/ui/strings.ts', import.meta.url),
+  new URL('../../../../apps/web/src/games/quoridor/ui/strings.ts', import.meta.url),
   {},
 );
 const { MatchUiController, installPageLifecycle } = await loadTs(
-  new URL('../../apps/web/src/games/quoridor/ui/match-controller.ts', import.meta.url),
+  new URL('../../../../apps/web/src/games/quoridor/ui/match-controller.ts', import.meta.url),
   {
     '@quoridor/engine-bridge': { RulesBridgeError },
     '../persistence/local-state': { makeSavedMatch: (replay, match) => ({ replay, match }) },
@@ -394,7 +394,7 @@ function actualStartup(f) {
     syncActivity: () => f.ports.render.syncActivity(),
   };
   const source = readFileSync(
-    new URL('../../apps/web/src/games/quoridor/index.ts', import.meta.url),
+    new URL('../../../../apps/web/src/games/quoridor/index.ts', import.meta.url),
     'utf8',
   );
   const render = source.slice(

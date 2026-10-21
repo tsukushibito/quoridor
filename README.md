@@ -23,7 +23,8 @@ Webの入口はゲーム選択画面です。Quoridorを開くと既存の新規
 | `games/quoridor/python/quoridor_training/`, `tools/model-export/`                          | bulk入力のPyTorch学習・曲線/freeze/test・nativeモデル変換                                       |
 | その他`tools/`                                                                             | 現役の補助ツール・独立checker・整形/検査用の固定依存                                            |
 | `scripts/`, `scripts/dev/`                                                                 | ビルド・生成・検証入口と開発環境/Beads/研究通信の操作                                           |
-| `tests/`                                                                                   | 製品のrender/audio/e2e検証・fixture                                                             |
+| `games/quoridor/tests/`, `games/quoridor/docs/`                                            | Quoridor固有のテスト・[製品仕様](games/quoridor/docs/quoridor-3d-webapp-design-rust-wasm-v1.md) |
+| `tests/`                                                                                   | 共通Web検証・既存fixture                                                                        |
 | `docs/design/`, `development/`, `reports/`                                                 | 設計・運用規約・実施結果と限界                                                                  |
 | `research-data/ai-sigma/`                                                                  | mainのGit保存データ・設定・要約・圧縮観測                                                       |
 | `.artifacts/`, `artifacts/`                                                                | ローカル運用/出力・データ展開・一時物、Playwrightブラウザ等。研究の出力は`.artifacts/ai-sigma/` |

@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parents[2]
 PY_ROOTS = (
     "games/quoridor/python/quoridor_training",
     "shared/python/quoridor_runtime",
-    "python/tests",
+    "games/quoridor/tests/python",
     "tools/model-export",
 )
 PY_FILES = (
@@ -60,7 +60,7 @@ NN0_TESTS = (
     "quoridor_training.test_mixed_reflection",
     "quoridor_training.test_mixed_update_observations",
     "quoridor_training.test_common_outcome_contract",
-    "python/tests/test_configured_outcome_cache.py",
+    "games/quoridor/tests/python/test_configured_outcome_cache.py",
     "quoridor_training.test_public_sigma",
     "quoridor_training.test_public_features",
     "quoridor_training.test_supply",

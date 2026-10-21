@@ -5,7 +5,7 @@ import {
   AudioSettingsRepository,
   DEFAULT_AUDIO_SETTINGS,
   validateAudioSettings,
-} from '../../apps/web/src/games/quoridor/audio/audio-settings.ts';
+} from '../../../../apps/web/src/games/quoridor/audio/audio-settings.ts';
 
 test('audio settings persist independently without touching existing game/display settings', () => {
   const saved = new Map([['quoridor.m1.settings.v1', '{"existing":true}']]);

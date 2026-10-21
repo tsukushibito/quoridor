@@ -8,7 +8,7 @@
 - AI目標改訂日: 2026-10-01（日本時間。初期棋力目標をSigmaQuoridor同等水準、他AIを参考比較に変更）
 - AI作業方針記録日: 2026-10-01（日本時間。大量自己対局の前に生成速度を改善）
 - 対象: 新規3DコリドールWebアプリを実装するCodex
-- 推奨配置先: `docs/design/quoridor-3d-webapp-design-rust-wasm-v1.md`
+- 推奨配置先: `games/quoridor/docs/quoridor-3d-webapp-design-rust-wasm-v1.md`
 - 文書の位置付け: 技術選定、責務分割、ディレクトリ構成、実装順序、受入条件の正本
 - 検証状況: 公開ドキュメント・参照ソースを確認した設計案。実アプリの実装、対象PCでの実測、AI棋力の検証は未実施。
 
@@ -899,7 +899,7 @@ backendの版依存部分は`three-context.ts`または診断adapterだけへ閉
 - **所有と障害**: HDRI、PMREM render target、木目、微細凹凸/roughness、画像bitmap、AO/pre-pass/beauty/blurのrender targetと材質は描画層で所有し、renderer再作成時に解放する。AO用cameraは通常cameraから各描画時に同期し、異なるlayerを描くpass間で描画リストを共有しない。asset取得を中断可能・時間制限付きとし、失敗時は単色PBRとfallback照明で対局を続ける。新規対局だけでは再取得・renderer再作成しない。Viteのbase pathをasset URLへ反映する。
 - **描画頻度**: VXGI無効の基本描画は、カメラ・盤面・プレビュー・材質更新時に描き、静止中の同一フレームの送信を抑える。VXGI/TRAA導入後は10.8の収束フレームを含む別の更新方針へ移行する。
 
-採用アセット、生成プロンプト、出所・ライセンス、ローカル検証は[テーブル空間の描画強化報告](../reports/tabletop-rendering.md)へ記録する。
+採用アセット、生成プロンプト、出所・ライセンス、ローカル検証は[テーブル空間の描画強化報告](../../../docs/reports/tabletop-rendering.md)へ記録する。
 
 #### 10.2.2 ユーザー設定からの環境切替
 
@@ -918,7 +918,7 @@ backendの版依存部分は`three-context.ts`または診断adapterだけへ閉
 - 読込中は以前の背景と照明を保持する。候補のHDR解析とPMREMが完成した時点で背景・IBL・直接光を一括適用する。最新の選択だけを採用し、以前の取得を中止する。失敗・10秒のタイムアウト時は旧環境を維持し、選択欄の要求IDと現在表示中の環境を区別して再読込ボタンを出す。初回に失敗した場合は簡易背景とAmbientLightで対局を続ける。
 - 木目取得は環境切替から独立させる。採用したHDRとPMREMだけを保持し、置換時に旧資源を解放する。破棄時はすべての取得を中止し、遅れて届いた結果を破棄する。renderer再作成時も選択済みIDを使う。
 
-採用アセットの出所・ライセンス・ハッシュと検証は[環境切替の実装報告](../reports/environment-presets.md)へ記録する。
+採用アセットの出所・ライセンス・ハッシュと検証は[環境切替の実装報告](../../../docs/reports/environment-presets.md)へ記録する。
 
 #### 10.2.3 将来のVXGIとの役割分担
 
@@ -1252,7 +1252,7 @@ GIだけの画像が非ゼロだから合格、という判定にしない。色
 
 視覚テストは、固定秒数のsleepだけで撮影しない。描画準備完了、animation完了、収束frame数を観測して待つ。GPU/driver差のある画像を完全一致で比較せず、対象環境を固定した許容差と人間の目視を併用する。
 
-M1のUI改善では1280×720、1440×900、1920×1080、390×844のviewport画像と、同じviewportにおける盤の投影寸法を改善前後で記録する。canvasのbounding rectangleがviewport全面と一致し、HUDの島がその上に重なり、島間の透明領域で盤へpointerが届くことを確認する。主要操作はスクロールなしで届き、盤の端と壁アンカーがHUDの下に隠れない。人間の操作感の合否は自動テストや画像目視だけでは確定しない。判断背景は[UI/UX調査](../reports/quoridor-ui-ux-research.md)、実装結果は[UI/UX改善報告](../reports/ui-ux-improvement.md)へ記録する。
+M1のUI改善では1280×720、1440×900、1920×1080、390×844のviewport画像と、同じviewportにおける盤の投影寸法を改善前後で記録する。canvasのbounding rectangleがviewport全面と一致し、HUDの島がその上に重なり、島間の透明領域で盤へpointerが届くことを確認する。主要操作はスクロールなしで届き、盤の端と壁アンカーがHUDの下に隠れない。人間の操作感の合否は自動テストや画像目視だけでは確定しない。判断背景は[UI/UX調査](../../../docs/reports/quoridor-ui-ux-research.md)、実装結果は[UI/UX改善報告](../../../docs/reports/ui-ux-improvement.md)へ記録する。
 
 ### 13.6 合格と未検証の扱い
 
@@ -1652,7 +1652,7 @@ S01〜S22の初回参照日は2026-09-29。AI目標の改訂に用いたS23〜S2
 
 ```text
 AGENTS.md、既存コード、開発環境資料、および
- docs/design/quoridor-3d-webapp-design-rust-wasm-v1.md
+ games/quoridor/docs/quoridor-3d-webapp-design-rust-wasm-v1.md
 を読み、この設計を正本として3DコリドールWebアプリを実装してください。
 
 固定スタックはVite + TypeScript + Three.js WebGPURenderer + 公式VXGIです。
