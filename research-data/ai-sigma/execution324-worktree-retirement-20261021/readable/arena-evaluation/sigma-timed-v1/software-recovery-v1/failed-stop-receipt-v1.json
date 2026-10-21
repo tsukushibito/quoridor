@@ -1,0 +1,79 @@
+{
+  "job": "32d1d511-1974-418d-a1b8-ba88b4bf331e",
+  "actual_outer_START": "2026-10-07T20:44:02.833983+00:00",
+  "worker_STOP": "2026-10-07T20:44:05.175837+00:00",
+  "outer_STOP": "2026-10-07T20:44:05.275267+00:00",
+  "outer_result": {
+    "job_id": "32d1d511-1974-418d-a1b8-ba88b4bf331e",
+    "outcome": "failed",
+    "error": null,
+    "exit_code": 1,
+    "finished_at": "2026-10-07T20:44:05.275267+00:00",
+    "wall_seconds": 2.4418700259411708,
+    "remaining": [],
+    "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+    "cleanup_complete": true,
+    "log_bytes_seen": 36,
+    "log_bytes_retained": 36
+  },
+  "worker_seconds_nested_not_added": 1.7985532460734248,
+  "failure": "named artifact disappeared: UNKNOWN",
+  "missing_exact_named_paths_after_STOP": [
+    "/workspaces/quoridor/.artifacts/rust-migration/target/release/deps/libquoridor_runner-6aaa82ac9921176f.rlib"
+  ],
+  "sampled_peaks": {
+    "family_RAM_B": 137871360,
+    "positive_artifact_growth_B": 18644992,
+    "TMP_B": 0,
+    "private_B": 10412032
+  },
+  "all_commands": [
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/software-recovery-v1/release.process.json",
+      "SHA256": "40c4766c5d45aa4814b28a893e2e3652b4a2d0f3b52045f77371044c65a8d2b0",
+      "child": {
+        "pid": 2661322,
+        "start_ticks": "65899215",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "exit_code": -15,
+      "direct_child_reaped": true,
+      "cleanup_complete": true,
+      "remaining": [],
+      "status": "failed",
+      "error": {
+        "type": "CycleStopped",
+        "message": "named artifact disappeared: UNKNOWN"
+      }
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/software-recovery-v1/compiler.process.json",
+      "SHA256": "77a301ad1e834aa3f83fbac57c8dbb04c86124df38e4e6af49c7d88b5b078523",
+      "child": {
+        "pid": 2661312,
+        "start_ticks": "65899202",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "exit_code": 0,
+      "direct_child_reaped": true,
+      "cleanup_complete": true,
+      "remaining": [],
+      "status": "complete",
+      "error": null
+    }
+  ],
+  "present_exact_recorded_identities": [
+    {
+      "pid": 2661222,
+      "start_ticks": "65898931",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    }
+  ],
+  "current_next_Cargo_model_clock_reservation": null,
+  "known_controller_cumulative_seconds": 124.9569185449509,
+  "new_release_fixture_Clippy": "NOT_COMPLETED",
+  "new_models_NN_FT_games": 0,
+  "raw_format_warning_and_initial_preflight_refusal_preserved": true,
+  "source_guard_next_repair_scope": "Bind exact OWN compiler/output replacement lease; missing named bytes retain prior full positive charge while in-flight, never missing-as-free; final exact artifact required or UNKNOWN. No auto next job or foreignmutation.",
+  "present_exact_recorded_identities_scope": "Only metadata notification supervisor remains; compiler/release/worker exact identities absent. No science/Cargo reservation."
+}

@@ -1,0 +1,173 @@
+{
+  "schema": "quoridor.research.completion.v1",
+  "kind": "run",
+  "status": "PASS",
+  "intent": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/corpus-entry-v3/intent.json",
+    "sha256": "25e48f916288f2636be4565d8d0d0118e8e10d41b3914540c1707f2fe29d32ce",
+    "bytes": 4490,
+    "mode": "0644"
+  },
+  "started_at": "2026-10-11T12:07:37.132239+00:00",
+  "checks": [
+    {
+      "name": "run",
+      "role": "run",
+      "argv": [
+        "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/private/quoridor-runner-pilot-v4",
+        "teacher-pilot",
+        "--experiment",
+        "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/corpus-entry-v2/experiment.json",
+        "--experiment-sha256",
+        "ff17e145fa94b6ce68c57d571d6ef8d988e322db3f594f44ac87bb815cc02410"
+      ],
+      "status": "PASS",
+      "guardian_return": {
+        "command": [
+          "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/private/quoridor-runner-pilot-v4",
+          "teacher-pilot",
+          "--experiment",
+          "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/corpus-entry-v2/experiment.json",
+          "--experiment-sha256",
+          "ff17e145fa94b6ce68c57d571d6ef8d988e322db3f594f44ac87bb815cc02410"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 583591,
+          "start_ticks": "97372716",
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        "log_bytes_seen": 5408,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 5408,
+        "wall_seconds": 131.83589450700674,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "full_log": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/corpus-entry-v3/operation-v3/run.full.log",
+        "sha256": "b8e6068a2f7a07f3fc6455f4b951d55504a15aceaad292863ec0da72e789cad5",
+        "bytes": 5408,
+        "mode": "0644"
+      },
+      "persisted_process_receipt": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/corpus-entry-v3/operation-v3/run.process.json",
+        "sha256": "b8446e5d5673573f65ef28e67585f3490fe7944543388c218dc86be70712d428",
+        "bytes": 1212,
+        "mode": "0600"
+      },
+      "capture_complete": true,
+      "secondary": [],
+      "primary": null
+    }
+  ],
+  "primary": null,
+  "secondary": [],
+  "cleanup_complete": true,
+  "remaining": [],
+  "owed_finalizers": [],
+  "originating_job": {
+    "runtime": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/corpus-entry-v3/runtime-v3",
+    "job_id": "77e69e50-7cf8-4a5c-9a31-f8ffef4ede27",
+    "config": {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/corpus-entry-v3/runtime-v3/config.json",
+      "sha256": "dbb9d2ecf473a41f71d5df407ef6d6c7a74232e45abb9332182c5640859122c9",
+      "bytes": 877,
+      "mode": "0600"
+    },
+    "config_sha256": "11c81430e497a397581368021b71c87e5e2624baa0dad5af3a0283ddbfb745bb",
+    "supervisor": {
+      "pid": 583498,
+      "start_ticks": "97372470",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child": {
+      "pid": 583561,
+      "start_ticks": "97372634",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    }
+  },
+  "experiment": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/corpus-entry-v2/experiment.json",
+    "sha256": "ff17e145fa94b6ce68c57d571d6ef8d988e322db3f594f44ac87bb815cc02410",
+    "bytes": 4055,
+    "mode": "0644"
+  },
+  "build_manifest": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/build-v4/operation-v4/manifest.json",
+    "sha256": "4ce963dfea6af76885c0bd911e503e6c9c28a0b99bbd1e1b113facc6443b334f",
+    "bytes": 85626,
+    "mode": "0644"
+  },
+  "planned_slots": 8,
+  "data": {
+    "status": "PASS",
+    "files": [
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/data/common-corpus-warmstart-study/pilot-v1/generation-result.json",
+        "sha256": "7e487a313b49da21dce66c38a3a6fb6a2abe12894a615e679804f9d64f17a14c",
+        "bytes": 4164,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/data/common-corpus-warmstart-study/pilot-v1/stream-content.json",
+        "sha256": "f22862cd30068a6078f8a72e33cc540c4b5ac60d76f284c97c850edd8aeb63ac",
+        "bytes": 369,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/data/common-corpus-warmstart-study/pilot-v1/cache/cache.json",
+        "sha256": "72545bb904e8a561d1bc7ba851405924ea4d461b3c85242283e6b1d4f00775aa",
+        "bytes": 25346,
+        "mode": "0644"
+      }
+    ],
+    "errors": [],
+    "planned_slots": 8,
+    "observed_local_games": [],
+    "missing_local_games": [],
+    "batch": null,
+    "global_campaign_complete": false,
+    "known_goals": 8,
+    "known_draws": 0,
+    "unknown": 0,
+    "canonical_compressed_source": {
+      "path": "/workspaces/quoridor/.worktree/assets/data/common-corpus-warmstart-study/pilot-v1/pilot-stream.jsonl.gz",
+      "sha256": "150b89a03104c4c1ae9f742f69c88efe1e0ceecf69b526c2e649e7198a86aa4f",
+      "bytes": 266410,
+      "mode": "0644"
+    },
+    "raw_content_sha256": "fd8ee3398129339882e135caf20a1bb01f2ad0d63301071dd7018e5a4b6bc81d",
+    "raw_content_B": 1820436
+  },
+  "finished_at": "2026-10-11T12:09:50.085554+00:00",
+  "process_cleanup_complete": true,
+  "outer_job_state": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/corpus-entry-v3/runtime-v3/state.json",
+    "sha256": "42297295d51ff030527185094f0cbcc77972fe180b00ef6cf505954561885563",
+    "bytes": 707,
+    "mode": "0600"
+  },
+  "outer_job_result": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/corpus-entry-v3/runtime-v3/result.json",
+    "sha256": "db5333e0c5dbf12019738ac06081a370a3bba3f5742dc054d214cd1c6ba08ea0",
+    "bytes": 501,
+    "mode": "0600"
+  },
+  "authoritative_finished_at": "2026-10-11T12:10:58.632970+00:00"
+}

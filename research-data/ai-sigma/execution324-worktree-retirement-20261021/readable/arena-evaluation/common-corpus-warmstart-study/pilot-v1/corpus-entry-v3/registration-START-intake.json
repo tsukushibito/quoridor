@@ -1,0 +1,51 @@
+{
+  "registered_job": "77e69e50-7cf8-4a5c-9a31-f8ffef4ede27",
+  "registration_created_at": "2026-10-11T12:07:35.215170+00:00",
+  "one_initial_state_intake": {
+    "schema_version": 1,
+    "job_id": "77e69e50-7cf8-4a5c-9a31-f8ffef4ede27",
+    "issue": "quoridor-4lc.362.2",
+    "thread_id": "01a11062-b120-73a1-8aa3-fe2cb922c7c0",
+    "phase": "running",
+    "created_at": "2026-10-11T12:07:35.215170+00:00",
+    "config_sha256": "11c81430e497a397581368021b71c87e5e2624baa0dad5af3a0283ddbfb745bb",
+    "supervisor": {
+      "pid": 583498,
+      "start_ticks": "97372470",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "updated_at": "2026-10-11T12:07:35.406058+00:00",
+    "child": {
+      "pid": 583561,
+      "start_ticks": "97372634",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "started_at": "2026-10-11T12:07:36.869766+00:00"
+  },
+  "one_initial_process_intake": {
+    "command": [
+      "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/private/quoridor-runner-pilot-v4",
+      "teacher-pilot",
+      "--experiment",
+      "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/corpus-entry-v2/experiment.json",
+      "--experiment-sha256",
+      "ff17e145fa94b6ce68c57d571d6ef8d988e322db3f594f44ac87bb815cc02410"
+    ],
+    "status": "running",
+    "child": {
+      "pid": 583591,
+      "start_ticks": "97372716",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "log_bytes_seen": 0,
+    "scope": "session group and periodically recorded descendants; no daemon adoption"
+  },
+  "intake_at": "2026-10-11T12:08:09.428101+00:00",
+  "planned_games": 8,
+  "actual_result": null,
+  "actual_cache": null,
+  "exact_native_child_UTC_START": "UNKNOWN",
+  "retained_failed_command_wall_seconds": 0.09719662799034268,
+  "experimental_remaining_before_command": 5399.90280337201,
+  "no_idle_reservation": "Actual maintained operation only; no futurequiet or scientific success inferred"
+}

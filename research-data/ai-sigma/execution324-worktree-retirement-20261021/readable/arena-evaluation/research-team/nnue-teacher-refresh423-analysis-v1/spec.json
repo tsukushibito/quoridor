@@ -1,0 +1,266 @@
+{
+  "issue": "quoridor-4lc.423.1",
+  "status": "FIXED_PILOT_AND_PROSPECTIVE_MAIN_RESOLUTION; FINAL_MAIN_COUNTS_DEPEND_ON_REAL_PILOT",
+  "authority": {
+    "original_contract": {
+      "path": "/workspaces/quoridor/.artifacts/research-policy/nnue-teacher-refresh-20261016.md",
+      "sha256": "8ee2ec752c8bee85441fa406807f10eebcd84e2e0314c43e58908d2dc6efeaca",
+      "bytes": 12648,
+      "mode": "0644",
+      "source_reader_STOP": "2026-10-16T01:00:12.410358+00:00"
+    },
+    "size_amendment_takes_precedence": {
+      "path": "/workspaces/quoridor/.artifacts/research-policy/nnue-teacher-refresh-20261016-size-correction.md",
+      "sha256": "c726de793861cae0cd76dce38fb1d299a3e358e8a15d129e9bf049e17cc0de31",
+      "bytes": 4891,
+      "mode": "0644"
+    }
+  },
+  "owner": {
+    "analyst": "codex:01a118a1-aef1-7252-b21b-42f07dd5b1e6",
+    "model": "gpt-6.1-sol",
+    "effort": "max",
+    "cwd": "/workspaces/quoridor",
+    "sandbox": "danger-full-access",
+    "approvalPolicy": "never",
+    "write_only": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-teacher-refresh423-analysis-v1",
+    "report_to": "quoridor-4lc.324 / 01a1376a-bfd3-75d2-bd64-61e9416b3b13",
+    "science_by_analyst": 0
+  },
+  "seeds": {
+    "generation_prefix": 42320261016,
+    "evaluation_prefix": 42320261017,
+    "whole_family_split": 42320261018,
+    "pilot_MCTS_slice_seeds": [
+      42320261100, 42320261101, 42320261102, 42320261103
+    ],
+    "suffix_MCTS_seed": 42320261104,
+    "U_R_W_training_base": 42320261020,
+    "F_fresh_initialization": 42320261021,
+    "W_F_shuffled_row_stream": 42320261022,
+    "U_R_uniform_proposal_stream": 42320261023,
+    "reflection_stream": 42320261024,
+    "fixed_public_T_panel": 42320261025,
+    "arena": 42320261026,
+    "native_family_interval": 42320261027,
+    "R_acceptance_stream": 42320261028,
+    "old_q": 42320261029
+  },
+  "input_selection": {
+    "generation_request_ids": "0..255 prospective maximum; first32 retain original pilot inputs and do not wait for suffix preparation. Freeze genuinely unentered suffix rules-only actions/IDs before its numerical entry; actual suffix length chosen once from pilot counts/costs, not q/outcomes/model merit",
+    "prefix_lengths_by_request": "[4,8,12,16][request_id % 4]",
+    "rules_candidates_per_request": 32,
+    "collision_owner": "existing quoridor_data::terminal::partition_families; reflection/canonical-prefix-extension/same-endpoint transitive families",
+    "split": "existing seeded whole-family floor(4F/5) T/rest V; final combined frozen before any fit; record any pilot-to-final family/split change explicitly",
+    "evaluation": "at most64 canonical families, disjoint from all prospective generation inputs, existing books and actual421 schedule/book; existing first-ID representative; reject/collision/missing retained, no refill",
+    "missing_public_history": "UNKNOWN; no invented NPZ history and no full-public re-decode premise",
+    "unknown_future_refs": "actual prefixes/schedules/partition/model outputs require normal prepared bindings; no placeholder SHA/FileRef"
+  },
+  "generation": {
+    "entry": "current quoridor-runner selfplay / current MCTS/config/codec",
+    "teacher_ONNX_sha256": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+    "backend": "CPU FP32 batch1 intra1/inter1 synchronous ORT, GPU0",
+    "simulations_per_move": 64,
+    "completed_simulations_required": true,
+    "temperature": 0.0,
+    "temperature_source": "runtime::choose_action existing zero-temperature snapshot fallback/best; no new visit sampler/Dirichlet",
+    "total_ply_including_opening": 200,
+    "pilot": [
+      {
+        "slice": 0,
+        "request_ids": [0, 1, 2, 3, 4, 5, 6, 7],
+        "Sigma_rows_ceiling": 60000
+      },
+      {
+        "slice": 1,
+        "request_ids": [8, 9, 10, 11, 12, 13, 14, 15],
+        "Sigma_rows_ceiling": 60000
+      },
+      {
+        "slice": 2,
+        "request_ids": [16, 17, 18, 19, 20, 21, 22, 23],
+        "Sigma_rows_ceiling": 60000
+      },
+      {
+        "slice": 3,
+        "request_ids": [24, 25, 26, 27, 28, 29, 30, 31],
+        "Sigma_rows_ceiling": 60000
+      }
+    ],
+    "pilot_unused_budget": "no cross-slice lending or pilot retry/refill",
+    "max_independent_backends": 4,
+    "each_backend": "one game sequentially, one physical CPU; actual width1..4 fixed before entry, aggregate family4GiB/hostreserve4GiB",
+    "whole_study_Sigma_rows": 2000000,
+    "old_q_and_needed_boundary_Sigma_rows": 10000,
+    "suffix": "one genuinely unentered fixed request suffix after pilot resolution, aggregate residual under same existing inference/controller counter; no simulation-quality reduction",
+    "charge": "count actual setup/warm/failed/executed logical and physical rows separately; simulation count is not inference-row count",
+    "labels": "zSTM only actual GOAL/genuine threefold; UNKNOWN/cap/error/cancel have no invented outcome; q/root_raw/visits descriptive only"
+  },
+  "one_time_main_resolution": {
+    "when": "after original32 pilot saved counts/actual cost/bytes, before any suffix entry or fit; Max/324 resolve once, no human/Root ACK",
+    "pilot_required_small_summary": [
+      "requested/entered/returned/statuses/reasons",
+      "actual canonical T/V family count and eligible games",
+      "selected T rows, exact distinct T model-input keys and stock/prefix-length coverage",
+      "all eligible V rows/families/stock distribution",
+      "actual logical/physical/warm/failed Sigma rows per slice and accepted goal/threefold game",
+      "whole bytes/serial TMP peak/output forecast and outer/internal costs",
+      "actual STOP and remaining original suffix"
+    ],
+    "coverage_planning_targets_not_power_guarantees": {
+      "T_families": 128,
+      "V_families": 32,
+      "selected_T_rows": 4096,
+      "distinct_T_model_inputs": 2048
+    },
+    "data_target_formula": "N_data=4*ceil(max(32,32*128/F_Tpilot,32*32/F_Vpilot,32*4096/Rpilot,32*2048/Dpilot)/4); undefined denominators => no extrapolated launch",
+    "why_these_targets": "約128 training lineages/32 held-out lineages、4層×8 capの下で数千rowとdistinct入力を目指すcoverage設計。既往8game/217T/76Vの反復過多から大きく離し、Wの上限32768 row-updatesを数千入力へ分散。Fの必要学習量を導いた公式ではない。",
+    "rows_projection": "conservative per-request pilot rows=max(slice_actual_rows/max(actual_completed_eligible_games,1)), include warm/failed; zero completed slice is an insufficiency signal. Forecast suffix at1.25 times this rate, retaining actual global2M guard and remaining old-q allowance",
+    "bytes_projection": "use actual pilot bytes/TMP/output owner forecast plus needed final cache/four models/curve/160-arena forecast; same aggregate128MiB guard. Do not grant completion from projection or add a budget framework",
+    "chosen_N": "round down to multiple4 of min(N_data,256,rows-feasible-total-requests,storage-feasible-total-requests); no automatic run to256",
+    "ideal_density_example_only": {
+      "pilot_F_T": 25,
+      "pilot_F_V": 7,
+      "pilot_R": 800,
+      "pilot_distinct_R": 800,
+      "N_data": 164
+    },
+    "insufficiency": "32 alone never auto-enters four fits/160games. If no defensible data/cost projection, or feasible scale materially misses the stated questions, preserve PILOT_ONLY and report the concrete shortfall. Max/324's one actual count-based resolution states which W/F questions remain exploratory before committing fits; no outcome/MSE/q-based selection or second scale sweep",
+    "fit_freeze": "final actual T/V, selected rows, distinct counts, schedules/forward forecast frozen after this one suffix and before four fits; missingness/failure never refilled"
+  },
+  "training_data": {
+    "T_view": "reuse421 family_training_view with compact pre-action geometry stocks/row_game_codes: [16..20,8..15,1..7,0], eachgame/stratum chronological equally-spaced<=8, game<=32; no empty-stratum fill or loss/outcome-based reselection",
+    "V": "all ordinarily eligible admitted V rows, no T-thinning/augmentation, whole-family split",
+    "raw_plusminus2_mask": false,
+    "U_R": "same qualified all43 public T, no sealed/newE; R uses source file i=1..43 row weight0.92**(43-i), not claimed model generation/quality",
+    "R_sampling": "exact weighted-row sampling; minimal existing indexed-reader option: uniform T-index proposals, accept with weight_i using separate seeded uniforms, then ordinary unweighted MSE. This gives P(row)=weight_i/sum_rows(weight). No equal-file masses, doubled loss weighting, corpus scan/NPZ re-decode, fallback to uniform; log proposals and accepted per-source exposure",
+    "warmstart": {
+      "weights_sha256": "046fe926e56b955b0fb7de8f147a74ec33eace9cbc00a55c307f9b6541ab9841",
+      "descriptor_sha256": "46ec2c4708f96dcf9fad579c2fb0d1299c6663df27412f0faac98267467715e1",
+      "typed_evaluator_sha256": "96a5f41f875022d1752b9c999595ad58bfb2d42687a8f06de08d42b1c4215875"
+    },
+    "F": "fresh seeded existing same architecture; no learned public weights/labels in optimization, but same incumbent public-T-only normalization/scale metadata and separate public monitoring; not wholly public-free",
+    "objective": "zSTM-only MSE; no q teacher/head reset/freeze/new feature or loss"
+  },
+  "training_schedule": {
+    "architecture": "current FT32/H32/QF1/Zero4 FP32/tanh, standardized distance inputs, bypassOFF; same frozen normalization/scale",
+    "optimizer_each": "fresh Adam betas[0.9,0.999], eps1e-8, weight_decay0",
+    "R_actual": "actual nonempty selected newT rows, not requests/maximum rows",
+    "U_R_W": "S=min(8R,32768); U=ceil(S/256); at update j, b_j=min(256,S-256*(j-1)); same actual b_j/update/LR for U/R/W",
+    "U_R_W_learning_rate": "1e-4, linear warmup min(10,U) then constant",
+    "F": "S_F=min(64R,524288); U_F=ceil(S_F/256); same actual-tail rule",
+    "F_learning_rate": "1e-3, linear warmup min(20,U_F) then constant; one prospective choice extrapolated from362/366/371, not a scratch-LR qualification/optimum",
+    "shuffle_and_reflection": "W/F same seeded shuffled-cycling row stream prefix; actual per-row visit counts; train-only correct LR reflection0.5 using separate stream; no ceil padding beyond8R/64R",
+    "observations": "unique{0,ceil(U/3),ceil(2U/3),U}, F uses U_F; <=4 per condition; no validation-driven extra points/fit",
+    "selector": "existing newV canonical-family mean of within-family row MSE, tie earlier step; public_non_regression=false; INITIAL/BEST/LAST only",
+    "public_monitor": "full opened V419150 once per distinct actual frozen BEST/scope; fixed publicT8192 diagnostics, not fullT",
+    "shared_INITIAL": "U/R/W only reuse actual saved exact-model/normalization/bank/scope record; no421C substitution or fabricated forward credits; conservative budget does not require aliasing",
+    "descriptive_metrics": "family/stock/prefix-length MSE and sign; fixed10 equal-width post-tanh[-1,1] calibration bins with last endpoint included, mean prediction vs mean z, from same predictions; no extra forwards",
+    "logical_forward_ceiling": 4000000,
+    "conservative_forward_bound": {
+      "requests_ceiling": 256,
+      "conservative_selected_new_T": 8192,
+      "conservative_new_V": 51200,
+      "public_T_panel": 8192,
+      "full_opened_public_V": 419150,
+      "max_four_fit_training": 622592,
+      "conservative_distinct_observations_without_initial_alias": 16,
+      "max_observation_bank_rows": 67584,
+      "frozen_best_public_V": 1676600,
+      "changed_weights_native_correspondence_allowance": 1024,
+      "upper_without_INITIAL_alias": 3381560,
+      "upper_with_actual_shared_warm_INITIAL": 3246392
+    },
+    "changed_weight_boundary": "necessary native/full-delta/undo/scale only, <=1024 additional logical rows within4M; no old successful suite replay"
+  },
+  "old_state_q": {
+    "fixed_inputs": {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-teacher-refresh423-analysis-v1/old-q-inputs.json",
+      "sha256": "ddedbafc7606235238ce4cea7c7ae535ba43358ab7cc1cdc0161cc6054924794",
+      "bytes": 75239,
+      "mode": "0644"
+    },
+    "selected_count": 28,
+    "MCTS": "same Sigma/current MCTS64 completed simulations, canonical from_prefix, no fabricated NPZ/from_counts history",
+    "total_rows_including_new_boundary": 10000,
+    "422": "reuse actual7 successful direct-static result when supplied; source-closed metadata is not executed success; static Sigma raw != MCTS root mean q; no standalone successful forward replay",
+    "interpretation": "same STM existing saved z/NNUE/D values only, separate searched/static/history/budget provenance; q not true WDL and no new fit from old-q table"
+  },
+  "arena": {
+    "allocation_before_new_outcomes": [
+      {
+        "contrast": "W versus frozen BEST43",
+        "families": "first64 available canonical eval families",
+        "maximum_games": 128,
+        "role": "primary"
+      },
+      {
+        "contrast": "W versus fixedD(0,8,tanh)",
+        "families": "first16 of same eval families",
+        "maximum_games": 32,
+        "role": "secondary exploratory"
+      }
+    ],
+    "total_maximum_games": 160,
+    "total_maximum_colour_pairs": 80,
+    "formerly_planned_five_by32": "unentered original plan retained in contract history; R/U,W/U,W/F have no direct game-strength comparison in this allocation, their curves remain descriptive",
+    "method": "Control/PVS/TT1048576/LMR ON depth_rank/approxOFF/safeOFF, same frozen image,100ms authority receipt/5ms reserve/1M nodes per turn/200 total ply",
+    "aggregate_nodes": 1000000000,
+    "completion": "actual<=64 disjoint eval families, two colours; missing/UNKNOWN/storage cap preserved, no replacement/refill;160 is a ceiling not guaranteed complete",
+    "uncertainty": "family paired scores; reuse existing family owner across necessary sequential batches, no averaging batch CIs/repeated bootstrap; same families in secondary are dependent; only saved native interval authority",
+    "normal_planning_only": [
+      {
+        "families": 16,
+        "games": 32,
+        "half_width_95": 0.245,
+        "difference_80pct_two_sided": 0.35
+      },
+      {
+        "families": 64,
+        "games": 128,
+        "half_width_95": 0.1225,
+        "difference_80pct_two_sided": 0.175
+      }
+    ],
+    "limitations": "even64 families has worst-case approximate95% halfwidth12.25points and80%-power MDE17.5points; no guaranteed small-gain/Elo/superiority claim. NewV BEST selection and multiple fits do not make arena an unbiased population certificate"
+  },
+  "required_minimal_current_inlets": [
+    {
+      "owner": "data/current MCTS",
+      "gap": "Config logical_row_limit currently rejects non-Sigma-static entries; connect actual2M aggregate and original four60k slice budgets to existing MCTS inference owner before forward, counting warm/failed, preserving64sim completion/error/partial policy"
+    },
+    {
+      "owner": "data/current selfplay",
+      "gap": "bind actual full-prefix schedule and normal family split/exclusions; expose already existing q/raw/visits and ordinary outcome z without raw-value mask; no new game/MCTS loop"
+    },
+    {
+      "owner": "learning/current mixed-outcome+IndexedPublicCorpus",
+      "gap": "one per-source weighted-row sampler using existing compact shard provenance; exact final batch lengths and same U/R/W schedule; no public data copy/redecode"
+    },
+    {
+      "owner": "learning/current train+LC prepare",
+      "gap": "honest F fresh-init inlet with same frozen normalization/scale (current prepare_fit requires warmstart); per-point newV-only selector and once-per-frozenBEST publicV monitoring; actual INITIAL record reuse only"
+    },
+    {
+      "owner": "data/current MCTS benchmark",
+      "gap": "bounded <=32 fixed full-prefix q-only requests through current invocation, not hardcoded old fixtures; charge10k total, reuse422 direct-static results with distinct meaning"
+    }
+  ],
+  "storage_and_stop": {
+    "whole_bulk_B": 134217728,
+    "included": "generation RAW/cache/views/four checkpoints/curves/arena/archive/controls/failures/serialTMP",
+    "prior_plus_pending_conservative_B": 49882066944,
+    "actual_global": "UNKNOWN; Root adds only actual positive422/ordinary increments once; no target-holding re-charge/refund/global walk/deletion",
+    "scope": "no new science by423.1; actual STOP/identity/directwait/reap/handles/TMP/leases, preserve failed and returned-vs-disk masks; no auto additional fit/seed/LR/teacher/roots"
+  },
+  "necessary_review_and_result": "one related independent Sol review of changed teacher/STM/family/sampler/scale/native boundaries, not per-run ACK. Source/software/numeric/strength are separate. Return original pilot small summary for one count/cost resolution, later same423.1 saved analysis; keep leaf open as actual dependency",
+  "not_identifiable": [
+    "32 requests as statistical/sample-size justification",
+    "teacher/data/initialization as isolated causal effects",
+    "F inadequacy as scratch impossibility",
+    "R file number as weaker historical model generation",
+    "small W/F differences as teacher uselessness",
+    "q as optimal WDL",
+    "160games as small-gain formal strength guarantee"
+  ]
+}

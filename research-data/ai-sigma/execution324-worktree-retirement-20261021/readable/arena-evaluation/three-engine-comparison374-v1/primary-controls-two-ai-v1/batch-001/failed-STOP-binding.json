@@ -1,0 +1,111 @@
+{
+  "issue": "quoridor-4lc.374.1",
+  "status": "STOPPED_ORIGINAL_FAILED_ACTUAL_PARTIAL_CENSUS",
+  "refs": {
+    "collection-result.json": {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/primary-controls-two-ai-v1/batch-001/collection-v1/collection-result.json",
+      "sha256": "8b2541be14ae2691541f064bdfa26a75d667a1f6feb345597b78f08038aca346",
+      "bytes": 23802,
+      "mode": "0644"
+    },
+    "finalize-return.json": {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/primary-controls-two-ai-v1/batch-001/collection-v1/finalize-return.json",
+      "sha256": "23f504965541d7f5e51985e5f626c938033238b3ebc6424c082592d396abe6ed",
+      "bytes": 1080,
+      "mode": "0644"
+    },
+    "formatting-receipt.json": {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/primary-controls-two-ai-v1/batch-001/collection-v1/formatting-receipt.json",
+      "sha256": "e840e5402a0ce1fa3c4609c18fe50d407a8f6e32c9c818ce8338460fe53ff7a1",
+      "bytes": 962,
+      "mode": "0644"
+    },
+    "collect-return.json": {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/primary-controls-two-ai-v1/batch-001/collection-v1/collect-return.json",
+      "sha256": "57887372655b7048ae55295515b54b222cd679abf7ef39cfb3e53116175ba489",
+      "bytes": 493,
+      "mode": "0644"
+    },
+    "collect.py": {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/primary-controls-two-ai-v1/batch-001/collection-v1/collect.py",
+      "sha256": "d88ab042ca1769735d30b3545b4cef8686781872fcdc536ceb2bdc0500c9edc1",
+      "bytes": 9269,
+      "mode": "0644"
+    },
+    "source-locator-refusal.json": {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/primary-controls-two-ai-v1/batch-001/collection-v1/source-locator-refusal.json",
+      "sha256": "771f4e3769cd2ab42f147c4c286921ccbe52b3a3179f19b21992ff3d0dd878fe",
+      "bytes": 493,
+      "mode": "0644"
+    },
+    "report.txt": {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/primary-controls-two-ai-v1/batch-001/collection-v1/report.txt",
+      "sha256": "b01fc34253f577405d5860b9554aa6b45d50716f4547610218f930304eee0cf5",
+      "bytes": 2673,
+      "mode": "0644"
+    }
+  },
+  "manifest": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/primary-controls-two-ai-v1/batch-001/operation-v1/manifest.json",
+    "sha256": "d2c5fec27c111d7435c917b02fedcea960fa1a9c220b9a6dfbf78cae70cee7bf",
+    "bytes": 261483,
+    "mode": "0644"
+  },
+  "publication_failure": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/primary-output-v1/batch-001/data/publication-failure.json",
+    "sha256": "12e99e31ff1287acbd163cbf6bd6a2e9c6083b60d5adc4c8581dea7c225cba50",
+    "bytes": 144104,
+    "mode": "0644"
+  },
+  "original_result": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/primary-controls-two-ai-v1/batch-001/runtime-v1/result.json",
+    "sha256": "5bf6f1183280e8037b0d05fae2f8ed2c4a2358134d18d93c6c1c9af8e7e18a15",
+    "bytes": 506,
+    "mode": "0600"
+  },
+  "owning_capture_subject": {
+    "path": "/workspaces/quoridor/crates/quoridor-runner/src/value_search_strength.rs",
+    "sha256": "a40824dc7d8d1972273a1e5fa4f12001bf55b38da41a32fe3d959f5d113f974a",
+    "bytes": 32717,
+    "mode": "0644"
+  },
+  "actual_selected_capture_source_reader_STOP": "2026-10-13T08:40:28.921789+00:00",
+  "actual_source_model_library_image_caller_reader_STOP": "2026-10-13T08:43:03.525285+00:00",
+  "actual_canonical_release": "2026-10-13T08:43:03.540409+00:00",
+  "environment_release": "Each qualified common-entry wrapper returned normally; independent envSH UTC UNKNOWN",
+  "final_OWN_control_reader_writer_STOP": "2026-10-13T08:45:34.620982+00:00",
+  "owned_readers_children_jobs_TMP_leases_remaining": [],
+  "counts": {
+    "requested": 2,
+    "started": 1,
+    "raw_goals": 1,
+    "canonical_successes": 0,
+    "validated_UNKNOWN": 2,
+    "saved_nn_calls": 584,
+    "complete_pairs": 0
+  },
+  "entered_never_replay": [
+    0,
+    1,
+    2
+  ],
+  "partial_pair_other_slot": {
+    "slot": 3,
+    "started": false,
+    "validated": "UNKNOWN",
+    "refill_admission": false
+  },
+  "next_full_unentered_pair": {
+    "batch": 2,
+    "slots": [
+      4,
+      5
+    ],
+    "ready": false,
+    "literal_gap": "Owning observation publication3072B limit conflicts with current required NNUE metadata; no known-bad next submission"
+  },
+  "new_scientific_calls": 0,
+  "controller_fee_once_seconds": 5.057206943998608,
+  "storage_budget_for_collection": null,
+  "old_model_rules_defaults_N_seals_fits96_pause323": "UNCHANGED"
+}

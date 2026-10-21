@@ -1,0 +1,593 @@
+{
+  "issue": "quoridor-4lc.374.1",
+  "original_manifest": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/primary-controls-v3/batch-000/operation-v1/manifest.json",
+    "sha256": "9adb9decd3b9539e0c0d063e412a6edb8eaf4e28b592773238794c58a4597934",
+    "bytes": 8542,
+    "mode": "0644"
+  },
+  "original_archive": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/primary-output-v1/batch-000/data/completed.jsonl.gz",
+    "sha256": "7269c5818d0c4b140186d03483c882116f0ca08a7f767b2fa5e51aad10bf41e8",
+    "bytes": 77885,
+    "mode": "0644"
+  },
+  "original_result": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/primary-output-v1/batch-000/data/result.json",
+    "sha256": "4648d11719b886113ed385d02091f97b1a8eb5ee5fc7a12a062634bc53dadf72",
+    "bytes": 3004,
+    "mode": "0644"
+  },
+  "scope": "Saved original facts/directed actual refusal, NOT a replacement validator or accepted outcome",
+  "raw_finished_game_rows": [
+    {
+      "game": 0,
+      "family": "374-primary-batch-000-v1-family-000000",
+      "candidate_color": 0,
+      "status": "goal",
+      "winner": 0,
+      "plies": 69,
+      "started": true,
+      "reason": "goal",
+      "nn_calls": 518,
+      "observation_count": 65
+    },
+    {
+      "game": 1,
+      "family": "374-primary-batch-000-v1-family-000000",
+      "candidate_color": 1,
+      "status": "goal",
+      "winner": 1,
+      "plies": 84,
+      "started": true,
+      "reason": "goal",
+      "nn_calls": 648,
+      "observation_count": 80
+    }
+  ],
+  "raw_started_goal_count": 2,
+  "validated_observed_local_games": [],
+  "normal_missing_local_games": [
+    0,
+    1
+  ],
+  "global_slots": [
+    0,
+    1
+  ],
+  "remaining_campaign_unentered": 766,
+  "accepted_Sigma_observation_count": 73,
+  "return_before_receipt_count": 44,
+  "by_game": {
+    "0": 21,
+    "1": 23
+  },
+  "first_original_violation": {
+    "game": 0,
+    "observation_index": 4,
+    "ply": 8,
+    "action": 40,
+    "returned_ns": 373796251,
+    "drain_finished_ns": 373796251,
+    "authority_receipt_ns": 373801916,
+    "inversion_ns": 5665,
+    "deadline_ns": 414025327
+  },
+  "maximum_inversion_ns": 19251,
+  "other_Sigma_conjunct_false_counts": {},
+  "clock_order_labels": [
+    {
+      "game": 0,
+      "observation_index": 4,
+      "ply": 8,
+      "action": 40,
+      "returned_ns": 373796251,
+      "drain_finished_ns": 373796251,
+      "authority_receipt_ns": 373801916,
+      "inversion_ns": 5665,
+      "deadline_ns": 414025327
+    },
+    {
+      "game": 0,
+      "observation_index": 6,
+      "ply": 10,
+      "action": 110,
+      "returned_ns": 530207918,
+      "drain_finished_ns": 530207918,
+      "authority_receipt_ns": 530213326,
+      "inversion_ns": 5408,
+      "deadline_ns": 568954787
+    },
+    {
+      "game": 0,
+      "observation_index": 8,
+      "ply": 12,
+      "action": 108,
+      "returned_ns": 687035466,
+      "drain_finished_ns": 687035466,
+      "authority_receipt_ns": 687039773,
+      "inversion_ns": 4307,
+      "deadline_ns": 725352152
+    },
+    {
+      "game": 0,
+      "observation_index": 10,
+      "ply": 14,
+      "action": 112,
+      "returned_ns": 844068438,
+      "drain_finished_ns": 844068438,
+      "authority_receipt_ns": 844073726,
+      "inversion_ns": 5288,
+      "deadline_ns": 882173551
+    },
+    {
+      "game": 0,
+      "observation_index": 14,
+      "ply": 18,
+      "action": 39,
+      "returned_ns": 1157532816,
+      "drain_finished_ns": 1157532816,
+      "authority_receipt_ns": 1157537805,
+      "inversion_ns": 4989,
+      "deadline_ns": 1194722897
+    },
+    {
+      "game": 0,
+      "observation_index": 16,
+      "ply": 20,
+      "action": 38,
+      "returned_ns": 1313920964,
+      "drain_finished_ns": 1313920964,
+      "authority_receipt_ns": 1313926403,
+      "inversion_ns": 5439,
+      "deadline_ns": 1352667956
+    },
+    {
+      "game": 0,
+      "observation_index": 18,
+      "ply": 22,
+      "action": 37,
+      "returned_ns": 1469477893,
+      "drain_finished_ns": 1469477893,
+      "authority_receipt_ns": 1469484638,
+      "inversion_ns": 6745,
+      "deadline_ns": 1509164975
+    },
+    {
+      "game": 0,
+      "observation_index": 20,
+      "ply": 24,
+      "action": 36,
+      "returned_ns": 1625986124,
+      "drain_finished_ns": 1625986124,
+      "authority_receipt_ns": 1625991430,
+      "inversion_ns": 5306,
+      "deadline_ns": 1664649025
+    },
+    {
+      "game": 0,
+      "observation_index": 22,
+      "ply": 26,
+      "action": 45,
+      "returned_ns": 1781970936,
+      "drain_finished_ns": 1781970936,
+      "authority_receipt_ns": 1781975701,
+      "inversion_ns": 4765,
+      "deadline_ns": 1821155200
+    },
+    {
+      "game": 0,
+      "observation_index": 24,
+      "ply": 28,
+      "action": 46,
+      "returned_ns": 1939625764,
+      "drain_finished_ns": 1939625764,
+      "authority_receipt_ns": 1939630867,
+      "inversion_ns": 5103,
+      "deadline_ns": 1977124340
+    },
+    {
+      "game": 0,
+      "observation_index": 26,
+      "ply": 30,
+      "action": 55,
+      "returned_ns": 2096278096,
+      "drain_finished_ns": 2096278096,
+      "authority_receipt_ns": 2096283484,
+      "inversion_ns": 5388,
+      "deadline_ns": 2134800422
+    },
+    {
+      "game": 0,
+      "observation_index": 28,
+      "ply": 32,
+      "action": 64,
+      "returned_ns": 2253554337,
+      "drain_finished_ns": 2253554337,
+      "authority_receipt_ns": 2253560042,
+      "inversion_ns": 5705,
+      "deadline_ns": 2291432604
+    },
+    {
+      "game": 0,
+      "observation_index": 30,
+      "ply": 34,
+      "action": 65,
+      "returned_ns": 2410944014,
+      "drain_finished_ns": 2410944014,
+      "authority_receipt_ns": 2410948553,
+      "inversion_ns": 4539,
+      "deadline_ns": 2448707998
+    },
+    {
+      "game": 0,
+      "observation_index": 34,
+      "ply": 38,
+      "action": 47,
+      "returned_ns": 2723230019,
+      "drain_finished_ns": 2723230019,
+      "authority_receipt_ns": 2723235144,
+      "inversion_ns": 5125,
+      "deadline_ns": 2763369541
+    },
+    {
+      "game": 0,
+      "observation_index": 38,
+      "ply": 42,
+      "action": 57,
+      "returned_ns": 3037760090,
+      "drain_finished_ns": 3037760090,
+      "authority_receipt_ns": 3037765361,
+      "inversion_ns": 5271,
+      "deadline_ns": 3075033017
+    },
+    {
+      "game": 0,
+      "observation_index": 40,
+      "ply": 44,
+      "action": 66,
+      "returned_ns": 3194316309,
+      "drain_finished_ns": 3194316309,
+      "authority_receipt_ns": 3194320972,
+      "inversion_ns": 4663,
+      "deadline_ns": 3232929350
+    },
+    {
+      "game": 0,
+      "observation_index": 42,
+      "ply": 46,
+      "action": 67,
+      "returned_ns": 3350225342,
+      "drain_finished_ns": 3350225342,
+      "authority_receipt_ns": 3350231401,
+      "inversion_ns": 6059,
+      "deadline_ns": 3389495972
+    },
+    {
+      "game": 0,
+      "observation_index": 46,
+      "ply": 50,
+      "action": 83,
+      "returned_ns": 3662814219,
+      "drain_finished_ns": 3662814219,
+      "authority_receipt_ns": 3662818680,
+      "inversion_ns": 4461,
+      "deadline_ns": 3700754394
+    },
+    {
+      "game": 0,
+      "observation_index": 54,
+      "ply": 58,
+      "action": 49,
+      "returned_ns": 4287341499,
+      "drain_finished_ns": 4287341499,
+      "authority_receipt_ns": 4287347095,
+      "inversion_ns": 5596,
+      "deadline_ns": 4326809120
+    },
+    {
+      "game": 0,
+      "observation_index": 60,
+      "ply": 64,
+      "action": 60,
+      "returned_ns": 4760726681,
+      "drain_finished_ns": 4760726681,
+      "authority_receipt_ns": 4760732089,
+      "inversion_ns": 5408,
+      "deadline_ns": 4798764593
+    },
+    {
+      "game": 0,
+      "observation_index": 64,
+      "ply": 68,
+      "action": 78,
+      "returned_ns": 5027817501,
+      "drain_finished_ns": 5027817501,
+      "authority_receipt_ns": 5027822244,
+      "inversion_ns": 4743,
+      "deadline_ns": 5112319577
+    },
+    {
+      "game": 1,
+      "observation_index": 1,
+      "ply": 5,
+      "action": 59,
+      "returned_ns": 156502802,
+      "drain_finished_ns": 156502802,
+      "authority_receipt_ns": 156507722,
+      "inversion_ns": 4920,
+      "deadline_ns": 195041265
+    },
+    {
+      "game": 1,
+      "observation_index": 3,
+      "ply": 7,
+      "action": 50,
+      "returned_ns": 314209157,
+      "drain_finished_ns": 314209157,
+      "authority_receipt_ns": 314214235,
+      "inversion_ns": 5078,
+      "deadline_ns": 351652002
+    },
+    {
+      "game": 1,
+      "observation_index": 5,
+      "ply": 9,
+      "action": 136,
+      "returned_ns": 470601994,
+      "drain_finished_ns": 470601994,
+      "authority_receipt_ns": 470607328,
+      "inversion_ns": 5334,
+      "deadline_ns": 509348318
+    },
+    {
+      "game": 1,
+      "observation_index": 7,
+      "ply": 11,
+      "action": 134,
+      "returned_ns": 625506249,
+      "drain_finished_ns": 625506249,
+      "authority_receipt_ns": 625510932,
+      "inversion_ns": 4683,
+      "deadline_ns": 665743791
+    },
+    {
+      "game": 1,
+      "observation_index": 9,
+      "ply": 13,
+      "action": 41,
+      "returned_ns": 780212680,
+      "drain_finished_ns": 780212680,
+      "authority_receipt_ns": 780217501,
+      "inversion_ns": 4821,
+      "deadline_ns": 820655596
+    },
+    {
+      "game": 1,
+      "observation_index": 11,
+      "ply": 15,
+      "action": 116,
+      "returned_ns": 935639962,
+      "drain_finished_ns": 935639962,
+      "authority_receipt_ns": 935646163,
+      "inversion_ns": 6201,
+      "deadline_ns": 975364216
+    },
+    {
+      "game": 1,
+      "observation_index": 23,
+      "ply": 27,
+      "action": 52,
+      "returned_ns": 1873525448,
+      "drain_finished_ns": 1873525448,
+      "authority_receipt_ns": 1873530814,
+      "inversion_ns": 5366,
+      "deadline_ns": 1911603184
+    },
+    {
+      "game": 1,
+      "observation_index": 29,
+      "ply": 33,
+      "action": 51,
+      "returned_ns": 2342343221,
+      "drain_finished_ns": 2342343221,
+      "authority_receipt_ns": 2342348577,
+      "inversion_ns": 5356,
+      "deadline_ns": 2381641832
+    },
+    {
+      "game": 1,
+      "observation_index": 31,
+      "ply": 35,
+      "action": 60,
+      "returned_ns": 2499970394,
+      "drain_finished_ns": 2499970394,
+      "authority_receipt_ns": 2499975215,
+      "inversion_ns": 4821,
+      "deadline_ns": 2537502548
+    },
+    {
+      "game": 1,
+      "observation_index": 35,
+      "ply": 39,
+      "action": 58,
+      "returned_ns": 2812331804,
+      "drain_finished_ns": 2812331804,
+      "authority_receipt_ns": 2812337016,
+      "inversion_ns": 5212,
+      "deadline_ns": 2851427455
+    },
+    {
+      "game": 1,
+      "observation_index": 39,
+      "ply": 43,
+      "action": 56,
+      "returned_ns": 3124232707,
+      "drain_finished_ns": 3124232707,
+      "authority_receipt_ns": 3124238134,
+      "inversion_ns": 5427,
+      "deadline_ns": 3164958098
+    },
+    {
+      "game": 1,
+      "observation_index": 41,
+      "ply": 45,
+      "action": 65,
+      "returned_ns": 3279555244,
+      "drain_finished_ns": 3279555244,
+      "authority_receipt_ns": 3279560370,
+      "inversion_ns": 5126,
+      "deadline_ns": 3319394188
+    },
+    {
+      "game": 1,
+      "observation_index": 47,
+      "ply": 51,
+      "action": 54,
+      "returned_ns": 3749257655,
+      "drain_finished_ns": 3749257655,
+      "authority_receipt_ns": 3749262843,
+      "inversion_ns": 5188,
+      "deadline_ns": 3786845912
+    },
+    {
+      "game": 1,
+      "observation_index": 49,
+      "ply": 53,
+      "action": 45,
+      "returned_ns": 3905319797,
+      "drain_finished_ns": 3905319797,
+      "authority_receipt_ns": 3905325314,
+      "inversion_ns": 5517,
+      "deadline_ns": 3944489268
+    },
+    {
+      "game": 1,
+      "observation_index": 51,
+      "ply": 55,
+      "action": 36,
+      "returned_ns": 4064497243,
+      "drain_finished_ns": 4064497243,
+      "authority_receipt_ns": 4064504832,
+      "inversion_ns": 7589,
+      "deadline_ns": 4100479715
+    },
+    {
+      "game": 1,
+      "observation_index": 53,
+      "ply": 57,
+      "action": 37,
+      "returned_ns": 4222027757,
+      "drain_finished_ns": 4222027757,
+      "authority_receipt_ns": 4222032736,
+      "inversion_ns": 4979,
+      "deadline_ns": 4259736156
+    },
+    {
+      "game": 1,
+      "observation_index": 55,
+      "ply": 59,
+      "action": 28,
+      "returned_ns": 4379417860,
+      "drain_finished_ns": 4379417860,
+      "authority_receipt_ns": 4379423019,
+      "inversion_ns": 5159,
+      "deadline_ns": 4417182425
+    },
+    {
+      "game": 1,
+      "observation_index": 57,
+      "ply": 61,
+      "action": 19,
+      "returned_ns": 4536467690,
+      "drain_finished_ns": 4536467690,
+      "authority_receipt_ns": 4536472622,
+      "inversion_ns": 4932,
+      "deadline_ns": 4574589650
+    },
+    {
+      "game": 1,
+      "observation_index": 61,
+      "ply": 65,
+      "action": 21,
+      "returned_ns": 4849798730,
+      "drain_finished_ns": 4849798730,
+      "authority_receipt_ns": 4849804343,
+      "inversion_ns": 5613,
+      "deadline_ns": 4887964403
+    },
+    {
+      "game": 1,
+      "observation_index": 63,
+      "ply": 67,
+      "action": 30,
+      "returned_ns": 5006892778,
+      "drain_finished_ns": 5006892778,
+      "authority_receipt_ns": 5006897305,
+      "inversion_ns": 4527,
+      "deadline_ns": 5044993926
+    },
+    {
+      "game": 1,
+      "observation_index": 67,
+      "ply": 71,
+      "action": 22,
+      "returned_ns": 5320044543,
+      "drain_finished_ns": 5320044543,
+      "authority_receipt_ns": 5320063794,
+      "inversion_ns": 19251,
+      "deadline_ns": 5359279694
+    },
+    {
+      "game": 1,
+      "observation_index": 69,
+      "ply": 73,
+      "action": 23,
+      "returned_ns": 5475673365,
+      "drain_finished_ns": 5475673365,
+      "authority_receipt_ns": 5475678284,
+      "inversion_ns": 4919,
+      "deadline_ns": 5515230546
+    },
+    {
+      "game": 1,
+      "observation_index": 75,
+      "ply": 79,
+      "action": 26,
+      "returned_ns": 5943597464,
+      "drain_finished_ns": 5943597464,
+      "authority_receipt_ns": 5943602123,
+      "inversion_ns": 4659,
+      "deadline_ns": 5981419557
+    }
+  ],
+  "raw_bytes": 410577,
+  "raw_sha256": "ccb99051442687f61ec4e7255db79c78a3fb02cedcf4cdc45df186df1fb4c179",
+  "directed_builtin_scope": [
+    {
+      "path": "crates/quoridor-runner/src/runtime.rs",
+      "current": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/runtime.rs",
+        "sha256": "8a1fa45b36295c9e4ad502f3f06f796b06ee3cc371a30fad2043b47cdc51937c",
+        "bytes": 233401,
+        "mode": "0644"
+      },
+      "built_git_blob_exact": true
+    },
+    {
+      "path": "crates/quoridor-runner/src/arena.rs",
+      "current": {
+        "path": "/workspaces/quoridor/crates/quoridor-runner/src/arena.rs",
+        "sha256": "2cd4115f080ad410c6637987e096ef727dcd4e7006014263e0ad5c0c53cfdf01",
+        "bytes": 59221,
+        "mode": "0644"
+      },
+      "built_git_blob_exact": true
+    }
+  ],
+  "built_git": "b54c836870b657d2172562a2f8963b7e6003f530",
+  "source_cause": "Runtime captures drained before joining the authority thread; returned/drain_finished reuse that earlier timestamp. Authority receipt can occur later. Native and Python accepted-observation guards reject returned_ns < receipt_ns",
+  "smallest_owning_gap": "Correct real returned/drain timestamp after both inference drain and authority receipt/join; keep genuine100ms authority receipt, resource/cancel/error/refusal guards and original timestamps/FAILED/raw untouched. Root owns source repair/adjudication; no future runtime entry or acceptance from this packet",
+  "source_reader_STOP": "2026-10-12T22:17:42.504928+00:00",
+  "new_model_or_head_Search_game_calls": 0
+}

@@ -1,0 +1,601 @@
+{
+  "issue": "quoridor-4lc.342.17.2",
+  "status": "ACTUAL_SELECTED_INPUTS_PREPARED_RUNTIME_DRAFT_STOPPED",
+  "input_config": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/mixed-study342-17-v1/global-input-settings.selected.json",
+    "sha256": "9fbfd490db06504cb500632c7c915012935b20ae35bcf56758fb7eb38a15a8ae",
+    "bytes": 493,
+    "mode": "0644"
+  },
+  "global_return": {
+    "config": {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/mixed-study342-17-v1/global-input-settings.selected.json",
+      "sha256": "9fbfd490db06504cb500632c7c915012935b20ae35bcf56758fb7eb38a15a8ae"
+    },
+    "result": {
+      "families": 1280,
+      "outcomes_selected": false,
+      "partition": {
+        "path": "/workspaces/quoridor/.worktree/assets/data/fixed-d-sigma-mixture380-v1/inputs/partition.json",
+        "sha256": "89b9343f1cab47029eaa0b8a92bb7682b0db0719ee812db774e120b95ca83c14"
+      },
+      "schedule": {
+        "path": "/workspaces/quoridor/.worktree/assets/data/fixed-d-sigma-mixture380-v1/inputs/schedule.json",
+        "sha256": "b72cd08741fb64ff528b1c46de66b448ff197484f9e0b703fbfe6465dae369ee"
+      },
+      "search_calls": 0
+    }
+  },
+  "evaluation_input_config": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/mixed-study342-17-v1/evaluation-input-settings.selected.json",
+    "sha256": "a6245b76b3b2cdfa10536267daad6a311fff79fb63e7fcb22288b65b4d73377d",
+    "bytes": 749,
+    "mode": "0644"
+  },
+  "evaluation_return": {
+    "config": {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/mixed-study342-17-v1/evaluation-input-settings.selected.json",
+      "sha256": "a6245b76b3b2cdfa10536267daad6a311fff79fb63e7fcb22288b65b4d73377d"
+    },
+    "result": {
+      "families": 64,
+      "outcomes_selected": false,
+      "partition": {
+        "path": "/workspaces/quoridor/.worktree/assets/data/fixed-d-sigma-mixture380-v1/inputs/evaluation-preparation/partition.json",
+        "sha256": "1b0ea767a0a746b3a60a0a50c9e4de2e28dd6294c7aed136ec72f33d31f0a022"
+      },
+      "schedule": {
+        "path": "/workspaces/quoridor/.worktree/assets/data/fixed-d-sigma-mixture380-v1/inputs/evaluation-preparation/schedule.json",
+        "sha256": "fcd452cb667b4b8688ac2566e239bbc92b9082a020cb05f0467efcb05d7fa56d"
+      },
+      "search_calls": 0
+    }
+  },
+  "schedule": {
+    "path": "/workspaces/quoridor/.worktree/assets/data/fixed-d-sigma-mixture380-v1/inputs/schedule.json",
+    "sha256": "b72cd08741fb64ff528b1c46de66b448ff197484f9e0b703fbfe6465dae369ee",
+    "bytes": 1324742,
+    "mode": "0644"
+  },
+  "partition": {
+    "path": "/workspaces/quoridor/.worktree/assets/data/fixed-d-sigma-mixture380-v1/inputs/partition.json",
+    "sha256": "89b9343f1cab47029eaa0b8a92bb7682b0db0719ee812db774e120b95ca83c14",
+    "bytes": 224548,
+    "mode": "0644"
+  },
+  "evaluation_book": {
+    "path": "/workspaces/quoridor/.worktree/assets/data/fixed-d-sigma-mixture380-v1/inputs/evaluation-book.json",
+    "sha256": "2b903467e98a679c4fde96fdddcaeb090eb4863a16e82773e5640b51b43d0641",
+    "bytes": 150708,
+    "mode": "0644"
+  },
+  "evaluation_schedule": {
+    "path": "/workspaces/quoridor/.worktree/assets/data/fixed-d-sigma-mixture380-v1/inputs/evaluation-preparation/schedule.json",
+    "sha256": "fcd452cb667b4b8688ac2566e239bbc92b9082a020cb05f0467efcb05d7fa56d",
+    "bytes": 66166,
+    "mode": "0644"
+  },
+  "evaluation_partition": {
+    "path": "/workspaces/quoridor/.worktree/assets/data/fixed-d-sigma-mixture380-v1/inputs/evaluation-preparation/partition.json",
+    "sha256": "1b0ea767a0a746b3a60a0a50c9e4de2e28dd6294c7aed136ec72f33d31f0a022",
+    "bytes": 11432,
+    "mode": "0644"
+  },
+  "actual_counts": {
+    "requests": 1280,
+    "accepted_prefixes": 1280,
+    "failed_prefixes": 0,
+    "unique_families": 1280,
+    "family_splits": {
+      "train": 1024,
+      "validation": 256
+    },
+    "request_splits": {
+      "train": 1024,
+      "validation": 256
+    },
+    "evaluation_histories": 64,
+    "evaluation_collision_families": 64
+  },
+  "config_refs": [
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/mixed-study342-17-v1/generation-batch-000.json",
+      "sha256": "7a9fb9a0bfa93188bbbff71a69bf7b74208e7907ddce31d8de5bb493b85d4403",
+      "bytes": 1674,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/mixed-study342-17-v1/generation-batch-001.json",
+      "sha256": "435a87e7b70d33215d48ec8aeddda5ae75e63f519a450567f941595c1b24c279",
+      "bytes": 1676,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/mixed-study342-17-v1/generation-batch-002.json",
+      "sha256": "0e613eaa7aa81ff010113b5c651a175b0fb80d0fca3b97a72273f1a9f5ae924e",
+      "bytes": 1676,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/mixed-study342-17-v1/generation-batch-003.json",
+      "sha256": "75203e83f0b48d4dbc1f5c54f3c8d9f1c544f7e637230492eb87e3f46b50afbe",
+      "bytes": 1676,
+      "mode": "0644"
+    }
+  ],
+  "experiments": [
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/mixed-study342-17-v1/generation-batch-000-experiment-current.json",
+      "sha256": "8e2efe2f830806c6f20f5e43b287eaae3aaa0e6ef00c6b8235abc70cef38a6ef",
+      "bytes": 5681,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/mixed-study342-17-v1/generation-batch-001-experiment-current.json",
+      "sha256": "6967162b5ebe88a67d4f4c6e625b19e2f342e41193c5bbffb4ec3d6c3448a34b",
+      "bytes": 5681,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/mixed-study342-17-v1/generation-batch-002-experiment-current.json",
+      "sha256": "99c2d5f8789352be539b61abdf153166b0025420a8a19369564d8edc6ac5be88",
+      "bytes": 5681,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/mixed-study342-17-v1/generation-batch-003-experiment-current.json",
+      "sha256": "0e9fd3b82ff6da8ee3e2dc0ae15b9e612df35c8c6bc30c3f052545096814619f",
+      "bytes": 5681,
+      "mode": "0644"
+    }
+  ],
+  "selected_plan": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/mixed-study342-17-v1/generation-plan.selected.json",
+    "sha256": "bc4d60e12733d8142c362b83b1c1a9d00059c1f97afa1b3300251f400b151bdc",
+    "bytes": 3938,
+    "mode": "0644"
+  },
+  "sequence_draft": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/mixed-study342-17-v1/generation-sequence-current.draft.json",
+    "sha256": "ced60acd475206f9d7049e22b1aa0ba45d64b3ccfa1bf8758b8a6a6416a45eb5",
+    "bytes": 40792,
+    "mode": "0644"
+  },
+  "collector_patch": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/mixed-study342-17-v1/corpus-stream-collector.current.patch",
+    "sha256": "c66ee3bda2aaa3ba1664d990cbe00b1eb18e032154e5bcfd6abee6cf1f6d3fb7",
+    "bytes": 1352,
+    "mode": "0644"
+  },
+  "collector_current_beforeimage": {
+    "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+    "sha256": "7fa127a022bd69e3dd5d0328f3954b076d71abf7ee00b0a5c5a7506ee85c3d1f",
+    "bytes": 216533,
+    "mode": "0644"
+  },
+  "ELF_dependencies": [
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30",
+      "sha256": "e7848e32af4932840ba775169041759a2a8dd5a008af360e5c55bce506eebcf4",
+      "bytes": 2190440,
+      "mode": "0644"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libgcc_s.so.1",
+      "sha256": "2bd1552c47799ef67e701e81d4383061fd76059868e446e63560f0dd0d5ec14e",
+      "bytes": 125312,
+      "mode": "0644"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+      "sha256": "7f2ca87f652f56b094462474b076749e90e689d0ecb9cb63c7679820b271b4e7",
+      "bytes": 911904,
+      "mode": "0644"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+      "sha256": "6b4a45352fd0c540a9c7c718f35ce8c8e46a4e482f9d3885a910c32d1a0e1421",
+      "bytes": 1926232,
+      "mode": "0755"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+      "sha256": "02bcda52c1a5dfc236f94d9e5255b4a0e26347d8a372a5223b650e31f291ce3c",
+      "bytes": 215000,
+      "mode": "0755"
+    }
+  ],
+  "loaded_glibc_version": "2.36",
+  "dynamic_libraries": [
+    {
+      "file": {
+        "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+        "sha256": "6b4a45352fd0c540a9c7c718f35ce8c8e46a4e482f9d3885a910c32d1a0e1421",
+        "bytes": 1926232,
+        "mode": "0755"
+      },
+      "version": "2.36"
+    }
+  ],
+  "current_refs_before_after": [
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner381-configured-outcome-v1",
+      "sha256": "9a63d2f3152b2062fdfb6dd441aa24fcaa39e0c8b784b5df96b98b7b18870ebd",
+      "bytes": 8726256,
+      "mode": "0755"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/mixed-outcome381-v1/runner-build-v1/operation-v1/manifest.json",
+      "sha256": "f8890ea6a6adb2db6b9fd2d3fcb53941d8ebcd8a5bb27990afbf4cbb7f58c979",
+      "bytes": 60565,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/campaign-generation-v1/data/book.json",
+      "sha256": "a6abde1f3182ba0e876c9e7719d3389502a44b3406ca28b7af9a0456952a6878",
+      "bytes": 85083,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/three-engine-comparison374/approved-plan-v5.json",
+      "sha256": "412d20539850283f29ca173b3c33071d5df031914ec560e62436371f380c4818",
+      "bytes": 154153,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/research-team/mixed-runtime342-16-v1/settings.UNSELECTED.json",
+      "sha256": "e268c0f752db537a9742498b7171a00a723a0a707c55a7ec000dd828b88082b8",
+      "bytes": 11963,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/configurable-fixed-d381-v1/source-binding-v1.json",
+      "sha256": "22260229755d4644ff257d338b499a869639df16a840f21fa86eee9475605fa1",
+      "bytes": 13250,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-data/src/common_corpus.rs",
+      "sha256": "94961085c15302ea29a00711fcc2c54405d42e7519c4051ce2a5e6d25f480f20",
+      "bytes": 11551,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-data/src/terminal.rs",
+      "sha256": "3c1e24fd6fc9aee369ace92769ca4842703b0f218bb84035adec269f011ddeef",
+      "bytes": 15068,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-runner/src/teacher_pilot/depth6.rs",
+      "sha256": "792336c409502b742202683aebd3c69f0571a2c9845390daa5c8a39dac660653",
+      "bytes": 8054,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-runner/src/teacher_pilot.rs",
+      "sha256": "51f61f9a2f698666c5d728bea6a2eaec0ff3e5a02e68acf92619f61657125f39",
+      "bytes": 8987,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+      "sha256": "7fa127a022bd69e3dd5d0328f3954b076d71abf7ee00b0a5c5a7506ee85c3d1f",
+      "bytes": 216533,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/scripts/dev/research-job.py",
+      "sha256": "db9ad6ea99bc525e4ccd150fbd5752196934f73fe839592eac5ab039c7ac2914",
+      "bytes": 31002,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/scripts/dev/project-env.sh",
+      "sha256": "fdffe71054d545e58a6aa649416491ba19831ac6195a12beca7d9ae41a33bd06",
+      "bytes": 3924,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/python/quoridor_training/cycle_process.py",
+      "sha256": "d6410c0c31956a31927f87c4e5a51d84064b841197cbfa4aa683ac76ea9c45e3",
+      "bytes": 22589,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/python/quoridor_training/snapshot.py",
+      "sha256": "ed0814965c012d6ad5ad094e653158b42b5d4ebf17463706ce53d029bc704341",
+      "bytes": 1232,
+      "mode": "0644"
+    },
+    {
+      "path": "/home/vscode/.cache/inference/python/cpython-3.14.7-linux-x86_64-gnu/bin/python3.14",
+      "sha256": "5a91882290532b2719eaca77c0f3a7448bd73b9214e56df57bc59004560a80c6",
+      "bytes": 32418544,
+      "mode": "0755"
+    },
+    {
+      "path": "/home/vscode/.cache/inference/envs/quoridor-training/pyvenv.cfg",
+      "sha256": "a9ec198f9a63bfcbbd437da9cb3d72ff5410514e008af734df87f9acc21f91f6",
+      "bytes": 200,
+      "mode": "0644"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30",
+      "sha256": "e7848e32af4932840ba775169041759a2a8dd5a008af360e5c55bce506eebcf4",
+      "bytes": 2190440,
+      "mode": "0644"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libgcc_s.so.1",
+      "sha256": "2bd1552c47799ef67e701e81d4383061fd76059868e446e63560f0dd0d5ec14e",
+      "bytes": 125312,
+      "mode": "0644"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+      "sha256": "7f2ca87f652f56b094462474b076749e90e689d0ecb9cb63c7679820b271b4e7",
+      "bytes": 911904,
+      "mode": "0644"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+      "sha256": "6b4a45352fd0c540a9c7c718f35ce8c8e46a4e482f9d3885a910c32d1a0e1421",
+      "bytes": 1926232,
+      "mode": "0755"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+      "sha256": "02bcda52c1a5dfc236f94d9e5255b4a0e26347d8a372a5223b650e31f291ce3c",
+      "bytes": 215000,
+      "mode": "0755"
+    },
+    {
+      "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+      "sha256": "7fa127a022bd69e3dd5d0328f3954b076d71abf7ee00b0a5c5a7506ee85c3d1f",
+      "bytes": 216533,
+      "mode": "0644"
+    }
+  ],
+  "checks": [
+    {
+      "name": "global-schedule1280",
+      "role": "input-preparation",
+      "argv": [
+        "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner381-configured-outcome-v1",
+        "teacher-pilot",
+        "--prepare-inputs",
+        "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/mixed-study342-17-v1/global-input-settings.selected.json",
+        "--input-sha256",
+        "9fbfd490db06504cb500632c7c915012935b20ae35bcf56758fb7eb38a15a8ae"
+      ],
+      "status": "PASS",
+      "guardian_return": {
+        "command": [
+          "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner381-configured-outcome-v1",
+          "teacher-pilot",
+          "--prepare-inputs",
+          "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/mixed-study342-17-v1/global-input-settings.selected.json",
+          "--input-sha256",
+          "9fbfd490db06504cb500632c7c915012935b20ae35bcf56758fb7eb38a15a8ae"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 74236,
+          "start_ticks": "327885",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "log_bytes_seen": 680,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 680,
+        "wall_seconds": 0.12674593700012338,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "full_log": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/mixed-study342-17-v1/native-input-checks-v1/global-schedule1280.full.log",
+        "sha256": "50c723ca483eec11ca6bd191e64917df75a9fc0ec0e0f57991b21b28f825c705",
+        "bytes": 680,
+        "mode": "0644"
+      },
+      "persisted_process_receipt": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/mixed-study342-17-v1/native-input-checks-v1/global-schedule1280.process.json",
+        "sha256": "3a05a1d8e82658d9a1717e9d271421572e332c4b4d458af22a5506dff5407f37",
+        "bytes": 1317,
+        "mode": "0600"
+      },
+      "capture_complete": true,
+      "secondary": [],
+      "primary": null
+    },
+    {
+      "name": "evaluation-histories64",
+      "role": "input-preparation",
+      "argv": [
+        "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner381-configured-outcome-v1",
+        "teacher-pilot",
+        "--prepare-inputs",
+        "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/mixed-study342-17-v1/evaluation-input-settings.selected.json",
+        "--input-sha256",
+        "a6245b76b3b2cdfa10536267daad6a311fff79fb63e7fcb22288b65b4d73377d"
+      ],
+      "status": "PASS",
+      "guardian_return": {
+        "command": [
+          "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner381-configured-outcome-v1",
+          "teacher-pilot",
+          "--prepare-inputs",
+          "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/mixed-study342-17-v1/evaluation-input-settings.selected.json",
+          "--input-sha256",
+          "a6245b76b3b2cdfa10536267daad6a311fff79fb63e7fcb22288b65b4d73377d"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 74243,
+          "start_ticks": "327901",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "log_bytes_seen": 728,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 728,
+        "wall_seconds": 0.05808666999973866,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "full_log": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/mixed-study342-17-v1/native-input-checks-v1/evaluation-histories64.full.log",
+        "sha256": "b01df359476366744b20ff67c24f962ed7d8cfc421b690f3edd4aa246b5c245f",
+        "bytes": 728,
+        "mode": "0644"
+      },
+      "persisted_process_receipt": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/mixed-study342-17-v1/native-input-checks-v1/evaluation-histories64.process.json",
+        "sha256": "b6534166c2ac6d02b4908a99b2d74210b665884e2feec5630a6a4c120793e562",
+        "bytes": 1321,
+        "mode": "0600"
+      },
+      "capture_complete": true,
+      "secondary": [],
+      "primary": null
+    },
+    {
+      "name": "runtime-ELF-dependencies",
+      "role": "input-preparation",
+      "argv": [
+        "/usr/bin/ldd",
+        "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner381-configured-outcome-v1"
+      ],
+      "status": "PASS",
+      "guardian_return": {
+        "command": [
+          "/usr/bin/ldd",
+          "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner381-configured-outcome-v1"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 74246,
+          "start_ticks": "327908",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "log_bytes_seen": 390,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 390,
+        "wall_seconds": 0.024570771000071545,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "full_log": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/mixed-study342-17-v1/native-input-checks-v1/runtime-ELF-dependencies.full.log",
+        "sha256": "2918236e5bf0c56a8914616b975f82adcdf97181002630a6646716ca3ec69de6",
+        "bytes": 390,
+        "mode": "0644"
+      },
+      "persisted_process_receipt": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/mixed-study342-17-v1/native-input-checks-v1/runtime-ELF-dependencies.process.json",
+        "sha256": "b433e7388fe684cef40bff715134dd2c91ab9afea3c96e3ba96c0fb5da82bce4",
+        "bytes": 1062,
+        "mode": "0600"
+      },
+      "capture_complete": true,
+      "secondary": [],
+      "primary": null
+    }
+  ],
+  "old_UNSELECTED_settings_immutable": {
+    "path": "/workspaces/quoridor/.worktree/learning-million/.artifacts/research-team/mixed-runtime342-16-v1/settings.UNSELECTED.json",
+    "sha256": "e268c0f752db537a9742498b7171a00a723a0a707c55a7ec000dd828b88082b8",
+    "bytes": 11963,
+    "mode": "0644"
+  },
+  "source_compatibility": "Four current owning input/partition production subjects byte-exact to adopted381",
+  "rules_only_native_prepare_calls": 2,
+  "Search_model_game_fit_build_calls": 0,
+  "future_outputs": {
+    "generation": "UNCREATED",
+    "compact": "UNCREATED",
+    "new_weights": "UNCREATED",
+    "evaluation_games": "UNENTERED"
+  },
+  "max_output_bytes_semantics": "Each batch maximum ceiling uses selected whole8GiB; Root must enforce one shared actual whole across retained batches/other stages; not four grants",
+  "runtime_gap": "Root collector/caller adoption and operation placement plus actual originating job; support now supplied; no readyfalse/None submitted",
+  "started_at": "2026-10-14T05:06:35.321897+00:00",
+  "controller_seconds_once": 0.6639581309996174,
+  "actual_source_input_caller_library_reader_STOP": "2026-10-14T05:06:35.985871+00:00",
+  "storage_budget": null,
+  "actual_Root_support": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/mixed-study342-17-v1/resources.json",
+    "sha256": "5150507478eebc77ec70767382c44ee65f12ea424bf8204bca5fbc0d5bfece38",
+    "bytes": 3194,
+    "mode": "0644"
+  },
+  "actual_Root_selected_plan": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/plan.json",
+    "sha256": "2d27a84a99549c7cdf0991ce592b8883785a102fdb7e50d78af0a83f90ebc0b0",
+    "bytes": 64550,
+    "mode": "0644"
+  },
+  "original_preparation_result": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/mixed-study342-17-v1/preparation-result.json",
+    "sha256": "c2d8ca45d71689dd4aee488ecc6db55b2faf93dc966814bdaf30bcdfc95b94fb",
+    "bytes": 23585,
+    "mode": "0644"
+  },
+  "metadata_correction": "input_config now names actual original global InputConfig; no native/rules replay"
+}

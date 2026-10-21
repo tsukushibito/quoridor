@@ -1,0 +1,39 @@
+{
+  "job_id": "95b5e7a7-5f19-4b19-b50a-b2554f19b5af",
+  "actualSTART": "2026-10-07T22:29:05.108458+00:00",
+  "workerSTOP": "2026-10-07T22:29:05.716675+00:00",
+  "controllerSTOP": "2026-10-07T22:29:07.102867+00:00",
+  "controller_seconds": 1.994829970994033,
+  "controller_outcome": "FAILED",
+  "raw_error": "explicit CPU duplicates physical sibling",
+  "stage": "runtime resources admit_explicit before output/evaluator/backend initialization",
+  "actual_runtime_Sigma_NNUE_caller_windows": 0,
+  "actual_model_backend_native_forwards": 0,
+  "planned_functional_slots": 4,
+  "started_functional_slots": 0,
+  "scientific_slots": 0,
+  "worker_prelaunch_counter_markers": "attempted_Sigma/NNUEmarker1 each means planned windows in launched runner config, not admitted API calls; original raw untouched",
+  "new_guard_source_calls": 0,
+  "all_direct_wait_cleanup_remaining": [],
+  "exactscience_identities_absent": [
+    {
+      "pid": 2729564,
+      "start_ticks": "66529799",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    {
+      "pid": 2729587,
+      "start_ticks": "66529843",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    }
+  ],
+  "old_costs_held": 186.63479634094983,
+  "new_controller_known_cumulative_seconds": 188.62962631194387,
+  "all_observed_positive_held_B": 18669568,
+  "TMP_sample_B": 6324224,
+  "private_b91_held": true,
+  "no_current_next_job_Cargo_clock_reservation": true,
+  "actual_main_adoption_input_received": "33b4d154ef4f3a1fc030a68f76f3f1e2a87e64fc",
+  "qualification_or_strength": false,
+  "automatic_retry": false
+}

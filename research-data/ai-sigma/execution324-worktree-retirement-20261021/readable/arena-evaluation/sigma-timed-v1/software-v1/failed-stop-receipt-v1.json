@@ -1,0 +1,206 @@
+{
+  "job": "8c4a2102-6879-4e64-93dc-01212ed60067",
+  "outer_outcome": "failed",
+  "actualSTART": "2026-10-07T20:26:07.271192+00:00",
+  "actual_workerSTOP": "2026-10-07T20:28:09.487835+00:00",
+  "controllerSTOP": "2026-10-07T20:28:09.710531+00:00",
+  "whole_controller_seconds": 122.51504851900972,
+  "nested_worker_seconds_not_added": 122.21852878492791,
+  "failure": "two Clippy diagnostics: Result SendError<Response> Err576B and redundant u8 cast; not resource guard or runtime/model failure",
+  "passed": "release own6 freshfalse/type/harness; four clock+four terminalreply+onebinding+one threecase synthetic-pump fixtures",
+  "scopedClippy": "FAILED101",
+  "native_clock": "NOT_RUN",
+  "models_nn_ft_calls": 0,
+  "scientific_games": 0,
+  "guard_sampled_peaks": {
+    "family_RAM_B": 701853696,
+    "positive_artifact_growth_B": 18644992,
+    "TMP_B": 1122304,
+    "private_B": 10412032
+  },
+  "private": {
+    "runner": {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/software-v1/private/quoridor-runner",
+      "SHA256": "d46dddce7c8feb6287be22f6cc03b2007eef97a9e0c800b0899986322a26137b",
+      "bytes": 6321704,
+      "mode": 493
+    },
+    "caller": {
+      "gzip_SHA256": "3b8e587f7728d291130b9ca8c934b2f866da80653dbf923c0cfebe608231d7ce",
+      "ELF_SHA256": "9b81c5f1cd13c0889b3fa689ea843a37c2ac4cd1b6ecb92df48ebf5a6643286a",
+      "ELF_bytes": 2931496,
+      "roundtrip": true
+    },
+    "arena": {
+      "gzip_SHA256": "3188523af5723975b0c9379e68b1852ac6297b1020c316c8931b4c17ddd72cb4",
+      "ELF_SHA256": "539807c7b9a62855298ae91fad6fa9050f1611d21c80613233caf0e331e12832",
+      "ELF_bytes": 1596728,
+      "roundtrip": true
+    },
+    "sigma": {
+      "gzip_SHA256": "56befb890efb9ae7fc4055d2ec810ef9ce8d919308420b2268386d2e8d86cb0d",
+      "ELF_SHA256": "e035c175d581aa075bb6ac9084d08554f6ca5836729d507bc6c48876da6c8eba",
+      "ELF_bytes": 6359728,
+      "roundtrip": true
+    }
+  },
+  "all10directcommands_cleanup": [
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/software-v1/arena-build.process.json",
+      "SHA256": "85b327abadded9cba2fd1055504c58be02f6531e358e3c14a0505bf82851ceed",
+      "child": {
+        "pid": 2653645,
+        "start_ticks": "65798618",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "exit_code": 0,
+      "direct_child_reaped": true,
+      "cleanup_complete": true,
+      "remaining": [],
+      "mask_receipt": "pending"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/software-v1/arena-fixture0.process.json",
+      "SHA256": "9b5b7601434ef95412694343113256e8cf2138b49b950da32ffa8f2ba73a230d",
+      "child": {
+        "pid": 2654042,
+        "start_ticks": "65801180",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "exit_code": 0,
+      "direct_child_reaped": true,
+      "cleanup_complete": true,
+      "remaining": [],
+      "mask_receipt": "pending"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/software-v1/caller-build.process.json",
+      "SHA256": "ca974189417b989fbaa0a401586bde591393dd4d463f04375b07c4b0955a6d36",
+      "child": {
+        "pid": 2653046,
+        "start_ticks": "65796323",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "exit_code": 0,
+      "direct_child_reaped": true,
+      "cleanup_complete": true,
+      "remaining": [],
+      "mask_receipt": "pending"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/software-v1/caller-fixture0.process.json",
+      "SHA256": "e9c22e0295a7fdbe13790f082d4a6cc381327de54746159335ea70c4ca4b3e3e",
+      "child": {
+        "pid": 2653632,
+        "start_ticks": "65798576",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "exit_code": 0,
+      "direct_child_reaped": true,
+      "cleanup_complete": true,
+      "remaining": [],
+      "mask_receipt": "pending"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/software-v1/caller-fixture1.process.json",
+      "SHA256": "5100cd113a8344a4ed08df3d2ddf31d99ac31d463c1aa42b0e41632a3efb1c14",
+      "child": {
+        "pid": 2653638,
+        "start_ticks": "65798584",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "exit_code": 0,
+      "direct_child_reaped": true,
+      "cleanup_complete": true,
+      "remaining": [],
+      "mask_receipt": "pending"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/software-v1/clippy.process.json",
+      "SHA256": "668bbe8ba259eee84c51530785f51d75dc71dd4fc8cfad2d018ceb107e37a36d",
+      "child": {
+        "pid": 2654263,
+        "start_ticks": "65803224",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "exit_code": 101,
+      "direct_child_reaped": true,
+      "cleanup_complete": true,
+      "remaining": [],
+      "mask_receipt": "pending"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/software-v1/compiler.process.json",
+      "SHA256": "d5a17ee465f4e4e6b4c81e3babb88da9bbb93753fe450f0a11696b809bc72dee",
+      "child": {
+        "pid": 2651936,
+        "start_ticks": "65791529",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "exit_code": 0,
+      "direct_child_reaped": true,
+      "cleanup_complete": true,
+      "remaining": [],
+      "mask_receipt": "pending"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/software-v1/release.process.json",
+      "SHA256": "676bee212e8e852a83cd123ef56fbe71f28d50807f17eb00763e81fb30696d74",
+      "child": {
+        "pid": 2651944,
+        "start_ticks": "65791533",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "exit_code": 0,
+      "direct_child_reaped": true,
+      "cleanup_complete": true,
+      "remaining": [],
+      "mask_receipt": "pending"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/software-v1/sigma-build.process.json",
+      "SHA256": "63ee4fb0f9d7e03d7833b7dda5065e57fd7ae47265489642cba05329514a99c9",
+      "child": {
+        "pid": 2654045,
+        "start_ticks": "65801223",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "exit_code": 0,
+      "direct_child_reaped": true,
+      "cleanup_complete": true,
+      "remaining": [],
+      "mask_receipt": "pending"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/software-v1/sigma-fixture0.process.json",
+      "SHA256": "76a0efe14d31d8d7791082ec24bf21ea08050c0bc52d5a633b6be64988b1430d",
+      "child": {
+        "pid": 2654248,
+        "start_ticks": "65803104",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "exit_code": 0,
+      "direct_child_reaped": true,
+      "cleanup_complete": true,
+      "remaining": [],
+      "mask_receipt": "pending"
+    }
+  ],
+  "exact_recorded_IDs_absent": 12,
+  "remaining": [],
+  "source_writer": "STOP",
+  "Cargo_science_reservation": "NONE",
+  "old_assets_source_caps_cost_UNKNOWN": "retained without refund",
+  "next_resource_gap_proposal": {
+    "keep_initial_private_allocated_B": 10412032,
+    "current_runner_gzip_inmemory_B": 2246953,
+    "new_runner_gzip_upper_B": 3145728,
+    "new_impacted_caller_harness_gzip_upper_B": 2097152,
+    "new_private_retention_upper_needed_B": 15728640,
+    "held_private_upper_B": 10485760,
+    "private_gap_B": 5242880,
+    "new_build_whole_needed_B": 47185920,
+    "held_build_whole_B": 41943040,
+    "precise_transfer_proposal": "5MiB within NEW128: source16->11 /build40->45, qual8/games64 unchanged; source current4497408<11MiB. This is a proposal, not selfgrant. New packed immutable payload decoded singly inside retainedTMP8MiB, preserve originals."
+  }
+}

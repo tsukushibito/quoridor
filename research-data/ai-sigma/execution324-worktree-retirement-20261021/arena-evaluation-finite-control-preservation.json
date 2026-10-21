@@ -1,0 +1,386 @@
+{
+  "issue": "quoridor-4lc.324.12.6",
+  "components": [
+    {
+      "component": "arena-common-pilot-controls",
+      "archive": {
+        "path": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-common-pilot-controls.tar.gz",
+        "sha256": "ed9b333f9d8a7fb12b41609c42d6e9cf4a186d820ee837fa18a93ea75efdb500",
+        "bytes": 5738028,
+        "mode": "0644"
+      },
+      "member_manifest": {
+        "path": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-common-pilot-controls-members.json",
+        "sha256": "80fbf2177ae4ae62c81093968ae5ce65a74552b589ebdfcdef03cc0cfe28a213",
+        "bytes": 279741,
+        "mode": "0644"
+      },
+      "prior_single_stream_reconstruction": {
+        "members": 659,
+        "bytes_modes_hash_exact": true,
+        "filesystem_extract": false
+      }
+    },
+    {
+      "component": "arena-paused-producer-controls",
+      "archive": {
+        "path": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-paused-producer-controls.tar.gz",
+        "sha256": "390823eaf1118052d6369a4c4140e9e6754691fc369cc0c8c0158b0a2ef26661",
+        "bytes": 234668,
+        "mode": "0644"
+      },
+      "member_manifest": {
+        "path": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-paused-producer-controls-members.json",
+        "sha256": "812c7d25354a6b75a22b9a2cb63a34b1d94a7c00290e83ae070023bdbc306878",
+        "bytes": 28912,
+        "mode": "0644"
+      },
+      "prior_single_stream_reconstruction": {
+        "members": 66,
+        "bytes_modes_hash_exact": true,
+        "filesystem_extract": false
+      }
+    },
+    {
+      "component": "arena-research-team-controls",
+      "archive": {
+        "path": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-research-team-controls.tar.gz",
+        "sha256": "9205dceb5de1cd337afb18b0f6079e3f6de59a6257433a31b22c6058164a70b5",
+        "bytes": 20933817,
+        "mode": "0644"
+      },
+      "member_manifest": {
+        "path": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-research-team-controls-members.json",
+        "sha256": "775447efacc5196351e0fb208fa93bb169700b2392ad66dc8b0f7b9bbad3dd12",
+        "bytes": 3923264,
+        "mode": "0644"
+      },
+      "prior_single_stream_reconstruction": {
+        "members": 9275,
+        "bytes_modes_hash_exact": true,
+        "filesystem_extract": false
+      }
+    },
+    {
+      "component": "arena-sigma-ended-controls",
+      "archive": {
+        "path": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-sigma-ended-controls.tar.gz",
+        "sha256": "25b65d2bd3805221aac0209c55d245d89ce32770b7fbd673488aa7afa78a8349",
+        "bytes": 26408487,
+        "mode": "0644"
+      },
+      "member_manifest": {
+        "path": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-sigma-ended-controls-members.json",
+        "sha256": "eb6bf16cd9d4f360a5f512bd3ed09d5117e00ef80825a16fa1511dbed2167d9a",
+        "bytes": 404946,
+        "mode": "0644"
+      },
+      "prior_single_stream_reconstruction": {
+        "members": 1033,
+        "bytes_modes_hash_exact": true,
+        "filesystem_extract": false
+      }
+    },
+    {
+      "component": "arena-three-engine-controls",
+      "archive": {
+        "path": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-three-engine-controls.tar.gz",
+        "sha256": "0c88d1ec82cf768919706208ee0c741cf0b89b39fb5adaa90690948a10de5050",
+        "bytes": 40661663,
+        "mode": "0644"
+      },
+      "member_manifest": {
+        "path": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-three-engine-controls-members.json",
+        "sha256": "31707e0270a49ce4a89863ced9e10d18b7196f675fd0c538b606b2da0533035e",
+        "bytes": 7955516,
+        "mode": "0644"
+      },
+      "prior_single_stream_reconstruction": {
+        "members": 18986,
+        "bytes_modes_hash_exact": true,
+        "filesystem_extract": false
+      }
+    },
+    {
+      "component": "arena-evaluation-source",
+      "archive": {
+        "path": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-evaluation-source.tar.gz",
+        "sha256": "30815c596f19abaa3c61f2d2e7075733612c680b1adee1326279d4d09a16f805",
+        "bytes": 162829,
+        "mode": "0644"
+      },
+      "member_manifest": {
+        "path": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-evaluation-source-members.json",
+        "sha256": "ae4554b7caf0ae8e2c356920ea7aeb8b8727536eac7f3c3a21cf96f775a094a6",
+        "bytes": 12608,
+        "mode": "0644"
+      },
+      "prior_single_stream_reconstruction": true
+    }
+  ],
+  "regular_evidence_files": 30019,
+  "original_logical_B": 254245491,
+  "source_preserved_files": 40,
+  "source_reused_Git": [
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/crates/quoridor-runner/src/main.rs",
+      "sha256": "4d0ec3b1ab7941023ff91f270191105ca69d0150d86b62f5c12dbb78ff66423b",
+      "bytes": 8803,
+      "mode": "0644",
+      "saved_owner": "/workspaces/quoridor/research-data/ai-sigma/arena-evaluation/source-stopped-clippy-repair-r3.json",
+      "existing_custody": "Root accepted old14source in0b103eb8; exact source manifest correspondence only"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/crates/quoridor-runner/src/arena_statistics.rs",
+      "sha256": "7d48611bc32199c751e1d8e53986f3eaac6a8b82c0f90dc59c4f83b4866888f2",
+      "bytes": 7850,
+      "mode": "0644",
+      "saved_owner": "/workspaces/quoridor/research-data/ai-sigma/arena-evaluation/source-stopped-clippy-repair-r3.json",
+      "existing_custody": "Root accepted old14source in0b103eb8; exact source manifest correspondence only"
+    }
+  ],
+  "source_manifest_correspondence_commit": "0b103eb8dab439166a13ce6beb631d8e04d6a843",
+  "original_metadata": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-evaluation-original-metadata.json",
+  "current_readable_migrations": [
+    {
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/software-v1/failed-stop-receipt-v1.json",
+      "preserved": "research-data/ai-sigma/execution324-worktree-retirement-20261021/readable/arena-evaluation/sigma-timed-v1/software-v1/failed-stop-receipt-v1.json",
+      "archive": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-sigma-ended-controls.tar.gz",
+      "member": "original/.artifacts/sigma-timed-v1/software-v1/failed-stop-receipt-v1.json"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/software-recovery-v1/failed-stop-receipt-v1.json",
+      "preserved": "research-data/ai-sigma/execution324-worktree-retirement-20261021/readable/arena-evaluation/sigma-timed-v1/software-recovery-v1/failed-stop-receipt-v1.json",
+      "archive": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-sigma-ended-controls.tar.gz",
+      "member": "original/.artifacts/sigma-timed-v1/software-recovery-v1/failed-stop-receipt-v1.json"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/live-qualification-v1/failed-stop-receipt-v1.json",
+      "preserved": "research-data/ai-sigma/execution324-worktree-retirement-20261021/readable/arena-evaluation/sigma-timed-v1/live-qualification-v1/failed-stop-receipt-v1.json",
+      "archive": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-sigma-ended-controls.tar.gz",
+      "member": "original/.artifacts/sigma-timed-v1/live-qualification-v1/failed-stop-receipt-v1.json"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/matches-current-unified-v1/final-task-bundle-v1.json",
+      "preserved": "research-data/ai-sigma/execution324-worktree-retirement-20261021/readable/arena-evaluation/sigma-timed-v1/matches-current-unified-v1/final-task-bundle-v1.json",
+      "archive": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-sigma-ended-controls.tar.gz",
+      "member": "original/.artifacts/sigma-timed-v1/matches-current-unified-v1/final-task-bundle-v1.json"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/matches-current-unified-v1/verified-outcome-summary-v1.json",
+      "preserved": "research-data/ai-sigma/execution324-worktree-retirement-20261021/readable/arena-evaluation/sigma-timed-v1/matches-current-unified-v1/verified-outcome-summary-v1.json",
+      "archive": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-sigma-ended-controls.tar.gz",
+      "member": "original/.artifacts/sigma-timed-v1/matches-current-unified-v1/verified-outcome-summary-v1.json"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/sigma-vs-distance-v1/matches-current-v1/final-task-bundle-v1.json",
+      "preserved": "research-data/ai-sigma/execution324-worktree-retirement-20261021/readable/arena-evaluation/sigma-timed-v1/sigma-vs-distance-v1/matches-current-v1/final-task-bundle-v1.json",
+      "archive": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-sigma-ended-controls.tar.gz",
+      "member": "original/.artifacts/sigma-timed-v1/sigma-vs-distance-v1/matches-current-v1/final-task-bundle-v1.json"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/sigma-vs-distance-v1/matches-current-v1/report.md",
+      "preserved": "research-data/ai-sigma/execution324-worktree-retirement-20261021/readable/arena-evaluation/sigma-timed-v1/sigma-vs-distance-v1/matches-current-v1/report.md",
+      "archive": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-sigma-ended-controls.tar.gz",
+      "member": "original/.artifacts/sigma-timed-v1/sigma-vs-distance-v1/matches-current-v1/report.md"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/sigma-vs-distance-v1/matches-current-v1/verified-outcome-summary-v1.json",
+      "preserved": "research-data/ai-sigma/execution324-worktree-retirement-20261021/readable/arena-evaluation/sigma-timed-v1/sigma-vs-distance-v1/matches-current-v1/verified-outcome-summary-v1.json",
+      "archive": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-sigma-ended-controls.tar.gz",
+      "member": "original/.artifacts/sigma-timed-v1/sigma-vs-distance-v1/matches-current-v1/verified-outcome-summary-v1.json"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/source-data-v1/interface-v1.json",
+      "preserved": "research-data/ai-sigma/execution324-worktree-retirement-20261021/readable/arena-evaluation/common-corpus-warmstart-study/source-data-v1/interface-v1.json",
+      "archive": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-paused-producer-controls.tar.gz",
+      "member": "original/.artifacts/common-corpus-warmstart-study/source-data-v1/interface-v1.json"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/corpus-entry-v2/operation-v2/manifest.json",
+      "preserved": "research-data/ai-sigma/execution324-worktree-retirement-20261021/readable/arena-evaluation/common-corpus-warmstart-study/pilot-v1/corpus-entry-v2/operation-v2/manifest.json",
+      "archive": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-common-pilot-controls.tar.gz",
+      "member": "original/.artifacts/common-corpus-warmstart-study/pilot-v1/corpus-entry-v2/operation-v2/manifest.json"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/corpus-entry-v2/failed-corpus-STOP.json",
+      "preserved": "research-data/ai-sigma/execution324-worktree-retirement-20261021/readable/arena-evaluation/common-corpus-warmstart-study/pilot-v1/corpus-entry-v2/failed-corpus-STOP.json",
+      "archive": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-common-pilot-controls.tar.gz",
+      "member": "original/.artifacts/common-corpus-warmstart-study/pilot-v1/corpus-entry-v2/failed-corpus-STOP.json"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/corpus-entry-v3/registration-START-intake.json",
+      "preserved": "research-data/ai-sigma/execution324-worktree-retirement-20261021/readable/arena-evaluation/common-corpus-warmstart-study/pilot-v1/corpus-entry-v3/registration-START-intake.json",
+      "archive": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-common-pilot-controls.tar.gz",
+      "member": "original/.artifacts/common-corpus-warmstart-study/pilot-v1/corpus-entry-v3/registration-START-intake.json"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/corpus-entry-v3/operation-v3/manifest.json",
+      "preserved": "research-data/ai-sigma/execution324-worktree-retirement-20261021/readable/arena-evaluation/common-corpus-warmstart-study/pilot-v1/corpus-entry-v3/operation-v3/manifest.json",
+      "archive": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-common-pilot-controls.tar.gz",
+      "member": "original/.artifacts/common-corpus-warmstart-study/pilot-v1/corpus-entry-v3/operation-v3/manifest.json"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/corpus-entry-v3/completion-collection-v3/qualified-corpus-STOP.json",
+      "preserved": "research-data/ai-sigma/execution324-worktree-retirement-20261021/readable/arena-evaluation/common-corpus-warmstart-study/pilot-v1/corpus-entry-v3/completion-collection-v3/qualified-corpus-STOP.json",
+      "archive": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-common-pilot-controls.tar.gz",
+      "member": "original/.artifacts/common-corpus-warmstart-study/pilot-v1/corpus-entry-v3/completion-collection-v3/qualified-corpus-STOP.json"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/compact-build-v5/operation-v5/manifest.json",
+      "preserved": "research-data/ai-sigma/execution324-worktree-retirement-20261021/readable/arena-evaluation/common-corpus-warmstart-study/pilot-v1/compact-build-v5/operation-v5/manifest.json",
+      "archive": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-common-pilot-controls.tar.gz",
+      "member": "original/.artifacts/common-corpus-warmstart-study/pilot-v1/compact-build-v5/operation-v5/manifest.json"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/compact-build-v5/completion-collection-v5/failed-build-STOP.json",
+      "preserved": "research-data/ai-sigma/execution324-worktree-retirement-20261021/readable/arena-evaluation/common-corpus-warmstart-study/pilot-v1/compact-build-v5/completion-collection-v5/failed-build-STOP.json",
+      "archive": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-common-pilot-controls.tar.gz",
+      "member": "original/.artifacts/common-corpus-warmstart-study/pilot-v1/compact-build-v5/completion-collection-v5/failed-build-STOP.json"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/no-cost-prediction-v1/software-build-v1/build-v7/qualified-collection-v1/completion-handoff.json",
+      "preserved": "research-data/ai-sigma/execution324-worktree-retirement-20261021/readable/arena-evaluation/three-engine-comparison374-v1/no-cost-prediction-v1/software-build-v1/build-v7/qualified-collection-v1/completion-handoff.json",
+      "archive": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-three-engine-controls.tar.gz",
+      "member": "original/.artifacts/three-engine-comparison374-v1/no-cost-prediction-v1/software-build-v1/build-v7/qualified-collection-v1/completion-handoff.json"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/primary-controls-two-ai-v1/batch-001/failed-STOP-binding.json",
+      "preserved": "research-data/ai-sigma/execution324-worktree-retirement-20261021/readable/arena-evaluation/three-engine-comparison374-v1/primary-controls-two-ai-v1/batch-001/failed-STOP-binding.json",
+      "archive": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-three-engine-controls.tar.gz",
+      "member": "original/.artifacts/three-engine-comparison374-v1/primary-controls-two-ai-v1/batch-001/failed-STOP-binding.json"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/cost-qualification-v1/phase1-entry-v1/collection-v1/QualificationPacket.json",
+      "preserved": "research-data/ai-sigma/execution324-worktree-retirement-20261021/readable/arena-evaluation/three-engine-comparison374-v1/cost-qualification-v1/phase1-entry-v1/collection-v1/QualificationPacket.json",
+      "archive": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-three-engine-controls.tar.gz",
+      "member": "original/.artifacts/three-engine-comparison374-v1/cost-qualification-v1/phase1-entry-v1/collection-v1/QualificationPacket.json"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/primary-controls-v3/batch-000/collection-v1/failed-first-pair-STOP.json",
+      "preserved": "research-data/ai-sigma/execution324-worktree-retirement-20261021/readable/arena-evaluation/three-engine-comparison374-v1/primary-controls-v3/batch-000/collection-v1/failed-first-pair-STOP.json",
+      "archive": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-three-engine-controls.tar.gz",
+      "member": "original/.artifacts/three-engine-comparison374-v1/primary-controls-v3/batch-000/collection-v1/failed-first-pair-STOP.json"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/primary-controls-v3/batch-000/collection-v1/smallest-condition.json",
+      "preserved": "research-data/ai-sigma/execution324-worktree-retirement-20261021/readable/arena-evaluation/three-engine-comparison374-v1/primary-controls-v3/batch-000/collection-v1/smallest-condition.json",
+      "archive": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-three-engine-controls.tar.gz",
+      "member": "original/.artifacts/three-engine-comparison374-v1/primary-controls-v3/batch-000/collection-v1/smallest-condition.json"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/clock-return-repair-v1/tests-only-v1/verified-tests-result.json",
+      "preserved": "research-data/ai-sigma/execution324-worktree-retirement-20261021/readable/arena-evaluation/three-engine-comparison374-v1/clock-return-repair-v1/tests-only-v1/verified-tests-result.json",
+      "archive": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-three-engine-controls.tar.gz",
+      "member": "original/.artifacts/three-engine-comparison374-v1/clock-return-repair-v1/tests-only-v1/verified-tests-result.json"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/finite-arena374-v1/result.json",
+      "preserved": "research-data/ai-sigma/execution324-worktree-retirement-20261021/readable/arena-evaluation/three-engine-comparison374-v1/finite-arena374-v1/result.json",
+      "archive": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-three-engine-controls.tar.gz",
+      "member": "original/.artifacts/three-engine-comparison374-v1/finite-arena374-v1/result.json"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/finite-arena374-v2/result.json",
+      "preserved": "research-data/ai-sigma/execution324-worktree-retirement-20261021/readable/arena-evaluation/three-engine-comparison374-v1/finite-arena374-v2/result.json",
+      "archive": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-three-engine-controls.tar.gz",
+      "member": "original/.artifacts/three-engine-comparison374-v1/finite-arena374-v2/result.json"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/finite-arena374-v3/result.json",
+      "preserved": "research-data/ai-sigma/execution324-worktree-retirement-20261021/readable/arena-evaluation/three-engine-comparison374-v1/finite-arena374-v3/result.json",
+      "archive": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-three-engine-controls.tar.gz",
+      "member": "original/.artifacts/three-engine-comparison374-v1/finite-arena374-v3/result.json"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/saved-results-v1/report.md",
+      "preserved": "research-data/ai-sigma/execution324-worktree-retirement-20261021/readable/arena-evaluation/three-engine-comparison374-v1/saved-results-v1/report.md",
+      "archive": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-three-engine-controls.tar.gz",
+      "member": "original/.artifacts/three-engine-comparison374-v1/saved-results-v1/report.md"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/interpretation-v1/current-v2/report.md",
+      "preserved": "research-data/ai-sigma/execution324-worktree-retirement-20261021/readable/arena-evaluation/three-engine-comparison374-v1/diagnostics-current-v1/interpretation-v1/current-v2/report.md",
+      "archive": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-three-engine-controls.tar.gz",
+      "member": "original/.artifacts/three-engine-comparison374-v1/diagnostics-current-v1/interpretation-v1/current-v2/report.md"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/nnue-loss-cases383-v1/analysis-v2/report-ja.md",
+      "preserved": "research-data/ai-sigma/execution324-worktree-retirement-20261021/readable/arena-evaluation/three-engine-comparison374-v1/nnue-loss-cases383-v1/analysis-v2/report-ja.md",
+      "archive": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-three-engine-controls.tar.gz",
+      "member": "original/.artifacts/three-engine-comparison374-v1/nnue-loss-cases383-v1/analysis-v2/report-ja.md"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/mixed-study342-17-v1/preparation-result-current.json",
+      "preserved": "research-data/ai-sigma/execution324-worktree-retirement-20261021/readable/arena-evaluation/research-team/mixed-study342-17-v1/preparation-result-current.json",
+      "archive": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-research-team-controls.tar.gz",
+      "member": "original/.artifacts/research-team/mixed-study342-17-v1/preparation-result-current.json"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-teacher-refresh423-analysis-v1/spec.json",
+      "preserved": "research-data/ai-sigma/execution324-worktree-retirement-20261021/readable/arena-evaluation/research-team/nnue-teacher-refresh423-analysis-v1/spec.json",
+      "archive": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-research-team-controls.tar.gz",
+      "member": "original/.artifacts/research-team/nnue-teacher-refresh423-analysis-v1/spec.json"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-teacher-refresh423-analysis-v1/one-time-scale-v1/resolution.json",
+      "preserved": "research-data/ai-sigma/execution324-worktree-retirement-20261021/readable/arena-evaluation/research-team/nnue-teacher-refresh423-analysis-v1/one-time-scale-v1/resolution.json",
+      "archive": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-research-team-controls.tar.gz",
+      "member": "original/.artifacts/research-team/nnue-teacher-refresh423-analysis-v1/one-time-scale-v1/resolution.json"
+    },
+    {
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/source-data-v1/quantity-schedule-cost-options-v1.json",
+      "preserved": "research-data/ai-sigma/execution324-worktree-retirement-20261021/readable/arena-evaluation/common-corpus-warmstart-study/source-data-v1/quantity-schedule-cost-options-v1.json",
+      "archive": "research-data/ai-sigma/execution324-worktree-retirement-20261021/arena-paused-producer-controls.tar.gz",
+      "member": "original/.artifacts/common-corpus-warmstart-study/source-data-v1/quantity-schedule-cost-options-v1.json"
+    }
+  ],
+  "unresolved_current_document_members": [
+    {
+      "document": "docs/research-findings.md",
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/trained-reference-v1/native-current-v1/qualification-v1/result.json"
+    },
+    {
+      "document": "docs/research-findings.md",
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/trained-reference-v1/native-current-v1/qualification-v1/job-runtime-v1/result.json"
+    },
+    {
+      "document": "docs/research-findings.md",
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/trained-reference-v1/native-current-v1/live-clock-immutable-v1/qualified-stop-receipt.json"
+    },
+    {
+      "document": "docs/research-findings.md",
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/trained-reference-v1/native-current-v1/distance-current-v1/current-result-summary.json"
+    },
+    {
+      "document": "docs/research-findings.md",
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/trained-reference-v1/native-current-v1/distance-current-v1/completion-stop-receipt.json"
+    },
+    {
+      "document": "docs/research-findings.md",
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/trained-reference-v1/native-final-v1/qualification-v1/summary.json"
+    },
+    {
+      "document": "docs/research-findings.md",
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/trained-reference-v1/native-final-v1/qualification-v1/completion-stop-receipt.json"
+    },
+    {
+      "document": "docs/research-findings.md",
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/arena-generalization361-verification-v1/report-v12.md"
+    },
+    {
+      "document": "docs/research-findings.md",
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/ordering-completion368-v1/result-handoff-v1/report.md"
+    },
+    {
+      "document": "docs/research-findings.md",
+      "original": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/build-provenance379-v1/software-build-v3/operation-v3/manifest.json"
+    }
+  ],
+  "prior_successful_stream_proofs_reused": true,
+  "new_full_stream_reconstruction": false,
+  "science_model_input_sealed_decode_execution": 0,
+  "whole_checkout_removal": false,
+  "original_bodies_custody": "arena-original-body-relocation-v1.json",
+  "resource_or_cost_qualification_unchanged": true
+}

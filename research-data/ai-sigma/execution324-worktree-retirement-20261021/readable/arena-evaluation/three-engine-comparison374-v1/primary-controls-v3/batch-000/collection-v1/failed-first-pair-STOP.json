@@ -1,0 +1,221 @@
+{
+  "issue": "quoridor-4lc.374.1",
+  "status": "STOPPED_ORIGINAL_FIRST_PAIR_FAILED_CLOCK_ORDER_VALIDATION",
+  "manifest": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/primary-controls-v3/batch-000/operation-v1/manifest.json",
+    "sha256": "9adb9decd3b9539e0c0d063e412a6edb8eaf4e28b592773238794c58a4597934",
+    "bytes": 8542,
+    "mode": "0644"
+  },
+  "condition": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/primary-controls-v3/batch-000/collection-v1/smallest-condition.json",
+    "sha256": "651952b7a8281f1e41e26219c7607c685e7cd5036ea14424fa773d3ada795c9d",
+    "bytes": 15842,
+    "mode": "0644"
+  },
+  "current_refs_and_original_identities": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/primary-controls-v3/batch-000/collection-v1/current-refs-process-STOP.json",
+    "sha256": "b79d92ba62eb1a17ea21cd27e58fadcf095566b1a2bc48bea06365bb0d734c1c",
+    "bytes": 14317,
+    "mode": "0644"
+  },
+  "original_submission": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/primary-controls-v3/batch-000/submission.json",
+    "sha256": "5b3edd06e6cb5ad83e73bc0590a717e134111b521479f88edcc7c4a169cd772e",
+    "bytes": 1362,
+    "mode": "0644"
+  },
+  "job_id": "1a11e5ab-513f-4b6a-a487-b7894ce91874",
+  "authoritative_finished_at": "2026-10-12T22:15:12.519932+00:00",
+  "normal_finalization_count": 1,
+  "INCOMPLETE_removed_LAST": true,
+  "primary": {
+    "type": "CycleStopped",
+    "message": "cycle child failed: ['/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner379-v1', 'arena', '--experiment', '/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/primary-controls-v3/batch-000/Experiment.json', '--experiment-sha256', '31751a0f354fb1383b16ee29ba051b593a47106b681fbc7cc85e029b93c403c8']: 1",
+    "notes": [
+      "data finalization secondary: durable data finalization incomplete: [{\"stage\": \"scientific_journal\", \"type\": \"Refused\", \"message\": \"Sigma receipt/drain/completed simulation\", \"notes\": []}]"
+    ]
+  },
+  "secondary": [
+    {
+      "stage": "candidate",
+      "facts": {
+        "type": "CycleStopped",
+        "message": "cycle child failed: ['/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/private-images/quoridor-runner379-v1', 'arena', '--experiment', '/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/primary-controls-v3/batch-000/Experiment.json', '--experiment-sha256', '31751a0f354fb1383b16ee29ba051b593a47106b681fbc7cc85e029b93c403c8']: 1",
+        "notes": [
+          "data finalization secondary: durable data finalization incomplete: [{\"stage\": \"scientific_journal\", \"type\": \"Refused\", \"message\": \"Sigma receipt/drain/completed simulation\", \"notes\": []}]"
+        ]
+      }
+    },
+    {
+      "stage": "outer_job",
+      "type": "Refused",
+      "message": "outer job unsuccessful or not cleaned",
+      "notes": [],
+      "available_result": {
+        "job_id": "1a11e5ab-513f-4b6a-a487-b7894ce91874",
+        "outcome": "failed",
+        "error": null,
+        "exit_code": 1,
+        "finished_at": "2026-10-12T22:13:24.208699+00:00",
+        "wall_seconds": 12.063042650930583,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+        "cleanup_complete": true,
+        "cleanup_errors": [],
+        "log_bytes_seen": 7243,
+        "log_bytes_retained": 7243
+      }
+    },
+    {
+      "stage": "command_return",
+      "command": "run",
+      "type": "Refused",
+      "message": "returned command facts unavailable",
+      "notes": []
+    },
+    {
+      "stage": "data_finalization",
+      "type": "Refused",
+      "message": "data finalization missing/failed",
+      "notes": []
+    }
+  ],
+  "inner_cleanup_complete": false,
+  "returned_native_guardian": null,
+  "authoritative_capture_complete": false,
+  "disk_directreaped_cleanup": [
+    true,
+    true,
+    true
+  ],
+  "disk_mask_persist": [
+    "pending",
+    "attempted"
+  ],
+  "outer_cleanup_complete": true,
+  "outer_direct_child_reaped": true,
+  "remaining": [],
+  "native_full_log": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/primary-controls-v3/batch-000/operation-v1/run.full.log",
+    "sha256": "c6540edadd65d0f74f615b91cdf62770a39dbc4b8849e838c88a350df8f3437f",
+    "bytes": 47,
+    "mode": "0644"
+  },
+  "native_saved_log_bytes_seen_retained": [
+    47,
+    47
+  ],
+  "outer_full_capture": [
+    7243,
+    7243
+  ],
+  "controller_START": "2026-10-12T22:13:12.146298+00:00",
+  "controller_STOP": "2026-10-12T22:13:24.208699+00:00",
+  "controller_wall_seconds_once": 12.063042650930583,
+  "native_wall_seconds_nested": 11.554237060016021,
+  "native_runtime_report_wall_seconds_nested": 11.383188966,
+  "native_inference_seconds_nested": 4.367005429000003,
+  "nested_added": false,
+  "first_raw_runtime_census": {
+    "planned_games": 2,
+    "started_games": 2,
+    "completed_games": 2,
+    "unknown_games": 0,
+    "complete_pairs": 1,
+    "incomplete_pairs": 0,
+    "unknown_reasons": {}
+  },
+  "raw_finished_games": [
+    {
+      "game": 0,
+      "family": "374-primary-batch-000-v1-family-000000",
+      "candidate_color": 0,
+      "status": "goal",
+      "winner": 0,
+      "plies": 69,
+      "started": true,
+      "reason": "goal",
+      "nn_calls": 518,
+      "observation_count": 65
+    },
+    {
+      "game": 1,
+      "family": "374-primary-batch-000-v1-family-000000",
+      "candidate_color": 1,
+      "status": "goal",
+      "winner": 1,
+      "plies": 84,
+      "started": true,
+      "reason": "goal",
+      "nn_calls": 648,
+      "observation_count": 80
+    }
+  ],
+  "raw_goal_count": 2,
+  "validated_observed_local_games": [],
+  "normal_missing_local_games": [
+    0,
+    1
+  ],
+  "global_campaign_planned": 768,
+  "remaining_campaign_unentered": 766,
+  "raw_native_nn_calls": 1166,
+  "raw_native_backend_work": {
+    "capture_rows": 0,
+    "executed_rows": 1166,
+    "failed_rows": 0,
+    "failed_warm_rows": 0,
+    "logical_rows": 1166,
+    "physical_rows": 1166,
+    "warm_rows": 0
+  },
+  "returned_before_receipt_count": 44,
+  "accepted_Sigma_observation_count": 73,
+  "source_model_library_image_input_caller_reader_STOP": "2026-10-12T22:17:42.589411+00:00",
+  "final_source_and_data_ref_reader_STOP": "2026-10-12T22:18:40.211813+00:00",
+  "finalizer_directwait": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/primary-controls-v3/batch-000/collection-v1/finalize-return.json",
+    "sha256": "a772bc878979e6ff64274cc1c0e1b4aa46b06a04cf79e53cf101018c8e797f12",
+    "bytes": 1299,
+    "mode": "0644"
+  },
+  "collector_directwait": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/primary-controls-v3/batch-000/collection-v1/collection-return.json",
+    "sha256": "987dc01772c214e7a29c8e64f6635bb4459da3fdd718433eac98e53290310219",
+    "bytes": 827,
+    "mode": "0644"
+  },
+  "collector_identity": {
+    "pid": 301538,
+    "start_ticks": 109674510,
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "collector_after": "ABSENT",
+  "exact_TMP_cleanup": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/primary-serial-TMP-v2/uv-cc8f3ad7aa19080a.lock",
+    "dev": 2128,
+    "ino": 3728355,
+    "FD_check": {
+      "dev": 2128,
+      "ino": 3728355,
+      "matching_FDs": [],
+      "unreadable": [],
+      "processes_inspected": 60
+    },
+    "EX_NB": true,
+    "directory_removed": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/primary-serial-TMP-v2"
+  },
+  "actual_canonical_env_release": "2026-10-12T22:18:40.212681+00:00",
+  "owned_readers_children_jobs_TMP_remaining": [],
+  "reservation": "NONE",
+  "new_native_model_head_Search_game_replay": 0,
+  "new_jobs_submitted": 0,
+  "primary_control_component_B": 51380224,
+  "whole_B": 809500672,
+  "global_held_B": 49996492800,
+  "new_grant_refund_borrow_B": 0,
+  "smallest_ordinary_gap": "Real returned/drain timestamp captured before authority.join; current native/Python ordering gate refuses44 observations. Root source/interpretation repair required; keep actual100ms authority/end/error/drain guards, oldraw/timestamps/FAILED immutable. No game/refill/cost replay or automatic nextpair."
+}

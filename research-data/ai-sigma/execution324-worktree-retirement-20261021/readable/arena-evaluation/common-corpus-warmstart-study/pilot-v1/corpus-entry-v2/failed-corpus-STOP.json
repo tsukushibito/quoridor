@@ -1,0 +1,174 @@
+{
+  "schema": "quoridor.common-corpus-STOP.v1",
+  "job_id": "9fd6810b-d7c4-4278-a106-3101225b5e34",
+  "authoritative_manifest": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/corpus-entry-v2/operation-v2/manifest.json",
+    "sha256": "73faaf930abda654b7903046becd0247306065e0de5c8d462eee6bb54f8a15c8",
+    "bytes": 9741,
+    "mode": "0644"
+  },
+  "outer_result": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/corpus-entry-v2/runtime-v2/result.json",
+    "sha256": "47510848cd4c9f3cf8a7f9b2c69d2d69415a1776a67c36e3600a6b28a417a46c",
+    "bytes": 502,
+    "mode": "0600"
+  },
+  "outer_state": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/corpus-entry-v2/runtime-v2/state.json",
+    "sha256": "ae4cab2dddba7aa2beb6fb28dab137fb4be62273ee433c260c0cdc901447dda1",
+    "bytes": 704,
+    "mode": "0600"
+  },
+  "outer_output": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/corpus-entry-v2/runtime-v2/output.log",
+    "sha256": "a1fcb2bde55fb9bbbaf43fc8e298c627cd4126e1db2d528424417c730813dbbe",
+    "bytes": 8317,
+    "mode": "0644"
+  },
+  "native_full_log": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/corpus-entry-v2/operation-v2/run.full.log",
+    "sha256": "3cfa5e3ccc891c15f6a4e06df9236e57065f38302eb50c03b881ed778440a1f1",
+    "bytes": 39,
+    "mode": "0644"
+  },
+  "persisted_process_receipt": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/corpus-entry-v2/operation-v2/run.process.json",
+    "sha256": "b0f6b95993438496dfc82d463fea009aae3b0e922b23bb9556e760ebcc024418",
+    "bytes": 2125,
+    "mode": "0600"
+  },
+  "controller_START": "2026-10-11T12:02:10.479445+00:00",
+  "controller_STOP": "2026-10-11T12:02:12.332558+00:00",
+  "controller_whole_seconds": 1.85373509908095,
+  "experimental_child_command_wall_seconds": 0.09719662799034268,
+  "experimental_seconds_remaining": 5399.90280337201,
+  "experimental_wall_origin": "Original failed native child persisted receipt. Returned guardianNULL; available child wall fact counted once, controller/admin/nested durations not added.",
+  "outer_cleanup_complete": true,
+  "inner_cleanup_complete": false,
+  "returned_guardian": null,
+  "persisted_direct_child_reaped": true,
+  "persisted_process_cleanup_complete": true,
+  "persisted_handle_closes_complete": true,
+  "persisted_signal_mask_restoration": "pending",
+  "persisted_final_record_persist": "attempted",
+  "exact_worker_UTC_STOP": "UNKNOWN",
+  "primary": {
+    "type": "CycleStopped",
+    "message": "cycle child failed: ['/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/private/quoridor-runner-pilot-v4', 'teacher-pilot', '--experiment', '/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/corpus-entry-v2/experiment.json', '--experiment-sha256', 'ff17e145fa94b6ce68c57d571d6ef8d988e322db3f594f44ac87bb815cc02410']: 1",
+    "notes": [
+      "data finalization secondary: durable data finalization incomplete: [{\"stage\": \"generation_result\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/assets/data/common-corpus-warmstart-study/pilot-v1/generation-result.json'\", \"notes\": []}, {\"stage\": \"stream_content\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/assets/data/common-corpus-warmstart-study/pilot-v1/stream-content.json'\", \"notes\": []}, {\"stage\": \"cache_manifest\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/assets/data/common-corpus-warmstart-study/pilot-v1/cache/cache.json'\", \"notes\": []}, {\"stage\": \"common_pilot_data\", \"type\": \"KeyError\", \"message\": \"'generation_result'\", \"notes\": []}]"
+    ]
+  },
+  "secondary": [
+    {
+      "stage": "candidate",
+      "facts": {
+        "type": "CycleStopped",
+        "message": "cycle child failed: ['/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/private/quoridor-runner-pilot-v4', 'teacher-pilot', '--experiment', '/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/corpus-entry-v2/experiment.json', '--experiment-sha256', 'ff17e145fa94b6ce68c57d571d6ef8d988e322db3f594f44ac87bb815cc02410']: 1",
+        "notes": [
+          "data finalization secondary: durable data finalization incomplete: [{\"stage\": \"generation_result\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/assets/data/common-corpus-warmstart-study/pilot-v1/generation-result.json'\", \"notes\": []}, {\"stage\": \"stream_content\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/assets/data/common-corpus-warmstart-study/pilot-v1/stream-content.json'\", \"notes\": []}, {\"stage\": \"cache_manifest\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/assets/data/common-corpus-warmstart-study/pilot-v1/cache/cache.json'\", \"notes\": []}, {\"stage\": \"common_pilot_data\", \"type\": \"KeyError\", \"message\": \"'generation_result'\", \"notes\": []}]"
+        ]
+      }
+    },
+    {
+      "stage": "outer_job",
+      "type": "Refused",
+      "message": "outer job unsuccessful or not cleaned",
+      "notes": [],
+      "available_result": {
+        "job_id": "9fd6810b-d7c4-4278-a106-3101225b5e34",
+        "outcome": "failed",
+        "error": null,
+        "exit_code": 1,
+        "finished_at": "2026-10-11T12:02:12.332558+00:00",
+        "wall_seconds": 1.85373509908095,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+        "cleanup_complete": true,
+        "cleanup_errors": [],
+        "log_bytes_seen": 8317,
+        "log_bytes_retained": 8317
+      }
+    },
+    {
+      "stage": "command_return",
+      "command": "run",
+      "type": "Refused",
+      "message": "returned command facts unavailable",
+      "notes": []
+    },
+    {
+      "stage": "data_finalization",
+      "type": "Refused",
+      "message": "data finalization missing/failed",
+      "notes": []
+    }
+  ],
+  "data_errors": [
+    {
+      "stage": "generation_result",
+      "type": "FileNotFoundError",
+      "message": "[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/assets/data/common-corpus-warmstart-study/pilot-v1/generation-result.json'",
+      "notes": []
+    },
+    {
+      "stage": "stream_content",
+      "type": "FileNotFoundError",
+      "message": "[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/assets/data/common-corpus-warmstart-study/pilot-v1/stream-content.json'",
+      "notes": []
+    },
+    {
+      "stage": "cache_manifest",
+      "type": "FileNotFoundError",
+      "message": "[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/assets/data/common-corpus-warmstart-study/pilot-v1/cache/cache.json'",
+      "notes": []
+    },
+    {
+      "stage": "common_pilot_data",
+      "type": "KeyError",
+      "message": "'generation_result'",
+      "notes": []
+    }
+  ],
+  "planned_games": 8,
+  "observed_games": 0,
+  "known_outcomes": 0,
+  "unentered_or_missing_UNKNOWN": 8,
+  "cache": "ABSENT",
+  "fit_A": "NOT_RUN",
+  "fit_B": "NOT_RUN",
+  "concrete_static_inlet_cause": {
+    "source": {
+      "path": "/workspaces/quoridor/crates/quoridor-runner/src/teacher_pilot_execution/depth6.rs",
+      "sha256": "10ca01c090aa694c60d73a391af2324ef67fb65cf9310ce0f10910fde369f310",
+      "bytes": 39153,
+      "mode": "0644"
+    },
+    "line": 284,
+    "statement": "fs::create_dir(&config.output)?;",
+    "exclusive_output": "/workspaces/quoridor/.worktree/assets/data/common-corpus-warmstart-study/pilot-v1",
+    "missing_parent": "/workspaces/quoridor/.worktree/assets/data/common-corpus-warmstart-study",
+    "scope": "Exclusive create_dir precedes stream/Requests/Header/scheduling/Search. All actual declared inputs/current source/tool/image refs matched; missing parent produces errno2. Not a compiler/source disappearance or actual game failure claim."
+  },
+  "source_refs_after_checked": 72,
+  "metadata_notification_supervisor": {
+    "identity": {
+      "pid": 575098,
+      "start_ticks": "97339853",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "observed_present_after_finished_result": true,
+    "scope": "Canonical research-job notification process; not inferred active native compute, no foreign kill."
+  },
+  "collector_refusal": "Initial exact-identities assertion included still-present completed-job notification supervisor; no source mutation, child replay or finalization rerun.",
+  "actual_source_reader_STOP": "2026-10-11T12:05:55.165413+00:00",
+  "owned_readers": [],
+  "owned_children": [],
+  "owned_scientific_jobs": [],
+  "TMP": [],
+  "remaining_native_processes": [],
+  "reservation": "NONE",
+  "minimum_routine_correction": "Prepare only missing assigned canonical output parent under fresh NB; preserve exclusive final pilot-v1 directory creation and original failed job. No source/Rust/framework change or blind retry."
+}

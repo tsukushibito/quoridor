@@ -1,0 +1,373 @@
+{
+  "issue": "quoridor-4lc.423.1",
+  "status": "ONE_TIME_SCALE_FIXED_SAVED_METADATA_ONLY",
+  "at": "2026-10-16T15:31:32.597541+00:00",
+  "decision": {
+    "total_generation_requests": 256,
+    "original_pilot_requests_reused": 32,
+    "genuinely_unentered_suffix_requests": 224,
+    "request_IDs": {
+      "reused": [0, 31],
+      "suffix": [32, 255]
+    },
+    "new_generation_launched_by_analyst": 0,
+    "source_model_payload_forward_fit_Search_arena_calls": 0,
+    "rationale": "Coverage formula requires288;256 is the largest feasible authorized finite comparison, with expected selectedT3754 below4096 guide. It broadens W's finite question, while F remains a small scratch-training exploration. Not an effect-size/sample-size guarantee or an automatic pilot-to-fit promotion.",
+    "PILOT_ONLY": false
+  },
+  "original_spec": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/research-team/nnue-teacher-refresh423-analysis-v1/spec.json",
+    "sha256": "c919d92bea060ebb73d205801581f34a4751b5b33bf9decf72c2aa25ee65e359",
+    "bytes": 17309,
+    "mode": "0644"
+  },
+  "resolved_seeds_unchanged": {
+    "generation_prefix": 42320261016,
+    "evaluation_prefix": 42320261017,
+    "whole_family_split": 42320261018,
+    "pilot_MCTS_slice_seeds": [
+      42320261100, 42320261101, 42320261102, 42320261103
+    ],
+    "suffix_MCTS_seed": 42320261104,
+    "U_R_W_training_base": 42320261020,
+    "F_fresh_initialization": 42320261021,
+    "W_F_shuffled_row_stream": 42320261022,
+    "U_R_uniform_proposal_stream": 42320261023,
+    "reflection_stream": 42320261024,
+    "fixed_public_T_panel": 42320261025,
+    "arena": 42320261026,
+    "native_family_interval": 42320261027,
+    "R_acceptance_stream": 42320261028,
+    "old_q": 42320261029
+  },
+  "pilot_actual": {
+    "requests_GOAL": 32,
+    "eligible_rows": 1704,
+    "T_rows": 1289,
+    "V_rows": 415,
+    "T_families": 25,
+    "V_families": 7,
+    "selected_T_rows": 460,
+    "exact_distinct_selected_T_inputs": 460,
+    "selected_stock_histogram": [
+      77, 35, 43, 34, 31, 25, 10, 22, 52, 24, 13, 14, 19, 7, 5, 6, 43, 0, 0, 0,
+      0
+    ],
+    "selected_per_training_game": 18.4,
+    "R_over_former_800_example": 0.575,
+    "Sigma_actual_rows": 95544,
+    "Sigma_warm_failed": [0, 0],
+    "observed_directed_bulk_allocated_B": 3477504,
+    "serial_TMP_historical_peak": "UNKNOWN"
+  },
+  "scale_arithmetic": {
+    "guide_is_not_power_requirement": true,
+    "individual_N_terms": {
+      "pilot_floor": 32,
+      "T_families": 163.84,
+      "V_families": 146.28571428571428,
+      "selected_T": 284.9391304347826,
+      "distinct_T": 142.4695652173913
+    },
+    "data_formula_N": 288,
+    "request_ceiling": 256,
+    "Sigma_forecast_feasible_total_N": 503,
+    "storage_forecast_feasible_total_N": 315,
+    "resolved_N": 256
+  },
+  "suffix_settings": {
+    "existing_controller_only": true,
+    "operations": 28,
+    "requests_per_operation": 8,
+    "fixed_ranges": [
+      [32, 39],
+      [40, 47],
+      [48, 55],
+      [56, 63],
+      [64, 71],
+      [72, 79],
+      [80, 87],
+      [88, 95],
+      [96, 103],
+      [104, 111],
+      [112, 119],
+      [120, 127],
+      [128, 135],
+      [136, 143],
+      [144, 151],
+      [152, 159],
+      [160, 167],
+      [168, 175],
+      [176, 183],
+      [184, 191],
+      [192, 199],
+      [200, 207],
+      [208, 215],
+      [216, 223],
+      [224, 231],
+      [232, 239],
+      [240, 247],
+      [248, 255]
+    ],
+    "each_operation_Sigma_rows_cap": 60000,
+    "quality": "Same canonical MCTS64 completed simulations/move,200ply inclusive prefix, original model/factory/codec and temperature0. No simulation-quality reduction, new engine, scheduler or classifier.",
+    "seed": 42320261104,
+    "seed_binding": "Use this one frozen suffix seed with existing native per-game/global-ID semantics in all planned operations; no new seed sweep or outcome-dependent reassignment.",
+    "unused_operation_caps": "not transferred or refilled; genuine UNKNOWN/failure/missing slots remain",
+    "actual_process_width": "Root chooses1..4 at ordinary physical/RAM admission, no width sweep"
+  },
+  "Sigma": {
+    "four_original_slice_actual_rows": [24545, 23819, 25731, 21449],
+    "worst_actual_rows_per_GOAL_request": 3216.375,
+    "suffix_forecast_margin": 1.25,
+    "suffix_forecast_rows": 900585.0,
+    "old_q_boundary_reserve": 10000,
+    "total_forecast_including_pilot_reserve": 1006129.0,
+    "hard_sum_of_fixed_operation_caps_plus_actual_pilot_reserve": 1785544,
+    "whole_limit": 2000000,
+    "unallocated_whole_rows": 214456,
+    "logical_physical_executed_warm_failed": "Actual separate counters retained; forecasts do not imply completed games or count simulations as forwards"
+  },
+  "final_fit_view": {
+    "frozen_prospective_partition": {
+      "path": "/workspaces/quoridor/.worktree/assets/data/nnue-teacher-refresh423-v1/inputs/prospective-v1/partition.json",
+      "sha256": "42c2fea8d67116dac7950b5e7d74a3931389b988b52d79b88e01ab7ecc8f8dd7",
+      "bytes": 45084,
+      "mode": "0644"
+    },
+    "canonical_families_if_all_256_complete": {
+      "validation": 52,
+      "train": 204
+    },
+    "pilot_to_final_fit_view_changes": [
+      {
+        "game": "fixed-d-family-000018",
+        "family": "3912e9bf7549ec722765624178603f8406fc2f3f87da43b05f00b65b74755569",
+        "pilot_split": "validation",
+        "final_fit_view_split": "train"
+      }
+    ],
+    "original_RAW_split_cache": "immutable pilot provenance; do not silently relabel or overwrite",
+    "binding": "Use existing normal canonical owner and original fac3fd19 split correspondence to bind final global IDs, schedule, realized successful row game codes, and exact final fit-view assignment. Suffix operational/raw split provenance is separate. No alternate registry or split algorithm.",
+    "if_missing": "Keep fixed256 prospective assignments, realized missingness and eligible T/V subset explicit; no re-ranking by outcome or success and no substitute requests",
+    "estimated_eligible_T_rows": 10518.24,
+    "estimated_all_V_rows": 3082.8571428571427,
+    "estimated_selected_T_rows": 3753.6,
+    "estimated_distinct_T_inputs": "UNKNOWN; pilot selected inputs are460/460 distinct, no guarantee at256",
+    "density_scenario_distinct_if_pilot_uniqueness_persists": 3753.6,
+    "selected_4096_guide_shortfall_estimate": 342.4000000000001,
+    "selected_stock_density_scenario": {
+      "0": 628.32,
+      "1": 285.6,
+      "2": 350.88,
+      "3": 277.44,
+      "4": 252.96,
+      "5": 204.0,
+      "6": 81.6,
+      "7": 179.52,
+      "8": 424.32,
+      "9": 195.84,
+      "10": 106.08,
+      "11": 114.24,
+      "12": 155.04,
+      "13": 57.12,
+      "14": 40.8,
+      "15": 48.96,
+      "16": 350.88,
+      "17": 0.0,
+      "18": 0.0,
+      "19": 0.0,
+      "20": 0.0
+    },
+    "actual_before_fit": "Freeze actual R/distinct/T/V/stock/prefix and forward arithmetic once after this suffix. Practical minimum coverage for the planned main comparison: >=128 eligible T families, >=32 V families, >=2048 distinct selected T inputs. These are prospective scope choices, not statistical sufficiency. If materially unmet, report PILOT_ONLY; do not fit just to exhaust authorization or resolve a second scale.",
+    "R4096_guide": "target only; projected3754 permits this explicitly limited main comparison, not a hidden hard guarantee"
+  },
+  "fits": {
+    "unchanged_rules": {
+      "architecture": "current FT32/H32/QF1/Zero4 FP32/tanh, standardized distance inputs, bypassOFF; same frozen normalization/scale",
+      "optimizer_each": "fresh Adam betas[0.9,0.999], eps1e-8, weight_decay0",
+      "R_actual": "actual nonempty selected newT rows, not requests/maximum rows",
+      "U_R_W": "S=min(8R,32768); U=ceil(S/256); at update j, b_j=min(256,S-256*(j-1)); same actual b_j/update/LR for U/R/W",
+      "U_R_W_learning_rate": "1e-4, linear warmup min(10,U) then constant",
+      "F": "S_F=min(64R,524288); U_F=ceil(S_F/256); same actual-tail rule",
+      "F_learning_rate": "1e-3, linear warmup min(20,U_F) then constant; one prospective choice extrapolated from362/366/371, not a scratch-LR qualification/optimum",
+      "shuffle_and_reflection": "W/F same seeded shuffled-cycling row stream prefix; actual per-row visit counts; train-only correct LR reflection0.5 using separate stream; no ceil padding beyond8R/64R",
+      "observations": "unique{0,ceil(U/3),ceil(2U/3),U}, F uses U_F; <=4 per condition; no validation-driven extra points/fit",
+      "selector": "existing newV canonical-family mean of within-family row MSE, tie earlier step; public_non_regression=false; INITIAL/BEST/LAST only",
+      "public_monitor": "full opened V419150 once per distinct actual frozen BEST/scope; fixed publicT8192 diagnostics, not fullT",
+      "shared_INITIAL": "U/R/W only reuse actual saved exact-model/normalization/bank/scope record; no421C substitution or fabricated forward credits; conservative budget does not require aliasing",
+      "descriptive_metrics": "family/stock/prefix-length MSE and sign; fixed10 equal-width post-tanh[-1,1] calibration bins with last endpoint included, mean prediction vs mean z, from same predictions; no extra forwards",
+      "logical_forward_ceiling": 4000000,
+      "conservative_forward_bound": {
+        "requests_ceiling": 256,
+        "conservative_selected_new_T": 8192,
+        "conservative_new_V": 51200,
+        "public_T_panel": 8192,
+        "full_opened_public_V": 419150,
+        "max_four_fit_training": 622592,
+        "conservative_distinct_observations_without_initial_alias": 16,
+        "max_observation_bank_rows": 67584,
+        "frozen_best_public_V": 1676600,
+        "changed_weights_native_correspondence_allowance": 1024,
+        "upper_without_INITIAL_alias": 3381560,
+        "upper_with_actual_shared_warm_INITIAL": 3246392
+      },
+      "changed_weight_boundary": "necessary native/full-delta/undo/scale only, <=1024 additional logical rows within4M; no old successful suite replay"
+    },
+    "projected_R_ceil_for_schedule_example_only": 3754,
+    "U_R_W_example_not_actual": {
+      "selected_R": 3754,
+      "training_rows": 30032,
+      "updates": 118,
+      "last_batch": 80,
+      "exposures_per_selected_row": 8.0
+    },
+    "F_example_not_actual": {
+      "selected_R": 3754,
+      "training_rows": 240256,
+      "updates": 939,
+      "last_batch": 128,
+      "exposures_per_selected_row": 64.0
+    },
+    "exact_row_exposure": "W at most8 and F at most64 per selected row, same shuffled stream prefix and no padded extra batch; save actual visits. U/R/W share actual updates, batches and warmstart; R alone changes 0.92^(43-i) public-row weights. F also differs in initialization/LR/update/exposure, not an initialization-only contrast.",
+    "hard_bounds_for_frozen_204T_52V_partition": {
+      "selected_T_rows": 6528,
+      "V_rows_200ply_bound": 10400,
+      "four_fit_training": 516096,
+      "one_observation_bank": 25120,
+      "observations_max": 16,
+      "four_BEST_full_public_V": 1676600,
+      "changed_weights_allowance": 1024,
+      "logical_NNUE_rows_without_INITIAL_sharing": 2595640,
+      "logical_NNUE_whole_cap": 4000000
+    },
+    "scope": "Shared INITIAL only actual exact scope; no421U/C substitution. No extra LR/seed/fit/checkpoints or q teacher. Search/arena node work is separate, never hidden in training counts."
+  },
+  "arena": {
+    "fixed_allocation_unchanged": {
+      "allocation_before_new_outcomes": [
+        {
+          "contrast": "W versus frozen BEST43",
+          "families": "first64 available canonical eval families",
+          "maximum_games": 128,
+          "role": "primary"
+        },
+        {
+          "contrast": "W versus fixedD(0,8,tanh)",
+          "families": "first16 of same eval families",
+          "maximum_games": 32,
+          "role": "secondary exploratory"
+        }
+      ],
+      "total_maximum_games": 160,
+      "total_maximum_colour_pairs": 80,
+      "formerly_planned_five_by32": "unentered original plan retained in contract history; R/U,W/U,W/F have no direct game-strength comparison in this allocation, their curves remain descriptive",
+      "method": "Control/PVS/TT1048576/LMR ON depth_rank/approxOFF/safeOFF, same frozen image,100ms authority receipt/5ms reserve/1M nodes per turn/200 total ply",
+      "aggregate_nodes": 1000000000,
+      "completion": "actual<=64 disjoint eval families, two colours; missing/UNKNOWN/storage cap preserved, no replacement/refill;160 is a ceiling not guaranteed complete",
+      "uncertainty": "family paired scores; reuse existing family owner across necessary sequential batches, no averaging batch CIs/repeated bootstrap; same families in secondary are dependent; only saved native interval authority",
+      "normal_planning_only": [
+        {
+          "families": 16,
+          "games": 32,
+          "half_width_95": 0.245,
+          "difference_80pct_two_sided": 0.35
+        },
+        {
+          "families": 64,
+          "games": 128,
+          "half_width_95": 0.1225,
+          "difference_80pct_two_sided": 0.175
+        }
+      ],
+      "limitations": "even64 families has worst-case approximate95% halfwidth12.25points and80%-power MDE17.5points; no guaranteed small-gain/Elo/superiority claim. NewV BEST selection and multiple fits do not make arena an unbiased population certificate"
+    },
+    "planning_old_family_variance_only": [
+      {
+        "saved_pairs": 98,
+        "sample_variance": 0.13749211024616032,
+        "planning_64_family_halfwidth_normal_95": 0.0908458249867641,
+        "planning_64_family_two_sided_80_MDE": 0.12977974998109157,
+        "cross_experiment_variance_transfer_unqualified": true
+      },
+      {
+        "saved_pairs": 98,
+        "sample_variance": 0.06956132968651378,
+        "planning_64_family_halfwidth_normal_95": 0.06461748071871101,
+        "planning_64_family_two_sided_80_MDE": 0.09231068674101572,
+        "cross_experiment_variance_transfer_unqualified": true
+      }
+    ],
+    "worst_range_64_family_normal95_halfwidth": 0.1225,
+    "worst_range_64_family_normal80_two_sided_MDE": 0.175,
+    "scope": "Only W/BEST43 primary64 starts; W/D secondary16 shared starts. Actual missing/UNKNOWN retained. No pooling old408/412/421 results, no population/Elo/superiority/noninferiority guarantee. U/R/F have no direct strength contrast here."
+  },
+  "storage": {
+    "existing_whole_cap_B": 134217728,
+    "actual_pilot_conversion_receipt_allocated_B": 3477504,
+    "suffix_generation_conversion_growth_forecast_B": 30428160.0,
+    "planning_allowances_not_measured_peaks": {
+      "four_fits_models_metrics_and_controls_B": 33554432,
+      "arena_saved_outputs_archives_and_controls_B": 50331648,
+      "serial_TMP_and_unmeasured_peak_allowance_B": 8388608
+    },
+    "old_saved_arena_196game_raw_bytes": [34485205, 39308906],
+    "scaled160game_old_largest_raw_with25pct_margin_B": 40111128.571428575,
+    "whole_forecast_B": 126180352.0,
+    "forecast_margin_B": 8037376.0,
+    "serial_TMP_peak": "UNKNOWN;8MiB is an allowance, not measured peak",
+    "admission": "Existing aggregate whole guard plus ordinary actual owner output forecasts/TMP/control checks are authoritative at each real stage; partial stop is allowed. This forecast does not certify future arena output size or guarantee256 games, fits or160 arena completion. Do not add a budget framework or silently expand128MiB.",
+    "latest_Root_support": {
+      "at": "2026-10-16T15:21:25.536850+00:00",
+      "status": "APPLIED_ONCE_REPORTED_GAP_RESOLVED",
+      "decision": {
+        "path": "/workspaces/quoridor/.worktree/assets/perf/policy-storage-reconciliation-20261016/decision.json",
+        "sha256": "f1ed4c0e4897a8d1cda162f6f6e37daa713ef037ec121c475e812602c2e8bd6b",
+        "bytes": 4886,
+        "mode": "0644"
+      },
+      "prior_covered_B": 50000000000,
+      "one_duplicate_cover_removed_B": 1511395328,
+      "nonnegative397_target_growth_retained_B": 32727040,
+      "new_interval_positive_composed_once_B": 552148992,
+      "covered_before_small_tails_B": 49040753664,
+      "headroom_before_small_tails_B": 959246336,
+      "remaining_old_unused_future_B": 97346560,
+      "actual_used_or_cost_refund_B": 0,
+      "actual_deletion_B": 0,
+      "Main_overlap_credit_B": 0,
+      "private_images_or_other_holdings_credit_B": 0,
+      "prior512MiB_or_migration_forward_reapplied_B": 0,
+      "other_historical_overcounts_changed": 0,
+      "whole421_B": 268435456,
+      "whole423_B": 134217728,
+      "decimal_cap_B": 50000000000,
+      "global_actual": "UNKNOWN",
+      "cache_global_inventory": 0,
+      "original_gap": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/zero-stock-wall-detour424-v1/retirement-build-v1/post-build-support-gap.json",
+        "sha256": "9165a4f12e7c12407765aec84cecf5f97d970ba14229fb7a85d980c3b3f2dd53",
+        "bytes": 1517
+      },
+      "original_receipts_unchanged": true,
+      "ordinary_tail": "Only actual new decision/publication/admin positives composed separately once"
+    },
+    "no_global_inventory_refund_or_shared_recharge": true
+  },
+  "cost": {
+    "pilot_outer_once_seconds": 422.15621964397724,
+    "conversion_outer_once_seconds": 4.450889509986155,
+    "known_original_outer_subtotal_seconds": 426.6071091539634,
+    "suffix_elapsed_planning_seconds": 3927.0476759495796,
+    "suffix_time_basis": "1.25*max(original slices1..3 native wall/8)*224, sequential operation planning only; not added to already counted pilot and not a kill deadline or parallel speed guarantee",
+    "all_other_source_software_LLM_admin_fit_arena_actual_cost": "UNKNOWN or not entered; no fabricated zero"
+  },
+  "interpretation": {
+    "W": "Test a finite practical transfer procedure from many more lineages with bounded exposure against same-schedule public continuation and frozen incumbent; small general strength gains remain unresolved by64-family arena.",
+    "F": "Exploratory scratch learning on a few thousand selected states plus inherited input normalization. Negative/INITIAL BEST cannot establish impossible scratch training, bad teacher, bad old weights or sufficient sample size.",
+    "U_R": "Same43 public sources/warmstart/schedule, only stated recency weights differ; old generations are not independently proved weak.",
+    "limitations": "No causal isolation of teacher/data/initialization/LR/updates, no MSE-to-strength equivalence, no D/Sigma oracle, newV checkpoint selection optimism and within-family dependence retained."
+  },
+  "unchanged": "All342.17/323 USERPAUSE,421 separate evidence, product/generator defaults, models/features/weights/seals/oldfits96/foreign/old RAW/FAILED/fees remain unchanged",
+  "next_dependency": "Root324 normal one suffix admission -> actual final cache/count/fit-view and schedules -> original four fits/finite arena -> same423.1 saved analysis. No new science by this analyst and no ACK/parentclose gate."
+}

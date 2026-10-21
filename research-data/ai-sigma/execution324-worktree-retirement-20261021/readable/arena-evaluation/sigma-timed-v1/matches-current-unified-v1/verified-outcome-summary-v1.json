@@ -1,0 +1,482 @@
+{
+  "issue": "quoridor-4lc.331",
+  "planned": 16,
+  "started": 16,
+  "decided": 14,
+  "NNUE_W": 0,
+  "NNUE_L": 14,
+  "Sigma_W": 14,
+  "Sigma_L": 0,
+  "draw": 0,
+  "unknown": 2,
+  "complete_pairs": 6,
+  "incomplete_pairs": 2,
+  "NNUE_planned_score_bounds": [0, 0.125],
+  "Sigma_planned_score_bounds": [0.875, 1],
+  "call_counters": {
+    "attempted": 660,
+    "accepted": 658,
+    "nodes": 16246244,
+    "nn_requests_attempted": 7746,
+    "completed_simulations": 9666,
+    "discarded_late_replies": 302
+  },
+  "rejected_clock_windows": [
+    {
+      "phase": "main",
+      "game": 6,
+      "ply": 9,
+      "engine": "Sigma",
+      "caller_seconds": 0.100207103,
+      "excess_ns": 207103,
+      "rejected_action": 77
+    },
+    {
+      "phase": "main",
+      "game": 10,
+      "ply": 17,
+      "engine": "Sigma",
+      "caller_seconds": 0.100302499,
+      "excess_ns": 302499,
+      "rejected_action": 50
+    }
+  ],
+  "slots": [
+    {
+      "phase": "initial",
+      "game": 0,
+      "family": "331-current-unified-NNUE-Sigma-initial-family-000000",
+      "candidate_color": 0,
+      "status": "goal",
+      "winner": 1,
+      "plies": 48,
+      "reason": "goal",
+      "failure": null
+    },
+    {
+      "phase": "initial",
+      "game": 1,
+      "family": "331-current-unified-NNUE-Sigma-initial-family-000000",
+      "candidate_color": 1,
+      "status": "goal",
+      "winner": 0,
+      "plies": 61,
+      "reason": "goal",
+      "failure": null
+    },
+    {
+      "phase": "main",
+      "game": 0,
+      "family": "331-current-unified-NNUE-Sigma-main-family-000000",
+      "candidate_color": 0,
+      "status": "goal",
+      "winner": 1,
+      "plies": 54,
+      "reason": "goal",
+      "failure": null
+    },
+    {
+      "phase": "main",
+      "game": 1,
+      "family": "331-current-unified-NNUE-Sigma-main-family-000000",
+      "candidate_color": 1,
+      "status": "goal",
+      "winner": 0,
+      "plies": 55,
+      "reason": "goal",
+      "failure": null
+    },
+    {
+      "phase": "main",
+      "game": 2,
+      "family": "331-current-unified-NNUE-Sigma-main-family-000001",
+      "candidate_color": 0,
+      "status": "goal",
+      "winner": 1,
+      "plies": 46,
+      "reason": "goal",
+      "failure": null
+    },
+    {
+      "phase": "main",
+      "game": 3,
+      "family": "331-current-unified-NNUE-Sigma-main-family-000001",
+      "candidate_color": 1,
+      "status": "goal",
+      "winner": 0,
+      "plies": 39,
+      "reason": "goal",
+      "failure": null
+    },
+    {
+      "phase": "main",
+      "game": 4,
+      "family": "331-current-unified-NNUE-Sigma-main-family-000002",
+      "candidate_color": 0,
+      "status": "goal",
+      "winner": 1,
+      "plies": 62,
+      "reason": "goal",
+      "failure": null
+    },
+    {
+      "phase": "main",
+      "game": 5,
+      "family": "331-current-unified-NNUE-Sigma-main-family-000002",
+      "candidate_color": 1,
+      "status": "goal",
+      "winner": 0,
+      "plies": 53,
+      "reason": "goal",
+      "failure": null
+    },
+    {
+      "phase": "main",
+      "game": 6,
+      "family": "331-current-unified-NNUE-Sigma-main-family-000003",
+      "candidate_color": 0,
+      "status": "unknown",
+      "winner": null,
+      "plies": 9,
+      "reason": "move_rejected:TimeOverrun",
+      "failure": "time_overrun"
+    },
+    {
+      "phase": "main",
+      "game": 7,
+      "family": "331-current-unified-NNUE-Sigma-main-family-000003",
+      "candidate_color": 1,
+      "status": "goal",
+      "winner": 0,
+      "plies": 53,
+      "reason": "goal",
+      "failure": null
+    },
+    {
+      "phase": "main",
+      "game": 8,
+      "family": "331-current-unified-NNUE-Sigma-main-family-000004",
+      "candidate_color": 0,
+      "status": "goal",
+      "winner": 1,
+      "plies": 40,
+      "reason": "goal",
+      "failure": null
+    },
+    {
+      "phase": "main",
+      "game": 9,
+      "family": "331-current-unified-NNUE-Sigma-main-family-000004",
+      "candidate_color": 1,
+      "status": "goal",
+      "winner": 0,
+      "plies": 73,
+      "reason": "goal",
+      "failure": null
+    },
+    {
+      "phase": "main",
+      "game": 10,
+      "family": "331-current-unified-NNUE-Sigma-main-family-000005",
+      "candidate_color": 0,
+      "status": "unknown",
+      "winner": null,
+      "plies": 17,
+      "reason": "move_rejected:TimeOverrun",
+      "failure": "time_overrun"
+    },
+    {
+      "phase": "main",
+      "game": 11,
+      "family": "331-current-unified-NNUE-Sigma-main-family-000005",
+      "candidate_color": 1,
+      "status": "goal",
+      "winner": 0,
+      "plies": 53,
+      "reason": "goal",
+      "failure": null
+    },
+    {
+      "phase": "main",
+      "game": 12,
+      "family": "331-current-unified-NNUE-Sigma-main-family-000006",
+      "candidate_color": 0,
+      "status": "goal",
+      "winner": 1,
+      "plies": 52,
+      "reason": "goal",
+      "failure": null
+    },
+    {
+      "phase": "main",
+      "game": 13,
+      "family": "331-current-unified-NNUE-Sigma-main-family-000006",
+      "candidate_color": 1,
+      "status": "goal",
+      "winner": 0,
+      "plies": 55,
+      "reason": "goal",
+      "failure": null
+    }
+  ],
+  "pairs": [
+    {
+      "phase": "initial",
+      "family": "331-current-unified-NNUE-Sigma-initial-family-000000",
+      "complete": true
+    },
+    {
+      "phase": "main",
+      "family": "331-current-unified-NNUE-Sigma-main-family-000000",
+      "complete": true
+    },
+    {
+      "phase": "main",
+      "family": "331-current-unified-NNUE-Sigma-main-family-000001",
+      "complete": true
+    },
+    {
+      "phase": "main",
+      "family": "331-current-unified-NNUE-Sigma-main-family-000002",
+      "complete": true
+    },
+    {
+      "phase": "main",
+      "family": "331-current-unified-NNUE-Sigma-main-family-000003",
+      "complete": false
+    },
+    {
+      "phase": "main",
+      "family": "331-current-unified-NNUE-Sigma-main-family-000004",
+      "complete": true
+    },
+    {
+      "phase": "main",
+      "family": "331-current-unified-NNUE-Sigma-main-family-000005",
+      "complete": false
+    },
+    {
+      "phase": "main",
+      "family": "331-current-unified-NNUE-Sigma-main-family-000006",
+      "complete": true
+    }
+  ],
+  "cohorts": [
+    {
+      "phase": "initial",
+      "summary": {
+        "schema": "quoridor-arena-v2",
+        "census": {
+          "planned_games": 2,
+          "started_games": 2,
+          "completed_games": 2,
+          "unknown_games": 0,
+          "complete_pairs": 1,
+          "incomplete_pairs": 0,
+          "unknown_reasons": {}
+        },
+        "by_cohort": {
+          "Initial": {
+            "planned_games": 2,
+            "started_games": 2,
+            "completed_games": 2,
+            "unknown_games": 0,
+            "complete_pairs": 1,
+            "incomplete_pairs": 0,
+            "unknown_reasons": {}
+          }
+        },
+        "pairs": [
+          {
+            "family": "331-current-unified-NNUE-Sigma-initial-family-000000",
+            "cohort": "Initial",
+            "lineage": "common-initial/PRNG32710001",
+            "score": 0.0
+          }
+        ],
+        "complete_pair_mean": 0.0,
+        "valid_game_score_secondary": 0.0,
+        "planned_score_range": [0.0, 0.0],
+        "bootstrap": {
+          "seed": 331,
+          "resamples": 2000,
+          "unit": "complete family pair",
+          "percentile_95": null,
+          "limitations": [
+            "Fixed sample, complete pairs only; missingness may bias the primary score.",
+            "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+            "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+            "Repeated inspection of this interval is not a sequential stopping rule.",
+            "Fewer than two complete pairs: no uncertainty interval is reported."
+          ]
+        }
+      },
+      "backend_work": {
+        "capture_rows": 0,
+        "executed_rows": 1320,
+        "failed_rows": 0,
+        "failed_warm_rows": 0,
+        "logical_rows": 1320,
+        "physical_rows": 1320,
+        "warm_rows": 0
+      }
+    },
+    {
+      "phase": "main",
+      "summary": {
+        "schema": "quoridor-arena-v2",
+        "census": {
+          "planned_games": 14,
+          "started_games": 14,
+          "completed_games": 12,
+          "unknown_games": 2,
+          "complete_pairs": 5,
+          "incomplete_pairs": 2,
+          "unknown_reasons": {
+            "time_overrun": 2
+          }
+        },
+        "by_cohort": {
+          "Main": {
+            "planned_games": 14,
+            "started_games": 14,
+            "completed_games": 12,
+            "unknown_games": 2,
+            "complete_pairs": 5,
+            "incomplete_pairs": 2,
+            "unknown_reasons": {
+              "time_overrun": 2
+            }
+          }
+        },
+        "pairs": [
+          {
+            "family": "331-current-unified-NNUE-Sigma-main-family-000000",
+            "cohort": "Main",
+            "lineage": "common-initial/PRNG32710001",
+            "score": 0.0
+          },
+          {
+            "family": "331-current-unified-NNUE-Sigma-main-family-000001",
+            "cohort": "Main",
+            "lineage": "common-initial/PRNG32710001",
+            "score": 0.0
+          },
+          {
+            "family": "331-current-unified-NNUE-Sigma-main-family-000002",
+            "cohort": "Main",
+            "lineage": "common-initial/PRNG32710001",
+            "score": 0.0
+          },
+          {
+            "family": "331-current-unified-NNUE-Sigma-main-family-000004",
+            "cohort": "Main",
+            "lineage": "common-initial/PRNG32710001",
+            "score": 0.0
+          },
+          {
+            "family": "331-current-unified-NNUE-Sigma-main-family-000006",
+            "cohort": "Main",
+            "lineage": "common-initial/PRNG32710001",
+            "score": 0.0
+          }
+        ],
+        "complete_pair_mean": 0.0,
+        "valid_game_score_secondary": 0.0,
+        "planned_score_range": [0.0, 0.14285714285714285],
+        "bootstrap": {
+          "seed": 331,
+          "resamples": 2000,
+          "unit": "complete family pair",
+          "percentile_95": [0.0, 0.0],
+          "limitations": [
+            "Fixed sample, complete pairs only; missingness may bias the primary score.",
+            "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+            "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+            "Repeated inspection of this interval is not a sequential stopping rule.",
+            "Shared lineages are present."
+          ]
+        }
+      },
+      "backend_work": {
+        "capture_rows": 0,
+        "executed_rows": 6426,
+        "failed_rows": 0,
+        "failed_warm_rows": 0,
+        "logical_rows": 6426,
+        "physical_rows": 6426,
+        "warm_rows": 0
+      }
+    }
+  ],
+  "artifact_bindings": {
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/matches-current-unified-v1/run-initial/admission.json": {
+      "bytes": 206,
+      "sha256": "0cf5ee24f75fe66b9e7b71be7a122fd7d5ff4002b3419ed190f5ba008ba74e40"
+    },
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/matches-current-unified-v1/run-initial/completed.jsonl": {
+      "bytes": 159625,
+      "sha256": "b758168593be8baf68461c525e5ca93adab79d1e86e760b429e23ce42be886be"
+    },
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/matches-current-unified-v1/run-initial/config.json": {
+      "bytes": 4206,
+      "sha256": "d82630a530777d93c7f4e4d865ab6a7ff118bd9cd5446ed7c8ec8dcc11fcd9f9"
+    },
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/matches-current-unified-v1/run-initial/evaluator-identities.json": {
+      "bytes": 458,
+      "sha256": "2f681654f8668d191f37d61936b81bad1ff0304a01402673410e43fd453c75a8"
+    },
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/matches-current-unified-v1/run-initial/games.csv": {
+      "bytes": 214,
+      "sha256": "500dae6ddb5267c12b329a2b4db456265ed4f2d1bdd6e5bd45f4de914ab9c8bf"
+    },
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/matches-current-unified-v1/run-initial/moves.jsonl.gz": {
+      "bytes": 19692,
+      "sha256": "b2d9957ed7295487e17ec2adba28b63a1bdd7c0a82a9998817227160ad856d52"
+    },
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/matches-current-unified-v1/run-initial/planned.json": {
+      "bytes": 1213,
+      "sha256": "151c1c02fc37b6b06a5c700a9232b00b1ca17ab9fd1db43a5e9d79ab13a7fd53"
+    },
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/matches-current-unified-v1/run-initial/result.json": {
+      "bytes": 161951,
+      "sha256": "823e196647b3145458d500512ce34040a3abed792685acd3efc039f94008bad0"
+    },
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/matches-current-unified-v1/run-main/admission.json": {
+      "bytes": 206,
+      "sha256": "ca85b37d4b70577a7c325c0da61afeae3ce2f19164406ac0f0d2a0d9c2558020"
+    },
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/matches-current-unified-v1/run-main/completed.jsonl": {
+      "bytes": 816371,
+      "sha256": "08097204df4dbb3b32b4502d67d4b0350d5840bddc61dc02da90b2c9ec6a666f"
+    },
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/matches-current-unified-v1/run-main/config.json": {
+      "bytes": 21613,
+      "sha256": "92c32a555a5b9106cff8cc37cb9c9cd3d4532c60531e49eb2fc237e1423d08f7"
+    },
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/matches-current-unified-v1/run-main/evaluator-identities.json": {
+      "bytes": 458,
+      "sha256": "2f681654f8668d191f37d61936b81bad1ff0304a01402673410e43fd453c75a8"
+    },
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/matches-current-unified-v1/run-main/games.csv": {
+      "bytes": 1101,
+      "sha256": "006d3890a1940f53690100726c960b588a4b5ce782e53b3f89ddc2cb47e45c7f"
+    },
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/matches-current-unified-v1/run-main/moves.jsonl.gz": {
+      "bytes": 96874,
+      "sha256": "979c7c77b0f3decd6b7712651799230185fb5a5d3130c5384af38ee153147a43"
+    },
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/matches-current-unified-v1/run-main/planned.json": {
+      "bytes": 12779,
+      "sha256": "2ec5c7b7db3c1517b4b24d0f490d8b5a1a5afc0215fb643b141dbe9aad13973c"
+    },
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/matches-current-unified-v1/run-main/result.json": {
+      "bytes": 820224,
+      "sha256": "b9365e7c857c880e758c9f6c7e5afd502b09339fd5ddd4dce882c7ed6a7eead7"
+    }
+  },
+  "main_commit": "ad358f6",
+  "private_ELF_SHA256": "e4b05b34e6019f46d9fb48e834a7d55deec9218671654c4e7fa488b9db869a71",
+  "limits": "Eight opened correlated common-initial/PRNG families. No Elo/global rank or calibrated independent precision; old RuleA and four functional windows separate. Two UNKNOWNs are not losses/draws/rescued/rerun.",
+  "known_all_controller_fees_seconds": 730.5251211230644
+}

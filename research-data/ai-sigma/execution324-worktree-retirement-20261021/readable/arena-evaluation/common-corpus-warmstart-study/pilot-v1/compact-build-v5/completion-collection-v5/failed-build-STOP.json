@@ -1,0 +1,380 @@
+{
+  "issue": "quoridor-4lc.362.2",
+  "status": "FAILED_SOFTWARE_NO_PRIVATE_OR_MIGRATION_PASS",
+  "job_id": "226f3d3a-34c4-400d-99c4-3edf6dc28d3d",
+  "controller_START": "2026-10-11T14:07:11.570302+00:00",
+  "controller_STOP": "2026-10-11T14:07:17.175270+00:00",
+  "whole_controller_seconds": 5.6054952970007434,
+  "exact_workerprocess_UTC_STOP": null,
+  "candidate_finished_is_not_workerSTOP": "2026-10-11T14:07:16.964257+00:00",
+  "authoritative_manifest": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/compact-build-v5/operation-v5/manifest.json",
+    "sha256": "d37066c02819e51e9b137859c1078218e5d17cc4a1918684578e47b0aee7ba51",
+    "bytes": 24871,
+    "mode": "0644"
+  },
+  "result": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/compact-build-v5/runtime-v5/result.json",
+    "sha256": "f024a5f59c42c0c7f2ec29246cf37685e5b0770632ab14aef43afe83eaa388d1",
+    "bytes": 506,
+    "mode": "0600"
+  },
+  "config": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/compact-build-v5/runtime-v5/config.json",
+    "sha256": "4a3705c5ce4e6f433985171a6a82cf3ce8a24e42d1e5a0c20123487a0fbb76de",
+    "bytes": 943,
+    "mode": "0600"
+  },
+  "state": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/compact-build-v5/runtime-v5/state.json",
+    "sha256": "70a69aceea89ac218fe67cbe6d67ae7e67aa70804f1935f00f9efea421728775",
+    "bytes": 704,
+    "mode": "0600"
+  },
+  "outer_full_capture": {
+    "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/compact-build-v5/runtime-v5/output.log",
+    "sha256": "75f11af19ac780e71fc57751054f26c4441dbe18115afbee8b72b23f229f2376",
+    "bytes": 19493,
+    "mode": "0644"
+  },
+  "outer_cleanup_complete": true,
+  "outer_directwait": true,
+  "outer_remaining": [],
+  "inner_cleanup_complete": false,
+  "primary": {
+    "type": "CycleStopped",
+    "message": "cycle child failed: ['/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo', 'clippy', '--manifest-path', '/workspaces/quoridor/Cargo.toml', '--offline', '--locked', '-j1', '--message-format=json-render-diagnostics', '-p', 'quoridor-data', '--lib', '--bins', '--tests', '--no-deps', '--keep-going', '--', '-Dwarnings']: 101",
+    "notes": []
+  },
+  "secondary": [
+    {
+      "stage": "candidate",
+      "facts": {
+        "type": "CycleStopped",
+        "message": "cycle child failed: ['/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo', 'clippy', '--manifest-path', '/workspaces/quoridor/Cargo.toml', '--offline', '--locked', '-j1', '--message-format=json-render-diagnostics', '-p', 'quoridor-data', '--lib', '--bins', '--tests', '--no-deps', '--keep-going', '--', '-Dwarnings']: 101",
+        "notes": []
+      }
+    },
+    {
+      "stage": "outer_job",
+      "type": "Refused",
+      "message": "outer job unsuccessful or not cleaned",
+      "notes": [],
+      "available_result": {
+        "job_id": "226f3d3a-34c4-400d-99c4-3edf6dc28d3d",
+        "outcome": "failed",
+        "error": null,
+        "exit_code": 1,
+        "finished_at": "2026-10-11T14:07:17.175270+00:00",
+        "wall_seconds": 5.6054952970007434,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+        "cleanup_complete": true,
+        "cleanup_errors": [],
+        "log_bytes_seen": 19493,
+        "log_bytes_retained": 19493
+      }
+    },
+    {
+      "stage": "command_return",
+      "command": "data-clippy",
+      "type": "Refused",
+      "message": "returned command facts unavailable",
+      "notes": []
+    }
+  ],
+  "passed_tests": {
+    "definitions": [
+      "compact_sampling_native_binary_roundtrip_and_bit_drift_refuse",
+      "compact_sampling_publication_missing_file_refuses_and_marker_commits_last"
+    ],
+    "count": 2,
+    "actual_test_command_seconds": 1.659748300909996,
+    "full_capture": {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/compact-build-v5/operation-v5/compact-publication-tests.full.log",
+      "sha256": "acfaeca7e5cc24aadd364f6e9d032d6e76d080ad57a78e67aac57c953cc0f2e5",
+      "bytes": 80216,
+      "mode": "0644"
+    },
+    "scope": "NEWsyntheticnativecodec/geometry/bit/historydrift/markerlast fixture only; no Search/model/pilotmigration; do not replay"
+  },
+  "passed_tool_versions": [
+    "version-cargo",
+    "version-rustc",
+    "version-rustdoc",
+    "version-cc",
+    "version-cxx",
+    "version-ar",
+    "version-python"
+  ],
+  "failed_command": {
+    "name": "data-clippy",
+    "full_capture": {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/compact-build-v5/operation-v5/data-clippy.full.log",
+      "sha256": "d308e15717d65c51326705e6da9ebd114beb090576aee1202bc096cd11fcbdd1",
+      "bytes": 74429,
+      "mode": "0644"
+    },
+    "guardian_return": null,
+    "persisted_process_receipt": {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/common-corpus-warmstart-study/pilot-v1/compact-build-v5/operation-v5/data-clippy.process.json",
+      "sha256": "9b19173f5a693abcb59dd1946f12f52ab478a18acb9c785b09dff84f67826c85",
+      "bytes": 1955,
+      "mode": "0600"
+    },
+    "disk_cleanup_complete": true,
+    "disk_directwait": true,
+    "disk_signal_mask": "pending",
+    "disk_persist": "attempted",
+    "command_seconds": 2.1601413000607863,
+    "facts": "Returnedguardian UNKNOWN, persistedcleanup/directreap true distinct pending/attempted; no copied returnedfacts"
+  },
+  "actual_failures": [
+    "large_enum_variant WorkerOutcome.Returned.value Game vs failed",
+    "too_many_arguments validate_game8/7",
+    "manual_is_multiple_of Config.validate_shape"
+  ],
+  "unrun": [
+    "converter-release",
+    "privatecopy",
+    "converterbindings23",
+    "original341migration",
+    "unfinishedA/B"
+  ],
+  "current_source_tools_dependencies_SHA_size_mode_checked": [
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-data/src/bin/terminal-cache.rs",
+      "sha256": "943753c99782cf134549617c4a0ac3b15845c32941f3e89e5f887d19c66a5c9c",
+      "bytes": 4718,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-data/src/lib.rs",
+      "sha256": "1213c01b040f76518099070cf1253ac9b73a024403a59a7755b2e89d86fe9bf9",
+      "bytes": 43336,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-data/src/terminal.rs",
+      "sha256": "c3704349240a168c6408be89f6e00405f2093316e73d88cdfe1394dd207a6548",
+      "bytes": 12314,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-data/src/terminal_stream.rs",
+      "sha256": "81dee32c1120bdabc0544a14869d26f6e665eaad813b14d31dcb2beffca7bb07",
+      "bytes": 65582,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-data/src/terminal_cache.rs",
+      "sha256": "17b5ca087181d5ca69e79d45728d67f0c93f718f4fc3e02348e4bee2436974b2",
+      "bytes": 21296,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-data/src/common_corpus.rs",
+      "sha256": "e12ef770d290d546bccbf905ee9acb31bb6bc45006ee941fe9e1fbb36c78a009",
+      "bytes": 11088,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-data/src/lossless_jsonl.rs",
+      "sha256": "76bde0a3cff239b414e0bff0ba5a651833a9f8aae031086ac97f2e97187b8c69",
+      "bytes": 12112,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-core/src/lib.rs",
+      "sha256": "c41814c97164d8c59a3bfd45685b54b21942bdbb8acc035cf0d4d809b7741f3b",
+      "bytes": 342,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-core/src/game.rs",
+      "sha256": "543995676fb46cc4e80d0fccb650875eb901a4b4d71187788ee09dfbaf01a420",
+      "bytes": 3968,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-core/src/position.rs",
+      "sha256": "6cb132a4e3f68c7cb739a926aad1ae5f0c8ad12ca8df60d22fb8fcc1c1aa173a",
+      "bytes": 17800,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-core/src/research.rs",
+      "sha256": "0b87fb3e269278516d84674c21ad0a351288e1f9c2f4a7e219f14345f0e708fe",
+      "bytes": 34167,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-core/src/profiling.rs",
+      "sha256": "1e26d96b6d443b4d54261e7e3cb742290f223b7e84ba450e3c2cf261af38255f",
+      "bytes": 6108,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-nnue/src/lib.rs",
+      "sha256": "90734f895e21f49ad246837a76303a37f45783dbaf3932be8d05a14345b207cf",
+      "bytes": 24343,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-nnue/src/features.rs",
+      "sha256": "25c2953e4805344fe27ea9f9480b08fee462a8ce5833602484491e2ce48f1531",
+      "bytes": 8230,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-nnue/src/quantized.rs",
+      "sha256": "2553767bb6f045f5312d8759e185da518dbc2b211c2849b1b23f93d964c046d6",
+      "bytes": 18380,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-nnue/src/residual.rs",
+      "sha256": "99f5acd09eec12aa78142d62973e16fa8e0dcb377c26e6deca731897c519dabd",
+      "bytes": 38066,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-nnue/src/simd.rs",
+      "sha256": "1731f69385649ff5eb6d75f5cbbaf2fd046a2907ec968801cae8ac033b17d02a",
+      "bytes": 5880,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-nnue/src/distance_step.rs",
+      "sha256": "a35d808eeb819aa0c9500364f4f12352d5e05bd455f92dc19fd63d7833c74225",
+      "bytes": 24573,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-data/Cargo.toml",
+      "sha256": "a0df9abe34ca445ce761d06b310affd1f01eb488272bae4dbd8af4795721477f",
+      "bytes": 481,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-core/Cargo.toml",
+      "sha256": "9e952267d75fd8b1cd51f72916e8fb97869f38d5ba4893a0ecedc297ebb74a27",
+      "bytes": 145,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/crates/quoridor-nnue/Cargo.toml",
+      "sha256": "fb21d093cb8b1a5e430cc3faf220263b9e1d101e6132f7ed11c3465a81cca1bf",
+      "bytes": 462,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/Cargo.toml",
+      "sha256": "6cbcf3b38c98492322761e78db908195789021216be51aa37de2888cacd0ab0b",
+      "bytes": 284,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/Cargo.lock",
+      "sha256": "aa938a8537b68f62f383f3ae1538ee335f294f336173ea1ea06eb57503ebb38a",
+      "bytes": 27359,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+      "sha256": "d8ac96e750f828891733b8bb2ebd933c48044713fb3910bacdcece26d30a785f",
+      "bytes": 110510,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/rust-toolchain.toml",
+      "sha256": "a295155a0b138ee09d908306393d2778135ebaab96cfbc29ea0a6cd647563b53",
+      "bytes": 152,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/Cargo.lock",
+      "sha256": "aa938a8537b68f62f383f3ae1538ee335f294f336173ea1ea06eb57503ebb38a",
+      "bytes": 27359,
+      "mode": "0644"
+    },
+    {
+      "path": "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo-clippy",
+      "sha256": "2d6d576cdd70e29c1c6b6ae8026b35f6295b6bd67e6845552697440d9c3edf15",
+      "bytes": 1223088,
+      "mode": "0775"
+    },
+    {
+      "path": "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/clippy-driver",
+      "sha256": "ecf6d74d4e13728405acd3749bff486db899e793b5e3cd179ab663f7fe9d6fe6",
+      "bytes": 16256512,
+      "mode": "0775"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/plan.json",
+      "sha256": "285e6d9ecded3709d0e23dc8ff45e89184cec053e314d6d2f61fd2e5fc9eeac1",
+      "bytes": 48825,
+      "mode": "0644"
+    },
+    {
+      "path": "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+      "sha256": "e951141cc55a6cd7b9876d187bd30a3720e6086b99413af95e3b8de1cdd72f14",
+      "bytes": 36160240,
+      "mode": "0775"
+    },
+    {
+      "path": "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustc",
+      "sha256": "f3834d26669b03f6855fa54bd2381443123e860167bc0c7a8dd137e5cf6e5e4f",
+      "bytes": 647376,
+      "mode": "0775"
+    },
+    {
+      "path": "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustdoc",
+      "sha256": "a1321a60578a6b2e3e0ff428201b8618bbd9a9fbcd475c0d0f151bbf17cb0a9e",
+      "bytes": 12568360,
+      "mode": "0775"
+    },
+    {
+      "path": "/usr/bin/x86_64-linux-gnu-gcc-12",
+      "sha256": "75e997ec62297a6484f491bae28ab0ccb489daba23e398fd10fe68e9e6f0def8",
+      "bytes": 1301496,
+      "mode": "0755"
+    },
+    {
+      "path": "/usr/bin/x86_64-linux-gnu-g++-12",
+      "sha256": "dd91977c184e327710578363ad93ebb175c3a457b6236b874fd3911b7c055c65",
+      "bytes": 1305592,
+      "mode": "0755"
+    },
+    {
+      "path": "/usr/bin/x86_64-linux-gnu-ar",
+      "sha256": "3acbee2794e3668a74bcb90f2eaf7d981211fb95288ab940f0e3ac380e8f6023",
+      "bytes": 52400,
+      "mode": "0755"
+    },
+    {
+      "path": "/home/vscode/.cache/inference/python/cpython-3.14.7-linux-x86_64-gnu/bin/python3.14",
+      "sha256": "5a91882290532b2719eaca77c0f3a7448bd73b9214e56df57bc59004560a80c6",
+      "bytes": 32418544,
+      "mode": "0755"
+    }
+  ],
+  "target_sample_B": 1106046976,
+  "retained_target_floor_B": 1106046976,
+  "target_peak_continuous": null,
+  "private_parent_sample_B": 4096,
+  "private_candidate_created": false,
+  "TMP_sample_B": 0,
+  "metadata_source_reader_STOP": "2026-10-11T14:12:58.832182+00:00",
+  "actual_owned_process_identities_remaining": [],
+  "owned_readers_children_jobs_TMP_remaining": [],
+  "reservation": "NONE",
+  "experimental_consumed_seconds": 138.60220936406404,
+  "experimental_remaining_seconds": 5261.397790635936,
+  "experimental_charge_from_BUILD": 0,
+  "fees": "Whole5.6054952970007434 countedonce assoftware, childnested notadded. PriorFAILED/raw/floors held; no allwork/continuouspeak claim.",
+  "next": "Only ordinary scoped Clippy repair in ownnewderivatives/RootMainadoption; NEW unique unfinishedbuild testrole--no-run, no2passedfixture or16oldsuccess replay. Sameheldwhole/target/private; no method/reviewer/ACK.",
+  "INCOMPLETE_removed_last": true
+}

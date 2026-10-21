@@ -45,7 +45,7 @@ journal・archive・モデルload・探索・長いforwardは受領critical path
 初期化のworker別durationは重なるためrun wallへ加算しない。TTはゲームごとにresetし、
 model/evaluator/backendの構築・呼出し・破棄を同じAI ownerに保つ。
 
-実行済み[有限結果](../../.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/finite-arena374-v3/result.json)と前の正常結果を合わせ、762 validated games/381 complete pairsを記録した。元768 denominatorのうちslots0/1/2/3/12/13のFAILED/UNKNOWNは原物として残し、未完成pairを補充しない。完全未入場pairはなく、次は保存結果の解釈と既存78parents/234singleproposals/18missing診断の未完了範囲を扱う。対局の記録完了をmodel/head資格・母集団棋力や診断完了へ読み替えない。
+実行済み[有限結果](../../research-data/ai-sigma/execution324-worktree-retirement-20261021/readable/arena-evaluation/three-engine-comparison374-v1/finite-arena374-v3/result.json)と前の正常結果を合わせ、762 validated games/381 complete pairsを記録した。元768 denominatorのうちslots0/1/2/3/12/13のFAILED/UNKNOWNは原物として残し、未完成pairを補充しない。完全未入場pairはなく、次は保存結果の解釈と既存78parents/234singleproposals/18missing診断の未完了範囲を扱う。対局の記録完了をmodel/head資格・母集団棋力や診断完了へ読み替えない。
 普通のsource/test/build/artifact/reviewはstorageを省略し終了後に実使用を一度観察する。
 旧容量予測は履歴であり開始gateではない。bulk RAW/model出力、異常増大や実FS/50GB不足は
 必要な範囲で対処し、所有・RAM/CPU・clock/cancel・実reader STOPを維持する。

@@ -1,0 +1,142 @@
+{
+  "schema": "quoridor.common-corpus-warmstart.source-interface.v1",
+  "issue": "quoridor-4lc.362.2",
+  "status": "SOURCE_PROPOSAL_UNBUILT_UNTYPED_UNRUN",
+  "scientific_entry": false,
+  "maintained_path": {
+    "entry": "quoridor-runner teacher-pilot --config <PilotConfig>",
+    "phase": "common_corpus",
+    "generator": "existing teacher_pilot/depth6 + teacher_pilot_execution/depth6",
+    "cache": "existing terminal_stream::write_cache scope=common-corpus + terminal_cache::Writer::new_common",
+    "publication": "existing intake incomplete-marker-last; native/footer is not external guardian success"
+  },
+  "required_config": {
+    "common_study": {
+      "selected_plan": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/teacher-distance-tanh-v1/plan.json",
+        "sha256": "actual canonical selected file SHA REQUIRED"
+      },
+      "families": "u64 >0 selected; no default",
+      "prefix_seed": "explicit u64 selected",
+      "prefix_lengths": "strict increasing distinct positive <200, balanced N divisible by count",
+      "split_seed": "explicit u64 selected",
+      "root_value_policy": [
+        "exclude_outside_unit",
+        "divide_by_two"
+      ],
+      "draw_policy": [
+        "include_threefold",
+        "exclude_threefold"
+      ]
+    },
+    "main_volume_n": "must equal selected common_study.families, scoped to362 not old fullgen",
+    "planned_games": "same selected N",
+    "depth": 6,
+    "max_nodes": "explicit positive u64; stop below6 =>UNKNOWN",
+    "per_move_timeout_ms": null,
+    "game_workers": "explicit1..2 with distinct worker_cores",
+    "other_rules": "Standard2pThreefold,TT4096/PVS/solvercontactOFF,D0b8/200ply capUNKNOWN"
+  },
+  "canonical_selection_shapes": {
+    "blind_schedule": {
+      "version": "fixed-d-common-corpus-warmstart-v1",
+      "prefix_seed": "selected",
+      "prefix_lengths": "selected",
+      "ordering": "round_robin_lengths",
+      "attempts_per_family": 32,
+      "old_games_included": false
+    },
+    "whole_family_T_V_partition": {
+      "algorithm": "canonical_LR_family_SHA256_seed_rank_train_floor_4F_over_5",
+      "seed": "selected",
+      "before_outcomes": true
+    },
+    "range_terminal_handling": {
+      "root_value_policy": "REQUIRED",
+      "draw_policy": "REQUIRED"
+    },
+    "current_plan_refusal": "scientific_entry=false plus null N/schedule/partition/recipe/range remains refused before producer output/geometry"
+  },
+  "stream": {
+    "schema": "quoridor-fixed-d-common-corpus-v1",
+    "version": "fixed-d-common-corpus-warmstart-v1",
+    "events": [
+      "requests full planned census before prefixes",
+      "header",
+      "indexed outcome Game",
+      "footer"
+    ],
+    "game_wrapper": {
+      "index": "ascending all0..N-1",
+      "result": "returned(value,whole_ns) OR failed(started:boolean,reason) with no fabricated game/rows"
+    },
+    "row_fields": "Existing teacher:TeacherRow and search:SearchEvidence only; no new parallel row registry",
+    "raw_teacher": "teacher.teacher type alpha_beta: value,depth=6,nodes,bound=completed_root,pv; value is raw f32",
+    "raw_search": "search.raw_value and raw_value_bits must agree with AlphaBeta value exactly; action/PV/depth/nodes/parent context and mainline are audited",
+    "requested_completed": "config.depth=6; accepted.completed_depth=6 AND stop=depth_cap, no lower-depth rescue",
+    "parent": "ruleset,pawns,walls,stocks,stm native0/1,ply,state_key,full counted history and chronological prefix",
+    "outcome": "teacher.z plus terminal_targets.outcome_z from actual final goal or real third occurrence; +/-1/0 in row STM side1/2, cap/error/missing =>None",
+    "provenance": "full actual finalprefix/finalcontext, winner absolute1/2, terminalreason/distances, rowprefix, family/split, headercompiled_sources/executable/config/evaluator/schedule/partition/resources",
+    "teacher_evaluator": "original-distance-a0-b8-tanh; FP32 normalizeddistance affine/f64tanh/f32, nonterminalabs1/terminalabs2; searchminimax estimate not truth"
+  },
+  "cache": {
+    "schema": "quoridor-common-corpus-terminal-geometry-v1",
+    "label_columns": [
+      "rootmean",
+      "z",
+      "terminal_margin",
+      "completed_root_raw"
+    ],
+    "files": {
+      "geometry.bin": "66B/row existing STM geometry",
+      "distance-steps.u8": "2B/row",
+      "terminal-margin.f32": "4B/rowLEf32",
+      "labels.f32": "8B/row legacy [rootmean,z]",
+      "rows.jsonl": "one bounded metadata row incl original stream search evidence",
+      "completed-root-raw.f32": "4B/row LEf32 raw AlphaBeta value; NEVER Teacher::value",
+      "common-eligible.u8": "1B/row literal0/1 shared by A+B",
+      "stream-games.jsonl": "existing per-game retained audit/failed record; no new registry"
+    },
+    "rootmean_semantics": "Existing Teacher::value maps abs(value)==2 to sign. rootmean/labels.f32[0] NOT rawD6; never train B by this field silently.",
+    "row_additions": [
+      "completed_root_raw",
+      "completed_root_raw_bits",
+      "common_eligible",
+      "teacher_B_target",
+      "raw_value_perspective=root_side_to_move",
+      "raw_value_units=maintained_fixedD_a0b8_tanh_nonterminal_abs1_terminal_abs2",
+      "rootmean_semantics",
+      "stream_evidence.search"
+    ],
+    "common_corpus_manifest": "cache.json.common_corpus: config,common_eligible_rows,planned_families,raw_file,common_mask_file,teacher_A,teacher_B,rootmean_is_raw=false,same_mask_and_family_partition_for_both=true",
+    "eligibility": "primary actual terminal eligibility AND exact completed6 finite raw AND actual z AND selected draw policy AND selected mappingdomain. Same mask/train-validation split for A+B. Raw/outcomes/unknown counts remain retained.",
+    "mapping": "exclude_outside_unit: common exclusion if absraw>1, no clipping; divide_by_two: explicitly divide EVERY raw score by2 including interior and terminal. Neither default. B target only exists for commoneligible rows.",
+    "raw_terminal_warning": "A nonterminal root can return +/-2 from a terminal PV; not a directly terminal training row. Preserve raw first. Full history/rule terminal facts remain separate."
+  },
+  "learner_requirements": [
+    "bind actual emitted cache SHA/file hashes/shape/source/evaluator/rules/schedule/partition before arrays",
+    "require same selected_plan/range/draw config rather than selecting at loader",
+    "incumbent353 descriptor T-only scale no refit, warmstart weights identical, separate fresh optimizers",
+    "FAILED/partial cache INCOMPLETE nonadmitting; guardian returned cleanup vs disk pending fields separate"
+  ],
+  "blocked_future": [
+    "human N/schedule/partition/range/recipe/assessment choices",
+    "independent coherent changed-boundary source acceptance/Main adoption",
+    "affected current Rust software/currentprivate and D6 numerical/source/rules custody",
+    "native indexed common-corpus/cache integration qualification",
+    "normal research-job RUN intent/teacher-pilot Search phase binding: never use generation model0/noSearch exemption",
+    "inclusive heavy whole support/current physical/peer/storage/lifetimeNB"
+  ],
+  "baseline": {
+    "descriptor_sha256": "46ec2c4708f96dcf9fad579c2fb0d1299c6663df27412f0faac98267467715e1",
+    "weights_sha256": "046fe926e56b955b0fb7de8f147a74ec33eace9cbc00a55c307f9b6541ab9841",
+    "evaluator_sha256": "96a5f41f875022d1752b9c999595ad58bfb2d42687a8f06de08d42b1c4215875"
+  },
+  "owned_remaining": {
+    "readers": [],
+    "children": [],
+    "jobs": [],
+    "TMP": [],
+    "hardware_reservation": null
+  }
+}

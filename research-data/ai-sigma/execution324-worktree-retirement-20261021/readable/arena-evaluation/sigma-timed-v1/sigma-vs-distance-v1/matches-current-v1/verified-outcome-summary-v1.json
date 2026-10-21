@@ -1,0 +1,571 @@
+{
+  "issue": "quoridor-4lc.336",
+  "planned": 16,
+  "started": 16,
+  "decided": 5,
+  "Sigma_W": 5,
+  "Sigma_L": 0,
+  "Distance_W": 0,
+  "Distance_L": 5,
+  "draw": 0,
+  "unknown": 11,
+  "complete_pairs": 1,
+  "incomplete_pairs": 7,
+  "Sigma_planned_score_bounds": [
+    0.3125,
+    1.0
+  ],
+  "Distance_planned_score_bounds": [
+    0.0,
+    0.6875
+  ],
+  "call_counters": {
+    "attempted": 534,
+    "accepted": 523,
+    "nodes": 23202866,
+    "nn_requests_attempted": 6053,
+    "completed_simulations": 6385,
+    "discarded_late_replies": 261
+  },
+  "rejected_clock_windows": [
+    {
+      "phase": "initial",
+      "game": 0,
+      "ply": 6,
+      "engine": "Sigma",
+      "caller_seconds": 0.100430848,
+      "returned_before_deadline": false,
+      "excess_ns": 430848,
+      "rejected_action": 91
+    },
+    {
+      "phase": "initial",
+      "game": 1,
+      "ply": 11,
+      "engine": "Sigma",
+      "caller_seconds": 0.100093695,
+      "returned_before_deadline": false,
+      "excess_ns": 93695,
+      "rejected_action": 40
+    },
+    {
+      "phase": "main",
+      "game": 0,
+      "ply": 16,
+      "engine": "Sigma",
+      "caller_seconds": 0.101705953,
+      "returned_before_deadline": false,
+      "excess_ns": 1705953,
+      "rejected_action": 38
+    },
+    {
+      "phase": "main",
+      "game": 1,
+      "ply": 51,
+      "engine": "Sigma",
+      "caller_seconds": 0.101430359,
+      "returned_before_deadline": false,
+      "excess_ns": 1430359,
+      "rejected_action": 139
+    },
+    {
+      "phase": "main",
+      "game": 2,
+      "ply": 42,
+      "engine": "Sigma",
+      "caller_seconds": 0.107168669,
+      "returned_before_deadline": false,
+      "excess_ns": 7168669,
+      "rejected_action": 64
+    },
+    {
+      "phase": "main",
+      "game": 5,
+      "ply": 17,
+      "engine": "Sigma",
+      "caller_seconds": 0.100941224,
+      "returned_before_deadline": false,
+      "excess_ns": 941224,
+      "rejected_action": 49
+    },
+    {
+      "phase": "main",
+      "game": 6,
+      "ply": 12,
+      "engine": "Sigma",
+      "caller_seconds": 0.10069419,
+      "returned_before_deadline": false,
+      "excess_ns": 694190,
+      "rejected_action": 10
+    },
+    {
+      "phase": "main",
+      "game": 7,
+      "ply": 9,
+      "engine": "Sigma",
+      "caller_seconds": 0.101629018,
+      "returned_before_deadline": false,
+      "excess_ns": 1629018,
+      "rejected_action": 77
+    },
+    {
+      "phase": "main",
+      "game": 8,
+      "ply": 50,
+      "engine": "Sigma",
+      "caller_seconds": 0.100032578,
+      "returned_before_deadline": true,
+      "excess_ns": 32578,
+      "rejected_action": 29
+    },
+    {
+      "phase": "main",
+      "game": 9,
+      "ply": 21,
+      "engine": "Sigma",
+      "caller_seconds": 0.1003835,
+      "returned_before_deadline": false,
+      "excess_ns": 383500,
+      "rejected_action": 69
+    },
+    {
+      "phase": "main",
+      "game": 12,
+      "ply": 64,
+      "engine": "Sigma",
+      "caller_seconds": 0.100688556,
+      "returned_before_deadline": false,
+      "excess_ns": 688556,
+      "rejected_action": 62
+    }
+  ],
+  "Sigma_late_return_windows": 10,
+  "Sigma_return_in_time_admission_late_windows": 1,
+  "slots": [
+    {
+      "phase": "initial",
+      "game": 0,
+      "family": "336-current-unified-Sigma-D-initial-family-000000",
+      "candidate_color": 0,
+      "status": "unknown",
+      "winner": null,
+      "plies": 6,
+      "reason": "move_rejected:TimeOverrun",
+      "failure": "time_overrun"
+    },
+    {
+      "phase": "initial",
+      "game": 1,
+      "family": "336-current-unified-Sigma-D-initial-family-000000",
+      "candidate_color": 1,
+      "status": "unknown",
+      "winner": null,
+      "plies": 11,
+      "reason": "move_rejected:TimeOverrun",
+      "failure": "time_overrun"
+    },
+    {
+      "phase": "main",
+      "game": 0,
+      "family": "336-current-unified-Sigma-D-main-family-000000",
+      "candidate_color": 0,
+      "status": "unknown",
+      "winner": null,
+      "plies": 16,
+      "reason": "move_rejected:TimeOverrun",
+      "failure": "time_overrun"
+    },
+    {
+      "phase": "main",
+      "game": 1,
+      "family": "336-current-unified-Sigma-D-main-family-000000",
+      "candidate_color": 1,
+      "status": "unknown",
+      "winner": null,
+      "plies": 51,
+      "reason": "move_rejected:TimeOverrun",
+      "failure": "time_overrun"
+    },
+    {
+      "phase": "main",
+      "game": 2,
+      "family": "336-current-unified-Sigma-D-main-family-000001",
+      "candidate_color": 0,
+      "status": "unknown",
+      "winner": null,
+      "plies": 42,
+      "reason": "move_rejected:TimeOverrun",
+      "failure": "time_overrun"
+    },
+    {
+      "phase": "main",
+      "game": 3,
+      "family": "336-current-unified-Sigma-D-main-family-000001",
+      "candidate_color": 1,
+      "status": "goal",
+      "winner": 1,
+      "plies": 68,
+      "reason": "goal",
+      "failure": null
+    },
+    {
+      "phase": "main",
+      "game": 4,
+      "family": "336-current-unified-Sigma-D-main-family-000002",
+      "candidate_color": 0,
+      "status": "goal",
+      "winner": 0,
+      "plies": 59,
+      "reason": "goal",
+      "failure": null
+    },
+    {
+      "phase": "main",
+      "game": 5,
+      "family": "336-current-unified-Sigma-D-main-family-000002",
+      "candidate_color": 1,
+      "status": "unknown",
+      "winner": null,
+      "plies": 17,
+      "reason": "move_rejected:TimeOverrun",
+      "failure": "time_overrun"
+    },
+    {
+      "phase": "main",
+      "game": 6,
+      "family": "336-current-unified-Sigma-D-main-family-000003",
+      "candidate_color": 0,
+      "status": "unknown",
+      "winner": null,
+      "plies": 12,
+      "reason": "move_rejected:TimeOverrun",
+      "failure": "time_overrun"
+    },
+    {
+      "phase": "main",
+      "game": 7,
+      "family": "336-current-unified-Sigma-D-main-family-000003",
+      "candidate_color": 1,
+      "status": "unknown",
+      "winner": null,
+      "plies": 9,
+      "reason": "move_rejected:TimeOverrun",
+      "failure": "time_overrun"
+    },
+    {
+      "phase": "main",
+      "game": 8,
+      "family": "336-current-unified-Sigma-D-main-family-000004",
+      "candidate_color": 0,
+      "status": "unknown",
+      "winner": null,
+      "plies": 50,
+      "reason": "move_rejected:TimeOverrun",
+      "failure": "time_overrun"
+    },
+    {
+      "phase": "main",
+      "game": 9,
+      "family": "336-current-unified-Sigma-D-main-family-000004",
+      "candidate_color": 1,
+      "status": "unknown",
+      "winner": null,
+      "plies": 21,
+      "reason": "move_rejected:TimeOverrun",
+      "failure": "time_overrun"
+    },
+    {
+      "phase": "main",
+      "game": 10,
+      "family": "336-current-unified-Sigma-D-main-family-000005",
+      "candidate_color": 0,
+      "status": "goal",
+      "winner": 0,
+      "plies": 67,
+      "reason": "goal",
+      "failure": null
+    },
+    {
+      "phase": "main",
+      "game": 11,
+      "family": "336-current-unified-Sigma-D-main-family-000005",
+      "candidate_color": 1,
+      "status": "goal",
+      "winner": 1,
+      "plies": 76,
+      "reason": "goal",
+      "failure": null
+    },
+    {
+      "phase": "main",
+      "game": 12,
+      "family": "336-current-unified-Sigma-D-main-family-000006",
+      "candidate_color": 0,
+      "status": "unknown",
+      "winner": null,
+      "plies": 64,
+      "reason": "move_rejected:TimeOverrun",
+      "failure": "time_overrun"
+    },
+    {
+      "phase": "main",
+      "game": 13,
+      "family": "336-current-unified-Sigma-D-main-family-000006",
+      "candidate_color": 1,
+      "status": "goal",
+      "winner": 1,
+      "plies": 66,
+      "reason": "goal",
+      "failure": null
+    }
+  ],
+  "pairs": [
+    {
+      "phase": "initial",
+      "family": "336-current-unified-Sigma-D-initial-family-000000",
+      "complete": false
+    },
+    {
+      "phase": "main",
+      "family": "336-current-unified-Sigma-D-main-family-000000",
+      "complete": false
+    },
+    {
+      "phase": "main",
+      "family": "336-current-unified-Sigma-D-main-family-000001",
+      "complete": false
+    },
+    {
+      "phase": "main",
+      "family": "336-current-unified-Sigma-D-main-family-000002",
+      "complete": false
+    },
+    {
+      "phase": "main",
+      "family": "336-current-unified-Sigma-D-main-family-000003",
+      "complete": false
+    },
+    {
+      "phase": "main",
+      "family": "336-current-unified-Sigma-D-main-family-000004",
+      "complete": false
+    },
+    {
+      "phase": "main",
+      "family": "336-current-unified-Sigma-D-main-family-000005",
+      "complete": true
+    },
+    {
+      "phase": "main",
+      "family": "336-current-unified-Sigma-D-main-family-000006",
+      "complete": false
+    }
+  ],
+  "cohorts": [
+    {
+      "phase": "initial",
+      "summary": {
+        "schema": "quoridor-arena-v2",
+        "census": {
+          "planned_games": 2,
+          "started_games": 2,
+          "completed_games": 0,
+          "unknown_games": 2,
+          "complete_pairs": 0,
+          "incomplete_pairs": 1,
+          "unknown_reasons": {
+            "time_overrun": 2
+          }
+        },
+        "by_cohort": {
+          "Initial": {
+            "planned_games": 2,
+            "started_games": 2,
+            "completed_games": 0,
+            "unknown_games": 2,
+            "complete_pairs": 0,
+            "incomplete_pairs": 1,
+            "unknown_reasons": {
+              "time_overrun": 2
+            }
+          }
+        },
+        "pairs": [],
+        "complete_pair_mean": null,
+        "valid_game_score_secondary": null,
+        "planned_score_range": [
+          0.0,
+          1.0
+        ],
+        "bootstrap": {
+          "seed": 331,
+          "resamples": 2000,
+          "unit": "complete family pair",
+          "percentile_95": null,
+          "limitations": [
+            "Fixed sample, complete pairs only; missingness may bias the primary score.",
+            "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+            "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+            "Repeated inspection of this interval is not a sequential stopping rule.",
+            "Fewer than two complete pairs: no uncertainty interval is reported."
+          ]
+        }
+      },
+      "backend_work": {
+        "capture_rows": 0,
+        "executed_rows": 198,
+        "failed_rows": 0,
+        "failed_warm_rows": 0,
+        "logical_rows": 198,
+        "physical_rows": 198,
+        "warm_rows": 0
+      }
+    },
+    {
+      "phase": "main",
+      "summary": {
+        "schema": "quoridor-arena-v2",
+        "census": {
+          "planned_games": 14,
+          "started_games": 14,
+          "completed_games": 5,
+          "unknown_games": 9,
+          "complete_pairs": 1,
+          "incomplete_pairs": 6,
+          "unknown_reasons": {
+            "time_overrun": 9
+          }
+        },
+        "by_cohort": {
+          "Main": {
+            "planned_games": 14,
+            "started_games": 14,
+            "completed_games": 5,
+            "unknown_games": 9,
+            "complete_pairs": 1,
+            "incomplete_pairs": 6,
+            "unknown_reasons": {
+              "time_overrun": 9
+            }
+          }
+        },
+        "pairs": [
+          {
+            "family": "336-current-unified-Sigma-D-main-family-000005",
+            "cohort": "Main",
+            "lineage": "common-initial/PRNG32710001",
+            "score": 1.0
+          }
+        ],
+        "complete_pair_mean": 1.0,
+        "valid_game_score_secondary": 1.0,
+        "planned_score_range": [
+          0.35714285714285715,
+          1.0
+        ],
+        "bootstrap": {
+          "seed": 331,
+          "resamples": 2000,
+          "unit": "complete family pair",
+          "percentile_95": null,
+          "limitations": [
+            "Fixed sample, complete pairs only; missingness may bias the primary score.",
+            "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+            "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+            "Repeated inspection of this interval is not a sequential stopping rule.",
+            "Fewer than two complete pairs: no uncertainty interval is reported."
+          ]
+        }
+      },
+      "backend_work": {
+        "capture_rows": 0,
+        "executed_rows": 5855,
+        "failed_rows": 0,
+        "failed_warm_rows": 0,
+        "logical_rows": 5855,
+        "physical_rows": 5855,
+        "warm_rows": 0
+      }
+    }
+  ],
+  "artifact_bindings": {
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/sigma-vs-distance-v1/matches-current-v1/run-initial/admission.json": {
+      "bytes": 206,
+      "sha256": "50cb4c0bf9803c0ff881bf17c0e9f06d3e74f53bc6dd45da15b2aa9fe9220966"
+    },
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/sigma-vs-distance-v1/matches-current-v1/run-initial/completed.jsonl": {
+      "bytes": 31386,
+      "sha256": "b7831e8e5e048692e2ff0329502a9b66bb13e653cd10fe648bec0f380ec52b70"
+    },
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/sigma-vs-distance-v1/matches-current-v1/run-initial/config.json": {
+      "bytes": 4090,
+      "sha256": "0ad054e01113577a7e4eea5c742db080964c08a546a2b585425c5d4345361045"
+    },
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/sigma-vs-distance-v1/matches-current-v1/run-initial/evaluator-identities.json": {
+      "bytes": 458,
+      "sha256": "a03974e3490fa777c24a3601f8d0e28518d774d9899a1c2e399cc125f8792254"
+    },
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/sigma-vs-distance-v1/matches-current-v1/run-initial/games.csv": {
+      "bytes": 233,
+      "sha256": "93f0b57680391e5ba02ae6cc49c9e5f4ebb95ae66d9515fbf913868f1ee0f03b"
+    },
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/sigma-vs-distance-v1/matches-current-v1/run-initial/moves.jsonl.gz": {
+      "bytes": 4274,
+      "sha256": "0f72c2aaf3905e0ab7138a743efb77b8a2311c30bcce594e0a233defd57fa50d"
+    },
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/sigma-vs-distance-v1/matches-current-v1/run-initial/planned.json": {
+      "bytes": 1207,
+      "sha256": "cf5ba323f0076a13aa420180fcc1a206231a67fe1fad09ef3080d87cc2550a9e"
+    },
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/sigma-vs-distance-v1/matches-current-v1/run-initial/result.json": {
+      "bytes": 33597,
+      "sha256": "19c334aba8e9239ce545115072ebec16d60705c0d3b23b57f24d33fca21d7cb6"
+    },
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/sigma-vs-distance-v1/matches-current-v1/run-main/admission.json": {
+      "bytes": 206,
+      "sha256": "edaa2292f3a5cbe49567aee9a6cc4210ab38714cef1efe373afec5782afbfbd9"
+    },
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/sigma-vs-distance-v1/matches-current-v1/run-main/completed.jsonl": {
+      "bytes": 763464,
+      "sha256": "0584976a91b9a25d25e3302b37b1121e53f3e5d7d2db2016a1bc2f3393b39f76"
+    },
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/sigma-vs-distance-v1/matches-current-v1/run-main/config.json": {
+      "bytes": 21497,
+      "sha256": "8ee0a287043c8ab356d30dba9bdabf13753ea00507e75f816f46bd8cf55063bc"
+    },
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/sigma-vs-distance-v1/matches-current-v1/run-main/evaluator-identities.json": {
+      "bytes": 458,
+      "sha256": "a03974e3490fa777c24a3601f8d0e28518d774d9899a1c2e399cc125f8792254"
+    },
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/sigma-vs-distance-v1/matches-current-v1/run-main/games.csv": {
+      "bytes": 1150,
+      "sha256": "335e3a2a120f1789b40469bb83eb8226f5b5403f7010e4644056ff8a88ed1c47"
+    },
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/sigma-vs-distance-v1/matches-current-v1/run-main/moves.jsonl.gz": {
+      "bytes": 84356,
+      "sha256": "20fe5bb03fb35fa6f7ce62820851d001adef659153be14b2b14e0f317107cf69"
+    },
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/sigma-vs-distance-v1/matches-current-v1/run-main/planned.json": {
+      "bytes": 12737,
+      "sha256": "fe60e34a55e81ea76bef2d60a2f421f9011c295a93274efa1e329161801c4141"
+    },
+    "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/sigma-timed-v1/sigma-vs-distance-v1/matches-current-v1/run-main/result.json": {
+      "bytes": 766846,
+      "sha256": "33350c687afdddd8a6e30f0b9618d83870a25b2fd5bb90ae05611fb2c59509d1"
+    }
+  },
+  "scientific_main_commit": "ad358f645e6b148eb7c3e6ac5a0ea9b1cad1dd0d",
+  "private_ELF_SHA256": "e4b05b34e6019f46d9fb48e834a7d55deec9218671654c4e7fa488b9db869a71",
+  "fixed_D": {
+    "a": 0.0,
+    "b": 8.0,
+    "head": "Tanh",
+    "nn_calls": 0
+  },
+  "pair_uncertainty_interval": null,
+  "limits": "Eight opened correlated common-initial/PRNG families, one completed pair. No CI/Elo/global rank or independent precision. Eleven informative Sigma clock UNKNOWNs retained, not losses/draws/rescued/rerun. Original331/RuleA/operational4 separate; no triangle inference.",
+  "known_all_controller_fees_seconds": 784.5447217000184,
+  "actual_STOP": "2026-10-08T13:35:11.811531+00:00",
+  "remaining": [],
+  "collection_STOP": "2026-10-08T13:40:31.473007+00:00"
+}

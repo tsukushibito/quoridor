@@ -1,0 +1,69 @@
+{
+  "settings": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/finite-continuation-v1/arena-sequence-v1/settings-v3.json",
+    "sha256": "05cd0bf947024a2b48432a019e2f6485f544431d904e339da4c8b2b9beeadc48",
+    "bytes": 7377,
+    "mode": "0644"
+  },
+  "originating_job": {
+    "runtime": "/workspaces/quoridor/.artifacts/research-team/integration324/finite-continuation-v1/arena-sequence-v1/runtime-v1",
+    "job_id": "6f720e0f-072e-4fe4-a5da-999a7d038c03",
+    "config": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/finite-continuation-v1/arena-sequence-v1/runtime-v1/config.json",
+      "sha256": "599d511f6177433ad59077e706f007a0d0aea3fd5c82ff63951227a04ebc32cb",
+      "bytes": 907,
+      "mode": "0600"
+    },
+    "config_sha256": "72d7abceff5f2ac55d78d7e0f169748efcc6f95f72a59950a3e000f7ffe27970",
+    "supervisor": {
+      "pid": 683557,
+      "start_ticks": "4125317",
+      "boot_id": "2c53965e-3116-4aa6-ab14-23bb75e5c887"
+    },
+    "child": {
+      "pid": 683592,
+      "start_ticks": "4125507",
+      "boot_id": "2c53965e-3116-4aa6-ab14-23bb75e5c887"
+    }
+  },
+  "operations": [
+    {
+      "kind": "arena",
+      "index": 6,
+      "launch_affinity": [
+        1,
+        4,
+        6
+      ],
+      "job_result": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/finite-arena374-v1/arena-006/runtime/result.json",
+        "sha256": "625f89edf807a9daf3b670ab3a2cc3da2053053aad9a4ae77a4eb0139849dc8d",
+        "bytes": 503,
+        "mode": "0600"
+      },
+      "manifest": {
+        "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/finite-arena374-v1/arena-006/operation/manifest.json",
+        "sha256": "2bb687b8460e8ce087884d17033e637796597b64c04f6c304ade23124d3992a9",
+        "bytes": 8396,
+        "mode": "0644"
+      }
+    }
+  ],
+  "primary": {
+    "type": "Refused",
+    "message": "owning operation failed or not cleaned",
+    "notes": []
+  },
+  "secondary": [],
+  "status": "FAILED",
+  "completed_operations": 0,
+  "selected_operations": 378,
+  "reader_STOP": "2026-10-13T12:33:34.430050+00:00",
+  "launch_affinity_restored": [
+    1,
+    4,
+    6
+  ],
+  "cleanup_complete": true,
+  "remaining": []
+}

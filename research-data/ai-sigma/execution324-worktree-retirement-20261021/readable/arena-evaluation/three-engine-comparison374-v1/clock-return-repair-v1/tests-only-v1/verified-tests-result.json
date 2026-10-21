@@ -1,0 +1,308 @@
+{
+  "issue": "quoridor-4lc.374.1",
+  "status": "VERIFIED_FOUR_ORIGINAL_POSTJOIN_CLOCK_TESTS_PASS",
+  "job_id": "1ac8e5dd-cdc3-4db7-80fe-4afaf5a24152",
+  "refs": [
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/clock-return-repair-v1/tests-only-v1/settings.json",
+      "sha256": "9104e074648dccfba4f581a303464d167c76dd56008a4801426dcfac6b0da3a2",
+      "bytes": 16032,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/clock-return-repair-v1/tests-only-v1/submission.json",
+      "sha256": "c8d5b303d12ef6dd34f3521b50f006c1cbd4f1d0230c0b9c87a9c42298f0d3dd",
+      "bytes": 508,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/clock-return-repair-v1/tests-only-v1/runtime-v1/result.json",
+      "sha256": "e72ad9f302b751eefaa6ed4ef0ef97fa78b43a9773321c140e6d4175c0f0c15b",
+      "bytes": 505,
+      "mode": "0600"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/clock-return-repair-v1/tests-only-v1/runtime-v1/state.json",
+      "sha256": "8a627c9bbac20b4c245b97d699da5be96f79286993471ecc480a8730fd15ec5f",
+      "bytes": 709,
+      "mode": "0600"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/clock-return-repair-v1/tests-only-v1/runtime-v1/config.json",
+      "sha256": "c93fa982be124fc245753fcae26161f228f6f20b732763dce187d776bcda9914",
+      "bytes": 859,
+      "mode": "0600"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/clock-return-repair-v1/tests-only-v1/job.json",
+      "sha256": "c93fa982be124fc245753fcae26161f228f6f20b732763dce187d776bcda9914",
+      "bytes": 859,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/clock-return-repair-v1/tests-only-v1/test-STOP.json",
+      "sha256": "4049800e47bd415f0fb769d493b612614ea9d87b70202b63ddb7144ba0a0b795",
+      "bytes": 22015,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/clock-return-repair-v1/tests-only-v1/operation/test-clock374-postjoin.full.log",
+      "sha256": "c62717fab320d409477f43f2d09dd6669a716005227bbf5f7f334ae06552dd86",
+      "bytes": 85534,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/clock-return-repair-v1/tests-only-v1/operation/test-clock374-postjoin.process.json",
+      "sha256": "89cd0830278ea3f0e96bbf3278f095b55bf5518d75a100b405f576c8d2eb16c9",
+      "bytes": 1202,
+      "mode": "0600"
+    }
+  ],
+  "actual_names": [
+    "runtime::three_engine_374_postjoin_tests::three_engine_374_postjoin_authority_error_and_panic_remain_errors",
+    "runtime::three_engine_374_postjoin_tests::three_engine_374_postjoin_cancel_noaction_illegal_keep_failure_priority",
+    "runtime::three_engine_374_postjoin_tests::three_engine_374_postjoin_return_does_not_extend_authority_deadline",
+    "runtime::three_engine_374_postjoin_tests::three_engine_374_postjoin_return_follows_delayed_authority_receipt"
+  ],
+  "counts": {
+    "passed": 4,
+    "failed": 0,
+    "ignored": 0,
+    "measured": 0,
+    "filtered_out": 155
+  },
+  "cargo_build_finished": true,
+  "compiler_artifacts": [
+    {
+      "reason": "compiler-artifact",
+      "package_id": "path+file:///workspaces/quoridor/crates/quoridor-runner#0.1.0",
+      "manifest_path": "/workspaces/quoridor/crates/quoridor-runner/Cargo.toml",
+      "target": {
+        "kind": [
+          "lib"
+        ],
+        "crate_types": [
+          "lib"
+        ],
+        "name": "quoridor_runner",
+        "src_path": "/workspaces/quoridor/crates/quoridor-runner/src/lib.rs",
+        "edition": "2024",
+        "doc": true,
+        "doctest": true,
+        "test": true
+      },
+      "profile": {
+        "opt_level": "0",
+        "debuginfo": 0,
+        "debug_assertions": true,
+        "overflow_checks": true,
+        "test": true
+      },
+      "features": [
+        "default",
+        "ordering-assessment"
+      ],
+      "filenames": [
+        "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target/debug/deps/quoridor_runner-7e7af0e37ecd9661"
+      ],
+      "executable": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target/debug/deps/quoridor_runner-7e7af0e37ecd9661",
+      "fresh": false
+    }
+  ],
+  "current_Git_revision": "4475ce06a50d8f514f86bbd2ceaa9bf3fcfba03b",
+  "standard_Git_source": {
+    "workspace": "/workspaces/quoridor",
+    "commit": "4475ce06a50d8f514f86bbd2ceaa9bf3fcfba03b",
+    "patch": {
+      "path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/three-engine-comparison374-v1/clock-return-repair-v1/tests-only-v1/current-Git-delta.patch",
+      "sha256": "b03d8f2d6225f555b95a436e7d68b4bbd823a39fd849f5d82e9109669bb540fa",
+      "bytes": 577,
+      "mode": "0644"
+    },
+    "untracked_inputs": [],
+    "manifest": {
+      "path": "/workspaces/quoridor/Cargo.toml",
+      "sha256": "6cbcf3b38c98492322761e78db908195789021216be51aa37de2888cacd0ab0b",
+      "bytes": 284,
+      "mode": "0644"
+    },
+    "lock": {
+      "path": "/workspaces/quoridor/Cargo.lock",
+      "sha256": "aa938a8537b68f62f383f3ae1538ee335f294f336173ea1ea06eb57503ebb38a",
+      "bytes": 27359,
+      "mode": "0644"
+    },
+    "cargo_configs": [
+      {
+        "path": "/workspaces/quoridor/.cargo/config",
+        "file": null
+      },
+      {
+        "path": "/workspaces/quoridor/.cargo/config.toml",
+        "file": null
+      }
+    ]
+  },
+  "source_environment_before_after": "MATCH original and fresh selected current refs",
+  "returned_guardian": {
+    "command": [
+      "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--manifest-path",
+      "/workspaces/quoridor/Cargo.toml",
+      "-j1",
+      "--message-format=json-render-diagnostics",
+      "-p",
+      "quoridor-runner",
+      "--lib",
+      "--features",
+      "ordering-assessment",
+      "three_engine_374_postjoin_",
+      "--",
+      "--test-threads=1"
+    ],
+    "status": "complete",
+    "child": {
+      "pid": 341920,
+      "start_ticks": "110052556",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "log_bytes_seen": 85534,
+    "scope": "session group and periodically recorded descendants; no daemon adoption",
+    "exit_code": 0,
+    "remaining": [],
+    "direct_child_reaped": true,
+    "descendant_visibility": "observed",
+    "cleanup_complete": true,
+    "log_bytes_retained": 65536,
+    "wall_seconds": 8.510333247017115,
+    "handle_closes_attempted": [
+      "selector_close",
+      "pipe_close",
+      "pidfd_close",
+      "log_close"
+    ],
+    "primary_error": null,
+    "process_cleanup_complete": true,
+    "handle_closes_complete": true,
+    "signal_mask_restoration": "completed",
+    "final_record_persist": "completed",
+    "finalization_errors": []
+  },
+  "persisted_receipt": {
+    "command": [
+      "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--manifest-path",
+      "/workspaces/quoridor/Cargo.toml",
+      "-j1",
+      "--message-format=json-render-diagnostics",
+      "-p",
+      "quoridor-runner",
+      "--lib",
+      "--features",
+      "ordering-assessment",
+      "three_engine_374_postjoin_",
+      "--",
+      "--test-threads=1"
+    ],
+    "status": "complete",
+    "child": {
+      "pid": 341920,
+      "start_ticks": "110052556",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "log_bytes_seen": 85534,
+    "scope": "session group and periodically recorded descendants; no daemon adoption",
+    "exit_code": 0,
+    "remaining": [],
+    "direct_child_reaped": true,
+    "descendant_visibility": "observed",
+    "cleanup_complete": true,
+    "log_bytes_retained": 65536,
+    "wall_seconds": 8.510333247017115,
+    "handle_closes_attempted": [
+      "selector_close",
+      "pipe_close",
+      "pidfd_close",
+      "log_close"
+    ],
+    "primary_error": null,
+    "process_cleanup_complete": true,
+    "handle_closes_complete": true,
+    "signal_mask_restoration": "pending",
+    "final_record_persist": "attempted",
+    "finalization_errors": []
+  },
+  "outer_result": {
+    "job_id": "1ac8e5dd-cdc3-4db7-80fe-4afaf5a24152",
+    "outcome": "succeeded",
+    "error": null,
+    "exit_code": 0,
+    "finished_at": "2026-10-12T23:20:54.628229+00:00",
+    "wall_seconds": 27.464450567029417,
+    "remaining": [],
+    "direct_child_reaped": true,
+    "descendant_visibility": "observed",
+    "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+    "cleanup_complete": true,
+    "cleanup_errors": [],
+    "log_bytes_seen": 221,
+    "log_bytes_retained": 221
+  },
+  "original_source_environment_TMP_STOP": "2026-10-12T23:20:54.510069+00:00",
+  "original_controller_STOP": "2026-10-12T23:20:54.628229+00:00",
+  "actual_selected_collection_reader_STOP": "2026-10-12T23:22:46.642844+00:00",
+  "actual_canonical_environment_release": "2026-10-12T23:22:46.644454+00:00",
+  "original_exact_identity_observations": [
+    {
+      "identity": {
+        "pid": 341269,
+        "start_ticks": "110050765",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "alive": false
+    },
+    {
+      "identity": {
+        "pid": 341528,
+        "start_ticks": "110051111",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "alive": false
+    },
+    {
+      "identity": {
+        "pid": 341920,
+        "start_ticks": "110052556",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "alive": false
+    }
+  ],
+  "owned_readers_children_jobs_TMP_waits_remaining": [],
+  "reservation": "NONE",
+  "full_capture_bytes": 85534,
+  "capture_limit_B": 262144,
+  "controller_whole_seconds_once": 27.464450567029417,
+  "nested_Cargo_wall_seconds_NOT_ADDED": 8.510333247017115,
+  "continuous_peak": "UNKNOWN",
+  "target_observed_before_B": 1384247296,
+  "target_observed_after_B": 1384411136,
+  "larger_target_retained_floor_B": 1388646400,
+  "target_cap_B": 1429536768,
+  "private_growth_B": 0,
+  "real_model_head_backend_Search_Game_calls": 0,
+  "old_assertions_replayed": 0,
+  "old1a11_RAW2goals_1166calls_FAILED_validatedUNKNOWN": "IMMUTABLE_NO_REPLAY",
+  "original64_Q8f9_image875": "IMMUTABLE_NO_NEW_QUALIFICATION",
+  "new_build_image_cost_science_claim": false,
+  "additional_review_requested": false,
+  "controls_inclusive_B": 4194304,
+  "actual_current_controls_allocated_B": 294912,
+  "handoff_to": "324 only"
+}
