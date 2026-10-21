@@ -1129,7 +1129,13 @@ mod probcut_consumer_tests {
             .unwrap();
         assert_eq!(p.deep_depth, 3);
         assert_eq!(p.shallow_depth, 1);
-        assert_eq!(serde_json::to_value(&config).unwrap(), value);
+        let record = serde_json::to_value(&config).unwrap();
+        let mut expected = value.clone();
+        expected["margin"] = serde_json::json!(0.1_f32);
+        assert_eq!(record, expected);
+        let roundtrip: ProbCutConfig = serde_json::from_value(record).unwrap();
+        assert_eq!(roundtrip, config);
+        assert_eq!(roundtrip.margin.to_bits(), 0.1_f32.to_bits());
         for (key, bad) in [
             ("deep_depth", serde_json::json!(4)),
             ("slope", serde_json::json!(0.)),

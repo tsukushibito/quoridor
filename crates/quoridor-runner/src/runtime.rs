@@ -522,6 +522,8 @@ pub struct TtProfile {
     #[serde(default)]
     pub actual_lmr_parameters: Option<crate::config::LmrParameters>,
     #[serde(default)]
+    pub actual_probcut: Option<serde_json::Value>,
+    #[serde(default)]
     pub lmr_reduction_rule: Option<String>,
     #[serde(default)]
     pub lmr_attempts: u64,
@@ -837,6 +839,12 @@ fn invoke_alpha_observed(
         profile.actual_lmr_method_id = session.lmr_method().map(|m| m.id().to_owned());
         profile.lmr_reduction_rule = session.lmr_reduction_rule().map(str::to_owned);
         profile.actual_lmr_parameters = session.lmr_parameters().map(Into::into);
+        profile.actual_probcut = session.probcut_parameters().map(|p| serde_json::json!({
+            "shallow_depth":p.shallow_depth,"deep_depth":p.deep_depth,
+            "slope":p.slope,"intercept":p.intercept,"margin":p.margin,
+            "nonterminal_abs_bound":p.nonterminal_abs_bound,"terminal_utility":p.terminal_utility,
+            "calibration_sha256":p.calibration_sha256,
+        }));
         profile.search_invocations += 1;
         let start = Instant::now();
         let mut bounded = limits.clone();
@@ -3119,6 +3127,8 @@ fn record_evaluation_alpha(
         "actual_zero_stock_safe_race_method_id":game.tt_profiles[engine].actual_zero_stock_safe_race_method_id,
         "requested_lmr_method":config.engines[engine].lmr_method.as_deref().unwrap_or(alphabeta::LmrMethod::default().name()),
         "requested_lmr_parameters":config.engines[engine].lmr_parameters,
+        "requested_probcut":config.engines[engine].probcut,
+        "actual_probcut":game.tt_profiles[engine].actual_probcut,
         "actual_lmr_parameters":game.tt_profiles[engine].actual_lmr_parameters,
         "actual_lmr_method_id":game.tt_profiles[engine].actual_lmr_method_id,
         "lmr_reduction_rule":game.tt_profiles[engine].lmr_reduction_rule,

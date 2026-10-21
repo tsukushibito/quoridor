@@ -1,0 +1,109 @@
+{
+  "issue": "quoridor-4lc.324.30",
+  "at": "2026-10-21",
+  "disposition": "ELIGIBLE_FOR_ONE_CONDITIONAL_ARENA_CANDIDATE_ACTUAL_SUPPORT_PENDING",
+  "exact_pair": {
+    "shallow": 1,
+    "deep": 3,
+    "actual_remaining_depth": 3,
+    "explicit_nonPV_scout_only": true
+  },
+  "calibration": {
+    "complete_exact_pairs": 196,
+    "families": 17,
+    "fits": 1
+  },
+  "confirmation": {
+    "all": 234,
+    "predicted_all": 47,
+    "predicted_decidable_supported": 47,
+    "false_cut": 0,
+    "predicted_UNKNOWN": 0,
+    "predicted_families": 9,
+    "not_predicted": 93,
+    "threshold_outside_domain": 94
+  },
+  "fixed": {
+    "calls": 104,
+    "DepthComplete": 104,
+    "Search_ON_OFF": 0.9542212848087639,
+    "nodes_ON_OFF": 0.9843114844882233,
+    "evals_ON_OFF": 1.0193909170161015,
+    "whole_driver_ON_OFF": 0.956282097778516,
+    "major_roots": [],
+    "ON_probes": 38034,
+    "ON_probe_nodes_subset": 1282708,
+    "actual_cut_counter": 22656,
+    "cut_roots": 20
+  },
+  "clock": {
+    "calls": 104,
+    "TimeLimit_horizon_UNKNOWN": 100,
+    "DepthComplete": 4,
+    "main_receipt_max_s": 0.086253174,
+    "terminal_p95_linear_s": 0.10033221925,
+    "terminal_max_s": 0.106411874,
+    "matched_depth_higher_same_lower": [3, 49, 0],
+    "matched_actions_changed": 0,
+    "matched_PV_changed": 8,
+    "matched_denominator": 52,
+    "ON_probes": 7513,
+    "ON_probe_nodes_subset": 360260,
+    "actual_cut_counter": 2151
+  },
+  "cost": {
+    "counted_calls": 1132,
+    "unique_parent_nodes": 62695898,
+    "parent_outer_seconds_once": 161.61070610582829,
+    "nested_added": 0,
+    "all_probe_and_reference_nodes_are_parent_subsets": true,
+    "fullfees_global_actual": "UNKNOWN"
+  },
+  "interpretation": "Finite selective-work cost/opportunity and clock gates pass. Correlated local OFF full-window0/47 is not an ON error oracle, WDL oracle, error-free guarantee or IID tail estimate. Different selective work/TT/history/PV cannot establish same-work or causal speed. Strength and general superiority unmeasured, default OFF unchanged. Conditional one original256-game comparison is separate and not entered by this record.",
+  "original_failures_NULL_masks_costs_pauses_seals_models_foreign": "PRESERVED",
+  "references": {
+    "summary": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-probcut-v1/all208-analysis-v1/summary.json",
+      "sha256": "3053c7ac36b1777bab7d5075e47f30b5149806c45e5d0f0097815733405e2962",
+      "bytes": 175625,
+      "mode": "0644"
+    },
+    "report": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-probcut-v1/all208-analysis-v1/report-ja.md",
+      "sha256": "177902d17076bc483f5b212cd370ff492e1c7f10920062955a96bb77de767588",
+      "bytes": 3421,
+      "mode": "0644"
+    },
+    "confirmation": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-probcut-v1/numeric-confirmation-v1/analysis-v1/locked-result.json",
+      "sha256": "07d5fb85ef88c5be999d52a6a27123a72b050308b9f399d771ff5bb6b9f1c4c1",
+      "bytes": 3728,
+      "mode": "0644"
+    },
+    "parameters": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-probcut-v1/numeric-calibration-v1/analysis-v1/fit-v1/parameters.json",
+      "sha256": "c31f98961da0bd66bde223d07c3a46274c7c012912ff19dd4b1de83296e6d032",
+      "bytes": 295,
+      "mode": "0644"
+    },
+    "finite_review": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-probcut-review-v1/finite-result-v1/minimum.json",
+      "sha256": "7c2f0d8ba581b2ccb436c542975e29f30d022f2676ba030b8dc3bb1b3b294d6b",
+      "bytes": 4222,
+      "mode": "0644"
+    },
+    "final_native_normal_source_STOP": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-probcut-v1/numeric-timing-clock104-v1/collection-v1/native-normal-source-STOP.json",
+      "sha256": "b87f8e0497be4e3f776fa16cb7e1cb903129267c5c0ecf027f56ca17b66e4748",
+      "bytes": 4544,
+      "mode": "0644"
+    },
+    "analysis_STOP": {
+      "path": "/workspaces/quoridor/.worktree/assets/perf/cedar-probcut-v1/all208-analysis-v1/analysis-STOP.json",
+      "sha256": "52258cb1b268deb2ff4869f34a9739a30427c79610eb95ad2b9ac6714a141ce7",
+      "bytes": 2588,
+      "mode": "0644"
+    }
+  },
+  "evidence_archive": "calibration-confirmation-and-all208-finite-v1.tar.gz"
+}

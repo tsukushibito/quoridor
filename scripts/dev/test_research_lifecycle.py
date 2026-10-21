@@ -548,5 +548,199 @@ class ConfiguredArenaPlanSelection(unittest.TestCase):
                 self.assertIsInstance(lc.Limits(legacy_spec), lc.Limits)
 
 
+    def test_arena_probcut_actual_fp32_namespace_and_off_correspondence(self):
+        import copy
+
+        lc = load_lifecycle()
+        p = dict(
+            shallow_depth=1,
+            deep_depth=3,
+            slope=1.0,
+            intercept=-0.02,
+            margin=0.1,
+            nonterminal_abs_bound=1.0,
+            terminal_utility=2.0,
+            calibration_sha256="a" * 64,
+        )
+        # Literal native FP32 namespace: this expectation does not call the reader helper.
+        base = "distance-tanh-f32:sha256:" + "b" * 64 + ":simd=false"
+        suffix = (
+            ":probcut13-v1:3f800000:bca3d70a:3dcccccd:3f800000:40000000:" + "a" * 64
+        )
+        typed = dict(p, intercept=-0.019999999552965164, margin=0.10000000149011612)
+        report = {
+            k: 0
+            for k in (
+                "eligible_after_TT",
+                "matching_nonPV_after_TT",
+                "threshold_outside_domain",
+                "shallow_probes",
+                "shallow_nodes",
+                "shallow_evaluations",
+                "predicted_cuts_ALL",
+                "probe_aborts",
+                "terminal_probe_rejects",
+                "diagnostic_explicit_child_calls",
+                "diagnostic_nodes_in_parent_budget",
+                "diagnostic_evaluations",
+            )
+        }
+        report["samples"] = []
+        engine = dict(
+            kind="distance",
+            simd=False,
+            depth=3,
+            ordering_profile="control",
+            lmr=False,
+            zero_stock_safe_race=False,
+        )
+        config = dict(
+            engines=[engine],
+            arena=dict(
+                comparison="evaluator_fixed_depth",
+                evaluator_sha256=["b" * 64],
+                decision_only=True,
+            ),
+        )
+        counters = dict(
+            actual_search_namespace=dict(
+                evaluator=base,
+                rules="research-standard-2p-threefold-goal-first-v1",
+                selectivity="control",
+            ),
+            requested_lmr_method="depth_rank",
+            actual_lmr_method_id=None,
+            lmr_reduction_rule=None,
+            requested_lmr_parameters=None,
+            actual_lmr_parameters=None,
+            actual_lmr_enabled=False,
+            actual_zero_stock_safe_race_enabled=False,
+            requested_zero_stock_safe_race_method="path_tail",
+            actual_zero_stock_safe_race_method_id=None,
+            completed_snapshot_validation_failed=False,
+            whole_search={},
+            requested_probcut=None,
+            actual_probcut=None,
+        )
+        obs = dict(
+            engine_index=0,
+            caller_seconds=0.01,
+            thinking_seconds=0.01,
+            value_stm=0.0,
+            accepted=True,
+            failure=None,
+            engine_error=None,
+            action=1,
+            accepted_ns=3,
+            admission_checked_ns=2,
+            returned_ns=1,
+            deadline_ns=None,
+            completed_depth=3,
+            pv=[1],
+            stop="depth_cap",
+            counters=counters,
+            completed_iteration_counters={},
+        )
+        row = dict(observations=[obs])
+        lc.arena_observation(config, row)
+        # Old OFF records may omit both new fields, never actual ProbCut work.
+        legacy = copy.deepcopy(row)
+        legacy_obs = legacy["observations"][0]
+        for key in ("requested_probcut", "actual_probcut"):
+            del legacy_obs["counters"][key]
+        lc.arena_observation(config, legacy)
+        for work in (
+            legacy_obs["counters"]["whole_search"],
+            legacy_obs["completed_iteration_counters"],
+        ):
+            for hidden in ({}, None):
+                work["probcut"] = hidden
+                with self.assertRaises(lc.Refused):
+                    lc.arena_observation(config, legacy)
+                del work["probcut"]
+        lc.arena_observation(config, legacy)
+        counters["actual_search_namespace"]["evaluator"] += suffix
+        with self.assertRaises(lc.Refused):
+            lc.arena_observation(config, row)
+        engine["probcut"] = p
+        counters.update(requested_probcut=typed, actual_probcut=copy.deepcopy(typed))
+        counters["whole_search"]["probcut"] = copy.deepcopy(report)
+        obs["completed_iteration_counters"]["probcut"] = copy.deepcopy(report)
+        lc.arena_observation(config, row)
+        for scope, key, value in (
+            (engine["probcut"], "margin", 0.2),
+            (engine["probcut"], "deep_depth", 4),
+            (engine["probcut"], "nonterminal_abs_bound", 2.0),
+            (engine["probcut"], "calibration_sha256", "c" * 64),
+            (counters["actual_probcut"], "margin", 0.2),
+            (counters, "actual_probcut", None),
+            (counters["actual_search_namespace"], "evaluator", base),
+            (
+                counters["actual_search_namespace"],
+                "evaluator",
+                base + suffix + ":extra",
+            ),
+            (counters["actual_search_namespace"], "rules", "other"),
+            (counters["whole_search"], "probcut", None),
+        ):
+            old = scope[key]
+            scope[key] = value
+            with self.assertRaises(lc.Refused, msg=key):
+                lc.arena_observation(config, row)
+            scope[key] = old
+        del engine["probcut"]
+        counters["actual_search_namespace"]["evaluator"] = base
+        counters.update(requested_probcut=None, actual_probcut=None)
+        with self.assertRaises(lc.Refused):
+            lc.arena_observation(config, row)  # OFF cannot hide leftover ON work.
+        # Existing legal zero-completion fallback remains truthful in OFF and ON.
+        for enabled in (False, True):
+            clock_config = copy.deepcopy(config)
+            clock_config["management_cpu_core"] = 0
+            clock_config["arena"]["comparison"] = "search_wall_time"
+            if enabled:
+                clock_config["engines"][0]["probcut"] = p
+            fallback = copy.deepcopy(obs)
+            fallback.update(
+                completed_depth=None,
+                value_stm=None,
+                pv=[],
+                stop="node_cap",
+                last_completed_iteration_ns=None,
+                completed_iteration_counters=None,
+                deadline_ns=100,
+                returned_ns=10,
+                admission_checked_ns=11,
+                accepted_ns=12,
+            )
+            c = fallback["counters"]
+            c.update(
+                selection_reason="legal_fallback_no_completed_iteration",
+                authority_receipt_ns=5,
+                drain_finished_ns=10,
+                inflight_after_drain=0,
+                whole_search={"probcut": copy.deepcopy(report)} if enabled else {},
+                requested_probcut=typed if enabled else None,
+                actual_probcut=typed if enabled else None,
+            )
+            c["actual_search_namespace"]["evaluator"] = base + (
+                suffix if enabled else ""
+            )
+            lc.arena_observation(clock_config, dict(observations=[fallback]))
+            if not enabled:
+                legacy_fallback = copy.deepcopy(fallback)
+                for key in ("requested_probcut", "actual_probcut"):
+                    del legacy_fallback["counters"][key]
+                lc.arena_observation(clock_config, dict(observations=[legacy_fallback]))
+                legacy_fallback["counters"]["whole_search"]["probcut"] = copy.deepcopy(
+                    report
+                )
+                with self.assertRaises(lc.Refused):
+                    lc.arena_observation(
+                        clock_config, dict(observations=[legacy_fallback])
+                    )
+
+
+
 if __name__ == "__main__":
     unittest.main()

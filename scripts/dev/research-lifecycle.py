@@ -18,6 +18,7 @@ from pathlib import Path
 import shutil
 import signal
 import stat
+import struct
 import subprocess
 import sys
 import time
@@ -5152,6 +5153,138 @@ def planned_game_slice(experiment, schedule, plan, width=2):
     return [schedule[i] for i in plan["batches"][experiment["batch"]]["slots"]]
 
 
+def arena_probcut_suffix(engine, counters, completed):
+    """Match the configured FP32 pair to the worker's actual session, not its label."""
+    keys = {
+        "shallow_depth",
+        "deep_depth",
+        "slope",
+        "intercept",
+        "margin",
+        "nonterminal_abs_bound",
+        "terminal_utility",
+        "calibration_sha256",
+    }
+    floats = (
+        "slope",
+        "intercept",
+        "margin",
+        "nonterminal_abs_bound",
+        "terminal_utility",
+    )
+
+    def typed(p):
+        require(
+            isinstance(p, dict) and set(p) == keys, "complete arena ProbCut parameters"
+        )
+        require(
+            type(p["shallow_depth"]) is int
+            and p["shallow_depth"] == 1
+            and type(p["deep_depth"]) is int
+            and p["deep_depth"] == 3,
+            "arena ProbCut exact1/3",
+        )
+        q = dict(p)
+        for k in floats:
+            require(
+                type(p[k]) in (int, float) and math.isfinite(p[k]),
+                "finite arena ProbCut",
+            )
+            try:
+                q[k] = struct.unpack(">f", struct.pack(">f", p[k]))[0]
+            except (OverflowError, struct.error) as error:
+                raise Refused("arena ProbCut FP32 range") from error
+            require(math.isfinite(q[k]), "finite typed arena ProbCut")
+        require(
+            q["slope"] > 0
+            and q["margin"] >= 0
+            and struct.pack(">f", q["nonterminal_abs_bound"]) == struct.pack(">f", 1.0)
+            and struct.pack(">f", q["terminal_utility"]) == struct.pack(">f", 2.0)
+            and isinstance(q["calibration_sha256"], str)
+            and len(q["calibration_sha256"]) == 64
+            and all(c in "0123456789abcdefABCDEF" for c in q["calibration_sha256"]),
+            "arena ProbCut actual legacy domain and calibration hash",
+        )
+        return q
+
+    configured = engine.get("probcut")
+    require(
+        "probcut" not in engine or configured is not None,
+        "absence alone is arena ProbCut OFF",
+    )
+    require(
+        "requested_probcut" in counters and "actual_probcut" in counters,
+        "native requested/effective arena ProbCut record",
+    )
+    if configured is None:
+        require(
+            counters["requested_probcut"] is None
+            and counters["actual_probcut"] is None,
+            "arena ProbCut OFF requested/effective",
+        )
+        suffix = ""
+    else:
+        expected = typed(configured)
+        for name in ("requested_probcut", "actual_probcut"):
+            actual = typed(counters[name])
+            require(
+                actual == expected
+                and all(
+                    struct.pack(">f", actual[k]) == struct.pack(">f", expected[k])
+                    for k in floats
+                ),
+                "configured/actual arena ProbCut FP32 correspondence",
+            )
+        suffix = (
+            ":probcut13-v1:"
+            + ":".join(struct.pack(">f", expected[k]).hex() for k in floats)
+            + ":"
+            + expected["calibration_sha256"]
+        )
+    for index, work in enumerate((counters.get("whole_search"), completed)):
+        # An absent completed snapshot is truthful only on the existing fallback route.
+        if work is None and (
+            configured is None
+            or (
+                index == 1
+                and counters.get("selection_reason")
+                == "legal_fallback_no_completed_iteration"
+            )
+        ):
+            continue
+        require(isinstance(work, dict), "actual completed/terminal arena work")
+        if configured is None:
+            require("probcut" not in work, "OFF arena cannot publish ProbCut work")
+        else:
+            report = work.get("probcut")
+            require(
+                isinstance(report, dict), "ON arena must report actual ProbCut work"
+            )
+            names = (
+                "eligible_after_TT",
+                "matching_nonPV_after_TT",
+                "threshold_outside_domain",
+                "shallow_probes",
+                "shallow_nodes",
+                "shallow_evaluations",
+                "predicted_cuts_ALL",
+                "probe_aborts",
+                "terminal_probe_rejects",
+                "diagnostic_explicit_child_calls",
+                "diagnostic_nodes_in_parent_budget",
+                "diagnostic_evaluations",
+            )
+            require(
+                all(type(report.get(k)) is int and report[k] >= 0 for k in names)
+                and report.get("samples") == []
+                and report["diagnostic_explicit_child_calls"] == 0
+                and report["diagnostic_nodes_in_parent_budget"] == 0
+                and report["diagnostic_evaluations"] == 0,
+                "arena ProbCut counters without calibration references",
+            )
+    return suffix
+
+
 def arena_observation(config, row):
     """Audit owned native decisions without replaying geometry or Search."""
     accepted = []
@@ -5236,6 +5369,22 @@ def arena_observation(config, row):
             continue
         counters = obs["counters"]
         engine = config["engines"][index]
+        probcut_suffix = (
+            arena_probcut_suffix(
+                engine, counters, obs.get("completed_iteration_counters")
+            )
+            if "probcut" in engine
+            or "requested_probcut" in counters
+            or "actual_probcut" in counters
+            or any(
+                isinstance(work, dict) and "probcut" in work
+                for work in (
+                    counters.get("whole_search"),
+                    obs.get("completed_iteration_counters"),
+                )
+            )
+            else ""
+        )
         if engine.get("ordering_profile") is not None:
             method = counters.get("actual_search_namespace")
             require(
@@ -5250,6 +5399,7 @@ def arena_observation(config, row):
                     + a["evaluator_sha256"][index]
                     + ":simd="
                     + str(engine["simd"]).lower()
+                    + probcut_suffix
                     for kind in {
                         "distance": ("distance-tanh-f32",),
                         "nnue": ("nnue-f32", "nnue-residual-f32"),
@@ -5276,7 +5426,8 @@ def arena_observation(config, row):
                         for k in ("actual_lmr_method_id", "lmr_reduction_rule")
                     )
                 )
-                and counters.get("requested_lmr_parameters") == engine.get("lmr_parameters")
+                and counters.get("requested_lmr_parameters")
+                == engine.get("lmr_parameters")
                 and "actual_lmr_parameters" in counters
                 and counters["actual_lmr_parameters"]
                 == (
@@ -5301,7 +5452,9 @@ def arena_observation(config, row):
                     or ("manhattan" if a["comparison"] == "functional" else "path_tail")
                 )
                 and (
-                    isinstance(counters.get("actual_zero_stock_safe_race_method_id"), str)
+                    isinstance(
+                        counters.get("actual_zero_stock_safe_race_method_id"), str
+                    )
                     and bool(counters["actual_zero_stock_safe_race_method_id"])
                     if enabled
                     else counters.get("actual_zero_stock_safe_race_method_id") is None
@@ -5314,7 +5467,9 @@ def arena_observation(config, row):
                 a["comparison"] == "search_wall_time"
                 and config.get("management_cpu_core") is not None
             )
-        ) and counters.get("selection_reason") == "legal_fallback_no_completed_iteration"
+        ) and counters.get(
+            "selection_reason"
+        ) == "legal_fallback_no_completed_iteration"
         require(
             counters["completed_snapshot_validation_failed"] is False
             and (
@@ -5353,7 +5508,10 @@ def arena_observation(config, row):
                 and receipt < obs["deadline_ns"]
                 and counters["drain_finished_ns"] == obs["returned_ns"]
                 and (
-                    (obs["returned_ns"] >= receipt and counters["inflight_after_drain"] == 0)
+                    (
+                        obs["returned_ns"] >= receipt
+                        and counters["inflight_after_drain"] == 0
+                    )
                     if (
                         a["comparison"] == "whole_wall_time"
                         or (
@@ -5369,7 +5527,8 @@ def arena_observation(config, row):
     if not config["arena"].get("decision_only", False):
         opening = config["arena"]["book"]["openings"][row["game"] // 2]["prefix"]
         require(
-            row["moves"][: len(opening)] == opening and accepted == row["moves"][len(opening) :],
+            row["moves"][: len(opening)] == opening
+            and accepted == row["moves"][len(opening) :],
             "full opening/accepted actions/durable moves",
         )
 

@@ -2980,3 +2980,17 @@ Rootは29の失敗softwareの実source STOPで、この1ownerと新fixtureだけ
 結果前の入力分割は既存192真正full-prefix familyを固定saltのSHA256順で64校正／128確認へ割り当てた。開始局面の残壁stockは4〜17で、零壁／接触／goal近傍の開始familyはそれぞれ0。内部の発動節点や後半局面を観測した数ではなく、このbookだけで全層を覆ったとは呼ばない。必要な補足は既存versioned chronological metadataから入場前にfamily対応と分割を明記し、元分割を保存する。新自己対局や結果による差替え・refillはしない。浅1／深3の選択理由はprobe費と残3 scout機会へのsource上の見込みまでで、費用・適用率の実測証明ではない。新Search／native／compiler／校正／対局は0のままである。[最初の私有差分・family固定・実STOP](../research-data/ai-sigma/probcut-single-pair-v1/first-private-delta-and-family-freeze-v1.json)。
 
 2026-10-21、324.30の単一ProbCutは浅1／深3・実残深さ3の明示非PV scoutへ限定する私有実装を疎に統合し、関連R1 factory／R2 LMR観測との混在拒否／O1入力対応を解消した。独立source確認は指摘0件。入力v2は校正・確認各32局面／17 familyで、各側に零壁1を含み、接触10対2・goal近傍14対2と層の偏りを残す。元family固定と失敗は保持した。最初のコンパイルは既存fixtureの新field欠落で試験前に失敗し、37.046196846秒。最小修復後の新AI5件はPASSしたが、Runnerの最初の新規試験はJSONの0.1と型付きFP32表現の期待値差で失敗した（153.214139758秒、nested非加算）。同作者の期待値修復と未完了softwareを進める。科学Search・校正・確認・対局はまだ0で、速度・誤cut・棋力の支持は未測定、既定OFFを維持する。[固定source・入力・関連確認・元失敗](../research-data/ai-sigma/probcut-single-pair-v1/fixed-source-review-and-software-progress-v1.json)。
+
+その後、真正共通imageで校正32親＋392明示参照、確認32親＋468明示参照、固定104、100ms／5msの104を完了した。計1132 counted calls／62,695,898 unique親nodesで、inline probe・参照nodesは親の内数、nested費は加算しない。196 Exact組／17 familyから一度だけOLSし、FP32傾き1.000012993812561・切片−0.021842867136001587・margin0.7459650039672852を確認前に固定した。確認234標本は47予測ALL＝47判定可能supported／false0／予測UNKNOWN0、9予測family、93非予測・94閾値域外である。相関した局所OFF全窓参照の0/47であり、ON狭窓の誤り率保証やWDL oracleにはしない。
+
+固定104は全件要求深さ完了で、2反復総和のON/OFFはprobe込みSearch0.954221285、nodes0.984311484、evals1.019390917、whole-driver0.956282098。凍結した重大root条件への該当は0、実cutのあるrootは20/26だった。clock104はmain receipt最大0.086253174秒、terminal線形p95 0.10033221925秒／最大0.106411874秒で、全合法・親復元・完成depth≥1の条件を満たした。matched52組の完成深さは上3／同49／下0、手変更0、PV変更8。100 TimeLimitの要求D64 horizonはUNKNOWNのまま、残る4件だけDepthCompleteとする。木・TT warming・選択仕事が異なるため、同仕事の速度比や一般的な因果・棋力改善を示さない。
+
+全凍結gateは通り、同Maxの有限解釈確認も指摘0件だった。支持は**元の一候補対OFFの条件付き最大256局へ進めること**までで、棋力・既定採用は未確認、defaultOFFを維持する。最後のnative＋通常collection/source STOPを保存解析より前に返した。親outer計161.610706106秒を一度だけ計上し、全費・global actualはUNKNOWN、元FAILED／NULL／mask／費を保持する。[全分母・費用・独立確認と復元可能な証拠](../research-data/ai-sigma/probcut-single-pair-v1/finite-calibration-confirmation-all208-v1.json)、[条件別表と限界](../research-data/ai-sigma/probcut-single-pair-v1/report-finite-ja.md)。
+
+対局準備では、型付きProbCut suffixと実session設定の記録が既存arena readerへ通らない不整合を修復し、影響するRunner all-target Clippyと新しい真正releaseを実施した。続く関連確認で旧OFF形式のhidden ProbCut work受理を指摘され、同じreaderの最小条件と同じ新規境界試験を拡張した。これは記録の資格を直す作業で、未実行の対局や元有限測定の科学的成功を追加しない。元128 family／256局・色・seedを保持し、実容量に合わせる4並列の資源準備を進めている。
+
+### ETCの独立した有限検証（324.31）
+
+人間の追加指示で、親TTが直ちにcutできず先頭の通常手でもcutしなかった後、既に順序付けられた次の最大2合法手だけを子TTで調べるETCを私有実装した。親残深さD≥3に対し子の要求深さD−1へstrict一致し、子STMのExactまたはUpper≤−betaだけを候補にする。完全history/context/evaluator/config namespace、合法bestと型、goal／threefold先行、親make/undoを維持し、NNUE更新・全子scan・OFF追加走査を避ける設計である。
+
+関連source確認では、arena記録対応の検査がloop外にあり最後の手しか調べず、非alpha-only記録で未束縛変数へ到達する指摘があった。同作者が各accepted alpha行の内部へ移し、同Maxがその関連差分を指摘0件とした。元negativeは保持し、このsource確認を型・software・runtime・性能へ格上げしない。新AI4／Runner1／Python1と真正imageは未実行。結果前の案はD4のOFF-ON-ON-OFF104＋100ms／5msのON-OFF-OFF-ON104で、元512 calls／512M以内、MPC／aspiration OFFを固定する。MPCの実時計・collectionと重いbuild／ETC計測を重ねず、両方式を同時tuningしない。[私有sourceとR1固定対象](../.worktree/search-optimization/.artifacts/cedar-etc-v1/r1-repair-v1/binding.json)、[関連source確認](../.worktree/assets/perf/cedar-etc-review-v1/source-v1/related-r1-v1/minimum.json)。

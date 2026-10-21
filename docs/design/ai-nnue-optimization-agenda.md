@@ -46,6 +46,10 @@ LMRと必要な再探索、futility、ProbCut/MPC、重要手の延長、ゴー�
 
 MPC-OFFの深い参照は同じ選択探索の局所参照で、真のWDLではない。typed boundが実betaのどちら側か決められない場合と未完了はUNKNOWNとし、予測cut全分母と判定可能分母を分ける。少数確認で誤cut未観測でも無誤り保証にはしない。[Jiang／Buro](https://www.cs.ubc.ca/~jiang/papers/mpc_main.pdf)の深さ組・校正・probe内再帰禁止と[原MPC](https://skatgame.net/mburo/ps/improve.pdf)、[Stockfishの現役source](https://github.com/official-stockfish/Stockfish/blob/master/src/search.cpp)を参考にするが、他棋種の条件・定数は移植しない。
 
+324.30の初回実測は1/3・実残深さ3の一候補で、校正196 Exact組の一度のfitを確認前に凍結した。別family確認では47判定可能予測／0誤cut／0予測UNKNOWN・9予測family、固定104全完了のprobe込みSearch総和ON/OFF0.954221285、clock104の凍結安全条件も通過した。同Maxは条件付き対局への有限支持だけを確認した。局所OFF参照・相関・異なる選択仕事とTimeLimit horizon UNKNOWNを保持し、一般速度・棋力・既定の支持へ拡張しない。元256局／128 familyの条件付き比較を完了してから単一pairの用途を判断する。追加pairやMulti-ProbCut fit／sweepは未発行。[有限結果・費用・限界](../../research-data/ai-sigma/probcut-single-pair-v1/finite-calibration-confirmation-all208-v1.json)。
+
+人間の別依頼324.31ではETCを独立に検証する。MPC OFF・aspiration OFFを固定し、先頭の通常手の後に既に順序付けられた最大2候補をkey-onlyで調べる。子はstrict残深さD−1／完全history-context／ExactかUpper≤−betaを要し、Lowerや浅いleaf種別を数値権威へ流用しない。初回案はD4 ABBA104＋100ms BAAB104、元512 calls／512M内。probe実費込みの反復全費、全要求完了、重大局面退行、時計と真の先頭以外のcut機会を確認し、支持時だけ元条件付き最大256局へ進む。私有sourceの関連R1は解消したがsoftware／実測は未完了であり、MPCとの同時tuningや既定採用は含めない。
+
 ## 評価器の精度と学習
 
 - 独立局数と局面多様性を増やした学習曲線。既存の小さい再用validationだけで十分な容量・特徴・データ量を判定しない。
