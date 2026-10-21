@@ -1,6 +1,15 @@
-import type { GameState, UiToken } from '../../../../../games/othello/bridge/src';
-export type AIRequest = { token: UiToken; state: GameState };
-export type AIResponse = AIRequest & { move: number | null; error: string | null };
+import type {
+  GameState,
+  SearchResult,
+  UiStrategy,
+  UiToken,
+} from '../../../../../games/othello/bridge/src';
+export type AIRequest = { token: UiToken; state: GameState; strategy: UiStrategy };
+export type AIResponse = AIRequest & {
+  move: number | null;
+  searchResult: SearchResult | null;
+  error: string | null;
+};
 type WorkerPort = Pick<
   Worker,
   'postMessage' | 'terminate' | 'addEventListener' | 'removeEventListener'
@@ -42,13 +51,22 @@ export function createAIClient(
             (data.move === null ||
               (Number.isInteger(data.move) && data.move >= 0 && data.move < 64)) &&
             (data.error === null || typeof data.error === 'string') &&
-            data.state
+            data.state &&
+            (data.strategy === 'simple' || data.strategy === 'searchV1')
           )
-            reply(data);
+            reply({
+              token: data.token,
+              state: data.state,
+              strategy: data.strategy,
+              move: data.move,
+              searchResult: data.searchResult,
+              error: data.error,
+            });
           else
             reply({
               ...request,
               move: null,
+              searchResult: null,
               error: 'AIの応答形式を確認できません。再試行できます。',
             });
         };
@@ -58,7 +76,8 @@ export function createAIClient(
           reply({
             ...request,
             move: null,
-            error: '簡易AIを実行できませんでした。再試行できます。',
+            searchResult: null,
+            error: 'AIを実行できませんでした。再試行できます。',
           });
         };
         active = { worker, message, failure };
@@ -71,6 +90,7 @@ export function createAIClient(
         reply({
           ...request,
           move: null,
+          searchResult: null,
           error: error instanceof Error ? error.message : String(error),
         });
       }

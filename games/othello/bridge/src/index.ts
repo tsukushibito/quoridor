@@ -1,6 +1,15 @@
 // No Wasm import or initialization runs until an exported operation is requested.
 import type { UiController } from './ui';
-export type { UiAction, UiController, UiEffect, UiMode, UiOutput, UiToken, UiView } from './ui';
+export type {
+  UiAction,
+  UiController,
+  UiEffect,
+  UiMode,
+  UiOutput,
+  UiStrategy,
+  UiToken,
+  UiView,
+} from './ui';
 export type Side = 1 | 2;
 type Row = [number, number, number, number, number, number, number, number];
 export type Board = [...Row, ...Row, ...Row, ...Row, ...Row, ...Row, ...Row, ...Row];

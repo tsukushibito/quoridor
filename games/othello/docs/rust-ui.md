@@ -3,7 +3,8 @@
 `othello-wasm/src/ui.rs`の`Controller`が、確定盤面・対戦方式・人間の色・合法な人間操作・
 必須パス・終局表示・保存可能性・開始と再開の確認・非同期要求の世代を所有する。
 ルールは既存`othello_core::GameState`を直接使う。探索・評価器・モデル・native APIは変更しない。
-既定はローカル2人で、簡易AI（非学習）は従来の`choose_move_json`だけをWorkerで呼ぶ。
+既定はローカル2人で、既定のAIは従来の簡易AI（非学習）。明示的な探索AIの選択は
+[ブラウザ探索接続](browser-search.md)に従い、同じWorker/token所有を使う。
 学習モデルのロードや採用は行わない。
 
 `new OthelloUi().dispatch_json(actionJson)`は`{view,effects}`を返す。
@@ -14,7 +15,8 @@ TSの旧`session.ts`は削除し、並行するセッション実装を残さな
 ホストはRustの表示値をDOMに投影し、`confirm/readSave/writeSave/think/cancelWorker`を
 ブラウザ操作へ転送する。storage adapterは渡されたkeyとraw文字列を読み書きするだけである。
 保存枠は従来どおり`othello.game.v1`、内容は
-`{version:1,game:"othello",mode:"local"|"ai",humanSide:1|2,state:GameState}`。
+`{version:1,game:"othello",mode:"local"|"ai",humanSide:1|2,strategy:"simple"|"searchV1",state:GameState}`。
+strategyがない従来のversion1保存だけはsimpleとして検査し、次の保存で明示する。
 保存schemaのversionを共有ゲームやQuoridorの保存へ流用しない。
 
 開始・再開要求は即座にRustの世代を更新し、確認待ちに入る。mode/side変更、中断、盤面確定、

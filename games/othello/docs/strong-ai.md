@@ -68,4 +68,8 @@ Rust主体UIは同じ既存コア担当が別の有限source作業として並�
 
 OthelloUiが確認済みGameState、確認/再開、保存可否、generation/requestとAI応答受理を所有し、薄いTS hostがDOM/storage/Worker effectを実行する。同期Wasmへcancelメッセージが届くことに依存せず、取消/新規/再開/setup/disposeでWorkerをterminateして所有権を破棄する。
 
-Rust8・actual Wasm7・生成型/Web型/Viteと新規実ブラウザ5ケースを確認した。破損/読み込み中/読み込み失敗のslotは明示newまたは有効resumeまで保持し、古い実Worker応答は盤面/保存へ反映しない。テストの通信/Storage barrierは明示した実装境界の検査で、探索時間・棋力測定ではない。malformed GameState応答はCancel→Retryを要する回復制限を残す。[実証と制限](../../../research-data/othello/strong-ai-n96/rust-ui-v1.json)。UIのAIは既存簡易policyのまま。
+Rust8・actual Wasm7・生成型/Web型/Viteと新規実ブラウザ5ケースを確認した。破損/読み込み中/読み込み失敗のslotは明示newまたは有効resumeまで保持し、古い実Worker応答は盤面/保存へ反映しない。テストの通信/Storage barrierは明示した実装境界の検査で、探索時間・棋力測定ではない。malformed GameState応答はCancel→Retryを要する回復制限を残す。[実証と制限](../../../research-data/othello/strong-ai-n96/rust-ui-v1.json)。
+
+その後、利用者が明示選択できる非学習v1探索を接続した。既定は簡易policyのまま、`searchV1`は同じRust探索を1000ms/TT32MiB/depth64/exact12でWorker実行する。Rustがconfirmed/draft/saved strategy、token、盤面とraw SearchResultを所有し、不整合・cancelled・不正な手を保存前に拒否する。既存保存でstrategyだけが欠ける場合はSimpleを復元し、明示null/未知値は拒否する。設定変更/新規/再開/取消/disposeでWorkerを同期終了し、旧返信を適用しない。
+
+新Rust7、actual Wasm3（実baseline探索1回＋transport fixture2）、関連Clippy、実生成型/Web型/bundle、実ブラウザ2ケースと限定strategy境界確認を通した。最初の描画2失敗はテストBlobのfetch基準URLによるもので、元FAILEDを保持し、製品・bundleを変えずテストだけ直して失敗2件を確認した。既成功suite/旧描画5件は再演していない。nominal1000msはbrowserの厳密な外側停止保証ではなく、Worker peak256MiBやbrowser棋力も未資格。学習モデルをloadせず、製品default・Quoridor/home/chooserを変えない。[任意探索のsource・実検証・元失敗](../../../research-data/othello/strong-ai-n96/browser-search-v1.json)、[利用境界](browser-search.md)。

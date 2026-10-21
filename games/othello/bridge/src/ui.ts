@@ -1,8 +1,9 @@
-import type { GameState, Side } from './index';
+import type { GameState, SearchResult, Side } from './index';
 export type UiMode = 'local' | 'ai';
+export type UiStrategy = 'simple' | 'searchV1';
 export type UiToken = { generation: number; request: number };
 export type UiAction =
-  | { kind: 'new' | 'setup'; mode: UiMode; humanSide: Side }
+  | { kind: 'new' | 'setup'; mode: UiMode; humanSide: Side; strategy: UiStrategy }
   | { kind: 'resume' | 'pass' | 'retryAi' | 'save' | 'dispose' | 'cancel' }
   | { kind: 'play'; index: number }
   | { kind: 'confirm'; token: UiToken; accepted: boolean; error?: string | null }
@@ -12,7 +13,9 @@ export type UiAction =
       kind: 'aiReply';
       token: UiToken;
       state: GameState;
+      strategy: UiStrategy;
       move: number | null;
+      searchResult: SearchResult | null;
       error: string | null;
     };
 export type UiEffect =
@@ -20,12 +23,13 @@ export type UiEffect =
   | { kind: 'confirm'; token: UiToken; message: string }
   | { kind: 'readSave'; token: UiToken; key: string }
   | { kind: 'writeSave'; token: UiToken; key: string; raw: string }
-  | { kind: 'think'; token: UiToken; state: GameState };
+  | { kind: 'think'; token: UiToken; state: GameState; strategy: UiStrategy };
 export type UiView = {
   generation: number;
   hasGame: boolean;
   mode: UiMode;
   humanSide: Side;
+  strategy: UiStrategy;
   busy: boolean;
   thinking: boolean;
   error: string;

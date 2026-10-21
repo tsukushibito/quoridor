@@ -71,20 +71,25 @@ export function createHost(ports: {
           },
         );
     } else if (effect.kind === 'think') {
-      ports.ai.run({ token: effect.token, state: effect.state }, (reply) => {
-        if (!owned(effect.token)) return;
-        try {
-          dispatch({ kind: 'aiReply', ...reply });
-        } catch (e) {
-          dispatch({
-            kind: 'aiReply',
-            token: effect.token,
-            state: effect.state,
-            move: null,
-            error: detail(e),
-          });
-        }
-      });
+      ports.ai.run(
+        { token: effect.token, state: effect.state, strategy: effect.strategy },
+        (reply) => {
+          if (!owned(effect.token)) return;
+          try {
+            dispatch({ kind: 'aiReply', ...reply });
+          } catch (e) {
+            dispatch({
+              kind: 'aiReply',
+              token: effect.token,
+              state: effect.state,
+              strategy: effect.strategy,
+              move: null,
+              searchResult: null,
+              error: detail(e),
+            });
+          }
+        },
+      );
     }
   }
   return {

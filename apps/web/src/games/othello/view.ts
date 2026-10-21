@@ -1,4 +1,10 @@
-import type { Side, UiAction, UiMode, UiView } from '../../../../../games/othello/bridge/src';
+import type {
+  Side,
+  UiAction,
+  UiMode,
+  UiStrategy,
+  UiView,
+} from '../../../../../games/othello/bridge/src';
 
 // DOM projection only. Labels, legality, transitions and enabled controls come from Rust.
 export function createView(
@@ -10,9 +16,10 @@ export function createView(
   root.innerHTML = `<main class="othello-page">
     <header><div><p class="othello-eyebrow">BOARD GAMES</p><h1 tabindex="-1">Othello</h1></div><a href="#/">ゲーム一覧へ戻る</a></header>
     <section class="othello-setup" aria-labelledby="othello-setup-title"><h2 id="othello-setup-title">対局を選ぶ</h2>
-      <label>対戦方式<select id="othello-mode"><option value="local">ローカル2人</option><option value="ai">簡易AI（非学習）と対戦</option></select></label>
+      <label>対戦方式<select id="othello-mode"><option value="local">ローカル2人</option><option value="ai">AIと対戦（非学習）</option></select></label>
       <label id="othello-side-label" hidden>人間が担当する色<select id="othello-human-side"><option value="1">黒（先手）</option><option value="2">白（後手）</option></select></label>
-      <p>簡易AIは決定的なルールで手を選びます。学習・モデルは使用しません。</p>
+      <label id="othello-strategy-label" hidden>AIの方式<select id="othello-strategy"><option value="simple">簡易AI（非学習）</option><option value="searchV1">探索AI（非学習・1秒）</option></select></label>
+      <p>既定は簡易AIです。探索AIは1手あたり1秒を予算に探索します。どちらも学習・モデルは使用しません。</p>
       <p>新しく始めると、この端末のOthello保存枠を置き換えます。開始・再開時に確認します。</p>
       <div class="othello-actions"><button id="othello-new" type="button">新しい対局</button><button id="othello-resume" type="button">続きから／再試行</button></div>
     </section><p id="othello-error" role="alert"></p>
@@ -20,11 +27,12 @@ export function createView(
       <div class="othello-summary"><h2 id="othello-turn" tabindex="-1" aria-live="polite"></h2><p id="othello-players"></p><p id="othello-score"></p></div>
       <p id="othello-notice" role="status"></p><p id="othello-guide"></p>
       <div class="othello-board" role="group" aria-label="Othello 8行8列の盤。列AからH、行1から8。合法手に印があります。"></div>
-      <div class="othello-actions"><button id="othello-pass" type="button" hidden>合法手がないためパス</button><button id="othello-cancel" type="button" hidden>思考を中断</button><button id="othello-retry-ai" type="button" hidden>簡易AIを再試行</button><button id="othello-save" type="button">今すぐ保存</button></div>
+      <div class="othello-actions"><button id="othello-pass" type="button" hidden>合法手がないためパス</button><button id="othello-cancel" type="button" hidden>思考を中断</button><button id="othello-retry-ai" type="button" hidden>AIを再試行</button><button id="othello-save" type="button">今すぐ保存</button></div>
     </section><p id="othello-save-status" role="status"></p></main>`;
   const $ = <T extends HTMLElement>(selector: string) => root.querySelector<T>(selector)!;
   const mode = $<HTMLSelectElement>('#othello-mode');
   const side = $<HTMLSelectElement>('#othello-human-side');
+  const strategy = $<HTMLSelectElement>('#othello-strategy');
   const board = $('.othello-board');
   const cells = Array.from({ length: 64 }, (_, index) => {
     const cell = document.createElement('button');
@@ -53,9 +61,14 @@ export function createView(
     board.append(cell);
     return cell;
   });
-  const setup = () => ({ mode: mode.value as UiMode, humanSide: Number(side.value) as Side });
+  const setup = () => ({
+    mode: mode.value as UiMode,
+    humanSide: Number(side.value) as Side,
+    strategy: strategy.value as UiStrategy,
+  });
   mode.addEventListener('change', () => action({ kind: 'setup', ...setup() }), { signal });
   side.addEventListener('change', () => action({ kind: 'setup', ...setup() }), { signal });
+  strategy.addEventListener('change', () => action({ kind: 'setup', ...setup() }), { signal });
   $('#othello-new').addEventListener('click', () => action({ kind: 'new', ...setup() }), {
     signal,
   });
@@ -79,7 +92,9 @@ export function createView(
       $('.othello-match').hidden = !view.hasGame;
       mode.value = view.mode;
       side.value = String(view.humanSide);
+      strategy.value = view.strategy;
       $('#othello-side-label').hidden = view.mode !== 'ai';
+      $('#othello-strategy-label').hidden = view.mode !== 'ai';
       $('#othello-resume').textContent =
         view.busy && !view.hasGame ? '読み込んでいます…' : '続きから／再試行';
       for (const [id, value] of [

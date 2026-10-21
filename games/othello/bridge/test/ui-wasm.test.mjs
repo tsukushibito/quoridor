@@ -9,7 +9,7 @@ initSync({ module: readFileSync(new URL('../wasm/othello_bg.wasm', import.meta.u
 const send = (ui, action) => JSON.parse(ui.dispatch_json(JSON.stringify(action)));
 const find = (out, kind) => out.effects.find((effect) => effect.kind === kind);
 function start(ui, mode = 'local', humanSide = 1) {
-  const ask = send(ui, { kind: 'new', mode, humanSide });
+  const ask = send(ui, { kind: 'new', mode, humanSide, strategy: 'simple' });
   assert.equal(find(ask, 'writeSave'), undefined);
   return send(ui, { kind: 'confirm', token: find(ask, 'confirm').token, accepted: true });
 }
@@ -120,7 +120,14 @@ test('real Rust UI required pass and terminal with empty cells use actual core r
 test('real Rust UI rejects stale, mismatched and replayed Worker replies', () =>
   withUi((ui) => {
     const req = find(start(ui, 'ai', 2), 'think');
-    const reply = { kind: 'aiReply', token: req.token, state: req.state, move: 19, error: null };
+    const reply = {
+      kind: 'aiReply',
+      strategy: 'simple',
+      token: req.token,
+      state: req.state,
+      move: 19,
+      error: null,
+    };
     assert.equal(
       find(
         send(ui, { ...reply, token: { ...req.token, request: req.token.request + 1 } }),
@@ -145,14 +152,21 @@ test('real Rust UI synchronously revokes AI ownership on new/resume/setup/cancel
     withUi((ui) => {
       const req = find(start(ui, 'ai', 2), 'think');
       const action = ['new', 'setup'].includes(kind)
-        ? { kind, mode: 'local', humanSide: 1 }
+        ? { kind, mode: 'local', humanSide: 1, strategy: 'simple' }
         : { kind };
       const revoked = send(ui, action);
       assert.ok(find(revoked, 'cancelWorker'));
       assert.ok(revoked.view.generation > req.token.generation);
       assert.equal(
         find(
-          send(ui, { kind: 'aiReply', token: req.token, state: req.state, move: 19, error: null }),
+          send(ui, {
+            kind: 'aiReply',
+            strategy: 'simple',
+            token: req.token,
+            state: req.state,
+            move: 19,
+            error: null,
+          }),
           'writeSave',
         ),
         undefined,
@@ -167,7 +181,7 @@ test('real Rust UI reports write failure, restores it on cancelled confirmation,
       send(ui, { kind: 'written', token: write.token, error: 'quota' }).view.exitWarning,
       /quota/,
     );
-    const ask = send(ui, { kind: 'new', mode: 'ai', humanSide: 2 });
+    const ask = send(ui, { kind: 'new', mode: 'ai', humanSide: 2, strategy: 'simple' });
     const cancelled = send(ui, {
       kind: 'confirm',
       token: find(ask, 'confirm').token,
@@ -181,7 +195,7 @@ test('real Rust UI reports write failure, restores it on cancelled confirmation,
       null,
     );
     assert.equal(
-      find(send(ui, { kind: 'new', mode: 'local', humanSide: 1 }), 'confirm'),
+      find(send(ui, { kind: 'new', mode: 'local', humanSide: 1, strategy: 'simple' }), 'confirm'),
       undefined,
     );
   }));

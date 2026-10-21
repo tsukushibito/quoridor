@@ -326,7 +326,11 @@ test('transport honors Rust request identity, terminates replacements and remove
     workers.push(w);
     return w;
   });
-  const request = { token: token(1, 3), state: { version: 1, board: [], toMove: 1 } };
+  const request = {
+    strategy: 'simple',
+    token: token(1, 3),
+    state: { version: 1, board: [], toMove: 1 },
+  };
   client.run(request, (reply) => replies.push(reply));
   const oldListener = workers[0].listeners.get('message');
   workers[0].emit('message', { ...request, token: token(1, 4), move: 19, error: null });
@@ -347,7 +351,7 @@ test('transport honors Rust request identity, terminates replacements and remove
 test('transport converts malformed/error/messageerror/construction/post failures to retryable replies', () => {
   for (const problem of ['message', 'error', 'messageerror', 'construction', 'post']) {
     const worker = new FakeWorker(),
-      request = { token: token(2, 8), state: { board: ['original'] } };
+      request = { strategy: 'simple', token: token(2, 8), state: { board: ['original'] } };
     const replies = [];
     if (problem === 'post')
       worker.postMessage = () => {
@@ -373,10 +377,17 @@ test('Worker entry echoes Rust ownership and calls only the unchanged simple pol
     scope = { onmessage: null, postMessage: (value) => replies.push(value) };
   await loadTs(
     source('ai.worker'),
-    { '../../../../../games/othello/bridge/src': { chooseMove: async () => 19 } },
+    {
+      '../../../../../games/othello/bridge/src': {
+        chooseMove: async () => 19,
+        search: () => {
+          throw Error('unexpected search');
+        },
+      },
+    },
     { self: scope },
   );
-  const request = { token: token(4, 8), state: { board: ['opaque'] } };
+  const request = { strategy: 'simple', token: token(4, 8), state: { board: ['opaque'] } };
   scope.onmessage({ data: request });
   await flush();
   assert.equal(replies[0].token, request.token);
@@ -512,6 +523,7 @@ test('DOM projection uses Rust labels/eligibility and releases listeners on abor
   assert.equal(board.children.length, 64);
   view.render({
     hasGame: true,
+    strategy: 'simple',
     mode: 'ai',
     humanSide: 2,
     busy: false,
