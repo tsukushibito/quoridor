@@ -1,0 +1,157 @@
+{
+  "issue": "quoridor-n96.1",
+  "scope": "Changed teacher connector/generator source software; accepted for bounded unlabeled preparation, no actual teacher/learned checkpoint/strength adoption",
+  "source": [
+    {
+      "relative": "games/othello/python/othello_arena/engines.py",
+      "worker": {
+        "bytes": 4100,
+        "mode": "0644",
+        "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/games/othello/python/othello_arena/engines.py",
+        "sha256": "05e67e5f3f9ce22a62be9406a102868c500a4c6dd13955e22767df2cd41c6b3a"
+      },
+      "before": {
+        "path": "/workspaces/quoridor/games/othello/python/othello_arena/engines.py",
+        "bytes": 3986,
+        "mode": "0644",
+        "sha256": "648a410f4c0b2451fe0278c44a5ec74f3d87182e4e39114d2d0f1f34e0867d33"
+      },
+      "main": {
+        "path": "/workspaces/quoridor/games/othello/python/othello_arena/engines.py",
+        "bytes": 4100,
+        "mode": "0644",
+        "sha256": "05e67e5f3f9ce22a62be9406a102868c500a4c6dd13955e22767df2cd41c6b3a"
+      }
+    },
+    {
+      "relative": "games/othello/python/othello_arena/generation.py",
+      "worker": {
+        "bytes": 30811,
+        "mode": "0644",
+        "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/games/othello/python/othello_arena/generation.py",
+        "sha256": "ee460d4db602cdaff92b8b7c667c031d26973277b993bce76cc756cfd6110491"
+      },
+      "before": {
+        "path": "/workspaces/quoridor/games/othello/python/othello_arena/generation.py",
+        "bytes": 19729,
+        "mode": "0644",
+        "sha256": "76ddb47f98bfe25c93420bd0d3ec9acf48b6fe5fa35af0e2b9120531086d6516"
+      },
+      "main": {
+        "path": "/workspaces/quoridor/games/othello/python/othello_arena/generation.py",
+        "bytes": 30811,
+        "mode": "0644",
+        "sha256": "ee460d4db602cdaff92b8b7c667c031d26973277b993bce76cc756cfd6110491"
+      }
+    },
+    {
+      "relative": "games/othello/python/othello_arena/teacher.py",
+      "worker": {
+        "bytes": 10572,
+        "mode": "0644",
+        "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/games/othello/python/othello_arena/teacher.py",
+        "sha256": "e2799bac5012910c57d6b5745e6334d3deb553916ed7f6b287f20ec4937eb696"
+      },
+      "before": null,
+      "main": {
+        "path": "/workspaces/quoridor/games/othello/python/othello_arena/teacher.py",
+        "bytes": 10572,
+        "mode": "0644",
+        "sha256": "e2799bac5012910c57d6b5745e6334d3deb553916ed7f6b287f20ec4937eb696"
+      }
+    },
+    {
+      "relative": "games/othello/tests/python/test_arena_teacher.py",
+      "worker": {
+        "bytes": 22889,
+        "mode": "0644",
+        "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/games/othello/tests/python/test_arena_teacher.py",
+        "sha256": "e37363cd69e9427a173da22d1965c7b6dd1816d08d0486df7857621a9039dfd3"
+      },
+      "before": null,
+      "main": {
+        "path": "/workspaces/quoridor/games/othello/tests/python/test_arena_teacher.py",
+        "bytes": 22889,
+        "mode": "0644",
+        "sha256": "e37363cd69e9427a173da22d1965c7b6dd1816d08d0486df7857621a9039dfd3"
+      }
+    },
+    {
+      "relative": "games/othello/docs/baselines.md",
+      "worker": {
+        "bytes": 18568,
+        "mode": "0644",
+        "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/games/othello/docs/baselines.md",
+        "sha256": "b1aab847adca924abc5f349fe5f52ee82e0199b62211f9078c97973b7ec64d39"
+      },
+      "before": {
+        "path": "/workspaces/quoridor/games/othello/docs/baselines.md",
+        "bytes": 13133,
+        "mode": "0644",
+        "sha256": "778c78da4bdea537db7f5c1ab675614a09f62d2959264226053eb0d64df985e1"
+      },
+      "main": {
+        "path": "/workspaces/quoridor/games/othello/docs/baselines.md",
+        "bytes": 19302,
+        "mode": "0644",
+        "sha256": "a10cb451c23ff608551d25d4b50dd8ae79e07fb5ff1043219d284ad90e2a1298"
+      }
+    }
+  ],
+  "checks": [
+    {
+      "name": "teacher-v3-tests",
+      "count": 11,
+      "scope": "new/causally affected source fake checks;14unique total across these runs, no actual game/search/teacher/fit",
+      "process": {
+        "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-baselines-n96/teacher-v3-tests.process.json",
+        "bytes": 1149,
+        "mode": "0600",
+        "sha256": "b26da874cd5dbef0c9eb3a1f1ea2807860137b47420f93c236062248ea0901f9"
+      },
+      "diskSignalRestoration": "pending"
+    },
+    {
+      "name": "teacher-v4-affected-tests",
+      "count": 4,
+      "scope": "new/causally affected source fake checks;14unique total across these runs, no actual game/search/teacher/fit",
+      "process": {
+        "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-baselines-n96/teacher-v4-affected-tests.process.json",
+        "bytes": 1466,
+        "mode": "0600",
+        "sha256": "13d7a23e367bf064636e5d7ba1ef1c671b1c5ae6b7602d78d01c9bc8ebac3924"
+      },
+      "diskSignalRestoration": "pending"
+    },
+    {
+      "name": "teacher-v5-preflight-test",
+      "count": 1,
+      "scope": "new/causally affected source fake checks;14unique total across these runs, no actual game/search/teacher/fit",
+      "process": {
+        "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-baselines-n96/teacher-v5-preflight-test.process.json",
+        "bytes": 1168,
+        "mode": "0600",
+        "sha256": "fc69f455473b972dd72d354f44a4803d218c46bc6c5978db5951cc6c0bf35def"
+      },
+      "diskSignalRestoration": "pending"
+    }
+  ],
+  "unique_focused_tests": 14,
+  "source_checks_replayed": false,
+  "archive": {
+    "path": "/workspaces/quoridor/research-data/othello/strong-ai-n96/teacher-generator-software-v1-checks.tar.gz",
+    "bytes": 6034,
+    "mode": "0644",
+    "sha256": "34fa3b0e458f82fa4893f59bc52db5c042ed752205106407b2c37f5b52ca380a"
+  },
+  "doc_merge": "Retained current published16game results/UNKNOWNRSS and headings; appended new source instructions, corrected stale worker-base UNRUN introduction. No frozen config/old result edits.",
+  "boundaries": "128openingsT96V16H16 actualstate frozen beforelabels; T/V112trajectories then frozen unlabeledobservations; max896scheduled/1024attempts; H nevertraversed/labeled. FixedEga1s,1100msouter rejection, initonce/TTresetseparate; rawSTMdisc*100 no whiteflip/proofinventing. Required7+optional5 row keys; rawmetrics retained separately.",
+  "failures": "Original teacher-v2 F402 lint and scientific/CLI failure receipts retained unchanged.",
+  "remaining": [
+    "Independent related teacher-label/split/source review n96.1.4",
+    "Fresh actual128states/exclusions and replay/observations binding",
+    "fresh retention/actualresources before numerical stages",
+    "actual teacher labels validation/fit/export/parity and strength/browser"
+  ],
+  "default_model_changed": false
+}

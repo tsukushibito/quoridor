@@ -101,14 +101,17 @@ class EgaroucidFixedTime:
     def prepare(self, state, *, deadline):
         pass
 
-    def choose(self, state, *, deadline):
+    def search_response(self, state, *, deadline):
         result = self.process.json_request(
             {"op": "search", "state": state, "timeMs": 1000}, deadline=deadline
         )
+        self.last_search = result
         if "move" not in result:
             raise EngineError("protocol", "fixed-time adapter omitted move")
-        self.last_search = result
-        return result["move"]
+        return result
+
+    def choose(self, state, *, deadline):
+        return self.search_response(state, deadline=deadline)["move"]
 
 
 def io_deadline(seconds=5):

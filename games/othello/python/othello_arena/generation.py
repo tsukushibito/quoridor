@@ -1,33 +1,34 @@
-"""Root-controlled weak-simple pilot connector; no search/teacher/fit or job manager.
+"""Root-bound opening, trajectory and label stages; shared Rust rules authority.
 
-Two separate run(config_FileRef, new_output_dir) calls are required. ``openings``
-selects 24 unlabeled eight-placement development openings (T16/V8, seed20261022,
-<=256 attempts). Root freezes that actual openings.json FileRef and its splits
-before issuing ``games``. The latter replays each opening with Rust, then uses
-only Rust simple/status/play/pass through real terminal status, <=121 total
-transitions. A mandatory pass does not advance the placement number. Sample
-once per preterminal placement8..60/4, before a mandatory pass when present.
+Config explicitly selects labelKind=gameOutcome or teacherEstimate. Outcome uses
+24 T16/V8 terminal simple games. Teacher uses128 T96/V16/H16 actual eight-placement
+roots, frozen by Root BEFORE any teacher result, then112 T/V simple trajectories,
+then a separately frozen observation FileRef for fixed external estimates. H roots
+are held only: no trajectory/teacher/selector. No search/selfplay/trainer framework.
 
-Config: stage, purpose="weak-simple-phase-pattern-pilot", seed=20261022,
-namespace="development/<name>", slots=[{gameId,openingFamily,split:"T"|"V"}]*24,
-engine=existing checked_spec format, source=FileRef(this module),
-canonicalSource=FileRef(same-tree othello_training/pattern.py),
-smokeOpenings=FileRef(original four-family smoke config), limits=PILOT_LIMITS,
-duplicatePolicy=DUPLICATE_POLICY, launchBinding=Root's concrete resource/source
-binding. Stage games additionally requires openings=FileRef(complete output
-from stage openings). Config itself is read only after size/mode/SHA matching.
-No Main/core-WT source fallback; canonical math has one integrated owner.
+Required common config: stage, labelKind, purpose, explicit seed, development
+namespace, slots, engine, source, canonicalSource, openingExclusions (list of
+{file:FileRef, recordsKey, count}), samplePlacements, limits, duplicatePolicy,
+launchBinding. Non-opening stages also bind openings=FileRef. Teacher stage binds
+observations=FileRef and teacher={id,engine,adapterSource,upstreamCommit}; engine
+spec binds actual binary/weights/argv once. teacher also contains the shared
+training identity source/weights/adapter/args; args must equal engine.argv.
+All FileRefs verify before parse.
+Config/retention/resources are new Root decisions; tiny32MiB is NOT teacher cover.
 
-Cross-split D4/STM/color sample duplicates are ALL excluded. Within one split,
-retain exactly the lexical (gameId, placement) first sample. No copies/refill;
-any of24 families without a retained sample is STOP. Five-field training rows
-have gameOutcome labels from actual Rust terminal counts, never minimax truth.
-Complete terminal/replay evidence is separate from trainer consistency checks.
+Cross-split canonical duplicates ALL excluded; within-split lexical gameId/placement
+first. Outcome samples once per preterminal placement8..60/4 before a pass. Teacher
+samples[8,12,20,24,36,40,48,52] after resolving mandatory passes (same placement),
+because the unchanged fixed frontend rejects no-legal input. Missing/duplicate/
+early-terminal observations are deficits, never filled or retried. Five-field
+outcome rows use actual terminal truth; teacher rows add the shared teacher object.
+The supplied training package remains single owner of canonical/features/loader.
+Its teacher loader extension must be integrated before actual data qualification.
 
-The existing caller owns CPU/RAM/GPU/deadline/cancellation, execute directwait,
-handles and the shared32MiB pilot budget including at most two later checkpoints
-and logs. This connector creates no checkpoints and launches one existing
-persistent Process only after explicit Root binding. It never calls search.
+run(config_FileRef,new_output,cancelled=current_callback) returns complete/STOP;
+caller maps STOP to nonzero and owns current execute resources, termination/reap,
+handles, cancellation/deadline and actual retained output guard. No checkpoint or
+model payload is created here. Real stages require fresh Root software/admission.
 """
 
 from collections import Counter, defaultdict
@@ -40,19 +41,7 @@ import time
 from .__main__ import checked_spec
 from .protocol import Native, Process
 
-MIB = 1024**2
-PILOT_LIMITS = {
-    "games": 24,
-    "openingPlacements": 8,
-    "openingAttempts": 256,
-    "rows": 4096,
-    "inputBytes": 16 * MIB,
-    "evidenceBytes": 16 * MIB,
-    "retainedBytes": 32 * MIB,
-    "checkpoints": 2,
-}
 DUPLICATE_POLICY = "cross-split-exclude-all;within-split-lexical-gameId-placement-first"
-PURPOSE = "weak-simple-phase-pattern-pilot"
 
 
 class GenerationStop(RuntimeError):
@@ -90,30 +79,58 @@ def _read(reference, maximum):
 
 
 def _validate(config):
-    if (
-        config["purpose"] != PURPOSE
-        or type(config["seed"]) is not int
-        or config["seed"] != 20261022
-    ):
-        raise GenerationStop("explicit weak-simple purpose and seed20261022 required")
-    if config["stage"] not in ("openings", "games") or not config.get("launchBinding"):
-        raise GenerationStop("Root must bind one stage and its resources before execution")
-    if config["limits"] != PILOT_LIMITS or config["duplicatePolicy"] != DUPLICATE_POLICY:
-        raise GenerationStop("first-pilot limits/duplicate policy must be fixed before outcomes")
+    kind = config["labelKind"]
+    if kind not in ("gameOutcome", "teacherEstimate") or type(config["seed"]) is not int:
+        raise GenerationStop("explicit labelKind and seed required")
+    stages = (
+        ("openings", "games") if kind == "gameOutcome" else ("openings", "trajectories", "teacher")
+    )
+    if config["stage"] not in stages or not config.get("launchBinding") or not config["purpose"]:
+        raise GenerationStop("Root must bind explicit stage/purpose/resources")
+    expected = {"T": 16, "V": 8} if kind == "gameOutcome" else {"T": 96, "V": 16, "H": 16}
+    slots = config["slots"]
+    if len(slots) != sum(expected.values()) or Counter(s["split"] for s in slots) != expected:
+        raise GenerationStop("wrong whole-family split count")
+    if any(set(s) != {"gameId", "openingFamily", "split"} for s in slots):
+        raise GenerationStop("slots must be unlabeled IDs/splits only")
     namespace = config["namespace"]
     if not namespace.startswith("development/") or "final" in namespace.casefold():
-        raise GenerationStop("development namespace required; final namespace excluded")
-    slots = config["slots"]
-    if len(slots) != 24 or Counter(s["split"] for s in slots) != {"T": 16, "V": 8}:
-        raise GenerationStop("exactly24 whole-game slots with T16/V8 required")
-    if any(set(s) != {"gameId", "openingFamily", "split"} for s in slots):
-        raise GenerationStop("unlabeled slot requires only gameId/openingFamily/split")
+        raise GenerationStop("development namespace required; final excluded")
     for key in ("gameId", "openingFamily"):
         values = [s[key] for s in slots]
-        if len(set(values)) != 24 or any(
-            not v.startswith(namespace + "/") or "final" in v.casefold() for v in values
+        if len(set(values)) != len(slots) or any(
+            not isinstance(v, str)
+            or len(v.encode()) > 192
+            or not v.startswith(namespace + "/")
+            or "final" in v.casefold()
+            for v in values
         ):
-            raise GenerationStop("24 distinct development game/family IDs required")
+            raise GenerationStop("distinct named development slots required")
+    if config["duplicatePolicy"] != DUPLICATE_POLICY:
+        raise GenerationStop("duplicate policy must be fixed before labels")
+    limits = config["limits"]
+    required = ("openingAttempts", "rows", "inputBytes", "evidenceBytes", "retainedBytes")
+    if any(type(limits[k]) is not int or limits[k] <= 0 for k in required):
+        raise GenerationStop("fresh concrete positive limits required")
+    if limits["inputBytes"] > 16 * 1024**2:
+        raise GenerationStop("input cap exceeds shared loader16MiB limit")
+    if kind == "teacherEstimate":
+        if (
+            config["samplePlacements"] != [8, 12, 20, 24, 36, 40, 48, 52]
+            or config["samplePassPolicy"] != "after-mandatory-pass"
+            or type(limits["teacherAttempts"]) is not int
+            or not 0 < limits["teacherAttempts"] <= 1024
+            or limits["openingAttempts"] > 4096
+            or limits["rows"] > 896
+            or sorted(x["count"] for x in config["openingExclusions"]) != [4, 24]
+        ):
+            raise GenerationStop("teacher schedule/exclusions/finite caps differ")
+    elif (
+        config["samplePlacements"] != list(range(8, 61, 4))
+        or limits["rows"] > 4096
+        or limits["openingAttempts"] > 256
+    ):
+        raise GenerationStop("outcome schedule/caps differ")
     if not _matches_ref(__file__, config["source"]):
         raise GenerationStop("generation source differs from Root binding")
 
@@ -141,14 +158,17 @@ def _call(native, op, cancelled, **fields):
     return native.request(op, deadline=time.monotonic() + 5, **fields)
 
 
-def _smoke_keys(config, canonical):
-    smoke = _read(config["smokeOpenings"], 256 * 1024)
-    families = smoke["families"]
-    if len(families) != 4:
-        raise GenerationStop("exact four original protocol-smoke exclusions required")
-    keys = {canonical(f["state"]) for f in families}
-    if len(keys) != 4:
-        raise GenerationStop("four distinct original smoke canonical exclusions required")
+def _excluded_keys(config, canonical):
+    keys = set()
+    for exclusion in config["openingExclusions"]:
+        record = _read(exclusion["file"], config["limits"]["inputBytes"])
+        families = record[exclusion["recordsKey"]]
+        if len(families) != exclusion["count"]:
+            raise GenerationStop("actual prior opening exclusion count differs")
+        current = {canonical(f["state"]) for f in families}
+        if len(current) != exclusion["count"]:
+            raise GenerationStop("prior opening exclusions contain canonical duplicates")
+        keys.update(current)
     return keys
 
 
@@ -157,8 +177,9 @@ def _prepare(native, config, canonical, excluded, result, cancelled):
     used = set(excluded)
     result["attempts"] = 0
     result["rejections"] = Counter()
-    for _ in range(256):
-        if len(result["records"]) == 24:
+    count = len(config["slots"])
+    for _ in range(config["limits"]["openingAttempts"]):
+        if len(result["records"]) == count:
             break
         result["attempts"] += 1
         state = _call(native, "new", cancelled)["state"]
@@ -190,33 +211,40 @@ def _prepare(native, config, canonical, excluded, result, cancelled):
                 "canonicalSha256": hashlib.sha256(key).hexdigest(),
             }
         )
-    if len(result["records"]) != 24:
+    if len(result["records"]) != count:
         raise GenerationStop(
-            f"opening candidate deficit: {24 - len(result['records'])}; no labels generated"
+            f"opening candidate deficit: {count - len(result['records'])}; no labels generated"
         )
 
 
 def _frozen_openings(config, canonical, excluded):
-    frozen = _read(config["openings"], PILOT_LIMITS["inputBytes"])
+    frozen = _read(config["openings"], config["limits"]["inputBytes"])
     records = frozen["records"]
     if (
         frozen.get("complete") is not True
         or frozen.get("stage") != "openings"
         or frozen.get("seed") != config["seed"]
         or frozen.get("outcomeLabels") is not False
-        or len(records) != 24
+        or len(records) != len(config["slots"])
     ):
-        raise GenerationStop("Root must freeze24 complete actual states/splits before outcomes")
+        raise GenerationStop("Root must freeze all actual states/splits before any labels")
     for field in (
         "source",
         "engine",
         "canonicalSource",
-        "smokeOpenings",
+        "openingExclusions",
+        "labelKind",
+        "samplePlacements",
         "duplicatePolicy",
         "namespace",
     ):
         if frozen.get(field) != config[field]:
             raise GenerationStop("frozen opening source/exclusion/policy binding changed")
+    if (
+        config["labelKind"] == "teacherEstimate"
+        and frozen.get("samplePassPolicy") != config["samplePassPolicy"]
+    ):
+        raise GenerationStop("frozen mandatory-pass policy changed")
     used = set(excluded)
     for opening, slot in zip(records, config["slots"], strict=True):
         if any(opening[k] != slot[k] for k in ("gameId", "openingFamily", "split")):
@@ -230,10 +258,20 @@ def _frozen_openings(config, canonical, excluded):
     return records
 
 
-def _play_game(native, opening, evidence, cancelled):
+def _play_game(
+    native,
+    opening,
+    evidence,
+    cancelled,
+    *,
+    label_kind="gameOutcome",
+    sample_placements=tuple(range(8, 61, 4)),
+):
     state = _call(native, "new", cancelled)["state"]
     placements = 0
     samples = []
+    if label_kind == "teacherEstimate":
+        evidence["observations"] = samples
     last_sample = None
     for transition in range(122):
         evidence["lastState"] = state
@@ -250,6 +288,8 @@ def _play_game(native, opening, evidence, cancelled):
                 terminalStatus=status,
                 actualBlackMinusWhite=difference,
             )
+            if label_kind == "teacherEstimate":
+                return samples
             return [
                 {
                     "placement": p,
@@ -268,12 +308,33 @@ def _play_game(native, opening, evidence, cancelled):
             raise GenerationStop("Rust game exceeded121 legal transitions")
         if (
             transition >= len(opening["moves"])
-            and 8 <= placements <= 60
-            and placements % 4 == 0
+            and placements in sample_placements
             and placements != last_sample
+            and not (label_kind == "teacherEstimate" and status["mustPass"])
         ):
-            samples.append((placements, state))
+            if label_kind == "gameOutcome":
+                samples.append((placements, state))
+            else:
+                samples.append(
+                    {
+                        "placement": placements,
+                        "split": opening["split"],
+                        "legalMoves": status["legalMoves"],
+                        "row": {
+                            "gameId": opening["gameId"],
+                            "openingFamily": opening["openingFamily"],
+                            "state": state,
+                        },
+                    }
+                )
             last_sample = placements
+        if (
+            label_kind == "teacherEstimate"
+            and placements >= max(sample_placements)
+            and not status["mustPass"]
+        ):
+            evidence.update(complete=True, stopReason="observation-schedule-complete")
+            return samples
         if transition < len(opening["moves"]):
             move = opening["moves"][transition]
         elif status["mustPass"]:
@@ -293,7 +354,7 @@ def _play_game(native, opening, evidence, cancelled):
     raise GenerationStop("unreachable transition bound")
 
 
-def _deduplicate(samples, families, canonical):
+def _deduplicate(samples, families, canonical, *, full_records=False):
     groups = defaultdict(list)
     for sample in samples:
         groups[canonical(sample["row"]["state"])].append(sample)
@@ -308,7 +369,7 @@ def _deduplicate(samples, families, canonical):
         within += len(group) - 1
     kept.sort(key=lambda s: (s["row"]["gameId"], s["placement"]))
     counts = Counter(s["row"]["openingFamily"] for s in kept)
-    return [s["row"] for s in kept], {
+    return [s if full_records else s["row"] for s in kept], {
         "crossSplitExcluded": cross,
         "withinSplitExcluded": within,
         "retainedByFamily": {family: counts[family] for family in sorted(families)},
@@ -316,14 +377,116 @@ def _deduplicate(samples, families, canonical):
     }
 
 
+def _trajectory_samples(
+    native, config, frozen, evidence, observations, canonical, report, cancelled
+):
+    records = []
+    active = [slot for slot in frozen if slot["split"] != "H"]
+    report.update(
+        heldoutFamilies=[slot["openingFamily"] for slot in frozen if slot["split"] == "H"],
+        trajectoriesPlanned=len(active),
+        trajectoriesComplete=0,
+    )
+    try:
+        for opening in active:
+            game = {
+                "gameId": opening["gameId"],
+                "openingFamily": opening["openingFamily"],
+                "split": opening["split"],
+                "openingState": opening["state"],
+                "complete": False,
+                "replay": [],
+            }
+            evidence.append(game)
+            try:
+                returned = _play_game(
+                    native,
+                    opening,
+                    game,
+                    cancelled,
+                    label_kind="teacherEstimate",
+                    sample_placements=config["samplePlacements"],
+                )
+            except Exception as error:
+                game["failure"] = {
+                    "kind": getattr(error, "kind", type(error).__name__),
+                    "message": str(error),
+                }
+                raise
+            records.extend(returned)
+            observations.extend(returned)
+            report["trajectoriesComplete"] += 1
+    finally:
+        counts = Counter(s["row"]["openingFamily"] for s in records)
+        report.update(
+            trajectoriesAttempted=len(evidence),
+            trajectoriesUnrun=len(active) - len(evidence),
+            rawObservations=len(records),
+            rawDeficitByFamily={s["openingFamily"]: 8 - counts[s["openingFamily"]] for s in active},
+        )
+    kept, duplicates = _deduplicate(
+        records, {x["openingFamily"] for x in active}, canonical, full_records=True
+    )
+    observations[:] = kept
+    report.update(
+        duplicates=duplicates,
+        observationsScheduled=len(kept),
+        observationDeficit=8 * len(active) - len(kept),
+        observationsByFamily=duplicates["retainedByFamily"],
+    )
+
+
+def _frozen_observations(config, frozen, canonical):
+    package = _read(config["observations"], config["limits"]["inputBytes"])
+    if (
+        package.get("complete") is not True
+        or package.get("openings") != config["openings"]
+        or package.get("outcomeLabels") is not False
+        or package.get("source") != config["source"]
+        or package.get("duplicatePolicy") != config["duplicatePolicy"]
+        or package.get("seed") != config["seed"]
+        or package.get("samplePassPolicy") != config["samplePassPolicy"]
+        or package.get("samplePlacements") != config["samplePlacements"]
+    ):
+        raise GenerationStop(
+            "Root must freeze complete unlabeled observations before teacher results"
+        )
+    slots = {slot["gameId"]: slot for slot in frozen}
+    records = package["records"]
+    if len(records) > 896 or len(records) > config["limits"]["teacherAttempts"]:
+        raise GenerationStop("teacher schedule exceeds896 T/V observations or attempt cap")
+    used, counts, placements = set(), Counter(), set()
+    for record in records:
+        row = record["row"]
+        if set(row) != {"gameId", "openingFamily", "state"}:
+            raise GenerationStop("observation must not contain labels/teacher results")
+        slot = slots[row["gameId"]]
+        key = canonical(row["state"])
+        if (
+            slot["split"] == "H"
+            or record["split"] != slot["split"]
+            or row["openingFamily"] != slot["openingFamily"]
+            or type(record["placement"]) is not int
+            or record["placement"] not in config["samplePlacements"]
+            or key in used
+            or sum(cell != 0 for cell in row["state"]["board"]) - 4 != record["placement"]
+            or (row["gameId"], record["placement"]) in placements
+        ):
+            raise GenerationStop("heldout/duplicate/wrong-split observation refused")
+        used.add(key)
+        placements.add((row["gameId"], record["placement"]))
+        counts[row["gameId"]] += 1
+        if counts[row["gameId"]] > 8:
+            raise GenerationStop("more than8 observations for one family")
+    return records
+
+
 def run(config_ref, output, *, cancelled=lambda: False):
-    """Explicitly issued stage only; enclosing standard job owns resource controls."""
+    """Issue exactly one explicit stage; enclosing standard job owns resource controls."""
     output = Path(output)
     output.mkdir(parents=True, exist_ok=False)
     config = {}
     report = {
-        "stage": config.get("stage"),
-        "seed": config.get("seed"),
         "config": config_ref,
         "source": _ref(__file__),
         "status": "STOP",
@@ -334,37 +497,75 @@ def run(config_ref, output, *, cancelled=lambda: False):
         "unrunGames": 0,
         "labels": "UNRUN",
         "cleanup": None,
-        "limits": PILOT_LIMITS,
         "duplicatePolicy": DUPLICATE_POLICY,
     }
     openings = {
         "stage": "openings",
-        "seed": config.get("seed"),
-        "outcomeLabels": False,
         "complete": False,
+        "outcomeLabels": False,
         "records": [],
         "source": report["source"],
         "config": config_ref,
     }
-    games, samples, rows = [], [], []
-    process = None
+    games, samples, rows, observations, requests = [], [], [], [], []
+    session, process = {}, None
+    scheduled = None
+    validated = False
     try:
         config = _read(config_ref, 256 * 1024)
-        report.update(stage=config.get("stage"), seed=config.get("seed"))
-        openings.update(seed=config.get("seed"))
-        for field in ("engine", "canonicalSource", "smokeOpenings", "duplicatePolicy", "namespace"):
-            openings[field] = config.get(field)
         _validate(config)
-        if config["stage"] == "games":
-            report.update(gamesPlanned=24, unrunGames=24)
-        canonical = _canonical(config)
-        excluded = _smoke_keys(config, canonical)
-        frozen = (
-            _frozen_openings(config, canonical, excluded) if config["stage"] == "games" else None
+        validated = True
+        report.update(
+            stage=config["stage"],
+            seed=config["seed"],
+            labelKind=config["labelKind"],
+            limits=config["limits"],
+            engine=config["engine"],
         )
+        for field in (
+            "seed",
+            "engine",
+            "canonicalSource",
+            "openingExclusions",
+            "labelKind",
+            "samplePlacements",
+            "duplicatePolicy",
+            "namespace",
+        ):
+            openings[field] = config[field]
+        if config["labelKind"] == "teacherEstimate":
+            openings["samplePassPolicy"] = config["samplePassPolicy"]
+        canonical = _canonical(config)
+        excluded = _excluded_keys(config, canonical)
+        frozen = (
+            _frozen_openings(config, canonical, excluded) if config["stage"] != "openings" else None
+        )
+        scheduled = (
+            _frozen_observations(config, frozen, canonical)
+            if config["stage"] == "teacher"
+            else None
+        )
+        if scheduled is not None:
+            report.update(
+                teacherScheduled=len(scheduled),
+                teacherAttemptUpper=config["limits"]["teacherAttempts"],
+            )
         checked_spec(config["engine"])
-        report["engine"] = config["engine"]
-        report["canonicalSource"] = config["canonicalSource"]
+        if config["stage"] == "teacher":
+            from .teacher import collect
+
+            if len(scheduled) > config["limits"]["rows"]:
+                raise GenerationStop("frozen schedule exceeds fresh row cap before teacher init")
+            if not _matches_ref(
+                config["teacher"]["adapterSource"]["path"], config["teacher"]["adapterSource"]
+            ):
+                raise GenerationStop("teacher adapter source identity differs")
+            report.update(
+                teacher=config["teacher"],
+                teacherConnectorSource=_ref(Path(__file__).with_name("teacher.py")),
+                teacherResponseSource=_ref(Path(__file__).with_name("engines.py")),
+                loaderQualification="UNRUN for actual labels: same-tree loader must qualify generated input",
+            )
         process = Process(
             config["engine"]["argv"],
             cwd=config["engine"]["cwd"],
@@ -373,10 +574,19 @@ def run(config_ref, output, *, cancelled=lambda: False):
         )
         with process:
             native = Native(process)
-            if frozen is None:
+            if config["stage"] == "openings":
                 _prepare(native, config, canonical, excluded, openings, cancelled)
-                openings["complete"] = True
+            elif config["stage"] == "trajectories":
+                _trajectory_samples(
+                    native, config, frozen, games, observations, canonical, report, cancelled
+                )
+            elif config["stage"] == "teacher":
+                collect(
+                    native, config, scheduled, output, rows, requests, session, cancelled=cancelled
+                )
+                report["labels"] = "teacherEstimate"
             else:
+                report.update(gamesPlanned=len(frozen), unrunGames=len(frozen))
                 for opening in frozen:
                     evidence = {
                         "gameId": opening["gameId"],
@@ -410,57 +620,98 @@ def run(config_ref, output, *, cancelled=lambda: False):
         if error.__context__ is not None:
             report["failure"]["context"] = str(error.__context__)
     finally:
-        report["cleanup"] = process.cleanup if process else None
-        if games and report["gamesComplete"] != 24:
-            report["labels"] = "not-published-incomplete-games"
+        report.update(
+            cleanup=process.cleanup if process else None,
+            teacherSession=session,
+            teacherAttempted=len(requests),
+            teacherComplete=len(rows) if requests else 0,
+            teacherSearchIssued=sum(r.get("searchAttempted", False) for r in requests),
+            teacherUnrun=None if scheduled is None else len(scheduled) - len(requests),
+        )
         blobs = {"config.json": _encode(config)}
-        if config.get("stage") == "openings":
+        stage = config.get("stage") if validated else None
+        if stage == "openings":
             openings["complete"] = report["status"] == "complete"
             blobs["openings.json"] = _encode(openings)
-        else:
-            blobs["terminal-evidence.json"] = _encode(
+        elif stage == "trajectories":
+            blobs["observations.json"] = _encode(
                 {
-                    "config": config_ref,
-                    "engine": config.get("engine"),
+                    "complete": report["status"] == "complete",
+                    "outcomeLabels": False,
+                    "openings": config["openings"],
                     "source": report["source"],
-                    "seed": config.get("seed"),
-                    "games": games,
+                    "duplicatePolicy": DUPLICATE_POLICY,
+                    "seed": config["seed"],
+                    "samplePassPolicy": config["samplePassPolicy"],
+                    "samplePlacements": config["samplePlacements"],
+                    "records": observations,
                 }
             )
-            blobs[
-                "training.jsonl" if report["status"] == "complete" else "training.partial.jsonl"
-            ] = b"".join(_encode(row) for row in rows)
-        row_bytes = sum(len(_encode(row)) for row in rows)
-        evidence_bytes = len(blobs.get("terminal-evidence.json", b""))
-        if len(rows) > 4096 or row_bytes > 16 * MIB or evidence_bytes > 16 * MIB:
-            report.update(
-                status="STOP",
-                failure={"kind": "bounds", "message": "row/input/evidence limit exceeded"},
+        if stage is not None and stage != "openings":
+            blobs["generation-evidence.json"] = _encode(
+                {
+                    "config": config_ref,
+                    "source": report["source"],
+                    "engine": config.get("engine"),
+                    "seed": config.get("seed"),
+                    "games": games,
+                    "requests": requests,
+                }
             )
-            blobs = {"config.json": _encode(config)}
+        if stage in ("games", "teacher"):
+            name = "training.jsonl" if report["status"] == "complete" else "training.partial.jsonl"
+            blobs[name] = b"".join(_encode(row) for row in rows)
+        limits = config["limits"] if validated else {}
+        input_bytes = sum(len(_encode(row)) for row in rows)
+        evidence_bytes = len(blobs.get("generation-evidence.json", b""))
+
+        def bound_failure(message):
+            fact = {"kind": "bounds", "message": message}
+            report["status"] = "STOP"
+            if report["failure"] is None:
+                report["failure"] = fact
+            else:
+                report.setdefault("secondaryFailures", []).append(fact)
+
+        if validated and (
+            len(rows) > limits["rows"]
+            or input_bytes > limits["inputBytes"]
+            or evidence_bytes > limits["evidenceBytes"]
+        ):
+            bound_failure("row/input/evidence limit; no further work")
         report.update(
-            rows=len(rows),
-            rowBytes=row_bytes,
-            terminalEvidenceBytes=evidence_bytes,
-            checkpointLimit=2,
-            checkpointsCreated=0,
+            rows=len(rows), rowBytes=input_bytes, evidenceBytes=evidence_bytes, checkpointsCreated=0
         )
-        # Include the actual closed Process log/receipt and report, with64KiB
-        # metadata/allocation margin. Later checkpoints share the caller's cap.
         existing = sum(p.stat().st_size for p in output.iterdir() if p.is_file())
-        upper = existing + sum(len(data) for data in blobs.values()) + len(_encode(report)) + 65536
-        if upper > 32 * MIB:
-            report.update(
-                status="STOP",
-                failure={"kind": "bounds", "message": "retained output limit exceeded"},
-            )
-            blobs = {}
-            upper = existing + len(_encode(report)) + 65536
+        upper = existing + sum(len(b) for b in blobs.values()) + len(_encode(report)) + 65536
+        if validated and upper > limits["retainedBytes"]:
+            bound_failure("fresh retained output limit")
+            report["notRetained"] = {}
+            # Retain configuration/attempt failure evidence ahead of training rows.
+            for name in sorted(
+                blobs, key=lambda n: (n in ("config.json", "generation-evidence.json"), n)
+            ):
+                if upper <= limits["retainedBytes"]:
+                    break
+                report["notRetained"][name] = {
+                    "bytes": len(blobs[name]),
+                    "sha256": hashlib.sha256(blobs[name]).hexdigest(),
+                }
+                del blobs[name]
+                upper = existing + sum(map(len, blobs.values())) + len(_encode(report)) + 65536
+        if report["status"] != "complete" and "training.jsonl" in blobs:
+            blobs["training.partial.jsonl"] = blobs.pop("training.jsonl")
+        if report["status"] != "complete":
+            for name in ("openings.json", "observations.json"):
+                if name in blobs:
+                    package = json.loads(blobs[name])
+                    package["complete"] = False
+                    blobs[name] = _encode(package)
         report.update(
             retainedUpperBytes=upper,
-            remainingRetainedBytesForCheckpointsAndLogs=max(0, 32 * MIB - upper),
+            remainingRetainedBytes=max(0, limits.get("retainedBytes", 0) - upper),
         )
-        for name, data in blobs.items():
-            (output / name).write_bytes(data)
+        for name, blob in blobs.items():
+            (output / name).write_bytes(blob)
         (output / "result.json").write_bytes(_encode(report))
     return report

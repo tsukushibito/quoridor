@@ -148,3 +148,70 @@ train/dev/final data 自体は未作成なので、その分割適用は Root �
 `egaroucid-fixed-probe.json`、各 `.process.json` / `.rss.json`。fake protocol 8 tests が成功した。
 C++ frontend は clang-format 未導入のため既存 style で手動整形し、限定 compile/probe を適用した。
 Python は共通 Ruff、100桁で対象だけ format/check/lint を行う。
+
+## 固定 teacher 用の source 接続
+
+原16局の protocol/cost 結果と旧未実行snapshotを区別する。
+tiny outcome pipeline も24局を完了した。この節の新128 family の生成・teacher・fit は **UNRUN**。
+以前の保存枠32MiBや単独 RSS probe は、新 teacher job の保存許可・RAM 保証には引き継がない。
+
+既存 `generation.run(config_FileRef, new_output, cancelled=current_callback)` を次の順に使う。
+外側は引き続き既存 `CycleResources` / `execute`。独自 controller・rules・trainer は置かない。
+
+| stage          | 入力と結果                                                                                                                                   |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `openings`     | 明示 seed と開局専用の有限 attempts（最大4096）。Rust の合法手だけで8 placements、T96/V16/H16 の実128状態・ID・split を出す。labels は無い。 |
+| `trajectories` | Root が固定した `openings` FileRef を照合し、T/V112 family のみ simple trajectory。H16 は走査しない。                                        |
+| `teacher`      | 別途固定した unlabeled `observations` FileRef にだけ最大896要求。結果を見ての追加・補充・再試行は無い。                                      |
+
+config は `labelKind: teacherEstimate`、`purpose`、新しい明示 `seed`、`namespace: development/...`、
+128個の `{gameId,openingFamily,split}`、`engine`、実 `source` / `canonicalSource` FileRef、
+`launchBinding` を持つ。ID は UTF-8で192 bytes以下、final namespace は使わない。
+`openingExclusions` は `{file: FileRef, recordsKey, count}` のリストで、prior smoke4状態と tiny actual24状態を指定する。
+FileRef の bytes/mode/SHA を parse 前に確認する。実開局と sample の D4/STM/色反転重複は、
+同じ checkout に Root が供給した `othello_training.pattern` の canonical 関数だけで判定する。
+Main fallback、feature math の複製は無い。
+
+`samplePlacements: [8,12,20,24,36,40,48,52]`、`samplePassPolicy: after-mandatory-pass` を事前固定する。
+Rust replay が frozen opening state と一致することを確認し、mandatory pass を Rust で解決してから
+同じ placement の非終局状態を観測する。trajectory は最終観測まで、または Rust terminal で停止する。
+早期終局なら terminal state/status/実黒白石差を証拠に残す。観測 schedule で止めた状態を終局としない。
+完全 replay と最後の状態、未実行 family、早期終局・重複による不足を保存する。
+cross-split canonical 重複は全件除外、within-split は lexical gameId/placement の先頭だけ保持する。
+不足のコピー・補充はしない。whole family split を使い、H は teacher label と fit/selector に入れない。
+
+teacher config の `id/source/weights/adapter/args` が学習側と共有する一つの identity。
+加えて起動用 `engine`（実 binary/weight refs・cwd・argv）、`adapterSource` FileRef、固定 `upstreamCommit` を持ち、
+`args == engine.argv` を確認する。Root は accepted source と build/provenance の実 hash をそこへ束縛する。
+engine/model の初期化と `info` は一度、各独立状態の TT reset は要求時計の外側で別計測する。
+search は1000ms要求、1 worker/book/ponder OFF、monotonic1100ms の送信・応答境界を超えたら STOP。
+最初の bad/late/incomplete/illegal/error で止め、request・raw response・failed・UNRUN を残す。
+既存 `Process` の TERM/KILL/direct wait、pipe/selector close と外側 guardian の取消を再用する。
+
+row は五つの共通フィールドに `teacher` を加える。teacher 内は次の12キーだけ。
+
+```text
+id rawSTMScore scorePerspective scoreUnits scaleToCentidiscs bound proven
+completedDepth reportedProbability internalElapsedMs outerWallMs requestedTimeMs
+```
+
+`scorePerspective=state.toMove`、`scoreUnits=engine-disc`、`scaleToCentidiscs=100`、
+`targetCentidiscs=rawSTMScore*100`。白手番でも符号を再反転しない。
+固定 frontend の `scoreKind` を先に検査するが、`scoreKind/nodes/budgetMs` は raw 証拠に保持し、row.teacher に追加しない。
+不明な bound は `UNKNOWN`、proven は返却の bool/null のまま。
+STEP32 の内部評価は upstream が disc 単位へ割った後の root STM 値であり、frontend はその値を変えない。
+終盤 engine score の空き勝者配分は Rust の actual disc difference と異なる。
+probability/depth から証明や bound を推定せず、常に teacherEstimate として扱う。
+同じゲームの推定値は変わり得るため、gameOutcome の終局スコア整合性は適用しない。
+
+返却 `elapsedMs` は clog・探索取消/join を含む既存 search 全体。
+初期化・reset・外側要求・shutdown は個別に計測するが、transport と cancelJoin の個別値は protocol に無く null。
+新 fake row は Root 供給の同一 WT strict loader を通した。実生成ラベルの loader qualification は未実施。
+
+`limits` は新たに Root が指定する正の `openingAttempts/teacherAttempts/rows/inputBytes/evidenceBytes/retainedBytes`。
+teacherAttempts は1024以下、scheduled rows は896以下、input は共通 loader と同じ16MiB以下。
+helper は checkpoint/model payload/temp file を作らず、既存 protocol tail は各64KiB以下。
+config 自体は256KiB以下。各 stage の結果に実 row/evidence bytes、retained upper と残量を記録する。
+Root は config・開局/観測・replay/raw証拠・ログと後続 checkpoint を含む新しい保存枠を決め、
+実 family2GiB・host reserve4GiB・公平な CPU 時計を入場時に再確認する。helper のサイズ検査を実資源の代用にしない。
+STOP は caller が非ゼロに写し、partial training と失敗を成功扱いしない。
