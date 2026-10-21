@@ -34,6 +34,10 @@ CLIは1行1JSON要求/応答、stdoutはJSONのみ、diagnosticsはstderr。`op`
 
 最初の学習方式は対称性を共有するphase別pattern table。小さな合法到達系列と固定外部教師/厳密小終盤からPython学習・export・共通Rust利用を一巡させる。教師推定値、対局結果、厳密値を区別し、STM・board向き・色反転・phase・石差規約を固定する。game/opening系列単位split、対称局面の重複を把握し、random row splitだけで独立と呼ばない。既存重みも条件・format・phase・視点の対応確認後に利用できるが、少量自前学習とPython/native/Wasm parityを省略しない。
 
+次の固定強豪教師pilotは新128開始familyをT96/V16/H16へ分け、既存4smokeと24tiny開始のD4/色・STM同値を除外した実state・splitをラベル取得前に固定する。Hは開始stateの排除確認だけに使い、今回のtrajectory・教師・fit・selectorへ入れない。placement8,12,20,24,36,40,48,52の各最大8観測を出発案とし、T/Vの予定上限896件、教師attemptの絶対上限1024件を区別する。欠損を新seedや重複で補充しない。固定Console7.8.1-engine＋既存fixed-time adapterは1秒・1探索thread・book/ponder OFF、初期化は一度、独立局面のTT resetは別計測、要求のmonotonic上限1100msを維持する。途中反復・取消join・輸送を実protocolが分離できなければUNKNOWN/nullのまま残す。実RAM、全体期限、serializerと保持量は新configへ入場前に解決し、tinyの32MiB/F1GiBを引き継がない。
+
+静的教師rowは `teacherEstimate` とし、固定idに束縛したraw STM engine-disc値×100をtargetへ保存する。Egaroucidの勝者空き割当は自作Rustの実石差と異なり、教師推定を終局zや自作のexact値へ変換しない。kindごとに条件を分け、gameOutcomeだけが同一gameの終局値整合を要求する。rowの教師metadataはid/rawSTMScore/scorePerspective/scoreUnits/scaleToCentidiscs/bound/provenと5個の任意計測値に限定し、reportedBudgetMs/nodes/scoreKind等は生の応答証拠へ保持する。報告depth/probabilityからprovenやboundを推定しない。T/V/H parserとmetadataの[限定software資格](../../../research-data/othello/strong-ai-n96/teacher-label-software-v1.json)は、実教師・学習・棋力の証拠ではない。
+
 量・時間・容量・checkpoint寿命・plateau/非有限STOPを小pilotのconfigへ結果前に固定する。大型data、NNUE、並列探索、選択pruningを初回に同時投入しない。改善候補は仮説→最小変更→開発集合比較→未使用familyで最終判断。NPS/depth/lossだけで棋力採用しない。各段階で動く最良版、失敗・費・未検証を保持し、最強目標の未達を明記する。
 
 既存のmanaged Worktree・Beads・CPUPlan/CycleResources・job取消/回収/完了通知を再用し、専用manager・常駐監督・全員ACKを増やさない。50GB decimalは共通基盤と両ゲームの合計。Quoridor USERPAUSE323/342.17、seals/newE/oldfits96、models/defaults、原RAW/FAILED/NULL/UNKNOWN費を維持する。
