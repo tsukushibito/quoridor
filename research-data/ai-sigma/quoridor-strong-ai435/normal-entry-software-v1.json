@@ -1,0 +1,251 @@
+{
+  "scope": "Actual current normal Build plus bounded library-identity reading; not a new model numerical/100ms/game qualification.",
+  "build": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/normal-entry-binding-v1/normal-build-v1/operation/manifest.json",
+    "sha256": "8f750287d7c2415c9da42e88471a060d404fd6a14f912d6efcce815ee0534d7b",
+    "bytes": 36786,
+    "mode": "0644"
+  },
+  "source": {
+    "workspace": "/workspaces/quoridor",
+    "commit": "f54897a611ca0ee17e9d59ef903e78d03228ef08",
+    "patch": null,
+    "untracked_inputs": [],
+    "manifest": {
+      "path": "/workspaces/quoridor/Cargo.toml",
+      "sha256": "7c2fbb4e536c3ff1803dd0a0fe4e1025e286922a1de33cae07beb898611a94e3",
+      "bytes": 465,
+      "mode": "0644"
+    },
+    "lock": {
+      "path": "/workspaces/quoridor/Cargo.lock",
+      "sha256": "34a1b67c91690d3b83a6b0e3734029e0d815e23f78b26444b60095e5511084d5",
+      "bytes": 27809,
+      "mode": "0644"
+    },
+    "cargo_configs": [
+      {
+        "path": "/.cargo/config",
+        "file": null
+      },
+      {
+        "path": "/.cargo/config.toml",
+        "file": null
+      },
+      {
+        "path": "/usr/local/cargo/config",
+        "file": null
+      },
+      {
+        "path": "/usr/local/cargo/config.toml",
+        "file": null
+      },
+      {
+        "path": "/workspaces/.cargo/config",
+        "file": null
+      },
+      {
+        "path": "/workspaces/.cargo/config.toml",
+        "file": null
+      },
+      {
+        "path": "/workspaces/quoridor/.cargo/config",
+        "file": null
+      },
+      {
+        "path": "/workspaces/quoridor/.cargo/config.toml",
+        "file": null
+      }
+    ]
+  },
+  "artifact": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/normal-entry-binding-v1/normal-build-v1/image/quoridor-runner",
+    "sha256": "409c0ef40914184b4f6de4b8e40a13ea9663f3bcc6b6c938ba456376f4925c43",
+    "bytes": 10502584,
+    "mode": "0755"
+  },
+  "actual_commands": [
+    {
+      "name": "normal-feature-clippy",
+      "role": "lint",
+      "status": "PASS",
+      "guardian": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "clippy",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "/workspaces/quoridor/Cargo.toml",
+          "-j1",
+          "--message-format=json-render-diagnostics",
+          "-p",
+          "quoridor-runner",
+          "--features",
+          "measurement,quoridor-inference/claustrophobia",
+          "--all-targets",
+          "--no-deps",
+          "--",
+          "-Dwarnings"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 1394954,
+          "start_ticks": "66925163",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [18],
+          "commands": {
+            "run": [0],
+            "test": [0]
+          },
+          "allocation": [0, 18],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "run",
+        "log_bytes_seen": 89861,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 89861,
+        "wall_seconds": 23.02216099295765,
+        "handle_closes_attempted": ["selector_close", "pipe_close", "pidfd_close", "log_close"],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      }
+    },
+    {
+      "name": "normal-feature-release",
+      "role": "build",
+      "status": "PASS",
+      "guardian": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "build",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "/workspaces/quoridor/Cargo.toml",
+          "-j1",
+          "--message-format=json-render-diagnostics",
+          "-p",
+          "quoridor-runner",
+          "--features",
+          "measurement,quoridor-inference/claustrophobia",
+          "--release",
+          "--bin",
+          "quoridor-runner"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 1396910,
+          "start_ticks": "66927467",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [18],
+          "commands": {
+            "run": [0],
+            "test": [0]
+          },
+          "allocation": [0, 18],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "run",
+        "log_bytes_seen": 90774,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 90774,
+        "wall_seconds": 141.11337148805615,
+        "handle_closes_attempted": ["selector_close", "pipe_close", "pidfd_close", "log_close"],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      }
+    }
+  ],
+  "prior_tests_reused": 7,
+  "source_tests_replayed": false,
+  "original_job": {
+    "job_id": "5132a8c7-832b-4e7e-89e4-c9df3f2ebe31",
+    "outcome": "succeeded",
+    "error": null,
+    "error_notes": [],
+    "exit_code": 0,
+    "finished_at": "2026-10-21T22:18:54.411654+00:00",
+    "wall_seconds": 168.01683847489767,
+    "remaining": [],
+    "direct_child_reaped": true,
+    "descendant_visibility": "observed",
+    "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+    "cleanup_complete": true,
+    "cleanup_errors": [],
+    "log_bytes_seen": 0,
+    "log_bytes_retained": 0
+  },
+  "cost_includes_nested": true,
+  "caller": {
+    "source": {
+      "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+      "sha256": "8a9e05bf67eecff38dcb35f58b7715b59880b6aa5cec9afc7771026bf607d8c0",
+      "bytes": 396930,
+      "mode": "0644"
+    },
+    "test": {
+      "path": "/workspaces/quoridor/scripts/dev/test_research_lifecycle_library_streaming.py",
+      "sha256": "741554ab7a09a7ef53b9e46b2168fafb8dd6cdd7e3c9fdc13339ab57c7200765",
+      "bytes": 4333,
+      "mode": "0644"
+    },
+    "change": "Declared binary libraries use existing streaming artifact identity before and after RUN; bounded JSON parsing unchanged, same size/mode/SHA and lifetime refusal.",
+    "test_scope": "One new synthetic80MiB sparse-file actual experiment_check case under64MiB RLIMIT_AS, including content and mode drift refusal. Other source/phase obligations explicitly stubbed; no native/model/dependency library body used.",
+    "test_seconds": 0.5263758979272097,
+    "failures": "Initial missing bracket rejected before import; next new fixture lacked kind field. Original failed logs/receipts retained, neither a numerical nor native failure."
+  },
+  "numerical": {
+    "status": "UNRUN_CURRENT_FORWARD",
+    "inheritance": "Saved Cedar204 finite native value heads and C four CPUFP32 joint heads may support exact unchanged mathematical/model/ABI correspondence. Current callback57eee model-ready0-head is separate. Current normal409c/100ms/8games remains unentered.",
+    "author_saved_correspondence": {
+      "path": "/workspaces/quoridor/.worktree/quoridor-strong435/.artifacts/quoridor-strong435/numerical-runtime-correspondence-v5/saved-correspondence.json",
+      "sha256": "64528afafb0667a6bcb3701aa98719a7dc0143523d29c787b742d406d78d52ab",
+      "bytes": 17134,
+      "mode": "0644"
+    }
+  },
+  "defaults_unchanged": true,
+  "scientific_calls": 0,
+  "archive": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/quoridor-strong-ai435/normal-entry-software-v1-checks.tar.gz",
+    "sha256": "3f685b5222b220ae419d3ec273d17a88307fcda964316cc31f8c33bc48d1308f",
+    "bytes": 27057,
+    "mode": "0644"
+  },
+  "archive_members": 38
+}

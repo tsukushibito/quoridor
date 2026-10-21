@@ -4068,12 +4068,14 @@ def experiment_check(spec):
         )
         refs.append(library["file"])
     refs.extend(caller_source_refs(spec, experiment))
-    streamed_inputs = set()
+    # Libraries are identity-only binary inputs, not bounded JSON controls.
+    # A single Torch library can exceed the entire management reservation.
+    streamed_inputs = {library["file"]["path"] for library in experiment["dynamic_libraries"]}
     if experiment["phase"] == "materialize" and manifest.get("artifact_target") == "terminal-cache":
-        streamed_inputs = {r["path"] for r in document(experiment["config"])["streams"]}
+        streamed_inputs |= {r["path"] for r in document(experiment["config"])["streams"]}
     elif mixed_outcome:
         cache_root = Path(spec["argv"][6])
-        streamed_inputs = {str(cache_root / name) for name in COMPACT_CACHE_WIDTHS}
+        streamed_inputs |= {str(cache_root / name) for name in COMPACT_CACHE_WIDTHS}
     for ref in refs:
         if ref["path"] in streamed_inputs:
             require(artifact_ref(ref["path"]) == ref, "actual streamed input identity")
@@ -7550,7 +7552,10 @@ def execute(
                     if run_error is not None:
                         raise run_error
                 for ref in refs:
-                    if spec["kind"] == "run" and ref == manifest["artifact"]:
+                    if spec["kind"] == "run" and (
+                        ref == manifest["artifact"]
+                        or ref in [library["file"] for library in experiment["dynamic_libraries"]]
+                    ):
                         require(
                             artifact_ref(ref["path"], resources=resources) == ref,
                             "artifact identity drift",
