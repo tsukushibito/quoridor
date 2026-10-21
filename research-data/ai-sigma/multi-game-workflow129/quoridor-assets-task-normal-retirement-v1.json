@@ -1,0 +1,1879 @@
+{
+  "issue": "quoridor-4lc.324.12.9.8",
+  "closed": {
+    "status": "closed",
+    "assignee": "codex:01a15f31-d1ed-70a1-bb23-7b49f7a92e0d",
+    "close_reason": "Root accepts Quoridor game asset integration883c3e00008f1663cde39fd2b83d9fbff46ed264; canonical research-data/ai-sigma/multi-game-workflow129/quoridor-assets-acceptance-v1.json.20 assets relocated to public/games/quoridor;13binary files preserve original Git bytes/modes without decode/reencoding,5text unchanged2READMElink/format only.9callers AST same except assigned asset literals; game/settings/storage/lifecycle/Worker semantics unchanged and common favicon preserved. Actual WT root/subpath builds40HTTP200/old404/favicon and real Audio/Tabletop URL+404 ports PASS; actual Main combined build and20distributed byte identities/link checks PASS. Original fixture/TSAPI failures and skill/context ordering deviation retained; no browser/Cargo/model/science replay. Source/helpers/servers stopped, evidence restored once and duplicate immutable distribution bodies use Git restoration refs. Parent final retirement continues without new research/default rights."
+  },
+  "session_before": {
+    "turn": "01a15f44-5697-7ef3-a093-1c7decc830e7",
+    "status": "completed",
+    "thread_status": {
+      "type": "idle"
+    }
+  },
+  "archive": "research-data/ai-sigma/multi-game-workflow129/quoridor-assets-final-control-tail-v1.tar.gz",
+  "new_members": [
+    {
+      "original": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/admin-close-v1.json",
+      "member": "worker/admin-close-v1.json",
+      "bytes": 8631,
+      "sha256": "96ab6037ab17649c62e7035c71fce8dace6ed12ee5d11de26db78bfc4ed25f9f",
+      "mode": "0644"
+    },
+    {
+      "original": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/admin-final-delivery-v1.json",
+      "member": "worker/admin-final-delivery-v1.json",
+      "bytes": 443,
+      "sha256": "9a8672bd4dfb0e1dca92b910b721c2a122f1c2de20e72615c1d16f9a08c27708",
+      "mode": "0644"
+    },
+    {
+      "original": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/admin-final-parent.txt",
+      "member": "worker/admin-final-parent.txt",
+      "bytes": 2163,
+      "sha256": "d88cc4cc175b5eccf3a99b00eeded4e94d1f617b88951958eefe33ec3ca64e6e",
+      "mode": "0644"
+    }
+  ],
+  "reused_members": [
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/affected-storage.json",
+        "bytes": 520,
+        "sha256": "ab508f49d031227870f207924df74464c809c9304b9a0454d70fd50b2147bf5f",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/affected-storage.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/audit-format.json",
+        "bytes": 1447,
+        "sha256": "999251291088d3f01c87a23a4a4b9953b7ee07826eeca1f81a7211bbb0b5627c",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/audit-format.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/audit-format.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/audit-format.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/audit-format.process.json",
+        "bytes": 1400,
+        "sha256": "6032dbb157e822d16d843a711ab871bbe4cb42e622024f6cb73f8c6505577466",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/audit-format.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/audit-repair-format.json",
+        "bytes": 1447,
+        "sha256": "04e42f72649d97f5454c7e9476a4ac9627c8db803cfb17bc1823d122a7e97815",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/audit-repair-format.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/audit-repair-format.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/audit-repair-format.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/audit-repair-format.process.json",
+        "bytes": 1400,
+        "sha256": "abc47aef8cadb44736e621e700134dd5d7ff7e2f609c8d00365aadaf06b1a20a",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/audit-repair-format.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/audit.mjs",
+        "bytes": 4328,
+        "sha256": "6bf7ed5c36b1ed5b7feb3855d22fffe507ced2eae5d88818df005bcd063bfb80",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/audit.mjs"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/assets/ai.worker-BPUHtKFo.js",
+        "bytes": 7962,
+        "sha256": "98f5b6ab44e5f08d33c618056eb0a68e8697c4808f7d2071b1c26e68e3df66fe",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/assets/ai.worker-BPUHtKFo.js"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/assets/index-BGT2OwzR.js",
+        "bytes": 4010,
+        "sha256": "8128f63d2e786ba3abfd67061bcf89f6fb24e1471e5fc18cb574aa001bc7cd2f",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/assets/index-BGT2OwzR.js"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/assets/index-BGvMoNmx.css",
+        "bytes": 786,
+        "sha256": "adb8f8fa88e979e8348df5003c3c3e5afee71ed60798a1c2694315b867484ce1",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/assets/index-BGvMoNmx.css"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/assets/noto-sans-jp-japanese-400-normal-Cy9Yahyj.woff2",
+        "bytes": 1017536,
+        "sha256": "4a7b928d4d75e7fc0bace614030664a7ea7eb7d2f754fd2b2da9c3c0ed350570",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/assets/noto-sans-jp-japanese-400-normal-Cy9Yahyj.woff2"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/assets/noto-sans-jp-japanese-700-normal-Cy7xyTMA.woff2",
+        "bytes": 1039792,
+        "sha256": "a5861823629995d9abb4b16b96a1c57139d9663d7a256209cb6b40640ed5431e",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/assets/noto-sans-jp-japanese-700-normal-Cy7xyTMA.woff2"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/assets/quoridor-B1RexvOb.js",
+        "bytes": 1082226,
+        "sha256": "3464aeed1abeb2efa425dc67086857de1c4e533382e4ef487e33eccebf65d3d9",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/assets/quoridor-B1RexvOb.js"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/assets/quoridor-CBGlegFx.css",
+        "bytes": 15797,
+        "sha256": "a8105ee24b403a199fa6cb8fc4dce3c05434589dc40a577585e1ecc162e9c78f",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/assets/quoridor-CBGlegFx.css"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/assets/quoridor_ai_bg-Dn2f54bG.wasm",
+        "bytes": 600696,
+        "sha256": "103613b631047b93a0a3859e3bc5fc8080be3971d9bcab928ee1dfe4c30d3318",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/assets/quoridor_ai_bg-Dn2f54bG.wasm"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/assets/quoridor_rules_bg-C21Eor_a.wasm",
+        "bytes": 653217,
+        "sha256": "b428e5e53875ea76ec0012b0b26fc8c1af16d36beb33feaa87c3299ba39f15bd",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/assets/quoridor_rules_bg-C21Eor_a.wasm"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/favicon.ico",
+        "bytes": 4286,
+        "sha256": "62684312a786790ea45baa075da7ec5ef042951a49b1fde1901f5d6fe7185d09",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/favicon.ico"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/index.html",
+        "bytes": 463,
+        "sha256": "acc556e05853e71b26e57111275767fa8ddd255a70257a5dfa87e15079e17fd4",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/index.html"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root.json",
+        "bytes": 1300,
+        "sha256": "8cec7772f1b9bdafc00be8379f8cd484a4093c6c296a0395dccfca5f52bd39d4",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root.log",
+        "bytes": 1755,
+        "sha256": "23cc1a554089abfb989fc4038d2300fdff8a22e0977a66c08f8570ddd58f020f",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root.process.json",
+        "bytes": 1256,
+        "sha256": "dcdb0992b1d0438fa58faec15f177912d0edf6c6337c90e0079f0578a7a15fe2",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/assets/ai.worker-D0V4KBlq.js",
+        "bytes": 7992,
+        "sha256": "a1a93611fa3a94961b7713873aad8394c2bc411dc6e29779c089ea2710e73f91",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/assets/ai.worker-D0V4KBlq.js"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/assets/index-BGvMoNmx.css",
+        "bytes": 786,
+        "sha256": "adb8f8fa88e979e8348df5003c3c3e5afee71ed60798a1c2694315b867484ce1",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/assets/index-BGvMoNmx.css"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/assets/index-iWiJbXli.js",
+        "bytes": 4025,
+        "sha256": "5098f0e80d7e7bdaa5a3f5d71e8cd999d4717eb7ae855e4e962004e9c467fb70",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/assets/index-iWiJbXli.js"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/assets/noto-sans-jp-japanese-400-normal-Cy9Yahyj.woff2",
+        "bytes": 1017536,
+        "sha256": "4a7b928d4d75e7fc0bace614030664a7ea7eb7d2f754fd2b2da9c3c0ed350570",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/assets/noto-sans-jp-japanese-400-normal-Cy9Yahyj.woff2"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/assets/noto-sans-jp-japanese-700-normal-Cy7xyTMA.woff2",
+        "bytes": 1039792,
+        "sha256": "a5861823629995d9abb4b16b96a1c57139d9663d7a256209cb6b40640ed5431e",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/assets/noto-sans-jp-japanese-700-normal-Cy7xyTMA.woff2"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/assets/quoridor-BTBHGzHT.js",
+        "bytes": 1082316,
+        "sha256": "9f230bd144dbd81e6369fd8f3648e4538072ee954377835757db2bcfe688e9a9",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/assets/quoridor-BTBHGzHT.js"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/assets/quoridor-CD8lv-KA.css",
+        "bytes": 15827,
+        "sha256": "ea8faa5d2971836bc7f7d699014a1bf7240df4ab808151cf90fa168384d4a51b",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/assets/quoridor-CD8lv-KA.css"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/assets/quoridor_ai_bg-Dn2f54bG.wasm",
+        "bytes": 600696,
+        "sha256": "103613b631047b93a0a3859e3bc5fc8080be3971d9bcab928ee1dfe4c30d3318",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/assets/quoridor_ai_bg-Dn2f54bG.wasm"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/assets/quoridor_rules_bg-C21Eor_a.wasm",
+        "bytes": 653217,
+        "sha256": "b428e5e53875ea76ec0012b0b26fc8c1af16d36beb33feaa87c3299ba39f15bd",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/assets/quoridor_rules_bg-C21Eor_a.wasm"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/favicon.ico",
+        "bytes": 4286,
+        "sha256": "62684312a786790ea45baa075da7ec5ef042951a49b1fde1901f5d6fe7185d09",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/favicon.ico"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/index.html",
+        "bytes": 508,
+        "sha256": "011e640338967e82a12762fe7df44fc427974998a2c39574401f8f8e8eb4776e",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/index.html"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath.json",
+        "bytes": 1300,
+        "sha256": "66100c68f6209a7aa62b282e458c6067955f71b455793fc3aad676f072045ee7",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath.log",
+        "bytes": 1785,
+        "sha256": "8cd7d63a72ab10ba8d14d5b1a0b19ac3beb51f18eb140673a3660d41d0d9086e",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath.process.json",
+        "bytes": 1256,
+        "sha256": "a5ba4c7b8e4e84acaae262b8f5a5df819223156ba905bd7fe28621e9a047ac57",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/changed-callers.json",
+        "bytes": 491,
+        "sha256": "1f4faf771f447ffb88048eacd44a2df7e0e0d471e6afde57a22d9916769c22bd",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/changed-callers.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/common-caller-proposal.patch",
+        "bytes": 6789,
+        "sha256": "956d88aff258608fa1978ca223c8c5d0e708c8212baa31d7dcc7fdf32054ca87",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/common-caller-proposal.patch"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/evidence-format.json",
+        "bytes": 1550,
+        "sha256": "b1a1a908d53fa2d8b2cc8a683fe87a64df357730a1a14cd8c34745606effb002",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/evidence-format.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/evidence-format.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/evidence-format.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/evidence-format.process.json",
+        "bytes": 1502,
+        "sha256": "53f574d2208e0cce1c0b9c7509ad03af6b673178a8d7841095004450aa455b56",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/evidence-format.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/evidence-refs.json",
+        "bytes": 16156,
+        "sha256": "d242658819ab29efc6ec3d866b9e96c108dc5f1b7d7c58e73a43addf0e7b4e3d",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/evidence-refs.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/final-source-manifest.json",
+        "bytes": 18045,
+        "sha256": "2a05549514fb23b96fd5b1ae30690af31fef9746c581bc316f897852aef80a4e",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/final-source-manifest.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/finalize-ruff-check.json",
+        "bytes": 1395,
+        "sha256": "7cbb658447a3f5c4645f68d4d2920cf4e138e6b71a1a43fe690d738a34cf42c9",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/finalize-ruff-check.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/finalize-ruff-check.log",
+        "bytes": 19,
+        "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/finalize-ruff-check.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/finalize-ruff-check.process.json",
+        "bytes": 1351,
+        "sha256": "32b2c541167a6ebe959a06316de81e37f8ad1ca08484c5b2df1d389ad1252801",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/finalize-ruff-check.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/finalize-ruff-format-check.json",
+        "bytes": 1411,
+        "sha256": "b75f0fd2e907eb5ccfeea42264b2c3c7dd3e9565c6ce5f28420feabb49e70fa8",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/finalize-ruff-format-check.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/finalize-ruff-format-check.log",
+        "bytes": 25,
+        "sha256": "fd2299c9f1c6dc869070883e281051bfe93aacf66c1a3b0069f45b4aa410ca50",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/finalize-ruff-format-check.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/finalize-ruff-format-check.process.json",
+        "bytes": 1367,
+        "sha256": "1e80cdce0e7ba343f5c2f22582bc0d1d01dc42ee3c2872fe67aa2b3a89875522",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/finalize-ruff-format-check.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/finalize.py",
+        "bytes": 5422,
+        "sha256": "817d3c0b0c157bae462eb496200c4d75686311627c6aa39b6873631eda6bb2fc",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/finalize.py"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/first-edit.md",
+        "bytes": 1021,
+        "sha256": "2de200bbe315bfe36be5fee04c9def05e5ff7ff0f435887c6b2bb5d66106c563",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/first-edit.md"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/first-read.md",
+        "bytes": 1049,
+        "sha256": "a2b21dceb161c81c10fbfd63c21cbf0119098b0c0bd0387997736e518bcb68d6",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/first-read.md"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/handoff.json",
+        "bytes": 21383,
+        "sha256": "42a6b7e408bbe5540e14f62da8f19fa8291c7fdb625f3295059f6c1b8e1448a5",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/handoff.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/handoff.md",
+        "bytes": 6066,
+        "sha256": "92f19b1a5ece2be2abfefd20a89405f6fecf7ec5a6746ea8a020f866d285644d",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/handoff.md"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/helper-ruff-check.json",
+        "bytes": 1535,
+        "sha256": "bca251692292cea4c5fae2dd8b159e04b40afd20aebe6ce29881223ac8d845c9",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/helper-ruff-check.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/helper-ruff-check.log",
+        "bytes": 19,
+        "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/helper-ruff-check.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/helper-ruff-check.process.json",
+        "bytes": 1492,
+        "sha256": "6361dee4066b04e8fbc179c19ce6d18a6913ec1de6a12dbe59c200b3bf5036f0",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/helper-ruff-check.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/helper-ruff-format-check.json",
+        "bytes": 1551,
+        "sha256": "09194a680d57beb7dfc5f84e8435c3c9f34b38bd65e7d4caf1f67ddde80de473",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/helper-ruff-format-check.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/helper-ruff-format-check.log",
+        "bytes": 26,
+        "sha256": "177f260a5645724013185e4b140c7045cc39e56c0c97b120f5cb23599f85f0de",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/helper-ruff-format-check.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/helper-ruff-format-check.process.json",
+        "bytes": 1507,
+        "sha256": "d8c50e3d28681f9df0bf9ab06f7fc04a8270833fcaae223cd578baac6e95ca44",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/helper-ruff-format-check.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/migrate.json",
+        "bytes": 1338,
+        "sha256": "408a6e61edfb54486d2fe026452ba7a639a92462fa35f0142c3bedacd9b1656e",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/migrate.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/migrate.log",
+        "bytes": 128,
+        "sha256": "a63b44d3c609cc39d416e614056e8a62846f588e88119d7e6cebaecfd4c9dc58",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/migrate.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/migrate.process.json",
+        "bytes": 1293,
+        "sha256": "43e722e8f0a8742e9ae0ac8d92a0b4e153b04d075fd955ba856c9020b3988348",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/migrate.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/migrate.py",
+        "bytes": 4836,
+        "sha256": "8fb4b196fe3317d66ffa0ac1c5cbcd1838013e98fd67cce2d5455e8d6999be9c",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/migrate.py"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/patches.json",
+        "bytes": 1338,
+        "sha256": "bd81c0ffa51ff640b07f97d23e9bd3bd1e0cfe6ab4f323ad2a13fe53011325d5",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/patches.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/patches.log",
+        "bytes": 79,
+        "sha256": "be413dc7b1474920879d3b7a5dfb10d8a8f2aa2f1ba0d3b1715050288fc319c6",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/patches.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/patches.process.json",
+        "bytes": 1293,
+        "sha256": "7cb2d0a812afd19f5d7a442ad23e8721f93807f8c0c53ff3d5d1e261048fb001",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/patches.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/patches.py",
+        "bytes": 1234,
+        "sha256": "369e831d0b74dce82ed7cdf9f4811fd67cd14beb09bbe51f85e21f411a7b5405",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/patches.py"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/ports-format.json",
+        "bytes": 1451,
+        "sha256": "5898b8195edd8388770444a3cc2c8c2e36dbd877744528a15427530fa0386524",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/ports-format.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/ports-format.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/ports-format.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/ports-format.process.json",
+        "bytes": 1404,
+        "sha256": "26c3a53b06a233a64ca4ec73a1102f9e6c241192c2b8aa87c12f35cdd78b36da",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/ports-format.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/ports-repair-format.json",
+        "bytes": 1451,
+        "sha256": "d34ec148d095d1f252dce40dbbe2d3eaadeb51e8fd5d04a178822b94bb1a4920",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/ports-repair-format.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/ports-repair-format.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/ports-repair-format.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/ports-repair-format.process.json",
+        "bytes": 1404,
+        "sha256": "a3c20d994ceae98aa1267f77994a0052626e80c6f0de86e9b417b3223762704e",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/ports-repair-format.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/prettier-check.json",
+        "bytes": 2327,
+        "sha256": "d0eca7ef5852e8643f47317c66864f6a03c266959149db6866f5579e763ed678",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/prettier-check.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/prettier-check.log",
+        "bytes": 66,
+        "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/prettier-check.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/prettier-check.process.json",
+        "bytes": 2279,
+        "sha256": "819470e6bdb14dc63488085c58db063408dfa956b63694b5203f9528286ccdf9",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/prettier-check.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/prettier-write.json",
+        "bytes": 2026,
+        "sha256": "27f64f0a5362eb337075142ddc5413014e1467c25215530b7c95d143cac9d8d3",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/prettier-write.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/prettier-write.log",
+        "bytes": 687,
+        "sha256": "eaa2add6ecdd7634514e69fd3fc14c651ba62c1d42a7b5dc13a5ae2bde8a362b",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/prettier-write.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/prettier-write.process.json",
+        "bytes": 1980,
+        "sha256": "6d8652e0931bcfc44566debf116d9ec25411e6ff995b6708fe4cb5c9c8d35998",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/prettier-write.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/rename-only.patch",
+        "bytes": 5192,
+        "sha256": "7029de220bc80fc6e75a6c1caea6a81aaa5149a1ccb6d10c6afee9b6b7762228",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/rename-only.patch"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/run.py",
+        "bytes": 3781,
+        "sha256": "6c12cd568938aaf9a1c357741cf055139fec7b320b4da3be87187e2b93c50097",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/run.py"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/source-audit-v2.json",
+        "bytes": 1280,
+        "sha256": "f133f39f33b7a2fadd3e9fbd34c0ee2f32f020ff2710aa1bc7439c12212db886",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/source-audit-v2.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/source-audit-v2.log",
+        "bytes": 1310,
+        "sha256": "c9c6cbfff972f81f59d5526093fbf2f9b824b14192e8bec868dbbb6ec9694b79",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/source-audit-v2.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/source-audit-v2.process.json",
+        "bytes": 1237,
+        "sha256": "9de6e301b2bece13db8cddd2beb744f9108797f1e2ebef522b8e172941c3a72f",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/source-audit-v2.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/source-audit.json",
+        "bytes": 1369,
+        "sha256": "bfc20440c136d56b6c89865c246c87a85d1ca575a945272183c80c7edb9efd12",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/source-audit.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/source-audit.log",
+        "bytes": 758,
+        "sha256": "3c11063784cea8359e46f5e08651af2ed93962df1db91b760bf03b0f9ea675c1",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/source-audit.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/source-audit.process.json",
+        "bytes": 1472,
+        "sha256": "0ff4e00337ca1905e5da2dd6ca36627562c88062da4c60202fd9d00cbf8bec93",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/source-audit.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/source-manifest.json",
+        "bytes": 11283,
+        "sha256": "21f4359c755513185324129fb2dfbecbf54355a029620a7744ffd88fb273a5c6",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/source-manifest.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/source-text.patch",
+        "bytes": 12156,
+        "sha256": "3c77bbc888b6d07b1b5c4a94c2b64089a6872c8bc233e11fc71977321cd109b9",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/source-text.patch"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/static-format.json",
+        "bytes": 1453,
+        "sha256": "e6de663a49f2b7a0469f86c17f763d1dda5229b985b80489d0f4daf459083651",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/static-format.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/static-format.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/static-format.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/static-format.process.json",
+        "bytes": 1406,
+        "sha256": "f1b7417cca035f4944def8955c1b6e2d20b7bb90055de090e67d4cdd4514ed94",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/static-format.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/static-urls.json",
+        "bytes": 1286,
+        "sha256": "5eb27c12065aa6fbfc76a1cf160b2eea3a8f6d5ca53a0ddfc52ebcc8348ead33",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/static-urls.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/static-urls.log",
+        "bytes": 9197,
+        "sha256": "c437b643facd309024dff3e4ec377c5fb8713ff3afee22224a0b09efa25dbeb9",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/static-urls.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/static-urls.mjs",
+        "bytes": 3139,
+        "sha256": "c0cf47d6b58940afbe4d18fdd5263a6cb39fe3866e81c09f9ec82dfd8bf5b13c",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/static-urls.mjs"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/static-urls.process.json",
+        "bytes": 1244,
+        "sha256": "fa5e0d1643de21a77a010bd90d402bfaa8de7fe03796ada59bce8760aeeea43d",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/static-urls.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/typecheck.json",
+        "bytes": 1328,
+        "sha256": "e2d2e7049e040f4ab65bd8d1220d383f0dd7e688343c414355aed54f241cff28",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/typecheck.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/typecheck.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/typecheck.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/typecheck.process.json",
+        "bytes": 1280,
+        "sha256": "d4b116226fcc7d333affda91e0d92d04616b634f13cc608a34ce3b7c6b1b1f4d",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/typecheck.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/url-ports-v2.json",
+        "bytes": 1316,
+        "sha256": "12f05f2cbbb48670ea24708044597f6a19c1446886f8cee76676400afa3bf504",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/url-ports-v2.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/url-ports-v2.log",
+        "bytes": 1924,
+        "sha256": "dd19472699f8df454bb2e9c424034ed7a16b4972e639562fc3dee04a5e920acb",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/url-ports-v2.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/url-ports-v2.process.json",
+        "bytes": 1274,
+        "sha256": "c88f20a5a3baa5f97003d9b26bd6db71419b81e88b73faa36596dbbe9e06707d",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/url-ports-v2.process.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/url-ports.json",
+        "bytes": 1440,
+        "sha256": "66389d7215e39141e37222b85e5a6b72948c948ce8e0b1368b11df62641ed3ec",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/url-ports.json"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/url-ports.log",
+        "bytes": 1240,
+        "sha256": "eb7aec5811bc578d6b3e8c543c740ba517ff7021495fda52a40eb9b358f59f9f",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/url-ports.log"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/url-ports.mjs",
+        "bytes": 4470,
+        "sha256": "93116e7c014798695087db477362bf0dc8197bfdea16de0fd82d8ac3ced3566b",
+        "mode": "0644"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/url-ports.mjs"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/url-ports.process.json",
+        "bytes": 1577,
+        "sha256": "46717b6deef115b988eea8e12be8bc74cb7b82ffe7d081b85c4ef610a0062558",
+        "mode": "0600"
+      },
+      "member": "files/.worktree/quoridor-assets129/.artifacts/quoridor-assets129/url-ports.process.json"
+    }
+  ],
+  "git_reused_distribution_files": [
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/games/quoridor/audio/README.md",
+        "bytes": 2119,
+        "sha256": "e56865888152ba4b36a7aca5122fe32eb0c4a5af582f82fd079493f4396f7056",
+        "mode": "0644"
+      },
+      "restore": {
+        "integration_source": "apps/web/public/games/quoridor/audio/README.md",
+        "sha256": "e56865888152ba4b36a7aca5122fe32eb0c4a5af582f82fd079493f4396f7056",
+        "mode": "0644"
+      },
+      "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/games/quoridor/audio/click.wav",
+        "bytes": 8644,
+        "sha256": "0ea6c11211783972dc5471a30b936960b0c717a6e6b5913d97b30a0be45253b7",
+        "mode": "0644"
+      },
+      "restore": {
+        "integration_source": "apps/web/public/games/quoridor/audio/click.wav",
+        "sha256": "0ea6c11211783972dc5471a30b936960b0c717a6e6b5913d97b30a0be45253b7",
+        "mode": "0644"
+      },
+      "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/games/quoridor/audio/cozy-puzzle.mp3",
+        "bytes": 2084071,
+        "sha256": "8882f4bda94cfe02495fdd023f7ce1916a065619bc6fdb33ce95f094665772b3",
+        "mode": "0644"
+      },
+      "restore": {
+        "integration_source": "apps/web/public/games/quoridor/audio/cozy-puzzle.mp3",
+        "sha256": "8882f4bda94cfe02495fdd023f7ce1916a065619bc6fdb33ce95f094665772b3",
+        "mode": "0644"
+      },
+      "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/games/quoridor/audio/impact-sounds-license.txt",
+        "bytes": 583,
+        "sha256": "6fa7dfb432dc8aefe26116cf179e25407a46bdee5bae736decb5bd88d4a565d2",
+        "mode": "0644"
+      },
+      "restore": {
+        "integration_source": "apps/web/public/games/quoridor/audio/impact-sounds-license.txt",
+        "sha256": "6fa7dfb432dc8aefe26116cf179e25407a46bdee5bae736decb5bd88d4a565d2",
+        "mode": "0644"
+      },
+      "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/games/quoridor/audio/interface-sounds-license.txt",
+        "bytes": 550,
+        "sha256": "1a2d0f1e2926b1de6f90c843c27a3101cf212ec29fb07d563cbc339a2329ea81",
+        "mode": "0644"
+      },
+      "restore": {
+        "integration_source": "apps/web/public/games/quoridor/audio/interface-sounds-license.txt",
+        "sha256": "1a2d0f1e2926b1de6f90c843c27a3101cf212ec29fb07d563cbc339a2329ea81",
+        "mode": "0644"
+      },
+      "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/games/quoridor/audio/lose.wav",
+        "bytes": 141198,
+        "sha256": "660be9eba786b98aa5385af4b55823bcb70eb5c1b6a38b11d65bbc0a5059d64c",
+        "mode": "0644"
+      },
+      "restore": {
+        "integration_source": "apps/web/public/games/quoridor/audio/lose.wav",
+        "sha256": "660be9eba786b98aa5385af4b55823bcb70eb5c1b6a38b11d65bbc0a5059d64c",
+        "mode": "0644"
+      },
+      "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/games/quoridor/audio/manifest.json",
+        "bytes": 4732,
+        "sha256": "29a7951f9a33df0dc14bca3a3554ba72497af67cf826d38794b59b400c86120f",
+        "mode": "0644"
+      },
+      "restore": {
+        "integration_source": "apps/web/public/games/quoridor/audio/manifest.json",
+        "sha256": "29a7951f9a33df0dc14bca3a3554ba72497af67cf826d38794b59b400c86120f",
+        "mode": "0644"
+      },
+      "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/games/quoridor/audio/pawn.wav",
+        "bytes": 23248,
+        "sha256": "846df720ff3453449751bb3db89e4894e19edae9eb96c2488506ae1389ff137c",
+        "mode": "0644"
+      },
+      "restore": {
+        "integration_source": "apps/web/public/games/quoridor/audio/pawn.wav",
+        "sha256": "846df720ff3453449751bb3db89e4894e19edae9eb96c2488506ae1389ff137c",
+        "mode": "0644"
+      },
+      "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/games/quoridor/audio/undo.wav",
+        "bytes": 5456,
+        "sha256": "4a0bf0c30f935218874cbe4cbbb02528d04797d4899308f28e3acadc0c95073c",
+        "mode": "0644"
+      },
+      "restore": {
+        "integration_source": "apps/web/public/games/quoridor/audio/undo.wav",
+        "sha256": "4a0bf0c30f935218874cbe4cbbb02528d04797d4899308f28e3acadc0c95073c",
+        "mode": "0644"
+      },
+      "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/games/quoridor/audio/wall.wav",
+        "bytes": 29164,
+        "sha256": "f05cf60507297b0abe67c899d1f6b5b30ef8509045dc4e6e1b1711e50c5798c3",
+        "mode": "0644"
+      },
+      "restore": {
+        "integration_source": "apps/web/public/games/quoridor/audio/wall.wav",
+        "sha256": "f05cf60507297b0abe67c899d1f6b5b30ef8509045dc4e6e1b1711e50c5798c3",
+        "mode": "0644"
+      },
+      "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/games/quoridor/audio/win.wav",
+        "bytes": 158838,
+        "sha256": "2878f500853fcf4dbfe239f1c03dd57324d0b1a3c12ba17d66236611b8534f24",
+        "mode": "0644"
+      },
+      "restore": {
+        "integration_source": "apps/web/public/games/quoridor/audio/win.wav",
+        "sha256": "2878f500853fcf4dbfe239f1c03dd57324d0b1a3c12ba17d66236611b8534f24",
+        "mode": "0644"
+      },
+      "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/games/quoridor/environments/README.md",
+        "bytes": 2356,
+        "sha256": "3c15c3cf2576b82e61808460594d3f0c43db09016c387ced7cc77e28b8408cee",
+        "mode": "0644"
+      },
+      "restore": {
+        "integration_source": "apps/web/public/games/quoridor/environments/README.md",
+        "sha256": "3c15c3cf2576b82e61808460594d3f0c43db09016c387ced7cc77e28b8408cee",
+        "mode": "0644"
+      },
+      "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/games/quoridor/environments/epping-forest-02-2k.hdr",
+        "bytes": 7070422,
+        "sha256": "d47f6f2c789d44d2b6502523ba93c8cc85d791f2683dea404d608ee73c4a23fb",
+        "mode": "0644"
+      },
+      "restore": {
+        "integration_source": "apps/web/public/games/quoridor/environments/epping-forest-02-2k.hdr",
+        "sha256": "d47f6f2c789d44d2b6502523ba93c8cc85d791f2683dea404d608ee73c4a23fb",
+        "mode": "0644"
+      },
+      "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/games/quoridor/environments/qwantani-noon-2k.hdr",
+        "bytes": 5757155,
+        "sha256": "6a36c0fd63f8a11788c84a514bfbb840b17400f24a55166d358b454accbc91a8",
+        "mode": "0644"
+      },
+      "restore": {
+        "integration_source": "apps/web/public/games/quoridor/environments/qwantani-noon-2k.hdr",
+        "sha256": "6a36c0fd63f8a11788c84a514bfbb840b17400f24a55166d358b454accbc91a8",
+        "mode": "0644"
+      },
+      "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/games/quoridor/environments/warm-restaurant-night-2k.hdr",
+        "bytes": 5710994,
+        "sha256": "115fdee7807078798e72277357d40df9671eb65e7667d79ece813f4e06b5d92a",
+        "mode": "0644"
+      },
+      "restore": {
+        "integration_source": "apps/web/public/games/quoridor/environments/warm-restaurant-night-2k.hdr",
+        "sha256": "115fdee7807078798e72277357d40df9671eb65e7667d79ece813f4e06b5d92a",
+        "mode": "0644"
+      },
+      "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/games/quoridor/tabletop/README.md",
+        "bytes": 1400,
+        "sha256": "91de1eaff0f29e21552b231749009b001df8f54842d4ba25e76547ef1d24c2cd",
+        "mode": "0644"
+      },
+      "restore": {
+        "integration_source": "apps/web/public/games/quoridor/tabletop/README.md",
+        "sha256": "91de1eaff0f29e21552b231749009b001df8f54842d4ba25e76547ef1d24c2cd",
+        "mode": "0644"
+      },
+      "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/games/quoridor/tabletop/beech-albedo.png",
+        "bytes": 2452019,
+        "sha256": "cc1ebb9b08e6c95336b841601d9dcb4df9b7e577f4c1f1ac4dfa522f8f1f7f2e",
+        "mode": "0644"
+      },
+      "restore": {
+        "integration_source": "apps/web/public/games/quoridor/tabletop/beech-albedo.png",
+        "sha256": "cc1ebb9b08e6c95336b841601d9dcb4df9b7e577f4c1f1ac4dfa522f8f1f7f2e",
+        "mode": "0644"
+      },
+      "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/games/quoridor/tabletop/comfy-cafe-2k.hdr",
+        "bytes": 6260522,
+        "sha256": "00597d2a2174b7803c10bd2d690922e170bb614bce6c98c9c9b688698f1d234d",
+        "mode": "0644"
+      },
+      "restore": {
+        "integration_source": "apps/web/public/games/quoridor/tabletop/comfy-cafe-2k.hdr",
+        "sha256": "00597d2a2174b7803c10bd2d690922e170bb614bce6c98c9c9b688698f1d234d",
+        "mode": "0644"
+      },
+      "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/games/quoridor/ui/README.md",
+        "bytes": 1706,
+        "sha256": "6f16b3cc9871a558b647d20ebaa1363b17826a5eda956b559cd797d628b69499",
+        "mode": "0644"
+      },
+      "restore": {
+        "integration_source": "apps/web/public/games/quoridor/ui/README.md",
+        "sha256": "6f16b3cc9871a558b647d20ebaa1363b17826a5eda956b559cd797d628b69499",
+        "mode": "0644"
+      },
+      "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-root/games/quoridor/ui/quoridor-title-logo.png",
+        "bytes": 796815,
+        "sha256": "669c8423640114c05a0d492ebcedf0eb58da9f1b4c0ff26557f34c5e5dfaa23b",
+        "mode": "0644"
+      },
+      "restore": {
+        "integration_source": "apps/web/public/games/quoridor/ui/quoridor-title-logo.png",
+        "sha256": "669c8423640114c05a0d492ebcedf0eb58da9f1b4c0ff26557f34c5e5dfaa23b",
+        "mode": "0644"
+      },
+      "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/games/quoridor/audio/README.md",
+        "bytes": 2119,
+        "sha256": "e56865888152ba4b36a7aca5122fe32eb0c4a5af582f82fd079493f4396f7056",
+        "mode": "0644"
+      },
+      "restore": {
+        "integration_source": "apps/web/public/games/quoridor/audio/README.md",
+        "sha256": "e56865888152ba4b36a7aca5122fe32eb0c4a5af582f82fd079493f4396f7056",
+        "mode": "0644"
+      },
+      "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/games/quoridor/audio/click.wav",
+        "bytes": 8644,
+        "sha256": "0ea6c11211783972dc5471a30b936960b0c717a6e6b5913d97b30a0be45253b7",
+        "mode": "0644"
+      },
+      "restore": {
+        "integration_source": "apps/web/public/games/quoridor/audio/click.wav",
+        "sha256": "0ea6c11211783972dc5471a30b936960b0c717a6e6b5913d97b30a0be45253b7",
+        "mode": "0644"
+      },
+      "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/games/quoridor/audio/cozy-puzzle.mp3",
+        "bytes": 2084071,
+        "sha256": "8882f4bda94cfe02495fdd023f7ce1916a065619bc6fdb33ce95f094665772b3",
+        "mode": "0644"
+      },
+      "restore": {
+        "integration_source": "apps/web/public/games/quoridor/audio/cozy-puzzle.mp3",
+        "sha256": "8882f4bda94cfe02495fdd023f7ce1916a065619bc6fdb33ce95f094665772b3",
+        "mode": "0644"
+      },
+      "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/games/quoridor/audio/impact-sounds-license.txt",
+        "bytes": 583,
+        "sha256": "6fa7dfb432dc8aefe26116cf179e25407a46bdee5bae736decb5bd88d4a565d2",
+        "mode": "0644"
+      },
+      "restore": {
+        "integration_source": "apps/web/public/games/quoridor/audio/impact-sounds-license.txt",
+        "sha256": "6fa7dfb432dc8aefe26116cf179e25407a46bdee5bae736decb5bd88d4a565d2",
+        "mode": "0644"
+      },
+      "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/games/quoridor/audio/interface-sounds-license.txt",
+        "bytes": 550,
+        "sha256": "1a2d0f1e2926b1de6f90c843c27a3101cf212ec29fb07d563cbc339a2329ea81",
+        "mode": "0644"
+      },
+      "restore": {
+        "integration_source": "apps/web/public/games/quoridor/audio/interface-sounds-license.txt",
+        "sha256": "1a2d0f1e2926b1de6f90c843c27a3101cf212ec29fb07d563cbc339a2329ea81",
+        "mode": "0644"
+      },
+      "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/games/quoridor/audio/lose.wav",
+        "bytes": 141198,
+        "sha256": "660be9eba786b98aa5385af4b55823bcb70eb5c1b6a38b11d65bbc0a5059d64c",
+        "mode": "0644"
+      },
+      "restore": {
+        "integration_source": "apps/web/public/games/quoridor/audio/lose.wav",
+        "sha256": "660be9eba786b98aa5385af4b55823bcb70eb5c1b6a38b11d65bbc0a5059d64c",
+        "mode": "0644"
+      },
+      "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/games/quoridor/audio/manifest.json",
+        "bytes": 4732,
+        "sha256": "29a7951f9a33df0dc14bca3a3554ba72497af67cf826d38794b59b400c86120f",
+        "mode": "0644"
+      },
+      "restore": {
+        "integration_source": "apps/web/public/games/quoridor/audio/manifest.json",
+        "sha256": "29a7951f9a33df0dc14bca3a3554ba72497af67cf826d38794b59b400c86120f",
+        "mode": "0644"
+      },
+      "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/games/quoridor/audio/pawn.wav",
+        "bytes": 23248,
+        "sha256": "846df720ff3453449751bb3db89e4894e19edae9eb96c2488506ae1389ff137c",
+        "mode": "0644"
+      },
+      "restore": {
+        "integration_source": "apps/web/public/games/quoridor/audio/pawn.wav",
+        "sha256": "846df720ff3453449751bb3db89e4894e19edae9eb96c2488506ae1389ff137c",
+        "mode": "0644"
+      },
+      "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/games/quoridor/audio/undo.wav",
+        "bytes": 5456,
+        "sha256": "4a0bf0c30f935218874cbe4cbbb02528d04797d4899308f28e3acadc0c95073c",
+        "mode": "0644"
+      },
+      "restore": {
+        "integration_source": "apps/web/public/games/quoridor/audio/undo.wav",
+        "sha256": "4a0bf0c30f935218874cbe4cbbb02528d04797d4899308f28e3acadc0c95073c",
+        "mode": "0644"
+      },
+      "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/games/quoridor/audio/wall.wav",
+        "bytes": 29164,
+        "sha256": "f05cf60507297b0abe67c899d1f6b5b30ef8509045dc4e6e1b1711e50c5798c3",
+        "mode": "0644"
+      },
+      "restore": {
+        "integration_source": "apps/web/public/games/quoridor/audio/wall.wav",
+        "sha256": "f05cf60507297b0abe67c899d1f6b5b30ef8509045dc4e6e1b1711e50c5798c3",
+        "mode": "0644"
+      },
+      "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/games/quoridor/audio/win.wav",
+        "bytes": 158838,
+        "sha256": "2878f500853fcf4dbfe239f1c03dd57324d0b1a3c12ba17d66236611b8534f24",
+        "mode": "0644"
+      },
+      "restore": {
+        "integration_source": "apps/web/public/games/quoridor/audio/win.wav",
+        "sha256": "2878f500853fcf4dbfe239f1c03dd57324d0b1a3c12ba17d66236611b8534f24",
+        "mode": "0644"
+      },
+      "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/games/quoridor/environments/README.md",
+        "bytes": 2356,
+        "sha256": "3c15c3cf2576b82e61808460594d3f0c43db09016c387ced7cc77e28b8408cee",
+        "mode": "0644"
+      },
+      "restore": {
+        "integration_source": "apps/web/public/games/quoridor/environments/README.md",
+        "sha256": "3c15c3cf2576b82e61808460594d3f0c43db09016c387ced7cc77e28b8408cee",
+        "mode": "0644"
+      },
+      "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/games/quoridor/environments/epping-forest-02-2k.hdr",
+        "bytes": 7070422,
+        "sha256": "d47f6f2c789d44d2b6502523ba93c8cc85d791f2683dea404d608ee73c4a23fb",
+        "mode": "0644"
+      },
+      "restore": {
+        "integration_source": "apps/web/public/games/quoridor/environments/epping-forest-02-2k.hdr",
+        "sha256": "d47f6f2c789d44d2b6502523ba93c8cc85d791f2683dea404d608ee73c4a23fb",
+        "mode": "0644"
+      },
+      "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/games/quoridor/environments/qwantani-noon-2k.hdr",
+        "bytes": 5757155,
+        "sha256": "6a36c0fd63f8a11788c84a514bfbb840b17400f24a55166d358b454accbc91a8",
+        "mode": "0644"
+      },
+      "restore": {
+        "integration_source": "apps/web/public/games/quoridor/environments/qwantani-noon-2k.hdr",
+        "sha256": "6a36c0fd63f8a11788c84a514bfbb840b17400f24a55166d358b454accbc91a8",
+        "mode": "0644"
+      },
+      "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/games/quoridor/environments/warm-restaurant-night-2k.hdr",
+        "bytes": 5710994,
+        "sha256": "115fdee7807078798e72277357d40df9671eb65e7667d79ece813f4e06b5d92a",
+        "mode": "0644"
+      },
+      "restore": {
+        "integration_source": "apps/web/public/games/quoridor/environments/warm-restaurant-night-2k.hdr",
+        "sha256": "115fdee7807078798e72277357d40df9671eb65e7667d79ece813f4e06b5d92a",
+        "mode": "0644"
+      },
+      "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/games/quoridor/tabletop/README.md",
+        "bytes": 1400,
+        "sha256": "91de1eaff0f29e21552b231749009b001df8f54842d4ba25e76547ef1d24c2cd",
+        "mode": "0644"
+      },
+      "restore": {
+        "integration_source": "apps/web/public/games/quoridor/tabletop/README.md",
+        "sha256": "91de1eaff0f29e21552b231749009b001df8f54842d4ba25e76547ef1d24c2cd",
+        "mode": "0644"
+      },
+      "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/games/quoridor/tabletop/beech-albedo.png",
+        "bytes": 2452019,
+        "sha256": "cc1ebb9b08e6c95336b841601d9dcb4df9b7e577f4c1f1ac4dfa522f8f1f7f2e",
+        "mode": "0644"
+      },
+      "restore": {
+        "integration_source": "apps/web/public/games/quoridor/tabletop/beech-albedo.png",
+        "sha256": "cc1ebb9b08e6c95336b841601d9dcb4df9b7e577f4c1f1ac4dfa522f8f1f7f2e",
+        "mode": "0644"
+      },
+      "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/games/quoridor/tabletop/comfy-cafe-2k.hdr",
+        "bytes": 6260522,
+        "sha256": "00597d2a2174b7803c10bd2d690922e170bb614bce6c98c9c9b688698f1d234d",
+        "mode": "0644"
+      },
+      "restore": {
+        "integration_source": "apps/web/public/games/quoridor/tabletop/comfy-cafe-2k.hdr",
+        "sha256": "00597d2a2174b7803c10bd2d690922e170bb614bce6c98c9c9b688698f1d234d",
+        "mode": "0644"
+      },
+      "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/games/quoridor/ui/README.md",
+        "bytes": 1706,
+        "sha256": "6f16b3cc9871a558b647d20ebaa1363b17826a5eda956b559cd797d628b69499",
+        "mode": "0644"
+      },
+      "restore": {
+        "integration_source": "apps/web/public/games/quoridor/ui/README.md",
+        "sha256": "6f16b3cc9871a558b647d20ebaa1363b17826a5eda956b559cd797d628b69499",
+        "mode": "0644"
+      },
+      "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+    },
+    {
+      "original": {
+        "path": ".worktree/quoridor-assets129/.artifacts/quoridor-assets129/build-subpath/games/quoridor/ui/quoridor-title-logo.png",
+        "bytes": 796815,
+        "sha256": "669c8423640114c05a0d492ebcedf0eb58da9f1b4c0ff26557f34c5e5dfaa23b",
+        "mode": "0644"
+      },
+      "restore": {
+        "integration_source": "apps/web/public/games/quoridor/ui/quoridor-title-logo.png",
+        "sha256": "669c8423640114c05a0d492ebcedf0eb58da9f1b4c0ff26557f34c5e5dfaa23b",
+        "mode": "0644"
+      },
+      "reason": "unchanged distribution copy in owned verification bundle; no duplicate source-asset archive"
+    }
+  ],
+  "one_forward_stream": "PASS exact bytes/SHA/modes/names and gzip EOF/CRC without extraction",
+  "first_archive_proof": "new v2 stream",
+  "prior_failed_control": "/workspaces/quoridor/.artifacts/research-team/integration324/multi-game-migration-v1/web-games-retirement-v1",
+  "config_sparse": {
+    "config.worktree": "[core]\n\tsparseCheckout = true\n\tsparseCheckoutCone = true\n[index]\n\tsparse = true\n",
+    "info/sparse-checkout": "/*\n!/*/\n/apps/\n!/apps/*/\n/docs/\n!/docs/*/\n/games/\n!/games/*/\n/games/quoridor/\n!/games/quoridor/*/\n/shared/\n!/shared/*/\n/tests/\n!/tests/*/\n/tools/\n!/tools/*/\n/apps/web/\n/docs/design/\n/docs/development/\n/docs/reports/\n/games/quoridor/bridge/\n/games/quoridor/docs/\n/games/quoridor/python/\n/games/quoridor/tests/\n/scripts/\n/shared/python/\n/tests/unit/\n/tools/research-quality/\n"
+  },
+  "index_flags": ["H", "S"],
+  "owned_processes": [
+    {
+      "path": "audit-format.process.json",
+      "status": "complete",
+      "code": 0,
+      "disk_signal": "pending"
+    },
+    {
+      "path": "audit-repair-format.process.json",
+      "status": "complete",
+      "code": 0,
+      "disk_signal": "pending"
+    },
+    {
+      "path": "build-root.process.json",
+      "status": "complete",
+      "code": 0,
+      "disk_signal": "pending"
+    },
+    {
+      "path": "build-subpath.process.json",
+      "status": "complete",
+      "code": 0,
+      "disk_signal": "pending"
+    },
+    {
+      "path": "evidence-format.process.json",
+      "status": "complete",
+      "code": 0,
+      "disk_signal": "pending"
+    },
+    {
+      "path": "finalize-ruff-check.process.json",
+      "status": "complete",
+      "code": 0,
+      "disk_signal": "pending"
+    },
+    {
+      "path": "finalize-ruff-format-check.process.json",
+      "status": "complete",
+      "code": 0,
+      "disk_signal": "pending"
+    },
+    {
+      "path": "helper-ruff-check.process.json",
+      "status": "complete",
+      "code": 0,
+      "disk_signal": "pending"
+    },
+    {
+      "path": "helper-ruff-format-check.process.json",
+      "status": "complete",
+      "code": 0,
+      "disk_signal": "pending"
+    },
+    {
+      "path": "migrate.process.json",
+      "status": "complete",
+      "code": 0,
+      "disk_signal": "pending"
+    },
+    {
+      "path": "patches.process.json",
+      "status": "complete",
+      "code": 0,
+      "disk_signal": "pending"
+    },
+    {
+      "path": "ports-format.process.json",
+      "status": "complete",
+      "code": 0,
+      "disk_signal": "pending"
+    },
+    {
+      "path": "ports-repair-format.process.json",
+      "status": "complete",
+      "code": 0,
+      "disk_signal": "pending"
+    },
+    {
+      "path": "prettier-check.process.json",
+      "status": "complete",
+      "code": 0,
+      "disk_signal": "pending"
+    },
+    {
+      "path": "prettier-write.process.json",
+      "status": "complete",
+      "code": 0,
+      "disk_signal": "pending"
+    },
+    {
+      "path": "source-audit-v2.process.json",
+      "status": "complete",
+      "code": 0,
+      "disk_signal": "pending"
+    },
+    {
+      "path": "source-audit.process.json",
+      "status": "failed",
+      "code": 1,
+      "disk_signal": "pending"
+    },
+    {
+      "path": "static-format.process.json",
+      "status": "complete",
+      "code": 0,
+      "disk_signal": "pending"
+    },
+    {
+      "path": "static-urls.process.json",
+      "status": "complete",
+      "code": 0,
+      "disk_signal": "pending"
+    },
+    {
+      "path": "typecheck.process.json",
+      "status": "complete",
+      "code": 0,
+      "disk_signal": "pending"
+    },
+    {
+      "path": "url-ports-v2.process.json",
+      "status": "complete",
+      "code": 0,
+      "disk_signal": "pending"
+    },
+    {
+      "path": "url-ports.process.json",
+      "status": "failed",
+      "code": 1,
+      "disk_signal": "pending"
+    }
+  ],
+  "task_dirty_paths": [
+    "apps/web/public/assets/audio/README.md",
+    "apps/web/public/assets/audio/click.wav",
+    "apps/web/public/assets/audio/cozy-puzzle.mp3",
+    "apps/web/public/assets/audio/impact-sounds-license.txt",
+    "apps/web/public/assets/audio/interface-sounds-license.txt",
+    "apps/web/public/assets/audio/lose.wav",
+    "apps/web/public/assets/audio/manifest.json",
+    "apps/web/public/assets/audio/pawn.wav",
+    "apps/web/public/assets/audio/undo.wav",
+    "apps/web/public/assets/audio/wall.wav",
+    "apps/web/public/assets/audio/win.wav",
+    "apps/web/public/assets/environments/README.md",
+    "apps/web/public/assets/environments/epping-forest-02-2k.hdr",
+    "apps/web/public/assets/environments/qwantani-noon-2k.hdr",
+    "apps/web/public/assets/environments/warm-restaurant-night-2k.hdr",
+    "apps/web/public/assets/tabletop/README.md",
+    "apps/web/public/assets/tabletop/beech-albedo.png",
+    "apps/web/public/assets/tabletop/comfy-cafe-2k.hdr",
+    "apps/web/public/assets/ui/README.md",
+    "apps/web/public/assets/ui/quoridor-title-logo.png",
+    "apps/web/public/games/quoridor/audio/README.md",
+    "apps/web/public/games/quoridor/audio/click.wav",
+    "apps/web/public/games/quoridor/audio/cozy-puzzle.mp3",
+    "apps/web/public/games/quoridor/audio/impact-sounds-license.txt",
+    "apps/web/public/games/quoridor/audio/interface-sounds-license.txt",
+    "apps/web/public/games/quoridor/audio/lose.wav",
+    "apps/web/public/games/quoridor/audio/manifest.json",
+    "apps/web/public/games/quoridor/audio/pawn.wav",
+    "apps/web/public/games/quoridor/audio/undo.wav",
+    "apps/web/public/games/quoridor/audio/wall.wav",
+    "apps/web/public/games/quoridor/audio/win.wav",
+    "apps/web/public/games/quoridor/environments/README.md",
+    "apps/web/public/games/quoridor/environments/epping-forest-02-2k.hdr",
+    "apps/web/public/games/quoridor/environments/qwantani-noon-2k.hdr",
+    "apps/web/public/games/quoridor/environments/warm-restaurant-night-2k.hdr",
+    "apps/web/public/games/quoridor/tabletop/README.md",
+    "apps/web/public/games/quoridor/tabletop/beech-albedo.png",
+    "apps/web/public/games/quoridor/tabletop/comfy-cafe-2k.hdr",
+    "apps/web/public/games/quoridor/ui/README.md",
+    "apps/web/public/games/quoridor/ui/quoridor-title-logo.png",
+    "apps/web/src/games/quoridor/audio/audio-controller.ts",
+    "apps/web/src/games/quoridor/environment-presets.ts",
+    "apps/web/src/games/quoridor/index.ts",
+    "apps/web/src/games/quoridor/render/tabletop-assets.ts",
+    "games/quoridor/tests/e2e/audio.spec.ts",
+    "games/quoridor/tests/e2e/phase4-recovery.spec.ts",
+    "games/quoridor/tests/e2e/presentation.spec.ts",
+    "games/quoridor/tests/e2e/tabletop-rendering.spec.ts",
+    "games/quoridor/tests/product/product-bfcache-worker.spec.mjs"
+  ],
+  "tracked_paths": [
+    "apps/web/public/assets/audio/README.md",
+    "apps/web/public/assets/audio/click.wav",
+    "apps/web/public/assets/audio/cozy-puzzle.mp3",
+    "apps/web/public/assets/audio/impact-sounds-license.txt",
+    "apps/web/public/assets/audio/interface-sounds-license.txt",
+    "apps/web/public/assets/audio/lose.wav",
+    "apps/web/public/assets/audio/manifest.json",
+    "apps/web/public/assets/audio/pawn.wav",
+    "apps/web/public/assets/audio/undo.wav",
+    "apps/web/public/assets/audio/wall.wav",
+    "apps/web/public/assets/audio/win.wav",
+    "apps/web/public/assets/environments/README.md",
+    "apps/web/public/assets/environments/epping-forest-02-2k.hdr",
+    "apps/web/public/assets/environments/qwantani-noon-2k.hdr",
+    "apps/web/public/assets/environments/warm-restaurant-night-2k.hdr",
+    "apps/web/public/assets/tabletop/README.md",
+    "apps/web/public/assets/tabletop/beech-albedo.png",
+    "apps/web/public/assets/tabletop/comfy-cafe-2k.hdr",
+    "apps/web/public/assets/ui/README.md",
+    "apps/web/public/assets/ui/quoridor-title-logo.png",
+    "apps/web/src/games/quoridor/audio/audio-controller.ts",
+    "apps/web/src/games/quoridor/environment-presets.ts",
+    "apps/web/src/games/quoridor/index.ts",
+    "apps/web/src/games/quoridor/render/tabletop-assets.ts",
+    "games/quoridor/tests/e2e/audio.spec.ts",
+    "games/quoridor/tests/e2e/phase4-recovery.spec.ts",
+    "games/quoridor/tests/e2e/presentation.spec.ts",
+    "games/quoridor/tests/e2e/tabletop-rendering.spec.ts",
+    "games/quoridor/tests/product/product-bfcache-worker.spec.mjs"
+  ],
+  "generated_inputs": [
+    {
+      "source": "/workspaces/quoridor/games/quoridor/bridge/wasm/rules/quoridor_rules.d.ts",
+      "destination": "/workspaces/quoridor/.worktree/quoridor-assets129/games/quoridor/bridge/wasm/rules/quoridor_rules.d.ts",
+      "bytes": 2702,
+      "sha256": "623014b8fca2d51486d7324de4ac32e19c00c36b527767e35d88ba13fb77aada",
+      "mode": "0644"
+    },
+    {
+      "source": "/workspaces/quoridor/games/quoridor/bridge/wasm/rules/quoridor_rules.js",
+      "destination": "/workspaces/quoridor/.worktree/quoridor-assets129/games/quoridor/bridge/wasm/rules/quoridor_rules.js",
+      "bytes": 12773,
+      "sha256": "d7e450cfeef566bfb6af7de14dfb1b3b34d35f6b05cd8efa1d0af9fff8d4c19e",
+      "mode": "0644"
+    },
+    {
+      "source": "/workspaces/quoridor/games/quoridor/bridge/wasm/rules/quoridor_rules_bg.wasm",
+      "destination": "/workspaces/quoridor/.worktree/quoridor-assets129/games/quoridor/bridge/wasm/rules/quoridor_rules_bg.wasm",
+      "bytes": 653217,
+      "sha256": "b428e5e53875ea76ec0012b0b26fc8c1af16d36beb33feaa87c3299ba39f15bd",
+      "mode": "0644"
+    },
+    {
+      "source": "/workspaces/quoridor/games/quoridor/bridge/wasm/rules/quoridor_rules_bg.wasm.d.ts",
+      "destination": "/workspaces/quoridor/.worktree/quoridor-assets129/games/quoridor/bridge/wasm/rules/quoridor_rules_bg.wasm.d.ts",
+      "bytes": 1305,
+      "sha256": "911878795b10815cad549abca9f85009a426760c348ab48d0475ab9bdf47ffaa",
+      "mode": "0644"
+    },
+    {
+      "source": "/workspaces/quoridor/games/quoridor/bridge/wasm/ai/quoridor_ai.d.ts",
+      "destination": "/workspaces/quoridor/.worktree/quoridor-assets129/games/quoridor/bridge/wasm/ai/quoridor_ai.d.ts",
+      "bytes": 2306,
+      "sha256": "0874499222cf3b66d2c435d2b87a0c463cc61c698010905a553926f19ae861e8",
+      "mode": "0644"
+    },
+    {
+      "source": "/workspaces/quoridor/games/quoridor/bridge/wasm/ai/quoridor_ai.js",
+      "destination": "/workspaces/quoridor/.worktree/quoridor-assets129/games/quoridor/bridge/wasm/ai/quoridor_ai.js",
+      "bytes": 9810,
+      "sha256": "c84c56a6b920bad00e5399fcfc1f9fb2e2baa2dd8aa01e6a7f8be45b6ccb8462",
+      "mode": "0644"
+    },
+    {
+      "source": "/workspaces/quoridor/games/quoridor/bridge/wasm/ai/quoridor_ai_bg.wasm",
+      "destination": "/workspaces/quoridor/.worktree/quoridor-assets129/games/quoridor/bridge/wasm/ai/quoridor_ai_bg.wasm",
+      "bytes": 600696,
+      "sha256": "103613b631047b93a0a3859e3bc5fc8080be3971d9bcab928ee1dfe4c30d3318",
+      "mode": "0644"
+    },
+    {
+      "source": "/workspaces/quoridor/games/quoridor/bridge/wasm/ai/quoridor_ai_bg.wasm.d.ts",
+      "destination": "/workspaces/quoridor/.worktree/quoridor-assets129/games/quoridor/bridge/wasm/ai/quoridor_ai_bg.wasm.d.ts",
+      "bytes": 1000,
+      "sha256": "309ab0dfe604cc76c782ddea8d009dc2e9a12b6deae41e12dffc5ee91e6094c7",
+      "mode": "0644"
+    }
+  ],
+  "discarded_task_generated_Ruff_cache": [
+    {
+      "path": ".ruff_cache/CACHEDIR.TAG",
+      "bytes": 43
+    },
+    {
+      "path": ".ruff_cache/.gitignore",
+      "bytes": 35
+    },
+    {
+      "path": ".ruff_cache/0.13.1/8468960228143834436",
+      "bytes": 202
+    }
+  ],
+  "discarded_task_generated_python_cache": [],
+  "at": "2026-10-21T16:33:38.847633+00:00",
+  "source_acceptance": "883c3e00008f1663cde39fd2b83d9fbff46ed264",
+  "normal_remove": "",
+  "branch_preserved": "eb38a0010de1cd30aa0ea0dd583534ef65c4623e",
+  "session_after": {
+    "turn": "01a15f44-5697-7ef3-a093-1c7decc830e7",
+    "status": "completed",
+    "thread_status": {
+      "type": "idle"
+    },
+    "actual_archive_response": {}
+  },
+  "scientific_calls": 0,
+  "USERPAUSE_assets_DB_models_seals_defaults_preserved": true,
+  "original_disk_and_actual_returned_signal_facts": "both retained as supplied, no retroactive signal restoration or allhost quiet claim",
+  "affected_storage": "worker and Root publication points reused, no global/oldholding rewalk/recharge/refund; late tails/globalactual/fullfees UNKNOWN"
+}

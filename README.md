@@ -66,7 +66,7 @@ npm run dev
 ```bash
 source scripts/dev/project-env.sh
 PLAYWRIGHT_BROWSERS_PATH=./artifacts/playwright npx playwright install chromium
-npm run check               # DTO/fixture、strict TypeScript、Rust fmt/check/clippy/test
+npm run check               # 両ゲームのWasm、TypeScript、ルール・接続・UI検証
 npm run test:render         # HDRI光源方向・球面面積・回転・境界の検証
 npm run build               # release rules/AI Wasm + Vite
 VITE_PHASE1_E2E=1 npm run dev
@@ -75,7 +75,7 @@ npm run test:e2e            # テストフック付きの開発ブラウザ検�
 PREVIEW_PORT=4273 npm run verify:production   # テストフック付き本番バンドルを / と /quoridor/ で検証
 ```
 
-普通の本番バンドル（テストフックなし）は`npm run build`後に`npm run preview`で起動し、別シェルで`PLAYWRIGHT_BROWSERS_PATH=./artifacts/playwright node scripts/smoke-ordinary-production.mjs`を実行します。サブパスへ置く場合は`APP_BASE=/quoridor/ npm run build -w @quoridor/web`で構築します。Wasm更新後はページを完全に再読み込みしてください。
+普通の本番バンドル（テストフックなし）は`npm run build`後に`npm run preview`で起動し、別シェルで`PLAYWRIGHT_BROWSERS_PATH=./artifacts/playwright node scripts/smoke-ordinary-production.mjs`を実行します。サブパスへ置く場合は`APP_BASE=/quoridor/ npm run build -w @quoridor/web`で構築します。Wasm更新後はページを完全に再読み込みしてください。Othelloだけのルール・接続確認は、生成Wasmを準備した後に `npm run check:othello` で行えます。共有CargoとWasm生成は統合担当の単独管理を保ちます。
 
 生成物を含まないソース検証では、明示した新しい出力先へ `node scripts/export-fresh-source.mjs --scope product --destination <新出力先> --max-bytes 67108864` で書き出します。main内なら `.artifacts/` 配下、外部なら既存親directoryを使い、既存出力先は拒否します。現在WTの選択sourceとSHA256を `source-manifest.json` に保存し、モデル・科学データ・runtime・一時sessionを含めません。研究sourceのみなら `--scope research`、限定集合なら `--paths-file <相対path配列.json>` を使います。全成果保存の代用ではなく、未コミットsourceを含むため `git archive HEAD` とも異なります。製品検証は書き出したdirectoryで、上記の `source scripts/dev/project-env.sh`、`npm ci`、`npm run check`、`npm run build`、`npm run verify:production` を実行できます。研究の軽量検査は別入口で、製品buildを起動しません。生成Wasm、`target/`、`node_modules/`、`dist/`、スクリーンショットはGitから除外します。
 
