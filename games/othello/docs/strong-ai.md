@@ -62,7 +62,17 @@ Rust主体UIは同じ既存コア担当が別の有限source作業として並�
 
 対局outer1159.073003907秒にはcommand1158.709165507秒を含み、加算しない。後続の1961保存遷移のRustルールreplayと独立レビューは別工程で、新しいsearch/game/bootstrapは行っていない。16familyは旧root同値を除いた開発開始であり、共有prefix・後の到達局面まで独立とは証明しない。RSS peakはUNKNOWN。返却探索scoreのzeroや深さ差は記述値で、静的評価や敗因の因果証拠ではない。H16はroot identity排除だけに用い、trajectory/ラベル/feature/loss/selectorへ入れていない。同じ896行への追加fit、seed救済、追加教師、同じ32局の再演は発行しない。
 
-次は保存済みT768/V128の896教師行と原32局の最大1961 pre-move状態だけで、スコア規約、phase付きsigned featureの同一表現、coverage、候補とv1の実静的評価を一度診断する。最大2857状態/各一評価・合計5714静的評価、新Search/教師/fit/game/RNG/CIは0、H特徴は読まない。T/V別・phase/教師scoreKind別の誤差/符号/range/飽和、同一表現内の教師値の広がり、Tで未観測のfeatureへの到達と相殺/静的zeroを分ける。これは選択済みVと既に開発で観測した32局の保存診断で、独立棋力や敗因の証明ではない。結果を受けて増量と表現変更の一案を選び、重要なモデル変更・次の有限fit/比較は別に解決する。
+保存済みT768/V128の896教師行と原32局の1961 pre-move状態、合計2857状態の候補/v1各一回、5714静的評価を完了した。新Search/教師/fit/game/RNG/CIは0、H特徴も読んでいない。既存のdecoded状態cacheがなかったため、Rust new32/play1920/pass41で保存状態だけを復元し、status/legal/oracle/終局資格の監査は再演しなかった。[保存診断の定義・集計・証拠](../../../research-data/othello/strong-ai-n96/saved-pattern-diagnostic-v1.json)。
+
+全896 targetはraw STM engine-disc×100と一致し、white再反転はない。教師518推定値と378外部winner-empties値をteacherEstimateとして保ち、自作exactの実石差/単位と区別した。候補V-MSE2,770,099.53125は元BESTと一致してv1の3,063,322.03125より小さいが、V-MAEは1,310.546875対1,228.453125、三値の符号一致は78/128対84/128で悪かった。T/V別・phase/教師scoreKind別の範囲・誤差・境界値も保存した。選択済みVでのMSE改善を独立棋力へ変換しない。
+
+phase0の実signed sparse vector＋phaseはT192状態で92表現、V32状態で21表現、空vectorはT30/V3だった。T121状態が21同一表現群、V15状態が4群に属し、教師値rangeの最大はT3200/V2300 centidiscだった。pattern union外の内部セルが異なる4群8状態を少数のprivate例として保存したが、その内部差だけが教師差や敗因を作ったとは証明しない。同一表現内の経験的教師分散は、真最善値の分散ではない。
+
+Tが触れたparameterは1018/2912、phase別46/190/369/413、signed directionは1554で、反対符号は同じ反対称parameterを共有する。原対局のphase別状態数480/480/480/521のうち、T未観測parameterを含む状態は7/98/203/221だった。候補のstatic0は255/1961で、空vector254、非空だが全lookup項0が1、非零重み項の完全相殺0だった。phase別static0は候補235/20/0/0、v1は66/4/0/0。実candidate探索前のstatic0と原返却heuristic Search0も別であり、Search0をroot/leaf static0や敗因へ読み替えない。
+
+analysis outer0.710086400秒はbody0.679073524秒とnative評価計測を内包する。数値だけのsummary0.047531848秒は別工程。原attempt scoreKindの別の過去hash根拠が見つからず、一度のcurrent stream snapshotをparse/evaluate前に固定して896件をstate/raw scoreで照合した事実と限界を残す。primary final returned dictは未捕捉で、diskのmask pending/persist attemptedを完了へ変更しない。元データ・モデル・private例・大きい状態別集計は公開archiveへ複製しない。
+
+原32局は開発で観測済みで、最終独立確認には再利用しない。不採用候補の救済fitや同32局/seed反復を行わず、次の一案として固定v1 heuristic＋既存二形状の学習residualを検討する。空/未観測patternでも既存mobility/corner/phase-disc情報を残す仮説で、alias自体を解消する案ではない。これはまだ採択・実装・fitしていない重要なmodel/feature設計判断であり、基準identity/STM centidisc/zero residual時のv1対応・clamp/exportと次の有限入力/費用を別に解決する。
 
 ## Rust主体UIの実動作
 

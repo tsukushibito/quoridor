@@ -1,0 +1,221 @@
+{
+  "scope": "One saved-only diagnostic of original896 T/V teacher states and1961 original32-game pre-move occurrences; no new strength experiment.",
+  "receipt": {
+    "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-saved-diagnostic-n96/receipt.json",
+    "bytes": 8224,
+    "mode": "0644",
+    "sha256": "280d56b6f0763d6f82b2a4bd8140457ce71109e6df97f2020c75735a78b48f19"
+  },
+  "report": {
+    "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-saved-diagnostic-n96/report.md",
+    "bytes": 7574,
+    "mode": "0644",
+    "sha256": "603262856822a7d8892e4ac9f40398ecfb4eb364fb9ec2c41f5895b43cc250dc"
+  },
+  "detailedScalars": {
+    "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-saved-diagnostic-n96/result.json",
+    "bytes": 28550,
+    "mode": "0644",
+    "sha256": "7576a142c6f20a2ab867046611450ecee802d0770e6436f36a2f590afb9d9dea"
+  },
+  "source": [
+    {
+      "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-saved-diagnostic-n96/diagnostic.py",
+      "bytes": 23512,
+      "mode": "0644",
+      "sha256": "44c125927429563dc38e26187dcc33799b67a717df86df1746a567091d2f5961"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-saved-diagnostic-n96/summarize_saved.py",
+      "bytes": 9626,
+      "mode": "0644",
+      "sha256": "1b7db454cfb2395dcc9d1489588a4e157a1089c34663790fc0e1b5c512639a4b"
+    }
+  ],
+  "counts": {
+    "candidate.evaluate.attempts": 2857,
+    "candidate.evaluate.completed": 2857,
+    "recordedPreMoveStates": 1961,
+    "stateOccurrences": 2857,
+    "teacherStates": 896,
+    "v1.evaluate.attempts": 2857,
+    "v1.evaluate.completed": 2857,
+    "v1.new.attempts": 32,
+    "v1.new.completed": 32,
+    "v1.pass.attempts": 41,
+    "v1.pass.completed": 41,
+    "v1.play.attempts": 1920,
+    "v1.play.completed": 1920
+  },
+  "inputs": {
+    "attempts": {
+      "bytes": 660191,
+      "mode": "0644",
+      "path": "/workspaces/quoridor/.worktree/assets/data/othello-strong-teacher-n96-v1/teacher-v2/generation-evidence.json",
+      "sha256": "200ee1764236f142a82d2d9877dd1d5357b7420ef5ae27356e3064552441f54b"
+    },
+    "games": {
+      "bytes": 602853,
+      "mode": "0644",
+      "path": "/workspaces/quoridor/.worktree/assets/data/othello-native-comparison-n96-v1/matches/games.jsonl",
+      "sha256": "6cedf76fb5d47d9408a08dcf41d0e0a1f975fce45df34c6888eb77a03ca10d35"
+    },
+    "rows": {
+      "bytes": 607021,
+      "mode": "0644",
+      "path": "/workspaces/quoridor/.worktree/assets/data/othello-strong-teacher-n96-v1/teacher-v2/training.jsonl",
+      "sha256": "b453ab1b5937a7a140dd756f4661dac3f12e4294c37f61f2d79c4da939c63660"
+    },
+    "trainConfig": {
+      "bytes": 60889,
+      "mode": "0644",
+      "path": "/workspaces/quoridor/.worktree/assets/data/othello-strong-teacher-n96-v1/training-config.json",
+      "sha256": "cb2b22654ef5bea37e36671bdeee4be841d736a0711398093837a96d197f07a3"
+    }
+  },
+  "model": {
+    "bytes": 16161,
+    "mode": "0644",
+    "path": "/workspaces/quoridor/.worktree/assets/models/othello-strong-teacher-n96-v1/pattern-v1.json",
+    "sha256": "7ed9fa38218f591d80cfa10f985d510635eaddcd9e2f530e3f778b16b052bd9a"
+  },
+  "image": {
+    "bytes": 800888,
+    "mode": "0755",
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/pattern-software-v1/image-2678ba8e2ff207a4f1d1f2f1047a345964fafad4375e9abcf5d9d6b34debc71d/othello-engine",
+    "sha256": "2678ba8e2ff207a4f1d1f2f1047a345964fafad4375e9abcf5d9d6b34debc71d"
+  },
+  "HFeatureLabelLoss": 0,
+  "staticTarget": {
+    "kind": "teacherEstimate",
+    "units": "STM centidiscs, raw teacher disc*100, no white reflip",
+    "estimateRows": 518,
+    "externalWinnerEmptiesRows": 378,
+    "externalProofMeaning": "External winner-empties estimate/proof metadata is not own actual-disc solver truth."
+  },
+  "selectedValidation": {
+    "candidateMSE": 2770099.53125,
+    "v1MSE": 3063322.03125,
+    "candidateMAE": 1310.546875,
+    "v1MAE": 1228.453125,
+    "candidateExactSignAgreement": 78,
+    "v1ExactSignAgreement": 84,
+    "rows": 128,
+    "independentStrengthSet": false
+  },
+  "aliasPhase0": {
+    "T": {
+      "states": 192,
+      "representations": 92,
+      "statesInAliasGroups": 121,
+      "emptyVectors": 30,
+      "maxTeacherRangeCentidiscs": 3200
+    },
+    "V": {
+      "states": 32,
+      "representations": 21,
+      "statesInAliasGroups": 15,
+      "emptyVectors": 3,
+      "maxTeacherRangeCentidiscs": 2300
+    },
+    "meaning": "Actual signed sparse coefficient vector plus phase, splits separate; empirical teacher dispersion, not true-minimax or a causal loss claim."
+  },
+  "trainingCoverage": {
+    "parameters": 1018,
+    "total": 2912,
+    "byPhase": [46, 190, 369, 413],
+    "signedDirections": 1554,
+    "meaning": "Opposite signed direction shares an antisymmetric parameter; not an additional unseen independent parameter."
+  },
+  "gameStatic": {
+    "occurrencesByPhase": [480, 480, 480, 521],
+    "TUnobservedParameterStates": [7, 98, 203, 221],
+    "candidateZeroByPhase": [235, 20, 0, 0],
+    "v1ZeroByPhase": [66, 4, 0, 0],
+    "candidateZeroTotal": 255,
+    "zeroFromEmptyVector": 254,
+    "zeroFromAllZeroLookupTermsWithNonemptyVector": 1,
+    "zeroFromNonemptyNonzeroWeightedTermCancellation": 0,
+    "meaning": "Partial signed-occurrence cancellation is separately recorded. Returned Search score is not this root static score or a leaf static evaluation."
+  },
+  "original32": "Development-observed, immutable3W2D27L/.125/original CI[.03125,.234375]. No new bootstrap or final independence.",
+  "cost": {
+    "analysisOuterSeconds": 0.7100864000385627,
+    "analysisBodySeconds": 0.679073524,
+    "candidateEvaluateWallSumSeconds": 0.123049281,
+    "v1EvaluateWallSumSeconds": 0.110034499,
+    "additive": false,
+    "fairSpeedClaim": false
+  },
+  "cleanup": {
+    "primary": {
+      "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-saved-diagnostic-n96/analysis.process.json",
+      "bytes": 1467,
+      "mode": "0600",
+      "sha256": "b7f69c1d3dd0c5dbc8b6ce8e770a0569b28502a040c1897e80d399551f1b5d76"
+    },
+    "resources": {
+      "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-saved-diagnostic-n96/analysis-resources.json",
+      "bytes": 508,
+      "mode": "0644",
+      "sha256": "3d2a792293a34b1ff3c8566d1ea9190bdde0448dcf724d62f3db03228d0e97ec"
+    },
+    "numericSummaryReturned": {
+      "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-saved-diagnostic-n96/summary.returned.json",
+      "bytes": 1354,
+      "mode": "0644",
+      "sha256": "d127bc66360220d5246f50f3a5251785eac237563845cd8d66b0a66564428dde"
+    },
+    "nativeCleanups": [
+      {
+        "bytesRetained": 65536,
+        "bytesSeen": 1213318,
+        "directReaped": true,
+        "errors": [],
+        "exitCode": -15,
+        "role": "candidate",
+        "unexpectedExit": false
+      },
+      {
+        "bytesRetained": 65536,
+        "bytesSeen": 1571654,
+        "directReaped": true,
+        "errors": [],
+        "exitCode": -15,
+        "role": "v1",
+        "unexpectedExit": false
+      }
+    ],
+    "outerSeconds": 0.7100864000385627,
+    "remaining": [],
+    "directReaped": true,
+    "handlesComplete": true,
+    "processCleanupComplete": true,
+    "diskSignalMaskRestoration": "pending",
+    "diskFinalRecordPersist": "attempted",
+    "originalFinalReturnedDict": "not captured; disk pending/attempted retained, no success replay to reconstruct it"
+  },
+  "provenanceLimits": [
+    "Attempt scoreKind sibling had no separately found prior evidence SHA. One current stream snapshot was frozen before parse/evaluation, with896 exact state/raw-score joins; this is not retroactive independent historical authentication.",
+    "No decoded prior replay cache; Rust new32/play1920/pass41 reconstructed recorded states without status/legal/oracle/final-state qualification replay.",
+    "Primary final returned dict not captured; disk mask pending/final persist attempted remain. Numeric-only summary has a separate complete returned receipt; no rerun manufactured a primary return.",
+    "Periodic RSS samples are not absolute peaks. Four private alias groups/eight actual original states remain private; no examples, raw inputs/model or per-state scalar body pushed."
+  ],
+  "forbiddenScientificCalls": {
+    "RNG": 0,
+    "fit": 0,
+    "search": 0,
+    "simple": 0,
+    "status": 0,
+    "teacher": 0
+  },
+  "decision": "Keep v1/default and original candidate rejection. Diagnostics do not establish the cause of the32-game loss or support a model change by themselves.",
+  "nextMethod": "Resolve one representation proposal using these facts; no new data, fit, seed, teacher or game issued here.",
+  "archive": {
+    "path": "/workspaces/quoridor/research-data/othello/strong-ai-n96/saved-pattern-diagnostic-v1-checks.tar.gz",
+    "bytes": 27234,
+    "mode": "0644",
+    "sha256": "de66dec655ab96b01319134800a35f8def63296e627dae64ffcf58c4c0cb44a1"
+  },
+  "archiveMemberCount": 14
+}
