@@ -1,0 +1,503 @@
+{
+  "status": "REMOVED_BY_NORMAL_MANAGED_HELPER",
+  "issue": "quoridor-4lc.324.12.6",
+  "at": "2026-10-21T08:38:36.902468+00:00",
+  "removed": "deeper-teacher-scheduling",
+  "before_registered": 22,
+  "after_registered": 21,
+  "normal_helper_exit": 0,
+  "branch_preserved": "refs/heads/codex/deeper-teacher-scheduling",
+  "branch_commit": "3543d63a0557f80fbf49c1f30de9bd9ec671f7f5",
+  "worktree_specific_metadata": {
+    "HEAD": {
+      "text": "ref: refs/heads/codex/deeper-teacher-scheduling\n",
+      "mode": "0644"
+    },
+    "config.worktree": {
+      "text": "[core]\n\tsparseCheckout = true\n\tsparseCheckoutCone = true\n[index]\n\tsparse = true\n",
+      "mode": "0644"
+    },
+    "info/sparse-checkout": {
+      "text": "/*\n!/*/\n/configs/\n!/configs/*/\n/scripts/\n!/scripts/*/\n/configs/arena/\n/crates/\n/scripts/dev/\n",
+      "mode": "0644"
+    },
+    "info/exclude": null
+  },
+  "index_flags": {
+    "S": 9609,
+    "H": 182
+  },
+  "staging_empty": true,
+  "preservation_commit": "080fa1da1d4abfc1a6d917f633072cef880c2a43",
+  "preservation_manifest": "research-data/ai-sigma/execution324-worktree-retirement-20261021/deeper-teacher-scheduling-preservation.json",
+  "source_reconstruction_commit": "2c3636543c21966ee2afb9d8d9c54506d871d671",
+  "supporting_proc_scan": {
+    "processes": 93,
+    "descriptors": 1749,
+    "matches": [],
+    "permission_denied": [
+      {
+        "pid": 1,
+        "uid": 0,
+        "comm": "docker-init",
+        "kind": "cwd"
+      },
+      {
+        "pid": 1,
+        "uid": 0,
+        "comm": "docker-init",
+        "kind": "exe"
+      },
+      {
+        "pid": 1,
+        "uid": 0,
+        "comm": "docker-init",
+        "kind": "fd-directory"
+      },
+      {
+        "pid": 7,
+        "uid": 0,
+        "comm": "sh",
+        "kind": "cwd"
+      },
+      {
+        "pid": 7,
+        "uid": 0,
+        "comm": "sh",
+        "kind": "exe"
+      },
+      {
+        "pid": 7,
+        "uid": 0,
+        "comm": "sh",
+        "kind": "fd-directory"
+      },
+      {
+        "pid": 5767,
+        "uid": 0,
+        "comm": "sshd",
+        "kind": "cwd"
+      },
+      {
+        "pid": 5767,
+        "uid": 0,
+        "comm": "sshd",
+        "kind": "exe"
+      },
+      {
+        "pid": 5767,
+        "uid": 0,
+        "comm": "sshd",
+        "kind": "fd-directory"
+      },
+      {
+        "pid": 9541,
+        "uid": 0,
+        "comm": "sh",
+        "kind": "cwd"
+      },
+      {
+        "pid": 9541,
+        "uid": 0,
+        "comm": "sh",
+        "kind": "exe"
+      },
+      {
+        "pid": 9541,
+        "uid": 0,
+        "comm": "sh",
+        "kind": "fd-directory"
+      },
+      {
+        "pid": 9547,
+        "uid": 0,
+        "comm": "sh",
+        "kind": "cwd"
+      },
+      {
+        "pid": 9547,
+        "uid": 0,
+        "comm": "sh",
+        "kind": "exe"
+      },
+      {
+        "pid": 9547,
+        "uid": 0,
+        "comm": "sh",
+        "kind": "fd-directory"
+      },
+      {
+        "pid": 9648,
+        "uid": 0,
+        "comm": "sh",
+        "kind": "cwd"
+      },
+      {
+        "pid": 9648,
+        "uid": 0,
+        "comm": "sh",
+        "kind": "exe"
+      },
+      {
+        "pid": 9648,
+        "uid": 0,
+        "comm": "sh",
+        "kind": "fd-directory"
+      },
+      {
+        "pid": 206480,
+        "uid": 0,
+        "comm": "sleep",
+        "kind": "cwd"
+      },
+      {
+        "pid": 206480,
+        "uid": 0,
+        "comm": "sleep",
+        "kind": "exe"
+      },
+      {
+        "pid": 206480,
+        "uid": 0,
+        "comm": "sleep",
+        "kind": "fd-directory"
+      },
+      {
+        "pid": 2470305,
+        "uid": 0,
+        "comm": "sshd",
+        "kind": "cwd"
+      },
+      {
+        "pid": 2470305,
+        "uid": 0,
+        "comm": "sshd",
+        "kind": "exe"
+      },
+      {
+        "pid": 2470305,
+        "uid": 0,
+        "comm": "sshd",
+        "kind": "fd-directory"
+      },
+      {
+        "pid": 2470311,
+        "uid": 1000,
+        "comm": "sshd",
+        "kind": "cwd"
+      },
+      {
+        "pid": 2470311,
+        "uid": 1000,
+        "comm": "sshd",
+        "kind": "exe"
+      },
+      {
+        "pid": 2470311,
+        "uid": 1000,
+        "comm": "sshd",
+        "kind": "fd-directory"
+      }
+    ],
+    "full_host_stop_claim": false
+  },
+  "controlled_reader_STOP": "Group A explicitly closed candidate after returned helper08:31:30.057730Z; closed348.2 and historical source/software STOPs preserved in custody",
+  "full_host_or_future_quiet": false,
+  "caches_not_preserved": ["target", "node_modules", ".ruff_cache"],
+  "scientific_calls": 0,
+  "old_RAW_paths_failures_costs": "PRESERVED",
+  "force_remove": false,
+  "branch_session_deleted": false,
+  "Main_clean_unchanged": true,
+  "global_actual_fullfees": "UNKNOWN",
+  "refund_lending": false,
+  "Root_actual_returned_cleanup": {
+    "returned": {
+      "command": [
+        "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+        "-B",
+        "/workspaces/quoridor/.artifacts/research-team/integration324/worktree-retirement-v1/deeper-v1/remove.py"
+      ],
+      "status": "complete",
+      "child": {
+        "pid": 206501,
+        "start_ticks": "62020768",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "cpu_plan": {
+        "management": [18],
+        "commands": {
+          "maintenance": [0]
+        },
+        "allocation": [0, 18],
+        "resource_CPUs": 2,
+        "worker_CPUs": 1,
+        "library_threads": 1
+      },
+      "command_cpu_scope": "maintenance",
+      "log_bytes_seen": 59,
+      "scope": "session group and periodically recorded descendants; no daemon adoption",
+      "exit_code": 0,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "cleanup_complete": true,
+      "log_bytes_retained": 59,
+      "wall_seconds": 0.39538082596845925,
+      "handle_closes_attempted": [
+        "selector_close",
+        "pipe_close",
+        "pidfd_close",
+        "log_close"
+      ],
+      "primary_error": null,
+      "process_cleanup_complete": true,
+      "handle_closes_complete": true,
+      "signal_mask_restoration": "completed",
+      "final_record_persist": "completed",
+      "finalization_errors": []
+    },
+    "disk": {
+      "command": [
+        "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+        "-B",
+        "/workspaces/quoridor/.artifacts/research-team/integration324/worktree-retirement-v1/deeper-v1/remove.py"
+      ],
+      "status": "complete",
+      "child": {
+        "pid": 206501,
+        "start_ticks": "62020768",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "cpu_plan": {
+        "management": [18],
+        "commands": {
+          "maintenance": [0]
+        },
+        "allocation": [0, 18],
+        "resource_CPUs": 2,
+        "worker_CPUs": 1,
+        "library_threads": 1
+      },
+      "command_cpu_scope": "maintenance",
+      "log_bytes_seen": 59,
+      "scope": "session group and periodically recorded descendants; no daemon adoption",
+      "exit_code": 0,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "cleanup_complete": true,
+      "log_bytes_retained": 59,
+      "wall_seconds": 0.39538082596845925,
+      "handle_closes_attempted": [
+        "selector_close",
+        "pipe_close",
+        "pidfd_close",
+        "log_close"
+      ],
+      "primary_error": null,
+      "process_cleanup_complete": true,
+      "handle_closes_complete": true,
+      "signal_mask_restoration": "pending",
+      "final_record_persist": "attempted",
+      "finalization_errors": []
+    },
+    "failure": null,
+    "TMP": [],
+    "sourceleases": [],
+    "host_future_quiet": false,
+    "scientific_calls": 0
+  },
+  "remaining_candidates": [
+    {
+      "name": "arena-evaluation",
+      "specific_preservation_hold": "Named ignored evidence paths require existing archive/member or preservation mapping; no payload read or automatic discard.",
+      "metadata": {
+        "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/metadata-arena-evaluation.json",
+        "sha256": "b0a8ec09070f80d6228c865d1108359448f7b56e15388ed293ae6a3a148763ec",
+        "bytes": 862520,
+        "mode": "0644"
+      }
+    },
+    {
+      "name": "arena-generalization377",
+      "specific_preservation_hold": "Named ignored evidence paths require existing archive/member or preservation mapping; no payload read or automatic discard.",
+      "metadata": {
+        "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/metadata-arena-generalization377.json",
+        "sha256": "568c76c4d1f4a7a548401c9738dd2ef6b911ebe836fd942cafc03469025aaa2c",
+        "bytes": 918706,
+        "mode": "0644"
+      }
+    },
+    {
+      "name": "cheap-static-ordering376",
+      "specific_preservation_hold": "Named ignored evidence paths require existing archive/member or preservation mapping; no payload read or automatic discard.",
+      "metadata": {
+        "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/metadata-cheap-static-ordering376.json",
+        "sha256": "921da5fc2f28ce8491f3b32c7ba0199cedff67a792a7cf77a35daf70b3c28f1e",
+        "bytes": 920550,
+        "mode": "0644"
+      }
+    },
+    {
+      "name": "endgame-solver335",
+      "specific_preservation_hold": "Named ignored evidence paths require existing archive/member or preservation mapping; no payload read or automatic discard.",
+      "metadata": {
+        "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/metadata-endgame-solver335.json",
+        "sha256": "7e2c01084572fb327262ee92abf52f9bf7d8f2bad61a682cfbc82e1cd852ec62",
+        "bytes": 886743,
+        "mode": "0644"
+      }
+    },
+    {
+      "name": "frame21-features",
+      "specific_preservation_hold": "HOLD models/experiments until committed science-weights-curves.tar.xz/member/mode custody established. Existing34member manifest maps A/B model paths; no weights rehash/replay. Archive not listed in current route-control tracked directory; broader committed archive locator unresolved.",
+      "metadata": {
+        "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/first-candidate-frame21-features.json",
+        "sha256": "6cc7697c458a717bdc8fa5a42e68102373831c9430f24a6a281b2edc9e0de793",
+        "bytes": 680421,
+        "mode": "0644"
+      }
+    },
+    {
+      "name": "frame21-search",
+      "specific_preservation_hold": "HOLD exact untracked list incl research-data/ai-sigma/frame24-persistent-tt; existing frame21 evidence.tar.gz46member restoration is narrower. No RAW decode/copy.",
+      "metadata": {
+        "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/metadata-frame21-search.json",
+        "sha256": "1490ee9215234e00c969de856f5bd4926ec4628af87cbb4bba087dfec0a7b729",
+        "bytes": 729444,
+        "mode": "0644"
+      }
+    },
+    {
+      "name": "learning-million",
+      "specific_preservation_hold": "Named ignored evidence paths require existing archive/member or preservation mapping; no payload read or automatic discard.",
+      "metadata": {
+        "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/metadata-learning-million.json",
+        "sha256": "77d4e7b66e74f5b57e4bb73b96935db381b58044678069163760ddea823f702d",
+        "bytes": 862343,
+        "mode": "0644"
+      }
+    },
+    {
+      "name": "nnue-causal-diagnostic",
+      "specific_preservation_hold": "Named ignored evidence paths require existing archive/member or preservation mapping; no payload read or automatic discard.",
+      "metadata": {
+        "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/metadata-nnue-causal-diagnostic.json",
+        "sha256": "8384b9f8963ff4e5d418ad2cca34c43ba3e3b9e0d09120c882e23e8f30b3bbb8",
+        "bytes": 882953,
+        "mode": "0644"
+      }
+    },
+    {
+      "name": "nnue-hypothesis-arena",
+      "specific_preservation_hold": "Named ignored evidence paths require existing archive/member or preservation mapping; no payload read or automatic discard.",
+      "metadata": {
+        "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/metadata-nnue-hypothesis-arena.json",
+        "sha256": "93b95f91331d5eb66513934fe74cef314f089643b4c9abbb5b2b0cf19c238fdd",
+        "bytes": 879005,
+        "mode": "0644"
+      }
+    },
+    {
+      "name": "nnue-hypothesis-learner",
+      "specific_preservation_hold": "Named ignored evidence paths require existing archive/member or preservation mapping; no payload read or automatic discard.",
+      "metadata": {
+        "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/metadata-nnue-hypothesis-learner.json",
+        "sha256": "b011f3454bcf87c493b6dd358d2dde7b81a3bad40bbb591d44c5721ea44014ee",
+        "bytes": 883272,
+        "mode": "0644"
+      }
+    },
+    {
+      "name": "nnue-hypothesis-search",
+      "specific_preservation_hold": "Named ignored evidence paths require existing archive/member or preservation mapping; no payload read or automatic discard.",
+      "metadata": {
+        "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/metadata-nnue-hypothesis-search.json",
+        "sha256": "b256c100cc8339895bbaede69ad645dc133445d1bdf90e5ed08abec566530274",
+        "bytes": 878153,
+        "mode": "0644"
+      }
+    },
+    {
+      "name": "nnue-public-no-bypass",
+      "specific_preservation_hold": "Named ignored evidence paths require existing archive/member or preservation mapping; no payload read or automatic discard.",
+      "metadata": {
+        "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/metadata-nnue-public-no-bypass.json",
+        "sha256": "b671966f9ab5aea9ce4caa3063185f6dbc67c54dd7fa502757655990e0860457",
+        "bytes": 879548,
+        "mode": "0644"
+      }
+    },
+    {
+      "name": "ordering-cost372",
+      "specific_preservation_hold": "Named ignored evidence paths require existing archive/member or preservation mapping; no payload read or automatic discard.",
+      "metadata": {
+        "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/metadata-ordering-cost372.json",
+        "sha256": "3d9b84a542675ff99fcf36dd5d121d54c260faea90dbe4c5b290e9cd8693d799",
+        "bytes": 912559,
+        "mode": "0644"
+      }
+    },
+    {
+      "name": "research-lifecycle-maintenance",
+      "specific_preservation_hold": "Named ignored evidence paths require existing archive/member or preservation mapping; no payload read or automatic discard.",
+      "metadata": {
+        "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/metadata-research-lifecycle-maintenance.json",
+        "sha256": "2ebb0bdba78a16ba45dcacde252fcdc1aad2b21d6b4d6524d674817975ae2fbd",
+        "bytes": 894877,
+        "mode": "0644"
+      }
+    },
+    {
+      "name": "sigma-receipt-caller",
+      "specific_preservation_hold": "Named ignored evidence paths require existing archive/member or preservation mapping; no payload read or automatic discard.",
+      "metadata": {
+        "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/metadata-sigma-receipt-caller.json",
+        "sha256": "4043b58799f56a7b721bc523c9406d92a94f8d72f1a663496a27693b50058f8e",
+        "bytes": 883055,
+        "mode": "0644"
+      }
+    },
+    {
+      "name": "sigma-receipt-reevaluation",
+      "specific_preservation_hold": "Named ignored evidence paths require existing archive/member or preservation mapping; no payload read or automatic discard.",
+      "metadata": {
+        "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/metadata-sigma-receipt-reevaluation.json",
+        "sha256": "449a5c3785b09cf250f66ad7e0fed8ad85b6783d1bf2964349c530fd1382e9b4",
+        "bytes": 883996,
+        "mode": "0644"
+      }
+    },
+    {
+      "name": "tt-hash-reuse351",
+      "specific_preservation_hold": "Named ignored evidence paths require existing archive/member or preservation mapping; no payload read or automatic discard.",
+      "metadata": {
+        "path": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/worktree-retirement-v1/metadata-tt-hash-reuse351.json",
+        "sha256": "1daaa70b1d4d6db1d71c4a50b341a3342a94bc6dea6d7b67cd5a892e49fda56f",
+        "bytes": 886337,
+        "mode": "0644"
+      }
+    }
+  ],
+  "total_removed": 4,
+  "protected_worktrees": {
+    "Main": "sole integration/Git/Cargo writer",
+    "search_optimization": "current ETC source/review/private inputs",
+    "value_search_strength_arena355": "sole current/concrete future Root Cargo pool",
+    "value_search_strength_engineering355": "unfinished adapter"
+  },
+  "other_ready_preservation": {
+    "commit": "080fa1da1d4abfc1a6d917f633072cef880c2a43",
+    "candidates": ["frame21-search", "frame21-features"],
+    "registered_removal": "pending final consumer/model/custody checks; no all-group gate"
+  }
+}
