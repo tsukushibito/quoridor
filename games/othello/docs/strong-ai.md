@@ -59,7 +59,7 @@ STM/盤面向き/色、raw STEP単位、disc単位、丸め、clamp段階と外�
 
 [最初の固定深さ比較](../../../research-data/othello/strong-ai-n96/full-search-numerical-v1.json)は、既観測の合法2系列から29の異なるstate/depthを結果前に固定した。浅い非選択21件、小終盤6件（forced pass1件を含む）、終局2件の計58要求で、同じ実weightのRustと元AVX参照のSTM未平滑値が全件一致し、今回は着手も全件一致した。元の四つの中央セルが埋まった記録局面だけを使用し、非終局の要求深さは空き数以下、両TTをケース時計の外でclearした。元参照は外部compileでMPCをOFFにしており、stock consoleでroot selectivity=6を指定しただけの条件とは区別する。包括1.417980500秒にsetup/reset/search/cleanupの内包時計を加算しない。入力準備の32件には共通初期盤面の3深さ分が重複していたため、入場前に29件へ統合し、失敗記録を保持して補充しなかった。H・新対局・教師・fitは0である。
 
-この有限一致は全探索の同値性や独立minimax証明ではない。元last4 parity-case順序、last2/3専用kernel、SIMD実行、clog ordering、全時計の差を対応表に残し、有効なsinglethread手法の忠実な移植を継続する。選択/MPC・深い境界、初期化再用の連続探索、処理速度・同時間対局、browser全weight動作・製品defaultは別の資格である。局所的な一致や元より弱いことを、小型評価路線へ戻す根拠にしない。
+この有限一致は全探索の同値性や独立minimax証明ではない。元last4の実効isolated-empty順序、last2/3専用kernel、SIMD実行、clog ordering、全時計の差を対応表に残し、有効なsinglethread手法の忠実な移植を継続する。選択/MPC・深い境界、初期化再用の連続探索、処理速度・同時間対局、browser全weight動作・製品defaultは別の資格である。局所的な一致や元より弱いことを、小型評価路線へ戻す根拠にしない。
 
 ## 最初の受入単位と検証
 
@@ -93,3 +93,5 @@ source/light prepはQuoridor435と並行する。soleMain/Git/index/sharedCargo�
 | Rust主体UIと任意v1探索              | [UI](../../../research-data/othello/strong-ai-n96/rust-ui-v1.json)、[browser search](../../../research-data/othello/strong-ai-n96/browser-search-v1.json)。Rust8/Wasm7と描画5、追加Rust7/Wasm3/描画2。malformed GameStateのCancel→Retry制限、nominal clockとbrowser棋力未資格を保持。 |
 
 旧residualは提案段階で採択/実装/fitされず、今回の人間選択で先行案から退けた。二形状専用model API・trainer/export・専用試験/未採用案は、具体的な直接比較用途が無ければ新core境界の統合時にGit履歴へ退役する。比較が必要な部分だけ対象/終了条件を定め、恒久shimや実験ID別のtrainerを残さない。現役のルール・UI・取消/保存・正しさの検査と、Gitだけでは復元できない科学データを削除対象へ混ぜない。
+
+固定sourceの追加読取りで、初回対応表が欠落機能として挙げたparity_case/parity_ordering_shuffle_mask_last4/parity_ordering_last3は定義だけで、activeなgeneric/SIMD PVS/NWS last4から使われていないと確認した。実効経路はempty1_bbによるisolated-empty partitionである。未使用tableをport要件へ追加せず、元の誤った説明は探索software正本の訂正欄とGit履歴へ残す。この訂正で元コード・実行画像・固定深さ29件の結果を変更しない。

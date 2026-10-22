@@ -145,10 +145,54 @@
     "Require legal!=0 and root_move<64 before second-best shift"
   ],
   "remainingDifferences": [
-    "Original last4 parity-case shuffle and last2/3 dedicated kernels/SIMD execution not yet reproduced",
+    "Dedicated original last2/3/4 min/max kernels with active isolated-empty last4 ordering and SIMD register execution are not yet fully reproduced. Unused parity_case tables are not a missing active path.",
     "Clog ordering differs; strict whole-call callback deadline intentionally excludes upstream post-budget extensions",
     "Node accounting differs; selected cuts need actual selective/end/timing qualification"
   ],
   "packageMetadata": "Both Rust crates explicitly GPL-3.0-or-later; no dependency/lock change. wasm-pack local output warns no crate-local LICENSE; existing games GPL text retained, package distribution not qualified.",
-  "cost": "Each original whole retained once, including v1/v2 failed attempts; v4 whole33.956008821s, no nested addition."
+  "cost": "Each original whole retained once, including v1/v2 failed attempts; v4 whole33.956008821s, no nested addition.",
+  "sourceCorrespondenceCorrection": {
+    "upstreamCommit": "570d5e0a478c9d720d75de06a5d31995f412704a",
+    "reason": "Pinned parity_case/parity_ordering_shuffle_mask_last4/parity_ordering_last3 are definitions only; active generic/SIMD PVS/NWS last4 use empty1_bb isolated-empty partition.",
+    "supersededFirstPublishedClaim": "Original last4 parity-case shuffle and last2/3 dedicated kernels/SIMD execution not yet reproduced",
+    "evidence": [
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/tools/othello-baselines-n96-v1/egaroucid/src/engine/endsearch_common.hpp",
+        "bytes": 7749,
+        "mode": "0644",
+        "sha256": "00451012547ecf3b42453194fcd43d91d812b7785bcddd0ba5e2b73672bf15de",
+        "definitionLines": [29, 45, 61]
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/tools/othello-baselines-n96-v1/egaroucid/src/engine/endsearch_last_generic.hpp",
+        "bytes": 11095,
+        "mode": "0644",
+        "sha256": "553396ceb8f9145f3cf310703c5152ad1e6102429678e7392821c273d42d95af",
+        "isolatedEmptyLines": [272]
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/tools/othello-baselines-n96-v1/egaroucid/src/engine/endsearch_last_simd.hpp",
+        "bytes": 11693,
+        "mode": "0644",
+        "sha256": "2780fefd02ad1455f2d5fd064aa75ed06f34e268d86e17454d10df3dcce243ec",
+        "isolatedEmptyLines": [277]
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/tools/othello-baselines-n96-v1/egaroucid/src/engine/endsearch_nws_last_generic.hpp",
+        "bytes": 7946,
+        "mode": "0644",
+        "sha256": "cdfd2b2a2165849c3aa5b02a705dd06d577f0b750758b48d3b89c446411183cb",
+        "isolatedEmptyLines": [186]
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/tools/othello-baselines-n96-v1/egaroucid/src/engine/endsearch_nws_last_simd.hpp",
+        "bytes": 15096,
+        "mode": "0644",
+        "sha256": "d39d200e62389c33e843f300fe78df8ed70bc643b7557bbe3496e5e31d64fd4f",
+        "isolatedEmptyLines": [335]
+      }
+    ],
+    "unchanged": "No program/ELF/weights/raw29 results/qualifications changed; source-only correspondence correction. Original capsule/source reports remain immutable.",
+    "continuation": "Port actual active kernels/order; do not add inactive parity-table branch."
+  }
 }
