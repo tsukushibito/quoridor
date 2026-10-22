@@ -1,11 +1,6 @@
 //! JSON-only browser boundary. The core owns all game semantics.
 
-use othello_core::{
-    GameState,
-    bitboard::Position,
-    pattern::PatternWeights,
-    search::{Evaluator, SearchOptions},
-};
+use othello_core::{GameState, bitboard::Position, search::SearchOptions};
 use serde::Serialize;
 use wasm_bindgen::prelude::*;
 
@@ -99,50 +94,13 @@ extern "C" {
 /// the Worker and discard stale responses for immediate external cancellation.
 #[wasm_bindgen]
 pub fn search_json(input: &str, options: &str) -> Result<String, JsValue> {
-    search_selected(input, options, Evaluator::V1Heuristic)
-}
-
-fn search_selected(
-    input: &str,
-    options: &str,
-    evaluator: Evaluator<'_>,
-) -> Result<String, JsValue> {
     let state = state(input)?;
     let options: SearchOptions = serde_json::from_str(options).map_err(js_error)?;
     #[cfg(target_arch = "wasm32")]
-    let result = othello_core::search::search(&state, options, browser_now, evaluator);
+    let result = othello_core::search::search(&state, options, browser_now);
     #[cfg(not(target_arch = "wasm32"))]
-    let result = othello_core::search::search_native(&state, options, evaluator);
+    let result = othello_core::search::search_native(&state, options);
     json(&result.map_err(js_error)?)
-}
-
-/// Explicit immutable model owner. Loading one never changes baseline search_json.
-/// Rust UI/Worker hosts can own/drop this object and borrow its evaluator per call.
-#[wasm_bindgen]
-pub struct PatternModel {
-    weights: PatternWeights,
-}
-
-#[wasm_bindgen]
-impl PatternModel {
-    #[wasm_bindgen(constructor)]
-    pub fn new(input: &str) -> Result<PatternModel, JsValue> {
-        Ok(Self {
-            weights: PatternWeights::from_json(input).map_err(js_error)?,
-        })
-    }
-
-    /// Raw heuristic only, including on terminal input; not a proven solver value.
-    pub fn evaluate_json(&self, input: &str) -> Result<String, JsValue> {
-        json(
-            &serde_json::json!({"score":self.weights.evaluate(Position::from(&state(input)?)),
-            "scoreKind":"heuristic","proven":false}),
-        )
-    }
-
-    pub fn search_json(&self, input: &str, options: &str) -> Result<String, JsValue> {
-        search_selected(input, options, Evaluator::Pattern(&self.weights))
-    }
 }
 
 /// Explicit full Console7.8.1 evaluator owner. No model/global/default adoption,

@@ -108,11 +108,8 @@ class GenerationTests(unittest.TestCase):
                     generation._read(reference, 1024)
 
     def test_same_tree_canonical_integration(self):
-        expected = Path(generation.__file__).resolve().parents[1] / "othello_training/pattern.py"
-        if not expected.is_file():
-            self.skipTest(
-                "UNRUN: integrate accepted othello_training.pattern in this same source tree"
-            )
+        expected = Path(generation.__file__).resolve().parents[1] / "othello_arena/canonical.py"
+        self.assertTrue(expected.is_file(), "same-tree arena canonical source is required")
         canonical = generation._canonical({"canonicalSource": generation._ref(expected)})
         position = {"version": 1, "board": [1, 2] + [0] * 62, "toMove": 1}
         flipped = {"version": 1, "board": [2, 1] + [0] * 62, "toMove": 2}

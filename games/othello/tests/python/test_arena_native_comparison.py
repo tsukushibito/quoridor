@@ -1,7 +1,6 @@
 """Canned protocols/analytic scores only; no native/model payload/scientific RNG."""
 
 import copy
-import hashlib
 import json
 from pathlib import Path
 import tempfile
@@ -11,43 +10,6 @@ from unittest.mock import patch
 from othello_arena import __main__ as arena, generation, matches
 from othello_arena.engines import NativePlayer
 from othello_arena.protocol import EngineError, Native
-
-
-def config():
-    image = "/immutable/othello-engine"
-    binary = {
-        "sha256": "2678ba8e2ff207a4f1d1f2f1047a345964fafad4375e9abcf5d9d6b34debc71d",
-        "bytes": 800888,
-        "mode": "0755",
-    }
-    model = {
-        "path": "/workspaces/quoridor/.worktree/assets/models/othello-strong-teacher-n96-v1/pattern-v1.json",
-        "bytes": 16161,
-        "mode": "0644",
-        "sha256": "7ed9fa38218f591d80cfa10f985d510635eaddcd9e2f530e3f778b16b052bd9a",
-    }
-    spec = {"argv": [image], "binary": binary, "cwd": "/immutable", "protocol": "native_jsonl"}
-    return {
-        "purpose": "native_evaluator_comparison",
-        "timeMs": 1000,
-        "overheadMs": 100,
-        "threads": 1,
-        "ttMiB": 32,
-        "maxDepth": 64,
-        "exactEmpties": 12,
-        "book": False,
-        "ponder": False,
-        "superiorityClaim": False,
-        "launchBinding": {"fixture": True},
-        "model": model,
-        "rules": copy.deepcopy(spec),
-        "opponents": [dict(copy.deepcopy(spec), id="heuristic")],
-        "candidate": dict(
-            copy.deepcopy(spec),
-            assets=[model],
-            argv=[image, "--pattern", model["path"], "--model-id", "sha256:" + model["sha256"]],
-        ),
-    }
 
 
 def search(evaluation):
@@ -69,7 +31,7 @@ def search(evaluation):
 def fixtures():
     """Opaque canned authority results; these are not generated legal games."""
     families = [{"id": f"development/comparison/{i:02}", "moves": [0] * 8} for i in range(16)]
-    evaluations = arena.comparison_bindings(config())
+    evaluations = {"candidate": {"kind": "fixtureCandidate"}, "opponent": {"kind": "v1Heuristic"}}
     results = []
     for family in families:
         for side in (1, 2):
@@ -154,27 +116,27 @@ class ConstantDraws:
 
 
 class NativeComparisonTests(unittest.TestCase):
-    def test_image_hash_preflight_failure_retains32_unrun_and_guard_wall(self):
-        families, _, _ = fixtures()
+    def test_retired_tiny_comparison_refused_before_process_start(self):
+        spec = {"argv": ["/unused"], "cwd": "/unused"}
+        bound = {
+            "purpose": "native_evaluator_comparison",
+            "superiorityClaim": False,
+            "launchBinding": {"fixture": True},
+            "families": [
+                {"id": str(i), "moves": [], "split": "protocol-smoke-only"} for i in range(4)
+            ],
+            "rules": spec,
+            "candidate": spec,
+            "opponents": [dict(spec, id="external", protocol="fixed_jsonl")],
+        }
         with tempfile.TemporaryDirectory() as tmp:
-            with (
-                patch.object(arena, "comparison_families", return_value=families),
-                patch.object(
-                    arena, "checked_spec", side_effect=ValueError("fake image hash mismatch")
-                ),
-                patch.object(arena, "Process", side_effect=AssertionError("must not launch")),
-                patch.object(
-                    matches.random, "Random", side_effect=AssertionError("must not bootstrap")
-                ),
-            ):
-                code = arena.run(config(), Path(tmp) / "out")
-            report = json.loads((Path(tmp) / "out/result.json").read_bytes())
+            with patch.object(arena, "Process", side_effect=AssertionError("must not start")):
+                code = arena.run(bound, Path(tmp) / "out")
+            report = json.loads((Path(tmp) / "out/result.json").read_text())
         self.assertEqual(code, 1)
-        self.assertEqual(report["failure"]["message"], "fake image hash mismatch")
-        self.assertEqual(report["comparison"]["unrun"], 32)
-        self.assertEqual(report["comparison"]["scoreRateBoundsIncludingUnknown"], [0, 1])
-        self.assertGreaterEqual(report["setupShutdown"][0]["launchValidationMs"], 0)
-        self.assertIsNone(report["setupShutdown"][0]["launchWallMs"])
+        self.assertEqual(report["failure"]["kind"], "ValueError")
+        self.assertEqual(report["cleanup"], [])
+        self.assertEqual(report["byOpponent"]["external"]["unrun"], 8)
 
     def test_existing_external_factory_branches_remain_protocol_cost_only(self):
         for protocol in ("fixed_jsonl", "gtp"):
@@ -260,99 +222,6 @@ class NativeComparisonTests(unittest.TestCase):
         self.assertEqual(summary["familyMeanScore"], 0.5)
         self.assertIsNone(summary["acceptance"])
 
-    def test_existing_run_native_factory_init_once_shutdown_and_cleanup_failure(self):
-        families, evaluations, results = fixtures()
-        for bad_cleanup, foreign_init, unknown_score in (
-            (False, False, False),
-            (True, False, False),
-            (False, True, False),
-            (False, False, True),
-        ):
-            instances = []
-            delivered = []
-
-            class Process:
-                cleanup = None
-
-                def __init__(self, argv, **kw):
-                    self.argv = argv
-                    self.ops = []
-                    instances.append(self)
-                    self.evaluation = evaluations[
-                        "candidate" if "--pattern" in argv else "opponent"
-                    ]
-                    if foreign_init and "--pattern" in argv:
-                        self.evaluation = {"kind": "foreign"}
-
-                def json_request(self, payload, **kw):
-                    self.ops.append(payload["op"])
-                    if payload["op"] == "new":
-                        return {"ok": True, "state": {"version": 1, "board": [0] * 64, "toMove": 1}}
-                    if payload["op"] == "evaluate":
-                        return {"ok": True, "score": 0, "evaluation": self.evaluation}
-                    raise AssertionError("actual search prohibited")
-
-                def close(self):
-                    self.cleanup = {
-                        "directReaped": True,
-                        "unexpectedExit": False,
-                        "errors": ["fixture cleanup error"] if bad_cleanup else [],
-                    }
-
-            def paired(rules, candidate, opponent, *args, **kw):
-                self.assertFalse(foreign_init, "identity failure must stop before games")
-                self.assertIsInstance(candidate, NativePlayer)
-                self.assertIsInstance(opponent, NativePlayer)
-                self.assertEqual(kw, {"time_ms": 1000, "overhead_ms": 100})
-                feed = copy.deepcopy(results)
-                if unknown_score:
-                    feed[0]["candidateScore"] = None
-                for item in feed:
-                    delivered.append(item)
-                    yield item
-
-            with tempfile.TemporaryDirectory() as tmp:
-                with (
-                    patch.object(arena, "Process", Process),
-                    patch.object(arena, "checked_spec"),
-                    patch.object(arena, "comparison_families", return_value=families),
-                    patch.object(arena, "paired", paired),
-                    patch.object(matches.random, "Random", ConstantDraws),
-                ):
-                    code = arena.run(config(), Path(tmp) / "out")
-                report = json.loads((Path(tmp) / "out/result.json").read_bytes())
-                if foreign_init:
-                    self.assertFalse((Path(tmp) / "out/games.jsonl").exists())
-                else:
-                    self.assertEqual(
-                        len((Path(tmp) / "out/games.jsonl").read_text().splitlines()),
-                        1 if unknown_score else 32,
-                    )
-            self.assertEqual(code, 1 if bad_cleanup or foreign_init or unknown_score else 0)
-            self.assertEqual(len(delivered), 0 if foreign_init else 1 if unknown_score else 32)
-            self.assertEqual(len(instances), 2 if foreign_init else 3)
-            self.assertEqual(
-                [p.ops for p in instances],
-                [["new"], ["new", "evaluate"]]
-                if foreign_init
-                else [["new"], ["new", "evaluate"], ["new", "evaluate"]],
-            )
-            for lifecycle in report["setupShutdown"]:
-                for field in (
-                    "launchValidationMs",
-                    "launchWallMs",
-                    "readyWallMs",
-                    "shutdownWallMs",
-                ):
-                    self.assertGreaterEqual(lifecycle[field], 0)
-            self.assertEqual(
-                report["comparison"]["ciEligible"],
-                not (bad_cleanup or foreign_init or unknown_score),
-            )
-            if bad_cleanup or foreign_init or unknown_score:
-                self.assertNotIn("familyBootstrap95", report["comparison"])
-                self.assertIsNotNone(report["failure"])
-
     def test_unknown_bounds_invalid_plan_and_mandatory_pass_evidence(self):
         families, evaluations, results = fixtures()
         score(results[0], 1)
@@ -379,7 +248,9 @@ class NativeComparisonTests(unittest.TestCase):
             self.assertFalse(self.summarize(results, families, evaluations)["ciEligible"])
 
     def test_first_bad_search_retains_raw_clock_and_paired_stops_without_refill(self):
-        expected = arena.comparison_bindings(config())["candidate"]
+        expected = {"candidate": {"kind": "fixtureCandidate"}, "opponent": {"kind": "v1Heuristic"}}[
+            "candidate"
+        ]
 
         class Rules:
             def request(self, op, **kw):
@@ -429,58 +300,6 @@ class NativeComparisonTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "FileRef mismatch"):
                 arena.checked_spec(spec)
 
-    def test_frozen16_canonical_exclusion_and_purpose_binding_use_current_generator(self):
-        prepared = preparation_config()
-        bound = config()
-        prepared["engine"] = bound["rules"]
-        prepared["canonicalSource"] = {"fixture": True}
-        frozen = {
-            key: copy.deepcopy(prepared[key])
-            for key in (
-                "purpose",
-                "seed",
-                "source",
-                "engine",
-                "canonicalSource",
-                "openingExclusions",
-                "labelKind",
-                "samplePlacements",
-                "duplicatePolicy",
-                "namespace",
-            )
-        }
-        frozen.update(complete=True, stage="openings", outcomeLabels=False, records=[])
-        for index, slot in enumerate(prepared["slots"]):
-            key = str(index).encode()
-            frozen["records"].append(
-                dict(
-                    slot,
-                    moves=[0] * 8,
-                    state={"key": str(index)},
-                    canonicalSha256=hashlib.sha256(key).hexdigest(),
-                )
-            )
-        bound.update(openingConfig={"fixture": "config"}, openings={"fixture": "openings"})
-
-        def read(reference, maximum):
-            return prepared if reference == bound["openingConfig"] else frozen
-
-        with (
-            patch.object(generation, "_read", side_effect=read),
-            patch.object(
-                generation, "_canonical", return_value=lambda state: state["key"].encode()
-            ),
-            patch.object(generation, "_excluded_keys", return_value=set()),
-        ):
-            self.assertEqual(len(arena.comparison_families(bound)), 16)
-            frozen["purpose"] = "foreign"
-            with self.assertRaises(generation.GenerationStop):
-                arena.comparison_families(bound)
-            frozen["purpose"] = prepared["purpose"]
-            frozen["records"][-1]["state"] = {"key": "0"}
-            with self.assertRaises(generation.GenerationStop):
-                arena.comparison_families(bound)
-
     def summarize(self, results, families, evaluations, qualified=True):
         return matches.comparison_summary(
             results, families, evaluations, run_qualified=qualified, opponent_id="heuristic"
@@ -514,38 +333,10 @@ class NativeComparisonTests(unittest.TestCase):
         self.assertEqual(len(keys), 156)
         self.assertIn(b"128/127", keys)  # includes held root identity; no traversal/label
 
-    def test_metadata_same_image_model_argv_binding_without_payload_read(self):
-        bound = config()
-        with patch.object(Path, "open", side_effect=AssertionError("payload read")):
-            evaluations = arena.comparison_bindings(bound)
-        self.assertEqual(evaluations["candidate"]["modelBytes"], 16161)
-        self.assertEqual(evaluations["opponent"], {"kind": "v1Heuristic"})
-        changes = []
-        for which in ("rules", "candidate"):
-            bad = config()
-            bad[which]["binary"]["sha256"] = "550b" + "0" * 60
-            changes.append(bad)
-        bad = config()
-        bad["candidate"]["argv"][-1] = "sha256:" + "0" * 64
-        changes.append(bad)
-        bad = config()
-        bad["opponents"][0]["argv"].append("--pattern")
-        changes.append(bad)
-        bad = config()
-        bad["candidate"]["assets"] = []
-        changes.append(bad)
-        bad = config()
-        bad["nodeCap"] = 100
-        changes.append(bad)
-        bad = config()
-        bad["overheadMs"] = 200
-        changes.append(bad)
-        for bad in changes:
-            with self.subTest(bad=bad), self.assertRaises(ValueError):
-                arena.comparison_bindings(bad)
-
     def test_native_identity_and_exact_search_options_no_node_cap(self):
-        expected = arena.comparison_bindings(config())["candidate"]
+        expected = {"candidate": {"kind": "fixtureCandidate"}, "opponent": {"kind": "v1Heuristic"}}[
+            "candidate"
+        ]
         calls = []
 
         class Process:

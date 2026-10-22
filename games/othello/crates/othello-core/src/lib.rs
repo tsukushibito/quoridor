@@ -7,7 +7,6 @@ pub mod bitboard;
 pub mod full_eval;
 pub mod full_search;
 pub mod heuristic;
-pub mod pattern;
 pub mod search;
 
 pub const BLACK: u8 = 1;

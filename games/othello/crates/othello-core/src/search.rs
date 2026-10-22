@@ -2,34 +2,11 @@
 //! The host supplies a monotonic millisecond clock and optional synchronous
 //! cancellation. No native clock is used by the shared search or Wasm path.
 
-use crate::{GameState, bitboard::Position, heuristic, pattern::PatternWeights};
+use crate::{GameState, bitboard::Position, heuristic};
 use serde::{Deserialize, Serialize};
 use std::{fmt, mem::size_of};
 
 const INF: i32 = 1_000_000;
-
-/// One immutable evaluator is selected before search; a TT belongs to that search.
-#[derive(Clone, Copy)]
-pub enum Evaluator<'a> {
-    V1Heuristic,
-    Pattern(&'a PatternWeights),
-}
-
-impl Evaluator<'_> {
-    pub fn evaluate(self, position: Position) -> i32 {
-        match self {
-            Self::V1Heuristic => heuristic::evaluate(position),
-            Self::Pattern(weights) => weights.evaluate(position),
-        }
-    }
-
-    pub fn name(self) -> &'static str {
-        match self {
-            Self::V1Heuristic => "v1Heuristic",
-            Self::Pattern(_) => "patternV1",
-        }
-    }
-}
 
 #[derive(Clone, Copy, Debug, Deserialize, Serialize)]
 #[serde(default, rename_all = "camelCase", deny_unknown_fields)]
@@ -161,9 +138,8 @@ struct Node {
 #[derive(Debug)]
 struct Stopped;
 
-struct Engine<'a, C, X> {
+struct Engine<C, X> {
     table: Table,
-    evaluator: Evaluator<'a>,
     clock: C,
     cancel: X,
     start: f64,
@@ -173,7 +149,7 @@ struct Engine<'a, C, X> {
     cancelled: bool,
 }
 
-impl<C: FnMut() -> f64, X: FnMut() -> bool> Engine<'_, C, X> {
+impl<C: FnMut() -> f64, X: FnMut() -> bool> Engine<C, X> {
     fn check(&mut self) -> Result<(), Stopped> {
         if (self.cancel)() {
             self.cancelled = true;
@@ -215,7 +191,7 @@ impl<C: FnMut() -> f64, X: FnMut() -> bool> Engine<'_, C, X> {
         }
         if depth == 0 {
             return Ok(Node {
-                score: self.evaluator.evaluate(position),
+                score: heuristic::evaluate(position),
                 best: None,
             });
         }
@@ -309,7 +285,6 @@ pub fn search_with_control<C: FnMut() -> f64, X: FnMut() -> bool>(
     options: SearchOptions,
     mut clock: C,
     cancel: X,
-    evaluator: Evaluator<'_>,
 ) -> Result<SearchResult, SearchError> {
     options.validate()?;
     let start = clock();
@@ -330,7 +305,7 @@ pub fn search_with_control<C: FnMut() -> f64, X: FnMut() -> bool>(
         score: if terminal {
             position.disc_difference()
         } else {
-            evaluator.evaluate(position)
+            heuristic::evaluate(position)
         },
         score_kind: if terminal {
             ScoreKind::DiscDifference
@@ -346,7 +321,6 @@ pub fn search_with_control<C: FnMut() -> f64, X: FnMut() -> bool>(
     };
     let mut engine = Engine {
         table: Table::new(0),
-        evaluator,
         clock,
         cancel,
         start,
@@ -398,9 +372,8 @@ pub fn search<C: FnMut() -> f64>(
     state: &GameState,
     options: SearchOptions,
     clock: C,
-    evaluator: Evaluator<'_>,
 ) -> Result<SearchResult, SearchError> {
-    search_with_control(state, options, clock, || false, evaluator)
+    search_with_control(state, options, clock, || false)
 }
 
 /// Native-only host adapter; compiled out entirely for wasm32.
@@ -408,15 +381,9 @@ pub fn search<C: FnMut() -> f64>(
 pub fn search_native(
     state: &GameState,
     options: SearchOptions,
-    evaluator: Evaluator<'_>,
 ) -> Result<SearchResult, SearchError> {
     let start = std::time::Instant::now();
-    search(
-        state,
-        options,
-        || start.elapsed().as_secs_f64() * 1000.0,
-        evaluator,
-    )
+    search(state, options, || start.elapsed().as_secs_f64() * 1000.0)
 }
 
 #[cfg(test)]

@@ -67,6 +67,8 @@ STM/盤面向き/色、raw STEP単位、disc単位、丸め、clamp段階と外�
 
 元e640工程ではnative12/元4まで完了した後にRootのWasm transport envelope検査で失敗し、保存返答だけから回収した。続く750工程の最初のWasm返答はscore等が一致した一方、MPC係数gがnativeのbit `3ffc70a545d535a4`に対し`3ffc70a545d535a5`で厳格なcontrol identityに失敗した。定数・許容誤差・比較項目を変えず、同じserde_json版の標準`float_roundtrip` featureで修復し、新1テスト/Clippy/native release/Wasm生成の包括10.863685434秒を別に記録した。修復後は失敗1＋未実行11のWasmだけを実行し、7係数すべてのbit一致を確認した。両原FAILED/NULL/費とdisk pending/attemptedは保持する。MPC OFFのこの比較からMPCによるscoreへの影響、選択探索全体、NPS・棋力・browser配布・weight公開条件を認定しない。
 
+新しいSELECTIVE参照は、元のMPC/precalculationと初期化を保持した別compile profileとしてbuildし、境界fixtureと関連source確認が通った。root6でも浅いorderingはMPC74を使えるため、既受入れのcompile-OFF固定深さ29件と同条件ではない。非終局の参照provenは保守的にfalseのまま保持し、Rust側の終盤/level6のprovenと値一致だけから同一視しない。このsoftware工程はRust2/Python6・実生成型と変更baseline native/Wasm境界を含む11command、包括39.003354656秒で、実weight読込・元Search・選択数値・速度/棋力実験は0だった。
+
 ## 最初の受入単位と検証
 
 最初の一まとまりは「全16形状・64配置・60段階のRust評価器、実weight読込、incremental更新、原engineとの数値一致」。同じ課題の既存core作者と基準接続作者を再用し、共通format/phase境界を先に固定する。core作者はRust実装、基準接続作者は外部static oracle・format/由来を担当する。sourceの実編集から進め、設計完成・親close・Root/人間ACKを入口にしない。
@@ -98,6 +100,6 @@ source/light prepはQuoridor435と並行する。soleMain/Git/index/sharedCargo�
 | 保存診断                            | [有限診断](../../../research-data/othello/strong-ai-n96/saved-pattern-diagnostic-v1.json)。2857状態/5714静的評価、V-MSE改善とMAE/符号悪化、alias/空vector/未観測を区別。新Search/教師/fit/RNG0。原32局は開発で観測済みで最終独立集合に再利用しない。                                  |
 | Rust主体UIと任意v1探索              | [UI](../../../research-data/othello/strong-ai-n96/rust-ui-v1.json)、[browser search](../../../research-data/othello/strong-ai-n96/browser-search-v1.json)。Rust8/Wasm7と描画5、追加Rust7/Wasm3/描画2。malformed GameStateのCancel→Retry制限、nominal clockとbrowser棋力未資格を保持。 |
 
-旧residualは提案段階で採択/実装/fitされず、今回の人間選択で先行案から退けた。二形状専用model API・trainer/export・専用試験/未採用案は、具体的な直接比較用途が無ければ新core境界の統合時にGit履歴へ退役する。比較が必要な部分だけ対象/終了条件を定め、恒久shimや実験ID別のtrainerを残さない。現役のルール・UI・取消/保存・正しさの検査と、Gitだけでは復元できない科学データを削除対象へ混ぜない。
+旧residualは提案段階で採択/実装/fitされず、今回の人間選択で先行案から退けた。[退役と選択参照のsoftware資格](../../../research-data/othello/strong-ai-n96/retirement-selective-software-v1.json)で、直接比較の現役用途が無い二形状専用model API・trainer/export・専用試験と旧候補の固定launchを撤去した。旧版コードの復元元はGit履歴とし、恒久shimは置かない。共有のD4/色手番canonical処理だけをarenaへ移し、ルール・v1 heuristic・UI・取消/保存とfull evaluator/searchは維持した。元モデル・入力・実行結果・失敗費は削除していない。
 
 固定sourceの追加読取りで、初回対応表が欠落機能として挙げたparity_case/parity_ordering_shuffle_mask_last4/parity_ordering_last3は定義だけで、activeなgeneric/SIMD PVS/NWS last4から使われていないと確認した。実効経路はempty1_bbによるisolated-empty partitionである。未使用tableをport要件へ追加せず、元の誤った説明は探索software正本の訂正欄とGit履歴へ残す。この訂正で元コード・実行画像・固定深さ29件の結果を変更しない。

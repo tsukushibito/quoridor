@@ -8,7 +8,10 @@ No C++ runtime is embedded in the product. Source attribution remains
 GPL-3.0-or-later / Takuto Yamana; Root maintains `games/othello/LICENSE.Egaroucid`.
 No weight redistribution grant is asserted.
 
-## Explicit reference profile
+## Existing compile-OFF reference profile
+
+The second, explicit selective profile is described below. The following
+compile-OFF contract and its accepted historical evidence remain distinct.
 
 Root builds the new `egaroucid-search-oracle.cpp` with C++20, `-O2 -mtune=generic
 -march=x86-64-v3 -pthread -DEGAROUCID_ORACLE_SIMD
@@ -134,3 +137,81 @@ generic/SIMD/numerical successes are not replayed. Root alone freezes H-free
 recorded states/depths, immutable references, finite per-call/whole limits and
 fresh RAM/output admission before any actual build or search. No actual case,
 weight header/body, model or dataset was read to prepare this source.
+
+## Selective fixed-depth profile
+
+Use exactly one of `EGAROUCID_SEARCH_ORACLE_NONSELECTIVE` and
+`EGAROUCID_SEARCH_ORACLE_SELECTIVE`, with the same actual AVX2 flags/include root.
+The latter selects `original-avx2-selective-fixed-depth`, leaves original
+`USE_MID_MPC=true` and `USE_MPC_PRE_CALCULATION=true`, and calls original
+`mpc_init()` once. Both or neither profile macros are rejected. No vendor bytes,
+inactive flags, evaluator or coefficients are changed. Selective requests require
+explicit `mpc:true` and integer `selectivity:0..6`; compile-OFF still requires
+`mpc:false/selectivity:6`. A request cannot relabel the compiled profile.
+
+Original levels0..6 correspond to74/88/93/98/99/99.9/100 percent. The actual parsed
+level is passed to `Search` and checked again after the original call restores
+its state. `requestedSelectivity`, `calledSelectivity`, `completedSelectivity`
+are distinguished. An uninitialized MPC table binding is rejected before search.
+Info emits original seven coefficients and sigma multipliers, minimum depth3,
+verification level6, error0 offset4 and the measured MPC initialization scope.
+The elapsed MPC scope is nested inside engine setup, not an additional whole.
+
+Original `mpc_init` precomputes `ceil(sigmaMultiplier * probcut_sigma(...))` for
+all original table indices. Guarded PVS/NWS MPC calls require subnode level<6
+and depth>=3, with the original mid/end shallow-depth parity and end-window parity
+adjustments. Promising tests use original level6 verification, then restore the
+calling level. Exact end dispatch can bypass statistical calls. No cut count is
+inferred from a level, probability or result: `mpcCuts/cutCount` are null.
+
+Original shallow ordering temporarily uses level0/MPC74. Therefore selective
+root6, while excluding main level6 MPC, still enables possible ordering MPC and
+is **not** the compile-OFF profile. The other original active/inactive flags,
+pool0, actual AVX2 backend and single root iteration stay unchanged. For root
+levels<6 this profile calls original `first_clog_search` at
+`min(requestedDepth,CLOG_SEARCH_MAX_DEPTH)` and passes its proof vector into the
+fixed root PVS, as the original fixed-depth tree wrapper does before its ID.
+Clog's internal Search has multi-thread=true, but its parallel task guard also
+requires idle pool workers; pool0 supplies none. This is reported explicitly,
+not described as an override of that original internal flag.
+
+`nodes` remains the root Search counter. Available original `clogNodes` is
+separate. `engineSearchMs` includes selective clog plus root PVS;
+`clogSearchMs/rootPvsMs` describe the nested scopes. At root6 no clog call is made
+and its counter/scope are0. A stopped prepass cannot produce a completed result.
+
+Every nonterminal result of this selective profile, including end-depth at
+root6, remains an estimate with `proven:false`, `bound:UNKNOWN`; it is not
+promoted because no cut was observed. Direct root terminal counting keeps its
+explicit winner-empty kind/proof scope, but called/completed selectivity and
+probability are null because no Search ran. Requested level is still retained.
+Pass preserves placement depth and requested STM sign as before. Policy ties
+remain distinct from score disagreement.
+
+Both profiles now explicitly reject boards with any original center square
+empty, using the original engine's center mask. This enforces a necessary kernel
+domain, not legal-history certification. Root must bind H-free recorded legal
+continuations, depth<=empties and TT clear outside each case clock. No original
+center, data or old successful case is regenerated/replayed here.
+
+The new selective-only fixture defines profile/option rejection, missing MPC
+binding, center domain and nonpromotion boundaries without explicit Search,
+initialization or coefficient-table calls. Author compile/preprocess/test/native/
+Search/Wasm/RNG execution remains UNRUN. Do not rebuild/replay the accepted
+compile-OFF fixture merely because the new profile exists. Root later freezes
+small states/depths/levels and actual resources before selective qualification.
+
+Root-only new build selectors use the common flags/include roots above with
+`-DEGAROUCID_SEARCH_ORACLE_SELECTIVE` in place of `NONSELECTIVE`, compiling
+`games/othello/tools/egaroucid-search-oracle.cpp`. The new boundary-only fixture
+selector uses those same flags but compiles
+`games/othello/tests/egaroucid_search_oracle_selective_test.cpp` instead. Both/neither
+profile definitions are expected compile refusals, not runtime modes. Author has
+not compiled, preprocessed or executed any of these selectors. Runtime calls are
+`clear`, then `search` with explicit `fixedDepth/selectivity/mpc:true`; Root binds
+the finite case/response-schema checks before actual execution.
+
+The initialized continuous-time Search comparison is a separate UNRUN packet in
+OWN `.artifacts/othello-selective-reference-n96/continuous-search.unrun.json`.
+It proposes finite quantity/options/images/cost scopes and unresolved differences;
+it launches no scheduler, benchmark or match and grants no speed/strength claim.

@@ -1,0 +1,383 @@
+{
+  "schema": "othello-retirement-selective-software-v1",
+  "status": "ACCEPTED_FINITE_SOFTWARE_ONLY",
+  "engineCommit": "570d5e0a478c9d720d75de06a5d31995f412704a",
+  "job": "1e6fc894-95fe-445d-8d3b-b7507717217d",
+  "wholeSeconds": 39.00335465592798,
+  "nestedCommandTimesNotAdded": true,
+  "retirement": {
+    "deleted": [
+      "games/othello/crates/othello-core/src/pattern.rs",
+      "games/othello/bridge/test/pattern-facade.test.mjs",
+      "games/othello/bridge/test/pattern-wasm.test.mjs",
+      "games/othello/python/othello_training/__init__.py",
+      "games/othello/python/othello_training/data.py",
+      "games/othello/python/othello_training/pattern.py",
+      "games/othello/python/othello_training/train.py",
+      "games/othello/python/othello_training/parity.py",
+      "games/othello/python/othello_training/README.md",
+      "games/othello/tests/python/test_pattern_data.py",
+      "games/othello/tests/python/test_pattern_features.py",
+      "games/othello/tests/python/test_pattern_update.py",
+      "games/othello/tests/python/test_pattern_parity.py",
+      "games/othello/tests/python/test_pattern_teacher.py"
+    ],
+    "retainedNewSource": [
+      {
+        "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/search.rs",
+        "bytes": 11267,
+        "mode": "0644",
+        "sha256": "7f971fbeb5c550e4e2d981a9fcb45fdfee2194c83628d6e554f4c7e7355ba968"
+      },
+      {
+        "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/search/tests.rs",
+        "bytes": 14562,
+        "mode": "0644",
+        "sha256": "98db4711d1ba929e394204edb89c36f2243b4c825056d3cdd632f0d10936c11b"
+      },
+      {
+        "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/lib.rs",
+        "bytes": 6832,
+        "mode": "0644",
+        "sha256": "06dbe4edb57068c227535ba2ebaa0af0981a284d93bb3f34cd3714565813103d"
+      },
+      {
+        "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/bin/othello-engine.rs",
+        "bytes": 4555,
+        "mode": "0644",
+        "sha256": "5deecf29f4d74d287ac0fd19a1ccc6513598e23f07e498bbc82c2e45276e07d6"
+      },
+      {
+        "path": "/workspaces/quoridor/games/othello/crates/othello-wasm/src/lib.rs",
+        "bytes": 4143,
+        "mode": "0644",
+        "sha256": "113d33c08205fe2ca9361c30b597f2b25e704cccdc490f026ecf8329aad3a1c1"
+      },
+      {
+        "path": "/workspaces/quoridor/games/othello/bridge/src/index.ts",
+        "bytes": 4140,
+        "mode": "0644",
+        "sha256": "455b88ceb24ce7344084557ac0b279a11adafa4a839e69719f0aba2e04a12723"
+      },
+      {
+        "path": "/workspaces/quoridor/games/othello/bridge/src/wasm.d.ts",
+        "bytes": 840,
+        "mode": "0644",
+        "sha256": "cf14a937ba1dd59a3935842228311d675fd9dfda99c0376217b6322a3694e9c2"
+      },
+      {
+        "path": "/workspaces/quoridor/games/othello/bridge/README.md",
+        "bytes": 10828,
+        "mode": "0644",
+        "sha256": "019f438cc9fa376653e271da3f8da2d724bbdeb35f9389e0c14c1852ca609518"
+      },
+      {
+        "path": "/workspaces/quoridor/games/othello/python/othello_arena/canonical.py",
+        "bytes": 1523,
+        "mode": "0644",
+        "sha256": "b5aa743f74c806ca16e4d7c172b1fd78a8af0930b15b4b3db3ab9ce68f712218"
+      },
+      {
+        "path": "/workspaces/quoridor/games/othello/tests/python/test_arena_canonical.py",
+        "bytes": 1799,
+        "mode": "0644",
+        "sha256": "6813356867e5d222902f0c1b801528bb85e111884fcf987c6b67e78eeece1110"
+      },
+      {
+        "path": "/workspaces/quoridor/games/othello/python/README.md",
+        "bytes": 1496,
+        "mode": "0644",
+        "sha256": "8abbdda90ff9f0e4688ec712831e71c11dc6bc7d77616edb75301376047f94ce"
+      },
+      {
+        "path": "/workspaces/quoridor/games/othello/python/othello_arena/__main__.py",
+        "bytes": 7020,
+        "mode": "0644",
+        "sha256": "7c91757a5b3121092ec7dd1f0d07a3675af26d8097a8443e92aa2f610f01fa76"
+      },
+      {
+        "path": "/workspaces/quoridor/games/othello/python/othello_arena/generation.py",
+        "bytes": 32164,
+        "mode": "0644",
+        "sha256": "f592c830aa8aa37ddb2b8ac4131eb1724c96d457ff366f10d730cd042795721e"
+      },
+      {
+        "path": "/workspaces/quoridor/games/othello/tests/python/test_arena_generation.py",
+        "bytes": 4752,
+        "mode": "0644",
+        "sha256": "47f8f24322a17ada21ca74a298014d01b1556e4dd94017438a371d2bd11013b4"
+      },
+      {
+        "path": "/workspaces/quoridor/games/othello/tests/python/test_arena_teacher.py",
+        "bytes": 20264,
+        "mode": "0644",
+        "sha256": "dd5e25b423d7cc0b9314d89462e265678e2c9324449742b0967e883ddb4b5394"
+      },
+      {
+        "path": "/workspaces/quoridor/games/othello/tests/python/test_arena_native_comparison.py",
+        "bytes": 17276,
+        "mode": "0644",
+        "sha256": "60336f02cfd6f520d318e1ce4a0f51f2950155f53d2432dadce74b3e5e75e42e"
+      }
+    ],
+    "sourceActions": {
+      "path": "/workspaces/quoridor/.worktree/othello-core-n96/.artifacts/othello-tiny-retirement-n96/source-actions.json",
+      "bytes": 17139,
+      "mode": "0644",
+      "sha256": "cca413d522e9174a5274ce6cb5da1044556fd588ef7d39ef3dc0da8bd4f2d0f6"
+    },
+    "patch": {
+      "path": "/workspaces/quoridor/.worktree/othello-core-n96/.artifacts/othello-tiny-retirement-n96/retirement-main-based.patch",
+      "bytes": 152806,
+      "mode": "0644",
+      "sha256": "3d80438388a25551ff03a6d5c7f9171ce9a045062c5a0b1c1a056ed6eb8e33c3"
+    },
+    "strictForwardInverse": true,
+    "legacyPurpose": "No live/planned direct old-tiny comparison; code reconstructs from Git; actual data/model/results preserved",
+    "default": "Existing v1/UI/simple unchanged"
+  },
+  "selectiveReference": {
+    "source": [
+      {
+        "path": "/workspaces/quoridor/games/othello/tools/egaroucid-search-oracle.cpp",
+        "bytes": 18876,
+        "mode": "0644",
+        "sha256": "dc501b7b34183f40558efaf321a6043da25168078591422fb6e37f8c2c3f7574"
+      },
+      {
+        "path": "/workspaces/quoridor/games/othello/tests/egaroucid_search_oracle_selective_test.cpp",
+        "bytes": 3220,
+        "mode": "0644",
+        "sha256": "65decb6e6da384cafe2fec189f4b40ce1beed91bf6e029e1121d1677d48213ca"
+      },
+      {
+        "path": "/workspaces/quoridor/games/othello/tests/fixtures/egaroucid-search-oracle-v1.schema.json",
+        "bytes": 23954,
+        "mode": "0644",
+        "sha256": "b54d9dcaeabb56560413fd46d24f6966a793f458ef017b62e9ad3359d3d13883"
+      },
+      {
+        "path": "/workspaces/quoridor/games/othello/tools/egaroucid-search-oracle.md",
+        "bytes": 13909,
+        "mode": "0644",
+        "sha256": "27b788a8f0a5a3042ed6226f19a3c37aa8adc64b655b168f9094b2c19b76f3bd"
+      }
+    ],
+    "review": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/selective-reference-boundary-review-v1/reviewer/report.md",
+      "bytes": 6241,
+      "mode": "0644",
+      "sha256": "e8906ccd20c50aeb6710fde19c0849ddc6d11d417c3256ef05fef25589ddcdf4"
+    },
+    "backend": "original-avx2-selective-fixed-depth",
+    "compileMpc": true,
+    "rootLevels": [0, 1, 2, 3, 4, 5, 6],
+    "orderingCanUseLevel74AtRoot6": true,
+    "proven": "All selective nonterminal oracle responses conservatively false; raw agreement alone cannot validate/promote exact",
+    "artifact": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retirement-selective-software-v1/images/egaroucid-selective-oracle",
+      "bytes": 889016,
+      "mode": "0555",
+      "sha256": "385ec6f20ae4457470fecc55c76d565df61393236d45754590836dc190374178"
+    }
+  },
+  "qualification": {
+    "rustAffected": 2,
+    "pythonAffected": 6,
+    "newSelectiveFixture": true,
+    "realGeneratedTypes": true,
+    "baselineWrapper": {
+      "nativeRequests": 6,
+      "wasmSearches": 1,
+      "retiredPatternArgumentRefused": true
+    },
+    "commands": [
+      {
+        "name": "affected-python-boundaries",
+        "wallSeconds": 0.07494528300594538
+      },
+      {
+        "name": "affected-baseline-pvs",
+        "wallSeconds": 1.4421785309677944
+      },
+      {
+        "name": "affected-native-protocol",
+        "wallSeconds": 0.5785898199537769
+      },
+      {
+        "name": "affected-clippy",
+        "wallSeconds": 1.3952246049884707
+      },
+      {
+        "name": "new-native-release",
+        "wallSeconds": 8.492803229019046
+      },
+      {
+        "name": "new-wasm-generation",
+        "wallSeconds": 1.1957751469453797
+      },
+      {
+        "name": "new-selective-reference-build",
+        "wallSeconds": 12.465265576960519
+      },
+      {
+        "name": "new-selective-boundary-build",
+        "wallSeconds": 12.48188785999082
+      },
+      {
+        "name": "new-selective-boundary",
+        "wallSeconds": 0.3538706280523911
+      },
+      {
+        "name": "affected-real-generated-types",
+        "wallSeconds": 0.15728465898428112
+      },
+      {
+        "name": "affected-native-wasm-boundary",
+        "wallSeconds": 0.06531045702286065
+      }
+    ],
+    "directChildReaped": true,
+    "remaining": [],
+    "returnedVsDisk": "Returned handles/mask/persist complete; disk pending/attempted retained",
+    "generatedProductOutput": [
+      {
+        "path": "/workspaces/quoridor/games/othello/bridge/wasm/othello.js",
+        "before": {
+          "path": "/workspaces/quoridor/games/othello/bridge/wasm/othello.js",
+          "bytes": 18065,
+          "mode": "0644",
+          "sha256": "02d31cdc38f12d28b06e6bfcf91e6cc887a6581ef3be4fb1ba87fa5e08223a6c"
+        },
+        "after": {
+          "path": "/workspaces/quoridor/games/othello/bridge/wasm/othello.js",
+          "bytes": 21800,
+          "mode": "0644",
+          "sha256": "9e43abdca5eed24f4516a16330ad853c3972f520c0bf68f18a6099b93d4fc87e"
+        }
+      },
+      {
+        "path": "/workspaces/quoridor/games/othello/bridge/wasm/othello_bg.wasm",
+        "before": {
+          "path": "/workspaces/quoridor/games/othello/bridge/wasm/othello_bg.wasm",
+          "bytes": 1283132,
+          "mode": "0644",
+          "sha256": "c856ea1e66f61296bb456e91dd1d93ca2b40b332fc7be6a080b43d47195e0e0d"
+        },
+        "after": {
+          "path": "/workspaces/quoridor/games/othello/bridge/wasm/othello_bg.wasm",
+          "bytes": 1563879,
+          "mode": "0644",
+          "sha256": "549c6f8b5158a789f321aa713f7170f8bc951f4c8ba01a5d83d413e4a326fe89"
+        }
+      },
+      {
+        "path": "/workspaces/quoridor/games/othello/bridge/wasm/othello.d.ts",
+        "before": {
+          "path": "/workspaces/quoridor/games/othello/bridge/wasm/othello.d.ts",
+          "bytes": 4120,
+          "mode": "0644",
+          "sha256": "4ba2008fbed6776e3b9bd01e0adf1fc9b4acfc314c45a31f0875aec0ef31033d"
+        },
+        "after": {
+          "path": "/workspaces/quoridor/games/othello/bridge/wasm/othello.d.ts",
+          "bytes": 5374,
+          "mode": "0644",
+          "sha256": "2ddb72d582659a725c8485a419e8fa65035a13951c65737bed7d2258dff0a5ab"
+        }
+      },
+      {
+        "path": "/workspaces/quoridor/games/othello/bridge/wasm/othello_bg.wasm.d.ts",
+        "before": {
+          "path": "/workspaces/quoridor/games/othello/bridge/wasm/othello_bg.wasm.d.ts",
+          "bytes": 1703,
+          "mode": "0644",
+          "sha256": "45aa6cab1bb670e77aaf3a25128941fc8cdc5191ca17d19e4122c08ed38a0189"
+        },
+        "after": {
+          "path": "/workspaces/quoridor/games/othello/bridge/wasm/othello_bg.wasm.d.ts",
+          "bytes": 2200,
+          "mode": "0644",
+          "sha256": "34ff74d6d4cd6a356843a80c6878f69591f912da54ea6441677b0d29e04f0e1b"
+        }
+      },
+      {
+        "path": "/workspaces/quoridor/games/othello/bridge/wasm/package.json",
+        "before": null,
+        "after": {
+          "path": "/workspaces/quoridor/games/othello/bridge/wasm/package.json",
+          "bytes": 276,
+          "mode": "0644",
+          "sha256": "e24914fb5f178d25e51a0b2b7ed9aea2a285225974a5aa7f638d6c95334c1a6b"
+        }
+      }
+    ]
+  },
+  "artifacts": [
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retirement-selective-software-v1/images/othello-engine",
+      "bytes": 717512,
+      "mode": "0555",
+      "sha256": "7446e503dcf7ba29a1aa67ef038d6e2f390018641c5e0afc0f7c5aa76ac3fd38"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retirement-selective-software-v1/images/othello-full-search",
+      "bytes": 780160,
+      "mode": "0555",
+      "sha256": "bef3844f104b94407b4308529cfed7076a1285e34290fb7874e6eefc4870a4fa"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retirement-selective-software-v1/images/egaroucid-selective-oracle",
+      "bytes": 889016,
+      "mode": "0555",
+      "sha256": "385ec6f20ae4457470fecc55c76d565df61393236d45754590836dc190374178"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retirement-selective-software-v1/generated/othello.js",
+      "bytes": 21800,
+      "mode": "0644",
+      "sha256": "9e43abdca5eed24f4516a16330ad853c3972f520c0bf68f18a6099b93d4fc87e"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retirement-selective-software-v1/generated/othello_bg.wasm",
+      "bytes": 1563879,
+      "mode": "0644",
+      "sha256": "549c6f8b5158a789f321aa713f7170f8bc951f4c8ba01a5d83d413e4a326fe89"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retirement-selective-software-v1/generated/othello.d.ts",
+      "bytes": 5374,
+      "mode": "0644",
+      "sha256": "2ddb72d582659a725c8485a419e8fa65035a13951c65737bed7d2258dff0a5ab"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retirement-selective-software-v1/generated/othello_bg.wasm.d.ts",
+      "bytes": 2200,
+      "mode": "0644",
+      "sha256": "34ff74d6d4cd6a356843a80c6878f69591f912da54ea6441677b0d29e04f0e1b"
+    }
+  ],
+  "evidence": {
+    "path": "/workspaces/quoridor/research-data/othello/strong-ai-n96/retirement-selective-software-v1.evidence.json.gz",
+    "bytes": 19837,
+    "mode": "0644",
+    "sha256": "72222ce9bc71ead3a25f17566950b42fde5fa498744b0931032663d5ccd158b4"
+  },
+  "originalCompletion": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retirement-selective-software-v1/completion-1e6fc894/collection.json",
+    "bytes": 17312,
+    "mode": "0644",
+    "sha256": "61c2e75c32ab79209319d78697f2d298b5d8ae23ff4c509da3356ebd471024a6"
+  },
+  "limits": {
+    "weightsRead": 0,
+    "originalStrongSearchCalls": 0,
+    "selectiveNumerical": "UNRUN",
+    "continuousTiming": "UNRUN",
+    "fairWDL": "UNRUN",
+    "browserFullWeight": "UNRUN",
+    "publicWeightGrant": "NOT_ESTABLISHED",
+    "strength": "UNRUN"
+  },
+  "preserved": "Old outcomes/896/32/diagnostics/RAW/FAILED/NULL/UNKNOWN/costs/pauses/seals/defaults/50GB unchanged"
+}

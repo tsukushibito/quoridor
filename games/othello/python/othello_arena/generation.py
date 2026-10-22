@@ -26,8 +26,8 @@ samples[8,12,20,24,36,40,48,52] after resolving mandatory passes (same placement
 because the unchanged fixed frontend rejects no-legal input. Missing/duplicate/
 early-terminal observations are deficits, never filled or retried. Five-field
 outcome rows use actual terminal truth; teacher rows add the shared teacher object.
-The supplied training package remains single owner of canonical/features/loader.
-Its teacher loader extension must be integrated before actual data qualification.
+Arena canonical.py owns shared state shape/D4/STM identity. No tiny model or
+training-loader dependency is needed for preparation or producer rows.
 
 run(config_FileRef,new_output,cancelled=current_callback) returns complete/STOP;
 caller maps STOP to nonzero and owns current execute resources, termination/reap,
@@ -166,18 +166,18 @@ def _validate(config):
 
 
 def _canonical(config):
-    expected = Path(__file__).resolve().parents[1] / "othello_training/pattern.py"
+    expected = Path(__file__).resolve().parents[1] / "othello_arena/canonical.py"
     if not expected.is_file():
-        raise GenerationStop("source integration prerequisite: same-tree othello_training.pattern")
+        raise GenerationStop("source integration prerequisite: same-tree othello_arena.canonical")
     if not _matches_ref(expected, config["canonicalSource"]):
         raise GenerationStop("canonical source FileRef mismatch")
-    from othello_training import pattern
+    from . import canonical as positions
 
-    if Path(pattern.__file__).resolve() != expected:
+    if Path(positions.__file__).resolve() != expected:
         raise GenerationStop("foreign-tree canonical import refused; no Main fallback")
 
     def canonical(position):
-        return pattern.canonical_board(pattern.state(position))
+        return positions.canonical_board(positions.state(position))
 
     return canonical
 

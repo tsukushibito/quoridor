@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "urn:quoridor:egaroucid-fixed-depth-v1",
-  "title": "External original AVX2 fixed-depth MPC-off reference response",
+  "title": "External original AVX2 fixed-depth profiles; MPC-OFF versus selective MPC",
   "oneOf": [
     {
       "$ref": "#/$defs/info"
@@ -28,10 +28,12 @@
           "maximum": 60
         },
         "selectivity": {
-          "const": 6
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 6
         },
         "mpc": {
-          "const": false
+          "type": "boolean"
         },
         "etc": {
           "const": true
@@ -45,7 +47,25 @@
         "shallowOrdering": {
           "const": true
         }
-      }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "mpc": {
+                "const": false
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "selectivity": {
+                "const": 6
+              }
+            }
+          }
+        }
+      ]
     },
     "controls": {
       "type": "object",
@@ -68,13 +88,15 @@
       ],
       "properties": {
         "selectivity": {
-          "const": 6
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 6
         },
         "probabilityPercent": {
-          "const": 100
+          "type": ["number", "null"]
         },
         "compiledMpc": {
-          "const": false
+          "type": "boolean"
         },
         "etc": {
           "const": true
@@ -108,8 +130,52 @@
         },
         "workerPool": {
           "const": 0
+        },
+        "selectivityDomain": {
+          "const": [0, 1, 2, 3, 4, 5, 6]
+        },
+        "orderingSelectivity": {
+          "const": 0
+        },
+        "clogSearchUseMultiThread": {
+          "const": true
         }
-      }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "compiledMpc": {
+                "const": true
+              }
+            }
+          },
+          "then": {
+            "required": ["selectivityDomain", "orderingSelectivity", "clogSearchUseMultiThread"],
+            "properties": {
+              "selectivity": {
+                "type": "null"
+              },
+              "probabilityPercent": {
+                "type": "null"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "selectivity": {
+                "const": 6
+              },
+              "probabilityPercent": {
+                "const": 100
+              },
+              "selectivityDomain": false,
+              "orderingSelectivity": false,
+              "clogSearchUseMultiThread": false
+            }
+          }
+        }
+      ]
     },
     "searchRequest": {
       "type": "object",
@@ -163,7 +229,7 @@
           "const": "egaroucid-fixed-depth-v1"
         },
         "profile": {
-          "const": "original-avx2-fixed-depth-mpc-off"
+          "enum": ["original-avx2-fixed-depth-mpc-off", "original-avx2-selective-fixed-depth"]
         },
         "engineCommit": {
           "const": "570d5e0a478c9d720d75de06a5d31995f412704a"
@@ -176,7 +242,10 @@
           "minimum": 0
         },
         "label": {
-          "const": "Console7.8.1-engine + fixed-depth AVX2 MPC-off reference"
+          "enum": [
+            "Console7.8.1-engine + fixed-depth AVX2 MPC-off reference",
+            "Console7.8.1-engine + selective fixed-depth AVX2 reference"
+          ]
         },
         "engineTag": {
           "const": "console_v7.8.1"
@@ -236,6 +305,13 @@
             },
             "preMainMs": {
               "type": "null"
+            },
+            "mpcSetupMs": {
+              "type": "number",
+              "minimum": 0
+            },
+            "mpcInitialized": {
+              "const": true
             }
           }
         },
@@ -277,8 +353,104 @@
         },
         "clock": {
           "const": "fixed depth; Root outer deadline only; no internal timer thread"
+        },
+        "mpcConfiguration": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "sigmaMultipliers",
+            "coefficients",
+            "minimumDepth",
+            "error0Offset",
+            "verificationSelectivity",
+            "precalculated",
+            "cutCount"
+          ],
+          "properties": {
+            "sigmaMultipliers": {
+              "type": "array",
+              "minItems": 7,
+              "maxItems": 7,
+              "items": {
+                "type": "number"
+              }
+            },
+            "coefficients": {
+              "type": "array",
+              "minItems": 7,
+              "maxItems": 7,
+              "items": {
+                "type": "number"
+              }
+            },
+            "minimumDepth": {
+              "const": 3
+            },
+            "error0Offset": {
+              "const": 4
+            },
+            "verificationSelectivity": {
+              "const": 6
+            },
+            "precalculated": {
+              "const": true
+            },
+            "cutCount": {
+              "type": "null"
+            }
+          }
         }
-      }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "profile": {
+                "const": "original-avx2-selective-fixed-depth"
+              }
+            }
+          },
+          "then": {
+            "required": ["mpcConfiguration"],
+            "properties": {
+              "label": {
+                "const": "Console7.8.1-engine + selective fixed-depth AVX2 reference"
+              },
+              "controls": {
+                "properties": {
+                  "compiledMpc": {
+                    "const": true
+                  }
+                }
+              },
+              "initialization": {
+                "required": ["mpcSetupMs", "mpcInitialized"]
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "label": {
+                "const": "Console7.8.1-engine + fixed-depth AVX2 MPC-off reference"
+              },
+              "controls": {
+                "properties": {
+                  "compiledMpc": {
+                    "const": false
+                  }
+                }
+              },
+              "mpcConfiguration": false,
+              "initialization": {
+                "properties": {
+                  "mpcSetupMs": false,
+                  "mpcInitialized": false
+                }
+              }
+            }
+          }
+        }
+      ]
     },
     "clear": {
       "type": "object",
@@ -302,7 +474,7 @@
           "const": "egaroucid-fixed-depth-v1"
         },
         "profile": {
-          "const": "original-avx2-fixed-depth-mpc-off"
+          "enum": ["original-avx2-fixed-depth-mpc-off", "original-avx2-selective-fixed-depth"]
         },
         "engineCommit": {
           "const": "570d5e0a478c9d720d75de06a5d31995f412704a"
@@ -377,7 +549,7 @@
           "const": "egaroucid-fixed-depth-v1"
         },
         "profile": {
-          "const": "original-avx2-fixed-depth-mpc-off"
+          "enum": ["original-avx2-fixed-depth-mpc-off", "original-avx2-selective-fixed-depth"]
         },
         "engineCommit": {
           "const": "570d5e0a478c9d720d75de06a5d31995f412704a"
@@ -414,13 +586,15 @@
           "maximum": 60
         },
         "completedSelectivity": {
-          "const": 6
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 6
         },
         "probabilityPercent": {
-          "const": 100
+          "enum": [74, 88, 93, 98, 99, 99.9, 100, null]
         },
         "mpc": {
-          "const": false
+          "type": "boolean"
         },
         "scorePerspective": {
           "const": "state.toMove"
@@ -486,7 +660,9 @@
           "enum": [
             "engine_terminal_winner_empties_stm",
             "engine_nonselective_end_winner_empties_stm",
-            "engine_fixed_depth_estimate_stm"
+            "engine_fixed_depth_estimate_stm",
+            "engine_selective_end_estimate_winner_empties_stm",
+            "engine_selective_fixed_depth_estimate_stm"
           ]
         },
         "proven": {
@@ -504,6 +680,31 @@
           "minimum": 0
         },
         "prepareMs": {
+          "type": "number",
+          "minimum": 0
+        },
+        "requestedSelectivity": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 6
+        },
+        "calledSelectivity": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 6
+        },
+        "mpcCuts": {
+          "type": "null"
+        },
+        "clogNodes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "clogSearchMs": {
+          "type": "number",
+          "minimum": 0
+        },
+        "rootPvsMs": {
           "type": "number",
           "minimum": 0
         }
@@ -602,6 +803,131 @@
               }
             }
           }
+        },
+        {
+          "if": {
+            "properties": {
+              "profile": {
+                "const": "original-avx2-selective-fixed-depth"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "requestedSelectivity",
+              "calledSelectivity",
+              "mpcCuts",
+              "clogNodes",
+              "clogSearchMs",
+              "rootPvsMs"
+            ],
+            "properties": {
+              "mpc": {
+                "const": true
+              },
+              "options": {
+                "properties": {
+                  "mpc": {
+                    "const": true
+                  }
+                }
+              }
+            },
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "action": {
+                      "const": "terminal"
+                    }
+                  }
+                },
+                "then": {
+                  "properties": {
+                    "calledSelectivity": {
+                      "type": "null"
+                    },
+                    "completedSelectivity": {
+                      "type": "null"
+                    },
+                    "probabilityPercent": {
+                      "type": "null"
+                    },
+                    "scoreKind": {
+                      "const": "engine_terminal_winner_empties_stm"
+                    },
+                    "clogNodes": {
+                      "const": 0
+                    },
+                    "clogSearchMs": {
+                      "const": 0
+                    },
+                    "rootPvsMs": {
+                      "const": 0
+                    }
+                  }
+                },
+                "else": {
+                  "properties": {
+                    "calledSelectivity": {
+                      "type": "integer"
+                    },
+                    "completedSelectivity": {
+                      "type": "integer"
+                    },
+                    "probabilityPercent": {
+                      "type": "number"
+                    },
+                    "proven": {
+                      "const": false
+                    },
+                    "scoreKind": {
+                      "enum": [
+                        "engine_selective_end_estimate_winner_empties_stm",
+                        "engine_selective_fixed_depth_estimate_stm"
+                      ]
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "else": {
+            "properties": {
+              "mpc": {
+                "const": false
+              },
+              "options": {
+                "properties": {
+                  "mpc": {
+                    "const": false
+                  },
+                  "selectivity": {
+                    "const": 6
+                  }
+                }
+              },
+              "completedSelectivity": {
+                "const": 6
+              },
+              "probabilityPercent": {
+                "const": 100
+              },
+              "scoreKind": {
+                "enum": [
+                  "engine_terminal_winner_empties_stm",
+                  "engine_nonselective_end_winner_empties_stm",
+                  "engine_fixed_depth_estimate_stm"
+                ]
+              },
+              "requestedSelectivity": false,
+              "calledSelectivity": false,
+              "mpcCuts": false,
+              "clogNodes": false,
+              "clogSearchMs": false,
+              "rootPvsMs": false
+            }
+          }
         }
       ]
     },
@@ -617,12 +943,13 @@
           "const": "egaroucid-fixed-depth-v1"
         },
         "profile": {
-          "const": "original-avx2-fixed-depth-mpc-off"
+          "enum": ["original-avx2-fixed-depth-mpc-off", "original-avx2-selective-fixed-depth"]
         },
         "error": {
           "type": "string"
         }
       }
     }
-  }
+  },
+  "$comment": "Runtime executable profile must bind options.mpc; requested/called/completed selectivity equality is enforced by original Search construction/restoration guard. Selective nonterminal proven is always false, including root6. Cut counts are unobserved, not inferred."
 }
