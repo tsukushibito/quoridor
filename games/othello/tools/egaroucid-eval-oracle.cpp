@@ -1,9 +1,16 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // External numerical oracle for Egaroucid Console7.8.1, by Takuto Yamana.
 // Links unchanged upstream headers; never part of the product engine.
-// Build only with the pinned source include root and -DHAS_NO_AVX2.
-#ifndef HAS_NO_AVX2
-#error "This oracle requires the original scalar evaluator (-DHAS_NO_AVX2)"
+// Generic: -DHAS_NO_AVX2. Actual pinned AVX2: -DEGAROUCID_ORACLE_SIMD -march=x86-64-v3.
+#if defined(EGAROUCID_ORACLE_SIMD)
+#if defined(HAS_NO_AVX2) || defined(HAS_ARM_PROCESSOR) || defined(HAS_AVX512)
+#error "Actual SIMD profile requires the pinned x86 AVX2 backend, without scalar/ARM/AVX512"
+#endif
+#ifndef __AVX2__
+#error "Actual SIMD profile requires AVX2 compiler targeting (-march=x86-64-v3)"
+#endif
+#elif !defined(HAS_NO_AVX2)
+#error "Select generic (-DHAS_NO_AVX2) or actual SIMD (-DEGAROUCID_ORACLE_SIMD) explicitly"
 #endif
 
 #include <algorithm>
@@ -23,7 +30,16 @@ using json = nlohmann::json;
 using Clock = std::chrono::steady_clock;
 constexpr const char* ENGINE_COMMIT = "570d5e0a478c9d720d75de06a5d31995f412704a";
 constexpr const char* PROTOCOL = "egaroucid-static-eval-v1";
+#if defined(EGAROUCID_ORACLE_SIMD)
+constexpr const char* LABEL = "Console7.8.1-engine + original AVX2 static-evaluation oracle";
+constexpr const char* IMPLEMENTATION = "evaluate_simd.hpp";
+#if !USE_SIMD_EVALUATION
+#error "Actual SIMD profile did not select the pinned AVX2 evaluation implementation"
+#endif
+#else
 constexpr const char* LABEL = "Console7.8.1-engine + scalar static-evaluation oracle";
+constexpr const char* IMPLEMENTATION = "evaluate_generic.hpp";
+#endif
 constexpr size_t LINE_BYTES = 16384;
 constexpr int COMPRESSED_TOKENS = 19121911;
 constexpr std::streamoff EVAL_BYTES = 38243826;
@@ -37,6 +53,11 @@ static_assert(N_PATTERNS == 16 && N_PATTERN_FEATURES == 64);
 static_assert(N_PHASES == 60 && PHASE_N_DISCS == 1 && STEP == 32 && STEP_2 == 16);
 static_assert(sizeof(int) == 4 && sizeof(int16_t) == 2 && sizeof(short) == 2);
 static_assert(std::endian::native == std::endian::little);
+#if defined(EGAROUCID_ORACLE_SIMD)
+static_assert(N_EVAL_VECTORS == 4 && CEIL_N_PATTERN_FEATURES == 64);
+static_assert(N_PATTERN_PARAMS_RAW == 612360 && SIMD_EVAL_MAX_VALUE == 4092);
+static_assert(SIMD_EVAL_MAX_VALUE_MO_END == 16380 && sizeof(__m256i) == 32);
+#endif
 
 struct Initialization {
     std::string eval_path;
@@ -110,6 +131,10 @@ json evaluate(const json& state) {
         {"mustPass", no_legal && !terminal},
         {"stmDiscCount", board.count_player()},
         {"stmActualDiscDifference", board.count_player() - board.count_opponent()}};
+#if defined(EGAROUCID_ORACLE_SIMD)
+    result.update({{"evaluationImplementation", IMPLEMENTATION},
+        {"compiledBackend", "upstream-avx2"}, {"simdPackedFeatures", nullptr}});
+#endif
     // Never index phase 60 (full board) or evaluate an early terminal heuristically.
     // Terminal winner-empty scoring is explicitly separate from actual disc difference.
     if (terminal) {
@@ -128,6 +153,49 @@ json evaluate(const json& state) {
     if (phase < 0 || phase >= N_PHASES) {
         throw std::runtime_error("nonterminal phase outside original tables");
     }
+#if defined(EGAROUCID_ORACLE_SIMD)
+    auto& features = search.eval.features[search.eval.feature_idx];
+    json indices = json::array(), terms = json::array(), packed = json::array();
+    int sums[N_PATTERNS] = {};
+    int diagnostic_sum = 0;
+    // Inspect actual original feature vectors, not a recomputation from board cells.
+    // _mm256_set_epi16 in the original initializer puts source occurrence0 in lane15.
+    // Simple groups0/1 carry pattern_starts offsets; compressed groups2/3 do not.
+    for (int group = 0; group < N_EVAL_VECTORS; ++group) {
+        uint16_t lanes[16];
+        _mm256_storeu_si256(reinterpret_cast<__m256i*>(lanes), features.f256[group]);
+        for (int local = 0; local < 16; ++local) {
+            const int occurrence = group * 16 + local;
+            const int shape = occurrence / 4; // Four original occurrences per shape.
+            const int stored = lanes[15 - local];
+            const int index = stored - (group < 2 ? pattern_starts[shape] : 0);
+            const int size = static_cast<int>(pow3[feature_to_coord[occurrence].n_cells]);
+            if (index < 0 || index >= size) {
+                throw std::runtime_error("original SIMD feature outside source shape domain");
+            }
+            // These are the same three bases used by original calc_pattern gathers.
+            const int base = shape == 4 || shape == 5 ? PATTERN4_START_IDX
+                : shape == 6 || shape == 7 ? PATTERN6_START_IDX : 0;
+            const int address = base + pattern_starts[shape] + index;
+            if (address < 1 || address >= N_PATTERN_PARAMS) {
+                throw std::runtime_error("original SIMD table address outside domain");
+            }
+            // Original loader clips and biases each entry. Expose that loaded term;
+            // never recover a supposed raw value by inverting a rounded score.
+            const int value = pattern_arr[phase][address] - SIMD_EVAL_MAX_VALUE;
+            indices.push_back(index);
+            packed.push_back(stored);
+            terms.push_back(value);
+            sums[shape] += value;
+            diagnostic_sum += value;
+        }
+    }
+    const int pattern = calc_pattern(phase, &features); // Genuine original AVX2 gather.
+    if (diagnostic_sum != pattern) {
+        throw std::runtime_error("SIMD diagnostic terms disagree with original raw call");
+    }
+    result["simdPackedFeatures"] = packed;
+#else
     const int slot = search.eval.feature_idx;
     const int reversed = search.eval.reversed[slot];
     json indices = json::array(), terms = json::array();
@@ -141,6 +209,7 @@ json evaluate(const json& state) {
         sums[pattern] += value;
     }
     const int pattern = calc_pattern(phase, &search.eval);
+#endif
     const int count_term = eval_num_arr[phase][board.count_player()];
     const int raw = pattern + count_term;
     const int bias = raw >= 0 ? STEP_2 : -STEP_2;
@@ -150,7 +219,11 @@ json evaluate(const json& state) {
     if (capped != original || capped != mid_evaluate_diff(&search)) {
         throw std::runtime_error("original evaluator disagrees with exposed terms");
     }
+#if defined(EGAROUCID_ORACLE_SIMD)
+    const int ordering_raw = calc_pattern_move_ordering_end(&features);
+#else
     const int ordering_raw = calc_pattern_move_ordering_end(&search.eval);
+#endif
     const int ordering_bias = ordering_raw >= 0 ? STEP_2 : -STEP_2;
     const int ordering_disc = mid_evaluate_move_ordering_end(&search);
     if ((ordering_raw + ordering_bias) / STEP != ordering_disc) {
@@ -175,9 +248,9 @@ json request(const json& input, const Initialization& init) {
     }
     const std::string op = input.at("op").get<std::string>();
     if (op == "info" && input.size() == 1) {
-        return {{"ok", true}, {"protocol", PROTOCOL}, {"label", LABEL},
+        json info = {{"ok", true}, {"protocol", PROTOCOL}, {"label", LABEL},
             {"engineCommit", ENGINE_COMMIT}, {"engineTag", "console_v7.8.1"},
-            {"evaluationImplementation", "evaluate_generic.hpp"},
+            {"evaluationImplementation", IMPLEMENTATION},
             {"search", false}, {"book", false}, {"ponder", false},
             {"workerPool", thread_pool.size()}, {"libraryThreads", 1},
             {"stepPerDisc", STEP}, {"patterns", N_PATTERNS},
@@ -188,6 +261,13 @@ json request(const json& input, const Initialization& init) {
                 {"bytes", ORDERING_BYTES}, {"sha256", ORDERING_SHA256}}}},
             {"initialization", {{"setupMs", init.setup_ms}, {"loadMs", init.load_ms},
                 {"totalMs", init.total_ms}}}};
+#if defined(EGAROUCID_ORACLE_SIMD)
+        info.update({{"compiledBackend", "upstream-avx2"},
+            {"mainEntryClip", SIMD_EVAL_MAX_VALUE},
+            {"orderingEntryClip", SIMD_EVAL_MAX_VALUE_MO_END},
+            {"packedFeatureDomain", "logical-source-order; groups0/1 include offsets"}});
+#endif
+        return info;
     }
     if (op != "evaluate" || input.size() != 2 || !input.contains("state")) {
         throw std::invalid_argument("only info or evaluate with state is supported");

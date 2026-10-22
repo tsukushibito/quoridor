@@ -30,6 +30,12 @@
       "maxItems": 64,
       "items": { "type": "integer", "minimum": 0, "maximum": 59048 }
     },
+    "packedFeatures": {
+      "type": "array",
+      "minItems": 64,
+      "maxItems": 64,
+      "items": { "type": "integer", "minimum": 0, "maximum": 65535 }
+    },
     "terms": {
       "type": "array",
       "minItems": 64,
@@ -85,10 +91,20 @@
         "score",
         "endOrdering"
       ],
+      "dependentRequired": {
+        "evaluationImplementation": ["compiledBackend", "simdPackedFeatures"],
+        "compiledBackend": ["evaluationImplementation", "simdPackedFeatures"],
+        "simdPackedFeatures": ["evaluationImplementation", "compiledBackend"]
+      },
       "properties": {
         "ok": { "const": true },
         "protocol": { "const": "egaroucid-static-eval-v1" },
         "engineCommit": { "const": "570d5e0a478c9d720d75de06a5d31995f412704a" },
+        "evaluationImplementation": { "const": "evaluate_simd.hpp" },
+        "compiledBackend": { "const": "upstream-avx2" },
+        "simdPackedFeatures": {
+          "oneOf": [{ "$ref": "#/$defs/packedFeatures" }, { "type": "null" }]
+        },
         "state": { "$ref": "#/$defs/state" },
         "scorePerspective": { "const": "state.toMove" },
         "scoreUnits": { "const": "engine-disc" },
@@ -124,6 +140,7 @@
               "patternIndices": { "$ref": "#/$defs/indices" },
               "patternTermsStep": { "$ref": "#/$defs/terms" },
               "patternSumsStep": { "$ref": "#/$defs/sums" },
+              "simdPackedFeatures": { "$ref": "#/$defs/packedFeatures" },
               "patternSumStep": { "type": "integer" },
               "discCountTermStep": { "type": "integer" },
               "rawTotalStep": { "type": "integer" },
@@ -142,6 +159,7 @@
               "patternIndices": { "type": "null" },
               "patternTermsStep": { "type": "null" },
               "patternSumsStep": { "type": "null" },
+              "simdPackedFeatures": { "type": "null" },
               "patternSumStep": { "type": "null" },
               "discCountTermStep": { "type": "null" },
               "rawTotalStep": { "type": "null" },
@@ -191,10 +209,23 @@
       "properties": {
         "ok": { "const": true },
         "protocol": { "const": "egaroucid-static-eval-v1" },
-        "label": { "const": "Console7.8.1-engine + scalar static-evaluation oracle" },
+        "label": {
+          "enum": [
+            "Console7.8.1-engine + scalar static-evaluation oracle",
+            "Console7.8.1-engine + original AVX2 static-evaluation oracle"
+          ]
+        },
         "engineCommit": { "const": "570d5e0a478c9d720d75de06a5d31995f412704a" },
         "engineTag": { "const": "console_v7.8.1" },
-        "evaluationImplementation": { "const": "evaluate_generic.hpp" },
+        "evaluationImplementation": {
+          "enum": ["evaluate_generic.hpp", "evaluate_simd.hpp"]
+        },
+        "compiledBackend": { "const": "upstream-avx2" },
+        "mainEntryClip": { "const": 4092 },
+        "orderingEntryClip": { "const": 16380 },
+        "packedFeatureDomain": {
+          "const": "logical-source-order; groups0/1 include offsets"
+        },
         "search": { "const": false },
         "book": { "const": false },
         "ponder": { "const": false },
@@ -221,7 +252,34 @@
             "totalMs": { "type": "number", "minimum": 0 }
           }
         }
-      }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "evaluationImplementation": { "const": "evaluate_simd.hpp" } }
+          },
+          "then": {
+            "required": [
+              "compiledBackend",
+              "mainEntryClip",
+              "orderingEntryClip",
+              "packedFeatureDomain"
+            ],
+            "properties": {
+              "label": { "const": "Console7.8.1-engine + original AVX2 static-evaluation oracle" }
+            }
+          },
+          "else": {
+            "properties": {
+              "label": { "const": "Console7.8.1-engine + scalar static-evaluation oracle" },
+              "compiledBackend": false,
+              "mainEntryClip": false,
+              "orderingEntryClip": false,
+              "packedFeatureDomain": false
+            }
+          }
+        }
+      ]
     },
     "error": {
       "type": "object",

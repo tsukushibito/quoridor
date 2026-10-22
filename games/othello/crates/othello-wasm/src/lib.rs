@@ -9,6 +9,7 @@ use othello_core::{
 use serde::Serialize;
 use wasm_bindgen::prelude::*;
 
+mod full_search;
 mod ui;
 
 /// Per-mount UI owner. All confirmed state, save eligibility and request tokens

@@ -5,6 +5,7 @@ use std::fmt;
 
 pub mod bitboard;
 pub mod full_eval;
+pub mod full_search;
 pub mod heuristic;
 pub mod pattern;
 pub mod search;

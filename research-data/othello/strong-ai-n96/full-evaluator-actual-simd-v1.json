@@ -1,0 +1,95 @@
+{
+  "engineCommit": "570d5e0a478c9d720d75de06a5d31995f412704a",
+  "archive": {
+    "path": "/workspaces/quoridor/research-data/othello/strong-ai-n96/full-clone-search-v1-checks.tar.gz",
+    "bytes": 81610,
+    "mode": "0644",
+    "sha256": "51623e1784b6e4abd2272514c3f344f008214b0328adfe9ad8ae20952d2a0cca"
+  },
+  "archiveMemberCount": 113,
+  "sourceLicense": "GPL-3.0-or-later",
+  "weightRedistribution": "UNCONFIRMED; local port/equality use only",
+  "strength": "UNRUN",
+  "productDefaultChanged": false,
+  "QuoridorChanged": false,
+  "RSSPeak": null,
+  "scope": "Actual pinned upstream AVX2 static calls versus saved Rust scalar-SIMD traces at original H-free fixed cases",
+  "qualification": {
+    "cases": 2032,
+    "phases": 60,
+    "D4": true,
+    "colorSTM": true,
+    "terminal": 64,
+    "mustPass": 32,
+    "H": 0,
+    "originalPassing": 2000,
+    "retainedResponseRecovered": 1,
+    "newTail": 31,
+    "duplicateCaseEvaluations": 0,
+    "newRustWasmGenericIncrementalReplays": 0
+  },
+  "sources": {
+    "software": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-search-software-v3/qualification.json",
+      "bytes": 1104,
+      "mode": "0644",
+      "sha256": "e12fe8c4f2f0e5976e507eff8c9a3d5a711f2bd24519e8e1a870520e10b2b26b"
+    },
+    "actualOracle": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-search-software-v3/egaroucid-actual-simd-oracle",
+      "bytes": 311968,
+      "mode": "0755",
+      "sha256": "087bc7cf0a58436a984779f6ec9d201ed652696a1f277e91e40929d918987f31"
+    },
+    "collection": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/actual-simd-numerical-v2/completion-d62c6971/collection.json",
+      "bytes": 7961,
+      "mode": "0644",
+      "sha256": "13d4025a27fbce9593ed153d51d99f1b58b66f4e188a0de7726e185c9b370c5e"
+    }
+  },
+  "jobs": [
+    {
+      "job_id": "1e529c50-66cb-4629-9b0c-9ca29db5d750",
+      "outcome": "failed",
+      "error": null,
+      "error_notes": [],
+      "exit_code": 1,
+      "finished_at": "2026-10-22T00:59:02.063202+00:00",
+      "wall_seconds": 0.8398664220003411,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+      "cleanup_complete": true,
+      "cleanup_errors": [],
+      "log_bytes_seen": 849,
+      "log_bytes_retained": 849
+    },
+    {
+      "job_id": "d62c6971-3be9-4a16-ad97-524dd01c70d4",
+      "outcome": "succeeded",
+      "error": null,
+      "error_notes": [],
+      "exit_code": 0,
+      "finished_at": "2026-10-22T01:07:24.887759+00:00",
+      "wall_seconds": 0.4310084970202297,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+      "cleanup_complete": true,
+      "cleanup_errors": [],
+      "log_bytes_seen": 107,
+      "log_bytes_retained": 107
+    }
+  ],
+  "cost": "Original failed whole0.839866422s and tail whole0.431008497s are separate retained attempts; nested clocks not added.",
+  "originalFailure": "Root comparator wrongly required phaseNone for every terminal. Early terminal63 retains phase59 metadata while skipping midgame/tablePhase. Original failed job and2001st reply immutable; recovered offline without evaluation.",
+  "domains": "Full64 skips phase60; early-terminal placement metadata need not beNone. Generic/raw-clipped scalar interpretation/actual original AVX are distinct identified paths.",
+  "remaining": [
+    "No original-search equality or performance/strength inference",
+    "Full-weight browser load/RSS not qualified",
+    "Separate weight/public redistribution grant unconfirmed"
+  ]
+}

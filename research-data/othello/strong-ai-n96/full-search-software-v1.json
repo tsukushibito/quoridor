@@ -1,0 +1,154 @@
+{
+  "engineCommit": "570d5e0a478c9d720d75de06a5d31995f412704a",
+  "archive": {
+    "path": "/workspaces/quoridor/research-data/othello/strong-ai-n96/full-clone-search-v1-checks.tar.gz",
+    "bytes": 81610,
+    "mode": "0644",
+    "sha256": "51623e1784b6e4abd2272514c3f344f008214b0328adfe9ad8ae20952d2a0cca"
+  },
+  "archiveMemberCount": 113,
+  "sourceLicense": "GPL-3.0-or-later",
+  "weightRedistribution": "UNCONFIRMED; local port/equality use only",
+  "strength": "UNRUN",
+  "productDefaultChanged": false,
+  "QuoridorChanged": false,
+  "RSSPeak": null,
+  "scope": "Corrected full-search source/native/Wasm plus external fixed-depth MPC-off reference software",
+  "sourceBindings": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-search-software-v4/config.json",
+    "bytes": 14657,
+    "mode": "0644",
+    "sha256": "c6cfd28abdd3df3341757e1413c298069d959d037326c22aed1ee20c45b1499a"
+  },
+  "bindings": 21,
+  "images": {
+    "correctedRust": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-search-software-v4/image-df58127c53fa0cfc1e036b79084d2655f60ff428efda52b7d93f9a1c625744ec/othello-full-search",
+      "bytes": 725312,
+      "mode": "0755",
+      "sha256": "df58127c53fa0cfc1e036b79084d2655f60ff428efda52b7d93f9a1c625744ec"
+    },
+    "externalFixedDepth": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-search-software-v4/egaroucid-fixed-depth-oracle",
+      "bytes": 878600,
+      "mode": "0755",
+      "sha256": "7a9388e072fa1c6a257029555291ed44cac9edfde9049595c07c0fe99bf74e47"
+    },
+    "externalFixture": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-search-software-v4/egaroucid-fixed-depth-fixtures",
+      "bytes": 898528,
+      "mode": "0755",
+      "sha256": "b9b1fc2160d646be4d0046a22d28034bb8acae46c82d4d98bc08141c00f31643"
+    }
+  },
+  "qualification": {
+    "newRustRegressions": 2,
+    "newWasmRegressions": 2,
+    "wasmSyntheticSearchCalls": 3,
+    "currentCommandsPassed": 8,
+    "oldNineTestsReplayed": false,
+    "trainedWeightsRead": 0
+  },
+  "jobs": [
+    {
+      "job_id": "6241c52c-e5dc-4bc0-acc2-426d92b06125",
+      "outcome": "failed",
+      "error": null,
+      "error_notes": [],
+      "exit_code": 1,
+      "finished_at": "2026-10-22T00:20:04.111881+00:00",
+      "wall_seconds": 1.6400072800461203,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+      "cleanup_complete": true,
+      "cleanup_errors": [],
+      "log_bytes_seen": 903,
+      "log_bytes_retained": 903
+    },
+    {
+      "job_id": "f583e7e6-24c6-4bbe-bd02-d88dfef35589",
+      "outcome": "failed",
+      "error": null,
+      "error_notes": [],
+      "exit_code": 1,
+      "finished_at": "2026-10-22T00:37:03.629495+00:00",
+      "wall_seconds": 1.4314146620454267,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+      "cleanup_complete": true,
+      "cleanup_errors": [],
+      "log_bytes_seen": 904,
+      "log_bytes_retained": 904
+    },
+    {
+      "job_id": "8ae4e19e-3f4f-4ac8-b034-dc4c74768be5",
+      "outcome": "succeeded",
+      "error": null,
+      "error_notes": [],
+      "exit_code": 0,
+      "finished_at": "2026-10-22T00:51:02.351438+00:00",
+      "wall_seconds": 17.476792611996643,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+      "cleanup_complete": true,
+      "cleanup_errors": [],
+      "log_bytes_seen": 532,
+      "log_bytes_retained": 532
+    },
+    {
+      "job_id": "8e69f27c-6364-469a-9c63-5e4c7ea06666",
+      "outcome": "succeeded",
+      "error": null,
+      "error_notes": [],
+      "exit_code": 0,
+      "finished_at": "2026-10-22T01:34:34.699333+00:00",
+      "wall_seconds": 33.95600882102735,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+      "cleanup_complete": true,
+      "cleanup_errors": [],
+      "log_bytes_seen": 605,
+      "log_bytes_retained": 605
+    }
+  ],
+  "originalFailures": [
+    "6241c52c:8PASS/1newfixtureFAIL, production matched upstream; fixture corrected",
+    "f583e7e6:repairedTT1PASS then Clippy5FAIL; mechanical fixes only",
+    "Original SOURCE_NOT_CLEAR4315f444:central60-only shallow coverage and pass shift64"
+  ],
+  "relatedReview": {
+    "verdict": "SOURCE_CLEAR",
+    "essential": 0,
+    "report": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-search-boundary-review-v1/reviewer/related-v5/report.md",
+      "bytes": 7711,
+      "mode": "0644",
+      "sha256": "135b81357388e01f856828180c1ef06720ed08188ec06627f6c1d2ff354b0397"
+    },
+    "originalReport": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-search-boundary-review-v1/reviewer/report.md",
+      "bytes": 7517,
+      "mode": "0644",
+      "sha256": "4315f44445c6eb802f60683a17c77dfa103e3359bf0061063a6b0b6a678f6469"
+    }
+  },
+  "repairs": [
+    "Append disjoint central4 mask after original60 order in both shallow leaf helpers",
+    "Require legal!=0 and root_move<64 before second-best shift"
+  ],
+  "remainingDifferences": [
+    "Original last4 parity-case shuffle and last2/3 dedicated kernels/SIMD execution not yet reproduced",
+    "Clog ordering differs; strict whole-call callback deadline intentionally excludes upstream post-budget extensions",
+    "Node accounting differs; selected cuts need actual selective/end/timing qualification"
+  ],
+  "packageMetadata": "Both Rust crates explicitly GPL-3.0-or-later; no dependency/lock change. wasm-pack local output warns no crate-local LICENSE; existing games GPL text retained, package distribution not qualified.",
+  "cost": "Each original whole retained once, including v1/v2 failed attempts; v4 whole33.956008821s, no nested addition."
+}

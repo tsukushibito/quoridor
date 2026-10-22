@@ -1,0 +1,628 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:quoridor:egaroucid-fixed-depth-v1",
+  "title": "External original AVX2 fixed-depth MPC-off reference response",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/info"
+    },
+    {
+      "$ref": "#/$defs/clear"
+    },
+    {
+      "$ref": "#/$defs/search"
+    },
+    {
+      "$ref": "#/$defs/error"
+    }
+  ],
+  "$defs": {
+    "options": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fixedDepth", "selectivity", "mpc"],
+      "properties": {
+        "fixedDepth": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 60
+        },
+        "selectivity": {
+          "const": 6
+        },
+        "mpc": {
+          "const": false
+        },
+        "etc": {
+          "const": true
+        },
+        "stability": {
+          "const": true
+        },
+        "parity": {
+          "const": true
+        },
+        "shallowOrdering": {
+          "const": true
+        }
+      }
+    },
+    "controls": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "selectivity",
+        "probabilityPercent",
+        "compiledMpc",
+        "etc",
+        "stability",
+        "parity",
+        "lastParity",
+        "shallowOrdering",
+        "last4Stability",
+        "aspiration",
+        "useMultiThread",
+        "book",
+        "ponder",
+        "workerPool"
+      ],
+      "properties": {
+        "selectivity": {
+          "const": 6
+        },
+        "probabilityPercent": {
+          "const": 100
+        },
+        "compiledMpc": {
+          "const": false
+        },
+        "etc": {
+          "const": true
+        },
+        "stability": {
+          "const": true
+        },
+        "parity": {
+          "const": true
+        },
+        "lastParity": {
+          "const": true
+        },
+        "shallowOrdering": {
+          "const": true
+        },
+        "last4Stability": {
+          "const": false
+        },
+        "aspiration": {
+          "const": false
+        },
+        "useMultiThread": {
+          "const": false
+        },
+        "book": {
+          "const": false
+        },
+        "ponder": {
+          "const": false
+        },
+        "workerPool": {
+          "const": 0
+        }
+      }
+    },
+    "searchRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["op", "caseId", "state", "options"],
+      "properties": {
+        "op": {
+          "const": "search"
+        },
+        "caseId": {
+          "type": "string",
+          "pattern": "^[!-~]{1,128}$"
+        },
+        "state": {
+          "$ref": "egaroucid-eval-oracle-v1.schema.json#/$defs/state"
+        },
+        "options": {
+          "$ref": "#/$defs/options"
+        }
+      }
+    },
+    "info": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ok",
+        "protocol",
+        "profile",
+        "engineCommit",
+        "evaluationImplementation",
+        "requestWallMs",
+        "label",
+        "engineTag",
+        "controls",
+        "entry",
+        "alpha",
+        "beta",
+        "hashLevel",
+        "hashSeed",
+        "activeTTBytes",
+        "staticTTVirtualBytes",
+        "initialization",
+        "weightIdentity",
+        "clock"
+      ],
+      "properties": {
+        "ok": {
+          "const": true
+        },
+        "protocol": {
+          "const": "egaroucid-fixed-depth-v1"
+        },
+        "profile": {
+          "const": "original-avx2-fixed-depth-mpc-off"
+        },
+        "engineCommit": {
+          "const": "570d5e0a478c9d720d75de06a5d31995f412704a"
+        },
+        "evaluationImplementation": {
+          "const": "evaluate_simd.hpp"
+        },
+        "requestWallMs": {
+          "type": "number",
+          "minimum": 0
+        },
+        "label": {
+          "const": "Console7.8.1-engine + fixed-depth AVX2 MPC-off reference"
+        },
+        "engineTag": {
+          "const": "console_v7.8.1"
+        },
+        "controls": {
+          "$ref": "#/$defs/controls"
+        },
+        "entry": {
+          "const": "first_nega_scout_legal"
+        },
+        "alpha": {
+          "const": -64
+        },
+        "beta": {
+          "const": 64
+        },
+        "hashLevel": {
+          "const": 20
+        },
+        "hashSeed": {
+          "const": 20261022
+        },
+        "activeTTBytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "staticTTVirtualBytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "initialization": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "evalSetupMs",
+            "weightLoadAndEvalPrecomputeMs",
+            "engineAndHashSetupMs",
+            "entryInitMs",
+            "preMainMs"
+          ],
+          "properties": {
+            "evalSetupMs": {
+              "type": "number",
+              "minimum": 0
+            },
+            "weightLoadAndEvalPrecomputeMs": {
+              "type": "number",
+              "minimum": 0
+            },
+            "engineAndHashSetupMs": {
+              "type": "number",
+              "minimum": 0
+            },
+            "entryInitMs": {
+              "type": "number",
+              "minimum": 0
+            },
+            "preMainMs": {
+              "type": "null"
+            }
+          }
+        },
+        "weightIdentity": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "midgameId",
+            "orderingId",
+            "callerVerified",
+            "midgamePath",
+            "orderingPath",
+            "expectedMidgameSha256",
+            "expectedOrderingSha256"
+          ],
+          "properties": {
+            "midgameId": {
+              "const": "sha256:0a8acbcbc23067933627f1bcc83c3f7ae6b7ff3e603d174a3364271fcaeeef2f"
+            },
+            "orderingId": {
+              "const": "sha256:bd908885e8bb85e72a9be2b0399f8ca52ed40a138bcaaecca3d13710945b9a93"
+            },
+            "callerVerified": {
+              "const": true
+            },
+            "midgamePath": {
+              "type": "string"
+            },
+            "orderingPath": {
+              "type": "string"
+            },
+            "expectedMidgameSha256": {
+              "const": "0a8acbcbc23067933627f1bcc83c3f7ae6b7ff3e603d174a3364271fcaeeef2f"
+            },
+            "expectedOrderingSha256": {
+              "const": "bd908885e8bb85e72a9be2b0399f8ca52ed40a138bcaaecca3d13710945b9a93"
+            }
+          }
+        },
+        "clock": {
+          "const": "fixed depth; Root outer deadline only; no internal timer thread"
+        }
+      }
+    },
+    "clear": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ok",
+        "protocol",
+        "profile",
+        "engineCommit",
+        "evaluationImplementation",
+        "requestWallMs",
+        "clearGeneration",
+        "ttReset",
+        "resetMs"
+      ],
+      "properties": {
+        "ok": {
+          "const": true
+        },
+        "protocol": {
+          "const": "egaroucid-fixed-depth-v1"
+        },
+        "profile": {
+          "const": "original-avx2-fixed-depth-mpc-off"
+        },
+        "engineCommit": {
+          "const": "570d5e0a478c9d720d75de06a5d31995f412704a"
+        },
+        "evaluationImplementation": {
+          "const": "evaluate_simd.hpp"
+        },
+        "requestWallMs": {
+          "type": "number",
+          "minimum": 0
+        },
+        "clearGeneration": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "ttReset": {
+          "const": true
+        },
+        "resetMs": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "search": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ok",
+        "protocol",
+        "profile",
+        "engineCommit",
+        "evaluationImplementation",
+        "requestWallMs",
+        "caseId",
+        "state",
+        "options",
+        "clearGeneration",
+        "requestedDepth",
+        "completedDepth",
+        "completedSelectivity",
+        "probabilityPercent",
+        "mpc",
+        "scorePerspective",
+        "scoreUnits",
+        "actualDiscDifference",
+        "bound",
+        "ttHits",
+        "orderingNodes",
+        "shutdownMs",
+        "processWholeMs",
+        "transportMs",
+        "action",
+        "rootPassed",
+        "move",
+        "searchedPolicyBit",
+        "searchedMove",
+        "searchedRawScore",
+        "rawScore",
+        "scoreKind",
+        "proven",
+        "proofDomain",
+        "nodes",
+        "engineSearchMs",
+        "prepareMs"
+      ],
+      "properties": {
+        "ok": {
+          "const": true
+        },
+        "protocol": {
+          "const": "egaroucid-fixed-depth-v1"
+        },
+        "profile": {
+          "const": "original-avx2-fixed-depth-mpc-off"
+        },
+        "engineCommit": {
+          "const": "570d5e0a478c9d720d75de06a5d31995f412704a"
+        },
+        "evaluationImplementation": {
+          "const": "evaluate_simd.hpp"
+        },
+        "requestWallMs": {
+          "type": "number",
+          "minimum": 0
+        },
+        "caseId": {
+          "type": "string",
+          "pattern": "^[!-~]{1,128}$"
+        },
+        "state": {
+          "$ref": "egaroucid-eval-oracle-v1.schema.json#/$defs/state"
+        },
+        "options": {
+          "$ref": "#/$defs/options"
+        },
+        "clearGeneration": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "requestedDepth": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 60
+        },
+        "completedDepth": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 60
+        },
+        "completedSelectivity": {
+          "const": 6
+        },
+        "probabilityPercent": {
+          "const": 100
+        },
+        "mpc": {
+          "const": false
+        },
+        "scorePerspective": {
+          "const": "state.toMove"
+        },
+        "scoreUnits": {
+          "const": "engine-disc"
+        },
+        "actualDiscDifference": {
+          "type": "integer",
+          "minimum": -64,
+          "maximum": 64
+        },
+        "bound": {
+          "const": "UNKNOWN"
+        },
+        "ttHits": {
+          "type": "null"
+        },
+        "orderingNodes": {
+          "type": "null"
+        },
+        "shutdownMs": {
+          "type": "null"
+        },
+        "processWholeMs": {
+          "type": "null"
+        },
+        "transportMs": {
+          "type": "null"
+        },
+        "action": {
+          "enum": ["terminal", "pass", "move"]
+        },
+        "rootPassed": {
+          "type": "boolean"
+        },
+        "move": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 63
+        },
+        "searchedPolicyBit": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 63
+        },
+        "searchedMove": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 63
+        },
+        "searchedRawScore": {
+          "type": ["integer", "null"],
+          "minimum": -64,
+          "maximum": 64
+        },
+        "rawScore": {
+          "type": "integer",
+          "minimum": -64,
+          "maximum": 64
+        },
+        "scoreKind": {
+          "enum": [
+            "engine_terminal_winner_empties_stm",
+            "engine_nonselective_end_winner_empties_stm",
+            "engine_fixed_depth_estimate_stm"
+          ]
+        },
+        "proven": {
+          "type": "boolean"
+        },
+        "proofDomain": {
+          "const": "original-engine-only"
+        },
+        "nodes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "engineSearchMs": {
+          "type": "number",
+          "minimum": 0
+        },
+        "prepareMs": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "action": {
+                "const": "terminal"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "move": {
+                "type": "null"
+              },
+              "searchedPolicyBit": {
+                "type": "null"
+              },
+              "searchedMove": {
+                "type": "null"
+              },
+              "searchedRawScore": {
+                "type": "null"
+              },
+              "completedDepth": {
+                "const": 0
+              },
+              "engineSearchMs": {
+                "const": 0
+              },
+              "nodes": {
+                "const": 0
+              },
+              "proven": {
+                "const": true
+              },
+              "rootPassed": {
+                "const": false
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "searchedPolicyBit": {
+                "type": "integer"
+              },
+              "searchedMove": {
+                "type": "integer"
+              },
+              "searchedRawScore": {
+                "type": "integer"
+              },
+              "completedDepth": {
+                "minimum": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "action": {
+                "const": "pass"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "move": {
+                "type": "null"
+              },
+              "rootPassed": {
+                "const": true
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "action": {
+                "const": "move"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "move": {
+                "type": "integer"
+              },
+              "rootPassed": {
+                "const": false
+              }
+            }
+          }
+        }
+      ]
+    },
+    "error": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ok", "protocol", "profile", "error"],
+      "properties": {
+        "ok": {
+          "const": false
+        },
+        "protocol": {
+          "const": "egaroucid-fixed-depth-v1"
+        },
+        "profile": {
+          "const": "original-avx2-fixed-depth-mpc-off"
+        },
+        "error": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,422 @@
+{
+  "engineCommit": "570d5e0a478c9d720d75de06a5d31995f412704a",
+  "archive": {
+    "path": "/workspaces/quoridor/research-data/othello/strong-ai-n96/full-clone-search-v1-checks.tar.gz",
+    "bytes": 81610,
+    "mode": "0644",
+    "sha256": "51623e1784b6e4abd2272514c3f344f008214b0328adfe9ad8ae20952d2a0cca"
+  },
+  "archiveMemberCount": 113,
+  "sourceLicense": "GPL-3.0-or-later",
+  "weightRedistribution": "UNCONFIRMED; local port/equality use only",
+  "strength": "UNRUN",
+  "productDefaultChanged": false,
+  "QuoridorChanged": false,
+  "RSSPeak": null,
+  "scope": "First H-free recorded-domain nonselective fixed-depth requested-STM value comparison",
+  "qualification": {
+    "scheduled": 29,
+    "completed": 29,
+    "remaining": 0,
+    "requests": 58,
+    "nonterminalEngineCalls": 54,
+    "terminalRequests": 4,
+    "heuristicCases": 21,
+    "endCases": 6,
+    "terminalCases": 2,
+    "mustPass": 1,
+    "rawScoreMatches": 29,
+    "policyMatches": 29,
+    "H": 0,
+    "newGames": 0,
+    "teacher": 0,
+    "fit": 0,
+    "RNGSelection": 0,
+    "statistics": 0
+  },
+  "job": {
+    "job_id": "2cf11541-04d6-4c61-a621-9b9c555ed433",
+    "outcome": "succeeded",
+    "error": null,
+    "error_notes": [],
+    "exit_code": 0,
+    "finished_at": "2026-10-22T01:46:33.005318+00:00",
+    "wall_seconds": 1.4179804999148473,
+    "remaining": [],
+    "direct_child_reaped": true,
+    "descendant_visibility": "observed",
+    "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+    "cleanup_complete": true,
+    "cleanup_errors": [],
+    "log_bytes_seen": 52,
+    "log_bytes_retained": 52
+  },
+  "rust": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-search-software-v4/image-df58127c53fa0cfc1e036b79084d2655f60ff428efda52b7d93f9a1c625744ec/othello-full-search",
+    "bytes": 725312,
+    "mode": "0755",
+    "sha256": "df58127c53fa0cfc1e036b79084d2655f60ff428efda52b7d93f9a1c625744ec"
+  },
+  "original": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-search-software-v4/egaroucid-fixed-depth-oracle",
+    "bytes": 878600,
+    "mode": "0755",
+    "sha256": "7a9388e072fa1c6a257029555291ed44cac9edfde9049595c07c0fe99bf74e47"
+  },
+  "midgame": {
+    "path": "/workspaces/quoridor/.worktree/assets/tools/othello-baselines-n96-v1/egaroucid/bin/resources/eval.egev2",
+    "bytes": 38243826,
+    "mode": "0644",
+    "sha256": "0a8acbcbc23067933627f1bcc83c3f7ae6b7ff3e603d174a3364271fcaeeef2f"
+  },
+  "ordering": {
+    "path": "/workspaces/quoridor/.worktree/assets/tools/othello-baselines-n96-v1/egaroucid/bin/resources/eval_move_ordering_end.egev",
+    "bytes": 472392,
+    "mode": "0644",
+    "sha256": "bd908885e8bb85e72a9be2b0399f8ca52ed40a138bcaaecca3d13710945b9a93"
+  },
+  "controls": {
+    "selectivity": 6,
+    "mpc": false,
+    "etc": true,
+    "stability": true,
+    "parity": true,
+    "shallowOrdering": true
+  },
+  "protocolDomain": "Only prior-qualified H-free legal recorded continuations with all original center cells occupied, original d0/c0; requestedDepth<=empties on nonterminal. Arbitrary-center R1 regression excluded.",
+  "comparison": "Both TT cleared outside each case clock; unsmoothed engine-disc requested-STM raw score. Different tie policies would be recorded separately; observed policies also all match.",
+  "setup": {
+    "rust": {
+      "launchMs": 0.4566099960356951,
+      "inclusiveReadyMs": 150.85979097057134,
+      "info": {
+        "coefficients": {
+          "a": 0.7308488452189136,
+          "b": -4.5708322989025865,
+          "c": 1.096319765006055,
+          "d": -0.8362251801219095,
+          "e": 4.610017383697701,
+          "f": 3.818582623595395,
+          "g": 1.7775013664098447
+        },
+        "engine": "console7.8.1-rust-singlethread-source-port",
+        "hashLevel": 20,
+        "hashSeed": 20261022,
+        "identityBinding": "callerVerified",
+        "interpretation": "simd",
+        "midgameId": "sha256:0a8acbcbc23067933627f1bcc83c3f7ae6b7ff3e603d174a3364271fcaeeef2f",
+        "ok": true,
+        "orderingId": "sha256:bd908885e8bb85e72a9be2b0399f8ca52ed40a138bcaaecca3d13710945b9a93",
+        "upstreamCommit": "570d5e0a478c9d720d75de06a5d31995f412704a",
+        "workerPool": 0
+      }
+    },
+    "original": {
+      "launchMs": 0.28052402194589376,
+      "inclusiveReadyMs": 781.9045840296894,
+      "info": {
+        "activeTTBytes": 25165872,
+        "alpha": -64,
+        "beta": 64,
+        "clock": "fixed depth; Root outer deadline only; no internal timer thread",
+        "controls": {
+          "aspiration": false,
+          "book": false,
+          "compiledMpc": false,
+          "etc": true,
+          "last4Stability": false,
+          "lastParity": true,
+          "parity": true,
+          "ponder": false,
+          "probabilityPercent": 100,
+          "selectivity": 6,
+          "shallowOrdering": true,
+          "stability": true,
+          "useMultiThread": false,
+          "workerPool": 0
+        },
+        "engineCommit": "570d5e0a478c9d720d75de06a5d31995f412704a",
+        "engineTag": "console_v7.8.1",
+        "entry": "first_nega_scout_legal",
+        "evaluationImplementation": "evaluate_simd.hpp",
+        "hashLevel": 20,
+        "hashSeed": 20261022,
+        "initialization": {
+          "engineAndHashSetupMs": 300.560674,
+          "entryInitMs": 475.428447,
+          "evalSetupMs": 0.06737,
+          "preMainMs": null,
+          "weightLoadAndEvalPrecomputeMs": 174.796705
+        },
+        "label": "Console7.8.1-engine + fixed-depth AVX2 MPC-off reference",
+        "ok": true,
+        "profile": "original-avx2-fixed-depth-mpc-off",
+        "protocol": "egaroucid-fixed-depth-v1",
+        "requestWallMs": 0.037849,
+        "staticTTVirtualBytes": 805306416,
+        "weightIdentity": {
+          "callerVerified": true,
+          "expectedMidgameSha256": "0a8acbcbc23067933627f1bcc83c3f7ae6b7ff3e603d174a3364271fcaeeef2f",
+          "expectedOrderingSha256": "bd908885e8bb85e72a9be2b0399f8ca52ed40a138bcaaecca3d13710945b9a93",
+          "midgameId": "sha256:0a8acbcbc23067933627f1bcc83c3f7ae6b7ff3e603d174a3364271fcaeeef2f",
+          "midgamePath": "/workspaces/quoridor/.worktree/assets/tools/othello-baselines-n96-v1/egaroucid/bin/resources/eval.egev2",
+          "orderingId": "sha256:bd908885e8bb85e72a9be2b0399f8ca52ed40a138bcaaecca3d13710945b9a93",
+          "orderingPath": "/workspaces/quoridor/.worktree/assets/tools/othello-baselines-n96-v1/egaroucid/bin/resources/eval_move_ordering_end.egev"
+        }
+      }
+    }
+  },
+  "caseResults": [
+    {
+      "id": "series0/0/d0/c0/depth1",
+      "rawScore": 0,
+      "kind": "heuristic",
+      "policyDifferent": false,
+      "rustMove": 44,
+      "originalMove": 44
+    },
+    {
+      "id": "series0/0/d0/c0/depth2",
+      "rawScore": 0,
+      "kind": "heuristic",
+      "policyDifferent": false,
+      "rustMove": 44,
+      "originalMove": 44
+    },
+    {
+      "id": "series0/0/d0/c0/depth3",
+      "rawScore": 0,
+      "kind": "heuristic",
+      "policyDifferent": false,
+      "rustMove": 44,
+      "originalMove": 44
+    },
+    {
+      "id": "series0/16/d0/c0/depth1",
+      "rawScore": -12,
+      "kind": "heuristic",
+      "policyDifferent": false,
+      "rustMove": 19,
+      "originalMove": 19
+    },
+    {
+      "id": "series0/16/d0/c0/depth2",
+      "rawScore": -12,
+      "kind": "heuristic",
+      "policyDifferent": false,
+      "rustMove": 19,
+      "originalMove": 19
+    },
+    {
+      "id": "series0/16/d0/c0/depth3",
+      "rawScore": -12,
+      "kind": "heuristic",
+      "policyDifferent": false,
+      "rustMove": 41,
+      "originalMove": 41
+    },
+    {
+      "id": "series0/32/d0/c0/depth1",
+      "rawScore": -22,
+      "kind": "heuristic",
+      "policyDifferent": false,
+      "rustMove": 5,
+      "originalMove": 5
+    },
+    {
+      "id": "series0/32/d0/c0/depth2",
+      "rawScore": -25,
+      "kind": "heuristic",
+      "policyDifferent": false,
+      "rustMove": 5,
+      "originalMove": 5
+    },
+    {
+      "id": "series0/32/d0/c0/depth3",
+      "rawScore": -23,
+      "kind": "heuristic",
+      "policyDifferent": false,
+      "rustMove": 5,
+      "originalMove": 5
+    },
+    {
+      "id": "series0/48/d0/c0/depth1",
+      "rawScore": -8,
+      "kind": "heuristic",
+      "policyDifferent": false,
+      "rustMove": 62,
+      "originalMove": 62
+    },
+    {
+      "id": "series0/48/d0/c0/depth2",
+      "rawScore": -8,
+      "kind": "heuristic",
+      "policyDifferent": false,
+      "rustMove": 62,
+      "originalMove": 62
+    },
+    {
+      "id": "series0/48/d0/c0/depth3",
+      "rawScore": -6,
+      "kind": "heuristic",
+      "policyDifferent": false,
+      "rustMove": 62,
+      "originalMove": 62
+    },
+    {
+      "id": "series0/54/d0/c0/depth6",
+      "rawScore": -22,
+      "kind": "end",
+      "policyDifferent": false,
+      "rustMove": 48,
+      "originalMove": 48
+    },
+    {
+      "id": "series0/58/d0/c0/depth2",
+      "rawScore": -22,
+      "kind": "end",
+      "policyDifferent": false,
+      "rustMove": 10,
+      "originalMove": 10
+    },
+    {
+      "id": "series0/59/d0/c0/depth1",
+      "rawScore": 22,
+      "kind": "end",
+      "policyDifferent": false,
+      "rustMove": 9,
+      "originalMove": 9
+    },
+    {
+      "id": "series0/60/d0/c0/terminal",
+      "rawScore": -22,
+      "kind": "terminal",
+      "policyDifferent": false,
+      "rustMove": null,
+      "originalMove": null
+    },
+    {
+      "id": "series1/16/d0/c0/depth1",
+      "rawScore": -5,
+      "kind": "heuristic",
+      "policyDifferent": false,
+      "rustMove": 53,
+      "originalMove": 53
+    },
+    {
+      "id": "series1/16/d0/c0/depth2",
+      "rawScore": -5,
+      "kind": "heuristic",
+      "policyDifferent": false,
+      "rustMove": 53,
+      "originalMove": 53
+    },
+    {
+      "id": "series1/16/d0/c0/depth3",
+      "rawScore": -4,
+      "kind": "heuristic",
+      "policyDifferent": false,
+      "rustMove": 53,
+      "originalMove": 53
+    },
+    {
+      "id": "series1/32/d0/c0/depth1",
+      "rawScore": 23,
+      "kind": "heuristic",
+      "policyDifferent": false,
+      "rustMove": 25,
+      "originalMove": 25
+    },
+    {
+      "id": "series1/32/d0/c0/depth2",
+      "rawScore": 23,
+      "kind": "heuristic",
+      "policyDifferent": false,
+      "rustMove": 25,
+      "originalMove": 25
+    },
+    {
+      "id": "series1/32/d0/c0/depth3",
+      "rawScore": 24,
+      "kind": "heuristic",
+      "policyDifferent": false,
+      "rustMove": 25,
+      "originalMove": 25
+    },
+    {
+      "id": "series1/48/d0/c0/depth1",
+      "rawScore": 25,
+      "kind": "heuristic",
+      "policyDifferent": false,
+      "rustMove": 2,
+      "originalMove": 2
+    },
+    {
+      "id": "series1/48/d0/c0/depth2",
+      "rawScore": 25,
+      "kind": "heuristic",
+      "policyDifferent": false,
+      "rustMove": 2,
+      "originalMove": 2
+    },
+    {
+      "id": "series1/48/d0/c0/depth3",
+      "rawScore": 26,
+      "kind": "heuristic",
+      "policyDifferent": false,
+      "rustMove": 2,
+      "originalMove": 2
+    },
+    {
+      "id": "series1/54/d0/c0/depth6",
+      "rawScore": 28,
+      "kind": "end",
+      "policyDifferent": false,
+      "rustMove": 1,
+      "originalMove": 1
+    },
+    {
+      "id": "series1/58/d0/c0/depth2",
+      "rawScore": 28,
+      "kind": "end",
+      "policyDifferent": false,
+      "rustMove": 24,
+      "originalMove": 24
+    },
+    {
+      "id": "series1/59/d0/c0/depth1",
+      "rawScore": -28,
+      "kind": "end",
+      "policyDifferent": false,
+      "rustMove": null,
+      "originalMove": null
+    },
+    {
+      "id": "series1/61/d0/c0/terminal",
+      "rawScore": -28,
+      "kind": "terminal",
+      "policyDifferent": false,
+      "rustMove": null,
+      "originalMove": null
+    }
+  ],
+  "collection": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-search-numerical-v1/completion-2cf11541/collection.json",
+    "bytes": 17456,
+    "mode": "0644",
+    "sha256": "30202aab00647c08656c100d8bf7f3af134a9a7c9b0af1841101b7a68d86f015"
+  },
+  "cost": {
+    "wholeSeconds": 1.4179804999148473,
+    "commandSeconds": 1.2021325239911675,
+    "bodySeconds": 1.1513591619441286,
+    "nestedTimesAdded": false
+  },
+  "preparation": "Draft32 contained3 duplicated common-initial-depth cases across two series. Pre-entry check failed and draftgzip/cost retained; reduced to29 with no refill/RNG/numerical replay.",
+  "remaining": [
+    "Finite two-series/limited-depth result, not whole-search equivalence",
+    "Six small-end cases use upstream reference, not a new independent minimax proof",
+    "Selective/MPC/timed schedule/continuous performance/matches/browser remain unqualified"
+  ],
+  "cleanup": "Both deliberate-15 close/directReaped/errors[]/unexpectedfalse; execute returned cleanup/handles/mask/persist complete, original disk pending/attempted preserved."
+}

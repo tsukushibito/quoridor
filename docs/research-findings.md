@@ -3074,3 +3074,11 @@ outer23.976065255秒を一度だけ記録し、nested秒を加算しない。Sea
 435の実original-model入口は、同じ4根/両色8予定局、64sim/65head、100ms/返却reserve5msで最初の要求が時間超過となり、1局開始・完了0・全8UNKNOWNで停止した。setupは1.292504783秒、失敗callerは1.449332044秒（stop/drain/closeを含む）。閉鎖時の遅延応答に65実head/65finite行とhead内合計0.923629745秒が残り、集計nn_calls=0を実forward0と解釈しない。純Search時間は未分離、記録されたcaller authority_core18/authority_legal=falseも未資格として残す。100ms達成・8局比較・棋力や一般的速度の証明にはしない。
 
 runtime/group/pipe/directwaitはsettled/reaped/EOFだが、遅延stdoutを正常応答へ採用せずsession success=false/unsolicited stdoutを保持し、元journal資格/operation publicationもFAILEDのままとする。包括9.312438964秒にnative/初期化/head/cleanupの内包時計を加算しない。持時間延長・補充・自動再対局は0。source/software、現モデルの実load/forward、clock資格、全対局完了を分け、Cedar/model/defaultと旧FAILED/NULL/UNKNOWNは不変。[元100ms限界・全8分母・生記録と回収](../research-data/ai-sigma/quoridor-strong-ai435/normal-100ms-pilot-v1.json)。
+
+### Othello実AVX評価と最初の非選択固定深さ一致
+
+固定Console7.8.1の実AVX2 callableと保存済みRust scalar-SIMD traceが、元の全60phase/D4/色手番/pass/終局を含む2032件で一致した。最初の2000成功、保存済み2001件目の返答を数値再実行なしで回収、残り31件という原ケースの合流で、成功したRust/generic/Wasm/incrementalは再演していない。Root比較器のearly-terminal phase条件の失敗と包括0.839866422秒は保持し、追加31件の包括0.431008497秒と区別する。実AVX一致は評価値の資格であり、探索・速度・棋力の資格ではない。[実AVX正本と原失敗/回収](../research-data/othello/strong-ai-n96/full-evaluator-actual-simd-v1.json)。
+
+探索source確認の2件（任意盤面の中央4合法手欠落、forced-pass時のshift64）を同じ作者が修復し、関連SOURCE_CLEARと新Rust2/actual Wasm2、関連Clippy/release/参照compileを確認した。旧9件の成功は再演せず、元fixture/Clippy失敗とSOURCE_NOT_CLEARを保存した。続いて既観測合法2系列の異なるstate/depth29件、計58要求で、同じ実weightの非選択・未平滑STM値と着手が全件一致した。内訳は浅い21・小終盤6（pass1）・終局2、H/新対局/教師/fitは0。原中央4セルを保持する記録領域、深さ<=空き数、毎回TT clear、元外部参照のcompile時MPC OFFという限定条件である。draft32の共通初期3深さ重複は入場前に除き、失敗記録を保持して補充しなかった。
+
+software包括33.956008821秒と数値包括1.417980500秒は別工程で、内包時計を加算しない。各nativeは意図したterminateでdirect-reaped/errors[]、実returnedのcleanup/handle/復元/persist完了と、diskのpending/attemptedを区別する。RSS peakはUNKNOWN。元last4順序/専用last2/3 kernel/SIMD実行/clog ordering/時計の差が残り、この有限一致を全アルゴリズム完了・独立exact証明・選択探索・性能・browser・棋力/defaultへ昇格しない。有効な元singlethread手法の移植と実性能を次に分けて進め、小モデル/residualへ戻さない。[探索software・元失敗と関連修復](../research-data/othello/strong-ai-n96/full-search-software-v1.json)、[固定深さ29件の入力・応答・費用](../research-data/othello/strong-ai-n96/full-search-numerical-v1.json)。

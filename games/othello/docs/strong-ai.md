@@ -47,11 +47,19 @@ STM/盤面向き/色、raw STEP単位、disc単位、丸め、clamp段階と外�
 
 全16形状・64配置・60placement段階のscalar実装、compactな実weight decoder、play/flip/undo/passの差分更新と明示native/Wasm入口を実装した。[限定software資格](../../../research-data/othello/strong-ai-n96/full-evaluator-software-v1.json)は新Rust6定義、関連Clippy、native release、外部generic oracleと合成fixture、Wasm生成の8commandを記録する。包括22.691710681秒に内包時計を加算しない。固定差分の独立確認はSOURCE_CLEARであり、実weight数値一致・全探索port・棋力の資格とは区別する。
 
-同一のraw tableに対しgenericは元i16値を読み、scalar SIMD解釈は元loader同様main項を±4092、ordering項を±16380へ制限する。auxiliary項は変更しない。外部oracleはgeneric専用であり、SIMDとの数値一致と呼ばない。port由来sourceのGPL-3.0-or-later帰属と[原GPL本文](../LICENSE.Egaroucid)を保持し、weightの公開・製品再配布条件は未認定のままとする。
+同一のraw tableに対しgenericは元i16値を読み、scalar SIMD解釈は元loader同様main項を±4092、ordering項を±16380へ制限する。auxiliary項は変更しない。最初の外部oracleはgeneric専用であり、後続の明示AVX2 profileとは区別する。port由来sourceのGPL-3.0-or-later帰属と[原GPL本文](../LICENSE.Egaroucid)を保持し、両Rust crateにも同じlicenseを明示した。weightの公開・製品再配布条件は未認定のままとする。
 
 [最初の実weight数値資格](../../../research-data/othello/strong-ai-n96/full-evaluator-numerical-v1.json)では、既観測の完全合法2系列と明示した境界fixtureから結果前に2032件を固定し、全60phase・D4・色手番・pass・終局近傍で元genericと64index、raw和、追加項、丸め、clamp、ordering、終局規約を照合した。不一致0。120着手と1passのfull recompute/play/undo/reapply、および同じ実weightのnative/Wasm計4064比較も一致した。H・教師再照会・fit・新Search/対局/RNGは使っていない。数値工程の包括4.834016124秒はsoftware工程と別で、内包時計を加算しない。
 
-これで最初のscalar評価器単位を受け入れる。scalar SIMD table解釈のnative/Wasm一致は、元AVX実装の呼出一致ではない。元SIMD oracleと忠実なsinglethread探索の実source移植を既存2作者が並行し、変更した境界だけを次に資格化する。探索port完了・処理速度・棋力・browser全weight動作・製品default採用はまだ認定しない。
+後続の[実AVX評価資格](../../../research-data/othello/strong-ai-n96/full-evaluator-actual-simd-v1.json)では、固定版の実際のAVX2 callableと保存済みRust scalar-SIMD traceが同じ2032件で一致した。原2000件、保存済み2001件目の返答の回収、残り31件を合わせ、同じケースを再評価していない。最初の比較器がearly terminalにもphase=Noneを要求した失敗は保持する。63石のearly terminalはphase59というplacement metadataを保ちながらmidgame/tablePhaseを使わず、満盤ではphase60へ入らない。元FAILEDの包括0.839866422秒と追加31件の包括0.431008497秒を別々に保持する。元generic・Rust・Wasm・incrementalの成功は再演していない。これで最初の全パターン・全phase実weight評価器単位を受け入れるが、探索全体・性能・棋力・browser配布の証明にはしない。
+
+## 探索の限定software・固定深さ資格
+
+[探索software](../../../research-data/othello/strong-ai-n96/full-search-software-v1.json)は、明示native/Wasm ownerと外部の固定深さ参照を記録する。独立source確認で見つかった中央4セルのshallow合法手欠落とforced-passのshift64を修復し、新Rust2件・actual Wasm2件、関連Clippy/release/生成と新参照fixtureの8commandを確認した。包括33.956008821秒、旧9件の成功テストは再演していない。元fixture/Clippy失敗、SOURCE_NOT_CLEARと関連SOURCE_CLEARを別々に保存する。作者の[SOURCE_MAP](../crates/othello-core/src/full_search/SOURCE_MAP.md)にあるUNRUNは作者の引渡し時点の実行範囲であり、Rootの実資格は正本結果を参照する。
+
+[最初の固定深さ比較](../../../research-data/othello/strong-ai-n96/full-search-numerical-v1.json)は、既観測の合法2系列から29の異なるstate/depthを結果前に固定した。浅い非選択21件、小終盤6件（forced pass1件を含む）、終局2件の計58要求で、同じ実weightのRustと元AVX参照のSTM未平滑値が全件一致し、今回は着手も全件一致した。元の四つの中央セルが埋まった記録局面だけを使用し、非終局の要求深さは空き数以下、両TTをケース時計の外でclearした。元参照は外部compileでMPCをOFFにしており、stock consoleでroot selectivity=6を指定しただけの条件とは区別する。包括1.417980500秒にsetup/reset/search/cleanupの内包時計を加算しない。入力準備の32件には共通初期盤面の3深さ分が重複していたため、入場前に29件へ統合し、失敗記録を保持して補充しなかった。H・新対局・教師・fitは0である。
+
+この有限一致は全探索の同値性や独立minimax証明ではない。元last4 parity-case順序、last2/3専用kernel、SIMD実行、clog ordering、全時計の差を対応表に残し、有効なsinglethread手法の忠実な移植を継続する。選択/MPC・深い境界、初期化再用の連続探索、処理速度・同時間対局、browser全weight動作・製品defaultは別の資格である。局所的な一致や元より弱いことを、小型評価路線へ戻す根拠にしない。
 
 ## 最初の受入単位と検証
 
