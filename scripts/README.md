@@ -1,6 +1,6 @@
 # 操作・検査・保存の入口
 
-実装本体の検索は[crates](../games/quoridor/crates/README.md)と[Python](../python/quoridor_training/README.md)へ切り替える。ここはmainを操作する開発scriptで、旧worktreeへの恒常mirrorやframe別AI実装を置く場所ではない。
+実装本体の検索は[crates](../games/quoridor/crates/README.md)と[Python](../games/quoridor/python/quoridor_training/README.md)へ切り替える。ここはmainを操作する開発scriptで、旧worktreeへの恒常mirrorやframe別AI実装を置く場所ではない。
 
 | 操作                             | 入口・正本文書                                                                                                                                               |
 | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |

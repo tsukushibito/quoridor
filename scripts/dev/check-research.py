@@ -19,6 +19,8 @@ PY_ROOTS = (
     "games/quoridor/python/quoridor_training",
     "shared/python/quoridor_runtime",
     "games/quoridor/tests/python",
+    "games/othello/python/othello_arena",
+    "games/othello/tests/python",
     "tools/model-export",
 )
 PY_FILES = (

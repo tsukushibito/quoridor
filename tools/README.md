@@ -1,6 +1,6 @@
 # 環境・変換・管理ツール
 
-現役の対局/探索/教師生成は[Rust crates](../games/quoridor/crates/README.md)、学習・解析は[Python](../python/quoridor_training/README.md)。ここはそれらの環境・変換・管理・品質の境界を扱う。
+現役の対局/探索/教師生成は[Rust crates](../games/quoridor/crates/README.md)、学習・解析は[Python](../games/quoridor/python/quoridor_training/README.md)。ここはそれらの環境・変換・管理・品質の境界を扱う。
 
 | 対象                               | 最初の入口                                                                                        |
 | ---------------------------------- | ------------------------------------------------------------------------------------------------- |
