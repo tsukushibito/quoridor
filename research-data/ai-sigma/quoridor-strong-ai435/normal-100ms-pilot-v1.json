@@ -1,0 +1,183 @@
+{
+  "schema": "quoridor.original-model-100ms-pilot.v1",
+  "status": "FAILED_INCOMPLETE",
+  "job": "ad8f2324-9f60-43e9-9d7c-14bd4748c9ad",
+  "result": {
+    "job": "ad8f2324-9f60-43e9-9d7c-14bd4748c9ad",
+    "runtime": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/normal-entry-binding-v1/normal8-v5/runtime/result.json",
+      "bytes": 522,
+      "mode": "0600",
+      "sha256": "cf4d73fe31c2b6b13f2687d5e2d54f25db1af52dc0868035b8f470f8ef20efb7"
+    },
+    "output": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/normal-entry-binding-v1/normal8-v5/runtime/output.log",
+      "bytes": 729,
+      "mode": "0644",
+      "sha256": "83566d55ac632176a6b9da68755b179170dab4e7e6544416b992fc02838ac4d6"
+    },
+    "config": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/normal-entry-binding-v1/normal8-v5/runtime/config.json",
+      "bytes": 946,
+      "mode": "0600",
+      "sha256": "0a6b6086273920908d2736d6cfdb6121f6587016a1d81fb2160cde1649e643c2"
+    },
+    "settings": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/normal-entry-binding-v1/normal8-v5/sequence-settings.json",
+      "bytes": 7465,
+      "mode": "0644",
+      "sha256": "b369b8c9e89f94699b959c49dc32d4eb848ee6baf5c47966f701c32ebe5766a9"
+    },
+    "binding": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/normal-entry-binding-v1/normal8-v5/module-route-binding.json",
+      "bytes": 2624,
+      "mode": "0644",
+      "sha256": "7044d46e3eef750fd29ae605b7c344d11e5d6fd3279ab536390ec069ee632a3b"
+    },
+    "operationManifest": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/normal-entry-binding-v1/normal8-v5/execution/sequence/run-000/operation/manifest.json",
+      "bytes": 12540,
+      "mode": "0644",
+      "sha256": "6e04a681ae5b6e05b5862ed359c2ac0dfcc15bbc798b5c4176d5cfdc7c2a0d04"
+    },
+    "nativeProcess": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/normal-entry-binding-v1/normal8-v5/execution/sequence/run-000/operation/run.process.json",
+      "bytes": 2661,
+      "mode": "0600",
+      "sha256": "d9dee8bee4f75a8b70569edec3b4520edf4ccf8fa19d0cd96b6f43b98d0d32a0"
+    },
+    "nativeData": [
+      {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/normal-entry-binding-v1/normal8-v5/execution/sequence/run-000/data/completed.jsonl.gz",
+        "sha256": "444227ca802e98c05b057f69e3975dde2ef9ba8758ae47795e30440416a70795",
+        "bytes": 5659,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/normal-entry-binding-v1/normal8-v5/execution/sequence/run-000/data/result.json",
+        "sha256": "3c82ac8342a11c3d90c550abdd60ba1122466b7763826fccbcda88738b4d37e4",
+        "bytes": 44243,
+        "mode": "0644"
+      },
+      {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/normal-entry-binding-v1/normal8-v5/execution/sequence/run-000/data/manifest.json",
+        "sha256": "1fa05734157438132bb18ef9449f950ce26584f0fab57f77759f9e89d486ad19",
+        "bytes": 78852,
+        "mode": "0644"
+      }
+    ],
+    "planned": 8,
+    "started": 1,
+    "completed": 0,
+    "unknown": 8,
+    "unstarted": 7,
+    "newMovesCommitted": 0,
+    "firstFailure": "time_overrun",
+    "remainingFailure": "not_started_cancelled/deadline",
+    "plannedScoreRange": [0, 1],
+    "completePairs": 0,
+    "CI": null,
+    "outerSecondsOnce": 9.312438964028843,
+    "nativeReportSecondsNested": 2.827319297,
+    "actualSetupSecondsNested": 1.2925047830212861,
+    "backendInitSecondsNested": 1.322852157,
+    "cleanupSecondsNested": 1.3540078150000001,
+    "lateHeadSecondsNested": 0.9236297445604578,
+    "nestedTimesAdded": false,
+    "actualRequests": 1,
+    "lateReply": {
+      "sequence": 1,
+      "simulations": 64,
+      "headCalls": 65,
+      "logicalRows": 65,
+      "finiteRows": 65,
+      "failedRows": 0,
+      "headSeconds": 0.9236297445604578,
+      "acceptedForMove": false,
+      "proof": "Stored unconsumed stdout only; no rerun"
+    },
+    "aggregateAcceptedNnCalls": 0,
+    "counterMeaning": "Aggregate0 is not actual forward0; original late response proves65 model heads",
+    "cleanup": {
+      "runtime": true,
+      "childReaped": true,
+      "settled": true,
+      "groupSettled": true,
+      "remaining": [],
+      "stdoutEOF": true,
+      "stderrEOF": true,
+      "childExit": 0,
+      "sessionSuccess": false,
+      "sessionErrors": ["unsolicited stdout at session close"],
+      "operation": false,
+      "operationProcess": false,
+      "nativeAllWorkersJoined": false,
+      "publication": "FAILED",
+      "publicationErrors": [
+        {
+          "stage": "scientific_journal",
+          "type": "Refused",
+          "message": "each persistent C child closed by EOF, direct reap and final drain",
+          "notes": []
+        }
+      ]
+    },
+    "limit": "Same image/model64sim65head100ms reserve5/TT/Cedar/4roots/8slots; did not meet first request clock. No clock extension/refill/retry/strength/default adoption.",
+    "RSSPeak": null,
+    "unqualified": [
+      "Cross-runtime numerical equality",
+      "100ms complete response",
+      "8 completed games",
+      "teacher/fit/H-J partition",
+      "strength"
+    ],
+    "disposition": "Preserve original FAILED/partial journal/native results, including unsolicited stdout close refusal. No refinalization. Full search/core software uses released heavy slot only after this actualSTOP.",
+    "recordedFirstCallerClock": {
+      "callerSeconds": 1.449332044,
+      "thinkingSeconds": 1.449332016,
+      "deadlineNs": 100031717,
+      "returnedNs": 1449363733,
+      "accepted": false,
+      "authorityCore": 18,
+      "authorityLegal": false,
+      "scope": "Failure return includes stop/drain/close; not an isolated search timer or corrected authority qualification"
+    },
+    "pureSearchSeconds": null
+  },
+  "methodology": {
+    "nativeImage": "409c0ef40914184b4f6de4b8e40a13ea9663f3bcc6b6c938ba456376f4925c43",
+    "model": "821bd10f2736fc433c82de4dfc090ab95fc81b524f04fa09e68c4a26e30b496c",
+    "callback": "57eee135e551d96bbe2a106d370c8012b003653b42b20a069fef4c7797d52dbd",
+    "originalUpstream": "ae093653e62ad700e201706fa5ed767093d0d68e",
+    "plannedOriginalGames": 8,
+    "families": 4,
+    "bothColors": true,
+    "timeMs": 100,
+    "returnReserveMs": 5,
+    "simulations": 64,
+    "headUpper": 65,
+    "maxPlies": 200,
+    "firstBadStop": true,
+    "replacements": 0,
+    "clockExtended": false
+  },
+  "interpretation": "Current persistent CPU FP32 model setup and one original MCTS request actually ran. The first request missed100ms; late65 finite heads are retained but no move was accepted. All8 remain UNKNOWN; this is a measured finite-route limit, not a strength comparison or general impossibility proof.",
+  "clocks": "Job9.312438964s, native2.827319297s, setup1.292504783s, failed caller1.449332044s and inner65-head0.923629745s are nested/distinct scopes, not additive. Failed caller includes cleanup; pure search duration unavailable.",
+  "additionalQualification": "Recorded caller authority_core18/authority_legalfalse retained; no all-host quiet or corrected authority/timing proof. Original scientific journal publication refuses failed persistent-session success even though process/EOF/group settlement completed.",
+  "noRerun": true,
+  "defaultChanged": false,
+  "modelsChanged": false,
+  "HJFit": "UNRUN",
+  "input512": "UNRUN",
+  "RSSPeak": null,
+  "archive": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/quoridor-strong-ai435/normal-100ms-pilot-v1-checks.tar.gz",
+    "bytes": 45349,
+    "mode": "0644",
+    "sha256": "213c2e2c4ed5e3768449dfef2693bfb0afc2b58a65e45428dc05b782b0253cc2"
+  },
+  "archiveMembers": 25,
+  "weightModelBodiesIncluded": false,
+  "priorFailures": "Original v1 not_started, v2/v3 typedbook, v4 package import and all FAILED/NULL/UNKNOWN costs preserved; no original record refinalized",
+  "nextBoundary": "Faithful Othello software now may use released heavy slot. Any next Quoridor change or performance trial needs its own resolved finite conditions; no automatic repeat/clock increase of this8-slot pilot."
+}
