@@ -3084,3 +3084,11 @@ runtime/group/pipe/directwaitはsettled/reaped/EOFだが、遅延stdoutを正常
 software包括33.956008821秒と数値包括1.417980500秒は別工程で、内包時計を加算しない。各nativeは意図したterminateでdirect-reaped/errors[]、実returnedのcleanup/handle/復元/persist完了と、diskのpending/attemptedを区別する。RSS peakはUNKNOWN。元last4順序/専用last2/3 kernel/SIMD実行/clog ordering/時計の差が残り、この有限一致を全アルゴリズム完了・独立exact証明・選択探索・性能・browser・棋力/defaultへ昇格しない。有効な元singlethread手法の移植と実性能を次に分けて進め、小モデル/residualへ戻さない。[探索software・元失敗と関連修復](../research-data/othello/strong-ai-n96/full-search-software-v1.json)、[固定深さ29件の入力・応答・費用](../research-data/othello/strong-ai-n96/full-search-numerical-v1.json)。
 
 固定source対応の訂正：初回の未移植差分に挙げたlast4 parity-case shuffleについて、parity_case/parity_ordering_shuffle_mask_last4/parity_ordering_last3の三つはengine内で定義しかなく、activeなgeneric/SIMD PVS/NWS last4はいずれもempty1_bbのisolated-empty partitionを使用する。未使用tableの移植は要件にしない。作者のlast.rs実編集はsource進行であり、まだcompile/数値資格ではない。原source報告/capsule/29件の実値は改稿せず、[探索software正本の訂正欄](../research-data/othello/strong-ai-n96/full-search-software-v1.json)に固定source refsと最初の誤った説明を保存した。
+
+### Othello専用終盤kernelとf64輸送の有限資格
+
+その後、元のlast1 PVS/lazy NWS、last2..4の視点・pass・窓と実効isolated-empty順序、clogの浅い評価/TT orderingを移植し、新kernel/clog Rust5定義と固定差分のSOURCE_CLEARを確認した。最初のClippy失敗はtest module配置だけを修復し、既成功5定義を再演していない。元のinactive parity-case tableを有効機能へ追加していない。scalar ray/bitboardと元AVX/LUT/register実装、node/helper会計、strict whole-call clockと元の延長の差は残る。
+
+結果前に固定した10局面/12条件（空き1/2/3/4/6、fixed10・timed clog2）の保存native12、元の新4応答＋既存6参照と、修復後のactual Wasm12が、未平滑STM値・着手・深さ・proven/scoreKind・TT・7係数で一致した。e640のRoot transport-envelope失敗後にnative/元返答を保存結果から回収し、再演していない。750の最初のWasmはscore等が一致しても係数gが1 ULP違ったためFAILEDを保ち、定数/許容誤差/比較項目を変えず同版serde_jsonの標準float_roundtrip featureを使用した。新1bit-roundtripテストと関連software4commandが通過し、失敗1＋未実行11のWasmだけを実行して全7係数bit一致を確認した。新native4ddはbuild済み・新Search0で、同一kernel sourceの保存nativec5dd資格を再用する。
+
+今回Wasm包括1.227524234秒、係数software包括10.863685434秒を別々に記録し、内包時計を加算しない。原e640/750のFAILED/NULL/費・returned完了とdisk pending/attempted・RSS UNKNOWNを保持する。H/新対局/教師/fit/新統計は0。この非選択小終盤の一致はMPC効果・全探索・性能・棋力/browser/default/weight公開の資格ではない。次は元の有効な選択MPCの固定深さ参照、初期化再用の連続探索と公平時計、同時間WDLを分け、旧小型/residual路線へ戻さない。[固定source・原失敗・回収・bit一致と費用](../research-data/othello/strong-ai-n96/full-search-kernels-v1.json)。

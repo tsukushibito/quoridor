@@ -14,7 +14,7 @@ fn zero_weights() -> FullWeights {
     compressed.extend(tokens.iter().flat_map(|token| token.to_le_bytes()));
     FullWeights::from_bytes(&compressed, &vec![0; crate::full_eval::ORDERING_VALUES * 2]).unwrap()
 }
-fn engine() -> FullSearch {
+pub(super) fn engine() -> FullSearch {
     FullSearch::new(
         zero_weights(),
         TableInterpretation::Generic,
@@ -388,4 +388,226 @@ fn full_search_mpc_depth_parity_and_fixed_original_coefficients() {
     assert!(c.error(0, 40, 4, 12) > 0);
     assert!(c.error(5, 40, 4, 12) > c.error(0, 40, 4, 12));
     assert!(!MpcCoefficients { a: f64::NAN, ..c }.valid());
+}
+
+#[test]
+fn full_search_kernel_v6_last_flip_lines_and_lazy_windows() {
+    // Exhaust every 8-bit coloring on each line through every possible last
+    // square. All other squares are occupied; the independent ray rules count
+    // every direction, including cross-line flips and both pass orientations.
+    for cell in 0..64_usize {
+        for (dr, dc) in [(0, 1), (1, 0), (1, 1), (1, -1)] {
+            for coloring in 0..256_u16 {
+                let mut cells = [BLACK; 64];
+                let (row, col) = ((cell / 8) as i32, (cell % 8) as i32);
+                for step in -7..=7_i32 {
+                    let (r, c) = (row + step * dr, col + step * dc);
+                    if (0..8).contains(&r) && (0..8).contains(&c) {
+                        // Distinct row (or horizontal column) gives a bijective
+                        // line-bit coordinate even for the opposite diagonal.
+                        let bit = if dr == 0 { c } else { r };
+                        cells[(8 * r + c) as usize] = if coloring & (1 << bit) == 0 {
+                            BLACK
+                        } else {
+                            WHITE
+                        };
+                    }
+                }
+                cells[cell] = 0;
+                for side in [BLACK, WHITE] {
+                    let state = board(cells, side);
+                    let current = Position::from(&state);
+                    let before = state.status();
+                    let ray_count = state.play(cell as u32).map_or(0, |next| {
+                        let after = next.status();
+                        if side == BLACK {
+                            i32::from(after.black) - i32::from(before.black) - 1
+                        } else {
+                            i32::from(after.white) - i32::from(before.white) - 1
+                        }
+                    });
+                    assert_eq!(
+                        last::count_last_flip(current.sides().0, cell as u8),
+                        ray_count,
+                        "last flip cell={cell} coloring={coloring}"
+                    );
+                }
+            }
+        }
+    }
+    // Explicit full, fail-low and lazy minimum-flip fail-high results. These
+    // NWS values are bounds, so requiring exact output for every window is wrong.
+    let mut cells = [WHITE; 64];
+    cells[0] = 0;
+    cells[3] = BLACK;
+    let state = board(cells, BLACK);
+    let exact = oracle(&state);
+    assert_eq!(exact, -56);
+    let mut visits = 0;
+    for (alpha, beta) in [
+        (-64, 64),
+        (-64, -63),
+        (exact - 1, exact),
+        (exact, exact + 1),
+    ] {
+        let value = last::solve(Position::from(&state), alpha, beta, true, &mut || {
+            visits += 1;
+            Ok(())
+        })
+        .unwrap();
+        assert_kernel_bound(value, exact, alpha, beta);
+        if (alpha, beta) == (-64, -63) {
+            assert_eq!(value, -58, "active lazy minimum-flip bound, not exact-56");
+        }
+    }
+    assert!(visits > 0 && visits <= 8);
+}
+
+fn assert_kernel_bound(value: i32, exact: i32, alpha: i32, beta: i32) {
+    assert!(
+        (-64..=64).contains(&value),
+        "no internal infinity may escape"
+    );
+    if exact <= alpha {
+        assert!(
+            (exact..=alpha).contains(&value),
+            "fail-low upper bound: {value}/{exact}/{alpha}"
+        );
+    } else if exact >= beta {
+        assert!(
+            (beta..=exact).contains(&value),
+            "fail-high lower bound: {value}/{exact}/{beta}"
+        );
+    } else {
+        assert_eq!(value, exact, "inside-window result must be exact");
+    }
+}
+
+#[test]
+fn full_search_kernel_v6_exhaustive_tiny_end_pass_and_windows() {
+    // All3^6 assignments of a frozen six-square corner/edge region, filtered
+    // only to1..4 empties. No RNG/trajectory/weights or ported rule oracle.
+    // Other58 squares use all-black or a fixed checkerboard. Both STM/parity settings and
+    // full/PVS/NWS windows include early terminal and forced-pass positions.
+    let region = [0, 1, 2, 8, 9, 16];
+    let mut states = 0;
+    let mut passes = 0;
+    let mut terminals = 0;
+    for checkerboard in [false, true] {
+        for mut assignment in 0..729_u32 {
+            let mut cells = std::array::from_fn(|cell| {
+                if !checkerboard || (cell / 8 + cell % 8) & 1 == 0 {
+                    BLACK
+                } else {
+                    WHITE
+                }
+            });
+            for cell in region {
+                cells[cell] = (assignment % 3) as u8;
+                assignment /= 3;
+            }
+            let empties = cells.iter().filter(|&&cell| cell == 0).count();
+            if !(1..=4).contains(&empties) {
+                continue;
+            }
+            for side in [BLACK, WHITE] {
+                let state = board(cells, side);
+                states += 1;
+                passes += usize::from(state.status().must_pass);
+                terminals += usize::from(state.status().terminal);
+                let exact = oracle(&state);
+                let position = Position::from(&state);
+                for parity in [false, true] {
+                    for (alpha, beta) in [
+                        (-64, 64),
+                        (-64, -63),
+                        (63, 64),
+                        ((exact - 1).max(-64), exact.max(-63)),
+                        (exact.min(63), (exact + 1).min(64)),
+                        ((exact - 4).max(-64), (exact + 4).min(64)),
+                    ] {
+                        let mut visits = 0;
+                        let value = last::solve(position, alpha, beta, parity, &mut || {
+                            visits += 1;
+                            assert!(visits <= 256, "bounded four-empty tree");
+                            Ok(())
+                        })
+                        .unwrap();
+                        assert_kernel_bound(value, exact, alpha, beta);
+                        assert_eq!(
+                            position,
+                            Position::from(&state),
+                            "copied board never mutates caller"
+                        );
+                    }
+                }
+            }
+        }
+    }
+    assert_eq!(states, 2608);
+    assert!(
+        passes > 0 && terminals > 0,
+        "must actually cover both pass boundaries"
+    );
+    let mut cells = [BLACK; 64];
+    for cell in [0, 7, 56, 63] {
+        cells[cell] = 0;
+    }
+    for cell in [1, 6, 8, 48, 55, 62] {
+        cells[cell] = WHITE;
+    }
+    let position = Position::from(&board(cells, BLACK));
+    let mut visits = 0;
+    assert_eq!(
+        last::solve(position, -64, 64, true, &mut || {
+            visits += 1;
+            if visits == 2 {
+                Err("cancelled")
+            } else {
+                Ok(())
+            }
+        }),
+        Err("cancelled")
+    );
+    assert_eq!(visits, 2);
+}
+
+#[test]
+fn full_search_kernel_v6_active_isolation_and_last3_context_order() {
+    // Active pinned last4 uses empty1_bb, not the unreferenced parity_case
+    // shuffle tables. Verify isolation independently via coordinate distances.
+    let sites = [0_u8, 1, 9, 10, 27, 36, 62, 63];
+    for a in 0..5 {
+        for b in a + 1..6 {
+            for c in b + 1..7 {
+                for d in c + 1..8 {
+                    let mut cells = [sites[a], sites[b], sites[c], sites[d]];
+                    cells.sort_unstable();
+                    cells.reverse();
+                    let empties = cells.iter().fold(0_u64, |bits, &cell| bits | (1 << cell));
+                    let isolated = |cell: u8| {
+                        cells.iter().all(|&other| {
+                            other == cell
+                                || (i32::from(cell / 8) - i32::from(other / 8)).abs() > 1
+                                || (i32::from(cell % 8) - i32::from(other % 8)).abs() > 1
+                        })
+                    };
+                    let expected: Vec<_> = cells
+                        .iter()
+                        .copied()
+                        .filter(|&cell| isolated(cell))
+                        .chain(cells.iter().copied().filter(|&cell| !isolated(cell)))
+                        .collect();
+                    assert_eq!(last::order4(empties, true).as_slice(), expected.as_slice());
+                    assert_eq!(last::order4(empties, false), cells);
+                }
+            }
+        }
+    }
+    let context = (1 << 0) | (1 << 1) | (1 << 27) | (1 << 28);
+    assert_eq!(last::order3([27, 28, 1], context, true), [27, 28, 1]);
+    assert_eq!(
+        last::order3([27, 28, 1], context & !(1 << 0), true),
+        [1, 28, 27]
+    );
 }

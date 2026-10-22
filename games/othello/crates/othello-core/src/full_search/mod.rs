@@ -11,6 +11,7 @@ use crate::{
 use serde::{Deserialize, Serialize};
 
 mod end_table;
+mod last;
 mod mpc;
 mod run;
 mod stability;

@@ -134,7 +134,7 @@ impl<C: FnMut() -> f64, K: FnMut() -> bool> Run<'_, C, K> {
             return self.eval_two_nws(alpha, legal);
         }
         if end && position.empties() <= 4 && !root {
-            return self.small(position, alpha, beta, false);
+            return self.last_kernel(position, alpha, beta);
         }
         let original_alpha = alpha;
         let original_beta = beta;
@@ -525,59 +525,12 @@ impl<C: FnMut() -> f64, K: FnMut() -> bool> Run<'_, C, K> {
         Ok(())
     }
 
-    /// Last1 has no feature evaluation or placement allocation. Last2..4 use
-    /// fixed bitboards and odd-quadrant ordering with the same winner-empty
-    /// arithmetic; specialized upstream shuffle/multi-flip kernels remain a
-    /// documented speed difference, never a different exact score convention.
-    fn small(&mut self, position: Position, mut alpha: i32, beta: i32, passed: bool) -> TreeResult {
-        self.visit()?;
-        let empties = position.empties();
-        if empties == 0 {
-            return Ok(terminal_discs(position));
-        }
-        if empties == 1 {
-            let cell = (!position.occupied()).trailing_zeros();
-            let flipped = position.flips(cell).count_ones() as i32;
-            let difference = position.disc_difference();
-            if flipped != 0 {
-                return Ok(difference + 1 + 2 * flipped);
-            }
-            let flipped = position.switched().flips(cell).count_ones() as i32;
-            if flipped != 0 {
-                return Ok(difference - 1 - 2 * flipped);
-            }
-            return Ok(terminal_discs(position));
-        }
-        let legal = position.legal_moves();
-        if legal == 0 {
-            if passed || position.switched().legal_moves() == 0 {
-                return Ok(terminal_discs(position));
-            }
-            return self
-                .small(position.switched(), -beta, -alpha, true)
-                .map(|v| -v);
-        }
-        let odd = if self.options.parity {
-            odd_quadrants(!position.occupied())
-        } else {
-            0
-        };
-        let mut value = -INF;
-        for group in [legal & odd, legal & !odd] {
-            let mut bits = group;
-            while bits != 0 {
-                let cell = 63 - bits.leading_zeros();
-                bits &= !(1_u64 << cell);
-                let child = position.play(cell).expect("small legal child");
-                let score = -self.small(child, -beta, -alpha, false)?;
-                value = value.max(score);
-                alpha = alpha.max(score);
-                if alpha >= beta {
-                    return Ok(value);
-                }
-            }
-        }
-        Ok(value)
+    /// Dedicated alternating min/max PVS/NWS kernels. Local copied bitboards
+    /// leave feature/TT ownership at this entry; every visit shares our deadline.
+    fn last_kernel(&mut self, position: Position, alpha: i32, beta: i32) -> TreeResult {
+        super::last::solve(position, alpha, beta, self.options.parity, &mut || {
+            self.visit()
+        })
     }
 
     fn end_child(&mut self, position: Position, cell: u8, alpha: i32) -> TreeResult {
@@ -596,7 +549,7 @@ impl<C: FnMut() -> f64, K: FnMut() -> bool> Run<'_, C, K> {
         self.visit()?;
         let n = position.empties();
         if n <= 4 {
-            return self.small(position, alpha, alpha + 1, passed);
+            return self.last_kernel(position, alpha, alpha + 1);
         }
         if self.options.stability && !passed && alpha >= stability::THRESHOLD_NWS[64 - n as usize] {
             let (own, opponent) = position.sides();
@@ -731,18 +684,53 @@ impl<C: FnMut() -> f64, K: FnMut() -> bool> Run<'_, C, K> {
         Ok(best)
     }
 
-    fn clog(&mut self, position: Position, depth: u8) -> Result<Option<i32>, &'static str> {
+    fn clog_child(&mut self, cell: u8, depth: u8) -> Result<Option<i32>, &'static str> {
+        let undo = self.state.play(u32::from(cell)).expect("clog legal child");
+        let result = self.clog(depth);
+        self.state.undo(undo).expect("LIFO clog child undo");
+        result.map(|value| value.map(|score| -score))
+    }
+
+    fn clog(&mut self, depth: u8) -> Result<Option<i32>, &'static str> {
         self.visit()?;
+        let position = self.state.position();
+        if depth == 0 {
+            return Ok(position.terminal().then(|| terminal_discs(position)));
+        }
         let legal = position.legal_moves();
         if legal == 0 {
             if position.switched().legal_moves() == 0 {
                 return Ok(Some(terminal_discs(position)));
             }
-            return self.clog(position.switched(), depth).map(|v| v.map(|n| -n));
+            let undo = self.state.pass().expect("clog forced pass");
+            let result = self.clog(depth);
+            self.state.undo(undo).expect("LIFO clog pass undo");
+            return result.map(|value| value.map(|score| -score));
         }
-        if depth == 0 {
-            return Ok(None);
+        let mut moves = [EMPTY_MOVE; 64];
+        let mut count = 0;
+        let mut bits = legal;
+        while bits != 0 {
+            let cell = (63 - bits.leading_zeros()) as u8;
+            bits &= !(1_u64 << cell);
+            if position.flips(u32::from(cell)) == position.sides().1 {
+                return Ok(Some(64));
+            }
+            moves[count] = Move {
+                cell,
+                value: 0,
+                done: false,
+            };
+            count += 1;
         }
+        // clogsearch::move_list_evaluate: any-depth TT moves, PVS shallow
+        // mobility/potential/evaluation weights and window [-64,64]. Depth<=5
+        // means eval_depth=0; no midgame search or selective proof is substituted.
+        let tt = self
+            .table
+            .find(position)
+            .map_or([NO_MOVE; 2], |entry| entry.moves);
+        self.order(&mut moves[..count], tt, depth, false, false, (-64, 64))?;
         let (own, opponent) = position.sides();
         let bound = if self.options.stability {
             64 - 2 * self.stability.bits(opponent, own).count_ones() as i32
@@ -751,15 +739,16 @@ impl<C: FnMut() -> f64, K: FnMut() -> bool> Run<'_, C, K> {
         };
         let mut best = -INF;
         let mut uncertain = false;
-        let mut bits = legal;
-        while bits != 0 {
-            let cell = 63 - bits.leading_zeros();
-            bits &= !(1_u64 << cell);
-            if position.flips(cell) == opponent {
-                return Ok(Some(64));
+        for index in 0..count {
+            let mut next = index;
+            for j in index + 1..count {
+                if moves[j].value > moves[next].value {
+                    next = j;
+                }
             }
-            match self.clog(position.play(cell).expect("clog legal child"), depth - 1)? {
-                Some(value) => best = best.max(-value),
+            moves.swap(index, next);
+            match self.clog_child(moves[index].cell, depth - 1)? {
+                Some(value) => best = best.max(value),
                 None => uncertain = true,
             }
             if best >= bound {
@@ -876,11 +865,11 @@ pub(super) fn search<C: FnMut() -> f64, K: FnMut() -> bool>(
         while bits != 0 {
             let cell = 63 - bits.leading_zeros();
             bits &= !(1_u64 << cell);
-            match run.clog(
-                position.play(cell).expect("clog root move"),
+            match run.clog_child(
+                cell as u8,
                 if fixed.is_some() { depth.min(5) - 1 } else { 4 },
             ) {
-                Ok(value) => run.clogs[cell as usize] = value.map(|v| -v),
+                Ok(value) => run.clogs[cell as usize] = value,
                 Err(stop) => {
                     preflight = Err(stop);
                     break;
@@ -1009,4 +998,119 @@ pub(super) fn search<C: FnMut() -> f64, K: FnMut() -> bool>(
     result.elapsed_ms = (run.last - run.start).max(0.0);
     debug_assert_eq!(run.state, FeatureState::new(position));
     Ok(result)
+}
+
+#[cfg(test)]
+mod kernel_tests {
+    use super::*;
+    use crate::{BLACK, WHITE};
+    use std::cell::Cell;
+
+    fn fixture_run<'a, K: FnMut() -> bool>(
+        owner: &'a mut FullSearch,
+        state: &GameState,
+        cancelled: K,
+    ) -> Run<'a, fn() -> f64, K> {
+        Run {
+            state: FeatureState::new(Position::from(state)),
+            evaluator: FullEvaluator::new(&owner.weights, owner.interpretation),
+            table: &mut owner.table,
+            end_table: &mut owner.end_table,
+            stability: &owner.stability,
+            errors: &owner.errors,
+            options: FullSearchOptions::default(),
+            clock: || 0.0, // Synthetic clock, never a timing measurement.
+            cancelled,
+            start: 0.0,
+            last: 0.0,
+            deadline: 1000.0,
+            nodes: 0,
+            level: 6,
+            root_move: NO_MOVE,
+            clogs: [None; 64],
+        }
+    }
+
+    #[test]
+    fn full_search_kernel_v6_clog_shallow_tt_order_and_cancel_restore() {
+        let mut owner = super::super::tests::engine();
+        let state = GameState::new();
+        let polls = Cell::new(0_u32);
+        let cancel_at = Cell::new(u32::MAX);
+        let mut run = fixture_run(&mut owner, &state, || {
+            polls.set(polls.get() + 1);
+            assert!(polls.get() < 512, "bounded shallow fixture");
+            polls.get() >= cancel_at.get()
+        });
+        let position = run.state.position();
+        let before = *run.state.indices();
+        let count = run.state.own_count();
+        let mut moves = [EMPTY_MOVE; 64];
+        let mut length = 0;
+        let mut legal = position.legal_moves();
+        while legal != 0 {
+            let cell = (63 - legal.leading_zeros()) as u8;
+            legal &= !(1 << cell);
+            moves[length] = Move { cell, ..EMPTY_MOVE };
+            length += 1;
+        }
+        assert_eq!(length, 4);
+        let tt_move = moves[length - 1].cell;
+        run.table.register(position, 1, 6, -64, 64, 0, tt_move);
+        let tt = run.table.find(position).unwrap().moves;
+        run.order(&mut moves[..length], tt, 4, false, false, (-64, 64))
+            .unwrap();
+        for mv in &moves[..length] {
+            if mv.cell == tt_move {
+                assert_eq!(mv.value, 10_000_000, "any-depth TT first move");
+            } else {
+                let child = position.play(u32::from(mv.cell)).unwrap();
+                let legal = child.legal_moves();
+                let mobility =
+                    2 * legal.count_ones() as i32 + (legal & CORNERS).count_ones() as i32;
+                let potential = potential_mobility(child.sides().1, !child.occupied());
+                assert_eq!(
+                    mv.value,
+                    (38 - mobility) * 35 + (38 - potential) * 17 + 64 * 269
+                );
+            }
+        }
+        assert_eq!(
+            run.clog(2),
+            Ok(None),
+            "no terminal proof in initial shallow tree"
+        );
+        assert_eq!(run.state.position(), position);
+        assert_eq!(run.state.indices(), &before);
+        assert_eq!(run.state.own_count(), count);
+        // Cancel after entering the first child and its ordering, exercising
+        // propagation through the new clog_child FeatureState undo boundary.
+        cancel_at.set(polls.get() + 7);
+        assert_eq!(run.clog(2), Err("cancelled"));
+        assert_eq!(run.state.position(), position);
+        assert_eq!(run.state.indices(), &before);
+        assert_eq!(run.state.own_count(), count);
+    }
+
+    #[test]
+    fn full_search_kernel_v6_clog_pass_proof_restores_features() {
+        let mut owner = super::super::tests::engine();
+        let mut cells = [0; 64];
+        cells[1] = BLACK;
+        for cell in [0, 27, 28, 35, 36, 62, 63] {
+            cells[cell] = WHITE;
+        }
+        let state: GameState = serde_json::from_value(serde_json::json!({
+            "version":1,"board":cells.as_slice(),"toMove":BLACK
+        }))
+        .unwrap();
+        assert!(state.status().must_pass);
+        let mut run = fixture_run(&mut owner, &state, || false);
+        let before = *run.state.indices();
+        let position = run.state.position();
+        assert_eq!(run.clog(2), Ok(Some(-64)));
+        assert_eq!(run.state.position(), position);
+        assert_eq!(run.state.indices(), &before);
+        assert_eq!(run.state.own_count(), 1);
+    }
 }

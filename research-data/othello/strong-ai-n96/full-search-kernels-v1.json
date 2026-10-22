@@ -1,0 +1,289 @@
+{
+  "schema": "othello.full-search-kernels-qualification.v1",
+  "engineCommit": "570d5e0a478c9d720d75de06a5d31995f412704a",
+  "scope": "Dedicatedscalar last1..4 and activeisolated-empty order plusclog shallowordering; standard f64 transport repair; finite software/native cached-reference/actualWasm endcase qualification",
+  "source": [
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_search/last.rs",
+      "bytes": 9506,
+      "mode": "0644",
+      "sha256": "d63e7ead279563271b20230e6b33a7c6ef2e0e5170440b0b81e1443a07b90db5"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_search/run.rs",
+      "bytes": 40172,
+      "mode": "0644",
+      "sha256": "258ce047b70f2be566c6245562383928850be8ea67ef67c6279be1ad478fedc6"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_search/tests.rs",
+      "bytes": 20802,
+      "mode": "0644",
+      "sha256": "884b49074279c7f55bf0f3ba31e3ae26315d8a9f9a8bb71185313b73803d8b0e"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_search/mod.rs",
+      "bytes": 5550,
+      "mode": "0644",
+      "sha256": "b107332cbbf68c44768f082e2e50347f160567bc7f9665c922dc4a5e60b197b8"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_search/SOURCE_MAP.md",
+      "bytes": 13629,
+      "mode": "0644",
+      "sha256": "a9ca2aee8f22ac5573605145803021227eed100bc1050fbe5f6babb9bb058435"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/Cargo.toml",
+      "bytes": 238,
+      "mode": "0644",
+      "sha256": "4f98eb5217b5520b23b89c0b847ebec126ed14e69dc346c16a5473aa6de4090a"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/tests/full_search_coefficients.rs",
+      "bytes": 2245,
+      "mode": "0644",
+      "sha256": "1bc10a42239a1f28bcc82e3ef5bb5154a1a754f7c29037f08f272f6a57a93006"
+    }
+  ],
+  "sourceLicense": "GPL-3.0-or-later with originalnotice; source origin fixed Console7.8.1",
+  "weightRedistribution": "UNQUALIFIED; borrowed fixed originalweights for local qualification only",
+  "archive": {
+    "path": "/workspaces/quoridor/research-data/othello/strong-ai-n96/full-search-kernels-v1-checks.tar.gz",
+    "bytes": 73142,
+    "mode": "0644",
+    "sha256": "8dd630b54b20cddbb117dfe906887c94e697c3d9bc6aa5e58ae74e290d51b968"
+  },
+  "archiveMemberCount": 61,
+  "archiveContents": "Source7 plus GPLnotice, exact finite configs/logs/returned-vs-disk/results/recovery/review; no weight/model/game/training payloads",
+  "reviews": {
+    "kernels": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-search-kernels-boundary-review-v1/reviewer/report.md",
+      "bytes": 6335,
+      "mode": "0644",
+      "sha256": "933bc14fa1b5658c79ac999d217866916e228f9deab9bb3f0e1e4a048083914e"
+    },
+    "f64": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-search-kernels-boundary-review-v1/reviewer/related-f64-v1/report.md",
+      "bytes": 3531,
+      "mode": "0644",
+      "sha256": "11b4569e3027f0bb23969d5c71f2da82d812ce5d3c6841d1e3643f2b0c20dd90"
+    },
+    "verdicts": ["SOURCE_CLEAR", "SOURCE_CLEAR"],
+    "v7Relationship": {
+      "proof": {
+        "path": "/workspaces/quoridor/.worktree/othello-core-n96/.artifacts/othello-full-search-n96/lint-module-placement-v7/transposition-proof.json",
+        "bytes": 3513,
+        "mode": "0644",
+        "sha256": "59374640420b07d7398148b94e4f81a1bae83393ed8dd2daa26ab5d7da1a2c8e"
+      },
+      "change": "Only complete cfg(test) module transposed toEOF; production-minus-block and testmodule bytes identical. No repeated review."
+    }
+  },
+  "software": {
+    "newKernelUnits": 5,
+    "newCoefficientBitUnit": 1,
+    "oldPassingTestsReplayed": false,
+    "originalKernelFailure": {
+      "job_id": "9e7e020a-1b23-45b5-8195-01e53ca42ca1",
+      "outcome": "failed",
+      "error": null,
+      "error_notes": [],
+      "exit_code": 1,
+      "finished_at": "2026-10-22T02:23:46.946825+00:00",
+      "wall_seconds": 4.237482897005975,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+      "cleanup_complete": true,
+      "cleanup_errors": [],
+      "log_bytes_seen": 856,
+      "log_bytes_retained": 856
+    },
+    "kernelBuild": {
+      "job_id": "d06482c7-f802-4bef-a386-729e23985b8a",
+      "outcome": "succeeded",
+      "error": null,
+      "error_notes": [],
+      "exit_code": 0,
+      "finished_at": "2026-10-22T02:40:03.389963+00:00",
+      "wall_seconds": 7.440882694907486,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+      "cleanup_complete": true,
+      "cleanup_errors": [],
+      "log_bytes_seen": 255,
+      "log_bytes_retained": 255
+    },
+    "roundtripSoftware": {
+      "job_id": "5c6a3334-3040-448d-8ede-72a0d0eac23a",
+      "outcome": "succeeded",
+      "error": null,
+      "error_notes": [],
+      "exit_code": 0,
+      "finished_at": "2026-10-22T03:16:15.937625+00:00",
+      "wall_seconds": 10.863685433985665,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+      "cleanup_complete": true,
+      "cleanup_errors": [],
+      "log_bytes_seen": 329,
+      "log_bytes_retained": 329
+    },
+    "roundtripCollection": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-search-coefficient-roundtrip-software-v1/completion-5c6a3334/collection.json",
+      "bytes": 3994,
+      "mode": "0644",
+      "sha256": "bd0955f3451439b365a72200bc72235452e385d7c29357428001165b7f106cd4"
+    },
+    "interpretation": "Newfocused6 units and relatedClippy/native/Wasm builds only; release/build is not runtime or strength qualification"
+  },
+  "numeric": {
+    "freeze": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-search-kernels-numerical-v1/freeze.json",
+      "bytes": 2390,
+      "mode": "0644",
+      "sha256": "2b1e0663a005074bac6675d41b214270157850b864c4ef742417001738d918af"
+    },
+    "cases": 12,
+    "uniqueStates": 10,
+    "modes": "10fixed and2timedclog exact endcases, selectivity6/MPCfalse, empties1/2/3/4/6 from two priorqualified legalseries; H0",
+    "nativeSavedRequests": 12,
+    "freshOriginalRequestsInInitialStage": 4,
+    "retainedOriginalReferences": 6,
+    "retainedOriginalCaseSlots": 8,
+    "wasmSuccessfulCurrentRequests": 12,
+    "wasmFailedPriorControlIdentityRequests": 1,
+    "totalSearchAttemptsAcrossAllKernelStages": 29,
+    "cacheReuse": "Original/native prefix from failed e640 saved rawresponses recovered without replay; onlyfailed1+unrun11Wasm ran after f64 postimage change.",
+    "result": "All12 unsmoothedSTMraw/score/move/depth/proven/scorekind/TT/options and all7f64 coefficientbits match saved nativec5dd; raw matches original references.",
+    "gBits": "3ffc70a545d535a4",
+    "priorBadGBits": "3ffc70a545d535a5",
+    "collection": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-search-kernels-numerical-v3/completion-521c1f2c/collection.json",
+      "bytes": 15711,
+      "mode": "0644",
+      "sha256": "0a89f58b96cb78fc791c994d5fa94299a2bec20338e8be42658a0da3e1b7a222"
+    },
+    "qualification": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-search-kernels-numerical-v3/qualification.json",
+      "bytes": 2601,
+      "mode": "0644",
+      "sha256": "e52279c842a41716d278fe38d89db943991036c3ea81e085ffac2b6dbc777e0c"
+    },
+    "currentWasm": [
+      {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-search-coefficient-roundtrip-software-v1/generated/othello.js",
+        "bytes": 25173,
+        "mode": "0644",
+        "sha256": "bad1d8e2749712565e65f82ee92110d587034cae957acc0c4643f52a2354e4c7"
+      },
+      {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-search-coefficient-roundtrip-software-v1/generated/othello_bg.wasm",
+        "bytes": 1696653,
+        "mode": "0644",
+        "sha256": "4e9282b6794787cb461e1d397816432f7af2ca429f4d463e08bcb7c14dbaecae"
+      },
+      {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-search-coefficient-roundtrip-software-v1/generated/othello.d.ts",
+        "bytes": 6255,
+        "mode": "0644",
+        "sha256": "bec236b5400b1de2efdf88afc8a86b007eb6e391e2a40614fa48c60435922682"
+      },
+      {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-search-coefficient-roundtrip-software-v1/generated/othello_bg.wasm.d.ts",
+        "bytes": 2597,
+        "mode": "0644",
+        "sha256": "d962dbf36254559c0a5ed98b2816dd33d6dec9e4f51eec633bdd9a2ac5129f53"
+      },
+      {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-search-coefficient-roundtrip-software-v1/generated/package.json",
+        "bytes": 276,
+        "mode": "0644",
+        "sha256": "e24914fb5f178d25e51a0b2b7ed9aea2a285225974a5aa7f638d6c95334c1a6b"
+      }
+    ],
+    "currentNativeBuild": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/full-search-coefficient-roundtrip-software-v1/image-4dd91bcece99b927d60ee988a09e2547b6816c558b70e042c74157875a3c6f02/othello-full-search",
+      "bytes": 780152,
+      "mode": "0755",
+      "sha256": "4dd91bcece99b927d60ee988a09e2547b6816c558b70e042c74157875a3c6f02"
+    },
+    "currentNativeSearch": "UNRUN; newnative4dd built only; exact samekernel source inherited savednativec5dd results, no newnative request.",
+    "wholeSecondsOnce": 1.227524233981967,
+    "newGames": 0,
+    "H": 0,
+    "selectionRNG": 0,
+    "statistics": 0
+  },
+  "originalFailures": {
+    "envelope": {
+      "job_id": "e640ade2-3500-4fdb-ba8c-cf95424d5523",
+      "outcome": "failed",
+      "error": null,
+      "error_notes": [],
+      "exit_code": 1,
+      "finished_at": "2026-10-22T02:50:40.129004+00:00",
+      "wall_seconds": 2.422032466973178,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+      "cleanup_complete": true,
+      "cleanup_errors": [],
+      "log_bytes_seen": 794,
+      "log_bytes_retained": 794
+    },
+    "coefficientIdentity": {
+      "job_id": "7504570f-c434-4bf1-b68b-905cbae90689",
+      "outcome": "failed",
+      "error": null,
+      "error_notes": [],
+      "exit_code": 1,
+      "finished_at": "2026-10-22T02:57:44.091476+00:00",
+      "wall_seconds": 1.2217604219913483,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+      "cleanup_complete": true,
+      "cleanup_errors": [],
+      "log_bytes_seen": 794,
+      "log_bytes_retained": 794
+    },
+    "preserved": "All original FAILED/NULL/partial/costs, old9eClippy failure and type/module checker failures retained; no refinalization or hidden repeated successful requests"
+  },
+  "cleanup": "All actual readers/native/Node/directwait reaped/handles/errors[]/remaining[]; returned mask/persist complete distinct from disk pending/attempted.",
+  "cost": {
+    "eachJobWholeSecondsOnce": {
+      "full-search-kernels-software-v1": 4.237482897005975,
+      "full-search-kernels-software-v2": 7.440882694907486,
+      "full-search-coefficient-roundtrip-software-v1": 10.863685433985665,
+      "full-search-kernels-numerical-v1": 2.422032466973178,
+      "full-search-kernels-numerical-v2": 1.2217604219913483,
+      "full-search-kernels-numerical-v3": 1.227524233981967
+    },
+    "nestedAdded": false,
+    "allSourcePreparationAdminCosts": "UNKNOWN; not treated as zero/refund/reset"
+  },
+  "remainingDifferences": [
+    "Scalar bounded ray/ordinary bitboards andcompacttables rather than upstream AVX/LUT/register kernels; performance unmeasured.",
+    "Helper/node accounting differs; no equal-node or NPS claim.",
+    "Intentional strict whole-call deadline/cancel rather than upstream post-budget/minimumdepth extension."
+  ],
+  "remainingQualification": [
+    "Actual selectiveMPC fixed-depth comparison",
+    "Continuous initialized native/original Search timing/whole/CPU/RAM and fair same-time WDL",
+    "Fullweight rendered browser load/Workerpeak and strength",
+    "Public weight redistribution conditions"
+  ],
+  "RSSPeak": null,
+  "productDefaultChanged": false,
+  "modelsChanged": false,
+  "strength": "UNRUN"
+}

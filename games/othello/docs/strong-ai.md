@@ -59,7 +59,13 @@ STM/盤面向き/色、raw STEP単位、disc単位、丸め、clamp段階と外�
 
 [最初の固定深さ比較](../../../research-data/othello/strong-ai-n96/full-search-numerical-v1.json)は、既観測の合法2系列から29の異なるstate/depthを結果前に固定した。浅い非選択21件、小終盤6件（forced pass1件を含む）、終局2件の計58要求で、同じ実weightのRustと元AVX参照のSTM未平滑値が全件一致し、今回は着手も全件一致した。元の四つの中央セルが埋まった記録局面だけを使用し、非終局の要求深さは空き数以下、両TTをケース時計の外でclearした。元参照は外部compileでMPCをOFFにしており、stock consoleでroot selectivity=6を指定しただけの条件とは区別する。包括1.417980500秒にsetup/reset/search/cleanupの内包時計を加算しない。入力準備の32件には共通初期盤面の3深さ分が重複していたため、入場前に29件へ統合し、失敗記録を保持して補充しなかった。H・新対局・教師・fitは0である。
 
-この有限一致は全探索の同値性や独立minimax証明ではない。元last4の実効isolated-empty順序、last2/3専用kernel、SIMD実行、clog ordering、全時計の差を対応表に残し、有効なsinglethread手法の忠実な移植を継続する。選択/MPC・深い境界、初期化再用の連続探索、処理速度・同時間対局、browser全weight動作・製品defaultは別の資格である。局所的な一致や元より弱いことを、小型評価路線へ戻す根拠にしない。
+この29件の有限一致は全探索の同値性や独立minimax証明ではない。その時点で残った専用終盤kernel・実効isolated-empty順序とclog orderingは、後述の別差分として移植・検証した。選択/MPC・深い境界、初期化再用の連続探索、処理速度・同時間対局、browser全weight動作・製品defaultは別の資格である。局所的な一致や元より弱いことを、小型評価路線へ戻す根拠にしない。
+
+[専用終盤kernelと輸送修復](../../../research-data/othello/strong-ai-n96/full-search-kernels-v1.json)では、last1のPVS/lazy NWS、min/maxの視点・pass・窓を保つlast2..4、実際に有効なisolated-empty順序、clog prepassの浅い評価/TT順序を実装した。新しいkernel/clogのRust5定義と、後述する7係数bit-roundtripの新1定義が通過した。最初のClippy失敗はtest moduleの配置だけを直し、既成功5定義や旧9/R1/R2/evaluator suiteを再演していない。独立source確認は固定kernel差分と関連f64輸送差分でそれぞれSOURCE_CLEAR。scalar ray/通常bitboardと元AVX/LUT/register実装、helper/nodeの数え方、元のpost-budget延長を採用しないstrict whole-call clockの差は残す。
+
+同じ実weight・記録2系列から固定した10局面/12条件（空き1/2/3/4/6、fixed10とtimed clog2）で、保存済みnative12応答、元参照の新規4応答と既存6参照、修復後のactual Wasm12応答を照合した。未平滑STM値・着手・深さ・proven/scoreKind・TTと全7係数が一致した。新しいnative4dd imageはbuild済みだがSearchを再実行しておらず、同じkernel sourceの旧c5dd imageによる保存結果を再用したという資格である。今回のWasm工程は包括1.227524234秒、新native/元engine要求0・H/新対局/教師/fit/統計0で、公平な速度比較ではない。
+
+元e640工程ではnative12/元4まで完了した後にRootのWasm transport envelope検査で失敗し、保存返答だけから回収した。続く750工程の最初のWasm返答はscore等が一致した一方、MPC係数gがnativeのbit `3ffc70a545d535a4`に対し`3ffc70a545d535a5`で厳格なcontrol identityに失敗した。定数・許容誤差・比較項目を変えず、同じserde_json版の標準`float_roundtrip` featureで修復し、新1テスト/Clippy/native release/Wasm生成の包括10.863685434秒を別に記録した。修復後は失敗1＋未実行11のWasmだけを実行し、7係数すべてのbit一致を確認した。両原FAILED/NULL/費とdisk pending/attemptedは保持する。MPC OFFのこの比較からMPCによるscoreへの影響、選択探索全体、NPS・棋力・browser配布・weight公開条件を認定しない。
 
 ## 最初の受入単位と検証
 
