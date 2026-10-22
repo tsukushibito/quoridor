@@ -23,6 +23,32 @@ from .test_public_sigma import fixture_cache
 
 
 class IntegrationContracts(unittest.TestCase):
+    def test_training_lr_is_resolved_before_admission_without_changing_explicit_configs(self):
+        with tempfile.TemporaryDirectory() as directory:
+            explicit = Path(directory) / "config.json"
+            for incoming, expected_lr in (
+                (None, 0.0001),
+                ({}, 0.001),
+                ({"optimizer": {"lr": 0.002}}, 0.002),
+            ):
+                if incoming is not None:
+                    explicit.write_text(json.dumps(incoming))
+                with (
+                    self.subTest(incoming=incoming),
+                    patch(
+                        "quoridor_training.distance_steps.require_main_volume",
+                        side_effect=RuntimeError("stop before corpus/framework"),
+                    ) as admission,
+                ):
+                    with self.assertRaisesRegex(RuntimeError, "stop before corpus/framework"):
+                        train.train(
+                            "unused", "unused", None if incoming is None else explicit, steps=11
+                        )
+                    resolved = admission.call_args.args[0]
+                    self.assertEqual(resolved["optimizer"]["lr"], expected_lr)
+                    self.assertEqual(resolved["training"]["steps"], 11)
+            self.assertEqual(resolve_config()["optimizer"]["lr"], 0.001)
+
     def test_workers_are_explicit_zero_default_two_supported(self):
         self.assertEqual(resolve_config()["training"]["supply_workers"], 0)
         self.assertEqual(

@@ -473,7 +473,12 @@ def train(
     progress_callback=None,
 ):
     start = time.monotonic()
-    cfg = resolve_config(config_path, () if steps is None else (f"training.steps={steps}",))
+    overrides = []
+    if config_path is None:
+        overrides.append("optimizer.lr=0.0001")
+    if steps is not None:
+        overrides.append(f"training.steps={steps}")
+    cfg = resolve_config(config_path, overrides)
     if cfg["experiment"]["study"] == "mixed-outcome":
         if steps is not None or scale_path is not None or supply_workers is not None:
             raise ValueError(
@@ -504,8 +509,6 @@ def train(
     if input_binding and supply_workers != cfg["training"]["supply_workers"]:
         raise ValueError("bound input requires the configured supply worker mode")
     cfg["training"]["supply_workers"] = supply_workers
-    if config_path is None:
-        cfg["optimizer"]["lr"] = 0.0001
     device = configure_framework(cfg)
     corpus = load(cache)
     static_teacher = getattr(corpus, "static_teacher", False)
