@@ -1,0 +1,157 @@
+{
+  "issue": "quoridor-n96.1",
+  "job": "b0788be4-409d-497b-a912-d6f544f34a1a",
+  "status": "GENERATION16_COMPLETE_INPUTS_ADOPTED_DEVELOPMENT_ONLY",
+  "collection": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/native64-development16-generation-v1/launch-repair-v2/completion-b0788be4/collection.json",
+    "bytes": 4708,
+    "mode": "0644",
+    "sha256": "b9017e6cbf4cbb67b0b6855ea7751197cdc0e2944bd8ddbf563364758d5df364"
+  },
+  "collector": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/native64-development16-generation-v1/launch-repair-v2/completion-b0788be4/collect.py",
+    "bytes": 7992,
+    "mode": "0644",
+    "sha256": "c76e3ca2b19acbe50ee43234494262041f5429c39bfab8682c9c8b39814f34b1"
+  },
+  "inputQualification": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/native64-development16-generation-v1/launch-repair-v2/completion-b0788be4/input-qualification.json",
+    "bytes": 10633,
+    "mode": "0644",
+    "sha256": "e88be4d2369141853d51308e1528c54c89742b8f6f723eb07923d40b7b4b8880"
+  },
+  "roots": {
+    "path": "/workspaces/quoridor/.worktree/assets/data/othello-native64-development-n96-v1/generation/roots.json",
+    "bytes": 21142,
+    "mode": "0644",
+    "sha256": "6498c77727bb124a43e0b60ec85cb0d7ecfc6e8d148fc76f591670202db70c38"
+  },
+  "report": {
+    "path": "/workspaces/quoridor/.worktree/assets/data/othello-native64-development-n96-v1/generation/result.json",
+    "bytes": 2319,
+    "mode": "0644",
+    "sha256": "c6b29070874fe21620c6cad5f806cdd1f812bd6bceb5ef52a882a67b2c0946ca"
+  },
+  "generationEvidence": {
+    "path": "/workspaces/quoridor/.worktree/assets/data/othello-native64-development-n96-v1/generation/generation-evidence.json",
+    "bytes": 86582,
+    "mode": "0644",
+    "sha256": "f0ce892c0bf44310ef9302a12507822bc108bdfadea1b9f04ea650fed4870fcd"
+  },
+  "source": {
+    "bytes": 46754,
+    "mode": "0644",
+    "path": "/workspaces/quoridor/games/othello/python/othello_arena/generation.py",
+    "sha256": "84992cc5fe4e2a8e936013d6354679ff7c24f3c5a75f9fa88843cf5926733e24"
+  },
+  "canonicalSource": {
+    "bytes": 1523,
+    "mode": "0644",
+    "path": "/workspaces/quoridor/games/othello/python/othello_arena/canonical.py",
+    "sha256": "b5aa743f74c806ca16e4d7c172b1fd78a8af0930b15b4b3db3ab9ce68f712218"
+  },
+  "config": {
+    "bytes": 11893,
+    "mode": "0644",
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/native64-development16-generation-v1/launch-repair-v2/generation-config.json",
+    "sha256": "7394f1653cdc82a4d8116ae95686417123022c636233c04aab52de65c8e186c6"
+  },
+  "generationCalls": 1,
+  "rootsPlanned": 16,
+  "rootsComplete": 16,
+  "rootDeficits": [],
+  "unrunRoots": 0,
+  "familyOrder": [
+    "development/native64-prospective/f01",
+    "development/native64-prospective/f02",
+    "development/native64-prospective/f03",
+    "development/native64-prospective/f04",
+    "development/native64-prospective/f05",
+    "development/native64-prospective/f06",
+    "development/native64-prospective/f07",
+    "development/native64-prospective/f08",
+    "development/native64-prospective/f09",
+    "development/native64-prospective/f10",
+    "development/native64-prospective/f11",
+    "development/native64-prospective/f12",
+    "development/native64-prospective/f13",
+    "development/native64-prospective/f14",
+    "development/native64-prospective/f15",
+    "development/native64-prospective/f16"
+  ],
+  "seeds": "2026102302001..2016 fixed order",
+  "placement": 16,
+  "mandatoryPassResolved": true,
+  "maxActions": 128,
+  "noRefill": true,
+  "H": 0,
+  "HUse": "Existing identity-only persisted metadata",
+  "labels": null,
+  "teacherSearchCalls": 0,
+  "games": 0,
+  "freshHistoryComplete": true,
+  "freshHistoryScope": {
+    "collisionPolicy": "stop-on-any-repeat",
+    "coverage": "placement8+-pass-inclusive",
+    "domain": "raw-canonical-board-bytes"
+  },
+  "historicalEndpointScope": {
+    "coverage": "declared-endpoints-only",
+    "domain": "sha256-canonical-board-bytes",
+    "passInclusiveHistoryCoverage": "UNKNOWN"
+  },
+  "historicalPassInclusiveHistoryCoverage": "UNKNOWN",
+  "unseenUnusedFitIndependence": null,
+  "strengthQualification": null,
+  "native64RuntimeAdmission": null,
+  "costSeconds": {
+    "outer": 0.23820524895563722,
+    "innerIncludedNotAdded": 0.08026544703170657
+  },
+  "actualOuterCleanup": {
+    "directReaped": true,
+    "complete": true,
+    "remaining": []
+  },
+  "actualInnerCleanup": {
+    "direct_child_reaped": true,
+    "cleanup_complete": true,
+    "handle_closes_complete": true,
+    "remaining": [],
+    "signal_mask_restoration": "completed",
+    "final_record_persist": "completed"
+  },
+  "rulesProcessCleanup": {
+    "bytesRetained": 65536,
+    "bytesSeen": 185695,
+    "directReaped": true,
+    "errors": [],
+    "exitCode": -15,
+    "unexpectedExit": false
+  },
+  "rulesProcessIdentity": "NOT_EMITTED; no invented PID/start/boot",
+  "knownExactIdentitiesAbsent": 5,
+  "TMPabsent": true,
+  "old75Failure": "Unchanged0attempted/all16UNRUN/costretained; norefund/restart",
+  "noRulesSearchCanonicalRNGReplay": true,
+  "nextBindingInputs": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/native64-development16-generation-v1/launch-repair-v2/completion-b0788be4/B21-actual16-binding-inputs.json",
+    "bytes": 7376,
+    "mode": "0644",
+    "sha256": "50471e704484c7d28386af12557ce4c232270ba305b969d9795270fe3ecc5738"
+  },
+  "sameOwnerTask": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/native64-development16-generation-v1/launch-repair-v2/completion-b0788be4/B21-actual16-native64-binding.md",
+    "bytes": 3735,
+    "mode": "0644",
+    "sha256": "abeb105e23d0f6c93b9faa6a2b4934ba6eb03c9a0b449b8442e138fd869349d1"
+  },
+  "sameOwnerDispatch": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/native64-development16-generation-v1/launch-repair-v2/completion-b0788be4/B21-binding-dispatch.json",
+    "bytes": 157,
+    "mode": "0644",
+    "sha256": "265e1ab9d7c388d61013a9b5aa2cad88c71509512353209036ae684ad2cfc62b"
+  },
+  "next": "Existing normalnative64 config actual16 inputbinding by SAMEB21; Root later binds runtime/load/resources/clock/output/admission, not newgamepermission. Quoridor savedanalysis prep remains independent.",
+  "pausesSealsDefaultsModelsForeign50GB": "UNCHANGED"
+}

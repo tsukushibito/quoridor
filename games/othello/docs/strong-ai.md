@@ -85,6 +85,8 @@ STM/盤面向き/色、raw STEP単位、disc単位、丸め、clamp段階と外�
 
 2026-10-23の最初の同時間native比較は、未使用・未見・fit独立を認定しないprospective development対戦とする。性能比較の4系列とは別に、seed2026102302001..2016、mandatory pass後の16placement、各128actions上限・no refillで新16familyを準備する。利用可能なtyped endpointとHのidentity-only除外、新cohort内のplacement8以降のpass-inclusive identity・self/inter-family衝突停止を保持し、historical full-history coverageはUNKNOWNと明記する。古い全履歴の復元を入口にしない。
 
+同日のrules-only生成b0788be4は16/16root・deficitなしで完了し、元packageを上記development範囲だけで採用した。[入力資格と元証拠](../../../research-data/othello/strong-ai-n96/native64-development16-generation-completion-v2.json)にfamily順・source・除外範囲・cleanupを固定し、未見性や対戦の実入場資格とは分ける。現在はこの実入力を現役native64 configへ束縛する工程であり、64局の成績・棋力は未確認である。
+
 同じ16familyの両色で現Rust版と固定Egaroucid/Edaxを各32局、計64局とし、各相手の予定32局を分母に残す。実経路の1秒・1thread・active TT上限32MiB・book/ponder OFF、現行game停止上限とfirst-error規約を結果前に束縛する。記述的区間は既存family-bootstrap経路で一つのPCG64表10000×16、seed2026102302064、同じfamily順を両相手へ共有し、linear95%とする。相手ごとの予定32局が完結しなければその区間はNULL、失敗・未実行の補充や除外はしない。固定depthの32組raw/policy一致や平均時間比を一般棋力・同等性・最強・製品昇格へ読み替えず、時間比だけで初回対戦を拒否しない。必要な現役caller差分の通常source/software資格と実資源・時間・保持は、実入場前に統合担当が解決する。
 
 実weightの符号化入力は合計38,716,218B、compact復号tableは73,963,392Bであり、旧16MiB配布目安を今回の構成へ適用できない。weight公開条件を確認した上で、この実サイズを配布設計の出発点とする。復号byte数はRSS/peakではなく、Worker256MiB目安の成立も未測定である。TT・入力の二重保持・ロード時間を含む実browser計測で見直す。50GBと実host RAM安全枠は維持する。既存Rust UIの確認/保存/再開とgeneration/request所有を再用し、新規/中断/局面変更で古い返信を適用しない。同期WasmのpostMessage取消だけに依存せず、Worker終了/再生成を使う。nativeでの一致/棋力をbrowserの速度/棋力へ読み替えない。製品defaultは別の受入判断まで維持する。
