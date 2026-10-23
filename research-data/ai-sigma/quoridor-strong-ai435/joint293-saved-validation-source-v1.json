@@ -1,0 +1,95 @@
+{
+  "issue": "quoridor-4lc.435",
+  "status": "EXISTING_SAVED_VALIDATION_SOURCE_CORRESPONDENCE_ACCEPTED_NO_NEW_FORWARD",
+  "intake": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/continuation-20261023-practical-v1/saved-diagnosis-next-v1/Q-diagnostic-intake.json",
+    "bytes": 2240,
+    "mode": "0644",
+    "sha256": "948f0e735d4eab072897f8890627cea06ef1a098d2443fa3373dd9107d1e7c65"
+  },
+  "sourcePacket": {
+    "path": "/workspaces/quoridor/.worktree/quoridor-strong435/.artifacts/quoridor-strong435/joint293-validation-diagnostic-prep-v1/packet.json",
+    "bytes": 5555,
+    "mode": "0644",
+    "sha256": "fd89284166a491dac8335e0fb1e07305ceb5cb42a75fce0d53cfb03814d7eac9"
+  },
+  "report": {
+    "path": "/workspaces/quoridor/.worktree/quoridor-strong435/.artifacts/quoridor-strong435/joint293-validation-diagnostic-prep-v1/report.md",
+    "bytes": 2199,
+    "mode": "0644",
+    "sha256": "5aa1ce403e00f8fa5104168002a8f434ff73c5c86923d9650afd06f14b95a532"
+  },
+  "metrics": {
+    "path": "/workspaces/quoridor/.worktree/quoridor-strong435/.artifacts/quoridor-strong435/joint293-validation-diagnostic-prep-v1/saved-supported-metrics.json",
+    "bytes": 2692,
+    "mode": "0644",
+    "sha256": "02598d6dab70ebc46fb404019c8f01f8565620458cb3d4ca07233695ab4b7c71"
+  },
+  "labelProvenance": {
+    "path": "/workspaces/quoridor/.worktree/quoridor-strong435/.artifacts/quoridor-strong435/joint293-validation-diagnostic-prep-v1/cohort-label-provenance.json",
+    "bytes": 5899,
+    "mode": "0644",
+    "sha256": "f7e5dcf1d790cb0c7c8eef64ea8650abc7b0b7836a2670d548547bc25136eab0"
+  },
+  "metricCapabilities": {
+    "path": "/workspaces/quoridor/.worktree/quoridor-strong435/.artifacts/quoridor-strong435/joint293-validation-diagnostic-prep-v1/metric-and-api-capabilities.json",
+    "bytes": 1824,
+    "mode": "0644",
+    "sha256": "8ac0d61aa95a8d350a9d5830130df07c6e7aaedb4d261acd01b28768f05146ff"
+  },
+  "savedMetrics": {
+    "rows": 192.0,
+    "input_classes": 187,
+    "actual_logical_rows": 374,
+    "expanded_orientation_observations": 384,
+    "target_mse": 0.06216923892486726,
+    "class_macro_mse": 0.06296816805848811,
+    "target_mae": 0.17181247978942338,
+    "decisive_sign_accuracy": 0.9114583333333334,
+    "bias": 2.284336930286372,
+    "target_mean": 0.18763604776995635,
+    "target_second_moment": 0.33562217548180384,
+    "target_zero_rows": 0.0,
+    "target_zero_mean_absolute_prediction": null,
+    "target_saturated90_fraction": 0.13541666666666666,
+    "target_saturated99_fraction": 0.020833333333333332,
+    "predicted_saturated90_fraction": 0.19791666666666666,
+    "predicted_saturated99_fraction": 0.07552083333333333,
+    "policy_cross_entropy": 3.5728393531559655,
+    "teacher_entropy": 0.8401751531154863,
+    "policy_kl": 2.732664204784669,
+    "policy_top1": 0.13020833333333334,
+    "policy_top3": 0.3697916666666667,
+    "joint_objective": 0.4194531742404638
+  },
+  "semantics": {
+    "bias": "weighted SUM(prediction-teacher), not mean bias",
+    "sign": "teacher nonzero sign agreement; scalar teacher zero is not Draw0",
+    "policy_top1_top3": "agreement with teacher argmax, not full rank/MRR",
+    "joint_objective": "value MSE + 0.1 legal policy CE; freeze best_validation_mse field contains this joint objective",
+    "weighting": "original observation multiplicity, equal actual canonical/trueLR orientations",
+    "missing_denominators": "NULL remains NULL, including no teacher-zero rows"
+  },
+  "validation": "Exposed selectedV192,187classes,374actualrows,384virtualorientations; not independentstrength. All maintained supportedmetrics already exist; unavailablemetrics not selected.",
+  "teacher": "Fixed original Claustrophobia joint rawSTM+legal209/temp1, notCedar/outcomez/visitpi",
+  "nextPreparation": {
+    "scope": "Existingpool FIRST128 eligiblewholecomponents afterallT/V/H+exposure exclusions; future96T/32selectionV, no refill/actualeligible guarantee/newgeneration/teacher/fit/modeldesign now",
+    "task": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/continuation-20261023-practical-v1/saved-diagnosis-next-v1/C435-expanded-coverage128-prep.md",
+      "bytes": 5047,
+      "mode": "0644",
+      "sha256": "49dd20297867801f601453a6e11e55ecceb5f3728c112f8fab1cd6b8df9a8ea9"
+    },
+    "dispatch": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/continuation-20261023-practical-v1/saved-diagnosis-next-v1/C435-next-dispatch.json",
+      "bytes": 157,
+      "mode": "0644",
+      "sha256": "35c9c4adb2072e65336c70955a8f84f12555932b2ea088f7b6cabe40c10edbb5"
+    },
+    "actualInputTeacherFitResourcesAdmission": null
+  },
+  "execution": "No targetimports/NumPy/RNG/recompute/forward/fit/game/build; sourcepacket only",
+  "TMP": "0Buvlock retained honestly, no empty/deleted claim",
+  "causalGeneralStrengthDefaultModelAdoption": null,
+  "preserved": "All original costs/FAILEDNULLUNKNOWN/pause/seals/defaultmodels/decimal50GB"
+}

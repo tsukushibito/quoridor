@@ -1,0 +1,264 @@
+{
+  "issue": "quoridor-n96.1",
+  "status": "SAVED64_DESCRIPTIVE_CLOCK_WORK_CENSUS_ACCEPTED",
+  "sourcePacket": {
+    "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-selective-reference-n96/saved64-clock-work-census-v1/packet-refs.json",
+    "bytes": 2756,
+    "mode": "0644",
+    "sha256": "45eb869e875090dbecc835fac87e0cb6c157618544662b2665da3cd2ba233708"
+  },
+  "compact": {
+    "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-selective-reference-n96/saved64-clock-work-census-v1/compact-table.json",
+    "bytes": 4331,
+    "mode": "0644",
+    "sha256": "f5d63a9e1ba4d19bd6c5f9c322367d45a2823bd6ca8283f409889c74e6a0f8ce"
+  },
+  "report": {
+    "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-selective-reference-n96/saved64-clock-work-census-v1/REPORT.txt",
+    "bytes": 5267,
+    "mode": "0644",
+    "sha256": "c3ab0f0766bea2bcdcf86d305dec200e609623841b978c49f9d3043b9e3caf66"
+  },
+  "readerSTOP": {
+    "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-selective-reference-n96/saved64-clock-work-census-v1/reader-STOP.json",
+    "bytes": 689,
+    "mode": "0644",
+    "sha256": "3ae36b8646cd7dd726cdc8d978c6580494a101731c53e51700faca94d4f1ed5c"
+  },
+  "actualReaderReturn": {
+    "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-selective-reference-n96/saved64-clock-work-census-v1/saved64-scalar-reader.returned.json",
+    "bytes": 1330,
+    "mode": "0644",
+    "sha256": "c1f71fe90b2e9b6d4bd349c624c40c070c63e10f56d34e1f93677bd547544ad6"
+  },
+  "sourceSTOP": {
+    "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-selective-reference-n96/saved64-clock-work-census-v1/SOURCE-STOP.json",
+    "bytes": 10252,
+    "mode": "0644",
+    "sha256": "4e6570f0ad2349581c8afd16a8b87dd29fa729d6b81ad1a7c5d28c4f35e8329d"
+  },
+  "groups": [
+    {
+      "opponent": "console7.8.1-fixed-time",
+      "actualPlayer": "Rust FullSearch",
+      "games": 32,
+      "completed": 32,
+      "terminal": 32,
+      "retainedLegalCompletionEvidence": 32,
+      "error": 0,
+      "clockFailure": 0,
+      "unrun": 0,
+      "blackGames": 16,
+      "whiteGames": 16,
+      "searchMoves": 698,
+      "forcedPasses": 10,
+      "callerMs": {
+        "median": 1000.2007390139624,
+        "p95": 1000.3202484338544,
+        "max": 1000.5383141105995,
+        "over1000": 373,
+        "over1100": 0
+      },
+      "internalReportedMs": {
+        "median": 1000.0000124999999,
+        "p95": 1000.0003665,
+        "max": 1000.0050900000001,
+        "over1000": 372,
+        "over1100": 0
+      },
+      "completedDepth": {
+        "median": 10.0,
+        "max": 31
+      },
+      "nodesSum": 1309398519,
+      "selectivity": {
+        "count": 698,
+        "missing": 0,
+        "sum": 3460,
+        "quantiles": {
+          "0": 0,
+          "0.25": 6.0,
+          "0.5": 6.0,
+          "0.75": 6.0,
+          "0.9": 6.0,
+          "0.95": 6.0,
+          "0.99": 6.0,
+          "1": 6
+        },
+        "max": 6
+      },
+      "stop": {
+        "timeout": 373,
+        "None": 325
+      },
+      "rawScoreAvailable": 698,
+      "TTBytesInMoveResponse": [25165872],
+      "activeThreadsMeasured": null,
+      "engineCPUSeconds": null,
+      "continuousPeak": null
+    },
+    {
+      "opponent": "console7.8.1-fixed-time",
+      "actualPlayer": "console7.8.1-fixed-time",
+      "games": 32,
+      "completed": 32,
+      "terminal": 32,
+      "retainedLegalCompletionEvidence": 32,
+      "error": 0,
+      "clockFailure": 0,
+      "unrun": 0,
+      "blackGames": 16,
+      "whiteGames": 16,
+      "searchMoves": 708,
+      "forcedPasses": 8,
+      "callerMs": {
+        "median": 24.91915546124801,
+        "p95": 1003.9166297763586,
+        "max": 1007.6500070281327,
+        "over1000": 317,
+        "over1100": 0
+      },
+      "internalReportedMs": {
+        "median": 24.6175,
+        "p95": 1003.64495,
+        "max": 1007.383,
+        "over1000": 302,
+        "over1100": 0
+      },
+      "completedDepth": {
+        "median": 18.0,
+        "max": 35
+      },
+      "nodesSum": 5273769937,
+      "selectivity": null,
+      "stop": null,
+      "rawScoreAvailable": 0,
+      "TTBytesInMoveResponse": null,
+      "activeThreadsMeasured": null,
+      "engineCPUSeconds": null,
+      "continuousPeak": null
+    },
+    {
+      "opponent": "edax-v4.7-fixed",
+      "actualPlayer": "Rust FullSearch",
+      "games": 32,
+      "completed": 32,
+      "terminal": 32,
+      "retainedLegalCompletionEvidence": 32,
+      "error": 0,
+      "clockFailure": 0,
+      "unrun": 0,
+      "blackGames": 16,
+      "whiteGames": 16,
+      "searchMoves": 701,
+      "forcedPasses": 12,
+      "callerMs": {
+        "median": 1000.1950400182977,
+        "p95": 1000.3059239825234,
+        "max": 1000.9920109296218,
+        "over1000": 360,
+        "over1100": 0
+      },
+      "internalReportedMs": {
+        "median": 1000.000004,
+        "p95": 1000.000334,
+        "max": 1000.5680980000001,
+        "over1000": 359,
+        "over1100": 0
+      },
+      "completedDepth": {
+        "median": 10.0,
+        "max": 31
+      },
+      "nodesSum": 1443448913,
+      "selectivity": {
+        "count": 701,
+        "missing": 0,
+        "sum": 3511,
+        "quantiles": {
+          "0": 0,
+          "0.25": 6.0,
+          "0.5": 6.0,
+          "0.75": 6.0,
+          "0.9": 6.0,
+          "0.95": 6.0,
+          "0.99": 6.0,
+          "1": 6
+        },
+        "max": 6
+      },
+      "stop": {
+        "timeout": 360,
+        "None": 341
+      },
+      "rawScoreAvailable": 701,
+      "TTBytesInMoveResponse": [25165872],
+      "activeThreadsMeasured": null,
+      "engineCPUSeconds": null,
+      "continuousPeak": null
+    },
+    {
+      "opponent": "edax-v4.7-fixed",
+      "actualPlayer": "edax-v4.7-fixed",
+      "games": 32,
+      "completed": 32,
+      "terminal": 32,
+      "retainedLegalCompletionEvidence": 32,
+      "error": 0,
+      "clockFailure": 0,
+      "unrun": 0,
+      "blackGames": 16,
+      "whiteGames": 16,
+      "searchMoves": 707,
+      "forcedPasses": 10,
+      "callerMs": {
+        "median": 3.4222060348838568,
+        "p95": 991.1720214993693,
+        "max": 992.3342439578846,
+        "over1000": 0,
+        "over1100": 0
+      },
+      "internalReportedMs": null,
+      "completedDepth": null,
+      "nodesSum": null,
+      "selectivity": null,
+      "stop": null,
+      "rawScoreAvailable": 0,
+      "TTBytesInMoveResponse": null,
+      "activeThreadsMeasured": null,
+      "engineCPUSeconds": null,
+      "continuousPeak": null
+    }
+  ],
+  "allChoices": 2814,
+  "forcedPassesExcluded": 40,
+  "callerOver1100": 0,
+  "nominalOver1000IsClockFailure": false,
+  "readerSeconds": 0.026144937961362302,
+  "guardianSecondsIncludingReader": 0.04986012994777411,
+  "costRule": "Nested clocks not added; move elapsed, caller whole, setup/reset/drop have different domains",
+  "causalOrSameWorkStrengthClaim": null,
+  "unexposed": "External raw/stop/selectivity/internalwork as declaredNULL; actualCPU/threads/fullTT/continuouspeak NULL",
+  "nextFiniteTask": {
+    "scope": "f01 Console two-colour FIRSTpostopening matchedscalar+normaltimedID source only; one NEW separately admitted savedfile projection, no engine replay",
+    "task": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/continuation-20261023-practical-v1/saved-diagnosis-next-v1/B21-same-root-source-next.md",
+      "bytes": 3379,
+      "mode": "0644",
+      "sha256": "191fb170106031e7f4cae388a4edd1b93796adfe82ce2bea3a46b3fc667a4057"
+    },
+    "dispatch": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/continuation-20261023-practical-v1/saved-diagnosis-next-v1/B21-next-dispatch.json",
+      "bytes": 157,
+      "mode": "0644",
+      "sha256": "16f02b6cf1e5b882824c0cc475b3eb00ab77c10ecf0ddff9406c5a2c6c9d95ad"
+    }
+  },
+  "review26Addendum": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/continuation-20261023-practical-v1/saved-diagnosis-next-v1/review26-census-addendum.json",
+    "bytes": 1548,
+    "mode": "0644",
+    "sha256": "3ea3f137aea2ef7cc163c7d77d1860dee5d817f2f79302005b4ed348c82c86e0"
+  },
+  "oldCostsPausesSealsDefaultModels50GB": "PRESERVED"
+}
