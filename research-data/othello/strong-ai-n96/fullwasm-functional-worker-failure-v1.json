@@ -1,0 +1,67 @@
+{
+  "schema": 1,
+  "job_id": "dd5966d2-db9c-44b2-aac9-546259008199",
+  "status": "FAILED_CPU_SCOPE_GUARD_BEFORE_FUNCTIONAL_INVOCATION",
+  "condition": "fullwasm-functional-worker-condition-v1.json",
+  "sourceControllerSHA256": "53f5adfe67d585e1257c08a3631b8305586348c78a2f037ecf254c05fb04f7a7",
+  "generatedWasmSHA256": "b66f98e349e5fba45a25d07bc251e16aecf2c52e5167e885f002499b74174b0d",
+  "actualError": {
+    "type": "CycleStopped",
+    "message": "owned child/thread outside assigned command CPU scope"
+  },
+  "nodePrimary": {
+    "where": "signal",
+    "message": "Root cancellation signal"
+  },
+  "functionalInvocations": 0,
+  "httpRequests": 0,
+  "actualResultPresent": false,
+  "scoreMoveNodes": null,
+  "functionalQualification": null,
+  "offendingProcessThreadMask": null,
+  "causeLimit": "Existing guard did not retain offender identity/mask. Do not infer which process or browser subsystem widened affinity. No sandbox failure inferred.",
+  "costs": {
+    "outerWholeSeconds": 1.4338547380175442,
+    "nestedCommandSeconds": 0.8837718850700185,
+    "nestedNotAdded": true
+  },
+  "cleanup": {
+    "direct_child_reaped": true,
+    "remaining": [],
+    "process_cleanup_complete": true,
+    "handle_closes_complete": true,
+    "signal_mask_restoration": "completed",
+    "final_record_persist": "completed",
+    "nodeCleanup": {
+      "page": {
+        "attempted": false,
+        "returned": null
+      },
+      "context": {
+        "attempted": true,
+        "returned": true
+      },
+      "browser": {
+        "attempted": true,
+        "returned": true
+      },
+      "server": {
+        "attempted": true,
+        "returned": true
+      }
+    },
+    "nodeProcessCleanup": null,
+    "nodeDescendantReap": null,
+    "originalDiskSignalMask": "pending",
+    "originalDiskPersist": "attempted",
+    "TMPfontconfigRetained": true
+  },
+  "collection": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/fullwasm-functional-browser-v1/completion-dd5966d2/collection.json",
+    "bytes": 8139,
+    "mode": "0644",
+    "sha256": "3a59074da61cbf9c5f57b158a001c5e4b7e943d004faaeeebc99dc7dcdd73ef3"
+  },
+  "next": "SAME A16 bounded source investigation of CPU-scope/browser launch; no unchanged retry, guard relaxation, no-sandbox fallback or resource enlargement",
+  "limits": "No Worker invocation/search output. No score/strength/timing/model/ABI/sandbox-failure conclusion. Original failure/cost/condition preserved; native/practical and Quoridor preparations remain independent."
+}
