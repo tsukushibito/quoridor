@@ -81,6 +81,8 @@ STM/盤面向き/色、raw STEP単位、disc単位、丸め、clamp段階と外�
 
 2026-10-23のrequest-boundary実観測は[保存結果](../../../research-data/othello/strong-ai-n96/request-boundary-two-owner-observation-result-v1.json)へ結合した。Rustはdepth18 timeoutから17を保持し、その終端で成功PVSを後段pollが破棄した事象は観測されなかった。本家はdepth22のfuture待機満了後にjoinし21を保持した。instrumented owner各1入力の事実に限定し、同仕事・kernel速度・棋力差の原因や修復成功とはしない。次は実行を重ねず、現役評価器と固定本家の直接midgame経路をsourceで対応させる。
 
+2026-10-23の[直接owner warm-work source](../../../research-data/othello/strong-ai-n96/direct-owner-warm-work-source-v1.json)は、既存4系列・16rootで現役評価と実play/eval/LIFOundoを呼ぶ有限carrierだけを準備した。Rust black_boxと本家GNU asm barrierの費用、実loop codegen・回数・同仕事は未資格であり、静的sourceから速度や対局差の原因を認定しない。両方UNBUILT/UNRUN、入力・回数・順序・実image・資源・時計の入場は別途束縛し、Search/対局/benchmarkを自動再演しない。
+
 ## 性能・棋力・browserへの接続
 
 評価単位の成立後、初期化を再用した連続探索でSearch時間、NPS、完成深度、全仕事、メモリを記録する。同実時間対局を主要評価とし、小さいprotocol/評価一致から有限なdevelopment対戦へ進む。後続の独立確認では未使用開始familyの両色で固定EgaroucidとEdaxへ進む。1thread・同TT上限・book/ponder OFF・実時計を固定adapterに結合する。原engineより弱くても小型評価へ戻さず、評価一致・探索条件・処理速度を分けて改善する。新たな対局量/停止/判定は入口ごとの実費と資源で結果前に固定し、設定だけから優越を主張しない。
