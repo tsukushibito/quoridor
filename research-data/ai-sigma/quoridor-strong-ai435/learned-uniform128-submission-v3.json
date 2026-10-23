@@ -1,0 +1,84 @@
+{
+  "issue": "quoridor-4lc.435",
+  "job": "9e6df1e2-3d90-423b-ad4b-ef0e3c25ccef",
+  "phaseAtSubmission": "starting",
+  "createdAt": "2026-10-23T14:51:42.174127+00:00",
+  "submission": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/control-repair-v3/submission.json",
+    "bytes": 2522,
+    "mode": "0644",
+    "sha256": "9550845b992fe6128be85eb45de9578a7e8f9e2e0f8c1d5a40c53fd334ee940a"
+  },
+  "preparedCondition": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/quoridor-strong-ai435/learned-uniform128-ownership-repair-v3.json",
+    "bytes": 1840,
+    "mode": "0644",
+    "sha256": "126305d666047e9a5496046f9f19ebcdd29c60964f6eade7b53f59a3af153fc8"
+  },
+  "settings": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/control-repair-v3/metadata/sequence.json",
+    "bytes": 71240,
+    "mode": "0644",
+    "sha256": "8f8c2a94aa752e7249eff2d7dd6ef32eb23fcec8b30589f3454bb93a1055a0c7"
+  },
+  "jobConfig": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/control-repair-v3/metadata/job.json",
+    "bytes": 969,
+    "mode": "0644",
+    "sha256": "b1dc91432e573850cb2b2d1fcd51bdf091a70c0b894024d8ffaf1c3d00362321"
+  },
+  "runtimeConfigSHA256": "7cd63f6f55d0d3fe5a1e87b40e5755468fcfdbd1520557d4a105c4cbdd556361",
+  "supervisor": {
+    "pid": 3367184,
+    "start_ticks": "81542149",
+    "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+  },
+  "cpuLaunch": {
+    "management": [18],
+    "commands": {
+      "0": [12, 18],
+      "1": [12, 18],
+      "2": [12, 18],
+      "3": [12, 18],
+      "4": [12, 18],
+      "5": [12, 18],
+      "6": [12, 18],
+      "7": [12, 18]
+    },
+    "allocation": [12, 18],
+    "resource_CPUs": 2,
+    "worker_CPUs": 1,
+    "library_threads": 1
+  },
+  "plannedGames": 128,
+  "families": 64,
+  "exposure": "SAME EXPOSED development families; both colours",
+  "comparison": "joint293 learned-head MCTS versus same joint value explicit-uniform MCTS; same PUCT/100ms/reserve5/K16384",
+  "policyCostCaveat": "Uniform skips policy head: prior and computation cost change together, not prior-only causal.",
+  "providers": "Two independent persistent providers; each 26216000 logical rows per16-game operation",
+  "memory": "6GiB family:1GiB management plus5GiB native; separate host4GiB reserve. Guards, not measured peak.",
+  "holdingBytes": 1073741824,
+  "nativeSeconds": 420,
+  "commandSeconds": 480,
+  "parentSeconds": 4380,
+  "statistics": {
+    "resamples": 10000,
+    "families": 64,
+    "seed": 435202610231,
+    "method": "shared PCG64; linear95%; incomplete planned pair -> interval NULL,128 denominator retained"
+  },
+  "consumedStop": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/native64-development16-generation-v1/completion-75f46369/collection.json",
+    "bytes": 5064,
+    "mode": "0644",
+    "sha256": "4a020df58f4756285719c1e93bce480fe597efc7ae1c7c0bd9f8e637ab94b0b3"
+  },
+  "actualResourceAdmission": null,
+  "actualUniformLoad": null,
+  "gamesCompleted": null,
+  "result": null,
+  "cleanup": null,
+  "observationLimit": "Starting submission only. No runtime state/result polling or scientific outcome inferred.",
+  "oldTrials": "e9b72721 and6bed8967 preserved as FAILED/all128UNRUN, costs included once, no restart/refill/refund",
+  "modelDefaultPauseSealChanges": false
+}

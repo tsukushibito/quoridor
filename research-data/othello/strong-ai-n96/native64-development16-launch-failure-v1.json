@@ -1,0 +1,148 @@
+{
+  "issue": "quoridor-n96.1",
+  "job": "75f46369-f86d-490b-86a8-bc0cd0e7c0cc",
+  "outcome": "FAILED_CONTROLLER_BEFORE_GENERATION_ENTRY",
+  "originals": {
+    "runtime/result.json": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/native64-development16-generation-v1/runtime/result.json",
+      "bytes": 523,
+      "mode": "0600",
+      "sha256": "a3624ef5f662f88a87b72e4b92ab70671fb2350ee7a01544bb4e88cc80baa701"
+    },
+    "runtime/config.json": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/native64-development16-generation-v1/runtime/config.json",
+      "bytes": 829,
+      "mode": "0600",
+      "sha256": "9f1a81a5d84ea2968be6bf64b2b0ceacc227b1b5edcbf5994911a75f3aa9665b"
+    },
+    "runtime/output.log": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/native64-development16-generation-v1/runtime/output.log",
+      "bytes": 466,
+      "mode": "0644",
+      "sha256": "0e76957f95861c33acacc1bce7859cdb1328864fdfe8b53bdd531d8a05cf84ec"
+    },
+    "runtime/state.json": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/native64-development16-generation-v1/runtime/state.json",
+      "bytes": 1270,
+      "mode": "0600",
+      "sha256": "53e806887b9c4b0873f0de67d8fddbf4772fcd02abcaecc5f59f0137b58f0672"
+    },
+    "parameters.json": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/native64-development16-generation-v1/parameters.json",
+      "bytes": 4573,
+      "mode": "0644",
+      "sha256": "f15b873dee0dd3e90189d4fc06399b7e4d3ebf328b919c933a84fdf2c6106ae9"
+    },
+    "run.py": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/native64-development16-generation-v1/run.py",
+      "bytes": 5258,
+      "mode": "0644",
+      "sha256": "034d5162d8f1e08848ba3c17f5e7ec92c44691bfe2051e85575af3a48c4ddbfc"
+    }
+  },
+  "cause": "Root submit mask4,18 propagated to job ancestors; existing physical-worker conflict guard correctly refused them",
+  "observedConflicts": [
+    {
+      "pid": 3355797,
+      "affinity": [4, 18]
+    },
+    {
+      "pid": 3355806,
+      "affinity": [4, 18]
+    },
+    {
+      "pid": 3355809,
+      "affinity": [4, 18]
+    },
+    {
+      "pid": 3355843,
+      "affinity": [4, 18]
+    },
+    {
+      "pid": 3355853,
+      "affinity": [4, 18]
+    }
+  ],
+  "exactOwnLauncherSupervisorChildMatches": [
+    {
+      "pid": 3355797,
+      "affinity": [4, 18]
+    },
+    {
+      "pid": 3355809,
+      "affinity": [4, 18]
+    },
+    {
+      "pid": 3355843,
+      "affinity": [4, 18]
+    }
+  ],
+  "unknownConflictRoles": [
+    {
+      "pid": 3355806,
+      "affinity": [4, 18]
+    },
+    {
+      "pid": 3355853,
+      "affinity": [4, 18]
+    }
+  ],
+  "unknownConflictHistoricalIdentities": "PID+mask only, start/boot not retained for the two unmatched members; no invented role/identity",
+  "sourceAccounting": "Refusal before entry.json/TMP/execute/generate_once; no generator import/call or Rust launch",
+  "generationCalls": 0,
+  "nativeRulesCalls": 0,
+  "searchForwardModelGames": 0,
+  "attemptedFamilies": 0,
+  "unrunFamilies": 16,
+  "actualRoots": null,
+  "plannedRoots": 16,
+  "dataAbsent": true,
+  "costSeconds": 0.2251632760744542,
+  "cleanup": {
+    "actualOuterDirectReaped": true,
+    "actualCleanupComplete": true,
+    "remaining": [],
+    "knownIdentities": [
+      {
+        "known": {
+          "pid": 3355762,
+          "start_ticks": "81423525",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "freshStartTicks": null,
+        "exactIdentityAbsent": true
+      },
+      {
+        "known": {
+          "pid": 3355797,
+          "start_ticks": "81423820",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "freshStartTicks": null,
+        "exactIdentityAbsent": true
+      },
+      {
+        "known": {
+          "pid": 3355809,
+          "start_ticks": "81423825",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "freshStartTicks": null,
+        "exactIdentityAbsent": true
+      },
+      {
+        "known": {
+          "pid": 3355843,
+          "start_ticks": "81424036",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "freshStartTicks": null,
+        "exactIdentityAbsent": true
+      }
+    ],
+    "controllerInnerReceipt": "Not created; inner execute never entered"
+  },
+  "next": "New immutable binding/namespace, parent management-only18, same explicit worker4/controller plan; guard/sandbox/resources/seeds unchanged. No future admission/cure inferred for unmatched processes.",
+  "originalRerun": false,
+  "defaultModelPauseSealChanges": false
+}

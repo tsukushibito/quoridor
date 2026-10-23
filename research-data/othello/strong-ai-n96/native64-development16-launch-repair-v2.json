@@ -1,0 +1,63 @@
+{
+  "issue": "quoridor-n96.1",
+  "status": "PREPARED_NOT_SUBMITTED",
+  "binding": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/native64-development16-generation-v1/launch-repair-v2/binding.json",
+    "bytes": 2215,
+    "mode": "0644",
+    "sha256": "f53c64a28d1e95ec056085b6dabba9382226ccdb513c528a74e9f29b099a34e0"
+  },
+  "failure": {
+    "path": "/workspaces/quoridor/research-data/othello/strong-ai-n96/native64-development16-launch-failure-v1.json",
+    "bytes": 4824,
+    "mode": "0644",
+    "sha256": "7939d567fed390b68d4273edf1c6a903913c17d47719124f1fb7cf85b3be711a"
+  },
+  "parameters": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/native64-development16-generation-v1/launch-repair-v2/parameters.json",
+    "bytes": 4675,
+    "mode": "0644",
+    "sha256": "ce53295d0da49c4a34cd9039bd595c01eb82eea319323dcb6a283159f0c609b7"
+  },
+  "job": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/native64-development16-generation-v1/launch-repair-v2/job.json",
+    "bytes": 863,
+    "mode": "0644",
+    "sha256": "a67294aeda2aefefb27d5c1eb833d28d5f080b52b355588ae53a694b4e1d617a"
+  },
+  "config": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/native64-development16-generation-v1/launch-repair-v2/generation-config.json",
+    "bytes": 11893,
+    "mode": "0644",
+    "sha256": "7394f1653cdc82a4d8116ae95686417123022c636233c04aab52de65c8e186c6"
+  },
+  "submitAffinity": [18],
+  "workerPlanUnchanged": {
+    "management": [18],
+    "commands": {
+      "work": [4]
+    },
+    "allocation": [4, 18],
+    "resource_CPUs": 2,
+    "worker_CPUs": 1,
+    "library_threads": 1
+  },
+  "delta": "Management-only parent mask18; unchanged executor sets actual worker4. No guard exclusion, repin or broader CPU scope.",
+  "controllerAndChildByteExact": true,
+  "seedsTargetsExclusionsSourceImageTimeRAMHoldingUnchanged": true,
+  "knownOwnConflictMatches": 3,
+  "otherHistoricalConflictRoles": "Two PID-only members remain UNKNOWN; future foreign conflict must still refuse.",
+  "generationCalls": 0,
+  "nativeRulesCalls": 0,
+  "attemptedFamilies": 0,
+  "unrunFamilies": 16,
+  "roots": null,
+  "futureAdmission": null,
+  "next": "Resolve this separate binding once after original Q9e6df1e2 actual resource STOP; no restart of old namespace.",
+  "collectionControlFailures": [
+    "taskset -c18 rejected before Python; corrected syntax -c 18 only",
+    "One wrong curated Quoridor path absent; correct existing ai-sigma path consumed, no scientific execution",
+    "Post-format FileRef check failed on changed curated JSON bytes; pointer corrected, original runtime evidence unchanged"
+  ],
+  "originalFailuresCostsPausesSealsModelsDefaultsAnd50GB": "PRESERVED"
+}
