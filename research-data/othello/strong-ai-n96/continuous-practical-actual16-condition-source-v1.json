@@ -1,0 +1,127 @@
+{
+  "schema": 1,
+  "status": "SOURCE_CONFIG_ACCEPTED_RUNTIME_UNISSUED",
+  "packet": {
+    "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-selective-reference-n96/actual16-continuous-comparison-source-v1/source-handoff.json",
+    "bytes": 3893,
+    "mode": "0644",
+    "sha256": "d9ed0047eb461e8d715bf78f04f398b57591e3d8c4a41deb758ea14655e691d7"
+  },
+  "sourceFiles": {
+    "comparison-config.json": {
+      "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-selective-reference-n96/actual16-continuous-comparison-source-v1/comparison-config.json",
+      "bytes": 22848,
+      "mode": "0644",
+      "sha256": "e81b408f90a22c14dd11bcc59fb348ec23ea71902da5598c2ca026df16946f78"
+    },
+    "PROFILE-SOURCE-FACTS.json": {
+      "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-selective-reference-n96/actual16-continuous-comparison-source-v1/PROFILE-SOURCE-FACTS.json",
+      "bytes": 4827,
+      "mode": "0644",
+      "sha256": "8c6c064e21b3fcd03761b4525f4c1a6df6a8855e0b8d08ef26e396467871e510"
+    },
+    "binding-manifest.json": {
+      "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-selective-reference-n96/actual16-continuous-comparison-source-v1/binding-manifest.json",
+      "bytes": 2804,
+      "mode": "0644",
+      "sha256": "485bd2b050ea3256b1b87e35885d321b5b9e0218f9e628489a4a16ee524879ed"
+    },
+    "static-checks.json": {
+      "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-selective-reference-n96/actual16-continuous-comparison-source-v1/static-checks.json",
+      "bytes": 1541,
+      "mode": "0644",
+      "sha256": "1c1a83bc971bff7d75e0c54e37632435fe1665acb05508654490c430d9d3ea99"
+    },
+    "SOURCE-NOTES.txt": {
+      "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-selective-reference-n96/actual16-continuous-comparison-source-v1/SOURCE-NOTES.txt",
+      "bytes": 3780,
+      "mode": "0644",
+      "sha256": "d2bea256dab78fc6e2ac9fb09ee7385cc213487c51d6aeb839fd0f2387bcd24b"
+    }
+  },
+  "sourceSTOP": {
+    "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-selective-reference-n96/actual16-continuous-comparison-source-v1/STOP-receipt.json",
+    "bytes": 8889,
+    "mode": "0644",
+    "sha256": "99b10ed6be4d80e0e49747b1e8d8a29f96b516c2f2869f4e0b18e22867beadb7"
+  },
+  "RootVerifiedFiveSourceFiles": true,
+  "actualRoots": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/continuous-practical-generation-v1/accepted/admitted-roots.json",
+    "bytes": 17721,
+    "mode": "0644",
+    "sha256": "2a2a2510d73b49ed55e46b58b7899f86f0fd6d72e1a2b8b10267bb9b99efcc05"
+  },
+  "generationQualification": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/continuous-practical-generation-v1/accepted/generation-qualification.json",
+    "bytes": 1343,
+    "mode": "0644",
+    "sha256": "00c80a879c55f5713b9b18f07cefe9c6e942aaa028ccfc418c25210343077df0"
+  },
+  "exposureQualification": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/continuous-practical-generation-v1/accepted/exposure-qualification.json",
+    "bytes": 2929,
+    "mode": "0644",
+    "sha256": "eefd08987f07e692f8c863c4585acb923a26fb62099c96e502ade87fdd4e0d65"
+  },
+  "pruningOffMeaning": "statistical-MPC-off;exact-cuts-retained",
+  "planned": {
+    "families": 4,
+    "roots": 16,
+    "profiles": 2,
+    "callsPerProfile": 64,
+    "searchCalls": 128,
+    "profileProcessInitializations": 4,
+    "resetsPerOwnerPerProfile": 8,
+    "totalResets": 32,
+    "maxCallsPerProcess": 32,
+    "ABBA": ["rust", "original", "original", "rust"],
+    "rootOrder": [16, 32, 48, 56],
+    "clearBoundary": "before each four-root block; no clear within block",
+    "firstError": "STOP; retain failures and all untouched UNRUN; no retries/refill",
+    "H": 0
+  },
+  "limits": {
+    "fixedRequestSeconds": 10,
+    "timedRequestSeconds": 1.1,
+    "setupSeconds": 30,
+    "resetSeconds": 5,
+    "dropSeconds": 6,
+    "commandSeconds": 1200,
+    "parentSeconds": 1260
+  },
+  "profileMeaning": {
+    "fixed": "Rust mpc:false/selectivity6=100%; original compile MID_MPC OFF including shallow ordering MPC. TT/alpha-beta/stability/ETC/parity/ordinary shallow ordering exact cuts retained. D6, or normal remaining end depth when empties<6.",
+    "timed": "normal original time-limited tree_search_legal1000ms with its own dynamic ID selectivity; Rust fixedDepth:null/selectivity:null/mpc:true normal ID1000ms. Effective maxDepth60 required by current API, human requested64 unsupported. Transport1100ms. Original rawScoreNULL/smoothed-only; no equal selective work/parity/timing guarantee.",
+    "score": "engine-disc STM / winner-empties end semantics; no old actual-disc teacher/minimax relabel",
+    "counts": "four correlated trajectory families, four chronological roots each; fixed64calls+timed64calls",
+    "TT": "original activeTT25165872B expected; both actual reply ttBytes<=33554432. No equal layout/work/NPS claim."
+  },
+  "depth64Mismatch": {
+    "humanRequestedMaxDepth": 64,
+    "effectiveRequestMaxDepth": 60,
+    "dispatchException": "actual current normal API requires maxDepth<=60",
+    "Rust": "FullSearch::search rejects max_depth>60 after normal JSON options deserialization; default60",
+    "original": "unchanged continuous16 request profile requires maxDepth60; timed function instead passes remaining-empties depth to original tree_search_legal",
+    "literal64Support": "UNSUPPORTED by current bound sources/images; not silently relabelled or patched",
+    "futureExact64": "Requires separate explicit owner-source/profile decision; no new source/image or runtime admitted here"
+  },
+  "sourceAcceptance": "Reuse related reviewed profile/generation boundary; actual16 references and constrained normal options joined; no new software/numerical/strength qualification",
+  "runtimeBindings": {
+    "cpuPlan": null,
+    "resourceBinding": null,
+    "launchBinding": null,
+    "outputDirectory": null,
+    "cancelFile": null,
+    "admitted": false,
+    "runtimeAdmission": null
+  },
+  "sourceChanged": 0,
+  "newImageOrHelper": 0,
+  "rootStateHImageWeightBodiesReadOrHashedThisCollection": 0,
+  "acceptedTestsBuildOrSearchReplayed": 0,
+  "sourceChecksByAuthor": "JSON/source/staticrefs/symbolic128slot32reset/caps PASS; source only",
+  "returnedCleanup": "Known source/admin children directreaped/handles/remaining[]; priorTMP empty; current handoff tail separate; disk pending/attempted unchanged",
+  "nextRuntime": "Bind fresh finite128 normal comparison resources/clock/output after actual shared timing cohort STOP; no human/worker/parentclose ACK gate",
+  "limitsScope": "Four correlated chronological families; historical history UNKNOWN; development implementation/time/reset only, not16 IID or unused strength/fit data"
+}

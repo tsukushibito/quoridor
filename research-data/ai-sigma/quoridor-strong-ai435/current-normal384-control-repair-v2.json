@@ -1,0 +1,89 @@
+{
+  "schema": 1,
+  "status": "REPAIRED_CONFIG_SUBMITTED_RESULTS_UNKNOWN",
+  "originalJobId": "70fbbfef-5d20-4167-ac4b-4a6d76d0ef3d",
+  "originalOutcome": "not_started",
+  "originalError": "'job_runtimes'",
+  "originalCollection": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/dev64-three-contrast384-entry-v1/completion-70fbbfef/collection.json",
+    "bytes": 4057,
+    "mode": "0644",
+    "sha256": "42ba8255b868d3ecaa871391e3bf124b8413f1bcba17958ca50ef45c61a03900"
+  },
+  "originalEngineSearchGamesIssued": 0,
+  "originalOutputLogAbsent": true,
+  "originalKnownIdentitiesAbsent": true,
+  "originalCleanupComplete": true,
+  "originalCostSeconds": null,
+  "costLimit": "No monotonic command start/wall emitted; no fabricated whole time",
+  "correction": "Root launch record now includes declared job_runtimes, actual pre-submit monotonic and exact parent_config; new mutable output/runtime namespaces only",
+  "repairBinding": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/dev64-three-contrast384-entry-v1/control-repair-v2/common/repair-binding.json",
+    "bytes": 2729,
+    "mode": "0644",
+    "sha256": "a0eb146497939231487faa08bb7a2129d43d6b2df4e3fe134a386e71c39cbb4b"
+  },
+  "repairedLaunch": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/dev64-three-contrast384-entry-v1/control-repair-v2/common/control/launch.json",
+    "bytes": 1631,
+    "mode": "0644",
+    "sha256": "9f548c6dee1f7533773eace1c4a5399416d3c95967e5e48cb28ad8ac5b2624a8"
+  },
+  "repairedParentJob": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/dev64-three-contrast384-entry-v1/control-repair-v2/common/parent-job.json",
+    "bytes": 987,
+    "mode": "0644",
+    "sha256": "4f3e497945fb1ffe214b1abd606b4f116f20bb9ef93c58b0e40f19e3aff7a995"
+  },
+  "metadataBinder": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/dev64-three-contrast384-entry-v1/control-repair-v2/bind_launch.py",
+    "bytes": 6664,
+    "mode": "0644",
+    "sha256": "8011f0b92fec225d9267103372447834da4bed655c9996681983b6e4545f38e4"
+  },
+  "binderFailedSourceCheck": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/dev64-three-contrast384-entry-v1/control-repair-v2/binder-v1-failure.json",
+    "bytes": 496,
+    "mode": "0644",
+    "sha256": "3500e9fadb02c1d8279727259ee5747c791e276b9958471a2f48d784df32d7d1"
+  },
+  "binderFailureLimit": "Incorrect checker expected both lane worker cores in each lane plan; corrected to both managers plus own AI core; no production/config CPU widening, source failure retained",
+  "submission": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/dev64-three-contrast384-entry-v1/control-repair-v2/submission.json",
+    "bytes": 2000,
+    "mode": "0644",
+    "sha256": "8f0c358f6fe5e1b508af7b1450d0a7b65bcae6b3f300fd42424e63ee37827fb1"
+  },
+  "newJobId": "bc5bc590-2af0-489a-a75d-5746d6df012b",
+  "submittedAt": "2026-10-23T11:51:37.245499+00:00",
+  "configFingerprint": "b513bd4af4496e66f9b4043a716f355156c18fa9ae728d074ca6e1324b7ad347",
+  "actualCPUPlan": {
+    "management": [16, 18],
+    "commands": {
+      "0": [12, 18],
+      "1": [14, 16]
+    },
+    "allocation": [12, 14, 16, 18],
+    "resource_CPUs": 4,
+    "worker_CPUs": 2,
+    "library_threads": 1
+  },
+  "plannedGames": 384,
+  "sharedFamilies": 64,
+  "contrasts": 3,
+  "reusedPlan": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/dev64-three-contrast384-entry-v1/common/plan.json",
+    "bytes": 23257,
+    "mode": "0644",
+    "sha256": "590ade8d372e7e647a4bff35e92a236bef739c6cdc61879a04b288e51bead3c4"
+  },
+  "same24ExperimentNumericalBuildModelAndInputRefs": true,
+  "newForwardOrDataGeneration": 0,
+  "newNativeObserverOrSourceFix": false,
+  "actualNativeEntry": null,
+  "actualOutcomes": null,
+  "freshResourcesAndOrigin": "Normal maintained admission; not inferred from submission",
+  "runtimeStateOrResultPolledAfterNewAcceptance": false,
+  "noRefillOrQuotaChange": true,
+  "oldFailureAndAllPartialEvidencePreserved": true
+}
