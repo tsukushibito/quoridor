@@ -1,0 +1,123 @@
+{
+  "scope": "ONE_NEW_FINITE_DIRECT_OWNER_WARM_WORK_SUBMITTED_NOT_RESULT",
+  "job": "da664a1c-df5f-48fd-a5af-bb9b73f5e3a6",
+  "submission": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/direct-owner-warm-work-numerical-v1/submission.json",
+    "bytes": 1072,
+    "mode": "0644",
+    "sha256": "4a0b6710ee82ef9ef074081fbad491df909caa4a372469f049ad67a79aa662f8"
+  },
+  "configuration": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/direct-owner-warm-work-numerical-v1/config.json",
+    "bytes": 10822,
+    "mode": "0644",
+    "sha256": "aae9d2fb7a9adac7fc4da1163d9a320ac64d3b6ac33a916ab30e4190344f19c7"
+  },
+  "resources": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/direct-owner-warm-work-numerical-v1/resources.json",
+    "bytes": 1258,
+    "mode": "0644",
+    "sha256": "53ea21e28a15832067c5f87c601c5b3da08d3734ffab13275f10614726ecc725"
+  },
+  "admission": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/direct-owner-warm-work-numerical-v1/Root-admission.json",
+    "bytes": 3324,
+    "mode": "0644",
+    "sha256": "a0cd67aa0f66f7127c89fb59c13369fbf72abfbb172e8a529da9f448c876305f"
+  },
+  "staticChecks": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/direct-owner-warm-work-numerical-v1/static-binding-checks.json",
+    "bytes": 356,
+    "mode": "0644",
+    "sha256": "876d790b6f63745700a5e3135888e9250a492763664c85fe28104268bfdfb188"
+  },
+  "images": [
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/direct-owner-warm-work-rust-software-v1/direct-owner-warm-work-rust-test",
+      "bytes": 2164184,
+      "mode": "0555",
+      "sha256": "9b8b5ab199e0d5d1aa85a63219127cf199ff7060f59809f9b6570bf31a2ba241"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/direct-owner-warm-work-original-software-v1/direct-owner-warm-work-original",
+      "bytes": 374672,
+      "mode": "0555",
+      "sha256": "f65e20fd7b5ec2de1147aa6ff0f924160933d92db7e0121b0ada4fdfad246949"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-selective-reference-n96/warm-work-bound-input-v1/rust-input.json",
+      "bytes": 18006,
+      "mode": "0644",
+      "sha256": "c52d2cd0694522d81f0ab8f40d597562b64155a0c300c7a789641c20fa434280"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-selective-reference-n96/warm-work-bound-input-v1/original-descriptor.json",
+      "bytes": 16702,
+      "mode": "0644",
+      "sha256": "57aeb83eaed4e34db9d3800b6f4ad63104ffd8e94a7fbb17cba57e5f509bc8c1"
+    }
+  ],
+  "inputQualification": {
+    "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-selective-reference-n96/warm-work-bound-input-v1/root-move-join-receipt.json",
+    "bytes": 7963,
+    "mode": "0644",
+    "sha256": "177be4b96c4e90f3e7d9b99c77ad5ec5f8026ec93927bcb1420570c982b6c040"
+  },
+  "emittedLoopQualification": {
+    "path": "/workspaces/quoridor/research-data/othello/strong-ai-n96/direct-owner-warm-work-emitted-loops-v1.json",
+    "bytes": 2370,
+    "mode": "0644",
+    "sha256": "f8fd66e1faacda56415b028708cad583dbdda33bd28848702aafcc4dcbcdc6d9"
+  },
+  "countPerProfilePerOwner": 1048576,
+  "rootCount": 16,
+  "familyCount": 4,
+  "profileOrders": {
+    "rust": "evalThenChild",
+    "original": ["moveEvaluateUndo", "evaluate"]
+  },
+  "CPU": {
+    "payload": [4],
+    "management": [18],
+    "libraryThreads": 1,
+    "GPU": 0
+  },
+  "RAM": {
+    "familyB": 2147483648,
+    "commonB": 67108864,
+    "commandB": 2080374784,
+    "hostReserveB": 4294967296
+  },
+  "clock": {
+    "commandSeconds": 60,
+    "operationSeconds": 180,
+    "parentSeconds": 240
+  },
+  "barrierLoopBookkeepingCost": null,
+  "actualResults": null,
+  "scopeLimits": "One fixed profile pair per owner over same16 exposed practical descriptors. No adaptive grid/repetitions/empty-loop baseline or subtraction. Real source/codegen work retained, actual dynamic counters and isolated barrier/loop costs unknown. No Search/game/model change/cause or speedup claim from static code. OwnerLastValues/checksums/restoration and matching configured loop counts qualify successful work; no additional empty-loop target exists in retained image, so isolated overhead remains NULL rather than delaying first finite measurement.",
+  "next": "Collect sole original completion; choose measured expensive route before actual owner improvement and continuous Search validation. No static causal conclusion or automatic repeat.",
+  "otherWork": {
+    "C435sourceDispatch": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/continuation-20261023-practical-v1/after-selected24/C435-dispatch.json",
+      "bytes": 157,
+      "mode": "0644",
+      "sha256": "b530e725d75ef367abc5e720775fd5379e2ccc741a698387511cb9ef996d7a1f"
+    },
+    "C435task": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/continuation-20261023-practical-v1/after-selected24/C435-next-fit-config.md",
+      "bytes": 2547,
+      "mode": "0644",
+      "sha256": "bbe9aac7c25aeb72e97bc0d558eea4ab59dd409affbf183cc4811a16f2cc5da9"
+    },
+    "B21sourceDispatch": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/continuation-20261023-practical-v1/after-selected24/B21-dispatch.json",
+      "bytes": 157,
+      "mode": "0644",
+      "sha256": "c990a8dfed29c1c5954e2fd559561946b6c1f20b3b6b5bcec90c13229840ac84"
+    }
+  },
+  "goalsComplete": false
+}

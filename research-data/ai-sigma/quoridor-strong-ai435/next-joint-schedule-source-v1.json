@@ -1,0 +1,40 @@
+{
+  "scope": "SUPPORTED_NORMAL_LARGER_JOINT_SCHEDULE_SOURCE_ONLY",
+  "sourcePacket": {
+    "path": "/workspaces/quoridor/.worktree/quoridor-strong435/.artifacts/quoridor-strong435/next-joint-schedule-entry-prep-v1/packet.json",
+    "bytes": 5868,
+    "mode": "0644",
+    "sha256": "ac3a57f7d985e4f060e931ef05d5f866bd82ac8beea194c14db0a8fbeacb0cd8"
+  },
+  "sourceSTOP": {
+    "path": "/workspaces/quoridor/.worktree/quoridor-strong435/.artifacts/quoridor-strong435/next-joint-schedule-entry-prep-v1/source-reader-STOP.json",
+    "bytes": 5589,
+    "mode": "0644",
+    "sha256": "6d2dc5972a634ac6c83400f59c35411db3e760818a7f8d4d54d59c02ba06af6a"
+  },
+  "supported": {
+    "updates": 4096,
+    "batch": 256,
+    "explicit_V_checkpoints": [
+      0, 128, 256, 384, 512, 640, 768, 896, 1024, 1152, 1280, 1408, 1536, 1664, 1792, 1920, 2048,
+      2176, 2304, 2432, 2560, 2688, 2816, 2944, 3072, 3200, 3328, 3456, 3584, 3712, 3840, 3968, 4096
+    ],
+    "full_selector_observations_upper": 33,
+    "significant_stale_early_stop_patience_checks": 8,
+    "maximum_training_draws": 1048576,
+    "logical_model_forward_rows_upper": 1057024
+  },
+  "essentialFieldFact": "evaluation.checkpoints is explicit and takes precedence over evaluation.interval; LR scheduler patience and significant-stale early stopping are separate",
+  "warmstartFact": "Selected24 exported value+policy with restart=None starts new INITIAL/fresh Adam without repeating head. Old completed24 .pt restart cannot change config/horizon or completed status.",
+  "sourceImplementationGap": false,
+  "finalRecipe": null,
+  "numericalAdmission": null,
+  "unchanged": "Current model/sampler/new96T32V/H0/teacher256; selected24 finite export parity retained, no replay",
+  "judgementSupplementDispatch": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/continuation-20261023-practical-v1/after-selected24/Root-schedule-supplement-dispatch.json",
+    "bytes": 157,
+    "mode": "0644",
+    "sha256": "5a09060f89498600e166784def5eda38c2fcb842b657d7e454eb9efa1087c209"
+  },
+  "limits": "Source/config facts only; explicit checkpoints required; earlystop significant-stale checks separate from LR patience. No .pt resume with changed horizon/completed status. No model/cache/payload/import/fit/game execution. Same actor and issue; no review/admin/human ACK gate."
+}
