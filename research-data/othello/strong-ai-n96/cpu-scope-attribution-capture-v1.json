@@ -1,0 +1,79 @@
+{
+  "schema": 1,
+  "job_id": "f8a97ea4-25d8-485a-8fa4-cd09acaacabd",
+  "status": "FIRST_CPU_SCOPE_REFUSAL_CAPTURED_FUNCTIONAL_UNENTERED",
+  "outerOutcome": "succeeded",
+  "outerExitCode": 0,
+  "nestedCommandOutcome": "failed",
+  "nestedCommandExitCode": 1,
+  "interpretation": "Diagnostic capture only, not browser functional success",
+  "cpuScopeViolation": {
+    "member": {
+      "pid": 3195287,
+      "start_ticks": "79769592",
+      "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+    },
+    "tid": 3195291,
+    "observed_cpus": [
+      0
+    ],
+    "allowed_cpus": [
+      4
+    ]
+  },
+  "offenderIsDirectNodeChild": false,
+  "backendLibraryProcessRole": null,
+  "causeLimit": "Observed descendant thread mask[0] conflicts with assigned[4]; process role/library/reset path unrecorded. No SwiftShader/GPU/sandbox/engine cause inferred.",
+  "functionalInvocations": 0,
+  "httpRequests": 0,
+  "actualResultPresent": false,
+  "scoreMoveNodes": null,
+  "functionalQualification": null,
+  "rootActualCleanup": {
+    "direct_child_reaped": true,
+    "process_cleanup_complete": true,
+    "handle_closes_complete": true,
+    "cleanup_complete": true,
+    "remaining": [],
+    "signal_mask_restoration": "completed",
+    "final_record_persist": "completed"
+  },
+  "nodeCleanup": {
+    "page": {
+      "attempted": false,
+      "returned": null
+    },
+    "context": {
+      "attempted": false,
+      "returned": null
+    },
+    "browser": {
+      "attempted": false,
+      "returned": null
+    },
+    "server": {
+      "attempted": true,
+      "returned": true
+    }
+  },
+  "nodeProcessCleanup": null,
+  "nodeDescendantReap": null,
+  "originalDiskMaskPersist": {
+    "signal_mask_restoration": "pending",
+    "final_record_persist": "attempted"
+  },
+  "TMPfontconfigRetained": true,
+  "costs": {
+    "outerWholeSeconds": 1.2377996910363436,
+    "nestedCommandSeconds": 0.8094974409323186,
+    "nestedNotAdded": true
+  },
+  "collection": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/fullwasm-cpu-scope-attribution-v1/completion-f8a97ea4/collection.json",
+    "bytes": 6642,
+    "mode": "0644",
+    "sha256": "351c24fef18675bd2f5cefb821a4229674d0ad232dffd391b296b0801c7c505b"
+  },
+  "next": "SAME A16 source resolves minimal CPU-only browser launch condition; no unchanged retry/new logger/guard weakening/CPU enlargement. B21 separately resolves typed practical endpoint-identity scope with historical history UNKNOWN.",
+  "preserved": "All prior failures/costs/NULL/UNKNOWN/defaults/models/pauses/seals/50GB unchanged."
+}
