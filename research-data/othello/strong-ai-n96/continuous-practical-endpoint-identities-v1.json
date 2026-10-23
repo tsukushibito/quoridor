@@ -1,0 +1,146 @@
+{
+  "schema": 1,
+  "scope": "endpoint identities only; no generated roots or Search",
+  "projectionResult": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/practical-endpoint-projection-v1/projection-result.json",
+    "bytes": 4600,
+    "mode": "0644",
+    "sha256": "cfc0600af15a81b21eb704a257d249085cc2c8e2a5a549b783b000f2d99f33e9"
+  },
+  "counts": [
+    {
+      "scope": "protocol-smoke-4",
+      "records": 4,
+      "distinctDigests": 4,
+      "splits": {
+        "protocol-smoke-only": 4
+      }
+    },
+    {
+      "scope": "tiny-openings-24",
+      "records": 24,
+      "distinctDigests": 24,
+      "splits": {
+        "T": 16,
+        "V": 8
+      }
+    },
+    {
+      "scope": "teacher-openings-128",
+      "records": 128,
+      "distinctDigests": 128,
+      "splits": {
+        "H": 16,
+        "T": 96,
+        "V": 16
+      }
+    },
+    {
+      "scope": "native-openings-16",
+      "records": 16,
+      "distinctDigests": 16,
+      "splits": {
+        "D": 16
+      }
+    },
+    {
+      "scope": "fixed18-serialized-endpoints-5",
+      "records": 5,
+      "distinctDigests": 5,
+      "splits": {
+        "development-exposed": 5
+      }
+    }
+  ],
+  "parents": [
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/protocol-smoke-v1/bound-config.json",
+      "bytes": 14823,
+      "mode": "0644",
+      "sha256": "d73accf3cd4ad10caf4c62104d21275eaf8253574bbc3f207368a17e5d8b90f2"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/data/othello-pattern-pilot-n96-v1/openings/openings.json",
+      "bytes": 11716,
+      "mode": "0644",
+      "sha256": "ed240db78bebc9b6a7790eedf9f49ed1608bbca64a5a20af90ba2736b71ae316"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/data/othello-strong-teacher-n96-v1/openings/openings.json",
+      "bytes": 55983,
+      "mode": "0644",
+      "sha256": "47d651fb541afb1c9990bc947e5b24bb3550b0c15ce2e58c74929ec74587ce44"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/data/othello-native-comparison-n96-v1/openings/openings.json",
+      "bytes": 9147,
+      "mode": "0644",
+      "sha256": "72949316036cceb05e763cb7afdc53e748157c4d6846aeba68eec5e32fd67d4e"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/selective-search-numerical-v1/cases.json",
+      "bytes": 19844,
+      "mode": "0644",
+      "sha256": "0ed0b07a83a48ac865ef9649f51c0c90eb9660cb642418654988d039ef0a14d8"
+    }
+  ],
+  "metadata": [
+    {
+      "scope": "protocol-smoke-4",
+      "file": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/practical-endpoint-projection-v1/protocol-smoke-4.json",
+        "bytes": 1150,
+        "mode": "0644",
+        "sha256": "e7cc7774bb07ba9f61497cb0e5a7346e15810b7beda3d3dde8d3feb982cffd4a"
+      },
+      "count": 4
+    },
+    {
+      "scope": "tiny-openings-24",
+      "file": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/practical-endpoint-projection-v1/tiny-openings-24.json",
+        "bytes": 4862,
+        "mode": "0644",
+        "sha256": "1d664e71c145d766267bcab015bb42789a703b8a554711ee1108c38225ccbcf7"
+      },
+      "count": 24
+    },
+    {
+      "scope": "teacher-openings-128",
+      "file": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/practical-endpoint-projection-v1/teacher-openings-128.json",
+        "bytes": 24130,
+        "mode": "0644",
+        "sha256": "a56f2af2dcd143c49d1ce691d7fd3d3a137557e0b3bb4e23a86e05bfee6fe6be"
+      },
+      "count": 128
+    },
+    {
+      "scope": "native-openings-16",
+      "file": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/practical-endpoint-projection-v1/native-openings-16.json",
+        "bytes": 3440,
+        "mode": "0644",
+        "sha256": "bf6874fb70258821d60227d69cef91330f9738abd1fa62044aa65896e8a1cfd2"
+      },
+      "count": 16
+    },
+    {
+      "scope": "fixed18-serialized-endpoints-5",
+      "file": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/practical-endpoint-projection-v1/fixed18-serialized-endpoints-5.json",
+        "bytes": 1335,
+        "mode": "0644",
+        "sha256": "171d8d99282fea91e69c21a0f825f8df27d89b08ae8eed158f805a19ff9476e5"
+      },
+      "count": 5
+    }
+  ],
+  "HFieldsOnly": ["openingFamily", "split", "canonicalSha256"],
+  "HBoardObjectsAssembled": false,
+  "historicalHistory": "UNKNOWN",
+  "freshHistory": "future pass-inclusive8+ self/inter-family STOP/no refill",
+  "fourCorrelatedFamilies": true,
+  "strengthAndFitIndependence": "UNQUALIFIED",
+  "generationSearchCalls": 0
+}

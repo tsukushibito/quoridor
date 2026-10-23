@@ -31,8 +31,10 @@ training-loader dependency is needed for preparation or producer rows.
 
 Unlabeled continuous-development uses four explicit family seeds, Rust-only legal
 trajectories and target placements16/32/48/56, after mandatory passes. Checked
-identity-only exposure metadata must declare complete placement8+ coverage; UNKNOWN
-refuses admission. Whole-family collisions/terminal/deficits STOP without refill.
+identity-only historical metadata excludes declared endpoint SHA256 digests only;
+old pass-inclusive history remains UNKNOWN. This development implementation/time/
+reset scope makes no unseen-strength claim. Fresh pass-inclusive raw64 histories
+at placement8+ stop on cross-family or self collisions/terminal/deficits, no refill.
 No prior state/H/label payload or model is read by this stage. All roots are dev.
 
 run(config_FileRef,new_output,cancelled=current_callback) returns complete/STOP;
@@ -211,7 +213,7 @@ def _excluded_keys(config, canonical):
     return keys
 
 
-CONTINUOUS_DUPLICATE_POLICY = "whole-family-stop-on-canonical-collision-placement8+"
+CONTINUOUS_DUPLICATE_POLICY = "whole-family-and-self-stop-on-canonical-collision-placement8+"
 
 
 def _validate_continuous(config):
@@ -219,6 +221,7 @@ def _validate_continuous(config):
     if (
         config["labelKind"] is not None
         or config["purpose"] != "development_trajectory_roots"
+        or config.get("comparisonScope") != "development-implementation-time-reset"
         or not config.get("launchBinding")
         or config.get("H") != 0
         or config.get("samplePassPolicy") != "after-mandatory-pass"
@@ -257,7 +260,19 @@ def _validate_continuous(config):
         raise GenerationStop("fresh bounded trajectory/input/evidence/retention limits required")
     metadata, scopes = config["exposureMetadata"], config["requiredExposureScopes"]
     if (
-        config.get("exposureCoverage") != "complete"
+        config.get("historicalEndpointScope")
+        != {
+            "domain": "sha256-canonical-board-bytes",
+            "coverage": "declared-endpoints-only",
+            "passInclusiveHistoryCoverage": "UNKNOWN",
+        }
+        or config.get("freshHistoryScope")
+        != {
+            "domain": "raw-canonical-board-bytes",
+            "coverage": "placement8+-pass-inclusive",
+            "collisionPolicy": "stop-on-any-repeat",
+        }
+        or "exposureCoverage" in config
         or not isinstance(metadata, list)
         or not metadata
         or not isinstance(scopes, list)
@@ -268,7 +283,9 @@ def _validate_continuous(config):
         or sorted(m["scope"] for m in metadata) != sorted(scopes)
         or any(type(m["count"]) is not int or m["count"] < 0 for m in metadata)
     ):
-        raise GenerationStop("exposure coverage UNKNOWN/incomplete; refuse admission")
+        raise GenerationStop(
+            "explicit endpoint scope/fresh history scope required; no UNKNOWN endpoint domain"
+        )
     if sum(m["file"]["bytes"] for m in metadata) > limits["inputBytes"]:
         raise GenerationStop("aggregate exposure metadata exceeds input cap")
     if not _matches_ref(__file__, config["source"]):
@@ -276,33 +293,52 @@ def _validate_continuous(config):
 
 
 def _continuous_exclusions(config):
-    """Checked identity-only metadata, never historical state/label/H payloads."""
-    keys = set()
+    """Checked endpoint identities only; old pass-inclusive history stays UNKNOWN."""
+    digests = set()
     for binding in config["exposureMetadata"]:
         package = _read(binding["file"], config["limits"]["inputBytes"])
-        values = package["canonicalKeys"]
+        if not isinstance(package, dict) or set(package) != {
+            "scope",
+            "identityScope",
+            "canonicalSource",
+            "records",
+        }:
+            raise GenerationStop("endpoint package must contain identity-only fields")
+        records = package.get("records")
         if (
-            package.get("coverageStatus") != "complete"
-            or package.get("scope") != binding["scope"]
-            or package.get("domain") != "canonical-states-placement8+-pass-inclusive"
+            package.get("scope") != binding["scope"]
+            or package.get("identityScope") != config["historicalEndpointScope"]
             or package.get("canonicalSource") != config["canonicalSource"]
-            or not isinstance(values, list)
-            or len(values) != binding["count"]
+            or not isinstance(records, list)
+            or len(records) != binding["count"]
         ):
-            raise GenerationStop("checked exposure metadata coverage differs or UNKNOWN")
-        current = set()
-        for value in values:
-            if not isinstance(value, str) or len(value) != 128:
-                raise GenerationStop("exposure canonical key must encode64 trits")
-            try:
-                key = bytes.fromhex(value)
-            except ValueError as error:
-                raise GenerationStop("invalid exposure canonical key") from error
-            if len(key) != 64 or any(cell not in (0, 1, 2) for cell in key) or key in current:
-                raise GenerationStop("invalid/duplicate exposure canonical key")
-            current.add(key)
-        keys.update(current)
-    return keys
+            raise GenerationStop("checked endpoint identity scope/count differs or UNKNOWN")
+        identifiers = set()
+        for record in records:
+            if (
+                not isinstance(record, dict)
+                or set(record) != {"id", "split", "canonicalSha256"}
+                or not isinstance(record["id"], str)
+                or not record["id"]
+                or record["id"] in identifiers
+                or not isinstance(record["split"], str)
+                or not record["split"]
+            ):
+                raise GenerationStop(
+                    "endpoint identity requires distinct ID, split and digest only"
+                )
+            value = record["canonicalSha256"]
+            if (
+                not isinstance(value, str)
+                or len(value) != 64
+                or any(cell not in "0123456789abcdef" for cell in value)
+            ):
+                raise GenerationStop(
+                    "endpoint digest must be SHA256 hex, not a raw128 canonical key"
+                )
+            identifiers.add(record["id"])
+            digests.add(value)
+    return digests
 
 
 def _continuous_deficits(config, package):
@@ -348,16 +384,18 @@ def _continuous(native, config, canonical, excluded, package, evidence, report, 
             record["lastStatus"] = status
             if placement >= 8:
                 key = canonical(state)
+                digest = hashlib.sha256(key).hexdigest()
                 record["canonicalHistory"].append(
                     {"placement": placement, "action": actions, "canonicalKey": key.hex()}
                 )
-                if key in excluded or (key in seen and seen[key] != family["id"]):
+                if digest in excluded or key in seen:
                     report["collision"] = {
                         "family": family["id"],
                         "placement": placement,
                         "canonicalKey": key.hex(),
+                        "canonicalSha256": digest,
                         "priorFamily": seen.get(key),
-                        "priorExposure": key in excluded,
+                        "priorExposure": digest in excluded,
                     }
                     raise GenerationStop("whole-family canonical collision; no refill")
                 seen[key] = family["id"]
@@ -371,7 +409,7 @@ def _continuous(native, config, canonical, excluded, package, evidence, report, 
                             "placement": placement,
                             "state": state,
                             "status": status,
-                            "canonicalSHA256": hashlib.sha256(key).hexdigest(),
+                            "canonicalSHA256": digest,
                             "fixedDepth": min(6, 64 - status["black"] - status["white"]),
                             "rulesStatusBinding": {
                                 "family": family["id"],
@@ -747,7 +785,11 @@ def run(config_ref, output, *, cancelled=lambda: False):
                 rootsPlanned=16,
                 rootsComplete=0,
                 unrunRoots=16,
-                exposureCoverage="UNKNOWN",
+                endpointMetadataChecked=False,
+                historicalEndpointScope=None,
+                freshHistoryScope=None,
+                historicalPassInclusiveHistoryCoverage="UNKNOWN",
+                freshHistoryComplete=False,
                 duplicatePolicy=CONTINUOUS_DUPLICATE_POLICY,
             )
         _validate(config)
@@ -781,7 +823,12 @@ def run(config_ref, output, *, cancelled=lambda: False):
             else _excluded_keys(config, canonical)
         )
         if config["stage"] == "continuous-development":
-            report.update(exposureCoverage="complete", duplicatePolicy=CONTINUOUS_DUPLICATE_POLICY)
+            report.update(
+                endpointMetadataChecked=True,
+                historicalEndpointScope=config["historicalEndpointScope"],
+                freshHistoryScope=config["freshHistoryScope"],
+                duplicatePolicy=CONTINUOUS_DUPLICATE_POLICY,
+            )
         frozen = (
             _frozen_openings(config, canonical, excluded)
             if config["stage"] not in ("openings", "continuous-development")
@@ -893,6 +940,7 @@ def run(config_ref, output, *, cancelled=lambda: False):
                 for family in continuous["families"]:
                     if family["status"] == "ATTEMPTED":
                         family["status"] = "STOP"
+            report["freshHistoryComplete"] = report["status"] == "complete"
             continuous.update(
                 stage=stage,
                 complete=report["status"] == "complete",
@@ -901,7 +949,12 @@ def run(config_ref, output, *, cancelled=lambda: False):
                 source=report["source"],
                 canonicalSource=config["canonicalSource"],
                 exposureMetadata=config["exposureMetadata"],
-                exposureCoverage=report.get("exposureCoverage", "UNKNOWN"),
+                comparisonScope=config["comparisonScope"],
+                historicalEndpointScope=config["historicalEndpointScope"],
+                freshHistoryScope=config["freshHistoryScope"],
+                endpointMetadataChecked=report.get("endpointMetadataChecked", False),
+                historicalPassInclusiveHistoryCoverage="UNKNOWN",
+                freshHistoryComplete=report["status"] == "complete",
                 duplicatePolicy=CONTINUOUS_DUPLICATE_POLICY,
                 commonPrefixPlacements=config["commonPrefixPlacements"],
             )
@@ -947,6 +1000,8 @@ def run(config_ref, output, *, cancelled=lambda: False):
         def bound_failure(message):
             fact = {"kind": "bounds", "message": message}
             report["status"] = "STOP"
+            if stage == "continuous-development":
+                report["freshHistoryComplete"] = False
             if report["failure"] is None:
                 report["failure"] = fact
             else:
@@ -985,6 +1040,8 @@ def run(config_ref, output, *, cancelled=lambda: False):
                 if name in blobs:
                     package = json.loads(blobs[name])
                     package["complete"] = False
+                    if name == "roots.json":
+                        package["freshHistoryComplete"] = False
                     blobs[name] = _encode(package)
         report.update(
             retainedUpperBytes=upper,

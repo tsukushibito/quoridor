@@ -11,6 +11,7 @@ def config():
     return {
         "stage": "continuous-development",
         "purpose": "development_trajectory_roots",
+        "comparisonScope": "development-implementation-time-reset",
         "labelKind": None,
         "H": 0,
         "namespace": "development/continuous-fixture",
@@ -26,7 +27,16 @@ def config():
         "source": {"fixture": True},
         "canonicalSource": {"fixture": True},
         "engine": {"binary": {"fixture": True}},
-        "exposureCoverage": "complete",
+        "historicalEndpointScope": {
+            "domain": "sha256-canonical-board-bytes",
+            "coverage": "declared-endpoints-only",
+            "passInclusiveHistoryCoverage": "UNKNOWN",
+        },
+        "freshHistoryScope": {
+            "domain": "raw-canonical-board-bytes",
+            "coverage": "placement8+-pass-inclusive",
+            "collisionPolicy": "stop-on-any-repeat",
+        },
         "requiredExposureScopes": ["prior-development"],
         "exposureMetadata": [{"scope": "prior-development", "file": {"bytes": 1}, "count": 1}],
         "limits": {
@@ -83,7 +93,7 @@ class FirstChoice:
 
 
 def identity(position):
-    return f"{position['family']}/{position['placement']}".encode()
+    return f"{position['family']}/{position['placement']}/{position['passed']}".encode()
 
 
 class ContinuousGenerationTests(unittest.TestCase):
@@ -92,7 +102,7 @@ class ContinuousGenerationTests(unittest.TestCase):
         with patch.object(generation, "_matches_ref", return_value=True):
             generation._validate(value)
             unknown = deepcopy(value)
-            unknown["exposureCoverage"] = "UNKNOWN"
+            unknown["historicalEndpointScope"]["domain"] = "UNKNOWN"
             with self.assertRaisesRegex(generation.GenerationStop, "UNKNOWN"):
                 generation._validate(unknown)
             invalid_id = deepcopy(value)
@@ -162,7 +172,7 @@ class ContinuousGenerationTests(unittest.TestCase):
                         native,
                         value,
                         key,
-                        {b"shared"} if exposed else set(),
+                        {generation.hashlib.sha256(b"shared").hexdigest()} if exposed else set(),
                         package,
                         evidence,
                         report,
@@ -178,11 +188,10 @@ class ContinuousGenerationTests(unittest.TestCase):
     def test_checked_identity_metadata_refusal_and_complete_domain(self):
         value = config()
         package = {
-            "coverageStatus": "UNKNOWN",
             "scope": "prior-development",
-            "domain": "canonical-states-placement8+-pass-inclusive",
+            "identityScope": {**value["historicalEndpointScope"], "domain": "UNKNOWN"},
             "canonicalSource": value["canonicalSource"],
-            "canonicalKeys": ["00" * 64],
+            "records": [{"id": "endpoint", "split": "development", "canonicalSha256": "a" * 64}],
         }
         with patch.object(generation, "_read", side_effect=generation.GenerationStop("FileRef")):
             with self.assertRaisesRegex(generation.GenerationStop, "FileRef"):
@@ -190,8 +199,8 @@ class ContinuousGenerationTests(unittest.TestCase):
         with patch.object(generation, "_read", return_value=package):
             with self.assertRaisesRegex(generation.GenerationStop, "UNKNOWN"):
                 generation._continuous_exclusions(value)
-            package["coverageStatus"] = "complete"
-            self.assertEqual(generation._continuous_exclusions(value), {bytes(64)})
+            package["identityScope"] = value["historicalEndpointScope"]
+            self.assertEqual(generation._continuous_exclusions(value), {"a" * 64})
 
     def test_cancel_stops_before_first_rules_call_without_rng_or_native_replacement(self):
         value, native = config(), CannedNative()
@@ -250,6 +259,99 @@ class ContinuousGenerationTests(unittest.TestCase):
             self.assertEqual(len(roots["families"]), 4)
             self.assertEqual(len(evidence["games"]), 4)
             self.assertEqual(list(output.glob("training*")), [])
+
+    def test_endpoint_digest_domain_is_distinct_from_raw_key_and_fileref_domain(self):
+        value = config()
+        metadata = {
+            "scope": "prior-development",
+            "identityScope": value["historicalEndpointScope"],
+            "canonicalSource": value["canonicalSource"],
+            "records": [{"id": "endpoint", "split": "development", "canonicalSha256": "a" * 64}],
+        }
+        with patch.object(generation, "_read", return_value=metadata):
+            self.assertEqual(generation._continuous_exclusions(value), {"a" * 64})
+            metadata["records"][0]["canonicalSha256"] = "00" * 64
+            with self.assertRaisesRegex(generation.GenerationStop, "raw128"):
+                generation._continuous_exclusions(value)
+            metadata["records"][0]["canonicalSha256"] = "a" * 64
+            metadata["identityScope"] = {
+                **value["historicalEndpointScope"],
+                "domain": "fileref-sha256",
+            }
+            with self.assertRaisesRegex(generation.GenerationStop, "scope"):
+                generation._continuous_exclusions(value)
+
+    def test_unknown_old_history_is_explicit_and_fresh_self_collision_stops(self):
+        value = config()
+        self.assertEqual(
+            value["historicalEndpointScope"]["passInclusiveHistoryCoverage"], "UNKNOWN"
+        )
+        with patch.object(generation, "_matches_ref", return_value=True):
+            generation._validate(value)
+            forged = deepcopy(value)
+            forged["historicalEndpointScope"]["passInclusiveHistoryCoverage"] = "complete"
+            with self.assertRaises(generation.GenerationStop):
+                generation._validate(forged)
+            bypass = deepcopy(value)
+            bypass["freshHistoryScope"]["collisionPolicy"] = "ignore"
+            with self.assertRaises(generation.GenerationStop):
+                generation._validate(bypass)
+        from pathlib import Path
+        import json
+        import tempfile
+
+        class CannedProcess:
+            def __init__(self, *_args, **_kwargs):
+                self.cleanup = {"unexpectedExit": False, "directReaped": True, "errors": []}
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *_args):
+                return False
+
+        value.update(seed=None, openingExclusions=[])
+        value["engine"].update(argv=["fixture-only"], cwd="/fixture")
+        value["limits"]["inputBytes"] = 1024 * 1024
+        with tempfile.TemporaryDirectory() as temporary:
+            output = Path(temporary) / "new-output"
+            with (
+                patch.object(generation, "_read", return_value=value),
+                patch.object(generation, "_ref", return_value={"fixture": True}),
+                patch.object(generation, "_matches_ref", return_value=True),
+                patch.object(generation, "_canonical", return_value=identity),
+                patch.object(generation, "_continuous_exclusions", return_value=set()),
+                patch.object(generation, "checked_spec"),
+                patch.object(generation, "Process", CannedProcess),
+                patch.object(generation, "Native", return_value=CannedNative()),
+                patch.object(generation.random, "Random", return_value=FirstChoice()),
+            ):
+                result = generation.run({"fixture": True}, output)
+            roots = json.loads((output / "roots.json").read_bytes())
+        self.assertEqual(result["status"], "complete")
+        self.assertEqual(result["historicalPassInclusiveHistoryCoverage"], "UNKNOWN")
+        self.assertTrue(result["endpointMetadataChecked"])
+        self.assertEqual(roots["historicalPassInclusiveHistoryCoverage"], "UNKNOWN")
+        self.assertEqual(roots["historicalEndpointScope"]["coverage"], "declared-endpoints-only")
+        self.assertEqual(roots["freshHistoryScope"], value["freshHistoryScope"])
+        self.assertTrue(roots["freshHistoryComplete"])
+        self.assertNotIn("exposureCoverage", roots)
+        native = CannedNative()
+        package, evidence, report = {}, [], {}
+
+        def repeated(position):
+            return b"shared" if position["placement"] in (8, 9) else identity(position)
+
+        with patch.object(generation.random, "Random", return_value=FirstChoice()):
+            with self.assertRaisesRegex(generation.GenerationStop, "collision"):
+                generation._continuous(
+                    native, value, repeated, set(), package, evidence, report, lambda: False
+                )
+        self.assertEqual(native.requests.count("new"), 1)
+        self.assertEqual(report["collision"]["family"], report["collision"]["priorFamily"])
+        self.assertFalse(report["collision"]["priorExposure"])
+        self.assertEqual(len(generation._continuous_deficits(value, package)), 16)
+        self.assertFalse(evidence[0]["complete"])
 
 
 if __name__ == "__main__":

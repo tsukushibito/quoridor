@@ -1,0 +1,138 @@
+{
+  "schema": 1,
+  "scope": "software-only",
+  "jobId": "1954768e-0e6a-41bf-80bb-f7253e9f08a0",
+  "collection": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/continuous-practical-software-v1/completion-1954768e/collection.json",
+    "bytes": 9264,
+    "mode": "0644",
+    "sha256": "8c59e350fa93cc61155ea212f142ee6503dc90aa988e7bd7715b8ba392d608e6"
+  },
+  "tests": {
+    "selected": 2,
+    "passed": 2,
+    "skipped": 0,
+    "unitSeconds": 0.005,
+    "actualLog": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/continuous-practical-software-v1/new-two-tests.log",
+      "bytes": 562,
+      "mode": "0644",
+      "sha256": "217e0b5569d0d65cc8cf1ba24a90f16ba3756d77ae0b3f55c999298c1feb6b1b"
+    }
+  },
+  "images": {
+    "fixed": {
+      "image": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/continuous-practical-software-v1/original-continuous-fixed",
+        "bytes": 914848,
+        "mode": "0555",
+        "sha256": "baaed0773991f9bef0daef11d2f5b4f9cf64fe3880e5ad91be82d89d86c76141"
+      },
+      "dependencyCount": 523,
+      "depfile": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/continuous-practical-software-v1/fixed.d",
+        "bytes": 27471,
+        "mode": "0644",
+        "sha256": "8b73a7678a248123c342f91a050a72f19a025f3b45f4a199d8bdd6e4243ec7bf"
+      }
+    },
+    "timed": {
+      "image": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/continuous-practical-software-v1/original-continuous-timed",
+        "bytes": 924280,
+        "mode": "0555",
+        "sha256": "6b3e2227c47156a1f0d270993307c3885299a7347b34d37d1e77e05174a4c36c"
+      },
+      "dependencyCount": 523,
+      "depfile": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/continuous-practical-software-v1/timed.d",
+        "bytes": 27471,
+        "mode": "0644",
+        "sha256": "bad0ab9f54612be53fd1a5976a221f1f28b71d5cbdcdbcf034b758b2bcb9b4d9"
+      }
+    }
+  },
+  "dependencyCounts": {
+    "fixed": 523,
+    "timed": 523
+  },
+  "uniqueDependencyRefsVerified": 523,
+  "sourceRefsVerified": 34,
+  "actualCommands": [
+    {
+      "name": "compiler-identity",
+      "wallSeconds": 0.009589998982846737,
+      "actualReturn": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/continuous-practical-software-v1/compiler-identity.returned.json",
+        "bytes": 1216,
+        "mode": "0644",
+        "sha256": "4a95a074790cc8cda927536cff95a501ec85769e05aed6e2c96e0947c38a8f84"
+      },
+      "exactIdentityAbsent": true
+    },
+    {
+      "name": "new-two-tests",
+      "wallSeconds": 0.06994958501309156,
+      "actualReturn": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/continuous-practical-software-v1/new-two-tests.returned.json",
+        "bytes": 1375,
+        "mode": "0644",
+        "sha256": "e730a92cfa90a7b6e034ad7695c27ff74a14cb9f0ff5f1815308fda263070751"
+      },
+      "exactIdentityAbsent": true
+    },
+    {
+      "name": "build-fixed",
+      "wallSeconds": 12.578508197912015,
+      "actualReturn": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/continuous-practical-software-v1/build-fixed.returned.json",
+        "bytes": 1993,
+        "mode": "0644",
+        "sha256": "28f1263d99f3ecd2cf8e81635f099021056fb66de758bdfa357625504147e83f"
+      },
+      "exactIdentityAbsent": true
+    },
+    {
+      "name": "build-timed",
+      "wallSeconds": 12.358214325038716,
+      "actualReturn": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/continuous-practical-software-v1/build-timed.returned.json",
+        "bytes": 1990,
+        "mode": "0644",
+        "sha256": "3d985766380085f04138c664d3dda2250b04eccddb90f7ed8f1712ad5960939c"
+      },
+      "exactIdentityAbsent": true
+    }
+  ],
+  "outerWallSeconds": 25.30890723702032,
+  "nestedNotAdded": true,
+  "profileMeaning": "statistical-MPC-off;exact-cuts-retained",
+  "reviewIssue": "quoridor-n96.1.24",
+  "reviewVerdict": "SOURCE_CLEAR essential0 ordinary0 source-only",
+  "MainAdoption": {
+    "generation": "60136344dc2ac6425326012e36cb452c79258d15acb277f0aa36eb873732bca1",
+    "tests": "ebed6eb6e3ae03a463b4e0234234dbfc47d9cc777418803be3fdd50134a92787",
+    "baseGeneration": "2e3d263f8fd8acca938e15872d396c218ce0d6ba80e70c5daf5537be60f2320f",
+    "oldAcceptedTestsReplayed": 0
+  },
+  "engineInitRNGWeightsSearchRootGenerationCalls": 0,
+  "actualRoots": null,
+  "limits": [
+    "original images compile-qualified only, neither executed",
+    "fixed statistical MPC off retains exact cuts",
+    "timed original reported smoothed score, raw NULL",
+    "runtime/resources/actual16/timing/tree identity/strength unqualified"
+  ],
+  "cleanup": {
+    "remaining": [],
+    "TMPabsent": true,
+    "persistedPendingFieldsUnchanged": true
+  },
+  "storage": {
+    "scope": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/continuous-practical-software-v1",
+    "files": 38,
+    "logicalBytes": 2155924,
+    "allocatedBytes": 2248704,
+    "beforeCollectionTail": true
+  }
+}
