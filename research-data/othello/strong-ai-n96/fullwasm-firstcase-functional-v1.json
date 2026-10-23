@@ -1,0 +1,222 @@
+{
+  "schema": 1,
+  "job_id": "2afd57af-3483-49b3-9bdf-40ecc03cc385",
+  "verdict": "ONE_ACTUAL_MODULE_WORKER_FUNCTIONAL_FIRSTCASE_MATCHES_SAVED_NATIVE_SCALARS",
+  "observed": {
+    "move": 41,
+    "rawScore": -14,
+    "score": -14,
+    "scoreUnits": "engine-disc",
+    "scoreKind": "heuristic",
+    "proven": false,
+    "completedDepth": 6,
+    "selectivity": 0,
+    "probability": 74,
+    "isEndSearch": false,
+    "nodes": 175452,
+    "elapsedMs": 102.29999995231628,
+    "stopped": null,
+    "interpretation": "simd",
+    "ttBytes": 25165872,
+    "coefficients": {
+      "a": 0.7308488452189136,
+      "b": -4.5708322989025865,
+      "c": 1.096319765006055,
+      "d": -0.8362251801219095,
+      "e": 4.610017383697701,
+      "f": 3.818582623595395,
+      "g": 1.7775013664098447
+    },
+    "mustPass": false,
+    "terminal": false
+  },
+  "counts": {
+    "constructor": 1,
+    "clear": 1,
+    "search": 1,
+    "originalCoefficients": 1,
+    "legalMoves": 1,
+    "free": 1
+  },
+  "coefficientBitsMatch": true,
+  "identityTimeMs": 15000,
+  "runtimeBudgetMs": 30000,
+  "nativeComparison": {
+    "byref": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/ordinary-firstcase-repair-v1/completion-e520f290/collection.json",
+      "bytes": 7193,
+      "mode": "0644",
+      "sha256": "78365fe66161597bb7e12ad1612d8ee6cd4745f445ae9a74ba97d8c1f71cc85a"
+    },
+    "matches": {
+      "rawScore": true,
+      "move": true,
+      "completedDepth": true,
+      "selectivity": true,
+      "totalNodes": true,
+      "ttBytes": true
+    },
+    "notFairSpeed": true,
+    "notWholeTTIdentity": true
+  },
+  "clocks": {
+    "parent": {
+      "workerCreatedMs": 2,
+      "requestPostedMs": 2.299999952316284,
+      "parentReceiptMs": 310.6999999284744,
+      "parentReturnedMs": 310.7999999523163
+    },
+    "workerStages": {
+      "workerReceivedMs": 0.3999999761581421,
+      "input": {
+        "startMs": 0.3999999761581421,
+        "endMs": 4.399999976158142,
+        "returned": true
+      },
+      "module": {
+        "startMs": 4.399999976158142,
+        "endMs": 7.899999976158142,
+        "returned": true
+      },
+      "wasmInit": {
+        "startMs": 7.899999976158142,
+        "endMs": 14.799999952316284,
+        "returned": true
+      },
+      "weights": {
+        "startMs": 14.799999952316284,
+        "endMs": 86.19999992847443,
+        "returned": true
+      },
+      "coefficients": {
+        "startMs": 86.19999992847443,
+        "endMs": 86.69999992847443,
+        "returned": true
+      },
+      "setupCompleteMs": 86.69999992847443,
+      "construct": {
+        "startMs": 86.69999992847443,
+        "endMs": 190.79999995231628,
+        "returned": true
+      },
+      "clear": {
+        "startMs": 190.79999995231628,
+        "endMs": 194,
+        "returned": true
+      },
+      "search": {
+        "startMs": 194,
+        "endMs": 297.10000002384186,
+        "returned": true
+      },
+      "resultCheck": {
+        "startMs": 297.1999999284744,
+        "endMs": 297.39999997615814,
+        "returned": true
+      },
+      "free": {
+        "startMs": 297.39999997615814,
+        "endMs": 297.39999997615814,
+        "returned": true
+      }
+    },
+    "workerReturnedMs": 297.5,
+    "node": {
+      "serverReadyMs": 578.2994679999999,
+      "pageCreatedMs": 712.7430089999999,
+      "actualReceiptMs": 1081.874679,
+      "returnMs": 1125.9703299999999
+    },
+    "engineElapsedMs": 102.29999995231628,
+    "differentClockRealmsNotSubtracted": true
+  },
+  "legalQualification": "Actual maintained legal_moves_json called once and worker resultCheck returned; legal set not separately retained or recomputed",
+  "bound": "UNKNOWN",
+  "restoration": null,
+  "pool": null,
+  "workerCloseObserved": null,
+  "parentCleanup": {
+    "listenersRemoved": true,
+    "timerCleared": true,
+    "terminateCalled": true,
+    "terminateAtMs": 310.7999999523163,
+    "terminateError": null,
+    "workerCloseObserved": null
+  },
+  "nodeCleanup": {
+    "page": {
+      "attempted": true,
+      "returned": true
+    },
+    "context": {
+      "attempted": true,
+      "returned": true
+    },
+    "browser": {
+      "attempted": true,
+      "returned": true
+    },
+    "server": {
+      "attempted": true,
+      "returned": true
+    }
+  },
+  "rootActualCleanup": {
+    "direct_child_reaped": true,
+    "process_cleanup_complete": true,
+    "handle_closes_complete": true,
+    "cleanup_complete": true,
+    "remaining": [],
+    "signal_mask_restoration": "completed",
+    "final_record_persist": "completed"
+  },
+  "originalDiskMaskPersist": {
+    "signal_mask_restoration": "pending",
+    "final_record_persist": "attempted"
+  },
+  "TMPfontconfigRetained": true,
+  "costs": {
+    "outerWholeSeconds": 1.6349618439562619,
+    "nestedCommandSeconds": 1.1749440770363435,
+    "nestedNotAdded": true
+  },
+  "collection": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/fullwasm-cpu-render-functional-v1/completion-2afd57af/collection.json",
+    "bytes": 11460,
+    "mode": "0644",
+    "sha256": "63a86902a2328a5272e9a4750b9368e026f619760754466e5aa8159f12771443"
+  },
+  "losslessGitArchives": [
+    {
+      "compressed": {
+        "path": "/workspaces/quoridor/research-data/othello/strong-ai-n96/fullwasm-cpu-render-functional-v1/actual-result.json.gz",
+        "bytes": 2608,
+        "mode": "0644",
+        "sha256": "2506c219a091c19dec3414d79a22a72e36080cd3cff97a8c53a621a38d019420"
+      },
+      "uncompressed": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/fullwasm-cpu-render-functional-v1/data/actual-result.json",
+        "bytes": 7222,
+        "mode": "0600",
+        "sha256": "12893e7cc637b7a1fff8f208ad72f24d474cf7cb79d71e673fd6c52a1728ea53"
+      }
+    },
+    {
+      "compressed": {
+        "path": "/workspaces/quoridor/research-data/othello/strong-ai-n96/fullwasm-cpu-render-functional-v1/controller-receipt.json.gz",
+        "bytes": 9712,
+        "mode": "0644",
+        "sha256": "4b35d8651992e6bae06a90db3291b4c73d1d3b4d0e91887ebb3f7bd8010e615e"
+      },
+      "uncompressed": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/fullwasm-cpu-render-functional-v1/data/controller-receipt.json",
+        "bytes": 41697,
+        "mode": "0600",
+        "sha256": "21314450e1a0781dd0f6c1e556952b2989d519f64ddddb0e439c7e05623b4960"
+      }
+    }
+  ],
+  "limits": "One explicit functional fullmodel API/current private browser condition only. No product default promotion, 1s/100ms or active-cancel qualification, strength/equivalence/cause/cure/fair speed/wholeTT guarantee. Prior failures retained.",
+  "causeOfPriorCPU0Failure": null,
+  "next": "Continuous profile/endpoint ordinary software +related source boundary; one bounded cancelled-request/recreated-Worker source scenario only."
+}

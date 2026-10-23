@@ -1,0 +1,74 @@
+{
+  "schema": 1,
+  "status": "NEW_SOFTWARE_CONDITION_SUBMISSION_ONLY",
+  "job_id": "1954768e-0e6a-41bf-80bb-f7253e9f08a0",
+  "submission": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/continuous-practical-software-v1/submission.json",
+    "bytes": 1072,
+    "mode": "0644",
+    "sha256": "aa1368560773a39a6b6adcbdf8d7acf1ff2a822f65a2b222e9dc412f2a038923"
+  },
+  "config": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/continuous-practical-software-v1/config.json",
+    "bytes": 13160,
+    "mode": "0644",
+    "sha256": "688acbdfc530910e31b9694b79c19723b66e4bdd93c23c3b6ffbd79bd946ef16"
+  },
+  "scope": "Exactly two NEW candidate model-free endpoint-domain/self-repeat tests, two NEW original continuous fixed/timed profile compiles, compiler identity only; compiled images never initialized/run.",
+  "candidateMainAdopted": false,
+  "generationTargetSHA256": "60136344dc2ac6425326012e36cb452c79258d15acb277f0aa36eb873732bca1",
+  "testTargetSHA256": "ebed6eb6e3ae03a463b4e0234234dbfc47d9cc777418803be3fdd50134a92787",
+  "originalAdapterSHA256": "fc9951dd59ce74210bc045cd3de9529f0a36b2380c0cd823266530126ef39f0b",
+  "profiles": [
+    "EGAROUCID_SEARCH_ORACLE_NONSELECTIVE",
+    "EGAROUCID_SEARCH_ORACLE_SELECTIVE"
+  ],
+  "fixedMeaning": "statistical-MPC-off;exact-cuts-retained",
+  "timedOriginalRawScore": null,
+  "timedOriginalReportedScore": "smoothed-only, not raw recovery",
+  "actualMDClosure": null,
+  "actualImages": null,
+  "actualDataRootsAdmission": null,
+  "noWeightInputOrProgramInitSearch": true,
+  "reviewIssue": "quoridor-n96.1.24",
+  "reviewHeld": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/practical-endpoint-profile-boundary-review-v1/held-source.json",
+    "bytes": 11849,
+    "mode": "0644",
+    "sha256": "f45e83d10ff63e5d4c3cc9a6bdc059666287b6084107db30d043614bbd86c51d"
+  },
+  "reviewDispatch": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/practical-endpoint-profile-boundary-review-v1/dispatch.json",
+    "bytes": 157,
+    "mode": "0644",
+    "sha256": "78dcc7643298f48d1ba8ce81a61bbab3bddaf483760b9b35282110a4ee82fd9c"
+  },
+  "sourceRefs": 34,
+  "cpu": {
+    "management": [
+      18
+    ],
+    "commands": [
+      4
+    ],
+    "libraryThreads": 1,
+    "GPU": 0
+  },
+  "memory": {
+    "familyBytes": 2147483648,
+    "controllerBytes": 67108864,
+    "commandsBytes": 2080374784,
+    "hostReserveBytes": 4294967296
+  },
+  "bounds": {
+    "compilerSecondsEach": 180,
+    "testSeconds": 30,
+    "controllerSeconds": 420,
+    "parentSeconds": 480,
+    "controlLogTMPUpperBytes": 67108864,
+    "advanceStorageBudget": null
+  },
+  "noOldSuccessfulSuiteOrScienceReplay": true,
+  "actualOutcome": null,
+  "noResultPoll": true
+}
