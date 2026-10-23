@@ -1,0 +1,177 @@
+{
+  "scope": "LIMITED_SAVED_SUBSET_SOURCE_SOFTWARE_PASS",
+  "originalJob": "cc256fd1-e0f1-498a-b60f-85cc55224b3e",
+  "Build": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/expanded-coverage128-selection-software-v1/operation/manifest.json",
+    "sha256": "1b88aa87a1c6ca107f4d761f049c600ae9b81d0b3b63361ef55588ca4c7cf252",
+    "bytes": 41946,
+    "mode": "0644"
+  },
+  "artifact": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/expanded-coverage128-selection-software-v1/image/quoridor-runner",
+    "sha256": "638e5e396b2292f4232384a9b9c9c186a7ec40b2753327b67f184d55f59aaf10",
+    "bytes": 10671592,
+    "mode": "0755"
+  },
+  "sourceCommit": "e56c4394d2544837d0b44dcc58949c6597762778",
+  "collection": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/expanded-coverage128-selection-software-v1/completion-cc256fd1/collection.json",
+    "sha256": "ea058ad4699e23b495a724cf6c8b578559a100cceda292e3d4d14a28498f759b",
+    "bytes": 16412,
+    "mode": "0644"
+  },
+  "newPythonNN0": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/expanded-coverage128-selection-software-v1/new-python-subset-nn0.returned.json",
+    "sha256": "1d0670600319b05603b373198736b7d86ba050bff8f39d4572ec1572e1e5fd4a",
+    "bytes": 1414,
+    "mode": "0644"
+  },
+  "newRustNN0Passed": 1,
+  "oldTestsReplayed": 0,
+  "commands": [
+    {
+      "name": "new-whole-component-subset-nn0",
+      "role": "test",
+      "seconds": 2.5894932319642976
+    },
+    {
+      "name": "saved-subset-affected-clippy",
+      "role": "lint",
+      "seconds": 10.733235005056486
+    },
+    {
+      "name": "saved-subset-normal-release",
+      "role": "build",
+      "seconds": 91.25732768303715
+    }
+  ],
+  "outerSeconds": 105.39920064201578,
+  "nestedTimesNotAdded": true,
+  "actualSTOP": {
+    "knownIdentities": [
+      {
+        "recorded": {
+          "pid": 3497237,
+          "start_ticks": "82792133",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "current": null,
+        "absentOrDifferent": true
+      },
+      {
+        "recorded": {
+          "pid": 3497238,
+          "start_ticks": "82792135",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "current": null,
+        "absentOrDifferent": true
+      },
+      {
+        "recorded": {
+          "pid": 3497240,
+          "start_ticks": "82792140",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "current": null,
+        "absentOrDifferent": true
+      },
+      {
+        "recorded": {
+          "pid": 3497241,
+          "start_ticks": "82792143",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "current": null,
+        "absentOrDifferent": true
+      },
+      {
+        "recorded": {
+          "pid": 3497242,
+          "start_ticks": "82792146",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "current": null,
+        "absentOrDifferent": true
+      },
+      {
+        "recorded": {
+          "pid": 3497243,
+          "start_ticks": "82792149",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "current": null,
+        "absentOrDifferent": true
+      },
+      {
+        "recorded": {
+          "pid": 3497245,
+          "start_ticks": "82792156",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "current": null,
+        "absentOrDifferent": true
+      },
+      {
+        "recorded": {
+          "pid": 3497246,
+          "start_ticks": "82792158",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "current": null,
+        "absentOrDifferent": true
+      },
+      {
+        "recorded": {
+          "pid": 3497300,
+          "start_ticks": "82792418",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "current": null,
+        "absentOrDifferent": true
+      },
+      {
+        "recorded": {
+          "pid": 3497491,
+          "start_ticks": "82793492",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "current": null,
+        "absentOrDifferent": true
+      },
+      {
+        "recorded": {
+          "pid": 3497205,
+          "start_ticks": "82792113",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "current": null,
+        "absentOrDifferent": true
+      }
+    ],
+    "remaining": [],
+    "sourceLeases": [],
+    "TMPexists": false,
+    "serialCargoLeaseFreeAtObservation": true
+  },
+  "affectedAllocation": {
+    "file": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/expanded-coverage128-selection-software-v1/operation/storage-usage.json",
+      "sha256": "7935ef3b9535bafd7bcece7f9716cf8d04070e04686d013278b0a84b16d8f2b8",
+      "bytes": 1008,
+      "mode": "0644"
+    },
+    "allocatedBytes": 2217947136,
+    "globalActual": null,
+    "peak": null
+  },
+  "dataSelectionPublicationOverlapTeacherFit": null,
+  "next": "SAME C435 bound input/publication config preparation dispatched; future actual128 normal admission remains separate. Othello same-owner exact existing image codegen question dispatched without engine execution.",
+  "preservedOriginalDiskPendingAttempted": true,
+  "preservedInitialManifestLocatorFailure": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/expanded-coverage128-selection-software-v1/completion-cc256fd1/initial-manifest-locator-failure.json",
+    "sha256": "6ed3e70106e6cf87c250e6510ba6fac9f1f7c2991a5ed45df59c694239f6c99f",
+    "bytes": 191,
+    "mode": "0644"
+  }
+}
