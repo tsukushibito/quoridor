@@ -1,0 +1,64 @@
+{
+  "issue": "quoridor-n96.1",
+  "status": "COMPILE_AND_CLIPPY_PASS_ONLY",
+  "jobId": "6300787d-4028-4ff4-9b54-e0ae81f643bd",
+  "collection": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/request-boundary-rust-software-v1/completion-6300787d/collection.json",
+    "bytes": 12760,
+    "mode": "0644",
+    "sha256": "864977340d339d5003301b8f5a513e66b576055bfd132f9ac9ce83437f584768"
+  },
+  "qualification": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/request-boundary-rust-software-v1/qualification.json",
+    "bytes": 1646,
+    "mode": "0644",
+    "sha256": "be167f7cd703f7b7ffc2e965b71043d5d47e8468bb1e1e0ad3a82c76fe772473"
+  },
+  "image": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/request-boundary-rust-software-v1/request-boundary-rust-test",
+    "bytes": 2183120,
+    "mode": "0555",
+    "sha256": "1a259d0957b1277e56c394cdec0a9c5149ac86cca29bc3592465c78ca3aa1263"
+  },
+  "actualPackageDependencies": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/request-boundary-rust-software-v1/actual-rust-package-dependencies.json",
+    "bytes": 4489,
+    "mode": "0644",
+    "sha256": "4a131e278932552151dd8ac12f5bd580b371b21c36820515bec7d814f73f2bd8"
+  },
+  "sourceBinding": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/request-boundary-rust-software-v1/completion-6300787d/retained-compile-source-binding.json",
+    "bytes": 1230,
+    "mode": "0644",
+    "sha256": "0b1271924da845e39d018ef237c7fc4cb86bff38b74fdb03f5f126df42fe8723"
+  },
+  "storagePoint": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/request-boundary-rust-software-v1/completion-6300787d/affected-storage-point.json",
+    "bytes": 1050,
+    "mode": "0644",
+    "sha256": "8f5f48fbebfca535fbadea0ef51d1945087ea40cd9a5f837de047727395eabac"
+  },
+  "MainRestored": {
+    "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_search/run.rs",
+    "bytes": 49106,
+    "mode": "0644",
+    "sha256": "f872229dac6b6715ca31827db801bab82a87a8c8efc19a2b9d2b19f6c56f2165"
+  },
+  "commandSeconds": [
+    {
+      "name": "build-request-boundary-libtest",
+      "wallSeconds": 14.484808716922998
+    },
+    {
+      "name": "affected-core-clippy",
+      "wallSeconds": 1.0855223570251837
+    }
+  ],
+  "outerSeconds": 15.897117149084806,
+  "nestedTimesNotAdded": true,
+  "testSearchInitInputWeightExecutions": 0,
+  "numericalResult": null,
+  "label": "INSTRUMENTED_CURRENT_OWNER_CFG_TEST_RELEASE",
+  "unchangedBinaryTimingCauseCure": false,
+  "diskPendingAttemptedVsReturnedCompletedPreserved": true
+}

@@ -1,0 +1,84 @@
+{
+  "issue": "quoridor-n96.1",
+  "status": "COMPILE_ONLY_SUBMITTED_RESULT_UNKNOWN",
+  "jobId": "cb8992d1-ff01-4bb1-8ae9-b53241e089ad",
+  "sourcePacket": {
+    "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-selective-reference-n96/request-boundary-original-source-v1/packet-refs.json",
+    "bytes": 3795,
+    "mode": "0644",
+    "sha256": "fa23c33d70a53e96b84662526826b38775305fb20dc99d6d74fe1934afdac87f"
+  },
+  "profile": {
+    "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-selective-reference-n96/request-boundary-original-source-v1/profile.json",
+    "bytes": 6681,
+    "mode": "0644",
+    "sha256": "b4fb38f8b0933ce874a66cc27d242b471514e32d938e5882ccba4e4d082f29b2"
+  },
+  "privateSourceReconstruction": {
+    "path": "/workspaces/quoridor/research-data/othello/strong-ai-n96/request-boundary-original-private-source-v1.json.gz",
+    "bytes": 7642,
+    "mode": "0644",
+    "sha256": "d3a0a1997c831fdf7c4e330d2d754458d85d3258c96f6ea5b85c5b7c15a50844"
+  },
+  "sourcePreparation": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/request-boundary-original-software-v1/source-preparation.json",
+    "bytes": 841,
+    "mode": "0644",
+    "sha256": "9309631b8a73fa672a84e678b288e46404adc6651a4585915ce79a28e9046cd0"
+  },
+  "config": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/request-boundary-original-software-v1/config.json",
+    "bytes": 20653,
+    "mode": "0644",
+    "sha256": "c8dd72d20222ac79d38a22956d67d6f435801c359191cc3522440a7290361ad3"
+  },
+  "job": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/request-boundary-original-software-v1/job.json",
+    "bytes": 831,
+    "mode": "0644",
+    "sha256": "fb49722abd65f7de724f3ad5ae5dc64e4474baed36d56ab4383bcba2aea5a7c7"
+  },
+  "resources": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/request-boundary-original-software-v1/resources.json",
+    "bytes": 1119,
+    "mode": "0644",
+    "sha256": "9a6be6bb095c6ae186c1dfcec431e34595b530ee61ba58f6add7f3a49da4d951"
+  },
+  "preSubmit": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/request-boundary-original-software-v1/pre-submit.json",
+    "bytes": 1758,
+    "mode": "0644",
+    "sha256": "79bd1291cfc30a7eda92a316a972954a3cfb9030a1e7bffb18f0552e35d01ff2"
+  },
+  "submission": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/request-boundary-original-software-v1/submission.json",
+    "bytes": 1072,
+    "mode": "0644",
+    "sha256": "71d53a2e8b7f75d2ef2d11840081f151e60cffde2ef2d838ca6db9f495c0e7c0"
+  },
+  "command": "One g++12 -O2 x86-64-v3 C++20 pthread build with actual -MD closure; original MPC flags, no source mutation",
+  "CPU": {
+    "worker": [4],
+    "management": [18],
+    "libraryThreads": 1,
+    "GPU": 0
+  },
+  "RAM": {
+    "familyB": 2147483648,
+    "controllerB": 67108864,
+    "descendantsB": 2080374784,
+    "hostReserveB": 4294967296
+  },
+  "bounds": {
+    "compilerSeconds": 180,
+    "controllerSeconds": 240,
+    "parentSeconds": 300,
+    "controlImageTMPB": 16777216
+  },
+  "MainRunCaptureRetired": true,
+  "sourceWorkerSTOP": true,
+  "engineInitializerRNGWeightResetSearchTests": 0,
+  "observed": "Submissionstarting only; no active runtime/result/log/qualification poll",
+  "numericalInputWeightsABIResourcesBudgetAdmission": null,
+  "preserved": "Original failures/costs/pause/seals/defaultmodels/50GB; no scientific success from submit/compile"
+}
