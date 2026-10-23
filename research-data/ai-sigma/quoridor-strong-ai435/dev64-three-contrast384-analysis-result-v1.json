@@ -1,0 +1,113 @@
+{
+  "schema": "quoridor.saved384-analysis-result.v1",
+  "collection": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/dev64-three-contrast384-analysis-v1/completion-0306b564/collection.json",
+    "bytes": 6215,
+    "mode": "0644",
+    "sha256": "ae6ffc4c22be83ae4004d8bb7499edf4db9b03980bbf53ddbb2fe58d8c01df4c"
+  },
+  "manifest": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/dev64-three-contrast384-analysis-v1/operation/manifest.json",
+    "bytes": 7083,
+    "mode": "0644",
+    "sha256": "810bd0d840037f6b762290bc8f35aeba279979acd5e0aac7a2ecf20f980e5cb9"
+  },
+  "summary": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/dev64-three-contrast384-analysis-v1/data/summary.json",
+    "bytes": 56192,
+    "mode": "0644",
+    "sha256": "b4fa7545d36708cf5c339951967df5edfff79d2a4bbbec7f4bbc1f4feb303c1d"
+  },
+  "report": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/dev64-three-contrast384-analysis-v1/data/report.md",
+    "bytes": 875,
+    "mode": "0644",
+    "sha256": "1f32e8781dfe49e0d99cfc7e9cb3cd42a1288f65f24c7e6cf1e3c7f7faf04b62"
+  },
+  "planned": 384,
+  "completed": 384,
+  "UNKNOWN": 0,
+  "sharedFamilies": 64,
+  "contrasts": [
+    {
+      "name": "joint293 learned-prior MCTS / joint293 Alpha policyOFF",
+      "matchup": 0,
+      "planned": 128,
+      "wins": 23,
+      "draws": 1,
+      "losses": 104,
+      "UNKNOWN": 0,
+      "completePairs": 64,
+      "score": 0.18359375,
+      "conditionalInterval": [0.109375, 0.26171875]
+    },
+    {
+      "name": "joint293 Alpha policyOFF / original Cedar Alpha",
+      "matchup": 1,
+      "planned": 128,
+      "wins": 73,
+      "draws": 1,
+      "losses": 54,
+      "UNKNOWN": 0,
+      "completePairs": 64,
+      "score": 0.57421875,
+      "conditionalInterval": [0.47265625, 0.671875]
+    },
+    {
+      "name": "joint293 learned-prior MCTS / original Cedar Alpha",
+      "matchup": 2,
+      "planned": 128,
+      "wins": 30,
+      "draws": 2,
+      "losses": 96,
+      "UNKNOWN": 0,
+      "completePairs": 64,
+      "score": 0.2421875,
+      "conditionalInterval": [0.16015625, 0.328125]
+    }
+  ],
+  "familyResampling": {
+    "method": "shared_pcg64_linear",
+    "family_order": [
+      0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+      26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48,
+      49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63
+    ],
+    "index_shape": [10000, 64],
+    "index_dtype": "<u8",
+    "index_sha256": "c9957cdf959d79d109a5364829c7f7f426c3cd275067c15a0141f724b491f9dc",
+    "numpy_version": "2.5.3",
+    "all_planned_pairs_complete": true,
+    "simultaneous_interpretation": "Bonferroni nominal alpha allocation across the predeclared contrasts; conditional approximate bootstrap, no IID/population coverage guarantee"
+  },
+  "nominalInterval": "98+1/3% each; linear tails1/120 and119/120; predeclared simultaneous interpretation is approximate/conditional",
+  "costs": {
+    "outerReportedWallSeconds": 1.8511513370322064,
+    "nestedCommandWallSeconds": 1.1898643299937248,
+    "nestedCostsNotAdded": true,
+    "original384CohortWallSeconds": 876.3447343759472,
+    "cohortAndAnalysisSeparateStages": true
+  },
+  "cleanup": {
+    "directReaped": true,
+    "handles": true,
+    "remaining": [],
+    "signalMask": "completed",
+    "finalRecordPersist": "completed",
+    "directChildIdentityAbsent": true,
+    "originalDiskFields": "unchanged; returned facts distinct"
+  },
+  "interpretation": [
+    "In this fixed midstock development book, joint MCTS scores below both Alpha opponents; this does not establish a general MCTS or learned-policy cause.",
+    "Joint Alpha/Cedar interval includes0.5, so joint Alpha superiority over Cedar is not established.",
+    "Conditional approximate shared-family bootstrap; not192 IID starts, no population/Elo/overall-strength/default/model-adoption claim."
+  ],
+  "nextSavedCollectionAndConditionDispatch": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/continuation-20261023-practical-v1/C435-saved384-clock-census-and-uniform-condition-dispatch.json",
+    "bytes": 157,
+    "mode": "0644",
+    "sha256": "4d70e36cae4494d1a93e3418fc2d03046d68c7650c259adbadedda4c8651fc79"
+  },
+  "newGamesSearchModelFits": 0,
+  "productionDefaultsModelsUnchanged": true
+}
