@@ -58,7 +58,15 @@ class GTP:
         color = "black" if state["toMove"] == 1 else "white"
         response = self.command(f"genmove {color}", deadline=deadline)
         try:
-            return move_index(response)
+            move = move_index(response)
+            self.last_search = {
+                "protocol": "gtp",
+                "engine": self.engine,
+                "side": state["toMove"],
+                "move": move,
+                "response": response,
+            }
+            return move
         except ValueError as error:
             raise EngineError("protocol", str(error)) from error
 
@@ -134,8 +142,9 @@ class NativePlayer:
 class EgaroucidFixedTime:
     """Pinned Console7.8.1 engine + external fixed-time adapter, separate from GTP."""
 
-    def __init__(self, process):
+    def __init__(self, process, *, evidence=None):
         self.process = process
+        self.evidence = evidence
 
     def reset(self, *, deadline):
         self.process.json_request({"op": "reset"}, deadline=deadline)
@@ -153,6 +162,8 @@ class EgaroucidFixedTime:
         self.last_search = result
         if "move" not in result:
             raise EngineError("protocol", "fixed-time adapter omitted move")
+        if self.evidence is not None:
+            validate_external_search(result, self.evidence, state["toMove"])
         return result
 
     def choose(self, state, *, deadline):
@@ -162,3 +173,157 @@ class EgaroucidFixedTime:
 def io_deadline(seconds=5):
     """Protocol setup/transfer envelope, independent of scientific thinking budget."""
     return time.monotonic() + seconds
+
+
+def validate_full_search(response, identity):
+    """Ordinary nested FullSearch evidence; startup identity is checked once separately."""
+    if not isinstance(response, dict) or response.get("ok") is not True:
+        raise EngineError("protocol", "unsuccessful FullSearch response")
+    result = response.get("result")
+    if not isinstance(result, dict):
+        raise EngineError("protocol", "missing nested FullSearch result")
+    if (
+        type(result.get("move")) is not int
+        or not 0 <= result["move"] < 64
+        or type(result.get("completedDepth")) is not int
+        or not 1 <= result["completedDepth"] <= 60
+        or type(result.get("selectivity")) is not int
+        or not 0 <= result["selectivity"] <= 6
+        or type(result.get("nodes")) is not int
+        or result["nodes"] < 0
+        or type(result.get("elapsedMs")) not in (int, float)
+        or not math.isfinite(result["elapsedMs"])
+        or not 0 <= result["elapsedMs"] <= 1100
+        or result.get("stopped") not in (None, "timeout")
+        or type(result.get("proven")) is not bool
+        or type(result.get("isEndSearch")) is not bool
+        or type(result.get("probability")) not in (int, float)
+        or not math.isfinite(result["probability"])
+        or not 0 <= result["probability"] <= 100
+        or result.get("proven") != (result.get("scoreKind") == "terminalEmptyAward")
+        or (result.get("proven") and (not result["isEndSearch"] or result["selectivity"] != 6))
+        or result.get("scoreUnits") != "engine-disc"
+        or result.get("scoreKind") not in ("heuristic", "terminalEmptyAward")
+        or any(
+            type(result.get(k)) is not int or not -64 <= result[k] <= 64
+            for k in ("rawScore", "score")
+        )
+        or result.get("terminal") is not False
+        or result.get("mustPass") is not False
+        or result.get("interpretation") != identity["interpretation"]
+        or result.get("coefficients") != identity["coefficients"]
+        or type(result.get("ttBytes")) is not int
+        or not 0 < result["ttBytes"] <= 32 * 1024**2
+    ):
+        raise EngineError("protocol", "invalid ordinary FullSearch placement evidence")
+    return result
+
+
+def validate_external_search(response, expected, side):
+    """External transport evidence, distinct from same-native evaluator evidence."""
+    if not isinstance(response, dict):
+        raise EngineError("protocol", "missing external transport response")
+    if expected["protocol"] == "gtp":
+        if (
+            response.get("protocol") != "gtp"
+            or expected["engine"] != "edax"
+            or response.get("engine") != "edax"
+            or response.get("side") != side
+            or not isinstance(response.get("response"), str)
+            or len(response["response"].encode()) > 256
+            or move_index(response["response"]) != response.get("move")
+        ):
+            raise EngineError("protocol", "invalid bound Edax GTP move evidence")
+    elif expected["protocol"] == "fixed_jsonl":
+        if (
+            response.get("ok") is not True
+            or response.get("budgetMs") != 1000
+            or response.get("scoreKind")
+            not in ("engine_estimate_stm", "engine_exact_winner_empties_stm")
+            or type(response.get("completedDepth")) is not int
+            or not 1 <= response["completedDepth"] <= 60
+            or type(response.get("nodes")) is not int
+            or response["nodes"] < 0
+            or type(response.get("elapsedMs")) not in (int, float)
+            or not math.isfinite(response["elapsedMs"])
+            or not 0 <= response["elapsedMs"] <= 1100
+            or type(response.get("score")) is not int
+            or not -64 <= response["score"] <= 64
+            or type(response.get("proven")) is not bool
+            or type(response.get("probability")) not in (int, float)
+            or not math.isfinite(response["probability"])
+            or not 0 <= response["probability"] <= 100
+            or response["proven"] != (response["scoreKind"] == "engine_exact_winner_empties_stm")
+            or (response["proven"] and response["probability"] != 100)
+        ):
+            raise EngineError("protocol", "invalid fixed-time Console placement evidence")
+    else:
+        raise EngineError("protocol", "unbound external protocol")
+    if type(response.get("move")) is not int or not 0 <= response["move"] < 64:
+        raise EngineError("protocol", "invalid external placement")
+    return response["move"]
+
+
+class FullSearchPlayer:
+    """Maintained ordinary CLI owner, persistent weights and TT, no response reshaping."""
+
+    def __init__(self, process, *, identity, options):
+        self.process, self.identity, self.options = process, identity, options
+        self.last_search = None
+
+    def initialize(self, *, deadline):
+        required = {
+            "engine",
+            "upstreamCommit",
+            "interpretation",
+            "midgameId",
+            "orderingId",
+            "identityBinding",
+            "hashLevel",
+            "hashSeed",
+            "coefficients",
+            "workerPool",
+        }
+        if (
+            set(self.identity) != required
+            or self.identity["identityBinding"] != "callerVerified"
+            or self.identity["engine"] != "console7.8.1-rust-singlethread-source-port"
+            or self.identity["upstreamCommit"] != "570d5e0a478c9d720d75de06a5d31995f412704a"
+            or self.identity["interpretation"] != "simd"
+            or self.identity["workerPool"] != 0
+            or self.identity["hashLevel"] != 20
+            or self.identity["hashSeed"] != 20261022
+            or self.options
+            != {
+                "timeMs": 1000,
+                "maxDepth": 60,
+                "fixedDepth": None,
+                "selectivity": None,
+                "mpc": True,
+                "etc": True,
+                "stability": True,
+                "parity": True,
+                "shallowOrdering": True,
+            }
+        ):
+            raise EngineError("identity", "explicit supported ordinary timed profile required")
+        info = self.process.json_request({"op": "info"}, deadline=deadline)
+        if any(info.get(k) != v for k, v in self.identity.items()):
+            raise EngineError("identity", "FullSearch startup identity differs")
+        return info
+
+    def reset(self, *, deadline):
+        self.process.json_request({"op": "clear"}, deadline=deadline)
+
+    def observe(self, side, move, *, deadline):
+        pass
+
+    def prepare(self, state, *, deadline):
+        pass
+
+    def choose(self, state, *, deadline):
+        self.last_search = None
+        self.last_search = self.process.json_request(
+            {"op": "search", "state": state, "options": self.options}, deadline=deadline
+        )
+        return validate_full_search(self.last_search, self.identity)["move"]

@@ -1,0 +1,135 @@
+{
+  "issue": "quoridor-n96.1.12",
+  "scope": "Current ordinary Python native64 development owners, not native64 admission",
+  "author": {
+    "packet": {
+      "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-selective-reference-n96/continuous128-result-native64-prep-v1/native64-source-candidate-v2/packet-refs.json",
+      "bytes": 5263,
+      "mode": "0644",
+      "sha256": "5399c5ad153dfe54fab25b7e90cb71ffc08fd451f08a85ca6b467c171d72bbef"
+    },
+    "manifest": {
+      "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-selective-reference-n96/continuous128-result-native64-prep-v1/native64-source-candidate-v2/source-manifest.json",
+      "bytes": 11642,
+      "mode": "0644",
+      "sha256": "184e2c70827d39e29b3bf468ecaa43b00b5b7957ee7cb8bf6d3ca0f8921ffc23"
+    },
+    "patch": {
+      "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-selective-reference-n96/continuous128-result-native64-prep-v1/native64-source-candidate-v2/candidate.patch",
+      "bytes": 54020,
+      "mode": "0644",
+      "sha256": "a69bb55bb2b8985a15f270121caa023ecdda5cdc5b00c0ad2661a349b5b01fdb"
+    },
+    "targets": [
+      "/workspaces/quoridor/games/othello/python/othello_arena/__main__.py",
+      "/workspaces/quoridor/games/othello/python/othello_arena/engines.py",
+      "/workspaces/quoridor/games/othello/python/othello_arena/generation.py",
+      "/workspaces/quoridor/games/othello/python/othello_arena/matches.py",
+      "/workspaces/quoridor/games/othello/tests/python/test_arena_native64_boundaries.py",
+      "/workspaces/quoridor/games/othello/tests/python/test_arena_native64_shared_bootstrap.py"
+    ],
+    "newOnlySelectors": [
+      "test_arena_native64_boundaries.Native64BoundaryTests.test_semantic16_profile_is_explicit_and_historical_history_stays_unknown",
+      "test_arena_native64_boundaries.Native64BoundaryTests.test_target_is_after_mandatory_pass_and_pass_does_not_advance_placement",
+      "test_arena_native64_boundaries.Native64BoundaryTests.test_collision_stops_first_attempt_without_replacement_or_later_family",
+      "test_arena_native64_boundaries.Native64BoundaryTests.test_ordinary_nested_result_retained_identity_once_clear_and_search",
+      "test_arena_native64_boundaries.Native64BoundaryTests.test_external_evidence_qualification_is_not_legacy_native_evidence",
+      "test_arena_native64_boundaries.Native64BoundaryTests.test_incomplete_external_schedule_never_bootstraps_completed_subset",
+      "test_arena_native64_shared_bootstrap.Native64SharedBootstrapTests.test_one_pcg_table_and_family_order_is_shared_by_both_complete_opponents",
+      "test_arena_native64_shared_bootstrap.Native64SharedBootstrapTests.test_incomplete_opponent_has_no_interval_without_erasing_complete_opponent"
+    ],
+    "independentReview": "Related B boundary after current435.8 sourceSTOP; no numerical64 yet",
+    "nativeSearchModelRNG": 0
+  },
+  "currentSources": [
+    {
+      "path": "/workspaces/quoridor/games/othello/python/othello_arena/__main__.py",
+      "bytes": 16168,
+      "mode": "0644",
+      "sha256": "f41838de674c033b44d4a4232b80e0c80d57f773d3137304c1a86914145e86aa"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/python/othello_arena/engines.py",
+      "bytes": 13472,
+      "mode": "0644",
+      "sha256": "c22ca45c3f4b3d4c5a002c113e255b7234bc8106e3fdb6c110a6b51d298600f3"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/python/othello_arena/generation.py",
+      "bytes": 46754,
+      "mode": "0644",
+      "sha256": "84992cc5fe4e2a8e936013d6354679ff7c24f3c5a75f9fa88843cf5926733e24"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/python/othello_arena/matches.py",
+      "bytes": 17965,
+      "mode": "0644",
+      "sha256": "7347457aabe23189e22a101e4df799e506cc5d15d186bf48e2a56b15355e80ea"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/tests/python/test_arena_native64_boundaries.py",
+      "bytes": 10304,
+      "mode": "0644",
+      "sha256": "b320470380f8108d120567baa7ddcca9be20e8442fbfad585aefe4bf00458a00"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/tests/python/test_arena_native64_shared_bootstrap.py",
+      "bytes": 7722,
+      "mode": "0644",
+      "sha256": "0b6fbc12270c2b08f82328b5c0eec7daed35d98443dfa56b15b49c66d5b39568"
+    }
+  ],
+  "savedChecks": {
+    "firstEight": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/native64-current-owner-software-v1/new-eight.process.json",
+      "bytes": 4758,
+      "mode": "0600",
+      "sha256": "728597e5f80e46a7dd680b1bea3647e2bb5bf5f7865262a80eabe3e73a81d5ce"
+    },
+    "firstEightLog": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/native64-current-owner-software-v1/new-eight.log",
+      "bytes": 2696,
+      "mode": "0644",
+      "sha256": "b9d7d46fcc66266d9d4d0fa5f32409d3adf7515a8cb7e0cd4cdc5d38b75119c8"
+    },
+    "failedOneOnly": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/native64-current-owner-software-v1/failed-one-v2.returned.json",
+      "bytes": 1407,
+      "mode": "0644",
+      "sha256": "0cb7e2f73c13df0f1ba253d23e232aaff7c8cfb985567412c1e367ff041f129a"
+    },
+    "failedOneLog": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/native64-current-owner-software-v1/failed-one-v2.log",
+      "bytes": 303,
+      "mode": "0644",
+      "sha256": "9f9051cfbb44d00d66b1b463624625b4651f82687943d5aa1a00241ef99b3466"
+    },
+    "fixtureRepair": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/native64-current-owner-software-v1/fixture-only-repair.json",
+      "bytes": 859,
+      "mode": "0644",
+      "sha256": "51e5bb032fd439563f4ebb2be08dd5c346a62bf050dbdf70dc47ebbfa389c434"
+    },
+    "result": "7 initial PASS plus 1 fixture-only repaired PASS; previous7 not rerun",
+    "failure": "Original ERROR missing fake engine.binary; production unchanged",
+    "firstWallSeconds": 0.10519370099063963,
+    "repairedWallSeconds": 0.07236706698313355,
+    "nestedCostsAdded": false,
+    "initialActualReturnedOutcome": null,
+    "initialCaptureLimit": "CycleStopped escaped Root wrapper before actual exception outcome saved; disk mask pending/persist attempted remain unchanged",
+    "correctedActualReturnedOutcome": "complete; signal restoration/persistence completed"
+  },
+  "syntheticPythonRandomUsed": true,
+  "realNumPyBootstrapRulesGenerationSearchModelGames": 0,
+  "softwareQualification": "Eight new model-free boundary definitions only; important external clock/identity/statistics source review remains separate",
+  "developmentScope": "16 new prospective families, both colours per fixed opponent; historical full history UNKNOWN; not unseen/unused/fit-independent",
+  "nextSource": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/native64-current-owner-software-v1/B21-edax-reset-dispatch.json",
+    "bytes": 157,
+    "mode": "0644",
+    "sha256": "3416302454b3f43758c99235bacd6117751c3853b403dac6025ca4501f7c6222"
+  },
+  "actual64Inputs": null,
+  "actual64RuntimeAdmission": null,
+  "defaultsModelsWeightsChanged": false
+}

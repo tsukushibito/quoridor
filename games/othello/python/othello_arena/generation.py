@@ -221,7 +221,6 @@ def _validate_continuous(config):
     if (
         config["labelKind"] is not None
         or config["purpose"] != "development_trajectory_roots"
-        or config.get("comparisonScope") != "development-implementation-time-reset"
         or not config.get("launchBinding")
         or config.get("H") != 0
         or config.get("samplePassPolicy") != "after-mandatory-pass"
@@ -232,8 +231,17 @@ def _validate_continuous(config):
     namespace = config["namespace"]
     if not namespace.startswith("development/") or "final" in namespace.casefold():
         raise GenerationStop("development namespace required")
-    if len(families) != 4 or targets != [16, 32, 48, 56]:
-        raise GenerationStop("four finite families and four placement targets required")
+    profile = config.get("trajectoryProfile", "continuous-series")
+    expected_families, expected_targets, scope = {
+        "continuous-series": (4, [16, 32, 48, 56], "development-implementation-time-reset"),
+        "development-contest-openings": (16, [16], "development-contest"),
+    }.get(profile, (None, None, None))
+    if (
+        len(families) != expected_families
+        or targets != expected_targets
+        or config["comparisonScope"] != scope
+    ):
+        raise GenerationStop("explicit development trajectory profile/count/targets required")
     if any(
         set(f) != {"id", "seed", "split"}
         or not isinstance(f["id"], str)
@@ -246,7 +254,9 @@ def _validate_continuous(config):
         for f in families
     ):
         raise GenerationStop("named development families and explicit seeds required")
-    if len({f["id"] for f in families}) != 4 or len({f["seed"] for f in families}) != 4:
+    if len({f["id"] for f in families}) != len(families) or len(
+        {f["seed"] for f in families}
+    ) != len(families):
         raise GenerationStop("duplicate family or seed; no replacement")
     if (
         type(limits["actionsPerTrajectory"]) is not int
@@ -406,6 +416,11 @@ def _continuous(native, config, canonical, excluded, package, evidence, report, 
                     family["roots"].append(
                         {
                             "id": f"{family['id']}/p{placement}",
+                            **(
+                                {"moves": [step["move"] for step in record["replay"]]}
+                                if config.get("trajectoryProfile") == "development-contest-openings"
+                                else {}
+                            ),
                             "placement": placement,
                             "state": state,
                             "status": status,
@@ -950,6 +965,11 @@ def run(config_ref, output, *, cancelled=lambda: False):
                 canonicalSource=config["canonicalSource"],
                 exposureMetadata=config["exposureMetadata"],
                 comparisonScope=config["comparisonScope"],
+                **(
+                    {"trajectoryProfile": config["trajectoryProfile"]}
+                    if config.get("trajectoryProfile") == "development-contest-openings"
+                    else {}
+                ),
                 historicalEndpointScope=config["historicalEndpointScope"],
                 freshHistoryScope=config["freshHistoryScope"],
                 endpointMetadataChecked=report.get("endpointMetadataChecked", False),

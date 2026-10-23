@@ -1,11 +1,17 @@
 """Finite paired games controlled exclusively by the Rust rules service."""
 
 from collections import Counter
+import hashlib
 import math
 import random
 import time
 
-from .engines import io_deadline, validate_native_search
+from .engines import (
+    io_deadline,
+    validate_native_search,
+    validate_full_search,
+    validate_external_search,
+)
 from .protocol import EngineError
 
 
@@ -19,6 +25,7 @@ def game(
     time_ms=1000,
     overhead_ms=100,
     expected_opening_state=None,
+    retain_setup=False,
 ):
     result = {
         "family": family,
@@ -29,13 +36,22 @@ def game(
         "blackMinusWhite": None,
         "candidateScore": None,
     }
+    whole_start = time.monotonic()
+    if retain_setup:
+        result["resetMs"] = {}
     state = None
     actor = "rules"
     try:
         state = rules.request("new", deadline=io_deadline())["state"]
         for color, player in players.items():
             actor = str(color)
-            player.reset(deadline=io_deadline())
+            reset_start = time.monotonic()
+            try:
+                player.reset(deadline=io_deadline())
+            finally:
+                if retain_setup:
+                    result["resetMs"][str(color)] = (time.monotonic() - reset_start) * 1000
+        opening_start = time.monotonic()
         for move in opening:
             actor = "rules"
             side = state["toMove"]
@@ -48,6 +64,8 @@ def game(
                 actor = str(color)
                 player.observe(side, move, deadline=io_deadline())
             result["moves"].append({"side": side, "move": move, "opening": True})
+        if retain_setup:
+            result["openingReplayWallMs"] = (time.monotonic() - opening_start) * 1000
         if expected_opening_state is not None and state != expected_opening_state:
             actor = "rules"
             raise EngineError("opening", "Rust replay differs from frozen external opening state")
@@ -75,9 +93,13 @@ def game(
                 move = None
                 elapsed = 0
             else:
+                prepare_start = time.monotonic()
                 players[side].prepare(state, deadline=io_deadline())
+                prepare_ms = (time.monotonic() - prepare_start) * 1000
                 start = time.monotonic()
                 entry = {"side": side, "move": None, "wallMs": None, "opening": False}
+                if retain_setup:
+                    entry["prepareMs"] = prepare_ms
                 result["moves"].append(entry)
                 if hasattr(players[side], "last_search"):
                     players[side].last_search = None
@@ -125,10 +147,14 @@ def game(
             "message": str(error),
         }
     result["state"] = state
+    if retain_setup:
+        result["wholeWallMs"] = (time.monotonic() - whole_start) * 1000
     return result
 
 
-def paired(rules, candidate, opponent, families, *, time_ms=1000, overhead_ms=100):
+def paired(
+    rules, candidate, opponent, families, *, time_ms=1000, overhead_ms=100, retain_setup=False
+):
     """Yield every attempted result; stop on failure without refilling the schedule."""
     for family in families:
         for side in (1, 2):
@@ -142,6 +168,7 @@ def paired(rules, candidate, opponent, families, *, time_ms=1000, overhead_ms=10
                 time_ms=time_ms,
                 overhead_ms=overhead_ms,
                 expected_opening_state=family.get("state"),
+                retain_setup=retain_setup,
             )
             yield result
             if result["failure"] is not None:
@@ -175,7 +202,7 @@ def summarize(results, planned):
     }
 
 
-def _normal_comparison_game(result, family, evaluations):
+def _normal_comparison_game(result, family, evaluations, *, evidence_kind="legacy-native"):
     """Audit retained Rust terminal truth and already-bound native response evidence."""
     try:
         side, difference, status = (
@@ -221,25 +248,58 @@ def _normal_comparison_game(result, family, evaluations):
                 if type(move["move"]) is not int:
                     return False
                 expected = evaluations["candidate" if move["side"] == side else "opponent"]
-                validate_native_search(move["search"], expected)
-                if move["move"] != move["search"]["move"]:
+                if evidence_kind == "fullsearch-external":
+                    if move["side"] == side:
+                        observed = validate_full_search(move["search"], expected["identity"])[
+                            "move"
+                        ]
+                    else:
+                        observed = validate_external_search(move["search"], expected, move["side"])
+                elif evidence_kind == "legacy-native":
+                    validate_native_search(move["search"], expected)
+                    observed = move["search"]["move"]
+                else:
+                    return False
+                if move["move"] != observed:
                     return False
             elif move.get("forcedPass") is not True or wall != 0 or "search" in move:
                 return False
         return True
-    except (KeyError, TypeError, EngineError):
+    except (KeyError, TypeError, ValueError, EngineError):
         return False
 
 
-def comparison_summary(results, families, evaluations, *, run_qualified, opponent_id):
+def comparison_summary(
+    results,
+    families,
+    evaluations,
+    *,
+    run_qualified,
+    opponent_id,
+    evidence_kind="legacy-native",
+    shared_bootstrap=None,
+):
     """CI uses ALL original32 games/16 family means, never a completed-pair subset.
 
+    External development uses the explicit shared PCG64 table (seed2026102302064)
+    and NumPy linear quantiles. Legacy same-native evidence retains its own method:
     Python random.Random (MT19937), seed2026102203;10000 independent resamples
     of16 family means with replacement via randrange(16). Percentiles use linear
     interpolation at sorted index (n-1)*p for p=.025/.975 (R7 convention).
     """
     family_ids = [f["id"] for f in families]
-    plan_valid = len(family_ids) == 16 and len(set(family_ids)) == 16
+    plan_valid = (
+        len(family_ids) == 16
+        and len(set(family_ids)) == 16
+        and evidence_kind in ("legacy-native", "fullsearch-external")
+        and (
+            evidence_kind != "fullsearch-external"
+            or (
+                evaluations.get("candidate", {}).get("protocol") == "fullsearch_jsonl"
+                and evaluations.get("opponent", {}).get("protocol") in ("gtp", "fixed_jsonl")
+            )
+        )
+    )
     by_id = {f["id"]: f for f in families}
     slots = [(r.get("family"), r.get("candidateSide")) for r in results]
     counts = Counter(slots)
@@ -254,7 +314,9 @@ def comparison_summary(results, families, evaluations, *, run_qualified, opponen
             or type(side) is not int
             or side not in (1, 2)
             or counts[slot] != 1
-            or not _normal_comparison_game(result, by_id[family], evaluations)
+            or not _normal_comparison_game(
+                result, by_id[family], evaluations, evidence_kind=evidence_kind
+            )
         ):
             invalid.append(
                 {"family": family, "candidateSide": side, "failure": result.get("failure")}
@@ -289,9 +351,36 @@ def comparison_summary(results, families, evaluations, *, run_qualified, opponen
             "superiorityClaim": False,
         }
     )
+    if evidence_kind == "fullsearch-external":
+        summary["gamesQualifiedForCI"] = eligible
+        summary["familyBootstrap95"] = None
     if not eligible:
         return summary
     means = [(known[(family, 1)] + known[(family, 2)]) / 2 for family in family_ids]
+    if evidence_kind == "fullsearch-external":
+        summary["ciEligible"] = False
+        if shared_bootstrap is None:
+            summary["statisticsStatus"] = "shared-table-unbound"
+            return summary
+        low, high = _shared_family_interval(means, family_ids, shared_bootstrap)
+        conclusion = (
+            "supported_in_finite_dev_condition"
+            if low > 0.5
+            else "unsupported"
+            if high < 0.5
+            else "unresolved"
+        )
+        summary.update(
+            ciEligible=True,
+            statisticsStatus="complete",
+            familyMeanScore=sum(means) / 16,
+            familyMeans=dict(zip(family_ids, means, strict=True)),
+            familyBootstrap95=[low, high],
+            bootstrap=shared_bootstrap["metadata"],
+            conclusion=conclusion,
+            acceptance=True if low > 0.5 else False if high < 0.5 else None,
+        )
+        return summary
     rng = random.Random(2026102203)
     samples = sorted(sum(means[rng.randrange(16)] for _ in range(16)) / 16 for _ in range(10000))
 
@@ -325,3 +414,55 @@ def comparison_summary(results, families, evaluations, *, run_qualified, opponen
         acceptance=True if low > 0.5 else False if high < 0.5 else None,
     )
     return summary
+
+
+def family_bootstrap_table(family_ids, path):
+    """One future-runtime PCG64 table shared by both external opponents."""
+    import numpy as np
+
+    if len(family_ids) != 16 or len(set(family_ids)) != 16:
+        raise ValueError("shared bootstrap requires the original16 ordered family IDs")
+    indices = (
+        np.random.Generator(np.random.PCG64(2026102302064))
+        .integers(0, 16, size=(10000, 16), dtype=np.int64)
+        .astype("<i8", copy=False)
+    )
+    raw = indices.tobytes(order="C")
+    path.write_bytes(raw)
+    metadata = {
+        "seed": 2026102302064,
+        "rng": "NumPy Generator(PCG64)",
+        "numpyVersion": np.__version__,
+        "indexShape": list(indices.shape),
+        "indexDtype": indices.dtype.str,
+        "indexSHA256": hashlib.sha256(raw).hexdigest(),
+        "indexFile": str(path),
+        "indexBytes": len(raw),
+        "indexOrder": "C",
+        "familyOrder": list(family_ids),
+        "resamples": 10000,
+        "unit": "16 family means, both colors per family",
+        "percentile": "numpy.quantile(method='linear'), tails .025/.975",
+        "sharedAcrossOpponents": True,
+    }
+    return {"indices": indices, "metadata": metadata}
+
+
+def _shared_family_interval(means, family_ids, shared):
+    """Consume the same owner-created indices; never create a per-opponent RNG."""
+    import numpy as np
+
+    metadata, indices = shared["metadata"], shared["indices"]
+    if (
+        metadata["familyOrder"] != family_ids
+        or metadata["seed"] != 2026102302064
+        or metadata["indexShape"] != [10000, 16]
+        or metadata["indexDtype"] != "<i8"
+        or tuple(indices.shape) != (10000, 16)
+        or indices.dtype.str != "<i8"
+        or metadata["sharedAcrossOpponents"] is not True
+    ):
+        raise ValueError("shared family index contract differs")
+    samples = np.asarray(means, dtype=float)[indices].mean(axis=1)
+    low, high = np.quantile(samples, [0.025, 0.975], method="linear")
+    return float(low), float(high)
