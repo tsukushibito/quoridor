@@ -1,0 +1,62 @@
+{
+  "scope": "ONE_FIXED_PRIVATE_DIRECT_OWNER_WARM_MEASUREMENT_COMPLETE",
+  "collection": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/direct-owner-warm-work-numerical-v1/completion-da664a1c/collection.json",
+    "bytes": 7270,
+    "mode": "0644",
+    "sha256": "9ac1f8032ceb75083667c0bfd4e42357dc36307ab01b275fa8be4953beca9cd0"
+  },
+  "metrics": {
+    "evaluate": {
+      "rustClamped": [27, 43, 23, 10, -8, 7, 17, -11, -29, -35, 2, 5, 16, 27, -6, -18],
+      "original": [27, 43, 23, 10, -8, 7, 17, -11, -29, -35, 2, 5, 16, 27, -6, -18],
+      "equalRows": 16,
+      "rustInnerMs": 70.372086,
+      "originalInnerMs": 31.544451,
+      "rustNsPerIteration": 67.11205101013184,
+      "originalNsPerIteration": 30.08313274383545,
+      "descriptiveRustOverOriginalRatio": 2.2308863768147367
+    },
+    "moveEvaluateUndo": {
+      "rustClamped": [-24, -44, -24, -15, 8, -10, -24, 12, 27, 31, -2, -7, -21, -25, 10, 17],
+      "original": [-24, -44, -24, -15, 8, -10, -24, 12, 27, 31, -2, -7, -21, -25, 10, 17],
+      "equalRows": 16,
+      "rustInnerMs": 122.864688,
+      "originalInnerMs": 44.837418,
+      "rustNsPerIteration": 117.17289733886719,
+      "originalNsPerIteration": 42.76029396057129,
+      "descriptiveRustOverOriginalRatio": 2.7402266562271715
+    }
+  },
+  "countsPerProfilePerOwner": 1048576,
+  "rootCount": 16,
+  "correlatedFamilies": 4,
+  "timing": {
+    "outerSeconds": 0.8261079409858212,
+    "commands": [
+      {
+        "name": "rust-warm",
+        "wallSeconds": 0.3419857469853014
+      },
+      {
+        "name": "original-warm",
+        "wallSeconds": 0.2707673669792712
+      }
+    ],
+    "inner": {
+      "rust": [70.372086, 122.864688],
+      "original": [31.544451, 44.837418]
+    },
+    "nestedNotAdded": true
+  },
+  "cleanup": "Both exact command children absent/different after real reap/handle closure/remaining[]; TMP absent. Actual returned mask/persist completed separate from original disk pending/attempted.",
+  "scopeLimits": "One order/cache condition and different private barriers/ABIs/bookkeeping; no empty-loop subtraction or isolated kernel cost. Scores compare32clamped values only, original raw accumulator unavailable. Source configured/completed counts/checksums plus emitted work, not dynamic invocation counters. Not a full-search speedup or depth17/21 cause, numerical full-domain proof or strength result.",
+  "nextDecision": "Prioritize actual FullEvaluator::midgame_raw implementation shared by both measured profiles for bounded owner optimization; preserve scalar fallback, phase/clip/aux/integer math and feature restoration; source candidate and related boundary verification before ordinary continuous Search validation.",
+  "goalsComplete": false,
+  "actualNextImplementationDispatch": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/continuation-20261023-practical-v1/after-selected24/A16-midgame-optimization-dispatch.json",
+    "bytes": 157,
+    "mode": "0644",
+    "sha256": "1a18fa4c7907ff3213a75e574263b39bba5d8fc688087036f4890ea8bc67c2d1"
+  }
+}
