@@ -1,0 +1,160 @@
+{
+  "issue": "quoridor-4lc.435",
+  "job": "e9b72721-4113-4261-92c6-2fd8ce93639b",
+  "outcome": "FAILED_BEFORE_ARENA_RUNTIME_CONFIG_DECODE",
+  "originals": {
+    "runtime/result.json": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/runtime/result.json",
+      "bytes": 522,
+      "mode": "0600",
+      "sha256": "ea7e6b242873a5a109456ab38e012a3e524ff3b8d702ae1dcf21bc4c9291245f"
+    },
+    "runtime/config.json": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/runtime/config.json",
+      "bytes": 933,
+      "mode": "0600",
+      "sha256": "886d7af274f46421ed918fbb225c8151133b431f6e2f4fce32db4a3ee11cdc21"
+    },
+    "runtime/output.log": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/runtime/output.log",
+      "bytes": 729,
+      "mode": "0644",
+      "sha256": "906514ee4067cb5631f2afac43334e95afac419c4511a58d7ba6c0149ba91200"
+    },
+    "runtime/state.json": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/runtime/state.json",
+      "bytes": 2720,
+      "mode": "0600",
+      "sha256": "66423ec0e41787591955da7c236276fac818ca8788b0d506dd8e476c60c57cc0"
+    },
+    "sequence/result.json": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/sequence/result.json",
+      "bytes": 2866,
+      "mode": "0644",
+      "sha256": "2743790ab45fb0e8ef6f400ea779fbde16fd9b41aa2c2d41912b3d9633f139b6"
+    },
+    "sequence/run-000/runtime/result.json": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/sequence/run-000/runtime/result.json",
+      "bytes": 527,
+      "mode": "0600",
+      "sha256": "de40f9602bd8c2fdd27ca152e91a4a0175328046d2932ef04131e007f26fcb7e"
+    },
+    "sequence/run-000/runtime/state.json": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/sequence/run-000/runtime/state.json",
+      "bytes": 985,
+      "mode": "0600",
+      "sha256": "f91d5d4e1af1321f17fea12274b56d57b982bf938e0af2e9246fd84ebf01193d"
+    },
+    "sequence/run-000/operation/manifest.json": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/sequence/run-000/operation/manifest.json",
+      "bytes": 13760,
+      "mode": "0644",
+      "sha256": "484541f304df46c744def23830e91a2b943ca21137069772acb4bdab60efef0f"
+    },
+    "sequence/run-000/operation/run.log": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/sequence/run-000/operation/run.log",
+      "bytes": 54,
+      "mode": "0644",
+      "sha256": "512aa68f49cd12900fcb3a1e17b8e537a57ebf627bcf01cf5131ce6c9e3df87e"
+    },
+    "sequence/run-000/operation/run.process.json": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/sequence/run-000/operation/run.process.json",
+      "bytes": 2582,
+      "mode": "0600",
+      "sha256": "6db9bf6210c8437328007489b254005f6d94a49badab3125b49a730aa36cdc36"
+    },
+    "metadata/config-000.json": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/metadata/config-000.json",
+      "bytes": 25881,
+      "mode": "0644",
+      "sha256": "89b2f1776ec1cbc6ed695d76f6777d00293bd543b4a532cb2dacdf86b6c3a65e"
+    }
+  },
+  "cause": "Root metadata binder wrote null for Config.deadline_unix_ms:u64; native serde rejects before runtime::run",
+  "nativeInvocations": 1,
+  "providerLoadForwardSearchGameWork": 0,
+  "nativeCustodyFileReads": "Not measured; pre-runtime manifest custody is distinct from evaluator loading",
+  "actualUniformLoadedIdentity": null,
+  "plannedGames": 128,
+  "completedGames": 0,
+  "plannedUnrun": 128,
+  "completedOperations": 0,
+  "selectedOperations": 8,
+  "dataRootAbsent": true,
+  "formalInterval": null,
+  "costs": {
+    "outerSeconds": 5.426576295983978,
+    "nestedJobSeconds": 0.2269509950419888,
+    "nativeCommandSeconds": 0.017390349064953625,
+    "nestedNotAdded": true
+  },
+  "physicalCleanup": {
+    "directReapedAll": true,
+    "remaining": [],
+    "nativeHandlesComplete": true,
+    "actualExceptionMaskPersistComplete": true,
+    "oldDiskPendingAttemptedPreserved": true,
+    "lifecycleFailedCleanupFalsePreserved": true,
+    "lifecycleMeaning": "Failed command/no data finalization blocks PASS; not substituted for actual process receipts",
+    "knownIdentities": [
+      {
+        "known": {
+          "pid": 3334411,
+          "start_ticks": "81201478",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "freshStartTicks": null,
+        "exactIdentityAbsent": true
+      },
+      {
+        "known": {
+          "pid": 3334464,
+          "start_ticks": "81201764",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "freshStartTicks": null,
+        "exactIdentityAbsent": true
+      },
+      {
+        "known": {
+          "pid": 3334452,
+          "start_ticks": "81201757",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "freshStartTicks": null,
+        "exactIdentityAbsent": true
+      },
+      {
+        "known": {
+          "pid": 3334497,
+          "start_ticks": "81202000",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "freshStartTicks": null,
+        "exactIdentityAbsent": true
+      },
+      {
+        "known": {
+          "pid": 3334571,
+          "start_ticks": "81202491",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "freshStartTicks": null,
+        "exactIdentityAbsent": true
+      },
+      {
+        "known": {
+          "pid": 3334573,
+          "start_ticks": "81202507",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "freshStartTicks": null,
+        "exactIdentityAbsent": true
+      }
+    ],
+    "childTMPAbsent": true
+  },
+  "missingData": "Journal/result/native manifest absent; downstream finalizer errors preserved",
+  "rerun": false,
+  "repair": "New immutable config/control namespace required; only null->0 normal typed default, all timing/caps/128/schedule/model/input/statistics unchanged"
+}

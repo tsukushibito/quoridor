@@ -1,0 +1,102 @@
+{
+  "issue": "quoridor-4lc.435",
+  "scope": "Explicit config-only repair of unentered finite128; not restart of original runtime or scientific success replay",
+  "originalFailure": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/completion-e9b72721/collection.json",
+    "bytes": 6596,
+    "mode": "0644",
+    "sha256": "7a638eb011582c627f7f85ead90563e80309baddfb01d799b7c984a5ddb2ed51"
+  },
+  "binding": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/control-repair-v2/metadata/binding.json",
+    "bytes": 5364,
+    "mode": "0644",
+    "sha256": "e2b34fef4234a6e135dac26e55768c1a4f8fbf521159820b60bb1c46f788965d"
+  },
+  "job": "6bed8967-aba8-43ae-8e51-14aeff62f478",
+  "submission": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/control-repair-v2/submission.json",
+    "bytes": 2522,
+    "mode": "0644",
+    "sha256": "4b2f3fa7bd108f752954af0fda76d0a432fba247ad6b3af1722502b0e8761f64"
+  },
+  "jobConfig": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/control-repair-v2/metadata/job.json",
+    "bytes": 969,
+    "mode": "0644",
+    "sha256": "c13dbf11c0283623a483714bb8b44ed492d37521762c7bef6a528f6eafe17e6b"
+  },
+  "settings": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/control-repair-v2/metadata/sequence.json",
+    "bytes": 46472,
+    "mode": "0644",
+    "sha256": "bbf4e0785054392153a25eae8c9506926dddd51f43cf787089cc372ec9d4ded5"
+  },
+  "plan": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/control-repair-v2/metadata/plan.json",
+    "bytes": 11844,
+    "mode": "0644",
+    "sha256": "475a9c9432ae9dd3692a8e3d091d9a7d23c188a978cdc1449051c8d9e212b3ab"
+  },
+  "configs": [
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/control-repair-v2/metadata/config-000.json",
+      "bytes": 25878,
+      "mode": "0644",
+      "sha256": "bca7c178fc31d2db01c26cbfe92a5ce1c7dc47430ecd2fb564b1f5b4d18c5a59"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/control-repair-v2/metadata/config-001.json",
+      "bytes": 26934,
+      "mode": "0644",
+      "sha256": "8bdbfdc3bb9150218bbe1b3accb89dc2dd723364aa19c46a4b033a34a830c79d"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/control-repair-v2/metadata/config-002.json",
+      "bytes": 27268,
+      "mode": "0644",
+      "sha256": "36a177fcc3379fea8ed6fb2f2565347e937bcc311123fcdd267610508dd46e45"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/control-repair-v2/metadata/config-003.json",
+      "bytes": 26748,
+      "mode": "0644",
+      "sha256": "eb6005c6afdcf0a5a8166542ab0c24631a86d2852f184093ac42e31129b6aa00"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/control-repair-v2/metadata/config-004.json",
+      "bytes": 27206,
+      "mode": "0644",
+      "sha256": "3c2c518cc8fc98ee5a268ebfdc86edd6152991742d9efb159af67bc79730caec"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/control-repair-v2/metadata/config-005.json",
+      "bytes": 26478,
+      "mode": "0644",
+      "sha256": "cf23b84e2d16a931996b5d28981ecd394a6fe7558fa7c85a6fb9e9149a680096"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/control-repair-v2/metadata/config-006.json",
+      "bytes": 27340,
+      "mode": "0644",
+      "sha256": "6f48f498bc002dae061b4e0198f4a463fe8ca1b7f0bb9c53e480d7e462aafbef"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/control-repair-v2/metadata/config-007.json",
+      "bytes": 26705,
+      "mode": "0644",
+      "sha256": "d36b5ba82330e008261952a9a38635376be43f8b9041e5f13962622bbdef0e34"
+    }
+  ],
+  "delta": "Only native config deadline_unix_ms null->0 (existing normal default); new immutable control/config/Plan/numerical refs",
+  "unchanged": "128/same64/bothcolours/8operations/schedule/models/weights/artifact/PUCT/time100ms5/K/tree/provider/CPU/RAM/host/storage/command480/native420/parent4380/firsterror/cancel/bootstrap seed. Existing data output paths remain unused and match RUN data_root.",
+  "deadlineMeaning": "0 is normal no additional absoluteUnix deadline; wall/command/parent/authority-action deadlines and cancellation remain enforced unchanged",
+  "oldFailuresFeesNotRefunded": true,
+  "actualUniformLoad": null,
+  "actualResourceAdmission": null,
+  "actualGames": null,
+  "results": null,
+  "notes": "Only new submission read. Native Config source default and all8 metadata/type/null/output/numerical/Plan/currentCaller identities checked without target import/test/native/schema probe/forward/Search/RNG/games.",
+  "sourceReview": "Existing435.8 source-only acceptance remains scoped to prior/provider/clock semantics, not Root binding qualification",
+  "preserved": "Models/defaults/seals/newE/oldfits96/323+342.17USERPAUSE/foreign/RAWFAILEDNULLUNKNOWNcosts/decimal50GB"
+}
