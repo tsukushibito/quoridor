@@ -1,0 +1,86 @@
+{
+  "scope": "ACCEPTED_FINITE_SELECTED24_FORWARD_PARITY_ONLY",
+  "jobId": "c476d803-94e6-48ed-9d33-bbf7715d0bb1",
+  "collection": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected24-export-parity-v1/completion-c476d803/collection.json",
+    "bytes": 8721,
+    "mode": "0644",
+    "sha256": "ebbd20b786e88b25b6df255533f9dcfd84c2935961b06534d0bc432e037ce75d"
+  },
+  "accepted": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected24-export-parity-v1/completion-c476d803/accepted-selected24-forward-parity.json",
+    "bytes": 4208,
+    "mode": "0644",
+    "sha256": "b77e15c3c3ca11ce898f2dc5c7387dbbf3b51808ebc5cfabd3b6df428f8c9587"
+  },
+  "providerIdentity": "nnue-mcts-core209:sha256:4376e70a76f9e66d82f271b4afa6f42398f301a8b1ba00542831f3a03598de8b",
+  "selectedStep": 24,
+  "counts": {
+    "T": 8,
+    "V": 8,
+    "H": 0,
+    "original": 16,
+    "trueLR": 16,
+    "allSelectedStockBand": "mid",
+    "perPort": 32,
+    "totalJointRows": 96,
+    "logitsPerRow": 209
+  },
+  "comparisons": {
+    "pythonVsNative": {
+      "value": {
+        "scalars": 32,
+        "maxAbsoluteDifference": 7.748603820800781e-7,
+        "maxToleranceFraction": 0.027050139993837978,
+        "failures": 0
+      },
+      "logits": {
+        "scalars": 6688,
+        "maxAbsoluteDifference": 2.384185791015625e-7,
+        "maxToleranceFraction": 0.01336129870968335,
+        "failures": 0
+      }
+    },
+    "wasmVsNative": {
+      "value": {
+        "scalars": 32,
+        "maxAbsoluteDifference": 3.203749656677246e-7,
+        "maxToleranceFraction": 0.025282984065658442,
+        "failures": 0
+      },
+      "logits": {
+        "scalars": 6688,
+        "maxAbsoluteDifference": 2.980232238769531e-7,
+        "maxToleranceFraction": 0.017123496828100524,
+        "failures": 0
+      }
+    },
+    "wasmVsPython": {
+      "value": {
+        "scalars": 32,
+        "maxAbsoluteDifference": 4.6193599700927734e-7,
+        "maxToleranceFraction": 0.023223850028123643,
+        "failures": 0
+      },
+      "logits": {
+        "scalars": 6688,
+        "maxAbsoluteDifference": 3.5762786865234375e-7,
+        "maxToleranceFraction": 0.018245114937694273,
+        "failures": 0
+      }
+    }
+  },
+  "timing": {
+    "outerSeconds": 4.045068426057696,
+    "commandSeconds": {
+      "native": 0.0243990559829399,
+      "python": 1.6434521580813453,
+      "wasm": 0.12156060803681612
+    },
+    "nestedNotAdded": true
+  },
+  "cleanup": "Three recorded command children absent/different after direct reap/handle closure/remaining[]; empty owned TMP directories only removed. Original disk pending/attempted facts retained separately.",
+  "limits": "Only 16 exposed NEW T/V mid-stock contexts and their trueLR states; finite value/all209 raw-logit export compatibility. No full-input-range, LR-invariance, convergence, strength, default, full-current-binary or old293 qualification transfer. Python constructor RNG initialization before exact weight restoration remains possible. Prior fit cap NOT_CONVERGED and poor exposed policy top-k retained.",
+  "newExperimentAdmitted": false,
+  "goalsComplete": false
+}
