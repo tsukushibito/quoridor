@@ -1,0 +1,100 @@
+{
+  "schema": 1,
+  "status": "SUBMITTED_RUNTIME_OUTCOMES_UNKNOWN",
+  "jobId": "d5ec5f60-1018-4d20-bc90-2e3c2b1e476f",
+  "submission": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/continuous-practical-comparison-v1/submission.json",
+    "bytes": 1072,
+    "mode": "0644",
+    "sha256": "9f4772c6b34fc5ee26f01f5ac08f489ba2486b08d3cf90e5b092d28670eea6dc"
+  },
+  "job": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/continuous-practical-comparison-v1/job.json",
+    "bytes": 811,
+    "mode": "0644",
+    "sha256": "c83762031de85e2397f7f3bcef8ab9573e731361430e5b11c2ebf7b56c55668b"
+  },
+  "config": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/continuous-practical-comparison-v1/comparison-config.json",
+    "bytes": 25356,
+    "mode": "0644",
+    "sha256": "57697332ba1745f8f04b4b115cfffa2032c8f6bcd2c05979ff28c89dee7a69b8"
+  },
+  "parameters": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/continuous-practical-comparison-v1/parameters.json",
+    "bytes": 2952,
+    "mode": "0644",
+    "sha256": "8214dcfa06282e310f0edbbf7808c7c3a1cff25efa4c53721845ce6df7399977"
+  },
+  "resources": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/continuous-practical-comparison-v1/resources.json",
+    "bytes": 1187,
+    "mode": "0644",
+    "sha256": "673148adeb4602f0c35e65457e7e649c67970e349b02865b101cddcdcd6c8255"
+  },
+  "cpuPlan": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/continuous-practical-comparison-v1/cpu-plan.json",
+    "bytes": 153,
+    "mode": "0644",
+    "sha256": "1451c0716ff24b1839ca8b6a954609d9d067eb47d3555594304acc2d4e159252"
+  },
+  "controller": {
+    "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-selective-reference-n96/continuous16-practical-source-v1/compare_continuous16.py",
+    "bytes": 15478,
+    "mode": "0644",
+    "sha256": "bcf78ae351e4c1ec43c21ab6675576338ebbf7ca32d5ad9d8556e595b44491e7"
+  },
+  "guardianSource": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/continuous-practical-comparison-v1/run.py",
+    "bytes": 4943,
+    "mode": "0644",
+    "sha256": "3ef01ffa7b20fda9d656ca821972313d38a5c19f4fe9b5f37909d147b28c2478"
+  },
+  "actualPriorCohortSTOP": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/dev64-three-contrast384-entry-v1/completion-14e45e93/collection.json",
+    "bytes": 69907,
+    "mode": "0644",
+    "sha256": "ce1e1d60114bd311ba2d47024afd19ad2bdf48029ed435069b485f979b1c1294"
+  },
+  "actualNewFakeTestSTOP": {
+    "path": "/workspaces/quoridor/.worktree/quoridor-strong435/.artifacts/quoridor-strong435/actual384-saved-analysis-entry-v1/test-STOP.json",
+    "bytes": 1899,
+    "mode": "0644",
+    "sha256": "d8af78b5fa15df48fe00120ccf1544f44bf87674b82ed37aa5930fc92af99376"
+  },
+  "plannedCalls": 128,
+  "fixedCalls": 64,
+  "timedCalls": 64,
+  "families": 4,
+  "roots": 16,
+  "profile": {
+    "fixed": "Rust mpc:false/selectivity6=100%; original compile MID_MPC OFF including shallow ordering MPC. TT/alpha-beta/stability/ETC/parity/ordinary shallow ordering exact cuts retained. D6, or normal remaining end depth when empties<6.",
+    "timed": "normal original time-limited tree_search_legal1000ms with its own dynamic ID selectivity; Rust fixedDepth:null/selectivity:null/mpc:true normal ID1000ms. Effective maxDepth60 required by current API, human requested64 unsupported. Transport1100ms. Original rawScoreNULL/smoothed-only; no equal selective work/parity/timing guarantee.",
+    "score": "engine-disc STM / winner-empties end semantics; no old actual-disc teacher/minimax relabel",
+    "counts": "four correlated trajectory families, four chronological roots each; fixed64calls+timed64calls",
+    "TT": "original activeTT25165872B expected; both actual reply ttBytes<=33554432. No equal layout/work/NPS claim."
+  },
+  "limits": {
+    "fixedRequestSeconds": 10,
+    "timedRequestSeconds": 1.1,
+    "setupSeconds": 30,
+    "resetSeconds": 5,
+    "dropSeconds": 6,
+    "commandSeconds": 1200,
+    "parentSeconds": 1260
+  },
+  "wholeCommandSeconds": 1200,
+  "outerParentSeconds": 1260,
+  "libraryThreads": 1,
+  "CPU": "AI4/management18; exactphysical/remainingRAM checks at actualentry",
+  "RAM": "family2GiB64+1984MiB; host4GiB separate",
+  "outputGuardBytes": 8388608,
+  "tableBytesLimit": 33554432,
+  "preserveOriginalInputAndSources": true,
+  "noOld18Local3CallOrSuccessfulCaseReplay": true,
+  "actualFreshResourceAdmission": null,
+  "actualSetupResetDropOrCalls": null,
+  "newRuntimeStateOrResultPolled": false,
+  "firstError": "STOP; retainpartial/failed/UNRUN; no refill",
+  "limitsScope": "statistical-MPC-off exactcutsretained andnormal1s ownID; requested64/effective60; originaltimedrawNULL; selectivework/speedup/strength unproved; fourcorrelatedfamilies/historyUNKNOWN/H0"
+}
