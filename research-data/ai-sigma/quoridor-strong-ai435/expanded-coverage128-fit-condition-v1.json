@@ -1,0 +1,130 @@
+{
+  "scope": "ONE_NEW128_NORMAL_TWO_STAGE_JOINT_FIT_SUBMITTED_NOT_RESULT",
+  "job": "a101674c-e795-4811-a649-2d384e7d3c1d",
+  "submission": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/expanded-coverage128-fit-v1/submission.json",
+    "bytes": 1074,
+    "mode": "0644",
+    "sha256": "4f1f4f579405a05b2c8029ea579149332b99c3f10911bb79678c1a590fc1aadf"
+  },
+  "sourcePacket": {
+    "path": "/workspaces/quoridor/.worktree/quoridor-strong435/.artifacts/quoridor-strong435/expanded-coverage128-fit-entry-prep-v1/packet.json",
+    "bytes": 6552,
+    "mode": "0644",
+    "sha256": "ce797768bea24dbfd27ad235ce6bb4bc108cbdfacc5fbca6535effbfc49f82a5"
+  },
+  "jobConfig": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/expanded-coverage128-fit-v1/job.json",
+    "bytes": 814,
+    "mode": "0644",
+    "sha256": "2694d0c2c6ed211c2406f7f4146d3a92161677d320109693b263f7ff138d8e3e"
+  },
+  "pipeline": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/expanded-coverage128-fit-v1/pipeline.json",
+    "bytes": 2873,
+    "mode": "0644",
+    "sha256": "66214911386e86f568b0b709ba78813b2dcce0fd0c06f7ba5efd21f360b7f6ab"
+  },
+  "binding": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/expanded-coverage128-fit-v1/bindings.json",
+    "bytes": 16190,
+    "mode": "0644",
+    "sha256": "c747f9eb32924eefcf212bb064bfa7d7a268e18a3dc7600e0a7b447823eb3dd8"
+  },
+  "RootAdmission": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/expanded-coverage128-fit-v1/Root-admission.json",
+    "bytes": 3047,
+    "mode": "0644",
+    "sha256": "dc5613b271c04657701612c8954106988db7ee2233b8103c3295094775cea456"
+  },
+  "currentTrainingCorrespondence": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/expanded-coverage128-fit-v1/current-training-correspondence.json",
+    "bytes": 18699,
+    "mode": "0644",
+    "sha256": "0ac92ffdaf17a9c79072b4d233eb5620f337051c497b7a5bc24b31ae7efd956d"
+  },
+  "resources": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/expanded-coverage128-fit-v1/resources.json",
+    "bytes": 2118,
+    "mode": "0644",
+    "sha256": "783f50bec7f55f7c374de727db1d910afc5d9b18507c1b2dd4b231dce2db4499"
+  },
+  "headConfiguration": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/expanded-coverage128-fit-v1/head-fit-config.json",
+    "bytes": 3067,
+    "mode": "0644",
+    "sha256": "93485d228f859a1b4ff3ee6b182c11e79a917d174009db123dc66d95de0c37d3"
+  },
+  "jointConfiguration": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/expanded-coverage128-fit-v1/joint-fit-config.json",
+    "bytes": 3150,
+    "mode": "0644",
+    "sha256": "f702d7e2626250abfada46a29e1d1481bee8890b773a3486ae2520fa0a7e89e3"
+  },
+  "preparationErrors": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/expanded-coverage128-fit-v1/preparation-errors.json",
+    "bytes": 901,
+    "mode": "0644",
+    "sha256": "e41e7b05051ac014b34f0c47afc70772a1cf6649bf3c355c222b600b91fe2de9"
+  },
+  "canonicalT": 96,
+  "selectionV": 32,
+  "H": 0,
+  "oldTMixture": false,
+  "oldVMonitor": false,
+  "old293Warmstart": false,
+  "initializer": "Retained Cedar a486/35cbb shared/value and scale; synthetic209head seed4351022; joint uses genuine NEW head BEST policy plus same Cedar, fresh Adam/no restart",
+  "trainingSeed": 4351022,
+  "reflectionSeed": 4351023,
+  "panelSeed": 4351024,
+  "reflectionProbability": 0.5,
+  "batch": 256,
+  "head": {
+    "maxDraws": 384,
+    "maxUpdates": 2,
+    "tailRows": 128,
+    "freeze": "value",
+    "learningRate": 0.001
+  },
+  "joint": {
+    "minDraws": 768,
+    "maxDraws": 6144,
+    "minUpdateBoundary": 3,
+    "maxUpdates": 24,
+    "freeze": "none",
+    "learningRate": 3e-5
+  },
+  "selection": "Strict INITIAL/BEST/LAST joint-loss selector; distinct approximately1T ceil points deduplicated to update boundaries. Batch256>N96: each full update2.6667T, not intra-update1T. Existing LRhalf/plateau/overfit/nonfinite/cancel rules; operational stop not convergence/sufficiency.",
+  "logicalForwardRowsMax": {
+    "head": 1152,
+    "joint": 12544
+  },
+  "CPU": {
+    "fit": [12],
+    "management": [18],
+    "libraryThreads": 1,
+    "GPU": 0
+  },
+  "RAM": {
+    "totalB": 3221225472,
+    "commonAuthorityB": 1073741824,
+    "commandTreeB": 2147483648,
+    "wrapperOwnB": 67108864,
+    "hostReserveB": 4294967296,
+    "freshAvailableMinimumB": 7516192768
+  },
+  "time": {
+    "headBodySeconds": 180,
+    "jointBodySeconds": 720,
+    "controllerSeconds": 1140,
+    "parentSeconds": 1200
+  },
+  "holding": {
+    "dataB": 50331648,
+    "wholeControlDataTMPB": 67108864,
+    "checkpointPerNameB": 4194304
+  },
+  "actualPreparedBindings": null,
+  "actualFitResults": null,
+  "limits": "Only starting submission read. Existing normal prepare maps this NEW completed bank and computes NEW T-only constant; actual fit/RNG/model loads belong to admitted normal entry, not source-prep work. No teacher replay, oldT/oldV/H read or independent-strength/model-default claim. All original failures/partial/costs/seals/pauses/decimal50GB retained. No automatic retry/refill or ACK gate."
+}
