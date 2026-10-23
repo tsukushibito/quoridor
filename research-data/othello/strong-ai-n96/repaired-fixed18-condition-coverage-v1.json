@@ -1,0 +1,350 @@
+{
+  "schema": "othello.repaired-fixed18-numerical-coverage.v1",
+  "status": "FIXED_CONDITIONS_COVERED_NOT_CLONE_OR_STRENGTH",
+  "collection": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/remaining17-cli-numerical-v1/completion-0c27efae/collection.json",
+    "bytes": 18374,
+    "mode": "0644",
+    "sha256": "16a5405077246978ac3ed9c50cd7f8d60b8965c968ef25671c370382d0392a34"
+  },
+  "requestedCurrentPairs": 17,
+  "requestedCurrentSearches": 34,
+  "rawMatchedCurrentPairs": 17,
+  "currentPolicyDifferences": 0,
+  "currentCLI": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/remaining17-cli-software-v1/othello-full-search",
+    "bytes": 780312,
+    "mode": "0555",
+    "sha256": "942c13600637c7c3c53ddfa0b976ec295e57b1ace25c31690360736352760996"
+  },
+  "original": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retirement-selective-software-v1/images/egaroucid-selective-oracle",
+    "bytes": 889016,
+    "mode": "0555",
+    "sha256": "385ec6f20ae4457470fecc55c76d565df61393236d45754590836dc190374178"
+  },
+  "historicalFirstcase": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/ordinary-firstcase-repair-v1/completion-e520f290/collection.json",
+    "bytes": 7193,
+    "mode": "0644",
+    "sha256": "78365fe66161597bb7e12ad1612d8ee6cd4745f445ae9a74ba97d8c1f71cc85a"
+  },
+  "historicalFirstcaseSummary": {
+    "verdict": "ORDINARY_PRODUCTION_FIRSTCASE_SCORE_AND_MOVE_MATCH_SAVED_ORIGINAL",
+    "actual": {
+      "rawScore": -14,
+      "move": 41,
+      "completedDepth": 6,
+      "selectivity": 0,
+      "totalNodes": 175452,
+      "callWallMs": 55.940942,
+      "ttBytes": 25165872,
+      "scoreKind": "heuristic",
+      "bound": "UNKNOWN",
+      "proven": false
+    },
+    "consumer": "ordinary FullSearch.search API via former release cfg(test) carrier, distinct from current maintained CLI image",
+    "replayed": false
+  },
+  "newFirstcaseRequests": 0,
+  "plannedConditionCoverage": 18,
+  "consumerScope": "Saved ordinary current-owner firstcase API carrier plus these17 maintained native CLI conditions cover fixed18 planned numeric conditions; not18 new currentCLI requests or wholeTT/clone/strength proof",
+  "fixedCases": [
+    {
+      "sourceIndex": 1,
+      "id": "series0/16/d0/c0/mpc-on/depth6/selectivity1",
+      "rawScore": -14,
+      "rustMove": 41,
+      "originalMove": 41,
+      "policyDifferent": false,
+      "requestWallMs": {
+        "rust": 52.71367297973484,
+        "original": 11.267496971413493
+      },
+      "kind": "heuristic",
+      "fixedDepth": 6,
+      "selectivity": 1
+    },
+    {
+      "sourceIndex": 2,
+      "id": "series0/16/d0/c0/mpc-on/depth6/selectivity2",
+      "rawScore": -14,
+      "rustMove": 41,
+      "originalMove": 41,
+      "policyDifferent": false,
+      "requestWallMs": {
+        "rust": 58.01540706306696,
+        "original": 11.611079913564026
+      },
+      "kind": "heuristic",
+      "fixedDepth": 6,
+      "selectivity": 2
+    },
+    {
+      "sourceIndex": 3,
+      "id": "series0/16/d0/c0/mpc-on/depth6/selectivity3",
+      "rawScore": -15,
+      "rustMove": 41,
+      "originalMove": 41,
+      "policyDifferent": false,
+      "requestWallMs": {
+        "rust": 54.44837000686675,
+        "original": 11.115440051071346
+      },
+      "kind": "heuristic",
+      "fixedDepth": 6,
+      "selectivity": 3
+    },
+    {
+      "sourceIndex": 4,
+      "id": "series0/16/d0/c0/mpc-on/depth6/selectivity4",
+      "rawScore": -15,
+      "rustMove": 41,
+      "originalMove": 41,
+      "policyDifferent": false,
+      "requestWallMs": {
+        "rust": 53.97767492104322,
+        "original": 11.65104506071657
+      },
+      "kind": "heuristic",
+      "fixedDepth": 6,
+      "selectivity": 4
+    },
+    {
+      "sourceIndex": 5,
+      "id": "series0/16/d0/c0/mpc-on/depth6/selectivity5",
+      "rawScore": -15,
+      "rustMove": 41,
+      "originalMove": 41,
+      "policyDifferent": false,
+      "requestWallMs": {
+        "rust": 54.3348389910534,
+        "original": 11.905453982762992
+      },
+      "kind": "heuristic",
+      "fixedDepth": 6,
+      "selectivity": 5
+    },
+    {
+      "sourceIndex": 6,
+      "id": "series0/16/d0/c0/mpc-on/depth6/selectivity6",
+      "rawScore": -15,
+      "rustMove": 41,
+      "originalMove": 41,
+      "policyDifferent": false,
+      "requestWallMs": {
+        "rust": 2.3565259762108326,
+        "original": 0.8174220565706491
+      },
+      "kind": "heuristic",
+      "fixedDepth": 6,
+      "selectivity": 6
+    },
+    {
+      "sourceIndex": 7,
+      "id": "series1/48/d0/c0/mpc-on/depth6/selectivity0",
+      "rawScore": 25,
+      "rustMove": 2,
+      "originalMove": 2,
+      "policyDifferent": false,
+      "requestWallMs": {
+        "rust": 3.379135043360293,
+        "original": 1.0871909325942397
+      },
+      "kind": "heuristic",
+      "fixedDepth": 6,
+      "selectivity": 0
+    },
+    {
+      "sourceIndex": 8,
+      "id": "series1/48/d0/c0/mpc-on/depth6/selectivity1",
+      "rawScore": 25,
+      "rustMove": 2,
+      "originalMove": 2,
+      "policyDifferent": false,
+      "requestWallMs": {
+        "rust": 3.408149932511151,
+        "original": 1.032412052154541
+      },
+      "kind": "heuristic",
+      "fixedDepth": 6,
+      "selectivity": 1
+    },
+    {
+      "sourceIndex": 9,
+      "id": "series1/48/d0/c0/mpc-on/depth6/selectivity2",
+      "rawScore": 25,
+      "rustMove": 2,
+      "originalMove": 2,
+      "policyDifferent": false,
+      "requestWallMs": {
+        "rust": 3.3698700135573745,
+        "original": 0.8945809677243233
+      },
+      "kind": "heuristic",
+      "fixedDepth": 6,
+      "selectivity": 2
+    },
+    {
+      "sourceIndex": 10,
+      "id": "series1/48/d0/c0/mpc-on/depth6/selectivity3",
+      "rawScore": 25,
+      "rustMove": 2,
+      "originalMove": 2,
+      "policyDifferent": false,
+      "requestWallMs": {
+        "rust": 3.1804100144654512,
+        "original": 0.911296927370131
+      },
+      "kind": "heuristic",
+      "fixedDepth": 6,
+      "selectivity": 3
+    },
+    {
+      "sourceIndex": 11,
+      "id": "series1/48/d0/c0/mpc-on/depth6/selectivity4",
+      "rawScore": 25,
+      "rustMove": 2,
+      "originalMove": 2,
+      "policyDifferent": false,
+      "requestWallMs": {
+        "rust": 3.234129981137812,
+        "original": 1.027408055961132
+      },
+      "kind": "heuristic",
+      "fixedDepth": 6,
+      "selectivity": 4
+    },
+    {
+      "sourceIndex": 12,
+      "id": "series1/48/d0/c0/mpc-on/depth6/selectivity5",
+      "rawScore": 25,
+      "rustMove": 2,
+      "originalMove": 2,
+      "policyDifferent": false,
+      "requestWallMs": {
+        "rust": 4.049233044497669,
+        "original": 1.136727980338037
+      },
+      "kind": "heuristic",
+      "fixedDepth": 6,
+      "selectivity": 5
+    },
+    {
+      "sourceIndex": 13,
+      "id": "series1/48/d0/c0/mpc-on/depth6/selectivity6",
+      "rawScore": 25,
+      "rustMove": 2,
+      "originalMove": 2,
+      "policyDifferent": false,
+      "requestWallMs": {
+        "rust": 0.4510069265961647,
+        "original": 0.3046679776161909
+      },
+      "kind": "heuristic",
+      "fixedDepth": 6,
+      "selectivity": 6
+    },
+    {
+      "sourceIndex": 14,
+      "id": "series0/54/d0/c0/mpc-on/depth6/selectivity0",
+      "rawScore": -22,
+      "rustMove": 48,
+      "originalMove": 48,
+      "policyDifferent": false,
+      "requestWallMs": {
+        "rust": 0.1861850032582879,
+        "original": 0.18555205315351486
+      },
+      "kind": "end",
+      "fixedDepth": 6,
+      "selectivity": 0
+    },
+    {
+      "sourceIndex": 15,
+      "id": "series0/54/d0/c0/mpc-on/depth6/selectivity6",
+      "rawScore": -22,
+      "rustMove": 48,
+      "originalMove": 48,
+      "policyDifferent": false,
+      "requestWallMs": {
+        "rust": 0.09635300375521183,
+        "original": 0.13641093391925097
+      },
+      "kind": "end",
+      "fixedDepth": 6,
+      "selectivity": 6
+    },
+    {
+      "sourceIndex": 16,
+      "id": "series1/59/d0/c0/mpc-on/depth1/selectivity0",
+      "rawScore": -28,
+      "rustMove": null,
+      "originalMove": null,
+      "policyDifferent": false,
+      "requestWallMs": {
+        "rust": 0.0644319225102663,
+        "original": 0.12786604929715395
+      },
+      "kind": "end",
+      "fixedDepth": 1,
+      "selectivity": 0
+    },
+    {
+      "sourceIndex": 17,
+      "id": "series0/60/d0/c0/mpc-on/depth1/selectivity0",
+      "rawScore": -22,
+      "rustMove": null,
+      "originalMove": null,
+      "policyDifferent": false,
+      "requestWallMs": {
+        "rust": 0.062069972045719624,
+        "original": 0.0985229853540659
+      },
+      "kind": "terminal",
+      "fixedDepth": 1,
+      "selectivity": 0
+    }
+  ],
+  "clockBudgets": {
+    "rustInternalMs": 30000,
+    "bothQualifyingReplyMs": 30000,
+    "hardTransportMs": 60000
+  },
+  "costs": {
+    "outerSeconds": 1.8339603359345347,
+    "commandSeconds": 1.5307671430055052,
+    "bodySeconds": 1.4692700729938224,
+    "maxReplyWallMs": {
+      "rust": 58.01540706306696,
+      "original": 11.905453982762992
+    },
+    "nestedNotAdded": true,
+    "practicalSpeedQualified": false
+  },
+  "cleanup": {
+    "actualReturned": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/remaining17-cli-numerical-v1/actual-returned-STOP.json",
+      "bytes": 3495,
+      "mode": "0644",
+      "sha256": "ef718b64e5344f45c6b902dd62d02b560c920a8e8c7325bc9a8f5e541a2d556c"
+    },
+    "directReaped": true,
+    "handlesComplete": true,
+    "remaining": [],
+    "TMPabsent": true,
+    "ownedProtocolTERMIsExpected": true,
+    "diskPendingFieldsPreserved": true
+  },
+  "limitations": [
+    "No wholeTT identity or general source equivalence",
+    "No equal-work NPS/speedup",
+    "No timed1s practical session or opponent strength result",
+    "No browser runtime/clock/cancel qualification",
+    "No defaults/model promotion"
+  ],
+  "opponentGames": 0,
+  "WasmRuntimeQualified": false,
+  "defaultsPromoted": false,
+  "weightsPublished": false
+}
