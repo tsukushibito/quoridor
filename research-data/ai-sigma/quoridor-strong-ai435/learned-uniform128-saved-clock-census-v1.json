@@ -1,0 +1,134 @@
+{
+  "issue": "quoridor-4lc.435",
+  "scope": "ONEnew8savedjournaldescriptiveclock/providercensus; not statistical/game replay",
+  "full": {
+    "path": "/workspaces/quoridor/.worktree/quoridor-strong435/.artifacts/quoridor-strong435/saved128-clock-census-v1/saved-clock-census.json",
+    "bytes": 93576,
+    "mode": "0644",
+    "sha256": "0afa2d50de2587518a6967e7fc879725f364c824701452edaa1587b98879960c"
+  },
+  "compact": {
+    "path": "/workspaces/quoridor/.worktree/quoridor-strong435/.artifacts/quoridor-strong435/saved128-clock-census-v1/compact-census.json",
+    "bytes": 39851,
+    "mode": "0644",
+    "sha256": "967d0ecfe7365d4dcc003e8470a2b405a8b5e0169ab8e70e5b6e057fe17528f4"
+  },
+  "readerSTOP": {
+    "path": "/workspaces/quoridor/.worktree/quoridor-strong435/.artifacts/quoridor-strong435/saved128-clock-census-v1/census-reader-STOP.json",
+    "bytes": 1444,
+    "mode": "0644",
+    "sha256": "226e665c1771088d2bf5de1d6f10d53f88ca7229ab028a2abbfbbcfa2da87a60"
+  },
+  "actualReturned": {
+    "path": "/workspaces/quoridor/.worktree/quoridor-strong435/.artifacts/quoridor-strong435/saved128-clock-census-v1/saved-census-once.returned.json",
+    "bytes": 1394,
+    "mode": "0644",
+    "sha256": "efa143456ce22c7e06af93232e360554f652313baa507afc90485cf4e6c83293"
+  },
+  "archivesOpenedAndCompletedOnce": 8,
+  "old24JournalOpens": 0,
+  "gameRows": 128,
+  "observations": 5291,
+  "sides": [
+    {
+      "side": "LEFT learned",
+      "observedLoadedIdentity": {
+        "content_sha256": "9059b0d9a3069dc2a2ad6a4ef231796df24cc7935c541faf480d746eb4f53d7c",
+        "kind": "nnue-mcts-core209",
+        "row_identity": "nnue-mcts-core209:sha256:9059b0d9a3069dc2a2ad6a4ef231796df24cc7935c541faf480d746eb4f53d7c"
+      },
+      "observations": 2630,
+      "stop": {
+        "\"decision_notified\"": 1002,
+        "\"internal_time_limit\"": 1494,
+        "\"simulation_cap\"": 134
+      },
+      "selectedSimulationCap": {
+        "false": 2500,
+        "true": 130
+      },
+      "wholeNodeCap": {
+        "false": 2630
+      },
+      "returnAfterDeadline": {
+        "false": 2259,
+        "true": 371
+      },
+      "authorityReceiptMedianMs": 94.9827365,
+      "returnMedianMs": 97.513194,
+      "selectedSimulationMedian": 3879.5,
+      "selectedLogicalHeadsMedian": 3635.0,
+      "wholeNodesMaximum": 500394,
+      "physicalKernelCalls": null
+    },
+    {
+      "side": "RIGHT uniform",
+      "observedLoadedIdentity": {
+        "content_sha256": "e1c4f19147cee6f1cb919c0abf67c91e5d8ddf8ebe92454769ed4171adaa554c",
+        "kind": "nnue-mcts-core209",
+        "row_identity": "nnue-mcts-core209:sha256:e1c4f19147cee6f1cb919c0abf67c91e5d8ddf8ebe92454769ed4171adaa554c"
+      },
+      "observations": 2661,
+      "stop": {
+        "\"decision_notified\"": 892,
+        "\"internal_time_limit\"": 1600,
+        "\"simulation_cap\"": 169
+      },
+      "selectedSimulationCap": {
+        "false": 2493,
+        "true": 168
+      },
+      "wholeNodeCap": {
+        "false": 2661
+      },
+      "returnAfterDeadline": {
+        "false": 2165,
+        "true": 496
+      },
+      "authorityReceiptMedianMs": 94.982339,
+      "returnMedianMs": 98.166339,
+      "selectedSimulationMedian": 4025.0,
+      "selectedLogicalHeadsMedian": 3661.0,
+      "wholeNodesMaximum": 510024,
+      "physicalKernelCalls": null
+    }
+  ],
+  "providerLifetimeRecords": 16,
+  "providerLifetimeCapReached": false,
+  "cumulativeAfterSummed": false,
+  "gameStatus": {
+    "{\"failure\": null, \"reason\": \"goal\", \"status\": \"goal\"}": 127,
+    "{\"failure\": null, \"reason\": \"threefold_draw\", \"status\": \"draw\"}": 1
+  },
+  "rootSolved": null,
+  "familyAllocatorPeak": null,
+  "physicalForwardThroughput": null,
+  "cost": {
+    "executeInclusive": 0.4164344100281596,
+    "innerIncludedNotAdded": 0.36910587491001934
+  },
+  "actualDirectReapHandlesCleanupRemainingEmpty": true,
+  "TMPemptyRemoved": true,
+  "sourceAdministrativeSuffix": "Note+backup actualreturn0; censusTMPemptyremoved; one0Bnotificationuvlockretained separately, late deliverytail remains Root custody",
+  "limits": "Allacceptedreceiptsbeforedeadline; laterfinalreturn isnotlateaction. Snapshot/whole separate; logicalheads!=physicalNN. Samecondition64EXPOSED only; uniformskipshead, prior+cost differs, no prior-onlycause/default/model/strengthadoption.",
+  "newNumPyRNGBootstrapQualifierNativeForwardSearchGames": 0,
+  "pausesSealsDefaultsModelsForeignOldFailuresCosts50GB": "PRESERVED",
+  "authorFinalPacket": {
+    "path": "/workspaces/quoridor/.worktree/quoridor-strong435/.artifacts/quoridor-strong435/saved128-clock-census-v1/packet.json",
+    "bytes": 7920,
+    "mode": "0644",
+    "sha256": "fbb71f0a60f4e0f9516aa451c47de3583475a0d6209e1b77d8a3e6b00f116561"
+  },
+  "authorReport": {
+    "path": "/workspaces/quoridor/.worktree/quoridor-strong435/.artifacts/quoridor-strong435/saved128-clock-census-v1/report.md",
+    "bytes": 6201,
+    "mode": "0644",
+    "sha256": "71ee8bef95cccf64030762ec20b3ed3fecf550381000882420eac97a191184a4"
+  },
+  "authorHandoffSTOP": {
+    "path": "/workspaces/quoridor/.worktree/quoridor-strong435/.artifacts/quoridor-strong435/saved128-clock-census-v1/handoff-STOP.json",
+    "bytes": 16083,
+    "mode": "0644",
+    "sha256": "87dab2b0c96338efadae33603ddd362bbd1e6d67d9e52726bb468506f46e710a"
+  }
+}

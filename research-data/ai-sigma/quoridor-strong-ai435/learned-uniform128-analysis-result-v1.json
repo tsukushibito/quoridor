@@ -1,0 +1,204 @@
+{
+  "issue": "quoridor-4lc.435",
+  "job": "d520c97f-0f2c-4425-b287-40939cce528e",
+  "status": "ORIGINAL_SAVED128_ANALYSIS_FINALIZED_PASS",
+  "collection": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-analysis-v1/completion-d520c97f/collection.json",
+    "bytes": 6824,
+    "mode": "0644",
+    "sha256": "c07a7ea795a49fc8c05c213e12787eabdfa8de208b38335c77eb9c0dc5b9f116"
+  },
+  "authoritativeManifest": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-analysis-v1/operation/manifest.json",
+    "bytes": 7022,
+    "mode": "0644",
+    "sha256": "9c156806c6ba01a24c1d3ddc4ade850d512ec7eecb38a73166662f320018662b"
+  },
+  "originalSummary": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-analysis-v1/data/summary.json",
+    "bytes": 19717,
+    "mode": "0644",
+    "sha256": "d80984f7f6de68ea2c5480bc14ea7573d18ec0ff5a0ff383115e6fd03d730ecb"
+  },
+  "originalReport": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-analysis-v1/data/report.md",
+    "bytes": 769,
+    "mode": "0644",
+    "sha256": "683fe4f5ee11e8ddca0b9422f2252057cfa27a27782afbf7300728a9e1cee9dd"
+  },
+  "counts": {
+    "planned": 128,
+    "started": 128,
+    "goal_first": 33,
+    "goal_second": 94,
+    "true_draw": 1,
+    "forfeit": 0,
+    "cap": 0,
+    "late": 0,
+    "illegal": 0,
+    "error": 0,
+    "unfinished": 0,
+    "unknown": 0,
+    "missing": 0
+  },
+  "completeColourPairs": 64,
+  "left": "joint293learned-headMCTS",
+  "right": "samejointvalueexplicit-uniformMCTS",
+  "leftScore": 0.26171875,
+  "conditional95Interval": [0.1953125, 0.328125],
+  "plannedDenominator": 128,
+  "UNKNOWN": 0,
+  "bootstrap": {
+    "seed": 435202610231,
+    "resamples": 10000,
+    "method": "shared_pcg64_linear",
+    "family_order": [
+      0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+      26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48,
+      49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63
+    ],
+    "index_shape": [10000, 64],
+    "index_dtype": "<u8",
+    "index_sha256": "b3cb7c41d95b1a6045d3ce2e9b42c901792cb6104a8a72cb98efbe6f7b9b95d6",
+    "numpy_version": "2.5.3",
+    "all_planned_pairs_complete": true,
+    "simultaneous_interpretation": "Bonferroni nominal alpha allocation across the predeclared contrasts; conditional approximate bootstrap, no IID/population coverage guarantee"
+  },
+  "interpretation": {
+    "left": "joint293 learned-head MCTS",
+    "right": "same joint value explicit-uniform MCTS",
+    "scope": "Same64EXPOSEDremainingwalls5..10developmentfamilies/bothcolors",
+    "costCaveat": "Uniform skips policyhead, so prior and implementation cost differ together",
+    "adoption": "Accepted conditional exposed-development record favors explicit uniform; no prior-only cause, general strength, model/default or new-science adoption"
+  },
+  "outerSeconds": 1.0296996720135212,
+  "innerSecondsIncluded": 0.4268172719748691,
+  "costRule": "Analysis outer includes inner; not added. Producer551.990084946s separate",
+  "actualGuardian": {
+    "child": {
+      "pid": 3386079,
+      "start_ticks": "81727199",
+      "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+    },
+    "direct_child_reaped": true,
+    "cleanup_complete": true,
+    "handle_closes_complete": true,
+    "remaining": [],
+    "signal_mask_restoration": "completed",
+    "final_record_persist": "completed"
+  },
+  "knownExactIdentitiesAbsent": 5,
+  "actualTMPAbsent": true,
+  "finalizerCalls": 1,
+  "originalDiskPendingAttempted": "Unmodified; actual final guardian return separate",
+  "newJournalIndexGameSearchForwardRNGReplayByCollector": 0,
+  "independentResultReview": {
+    "issue": "quoridor-4lc.435.9",
+    "input": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-analysis-v1/completion-d520c97f/bounded-result-review-inputs.json",
+      "bytes": 5166,
+      "mode": "0644",
+      "sha256": "b26ac0be17f98a27c03142bd471a63e86f3fd46a76639a9244b0f5bc34ac2f4b"
+    },
+    "dispatch": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-analysis-v1/completion-d520c97f/review4359-dispatch-v2.json",
+      "bytes": 157,
+      "mode": "0644",
+      "sha256": "b16c561017d83073f025add2c00a70841f900c13de9e0a96f06a4b6558f7bfe8"
+    },
+    "status": "ACCEPTED_CONCLUSION_CLEAR_E0_O0_LIMITED_SCOPE",
+    "report": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-result-boundary-review-v1/reviewer/report.md",
+      "bytes": 7196,
+      "mode": "0644",
+      "sha256": "1ed8672dce9b3d32e949d70a8b1f478371b904b9ad464fc6f5cb0779d4b84a98"
+    },
+    "minimum": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-result-boundary-review-v1/reviewer/minimum.json",
+      "bytes": 6281,
+      "mode": "0644",
+      "sha256": "207321a85dc798b5496d923ea821b8a54216b18d74cd0ceabe9eb85d4ae0792b"
+    },
+    "receipt": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-result-boundary-review-v1/reviewer/receipt.json",
+      "bytes": 3128,
+      "mode": "0644",
+      "sha256": "b5695d6efc3eec44e61973a987c8355b01cafd2e39005d9dc674e1b2159e30e8"
+    },
+    "readerSTOP": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-result-boundary-review-v1/reviewer/actual-reader-report-STOP.json",
+      "bytes": 3197,
+      "mode": "0644",
+      "sha256": "7a72958b85e1f21ecf8ccce72bce44200a89efb0a61ed39995599e3776738e97"
+    },
+    "acceptance": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-result-boundary-review-v1/Root-acceptance.json",
+      "bytes": 2100,
+      "mode": "0644",
+      "sha256": "5d2ec980c6018e91842a205a980292ed0d416c1a5d1dd1d4c662a286d5ed19db"
+    },
+    "ownClosureReceipt": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-result-boundary-review-v1/reviewer/accepted-admin-v1/closure-receipt.json",
+      "bytes": 12952,
+      "mode": "0644",
+      "sha256": "b7a643006ececa8c0af922eace350d9f808ee6da67e365839751c6b746f29854"
+    },
+    "ownAdministrativeSTOP": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-result-boundary-review-v1/reviewer/accepted-admin-v1/actual-admin-STOP.json",
+      "bytes": 4846,
+      "mode": "0644",
+      "sha256": "0e72742cdfee8425cc6a528a4d4bf72b7426244b82242a60d095ae163ab0bce9"
+    }
+  },
+  "saved8ClockCensus": {
+    "task": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-analysis-v1/completion-d520c97f/C435-saved128-census.md",
+      "bytes": 3287,
+      "mode": "0644",
+      "sha256": "74e4fd0f6cf92c8eb228f97034866be00d072ecf15d01addc6ea5807808a943a"
+    },
+    "dispatch": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-analysis-v1/completion-d520c97f/C435-census-dispatch.json",
+      "bytes": 157,
+      "mode": "0644",
+      "sha256": "e56bfb670826848c36d89fb5103acdff32cf0b8d448fd45c1bf75b2f935b16a4"
+    },
+    "status": "ONE_NEW8_DESCRIPTIVE_PASS_COMPLETED_ACTUAL_STOP"
+  },
+  "administrativeFailures": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-analysis-v1/completion-d520c97f/review-admin-failures.json",
+    "bytes": 1132,
+    "mode": "0644",
+    "sha256": "bf0c930876329990dab275e4f2f77b7b1229425a44f8d7b7423f73afa1656a38"
+  },
+  "adoption": "Accepted conditional exposed-development record favors explicit uniform; no prior-only cause, general strength, model/default or new-science adoption",
+  "oldTrialsCostsPausesSealsModelsDefaults50GB": "PRESERVED",
+  "clockAddendumLocatorFailure": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-analysis-v1/completion-d520c97f/clock-addendum-locator-failure.json",
+    "bytes": 212,
+    "mode": "0644",
+    "sha256": "b698d54b95fa6cf934ae5fecb5efb0e821a85df2e50ffa647490c34533d33408"
+  },
+  "clockCensus": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/quoridor-strong-ai435/learned-uniform128-saved-clock-census-v1.json",
+    "bytes": 5290,
+    "mode": "0644",
+    "sha256": "313123fa5b61e58de59a863df6a9511676ad82bebee05076c1ac0ed6a9881869"
+  },
+  "nextOrdinaryPreparation": {
+    "issue": "quoridor-4lc.435.1",
+    "scope": "Current joint293 retained V192 existing-owner value/policy diagnostic source and metadata only; future forward and fit unissued",
+    "task": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-analysis-v1/completion-d520c97f/C435-joint293-V192-diagnostic-prep.md",
+      "bytes": 3705,
+      "mode": "0644",
+      "sha256": "cbc399301eecfa02e1ed1a17c3c4fce85e947e334d01c11405a77643f5e86b58"
+    },
+    "dispatch": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-analysis-v1/completion-d520c97f/C435-joint293-V192-dispatch.json",
+      "bytes": 157,
+      "mode": "0644",
+      "sha256": "5b05f613fc60bf309f088c1f8ba1bdaa792bef01744af9e5e55ebfd6a1b2eac4"
+    }
+  }
+}
