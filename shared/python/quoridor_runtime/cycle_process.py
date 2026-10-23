@@ -527,7 +527,15 @@ def execute(
                         continue
                     try:
                         for task in Path(f"/proc/{member['pid']}/task").iterdir():
-                            if not os.sched_getaffinity(int(task.name)) <= set(cpu_cores):
+                            observed_cpus = os.sched_getaffinity(int(task.name))
+                            if not observed_cpus <= set(cpu_cores):
+                                # Retain the first refusal's exact observed mask, not a later read.
+                                record["cpu_scope_violation"] = {
+                                    "member": dict(member),
+                                    "tid": int(task.name),
+                                    "observed_cpus": sorted(observed_cpus),
+                                    "allowed_cpus": sorted(set(cpu_cores)),
+                                }
                                 raise CycleStopped(
                                     "owned child/thread outside assigned command CPU scope"
                                 )
