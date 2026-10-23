@@ -1,0 +1,123 @@
+{
+  "schema": 1,
+  "status": "OUTPUT_BINDING_REPAIRED_NEW_SUBMISSION_UNKNOWN",
+  "originalJobId": "bc5bc590-2af0-489a-a75d-5746d6df012b",
+  "originalOutcome": "failed",
+  "originalCollection": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/dev64-three-contrast384-entry-v1/completion-bc5bc590/collection.json",
+    "bytes": 13066,
+    "mode": "0644",
+    "sha256": "c67dcbe58fc0c9c497e40f2f89fe85e6efe248005ba93b234f443a9817dd8bbb"
+  },
+  "originalWholeWallSeconds": 1.6778553180629387,
+  "nestedResults": [
+    {
+      "runtime": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/dev64-three-contrast384-entry-v1/control-repair-v2/common/runtime",
+      "jobId": "bc5bc590-2af0-489a-a75d-5746d6df012b",
+      "wallSeconds": 1.6778553180629387,
+      "outcome": "failed",
+      "directChildReaped": true,
+      "cleanupComplete": true,
+      "remaining": []
+    },
+    {
+      "runtime": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/dev64-three-contrast384-entry-v1/control-repair-v2/lane-0/runtime",
+      "jobId": "57bce764-0318-4d74-9997-96ba409445b9",
+      "wallSeconds": 0.693399152951315,
+      "outcome": "failed",
+      "directChildReaped": true,
+      "cleanupComplete": true,
+      "remaining": []
+    },
+    {
+      "runtime": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/dev64-three-contrast384-entry-v1/control-repair-v2/lane-1/runtime",
+      "jobId": "33273791-ea7d-4c77-b1a1-03f00bad25e3",
+      "wallSeconds": 0.9135253720451146,
+      "outcome": "failed",
+      "directChildReaped": true,
+      "cleanupComplete": true,
+      "remaining": []
+    },
+    {
+      "runtime": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/dev64-three-contrast384-entry-v1/control-repair-v2/lane-0/sequence/run-000/runtime",
+      "jobId": "82aa74a0-e9ad-4b8c-a949-d23dfe88ba9f",
+      "wallSeconds": 0.24864708702079952,
+      "outcome": "failed",
+      "directChildReaped": true,
+      "cleanupComplete": true,
+      "remaining": []
+    },
+    {
+      "runtime": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/dev64-three-contrast384-entry-v1/control-repair-v2/lane-1/sequence/run-000/runtime",
+      "jobId": "a99612ce-4a88-4d87-b0e0-1bc9aed56959",
+      "wallSeconds": 0.24443588906433433,
+      "outcome": "failed",
+      "directChildReaped": true,
+      "cleanupComplete": true,
+      "remaining": []
+    }
+  ],
+  "nestedNotAdded": true,
+  "originalNativeSearchGamesIssued": 0,
+  "originalGamesCompleted": 0,
+  "planned384Preserved": true,
+  "originalFailure": "Both first operations refused arena owned runtime output: Root moved RUN data_root while native config output remained frozen",
+  "originalCleanup": "Outer/lane/inner actual job reap and cleanup true/remaining[];12 exact known identities absent",
+  "partialLifecycleCleanup": "Both partial lifecycle facts cleanup false before operation ownership; retained unchanged, distinct from process cleanup",
+  "repair": "Control/job lifetimes use new namespace; preserve exact frozen native output directories which were never created; do not move/rewrite native settings or fabricate completed work",
+  "all24FrozenNativeOutputsMatchRunDataRoot": true,
+  "originalPlan": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/dev64-three-contrast384-entry-v1/common/plan.json",
+    "bytes": 23257,
+    "mode": "0644",
+    "sha256": "590ade8d372e7e647a4bff35e92a236bef739c6cdc61879a04b288e51bead3c4"
+  },
+  "all24ExperimentNumericalBuildModelInputsUnchanged": true,
+  "repairBinding": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/dev64-three-contrast384-entry-v1/control-repair-v3/common/repair-binding.json",
+    "bytes": 3087,
+    "mode": "0644",
+    "sha256": "f97fc26e7b9b772fc5ecf9c0130971fdf61813b62361435a48317c45c606d541"
+  },
+  "launch": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/dev64-three-contrast384-entry-v1/control-repair-v3/common/control/launch.json",
+    "bytes": 1631,
+    "mode": "0644",
+    "sha256": "68c9f22bf2e6229ad4868719fb8e073437edbd3d5a1ebcc2f3891fdf36dd77b2"
+  },
+  "parentJob": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/dev64-three-contrast384-entry-v1/control-repair-v3/common/parent-job.json",
+    "bytes": 987,
+    "mode": "0644",
+    "sha256": "db0f32b7212df0c8cf73393915ca842e4f9824088b71cabc0e2643b7227c747a"
+  },
+  "submission": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/dev64-three-contrast384-entry-v1/control-repair-v3/submission.json",
+    "bytes": 2000,
+    "mode": "0644",
+    "sha256": "829bdd8cc19a982f156339e21e60228561499c781efbeed7e31b3aa6a531fe98"
+  },
+  "newJobId": "14e45e93-0cf0-4dfb-940b-9c482dfebf2f",
+  "submittedAt": "2026-10-23T11:58:51.797946+00:00",
+  "configFingerprint": "085b9f192987074e5176a5d4a5dd0336b66ac35f0a356a2696aff69b4836cdb0",
+  "CPUPlan": {
+    "management": [16, 18],
+    "commands": {
+      "0": [12, 18],
+      "1": [14, 16]
+    },
+    "allocation": [12, 14, 16, 18],
+    "resource_CPUs": 4,
+    "worker_CPUs": 2,
+    "library_threads": 1
+  },
+  "scientificCapsAndResourcesUnchanged": true,
+  "nativeOrControllerGuardChanged": false,
+  "newPipelineFrameworkOrObserver": false,
+  "newForwardGenerationParityClockOrGameReplay": false,
+  "oldFailuresAndCostsRetained": true,
+  "newActualNativeEntry": null,
+  "newActualOutcomes": null,
+  "newRuntimeStateOrResultPolled": false,
+  "admission": "Maintained normal fresh RAM/CPU/owner/source/input/serializer guard at actual entry; no success inferred from acceptance"
+}
