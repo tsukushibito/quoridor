@@ -1,0 +1,71 @@
+{
+  "schema": 1,
+  "status": "ISOLATED_TOOL_FILES_VERIFIED_BROWSER_RUNTIME_UNQUALIFIED",
+  "PlaywrightVersion": "1.64.1",
+  "registryIntegrity": "sha512-HCrVhHr5QQuwYoswEUGTb7gGp522yflbv/ST8nF4sFWGuLjQCt17Q/EubpGGSNKYn1tsTCPZxqHhHCfVURu7UA==",
+  "toolRefs": [
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/tools/othello-fullwasm-browser-v1/package-lock.json",
+      "bytes": 1184,
+      "mode": "0644",
+      "sha256": "db70a21c7b4fae83241f5d15ff289c11d16dfa8ce556f0d5bdd2ce94febcde05"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/tools/othello-fullwasm-browser-v1/node_modules/playwright/index.mjs",
+      "bytes": 704,
+      "mode": "0644",
+      "sha256": "a0f5715ea22354f922791a9c53dc012d5d5c067ff9cc4cd35ffb7cd272071a9f"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/tools/othello-fullwasm-browser-v1/node_modules/playwright-core/browsers.json",
+      "bytes": 1135,
+      "mode": "0644",
+      "sha256": "2cfd419f71ac6475d81e1301fa86c34cf2a2a6bae2a0da4b5a2b18310216b6bf"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/tools/othello-fullwasm-browser-v1/browsers/chromium_headless_shell-1248/chrome-headless-shell-linux64/chrome-headless-shell",
+      "bytes": 207474000,
+      "mode": "0755",
+      "sha256": "4fa61f0ba0b4f89b7bec242c32ca16d3bccf69dbfef0651924a9ba8fede5f9d6"
+    }
+  ],
+  "browserRevision": {
+    "name": "chromium-headless-shell",
+    "revision": "1248",
+    "installByDefault": true,
+    "browserVersion": "156.0.8078.4",
+    "title": "Chrome Headless Shell"
+  },
+  "outerWallSeconds": 17.328814242966473,
+  "nestedCommandsNotAdded": [
+    {
+      "name": "isolated-npm-install",
+      "wallSeconds": 2.954203992965631
+    },
+    {
+      "name": "isolated-headless-shell-install",
+      "wallSeconds": 13.938129264046438
+    }
+  ],
+  "allocatedBAtInstallerReturn": 353079296,
+  "allocatedBAfterOwnedCacheCleanup": 350396416,
+  "originalNodeCompileCache": {
+    "originalInstallerTMPentries": [
+      "/workspaces/quoridor/.worktree/assets/tools/othello-fullwasm-browser-v1/TMP/node-compile-cache"
+    ],
+    "completedCommandReaders": true,
+    "futureFunctionalCacheDisabledAndSeparateTMP": true,
+    "oldRecordsUnmodified": true,
+    "cacheBodyReadHash": false,
+    "removedRebuildableCacheAllocatedB": 2682880,
+    "actualToolTMPAbsent": true
+  },
+  "actualInstallerChildrenReaped": true,
+  "sharedEnvironmentChanged": false,
+  "OSDependenciesChanged": false,
+  "userBrowserLaunches": 0,
+  "Search": 0,
+  "actualBrowserWorker": null,
+  "globalCapBytes": 50000000000,
+  "globalUsageNotReinventoried": true
+}

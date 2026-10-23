@@ -1,0 +1,43 @@
+{
+  "schema": 1,
+  "status": "SOURCE_REVIEW_AND_NEW7_FAKE_SOFTWARE_PASS",
+  "source": "games/othello/python/othello_arena/generation.py",
+  "basisSHA256": "f592c830aa8aa37ddb2b8ac4131eb1724c96d457ff366f10d730cd042795721e",
+  "currentSHA256": "2e3d263f8fd8acca938e15872d396c218ce0d6ba80e70c5daf5537be60f2320f",
+  "newTest": "games/othello/tests/python/test_arena_continuous_generation.py",
+  "newTestSHA256": "3457a3bed4d48be54f1c52b3e3e6a8307704f94f8465ef74b9a372d53f69388e",
+  "review": {
+    "reportSHA256": "c0922f2e760714f24f887106da3848ed1c5f3e066109f385297f5b5e80ce54b1",
+    "essential": 0,
+    "ordinary": 0
+  },
+  "newTests": [
+    "test_cancel_stops_before_first_rules_call_without_rng_or_native_replacement",
+    "test_checked_identity_metadata_refusal_and_complete_domain",
+    "test_early_terminal_and_action_cap_retain_exact_deficits_no_replacement",
+    "test_exposure_and_whole_family_collision_stop_without_refill",
+    "test_new_stage_run_writes_only_unlabeled_roots_and_chronological_evidence",
+    "test_semantic_stage_and_unknown_exposure_rejection_before_native",
+    "test_targets_count_placements_and_freeze_after_mandatory_pass"
+  ],
+  "passed": 7,
+  "skipped": 0,
+  "oldTestsReplayed": 0,
+  "commandWallSeconds": 0.09193969389889389,
+  "nestedUnittestWallSeconds": 0.005,
+  "costsNotAdded": true,
+  "cleanup": {
+    "directChildReaped": true,
+    "handlesComplete": true,
+    "remaining": [],
+    "TMPabsent": true,
+    "actualReturnedMask": "completed",
+    "originalDiskMask": "pending",
+    "originalDiskUnchanged": true
+  },
+  "realRulesGenerationSearch": 0,
+  "actual16": null,
+  "historicalExposureCoverage": null,
+  "comparisonAdmission": null,
+  "limits": "Opaque fake ports exercise source boundary only. Source review certifies no actual historical completeness or generated roots. Prospective seeds/targets/no-refill and statistical-MPC-off/exact-cuts-retained remain; original timed smoothed-only rawNULL."
+}

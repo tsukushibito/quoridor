@@ -29,6 +29,12 @@ outcome rows use actual terminal truth; teacher rows add the shared teacher obje
 Arena canonical.py owns shared state shape/D4/STM identity. No tiny model or
 training-loader dependency is needed for preparation or producer rows.
 
+Unlabeled continuous-development uses four explicit family seeds, Rust-only legal
+trajectories and target placements16/32/48/56, after mandatory passes. Checked
+identity-only exposure metadata must declare complete placement8+ coverage; UNKNOWN
+refuses admission. Whole-family collisions/terminal/deficits STOP without refill.
+No prior state/H/label payload or model is read by this stage. All roots are dev.
+
 run(config_FileRef,new_output,cancelled=current_callback) returns complete/STOP;
 caller maps STOP to nonzero and owns current execute resources, termination/reap,
 handles, cancellation/deadline and actual retained output guard. No checkpoint or
@@ -83,6 +89,9 @@ def _read(reference, maximum):
 
 
 def _validate(config):
+    if config["stage"] == "continuous-development":
+        _validate_continuous(config)
+        return
     kind = config["labelKind"]
     comparison = config.get("purpose") == "native_evaluator_comparison"
     if (
@@ -200,6 +209,190 @@ def _excluded_keys(config, canonical):
             raise GenerationStop("prior opening exclusions contain canonical duplicates")
         keys.update(current)
     return keys
+
+
+CONTINUOUS_DUPLICATE_POLICY = "whole-family-stop-on-canonical-collision-placement8+"
+
+
+def _validate_continuous(config):
+    families, targets, limits = config["families"], config["samplePlacements"], config["limits"]
+    if (
+        config["labelKind"] is not None
+        or config["purpose"] != "development_trajectory_roots"
+        or not config.get("launchBinding")
+        or config.get("H") != 0
+        or config.get("samplePassPolicy") != "after-mandatory-pass"
+        or config.get("commonPrefixPlacements") != [0, 7]
+        or config["duplicatePolicy"] != CONTINUOUS_DUPLICATE_POLICY
+    ):
+        raise GenerationStop("explicit unlabeled development trajectory binding required")
+    namespace = config["namespace"]
+    if not namespace.startswith("development/") or "final" in namespace.casefold():
+        raise GenerationStop("development namespace required")
+    if len(families) != 4 or targets != [16, 32, 48, 56]:
+        raise GenerationStop("four finite families and four placement targets required")
+    if any(
+        set(f) != {"id", "seed", "split"}
+        or not isinstance(f["id"], str)
+        or not f["id"].startswith(namespace + "/")
+        or len(f["id"].encode()) > 124
+        or any(not 33 <= ord(c) <= 126 for c in f["id"])
+        or "final" in f["id"].casefold()
+        or type(f["seed"]) is not int
+        or f["split"] != "development"
+        for f in families
+    ):
+        raise GenerationStop("named development families and explicit seeds required")
+    if len({f["id"] for f in families}) != 4 or len({f["seed"] for f in families}) != 4:
+        raise GenerationStop("duplicate family or seed; no replacement")
+    if (
+        type(limits["actionsPerTrajectory"]) is not int
+        or not 1 <= limits["actionsPerTrajectory"] <= 128
+        or any(
+            type(limits[k]) is not int or limits[k] <= 0
+            for k in ("inputBytes", "evidenceBytes", "retainedBytes")
+        )
+        or limits["inputBytes"] > 16 * 1024**2
+    ):
+        raise GenerationStop("fresh bounded trajectory/input/evidence/retention limits required")
+    metadata, scopes = config["exposureMetadata"], config["requiredExposureScopes"]
+    if (
+        config.get("exposureCoverage") != "complete"
+        or not isinstance(metadata, list)
+        or not metadata
+        or not isinstance(scopes, list)
+        or not scopes
+        or any(not isinstance(s, str) or not s for s in scopes)
+        or len(set(scopes)) != len(scopes)
+        or any(set(m) != {"scope", "file", "count"} for m in metadata)
+        or sorted(m["scope"] for m in metadata) != sorted(scopes)
+        or any(type(m["count"]) is not int or m["count"] < 0 for m in metadata)
+    ):
+        raise GenerationStop("exposure coverage UNKNOWN/incomplete; refuse admission")
+    if sum(m["file"]["bytes"] for m in metadata) > limits["inputBytes"]:
+        raise GenerationStop("aggregate exposure metadata exceeds input cap")
+    if not _matches_ref(__file__, config["source"]):
+        raise GenerationStop("generation source differs from Root binding")
+
+
+def _continuous_exclusions(config):
+    """Checked identity-only metadata, never historical state/label/H payloads."""
+    keys = set()
+    for binding in config["exposureMetadata"]:
+        package = _read(binding["file"], config["limits"]["inputBytes"])
+        values = package["canonicalKeys"]
+        if (
+            package.get("coverageStatus") != "complete"
+            or package.get("scope") != binding["scope"]
+            or package.get("domain") != "canonical-states-placement8+-pass-inclusive"
+            or package.get("canonicalSource") != config["canonicalSource"]
+            or not isinstance(values, list)
+            or len(values) != binding["count"]
+        ):
+            raise GenerationStop("checked exposure metadata coverage differs or UNKNOWN")
+        current = set()
+        for value in values:
+            if not isinstance(value, str) or len(value) != 128:
+                raise GenerationStop("exposure canonical key must encode64 trits")
+            try:
+                key = bytes.fromhex(value)
+            except ValueError as error:
+                raise GenerationStop("invalid exposure canonical key") from error
+            if len(key) != 64 or any(cell not in (0, 1, 2) for cell in key) or key in current:
+                raise GenerationStop("invalid/duplicate exposure canonical key")
+            current.add(key)
+        keys.update(current)
+    return keys
+
+
+def _continuous_deficits(config, package):
+    reached = {root["id"] for f in package["families"] for root in f["roots"]}
+    return [
+        f"{family['id']}/p{placement}"
+        for family in config["families"]
+        for placement in config["samplePlacements"]
+        if f"{family['id']}/p{placement}" not in reached
+    ]
+
+
+def _continuous(native, config, canonical, excluded, package, evidence, report, cancelled):
+    """One bounded Rust-only trajectory per family; no retry, label or search."""
+    seen = {}
+    package["families"] = [
+        {
+            **family,
+            "roots": [],
+            "status": "UNRUN",
+            "exposureComponent": None,
+            "generationActions": 0,
+        }
+        for family in config["families"]
+    ]
+    for family in package["families"]:
+        family["status"] = "ATTEMPTED"
+        record = {
+            "openingFamily": family["id"],
+            "seed": family["seed"],
+            "complete": False,
+            "replay": [],
+            "canonicalHistory": [],
+        }
+        evidence.append(record)
+        state = _call(native, "new", cancelled)["state"]
+        rng = random.Random(family["seed"])
+        record["initialState"] = state
+        placement, actions = 0, 0
+        while True:
+            record["lastState"] = state
+            status = _call(native, "status", cancelled, state=state)["status"]
+            record["lastStatus"] = status
+            if placement >= 8:
+                key = canonical(state)
+                record["canonicalHistory"].append(
+                    {"placement": placement, "action": actions, "canonicalKey": key.hex()}
+                )
+                if key in excluded or (key in seen and seen[key] != family["id"]):
+                    report["collision"] = {
+                        "family": family["id"],
+                        "placement": placement,
+                        "canonicalKey": key.hex(),
+                        "priorFamily": seen.get(key),
+                        "priorExposure": key in excluded,
+                    }
+                    raise GenerationStop("whole-family canonical collision; no refill")
+                seen[key] = family["id"]
+            if status["terminal"]:
+                raise GenerationStop(f"early terminal family {family['id']}; no refill")
+            if not status["mustPass"]:
+                if placement in config["samplePlacements"]:
+                    family["roots"].append(
+                        {
+                            "id": f"{family['id']}/p{placement}",
+                            "placement": placement,
+                            "state": state,
+                            "status": status,
+                            "canonicalSHA256": hashlib.sha256(key).hexdigest(),
+                            "fixedDepth": min(6, 64 - status["black"] - status["white"]),
+                            "rulesStatusBinding": {
+                                "family": family["id"],
+                                "action": actions,
+                                "engine": config["engine"]["binary"],
+                            },
+                        }
+                    )
+                if placement == config["samplePlacements"][-1]:
+                    family.update(status="COMPLETE", exposureComponent=family["id"])
+                    record["complete"] = True
+                    break
+            if actions >= config["limits"]["actionsPerTrajectory"]:
+                raise GenerationStop(f"legal-action cap family {family['id']}; no refill")
+            move = None if status["mustPass"] else rng.choice(sorted(status["legalMoves"]))
+            request = {"state": state} if move is None else {"state": state, "move": move}
+            state = _call(native, "pass" if move is None else "play", cancelled, **request)["state"]
+            placement += move is not None
+            actions += 1
+            family["generationActions"] = actions
+            record["replay"].append({"move": move, "placement": placement, "state": state})
 
 
 def _prepare(native, config, canonical, excluded, result, cancelled):
@@ -542,12 +735,21 @@ def run(config_ref, output, *, cancelled=lambda: False):
         "source": report["source"],
         "config": config_ref,
     }
+    continuous = {"families": [], "H": 0}
     games, samples, rows, observations, requests = [], [], [], [], []
     session, process = {}, None
     scheduled = None
     validated = False
     try:
         config = _read(config_ref, 256 * 1024)
+        if config.get("stage") == "continuous-development":
+            report.update(
+                rootsPlanned=16,
+                rootsComplete=0,
+                unrunRoots=16,
+                exposureCoverage="UNKNOWN",
+                duplicatePolicy=CONTINUOUS_DUPLICATE_POLICY,
+            )
         _validate(config)
         validated = True
         report.update(
@@ -573,9 +775,17 @@ def run(config_ref, output, *, cancelled=lambda: False):
         if config["purpose"] == "native_evaluator_comparison":
             openings["purpose"] = config["purpose"]
         canonical = _canonical(config)
-        excluded = _excluded_keys(config, canonical)
+        excluded = (
+            _continuous_exclusions(config)
+            if config["stage"] == "continuous-development"
+            else _excluded_keys(config, canonical)
+        )
+        if config["stage"] == "continuous-development":
+            report.update(exposureCoverage="complete", duplicatePolicy=CONTINUOUS_DUPLICATE_POLICY)
         frozen = (
-            _frozen_openings(config, canonical, excluded) if config["stage"] != "openings" else None
+            _frozen_openings(config, canonical, excluded)
+            if config["stage"] not in ("openings", "continuous-development")
+            else None
         )
         scheduled = (
             _frozen_observations(config, frozen, canonical)
@@ -611,7 +821,11 @@ def run(config_ref, output, *, cancelled=lambda: False):
         )
         with process:
             native = Native(process)
-            if config["stage"] == "openings":
+            if config["stage"] == "continuous-development":
+                _continuous(
+                    native, config, canonical, excluded, continuous, games, report, cancelled
+                )
+            elif config["stage"] == "openings":
                 _prepare(native, config, canonical, excluded, openings, cancelled)
             elif config["stage"] == "trajectories":
                 _trajectory_samples(
@@ -667,7 +881,32 @@ def run(config_ref, output, *, cancelled=lambda: False):
         )
         blobs = {"config.json": _encode(config)}
         stage = config.get("stage") if validated else None
-        if stage == "openings":
+        if stage == "continuous-development":
+            deficits = _continuous_deficits(config, continuous)
+            report.update(
+                rootsPlanned=16,
+                rootsComplete=16 - len(deficits),
+                rootDeficits=deficits,
+                unrunRoots=len(deficits),
+            )
+            if report["status"] != "complete":
+                for family in continuous["families"]:
+                    if family["status"] == "ATTEMPTED":
+                        family["status"] = "STOP"
+            continuous.update(
+                stage=stage,
+                complete=report["status"] == "complete",
+                outcomeLabels=False,
+                config=config_ref,
+                source=report["source"],
+                canonicalSource=config["canonicalSource"],
+                exposureMetadata=config["exposureMetadata"],
+                exposureCoverage=report.get("exposureCoverage", "UNKNOWN"),
+                duplicatePolicy=CONTINUOUS_DUPLICATE_POLICY,
+                commonPrefixPlacements=config["commonPrefixPlacements"],
+            )
+            blobs["roots.json"] = _encode(continuous)
+        elif stage == "openings":
             openings["complete"] = report["status"] == "complete"
             blobs["openings.json"] = _encode(openings)
         elif stage == "trajectories":
@@ -700,6 +939,9 @@ def run(config_ref, output, *, cancelled=lambda: False):
             blobs[name] = b"".join(_encode(row) for row in rows)
         limits = config["limits"] if validated else {}
         input_bytes = sum(len(_encode(row)) for row in rows)
+        root_bytes = len(blobs.get("roots.json", b""))
+        if stage == "continuous-development":
+            report["rootBytes"] = root_bytes
         evidence_bytes = len(blobs.get("generation-evidence.json", b""))
 
         def bound_failure(message):
@@ -712,7 +954,7 @@ def run(config_ref, output, *, cancelled=lambda: False):
 
         if validated and (
             len(rows) > limits.get("rows", 0)
-            or input_bytes > limits["inputBytes"]
+            or input_bytes + root_bytes > limits["inputBytes"]
             or evidence_bytes > limits["evidenceBytes"]
         ):
             bound_failure("row/input/evidence limit; no further work")
@@ -739,7 +981,7 @@ def run(config_ref, output, *, cancelled=lambda: False):
         if report["status"] != "complete" and "training.jsonl" in blobs:
             blobs["training.partial.jsonl"] = blobs.pop("training.jsonl")
         if report["status"] != "complete":
-            for name in ("openings.json", "observations.json"):
+            for name in ("openings.json", "observations.json", "roots.json"):
                 if name in blobs:
                     package = json.loads(blobs[name])
                     package["complete"] = False

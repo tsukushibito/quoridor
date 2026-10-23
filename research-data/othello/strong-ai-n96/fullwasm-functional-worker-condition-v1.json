@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "status": "ONE_REAL_WORKER_CONDITION_BOUND_SUBMISSION_ONLY",
+  "scope": "Functional current full-Wasm API, not product promotion/cancellation/performance/strength",
+  "sourceControllerSHA256": "53f5adfe67d585e1257c08a3631b8305586348c78a2f037ecf254c05fb04f7a7",
+  "generatedWasmSHA256": "b66f98e349e5fba45a25d07bc251e16aecf2c52e5167e885f002499b74174b0d",
+  "browser": {
+    "path": "/workspaces/quoridor/.worktree/assets/tools/othello-fullwasm-browser-v1/browsers/chromium_headless_shell-1248/chrome-headless-shell-linux64/chrome-headless-shell",
+    "bytes": 207474000,
+    "mode": "0755",
+    "sha256": "4fa61f0ba0b4f89b7bec242c32ca16d3bccf69dbfef0651924a9ba8fede5f9d6"
+  },
+  "playwrightModule": {
+    "path": "/workspaces/quoridor/.worktree/assets/tools/othello-fullwasm-browser-v1/node_modules/playwright/index.mjs",
+    "bytes": 704,
+    "mode": "0644",
+    "sha256": "a0f5715ea22354f922791a9c53dc012d5d5c067ff9cc4cd35ffb7cd272071a9f"
+  },
+  "verifiedCoreWrapperClosureCount": 119,
+  "browserBundleFiles": 289,
+  "runtimeOptions": {
+    "timeMs": 30000,
+    "maxDepth": 6,
+    "fixedDepth": 6,
+    "selectivity": 0,
+    "mpc": true,
+    "etc": true,
+    "stability": true,
+    "parity": true,
+    "shallowOrdering": true
+  },
+  "inputIdentityTimeMs": 15000,
+  "parentTimeoutMs": 75000,
+  "wholeTimeoutMs": 105000,
+  "cleanupTimeoutMs": 5000,
+  "guardianCommandSeconds": 150,
+  "guardianParentSeconds": 240,
+  "cpu": {
+    "management": [
+      18
+    ],
+    "payload": [
+      4
+    ],
+    "searchWorkers": 1,
+    "libraryThreads": 1
+  },
+  "memory": {
+    "familyBytes": 4294967296,
+    "managementBytes": 1073741824,
+    "descendantsBytes": 3221225472,
+    "hostReserveBytes": 4294967296
+  },
+  "controlLogTMPUpperBytes": 67108864,
+  "noBulkDataGeneration": true,
+  "expectedScoreMoveNodes": null,
+  "selectedInput": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/first-state-clog-root-v1/first-case.json",
+    "bytes": 966,
+    "mode": "0644",
+    "sha256": "a01077987d408f0482bcedc9c085ff4c6be8920010ebb0d700dc1512c5718581"
+  },
+  "weights": [
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/tools/othello-baselines-n96-v1/egaroucid/bin/resources/eval.egev2",
+      "bytes": 38243826,
+      "mode": "0644",
+      "sha256": "0a8acbcbc23067933627f1bcc83c3f7ae6b7ff3e603d174a3364271fcaeeef2f"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/tools/othello-baselines-n96-v1/egaroucid/bin/resources/eval_move_ordering_end.egev",
+      "bytes": 472392,
+      "mode": "0644",
+      "sha256": "bd908885e8bb85e72a9be2b0399f8ca52ed40a138bcaaecca3d13710945b9a93"
+    }
+  ],
+  "sandbox": true,
+  "privateLoopbackOnly": true,
+  "nativeOrOriginalReplay": 0,
+  "activeCancelClockStrength": null,
+  "actualOutcome": null,
+  "limits": "One real moduleWorker invocation only; exact file bytes checked before serving. Twelve pinned routes, no fallback, immutable actual result before validation. Compare after return with saved ordinary-native compact. Actual owned process/clock/cleanup require original completion."
+}
