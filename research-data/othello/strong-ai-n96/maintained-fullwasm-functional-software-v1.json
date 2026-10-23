@@ -1,0 +1,254 @@
+{
+  "schema": 1,
+  "status": "MAINTAINED_FULLWASM_FUNCTIONAL_SOFTWARE_QUALIFIED",
+  "scope": "Current Othello web bindings and affected wasm32 Clippy; browser/numerical operation unperformed",
+  "sourceCommit": "d9e049d3",
+  "actualDependencies": [
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/bitboard.rs",
+      "bytes": 4172,
+      "mode": "0644",
+      "sha256": "c995c904587deaf33d3b27c762b7e73ed579b2e9ff8a3a731cf5b58001771fd4"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_eval/features.rs",
+      "bytes": 6209,
+      "mode": "0644",
+      "sha256": "1a76a18dfa393a63a09b017a9ba871b313d979a2f9c67c283da7cb3c0892f4a1"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_eval/geometry.rs",
+      "bytes": 7211,
+      "mode": "0644",
+      "sha256": "86ed88b4962ae945b403c55d1aa8a6abaa89c95411bc1288ce0b4bd7f20f6e84"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_eval/mod.rs",
+      "bytes": 8150,
+      "mode": "0644",
+      "sha256": "5e344e5f95717c1177804587f1e4e09ba93ad3a7cd6f5a1c84b283dcfee88861"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_eval/weights.rs",
+      "bytes": 3583,
+      "mode": "0644",
+      "sha256": "3cd789631165524f26bc243ffaca6d7036b86edf1b584e540bf55f8a931ee3e6"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_search/end_table.rs",
+      "bytes": 2217,
+      "mode": "0644",
+      "sha256": "9b3c15cee673df0411df9583732a5de83d39c2156bfc64356f74161158add8cc"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_search/last.rs",
+      "bytes": 9506,
+      "mode": "0644",
+      "sha256": "d63e7ead279563271b20230e6b33a7c6ef2e0e5170440b0b81e1443a07b90db5"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_search/mod.rs",
+      "bytes": 5550,
+      "mode": "0644",
+      "sha256": "b107332cbbf68c44768f082e2e50347f160567bc7f9665c922dc4a5e60b197b8"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_search/mpc.rs",
+      "bytes": 3246,
+      "mode": "0644",
+      "sha256": "d95e0a6231e84b90f6eb302b7f49268674a4667bf9c9a16acea65556a056d2f0"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_search/run.rs",
+      "bytes": 49106,
+      "mode": "0644",
+      "sha256": "f872229dac6b6715ca31827db801bab82a87a8c8efc19a2b9d2b19f6c56f2165"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_search/stability.rs",
+      "bytes": 4909,
+      "mode": "0644",
+      "sha256": "bb290330e468b722834e90b8bae364709f20a6e26e388ba84c95e639e5f7e90a"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_search/tt.rs",
+      "bytes": 14186,
+      "mode": "0644",
+      "sha256": "0bdb7626b68834b18beef1e9a540d4cc447973c566c1e4e5e90c482c5d4dd772"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/heuristic.rs",
+      "bytes": 815,
+      "mode": "0644",
+      "sha256": "6dd62ea17ff06675c1e2d8d5a0453530e32588d469bf6aaae5a14e72ab5244b8"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/lib.rs",
+      "bytes": 6832,
+      "mode": "0644",
+      "sha256": "06dbe4edb57068c227535ba2ebaa0af0981a284d93bb3f34cd3714565813103d"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/search.rs",
+      "bytes": 11267,
+      "mode": "0644",
+      "sha256": "7f971fbeb5c550e4e2d981a9fcb45fdfee2194c83628d6e554f4c7e7355ba968"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-wasm/src/full_search.rs",
+      "bytes": 2265,
+      "mode": "0644",
+      "sha256": "aba11b5994849d7b1b2b5b6c6768bf49494606eca5a74ea21b295caabd21c183"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-wasm/src/lib.rs",
+      "bytes": 4143,
+      "mode": "0644",
+      "sha256": "113d33c08205fe2ca9361c30b597f2b25e704cccdc490f026ecf8329aad3a1c1"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-wasm/src/ui.rs",
+      "bytes": 45161,
+      "mode": "0644",
+      "sha256": "e1783a6ebe2bfb258931bafcdec00c6b167dcb195ffdf00505858b68ff357f47"
+    }
+  ],
+  "generatedArtifacts": [
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/maintained-fullwasm-software-v1/generated/othello.js",
+      "bytes": 20055,
+      "mode": "0644",
+      "sha256": "0f02912f9c194f4e65c3ff2ab4c79b6b34fdc0cf2e471a7656a5f031ca67d1d4"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/maintained-fullwasm-software-v1/generated/othello_bg.wasm",
+      "bytes": 499263,
+      "mode": "0644",
+      "sha256": "b66f98e349e5fba45a25d07bc251e16aecf2c52e5167e885f002499b74174b0d"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/maintained-fullwasm-software-v1/generated/othello.d.ts",
+      "bytes": 5374,
+      "mode": "0644",
+      "sha256": "2ddb72d582659a725c8485a419e8fa65035a13951c65737bed7d2258dff0a5ab"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/maintained-fullwasm-software-v1/generated/othello_bg.wasm.d.ts",
+      "bytes": 2200,
+      "mode": "0644",
+      "sha256": "34ff74d6d4cd6a356843a80c6878f69591f912da54ea6441677b0d29e04f0e1b"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/maintained-fullwasm-software-v1/generated/package.json",
+      "bytes": 276,
+      "mode": "0644",
+      "sha256": "e24914fb5f178d25e51a0b2b7ed9aea2a285225974a5aa7f638d6c95334c1a6b"
+    }
+  ],
+  "rawCompilerWasm": {
+    "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target/wasm32-unknown-unknown/release/othello_wasm.wasm",
+    "bytes": 542856,
+    "mode": "0755",
+    "sha256": "3610648706aabc1f3df6e2b66119295372703d89243b844cd4aa21353cb6c6b7"
+  },
+  "profile": {
+    "target": "wasm32-unknown-unknown",
+    "bindings": "web",
+    "rustOptLevel": 3,
+    "LTO": "thin",
+    "codegenUnits": 1,
+    "debug": 0,
+    "defaultFeatures": false,
+    "binaryenPass": false,
+    "binaryenReason": "Optional wasm-opt tool is absent; explicit supported --no-opt functional profile uses existing offline compiler/bindgen. No optimized-product/browser performance claim. No automatic tool download or guard bypass."
+  },
+  "generatedABI": [
+    "FullSearchModel",
+    "search_json",
+    "clear",
+    "free",
+    "original_mpc_coefficients_json",
+    "initSync"
+  ],
+  "actualDeclarationABI": {
+    "schema": 1,
+    "UTC": "2026-10-23T08:35:58.403658+00:00",
+    "status": "ACTUAL_GENERATED_DECLARATION_SOURCE_CORRESPONDS",
+    "actualDts": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/maintained-fullwasm-software-v1/generated/othello.d.ts",
+      "bytes": 5374,
+      "mode": "0644",
+      "sha256": "2ddb72d582659a725c8485a419e8fa65035a13951c65737bed7d2258dff0a5ab"
+    },
+    "actualModule": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/maintained-fullwasm-software-v1/generated/othello.js",
+      "bytes": 20055,
+      "mode": "0644",
+      "sha256": "0f02912f9c194f4e65c3ff2ab4c79b6b34fdc0cf2e471a7656a5f031ca67d1d4"
+    },
+    "actualWasm": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/maintained-fullwasm-software-v1/generated/othello_bg.wasm",
+      "bytes": 499263,
+      "mode": "0644",
+      "sha256": "b66f98e349e5fba45a25d07bc251e16aecf2c52e5167e885f002499b74174b0d"
+    },
+    "sourceRequirements": {
+      "path": "/workspaces/quoridor/.worktree/othello-core-n96/.artifacts/othello-full-search-n96/fullwasm-functional-entry-source-v1/ABI-REQUIREMENTS.json",
+      "bytes": 808,
+      "mode": "0644",
+      "sha256": "3301e7764cb869a5911a2a8df92399f0efe82a1605905acccaeff857b83c9ee2"
+    },
+    "actualReadPredicates": [
+      "export class FullSearchModel {",
+      "    free(): void;",
+      "    clear(): void;",
+      "    constructor(midgame: Uint8Array, ordering: Uint8Array, interpretation: string, hash_level: number, coefficients: string);",
+      "    search_json(input: string, options: string): string;",
+      "export function original_mpc_coefficients_json(): string;",
+      "export function legal_moves_json(input: string): string;",
+      "module_or_path?: { module_or_path: InitInput | Promise<InitInput> }"
+    ],
+    "actualDefaultExport": "export { initSync, __wbg_init as default };",
+    "binaryImportedOrExecuted": false,
+    "runtimeOrNumericalQualification": null,
+    "limits": "Exact generated declarations and JS export source; no browser import/constructor/search. Original overly literal default-export checker assertion retained separately; actual emitted export inspected, checker fixed only."
+  },
+  "checks": {
+    "build": true,
+    "affectedClippy": true,
+    "noPrivateDiagnosticDependencies": true,
+    "settledCommands": 2,
+    "directCompilerChildrenReaped": true,
+    "handleCleanupComplete": true,
+    "emptyTMPRemoved": true,
+    "sharedCargoLeaseFreeObserved": true
+  },
+  "costsNestedNotAdded": {
+    "outerWallSeconds": 17.084547114092857,
+    "commands": [
+      {
+        "name": "current-fullwasm-web-release-build",
+        "wallSeconds": 14.174505659029819
+      },
+      {
+        "name": "affected-wasm32-library-clippy",
+        "wallSeconds": 2.554818690987304
+      }
+    ]
+  },
+  "runtimeCounts": {
+    "tests": 0,
+    "NodeOrBrowser": 0,
+    "engineInitializations": 0,
+    "caseOrWeightLoads": 0,
+    "Search": 0
+  },
+  "unqualified": {
+    "browserOperation": null,
+    "numericalParity": null,
+    "clockCancellation": null,
+    "strength": null,
+    "optimizedProductPerformance": null
+  },
+  "limitations": "Binaryen --no-opt functional profile; no product default/model adoption. Old pending disk finalization fields retained separately from actual returned complete. Local browser tooling needs an actual owned binding; no Node/mock substitute."
+}
