@@ -1,0 +1,80 @@
+{
+  "scope": "ONE_NEW_PRIVATE_NATIVE_CARRIER_COMPILE_ONLY",
+  "job": "e2fc53d0-b261-49e7-a1d8-b1dd214b1bda",
+  "submission": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/direct-owner-warm-work-rust-software-v1/submission.json",
+    "bytes": 1072,
+    "mode": "0644",
+    "sha256": "6b6e1fc18f1d158ce17e8191456af56f3cf28d0aca756f9d5606f63254f1e906"
+  },
+  "config": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/direct-owner-warm-work-rust-software-v1/config.json",
+    "bytes": 11922,
+    "mode": "0644",
+    "sha256": "31bed0c9a160e8db8f6c2d55ef53ee8cb3e794e2c2d4b13fcb0f972253bc4e01"
+  },
+  "RootAdmission": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/direct-owner-warm-work-rust-software-v1/Root-admission.json",
+    "bytes": 2021,
+    "mode": "0644",
+    "sha256": "3a1b0986536beaae696cc91f92f3b6ffa2753b8d414177767073901614d298e0"
+  },
+  "resourceContract": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/direct-owner-warm-work-rust-software-v1/resources.json",
+    "bytes": 1664,
+    "mode": "0644",
+    "sha256": "a2aa848504999be646b27d9a734cbc3d0550b93d5bae518aa80123836bdcd404"
+  },
+  "sourceStaging": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/direct-owner-warm-work-rust-software-v1/source-staging.json",
+    "bytes": 1353,
+    "mode": "0644",
+    "sha256": "d14333e8deee5a997b4ba175b6df08ce6e73fd568608c5bec1e20aad0b012508"
+  },
+  "sourcePatch": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/direct-owner-warm-work-rust-software-v1/source.patch",
+    "bytes": 636,
+    "mode": "0644",
+    "sha256": "a1b4f5ec902f6a7e5a09c9954aafefd95e5411b723161185b345d13e36fa9b49"
+  },
+  "privateCarrierSHA256": "44789c831b1f623f505eef7aed9cf49898def1e3373a7fa4063aee69c914cc82",
+  "stagedLibSHA256": "15082491caabd532c5d4c11da8cb8784c1737982fd88d02f9106c015fa7d1d61",
+  "originalLibSHA256": "06dbe4edb57068c227535ba2ebaa0af0981a284d93bb3f34cd3714565813103d",
+  "sourceBaseCommit": "9b21309d",
+  "flags": {
+    "opt_level": 3,
+    "lto": "thin",
+    "codegen_units": 1,
+    "debuginfo": 0
+  },
+  "commands": [
+    "cargo test --offline --locked -j1 --release -p othello-core --lib --no-run --message-format=json",
+    "cargo clippy --offline --locked -j1 --release -p othello-core --all-targets -- -D warnings"
+  ],
+  "CPU": {
+    "command": [4],
+    "management": [18],
+    "library_threads": 1,
+    "GPU": 0
+  },
+  "RAM": {
+    "familyB": 2147483648,
+    "commonAuthorityControllerB": 805306368,
+    "wrapperOwnSubcapB": 67108864,
+    "commandGuardB": 1342177280,
+    "hostReserveB": 4294967296
+  },
+  "timelimits": {
+    "perCommandSeconds": 180,
+    "controllerSeconds": 420,
+    "parentSeconds": 480
+  },
+  "storage": "Ordinary existing marked shared target and sole Cargo lease; no advance storage budget. Bounded16MiB controls/logs/copied image, directed affected allocation afterSTOP.",
+  "actualCompileOrImageResult": null,
+  "emittedLoopQualification": null,
+  "actualInputCountsOrderTimingAdmission": null,
+  "targetExecutions": 0,
+  "oldSuccessfulSuitesReplayed": 0,
+  "sourceRemoval": "Only after actual compiler/readersSTOP: exact staged lib CAS to source-staging original bytes. Source package/kernel/oldtests unchanged apart from one cfgtest module registration.",
+  "limits": "Instrumented private carrier, not production image or numerical/timing qualification. No tests/list, initializer, evaluator, Search, benchmark, model/weight/input body read or execution requested. Original carrier remains independently unbuilt. Only accepted starting submission read."
+}
