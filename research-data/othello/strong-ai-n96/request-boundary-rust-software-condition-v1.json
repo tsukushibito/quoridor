@@ -1,0 +1,85 @@
+{
+  "issue": "quoridor-n96.1",
+  "status": "COMPILE_ONLY_SUBMITTED_NOT_NUMERICAL_QUALIFICATION",
+  "sourcePacket": {
+    "path": "/workspaces/quoridor/.worktree/othello-core-n96/.artifacts/othello-full-search-n96/request-boundary-current-source-v1/source-packet.json",
+    "bytes": 5573,
+    "mode": "0644",
+    "sha256": "57fc5d34bd9f5ece8ca2503cc311ca9b1d9dd0981639ab8d1e827f1bdb85de45"
+  },
+  "sourceProof": {
+    "path": "/workspaces/quoridor/.worktree/othello-core-n96/.artifacts/othello-full-search-n96/request-boundary-current-source-v1/source-proof.json",
+    "bytes": 1017,
+    "mode": "0644",
+    "sha256": "37c03e5c0006a1a9e59c2a26fa7e00b810992e156ec15c0b6328d429ff871ff2"
+  },
+  "rootAdoption": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/request-boundary-rust-software-v1/source-adoption.json",
+    "bytes": 1420,
+    "mode": "0644",
+    "sha256": "9494367e1b9cfa0ff5d01cac3a9c2f845f1ff130a61cfeafcff43b842695de36"
+  },
+  "privateSourceReconstruction": {
+    "path": "/workspaces/quoridor/research-data/othello/strong-ai-n96/request-boundary-private-source-v1.json.gz",
+    "bytes": 14346,
+    "mode": "0644",
+    "sha256": "6831944947ad59c57b572acae606540f862c4c3dda496c50dda839f0e8a6cd75"
+  },
+  "job": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/request-boundary-rust-software-v1/job.json",
+    "bytes": 823,
+    "mode": "0644",
+    "sha256": "878ae0f5bc0b6fd5421390c249cc298dce4ffa290c5ce81dd2e99c4e67cd9b08"
+  },
+  "config": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/request-boundary-rust-software-v1/config.json",
+    "bytes": 10905,
+    "mode": "0644",
+    "sha256": "34a60bd081812b8d3fb194d1220d70107850542f14357f6df1e2c3e737060954"
+  },
+  "resources": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/request-boundary-rust-software-v1/resources.json",
+    "bytes": 1446,
+    "mode": "0644",
+    "sha256": "3e9acd5f956c5938ab71b33c25d1a87cdac6c785555674111fa6d3e92870e788"
+  },
+  "preSubmit": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/request-boundary-rust-software-v1/pre-submit.json",
+    "bytes": 1497,
+    "mode": "0644",
+    "sha256": "982c7797805aaed2a6d644fc5e214c8a853994b3c447cf57edf71fc51cd913b9"
+  },
+  "submission": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/request-boundary-rust-software-v1/submission.json",
+    "bytes": 1072,
+    "mode": "0644",
+    "sha256": "0791aeafacb383f191ba44e78e783469095adc4618c09db37bd1af3131358c99"
+  },
+  "jobId": "6300787d-4028-4ff4-9b54-e0ae81f643bd",
+  "commands": [
+    "cargo test release locked offline -p othello-core --lib --no-run --message-format=json",
+    "cargo clippy release locked offline -p othello-core --all-targets -- -D warnings"
+  ],
+  "testEngineSearchModelWeightRuntime": 0,
+  "sourceInverse": "18 nativecfgtest blocks strip exactly to49106B/f872 owner; original publication expression/recursiveowners/oldtests unchanged",
+  "ownerLabel": "INSTRUMENTED_CURRENT_OWNER_CFG_TEST_RELEASE, no unchangedbinary timing/parity/cause claim",
+  "boundControls": {
+    "workerCPU": [4],
+    "managementCPU": [18],
+    "libraryThreads": 1,
+    "GPU": 0,
+    "familyB": 2147483648,
+    "controllerB": 67108864,
+    "descendantsB": 2080374784,
+    "hostReserveB": 4294967296,
+    "perCommandSeconds": 180,
+    "controllerSeconds": 420,
+    "parentSeconds": 480,
+    "wholeControlImageB": 16777216
+  },
+  "immutableExistingCargoTarget": "Same sole324writer/normal lock; incremental storagepoint afterSTOP, no model/data cache creation",
+  "currentMain": "Temporary cfgtest run13f09e46 for compiler readers; baselinef872 retirement CAS afteractualSTOP. No productiondefault/feature/model change. Do not overwrite active source.",
+  "observed": "Submissionstarting only; no runtime/result/output/qualification poll",
+  "futureNumericalInputWeightsImageABIResourcesBudgetAdmission": null,
+  "preserved": "All original costs/failures/NULL/UNKNOWN/pause/seals/defaultmodels/50GB"
+}
