@@ -1,0 +1,102 @@
+{
+  "scope": "EMITTED_CODE_IN_SELECTED_EXISTING_INSTRUMENTED_IMAGES_ONLY",
+  "rustContract": {
+    "path": "/workspaces/quoridor/.worktree/othello-core-n96/.artifacts/othello-full-search-n96/midgame-emitted-code-v2/codegen-contract.json",
+    "sha256": "b2b66fcbf5fdf9cd16b1d77b7968fb905e91f991b078b96265ef20a9b2ced608",
+    "bytes": 5561,
+    "mode": "0644"
+  },
+  "rustReport": {
+    "path": "/workspaces/quoridor/.worktree/othello-core-n96/.artifacts/othello-full-search-n96/midgame-emitted-code-v2/EMITTED-CODE-REPORT.md",
+    "sha256": "a4019599cf0b8b3669bb3ad22bb68649d793ae4672194614f8b5c1ff75ce25d5",
+    "bytes": 7582,
+    "mode": "0644"
+  },
+  "rustSTOP": {
+    "path": "/workspaces/quoridor/.worktree/othello-core-n96/.artifacts/othello-full-search-n96/midgame-emitted-code-v2/software-stop.json",
+    "sha256": "5b2f91df41f563625af1f9449b2f609d0350447221d66a4d80091b1582f544f5",
+    "bytes": 8191,
+    "mode": "0644"
+  },
+  "originalEvidence": {
+    "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-selective-reference-n96/midgame-emitted-code-v1/evidence.json",
+    "sha256": "4a1951dc150a23995fc1c98ae1fde89ea9b66f776806e73b797e92a74c500250",
+    "bytes": 16479,
+    "mode": "0644"
+  },
+  "originalReport": {
+    "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-selective-reference-n96/midgame-emitted-code-v1/REPORT.md",
+    "sha256": "095a3b913d2766cb831ea62a9c2d09b0e4d666cec3ef4726f825e7ddce61e3a6",
+    "bytes": 9047,
+    "mode": "0644"
+  },
+  "originalSTOP": {
+    "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-selective-reference-n96/midgame-emitted-code-v1/SOFTWARE-STOP.json",
+    "sha256": "728b5a40c1c3bbaa25854bc956d931d952314a942692c888bf9a133fa7c45af7",
+    "bytes": 15545,
+    "mode": "0644"
+  },
+  "originalTargets": [
+    {
+      "label": "mid-evaluate",
+      "symbol": "_Z17mid_evaluate_diffP6Search",
+      "raw": {
+        "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-selective-reference-n96/midgame-emitted-code-v1/mid-evaluate.objdump.txt",
+        "bytes": 5743,
+        "mode": "0644",
+        "sha256": "cde791510d5bbbd95ee17ac899c16e508691c462f41633e40dfb3d28fdd92f41"
+      },
+      "elfVirtualAddressRangeHalfOpen": ["0x421a0", "0x4232f"]
+    },
+    {
+      "label": "feature-initialization",
+      "symbol": "_Z18calc_eval_featuresP5BoardP11Eval_search",
+      "raw": {
+        "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-selective-reference-n96/midgame-emitted-code-v1/feature-initialization.objdump.txt",
+        "bytes": 11634,
+        "mode": "0644",
+        "sha256": "7720d341052c212fbe7a204ff5d334e24d42fd57b6671e7491c3b7b7ee8374fa"
+      },
+      "elfVirtualAddressRangeHalfOpen": ["0x42330", "0x42649"]
+    },
+    {
+      "label": "move-update-callsite",
+      "symbol": "_ZN6Search4moveEPK4Flip",
+      "raw": {
+        "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-selective-reference-n96/midgame-emitted-code-v1/move-update-callsite.objdump.txt",
+        "bytes": 4960,
+        "mode": "0644",
+        "sha256": "78ec25849acc45a9f07b56b4189a6992f313798b61c862e6a8c4604d554f3ec3"
+      },
+      "elfVirtualAddressRangeHalfOpen": ["0x40ef0", "0x41035"]
+    },
+    {
+      "label": "pass-update",
+      "symbol": "_Z9eval_passP11Eval_searchPK5Board",
+      "raw": {
+        "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-selective-reference-n96/midgame-emitted-code-v1/pass-update.objdump.txt",
+        "bytes": 2892,
+        "mode": "0644",
+        "sha256": "a7ab16a918506fcb439cba016e25881826ca1741ccc91da75dff409d75b94b5c"
+      },
+      "elfVirtualAddressRangeHalfOpen": ["0x42700", "0x427b4"]
+    }
+  ],
+  "originalEmitted": "mid_evaluate_diff has8 scale2 vpgatherdd and packed adds/mask/reduction; selected feature/update targets have packed16 arithmetic",
+  "rustEmitted": "reported complete midgame_raw scalar signed16 loads/clamp/int adds; change scalar two-view word updates; selected XMM copies are Position copies, not pattern gather",
+  "rustTargets": {
+    "path": "/workspaces/quoridor/.worktree/othello-core-n96/.artifacts/othello-full-search-n96/midgame-emitted-code-v2/selected-targets.json",
+    "sha256": "f6cdc1ed9de99249bc3171899e636e8875bd510fe51450af5acda55a339e8e2f",
+    "bytes": 4793,
+    "mode": "0644"
+  },
+  "rustRawBytes": 25435,
+  "originalRawBytes": 25229,
+  "engineExecutions": 0,
+  "newCompile": 0,
+  "emittedOtherInlinedPaths": null,
+  "executedISAUtilizationPerformanceCausalDepthWDL": null,
+  "instrumentedOverhead": null,
+  "preservedFailures": "Rustv1 literal filter returned0 matches; correctedv2 locator authorized. Original nm128KiB capture/pipe-drain failure and cleanupfalse retained separately from actualreap/handles; no rescan. Neither is evidence of absent symbols/SIMD.",
+  "noAutomaticBenchmarkOrImplementation": true
+}

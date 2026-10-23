@@ -970,6 +970,158 @@ def cpu_policy_teacher_boundary(config):
     return identity
 
 
+def exclude_joint_source_inputs(config, pairs):
+    """Veto old actual input keys; never read, copy or transform old labels."""
+    source = config["excluded_joint_source"]
+    if not isinstance(source, dict) or set(source) != {
+        "input_classes",
+        "teacher_values",
+        "configuration",
+    }:
+        raise ValueError("explicit complete old joint source authority required")
+    previous = json.loads(bound_file_bytes(source["configuration"], 64 * 1024))
+    bank = json.loads(bound_file_bytes(source["teacher_values"], 64 * 1024))
+    if (
+        set(previous) != set(config) - {"excluded_joint_source"}
+        or previous["input_classes"] != source["input_classes"]
+        or bank["schema"] != "quoridor-public-static-teacher-values-v1"
+        or bank["status"] != "COMPLETE"
+        or bank["input_classes"] != source["input_classes"]
+        or (Path(source["teacher_values"]["path"]).parent / "INCOMPLETE").exists()
+        or set(bank["teachers"]) != {"C"}
+    ):
+        raise ValueError("complete joined old input/configuration/joint bank required")
+    for name in (
+        "runtime_boundary",
+        "model",
+        "model_identity",
+        "core_library",
+        "c20_library",
+        "device",
+        "cpu_threads",
+        "temperature",
+    ):
+        if previous[name] != config[name]:
+            raise ValueError("old joint teacher source differs: " + name)
+    if (
+        config["temperature"] != 1
+        or config["device"] != "cpu"
+        or config["cpu_threads"] != 1
+        or type(previous["temperature"]) not in (int, float)
+        or type(previous["cpu_threads"]) is not int
+    ):
+        raise ValueError("old joint exclusion requires the matching CPU temperature1 teacher")
+    entry = bank["teachers"]["C"]
+    for name in ("runtime_boundary", "core_library", "c20_library"):
+        if bank[name] != previous[name]:
+            raise ValueError("old joint bank source differs: " + name)
+    if entry["model"] != previous["model"]:
+        raise ValueError("old joint bank teacher model differs")
+    policy = entry["policy"]
+    if set(policy) != {
+        "action_order",
+        "value_perspective",
+        "input_coordinates",
+        "orientation_targets",
+        "temperature",
+        "probabilities",
+        "probabilities_identity",
+        "legal_mask",
+        "legal_mask_identity",
+    } or any(
+        policy[name] != value
+        for name, value in (
+            ("action_order", "absolute-core-action-id209"),
+            ("value_perspective", "side-to-move"),
+            ("input_coordinates", "canonical-public-STM0-native-C20"),
+            ("orientation_targets", "independent same-forward actual input orientations"),
+            ("temperature", 1),
+        )
+    ):
+        raise ValueError("old joint raw STM/legal209/orientation/temperature source required")
+    import stat
+
+    for name in ("probabilities", "legal_mask"):
+        payload = policy[name]
+        identity = policy[name + "_identity"]
+        if (
+            not isinstance(payload, dict)
+            or set(payload) != {"path", "sha256", "bytes", "mode"}
+            or not isinstance(payload["path"], str)
+            or "\x00" in payload["path"]
+            or not Path(payload["path"]).is_absolute()
+            or not isinstance(payload["sha256"], str)
+            or len(payload["sha256"]) != 64
+            or any(c not in "0123456789abcdef" for c in payload["sha256"])
+            or type(payload["bytes"]) is not int
+            or payload["bytes"] <= 0
+            or not isinstance(payload["mode"], str)
+            or not isinstance(identity, (list, tuple))
+            or len(identity) != 6
+            or any(type(value) is not int for value in identity)
+            or identity[0] < 0
+            or identity[1] <= 0
+            or not stat.S_ISREG(identity[2])
+            or identity[2] != stat.S_IFREG | stat.S_IMODE(identity[2])
+            or payload["bytes"] != identity[3]
+            or payload["mode"] != f"{stat.S_IMODE(identity[2]):04o}"
+        ):
+            raise ValueError("old joint policy payload FileRef/identity metadata differs")
+    head = entry["head"]
+    if (
+        head["device"] != "cpu"
+        or head["fp32"] is not True
+        or head["autocast"] is not False
+        or head["tf32"] is not False
+        or head["value"] != "raw-local-stm-single-network-post-tanh"
+        or type(head["failed_attempted_rows"]) is not int
+        or head["failed_attempted_rows"] != 0
+        or type(head["constructor_model_calls"]) is not int
+        or head["constructor_model_calls"] != 0
+    ):
+        raise ValueError("old joint completed CPU FP32 head source required")
+    with input_pairs(source["input_classes"]) as (_, old_pairs):
+        blocked = set()
+        old_rows = 0
+        for _, _, keys in oriented_keys(old_pairs, config["batch_rows"]):
+            old_rows += len(keys)
+            blocked.update(bytes(key) for key in keys)
+        for value in (
+            bank["actual_orientation_rows"],
+            head["logical_rows_attempted"],
+            head["finite_rows_returned"],
+        ):
+            if type(value) is not int or value != old_rows:
+                raise ValueError("old joint actual orientation census differs")
+        prior = bank["prior_actual_rows"]
+        inclusive = bank["inclusive_attempted_rows"]
+        if (
+            old_rows == 0
+            or len(blocked) != old_rows
+            or type(prior) is not int
+            or prior < 0
+            or type(inclusive) is not int
+            or inclusive != prior + old_rows
+            or type(previous["prior_actual_rows"]) is not int
+            or previous["prior_actual_rows"] != prior
+            or type(previous["inclusive_row_limit"]) is not int
+            or inclusive > previous["inclusive_row_limit"]
+        ):
+            raise ValueError("old joint incomplete or inconsistent actual row accounting")
+        current_rows = 0
+        for _, _, keys in oriented_keys(pairs, config["batch_rows"]):
+            current_rows += len(keys)
+            if any(bytes(key) in blocked for key in keys):
+                raise ValueError("old joint input eligibility collision; no teacher constructor")
+    return dict(
+        excluded_joint_source=source,
+        old_actual_orientation_rows=old_rows,
+        current_actual_orientation_rows=current_rows,
+        overlapping_actual_input_keys=0,
+        labels_read_or_copied=0,
+    )
+
+
 def label_policy_values(config):
     """Chunk the existing C joint head into its two actual orientation targets.
 
@@ -993,7 +1145,7 @@ def label_policy_values(config):
         "prior_actual_rows",
         "inclusive_row_limit",
     }
-    if set(config) != required:
+    if set(config) not in (required, required | {"excluded_joint_source"}):
         raise ValueError("explicit bounded joint teacher configuration")
     temperature = config["temperature"]
     if (
@@ -1021,6 +1173,9 @@ def label_policy_values(config):
     started = time.monotonic()
     try:
         with input_pairs(config["input_classes"]) as (inputs, pairs):
+            if "excluded_joint_source" in config:
+                exclusion = exclude_joint_source_inputs(config, pairs)
+                write_json(output / "old-input-exclusion.json", exclusion)
             n = len(pairs)
             expected_rows = actual_orientation_count(pairs)
             if config["prior_actual_rows"] + expected_rows > config["inclusive_row_limit"]:
