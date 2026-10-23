@@ -1,0 +1,111 @@
+{
+  "scope": "ACTUAL_NEW128_SAME_FORWARD_TEACHER_ONLY",
+  "originalJob": "d520a67c-4310-4ef4-accb-0f3611824da2",
+  "cache": {
+    "path": "/workspaces/quoridor/.worktree/assets/inputs/quoridor-strong435/expanded-coverage128-policy-values-v1/cache.json",
+    "sha256": "f06b6c38b6f6d9bbe700c4ce0bcc4f0a0be8079920663d29e7fc1ee862875ccf",
+    "bytes": 630,
+    "mode": "0600"
+  },
+  "bank": {
+    "path": "/workspaces/quoridor/.worktree/assets/inputs/quoridor-strong435/expanded-coverage128-policy-values-v1/teacher-values.json",
+    "sha256": "7dfd46b0fd1e9789c9be8b654969e7b10ae0e41e3498163ead1f77f0f03a5a3f",
+    "bytes": 25608,
+    "mode": "0600"
+  },
+  "observedExclusion": {
+    "excluded_joint_source": {
+      "input_classes": {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/quoridor-strong435/pilot128-input-classes-canonical-v2/cache.json",
+        "sha256": "617266c7f691a08184fc4bc91c9f399bf6ee24b559d0bbdee6206794bbc91e52",
+        "bytes": 1032637,
+        "mode": "0600"
+      },
+      "teacher_values": {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/quoridor-strong435/pilot128-policy-values-v1/teacher-values.json",
+        "sha256": "9f69137df7f8d2fcdc2be46dc62c204c5f204713a51347befe0520fd08fa0208",
+        "bytes": 25580,
+        "mode": "0600"
+      },
+      "configuration": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/pilot128-teacher-v1/teacher-config.json",
+        "bytes": 4150,
+        "mode": "0644",
+        "sha256": "1609178ec22187ff47883cab5db81143d9cee440db63650a2157d89f67b9438e"
+      }
+    },
+    "old_actual_orientation_rows": 3174,
+    "current_actual_orientation_rows": 256,
+    "overlapping_actual_input_keys": 0,
+    "labels_read_or_copied": 0
+  },
+  "originalObservations": {
+    "train": 96,
+    "validation": 32,
+    "H": 0
+  },
+  "originalPoolDeficit": 772,
+  "inputPairRows": 128,
+  "actualNewOrientedRows": 256,
+  "priorActualRows": 3174,
+  "inclusiveAttemptedRows": 3430,
+  "headCallsAttempted": 1,
+  "finiteRows": 256,
+  "failedRows": 0,
+  "constructorModelCalls": 0,
+  "device": "cpu",
+  "fp32": true,
+  "autocast": false,
+  "tf32": false,
+  "outerSecondsOnce": 12.088821602985263,
+  "nestedCommandSeconds": 10.422904329025187,
+  "nestedHeadSeconds": 5.537229128996842,
+  "nestedNotAdded": true,
+  "actualCleanup": {
+    "directReaped": true,
+    "handlesClosed": true,
+    "remaining": [],
+    "mask": "completed",
+    "persist": "completed"
+  },
+  "originalDiskSnapshot": {
+    "mask": "pending",
+    "persist": "attempted"
+  },
+  "TMPcustody": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/expanded-coverage128-teacher-v1/completion-d520a67c/after-return-TMP-custody.json",
+    "bytes": 882,
+    "mode": "0644",
+    "sha256": "07425714f36e2b1671d6c21900ac2dd8e5e865a852e3636c5ff7090895e1b934"
+  },
+  "affectedStoragePoint": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/expanded-coverage128-teacher-v1/affected-storage-point.json",
+    "bytes": 565,
+    "mode": "0644",
+    "sha256": "9551f9ae29f11ed59bb2d38ccfd7869999878022d4eb914946108c2a1f3ed427"
+  },
+  "physicalKernelCountAndUtilization": "UNKNOWN without actual profiling; graph visitation/head_calls metadata not physicalkernel count",
+  "fitUpdates": 0,
+  "strengthOrBatchParityClaim": false,
+  "oldLabelPayloadsReadOrCopied": 0,
+  "collection": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/expanded-coverage128-teacher-v1/completion-d520a67c/collection.json",
+    "bytes": 6332,
+    "mode": "0644",
+    "sha256": "32c48b7f4efb3d7da4f43676b6028857ae86938eda085a0c643940ce4dde7191"
+  },
+  "accepted": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/expanded-coverage128-teacher-v1/completion-d520a67c/accepted-new128-joint-labels.json",
+    "bytes": 6370,
+    "mode": "0644",
+    "sha256": "0fd56e5045781de0e8d6234beca0b336d83cc817cc17d2c33e23aa2a03affcf1"
+  },
+  "fitAdmission": null,
+  "limits": "New256 same-forward CPUFP32 rawlocalSTM/posttanh/legal209/temp1 labels only. New32V is exposed selection data; historical exposure/fit independence UNKNOWN. No oldlabel copy/merge, fit, Search, game, RNG or model/default change. Constructor-model-call0 is not constructor-invocation0. Physical kernels and utilization UNKNOWN; nested times not added. Old3174 rows/cost53.373499902s and all earlier FAILED/NULL/UNKNOWN costs retained.",
+  "sameAuthorSourceContinuation": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/expanded-coverage128-teacher-v1/completion-d520a67c/C435-dispatch.json",
+    "bytes": 157,
+    "mode": "0644",
+    "sha256": "d0dd62413c1e9631b7a7dba72a74cb3bc9decf21cf3661e8b43e03514527edd6"
+  }
+}
