@@ -1,13 +1,67 @@
 """Synthetic actual sequence control flow; no native searches or job submission."""
 
 from contextlib import ExitStack, nullcontext
+import hashlib
 import importlib.util
 import json
 from pathlib import Path
+import sys
 import tempfile
 from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
+
+
+class JobCPUPrimitiveBoundary(unittest.TestCase):
+    def test_authenticated_launch_uses_shared_cpu_plan_without_loading_game_lifecycle(self):
+        loader = importlib.util.spec_from_file_location(
+            "job_cpu_boundary", Path(__file__).with_name("research-job.py")
+        )
+        job = importlib.util.module_from_spec(loader)
+        loader.loader.exec_module(job)
+        root = Path(__file__).resolve().parents[2]
+        config = {"argv": [sys.executable, "-B", str(root / "scripts/dev/research-lifecycle.py")]}
+        owner = dict(pid=123, start_ticks="456", boot_id="synthetic")
+        plan = job.process.CPUPlan([18], {"run": [12, 18]}).record()
+        for change in (None, "config", "owner", "plan"):
+            with self.subTest(change=change), tempfile.TemporaryDirectory() as tmp:
+                state = {
+                    "cpu_launch": {
+                        "config_sha256": hashlib.sha256(
+                            json.dumps(config, sort_keys=True).encode()
+                        ).hexdigest(),
+                        "owner": owner,
+                        "plan": plan,
+                    },
+                    "launch": {"owner": owner},
+                }
+                state = json.loads(json.dumps(state))
+                if change == "config":
+                    state["cpu_launch"]["config_sha256"] = "0" * 64
+                elif change == "owner":
+                    state["launch"]["owner"]["pid"] += 1
+                elif change == "plan":
+                    state["cpu_launch"]["plan"]["resource_CPUs"] += 1
+                (Path(tmp) / "state.json").write_text(json.dumps(state))
+                with (
+                    patch.object(
+                        job,
+                        "lifecycle_module",
+                        side_effect=AssertionError("game lifecycle must not be loaded"),
+                    ),
+                    patch.dict(job.os.environ, {"QUORIDOR_RESEARCH_JOB_DIR": ""}),
+                    patch.object(job.process.CPUPlan, "check_host"),
+                    patch.object(job.process.CPUPlan, "apply") as apply,
+                ):
+                    if change is None:
+                        actual, owns_peers = job.configured_cpu_control(Path(tmp), config, root)
+                        self.assertEqual(actual.record(), plan)
+                        self.assertTrue(owns_peers)
+                        apply.assert_called_once_with()
+                    else:
+                        with self.assertRaises((job.JobError, ValueError)):
+                            job.configured_cpu_control(Path(tmp), config, root)
+                        apply.assert_not_called()
 
 
 class CohortControllerAffinity(unittest.TestCase):

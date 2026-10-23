@@ -19,6 +19,8 @@ import threading
 import time
 import uuid
 
+from quoridor_runtime import cycle_process as process
+
 _spec = importlib.util.spec_from_file_location(
     "job_runtime", Path(__file__).with_name("research-runtime.py")
 )
@@ -351,7 +353,6 @@ def configured_cpu_control(directory, config, root):
             None,
             False,
         )  # Unchanged arbitrary jobs have no implicit CPU allocation authority.
-    lifecycle = lifecycle_module(root)
     state = read(directory, "state.json") if (directory / "state.json").exists() else {}
     launch_plan = state.get("cpu_launch")
     if launch_plan is not None:
@@ -361,20 +362,23 @@ def configured_cpu_control(directory, config, root):
             or state.get("launch", {}).get("owner") != launch_plan["owner"]
         ):
             raise JobError("CPU plan launch lacks exact submit/config/owner custody")
-        plan = lifecycle.process.CPUPlan.from_record(launch_plan["plan"])
+        plan = process.CPUPlan.from_record(launch_plan["plan"])
     else:
+        lifecycle = lifecycle_module(root)
         with lifecycle.lease(shared=True):
             plan = lifecycle.configured_job_cpu_plan(config)
     if plan is None:
         return None, False
-    plan.check_host(lifecycle.process.available_cpus())
+    plan.check_host(process.available_cpus())
     delegated = config.get("authority_parent")
     if delegated is not None:
+        lifecycle = lifecycle_module(root)
         binding = lifecycle.cohort_job_authority(config, directory)
         lifecycle.cohort_parent_check(binding)
         allowed = lifecycle.arena_cohort_cpus(lifecycle.document(delegated["cohort"]))
         owns_peers = False
     elif os.environ.get("QUORIDOR_RESEARCH_JOB_DIR"):
+        lifecycle = lifecycle_module(root)
         parent = lifecycle.current_cpu_owner()
         allowed = parent["allocation"]
         owns_peers = False
@@ -389,7 +393,6 @@ def configured_cpu_control(directory, config, root):
         raise JobError("normal job CPU plan outside assigned parent/launch scope")
     plan.apply()
     return plan, owns_peers
-
 
 
 def internal_cohort_failure(directory, config, root):
@@ -491,9 +494,7 @@ def execute(directory, config, root, backend, *, resources=None):
                     "chromium",
                     "chrome",
                 }
-                lifecycle_module(root).process.compute_peers(
-                    runtime.process_identity(os.getpid()), cpu_plan.all, names
-                )
+                process.compute_peers(runtime.process_identity(os.getpid()), cpu_plan.all, names)
 
     def local_control():
         nonlocal known, next_scan
@@ -1119,7 +1120,7 @@ def submit(path, directory, root, backend, *, supervisor_handles=None):
         with lifecycle.lease(shared=True):
             launch_plan = lifecycle.configured_job_cpu_plan(config)
         if launch_plan is not None:
-            launch_plan.check_host(lifecycle.process.available_cpus())
+            launch_plan.check_host(process.available_cpus())
             parent = (
                 lifecycle.current_cpu_owner()
                 if os.environ.get("QUORIDOR_RESEARCH_JOB_DIR")
