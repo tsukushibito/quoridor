@@ -673,6 +673,107 @@ class ConfiguredArenaTests(unittest.TestCase):
         self.assertEqual(summary["diagnostic_planned"], 4)
         self.assertEqual(summary["diagnostics"]["unknown"], 4)
 
+    def test_shared_pcg64_linear_reuses_one_table_and_refuses_incomplete_pairs(self):
+        # Fake deterministic table/interface only: no NumPy/RNG/model/geometry call.
+        import struct
+        import sys
+        from types import SimpleNamespace
+        from unittest import mock
+
+        class FixedIndices(list):
+            def astype(self, dtype, *, copy):
+                self_dtype = dtype
+                assert self_dtype == "<u8" and copy is False
+                return self
+
+            def tobytes(self, *, order):
+                assert order == "C"
+                return b"".join(struct.pack("<QQ", *row) for row in self)
+
+        indices = FixedIndices([[0, 0], [1, 1], [0, 1], [1, 0]])
+        rng = SimpleNamespace(integers=mock.Mock(return_value=indices))
+        quantile = mock.Mock(
+            side_effect=lambda values, _q, *, method: SimpleNamespace(
+                tolist=lambda: [min(values), max(values)]
+            )
+        )
+        fake = SimpleNamespace(
+            __version__="NN0-FAKE-NOT-NUMPY",
+            uint64=object(),
+            random=SimpleNamespace(
+                PCG64=mock.Mock(return_value="fake-PCG64"),
+                Generator=mock.Mock(return_value=rng),
+            ),
+            quantile=quantile,
+        )
+        plan = {"family_ids": [0, 1], "matchups": [{"id": m} for m in range(3)]}
+        schedule = []
+        observed = {}
+        for matchup in range(3):
+            for family in range(2):
+                for colour in range(2):
+                    slot = 4 * matchup + 2 * family + colour
+                    schedule.append(
+                        {
+                            "slot": slot,
+                            "matchup": matchup,
+                            "family_id": family,
+                            "candidate_color": colour,
+                        }
+                    )
+                    draw = matchup == 2
+                    observed[slot] = (
+                        {
+                            "started": True,
+                            "status": "draw" if draw else "goal",
+                            "winner": None
+                            if draw
+                            else (colour if (matchup + family) % 2 == 0 else 1 - colour),
+                            "failure": None,
+                        },
+                        None,
+                    )
+        config = {
+            "bootstrap_method": "shared_pcg64_linear",
+            "bootstrap_resamples": 4,
+            "bootstrap_seed": 19,
+            "central_interval": "295/3%",
+        }
+        with mock.patch.dict(sys.modules, {"numpy": fake}):
+            tables = lc.arena_score_tables(plan, schedule, observed, config)
+            fake.random.PCG64.assert_called_once_with(19)
+            fake.random.Generator.assert_called_once_with("fake-PCG64")
+            rng.integers.assert_called_once_with(0, 2, size=(4, 2), dtype=fake.uint64)
+            self.assertEqual([t["counts"]["planned"] for t in tables], [4, 4, 4])
+            self.assertEqual([t["complete_pair_mean"] for t in tables], [0.5] * 3)
+            self.assertEqual(quantile.call_count, 3)
+            for call in quantile.call_args_list:
+                self.assertEqual(call.args[1], [1 / 120, 119 / 120])
+                self.assertEqual(call.kwargs, {"method": "linear"})
+            self.assertEqual(quantile.call_args_list[0].args[0], [0.0, 0.5, 0.5, 1.0])
+            self.assertEqual(quantile.call_args_list[1].args[0], [0.0, 0.5, 0.5, 1.0])
+            self.assertEqual(quantile.call_args_list[2].args[0], [0.5] * 4)
+            self.assertEqual(len({t["family_resampling"]["index_sha256"] for t in tables}), 1)
+            fake.random.PCG64.reset_mock()
+            rng.integers.reset_mock()
+            quantile.reset_mock()
+            incomplete = lc.arena_score_tables(
+                plan, schedule, {k: v for k, v in observed.items() if k != 0}, config
+            )
+            self.assertEqual(sum(t["counts"]["planned"] for t in incomplete), 12)
+            self.assertEqual(sum(t["counts"]["unknown"] for t in incomplete), 1)
+            self.assertTrue(
+                all(
+                    t["conditional_complete_pair_interval"] is None
+                    and t["conditional_interval_unavailable_reason"]
+                    == "incomplete_planned_colour_pair_in_shared_contrasts"
+                    for t in incomplete
+                )
+            )
+            fake.random.PCG64.assert_not_called()
+            rng.integers.assert_not_called()
+            quantile.assert_not_called()
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

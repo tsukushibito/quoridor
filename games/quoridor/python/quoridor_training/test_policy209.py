@@ -140,5 +140,133 @@ class PolicyTensorCorrespondence(unittest.TestCase):
                 )
 
 
+@unittest.skipUnless(
+    os.environ.get("QUORIDOR_SELECTED_JOINT_PARITY"),
+    "Root-only selected actual export: at most32 same-input joint forward rows; no search",
+)
+class SelectedJointExportParity(unittest.TestCase):
+    def test_selected_export_python_matches_native_once(self):
+        import json
+        import hashlib
+        import torch
+        from .common import bound_file_bytes
+        from .residual_model import DistanceResidualModel, load_policy_head, policy_permutation
+        from .scaled_model import validate_statistics
+        from .train import restore_warmstart_parameters
+
+        spec = json.loads(Path(os.environ["QUORIDOR_SELECTED_JOINT_PARITY"]).read_bytes())
+        native_input = bound_file_bytes(spec["native_input"], 65536)
+        source = json.loads(native_input)
+        native_raw = bound_file_bytes(spec["native_result"], 2 * 1024**2)
+        native = json.loads(native_raw)
+        self.assertEqual(native["status"], "COMPLETE")
+        self.assertEqual(native["input_sha256"], hashlib.sha256(native_input).hexdigest())
+        for name in ("descriptor", "weights", "policy", "policy_weights", "input_classes"):
+            self.assertEqual(native[name], source[name])
+        rows = native["rows"]
+        self.assertEqual(len(rows), 32)
+        self.assertEqual(native["work"]["head_attempted"], 32)
+        self.assertEqual(native["work"]["head_returned"], 32)
+        self.assertEqual(native["H_rows"], 0)
+        self.assertEqual(
+            native["lr_action_permutation"], list(policy_permutation(1, reflected=True))
+        )
+        descriptor = json.loads(bound_file_bytes(source["descriptor"], 65536))
+        self.assertEqual(descriptor["route_mode"], "zero4")
+        self.assertEqual(descriptor["topology"], {"ft_width": 32, "hidden_width": 32})
+        self.assertEqual(descriptor["distance_fit"], {"a": 0, "b": 0})
+        bound_file_bytes(source["policy_weights"], 27588)
+        torch.set_num_threads(1)
+        torch.set_num_interop_threads(1)
+        model = DistanceResidualModel(
+            {"transformer_width": 32, "hidden_width": 32, "dropout": 0.0},
+            validate_statistics(descriptor),
+            a=0,
+            b=0,
+        )
+        restore_warmstart_parameters(model, source["weights"])
+        bound_file_bytes(source["policy"], 65536)
+        load_policy_head(
+            model, source["policy"]["path"], shared_fingerprint=source["shared_fingerprint"]
+        )
+        self.assertEqual(model.policy_evidence, "learned")
+        model.eval()
+        output = Path(spec["output"])
+        result = {
+            "status": "NOT_RUN",
+            "native_input": spec["native_input"],
+            "native_result": spec["native_result"],
+            "head_attempted": 0,
+            "head_returned": 0,
+            "rows": [],
+            "H_rows": 0,
+            "Search_calls": 0,
+            "backward_calls": 0,
+            "constructor": "DistanceResidualModel + restore_warmstart_parameters + load_policy_head",
+            "constructors": 1,
+            "atol": 1e-5,
+            "rtol": 1e-4,
+        }
+
+        # Existing native changed-weight close() tolerance, fixed before this export's results.
+        def persist():
+            with output.open("w") as stream:
+                json.dump(result, stream)
+
+        with output.open("x") as stream:
+            json.dump(result, stream)
+        try:
+            with torch.inference_mode():
+                for index, row in enumerate(rows):
+                    self.assertIn(row["side"], (1, 2))
+                    self.assertEqual(row["side"], row["root"]["stm"] + 1)
+                    self.assertIn(row["split"], ("T", "V"))
+                    self.assertEqual(
+                        row["stm_action_permutation"], list(policy_permutation(row["side"]))
+                    )
+                    self.assertEqual(row["reflected"], bool(index % 2))
+                    legal = row["legal"]
+                    self.assertTrue(legal and len(set(legal)) == len(legal))
+                    self.assertTrue(all(type(a) is int and 0 <= a < 209 for a in legal))
+                    if index % 2:
+                        expected = sorted(
+                            native["lr_action_permutation"][a] for a in rows[index - 1]["legal"]
+                        )
+                        self.assertEqual(sorted(legal), expected)
+                    # Inputs are solely the native canonical QF1 fields, not a Python encoder.
+                    x = torch.zeros((1, 2, 312), dtype=torch.float32)
+                    for player, ids in enumerate(row["ids"]):
+                        self.assertTrue(all(type(a) is int and 0 <= a < 312 for a in ids))
+                        x[0, player, ids] = 1
+                    distance = torch.tensor([row["distance"]], dtype=torch.float32)
+                    side = torch.tensor([row["side"]], dtype=torch.int64)
+                    result["head_attempted"] += 1
+                    persist()
+                    value, logits = model.forward_policy_value(x, distance, side)
+                    result["head_returned"] += 1
+                    actual = {"value": value.item(), "logits": logits[0].tolist()}
+                    result["rows"].append(actual)
+                    persist()
+                    self.assertEqual(tuple(logits.shape), (1, 209))
+                    self.assertTrue(torch.isfinite(value).all() and torch.isfinite(logits).all())
+                    self.assertLessEqual(abs(actual["value"]), 1)
+                    torch.testing.assert_close(
+                        value, torch.tensor([row["value"]]), atol=1e-5, rtol=1e-4
+                    )
+                    torch.testing.assert_close(
+                        logits[0], torch.tensor(row["logits"]), atol=1e-5, rtol=1e-4
+                    )
+            for name in ("descriptor", "weights", "policy", "policy_weights"):
+                bound_file_bytes(source[name], 65536)
+            self.assertEqual(bound_file_bytes(spec["native_result"], 2 * 1024**2), native_raw)
+            result["status"] = "COMPLETE"
+            persist()
+        except BaseException as error:
+            result["status"] = "FAILED"
+            result["error"] = repr(error)
+            persist()
+            raise
+
+
 if __name__ == "__main__":
     unittest.main()

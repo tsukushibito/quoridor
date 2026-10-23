@@ -118,6 +118,8 @@ pub struct Call {
     pub session_sequence: Option<u64>,
     pub session_reply_received: bool,
     pub session_ready: Option<serde_json::Value>,
+    /// Parent observation of exchange/validation outcome, before terminal cleanup.
+    pub request_finished_at: Option<Instant>,
 }
 
 impl Call {
@@ -139,6 +141,7 @@ impl Call {
             session_sequence: None,
             session_reply_received: false,
             session_ready: None,
+            request_finished_at: None,
         }
     }
     /// No spawn or confirmed direct reap proves zero; failed wait is UNKNOWN.

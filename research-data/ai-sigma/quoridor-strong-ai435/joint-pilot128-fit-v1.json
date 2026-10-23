@@ -1,0 +1,214 @@
+{
+  "job": "f14ad653-be5a-4ff0-8fdc-3362f836e895",
+  "outcome": "FAILED_CALLER_MANIFEST_PATH_BEFORE_MODEL_BUILD",
+  "originalResult": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/pilot128-fit-v1/runtime/result.json",
+    "bytes": 525,
+    "mode": "0600",
+    "sha256": "2335f690a0ac285306da917a0d1925718210fb752af9badcb7c451913a763658"
+  },
+  "originalOutput": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/pilot128-fit-v1/runtime/output.log",
+    "bytes": 1354,
+    "mode": "0644",
+    "sha256": "e72ea4b8bf23930716c6d9a1af9016c1bb18227ef6f1b950ed8d1becf4943aca"
+  },
+  "originalConfig": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/pilot128-fit-v1/runtime/config.json",
+    "bytes": 790,
+    "mode": "0600",
+    "sha256": "1852a7ffdf7bdaecfdb474782feafbd3ec7e3906aecae479e8aaa00c9bc4b519"
+  },
+  "failure": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/pilot128-fit-v1/failure.json",
+    "bytes": 1682,
+    "mode": "0644",
+    "sha256": "856b0ce1d7fc0d4595fdc1a28bf86eeb16de71622122814383cb22a486ed64cf"
+  },
+  "failedHeadLog": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/pilot128-fit-v1/head-fit.log",
+    "bytes": 1128,
+    "mode": "0644",
+    "sha256": "bc3ab71cebbcf267a43198e3e54f6d598cf28c78a52ed8ec7bd3f13437e96bb0"
+  },
+  "headPrepared": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/pilot128-fit-v1/head-prepared.json",
+    "bytes": 1420,
+    "mode": "0644",
+    "sha256": "7de22eb5f90ab2ba6f464e1bc3b02ceb99de38f6eb1ba85359b3f213fbedb931"
+  },
+  "prepared": {
+    "cache": {
+      "path": "/workspaces/quoridor/.worktree/assets/inputs/quoridor-strong435/pilot128-policy-values-v1/cache.json",
+      "sha256": "ea655050a95ed697cf7e41bab4af8dcb21776ba4d33635854c3a28d5e857bfc4",
+      "bytes": 618,
+      "mode": "0600"
+    },
+    "config": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/quoridor-strong435/joint-pilot128-v1/head-inputs/config.json",
+      "sha256": "90c3643fcb202a08f75b18c1986183aac31513547355092f092950b7b8dbdeef",
+      "bytes": 3140,
+      "mode": "0600"
+    },
+    "input_binding": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/quoridor-strong435/joint-pilot128-v1/head-inputs/input-binding.json",
+      "sha256": "969f940a75fb5e67cb7b548a2fe250de9281953f3c3dc838e035741ce376e978",
+      "bytes": 2008,
+      "mode": "0600"
+    },
+    "scale": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/quoridor-strong435/joint-pilot128-v1/head-inputs/scale.json",
+      "sha256": "271db6d05cccfbda44d93bbf4b7b710b50a8ad7f1b811b0b7694e43a41e186ca",
+      "bytes": 142,
+      "mode": "0600"
+    },
+    "constant": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/quoridor-strong435/joint-pilot128-v1/head-inputs/constant.json",
+      "sha256": "cdd0d77920c0e6634c7883f1b0d9f6db36e84f9d9b8e659c8c8efb2e59c20d3c",
+      "bytes": 237,
+      "mode": "0600"
+    },
+    "scope": "actual source/config preparation only; no fit/forward or runtime permission"
+  },
+  "wholeSecondsOnce": 2.4387156509328634,
+  "stagesNestedNotAdded": {
+    "head-prepare": {
+      "returned": true,
+      "exit": 0,
+      "wallSeconds": 0.14067277102731168,
+      "knownIdentityAbsentOrDifferent": true,
+      "record": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/pilot128-fit-v1/head-prepare.returned.json",
+        "bytes": 3265,
+        "mode": "0644",
+        "sha256": "43d38a995a631bb267bcaaac8eec07dbfde05343da611c92939d5c8b7680bdfe"
+      }
+    },
+    "head-fit": {
+      "returned": false,
+      "exit": 1,
+      "wallSeconds": 1.7849928779760376,
+      "knownIdentityAbsentOrDifferent": true,
+      "record": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/pilot128-fit-v1/head-fit.returned.json",
+        "bytes": 4547,
+        "mode": "0644",
+        "sha256": "5242309293e04a4102f5169131f0b3bb0ef60dac12b5b774edf51b0babefd67c"
+      }
+    }
+  },
+  "cause": "Caller passed teacher cache.json file to cache.load; a file selects sharded schema, static cache routing requires its directory. Preparation owner already used parent directory correctly. Fix only caller argument to Path(cache.path).parent.",
+  "actualModelBuildForwardOptimizerUpdates": 0,
+  "scopeOfZeroEvidence": "Actual trace cache.load failure at train.py513 precedes build_model686 and output creation; output head absent. Torch configure_framework512 and manual_seed441 already occurred; no seed-init0 claim. Parent authenticated existing model bytes byref.",
+  "teacherReplayed": false,
+  "headPreparationRepeated": false,
+  "jointPrepareFitUNRUN": true,
+  "originalReturnedNull": true,
+  "diskCleanupTrue": true,
+  "diskFinalization": "pending/attempted preserved",
+  "TMPnowAbsent": true,
+  "noUnusedFeeRefund": true,
+  "scope": "Failed original caller first head attempt, complete head preparation retained; no mathematical repair",
+  "secondCapacityAttempt": {
+    "job": "3fbe3608-d439-42a6-abb1-d4e3400f9890",
+    "outcome": "FAILED_CHECKPOINT_CAPACITY_BEFORE_PYTHON_MODEL_BUILD",
+    "originalResult": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/pilot128-fit-v2/runtime/result.json",
+      "bytes": 524,
+      "mode": "0600",
+      "sha256": "c47dfe7e64d5fc7b3eab40fcd1f31e1af1ceff4bfaf453215492d3b29a768795"
+    },
+    "originalOutput": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/pilot128-fit-v2/runtime/output.log",
+      "bytes": 1343,
+      "mode": "0644",
+      "sha256": "80c74dea5ba8e6e137dae86c02e03d55f98eb416e19af379d572d38d67f1ee3e"
+    },
+    "originalConfig": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/pilot128-fit-v2/runtime/config.json",
+      "bytes": 790,
+      "mode": "0600",
+      "sha256": "c5946acf23a91b9385e06392258d45a675e5c9a5e5e615f7edb12dc19fb313e0"
+    },
+    "failedHeadLog": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/pilot128-fit-v2/head-fit.log",
+      "bytes": 803,
+      "mode": "0644",
+      "sha256": "5a6b42243e21ec5ca4a45fca6b33fa7157b10c64dd6f11136be79c0afe9a738a"
+    },
+    "failedHeadReturn": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/pilot128-fit-v2/head-fit.returned.json",
+      "bytes": 4501,
+      "mode": "0644",
+      "sha256": "513706766f4a01a040b422125bf341348d7287f87d48f8f2cb456cbbcfc65e68"
+    },
+    "failure": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/pilot128-fit-v2/failure.json",
+      "bytes": 1316,
+      "mode": "0644",
+      "sha256": "39b9dfb40d4cf7f527b83b69a974be8e19ff216fedc8ada301f7ff62b1c87a8d"
+    },
+    "wholeSecondsOnce": 2.242870740010403,
+    "headCommandNestedNotAdded": 1.7483989580068737,
+    "configuredCheckpointB": 1048576,
+    "requiredByCurrentSourceB": 2148672,
+    "canonicalRows": 1632,
+    "pairs": 1588,
+    "proposedCheckpointB": 4194304,
+    "PythonModelBuildForwardOptimizerUpdates": 0,
+    "nativeInitialIdentityConstructor": "1 source-inferred: initialization returned before capacity guard; head rows0, not runtime profiling",
+    "TorchSeedInitialization": "already reached",
+    "headPrepareReplayed": false,
+    "teacherReplayed": false,
+    "jointPrepareFitUNRUN": true,
+    "primaryReturned": null,
+    "diskCleanup": true,
+    "knownChildAbsentOrDifferent": true,
+    "TMPnowAbsent": true,
+    "diskFinalization": "pending/attempted preserved",
+    "prospectiveCallerCorrection": "Input-bound train forbids --scale; normalizer is verified from input binding. Remove CLI option before next attempt; not observed as the prior primary failure.",
+    "allOldFeesRetained": true
+  },
+  "capacityRepairCommit": "f5a7220f",
+  "nextAttempt": "UNRUN at this evidence point, samecalibration/teacher byref and4MiB cap/no bound-scale CLI; old fees retained",
+  "actualPilot": {
+    "collection": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/pilot128-fit-v3/completion-83c58fb8/collection.json",
+      "bytes": 14921,
+      "mode": "0644",
+      "sha256": "bf58a6ced20007b6c18b2895537628468fa31338d37726da61c784fe8fb8791c"
+    },
+    "jobId": "83c58fb8-78d1-419c-84bf-f56622ed0fa6",
+    "outerSeconds": 12.071419021929614,
+    "nestedTimesNotAdded": true,
+    "canonicalTrain": 1440,
+    "canonicalV": 192,
+    "H": 0,
+    "head": {
+      "steps": 23,
+      "draws": 5760,
+      "exposure": 4.0,
+      "selectedStep": 23,
+      "valueWeightsUnchangedFromCedar": true
+    },
+    "joint": {
+      "actualSteps": 310,
+      "actualDraws": 79360,
+      "exposure": 55.111111111111114,
+      "selectedStep": 293,
+      "selectedDraws": 75008,
+      "stop": "TRAIN_IMPROVES_VALIDATION_WORSENS after3 observations",
+      "VJointInitial": 0.4608134142450319,
+      "VJointSelected": 0.4194531742404638,
+      "VValueMSESelected": 0.06216923892486726,
+      "VPolicyCESelected": 3.5728393531559655
+    },
+    "selectedModelWeightsSHA256": "965cff849e9ef52ac8455c2580427625e51a174a915d06c3c863d9e03eb93b1e",
+    "selectedPolicyWeightsSHA256": "2bad0ce329ee5eb02d4325a5d68893d1447ebac4162c199665019629540aab94",
+    "newCandidateParity": "UNRUN",
+    "strength": "UNRUN",
+    "defaultPromotion": false,
+    "sufficiency": "Not established by operational early stop",
+    "priorFailuresPreserved": true
+  }
+}

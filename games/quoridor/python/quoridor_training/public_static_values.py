@@ -27,7 +27,7 @@ from .static_teacher_inputs import StaticInputs
 
 @contextmanager
 def input_pairs(ref):
-    manifest = json.loads(bound_file_bytes(ref, 131072))
+    manifest = json.loads(bound_file_bytes(ref, 2 * 1024**2))
     if (
         manifest["schema"] != "quoridor-public-static-input-classes-v1"
         or manifest["status"] != "COMPLETE"

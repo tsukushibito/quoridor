@@ -22,7 +22,7 @@ pub type Result<T> = std::result::Result<T, Box<dyn std::error::Error + Send + S
 pub const SCHEMA_VERSION: &str = "quoridor-teacher-v1";
 pub const FEATURE_COUNT: usize = 312;
 mod static_public;
-pub use static_public::StaticInputExclusions;
+pub use static_public::{StaticInputExclusions, quoridor_public_prefix_keys};
 pub mod terminal;
 pub mod terminal_cache;
 pub mod terminal_stream;

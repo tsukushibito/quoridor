@@ -1,0 +1,94 @@
+{
+  "job": "5e7ebbdb-4d51-422d-8a2d-f58614a91b0f",
+  "outcome": "JOINT_TEACHER_COMPLETE_NOT_FIT_OR_STRENGTH",
+  "originalResult": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/pilot128-teacher-v1/runtime/result.json",
+    "bytes": 530,
+    "mode": "0600",
+    "sha256": "7ae22f1f6e390f865df7a9dc4d2f84ec9f49f802326de0c580b10a44d606acca"
+  },
+  "originalOutput": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/pilot128-teacher-v1/runtime/output.log",
+    "bytes": 16060,
+    "mode": "0644",
+    "sha256": "b082d64b6644409e7fcb88c8b79e32b91d297d1dd91673b0797a872d410d82b2"
+  },
+  "originalConfig": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/pilot128-teacher-v1/runtime/config.json",
+    "bytes": 798,
+    "mode": "0600",
+    "sha256": "0890824b8e88b18ce6c67551e9b0dd2c58c1a80538395a2aee0c8ae276f59a6c"
+  },
+  "actualResult": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/pilot128-teacher-v1/result.json",
+    "bytes": 20786,
+    "mode": "0644",
+    "sha256": "51eba47a66b82d388d3c3206fbe58494d677130d3696bbeecb5f08bb38c5be5a"
+  },
+  "returnedSTOP": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/pilot128-teacher-v1/actual-returned-STOP.json",
+    "bytes": 3226,
+    "mode": "0644",
+    "sha256": "1542866557b55c4712b2d05f2f0ea732cd4f62a47a49ae2ca782bc16b8b14507"
+  },
+  "actualCache": {
+    "path": "/workspaces/quoridor/.worktree/assets/inputs/quoridor-strong435/pilot128-policy-values-v1/cache.json",
+    "sha256": "ea655050a95ed697cf7e41bab4af8dcb21776ba4d33635854c3a28d5e857bfc4",
+    "bytes": 618,
+    "mode": "0600"
+  },
+  "actualBank": {
+    "path": "/workspaces/quoridor/.worktree/assets/inputs/quoridor-strong435/pilot128-policy-values-v1/teacher-values.json",
+    "sha256": "9f69137df7f8d2fcdc2be46dc62c204c5f204713a51347befe0520fd08fa0208",
+    "bytes": 25580,
+    "mode": "0600"
+  },
+  "payloads": {
+    "values": {
+      "path": "/workspaces/quoridor/.worktree/assets/inputs/quoridor-strong435/pilot128-policy-values-v1/values.bin",
+      "sha256": "952945a05d54e8495838f0a0d4dcabc1b957847abe9a6e88c83e8b6a0b6fb6b9",
+      "bytes": 12704,
+      "mode": "0644"
+    },
+    "policy": {
+      "path": "/workspaces/quoridor/.worktree/assets/inputs/quoridor-strong435/pilot128-policy-values-v1/policy.bin",
+      "sha256": "371844bd7c34f4b1767b77313ae19d36cec12dc059e5b1dabd412fd6396d428b",
+      "bytes": 2655136,
+      "mode": "0644"
+    },
+    "mask": {
+      "path": "/workspaces/quoridor/.worktree/assets/inputs/quoridor-strong435/pilot128-policy-values-v1/legal_mask.bin",
+      "sha256": "0d90fee917aa1135d9a507fc618daf262456ae04d0944cefc2f590ed6a02db1f",
+      "bytes": 663784,
+      "mode": "0644"
+    }
+  },
+  "canonicalTrain": 1440,
+  "canonicalV": 192,
+  "HExclusionOnly": 208,
+  "HLabelsFeaturesFitSelector": 0,
+  "pairRows": 1588,
+  "actualOrientedRows": 3174,
+  "callsAttempted": 13,
+  "finiteRows": 3174,
+  "failedRows": 0,
+  "device": "cpu",
+  "fp32": true,
+  "autocast": false,
+  "constructorModelCalls": 0,
+  "wholeSecondsOnce": 53.373499902081676,
+  "nestedCommandNotAdded": 52.908972075092606,
+  "nestedHeadNotAdded": 47.611548673710786,
+  "cleanup": true,
+  "knownChildAbsentOrDifferent": true,
+  "originalTMPPoint": ["torchinductor_vscode"],
+  "derivedEmptyTMPRemovedAfterActualSTOP": true,
+  "TMPnowAbsent": true,
+  "returnedVsDisk": "returned completed; original disk maskpending/persistattempted preserved",
+  "fitUpdates": 0,
+  "searchGames": 0,
+  "batchParityOrStrengthClaim": false,
+  "oldOutputsUnchanged": true,
+  "scope": "First actual3174-row CPU same-forward C policy209/value teacher; no fit/strength/batch-equivalence claim",
+  "sourceAndResourceBinding": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/pilot128-teacher-v1/bindings.json"
+}

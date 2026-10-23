@@ -127,6 +127,9 @@ pub struct InputConfig {
     /// One bounded source trajectory per slot, no candidate retries or teacher.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub trajectory: Option<TrajectoryInput>,
+    /// Repartition a completed unlabelled trajectory publication without generation.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub repartition: Option<RepartitionInput>,
     pub output: PathBuf,
 }
 
@@ -148,7 +151,7 @@ impl TrajectoryInput {
                 n.checked_add(*v).ok_or("observation count overflow")
             })?;
         if c.families == 0
-            || c.families > 512
+            || c.families > 1024
             || self.max_plies == 0
             || self.max_plies > PLY_CAP
             || observations == 0
@@ -163,6 +166,219 @@ impl TrajectoryInput {
         Ok(())
     }
 }
+
+/// A separate, unlabelled split decision over a bound completed trajectory publication.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct RepartitionInput {
+    pub schedule: crate::research_manifest::FileRef,
+    pub split_counts: quoridor_data::terminal::FamilySplitCounts,
+    pub max_fit_observations: usize,
+    pub max_holdout_observations: usize,
+}
+
+fn read_input_reference(
+    reference: &crate::research_manifest::FileRef,
+) -> Result<serde_json::Value> {
+    use std::os::unix::fs::PermissionsExt;
+    let before = std::fs::symlink_metadata(&reference.path)?;
+    if !reference.path.is_absolute()
+        || reference.path.canonicalize()? != reference.path
+        || !before.is_file()
+        || before.len() != reference.bytes
+        || format!("{:04o}", before.permissions().mode() & 0o777) != reference.mode
+    {
+        return Err("bound regular input length/mode/path differs".into());
+    }
+    // BoundJson reads/hash-checks one bounded stream, including the original full history.
+    let value = quoridor_data::terminal_stream::BoundJson {
+        path: reference.path.clone(),
+        sha256: reference.sha256.clone(),
+    }
+    .read()?;
+    use std::os::unix::fs::MetadataExt;
+    let after = std::fs::symlink_metadata(&reference.path)?;
+    if (
+        before.dev(),
+        before.ino(),
+        before.len(),
+        before.mtime(),
+        before.mtime_nsec(),
+        before.ctime(),
+        before.ctime_nsec(),
+    ) != (
+        after.dev(),
+        after.ino(),
+        after.len(),
+        after.mtime(),
+        after.mtime_nsec(),
+        after.ctime(),
+        after.ctime_nsec(),
+    ) {
+        return Err("input changed during its single read".into());
+    }
+    Ok(value)
+}
+
+fn prepare_repartition(c: &InputConfig, settings: &RepartitionInput) -> Result<serde_json::Value> {
+    use quoridor_data::{
+        Split,
+        terminal::{SeriesPartition, repartition_series},
+    };
+    if c.families == 0
+        || c.families > 512
+        || c.trajectory.is_some()
+        || c.reuse_schedule.is_some()
+        || !c.prefix_lengths.is_empty()
+        || !c.excluded_books.is_empty()
+        || c.excluded_static_inputs.is_some()
+        || c.unique_families
+        || settings.max_fit_observations == 0
+        || settings.max_fit_observations > 1792
+        || settings.max_holdout_observations == 0
+        || settings.max_holdout_observations > 256
+    {
+        return Err(
+            "saved repartition cannot generate/filter/refill or exceed fit/H bounds".into(),
+        );
+    }
+    let schedule = read_input_reference(&settings.schedule)?;
+    if schedule["generator_version"] != quoridor_data::common_corpus::VERSION
+        || schedule["prefix_seed"].as_u64() != Some(c.prefix_seed)
+        || schedule["split_seed"].as_u64() != Some(c.split_seed)
+        || schedule["series"].as_array().map(Vec::len) != Some(c.families)
+        || schedule.get("trajectory").is_none()
+    {
+        return Err("original trajectory schedule/seed/series count differs".into());
+    }
+    let parent_ref: crate::research_manifest::FileRef =
+        serde_json::from_value(schedule["partition"].clone())?;
+    let source_ref: crate::research_manifest::FileRef =
+        serde_json::from_value(schedule["source_observations"].clone())?;
+    let original: SeriesPartition = serde_json::from_value(read_input_reference(&parent_ref)?)?;
+    if original.partition.seed != c.split_seed
+        || serde_json::to_value(original.requested)? != schedule["trajectory"]["split_counts"]
+    {
+        return Err("original schedule/partition split authority differs".into());
+    }
+    let partition = repartition_series(&original, settings.split_counts)?;
+    let source = read_input_reference(&source_ref)?;
+    let rows = source["observations"]
+        .as_array()
+        .ok_or("original observations missing")?;
+    if source["schema"] != "quoridor-prefix-series-full-history-v1"
+        || source["teacher_labels"] != false
+        || source["partition"] != serde_json::to_value(&parent_ref)?
+        || rows.len() != original.partition.assignments.len()
+        || rows.len() > c.families * 64
+    {
+        return Err("original source/partition census differs".into());
+    }
+    let mut projected = [Vec::new(), Vec::new()];
+    let mut counts = [0usize; 3];
+    for ((value, old), new) in rows
+        .iter()
+        .zip(&original.partition.assignments)
+        .zip(&partition.partition.assignments)
+    {
+        let row: InputObservation = serde_json::from_value(value.clone())?;
+        if row.id != old.game
+            || row.prefix != old.prefix
+            || value["family"] != old.family
+            || value["split"] != serde_json::to_value(&old.split)?
+            || original.source_series.get(&row.id) != Some(&row.source_series)
+            || row.canonical_prefix != super::canonical_prefix(&row.prefix)?
+        {
+            return Err("original full-history observation/component membership differs".into());
+        }
+        let context = row.root.audit(&row.prefix)?;
+        if context.terminal_value().is_some() {
+            return Err("terminal observation cannot enter fit/H publication".into());
+        }
+        let index = match new.split {
+            Split::Train => 0,
+            Split::Validation => 1,
+            Split::Test => 2,
+        };
+        counts[index] += 1;
+        projected[usize::from(index == 2)].push(serde_json::json!({
+            "id":row.id,"source_series":row.source_series,"prefix":row.prefix,
+            "family":new.family,"split":new.split
+        }));
+    }
+    // All members, including H, are censused before any label-facing projection is written.
+    let eligible = counts[0] > 0
+        && counts[1] > 0
+        && counts[2] > 0
+        && counts[0] + counts[1] <= settings.max_fit_observations
+        && counts[2] <= settings.max_holdout_observations;
+    std::fs::create_dir(&c.output)?;
+    let marker = c.output.join("INCOMPLETE");
+    std::fs::write(
+        &marker,
+        "saved input repartition incomplete; no teacher/fit admitted",
+    )?;
+    let write =
+        |name: &str, value: &serde_json::Value| -> Result<crate::research_manifest::FileRef> {
+            use std::os::unix::fs::PermissionsExt;
+            let r = write_input_json(&c.output, name, value)?;
+            let metadata = std::fs::metadata(&r.path)?;
+            Ok(crate::research_manifest::FileRef {
+                path: r.path,
+                sha256: r.sha256,
+                bytes: metadata.len(),
+                mode: format!("{:04o}", metadata.permissions().mode() & 0o777),
+            })
+        };
+    let census = serde_json::json!({"train":counts[0],"validation":counts[1],"test":counts[2]});
+    if !eligible {
+        write(
+            "refusal.json",
+            &serde_json::json!({
+                "status":"REFUSED_SPLIT_OBSERVATION_BOUNDS","actual_observations":census,
+                "settings":settings,"source_observations":source_ref,
+                "source_partition":parent_ref,"source_schedule":settings.schedule,
+                "generated_transitions":0,"teacher_calls":0,"refill":false
+            }),
+        )?;
+        return Err("saved split has empty/overflow fit/H observations; refusal saved, no clipping or alternate split".into());
+    }
+    let authority = serde_json::json!({
+        "schema":"quoridor-prefix-series-repartition-v1",
+        "source_partition":parent_ref,"source_schedule":settings.schedule,
+        "source_observations":source_ref,
+        "max_fit_observations":settings.max_fit_observations,
+        "max_holdout_observations":settings.max_holdout_observations,
+        "actual_observations":census
+    });
+    let mut partition_value = serde_json::to_value(&partition)?;
+    partition_value["repartition"] = authority;
+    let partition_ref = write("partition.json", &partition_value)?;
+    let publish = |name: &str, rows: &Vec<serde_json::Value>| {
+        write(
+            name,
+            &serde_json::json!({
+                "schema":"quoridor-prefix-series-observations-v1","partition":partition_ref,
+                "source_observations":source_ref,"observations":rows,"teacher_labels":false
+            }),
+        )
+    };
+    // H metadata is closed first; the Python owner must finish native exact/LR key exclusion
+    // before creating any T/V classes, labels or fit inputs.
+    let holdout = publish("holdout-observations.json", &projected[1])?;
+    let fit = publish("fit-observations.json", &projected[0])?;
+    let report = serde_json::json!({
+        "partition":partition_ref,"fit_observations":fit,"holdout_observations":holdout,
+        "source_observations":source_ref,"actual_observations":census,
+        "requested_components":partition.requested,"actual_components":partition.actual,
+        "component_deficits":partition.deficits,"generated_transitions":0,
+        "search_calls":0,"teacher_calls":0,"outcomes_selected":false
+    });
+    write("repartition.json", &report)?;
+    std::fs::remove_file(marker)?;
+    Ok(report)
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 struct InputObservation {
     id: String,
@@ -416,6 +632,7 @@ fn prepare_trajectories(c: &InputConfig, settings: &TrajectoryInput) -> Result<s
         "generator_version":quoridor_data::common_corpus::VERSION,"trajectory":settings,
         "prefix_seed":c.prefix_seed,"split_seed":c.split_seed,"series":series,
         "generated_transitions":generated_transitions,
+        "ranked_components":quoridor_data::terminal::ranked_components(&partition.partition),
         "native_replay_checks":"selection/collision validation replays are separate from generated actions; no search/model",
         "excluded_books":c.excluded_books,"excluded_static_inputs":c.excluded_static_inputs,
         "excluded_observation_ids":excluded,"partition":partition_ref,
@@ -498,6 +715,9 @@ fn filter_input_slots(
 pub fn prepare_inputs(c: &InputConfig) -> Result<serde_json::Value> {
     if !c.output.is_absolute() {
         return Err("fresh absolute global input output required".into());
+    }
+    if let Some(settings) = &c.repartition {
+        return prepare_repartition(c, settings);
     }
     if let Some(settings) = &c.trajectory {
         return prepare_trajectories(c, settings);
@@ -728,6 +948,124 @@ mod tests {
                 .is_none()
         );
     }
+
+    #[test]
+    fn saved_trajectory_repartition_is_byref_and_refuses_row_overflow_before_publication() {
+        use quoridor_data::terminal::{FamilySplitCounts, partition_series};
+        let root = std::env::temp_dir().join(format!(
+            "saved-trajectory-repartition-{}",
+            std::process::id()
+        ));
+        std::fs::create_dir(&root).unwrap();
+        let write = |name: &str, value: serde_json::Value| {
+            use std::os::unix::fs::PermissionsExt;
+            let r = write_input_json(&root, name, &value).unwrap();
+            let meta = std::fs::metadata(&r.path).unwrap();
+            crate::research_manifest::FileRef {
+                path: r.path,
+                sha256: r.sha256,
+                bytes: meta.len(),
+                mode: format!("{:04o}", meta.permissions().mode() & 0o777),
+            }
+        };
+        let planned = vec![
+            ("a".to_string(), vec![13]),
+            ("b".to_string(), vec![3]),
+            ("c".to_string(), vec![81]),
+        ];
+        let sources = planned
+            .iter()
+            .map(|(id, _)| (id.clone(), id.clone()))
+            .collect();
+        let original = partition_series(
+            &planned,
+            &sources,
+            435102206,
+            FamilySplitCounts {
+                train: 3,
+                validation: 0,
+                test: 0,
+            },
+        )
+        .unwrap();
+        let parent = write(
+            "original-partition.json",
+            serde_json::to_value(&original).unwrap(),
+        );
+        let observations = original
+            .partition
+            .assignments
+            .iter()
+            .map(|a| {
+                let ctx = SigmaContext::from_prefix(&a.prefix).unwrap();
+                serde_json::json!({"id":a.game,"source_series":a.game,"prefix":a.prefix,
+                "canonical_prefix":canonical_prefix(&a.prefix).unwrap(),
+                "root":ContextRecord::from_context(&ctx),"family":a.family,"split":a.split})
+            })
+            .collect::<Vec<_>>();
+        let source = write(
+            "original-observations.json",
+            serde_json::json!({
+            "schema":"quoridor-prefix-series-full-history-v1","partition":parent,
+            "teacher_labels":false,"observations":observations}),
+        );
+        let schedule = write(
+            "original-schedule.json",
+            serde_json::json!({
+            "generator_version":quoridor_data::common_corpus::VERSION,"prefix_seed":7,
+            "split_seed":435102206,"series":[{},{},{}],
+            "trajectory":{"split_counts":original.requested},
+            "partition":parent,"source_observations":source}),
+        );
+        let c = InputConfig {
+            families: 3,
+            prefix_seed: 7,
+            prefix_lengths: vec![],
+            split_seed: 435102206,
+            reuse_schedule: None,
+            excluded_books: vec![],
+            excluded_static_inputs: None,
+            unique_families: false,
+            trajectory: None,
+            repartition: Some(RepartitionInput {
+                schedule,
+                split_counts: FamilySplitCounts {
+                    train: 1,
+                    validation: 1,
+                    test: 1,
+                },
+                max_fit_observations: 2,
+                max_holdout_observations: 1,
+            }),
+            output: root.join("freeze"),
+        };
+        let actual = prepare_inputs(&c).unwrap();
+        assert_eq!(
+            actual["source_observations"],
+            serde_json::to_value(&source).unwrap()
+        );
+        assert_eq!(
+            actual["actual_observations"],
+            serde_json::json!({"train":1,"validation":1,"test":1})
+        );
+        assert_eq!(actual["generated_transitions"], 0);
+        assert!(!c.output.join("observations.json").exists()); // No full-history mirror.
+        assert!(!c.output.join("INCOMPLETE").exists());
+        assert_eq!(
+            read_input_reference(&parent).unwrap(),
+            serde_json::to_value(&original).unwrap()
+        );
+        let mut refused = c.clone();
+        refused.output = root.join("overflow");
+        refused.repartition.as_mut().unwrap().max_fit_observations = 1;
+        assert!(prepare_inputs(&refused).is_err());
+        assert!(refused.output.join("refusal.json").is_file());
+        assert!(refused.output.join("INCOMPLETE").is_file());
+        assert!(!refused.output.join("fit-observations.json").exists());
+        assert!(!refused.output.join("holdout-observations.json").exists());
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
     #[test]
     fn input_schedule_reuse_keeps_original_attempts_missing_slots_and_repartitions_only() {
         let root =
@@ -766,6 +1104,7 @@ mod tests {
                 path: master,
             }),
             trajectory: None,
+            repartition: None,
         };
         let report = prepare_inputs(&c).unwrap();
         let schedule: BoundJson = serde_json::from_value(report["schedule"].clone()).unwrap();
@@ -834,6 +1173,26 @@ mod tests {
 #[cfg(test)]
 mod trajectory_input_tests {
     use super::*;
+
+    #[test]
+    fn fixed_1024_midstock_pool_accepts_and_overflow_refuses_without_generation() {
+        let mut c: InputConfig = serde_json::from_value(serde_json::json!({
+            "families":1024,"prefix_seed":43510231024_u64,"prefix_lengths":[],
+            "split_seed":43510231025_u64,"excluded_books":[],"output":"/synthetic-pool",
+            "trajectory":{"max_plies":200,"wall_layer_observations":[0,1,0],
+                "selection_seed":43510231026_u64,
+                "split_counts":{"train":1024,"validation":0,"test":0}}
+        }))
+        .unwrap();
+        c.trajectory.as_ref().unwrap().validate(&c).unwrap();
+        c.families = 1025;
+        c.trajectory.as_mut().unwrap().split_counts.train = 1025;
+        assert!(c.trajectory.as_ref().unwrap().validate(&c).is_err());
+        c.families = 1024;
+        c.trajectory.as_mut().unwrap().split_counts.train = 1024;
+        c.trajectory.as_mut().unwrap().max_plies = 201;
+        assert!(c.trajectory.as_ref().unwrap().validate(&c).is_err());
+    }
     #[test]
     fn trajectory_metadata_limits_reject_root_mix_and_keep_exact_layer_deficits() {
         let mut c: InputConfig = serde_json::from_value(serde_json::json!({

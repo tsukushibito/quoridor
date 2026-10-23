@@ -214,12 +214,17 @@ impl Session {
             call.session_reply_received = true;
             Ok(())
         })();
+        call.request_finished_at = Some(Instant::now());
         if let Err(error) = result {
             if call.stdout.is_empty() {
                 call.stdout = String::from_utf8_lossy(&self.stdout).into_owned();
             }
             call.primary.get_or_insert_with(|| error.to_string());
             call.reply = None;
+            // A failed in-flight request is no longer a graceful idle EOF.
+            // The existing custody-checked close path kills its owned group,
+            // then drains and directly reaps it within the same cleanup bound.
+            self.close_error(format!("session request failed:{error}"));
             let closed = self.close();
             call.direct_reaped = closed["direct_child_reaped"] == true;
             call.exit_code = closed["exit_code"].as_i64().map(|v| v as i32);
@@ -464,6 +469,75 @@ impl Drop for Session {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn claustrophobia435_expired_turn_stops_owned_child_and_keeps_exchange_time() {
+        // NEW transport/control boundary only: no model, ABI, Search or game.
+        let mut child = Command::new("/bin/sleep")
+            .arg("30")
+            .stdin(Stdio::piped())
+            .stdout(Stdio::piped())
+            .stderr(Stdio::piped())
+            .process_group(0)
+            .spawn()
+            .unwrap();
+        let input = child.stdin.take().unwrap();
+        let output = child.stdout.take().unwrap();
+        let errors = child.stderr.take().unwrap();
+        nonblocking(input.as_raw_fd()).unwrap();
+        nonblocking(output.as_raw_fd()).unwrap();
+        nonblocking(errors.as_raw_fd()).unwrap();
+        let mut session = Session {
+            child,
+            input: Some(input),
+            output,
+            errors,
+            stdout: vec![],
+            stderr: vec![],
+            settings: Config {
+                python: "/synthetic/python".into(),
+                library: "/synthetic/library".into(),
+                library_sha256: "a".repeat(64),
+                model_sha256: "b".repeat(64),
+                simulations: 64,
+                c_puct: 1.5,
+                max_head_calls: 65,
+            },
+            model: "/synthetic/model".into(),
+            core: 0,
+            sequence: 0,
+            ready: serde_json::json!({"synthetic_transport":true}),
+            closed: None,
+            reaped: None,
+            group_settled: false,
+            group_kill_sent: false,
+            close_errors: vec![],
+        };
+        let before = Instant::now();
+        let call = session.turn(&[], &[13], before, || false);
+        let returned = Instant::now();
+        assert_eq!(call.primary.as_deref(), Some("deadline"));
+        assert!(call.reply.is_none() && !call.session_reply_received);
+        let exchange = call.request_finished_at.unwrap();
+        assert!(before <= exchange && exchange <= returned);
+        let closed = session.closed.as_ref().expect("owned cleanup settled");
+        assert_eq!(closed["success"], false); // Original request failure survives cleanup.
+        assert_eq!(closed["cleanup_settled"], true);
+        assert_eq!(closed["group_kill_sent"], true);
+        assert_eq!(closed["direct_child_reaped"], true);
+        assert_eq!(closed["stdout_eof"], true);
+        assert_eq!(closed["stderr_eof"], true);
+        assert!(
+            closed["errors"]
+                .as_array()
+                .unwrap()
+                .iter()
+                .any(|s| s.as_str() == Some("session request failed:deadline"))
+        );
+        // A failed request must not wait through the old four-second EOF grace.
+        assert!(returned.duration_since(exchange) < Duration::from_secs(3));
+        assert!(call.direct_reaped && call.stdout_eof && call.stderr_eof);
+    }
 
     #[test]
     fn claustrophobia435_two_frames_keep_one_child_and_close_on_eof() {

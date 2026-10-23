@@ -323,4 +323,304 @@ mod tests {
             (None, Ok(())) => Ok(()),
         }
     }
+    /// Root freezes only actual T/V source contexts before any selected-model forward.
+    #[test]
+    #[ignore = "selected joint export; owning numerical admission, at most 32 actual heads"]
+    fn selected_joint_export_prefix_parity_rows()
+    -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
+        use crate::research_manifest::FileRef;
+        use crate::teacher_pilot::{ContextRecord, reflected_prefix};
+        use std::collections::BTreeSet;
+        use std::io::{Read, Seek, Write};
+        #[derive(Deserialize)]
+        #[serde(deny_unknown_fields)]
+        struct Selected {
+            source_index: usize,
+            prefix: Vec<u16>,
+        }
+        #[derive(Deserialize)]
+        #[serde(deny_unknown_fields)]
+        struct Input {
+            descriptor: FileRef,
+            weights: FileRef,
+            policy: FileRef,
+            policy_weights: FileRef,
+            cohort_fit: FileRef,
+            partition: FileRef,
+            holdout_exclusion: FileRef,
+            selected: FileRef,
+            input_classes: FileRef,
+            shared_fingerprint: String,
+            policy_fingerprint: String,
+            output: PathBuf,
+        }
+        let input_path = std::env::var("QUORIDOR_JOINT_EXPORT_INPUT")?;
+        let mut raw = Vec::new();
+        std::fs::File::open(input_path)?
+            .take(65537)
+            .read_to_end(&mut raw)?;
+        if raw.len() > 65536
+            || crate::arena::digest(&raw) != std::env::var("QUORIDOR_JOINT_EXPORT_INPUT_SHA256")?
+        {
+            return Err("bounded exact joint-export input".into());
+        }
+        let input: Input = serde_json::from_slice(&raw)?;
+        let refs = [
+            &input.descriptor,
+            &input.weights,
+            &input.policy,
+            &input.policy_weights,
+            &input.cohort_fit,
+            &input.partition,
+            &input.holdout_exclusion,
+            &input.selected,
+            &input.input_classes,
+        ];
+        for f in refs {
+            f.verify()?;
+        }
+        let mut bytes = Vec::new();
+        std::fs::File::open(&input.selected.path)?
+            .take(524289)
+            .read_to_end(&mut bytes)?;
+        if bytes.len() > 524288 {
+            return Err("selected context metadata bound".into());
+        }
+        let frozen: serde_json::Value = serde_json::from_slice(&bytes)?;
+        if frozen["schema"] != "quoridor-selected-joint-export-parity-cases-v1"
+            || frozen["source"] != serde_json::to_value(&input.input_classes)?
+            || frozen["originalContexts"] != 16
+            || frozen["maximumStates"] != 32
+        {
+            return Err("exact result-blind frozen selection required".into());
+        }
+        let cases = frozen["cases"].as_array().ok_or("frozen cases")?;
+        let selected: Vec<Selected> = cases.iter().map(|c| serde_json::from_value(
+            serde_json::json!({"source_index":c["sourceOrdinal"],"prefix":c["receipt"]["history"]})
+        )).collect::<Result<_, _>>()?;
+        bytes.clear();
+        std::fs::File::open(&input.input_classes.path)?
+            .take(2097153)
+            .read_to_end(&mut bytes)?;
+        if bytes.len() > 2097152 {
+            return Err("bounded current class metadata".into());
+        }
+        let classes: serde_json::Value = serde_json::from_slice(&bytes)?;
+        if classes["status"] != "COMPLETE"
+            || classes["source_manifest"] != serde_json::to_value(&input.cohort_fit)?
+        {
+            return Err("current canonical cohort publication required".into());
+        }
+        let receipts = classes["source_receipts"]
+            .as_array()
+            .ok_or("actual source receipts")?;
+        let mut seen = BTreeSet::new();
+        let mut counts = [0_usize; 2];
+        if selected.len() != 16 {
+            return Err("1..16 original T/V states".into());
+        }
+        let actions: Vec<_> = selected
+            .iter()
+            .flat_map(|r| r.prefix.iter().copied())
+            .collect();
+        let mut offsets = vec![0];
+        for row in &selected {
+            offsets.push(offsets.last().unwrap() + row.prefix.len());
+        }
+        let mut keys = vec![0_u8; selected.len() * 56];
+        let mut status = vec![1_u8; selected.len()];
+        // Reuse the existing native key/trueLR/full-prefix owner, not a key formula.
+        let code = unsafe {
+            quoridor_data::quoridor_public_prefix_keys(
+                actions.as_ptr(),
+                actions.len(),
+                offsets.as_ptr(),
+                selected.len(),
+                keys.as_mut_ptr(),
+                status.as_mut_ptr(),
+            )
+        };
+        if code != 0 || status.iter().any(|s| *s != 0) {
+            return Err("native prefix keys refused".into());
+        }
+        let mut contexts = Vec::new();
+        for (row_index, row) in selected.iter().enumerate() {
+            let source = receipts
+                .get(row.source_index)
+                .ok_or("actual source index")?;
+            let key_hex = |b: &[u8]| b.iter().map(|v| format!("{v:02x}")).collect::<String>();
+            if source != &cases[row_index]["receipt"]
+                || source["original_key"] != key_hex(&keys[row_index * 56..row_index * 56 + 28])
+                || source["reflected_key"]
+                    != key_hex(&keys[row_index * 56 + 28..(row_index + 1) * 56])
+            {
+                return Err("actual replay keys or frozen source receipt differ".into());
+            }
+            let split = match source["functional_split"].as_str() {
+                Some("T") => 0,
+                Some("V") => 1,
+                _ => return Err("H/unknown partition forbidden".into()),
+            };
+            if serde_json::to_value(&row.prefix)? != source["history"]
+                || source["family"].as_u64().is_none()
+                || source["fixture"].as_u64().is_none()
+            {
+                return Err("selected prefix must equal the actual current source receipt".into());
+            }
+            counts[split] += 1;
+            if counts[split] > 8
+                || row.prefix.is_empty()
+                || row.prefix.len() > 200
+                || !seen.insert(row.source_index)
+            {
+                return Err("bounded distinct original source contexts".into());
+            }
+            let original = SigmaContext::from_prefix(&row.prefix).map_err(|e| e.to_string())?;
+            let total_stock: u8 = original.position().walls_remaining.iter().sum();
+            let band = match total_stock {
+                11..=20 => "high",
+                5..=10 => "mid",
+                0..=4 => "low",
+                _ => return Err("invalid native stock".into()),
+            };
+            if cases[row_index]["stockBand"] != band {
+                return Err("native stock does not match frozen coverage".into());
+            }
+            let reflected = reflected_prefix(&row.prefix)?;
+            let mirror = SigmaContext::from_prefix(&reflected).map_err(|e| e.to_string())?;
+            if original.terminal_value().is_some() || mirror.terminal_value().is_some() {
+                return Err("nonterminal actual source context required".into());
+            }
+            let mut expected: Vec<_> = original
+                .legal_ids()
+                .into_iter()
+                .map(quoridor_data::terminal::reflect_action)
+                .collect::<Result<_, _>>()?;
+            expected.sort_unstable();
+            let mut legal = mirror.legal_ids();
+            legal.sort_unstable();
+            if legal != expected || original.position().turn != mirror.position().turn {
+                return Err("actual trueLR legal/STM correspondence".into());
+            }
+            contexts.push((original, row.prefix.clone(), false));
+            contexts.push((mirror, reflected, true));
+        }
+        if counts.contains(&0) {
+            return Err("both T and V required; no deficit refill".into());
+        }
+        let config = Config {
+            prior: Prior::Head {
+                manifest: input.policy.path.clone(),
+                evidence: PolicyEvidence::Learned,
+            },
+            logical_row_limit: contexts.len() as u64,
+        };
+        if !input.output.is_absolute() {
+            return Err("absolute fresh parity output required".into());
+        }
+        let descriptor: serde_json::Value = input.descriptor.read()?;
+        let policy_descriptor: serde_json::Value = input.policy.read()?;
+        if descriptor["weights_SHA"] != input.weights.sha256
+            || policy_descriptor["weights_sha256"] != input.policy_weights.sha256
+            || input
+                .descriptor
+                .path
+                .parent()
+                .ok_or("descriptor parent")?
+                .join(descriptor["weights"].as_str().ok_or("descriptor weights")?)
+                != input.weights.path
+            || input.policy.path.parent().ok_or("policy parent")?.join(
+                policy_descriptor["weights"]
+                    .as_str()
+                    .ok_or("policy weights")?,
+            ) != input.policy_weights.path
+        {
+            return Err("exact selected model/head weight FileRefs required".into());
+        }
+        let mut provider = Provider::load(&input.descriptor.path, &config, false)?;
+        let hex = |v: [u8; 32]| v.iter().map(|b| format!("{b:02x}")).collect::<String>();
+        if hex(provider.model.fingerprint()) != input.shared_fingerprint
+            || hex(provider
+                .policy
+                .as_ref()
+                .ok_or("learned policy missing")?
+                .0
+                .fingerprint())
+                != input.policy_fingerprint
+        {
+            return Err("selected native shared/policy identity differs".into());
+        }
+        let provider_identity = provider.identity().to_string();
+        let lr_action_permutation: Vec<_> = (0..209)
+            .map(quoridor_data::terminal::reflect_action)
+            .collect::<Result<_, _>>()?;
+        let mut file = std::fs::OpenOptions::new()
+            .write(true)
+            .create_new(true)
+            .open(&input.output)?;
+        let mut rows = Vec::new();
+        let mut persist = |status: &str,
+                           rows: &Vec<serde_json::Value>,
+                           work: Work|
+         -> std::io::Result<()> {
+            let bytes = serde_json::to_vec(&serde_json::json!({
+                "status":status,"input_sha256":crate::arena::digest(&raw),
+                "selected":input.selected,"descriptor":input.descriptor,"weights":input.weights,
+                "policy":input.policy,"policy_weights":input.policy_weights,"input_classes":input.input_classes,
+                "shared_fingerprint":input.shared_fingerprint,"policy_fingerprint":input.policy_fingerprint,
+                "provider_identity":provider_identity,"head_limit":contexts.len(),
+                "work":work,"rows":rows,"Search_calls":0,"H_rows":0,
+                "model_constructor":"Provider::load -> ResidualModel::load + PolicyHead::load",
+                "constructors":1,"simd":false,"lr_action_permutation":lr_action_permutation
+            })).map_err(std::io::Error::other)?;
+            file.rewind()?;
+            file.set_len(0)?;
+            file.write_all(&bytes)?;
+            file.flush()
+        };
+        persist("NOT_RUN", &rows, provider.work())?;
+        for (index, (context, prefix, reflected)) in contexts.iter().enumerate() {
+            let chosen = &selected[index / 2];
+            let source = &receipts[chosen.source_index];
+            let features =
+                quoridor_nnue::encode_qf1(context.position()).map_err(|e| e.to_string())?;
+            let output = provider.evaluate(context);
+            let (logits, value) = match output {
+                Ok(output) => output,
+                Err(e) => {
+                    rows.push(serde_json::json!({"index":index,"error":e,"status":"FAILED"}));
+                    persist("FAILED", &rows, provider.work())?;
+                    return Err(e.into());
+                }
+            };
+            if !value.is_finite() || value.abs() > 1. || logits.iter().any(|v| !v.is_finite()) {
+                rows.push(serde_json::json!({"index":index,"error":"nonfinite joint output","status":"FAILED"}));
+                persist("FAILED", &rows, provider.work())?;
+                return Err("nonfinite joint output".into());
+            }
+            let stm_action_permutation: Vec<_> = (0..209)
+                .map(|a| {
+                    if features.side == 0 {
+                        Ok(a)
+                    } else {
+                        quoridor_nnue::policy::rotate_action(a)
+                    }
+                })
+                .collect::<Result<_, _>>()?;
+            rows.push(serde_json::json!({
+                "stm_action_permutation":stm_action_permutation,
+                "source_index":chosen.source_index,"fixture":source["fixture"],
+                "component":source["family"],"split":source["functional_split"],"reflected":reflected,
+                "prefix":prefix,"root":ContextRecord::from_context(context),
+                "ids":features.ids,"distance":features.distance,"side":features.side+1,
+                "legal":context.legal_ids(),"value":value,"logits":logits.as_slice()
+            }));
+            persist("PENDING", &rows, provider.work())?;
+        }
+        for f in refs {
+            f.verify()?;
+        }
+        persist("COMPLETE", &rows, provider.work())?;
+        Ok(())
+    }
 }

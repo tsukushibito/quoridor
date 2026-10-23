@@ -41,18 +41,94 @@ class PrefixFixtureMetadata(unittest.TestCase):
         with self.assertRaises(ValueError):
             prefix_fixture_partition(self.rows(), [(a, b), (c, b"x"), (a, b)])
 
-    def test_original_lr_multiplicity_and_self_lr_no_refill_nn0(self):
-        rows = self.rows()
-        a, b, c = (bytes([i]) * 28 for i in (1, 2, 3))
-        # Opaque synthetic keys: no board geometry or model inference here.
+    def test_source_weights_reflection_and_teacher_views_are_separate_nn0(self):
+        """Synthetic native-key ports, real PAIR37/sampler owners, no model/RNG."""
+        from collections import Counter
+        from types import SimpleNamespace
+        from unittest.mock import patch
+        import numpy as np
+
+        from . import static_public
+        from . import public_static_values
+        from .sampling import ReflectionBatches
+
+        a, b, c, d, symmetric = (bytes([i]) * 28 for i in range(1, 6))
+        mirrors = {a: b, b: a, c: d, d: c, symmetric: symmetric}
+
+        def reflected(keys):
+            return np.asarray([mirrors[bytes(key)] for key in keys], dtype="V28")
+
+        def grouped(keys):
+            return np.asarray([min(bytes(key), mirrors[bytes(key)]) for key in keys], dtype="V28")
+
+        rows = [
+            {"fixture": i, "history": [i], "functional_split": "T" if i < 4 else "V"}
+            for i in range(5)
+        ]
+        # Two source observations share a, one starts at b, one is self-LR.
         assignments, observations, provenance = prefix_fixture_partition(
-            rows, [(b, a), (c, c), (a, b)]
+            rows, [(a, b), (a, b), (b, a), (symmetric, symmetric), (c, d)]
         )
-        self.assertEqual(assignments, {a: 0, c: 1})
-        self.assertEqual(observations, [b, a, c, a, b])
-        self.assertEqual([r["self_lr"] for r in provenance], [False, True, False])
-        self.assertEqual([r["orientation_observations"] for r in provenance], [2, 1, 2])
-        self.assertEqual([r["history"] for r in provenance], [[], [13], [81, 163]])
+        self.assertEqual(observations, [a, a, b, symmetric, c])
+        self.assertEqual([r["original_observations"] for r in provenance], [1] * 5)
+        self.assertEqual([r["teacher_orientations"] for r in provenance], [2, 2, 2, 1, 2])
+        self.assertEqual(assignments, {a: 0, symmetric: 0, c: 1})
+
+        weights = Counter(observations)
+        pairs = np.zeros(3, dtype=static_public.PAIR)
+        for index, key in enumerate(sorted(assignments)):
+            other = mirrors[key]
+            pairs[index] = (
+                key,
+                (weights[key], 0 if key == other else weights[other]),
+                assignments[key],
+            )
+        with (
+            patch.object(static_public, "lr_group_keys", grouped),
+            patch.object(static_public, "reflected_keys", reflected),
+            patch.object(public_static_values, "reflected_keys", reflected),
+        ):
+            virtual = static_public.ClassObservations(pairs)
+            self.assertEqual(virtual.counts, {"train": 4, "validation": 1})
+            original_pair, original_orientation = virtual.offsets(
+                "train", np.arange(4, dtype=np.int64)
+            )
+            self.assertEqual(original_pair.tolist(), [0, 0, 0, 2])
+            self.assertEqual(original_orientation.tolist(), [0, 0, 1, 0])
+            # A zero-weight reflected source view remains a required teacher view.
+            self.assertEqual(pairs["observations"][1].tolist(), [1, 0])
+            views = list(public_static_values.oriented_keys(pairs, 4))
+            self.assertEqual(sum(len(keys) for _, _, keys in views), 5)
+            self.assertEqual(public_static_values.actual_orientation_count(pairs), 5)
+            keys = {bytes(key) for _, _, chunk in views for key in chunk}
+            self.assertEqual(keys, {a, b, c, d, symmetric})
+            values = np.zeros((3, 2), dtype="<f4")
+            virtual.validate_values(values)
+            values[1, 1] = np.nan
+            with self.assertRaises(ValueError):
+                virtual.validate_values(values)
+
+            class CorpusPort:
+                splits = np.asarray([0, 0, 0, 0, 1], dtype="u1")
+
+                def batch(self, indices, mask=None):
+                    return virtual.offsets("train", indices, mask, training=mask is not None)
+
+            # Supply fixed mask inputs instead of constructing/advancing an RNG.
+            reflected_batch = ReflectionBatches.__new__(ReflectionBatches)
+            reflected_batch.corpus = CorpusPort()
+            reflected_batch.probability = 0.5
+            reflected_batch.generator = SimpleNamespace(
+                random=lambda length: np.asarray([0.1, 0.9, 0.1, 0.9])
+            )
+            reflected_batch.training_seen = reflected_batch.reflected_seen = 0
+            selected_pair, selected_orientation = reflected_batch.batch(
+                np.arange(4, dtype=np.int64), training=True
+            )
+            self.assertEqual(selected_pair.tolist(), original_pair.tolist())
+            self.assertEqual(selected_orientation.tolist(), [1, 0, 0, 0])
+            self.assertEqual(reflected_batch.training_seen, 4)
+            self.assertEqual(reflected_batch.reflected_seen, 2)
 
 
 class PrefixFixturePublisher(unittest.TestCase):

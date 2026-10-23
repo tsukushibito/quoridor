@@ -61,9 +61,7 @@ class SigmaArenaAdmission(unittest.TestCase):
             "pv": [13, 67],
             "counters": {
                 "actual_search_namespace": {
-                    "evaluator": "sigma-value-onnx-cpu:sha256:"
-                    + "a" * 64
-                    + ":simd=false",
+                    "evaluator": "sigma-value-onnx-cpu:sha256:" + "a" * 64 + ":simd=false",
                     "rules": "research-standard-2p-threefold-goal-first-v1",
                     "selectivity": "fullwidth",
                 },
@@ -140,9 +138,7 @@ class SigmaArenaAdmission(unittest.TestCase):
             ],
         }
         experiment = {
-            "dynamic_libraries": [
-                {"file": {"path": inference["library"], "sha256": "b" * 64}}
-            ]
+            "dynamic_libraries": [{"file": {"path": inference["library"], "sha256": "b" * 64}}]
         }
         check = scope["arena_model_check"]
         check(experiment, plan, 2)
@@ -214,6 +210,93 @@ class SigmaArenaAdmission(unittest.TestCase):
                 changed["support"]["resources"]["family_RAM_B"] = 1
             with self.assertRaises(ValueError):
                 cpu_check(changed)
+
+    def test_nnue_mcts_completed_receipt_and_no_zero_work_fallback_nn0(self):
+        source = Path(__file__).with_name("research-lifecycle.py")
+        nodes = [
+            n
+            for n in ast.parse(source.read_text()).body
+            if isinstance(n, ast.FunctionDef) and n.name == "arena_observation"
+        ]
+        self.assertEqual(len(nodes), 1)
+
+        def require(condition, message):
+            if not condition:
+                raise ValueError(message)
+
+        scope = {"require": require, "math": math}
+        exec(compile(ast.Module(body=nodes, type_ignores=[]), str(source), "exec"), scope)
+        config = {
+            "engines": [{"kind": "nnue_mcts"}],
+            "arena": {"comparison": "whole_wall_time", "book": {"openings": [{"prefix": []}]}},
+        }
+        observation = {
+            "engine_index": 0,
+            "caller_seconds": 0.1,
+            "thinking_seconds": 0.09,
+            "value_stm": 0.25,
+            "accepted": True,
+            "failure": None,
+            "engine_error": None,
+            "action": 13,
+            "accepted_ns": 125,
+            "admission_checked_ns": 124,
+            "returned_ns": 123,
+            "deadline_ns": 100,
+            "completed_depth": None,
+            "pv": [],
+            "counters": {
+                "authority_receipt_ns": 90,
+                "authority_legal": True,
+                "inflight_after_drain": 0,
+                "completed_simulations": 2,
+                "clock_contract": "authority-action-receipt-v1",
+                "clock_contract_sha256": "04062382f70648cdfd722e59c35be1100719169097a04749b0046ea5a19a280d",
+                "drain_finished_ns": 123,
+            },
+        }
+        # Synthetic observation only: no source imports, model/geometry/Search or OS lifetime proof.
+        check = scope["arena_observation"]
+        row = {"game": 0, "moves": [13], "observations": [observation]}
+        check(config, row)
+        for field, value in [
+            ("completed_depth", 1),
+            ("pv", [13]),
+            ("engine_error", "NNUE_ROW_LIMIT"),
+        ]:
+            bad = deepcopy(row)
+            bad["observations"][0][field] = value
+            with self.assertRaises(ValueError):
+                check(config, bad)
+        for field, value in [
+            ("authority_receipt_ns", 100),
+            ("inflight_after_drain", None),
+            ("drain_finished_ns", 122),
+            ("authority_legal", False),
+        ]:
+            bad = deepcopy(row)
+            bad["observations"][0]["counters"][field] = value
+            with self.assertRaises(ValueError):
+                check(config, bad)
+        zero = deepcopy(row)
+        zero["observations"][0]["value_stm"] = None
+        zero["observations"][0]["counters"].update(
+            completed_simulations=0,
+            selection_reason="legal_fallback_no_completed_simulation",
+            completed_simulation_counters=None,
+            last_completed_simulation_ns=None,
+        )
+        with self.assertRaises(ValueError):
+            check(config, zero)
+        # Existing Sigma fallback contract remains unchanged; NNUE producer forbids it.
+        sigma = deepcopy(config)
+        sigma["engines"][0]["kind"] = "mcts"
+        check(sigma, zero)
+        refused = deepcopy(zero)
+        refused["moves"] = []
+        refused["observations"][0]["accepted"] = False
+        refused["observations"][0]["failure"] = "NoCompletedSimulation"
+        check(config, refused)
 
 
 if __name__ == "__main__":

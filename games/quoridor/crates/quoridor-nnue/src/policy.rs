@@ -56,8 +56,36 @@ impl PolicyHead {
     pub fn load(path: impl AsRef<Path>, model: &ResidualModel) -> Result<Self> {
         let path = path.as_ref();
         let raw = crate::read_asset(path, 65536, false)?;
+        let m = Self::parse_manifest(&raw, model)?;
+        let bytes = crate::read_asset(
+            &path.parent().unwrap_or(Path::new(".")).join(&m.weights),
+            m.weights_bytes,
+            true,
+        )?;
+        Self::load_bytes(&raw, &bytes, model)
+    }
+    /// Browser bytes and native files share all artifact/identity predicates.
+    pub fn load_bytes(raw: &[u8], bytes: &[u8], model: &ResidualModel) -> Result<Self> {
+        let m = Self::parse_manifest(raw, model)?;
+        if bytes.len() != m.weights_bytes
+            || format!("{:x}", Sha256::digest(bytes)) != m.weights_sha256
+        {
+            return Err(Error::Manifest("policy weights SHA".into()));
+        }
+        let w = bytes
+            .as_chunks::<4>()
+            .0
+            .iter()
+            .map(|b| f32::from_le_bytes(*b))
+            .collect();
+        Self::from_parts(model, w, m.evidence)
+    }
+    fn parse_manifest(raw: &[u8], model: &ResidualModel) -> Result<PolicyManifest> {
+        if raw.len() > 65536 {
+            return Err(Error::Manifest("policy manifest exceeds 64 KiB".into()));
+        }
         let m: PolicyManifest =
-            serde_json::from_slice(&raw).map_err(|e| Error::Manifest(e.to_string()))?;
+            serde_json::from_slice(raw).map_err(|e| Error::Manifest(e.to_string()))?;
         if m.schema != POLICY_SCHEMA
             || m.action_order != POLICY_ORDER
             || m.head_coordinates != POLICY_COORDINATES
@@ -77,21 +105,7 @@ impl PolicyHead {
         if m.weights_bytes != n * 4 {
             return Err(Error::Manifest("policy shape".into()));
         }
-        let bytes = crate::read_asset(
-            &path.parent().unwrap_or(Path::new(".")).join(&m.weights),
-            n * 4,
-            true,
-        )?;
-        if format!("{:x}", Sha256::digest(&bytes)) != m.weights_sha256 {
-            return Err(Error::Manifest("policy weights SHA".into()));
-        }
-        let w = bytes
-            .as_chunks::<4>()
-            .0
-            .iter()
-            .map(|b| f32::from_le_bytes(*b))
-            .collect();
-        Self::from_parts(model, w, m.evidence)
+        Ok(m)
     }
     pub fn from_parts(
         model: &ResidualModel,
@@ -315,5 +329,71 @@ mod tests {
         assert!(head.scratch(&other).is_err()); // no head
         assert!(PolicyHead::load(directory.join("manifest.json"), &other).is_err());
         std::fs::remove_dir_all(directory).unwrap();
+    }
+    #[test]
+    fn joint_browser_byte_loaders_authenticate_shape_shared_and_sha_nn0() {
+        use crate::residual::{RESIDUAL_FEATURE, ResidualManifest, RouteMode};
+        use crate::{DistanceFit, Topology};
+        let topology = Topology {
+            ft_width: 1,
+            hidden_width: 1,
+        };
+        let count = ResidualModel::parameter_count(topology).unwrap();
+        let weights = vec![0_u8; count * 4];
+        let manifest = ResidualManifest {
+            schema: "quoridor-nnue-distance-residual-v3".into(),
+            feature: RESIDUAL_FEATURE.into(),
+            value_perspective: "side-to-move".into(),
+            value_parameterization: "fixed-distance-logit-plus-linear-residual-tanh".into(),
+            dense_feature_version: "shortest-dag4-f32-STM-v1".into(),
+            route_mode: RouteMode::Zero4,
+            topology,
+            weights: "weights.f32".into(),
+            weights_sha: format!("{:x}", Sha256::digest(&weights)),
+            weights_bytes: weights.len(),
+            little_endian_f32: count,
+            mu_f32: [0.; 2],
+            sigma_f32: [1.; 2],
+            distance_fit: DistanceFit { a: 0., b: 0. },
+            route_mu_f32: [0.; 4],
+            route_sigma_f32: [1.; 4],
+        };
+        let raw = serde_json::to_vec(&manifest).unwrap();
+        let model = ResidualModel::load_bytes(&raw, &weights).unwrap();
+        assert!(ResidualModel::load_bytes(&raw, &weights[4..]).is_err());
+        assert!(ResidualModel::load_bytes(&vec![b' '; 65537], &weights).is_err());
+        let mut corrupt = weights.clone();
+        corrupt[0] = 1;
+        assert!(ResidualModel::load_bytes(&raw, &corrupt).is_err());
+        let bytes = vec![0_u8; POLICY * 2 * 4];
+        let policy = PolicyManifest {
+            schema: POLICY_SCHEMA.into(),
+            action_order: POLICY_ORDER.into(),
+            head_coordinates: POLICY_COORDINATES.into(),
+            value_perspective: "side-to-move".into(),
+            reflection: POLICY_REFLECTION.into(),
+            evidence: PolicyEvidence::Learned,
+            shared_fingerprint: format!("{:x}", Sha256Bytes(model.fingerprint())),
+            hidden_width: 1,
+            weights: "policy.f32".into(),
+            weights_sha256: format!("{:x}", Sha256::digest(&bytes)),
+            weights_bytes: bytes.len(),
+        };
+        let raw = serde_json::to_vec(&policy).unwrap();
+        assert!(PolicyHead::load_bytes(&raw, &bytes, &model).is_ok());
+        assert!(PolicyHead::load_bytes(&raw, &bytes[4..], &model).is_err());
+        let mut wrong = serde_json::to_value(&policy).unwrap();
+        wrong["shared_fingerprint"] = "0".repeat(64).into();
+        assert!(
+            PolicyHead::load_bytes(&serde_json::to_vec(&wrong).unwrap(), &bytes, &model).is_err()
+        );
+        let mut wrong = serde_json::to_value(&policy).unwrap();
+        wrong["hidden_width"] = 2.into();
+        assert!(
+            PolicyHead::load_bytes(&serde_json::to_vec(&wrong).unwrap(), &bytes, &model).is_err()
+        );
+        let mut corrupt = bytes.clone();
+        corrupt[0] = 1;
+        assert!(PolicyHead::load_bytes(&raw, &corrupt, &model).is_err());
     }
 }

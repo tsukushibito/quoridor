@@ -357,6 +357,79 @@ pub fn partition_series(
         },
     })
 }
+
+/// Reassign only whole recorded components; the original native grouping must reconstruct exactly.
+pub fn repartition_series(
+    original: &SeriesPartition,
+    counts: FamilySplitCounts,
+) -> Result<SeriesPartition> {
+    let planned = original
+        .partition
+        .assignments
+        .iter()
+        .map(|a| (a.game.clone(), a.prefix.clone()))
+        .collect::<Vec<_>>();
+    let reconstructed = partition_series(
+        &planned,
+        &original.source_series,
+        original.partition.seed,
+        original.requested,
+    )?;
+    if serde_json::to_value(&reconstructed)? != serde_json::to_value(original)?
+        || counts.train == 0
+        || counts.validation == 0
+        || counts.test == 0
+        || counts.total()? != original.actual.total()?
+    {
+        return Err(
+            "exact original native components and complete nonempty new counts required".into(),
+        );
+    }
+    let unique = original
+        .partition
+        .assignments
+        .iter()
+        .map(|a| a.family.clone())
+        .collect::<BTreeSet<_>>();
+    let ranked = rank_components(unique, original.partition.seed);
+    let splits = ranked_splits(&ranked, counts)?;
+    let mut result = original.clone();
+    for assignment in &mut result.partition.assignments {
+        assignment.split = splits[&assignment.family].clone();
+    }
+    result.requested = counts;
+    result.actual = counts;
+    result.deficits = FamilySplitCounts {
+        train: 0,
+        validation: 0,
+        test: 0,
+    };
+    Ok(result)
+}
+
+fn rank_components(unique: BTreeSet<String>, seed: u64) -> Vec<String> {
+    let mut ranked: Vec<_> = unique.into_iter().collect();
+    ranked.sort_by_key(|family| {
+        (
+            hex_digest(format!("{seed}:{family}").as_bytes()),
+            family.clone(),
+        )
+    });
+    ranked
+}
+
+/// The existing seeded native rank, published after the complete pool is frozen.
+pub fn ranked_components(partition: &FamilyPartition) -> Vec<String> {
+    rank_components(
+        partition
+            .assignments
+            .iter()
+            .map(|a| a.family.clone())
+            .collect(),
+        partition.seed,
+    )
+}
+
 fn ranked_splits(ranked: &[String], counts: FamilySplitCounts) -> Result<BTreeMap<String, Split>> {
     if ranked.len() > counts.total()? {
         return Err("more components than declared split slots".into());
@@ -454,13 +527,7 @@ fn partition_owned_families(
         })
         .collect::<Vec<_>>();
     let unique: BTreeSet<_> = families.iter().cloned().collect();
-    let mut ranked: Vec<_> = unique.into_iter().collect();
-    ranked.sort_by_key(|family| {
-        (
-            hex_digest(format!("{seed}:{family}").as_bytes()),
-            family.clone(),
-        )
-    });
+    let ranked = rank_components(unique, seed);
     let counts = series.map_or_else(
         || {
             let train = ranked.len() * 4 / 5;
@@ -497,6 +564,37 @@ fn partition_owned_families(
 #[cfg(test)]
 mod configured_family_tests {
     use super::*;
+
+    #[test]
+    fn published_component_rank_keeps_seed_deduplicates_and_ignores_row_order() {
+        let mut p = FamilyPartition {
+            schema: "synthetic-metadata-only".into(),
+            seed: 43510231025,
+            rounding: "not-a-geometry-qualification".into(),
+            assignments: ["family-b", "family-a", "family-b"]
+                .iter()
+                .enumerate()
+                .map(|(i, family)| FamilyAssignment {
+                    game: format!("row-{i}"),
+                    prefix: vec![],
+                    family: (*family).into(),
+                    split: Split::Train,
+                })
+                .collect(),
+        };
+        let expected = ranked_components(&p);
+        assert_eq!(expected.len(), 2);
+        assert_eq!(
+            expected.iter().cloned().collect::<BTreeSet<_>>(),
+            BTreeSet::from(["family-a".to_string(), "family-b".to_string()])
+        );
+        p.assignments.reverse();
+        assert_eq!(ranked_components(&p), expected);
+        assert!(expected.windows(2).all(|w| {
+            (hex_digest(format!("{}:{}", p.seed, w[0]).as_bytes()), &w[0])
+                < (hex_digest(format!("{}:{}", p.seed, w[1]).as_bytes()), &w[1])
+        }));
+    }
     #[test]
     fn configured_families_group_lr_extensions_and_endpoint_collisions_before_split() {
         let a = vec![13, 75, 14, 74];
@@ -529,6 +627,71 @@ mod configured_family_tests {
 #[cfg(test)]
 mod trajectory_partition_tests {
     use super::*;
+
+    #[test]
+    fn saved_component_repartition_preserves_members_and_refuses_forged_original() {
+        let planned = vec![
+            ("a".to_string(), vec![13]),
+            ("b".to_string(), vec![3]),
+            ("c".to_string(), vec![81]),
+        ];
+        let sources = planned
+            .iter()
+            .map(|(id, _)| (id.clone(), id.clone()))
+            .collect();
+        let original = partition_series(
+            &planned,
+            &sources,
+            435102206,
+            FamilySplitCounts {
+                train: 3,
+                validation: 0,
+                test: 0,
+            },
+        )
+        .unwrap();
+        assert_eq!(original.actual.total().unwrap(), 3);
+        let counts = FamilySplitCounts {
+            train: 1,
+            validation: 1,
+            test: 1,
+        };
+        let actual = repartition_series(&original, counts).unwrap();
+        let expected = partition_series(&planned, &sources, 435102206, counts).unwrap();
+        assert_eq!(
+            serde_json::to_value(&actual).unwrap(),
+            serde_json::to_value(expected).unwrap()
+        );
+        for (a, b) in original
+            .partition
+            .assignments
+            .iter()
+            .zip(&actual.partition.assignments)
+        {
+            assert_eq!(
+                (&a.game, &a.prefix, &a.family),
+                (&b.game, &b.prefix, &b.family)
+            );
+        }
+        assert_eq!(original.actual.train, 3); // The original allTrain receipt was not rewritten.
+        let mut forged = original.clone();
+        forged.partition.assignments[0].family = "invented".into();
+        assert!(repartition_series(&forged, counts).is_err());
+        forged = original.clone();
+        forged.source_series.insert("a".into(), "b".into());
+        assert!(repartition_series(&forged, counts).is_err());
+        assert!(
+            repartition_series(
+                &original,
+                FamilySplitCounts {
+                    train: 1,
+                    validation: 1,
+                    test: 2
+                }
+            )
+            .is_err()
+        );
+    }
     #[test]
     fn explicit_component_ceilings_keep_holdout_and_missing_components() {
         let ranked = (0..5)

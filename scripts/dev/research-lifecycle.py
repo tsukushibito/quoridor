@@ -5477,7 +5477,7 @@ def arena_observation(config, row):
             )
             accepted.append(obs["action"])
             continue
-        if config["engines"][index]["kind"] == "mcts":
+        if config["engines"][index]["kind"] in {"mcts", "nnue_mcts"}:
             counters = obs["counters"]
             receipt = counters["authority_receipt_ns"]
             require(
@@ -5490,7 +5490,8 @@ def arena_observation(config, row):
                 and (
                     (counters["completed_simulations"] > 0)
                     or (
-                        counters["completed_simulations"] == 0
+                        config["engines"][index]["kind"] == "mcts"
+                        and counters["completed_simulations"] == 0
                         and counters.get("selection_reason")
                         == "legal_fallback_no_completed_simulation"
                         and "completed_simulation_counters" in counters
@@ -6064,7 +6065,7 @@ def interval_tail(interval):
 def arena_analysis_check(spec, experiment):
     config = document(experiment["config"])
     require(
-        set(config) - {"linked_examples_limit"}
+        set(config) - {"linked_examples_limit", "bootstrap_method"}
         == {
             "schema",
             "arena_plan",
@@ -6102,6 +6103,10 @@ def arena_analysis_check(spec, experiment):
         "one maintained reference analysis entry",
     )
     interval_tail(config["central_interval"])
+    require(
+        config.get("bootstrap_method") in (None, "shared_pcg64_linear"),
+        "declared existing or shared PCG64 linear family bootstrap",
+    )
     require(
         type(config.get("linked_examples_limit", 12)) is int
         and config.get("linked_examples_limit", 12) >= 0,
@@ -6294,9 +6299,47 @@ def arena_score_tables(plan, schedule, observed, config):
         )
     samples = {m["id"]: [] for m in plan["matchups"]}
     empty = {key: 0 for key in samples}
-    rng = random.Random(config["bootstrap_seed"])
-    for _ in range(config["bootstrap_resamples"]):
-        indices = [rng.randrange(len(plan["family_ids"])) for _ in plan["family_ids"]]
+    shared = config.get("bootstrap_method") == "shared_pcg64_linear"
+    shared_complete = all(all(v is not None for v in values) for values in pair_scores.values())
+    resampling = None
+    if shared:
+        require(len(plan["family_ids"]) > 0, "nonempty shared family order")
+        resampling = {
+            "method": "shared_pcg64_linear",
+            "family_order": plan["family_ids"],
+            "index_shape": [config["bootstrap_resamples"], len(plan["family_ids"])],
+            "index_dtype": "<u8",
+            "index_sha256": None,
+            "numpy_version": None,
+            "all_planned_pairs_complete": shared_complete,
+            "simultaneous_interpretation": (
+                "Bonferroni nominal alpha allocation across the predeclared contrasts; "
+                "conditional approximate bootstrap, no IID/population coverage guarantee"
+            ),
+        }
+        if shared_complete:
+            import numpy as np
+
+            index_table = np.random.Generator(np.random.PCG64(config["bootstrap_seed"])).integers(
+                0,
+                len(plan["family_ids"]),
+                size=(config["bootstrap_resamples"], len(plan["family_ids"])),
+                dtype=np.uint64,
+            )
+            resampling["index_sha256"] = sha(
+                index_table.astype("<u8", copy=False).tobytes(order="C")
+            )
+            resampling["numpy_version"] = np.__version__
+            index_rows = index_table
+        else:
+            index_rows = ()
+    else:
+        rng = random.Random(config["bootstrap_seed"])
+        index_rows = (
+            [rng.randrange(len(plan["family_ids"])) for _ in plan["family_ids"]]
+            for _ in range(config["bootstrap_resamples"])
+        )
+    for indices in index_rows:
         for key, values in pair_scores.items():
             known = [values[i] for i in indices if values[i] is not None]
             if known:
@@ -6307,7 +6350,9 @@ def arena_score_tables(plan, schedule, observed, config):
         values = sorted(samples[table["matchup"]])
         table["empty_family_resamples"] = empty[table["matchup"]]
         unavailable = (
-            "fewer_than_two_complete_colour_pairs"
+            "incomplete_planned_colour_pair_in_shared_contrasts"
+            if shared and not shared_complete
+            else "fewer_than_two_complete_colour_pairs"
             if table["complete_colour_pairs"] < 2
             else "empty_family_resample"
             if len(values) != config["bootstrap_resamples"]
@@ -6317,6 +6362,15 @@ def arena_score_tables(plan, schedule, observed, config):
         table["conditional_complete_pair_interval"] = (
             None
             if unavailable is not None
+            else np.quantile(
+                values,
+                [
+                    float(interval_tail(config["central_interval"])),
+                    float(1 - interval_tail(config["central_interval"])),
+                ],
+                method="linear",
+            ).tolist()
+            if shared
             else [
                 values[math.floor((len(values) - 1) * interval_tail(config["central_interval"]))],
                 values[
@@ -6324,6 +6378,8 @@ def arena_score_tables(plan, schedule, observed, config):
                 ],
             ]
         )
+        if shared:
+            table["family_resampling"] = resampling
     return tables
 
 

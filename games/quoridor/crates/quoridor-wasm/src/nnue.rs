@@ -140,6 +140,62 @@ impl NnueEngine {
     }
 }
 
+/// Joint residual artifact view. No Search, alternate model math or default selection.
+/// The original value-only NnueEngine API remains unchanged.
+#[wasm_bindgen]
+pub struct NnuePolicyValue {
+    model: quoridor_nnue::residual::ResidualModel,
+    head: quoridor_nnue::policy::PolicyHead,
+    scratch: quoridor_nnue::policy::PolicyScratch,
+}
+#[wasm_bindgen]
+impl NnuePolicyValue {
+    #[wasm_bindgen(constructor)]
+    pub fn new(
+        manifest: &[u8],
+        weights: &[u8],
+        policy_manifest: &[u8],
+        policy_weights: &[u8],
+    ) -> Result<NnuePolicyValue, JsValue> {
+        let model =
+            quoridor_nnue::residual::ResidualModel::load_bytes(manifest, weights).map_err(error)?;
+        let head =
+            quoridor_nnue::policy::PolicyHead::load_bytes(policy_manifest, policy_weights, &model)
+                .map_err(error)?;
+        let scratch = head.scratch(&model).map_err(error)?;
+        Ok(Self {
+            model,
+            head,
+            scratch,
+        })
+    }
+    /// One same-hidden joint forward, absolute core209 logits and actual native STM.
+    pub fn evaluate_json(&mut self, prefix_json: &str) -> Result<String, JsValue> {
+        let context = context(prefix_json).map_err(error)?;
+        context.validate_normal().map_err(error)?;
+        if context.terminal_value().is_some() {
+            return Err(error("terminal has no joint head request"));
+        }
+        let a = self
+            .model
+            .full_context(&context, EvaluationMode::Scalar)
+            .map_err(error)?;
+        let (value, logits) = self
+            .head
+            .evaluate(&self.model, &a, &mut self.scratch)
+            .map_err(error)?;
+        serde_json::to_string(&serde_json::json!({
+            "shared_fingerprint":self.model.fingerprint(),
+            "policy_fingerprint":self.head.fingerprint(),
+            "side":context.position().turn+1,
+            "legal":context.legal_ids(),
+            "value":value.post_tanh,
+            "logits":logits.as_slice(),
+        }))
+        .map_err(error)
+    }
+}
+
 #[cfg(test)]
 mod tests {
     #[test]

@@ -113,9 +113,9 @@ def prefix_fixture_partition(rows, pairs):
         if canonical in assignments and assignments[canonical] != code:
             raise ValueError("same or true-LR class crosses explicit fixture T/V")
         assignments[canonical] = code
-        # A real self-LR input has a single original observation, with no refill.
-        oriented = [original] if original == reflected else [original, reflected]
-        observations.extend(oriented)
+        # One actual source prefix contributes one original weight. The teacher
+        # separately evaluates both distinct keys, including zero-weight views.
+        observations.append(original)
         provenance.append(
             {
                 **row,
@@ -123,7 +123,8 @@ def prefix_fixture_partition(rows, pairs):
                 "reflected_key": reflected.hex(),
                 "canonical_key": canonical.hex(),
                 "self_lr": original == reflected,
-                "orientation_observations": len(oriented),
+                "original_observations": 1,
+                "teacher_orientations": 1 if original == reflected else 2,
             }
         )
     return assignments, observations, provenance
@@ -168,7 +169,110 @@ def native_prefix_keys(rows, library):
     ]
 
 
-def series_fixture_rows(source, holdout, partition):
+def repartition_fixture_authority(source, holdout, partition, original):
+    """Validate the new split against the bound original native component census."""
+    import hashlib
+
+    authority = partition["repartition"]
+    if (
+        original is None
+        or set(authority)
+        != {
+            "schema",
+            "source_partition",
+            "source_schedule",
+            "source_observations",
+            "max_fit_observations",
+            "max_holdout_observations",
+            "actual_observations",
+        }
+        or authority["schema"] != "quoridor-prefix-series-repartition-v1"
+        or source["source_observations"] != authority["source_observations"]
+        or holdout["source_observations"] != authority["source_observations"]
+        or partition["source_series"] != original["source_series"]
+        or partition["partition"]["schema"] != original["partition"]["schema"]
+        or partition["partition"]["rounding"] != original["partition"]["rounding"]
+        or partition["partition"]["seed"] != original["partition"]["seed"]
+    ):
+        raise ValueError("bound original source/component split authority differs")
+    old = original["partition"]["assignments"]
+    new = partition["partition"]["assignments"]
+    if len(old) != len(new) or not old:
+        raise ValueError("repartition must preserve every original member")
+    original_splits, new_splits = {}, {}
+    identities = set()
+    for before, after in zip(old, new, strict=True):
+        if (
+            set(before) != {"game", "prefix", "family", "split"}
+            or set(after) != set(before)
+            or {k: v for k, v in before.items() if k != "split"}
+            != {k: v for k, v in after.items() if k != "split"}
+            or before["game"] in identities
+        ):
+            raise ValueError("original member/order/prefix/component changed")
+        identities.add(before["game"])
+        for row, splits in ((before, original_splits), (after, new_splits)):
+            family, split = row["family"], row["split"]
+            if split not in ("train", "validation", "test") or (
+                family in splits and splits[family] != split
+            ):
+                raise ValueError("repartition cuts an original native component")
+            splits[family] = split
+    if set(original["source_series"]) != identities:
+        raise ValueError("original native source membership differs")
+    for record, splits in ((original, original_splits), (partition, new_splits)):
+        actual = {
+            name: sum(v == name for v in splits.values())
+            for name in ("train", "validation", "test")
+        }
+        if actual != record["actual"] or any(
+            type(record["requested"][k]) is not int
+            or record["requested"][k] < actual[k]
+            or record["deficits"][k] != record["requested"][k] - actual[k]
+            for k in actual
+        ):
+            raise ValueError("native original/new component census differs")
+    counts = partition["requested"]
+    if (
+        any(type(n) is not int or n <= 0 for n in counts.values())
+        or set(counts) != {"train", "validation", "test"}
+        or sum(counts.values()) != len(original_splits)
+        or any(partition["deficits"].values())
+    ):
+        raise ValueError("complete nonempty whole-component allocation required")
+    seed = original["partition"]["seed"]
+    ranked = sorted(
+        original_splits, key=lambda f: (hashlib.sha256(f"{seed}:{f}".encode()).hexdigest(), f)
+    )
+    for index, family in enumerate(ranked):
+        expected = (
+            "train"
+            if index < counts["train"]
+            else "validation"
+            if index < counts["train"] + counts["validation"]
+            else "test"
+        )
+        if new_splits[family] != expected:
+            raise ValueError("same-seed native component ranking changed")
+    actual_rows = {
+        name: sum(a["split"] == name for a in new) for name in ("train", "validation", "test")
+    }
+    fit_max, holdout_max = authority["max_fit_observations"], authority["max_holdout_observations"]
+    if (
+        type(fit_max) is not int
+        or not 0 < fit_max <= 1792
+        or type(holdout_max) is not int
+        or not 0 < holdout_max <= 256
+        or actual_rows != authority["actual_observations"]
+        or any(n <= 0 for n in actual_rows.values())
+        or actual_rows["train"] + actual_rows["validation"] > fit_max
+        or actual_rows["test"] > holdout_max
+    ):
+        raise ValueError("saved repartition fit/H row bounds differ")
+    return authority
+
+
+def series_fixture_rows(source, holdout, partition, original_partition=None):
     """Project a bound native component partition; H remains exclusion-only."""
     schema = "quoridor-prefix-series-observations-v1"
     if (
@@ -181,6 +285,10 @@ def series_fixture_rows(source, holdout, partition):
         or source.get("source_observations") != holdout.get("source_observations")
     ):
         raise ValueError("matching unlabelled native fit/holdout partition required")
+    if "repartition" in partition:
+        repartition_fixture_authority(source, holdout, partition, original_partition)
+    elif original_partition is not None:
+        raise ValueError("unexpected replacement split authority")
     assignments = partition["partition"]["assignments"]
     sources = partition["source_series"]
     by_id = {a["game"]: a for a in assignments}
@@ -289,12 +397,23 @@ def prepare_prefix_fixture(config):
     if "holdout_exclusion" in config:
         holdout_raw = bound_file_bytes(config["holdout_exclusion"], 64 * 1024**2)
         partition_raw = bound_file_bytes(source["partition"], 64 * 1024**2)
+        partition = json.loads(partition_raw)
+        original_partition = None
+        parent_sources = []
+        if "repartition" in partition:
+            parent_ref = partition["repartition"]["source_partition"]
+            parent_raw = bound_file_bytes(parent_ref, 64 * 1024**2)
+            original_partition = json.loads(parent_raw)
+            parent_sources.append((parent_ref, parent_raw))
         rows, holdout_rows, lineage = series_fixture_rows(
-            source, json.loads(holdout_raw), json.loads(partition_raw)
+            source, json.loads(holdout_raw), partition, original_partition
         )
+        if original_partition is not None:
+            lineage["repartition"] = partition["repartition"]
         extra_sources = [
             (config["holdout_exclusion"], holdout_raw),
             (source["partition"], partition_raw),
+            *parent_sources,
         ]
     else:
         rows = prefix_fixture_rows(source)
@@ -328,8 +447,8 @@ def prepare_prefix_fixture(config):
             counts = write_class_table(connection, stream, split_assignments=assignments)
             stream.flush()
             os.fsync(stream.fileno())
-        if counts["qualified_original_observations"] != len(observations):
-            raise ValueError("fixture orientation multiplicity census differs")
+        if len(observations) != len(rows) or counts["qualified_original_observations"] != len(rows):
+            raise ValueError("fixture original source multiplicity census differs")
         mapped = np.memmap(table, dtype=PAIR, mode="r")
         try:
             if ClassObservations(mapped).counts != {k: counts[k] for k in ("train", "validation")}:
@@ -351,7 +470,7 @@ def prepare_prefix_fixture(config):
             "class_pairs_identity": file_identity(table),
             "pair_record_bytes": PAIR.itemsize,
             "counts": counts,
-            "original_observations": len(observations),
+            "original_observations": len(rows),
             "source_receipts": provenance,
             "split": {
                 "algorithm": "explicit configured functional T/V; reject same/trueLR pair across partitions",

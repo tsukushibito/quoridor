@@ -247,9 +247,43 @@ impl StaticInputExclusions {
         };
 
         let manifest = reference.read()?;
+        // These are the two current publisher declarations, not interchangeable
+        // flags added to an already published cache. Both payloads contain only
+        // unprotected T/V originals; full-public also reports excluded originals.
+        let prefix_fixture =
+            manifest["source_mode"] == "prefix-fixture" && manifest.get("original_only").is_none();
+        let full_public =
+            manifest.get("source_mode").is_none() && manifest["original_only"] == true;
+        let counts = &manifest["counts"];
+        let train = counts["train"].as_u64().ok_or("T count")?;
+        let validation = counts["validation"].as_u64().ok_or("V count")?;
+        let protected = counts["protected_original_observations"]
+            .as_u64()
+            .ok_or("protected original count")?;
+        let qualified = counts["qualified_original_observations"]
+            .as_u64()
+            .ok_or("qualified original count")?;
+        let originals = manifest["original_observations"]
+            .as_u64()
+            .ok_or("original observation count")?;
+        let protected_bits = ["1", "2", "3"].into_iter().try_fold(0_u64, |sum, bit| {
+            sum.checked_add(counts["protected_by_bits"][bit].as_u64()?)
+        });
+        let complete_count = train
+            .checked_add(validation)
+            .and_then(|n| n.checked_add(protected));
         if manifest["schema"] != "quoridor-public-static-input-classes-v1"
             || manifest["status"] != "COMPLETE"
-            || manifest["original_only"] != true
+            || !(prefix_fixture || full_public)
+            || counts["protected_by_bits"]
+                .as_object()
+                .map(|bits| bits.len())
+                != Some(3)
+            || protected_bits != Some(protected)
+            || complete_count != Some(qualified)
+            || qualified == 0
+            || originals < qualified
+            || (prefix_fixture && (originals != qualified || protected != 0))
             || manifest["pair_record_bytes"] != 37
             || reference
                 .path
@@ -310,8 +344,8 @@ impl StaticInputExclusions {
         if reader.read(&mut extra)? != 0
             || format!("{:x}", digest.finalize()) != expected_sha
             || reader.get_ref().metadata()?.len() != expected_bytes
-            || observations[0] != manifest["counts"]["train"].as_u64().ok_or("T count")?
-            || observations[1] != manifest["counts"]["validation"].as_u64().ok_or("V count")?
+            || observations[0] != train
+            || observations[1] != validation
         {
             return Err("PAIR37 complete SHA/multiplicity census differs".into());
         }
@@ -563,9 +597,12 @@ mod tests {
             &path,
             serde_json::to_vec(&serde_json::json!({
                 "schema":"quoridor-public-static-input-classes-v1","status":"COMPLETE",
-                "original_only":true,"pair_record_bytes":37,
+                "source_mode":"prefix-fixture","pair_record_bytes":37,
+                "original_observations":counts[0]+counts[1],
                 "class_pairs":{"path":pairs,"bytes":raw.len(),"sha256":crate::hex_digest(&raw)},
-                "counts":{"pair_rows":entries.len(),"train":counts[0],"validation":counts[1]}
+                "counts":{"pair_rows":entries.len(),"train":counts[0],"validation":counts[1],
+                    "qualified_original_observations":counts[0]+counts[1],
+                    "protected_original_observations":0,"protected_by_bits":{"1":0,"2":0,"3":0}}
             }))
             .unwrap(),
         )
@@ -594,6 +631,99 @@ mod tests {
             })
             .min()
             .unwrap()
+    }
+
+    #[test]
+    fn public_static_endpoint_current_publisher_declarations_and_census() {
+        let root = std::env::temp_dir().join(format!(
+            "public-static-publisher-census-{}",
+            std::process::id()
+        ));
+        // Opaque synthetic PAIR37 key only: no geometry/model/feature execution.
+        let reference = endpoint_manifest(&root, &[([1; 28], 2, 0), ([2; 28], 3, 1)]);
+        let original = reference.read().unwrap();
+        assert!(original.get("original_only").is_none());
+        let read = |metadata: &serde_json::Value| {
+            std::fs::write(&reference.path, serde_json::to_vec(metadata).unwrap()).unwrap();
+            StaticInputExclusions::from_manifest(&crate::terminal_stream::BoundJson {
+                path: reference.path.clone(),
+                sha256: crate::file_sha(&reference.path).unwrap(),
+            })
+        };
+        assert_eq!(read(&original).unwrap().keys.len(), 2);
+        // Full-public retains its distinct current declaration and may census
+        // protected/rejected source originals outside the unprotected payload.
+        let mut public = original.clone();
+        public.as_object_mut().unwrap().remove("source_mode");
+        public["original_only"] = serde_json::json!(true);
+        public["original_observations"] = serde_json::json!(8);
+        public["counts"]["qualified_original_observations"] = serde_json::json!(7);
+        public["counts"]["protected_original_observations"] = serde_json::json!(2);
+        public["counts"]["protected_by_bits"]["1"] = serde_json::json!(2);
+        assert_eq!(read(&public).unwrap().keys.len(), 2);
+
+        for (field, value) in [
+            ("source_mode", serde_json::json!("unknown")),
+            ("status", serde_json::json!("INCOMPLETE")),
+            ("schema", serde_json::json!("wrong")),
+            ("pair_record_bytes", serde_json::json!(38)),
+            ("original_only", serde_json::json!(false)),
+            ("original_observations", serde_json::json!(6)),
+            ("original_observations", serde_json::json!(4)),
+        ] {
+            let mut bad = original.clone();
+            bad[field] = value;
+            assert!(read(&bad).is_err(), "{field}");
+        }
+        for (field, value) in [
+            ("qualified_original_observations", serde_json::json!(6)),
+            ("protected_original_observations", serde_json::json!(1)),
+            ("protected_by_bits", serde_json::json!({"1":1,"2":0,"3":0})),
+            ("protected_by_bits", serde_json::json!({"1":0,"2":0})),
+            (
+                "protected_by_bits",
+                serde_json::json!({"1":0,"2":0,"3":0,"4":1}),
+            ),
+            ("train", serde_json::json!(3)),
+            ("train", serde_json::json!(u64::MAX)),
+            ("pair_rows", serde_json::json!(3)),
+        ] {
+            let mut bad = original.clone();
+            bad["counts"][field] = value;
+            assert!(read(&bad).is_err(), "{field}");
+        }
+        let mut protected_fixture = original.clone();
+        protected_fixture["original_observations"] = serde_json::json!(6);
+        protected_fixture["counts"]["qualified_original_observations"] = serde_json::json!(6);
+        protected_fixture["counts"]["protected_original_observations"] = serde_json::json!(1);
+        protected_fixture["counts"]["protected_by_bits"]["1"] = serde_json::json!(1);
+        assert!(read(&protected_fixture).is_err());
+        let mut bad_public = public.clone();
+        bad_public["counts"]["protected_by_bits"]["1"] = serde_json::json!(1);
+        assert!(read(&bad_public).is_err());
+
+        // A consistent declaration still cannot override streamed multiplicity.
+        let mut wrong_stream_count = original.clone();
+        wrong_stream_count["original_observations"] = serde_json::json!(6);
+        wrong_stream_count["counts"]["qualified_original_observations"] = serde_json::json!(6);
+        wrong_stream_count["counts"]["train"] = serde_json::json!(3);
+        assert!(read(&wrong_stream_count).is_err());
+
+        // The same reader still owns the complete stream SHA and split checks.
+        read(&original).unwrap();
+        let pairs = root.join("pairs.bin");
+        let raw = std::fs::read(&pairs).unwrap();
+        let mut corrupt = raw.clone();
+        corrupt[0] ^= 1;
+        std::fs::write(&pairs, corrupt).unwrap();
+        assert!(read(&original).is_err());
+        let mut protected_row = raw;
+        protected_row[36] = 2;
+        std::fs::write(&pairs, &protected_row).unwrap();
+        let mut rebound = original.clone();
+        rebound["class_pairs"]["sha256"] = serde_json::json!(crate::hex_digest(&protected_row));
+        assert!(read(&rebound).is_err());
+        std::fs::remove_dir_all(root).unwrap();
     }
 
     #[test]

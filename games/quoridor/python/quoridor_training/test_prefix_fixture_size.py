@@ -55,9 +55,9 @@ class PrefixFixturePublicationSize(unittest.TestCase):
                 output = root / "output"
                 reads, connections = [], []
                 counts = {
-                    "qualified_original_observations": 256,
-                    "train": 128,
-                    "validation": 128,
+                    "qualified_original_observations": 128,
+                    "train": 64,
+                    "validation": 64,
                 }
 
                 def read_bound(reference, limit):
@@ -108,7 +108,7 @@ class PrefixFixturePublicationSize(unittest.TestCase):
                     ),
                     "PAIR": SimpleNamespace(itemsize=37),
                     "ClassObservations": lambda _: SimpleNamespace(
-                        counts={"train": 128, "validation": 128}
+                        counts={"train": 64, "validation": 64}
                     ),
                     "create_class_accumulator": connection,
                     "write_class_table": table,

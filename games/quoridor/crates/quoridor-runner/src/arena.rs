@@ -614,6 +614,45 @@ impl ArenaPlan {
                         }
                         used.insert(model.descriptor.path.clone());
                     }
+                    "nnue_mcts" if self.comparison == Comparison::WholeWallTime => {
+                        let settings = engine.nnue_mcts.as_ref().ok_or("NNUE MCTS settings")?;
+                        settings.validate()?;
+                        let model = self
+                            .models
+                            .iter()
+                            .find(|m| Some(&m.descriptor.path) == engine.model.as_ref())
+                            .ok_or("NNUE MCTS declared value descriptor")?;
+                        if !sha_valid(&matchup.evaluator_sha256[i]) {
+                            return Err("NNUE MCTS declared provider identity".into());
+                        }
+                        used.insert(model.descriptor.path.clone());
+                        if let crate::nnue_mcts::Prior::Head { manifest, evidence } =
+                            &settings.prior
+                        {
+                            let reference = self
+                                .inputs
+                                .iter()
+                                .find(|r| &r.path == manifest)
+                                .ok_or("NNUE MCTS declared policy descriptor")?;
+                            let policy: quoridor_nnue::policy::PolicyManifest =
+                                serde_json::from_value(reference.read()?)?;
+                            let weights = manifest
+                                .parent()
+                                .ok_or("policy parent")?
+                                .join(&policy.weights);
+                            if policy.evidence != *evidence
+                                || !self.inputs.iter().any(|r| {
+                                    r.path == weights
+                                        && r.sha256 == policy.weights_sha256
+                                        && r.bytes == policy.weights_bytes as u64
+                                })
+                            {
+                                return Err("NNUE MCTS declared policy weights/evidence".into());
+                            }
+                        }
+                        // Provider::load owns shared fingerprint, checked policy schema,
+                        // SHA/shape and actual typed identity at normal initialization.
+                    }
                     "claustrophobia" if self.comparison == Comparison::WholeWallTime => {
                         let settings = engine
                             .claustrophobia
@@ -1904,6 +1943,98 @@ mod generic_arena_361_tests {
         obs.counters["completed_simulation_counters"] = serde_json::Value::Null;
         obs.counters["authority_receipt_ns"] = 100.into();
         assert!(validate_observations(&c, &[obs]).is_err());
+    }
+    #[test]
+    fn nnue_mcts_normal_plan_binds_shared_value_and_policy_inputs_nn0() -> Result<()> {
+        use crate::nnue_mcts::{Config as NnueConfig, Prior};
+        use quoridor_nnue::policy::{PolicyEvidence, PolicyManifest};
+        let (mut plan, experiment, _, _, _) = fixture(1, 4);
+        plan.comparison = Comparison::WholeWallTime;
+        let directory =
+            std::env::temp_dir().join(format!("arena-policy-input-{}", std::process::id()));
+        std::fs::create_dir(&directory)?;
+        let manifest = directory.join("manifest.json");
+        let policy = PolicyManifest {
+            schema: "quoridor-nnue-policy209-v1".into(),
+            action_order: "absolute-core-action-id209".into(),
+            head_coordinates: "QF1-STM-rotate180".into(),
+            value_perspective: "side-to-move".into(),
+            reflection: "core-action-id209-left-right-v1".into(),
+            evidence: PolicyEvidence::Learned,
+            shared_fingerprint: "a".repeat(64),
+            hidden_width: 32,
+            weights: "policy.f32".into(),
+            weights_sha256: "b".repeat(64),
+            weights_bytes: 27588,
+        };
+        let raw = serde_json::to_vec(&policy)?;
+        std::fs::write(&manifest, &raw)?;
+        use std::os::unix::fs::PermissionsExt;
+        std::fs::set_permissions(&manifest, std::fs::Permissions::from_mode(0o644))?;
+        let head = crate::research_manifest::FileRef {
+            path: manifest.clone(),
+            sha256: digest(&raw),
+            bytes: raw.len() as u64,
+            mode: "0644".into(),
+        };
+        let weights = crate::research_manifest::FileRef {
+            path: directory.join("policy.f32"),
+            sha256: "b".repeat(64),
+            bytes: 27588,
+            mode: "0644".into(),
+        };
+        // Synthetic metadata only: no model/weight file, forward, board replay or Search.
+        plan.inputs.extend([head.clone(), weights.clone()]);
+        let engine = &mut plan.matchups[0].engines[1];
+        engine.kind = "nnue_mcts".into();
+        engine.model = Some(plan.models[0].descriptor.path.clone());
+        engine.time_ms = Some(100);
+        engine.nnue_mcts = Some(NnueConfig {
+            prior: Prior::Head {
+                manifest: manifest.clone(),
+                evidence: PolicyEvidence::Learned,
+            },
+            logical_row_limit: 10,
+        });
+        let checked = (|| -> Result<()> {
+            plan.validate_models(&experiment)?;
+            let mut bad = plan.clone();
+            bad.comparison = Comparison::SearchWallTime;
+            assert!(bad.validate_models(&experiment).is_err());
+            let mut bad = plan.clone();
+            bad.models.clear();
+            assert!(bad.validate_models(&experiment).is_err());
+            for path in [&head.path, &weights.path] {
+                let mut bad = plan.clone();
+                bad.inputs.retain(|r| &r.path != path);
+                assert!(bad.validate_models(&experiment).is_err());
+            }
+            let mut bad = plan.clone();
+            bad.inputs
+                .iter_mut()
+                .find(|r| r.path == weights.path)
+                .unwrap()
+                .sha256 = "c".repeat(64);
+            assert!(bad.validate_models(&experiment).is_err());
+            let mut bad = plan.clone();
+            bad.matchups[0].engines[1]
+                .nnue_mcts
+                .as_mut()
+                .unwrap()
+                .logical_row_limit = 0;
+            assert!(bad.validate_models(&experiment).is_err());
+            let mut bad = plan.clone();
+            if let Prior::Head { evidence, .. } =
+                &mut bad.matchups[0].engines[1].nnue_mcts.as_mut().unwrap().prior
+            {
+                *evidence = PolicyEvidence::SyntheticUntrained;
+            }
+            assert!(bad.validate_models(&experiment).is_err());
+            Ok(())
+        })();
+        std::fs::remove_file(manifest)?;
+        std::fs::remove_dir(directory)?;
+        checked
     }
 }
 

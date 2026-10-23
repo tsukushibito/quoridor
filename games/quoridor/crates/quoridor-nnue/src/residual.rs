@@ -189,30 +189,18 @@ impl ResidualModel {
     pub fn load(path: impl AsRef<Path>) -> Result<Self> {
         let path = path.as_ref();
         let bytes = crate::read_asset(path, 65536, false)?;
-        let m: ResidualManifest =
-            serde_json::from_slice(&bytes).map_err(|e| Error::Manifest(e.to_string()))?;
-        if m.schema != "quoridor-nnue-distance-residual-v3"
-            || m.feature != RESIDUAL_FEATURE
-            || m.value_perspective != "side-to-move"
-            || m.value_parameterization != "fixed-distance-logit-plus-linear-residual-tanh"
-            || m.dense_feature_version != "shortest-dag4-f32-STM-v1"
-            || m.weights.is_empty()
-            || Path::new(&m.weights).components().count() != 1
-            || Path::new(&m.weights).is_absolute()
-            || Path::new(&m.weights).file_name().is_none()
-        {
-            return Err(Error::Manifest("residual version/perspective/path".into()));
-        }
-        let n = Self::parameter_count(m.topology)?;
-        if m.weights_bytes != 4 * n || m.little_endian_f32 != n {
-            return Err(Error::Manifest("residual layout".into()));
-        }
+        let m = Self::parse_manifest(&bytes)?;
         let raw = crate::read_asset(
             &path.parent().unwrap_or(Path::new(".")).join(&m.weights),
-            4 * n,
+            m.weights_bytes,
             true,
         )?;
-        if raw.len() != 4 * n || format!("{:x}", Sha256::digest(&raw)) != m.weights_sha {
+        Self::load_bytes(&bytes, &raw)
+    }
+    /// Same authenticated native artifact, supplied as bytes by a browser caller.
+    pub fn load_bytes(bytes: &[u8], raw: &[u8]) -> Result<Self> {
+        let m = Self::parse_manifest(bytes)?;
+        if raw.len() != m.weights_bytes || format!("{:x}", Sha256::digest(raw)) != m.weights_sha {
             return Err(Error::Manifest("residual weights SHA/length".into()));
         }
         let w = raw
@@ -231,6 +219,30 @@ impl ResidualModel {
             m.route_mu_f32,
             m.route_sigma_f32,
         )
+    }
+    fn parse_manifest(bytes: &[u8]) -> Result<ResidualManifest> {
+        if bytes.len() > 65536 {
+            return Err(Error::Manifest("residual manifest exceeds 64 KiB".into()));
+        }
+        let m: ResidualManifest =
+            serde_json::from_slice(bytes).map_err(|e| Error::Manifest(e.to_string()))?;
+        if m.schema != "quoridor-nnue-distance-residual-v3"
+            || m.feature != RESIDUAL_FEATURE
+            || m.value_perspective != "side-to-move"
+            || m.value_parameterization != "fixed-distance-logit-plus-linear-residual-tanh"
+            || m.dense_feature_version != "shortest-dag4-f32-STM-v1"
+            || m.weights.is_empty()
+            || Path::new(&m.weights).components().count() != 1
+            || Path::new(&m.weights).is_absolute()
+            || Path::new(&m.weights).file_name().is_none()
+        {
+            return Err(Error::Manifest("residual version/perspective/path".into()));
+        }
+        let n = Self::parameter_count(m.topology)?;
+        if m.weights_bytes != 4 * n || m.little_endian_f32 != n {
+            return Err(Error::Manifest("residual layout".into()));
+        }
+        Ok(m)
     }
     pub fn full_features(
         &self,

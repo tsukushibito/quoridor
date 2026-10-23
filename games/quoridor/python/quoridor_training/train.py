@@ -754,18 +754,6 @@ def train(
         from .distance_steps import significant_improvement
 
         scheduler.is_better = significant_improvement
-    if static_teacher and scheduler is not None:
-        # The fresh static caller owns the standard scheduler; continuation
-        # owns the saved floor/overfit policy and never constructs this path.
-        scheduler.is_better = lambda current, best: math.isfinite(current) and (
-            not math.isfinite(best)
-            or current
-            < best
-            - max(
-                static_controls["delta_absolute"],
-                static_controls["delta_relative"] * best,
-            )
-        )
     output = Path(output)
     output.mkdir(parents=True)
     if volume_admission is not None:
@@ -1685,6 +1673,15 @@ def train(
                         _, stop = stopper.observe(loss)
                         stop = stop and training_seen >= static_controls["minimum_training_draws"]
                         if scheduler is not None:
+                            # Keep the standard abs comparator and serializable state.
+                            scheduler.threshold = (
+                                max(
+                                    static_controls["delta_absolute"],
+                                    static_controls["delta_relative"] * abs(scheduler.best),
+                                )
+                                if math.isfinite(scheduler.best)
+                                else static_controls["delta_absolute"]
+                            )
                             scheduler.step(loss)
                         if joint_mode:
                             from .policy_value_training import observe_joint_overfit
