@@ -174,6 +174,9 @@ impl Table {
                 continue;
             }
             let same = entry.valid && entry.own == own && entry.opponent == opponent;
+            // Upstream reg_new_data compares the old slot's first policy before
+            // clearing a different board: repeating that policy leaves it undefined.
+            let store_move = same || entry.moves[0] != mv;
             if same && entry.level() == level {
                 if value < beta && value < i32::from(entry.upper) {
                     entry.upper = value as i8;
@@ -202,7 +205,7 @@ impl Table {
                 entry.selectivity = selectivity;
                 entry.valid = true;
             }
-            if (alpha < value || value == -64) && mv < 64 && entry.moves[0] != mv {
+            if store_move && (alpha < value || value == -64) && mv < 64 && entry.moves[0] != mv {
                 entry.moves[1] = entry.moves[0];
                 entry.moves[0] = mv;
             }
@@ -330,5 +333,40 @@ mod tests {
         assert_eq!(table.find(position).unwrap().lower, 1);
         table.clear();
         assert!(table.find(position).is_none());
+    }
+
+    #[test]
+    fn tt_new_board_repeated_policy_matches_original_reg_new_data() {
+        // Zero keys force collision without RNG. Ten slots retain importance across
+        // these four registrations, so no threshold reset masks the replaced slot.
+        let mut table = Table {
+            entries: vec![Entry::default(); 10].into_boxed_slice(),
+            hash: BoardHash {
+                keys: vec![0; 8 * 65536].into_boxed_slice(),
+                mask: 7,
+            },
+            registered: 0,
+        };
+        let first = Position::from(&crate::GameState::new());
+        let second = first.switched();
+        assert_ne!(first.sides(), second.sides());
+        const POLICY: u8 = 19;
+        // Table-storage fixture, not a legal-move/Search test. The policy is a valid
+        // square; registration itself does not test legality for either board.
+        table.register(first, 5, 0, -64, 64, 3, POLICY);
+        assert_eq!(table.find(first).unwrap().moves, [POLICY, NO_MOVE]);
+        table.register(second, 5, 0, -64, 64, 4, POLICY);
+        assert!(table.find(first).is_none());
+        let replaced = table.find(second).unwrap();
+        // Original reg_new_data checks the PREVIOUS board's moves[0] first.
+        assert_eq!(replaced.moves, [NO_MOVE, NO_MOVE]);
+        assert_eq!((replaced.lower, replaced.upper), (4, 4));
+        assert_eq!((replaced.depth, replaced.selectivity), (5, 0));
+        // Same-board same-level registration must still install the policy.
+        table.register(second, 5, 0, -64, 64, 4, POLICY);
+        assert_eq!(table.find(second).unwrap().moves, [POLICY, NO_MOVE]);
+        // A different policy on a different board keeps the ordinary insertion path.
+        table.register(first, 5, 0, -64, 64, 5, POLICY + 1);
+        assert_eq!(table.find(first).unwrap().moves, [POLICY + 1, NO_MOVE]);
     }
 }

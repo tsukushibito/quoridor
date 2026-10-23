@@ -144,6 +144,22 @@ impl FeatureState {
         })
     }
 
+    /// Trusted search-only side reversal. The pinned MPC verifier can receive a
+    /// consumed zero legal hint even when the board has legal moves. Absolute
+    /// feature views/counts remain intact; the same LIFO Undo restores the turn.
+    /// This is not a public game pass and performs no legality test or allocation.
+    pub(crate) fn reverse_for_search(&mut self) -> Undo {
+        let before = self.position;
+        let after = before.switched();
+        self.position = after;
+        Undo {
+            before,
+            after,
+            placed: None,
+            flipped: 0,
+        }
+    }
+
     pub fn undo(&mut self, undo: Undo) -> Result<(), UndoMismatch> {
         if self.position != undo.after {
             return Err(UndoMismatch);

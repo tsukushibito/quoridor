@@ -91,10 +91,12 @@ impl<C: FnMut() -> f64, K: FnMut() -> bool> Run<'_, C, K> {
             .state
             .play(u32::from(cell))
             .expect("generated legal move");
-        let result = self.pvs(alpha, beta, depth, end, false, false);
+        let result = self.pvs(alpha, beta, depth, end, false, false, None);
         self.state.undo(undo).expect("LIFO child undo");
         result
     }
+    // Mirrors the pinned owner's legal argument as well as its window/pass flags.
+    #[allow(clippy::too_many_arguments)]
     fn pvs(
         &mut self,
         mut alpha: i32,
@@ -103,6 +105,7 @@ impl<C: FnMut() -> f64, K: FnMut() -> bool> Run<'_, C, K> {
         end: bool,
         passed: bool,
         root: bool,
+        legal_hint: Option<u64>,
     ) -> TreeResult {
         self.visit()?;
         let position = self.state.position();
@@ -117,13 +120,22 @@ impl<C: FnMut() -> f64, K: FnMut() -> bool> Run<'_, C, K> {
         if end && beta == alpha + 1 && (depth <= 9 || (self.level == 6 && depth <= 13)) && !root {
             return self.end_nws(position, alpha, passed);
         }
-        let legal = position.legal_moves();
+        // None is upstream LEGAL_UNDEFINED; Some(0) is a consumed legal word,
+        // not a request to recompute. eval1 ignores that word in both upstream
+        // PVS and NWS, whereas eval2_nws and deeper owners consume it before TT.
+        let legal = if !end && depth == 1 {
+            position.legal_moves()
+        } else {
+            legal_hint.unwrap_or_else(|| position.legal_moves())
+        };
         if legal == 0 {
-            if passed || position.switched().legal_moves() == 0 {
+            if passed {
                 return Ok(terminal_discs(position));
             }
-            let undo = self.state.pass().expect("forced pass");
-            let result = self.pvs(-beta, -alpha, depth, end, true, false);
+            // Upstream Search::pass is an internal side reversal, including
+            // consumed-zero MPC verification. Public legal-pass checks stay strict.
+            let undo = self.state.reverse_for_search();
+            let result = self.pvs(-beta, -alpha, depth, end, true, false, None);
             self.state.undo(undo).expect("LIFO pass undo");
             return result.map(|v| -v);
         }
@@ -169,6 +181,17 @@ impl<C: FnMut() -> f64, K: FnMut() -> bool> Run<'_, C, K> {
             }
             alpha = alpha.max(lower);
             beta = beta.min(upper);
+        }
+        // Both original NWS routines probe MPC before constructing moves and
+        // checking wipeout. PVS deliberately keeps its later, post-ETC probe.
+        if !root
+            && nws
+            && self.options.mpc
+            && self.level < 6
+            && depth >= 3
+            && let Some(cut) = self.probcut(alpha, beta, depth, end, legal)?
+        {
+            return Ok(cut);
         }
         let mut moves = [EMPTY_MOVE; 64];
         let mut count = 0;
@@ -235,10 +258,11 @@ impl<C: FnMut() -> f64, K: FnMut() -> bool> Run<'_, C, K> {
             }
         }
         if !root
+            && !nws
             && self.options.mpc
             && self.level < 6
             && depth >= 3
-            && let Some(cut) = self.probcut(alpha, beta, depth, end)?
+            && let Some(cut) = self.probcut(alpha, beta, depth, end, bits)?
         {
             return Ok(cut);
         }
@@ -379,7 +403,10 @@ impl<C: FnMut() -> f64, K: FnMut() -> bool> Run<'_, C, K> {
         mut beta: i32,
         depth: u8,
         end: bool,
+        legal: u64,
     ) -> Result<Option<i32>, &'static str> {
+        // NWS supplies its current legal word; wide PVS supplies the exhausted
+        // enumeration word, exactly as midsearch.hpp forwards it to mpc.
         let shallow = mpc::shallow_depth(depth, end);
         let d0 = self.static_value();
         let level = self.level;
@@ -420,14 +447,30 @@ impl<C: FnMut() -> f64, K: FnMut() -> bool> Run<'_, C, K> {
             let pc_beta = beta + error;
             if d0 >= beta + error0
                 && pc_beta <= 64
-                && self.pvs(pc_beta - 1, pc_beta, shallow, false, false, false)? >= pc_beta
+                && self.pvs(
+                    pc_beta - 1,
+                    pc_beta,
+                    shallow,
+                    false,
+                    false,
+                    false,
+                    Some(legal),
+                )? >= pc_beta
             {
                 return Ok(Some(high(beta)));
             }
             let pc_alpha = alpha - error;
             if d0 <= alpha - error0
                 && pc_alpha >= -64
-                && self.pvs(pc_alpha, pc_alpha + 1, shallow, false, false, false)? <= pc_alpha
+                && self.pvs(
+                    pc_alpha,
+                    pc_alpha + 1,
+                    shallow,
+                    false,
+                    false,
+                    false,
+                    Some(legal),
+                )? <= pc_alpha
             {
                 return Ok(Some(low(alpha)));
             }
@@ -507,7 +550,15 @@ impl<C: FnMut() -> f64, K: FnMut() -> bool> Run<'_, C, K> {
                     if eval_depth > 1 {
                         self.level = 0;
                     }
-                    let result = self.pvs(eval_alpha, eval_beta, eval_depth, false, false, false);
+                    let result = self.pvs(
+                        eval_alpha,
+                        eval_beta,
+                        eval_depth,
+                        false,
+                        false,
+                        false,
+                        Some(legal),
+                    );
                     self.level = saved;
                     result?
                 };
@@ -890,7 +941,7 @@ pub(super) fn search<C: FnMut() -> f64, K: FnMut() -> bool>(
             6
         };
         let end = depth >= position.empties();
-        let searched = run.pvs(-64, 64, depth, end, false, true);
+        let searched = run.pvs(-64, 64, depth, end, false, true, None);
         match searched.and_then(|v| run.poll().map(|()| v)) {
             Ok(raw) => {
                 let reported = if fixed.is_none() && !end {
@@ -1032,6 +1083,51 @@ mod kernel_tests {
     }
 
     #[test]
+    fn full_search_selective_nws_mpc_precedes_wipeout() {
+        let mut owner = super::super::tests::engine();
+        let mut cells = [0; 64];
+        for cell in [0, 8, 16] {
+            cells[cell] = BLACK;
+        }
+        cells[1] = WHITE;
+        let state: GameState = serde_json::from_value(serde_json::json!({
+            "version":1,"board":cells.as_slice(),"toMove":BLACK
+        }))
+        .unwrap();
+        assert_eq!(state.legal_moves(), vec![2]);
+        let mut run = fixture_run(&mut owner, &state, || false);
+        let position = run.state.position();
+        let before = *run.state.indices();
+        assert_eq!(position.flips(2), position.sides().1, "sole move wipes out");
+        run.level = 0;
+        let error = run.errors.get(0, 4, 3, 1);
+        assert!((1..=32).contains(&error), "fixture's original MPC margin");
+        // Zero-table d0 and shallow1 are0 even though that leaf is terminal:
+        // original eval1 evaluates the placed board rather than calling end_evaluate.
+        // Thus this selective fail-low returns alpha63 before a wipeout shortcut.
+        assert_eq!(
+            run.probcut(63, 64, 3, false, position.legal_moves()),
+            Ok(Some(63))
+        );
+        assert_eq!(run.level, 0, "verification restores configured selectivity");
+        assert_eq!(run.pvs(63, 64, 3, false, false, false, None), Ok(63));
+        assert!(
+            run.table.find(position).is_none(),
+            "MPC cut is not registered"
+        );
+        assert_eq!(run.state.position(), position);
+        assert_eq!(run.state.indices(), &before);
+
+        run.options.mpc = false;
+        assert_eq!(run.pvs(63, 64, 3, false, false, false, None), Ok(64));
+        run.options.mpc = true;
+        // Original wide-window PVS checks wipeout before MPC, unlike NWS.
+        assert_eq!(run.pvs(62, 64, 3, false, false, false, None), Ok(64));
+        assert_eq!(run.state.position(), position);
+        assert_eq!(run.state.indices(), &before);
+    }
+
+    #[test]
     fn full_search_kernel_v6_clog_shallow_tt_order_and_cancel_restore() {
         let mut owner = super::super::tests::engine();
         let state = GameState::new();
@@ -1113,4 +1209,123 @@ mod kernel_tests {
         assert_eq!(run.state.indices(), &before);
         assert_eq!(run.state.own_count(), 1);
     }
+    // BEGIN consumed-legal-hint regressions (model-free synthetic decoder tables).
+    #[test]
+    fn full_search_legal_hint_zero_verifier_routes_before_tt() {
+        let mut owner = super::super::tests::engine();
+        let state = GameState::new();
+        let mut run = fixture_run(&mut owner, &state, || false);
+        run.options.mpc = false;
+        let before = run.state.clone();
+        let position = before.position();
+        let legal = position.legal_moves();
+        assert_ne!(legal, 0);
+        run.table.register(position, 2, 6, -64, 64, 31, NO_MOVE);
+        assert_eq!(run.pvs(4, 5, 2, false, false, false, None), Ok(31));
+        assert_eq!(run.pvs(4, 5, 2, false, false, false, Some(legal)), Ok(31));
+        let nodes = run.nodes;
+        // Consumed zero must reverse before this current-board TT cut.
+        // Opposite-side eval2 sees only the synthetic zero tables.
+        assert_eq!(run.pvs(4, 5, 2, false, false, false, Some(0)), Ok(0));
+        assert!(run.nodes - nodes > 1);
+        assert_eq!(run.table.find(position).unwrap().lower, 31);
+        assert_eq!(run.state, before);
+
+        // Upstream eval1 ignores a supplied legal word, unlike eval2_nws.
+        let nodes = run.nodes;
+        assert_eq!(run.pvs(4, 5, 1, false, false, false, None), Ok(0));
+        let actual_nodes = run.nodes - nodes;
+        let nodes = run.nodes;
+        assert_eq!(run.pvs(4, 5, 1, false, false, false, Some(0)), Ok(0));
+        assert_eq!(run.nodes - nodes, actual_nodes);
+        assert_eq!(run.state, before);
+    }
+
+    #[test]
+    fn full_search_legal_hint_mpc_forwards_consumed_zero() {
+        let mut owner = super::super::tests::engine();
+        let state = GameState::new();
+        let mut run = fixture_run(&mut owner, &state, || false);
+        run.level = 0;
+        let before = run.state.clone();
+        let position = before.position();
+        let error = run.errors.get(0, before.occupied(), 4, 1);
+        assert!((1..64).contains(&error));
+        // Derive a valid synthetic high-verifier window from the real margin;
+        // this test does not replace or tune any coefficient or gate formula.
+        let beta = -error;
+        let alpha = beta - 1;
+        run.table.register(position, 2, 6, -64, 64, -1, NO_MOVE);
+        assert_eq!(
+            run.probcut(alpha, beta, 4, false, position.legal_moves()),
+            Ok(None)
+        );
+        assert_eq!(run.level, 0);
+        assert_eq!(run.state, before);
+        assert_eq!(run.probcut(alpha, beta, 4, false, 0), Ok(Some(beta)));
+        assert_eq!(run.level, 0);
+        assert_eq!(run.state, before);
+    }
+
+    #[test]
+    fn full_search_legal_hint_side_reverse_lifo_and_public_pass_strict() {
+        let initial = GameState::new();
+        let state = initial.play(initial.legal_moves()[0]).unwrap();
+        let mut features = FeatureState::new(Position::from(&state));
+        let before = features.clone();
+        assert!(matches!(
+            state.pass(),
+            Err(crate::RuleError::PassWithLegalMove)
+        ));
+        assert!(matches!(
+            before.position().pass(),
+            Err(crate::RuleError::PassWithLegalMove)
+        ));
+        assert!(matches!(
+            features.pass(),
+            Err(crate::RuleError::PassWithLegalMove)
+        ));
+        assert_eq!(features, before);
+
+        let reverse = features.reverse_for_search();
+        assert_eq!(features, FeatureState::new(before.position().switched()));
+        assert_eq!(features.occupied(), before.occupied());
+        assert_eq!(features.own_count(), before.occupied() - before.own_count());
+        let legal = features.position().legal_moves();
+        assert_ne!(legal, 0);
+        let child = features.play(legal.trailing_zeros()).unwrap();
+        assert_eq!(features, FeatureState::new(features.position()));
+        features.undo(child).unwrap();
+        assert_eq!(features, FeatureState::new(before.position().switched()));
+        features.undo(reverse).unwrap();
+        assert_eq!(features, before);
+    }
+
+    #[test]
+    fn full_search_legal_hint_mpc_off_and_cancel_restore() {
+        let mut owner = super::super::tests::engine();
+        let state = GameState::new();
+        let polls = Cell::new(0_u32);
+        let cancel_at = Cell::new(u32::MAX);
+        let mut run = fixture_run(&mut owner, &state, || {
+            polls.set(polls.get() + 1);
+            polls.get() >= cancel_at.get()
+        });
+        run.options.mpc = false;
+        run.level = 0;
+        let before = run.state.clone();
+        assert_eq!(run.pvs(-64, 64, 3, false, false, true, None), Ok(0));
+        assert!(state.legal_moves().contains(&u32::from(run.root_move)));
+        assert_eq!(run.state, before);
+        assert_eq!(run.level, 0);
+        // Cancel at the recursive visit after a consumed-zero side reversal.
+        cancel_at.set(polls.get() + 2);
+        assert_eq!(
+            run.pvs(-1, 0, 2, false, false, false, Some(0)),
+            Err("cancelled")
+        );
+        assert_eq!(run.state, before);
+        assert_eq!(run.level, 0);
+    }
+    // END consumed-legal-hint regressions.
 }
