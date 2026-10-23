@@ -1,0 +1,120 @@
+{
+  "scope": "ONE_NEW_SELECTED24_EXPORT_FORWARD_PARITY_CONDITION_SUBMITTED_NOT_RESULT",
+  "job": "c476d803-94e6-48ed-9d33-bbf7715d0bb1",
+  "submission": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected24-export-parity-v1/submission.json",
+    "bytes": 1074,
+    "mode": "0644",
+    "sha256": "42a4a4e8b3f677da4b91a1e31ecab1cafd1000941c22f4016de901977384606f"
+  },
+  "sourcePacket": {
+    "path": "/workspaces/quoridor/.worktree/quoridor-strong435/.artifacts/quoridor-strong435/selected24-export-parity-entry-prep-v1/packet.json",
+    "bytes": 9008,
+    "mode": "0644",
+    "sha256": "fd46101110374098e0d57b9670d985b23fcb431154e3bd7aaecaebacf32e4108"
+  },
+  "configuration": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected24-export-parity-v1/config.json",
+    "bytes": 21361,
+    "mode": "0644",
+    "sha256": "2fee8ff0f13ee504faf731747fe07c628d5786267ebfd196953d6afa4d4527b1"
+  },
+  "jobConfig": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected24-export-parity-v1/job.json",
+    "bytes": 813,
+    "mode": "0644",
+    "sha256": "9ce41132e2c37f099e4e36bed7b6fe0a38f4bdff3f8a9317225cbdd6f1f1ae14"
+  },
+  "nativeTemplate": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected24-export-parity-v1/native-input.template.json",
+    "bytes": 2621,
+    "mode": "0644",
+    "sha256": "2f692a605ea83b86d82e47c4bca0872c7cda5875ea2a9e698533cc53bf5bd32a"
+  },
+  "identityProjection": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected24-export-parity-v1/selected24-identity-projection.json",
+    "bytes": 1473,
+    "mode": "0644",
+    "sha256": "b2e27509f6fdb18169c154d0d3cd60776ec53af2906122b088aa0443104e0b69"
+  },
+  "currentSoftwareCorrespondence": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected24-export-parity-v1/current-software-input-correspondence.json",
+    "bytes": 9728,
+    "mode": "0644",
+    "sha256": "c035c33ff12032d75b086d36d2e65cc24baa94caff004b2520c5fc0d92f7aed8"
+  },
+  "RootAdmission": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected24-export-parity-v1/Root-admission.json",
+    "bytes": 2321,
+    "mode": "0644",
+    "sha256": "bf835f51e508dab926cd3c304e035fb6875f4620b1b5af8e35342e948474c643"
+  },
+  "resources": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected24-export-parity-v1/resources.json",
+    "bytes": 2082,
+    "mode": "0644",
+    "sha256": "1855936c558b5705dc053484b561742351cce7a4d2a6a2344eadaa086ffff491"
+  },
+  "staticChecks": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected24-export-parity-v1/static-binding-checks.json",
+    "bytes": 1044,
+    "mode": "0644",
+    "sha256": "89090bebf8bc276ec6d8b0db3a9f239c94b144f1b94afa2bbe34697ba85975d8"
+  },
+  "preservedPreparationErrors": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected24-export-parity-v1/preparation-errors.json",
+    "bytes": 1275,
+    "mode": "0644",
+    "sha256": "4a795a608ead0b504b3b3bee8aa563e32ce24d0246c076e2f12cab140fb4b3ec"
+  },
+  "selectedStep": 24,
+  "valueWeightsSHA": "59cc7bea12c6ad199cd0bc873a8cd1decf51e3025732a8747efec58a090d278a",
+  "policyWeightsSHA": "2eaa59f8a78116dcca7480efd6a75dd48766c5ee22585ec2999db5a60f4e3925",
+  "sharedFingerprint": "a590b2ac2876f6f4e0b8c5bcd919f07fef6ae458fd15d421256e8d70a01a08d4",
+  "policyFingerprint": "0b5b5f131b2339336db3ebc496e3ef0b451be080c96b09ce9e5fe3432af533ab",
+  "providerIdentity": "Not emitted in original freeze; existing native constructor checks both fingerprints and emits actual provider identity, no guessed hash",
+  "selection": "First8 newT then first8 newV persisted canonical PAIR37-key classes, unique canonical_key -> actual sourceOrdinal/unchanged receipt join, actual source+trueLR32. Existing input_records reads native stored stock metadata only; no board/STM/history reconstructed from key; native verifies full real prefix/key/legal/stock/STM/trueLR before model evaluate.",
+  "ports": {
+    "nativeMax": 32,
+    "pythonMax": 32,
+    "wasmMax": 32,
+    "totalMax": 96,
+    "H": 0
+  },
+  "tolerance": {
+    "atol": 1e-5,
+    "rtol": 0.0001,
+    "formula": "abs(actual-reference)<=atol+rtol*abs(reference)"
+  },
+  "CPU": {
+    "numerical": [12],
+    "management": [18],
+    "libraryThreads": 1,
+    "GPU": 0
+  },
+  "RAM": {
+    "totalB": 4294967296,
+    "commonAuthorityB": 1073741824,
+    "commandTreeB": 3221225472,
+    "wrapperRSSSubcapB": 134217728,
+    "hostReserveB": 4294967296,
+    "freshAvailableMinimumB": 8589934592
+  },
+  "time": {
+    "nativeSeconds": 30,
+    "pythonSeconds": 90,
+    "wasmSeconds": 60,
+    "operationSeconds": 240,
+    "parentSeconds": 300
+  },
+  "holding": {
+    "eachResultB": 2097152,
+    "wholeB": 33554432
+  },
+  "actualCasesAndNativeQualification": null,
+  "actualParityResult": null,
+  "SearchGamesTeacherFitBackward": 0,
+  "old293ResultOrFrozenCasesReplayed": false,
+  "productionSourceChanged": false,
+  "scopeLimits": "Only starting submission read. Current necessary numerical/ABI/selector sources match retained software; byte custody at normal entry, actual newtuple/input qualification from new results only. Model constructor RNG may occur before exact weights restore; no data/game/selection RNG or fit. BothT/V are exposed development input, not strength/independent validation/default grant. Firsterror/partial/UNKNOWN/no retry-refill or tolerance tuning; all old costs/pauses/seals/models/defaults/decimal50GB retained."
+}
