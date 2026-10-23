@@ -1,0 +1,182 @@
+{
+  "issue": "quoridor-4lc.435",
+  "job": "6bed8967-aba8-43ae-8e51-14aeff62f478",
+  "outcome": "FAILED_BEFORE_OPERATION_OWNERSHIP_AND_NATIVE_LAUNCH",
+  "originals": {
+    "runtime/result.json": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/control-repair-v2/runtime/result.json",
+      "bytes": 523,
+      "mode": "0600",
+      "sha256": "4702513e5cfc3cc8b991d512687175eb0d7cc62c267085594c2908dec239a65f"
+    },
+    "runtime/config.json": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/control-repair-v2/runtime/config.json",
+      "bytes": 969,
+      "mode": "0600",
+      "sha256": "c13dbf11c0283623a483714bb8b44ed492d37521762c7bef6a528f6eafe17e6b"
+    },
+    "runtime/output.log": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/control-repair-v2/runtime/output.log",
+      "bytes": 729,
+      "mode": "0644",
+      "sha256": "906514ee4067cb5631f2afac43334e95afac419c4511a58d7ba6c0149ba91200"
+    },
+    "runtime/state.json": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/control-repair-v2/runtime/state.json",
+      "bytes": 2720,
+      "mode": "0600",
+      "sha256": "315b7853729072b39c080e425bcf484ebcad175759788611e936b162529d9d64"
+    },
+    "sequence/result.json": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/control-repair-v2/sequence/result.json",
+      "bytes": 2625,
+      "mode": "0644",
+      "sha256": "bf2053e0fffde8290447c86153ecbe405ebb17668c90df165520925426286169"
+    },
+    "sequence/run-000/intent.json": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/control-repair-v2/sequence/run-000/intent.json",
+      "bytes": 5966,
+      "mode": "0644",
+      "sha256": "9dd2124d18206c4ef75f0bce3fdcb053147a1b785359ea5c28f298104f631d98"
+    },
+    "sequence/run-000/runtime/result.json": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/control-repair-v2/sequence/run-000/runtime/result.json",
+      "bytes": 525,
+      "mode": "0600",
+      "sha256": "7c929697eccb093526e953d65ed1e47e79a2c9bf6c19f6a81ee696504b3a15e8"
+    },
+    "sequence/run-000/runtime/output.log": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/control-repair-v2/sequence/run-000/runtime/output.log",
+      "bytes": 2866,
+      "mode": "0644",
+      "sha256": "2366eb372a4330025acca4a313da52709adf09f71e5e8ae26c96d9e36a94726c"
+    },
+    "sequence/run-000/runtime/state.json": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/control-repair-v2/sequence/run-000/runtime/state.json",
+      "bytes": 985,
+      "mode": "0600",
+      "sha256": "6df36727fddc6faf728cf218c02a5c06dcad7ca77a59d2483f5fc3e31e9d8f68"
+    },
+    "metadata/sequence.json": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/control-repair-v2/metadata/sequence.json",
+      "bytes": 46472,
+      "mode": "0644",
+      "sha256": "bbf4e0785054392153a25eae8c9506926dddd51f43cf787089cc372ec9d4ded5"
+    }
+  },
+  "partial": {
+    "schema": "quoridor.research.completion.v1",
+    "kind": "run",
+    "status": "FAILED",
+    "intent": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/control-repair-v2/sequence/run-000/intent.json",
+      "sha256": "9dd2124d18206c4ef75f0bce3fdcb053147a1b785359ea5c28f298104f631d98",
+      "bytes": 5966,
+      "mode": "0644"
+    },
+    "started_at": "2026-10-23T14:15:24.924437+00:00",
+    "checks": [],
+    "primary": {
+      "type": "Refused",
+      "message": "exclusive operation must be below owner",
+      "notes": []
+    },
+    "secondary": [],
+    "cleanup_complete": false,
+    "remaining": [],
+    "owed_finalizers": [],
+    "originating_job": {
+      "runtime": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/control-repair-v2/sequence/run-000/runtime",
+      "job_id": "8ed3d906-1a6c-4b66-9e79-624b5a566509",
+      "config": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/control-repair-v2/sequence/run-000/runtime/config.json",
+        "sha256": "70ed3e2cdf2e32a387af57d57be3dc97d179a3b11437887fbfc184988ecec7b6",
+        "bytes": 972,
+        "mode": "0600"
+      },
+      "config_sha256": "5ffd3c6010408aa489996c3ab5b195f0c0cec2c3064f9e050fefc30a836ff08d",
+      "supervisor": {
+        "pid": 3346584,
+        "start_ticks": "81323907",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "child": {
+        "pid": 3346658,
+        "start_ticks": "81324361",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      }
+    },
+    "finished_at": "2026-10-23T14:15:24.925580+00:00",
+    "process_cleanup_complete": false
+  },
+  "cause": "Root repair binder made owned_outputs=[owner], violating existing exclusive-child ownership contract",
+  "nativeInvocations": 0,
+  "loadForwardSearchGameWork": 0,
+  "completedOperations": 0,
+  "plannedOperations": 8,
+  "plannedGames": 128,
+  "unrunGames": 128,
+  "dataRootAbsent": true,
+  "formalInterval": null,
+  "costs": {
+    "outerSeconds": 5.0073777890065685,
+    "nestedJobSeconds": 0.2545942389406264,
+    "nestedNotAdded": true
+  },
+  "cleanup": {
+    "actualOuterAndInnerDirectReaped": true,
+    "actualCleanupComplete": true,
+    "remaining": [],
+    "knownIdentities": [
+      {
+        "known": {
+          "pid": 3346330,
+          "start_ticks": "81323453",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "freshStartTicks": null,
+        "exactIdentityAbsent": true
+      },
+      {
+        "known": {
+          "pid": 3346418,
+          "start_ticks": "81323677",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "freshStartTicks": null,
+        "exactIdentityAbsent": true
+      },
+      {
+        "known": {
+          "pid": 3346394,
+          "start_ticks": "81323672",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "freshStartTicks": null,
+        "exactIdentityAbsent": true
+      },
+      {
+        "known": {
+          "pid": 3346584,
+          "start_ticks": "81323907",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "freshStartTicks": null,
+        "exactIdentityAbsent": true
+      },
+      {
+        "known": {
+          "pid": 3346658,
+          "start_ticks": "81324361",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "freshStartTicks": null,
+        "exactIdentityAbsent": true
+      }
+    ],
+    "partialCleanupFalsePreserved": true
+  },
+  "collectorMissingLog": "Initial collection attempted absent operation/run.log; FileNotFound exit1 retained in tool output, corrected by actual inner runtime log, not a scientific failure",
+  "retry": false,
+  "next": "Fix only charged child-path declaration and validate with actual charged_roots; ordinary Othello16 generation may proceed after this actual STOP"
+}

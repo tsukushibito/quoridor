@@ -1,0 +1,155 @@
+{
+  "issue": "quoridor-n96.1",
+  "scope": "ONE prospective development16 rules-only input generation, not native64 games or unused strength data",
+  "job": "75f46369-f86d-490b-86a8-bc0cd0e7c0cc",
+  "submission": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/native64-development16-generation-v1/submission.json",
+    "bytes": 1072,
+    "mode": "0644",
+    "sha256": "0b9bf9361ccb544bcf489dd092645d22157a6d0604b075cd814f9be49ad0b9c5"
+  },
+  "jobConfig": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/native64-development16-generation-v1/job.json",
+    "bytes": 829,
+    "mode": "0644",
+    "sha256": "9f1a81a5d84ea2968be6bf64b2b0ceacc227b1b5edcbf5994911a75f3aa9665b"
+  },
+  "binding": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/native64-development16-generation-v1/binding.json",
+    "bytes": 2495,
+    "mode": "0644",
+    "sha256": "ab7e71ff86ab7ebb7fbd6c4b83f8f878b73a99fa76b75f785e6f851666e15bd7"
+  },
+  "parameters": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/native64-development16-generation-v1/parameters.json",
+    "bytes": 4573,
+    "mode": "0644",
+    "sha256": "f15b873dee0dd3e90189d4fc06399b7e4d3ebf328b919c933a84fdf2c6106ae9"
+  },
+  "config": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/native64-development16-generation-v1/generation-config.json",
+    "bytes": 11774,
+    "mode": "0644",
+    "sha256": "086581d19529d2215d46cfc06357fe6140f2cb3fcea157146ab2f27765cb133e"
+  },
+  "resources": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/native64-development16-generation-v1/resources.json",
+    "bytes": 1201,
+    "mode": "0644",
+    "sha256": "2d865e366d206d47522cc4ab1097312168d142c26a705452a95a6a57280b8780"
+  },
+  "cpuPlan": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/native64-development16-generation-v1/cpu-plan.json",
+    "bytes": 185,
+    "mode": "0644",
+    "sha256": "d96371f399090ab4d36fca2d453454992ff886c62c46ee48006391402e82c063"
+  },
+  "output": "/workspaces/quoridor/.worktree/assets/data/othello-native64-development-n96-v1/generation",
+  "controller": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/native64-development16-generation-v1/run.py",
+    "bytes": 5258,
+    "mode": "0644",
+    "sha256": "034d5162d8f1e08848ba3c17f5e7ec92c44691bfe2051e85575af3a48c4ddbfc"
+  },
+  "child": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/native64-development16-generation-v1/generate_once.py",
+    "bytes": 765,
+    "mode": "0644",
+    "sha256": "5392b05d8b8e19739f9fe14901a994e57956370c2f198e27d8c5584ceaa4e66d"
+  },
+  "sourceClosure": [
+    {
+      "path": "/workspaces/quoridor/games/othello/python/othello_arena/generation.py",
+      "bytes": 46754,
+      "mode": "0644",
+      "sha256": "84992cc5fe4e2a8e936013d6354679ff7c24f3c5a75f9fa88843cf5926733e24"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/python/othello_arena/canonical.py",
+      "bytes": 1523,
+      "mode": "0644",
+      "sha256": "b5aa743f74c806ca16e4d7c172b1fd78a8af0930b15b4b3db3ab9ce68f712218"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/python/othello_arena/__main__.py",
+      "bytes": 16168,
+      "mode": "0644",
+      "sha256": "f41838de674c033b44d4a4232b80e0c80d57f773d3137304c1a86914145e86aa"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/python/othello_arena/engines.py",
+      "bytes": 13472,
+      "mode": "0644",
+      "sha256": "c22ca45c3f4b3d4c5a002c113e255b7234bc8106e3fdb6c110a6b51d298600f3"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/python/othello_arena/matches.py",
+      "bytes": 17965,
+      "mode": "0644",
+      "sha256": "7347457aabe23189e22a101e4df799e506cc5d15d186bf48e2a56b15355e80ea"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/python/othello_arena/protocol.py",
+      "bytes": 8474,
+      "mode": "0644",
+      "sha256": "6f4b7ffa8b4e662d22a15e85d4cc00c88bc60aff0f22d4844110cfe6be90b1f5"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/python/othello_arena/__init__.py",
+      "bytes": 687,
+      "mode": "0644",
+      "sha256": "813061130e7ec86296c13c8e303b628597514ca628a45f7ab12ae9393a2bd116"
+    },
+    {
+      "path": "/workspaces/quoridor/shared/python/quoridor_runtime/__init__.py",
+      "bytes": 71,
+      "mode": "0644",
+      "sha256": "9f02dc40d0270ec8eb204de9b4c3dab43b62eba810190a9dda37b7603d494ac0"
+    },
+    {
+      "path": "/workspaces/quoridor/shared/python/quoridor_runtime/cycle_process.py",
+      "bytes": 31337,
+      "mode": "0644",
+      "sha256": "42b9888c4bd729443b829e340371124dff96e43bbb1005aaae6c10d819d10d52"
+    }
+  ],
+  "conditions": {
+    "families": 16,
+    "seeds": "2026102302001..2016",
+    "targetPlacements": [16],
+    "mandatoryPass": true,
+    "actionsEachMax": 128,
+    "noRefill": true,
+    "typedExposurePackages": [4, 24, 128, 16, 5, 197],
+    "historicalFullHistory": "UNKNOWN",
+    "H": "Identity only",
+    "independentUnseenFitQualification": null
+  },
+  "caps": {
+    "CPU": [4, 18],
+    "libraryThreads": 1,
+    "GPU": 0,
+    "familyBytes": 2147483648,
+    "controllerBytes": 67108864,
+    "commandBytes": 2080374784,
+    "hostReserveBytes": 4294967296,
+    "commandSeconds": 300,
+    "parentSeconds": 360,
+    "retainedDataBytes": 16777216,
+    "controlBytes": 8388608
+  },
+  "actualGeneration": null,
+  "actualRoots": null,
+  "actualResourceAdmission": null,
+  "actualCleanup": null,
+  "searchGamesModelWeightCalls": 0,
+  "oldSuccessfulGenerationOrTestsRepeated": 0,
+  "previousSharedTimingSTOP": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/learned-uniform128-entry-v1/completion-6bed8967/collection.json",
+    "bytes": 7591,
+    "mode": "0644",
+    "sha256": "a1b35e5da1b3a85c4b07c0d4c7796cbfd775b729e7acf37e71a038076ad7ee11"
+  },
+  "comparisonAdmission": null,
+  "limits": "Starting receipt only read. Exact existing boundedcontroller/callable reused byte-exact with new parameters, source/runtime/current rule-image checks at soleentry. H/model/weight/oldstate/history not reopened; no fabricated root or result. All costs/failures/pauses/seals/defaults/models/50GB retained."
+}
