@@ -1,0 +1,177 @@
+{
+  "scope": "ONE_INSTRUMENTED_REQUEST_PER_OWNER_NOT_CAUSE_OR_PARITY",
+  "originalJob": "dac795ac-2df0-4685-931e-cb455e8dc345",
+  "planned": 2,
+  "completed": 2,
+  "unrun": 0,
+  "collection": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/request-boundary-pair-observation-v1/completion-dac795ac/collection.json",
+    "bytes": 12416,
+    "mode": "0644",
+    "sha256": "178a30d518f1e3066b2e8ded7009aa90faa1cc24b141951dc5c0f49831e2029e"
+  },
+  "compact": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/request-boundary-pair-observation-v1/completion-dac795ac/compact-observation.json",
+    "bytes": 4360,
+    "mode": "0644",
+    "sha256": "b60cf30dcca8eae9ce4381da75ee6631aad962f1dad1d6a8c5e378cb2d944a13"
+  },
+  "observation": {
+    "scope": "One instrumented f01 request per real owner; no parity/speed/causal/strength conclusion",
+    "rust": {
+      "lastStarted": {
+        "depth": 18,
+        "end": false,
+        "existingLastPollMs": 903.8242779999999,
+        "level": 0,
+        "nodes": 3238022
+      },
+      "lastReturned": {
+        "depth": 18,
+        "end": false,
+        "existingLastPollMs": 1000.0001050000001,
+        "level": 0,
+        "nodes": 3663690
+      },
+      "lastReturnedOk": false,
+      "lastStop": "timeout",
+      "lastCompleted": {
+        "depth": 17,
+        "end": false,
+        "existingLastPollMs": 903.823842,
+        "level": 0,
+        "nodes": 3238022
+      },
+      "lastPublished": {
+        "depth": 17,
+        "end": false,
+        "existingLastPollMs": 903.8242779999999,
+        "level": 0,
+        "nodes": 3238022
+      },
+      "lastPublicationDecision": {
+        "eligible": false,
+        "iteration": {
+          "depth": 18,
+          "end": false,
+          "existingLastPollMs": 1000.0001050000001,
+          "level": 0,
+          "nodes": 3663690
+        },
+        "postSearchPollCalled": false,
+        "stop": null,
+        "successfulPvsDiscarded": false
+      },
+      "clogStartLastPollMs": 2.9e-5,
+      "clogEndLastPollMs": 18.922114999999998,
+      "clogNodeCharge": 60812,
+      "requestMs": 1000.002222,
+      "ownerResult": {
+        "coefficients": {
+          "a": 0.7308488452189136,
+          "b": -4.5708322989025865,
+          "c": 1.096319765006055,
+          "d": -0.8362251801219095,
+          "e": 4.610017383697701,
+          "f": 3.818582623595395,
+          "g": 1.7775013664098447
+        },
+        "completedDepth": 17,
+        "elapsedMs": 1000.000076,
+        "interpretation": "simd",
+        "isEndSearch": false,
+        "move": 25,
+        "mustPass": false,
+        "nodes": 3663690,
+        "probability": 74.0,
+        "proven": false,
+        "rawScore": -33,
+        "score": -34,
+        "scoreKind": "heuristic",
+        "scoreUnits": "engine-disc",
+        "selectivity": 0,
+        "stopped": "timeout",
+        "terminal": false,
+        "ttBytes": 25165872
+      },
+      "phaseSpansMs": {
+        "explicitReset": 1.961606,
+        "input": 0.00989,
+        "ordinaryRequest": 1000.002222,
+        "ownerSetup": 10.255109000000001,
+        "weightInit": 138.834438
+      }
+    },
+    "original": {
+      "lastStarted": {
+        "depth": 22,
+        "end": false,
+        "event": "main-future-start",
+        "level": 0
+      },
+      "lastReturned": {
+        "depth": 22,
+        "end": false,
+        "event": "get-return-after-stop",
+        "level": 0
+      },
+      "lastCompleted": {
+        "depth": 21,
+        "end": false,
+        "event": "owner-search-success",
+        "level": 0
+      },
+      "lastPublished": {
+        "depth": 21,
+        "end": false,
+        "event": "owner-result-fields-assigned",
+        "level": 0
+      },
+      "waitExpiredCount": 1,
+      "joinedAfterStopCount": 1,
+      "postPvsDeadlineCheck": {
+        "domain": "not applicable: original publishes on future-ready branch",
+        "exists": false,
+        "successfulReturnDiscarded": null
+      },
+      "IDBudgetMs": 996,
+      "clogMs": 4,
+      "clogNodes": 60812,
+      "spans": {
+        "existingTreeCallMs": 1000.117,
+        "instrumentedInitMs": 498.944962,
+        "instrumentedResetMs": 2.345427,
+        "processSetupMs": null,
+        "pureModelParseMs": null,
+        "shutdownMs": null,
+        "wholeRequestTransportMs": null
+      },
+      "requestMs": 1000.3693110775203,
+      "ownerElapsedMs": 1000.117,
+      "move": 11,
+      "reportedScore": -33,
+      "rawScore": null,
+      "nodes": 14902438,
+      "existingMaxUsableThreadsGetter": 999999999,
+      "actualActiveSearchThreads": null
+    },
+    "limits": [
+      "Rust clog values are existing last-poll samples, not exact wall endpoints",
+      "Same reported60812 clog nodes do not prove full-tree/TT/work equality or a kernel speed ratio",
+      "Original integer existingclock and Rust f64 relativeclock remain distinct",
+      "Last terminal Rust PVS returned timeout and post-search poll was not called; successful-discard not observed at this boundary",
+      "Instrumented bookkeeping/codegen overhead unmeasured",
+      "Getter999999999 is retained raw, not an observed worker count",
+      "Original protocol tail bytes include direction prefixes; bytesSeen and bytesRetained are distinct",
+      "Original process exit-15 is actual normal caller close after response, not retroactive native exit0",
+      "Original raw timed score and restoration/loadedlibraries remainNULL"
+    ]
+  },
+  "outerSeconds": 3.4552060270216316,
+  "nestedTimesNotAdded": true,
+  "normalOriginalCloseExit": -15,
+  "actualCleanupVerified": true,
+  "originalDiskPendingAttemptedPreserved": true,
+  "fullTTWorkEqualityCodegenSpeedCausalStrength": null,
+  "next": "Source-only direct midgame evaluator correspondence; no repeated Search/game/trace."
+}

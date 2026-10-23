@@ -452,6 +452,120 @@ fn ranked_splits(ranked: &[String], counts: FamilySplitCounts) -> Result<BTreeMa
         .collect())
 }
 
+/// One row of the SHA-bound, payload-free published component disposition census.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct RankedComponentDisposition(
+    pub usize,
+    pub String,
+    pub Vec<String>,
+    pub Vec<String>,
+    pub String,
+    pub Option<Split>,
+);
+
+/// Select a prefix of the still-eligible native rank, retaining whole parent components.
+/// The bound census is an explicit named exposure authority, not a global exposure proof.
+pub fn select_series_components(
+    original: &SeriesPartition,
+    records: &[RankedComponentDisposition],
+    excluded_prefix_components: usize,
+    counts: FamilySplitCounts,
+) -> Result<SeriesPartition> {
+    let planned = original
+        .partition
+        .assignments
+        .iter()
+        .map(|a| (a.game.clone(), a.prefix.clone()))
+        .collect::<Vec<_>>();
+    let reconstructed = partition_series(
+        &planned,
+        &original.source_series,
+        original.partition.seed,
+        original.requested,
+    )?;
+    if serde_json::to_value(&reconstructed)? != serde_json::to_value(original)?
+        || counts.train == 0
+        || counts.validation == 0
+        || counts.test != 0
+        || counts.total()? > 128
+    {
+        return Err("exact parent components and bounded nonempty T/V subset required".into());
+    }
+    let ranked = ranked_components(&original.partition);
+    if records.len() != ranked.len() || excluded_prefix_components > ranked.len() {
+        return Err("complete original ranked disposition census required".into());
+    }
+    let total = counts.total()?;
+    let eligible = ranked.len() - excluded_prefix_components;
+    if eligible < total {
+        return Err(format!("saved component selection deficit {}", total - eligible).into());
+    }
+    let mut selected = BTreeMap::new();
+    for (rank, (family, record)) in ranked.iter().zip(records).enumerate() {
+        let RankedComponentDisposition(index, identity, members, sources, disposition, split) =
+            record;
+        let actual_members = original
+            .partition
+            .assignments
+            .iter()
+            .filter(|a| &a.family == family)
+            .map(|a| a.game.clone())
+            .collect::<BTreeSet<_>>();
+        let actual_sources = actual_members
+            .iter()
+            .map(|id| original.source_series[id].clone())
+            .collect::<BTreeSet<_>>();
+        let chosen = rank
+            .checked_sub(excluded_prefix_components)
+            .filter(|i| *i < total);
+        let expected_split = chosen.map(|i| {
+            if i < counts.train {
+                Split::Train
+            } else {
+                Split::Validation
+            }
+        });
+        if *index != rank
+            || identity != family
+            || members.len() != actual_members.len()
+            || members.iter().cloned().collect::<BTreeSet<_>>() != actual_members
+            || sources.len() != actual_sources.len()
+            || sources.iter().cloned().collect::<BTreeSet<_>>() != actual_sources
+            || disposition
+                != if rank < excluded_prefix_components {
+                    "excluded_dev64"
+                } else {
+                    "eligible_named_scope"
+                }
+            || serde_json::to_value(split)? != serde_json::to_value(&expected_split)?
+        {
+            return Err("rank/member/source/exposure/prospective split differs".into());
+        }
+        if let Some(split) = expected_split {
+            selected.insert(family.clone(), split);
+        }
+    }
+    let mut result = original.clone();
+    result
+        .partition
+        .assignments
+        .retain(|a| selected.contains_key(&a.family));
+    for a in &mut result.partition.assignments {
+        a.split = selected[&a.family].clone();
+    }
+    result
+        .source_series
+        .retain(|id, _| result.partition.assignments.iter().any(|a| &a.game == id));
+    result.requested = counts;
+    result.actual = counts;
+    result.deficits = FamilySplitCounts {
+        train: 0,
+        validation: 0,
+        test: 0,
+    };
+    Ok(result)
+}
+
 /// Inputs only: outcome/teacher fields cannot participate in grouping or rounding.
 pub fn partition_families(planned: &[(String, Vec<u16>)], seed: u64) -> Result<FamilyPartition> {
     partition_owned_families(planned, seed, None)
@@ -627,6 +741,101 @@ mod configured_family_tests {
 #[cfg(test)]
 mod trajectory_partition_tests {
     use super::*;
+
+    #[test]
+    fn saved_component_subset_rejects_rank_exposure_partial_members_and_split_corruption() {
+        let planned = vec![
+            ("a".to_string(), vec![13]),
+            ("b".to_string(), vec![3]),
+            ("c".to_string(), vec![81]),
+        ];
+        let sources = planned
+            .iter()
+            .map(|(id, _)| (id.clone(), id.clone()))
+            .collect();
+        let original = partition_series(
+            &planned,
+            &sources,
+            435102206,
+            FamilySplitCounts {
+                train: 3,
+                validation: 0,
+                test: 0,
+            },
+        )
+        .unwrap();
+        let ranked = ranked_components(&original.partition);
+        assert_eq!(ranked.len(), 3);
+        let records = ranked
+            .iter()
+            .enumerate()
+            .map(|(i, family)| {
+                let members = original
+                    .partition
+                    .assignments
+                    .iter()
+                    .filter(|a| &a.family == family)
+                    .map(|a| a.game.clone())
+                    .collect::<Vec<_>>();
+                let sources = members
+                    .iter()
+                    .map(|id| original.source_series[id].clone())
+                    .collect();
+                RankedComponentDisposition(
+                    i,
+                    family.clone(),
+                    members,
+                    sources,
+                    if i == 0 {
+                        "excluded_dev64"
+                    } else {
+                        "eligible_named_scope"
+                    }
+                    .into(),
+                    match i {
+                        0 => None,
+                        1 => Some(Split::Train),
+                        _ => Some(Split::Validation),
+                    },
+                )
+            })
+            .collect::<Vec<_>>();
+        let counts = FamilySplitCounts {
+            train: 1,
+            validation: 1,
+            test: 0,
+        };
+        let selected = select_series_components(&original, &records, 1, counts).unwrap();
+        assert_eq!(selected.partition.assignments.len(), 2);
+        assert!(
+            selected
+                .partition
+                .assignments
+                .iter()
+                .all(|a| a.family != ranked[0])
+        );
+        for a in &selected.partition.assignments {
+            let old = original
+                .partition
+                .assignments
+                .iter()
+                .find(|old| old.game == a.game)
+                .unwrap();
+            assert_eq!((&a.prefix, &a.family), (&old.prefix, &old.family));
+        }
+        for field in 0..4 {
+            let mut bad = records.clone();
+            match field {
+                0 => bad.swap(0, 1),
+                1 => bad[1].2.clear(),
+                2 => bad[0].4 = "eligible_named_scope".into(),
+                _ => bad[1].5 = Some(Split::Validation),
+            }
+            assert!(select_series_components(&original, &bad, 1, counts).is_err());
+        }
+        assert!(select_series_components(&original, &records, 2, counts).is_err());
+        assert_eq!(original.partition.assignments.len(), 3);
+    }
 
     #[test]
     fn saved_component_repartition_preserves_members_and_refuses_forged_original() {

@@ -272,7 +272,166 @@ def repartition_fixture_authority(source, holdout, partition, original):
     return authority
 
 
-def series_fixture_rows(source, holdout, partition, original_partition=None):
+def saved_subset_fixture_authority(source, holdout, partition, original, census, source_config):
+    """Verify the bound native subset against every original component, before labels."""
+    import hashlib
+
+    authority = partition["selection"]
+    fields = {
+        "schema",
+        "source_schedule",
+        "source_partition",
+        "source_observations",
+        "source_config",
+        "census",
+        "exposure_parent",
+        "excluded_prefix_components",
+        "split_counts",
+        "actual_observations",
+    }
+    if (
+        original is None
+        or census is None
+        or source_config is None
+        or set(authority) != fields
+        or "repartition" in partition
+        or authority["schema"] != "quoridor-prefix-series-saved-subset-v1"
+        or census.get("schema") != "research.identity-only-component-census.v1"
+        or census["columns"]
+        != [
+            "rank0",
+            "component",
+            "member_ids",
+            "source_series_ids",
+            "disposition",
+            "prospective_split",
+        ]
+        or authority["exposure_parent"] != census["selected64"]
+        or authority["source_partition"] != census["partition"]
+        or authority["source_schedule"] != census["publishedScheduleByRef"]
+        or authority["source_config"] != census["nativeInputConfig"]
+        or source["source_observations"] != authority["source_observations"]
+        or holdout["source_observations"] != authority["source_observations"]
+        or original["partition"]["seed"] != census["componentRankSeed"]
+        or source_config["split_seed"] != census["componentRankSeed"]
+        or source_config["trajectory"]["split_counts"] != original["requested"]
+    ):
+        raise ValueError("bound native subset parent/census/config authority differs")
+    excluded_authority = census["sourceExclusionAuthority"]
+
+    def bound(ref):
+        return {key: ref[key] for key in ("path", "sha256")}
+
+    if source_config["excluded_books"] != [
+        bound(excluded_authority["prefixProjection"]),
+        bound(excluded_authority["clockBook"]),
+    ] or source_config["excluded_static_inputs"] != bound(
+        excluded_authority["staticExclusionManifest"]
+    ):
+        raise ValueError("inherited T/V/H/dev/clock exclusions differ")
+    old = original["partition"]["assignments"]
+    old_by_id = {a["game"]: a for a in old}
+    if len(old_by_id) != len(old) or set(original["source_series"]) != set(old_by_id):
+        raise ValueError("complete unique parent member/source census required")
+    members, source_ids = {}, {}
+    old_splits = {}
+    for a in old:
+        if set(a) != {"game", "prefix", "family", "split"}:
+            raise ValueError("original native assignment shape differs")
+        family = a["family"]
+        if family in old_splits and old_splits[family] != a["split"]:
+            raise ValueError("original component crosses splits")
+        old_splits[family] = a["split"]
+        members.setdefault(family, set()).add(a["game"])
+        source_ids.setdefault(family, set()).add(original["source_series"][a["game"]])
+    old_actual = {
+        name: sum(v == name for v in old_splits.values())
+        for name in ("train", "validation", "test")
+    }
+    if original["actual"] != old_actual or any(
+        type(original["requested"][name]) is not int
+        or original["requested"][name] < count
+        or original["deficits"][name] != original["requested"][name] - count
+        for name, count in old_actual.items()
+    ):
+        raise ValueError("original component deficit/count differs")
+    seed = census["componentRankSeed"]
+    ranked = sorted(members, key=lambda f: (hashlib.sha256(f"{seed}:{f}".encode()).hexdigest(), f))
+    excluded, counts = authority["excluded_prefix_components"], authority["split_counts"]
+    if (
+        type(excluded) is not int
+        or not 0 <= excluded <= len(ranked)
+        or set(counts) != {"train", "validation", "test"}
+        or any(type(v) is not int for v in counts.values())
+        or counts["train"] <= 0
+        or counts["validation"] <= 0
+        or counts["test"] != 0
+        or not 0 < sum(counts.values()) <= 128
+        or len(ranked) - excluded < sum(counts.values())
+    ):
+        raise ValueError("bounded nonempty T/V whole-component subset or deficit")
+    total = sum(counts.values())
+    if (
+        census["counts"]
+        != {
+            "originalSurvivors": len(ranked),
+            "originalDeficit": sum(original["deficits"].values()),
+            "excludedDev64": excluded,
+            "eligibleNamedScope": len(ranked) - excluded,
+        }
+        or census["prospective"]
+        != {
+            "selected": total,
+            "train": counts["train"],
+            "validation": counts["validation"],
+            "holdout": 0,
+            "deficitWithinNamedScope": 0,
+        }
+        or len(census["records"]) != len(ranked)
+    ):
+        raise ValueError("subset census component counts/request differs")
+    chosen = {}
+    for rank, (family, record) in enumerate(zip(ranked, census["records"], strict=True)):
+        selected = excluded <= rank < excluded + total
+        split = (
+            ("train" if rank < excluded + counts["train"] else "validation") if selected else None
+        )
+        if (
+            not isinstance(record, list)
+            or len(record) != 6
+            or type(record[0]) is not int
+            or record[:2] != [rank, family]
+            or len(record[2]) != len(members[family])
+            or set(record[2]) != members[family]
+            or len(record[3]) != len(source_ids[family])
+            or set(record[3]) != source_ids[family]
+            or record[4] != ("excluded_dev64" if rank < excluded else "eligible_named_scope")
+            or record[5] != split
+        ):
+            raise ValueError("native rank/member/source/exposed/split census differs")
+        if selected:
+            chosen[family] = split
+    expected = [{**a, "split": chosen[a["family"]]} for a in old if a["family"] in chosen]
+    expected_sources = {a["game"]: original["source_series"][a["game"]] for a in expected}
+    if (
+        partition["partition"] != {**original["partition"], "assignments": expected}
+        or partition["source_series"] != expected_sources
+        or len(expected) != total
+        or partition["requested"] != counts
+        or partition["actual"] != counts
+        or partition["deficits"] != {"train": 0, "validation": 0, "test": 0}
+        or authority["actual_observations"] != counts
+        or holdout["observations"]
+    ):
+        raise ValueError(
+            "subset cuts/changes parent members, exposes excluded components or changes split"
+        )
+    return authority
+
+
+def series_fixture_rows(
+    source, holdout, partition, original_partition=None, selection_census=None, source_config=None
+):
     """Project a bound native component partition; H remains exclusion-only."""
     schema = "quoridor-prefix-series-observations-v1"
     if (
@@ -285,7 +444,13 @@ def series_fixture_rows(source, holdout, partition, original_partition=None):
         or source.get("source_observations") != holdout.get("source_observations")
     ):
         raise ValueError("matching unlabelled native fit/holdout partition required")
-    if "repartition" in partition:
+    if "selection" in partition:
+        saved_subset_fixture_authority(
+            source, holdout, partition, original_partition, selection_census, source_config
+        )
+    elif selection_census is not None or source_config is not None:
+        raise ValueError("unexpected saved selection census/config")
+    elif "repartition" in partition:
         repartition_fixture_authority(source, holdout, partition, original_partition)
     elif original_partition is not None:
         raise ValueError("unexpected replacement split authority")
@@ -387,6 +552,10 @@ def prepare_prefix_fixture(config):
     expected = {"prefix_fixture", "native_library", "output", "max_sqlite_bytes"}
     if "holdout_exclusion" in config:
         expected.add("holdout_exclusion")
+    if "selection_census" in config:
+        expected.add("selection_census")
+        if "holdout_exclusion" not in config:
+            raise ValueError("native saved subset requires explicit empty H publication")
     if set(config) != expected:
         raise ValueError("prefix fixture and full-public settings cannot be mixed")
     source_raw = bound_file_bytes(config["prefix_fixture"], 64 * 1024**2)
@@ -400,15 +569,43 @@ def prepare_prefix_fixture(config):
         partition = json.loads(partition_raw)
         original_partition = None
         parent_sources = []
+        selection_census = source_config = None
+        if "selection" in partition:
+            selection = partition["selection"]
+            if config.get("selection_census") != selection["census"]:
+                raise ValueError("explicit saved-selection census FileRef differs")
+            census_raw = bound_file_bytes(config["selection_census"], 65536)
+            source_config_raw = bound_file_bytes(selection["source_config"], 65536)
+            selection_census = json.loads(census_raw)
+            source_config = json.loads(source_config_raw)
+            parent_sources.extend(
+                [
+                    (config["selection_census"], census_raw),
+                    (selection["source_config"], source_config_raw),
+                ]
+            )
+            parent_ref = selection["source_partition"]
+            parent_raw = bound_file_bytes(parent_ref, 64 * 1024**2)
+            original_partition = json.loads(parent_raw)
+            parent_sources.append((parent_ref, parent_raw))
+        elif "selection_census" in config:
+            raise ValueError("unexpected saved-selection census")
         if "repartition" in partition:
             parent_ref = partition["repartition"]["source_partition"]
             parent_raw = bound_file_bytes(parent_ref, 64 * 1024**2)
             original_partition = json.loads(parent_raw)
             parent_sources.append((parent_ref, parent_raw))
         rows, holdout_rows, lineage = series_fixture_rows(
-            source, json.loads(holdout_raw), partition, original_partition
+            source,
+            json.loads(holdout_raw),
+            partition,
+            original_partition,
+            selection_census,
+            source_config,
         )
-        if original_partition is not None:
+        if "selection" in partition:
+            lineage["selection"] = partition["selection"]
+        elif original_partition is not None:
             lineage["repartition"] = partition["repartition"]
         extra_sources = [
             (config["holdout_exclusion"], holdout_raw),

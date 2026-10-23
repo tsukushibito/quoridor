@@ -130,6 +130,9 @@ pub struct InputConfig {
     /// Repartition a completed unlabelled trajectory publication without generation.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub repartition: Option<RepartitionInput>,
+    /// Explicit whole-component subset of a frozen input publication; never generation.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub saved_subset: Option<SavedSubsetInput>,
     pub output: PathBuf,
 }
 
@@ -175,6 +178,243 @@ pub struct RepartitionInput {
     pub split_counts: quoridor_data::terminal::FamilySplitCounts,
     pub max_fit_observations: usize,
     pub max_holdout_observations: usize,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct SavedSubsetInput {
+    pub exposure_parent: crate::research_manifest::FileRef,
+    pub schedule: crate::research_manifest::FileRef,
+    pub census: crate::research_manifest::FileRef,
+    pub source_config: crate::research_manifest::FileRef,
+    pub excluded_prefix_components: usize,
+    pub split_counts: quoridor_data::terminal::FamilySplitCounts,
+}
+
+fn prepare_saved_subset(c: &InputConfig, settings: &SavedSubsetInput) -> Result<serde_json::Value> {
+    use quoridor_data::terminal::{
+        RankedComponentDisposition, SeriesPartition, ranked_components, select_series_components,
+    };
+    if c.families == 0
+        || c.families > 1024
+        || c.trajectory.is_some()
+        || c.repartition.is_some()
+        || c.reuse_schedule.is_some()
+        || !c.prefix_lengths.is_empty()
+        || !c.excluded_books.is_empty()
+        || c.excluded_static_inputs.is_some()
+        || c.unique_families
+        || settings.census.bytes > 65536
+    {
+        return Err(
+            "saved subset requires its exact frozen parent and explicit census, no generation"
+                .into(),
+        );
+    }
+    let schedule = read_input_reference(&settings.schedule)?;
+    let census = read_input_reference(&settings.census)?;
+    let source_config = read_input_reference(&settings.source_config)?;
+    let parent_ref: crate::research_manifest::FileRef =
+        serde_json::from_value(schedule["partition"].clone())?;
+    let source_ref: crate::research_manifest::FileRef =
+        serde_json::from_value(schedule["source_observations"].clone())?;
+    let original: SeriesPartition = serde_json::from_value(read_input_reference(&parent_ref)?)?;
+    let rank = ranked_components(&original.partition);
+    let columns = serde_json::json!([
+        "rank0",
+        "component",
+        "member_ids",
+        "source_series_ids",
+        "disposition",
+        "prospective_split"
+    ]);
+    if schedule["generator_version"] != quoridor_data::common_corpus::VERSION
+        || schedule["series"].as_array().map(Vec::len) != Some(c.families)
+        || schedule["prefix_seed"].as_u64() != Some(c.prefix_seed)
+        || schedule["split_seed"].as_u64() != Some(c.split_seed)
+        || schedule["trajectory"] != source_config["trajectory"]
+        || source_config["families"].as_u64() != Some(u64::try_from(c.families)?)
+        || source_config["prefix_seed"] != schedule["prefix_seed"]
+        || source_config["split_seed"] != schedule["split_seed"]
+        || source_config["trajectory"]["split_counts"] != serde_json::to_value(original.requested)?
+        || original.partition.seed != c.split_seed
+        || schedule["ranked_components"] != serde_json::to_value(&rank)?
+        || census["schema"] != "research.identity-only-component-census.v1"
+        || census["columns"] != columns
+        || census["selected64"] != serde_json::to_value(&settings.exposure_parent)?
+        || census["partition"] != serde_json::to_value(&parent_ref)?
+        || census["publishedScheduleByRef"] != serde_json::to_value(&settings.schedule)?
+        || census["nativeInputConfig"] != serde_json::to_value(&settings.source_config)?
+        || census["componentRankSeed"].as_u64() != Some(c.split_seed)
+    {
+        return Err("saved subset parent/config/census/rank identity differs".into());
+    }
+    let collection_ref: crate::research_manifest::FileRef =
+        serde_json::from_value(census["sourceCollection"].clone())?;
+    if collection_ref.bytes > 65536 {
+        return Err("bounded original pool collection required".into());
+    }
+    let collection = read_input_reference(&collection_ref)?;
+    if collection["selected64_map"] != serde_json::to_value(&settings.exposure_parent)?
+        || collection["native"]["schedule"] != serde_json::to_value(&settings.schedule)?
+        || collection["native"]["partition"] != serde_json::to_value(&parent_ref)?
+        || collection["native"]["source_observations"] != serde_json::to_value(&source_ref)?
+        || collection["refs"]["input-generation.json"]
+            != serde_json::to_value(&settings.source_config)?
+    {
+        return Err("census pool collection/config correspondence differs".into());
+    }
+    let authority = &census["sourceExclusionAuthority"];
+    let bound = |value: &serde_json::Value| {
+        serde_json::json!({
+            "path":value["path"],"sha256":value["sha256"]
+        })
+    };
+    if source_config["excluded_books"]
+        != serde_json::json!([
+            bound(&authority["prefixProjection"]),
+            bound(&authority["clockBook"])
+        ])
+        || source_config["excluded_static_inputs"] != bound(&authority["staticExclusionManifest"])
+        || schedule["excluded_books"] != source_config["excluded_books"]
+        || schedule["excluded_static_inputs"] != source_config["excluded_static_inputs"]
+    {
+        return Err("inherited original T/V/H/dev/clock exclusion authority differs".into());
+    }
+    let records: Vec<RankedComponentDisposition> =
+        serde_json::from_value(census["records"].clone())?;
+    let total = settings.split_counts.total()?;
+    let eligible = rank
+        .len()
+        .checked_sub(settings.excluded_prefix_components)
+        .ok_or("excluded component count exceeds parent")?;
+    if census["counts"]
+        != serde_json::json!({
+            "originalSurvivors":rank.len(),"originalDeficit":original.deficits.total()?,
+            "excludedDev64":settings.excluded_prefix_components,"eligibleNamedScope":eligible
+        })
+        || census["prospective"]
+            != serde_json::json!({
+                "selected":total,"train":settings.split_counts.train,
+                "validation":settings.split_counts.validation,"holdout":settings.split_counts.test,
+                "deficitWithinNamedScope":total.saturating_sub(eligible)
+            })
+    {
+        return Err("bound census component counts/split request differs".into());
+    }
+    let partition = select_series_components(
+        &original,
+        &records,
+        settings.excluded_prefix_components,
+        settings.split_counts,
+    )?;
+    let source = read_input_reference(&source_ref)?;
+    let rows = source["observations"]
+        .as_array()
+        .ok_or("original observations missing")?;
+    if source["schema"] != "quoridor-prefix-series-full-history-v1"
+        || source["teacher_labels"] != false
+        || source["partition"] != serde_json::to_value(&parent_ref)?
+        || rows.len() != original.partition.assignments.len()
+        || rows.len() > c.families * 64
+    {
+        return Err("original full-history source census differs".into());
+    }
+    let selected = partition
+        .partition
+        .assignments
+        .iter()
+        .map(|a| (a.game.as_str(), a))
+        .collect::<std::collections::BTreeMap<_, _>>();
+    let mut projected = Vec::new();
+    let mut counts = [0usize; 2];
+    for (value, old) in rows.iter().zip(&original.partition.assignments) {
+        let row: InputObservation = serde_json::from_value(value.clone())?;
+        if row.id != old.game
+            || row.prefix != old.prefix
+            || value["family"] != old.family
+            || value["split"] != serde_json::to_value(&old.split)?
+            || original.source_series.get(&row.id) != Some(&row.source_series)
+            || row.canonical_prefix != super::canonical_prefix(&row.prefix)?
+        {
+            return Err("parent full-history/member/source correspondence differs".into());
+        }
+        let context = row.root.audit(&row.prefix)?;
+        if context.terminal_value().is_some() {
+            return Err("terminal saved observation cannot enter labels".into());
+        }
+        if let Some(new) = selected.get(row.id.as_str()) {
+            let index = match new.split {
+                quoridor_data::Split::Train => 0,
+                quoridor_data::Split::Validation => 1,
+                quoridor_data::Split::Test => return Err("saved subset has no H labels".into()),
+            };
+            counts[index] += 1;
+            projected.push(serde_json::json!({
+                "id":row.id,"source_series":row.source_series,"prefix":row.prefix,
+                "family":new.family,"split":new.split
+            }));
+        }
+    }
+    // One existing root per selected WHOLE component, never a picked partial component.
+    if counts
+        != [
+            settings.split_counts.train,
+            settings.split_counts.validation,
+        ]
+    {
+        return Err("saved subset requires one original observation per whole component".into());
+    }
+    std::fs::create_dir(&c.output)?;
+    let marker = c.output.join("INCOMPLETE");
+    std::fs::write(
+        &marker,
+        "saved subset publication incomplete; no teacher admitted",
+    )?;
+    let write =
+        |name: &str, value: &serde_json::Value| -> Result<crate::research_manifest::FileRef> {
+            use std::os::unix::fs::PermissionsExt;
+            let r = write_input_json(&c.output, name, value)?;
+            let m = std::fs::metadata(&r.path)?;
+            Ok(crate::research_manifest::FileRef {
+                path: r.path,
+                sha256: r.sha256,
+                bytes: m.len(),
+                mode: format!("{:04o}", m.permissions().mode() & 0o777),
+            })
+        };
+    let mut partition_value = serde_json::to_value(&partition)?;
+    partition_value["selection"] = serde_json::json!({
+        "schema":"quoridor-prefix-series-saved-subset-v1",
+        "source_schedule":settings.schedule,"source_partition":parent_ref,
+        "source_observations":source_ref,"source_config":settings.source_config,
+        "census":settings.census,"exposure_parent":settings.exposure_parent,
+        "excluded_prefix_components":settings.excluded_prefix_components,
+        "split_counts":settings.split_counts,
+        "actual_observations":{"train":counts[0],"validation":counts[1],"test":0}
+    });
+    let partition_ref = write("partition.json", &partition_value)?;
+    let publish = |name: &str, rows: &Vec<serde_json::Value>| {
+        write(
+            name,
+            &serde_json::json!({
+                "schema":"quoridor-prefix-series-observations-v1","partition":partition_ref,
+                "source_observations":source_ref,"observations":rows,"teacher_labels":false
+            }),
+        )
+    };
+    let holdout = publish("holdout-observations.json", &Vec::new())?;
+    let fit = publish("fit-observations.json", &projected)?;
+    let report = serde_json::json!({
+        "partition":partition_ref,"fit_observations":fit,"holdout_observations":holdout,
+        "source_observations":source_ref,"selection_census":settings.census,
+        "requested_components":settings.split_counts,"actual_components":partition.actual,
+        "component_deficits":partition.deficits,"generated_transitions":0,
+        "search_calls":0,"teacher_calls":0,"outcomes_selected":false
+    });
+    write("selection.json", &report)?;
+    std::fs::remove_file(marker)?;
+    Ok(report)
 }
 
 fn read_input_reference(
@@ -716,6 +956,9 @@ pub fn prepare_inputs(c: &InputConfig) -> Result<serde_json::Value> {
     if !c.output.is_absolute() {
         return Err("fresh absolute global input output required".into());
     }
+    if let Some(settings) = &c.saved_subset {
+        return prepare_saved_subset(c, settings);
+    }
     if let Some(settings) = &c.repartition {
         return prepare_repartition(c, settings);
     }
@@ -1027,6 +1270,7 @@ mod tests {
             excluded_static_inputs: None,
             unique_families: false,
             trajectory: None,
+            saved_subset: None,
             repartition: Some(RepartitionInput {
                 schedule,
                 split_counts: FamilySplitCounts {
@@ -1104,6 +1348,7 @@ mod tests {
                 path: master,
             }),
             trajectory: None,
+            saved_subset: None,
             repartition: None,
         };
         let report = prepare_inputs(&c).unwrap();
