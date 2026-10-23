@@ -1,0 +1,855 @@
+{
+  "schema": "quoridor.dev64-saved-clock-census.v1",
+  "status": "ACTUAL_SAVED_CENSUS_COLLECTED_NO_JOURNAL_REOPEN_BY_ROOT",
+  "census": {
+    "path": "/workspaces/quoridor/.worktree/quoridor-strong435/.artifacts/quoridor-strong435/saved384-clock-uniform-condition-v1/saved-clock-census.json",
+    "bytes": 158147,
+    "mode": "0644",
+    "sha256": "1ac5235eb29c2c70891c0a0288a5d00bf9fb95d7a2902c1121993b92d8fcf334"
+  },
+  "shortSummary": {
+    "path": "/workspaces/quoridor/.worktree/quoridor-strong435/.artifacts/quoridor-strong435/saved384-clock-uniform-condition-v1/census-short-summary.json",
+    "bytes": 11958,
+    "mode": "0644",
+    "sha256": "09030430ad31b8b3310134ed03331fe45caacb6a1d6cad1c3a0f856a902d6564"
+  },
+  "authorSource": {
+    "path": "/workspaces/quoridor/.worktree/quoridor-strong435/.artifacts/quoridor-strong435/saved384-clock-uniform-condition-v1/census_saved_clock.py",
+    "bytes": 20072,
+    "mode": "0644",
+    "sha256": "bc28ebde14d117c58382d2e3e48a151a181acd33d940d6f60dd77542ccd2f067"
+  },
+  "returned": {
+    "path": "/workspaces/quoridor/.worktree/quoridor-strong435/.artifacts/quoridor-strong435/saved384-clock-uniform-condition-v1/saved-census-once.returned.json",
+    "bytes": 1405,
+    "mode": "0644",
+    "sha256": "44d6d0435c81578847a2f1e1f8f93b69e48c9b12993ea611b4c3ddec7e3c800b"
+  },
+  "originalDiskProcess": {
+    "path": "/workspaces/quoridor/.worktree/quoridor-strong435/.artifacts/quoridor-strong435/saved384-clock-uniform-condition-v1/saved-census-once.process.json",
+    "bytes": 1403,
+    "mode": "0600",
+    "sha256": "5f8c0ac553ff455e521ec4c385b3dc5558f4775a1dbebcfacd662a6f0fd8bf51"
+  },
+  "TMP": {
+    "path": "/workspaces/quoridor/.worktree/quoridor-strong435/.artifacts/quoridor-strong435/saved384-clock-uniform-condition-v1/saved-census-once.TMP.json",
+    "bytes": 52,
+    "mode": "0644",
+    "sha256": "1b9b2f257233361295ddb2bb5e05483a6e56ad19820f0d2c91aa878a29341c6e"
+  },
+  "archiveOpenAndComplete": 24,
+  "gameRows": 384,
+  "moveObservations": 16975,
+  "groups": [
+    {
+      "compact": {
+        "contrast": 0,
+        "engine": "nnue_mcts",
+        "identity": "nnue-mcts-core209:sha256:9059b0d9a3069dc2a2ad6a4ef231796df24cc7935c541faf480d746eb4f53d7c",
+        "observations": 2820,
+        "stops": {
+          "\"decision_notified\"": 911,
+          "\"internal_time_limit\"": 1750,
+          "\"simulation_cap\"": 159
+        },
+        "failures": {
+          "null": 2820
+        },
+        "receipt_ms": {
+          "observations": 2820,
+          "known": 2820,
+          "missing": 0,
+          "min": 7.903442,
+          "median": 94.9798245,
+          "quantiles_linear": {
+            "0": 7.903442,
+            "0.05": 85.35421575000002,
+            "0.25": 94.16024075,
+            "0.5": 94.9798245,
+            "0.75": 94.99207150000001,
+            "0.95": 94.99839545,
+            "0.99": 94.99967129,
+            "1": 94.999985
+          },
+          "max": 94.999985,
+          "sum_known": 259221.877166,
+          "complete_sum": 259221.877166
+        },
+        "returned_ms": {
+          "observations": 2820,
+          "known": 2820,
+          "missing": 0,
+          "min": 7.912036,
+          "median": 97.987791,
+          "quantiles_linear": {
+            "0": 7.912036,
+            "0.05": 87.3106815,
+            "0.25": 95.73096475,
+            "0.5": 97.987791,
+            "0.75": 99.56451775,
+            "0.95": 102.45920840000001,
+            "0.99": 107.63100129999998,
+            "1": 133.440553
+          },
+          "max": 133.440553,
+          "sum_known": 269948.973563,
+          "complete_sum": 269948.973563
+        },
+        "simulations": {
+          "observations": 2820,
+          "known": 2820,
+          "missing": 0,
+          "min": 1757,
+          "median": 4127.0,
+          "quantiles_linear": {
+            "0": 1757,
+            "0.05": 3087.8,
+            "0.25": 3712.75,
+            "0.5": 4127.0,
+            "0.75": 4623.25,
+            "0.95": 16384.0,
+            "0.99": 16384.0,
+            "1": 16384
+          },
+          "max": 16384,
+          "sum_known": 14096369,
+          "complete_sum": 14096369
+        },
+        "provider_head_rows": {
+          "observations": 2820,
+          "known": 2820,
+          "missing": 0,
+          "min": 111,
+          "median": 3875.5,
+          "quantiles_linear": {
+            "0": 111,
+            "0.05": 2286.05,
+            "0.25": 3406.5,
+            "0.5": 3875.5,
+            "0.75": 4298.25,
+            "0.95": 4893.0,
+            "0.99": 5315.24,
+            "1": 5757
+          },
+          "max": 5757,
+          "sum_known": 10645567,
+          "complete_sum": 10645567
+        },
+        "Alpha_whole_nodes": null
+      },
+      "clockCategories": {
+        "accepted": {
+          "true": 2820
+        },
+        "accepted_and_return_after_deadline": {
+          "false": 2270,
+          "true": 550
+        },
+        "provider.physical_kernel_calls": {
+          "null": 2820
+        },
+        "receipt_at_or_before_deadline": {
+          "true": 2820
+        },
+        "return_after_deadline": {
+          "false": 2270,
+          "true": 550
+        },
+        "simulation_cap_reached": {
+          "false": 2663,
+          "true": 157
+        },
+        "whole_nodes_at_or_above_cap": {
+          "false": 2820
+        }
+      },
+      "receiptSlackMs": {
+        "observations": 2820,
+        "known": 2820,
+        "missing": 0,
+        "min": 5.000015,
+        "median": 5.020175500000001,
+        "quantiles_linear": {
+          "0": 5.000015,
+          "0.05": 5.00160455,
+          "0.25": 5.0079285,
+          "0.5": 5.020175500000001,
+          "0.75": 5.83975925,
+          "0.95": 14.64578424999974,
+          "0.99": 76.17585728999998,
+          "1": 92.096558
+        },
+        "max": 92.096558,
+        "sum_known": 22778.122834,
+        "complete_sum": 22778.122834
+      },
+      "wholeMctsAllocatedNodes": {
+        "observations": 2820,
+        "known": 2820,
+        "missing": 0,
+        "min": 257,
+        "median": 142458.0,
+        "quantiles_linear": {
+          "0": 257,
+          "0.05": 6310.75,
+          "0.25": 12290.25,
+          "0.5": 142458.0,
+          "0.75": 255943.25,
+          "0.95": 362677.4499999999,
+          "0.99": 407887.43,
+          "1": 468434
+        },
+        "max": 468434,
+        "sum_known": 417662115,
+        "complete_sum": 417662115
+      }
+    },
+    {
+      "compact": {
+        "contrast": 0,
+        "engine": "nnue",
+        "identity": "nnue-residual-f32:sha256:15ddf009dec48a97ac8e655acfd3acc6f1fa8c3cd48342fa7277bfa6c4ef838f",
+        "observations": 2861,
+        "stops": {
+          "\"cancelled\"": 2,
+          "\"depth_cap\"": 185,
+          "\"internal_time_limit\"": 2674
+        },
+        "failures": {
+          "null": 2861
+        },
+        "receipt_ms": {
+          "observations": 2861,
+          "known": 2861,
+          "missing": 0,
+          "min": 0.45186,
+          "median": 62.895831,
+          "quantiles_linear": {
+            "0": 0.45186,
+            "0.05": 2.859654,
+            "0.25": 34.49008,
+            "0.5": 62.895831,
+            "0.75": 78.308721,
+            "0.95": 91.101692,
+            "0.99": 94.2538782,
+            "1": 94.991262
+          },
+          "max": 94.991262,
+          "sum_known": 161966.037309,
+          "complete_sum": 161966.037309
+        },
+        "returned_ms": {
+          "observations": 2861,
+          "known": 2861,
+          "missing": 0,
+          "min": 0.457681,
+          "median": 99.370293,
+          "quantiles_linear": {
+            "0": 0.457681,
+            "0.05": 3.131846,
+            "0.25": 99.066333,
+            "0.5": 99.370293,
+            "0.75": 99.762206,
+            "0.95": 101.60494,
+            "0.99": 103.8482874,
+            "1": 109.861031
+          },
+          "max": 109.861031,
+          "sum_known": 267265.012117,
+          "complete_sum": 267265.012117
+        },
+        "simulations": null,
+        "provider_head_rows": null,
+        "Alpha_whole_nodes": {
+          "observations": 2861,
+          "known": 2861,
+          "missing": 0,
+          "min": 128,
+          "median": 79320.0,
+          "quantiles_linear": {
+            "0": 128,
+            "0.05": 322.0,
+            "0.25": 68485.0,
+            "0.5": 79320.0,
+            "0.75": 92244.0,
+            "0.95": 112606.0,
+            "0.99": 121685.4,
+            "1": 160619
+          },
+          "max": 160619,
+          "sum_known": 221314673,
+          "complete_sum": 221314673
+        }
+      },
+      "clockCategories": {
+        "accepted": {
+          "true": 2861
+        },
+        "accepted_and_return_after_deadline": {
+          "false": 2405,
+          "true": 456
+        },
+        "receipt_at_or_before_deadline": {
+          "true": 2861
+        },
+        "return_after_deadline": {
+          "false": 2405,
+          "true": 456
+        }
+      },
+      "receiptSlackMs": {
+        "observations": 2861,
+        "known": 2861,
+        "missing": 0,
+        "min": 5.008738,
+        "median": 37.104169,
+        "quantiles_linear": {
+          "0": 5.008738,
+          "0.05": 8.898308,
+          "0.25": 21.691279,
+          "0.5": 37.104169,
+          "0.75": 65.50992,
+          "0.95": 97.140346,
+          "0.99": 99.4817218,
+          "1": 99.54814
+        },
+        "max": 99.54814,
+        "sum_known": 124133.962691,
+        "complete_sum": 124133.962691
+      },
+      "wholeMctsAllocatedNodes": null
+    },
+    {
+      "compact": {
+        "contrast": 1,
+        "engine": "nnue",
+        "identity": "nnue-residual-f32:sha256:15ddf009dec48a97ac8e655acfd3acc6f1fa8c3cd48342fa7277bfa6c4ef838f",
+        "observations": 2781,
+        "stops": {
+          "\"cancelled\"": 3,
+          "\"depth_cap\"": 133,
+          "\"internal_time_limit\"": 2645
+        },
+        "failures": {
+          "null": 2781
+        },
+        "receipt_ms": {
+          "observations": 2781,
+          "known": 2781,
+          "missing": 0,
+          "min": 0.408302,
+          "median": 62.526139,
+          "quantiles_linear": {
+            "0": 0.408302,
+            "0.05": 17.580273,
+            "0.25": 33.529477,
+            "0.5": 62.526139,
+            "0.75": 77.03455,
+            "0.95": 90.958338,
+            "0.99": 94.1280824,
+            "1": 94.96919
+          },
+          "max": 94.96919,
+          "sum_known": 157917.333637,
+          "complete_sum": 157917.333637
+        },
+        "returned_ms": {
+          "observations": 2781,
+          "known": 2781,
+          "missing": 0,
+          "min": 0.414428,
+          "median": 99.286716,
+          "quantiles_linear": {
+            "0": 0.414428,
+            "0.05": 98.476808,
+            "0.25": 99.020797,
+            "0.5": 99.286716,
+            "0.75": 99.636746,
+            "0.95": 101.323972,
+            "0.99": 103.921085,
+            "1": 108.909087
+          },
+          "max": 108.909087,
+          "sum_known": 263845.890446,
+          "complete_sum": 263845.890446
+        },
+        "simulations": null,
+        "provider_head_rows": null,
+        "Alpha_whole_nodes": {
+          "observations": 2781,
+          "known": 2781,
+          "missing": 0,
+          "min": 128,
+          "median": 81380.0,
+          "quantiles_linear": {
+            "0": 128,
+            "0.05": 41681.0,
+            "0.25": 72135.0,
+            "0.5": 81380.0,
+            "0.75": 94047.0,
+            "0.95": 113691.0,
+            "0.99": 120976.99999999999,
+            "1": 178684
+          },
+          "max": 178684,
+          "sum_known": 223661398,
+          "complete_sum": 223661398
+        }
+      },
+      "clockCategories": {
+        "accepted": {
+          "true": 2781
+        },
+        "accepted_and_return_after_deadline": {
+          "false": 2410,
+          "true": 371
+        },
+        "receipt_at_or_before_deadline": {
+          "true": 2781
+        },
+        "return_after_deadline": {
+          "false": 2410,
+          "true": 371
+        }
+      },
+      "receiptSlackMs": {
+        "observations": 2781,
+        "known": 2781,
+        "missing": 0,
+        "min": 5.03081,
+        "median": 37.473861,
+        "quantiles_linear": {
+          "0": 5.03081,
+          "0.05": 9.041662,
+          "0.25": 22.96545,
+          "0.5": 37.473861,
+          "0.75": 66.470523,
+          "0.95": 82.419727,
+          "0.99": 99.5014206,
+          "1": 99.591698
+        },
+        "max": 99.591698,
+        "sum_known": 120182.666363,
+        "complete_sum": 120182.666363
+      },
+      "wholeMctsAllocatedNodes": null
+    },
+    {
+      "compact": {
+        "contrast": 1,
+        "engine": "nnue",
+        "identity": "nnue-residual-f32:sha256:eb0fbc9357252e916b1c6314bee6f6c76d975828c15cc439cceb9766309fb5b9",
+        "observations": 2771,
+        "stops": {
+          "\"cancelled\"": 1,
+          "\"depth_cap\"": 159,
+          "\"internal_time_limit\"": 2611
+        },
+        "failures": {
+          "null": 2771
+        },
+        "receipt_ms": {
+          "observations": 2771,
+          "known": 2771,
+          "missing": 0,
+          "min": 0.412705,
+          "median": 62.803669,
+          "quantiles_linear": {
+            "0": 0.412705,
+            "0.05": 1.7076065,
+            "0.25": 34.7556795,
+            "0.5": 62.803669,
+            "0.75": 77.9146195,
+            "0.95": 91.2728445,
+            "0.99": 94.0661352,
+            "1": 94.992317
+          },
+          "max": 94.992317,
+          "sum_known": 158505.888914,
+          "complete_sum": 158505.888914
+        },
+        "returned_ms": {
+          "observations": 2771,
+          "known": 2771,
+          "missing": 0,
+          "min": 0.418271,
+          "median": 99.31468,
+          "quantiles_linear": {
+            "0": 0.418271,
+            "0.05": 1.7146255,
+            "0.25": 99.001536,
+            "0.5": 99.31468,
+            "0.75": 99.7093255,
+            "0.95": 101.16842,
+            "0.99": 103.8870247,
+            "1": 107.217801
+          },
+          "max": 107.217801,
+          "sum_known": 260343.674788,
+          "complete_sum": 260343.674788
+        },
+        "simulations": null,
+        "provider_head_rows": null,
+        "Alpha_whole_nodes": {
+          "observations": 2771,
+          "known": 2771,
+          "missing": 0,
+          "min": 128,
+          "median": 80811.0,
+          "quantiles_linear": {
+            "0": 128,
+            "0.05": 479.0,
+            "0.25": 70771.0,
+            "0.5": 80811.0,
+            "0.75": 93596.0,
+            "0.95": 113836.0,
+            "0.99": 120650.50000000009,
+            "1": 154579
+          },
+          "max": 154579,
+          "sum_known": 219596699,
+          "complete_sum": 219596699
+        }
+      },
+      "clockCategories": {
+        "accepted": {
+          "true": 2771
+        },
+        "accepted_and_return_after_deadline": {
+          "false": 2378,
+          "true": 393
+        },
+        "receipt_at_or_before_deadline": {
+          "true": 2771
+        },
+        "return_after_deadline": {
+          "false": 2378,
+          "true": 393
+        }
+      },
+      "receiptSlackMs": {
+        "observations": 2771,
+        "known": 2771,
+        "missing": 0,
+        "min": 5.007683,
+        "median": 37.196331,
+        "quantiles_linear": {
+          "0": 5.007683,
+          "0.05": 8.7271555,
+          "0.25": 22.0853805,
+          "0.5": 37.196331,
+          "0.75": 65.2443205,
+          "0.95": 98.2923935,
+          "0.99": 99.5010323,
+          "1": 99.587295
+        },
+        "max": 99.587295,
+        "sum_known": 118594.111086,
+        "complete_sum": 118594.111086
+      },
+      "wholeMctsAllocatedNodes": null
+    },
+    {
+      "compact": {
+        "contrast": 2,
+        "engine": "nnue_mcts",
+        "identity": "nnue-mcts-core209:sha256:9059b0d9a3069dc2a2ad6a4ef231796df24cc7935c541faf480d746eb4f53d7c",
+        "observations": 2854,
+        "stops": {
+          "\"decision_notified\"": 864,
+          "\"internal_time_limit\"": 1843,
+          "\"simulation_cap\"": 147
+        },
+        "failures": {
+          "null": 2854
+        },
+        "receipt_ms": {
+          "observations": 2854,
+          "known": 2854,
+          "missing": 0,
+          "min": 4.471389,
+          "median": 94.97902450000001,
+          "quantiles_linear": {
+            "0": 4.471389,
+            "0.05": 85.0550549,
+            "0.25": 93.8324275,
+            "0.5": 94.97902450000001,
+            "0.75": 94.992085,
+            "0.95": 94.99866705000001,
+            "0.99": 94.99972323,
+            "1": 94.999987
+          },
+          "max": 94.999987,
+          "sum_known": 262386.015859,
+          "complete_sum": 262386.015859
+        },
+        "returned_ms": {
+          "observations": 2854,
+          "known": 2854,
+          "missing": 0,
+          "min": 4.479129,
+          "median": 98.1628805,
+          "quantiles_linear": {
+            "0": 4.479129,
+            "0.05": 92.1675081,
+            "0.25": 95.72526275,
+            "0.5": 98.1628805,
+            "0.75": 99.94489875,
+            "0.95": 103.27127045,
+            "0.99": 109.26419803999995,
+            "1": 147.194704
+          },
+          "max": 147.194704,
+          "sum_known": 274204.274466,
+          "complete_sum": 274204.274466
+        },
+        "simulations": {
+          "observations": 2854,
+          "known": 2854,
+          "missing": 0,
+          "min": 1868,
+          "median": 4214.5,
+          "quantiles_linear": {
+            "0": 1868,
+            "0.05": 3057.6,
+            "0.25": 3778.25,
+            "0.5": 4214.5,
+            "0.75": 4722.5,
+            "0.95": 16384.0,
+            "0.99": 16384.0,
+            "1": 16384
+          },
+          "max": 16384,
+          "sum_known": 14437160,
+          "complete_sum": 14437160
+        },
+        "provider_head_rows": {
+          "observations": 2854,
+          "known": 2854,
+          "missing": 0,
+          "min": 3,
+          "median": 3983.0,
+          "quantiles_linear": {
+            "0": 3,
+            "0.05": 2343.65,
+            "0.25": 3503.75,
+            "0.5": 3983.0,
+            "0.75": 4425.0,
+            "0.95": 5034.0,
+            "0.99": 5440.0,
+            "1": 6310
+          },
+          "max": 6310,
+          "sum_known": 11053977,
+          "complete_sum": 11053977
+        },
+        "Alpha_whole_nodes": null
+      },
+      "clockCategories": {
+        "accepted": {
+          "true": 2854
+        },
+        "accepted_and_return_after_deadline": {
+          "false": 2158,
+          "true": 696
+        },
+        "provider.physical_kernel_calls": {
+          "null": 2854
+        },
+        "receipt_at_or_before_deadline": {
+          "true": 2854
+        },
+        "return_after_deadline": {
+          "false": 2158,
+          "true": 696
+        },
+        "simulation_cap_reached": {
+          "false": 2708,
+          "true": 146
+        },
+        "whole_nodes_at_or_above_cap": {
+          "false": 2854
+        }
+      },
+      "receiptSlackMs": {
+        "observations": 2854,
+        "known": 2854,
+        "missing": 0,
+        "min": 5.000013,
+        "median": 5.0209755000000005,
+        "quantiles_linear": {
+          "0": 5.000013,
+          "0.05": 5.00133295,
+          "0.25": 5.007915,
+          "0.5": 5.0209755000000005,
+          "0.75": 6.1675725,
+          "0.95": 14.944945099999993,
+          "0.99": 78.62369207999988,
+          "1": 95.528611
+        },
+        "max": 95.528611,
+        "sum_known": 23013.984141,
+        "complete_sum": 23013.984141
+      },
+      "wholeMctsAllocatedNodes": {
+        "observations": 2854,
+        "known": 2854,
+        "missing": 0,
+        "min": 8,
+        "median": 138726.0,
+        "quantiles_linear": {
+          "0": 8,
+          "0.05": 6674.3,
+          "0.25": 13025.5,
+          "0.5": 138726.0,
+          "0.75": 256548.25,
+          "0.95": 369049.9999999999,
+          "0.99": 416850.32999999984,
+          "1": 476413
+        },
+        "max": 476413,
+        "sum_known": 422814072,
+        "complete_sum": 422814072
+      }
+    },
+    {
+      "compact": {
+        "contrast": 2,
+        "engine": "nnue",
+        "identity": "nnue-residual-f32:sha256:eb0fbc9357252e916b1c6314bee6f6c76d975828c15cc439cceb9766309fb5b9",
+        "observations": 2888,
+        "stops": {
+          "\"cancelled\"": 6,
+          "\"depth_cap\"": 153,
+          "\"internal_time_limit\"": 2729
+        },
+        "failures": {
+          "null": 2888
+        },
+        "receipt_ms": {
+          "observations": 2888,
+          "known": 2888,
+          "missing": 0,
+          "min": 0.460031,
+          "median": 62.622192,
+          "quantiles_linear": {
+            "0": 0.460031,
+            "0.05": 7.4992265499999995,
+            "0.25": 34.93529275,
+            "0.5": 62.622192,
+            "0.75": 77.813309,
+            "0.95": 91.2451922,
+            "0.99": 94.1874588,
+            "1": 94.998729
+          },
+          "max": 94.998729,
+          "sum_known": 164573.04641,
+          "complete_sum": 164573.04641
+        },
+        "returned_ms": {
+          "observations": 2888,
+          "known": 2888,
+          "missing": 0,
+          "min": 0.46598,
+          "median": 99.5152235,
+          "quantiles_linear": {
+            "0": 0.46598,
+            "0.05": 7.5120309999999995,
+            "0.25": 99.24808275,
+            "0.5": 99.5152235,
+            "0.75": 99.8979435,
+            "0.95": 101.6146579,
+            "0.99": 103.97856786,
+            "1": 107.255112
+          },
+          "max": 107.255112,
+          "sum_known": 273390.268267,
+          "complete_sum": 273390.268267
+        },
+        "simulations": null,
+        "provider_head_rows": null,
+        "Alpha_whole_nodes": {
+          "observations": 2888,
+          "known": 2888,
+          "missing": 0,
+          "min": 128,
+          "median": 80377.0,
+          "quantiles_linear": {
+            "0": 128,
+            "0.05": 6696.94999999997,
+            "0.25": 70198.5,
+            "0.5": 80377.0,
+            "0.75": 94069.5,
+            "0.95": 112270.55,
+            "0.99": 119911.02000000003,
+            "1": 169458
+          },
+          "max": 169458,
+          "sum_known": 227630692,
+          "complete_sum": 227630692
+        }
+      },
+      "clockCategories": {
+        "accepted": {
+          "true": 2888
+        },
+        "accepted_and_return_after_deadline": {
+          "false": 2299,
+          "true": 589
+        },
+        "receipt_at_or_before_deadline": {
+          "true": 2888
+        },
+        "return_after_deadline": {
+          "false": 2299,
+          "true": 589
+        }
+      },
+      "receiptSlackMs": {
+        "observations": 2888,
+        "known": 2888,
+        "missing": 0,
+        "min": 5.001271,
+        "median": 37.377808,
+        "quantiles_linear": {
+          "0": 5.001271,
+          "0.05": 8.7548078,
+          "0.25": 22.186691,
+          "0.5": 37.377808,
+          "0.75": 65.06470725,
+          "0.95": 92.50077345000001,
+          "0.99": 99.46671149,
+          "1": 99.539969
+        },
+        "max": 99.539969,
+        "sum_known": 124226.95359,
+        "complete_sum": 124226.95359
+      },
+      "wholeMctsAllocatedNodes": null
+    }
+  ],
+  "scopeNotes": [
+    "Authority action receipt is distinct from final return/drain/cleanup.",
+    "Selected completed snapshot and whole-search counters are separate, never added.",
+    "Provider request rows are cumulative-after minus cumulative-before, never sums of after.",
+    "Root backup is included in simulation K; terminal paths can consume zero new head rows.",
+    "Missing counters are NULL, not zero; static evaluations are not physical NN calls.",
+    "Scalar linear quantiles only; no new bootstrap, qualifier, rules, or outcome replay.",
+    "Original accepted 384 outcomes/statistical analysis remain separate and unchanged."
+  ],
+  "costs": {
+    "executeInclusiveSeconds": 1.2666551698930562,
+    "nestedDescriptivePassSeconds": 1.1924173099687323,
+    "nestedNotAdded": true
+  },
+  "cleanup": {
+    "actualReturnedReapedHandlesComplete": true,
+    "remaining": [],
+    "knownDirectChildAbsent": true,
+    "ownTMPRemoved": true,
+    "sourceAuthorStillPreparingCondition": true
+  },
+  "newBootstrapRNGModelSearchGames": 0,
+  "interpretation": "MCTS median last-action receipt near95ms in both contrasts; early K512 cap explanation cannot be transferred. K16384 cap stops remain159/2820 and147/2854, while selectedsnapshot cap-reached counts157/146 remain distinct. Does not establish everyturn usedfullclock, cleanupunder100ms, physicalNNthroughput or learnedprior-onlycause.",
+  "next": "Fixed samejointvalue/samePUCT learned-v-uniform128 on same64EXPOSEDfamilies, seed435202610231/10000/linear95 prospectiveconfig; no gamesadmitted. Policy-compute omission cost explicit; no artificialextraforward. One existing related source check of clock/prior/session semantics after fixedcondition packet, independent source/software continues."
+}
