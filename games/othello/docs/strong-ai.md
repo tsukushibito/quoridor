@@ -81,7 +81,7 @@ STM/盤面向き/色、raw STEP単位、disc単位、丸め、clamp段階と外�
 
 2026-10-23のrequest-boundary実観測は[保存結果](../../../research-data/othello/strong-ai-n96/request-boundary-two-owner-observation-result-v1.json)へ結合した。Rustはdepth18 timeoutから17を保持し、その終端で成功PVSを後段pollが破棄した事象は観測されなかった。本家はdepth22のfuture待機満了後にjoinし21を保持した。instrumented owner各1入力の事実に限定し、同仕事・kernel速度・棋力差の原因や修復成功とはしない。次は実行を重ねず、現役評価器と固定本家の直接midgame経路をsourceで対応させる。
 
-2026-10-23の[直接owner warm-work source](../../../research-data/othello/strong-ai-n96/direct-owner-warm-work-source-v1.json)は、既存4系列・16rootで現役評価と実play/eval/LIFOundoを呼ぶ有限carrierだけを準備した。Rust black_boxと本家GNU asm barrierの費用、実loop codegen・回数・同仕事は未資格であり、静的sourceから速度や対局差の原因を認定しない。両方UNBUILT/UNRUN、入力・回数・順序・実image・資源・時計の入場は別途束縛し、Search/対局/benchmarkを自動再演しない。
+2026-10-23の[直接owner warm-work source](../../../research-data/othello/strong-ai-n96/direct-owner-warm-work-source-v1.json)は、既存4系列・16rootで現役評価と実play/eval/LIFOundoを呼ぶ有限carrierとする。両新imageのcompile-onlyと[限定したemitted-loop確認](../../../research-data/othello/strong-ai-n96/direct-owner-warm-work-emitted-loops-v1.json)で、実ownerの仕事とloop進行がsuccess backedge内に残ることを記録した。Rust black_boxと本家GNU asm barrier・bookkeepingの費用、実処理回数・同仕事・速度や対局差の原因は未証明である。計測はUNRUNで、実入力・回数・順序・資源・時計の入場を別途束縛し、Search/対局/benchmarkを自動再演しない。
 
 ## 性能・棋力・browserへの接続
 

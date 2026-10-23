@@ -1,0 +1,44 @@
+{
+  "scope": "TWO_NEW_IMAGES_FINITE_EMITTED_WORK_SOFTWARE_FACTS_ONLY",
+  "rust": {
+    "contract": {
+      "path": "/workspaces/quoridor/.worktree/othello-core-n96/.artifacts/othello-full-search-n96/direct-owner-warm-loop-codegen-v1/emitted-loop-contract.json",
+      "bytes": 3604,
+      "mode": "0644",
+      "sha256": "d645539e94ddcd6b39bdd376a198f2a04a42d6b6f18ead539bdf65854bff27f9"
+    },
+    "STOP": {
+      "path": "/workspaces/quoridor/.worktree/othello-core-n96/.artifacts/othello-full-search-n96/direct-owner-warm-loop-codegen-v1/software-stop.json",
+      "bytes": 7343,
+      "mode": "0644",
+      "sha256": "05d2cb0ec25f67c56773adf1d3c5253959f9c19b8fcb02aaf0b82784ac44dc0e"
+    },
+    "imageSHA256": "9b8b5ab199e0d5d1aa85a63219127cf199ff7060f59809f9b6570bf31a2ba241",
+    "targetCount": 2,
+    "disassemblyBytes": 22314,
+    "locatorSelectedRows": 29,
+    "locatorSelectedBytes": 4199,
+    "unfilteredNonmatches": "UNKNOWN",
+    "finding": "evaluate_roots and play_evaluate_undo real owner calls/inlinedundo, dynamic loop progress, checksum/last-value stores retained inside success loops."
+  },
+  "original": {
+    "packet": {
+      "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-selective-reference-n96/primitive-warm-work-emitted-loops-v1/packet-refs.json",
+      "bytes": 3210,
+      "mode": "0644",
+      "sha256": "5524fc65055ca5144a8cd980910c6fb53343264e9dd1ed42508b17f04a88678f"
+    },
+    "imageSHA256": "f65e20fd7b5ec2de1147aa6ff0f924160933d92db7e0121b0ada4fdfad246949",
+    "targetCount": 2,
+    "disassemblyBytes": 26662,
+    "locatorRawBytes": 159252,
+    "locatorUsefulBytes": 635,
+    "locatorRawLines": 489,
+    "toolErrorOrCap": false,
+    "finding": "B21 reports evaluations[e3c0,e67e) and move_evaluations[df80,e3bf) retain original gather/reduction and genuine move/eval/undo inside backedges, indexing/increment/checksum/result stores; aggregate clocks outside loops."
+  },
+  "limits": "Root verified small immutable contract/packet metadata only; no rawdisassembly/tool/ELF rerun. Emitted dynamic incoming counts and retained work do not prove actual invocation counts/executed ISA, equivalent barrier overhead, kernel latency, same-work Search or depth/WDL cause.",
+  "actualInputWeightsCountsOrderFairTimingResourcesAdmission": null,
+  "benchmarkExecuted": false,
+  "sourceOrModelChanges": false
+}
