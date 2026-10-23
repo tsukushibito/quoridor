@@ -2196,7 +2196,13 @@ def operation_cpu_plan(spec):
     if spec["kind"] == "build" and "test_cpu_cores" in spec:
         test = _build_test_cpu_cores(spec)
     if spec["kind"] == "run":
-        if document(spec["experiment"])["phase"] == "corpus":
+        phase = document(spec["experiment"])["phase"]
+        if phase == "analysis":
+            require(
+                spec.get("child_cpu_cores") == cores,
+                "saved analysis uses its single declared Python worker",
+            )
+        elif phase == "corpus":
             cores = spec["child_cpu_cores"]
             require(
                 isinstance(cores, list)

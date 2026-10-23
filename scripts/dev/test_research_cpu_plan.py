@@ -23,6 +23,31 @@ def lifecycle():
 
 
 class CPUPlanBoundaries(unittest.TestCase):
+    def test_saved_analysis_has_one_worker_and_keeps_management_separate(self):
+        lc = lifecycle()
+        spec = dict(
+            kind="run",
+            experiment="experiment",
+            child_cpu_cores=[12],
+            limits=dict(worker_cpu=12, guardian_cpu=18),
+        )
+        with patch.object(lc, "document", return_value=dict(phase="analysis")):
+            plan = lc.operation_cpu_plan(spec)
+            self.assertEqual(plan.management, (18,))
+            self.assertEqual(plan.commands["run"], (12,))
+            self.assertEqual(plan.all, (12, 18))
+            for team in (None, [12, 14], [18], [12, 18]):
+                spec["child_cpu_cores"] = team
+                with (
+                    self.subTest(team=team),
+                    self.assertRaisesRegex(lc.Refused, "single declared Python worker"),
+                ):
+                    lc.operation_cpu_plan(spec)
+            spec["child_cpu_cores"] = [12]
+            spec["limits"]["guardian_cpu"] = 12
+            with self.assertRaisesRegex(lc.Refused, "roles overlap"):
+                lc.operation_cpu_plan(spec)
+
     def test_runtime_plan_roundtrip_rejects_an_invented_scope_or_count(self):
         record = process.CPUPlan([0, 18], {"run": [0, 12]}).record()
         self.assertEqual(process.CPUPlan.from_record(record).record(), record)

@@ -1,0 +1,110 @@
+{
+  "schema": "quoridor.saved384-analysis-condition.v1",
+  "status": "SUBMITTED_RESULTS_UNKNOWN",
+  "submission": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/dev64-three-contrast384-analysis-v1/submission.json",
+    "bytes": 1892,
+    "mode": "0644",
+    "sha256": "2aba2df9808e7137a59f8e01df4d81565fd5a78525fa7fbef7ff881f7e7851cb"
+  },
+  "job": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/dev64-three-contrast384-analysis-v1/job.json",
+    "bytes": 919,
+    "mode": "0644",
+    "sha256": "1cf610c840a9f8168c6ae12b83ee7047b4d34e87991f905283d25210656a47c1"
+  },
+  "intent": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/dev64-three-contrast384-analysis-v1/RUN.json",
+    "bytes": 4653,
+    "mode": "0644",
+    "sha256": "527f3b267d9a433716e2b6e2ad2348f9d5673922c0ba4ef8ac46bb34dd0a1499"
+  },
+  "experiment": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/dev64-three-contrast384-analysis-v1/experiment.json",
+    "bytes": 113448,
+    "mode": "0644",
+    "sha256": "22d2f989d7b058dbf77ceff6ac29c877b68a470bbb3d3d05106d042a15c67609"
+  },
+  "sourceCorrespondence": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/dev64-three-contrast384-analysis-v1/source-correspondence.json",
+    "bytes": 2888,
+    "mode": "0644",
+    "sha256": "b95d00022e7200da09ed87f0a61687b55ce26c54fab944b3eebeef5fb3dcf485"
+  },
+  "runtime": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/dev64-three-contrast384-analysis-v1/python-numpy-runtime.json",
+    "bytes": 54573,
+    "mode": "0644",
+    "sha256": "9c8f115b3082ec1c5c9ecad667e4b71618397b94d0a9ce20f1ccc0e55917fbb0"
+  },
+  "numericalCorrespondence": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/dev64-three-contrast384-analysis-v1/numerical-correspondence.json",
+    "bytes": 26406,
+    "mode": "0644",
+    "sha256": "9779f2c066de7d357111e624e3ce082a6ece0bc90d7de7c42116772e6642248c"
+  },
+  "support": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/dev64-three-contrast384-analysis-v1/support.json",
+    "bytes": 1305,
+    "mode": "0644",
+    "sha256": "71ede093b3405cbfe166250454c3f6528f694239db97bd4c555b763256055acf"
+  },
+  "cpuPlan": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/dev64-three-contrast384-analysis-v1/cpu-plan.json",
+    "bytes": 216,
+    "mode": "0644",
+    "sha256": "d5e91a5ce09baa5d7de1527f082ead9b60183c7c88a71c66ee495503b2d16e86"
+  },
+  "sourceFix": "Normal operation CPU resolver now assigns phaseanalysis one explicit Python worker rather than refusing it as a native search team; management and physical/RAM/cancel/cleanup guards retained.",
+  "newCpuScopeRegression": {
+    "passed": 1,
+    "skipped": 0,
+    "returned": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/dev64-three-contrast384-analysis-v1/new-cpu-scope.returned.json",
+      "bytes": 1407,
+      "mode": "0644",
+      "sha256": "5316e8db9be4ea891e16b707f0bd554ecd03f08278f91d518ae1ef0c7d7e6eec"
+    },
+    "log": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/dev64-three-contrast384-analysis-v1/new-cpu-scope.log",
+      "bytes": 263,
+      "mode": "0644",
+      "sha256": "807418f2653d972c12e45e88cb6feb3ffcdeb7ed967de96a636121b87f541cf7"
+    },
+    "commandWallSeconds": 0.18246657401323318,
+    "modelSearchRNGCalls": 0
+  },
+  "formalContract": {
+    "sharedFamilies": 64,
+    "plannedGames": 384,
+    "contrasts": 3,
+    "colourPairs": 192,
+    "resamples": 10000,
+    "sampler": "ONE shared PCG64 index table10000x64",
+    "seed": 43520261023,
+    "quantileMethod": "linear",
+    "tails": ["1/120", "119/120"],
+    "anyIncompletePlannedPair": "ALL3 formal intervalsNULL; retain384denominator/UNKNOWN"
+  },
+  "resources": {
+    "CPU": 2,
+    "worker": 12,
+    "management": 18,
+    "libraryThreads": 1,
+    "GPU": 0,
+    "familyB": 2147483648,
+    "controllerB": 67108864,
+    "hostReserveB": 4294967296,
+    "commandGuardSeconds": 240,
+    "parentGuardSeconds": 300
+  },
+  "result": "UNKNOWN until original completion; submission only read",
+  "nativeSearchGamesModelCalls": 0,
+  "replayCorrection": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/quoridor-strong-ai435/dev64-three-contrast384-completion-v1.json",
+    "bytes": 11063,
+    "mode": "0644",
+    "sha256": "b91b27e8b0ec715304b62bd7060e6815bdd1f2febe5bc475d3da67a8e6c509ee"
+  },
+  "historicalFailuresCostsPausesSealsModelsDefaults50GB": "preserved"
+}
