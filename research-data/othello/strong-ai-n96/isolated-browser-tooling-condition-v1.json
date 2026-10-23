@@ -1,0 +1,88 @@
+{
+  "schema": 1,
+  "stage": "CONDITION_FIXED_SUBMISSION_ACCEPTED_NO_TOOL_RESULT_YET",
+  "purpose": "One isolated pinned package and headless-shell download only; no browser launch/model/input/weights/Search",
+  "packageVersion": "1.64.1",
+  "registryIntegrity": "sha512-HCrVhHr5QQuwYoswEUGTb7gGp522yflbv/ST8nF4sFWGuLjQCt17Q/EubpGGSNKYn1tsTCPZxqHhHCfVURu7UA==",
+  "registryTarball": "https://registry.npmjs.org/playwright/-/playwright-1.64.1.tgz",
+  "toolRoot": "/workspaces/quoridor/.worktree/assets/tools/othello-fullwasm-browser-v1",
+  "commands": [
+    {
+      "name": "isolated-npm-install",
+      "argv": [
+        "/home/vscode/.local/opt/node/v24.22.0/bin/node",
+        "/home/vscode/.local/opt/node/v24.22.0/lib/node_modules/npm/bin/npm-cli.js",
+        "install",
+        "--ignore-scripts",
+        "--no-audit",
+        "--no-fund",
+        "--save-exact"
+      ],
+      "seconds": 240
+    },
+    {
+      "name": "isolated-headless-shell-install",
+      "argv": [
+        "/home/vscode/.local/opt/node/v24.22.0/bin/node",
+        "/workspaces/quoridor/.worktree/assets/tools/othello-fullwasm-browser-v1/node_modules/playwright/cli.js",
+        "install",
+        "chromium",
+        "--only-shell"
+      ],
+      "seconds": 360
+    }
+  ],
+  "resources": {
+    "family_B": 2147483648,
+    "controller_B": 67108864,
+    "descendants_B": 2080374784,
+    "host_reserve_B": 4294967296,
+    "library_threads": 1,
+    "GPU": 0,
+    "controller_seconds": 660,
+    "parent_seconds": 720,
+    "newToolStorageUpperBytes": 1073741824,
+    "controlLogUpperBytes": 16777216,
+    "globalCapBytes": 50000000000
+  },
+  "cpuPlan": {
+    "management": [
+      18
+    ],
+    "commands": {
+      "probe": [
+        4
+      ]
+    },
+    "allocation": [
+      4,
+      18
+    ],
+    "resource_CPUs": 2,
+    "worker_CPUs": 1,
+    "library_threads": 1
+  },
+  "packageDescriptor": {
+    "name": "othello-fullwasm-browser-tools",
+    "private": true,
+    "version": "1.0.0",
+    "type": "module",
+    "dependencies": {
+      "playwright": "1.64.1"
+    }
+  },
+  "guard": "Existing CycleResources + execute covers affinity/physical peer/RAM/deadline/CANCEL/owned tool allocation/process cleanup. Storage bound is observed by existing guard, not a filesystem quota or measured need. Partial files/errors retained, no automatic command reissue.",
+  "noOSDependencyInstall": true,
+  "noSharedEnvironmentUpdate": true,
+  "userRequestedBrowserLaunches": 0,
+  "modelInputWeightLoads": 0,
+  "Search": 0,
+  "currentGlobalUsage": "UNKNOWN beyond saved observations; no old unused quota credited or cap increased",
+  "officialDocs": "https://playwright.dev/docs/browsers#chromium-headless-shell",
+  "workerControllerSource": {
+    "bytes": 18543,
+    "sha256": "53f5adfe67d585e1257c08a3631b8305586348c78a2f037ecf254c05fb04f7a7",
+    "scope": "same A16 source only;8 refs verified, author39 source checks byref, no runtime replay"
+  },
+  "futureFunctionalEntry": "Actual installed tool refs/closure/ABI/input/weights/resources/outerguardian bound separately; ONE Worker operation, no expected score or activecancel/clock/strength grant."
+}
