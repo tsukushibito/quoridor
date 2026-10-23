@@ -1,0 +1,68 @@
+{
+  "schema": 1,
+  "status": "ONE_SOURCE_GROUNDED_RENDER_CONDITION_SUBMITTED_ONLY",
+  "job_id": "2afd57af-3483-49b3-9bdf-40ecc03cc385",
+  "submission": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/fullwasm-cpu-render-functional-v1/submission.json",
+    "bytes": 1072,
+    "mode": "0644",
+    "sha256": "c2702c9722e4d486c692816c91472ff45528a852f5ab6f16d591a2a69fb6ce1a"
+  },
+  "RootConfig": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/fullwasm-cpu-render-functional-v1/config.json",
+    "bytes": 6223,
+    "mode": "0644",
+    "sha256": "984864fb27fe0484dd8f6742ab07c1b92f0b9125aa9173f6fb69c47bd4c1cfe5"
+  },
+  "NodeConfig": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/fullwasm-cpu-render-functional-v1/controller-config.json",
+    "bytes": 48038,
+    "mode": "0644",
+    "sha256": "6283c4aec3d2ae57da20f450ab18540d93de5b2878ac12da6f8e041e8005a2bc"
+  },
+  "controller": {
+    "path": "/workspaces/quoridor/.worktree/othello-core-n96/.artifacts/othello-full-search-n96/browser-cpu-render-condition-source-v1/postimages/controller.mjs",
+    "bytes": 18609,
+    "mode": "0644",
+    "sha256": "7bd303efa43fcf1b222db827cbc0c29006e1b70ae26f4b236154b690a5ae1ed7"
+  },
+  "sourcePacket": {
+    "path": "/workspaces/quoridor/.worktree/othello-core-n96/.artifacts/othello-full-search-n96/browser-cpu-render-condition-source-v1/source-packet.json",
+    "bytes": 6175,
+    "mode": "0644",
+    "sha256": "bbc12639ffe725162c598590b69b04028466387d13a2adf541a2502ee3c20924"
+  },
+  "sourceRefsVerified": 14,
+  "renderArgs": [
+    "--disable-gpu",
+    "--disable-software-rasterizer"
+  ],
+  "sourceRationale": "Pinned Chromium156.0.8078.4 source excludes hardware + SoftwareGL modes, leaves Linux DISPLAY_COMPOSITOR and common platform/sandbox startup. No no-GPU-process claim.",
+  "observedCPU0RoleOrCause": null,
+  "causalCure": null,
+  "runtimeOutcome": null,
+  "functionalQualification": null,
+  "sourceChecks": "Author scoped Prettier/19checks/protected/inverse reused byref, not replayed; Root exact14refs and sparse added args line reviewed.",
+  "sameScope": {
+    "payloadCPU": 4,
+    "managementCPU": 18,
+    "libraryThreads": 1,
+    "GPU": 0,
+    "familyBytes": 4294967296,
+    "controllerBytes": 1073741824,
+    "descendantsBytes": 3221225472,
+    "hostReserveBytes": 4294967296,
+    "controlLogTMPUpperBytes": 67108864,
+    "ownerSearchBudgetMs": 30000,
+    "identityTimeMs": 15000,
+    "commandSeconds": 150,
+    "controllerSeconds": 180,
+    "parentSeconds": 240,
+    "sandboxEnabled": true,
+    "oneWorkerOperation": true
+  },
+  "noExpectedScoreMoveNodes": true,
+  "noOldSuccessfulTestOrScienceReplay": true,
+  "noRuntimeResultPoll": true,
+  "preserved": "Both original CPU-scope failures/nestedFAILED and diagnosticouter0 meanings, costs/NULL/UNKNOWN/models/defaults/pauses/seals/50GB unchanged. C435/B21 independent."
+}
