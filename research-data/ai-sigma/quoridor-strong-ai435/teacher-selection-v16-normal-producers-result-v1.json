@@ -1,0 +1,344 @@
+{
+  "condition": "SAME b44f teacherV16:16 EXPOSED components/32original+trueLR views; selectedAlpha32 then CedarAlpha32",
+  "status": "NORMAL_TWO_PRODUCERS_COMPLETE_DETAIL_JOIN_PENDING",
+  "outer_result": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-decisions64-output-bound-entry-v2/runtime/result.json",
+    "bytes": 522,
+    "mode": "0600",
+    "sha256": "9adaa97da5a3e100ec606b78ddceb265301fac13302e61499f3c17362d671872"
+  },
+  "outer_config": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-decisions64-output-bound-entry-v2/runtime/config.json",
+    "bytes": 970,
+    "mode": "0600",
+    "sha256": "1788cd3ec449628b8f9ab245273841fb09982f806f7ceeca14b10f174caeb2e8"
+  },
+  "sequence_result": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-decisions64-output-bound-entry-v2/sequence/result.json",
+    "bytes": 3606,
+    "mode": "0644",
+    "sha256": "1ef754dc4193c435af21a5a078975e444fe298e26316619f3310e702fe5ec19b"
+  },
+  "producer_projection": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-decisions64-output-bound-entry-v2/completion-7f1496ed/producer-format-projection.json",
+    "bytes": 10439,
+    "mode": "0644",
+    "sha256": "815042520112d11776e21867d95ea8f1c8255e5285c5ef36c1d5a000dbdf109d"
+  },
+  "producers": [
+    {
+      "producer": "selected_alpha",
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-decisions64-output-bound-entry-v2/sequence/run-000/operation/manifest.json",
+        "bytes": 8515,
+        "mode": "0644",
+        "sha256": "2efb9c03f437a35cf8e2b60dbdc9fc417f3e102644a28901a7ec54b137ca6bc7"
+      },
+      "experiment": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-decisions64-output-bound-entry-v2/sequence/run-000/experiment.json",
+        "sha256": "81837acaa3f07c4e9ece2ae7ff39f6bba0180fbfb5344fc8adef5eaae2a237c1",
+        "bytes": 3679,
+        "mode": "0644"
+      },
+      "configuration": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-decisions64-output-bound-entry-v2/control/selected_alpha.config.json",
+        "sha256": "6aff09461f2505c62c4cb17cac4086f099312ad6048c0992fb70318ffa34fb1a",
+        "bytes": 41012,
+        "mode": "0644"
+      },
+      "report": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-decisions64-output-bound-entry-v2/data/selected_alpha/result.json",
+        "sha256": "5bac91be8e2516f422ffa0d80dae5da9fb7e08741a3c9f090a22d09b89dfca0e",
+        "bytes": 4297,
+        "mode": "0644"
+      },
+      "publication_schema": "quoridor.arena.reference-result.v1",
+      "inner_report_schema": "quoridor-decisions-v1",
+      "published_outcome_count": 32,
+      "inline_outcomes_count": 0,
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-decisions64-output-bound-entry-v2/data/selected_alpha/completed.jsonl.gz",
+          "sha256": "aa1fcfb01b18140f7ad42c0532c2cf3580c76aa51e50655a250103e17b813056",
+          "bytes": 35462,
+          "mode": "0644"
+        },
+        "raw_sha256": "97abdbc8cc3a5c3b3027be96b8f02973b286c332c3678148ba4cd6ca5a09a08d",
+        "raw_bytes": 219038
+      },
+      "native_manifest": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-decisions64-output-bound-entry-v2/data/selected_alpha/manifest.json",
+        "sha256": "b8c6b36246e3c83dc5d4a7fee84975c5fdbb6692f3a432035aad80d6263173a8",
+        "bytes": 74823,
+        "mode": "0644"
+      },
+      "normal_validation": {
+        "status": "PASS",
+        "data_status": "PASS",
+        "data_errors": [],
+        "observed": 32,
+        "missing": []
+      },
+      "scalar_report": {
+        "planned": 32,
+        "rows": 0,
+        "nn_calls": 0,
+        "actual_batches": {},
+        "wall_seconds": 3.365902783,
+        "inference_seconds": 0.0,
+        "stopped": null,
+        "dataset": null,
+        "score": null,
+        "model_sha": null,
+        "all_workers_joined": true
+      },
+      "actual_return": {
+        "command": [
+          "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-frame-build-v1/image/quoridor-runner",
+          "decisions",
+          "--experiment",
+          "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-decisions64-output-bound-entry-v2/sequence/run-000/experiment.json",
+          "--experiment-sha256",
+          "81837acaa3f07c4e9ece2ae7ff39f6bba0180fbfb5344fc8adef5eaae2a237c1"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 1406705,
+          "start_ticks": "90727990",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "run": [
+              12,
+              18
+            ],
+            "test": [
+              12
+            ]
+          },
+          "allocation": [
+            12,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "run",
+        "log_bytes_seen": 557,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 557,
+        "wall_seconds": 3.412191382027231,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      }
+    },
+    {
+      "producer": "cedar_alpha",
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-decisions64-output-bound-entry-v2/sequence/run-001/operation/manifest.json",
+        "bytes": 8506,
+        "mode": "0644",
+        "sha256": "12bb4370f99c478b438aa72755e938ff7fede0cabfc54a13bc6a388a379ac530"
+      },
+      "experiment": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-decisions64-output-bound-entry-v2/sequence/run-001/experiment.json",
+        "sha256": "e7c040b2f62c0dc1842752e2ec07494932bb2162d81e64fb76a641b25f64c223",
+        "bytes": 3612,
+        "mode": "0644"
+      },
+      "configuration": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-decisions64-output-bound-entry-v2/control/cedar_alpha.config.json",
+        "sha256": "a94ca6f36d29e16347ac0c68e826d849c055481151bbfd2af154ad0da2a140b9",
+        "bytes": 40977,
+        "mode": "0644"
+      },
+      "report": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-decisions64-output-bound-entry-v2/data/cedar_alpha/result.json",
+        "sha256": "172d655d34d47c22a5bf7409c37463d850027000b4529da90541a8093cfe2f4d",
+        "bytes": 4283,
+        "mode": "0644"
+      },
+      "publication_schema": "quoridor.arena.reference-result.v1",
+      "inner_report_schema": "quoridor-decisions-v1",
+      "published_outcome_count": 32,
+      "inline_outcomes_count": 0,
+      "archive": {
+        "encoding": "gzip-single-member-v1",
+        "compressed": {
+          "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-decisions64-output-bound-entry-v2/data/cedar_alpha/completed.jsonl.gz",
+          "sha256": "7e3b297bcf235d56f006e9c24961804d9e8fa662da40e9fae15a99fd2b83aeac",
+          "bytes": 35089,
+          "mode": "0644"
+        },
+        "raw_sha256": "db0d29505813b73fd2dbae3e35fa0adad2162d0d968c7b3b3744b1467eca3400",
+        "raw_bytes": 218885
+      },
+      "native_manifest": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-decisions64-output-bound-entry-v2/data/cedar_alpha/manifest.json",
+        "sha256": "1d99bdf4a6b410d706d62f78e6d12fad1843941c3f86ebbd279c74c1a934edad",
+        "bytes": 74675,
+        "mode": "0644"
+      },
+      "normal_validation": {
+        "status": "PASS",
+        "data_status": "PASS",
+        "data_errors": [],
+        "observed": 32,
+        "missing": []
+      },
+      "scalar_report": {
+        "planned": 32,
+        "rows": 0,
+        "nn_calls": 0,
+        "actual_batches": {},
+        "wall_seconds": 3.375515114,
+        "inference_seconds": 0.0,
+        "stopped": null,
+        "dataset": null,
+        "score": null,
+        "model_sha": null,
+        "all_workers_joined": true
+      },
+      "actual_return": {
+        "command": [
+          "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-frame-build-v1/image/quoridor-runner",
+          "decisions",
+          "--experiment",
+          "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-decisions64-output-bound-entry-v2/sequence/run-001/experiment.json",
+          "--experiment-sha256",
+          "e7c040b2f62c0dc1842752e2ec07494932bb2162d81e64fb76a641b25f64c223"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 1406802,
+          "start_ticks": "90728838",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "run": [
+              12,
+              18
+            ],
+            "test": [
+              12
+            ]
+          },
+          "allocation": [
+            12,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "run",
+        "log_bytes_seen": 551,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 551,
+        "wall_seconds": 3.438572490005754,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      }
+    }
+  ],
+  "planned_requests": 64,
+  "normal_published_outcome_records": 64,
+  "normal_missing_records": 0,
+  "accepted_decision_details_and_UNKNOWN_census": null,
+  "detail_scope": "Both sole finalizers PASS with32 unique observed records each; this collector has not decoded compressed per-request details. Do not equate record count with64 accepted replies.",
+  "current_offline_joint_forward": 0,
+  "new_teacher_forward": 0,
+  "games": 0,
+  "remaining_joint_rows": 32,
+  "exact_tuple_and_100ms5_clock": "preserved via original normal configurations/Plans/Experiments/currentBuild, no tuning or new inputs",
+  "costs": {
+    "outer_parent_seconds": 17.544351981952786,
+    "native_command_seconds": [
+      3.412191382027231,
+      3.438572490005754
+    ],
+    "nested_not_added": true,
+    "same_pilot_command_remaining_seconds": 172.85958198609296,
+    "same_pilot_parent_remaining_seconds": 216.18930959119461
+  },
+  "holding_point": {
+    "whole_B": 16777216,
+    "points": [
+      {
+        "root": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-pilot-entry-v1",
+        "allocated_B": 1331200
+      },
+      {
+        "root": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-parent-directory-entry-v2",
+        "allocated_B": 184320
+      },
+      {
+        "root": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-decisions64-entry-v1",
+        "allocated_B": 356352
+      },
+      {
+        "root": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-decisions64-output-bound-entry-v2",
+        "allocated_B": 1138688
+      }
+    ],
+    "total_allocated_B": 3010560,
+    "not_peak_or_global_inventory": true,
+    "subsequent_control_tails_excluded": true
+  },
+  "caller_representation_gap": "Current618a selection_diagnostic passes compact reference-result to plain-report join; inline outcomes0. Existing maintained arena_reference_report must consume authoritative completion inventory/archive once in saved diagnostic.",
+  "next_entry": "Same C435.1 ordinary source-only caller correction; no replacement engine requests. Then NEW focused model-free format tests/affected fixture only and unchanged saved-diagnostic32 under residual budget; no new numerical condition.",
+  "original_FAILED_states_immutable": true,
+  "no_Search_reissue": true,
+  "archive_accounting": "Original normal finalizers validated archives; Root completion collection decodes0 compressed bodies, no raw bank/model/H bodies. Future sole saved diagnostic uses existing lossless reader, no new decompressed subcache.",
+  "pipeline_scientific_conclusion": null,
+  "full_fees": null,
+  "peak": null
+}

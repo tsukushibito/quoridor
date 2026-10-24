@@ -4569,3 +4569,14 @@ Oの標準attach source39180d63/entrycc59ecd4は、init+clear後のowned PIDへ�
 A16のstandard-attach entrycc59ecd4/new tests7561e098を私有software域へexact stageし、新2定義だけPASS（guarded .060390341095626354s）した。通常chooseの返却/原例外/cancel前0dispatchと、既存closeの一回停止・early exit/KILL拒否を合成portsで確認した。旧3成功やACK3未実行は走らせず、actual perf/native/model/Search/offline reportは0である。[新software結果](../research-data/othello/strong-ai-n96/packed-standard-attach-software-result-v1.json)。stdin-redactionの既受入れMain変更を再演せず、製品/math/model/defaultは変えない。
 
 新prospective私有bindingはFIFO/enable-ACKを含まないsource/testだけを使い、歴史的post/ACK案/原18feb raw・hash・費は削除・再読・再parseしない。kernel sampling readiness/window/fullSearch coverageや正常flushは未資格であり、source/software成功は旧失敗のcureでも新O数値実行許可でもない。
+
+
+### 2026-10-24: teacherV16 normal producers completed; saved diagnostic representation gap found before entry
+
+7f1496edはnormal sequenceの2operationと両finalizerがPASSし、selectedAlpha/Cedarそれぞれ32 unique records・missing[]・data errors[]・worker join・実guardiansのreap/process+handles/remaining[]/mask-persist完了を保存した。[二つのnormal producer結果](../research-data/ai-sigma/quoridor-strong-ai435/teacher-selection-v16-normal-producers-result-v1.json)。Rootのこの回収では圧縮detailを展開せず、64 recordsを64 accepted replyやUNKNOWN0と読み替えない。per-request action/receipt/stopは次の既存saved diagnosticが元archiveからconsumeする。
+
+元parent17.544351981952786sにselected native3.412191382027231sとCedar native3.438572490005754s、さらに通常管理が含まれ、内包時間を加算しない。前の入力/拒否phaseを含め同pilotの残command172.85958198609296s、parent216.18930959119461sを保持する。whole16MiBの対象4namespaceの実pointを一度記録し、peak/global censusとはしない。新teacher forward/gameは0、現模型の目的別offline joint32は未入場である。
+
+入場前の実形式照合で、current618aの診断callerがplain quoridor-decisions-v1/outcomes32を期待する一方、実normal result.jsonはquoridor.arena.reference-result.v1・report.outcomes空・outcome_count32・元gzip archive参照であることが分かった。source/control上の未接続であり、保存診断を試しに失敗させたりSearchを再発行したりしない。同C435.1へ、このcompletion inventoryを現役arena_reference_reportへ渡す最小owner補正とactual compact形式を使うNEW model-free確認を返した。gzip規則の複製、別展開cache/registry/framework、新sample/teacher/forwardは加えない。既R1 fault fixtureのmock配線だけが因果的に影響する場合は元assertions/scenariosを保持して機械的に補正し、そのaffected regressionだけRootが確認する。新reviewerや成功suite再演/Root ACKを入口にしない。
+
+caller補正の初回2配送は、Rootが親issue435（owner324）を指定したためRPC前のowner照合に拒否された。元0Bstdoutと失敗を保持し、既存子435.1の同C owner/in_progressを通常wrapperで確認して一つの合流bodyを送達した。新actor/task/数値実行は作らず、この配送受付をsource作業開始や資格成功とは扱わない。
