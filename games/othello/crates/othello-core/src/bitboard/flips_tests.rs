@@ -1,6 +1,6 @@
-//! NEW model-free cases: maintained coordinate-ray GameState is the oracle.
+//! Existing affected model-free cases: GameState coordinate rays remain the oracle.
 
-use super::Position;
+use super::{Position, flips_cursor};
 use crate::{BLACK, DIRECTIONS, GameState, RuleError, WHITE};
 
 fn ray_cells(origin: usize, dr: i32, dc: i32) -> Vec<usize> {
@@ -35,6 +35,14 @@ fn compare_mask_and_play(board: [u8; 64], side: u8, origin: u32) -> u64 {
         expected_mask,
         "mask origin={origin} side={side} board={board:?}"
     );
+    if origin < 64 && board[origin as usize] == 0 {
+        let (own, opponent) = position.sides();
+        assert_eq!(
+            flips_cursor(own, opponent, origin),
+            expected_mask,
+            "cursor fallback origin={origin} side={side} board={board:?}"
+        );
+    }
     let expected_play = oracle.play(origin).map(|next| Position::from(&next));
     assert_eq!(
         position.play(origin),

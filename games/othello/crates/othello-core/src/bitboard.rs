@@ -19,6 +19,26 @@ fn shift(bits: u64, direction: usize) -> u64 {
     }
 }
 
+#[cfg(target_arch = "x86_64")]
+mod original_flip;
+
+// Required portable owner; caller has already rejected invalid/occupied origins.
+fn flips_cursor(own: u64, opponent: u64, index: u32) -> u64 {
+    let mut flips = 0;
+    for direction in 0..8 {
+        let mut cursor = shift(1 << index, direction);
+        let mut run = 0;
+        while cursor & opponent != 0 {
+            run |= cursor;
+            cursor = shift(cursor, direction);
+        }
+        if cursor & own != 0 {
+            flips |= run;
+        }
+    }
+    flips
+}
+
 /// Search position; absolute colors keep state and transposition identity explicit.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct Position {
@@ -87,19 +107,12 @@ impl Position {
             return 0;
         }
         let (own, opponent) = self.sides();
-        let mut flips = 0;
-        for direction in 0..8 {
-            let mut cursor = shift(1 << index, direction);
-            let mut run = 0;
-            while cursor & opponent != 0 {
-                run |= cursor;
-                cursor = shift(cursor, direction);
-            }
-            if cursor & own != 0 {
-                flips |= run;
-            }
+        #[cfg(target_arch = "x86_64")]
+        if std::is_x86_feature_detected!("avx2") {
+            // SAFETY: AVX2 is checked and index<64 was guarded before table access.
+            return unsafe { original_flip::calc_flip(own, opponent, index as usize) };
         }
-        flips
+        flips_cursor(own, opponent, index)
     }
 
     pub fn play(self, index: u32) -> Result<Self, RuleError> {
