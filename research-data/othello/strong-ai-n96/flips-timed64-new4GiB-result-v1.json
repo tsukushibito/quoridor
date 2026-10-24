@@ -1,0 +1,682 @@
+{
+  "schema": "othello.flips.new4GiB-timed64-result.v1",
+  "conditionId": "flips-timed64-4g-condition-v1",
+  "status": "COMPLETE_NEW_CONDITIONAL_TIMED64",
+  "jobId": "2fffc883-72aa-4c70-bdba-61cb72c1d087",
+  "sourceConfig": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/flips-timed64-4g-condition-v1/comparison-config.json",
+    "bytes": 17815,
+    "mode": "0644",
+    "sha256": "697390f746067b996228642f3d3e0989ce8f6b9c02b8dacee24073c056afc96f"
+  },
+  "resourceBinding": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/flips-timed64-4g-condition-v1/resources.json",
+    "bytes": 3589,
+    "mode": "0644",
+    "sha256": "dd239a8e2f369e412843d637b23c50d8cab74e338527167bf12a9a4fed035cb0"
+  },
+  "runtimeResult": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/flips-timed64-4g-condition-v1/runtime/result.json",
+    "bytes": 521,
+    "mode": "0600",
+    "sha256": "8ac73915ec08fe1617e018c14652cae570146538caa982d2cab9e99914ba1adf"
+  },
+  "normalControllerResult": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/flips-timed64-4g-condition-v1/controller-result.json",
+    "bytes": 698,
+    "mode": "0644",
+    "sha256": "216e3c01b5c839773a3a4b46eb5c8c3f62c417c49c3d335d4165307c3d0569af"
+  },
+  "actualControllerSTOP": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/flips-timed64-4g-condition-v1/controller-STOP.json",
+    "bytes": 146,
+    "mode": "0644",
+    "sha256": "19bbb156b2775979ad8ea812ab6d6a96a4299177714e75d9ef8b76326ebd7b0a"
+  },
+  "savedScalarSummary": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/flips-timed64-4g-condition-v1/collection-v1/summary.json",
+    "bytes": 21199,
+    "mode": "0644",
+    "sha256": "45cc224673a6053bf9ab6a44b07f059cf73f37c7266594e79e16a30ca27d6800"
+  },
+  "compactAll64And32Pairs": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/flips-timed64-4g-condition-v1/collection-v1/compact-table.json",
+    "bytes": 23450,
+    "mode": "0644",
+    "sha256": "78161a86cbb5979143aaf70b008d209f43ba745ec99e3476b9441715456cc995"
+  },
+  "scalarPassActualReturn": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/flips-timed64-4g-condition-v1/collection-v1/projection-returned.json",
+    "bytes": 3226,
+    "mode": "0644",
+    "sha256": "349158bdbd534ab4be3bc4e53f61847f77b04f65ed9de95053456656e0c4625f"
+  },
+  "newOnly": {
+    "planned": 64,
+    "searchTransports": 64,
+    "numeric": 64,
+    "completePairs": 32,
+    "UNKNOWN": 0,
+    "UNRUN": 0,
+    "setups": 2,
+    "clears": 16,
+    "drops": 2
+  },
+  "oldCampaignUnchanged": {
+    "status": "INCOMPLETE",
+    "logicalNumeric": 121,
+    "physicalSearchTransports": 123
+  },
+  "allRetainedAcrossDifferentConditions": {
+    "numeric": 185,
+    "physicalSearchTransports": 187,
+    "homogeneousCombinedCampaign": false
+  },
+  "pairFieldComparison": {
+    "rawScore": {
+      "equal": 30,
+      "different": 2,
+      "unexposed": 0
+    },
+    "score": {
+      "equal": 30,
+      "different": 2,
+      "unexposed": 0
+    },
+    "move": {
+      "equal": 32,
+      "different": 0,
+      "unexposed": 0
+    },
+    "mustPass": {
+      "equal": 32,
+      "different": 0,
+      "unexposed": 0
+    },
+    "nodes": {
+      "equal": 16,
+      "different": 16,
+      "unexposed": 0
+    },
+    "completedDepth": {
+      "equal": 29,
+      "different": 3,
+      "unexposed": 0
+    },
+    "selectivity": {
+      "equal": 29,
+      "different": 3,
+      "unexposed": 0
+    },
+    "probability": {
+      "equal": 29,
+      "different": 3,
+      "unexposed": 0
+    },
+    "proven": {
+      "equal": 32,
+      "different": 0,
+      "unexposed": 0
+    },
+    "isEndSearch": {
+      "equal": 32,
+      "different": 0,
+      "unexposed": 0
+    },
+    "scoreUnits": {
+      "equal": 32,
+      "different": 0,
+      "unexposed": 0
+    }
+  },
+  "byOwner": {
+    "baseline": {
+      "numeric": 32,
+      "callerWallMs": {
+        "count": 32,
+        "sum": 16046.098460210487,
+        "mean": 501.4405768815777,
+        "minimum": 0.1135609345510602,
+        "maximum": 1000.2449009334669
+      },
+      "reportedNumericFields": {
+        "completedDepth": {
+          "count": 32,
+          "sum": 348,
+          "mean": 10.875,
+          "minimum": 4,
+          "maximum": 19
+        },
+        "elapsedMs": {
+          "count": 32,
+          "sum": 16040.823444,
+          "mean": 501.275732625,
+          "minimum": 0.025452,
+          "maximum": 1000.006154
+        },
+        "move": {
+          "count": 32,
+          "sum": 1076,
+          "mean": 33.625,
+          "minimum": 0,
+          "maximum": 63
+        },
+        "nodes": {
+          "count": 32,
+          "sum": 109630449,
+          "mean": 3425951.53125,
+          "minimum": 37,
+          "maximum": 9343073
+        },
+        "probability": {
+          "count": 32,
+          "sum": 2966.0,
+          "mean": 92.6875,
+          "minimum": 74.0,
+          "maximum": 100.0
+        },
+        "rawScore": {
+          "count": 32,
+          "sum": 102,
+          "mean": 3.1875,
+          "minimum": -36,
+          "maximum": 38
+        },
+        "score": {
+          "count": 32,
+          "sum": 114,
+          "mean": 3.5625,
+          "minimum": -36,
+          "maximum": 39
+        },
+        "selectivity": {
+          "count": 32,
+          "sum": 138,
+          "mean": 4.3125,
+          "minimum": 0,
+          "maximum": 6
+        },
+        "ttBytes": {
+          "count": 32,
+          "sum": 805307904,
+          "mean": 25165872.0,
+          "minimum": 25165872,
+          "maximum": 25165872
+        }
+      },
+      "reportedStoppedTimeout": 16,
+      "stoppedFieldAbsent": 0,
+      "reportedIsEndSearchTrue": 16
+    },
+    "candidate": {
+      "numeric": 32,
+      "callerWallMs": {
+        "count": 32,
+        "sum": 16047.842715401202,
+        "mean": 501.4950848562876,
+        "minimum": 0.12271292507648468,
+        "maximum": 1000.2339769853279
+      },
+      "reportedNumericFields": {
+        "completedDepth": {
+          "count": 32,
+          "sum": 336,
+          "mean": 10.5,
+          "minimum": 4,
+          "maximum": 19
+        },
+        "elapsedMs": {
+          "count": 32,
+          "sum": 16042.639169,
+          "mean": 501.33247403125,
+          "minimum": 0.023041999999999997,
+          "maximum": 1000.015211
+        },
+        "move": {
+          "count": 32,
+          "sum": 1076,
+          "mean": 33.625,
+          "minimum": 0,
+          "maximum": 63
+        },
+        "nodes": {
+          "count": 32,
+          "sum": 100976473,
+          "mean": 3155514.78125,
+          "minimum": 37,
+          "maximum": 10008373
+        },
+        "probability": {
+          "count": 32,
+          "sum": 3044.0,
+          "mean": 95.125,
+          "minimum": 74.0,
+          "maximum": 100.0
+        },
+        "rawScore": {
+          "count": 32,
+          "sum": 106,
+          "mean": 3.3125,
+          "minimum": -36,
+          "maximum": 38
+        },
+        "score": {
+          "count": 32,
+          "sum": 116,
+          "mean": 3.625,
+          "minimum": -36,
+          "maximum": 39
+        },
+        "selectivity": {
+          "count": 32,
+          "sum": 156,
+          "mean": 4.875,
+          "minimum": 0,
+          "maximum": 6
+        },
+        "ttBytes": {
+          "count": 32,
+          "sum": 805307904,
+          "mean": 25165872.0,
+          "minimum": 25165872,
+          "maximum": 25165872
+        }
+      },
+      "reportedStoppedTimeout": 16,
+      "stoppedFieldAbsent": 0,
+      "reportedIsEndSearchTrue": 16
+    }
+  },
+  "byFamily": [
+    {
+      "family": "development/continuous16-practical-v1/f0",
+      "numeric": 16,
+      "completePairs": 8,
+      "byOwner": {
+        "baseline": {
+          "callerWallMs": {
+            "count": 8,
+            "sum": 4005.740115069784,
+            "mean": 500.717514383723,
+            "minimum": 0.13881304766982794,
+            "maximum": 1000.2441960386932
+          },
+          "nodes": {
+            "count": 8,
+            "sum": 25093128,
+            "mean": 3136641.0,
+            "minimum": 53,
+            "maximum": 6782845
+          },
+          "completedDepth": {
+            "count": 8,
+            "sum": 72,
+            "mean": 9.0,
+            "minimum": 4,
+            "maximum": 12
+          }
+        },
+        "candidate": {
+          "callerWallMs": {
+            "count": 8,
+            "sum": 4005.513069103472,
+            "mean": 500.689133637934,
+            "minimum": 0.12282794341444969,
+            "maximum": 1000.2112539950758
+          },
+          "nodes": {
+            "count": 8,
+            "sum": 21769643,
+            "mean": 2721205.375,
+            "minimum": 53,
+            "maximum": 5760123
+          },
+          "completedDepth": {
+            "count": 8,
+            "sum": 72,
+            "mean": 9.0,
+            "minimum": 4,
+            "maximum": 12
+          }
+        }
+      }
+    },
+    {
+      "family": "development/continuous16-practical-v1/f1",
+      "numeric": 16,
+      "completePairs": 8,
+      "byOwner": {
+        "baseline": {
+          "callerWallMs": {
+            "count": 8,
+            "sum": 4014.0137852868065,
+            "mean": 501.7517231608508,
+            "minimum": 0.15665602404624224,
+            "maximum": 1000.2194420667365
+          },
+          "nodes": {
+            "count": 8,
+            "sum": 31670392,
+            "mean": 3958799.0,
+            "minimum": 52,
+            "maximum": 9343073
+          },
+          "completedDepth": {
+            "count": 8,
+            "sum": 102,
+            "mean": 12.75,
+            "minimum": 4,
+            "maximum": 19
+          }
+        },
+        "candidate": {
+          "callerWallMs": {
+            "count": 8,
+            "sum": 4014.5915880566463,
+            "mean": 501.8239485070808,
+            "minimum": 0.12721295934170485,
+            "maximum": 1000.2339769853279
+          },
+          "nodes": {
+            "count": 8,
+            "sum": 30891969,
+            "mean": 3861496.125,
+            "minimum": 52,
+            "maximum": 10008373
+          },
+          "completedDepth": {
+            "count": 8,
+            "sum": 102,
+            "mean": 12.75,
+            "minimum": 4,
+            "maximum": 19
+          }
+        }
+      }
+    },
+    {
+      "family": "development/continuous16-practical-v1/f2",
+      "numeric": 16,
+      "completePairs": 8,
+      "byOwner": {
+        "baseline": {
+          "callerWallMs": {
+            "count": 8,
+            "sum": 4013.328154804185,
+            "mean": 501.66601935052313,
+            "minimum": 0.1135609345510602,
+            "maximum": 1000.2449009334669
+          },
+          "nodes": {
+            "count": 8,
+            "sum": 28811213,
+            "mean": 3601401.625,
+            "minimum": 37,
+            "maximum": 8337690
+          },
+          "completedDepth": {
+            "count": 8,
+            "sum": 96,
+            "mean": 12.0,
+            "minimum": 4,
+            "maximum": 16
+          }
+        },
+        "candidate": {
+          "callerWallMs": {
+            "count": 8,
+            "sum": 4013.032682123594,
+            "mean": 501.62908526544925,
+            "minimum": 0.12271292507648468,
+            "maximum": 1000.2294980222359
+          },
+          "nodes": {
+            "count": 8,
+            "sum": 26971704,
+            "mean": 3371463.0,
+            "minimum": 37,
+            "maximum": 8261026
+          },
+          "completedDepth": {
+            "count": 8,
+            "sum": 90,
+            "mean": 11.25,
+            "minimum": 4,
+            "maximum": 16
+          }
+        }
+      }
+    },
+    {
+      "family": "development/continuous16-practical-v1/f3",
+      "numeric": 16,
+      "completePairs": 8,
+      "byOwner": {
+        "baseline": {
+          "callerWallMs": {
+            "count": 8,
+            "sum": 4013.0164050497115,
+            "mean": 501.62705063121393,
+            "minimum": 0.11691602412611246,
+            "maximum": 1000.2180919982493
+          },
+          "nodes": {
+            "count": 8,
+            "sum": 24055716,
+            "mean": 3006964.5,
+            "minimum": 43,
+            "maximum": 6314317
+          },
+          "completedDepth": {
+            "count": 8,
+            "sum": 78,
+            "mean": 9.75,
+            "minimum": 4,
+            "maximum": 16
+          }
+        },
+        "candidate": {
+          "callerWallMs": {
+            "count": 8,
+            "sum": 4014.7053761174902,
+            "mean": 501.8381720146863,
+            "minimum": 0.14776806347072124,
+            "maximum": 1000.2249389654025
+          },
+          "nodes": {
+            "count": 8,
+            "sum": 21343157,
+            "mean": 2667894.625,
+            "minimum": 43,
+            "maximum": 5445433
+          },
+          "completedDepth": {
+            "count": 8,
+            "sum": 72,
+            "mean": 9.0,
+            "minimum": 4,
+            "maximum": 12
+          }
+        }
+      }
+    }
+  ],
+  "setup": [
+    {
+      "profile": "timed",
+      "owner": "baseline",
+      "info": {
+        "coefficients": {
+          "a": 0.7308488452189136,
+          "b": -4.5708322989025865,
+          "c": 1.096319765006055,
+          "d": -0.8362251801219095,
+          "e": 4.610017383697701,
+          "f": 3.818582623595395,
+          "g": 1.7775013664098447
+        },
+        "engine": "console7.8.1-rust-singlethread-source-port",
+        "hashLevel": 20,
+        "hashSeed": 20261022,
+        "identityBinding": "callerVerified",
+        "interpretation": "simd",
+        "midgameId": "sha256:0a8acbcbc23067933627f1bcc83c3f7ae6b7ff3e603d174a3364271fcaeeef2f",
+        "ok": true,
+        "orderingId": "sha256:bd908885e8bb85e72a9be2b0399f8ca52ed40a138bcaaecca3d13710945b9a93",
+        "upstreamCommit": "570d5e0a478c9d720d75de06a5d31995f412704a",
+        "workerPool": 0
+      },
+      "launchAndReadyMs": 147.96780701726675,
+      "pureModelParseMs": null,
+      "preMainMs": null,
+      "childCPUSecondsAtReady": 0.13
+    },
+    {
+      "profile": "timed",
+      "owner": "candidate",
+      "info": {
+        "coefficients": {
+          "a": 0.7308488452189136,
+          "b": -4.5708322989025865,
+          "c": 1.096319765006055,
+          "d": -0.8362251801219095,
+          "e": 4.610017383697701,
+          "f": 3.818582623595395,
+          "g": 1.7775013664098447
+        },
+        "engine": "console7.8.1-rust-singlethread-source-port",
+        "hashLevel": 20,
+        "hashSeed": 20261022,
+        "identityBinding": "callerVerified",
+        "interpretation": "simd",
+        "midgameId": "sha256:0a8acbcbc23067933627f1bcc83c3f7ae6b7ff3e603d174a3364271fcaeeef2f",
+        "ok": true,
+        "orderingId": "sha256:bd908885e8bb85e72a9be2b0399f8ca52ed40a138bcaaecca3d13710945b9a93",
+        "upstreamCommit": "570d5e0a478c9d720d75de06a5d31995f412704a",
+        "workerPool": 0
+      },
+      "launchAndReadyMs": 148.00645399373025,
+      "pureModelParseMs": null,
+      "preMainMs": null,
+      "childCPUSecondsAtReady": 0.13
+    }
+  ],
+  "shutdown": [
+    {
+      "profile": "timed",
+      "owner": "baseline",
+      "cleanup": {
+        "exitCode": -15,
+        "unexpectedExit": false,
+        "directReaped": true,
+        "bytesSeen": 28206,
+        "bytesRetained": 28821,
+        "errors": []
+      },
+      "dropMs": 3.1771790236234665,
+      "childCPUSecondsBeforeDrop": 16.11,
+      "CPUAfterDrop": null
+    },
+    {
+      "profile": "timed",
+      "owner": "candidate",
+      "cleanup": {
+        "exitCode": -15,
+        "unexpectedExit": false,
+        "directReaped": true,
+        "bytesSeen": 28222,
+        "bytesRetained": 28837,
+        "errors": []
+      },
+      "dropMs": 3.37716203648597,
+      "childCPUSecondsBeforeDrop": 16.17,
+      "CPUAfterDrop": null
+    }
+  ],
+  "costs": {
+    "outerSeconds": 32.89854048099369,
+    "commandIncludedSeconds": 32.71175658097491,
+    "comparisonIncludedSeconds": 32.66883315902669,
+    "nestedAdded": 0,
+    "feesAndActualPeak": null,
+    "savedScalarPassSeparateSeconds": 0.02277177304495126
+  },
+  "actualGuardianReturn": {
+    "command": [
+      "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+      "-B",
+      "/workspaces/quoridor/games/othello/python/othello_arena/continuous.py",
+      "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/flips-timed64-4g-condition-v1/comparison-config.json",
+      "697390f746067b996228642f3d3e0989ce8f6b9c02b8dacee24073c056afc96f"
+    ],
+    "status": "complete",
+    "child": {
+      "pid": 1537560,
+      "start_ticks": "92165840",
+      "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+    },
+    "launch_policy": {
+      "no_new_privs_requested": false,
+      "verified_before_exec": null
+    },
+    "cpu_plan": {
+      "management": [18],
+      "commands": {
+        "work": [4]
+      },
+      "allocation": [4, 18],
+      "resource_CPUs": 2,
+      "worker_CPUs": 1,
+      "library_threads": 1
+    },
+    "command_cpu_scope": "work",
+    "log_bytes_seen": 0,
+    "scope": "session group and periodically recorded descendants; no daemon adoption",
+    "exit_code": 0,
+    "remaining": [],
+    "direct_child_reaped": true,
+    "descendant_visibility": "observed",
+    "cleanup_complete": true,
+    "log_bytes_retained": 0,
+    "wall_seconds": 32.71175658097491,
+    "handle_closes_attempted": ["selector_close", "pipe_close", "pidfd_close", "log_close"],
+    "primary_error": null,
+    "process_cleanup_complete": true,
+    "handle_closes_complete": true,
+    "signal_mask_restoration": "completed",
+    "final_record_persist": "completed",
+    "finalization_errors": []
+  },
+  "diskSnapshot": {
+    "signalMaskRestoration": "pending",
+    "finalRecordPersist": "attempted"
+  },
+  "observability": {
+    "wholeTTIdentity": "UNKNOWN",
+    "perSearchRestoration": null,
+    "oldFreeReclamation": null,
+    "continuousRSSPeak": null,
+    "minimumRAM": null,
+    "historicalMemoryCause": null,
+    "actualModelConstructorCount": null,
+    "nativeEngineEntryCounter": null
+  },
+  "extractionScope": {
+    "newInputReads": [
+      {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/flips-timed64-4g-condition-v1/results/result.json",
+        "bytes": 184383,
+        "mode": "0644",
+        "sha256": "ad01b1cb0fa098f05f41c4582e1ebfe856e5183adc7c1de7b2ab9c1c28d2dcef"
+      }
+    ],
+    "wholeJsonParseOnce": true,
+    "transientRequestBoardsDecodedNotExported": true,
+    "linkedFilesOpened": false,
+    "modelNativeSearchRulesRNGNumPyCIOrOldValidatorReexecution": 0
+  },
+  "interpretation": "All32new pairs legal and within normal saved caller guard; moves32same, raw/score2different, nodes16different, depth/selectivity/probability3different. Conditional completed32pair facts only; mixed stop/earlyend and selective work. No same-work speedup/NPS/kernel cost/17vs21 cause/CI/generalstrength/default/model adoption or old2GiB failure diagnosis.",
+  "limitations": "Conditional complete NEW4GiB timed comparison, correlated4families/2ABBA repeats and mixed completed work. No same-work speedup/NPS/kernel ratio/depth cause/generalstrength/default/model adoption; old2GiB failure not recovered or overwritten.",
+  "budget": "One explicitly new64 condition at family4GiB=common1+command3/host4/fresh8/CPU4G18/lib1G0/normal1s/wire60/1100guard, same8MiB old+new holding and globaldecimal50GB. No refill/second4GiB attempt/refund.",
+  "preserve": "All prior18feb/4e1e/00f42/4ed failures/raw/NULL/UNKNOWN/fees, Q onepool/same-teacher/same-model condition,323342.17USERPAUSE/seals/newE/oldfits96/H128/defaultmodels/foreign unchanged; both strongestgoals unfinished."
+}
