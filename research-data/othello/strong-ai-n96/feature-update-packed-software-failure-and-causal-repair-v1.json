@@ -1,0 +1,68 @@
+{
+  "status": "ORIGINAL_FAILED_CLIPPY_CAUSAL_REPAIR_NEW_SOFTWARE_SUBMITTED",
+  "originalJob": "d957eca7-b81b-46e8-ad75-77cf6edbddbc",
+  "originalCollection": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/feature-update-packed-affected-software-v1/completion-d957eca7/collection.json",
+    "bytes": 4327,
+    "mode": "0644",
+    "sha256": "d7b7ddfd724227f109963a3a0bd1c7649ec25772afd0ca8f8114b53bf4087d92"
+  },
+  "originalFailure": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/feature-update-packed-affected-software-v1/runtime/result.json",
+    "bytes": 523,
+    "mode": "0600",
+    "sha256": "8bad2f51ba9c97213a198b3167e9ef89b6510eea4af0ed68d940f31e5ee5ce89"
+  },
+  "originalClippyLog": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/feature-update-packed-affected-software-v1/affected-core-wasm-clippy.log",
+    "bytes": 1498,
+    "mode": "0644",
+    "sha256": "44d5f33a6d24b57362136ad3e446aa7db7bdce5b97501236e188e639cdaa8a55"
+  },
+  "newFourTests": "4 executed / 4PASS / 0skip, original normalCLI completed; full qualification incomplete",
+  "cause": "manual_is_multiple_of at two new cfg(test) pointer alignment predicates; no production failure established",
+  "causalRepair": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/feature-update-packed-affected-software-v1/alignment-lint-software-v2/source-adoption.json",
+    "bytes": 1878,
+    "mode": "0644",
+    "sha256": "5cab9bdd5624d994acc434eab202be82efc2e1da4c99cc4d1baaeb5db33fed55"
+  },
+  "retainedProduction": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/feature-update-packed-affected-software-v1/alignment-lint-software-v2/retained-production-closure.json",
+    "bytes": 6105,
+    "mode": "0644",
+    "sha256": "77162c3e9b06ac7141718c68a12e7d677f28babcee91a753d6be516eda5b93b4"
+  },
+  "newJob": "9ea10e3e-ab57-4567-8939-b04586a90c40",
+  "newSubmission": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/feature-update-packed-affected-software-v1/alignment-lint-software-v2/submission.json",
+    "bytes": 1072,
+    "mode": "0644",
+    "sha256": "b62adf529627f1f4dc2cab6581daf850e38ddf486b19a201b4057702500bb54a"
+  },
+  "newConfig": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/feature-update-packed-affected-software-v1/alignment-lint-software-v2/config.json",
+    "bytes": 21125,
+    "mode": "0644",
+    "sha256": "53ab3ecc74ebfbc775b9f5cd7824d613f8b3053f4d9038cd5306cb3ab9419b6e"
+  },
+  "newResources": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/feature-update-packed-affected-software-v1/alignment-lint-software-v2/resources.json",
+    "bytes": 2067,
+    "mode": "0644",
+    "sha256": "40f3b6800bfe775ee761b940c08708047cda4afc0fdcb6c36ef6a9c3590227d5"
+  },
+  "newScope": "Rebuild affected libtest, exactly ONE changed ignored test; failedClippy and UNRUN Wasm. Three unchanged successful definitions and normalCLI retained, no oldsuite/engine/Search replay.",
+  "newResultsRead": false,
+  "actualOuterWallSeconds": 22.328984142048284,
+  "nestedFeesNotAdded": true,
+  "cleanup": "actual original directreap/process+handles/remaining[]/TMP absent; exception-return completed kept separately from disk pending/attempted",
+  "sharedTargetAffectedPoint": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/feature-update-packed-affected-software-v1/completion-d957eca7/affected-storage-point.txt",
+    "bytes": 228,
+    "mode": "0644",
+    "sha256": "eb1b615789c034e4f2d25a8edafdb52078fc53412ee4d783731ed4f1e47ae407"
+  },
+  "future128Search": "Separate resolved cap, baseline currentvectorf6afa only; actual new software/STOP/currentimage/normaladmission still required",
+  "goalsComplete": false
+}

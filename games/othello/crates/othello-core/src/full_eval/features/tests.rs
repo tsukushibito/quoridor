@@ -100,12 +100,12 @@ fn full_feature_avx2_exact_arrays_unaligned_wrapping_and_zero_lanes() {
     // One initialized canary on either side, deliberately non-32-byte aligned.
     let mut black_backing = [0x1357_u16; N_FEATURES + 4];
     let mut white_backing = [0x2468_u16; N_FEATURES + 4];
-    let black_start = if black_backing.as_ptr().wrapping_add(1) as usize % 32 == 0 {
+    let black_start = if (black_backing.as_ptr().wrapping_add(1) as usize).is_multiple_of(32) {
         2
     } else {
         1
     };
-    let white_start = if white_backing.as_ptr().wrapping_add(1) as usize % 32 == 0 {
+    let white_start = if (white_backing.as_ptr().wrapping_add(1) as usize).is_multiple_of(32) {
         2
     } else {
         1

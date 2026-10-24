@@ -1,0 +1,81 @@
+{
+  "status": "NORMAL_BOUND_PREFLIGHT_PASS_NOT_SUBMITTED",
+  "condition": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/quoridor-strong-ai435/selected3072-development256-coverage8192-condition-v1.json",
+    "bytes": 11545,
+    "mode": "0644",
+    "sha256": "2c81dc1e33e333104ef769e3425e92df6ec78b73bbd471e0e74cd6f693add487"
+  },
+  "preflight": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected3072-development256-entry-v1/common/binding-v4/preflight.json",
+    "bytes": 5617,
+    "mode": "0644",
+    "sha256": "94a010ae9b3812f37c742934c4e1d030cb6fb8814bc0d1106c6f7a11ee2dfc17"
+  },
+  "parentJob": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected3072-development256-entry-v1/common/parent-job.json",
+    "bytes": 959,
+    "mode": "0644",
+    "sha256": "d0fe142ac08a2f534e163432b46fafd9a9ec1a8bea5b13afa5a5a405bb3f9989"
+  },
+  "settings": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected3072-development256-entry-v1/lane-0/settings.json",
+    "bytes": 94280,
+    "mode": "0644",
+    "sha256": "def83f0ac06ec44cb0c320c4b49159b79f62ed6b1a88d8f951c2bca8245a564e"
+  },
+  "cohort": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected3072-development256-entry-v1/common/cohort.json",
+    "bytes": 3368,
+    "mode": "0644",
+    "sha256": "f80c755d1b81c4d1d2acec59a8e8f56dd75ddf4fe21b122ab928338d35ebb0ff"
+  },
+  "support": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected3072-development256-entry-v1/common/binding-v4/support.json",
+    "bytes": 2218,
+    "mode": "0644",
+    "sha256": "f41dc65dbbae9774b10bd8082be044de3d4329153c887c161761bb2ad28781c1"
+  },
+  "analysisPredeclared": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected3072-development256-entry-v1/common/binding-v4/analysis-predeclared.json",
+    "bytes": 1496,
+    "mode": "0644",
+    "sha256": "046f9980c65c53fbebd0d2613464a4c77927d382784c4f6f7a2a3a2ac2af9767"
+  },
+  "plannedGames": 256,
+  "contrasts": [
+    "selected3072AlphaOFF vs CedarAlpha",
+    "selected3072 learnedMCTS vs samevalue explicituniformMCTS"
+  ],
+  "sameExposedFamilies": 64,
+  "normalMetaChecks": 16,
+  "resources": {
+    "familyGiB": 8,
+    "highestCommonGiB": 2,
+    "laneGiB": 6,
+    "hostReserveGiB": 4,
+    "AIphysicalCPU": 12,
+    "management": [18, 16],
+    "GPU": 0,
+    "libraryThreads": 1,
+    "parentSeconds": 8400
+  },
+  "holding": {
+    "wholeBytes": 2147483648,
+    "laneBytes": 1879048192,
+    "sharedBytes": 268435456,
+    "priorAffectedAggregateBytes": 17763647488,
+    "conservativeAdditionalFullSharedTargetBytes": 2266820608,
+    "conservativeAdditionalOwnSoftwareBytes": 3112960,
+    "conservativeAggregatePlusNewWholeBytes": 22181064704,
+    "globalCapBytes": 50000000000,
+    "scope": "Prior actual aggregate plus entire affected target again conservatively overcounts target rather than subtract/refund; one new2GiB bound. No additional global walk or existingmodel/library copy."
+  },
+  "metaFailures": "Original four bounded helper failures preserved: caller list then selected/cohort/TMP projection order. Corrected through unchanged maintained functions, no native/job/game attempt.",
+  "payloadScope": "Named normal input/model/config/book read/hash for exact binding; no printed body, geometry clone, newselection, forward or replay.",
+  "actualOrigin": null,
+  "actualAdmission": null,
+  "actualGames": 0,
+  "launch": "ONE parent later after actual Othello software/Search resource STOP; no per-operation jobs, no ACK/parentclose/wholeothergoal gate",
+  "goalsComplete": false
+}
