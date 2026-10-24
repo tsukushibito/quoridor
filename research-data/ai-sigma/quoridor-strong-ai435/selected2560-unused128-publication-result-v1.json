@@ -1,0 +1,205 @@
+{
+  "status": "ACTUAL_NATIVE_EVALUATION_ONLY128_PUBLICATION_QUALIFIED_NOT_GAMES_OR_STRENGTH",
+  "jobId": "231474db-5cea-4577-813f-3a82366c425a",
+  "outerRuntime": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-unused128-publication-v1/runtime/result.json",
+    "bytes": 526,
+    "mode": "0600",
+    "sha256": "aa52ff89213c50fb1078a2c816c99f8dcaca74edc36656c4b7a64b6142573857"
+  },
+  "outerOutput": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-unused128-publication-v1/runtime/output.log",
+    "bytes": 101,
+    "mode": "0644",
+    "sha256": "168c3166689be5265c69cdf8422554065431d29b954a1bf583b7f2fb97d0303b"
+  },
+  "normalJobConfig": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-unused128-publication-v1/runtime/config.json",
+    "bytes": 834,
+    "mode": "0600",
+    "sha256": "4dc0b63f759f2f4e92c3aab314ee862e5900349a410c46f74c83b75a9ed73210"
+  },
+  "config": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-unused128-publication-v1/input-evaluation.json",
+    "bytes": 879,
+    "mode": "0644",
+    "sha256": "767287c8432cd14deee12af1368b19118e5eaea8dc39fad9e0de7ebb3a0d7d04"
+  },
+  "normalBuild": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/unused128-evaluation-import-software-v2/operation/manifest.json",
+    "bytes": 52648,
+    "mode": "0644",
+    "sha256": "f7eb38b8ab4a31c1c34b2a4016b6cf19a8a36d52fef5070a2b488984d827da5c"
+  },
+  "book": {
+    "bytes": 114883,
+    "mode": "0644",
+    "path": "/workspaces/quoridor/.worktree/assets/inputs/quoridor-strong435/selected2560-unused128-evaluation-v1/book.json",
+    "sha256": "cbb736e264c32d7020b873d81682369c0e176195bd0de0892e2252e957dffc2d"
+  },
+  "evaluationCensus": {
+    "bytes": 31444,
+    "mode": "0644",
+    "path": "/workspaces/quoridor/.worktree/assets/inputs/quoridor-strong435/selected2560-unused128-evaluation-v1/evaluation-census.json",
+    "sha256": "127d122138012ed23ddd57f0093eed52cc8eccecae2e3d3dea6a60124b8ce1ba"
+  },
+  "actualCounts": {
+    "eligible_named_scope": 568,
+    "excluded_components": 1408,
+    "fit_calls": 0,
+    "generated_transitions": 0,
+    "opaque_parent_JSON_read_including_protected_bytes": true,
+    "protected_H_typed_context_or_rules_audits": 0,
+    "search_calls": 0,
+    "selected_components": 128,
+    "teacher_calls": 0,
+    "typed_context_rows": 128
+  },
+  "parentComponents": 1976,
+  "protectedHComponents": 128,
+  "deficit": 0,
+  "selection": "FIRST128 remaining eligible whole components in frozen native rank order; no refill/trim/reseed/newpool",
+  "futureFitExclusion": "Published native census marks these128 excluded_from_future_fit. Future normal input/fit must bind this new named authority; no global guard or future fit is claimed.",
+  "opaqueParentJSONIncludesProtectedBytes": true,
+  "typedHUse": 0,
+  "historicalExposureAndFitIndependence": null,
+  "actualReturn": {
+    "command": [
+      "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/unused128-evaluation-import-software-v2/image/quoridor-runner",
+      "teacher-pilot",
+      "--prepare-inputs",
+      "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-unused128-publication-v1/input-evaluation.json",
+      "--input-sha256",
+      "767287c8432cd14deee12af1368b19118e5eaea8dc39fad9e0de7ebb3a0d7d04"
+    ],
+    "status": "complete",
+    "child": {
+      "pid": 3992572,
+      "start_ticks": "88005539",
+      "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+    },
+    "launch_policy": {
+      "no_new_privs_requested": false,
+      "verified_before_exec": null
+    },
+    "cpu_plan": {
+      "management": [
+        18
+      ],
+      "commands": {
+        "inputs": [
+          12
+        ]
+      },
+      "allocation": [
+        12,
+        18
+      ],
+      "resource_CPUs": 2,
+      "worker_CPUs": 1,
+      "library_threads": 1
+    },
+    "command_cpu_scope": "inputs",
+    "log_bytes_seen": 1028,
+    "scope": "session group and periodically recorded descendants; no daemon adoption",
+    "exit_code": 0,
+    "remaining": [],
+    "direct_child_reaped": true,
+    "descendant_visibility": "observed",
+    "cleanup_complete": true,
+    "log_bytes_retained": 1028,
+    "wall_seconds": 0.27138490602374077,
+    "handle_closes_attempted": [
+      "selector_close",
+      "pipe_close",
+      "pidfd_close",
+      "log_close"
+    ],
+    "primary_error": null,
+    "process_cleanup_complete": true,
+    "handle_closes_complete": true,
+    "signal_mask_restoration": "completed",
+    "final_record_persist": "completed",
+    "finalization_errors": []
+  },
+  "diskSnapshot": {
+    "command": [
+      "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/unused128-evaluation-import-software-v2/image/quoridor-runner",
+      "teacher-pilot",
+      "--prepare-inputs",
+      "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-unused128-publication-v1/input-evaluation.json",
+      "--input-sha256",
+      "767287c8432cd14deee12af1368b19118e5eaea8dc39fad9e0de7ebb3a0d7d04"
+    ],
+    "status": "complete",
+    "child": {
+      "pid": 3992572,
+      "start_ticks": "88005539",
+      "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+    },
+    "launch_policy": {
+      "no_new_privs_requested": false,
+      "verified_before_exec": null
+    },
+    "cpu_plan": {
+      "management": [
+        18
+      ],
+      "commands": {
+        "inputs": [
+          12
+        ]
+      },
+      "allocation": [
+        12,
+        18
+      ],
+      "resource_CPUs": 2,
+      "worker_CPUs": 1,
+      "library_threads": 1
+    },
+    "command_cpu_scope": "inputs",
+    "log_bytes_seen": 1028,
+    "scope": "session group and periodically recorded descendants; no daemon adoption",
+    "exit_code": 0,
+    "remaining": [],
+    "direct_child_reaped": true,
+    "descendant_visibility": "observed",
+    "cleanup_complete": true,
+    "log_bytes_retained": 1028,
+    "wall_seconds": 0.27138490602374077,
+    "handle_closes_attempted": [
+      "selector_close",
+      "pipe_close",
+      "pidfd_close",
+      "log_close"
+    ],
+    "primary_error": null,
+    "process_cleanup_complete": true,
+    "handle_closes_complete": true,
+    "signal_mask_restoration": "pending",
+    "final_record_persist": "attempted",
+    "finalization_errors": []
+  },
+  "returnedVersusDiskDistinct": true,
+  "actualChildEnded": {
+    "recorded": {
+      "pid": 3992572,
+      "start_ticks": "88005539",
+      "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+    },
+    "sameIdentityPresent": false
+  },
+  "outerWallSecondsOnce": 0.4360679399687797,
+  "innerWallSecondsIncludedNotAdded": 0.27138490602374077,
+  "affectedStoragePoint": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-unused128-publication-v1/affected-storage-point.json",
+    "bytes": 503,
+    "mode": "0644",
+    "sha256": "7edb2eadf346e1f5db7261d328c4aa87baa4da1da6d469d08f60d470ede37967"
+  },
+  "globalStorageContinuousPeakFullFees": null,
+  "original559bLostPoolFailureAndAllPriorCosts": "immutable, unrefunded",
+  "gamesTeacherFitNewGeneration": 0,
+  "next": "Existing normal Alpha policyOFF selected2560 vs originalCedar256,128 colourpairs/16x16 operations,100ms/reserve5/max200,ONE new PCG64 seed4352026102405 table10000x128/linear95. Allcomplete-only CI, no retry/refill. Actual factory/Plan/model/source/resources/admission remain separate."
+}

@@ -4342,3 +4342,11 @@ C435のimport-only修復3729e204はBTreeMap import一行だけで、Rootが削�
 新normal BUILD9c8caa1bは3個の新exact --lib/measurement検査が各1実行/1PASS/0ignored、affected ClippyとnormalreleaseもPASSだった。実directreap/process+handles/remaining[]/maskpersistcompleted、全bounded fullcapture、origin/directwait/state対応を確認して通常finalizeを一度行い、manifestを公開した。imagea39a470b/10781128B/0755、opt3/debug0/default+measurementはactual Cargo artifactで、native/モデルを起動した資格ではない。外側95.110251630sはtest/Clippy/release等を内包し加算せず、continuouspeak/fullfeesはUNKNOWN。通常finalizeの対象保持pointを再用し、global容量を全域走査していない。証拠はresearch-data/ai-sigma/quoridor-strong-ai435/unused128-evaluation-import-software-result-v2.json。
 
 実128 eligibility/Family7 book/256局はまだNULL。次は同1976 frozen parentから保護1408/Hを排除し、元native rankのFIRST128 whole componentsだけを既存native ownerで公開する一回の有限entryへ、この新Buildを束縛する。新trajectory/teacher/fit/RNG/追加選抜/refillは0、Hはopaque parent bytecustodyとtyped使用を分ける。O同A16 fixture修復を独立継続し、重い窓は実STOPで交互にする。全pause/seal/default/model/FAILEDNULLUNKNOWN費とdecimal50GBは維持する。
+
+### 2026-10-24: selected2560 comparison input128 actually published
+
+通常native --prepare-inputs の原231474dbは同じ凍結1976 parentから、保護1408（H128を含む）を排除したnamed scopeのeligible568を実際に確認し、元rank順FIRST128 whole componentsを公開した。568は今回nativeの出力であり、以前の差算だけのeligibility主張ではない。typed context128、H typed/rules audit0、新生成/Search/teacher/fit/game0。opaque parent JSON bytecustodyは保護prefix bytesを含み、H byte-read0とはしない。native book cbb736e2/114883Bとidentity census127d1221/31444Bを固定した。将来fitでの除外はこの新named censusを正常入口に束縛する義務であり、全域guard導入済みとは主張しない。
+
+原job外側.436067940sはnative .271384906sを内包し加算しない。actual directreap/process+handles/remaining[]/mask+persist completedを確認し、disk pending/attemptedは別に保持した。実影響範囲の保持pointを保存し、global全域walk/peak/fee推定は行っていない。旧559b lost pool/FAILED、8192 target deficit6216、元H/oldcostsは不変。証拠はresearch-data/ai-sigma/quoridor-strong-ai435/selected2560-unused128-publication-result-v1.json。
+
+次はこの固定128を用いたselected2560 Alpha policyOFF対original Cedarの正常256局だけ。100ms/reserve5/max200/両色128pairs、共有PCG64 seed4352026102405の新10000x128/linear95は結果前に固定し、全256完了だけでCI、欠測はUNKNOWN/CI NULL、補充・再試行・MCTS/fit/新poolなし。通常factory/Plan/currentimage/model/resource/origin admissionが必要で、公開だけで対局START/strengthを認定しない。Oの修復exact2と元UNRUN5ソフトウェアがreadyとなり、先に短い窓を配分する。全pause/seal/H/default/foreign/FAILEDNULLUNKNOWN費/decimal50GB維持。
