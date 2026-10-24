@@ -225,19 +225,256 @@ pub(super) fn prepare(c: &EvaluationInputConfig) -> Result<Value> {
             && same_ref(&source["partition"], &parent_ref)?,
         "bound unlabelled full-history source differs",
     )?;
-    let (families, mapping) = evaluation_rows(&source, &parent, &schedule, &plan)?;
+    let producer = json!({"authority":s.authority,"checked_dispositions":s.checked_dispositions,
+        "source_observations":source_ref,"source_schedule":schedule_ref,
+        "original_partition":parent_ref,"excluded_selection":selected_ref});
+    publish_evaluation(
+        &c.output,
+        producer,
+        &source,
+        &parent,
+        &schedule,
+        &plan,
+        s.components,
+    )
+}
+
+/// Explicit completed32768/5120 parent path. No configurable rank search or split.
+pub(super) fn prepare_next(c: &NextEvaluationInputConfig) -> Result<Value> {
+    require(
+        c.output.is_absolute() && c.saved_next_evaluation.components == 128,
+        "next evaluation requires exactly128 components and an absolute fresh output",
+    )?;
+    let locator_ref = &c.saved_next_evaluation.locator;
+    let locator = read_input_reference_max(locator_ref, CONTROL)?;
+    require(
+        locator["schema"] == "quoridor.saved5120.payload-free-locator.v1",
+        "completed saved5120 locator required",
+    )?;
+    let accepted_ref = reference(&locator, "acceptedSaved5120")?;
+    let accepted = read_input_reference_max(&accepted_ref, CONTROL)?;
+    let manifest_ref = reference(&locator, "normalManifest")?;
+    let manifest = read_input_reference_max(&manifest_ref, CONTROL)?;
+    let experiment_ref = reference(&locator, "normalExperiment")?;
+    let experiment = read_input_reference_max(&experiment_ref, CONTROL)?;
+    let plan_ref = reference(&locator["normalBinding"], "control/Plan.json")?;
+    let plan_value = read_input_reference_max(&plan_ref, CONTROL)?;
+    let selection_config_ref = reference(&locator, "selection_config")?;
+    let selection_config = read_input_reference_max(&selection_config_ref, CONTROL)?;
+    let subset = &selection_config["saved_subset"];
+    let census_ref = reference(&locator, "selection_census")?;
+    let census = read_input_reference_max(&census_ref, CENSUS)?;
+    let pool_result_ref = reference(&locator, "sourcePoolResult")?;
+    let pool_result = read_input_reference_max(&pool_result_ref, CONTROL)?;
+    let pool_ref = reference(&pool_result, "collection")?;
+    let pool = read_input_reference_max(&pool_ref, CONTROL)?;
+    let source_ref = reference(&pool["native"], "source_observations")?;
+    let parent_ref = reference(&pool["native"], "partition")?;
+    let schedule_ref = reference(&pool["native"], "schedule")?;
+    let selected_ref = reference(&locator, "partition")?;
+    let config_ref = reference(subset, "source_config")?;
+    let config = read_input_reference_max(&config_ref, CONTROL)?;
+    let exclusion_ref = reference(subset, "exposure_parent")?;
+    let exclusions = read_input_reference_max(&exclusion_ref, CONTROL)?;
+    let actual = &manifest["data"]["generation"]["actual"];
+    let counts = json!({"train":4096,"validation":1024,"test":0});
+    let zero = json!({"train":0,"validation":0,"test":0});
+    require(
+        accepted["schema"] == "quoridor.research.saved5120-input-result.v1"
+            && accepted["status"] == "SAVED_SUBSET_NATIVE_AND_NORMAL_DATA_PASS"
+            && accepted["jobId"].as_str().is_some()
+            && accepted["jobId"] == locator["completedJob"]
+            && same_ref(&accepted["normalManifest"], &manifest_ref)?
+            && same_ref(&accepted["config"], &selection_config_ref)?
+            && same_ref(&accepted["poolResult"], &pool_result_ref)?
+            && same_ref(&accepted["rankCensusByRef"], &census_ref)?
+            && same_ref(&accepted["inheritedSourceByRef"], &source_ref)?
+            && accepted["actualComponents"] == counts
+            && accepted["componentDeficits"] == zero
+            && manifest["schema"] == "quoridor.research.completion.v1"
+            && manifest["status"] == "PASS"
+            && manifest["cleanup_complete"] == true
+            && manifest["remaining"] == json!([])
+            && manifest["data"]["status"] == "PASS"
+            && manifest["data"]["errors"] == json!([])
+            && manifest["data"]["files"] == accepted["actualNewFiles"]
+            && same_ref(&manifest["experiment"], &experiment_ref)?
+            && manifest["build_manifest"] == experiment["build_manifest"]
+            && experiment["phase"] == "generation"
+            && experiment["models"] == json!([])
+            && same_ref(&experiment["config"], &selection_config_ref)?
+            && experiment["canonical_plan_sha256"] == plan_ref.sha256
+            && same_ref(&plan_value["input_request"], &selection_config_ref)?
+            && same_ref(&plan_value["fullPoolCollection"], &pool_ref)?
+            && same_ref(&plan_value["rankCensus"], &census_ref)?
+            && experiment["schedule"] == plan_value["schedule"]
+            && manifest["data"]["generation"]["saved_subset_only"] == true
+            && same_ref(
+                &manifest["data"]["generation"]["config"],
+                &selection_config_ref,
+            )?
+            && same_ref(
+                &manifest["data"]["generation"]["experiment"],
+                &experiment_ref,
+            )?
+            && actual["actual_components"] == counts
+            && actual["requested_components"] == counts
+            && actual["component_deficits"] == zero
+            && actual["generated_transitions"] == 0
+            && actual["search_calls"] == 0
+            && actual["teacher_calls"] == 0
+            && actual["outcomes_selected"] == false
+            && same_ref(&actual["partition"], &selected_ref)?
+            && same_ref(&actual["source_observations"], &source_ref)?
+            && same_ref(&actual["selection_census"], &census_ref)?,
+        "actual completed5120 normal/selection correspondence differs",
+    )?;
+    for key in ["partition", "fit_observations", "holdout_observations"] {
+        require(
+            actual[key] == locator[key]
+                && array(&manifest["data"], "files")?.contains(&locator[key]),
+            "actual5120 publication file correspondence differs",
+        )?;
+    }
+    require(
+        array(&manifest["data"], "files")?.contains(&locator["selectionPublication"]),
+        "actual5120 selection publication missing",
+    )?;
+    require(
+        pool["status"] == "COMPLETE_FIXED32768_POOL_BEFORE_FIRST5120"
+            && pool["sourcePoolComplete"] == true
+            && pool["native"]["outcomes_selected"] == false
+            && same_ref(
+                &pool["normalManifest"],
+                &reference(&pool_result, "normalManifest")?,
+            )?
+            && same_ref(&pool_result["rankedCensus"], &census_ref)?
+            && same_ref(&pool["refs"]["input-generation.json"], &config_ref)?
+            && same_ref(&pool["exclusion_authority"], &exclusion_ref)?
+            && selection_config["families"] == 32768
+            && config["families"] == 32768
+            && selection_config["prefix_seed"] == config["prefix_seed"]
+            && selection_config["split_seed"] == config["split_seed"]
+            && subset == &locator["saved_subset_source"]
+            && subset["split_counts"] == counts
+            && subset["excluded_prefix_components"] == 0
+            && same_ref(&subset["schedule"], &schedule_ref)?
+            && same_ref(&subset["census"], &census_ref)?
+            && exclusions["schema"] == "research.named-prefix-exclusion-authority.v1"
+            && config["trajectory"]["wall_layer_observations"] == json!([0, 1, 0])
+            && config["trajectory"]["split_counts"]
+                == json!({"train":32768,"validation":0,"test":0})
+            && config["excluded_books"] == exclusions["excluded_books"]
+            && config["excluded_static_inputs"] == exclusions["excluded_static_inputs"]
+            && !config["excluded_static_inputs"].is_null()
+            && exclusions["excluded_books"]
+                .as_array()
+                .is_some_and(|v| !v.is_empty())
+            && !config["excluded_parent"].is_null()
+            && config["excluded_parent"] == exclusions["excluded_parent"]
+            && same_ref(&exclusions["nativeInputConfig"], &config_ref)?
+            && census["schema"] == "research.identity-only-component-census.v2"
+            && census["columns"]
+                == json!([
+                    "rank0",
+                    "component",
+                    "member_ids",
+                    "source_series_ids",
+                    "disposition",
+                    "prospective_split"
+                ])
+            && same_ref(&census["sourceCollection"], &pool_ref)?
+            && same_ref(&census["partition"], &parent_ref)?
+            && same_ref(&census["publishedScheduleByRef"], &schedule_ref)?
+            && same_ref(&census["nativeInputConfig"], &config_ref)?
+            && same_ref(&census["exposureParent"], &exclusion_ref)?
+            && census["sourceExclusionAuthority"] == exclusions
+            && census["componentRankSeed"] == config["split_seed"]
+            && census["counts"]
+                == json!({"originalSurvivors":7615,"originalDeficit":25153,
+            "excludedComponents":0,"eligibleNamedScope":7615})
+            && census["prospective"]
+                == json!({"selected":5120,"train":4096,"validation":1024,
+            "holdout":0,"deficitWithinNamedScope":0}),
+        "complete32768 parent/rank/inherited exclusion authority differs",
+    )?;
+    // Generic JSON custody includes all new-parent rows/prefixes, without auditing
+    // unselected roots or reopening the protected old1976/H128 authorities.
+    let parent = read_input_reference_max(&parent_ref, PARENT)?;
+    let selected = read_input_reference_max(&selected_ref, PARENT)?;
+    let schedule = read_input_reference_max(&schedule_ref, PARENT)?;
+    require(
+        parent["actual"] == pool["native"]["actual_components"]
+            && parent["requested"] == pool["native"]["requested_components"]
+            && parent["requested"] == config["trajectory"]["split_counts"]
+            && parent["deficits"] == pool["native"]["component_deficits"]
+            && parent["partition"]["seed"] == config["split_seed"]
+            && selected["actual"] == counts
+            && selected["requested"] == counts
+            && selected["deficits"] == zero
+            && selected["partition"]["seed"] == config["split_seed"]
+            && selected["selection"]["schema"] == "quoridor-prefix-series-saved-subset-v3"
+            && same_ref(&selected["selection"]["source_partition"], &parent_ref)?
+            && same_ref(&selected["selection"]["source_observations"], &source_ref)?
+            && same_ref(&selected["selection"]["source_schedule"], &schedule_ref)?
+            && same_ref(&selected["selection"]["source_config"], &config_ref)?
+            && same_ref(&selected["selection"]["census"], &census_ref)?
+            && same_ref(&selected["selection"]["exposure_parent"], &exclusion_ref)?
+            && selected["selection"]["split_counts"] == counts
+            && selected["selection"]["excluded_prefix_components"] == 0
+            && schedule["generator_version"] == quoridor_data::common_corpus::VERSION
+            && same_ref(&schedule["partition"], &parent_ref)?
+            && same_ref(&schedule["source_observations"], &source_ref)?
+            && schedule["prefix_seed"] == config["prefix_seed"]
+            && schedule["split_seed"] == config["split_seed"]
+            && schedule["trajectory"] == config["trajectory"]
+            && schedule["excluded_books"] == config["excluded_books"]
+            && schedule["excluded_static_inputs"] == config["excluded_static_inputs"]
+            && schedule["excluded_parent"] == config["excluded_parent"]
+            && array(&schedule, "series")?.len() == 32768,
+        "full completed5120 parent/schedule correspondence differs",
+    )?;
+    let plan = checked_rank_components(&parent, &selected, &schedule, &census, &census, 128, true)?;
+    require(
+        plan.parent_components == 7615
+            && plan.excluded == 5120
+            && plan.protected_h == 0
+            && plan.members.first().map(|m| m.0) == Some(5120)
+            && plan.members.last().map(|m| m.0) == Some(5247),
+        "exact next128 native rank window differs",
+    )?;
+    let source = read_input_reference_max(&source_ref, PARENT)?;
+    require(
+        source["schema"] == "quoridor-prefix-series-full-history-v1"
+            && source["teacher_labels"] == false
+            && same_ref(&source["partition"], &parent_ref)?,
+        "bound unlabelled full-history source differs",
+    )?;
+    let producer = json!({"locator":locator_ref,"source_observations":source_ref,
+        "source_schedule":schedule_ref,"original_partition":parent_ref,
+        "excluded_selection":selected_ref});
+    publish_evaluation(&c.output, producer, &source, &parent, &schedule, &plan, 128)
+}
+
+fn publish_evaluation(
+    output: &std::path::Path,
+    producer: Value,
+    source: &Value,
+    parent: &Value,
+    schedule: &Value,
+    plan: &EvaluationPlan,
+    components: usize,
+) -> Result<Value> {
+    let (families, mapping) = evaluation_rows(source, parent, schedule, plan)?;
     // No output directory or complete book exists until every check/audit succeeds.
-    std::fs::create_dir(&c.output)?;
-    let marker = c.output.join("INCOMPLETE");
+    std::fs::create_dir(output)?;
+    let marker = output.join("INCOMPLETE");
     std::fs::write(
         &marker,
         "evaluation publication incomplete; no arena admitted\n",
     )?;
-    let producer = json!({"authority":s.authority,"checked_dispositions":s.checked_dispositions,
-        "source_observations":source_ref,"source_schedule":schedule_ref,
-        "original_partition":parent_ref,"excluded_selection":selected_ref});
     let book = publish(
-        &c.output,
+        output,
         "book.json",
         &json!({
             "complete":true,"rules":"research-standard-2p-threefold-goal-first-v1",
@@ -245,23 +482,23 @@ pub(super) fn prepare(c: &EvaluationInputConfig) -> Result<Value> {
         }),
     )?;
     let mapping_ref = publish(
-        &c.output,
+        output,
         "evaluation-census.json",
         &json!({
             "schema":"quoridor-native-saved-evaluation-census-v1","producer":producer,
             "parent_components":plan.parent_components,"excluded_components":plan.excluded,
             "protected_H_components":plan.protected_h,"eligible_named_scope":plan.eligible,
-            "selected_components":s.components,"deficit":0,"evaluation_only":true,
+            "selected_components":components,"deficit":0,"evaluation_only":true,
             "excluded_from_future_fit":true,"members":mapping
         }),
     )?;
     let result = json!({"book":book,"evaluation_census":mapping_ref,
-        "selected_components":s.components,"eligible_named_scope":plan.eligible,
+        "selected_components":components,"eligible_named_scope":plan.eligible,
         "excluded_components":plan.excluded,"protected_H_typed_context_or_rules_audits":0,
         "opaque_parent_JSON_read_including_protected_bytes":true,
-        "typed_context_rows":s.components,"generated_transitions":0,
+        "typed_context_rows":components,"generated_transitions":0,
         "search_calls":0,"teacher_calls":0,"fit_calls":0});
-    write_input_json(&c.output, "publication.json", &result)?;
+    write_input_json(output, "publication.json", &result)?;
     std::fs::remove_file(marker)?;
     Ok(result)
 }
@@ -295,6 +532,20 @@ fn checked_components(
     census: &Value,
     projection: &Value,
     wanted: usize,
+) -> Result<EvaluationPlan> {
+    checked_rank_components(
+        parent, selected, schedule, census, projection, wanted, false,
+    )
+}
+
+fn checked_rank_components(
+    parent: &Value,
+    selected: &Value,
+    schedule: &Value,
+    census: &Value,
+    projection: &Value,
+    wanted: usize,
+    next5120: bool,
 ) -> Result<EvaluationPlan> {
     let mut original = BTreeMap::new();
     let mut components: BTreeMap<String, BTreeSet<String>> = BTreeMap::new();
@@ -377,8 +628,9 @@ fn checked_components(
     let mut disposition_counts = [0usize; 4];
     for (rank, ((row, old), identity)) in records.iter().zip(native).zip(ranked).enumerate() {
         let fields = row.as_array().ok_or("ranked disposition row required")?;
+        let expected_fields = if next5120 { 6 } else { 8 };
         require(
-            fields.len() == 8
+            fields.len() == expected_fields
                 && fields[..6] == old.as_array().ok_or("native census row")?[..]
                 && fields[0].as_u64() == Some(rank as u64)
                 && fields[1] == *identity,
@@ -412,6 +664,12 @@ fn checked_components(
             .iter()
             .filter(|id| excluded_members.contains_key(*id))
             .count();
+        if next5120 {
+            require(
+                (selected_count != 0) == (rank < 5120),
+                "completed5120 selection must occupy exactly native ranks0..5119",
+            )?;
+        }
         if selected_count != 0 {
             require(
                 selected_count == ids.len() && splits.len() == 1,
@@ -424,20 +682,32 @@ fn checked_components(
                 "test" => (2, "PROTECTED_H128"),
                 _ => return Err("unsupported protected split".into()),
             };
-            require(
-                fields[5] == split.as_str()
-                    && fields[6] == split.as_str()
-                    && fields[7] == disposition,
-                "protected1408 disposition mismatch",
-            )?;
+            if next5120 {
+                let expected_split = if rank < 4096 { "train" } else { "validation" };
+                require(
+                    ids.len() == 1
+                        && sources.len() == 1
+                        && split == expected_split
+                        && fields[5] == split.as_str(),
+                    "actual5120 rank/split/singleton identity differs",
+                )?;
+            } else {
+                require(
+                    fields[5] == split.as_str()
+                        && fields[6] == split.as_str()
+                        && fields[7] == disposition,
+                    "protected1408 disposition mismatch",
+                )?;
+            }
             disposition_counts[index] += 1;
             protected_h += usize::from(index == 2);
             excluded += 1;
         } else {
             require(
                 fields[5].is_null()
-                    && fields[6].is_null()
-                    && fields[7] == "NOT_SELECTED1408_ELIGIBILITY_NOT_CLAIMED",
+                    && (next5120
+                        || (fields[6].is_null()
+                            && fields[7] == "NOT_SELECTED1408_ELIGIBILITY_NOT_CLAIMED")),
                 "unselected component disposition mismatch",
             )?;
             disposition_counts[3] += 1;
@@ -453,11 +723,12 @@ fn checked_components(
     }
     require(
         seen_members.len() == original.len()
-            && projection["counts"]
-                == json!({
+            && (next5120
+                || projection["counts"]
+                    == json!({
             "EXCLUDED_TRAIN1024":disposition_counts[0],"EXCLUDED_SELECTION_V256":disposition_counts[1],
             "PROTECTED_H128":disposition_counts[2],
-            "NOT_SELECTED1408_ELIGIBILITY_NOT_CLAIMED":disposition_counts[3]}),
+            "NOT_SELECTED1408_ELIGIBILITY_NOT_CLAIMED":disposition_counts[3]})),
         "complete member/disposition counts differ",
     )?;
     if members.len() != wanted {
@@ -581,6 +852,121 @@ fn evaluation_rows(
 mod tests {
     use super::*;
 
+    /// Opaque roots in ALL selected training rows and later unassigned rows must
+    /// never be needed to validate the fixed metadata window.
+    fn next5120_fixture() -> (Value, Value, Value, Value, Value) {
+        let (mut parent, selected, mut schedule, mut census, _, mut source) =
+            fixture([4096, 1024, 0]);
+        for rank in 5122..5249 {
+            let id = format!("observation-{rank:04}");
+            let family = format!("component-{rank:04}");
+            let series = format!("source-{rank:04}");
+            parent["partition"]["assignments"]
+                .as_array_mut()
+                .unwrap()
+                .push(json!({"game":id,"family":family,"split":"train",
+                    "prefix":"opaque unselected prefix"}));
+            parent["source_series"][&id] = json!(series);
+            schedule["ranked_components"]
+                .as_array_mut()
+                .unwrap()
+                .push(json!(family));
+            schedule["series"]
+                .as_array_mut()
+                .unwrap()
+                .push(json!({"id":series,"seed":rank,"source_attempts":1}));
+            census["records"].as_array_mut().unwrap().push(json!([
+                rank,
+                family,
+                [id],
+                [series],
+                "eligible_named_scope",
+                null
+            ]));
+            source["observations"].as_array_mut().unwrap().push(
+                json!({"id":id,"family":family,"source_series":series,"split":"train",
+                    "root":"opaque root must not decode"}),
+            );
+        }
+        (parent, selected, schedule, census, source)
+    }
+
+    #[test]
+    fn next5120_exact_window_preserves_members_and_refuses_corruption() {
+        let (parent, selected, schedule, census, _) = next5120_fixture();
+        let check = |p: &Value, s: &Value, q: &Value, c: &Value, wanted| {
+            checked_rank_components(p, s, q, c, c, wanted, true)
+        };
+        let plan = check(&parent, &selected, &schedule, &census, 128).unwrap();
+        assert_eq!(plan.members.len(), 128);
+        assert_eq!(plan.members.first().unwrap().0, 5120);
+        assert_eq!(plan.members.last().unwrap().0, 5247);
+        assert_eq!(plan.excluded, 5120);
+        assert_eq!(plan.protected_h, 0);
+        for field in [0, 1, 2, 3, 5] {
+            let mut bad = census.clone();
+            bad["records"][5120][field] = json!("corrupt native rank/member/source/split");
+            assert!(check(&parent, &selected, &schedule, &bad, 128).is_err());
+        }
+        let mut bad = selected.clone();
+        bad["partition"]["assignments"][4096]["split"] = json!("train");
+        assert!(check(&parent, &bad, &schedule, &census, 128).is_err());
+        let mut bad = parent.clone();
+        let mut extra = bad["partition"]["assignments"][5120].clone();
+        extra["game"] = json!("extra-member");
+        bad["partition"]["assignments"]
+            .as_array_mut()
+            .unwrap()
+            .push(extra);
+        bad["source_series"]["extra-member"] = json!("extra-source");
+        let mut multi_census = census.clone();
+        multi_census["records"][5120][2]
+            .as_array_mut()
+            .unwrap()
+            .push(json!("extra-member"));
+        multi_census["records"][5120][3]
+            .as_array_mut()
+            .unwrap()
+            .push(json!("extra-source"));
+        let error = check(&bad, &selected, &schedule, &multi_census, 128)
+            .err()
+            .unwrap()
+            .to_string();
+        assert!(error.contains("multimember"));
+
+        // Never skip a selected multimember component or replace a missing rank.
+        let mut bad = schedule.clone();
+        bad["ranked_components"]
+            .as_array_mut()
+            .unwrap()
+            .remove(5120);
+        assert!(check(&parent, &selected, &bad, &census, 128).is_err());
+        assert!(check(&parent, &selected, &schedule, &census, 130).is_err());
+    }
+
+    #[test]
+    fn next5120_count_refuses_before_locator_read_or_output() {
+        let output = std::env::temp_dir().join(format!(
+            "quoridor-next5120-invalid-count-{}",
+            std::process::id()
+        ));
+        assert!(!output.exists());
+        let c = NextEvaluationInputConfig {
+            saved_next_evaluation: SavedNextEvaluationInput {
+                locator: FileRef {
+                    path: output.join("absent-locator.json"),
+                    bytes: 1,
+                    mode: "0644".into(),
+                    sha256: "0".repeat(64),
+                },
+                components: 127,
+            },
+            output: output.clone(),
+        };
+        let error = prepare_next(&c).unwrap_err().to_string();
+        assert!(error.contains("exactly128"));
+        assert!(!output.exists());
+    }
     fn fixture(excluded: [usize; 3]) -> (Value, Value, Value, Value, Value, Value) {
         let count: usize = excluded.iter().sum();
         let mut assignments = Vec::<Value>::new();

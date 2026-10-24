@@ -733,6 +733,163 @@ class ConfiguredArenaPlanSelection(unittest.TestCase):
                 with self.assertRaises(lc.Refused):
                     lc.arena_observation(clock_config, dict(observations=[legacy_fallback]))
 
+    def test_next5120_evaluation_publication_joins_rank_and_locator_nn0(self):
+        lc = load_lifecycle()
+        with tempfile.TemporaryDirectory() as name:
+            root = Path(name)
+            (root / "locator.json").write_text("{}")
+            locator = lc.artifact_ref(root / "locator.json")
+            request = dict(saved_next_evaluation=dict(locator=locator, components=128), output=name)
+            (root / "config.json").write_text(json.dumps(request))
+            config_ref = lc.artifact_ref(root / "config.json")
+            experiment = dict(
+                phase="generation",
+                planned_slots=0,
+                config=config_ref,
+                inputs=[locator],
+                argv=[
+                    "/native",
+                    "teacher-pilot",
+                    "--prepare-inputs",
+                    config_ref["path"],
+                    "--input-sha256",
+                    config_ref["sha256"],
+                ],
+            )
+            (root / "Experiment.json").write_text(json.dumps(experiment))
+            names = dict(
+                book="book.json",
+                evaluation_census="evaluation-census.json",
+                publication="publication.json",
+            )
+            # This is deliberately not JSON: the collector must never retain/decode it.
+            (root / "book.json").write_bytes(b"synthetic book is streamed/hash-only")
+            census = dict(
+                schema="quoridor-native-saved-evaluation-census-v1",
+                producer=dict(locator=locator),
+                parent_components=7615,
+                excluded_components=5120,
+                protected_H_components=0,
+                eligible_named_scope=2495,
+                selected_components=128,
+                deficit=0,
+                evaluation_only=True,
+                excluded_from_future_fit=True,
+                members=[
+                    dict(
+                        family_id=i,
+                        native_rank=5120 + i,
+                        component=f"c{i}",
+                        observation=f"o{i}",
+                        source_series=f"s{i}",
+                        source_seed=i,
+                    )
+                    for i in range(128)
+                ],
+            )
+            (root / "evaluation-census.json").write_text(json.dumps(census))
+            files = [
+                lc.artifact_ref(root / filename)
+                for filename in ("book.json", "evaluation-census.json")
+            ]
+            result = dict(
+                book=files[0],
+                evaluation_census=files[1],
+                selected_components=128,
+                eligible_named_scope=2495,
+                excluded_components=5120,
+                typed_context_rows=128,
+                protected_H_typed_context_or_rules_audits=0,
+                opaque_parent_JSON_read_including_protected_bytes=True,
+                generated_transitions=0,
+                search_calls=0,
+                teacher_calls=0,
+                fit_calls=0,
+            )
+            (root / "publication.json").write_text(json.dumps(result))
+            files.append(lc.artifact_ref(root / "publication.json"))
+            spec = dict(
+                data_root=name,
+                output=str(root / "operation"),
+                owner=name,
+                limits=dict(log_B=65536),
+                experiment=lc.artifact_ref(root / "Experiment.json"),
+                data=[
+                    dict(name=key, path=str(root / filename), limit_B=8 * 1024**2)
+                    for key, filename in names.items()
+                ],
+            )
+            Path(spec["output"]).mkdir()
+            response = dict(config={k: config_ref[k] for k in ("path", "sha256")}, result=result)
+            capture = Path(spec["output"]) / "run.full.log"
+            capture.write_text(json.dumps(response))
+            values = dict(
+                evaluation_census=json.dumps(census).encode(),
+                publication=json.dumps(result).encode(),
+            )
+            with (
+                patch.object(lc, "owned", side_effect=lambda path, owner: Path(path)),
+                patch.object(lc, "bound", wraps=lc.bound) as intake,
+            ):
+                self.assertEqual(lc.native_input_files(request), names)
+                collected = lc.collect_data(spec, experiment)
+                self.assertEqual(collected["status"], "PASS")
+                self.assertEqual(collected["errors"], [])
+                self.assertEqual(collected["files"], files)
+                evidence = collected["generation"]
+                self.assertTrue(evidence["saved_evaluation_only"])
+                self.assertIsNone(evidence["numerical_qualification"])
+                retained_limits = {
+                    Path(call.args[0]).name: call.args[1]
+                    for call in intake.call_args_list
+                    if len(call.args) > 1
+                }
+                self.assertNotIn("book.json", retained_limits)
+                self.assertFalse(
+                    any(Path(call.args[0]) == root / "book.json" for call in intake.call_args_list)
+                )
+                self.assertEqual(retained_limits["evaluation-census.json"], 4 * 1024**2)
+                self.assertEqual(retained_limits["publication.json"], 65536)
+                for mutation in ("locator", "rank", "publication"):
+                    with self.subTest(mutation=mutation):
+                        bad = json.loads(json.dumps(census))
+                        bad_values = dict(values)
+                        if mutation == "locator":
+                            bad["producer"]["locator"]["sha256"] = "c" * 64
+                        elif mutation == "rank":
+                            bad["members"][0]["native_rank"] = 5121
+                        else:
+                            bad_values["publication"] = b"{}"
+                        bad_values["evaluation_census"] = json.dumps(bad).encode()
+                        # Preserve the original direct refusal assertion, then require
+                        # the same refusal through real bounded collection/file ports.
+                        with self.assertRaises(lc.Refused):
+                            lc.native_input_evidence(spec, experiment, bad_values, files)
+                        (root / "evaluation-census.json").write_bytes(
+                            bad_values["evaluation_census"]
+                        )
+                        bad_result = dict(
+                            result,
+                            evaluation_census=lc.artifact_ref(root / "evaluation-census.json"),
+                        )
+                        (root / "publication.json").write_bytes(
+                            b"{}" if mutation == "publication" else json.dumps(bad_result).encode()
+                        )
+                        capture.write_text(json.dumps(dict(response, result=bad_result)))
+                        refused = lc.collect_data(spec, experiment)
+                        self.assertEqual(refused["status"], "FAILED")
+                        self.assertTrue(
+                            any(
+                                error["stage"] == "generation_metadata"
+                                for error in refused["errors"]
+                            )
+                        )
+                        (root / "evaluation-census.json").write_bytes(values["evaluation_census"])
+                        (root / "publication.json").write_bytes(values["publication"])
+                        capture.write_text(json.dumps(response))
+            with self.assertRaises(lc.Refused):
+                lc.native_input_files({**request, "trajectory": {"max_plies": 200}})
+
 
 if __name__ == "__main__":
     unittest.main()

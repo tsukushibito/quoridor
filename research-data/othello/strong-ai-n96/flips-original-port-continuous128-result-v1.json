@@ -1,0 +1,1059 @@
+{
+  "conditionId": "flips-original-port-continuous-comparison-v1",
+  "status": "NEW_FIXED64_TIMED64_SAVED_COLLECTION_COMPLETE",
+  "job": "005985f3-432c-4842-b547-580e64df6928",
+  "newOnly": {
+    "planned": 128,
+    "searchTransports": 128,
+    "numeric": 128,
+    "completePairs": 64,
+    "UNKNOWN": 0,
+    "UNRUN": 0,
+    "setups": 4,
+    "clears": 32,
+    "drops": 4
+  },
+  "references": {
+    "baseline": "bd8ffc91",
+    "candidate": "d1106b89",
+    "sourceReview": "b6ebf04b/Max34 SOURCE_CLEAR",
+    "software": "318b3261"
+  },
+  "fixedSavedOriginalComparatorChecks": {
+    "completePairs": 32,
+    "allTenDeclaredFieldsEqual": true
+  },
+  "pairFieldComparison": {
+    "fixed": {
+      "rawScore": {
+        "equal": 32,
+        "different": 0,
+        "unexposed": 0
+      },
+      "score": {
+        "equal": 32,
+        "different": 0,
+        "unexposed": 0
+      },
+      "move": {
+        "equal": 32,
+        "different": 0,
+        "unexposed": 0
+      },
+      "mustPass": {
+        "equal": 32,
+        "different": 0,
+        "unexposed": 0
+      },
+      "nodes": {
+        "equal": 32,
+        "different": 0,
+        "unexposed": 0
+      },
+      "completedDepth": {
+        "equal": 32,
+        "different": 0,
+        "unexposed": 0
+      },
+      "selectivity": {
+        "equal": 32,
+        "different": 0,
+        "unexposed": 0
+      },
+      "probability": {
+        "equal": 32,
+        "different": 0,
+        "unexposed": 0
+      },
+      "proven": {
+        "equal": 32,
+        "different": 0,
+        "unexposed": 0
+      },
+      "isEndSearch": {
+        "equal": 32,
+        "different": 0,
+        "unexposed": 0
+      },
+      "scoreUnits": {
+        "equal": 32,
+        "different": 0,
+        "unexposed": 0
+      },
+      "stopped": {
+        "equal": 32,
+        "different": 0,
+        "unexposed": 0
+      }
+    },
+    "timed": {
+      "rawScore": {
+        "equal": 28,
+        "different": 4,
+        "unexposed": 0
+      },
+      "score": {
+        "equal": 29,
+        "different": 3,
+        "unexposed": 0
+      },
+      "move": {
+        "equal": 30,
+        "different": 2,
+        "unexposed": 0
+      },
+      "mustPass": {
+        "equal": 32,
+        "different": 0,
+        "unexposed": 0
+      },
+      "nodes": {
+        "equal": 16,
+        "different": 16,
+        "unexposed": 0
+      },
+      "completedDepth": {
+        "equal": 26,
+        "different": 6,
+        "unexposed": 0
+      },
+      "selectivity": {
+        "equal": 30,
+        "different": 2,
+        "unexposed": 0
+      },
+      "probability": {
+        "equal": 30,
+        "different": 2,
+        "unexposed": 0
+      },
+      "proven": {
+        "equal": 32,
+        "different": 0,
+        "unexposed": 0
+      },
+      "isEndSearch": {
+        "equal": 32,
+        "different": 0,
+        "unexposed": 0
+      },
+      "scoreUnits": {
+        "equal": 32,
+        "different": 0,
+        "unexposed": 0
+      },
+      "stopped": {
+        "equal": 32,
+        "different": 0,
+        "unexposed": 0
+      }
+    }
+  },
+  "byProfile": {
+    "fixed": {
+      "planned": 64,
+      "numeric": 64,
+      "completePairs": 32,
+      "UNKNOWN": 0,
+      "UNRUN": 0,
+      "byOwner": {
+        "baseline": {
+          "numeric": 32,
+          "callerWallMs": {
+            "count": 32,
+            "sum": 21.005159011110663,
+            "mean": 0.6564112190972082,
+            "minimum": 0.09433494415134192,
+            "maximum": 2.4902960285544395
+          },
+          "numericFields": {
+            "completedDepth": {
+              "count": 32,
+              "sum": 176,
+              "mean": 5.5,
+              "minimum": 4,
+              "maximum": 6
+            },
+            "elapsedMs": {
+              "count": 32,
+              "sum": 17.569053999999994,
+              "mean": 0.5490329374999998,
+              "minimum": 0.010234,
+              "maximum": 2.316994
+            },
+            "move": {
+              "count": 32,
+              "sum": 996,
+              "mean": 31.125,
+              "minimum": 0,
+              "maximum": 63
+            },
+            "nodes": {
+              "count": 32,
+              "sum": 81058,
+              "mean": 2533.0625,
+              "minimum": 21,
+              "maximum": 7250
+            },
+            "probability": {
+              "count": 32,
+              "sum": 3200.0,
+              "mean": 100.0,
+              "minimum": 100.0,
+              "maximum": 100.0
+            },
+            "rawScore": {
+              "count": 32,
+              "sum": 90,
+              "mean": 2.8125,
+              "minimum": -38,
+              "maximum": 35
+            },
+            "score": {
+              "count": 32,
+              "sum": 90,
+              "mean": 2.8125,
+              "minimum": -38,
+              "maximum": 35
+            },
+            "selectivity": {
+              "count": 32,
+              "sum": 192,
+              "mean": 6.0,
+              "minimum": 6,
+              "maximum": 6
+            },
+            "ttBytes": {
+              "count": 32,
+              "sum": 805307904,
+              "mean": 25165872.0,
+              "minimum": 25165872,
+              "maximum": 25165872
+            }
+          },
+          "stoppedTimeout": 0,
+          "stoppedAbsent": 0,
+          "isEndSearchTrue": 8
+        },
+        "candidate": {
+          "numeric": 32,
+          "callerWallMs": {
+            "count": 32,
+            "sum": 16.464082757011056,
+            "mean": 0.5145025861565955,
+            "minimum": 0.09398197289556265,
+            "maximum": 1.123058027587831
+          },
+          "numericFields": {
+            "completedDepth": {
+              "count": 32,
+              "sum": 176,
+              "mean": 5.5,
+              "minimum": 4,
+              "maximum": 6
+            },
+            "elapsedMs": {
+              "count": 32,
+              "sum": 13.222981000000004,
+              "mean": 0.41321815625000013,
+              "minimum": 0.008919,
+              "maximum": 1.0271119999999998
+            },
+            "move": {
+              "count": 32,
+              "sum": 996,
+              "mean": 31.125,
+              "minimum": 0,
+              "maximum": 63
+            },
+            "nodes": {
+              "count": 32,
+              "sum": 81058,
+              "mean": 2533.0625,
+              "minimum": 21,
+              "maximum": 7250
+            },
+            "probability": {
+              "count": 32,
+              "sum": 3200.0,
+              "mean": 100.0,
+              "minimum": 100.0,
+              "maximum": 100.0
+            },
+            "rawScore": {
+              "count": 32,
+              "sum": 90,
+              "mean": 2.8125,
+              "minimum": -38,
+              "maximum": 35
+            },
+            "score": {
+              "count": 32,
+              "sum": 90,
+              "mean": 2.8125,
+              "minimum": -38,
+              "maximum": 35
+            },
+            "selectivity": {
+              "count": 32,
+              "sum": 192,
+              "mean": 6.0,
+              "minimum": 6,
+              "maximum": 6
+            },
+            "ttBytes": {
+              "count": 32,
+              "sum": 805307904,
+              "mean": 25165872.0,
+              "minimum": 25165872,
+              "maximum": 25165872
+            }
+          },
+          "stoppedTimeout": 0,
+          "stoppedAbsent": 0,
+          "isEndSearchTrue": 8
+        }
+      },
+      "byFamily": [
+        {
+          "family": "development/continuous16-practical-v1/f0",
+          "numeric": 16,
+          "completePairs": 8,
+          "byOwner": {
+            "baseline": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 7.010782137513161,
+                "mean": 0.8763477671891451,
+                "minimum": 0.09474297985434532,
+                "maximum": 2.4902960285544395
+              },
+              "numericFields": {
+                "nodes": {
+                  "count": 8,
+                  "sum": 26486,
+                  "mean": 3310.75,
+                  "minimum": 21,
+                  "maximum": 7250
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 44,
+                  "mean": 5.5,
+                  "minimum": 4,
+                  "maximum": 6
+                }
+              },
+              "stoppedTimeout": 0,
+              "stoppedAbsent": 0,
+              "isEndSearchTrue": 2
+            },
+            "candidate": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 4.589268006384373,
+                "mean": 0.5736585007980466,
+                "minimum": 0.09398197289556265,
+                "maximum": 1.123058027587831
+              },
+              "numericFields": {
+                "nodes": {
+                  "count": 8,
+                  "sum": 26486,
+                  "mean": 3310.75,
+                  "minimum": 21,
+                  "maximum": 7250
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 44,
+                  "mean": 5.5,
+                  "minimum": 4,
+                  "maximum": 6
+                }
+              },
+              "stoppedTimeout": 0,
+              "stoppedAbsent": 0,
+              "isEndSearchTrue": 2
+            }
+          }
+        },
+        {
+          "family": "development/continuous16-practical-v1/f1",
+          "numeric": 16,
+          "completePairs": 8,
+          "byOwner": {
+            "baseline": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 4.037997801788151,
+                "mean": 0.5047497252235189,
+                "minimum": 0.09433494415134192,
+                "maximum": 0.9177490137517452
+              },
+              "numericFields": {
+                "nodes": {
+                  "count": 8,
+                  "sum": 16392,
+                  "mean": 2049.0,
+                  "minimum": 25,
+                  "maximum": 3889
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 44,
+                  "mean": 5.5,
+                  "minimum": 4,
+                  "maximum": 6
+                }
+              },
+              "stoppedTimeout": 0,
+              "stoppedAbsent": 0,
+              "isEndSearchTrue": 2
+            },
+            "candidate": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 3.873694804497063,
+                "mean": 0.4842118505621329,
+                "minimum": 0.10158889926970005,
+                "maximum": 0.9394619846716523
+              },
+              "numericFields": {
+                "nodes": {
+                  "count": 8,
+                  "sum": 16392,
+                  "mean": 2049.0,
+                  "minimum": 25,
+                  "maximum": 3889
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 44,
+                  "mean": 5.5,
+                  "minimum": 4,
+                  "maximum": 6
+                }
+              },
+              "stoppedTimeout": 0,
+              "stoppedAbsent": 0,
+              "isEndSearchTrue": 2
+            }
+          }
+        },
+        {
+          "family": "development/continuous16-practical-v1/f2",
+          "numeric": 16,
+          "completePairs": 8,
+          "byOwner": {
+            "baseline": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 5.15760388225317,
+                "mean": 0.6447004852816463,
+                "minimum": 0.10121299419552088,
+                "maximum": 1.1942859273403883
+              },
+              "numericFields": {
+                "nodes": {
+                  "count": 8,
+                  "sum": 19760,
+                  "mean": 2470.0,
+                  "minimum": 26,
+                  "maximum": 5641
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 44,
+                  "mean": 5.5,
+                  "minimum": 4,
+                  "maximum": 6
+                }
+              },
+              "stoppedTimeout": 0,
+              "stoppedAbsent": 0,
+              "isEndSearchTrue": 2
+            },
+            "candidate": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 4.074085969477892,
+                "mean": 0.5092607461847365,
+                "minimum": 0.10431092232465744,
+                "maximum": 0.9494920959696174
+              },
+              "numericFields": {
+                "nodes": {
+                  "count": 8,
+                  "sum": 19760,
+                  "mean": 2470.0,
+                  "minimum": 26,
+                  "maximum": 5641
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 44,
+                  "mean": 5.5,
+                  "minimum": 4,
+                  "maximum": 6
+                }
+              },
+              "stoppedTimeout": 0,
+              "stoppedAbsent": 0,
+              "isEndSearchTrue": 2
+            }
+          }
+        },
+        {
+          "family": "development/continuous16-practical-v1/f3",
+          "numeric": 16,
+          "completePairs": 8,
+          "byOwner": {
+            "baseline": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 4.798775189556181,
+                "mean": 0.5998468986945227,
+                "minimum": 0.1078310888260603,
+                "maximum": 1.1751470156013966
+              },
+              "numericFields": {
+                "nodes": {
+                  "count": 8,
+                  "sum": 18420,
+                  "mean": 2302.5,
+                  "minimum": 26,
+                  "maximum": 5150
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 44,
+                  "mean": 5.5,
+                  "minimum": 4,
+                  "maximum": 6
+                }
+              },
+              "stoppedTimeout": 0,
+              "stoppedAbsent": 0,
+              "isEndSearchTrue": 2
+            },
+            "candidate": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 3.927033976651728,
+                "mean": 0.490879247081466,
+                "minimum": 0.09790901094675064,
+                "maximum": 0.9069460211321712
+              },
+              "numericFields": {
+                "nodes": {
+                  "count": 8,
+                  "sum": 18420,
+                  "mean": 2302.5,
+                  "minimum": 26,
+                  "maximum": 5150
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 44,
+                  "mean": 5.5,
+                  "minimum": 4,
+                  "maximum": 6
+                }
+              },
+              "stoppedTimeout": 0,
+              "stoppedAbsent": 0,
+              "isEndSearchTrue": 2
+            }
+          }
+        }
+      ]
+    },
+    "timed": {
+      "planned": 64,
+      "numeric": 64,
+      "completePairs": 32,
+      "UNKNOWN": 0,
+      "UNRUN": 0,
+      "byOwner": {
+        "baseline": {
+          "numeric": 32,
+          "callerWallMs": {
+            "count": 32,
+            "sum": 16050.01830169931,
+            "mean": 501.56307192810345,
+            "minimum": 0.13437296729534864,
+            "maximum": 1000.3150770207867
+          },
+          "numericFields": {
+            "completedDepth": {
+              "count": 32,
+              "sum": 349,
+              "mean": 10.90625,
+              "minimum": 4,
+              "maximum": 19
+            },
+            "elapsedMs": {
+              "count": 32,
+              "sum": 16044.101035999996,
+              "mean": 501.3781573749999,
+              "minimum": 0.025319,
+              "maximum": 1000.000112
+            },
+            "move": {
+              "count": 32,
+              "sum": 1076,
+              "mean": 33.625,
+              "minimum": 0,
+              "maximum": 63
+            },
+            "nodes": {
+              "count": 32,
+              "sum": 112199083,
+              "mean": 3506221.34375,
+              "minimum": 37,
+              "maximum": 9324999
+            },
+            "probability": {
+              "count": 32,
+              "sum": 2992.0,
+              "mean": 93.5,
+              "minimum": 74.0,
+              "maximum": 100.0
+            },
+            "rawScore": {
+              "count": 32,
+              "sum": 107,
+              "mean": 3.34375,
+              "minimum": -36,
+              "maximum": 38
+            },
+            "score": {
+              "count": 32,
+              "sum": 118,
+              "mean": 3.6875,
+              "minimum": -36,
+              "maximum": 39
+            },
+            "selectivity": {
+              "count": 32,
+              "sum": 144,
+              "mean": 4.5,
+              "minimum": 0,
+              "maximum": 6
+            },
+            "ttBytes": {
+              "count": 32,
+              "sum": 805307904,
+              "mean": 25165872.0,
+              "minimum": 25165872,
+              "maximum": 25165872
+            }
+          },
+          "stoppedTimeout": 16,
+          "stoppedAbsent": 0,
+          "isEndSearchTrue": 16
+        },
+        "candidate": {
+          "numeric": 32,
+          "callerWallMs": {
+            "count": 32,
+            "sum": 16044.870542362332,
+            "mean": 501.4022044488229,
+            "minimum": 0.12154108844697475,
+            "maximum": 1000.4970040172338
+          },
+          "numericFields": {
+            "completedDepth": {
+              "count": 32,
+              "sum": 364,
+              "mean": 11.375,
+              "minimum": 4,
+              "maximum": 20
+            },
+            "elapsedMs": {
+              "count": 32,
+              "sum": 16038.544390000001,
+              "mean": 501.20451218750003,
+              "minimum": 0.023199,
+              "maximum": 1000.00029
+            },
+            "move": {
+              "count": 32,
+              "sum": 1036,
+              "mean": 32.375,
+              "minimum": 0,
+              "maximum": 63
+            },
+            "nodes": {
+              "count": 32,
+              "sum": 141715051,
+              "mean": 4428595.34375,
+              "minimum": 37,
+              "maximum": 13909846
+            },
+            "probability": {
+              "count": 32,
+              "sum": 2940.0,
+              "mean": 91.875,
+              "minimum": 74.0,
+              "maximum": 100.0
+            },
+            "rawScore": {
+              "count": 32,
+              "sum": 106,
+              "mean": 3.3125,
+              "minimum": -36,
+              "maximum": 38
+            },
+            "score": {
+              "count": 32,
+              "sum": 118,
+              "mean": 3.6875,
+              "minimum": -36,
+              "maximum": 39
+            },
+            "selectivity": {
+              "count": 32,
+              "sum": 132,
+              "mean": 4.125,
+              "minimum": 0,
+              "maximum": 6
+            },
+            "ttBytes": {
+              "count": 32,
+              "sum": 805307904,
+              "mean": 25165872.0,
+              "minimum": 25165872,
+              "maximum": 25165872
+            }
+          },
+          "stoppedTimeout": 16,
+          "stoppedAbsent": 0,
+          "isEndSearchTrue": 16
+        }
+      },
+      "byFamily": [
+        {
+          "family": "development/continuous16-practical-v1/f0",
+          "numeric": 16,
+          "completePairs": 8,
+          "byOwner": {
+            "baseline": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 4005.5380929261446,
+                "mean": 500.6922616157681,
+                "minimum": 0.15578605234622955,
+                "maximum": 1000.2407709835097
+              },
+              "numericFields": {
+                "nodes": {
+                  "count": 8,
+                  "sum": 25991215,
+                  "mean": 3248901.875,
+                  "minimum": 53,
+                  "maximum": 6883005
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 72,
+                  "mean": 9.0,
+                  "minimum": 4,
+                  "maximum": 12
+                }
+              },
+              "stoppedTimeout": 4,
+              "stoppedAbsent": 0,
+              "isEndSearchTrue": 4
+            },
+            "candidate": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 4004.8314700834453,
+                "mean": 500.60393376043066,
+                "minimum": 0.12154108844697475,
+                "maximum": 1000.4970040172338
+              },
+              "numericFields": {
+                "nodes": {
+                  "count": 8,
+                  "sum": 30903371,
+                  "mean": 3862921.375,
+                  "minimum": 53,
+                  "maximum": 8160958
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 72,
+                  "mean": 9.0,
+                  "minimum": 4,
+                  "maximum": 12
+                }
+              },
+              "stoppedTimeout": 4,
+              "stoppedAbsent": 0,
+              "isEndSearchTrue": 4
+            }
+          }
+        },
+        {
+          "family": "development/continuous16-practical-v1/f1",
+          "numeric": 16,
+          "completePairs": 8,
+          "byOwner": {
+            "baseline": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 4014.7554809227586,
+                "mean": 501.8444351153448,
+                "minimum": 0.14174100942909718,
+                "maximum": 1000.2146469196305
+              },
+              "numericFields": {
+                "nodes": {
+                  "count": 8,
+                  "sum": 31644659,
+                  "mean": 3955582.375,
+                  "minimum": 52,
+                  "maximum": 9324999
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 102,
+                  "mean": 12.75,
+                  "minimum": 4,
+                  "maximum": 19
+                }
+              },
+              "stoppedTimeout": 4,
+              "stoppedAbsent": 0,
+              "isEndSearchTrue": 4
+            },
+            "candidate": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 4016.7956912191585,
+                "mean": 502.0994614023948,
+                "minimum": 0.1400490291416645,
+                "maximum": 1000.2317560138181
+              },
+              "numericFields": {
+                "nodes": {
+                  "count": 8,
+                  "sum": 43107742,
+                  "mean": 5388467.75,
+                  "minimum": 52,
+                  "maximum": 13909846
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 104,
+                  "mean": 13.0,
+                  "minimum": 4,
+                  "maximum": 20
+                }
+              },
+              "stoppedTimeout": 4,
+              "stoppedAbsent": 0,
+              "isEndSearchTrue": 4
+            }
+          }
+        },
+        {
+          "family": "development/continuous16-practical-v1/f2",
+          "numeric": 16,
+          "completePairs": 8,
+          "byOwner": {
+            "baseline": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 4016.830052016303,
+                "mean": 502.10375650203787,
+                "minimum": 0.13437296729534864,
+                "maximum": 1000.2186759375036
+              },
+              "numericFields": {
+                "nodes": {
+                  "count": 8,
+                  "sum": 29630241,
+                  "mean": 3703780.125,
+                  "minimum": 37,
+                  "maximum": 8553317
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 97,
+                  "mean": 12.125,
+                  "minimum": 4,
+                  "maximum": 17
+                }
+              },
+              "stoppedTimeout": 4,
+              "stoppedAbsent": 0,
+              "isEndSearchTrue": 4
+            },
+            "candidate": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 4011.63787196856,
+                "mean": 501.45473399607,
+                "minimum": 0.13840710744261742,
+                "maximum": 1000.2590200165287
+              },
+              "numericFields": {
+                "nodes": {
+                  "count": 8,
+                  "sum": 37327137,
+                  "mean": 4665892.125,
+                  "minimum": 37,
+                  "maximum": 11174140
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 102,
+                  "mean": 12.75,
+                  "minimum": 4,
+                  "maximum": 19
+                }
+              },
+              "stoppedTimeout": 4,
+              "stoppedAbsent": 0,
+              "isEndSearchTrue": 4
+            }
+          }
+        },
+        {
+          "family": "development/continuous16-practical-v1/f3",
+          "numeric": 16,
+          "completePairs": 8,
+          "byOwner": {
+            "baseline": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 4012.8946758341044,
+                "mean": 501.61183447926305,
+                "minimum": 0.1485380344092846,
+                "maximum": 1000.3150770207867
+              },
+              "numericFields": {
+                "nodes": {
+                  "count": 8,
+                  "sum": 24932968,
+                  "mean": 3116621.0,
+                  "minimum": 43,
+                  "maximum": 6250787
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 78,
+                  "mean": 9.75,
+                  "minimum": 4,
+                  "maximum": 13
+                }
+              },
+              "stoppedTimeout": 4,
+              "stoppedAbsent": 0,
+              "isEndSearchTrue": 4
+            },
+            "candidate": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 4011.6055090911686,
+                "mean": 501.4506886363961,
+                "minimum": 0.23091502953320742,
+                "maximum": 1000.2381439553574
+              },
+              "numericFields": {
+                "nodes": {
+                  "count": 8,
+                  "sum": 30376801,
+                  "mean": 3797100.125,
+                  "minimum": 43,
+                  "maximum": 7696790
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 86,
+                  "mean": 10.75,
+                  "minimum": 4,
+                  "maximum": 17
+                }
+              },
+              "stoppedTimeout": 4,
+              "stoppedAbsent": 0,
+              "isEndSearchTrue": 4
+            }
+          }
+        }
+      ]
+    }
+  },
+  "summary": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/flips-original-port-continuous-comparison-v1/collection-v1/summary.json",
+    "bytes": 46004,
+    "mode": "0644",
+    "sha256": "5d3d97cd1c356f293236bc88f84f4fb19dfcd8ce5d6359f9c58efaab0becce2e"
+  },
+  "table": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/flips-original-port-continuous-comparison-v1/collection-v1/compact-table.json",
+    "bytes": 47412,
+    "mode": "0644",
+    "sha256": "7af8083f661b60d46a979070db332d36b3f9d81a522a77fbb6a1f3d7f6bdd368"
+  },
+  "originalResult": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/flips-original-port-continuous-comparison-v1/results/result.json",
+    "bytes": 368008,
+    "mode": "0644",
+    "sha256": "cbca64ca0ff57f70f86a82317e080cb43f22c38d47676efec2ff36a00ab1f397"
+  },
+  "costs": {
+    "outerSeconds": 34.63486422796268,
+    "commandIncludedSeconds": 34.34843777201604,
+    "comparisonIncludedSeconds": 34.30468181206379,
+    "nestedAdded": 0,
+    "actualContinuousPeak": null
+  },
+  "actualSTOP": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/flips-original-port-continuous-comparison-v1/controller-STOP.json",
+    "bytes": 146,
+    "mode": "0644",
+    "sha256": "19bbb156b2775979ad8ea812ab6d6a96a4299177714e75d9ef8b76326ebd7b0a"
+  },
+  "actualReturnReceipt": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/flips-original-port-continuous-comparison-v1/comparison.returned.json",
+    "bytes": 3380,
+    "mode": "0644",
+    "sha256": "068e4035c7092119a41cd0d5f654fa09b654c65bb287bc0456934c222ce8e624"
+  },
+  "affectedStoragePoint": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/flips-original-port-continuous-comparison-v1/collection-v1/affected-storage-point.json",
+    "bytes": 392,
+    "mode": "0644",
+    "sha256": "61e4c58aad30366f3caa721087157ef9148f07c87b30b9c10dba8ab6218e53f7"
+  },
+  "missingObservability": null,
+  "priorConditions": {
+    "unchanged": true,
+    "merged": false,
+    "oldFailedCampaignComplete": false,
+    "deliberateNewReferenceRemeasurements": true
+  },
+  "interpretation": "Fixed32 pairs match ten fields under this finite condition. Timed32 pairs are conditional correlated normal-budget observations with mixed early end/timeout/selective work; no same-work throughput/NPS/isolatedflip/strength/CI/default claim or automatic candidate/adoption decision."
+}

@@ -111,6 +111,7 @@ pub fn validate(c: &PilotConfig) -> Result<()> {
 #[serde(untagged)]
 pub enum InputPreparation {
     Evaluation(Box<EvaluationInputConfig>),
+    NextEvaluation(Box<NextEvaluationInputConfig>),
     Ordinary(Box<InputConfig>),
 }
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -126,11 +127,25 @@ pub struct SavedEvaluationInput {
     pub checked_dispositions: crate::research_manifest::FileRef,
     pub components: usize,
 }
+/// One explicit next128 evaluation publication from the completed32768/5120 parent.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct NextEvaluationInputConfig {
+    pub saved_next_evaluation: SavedNextEvaluationInput,
+    pub output: PathBuf,
+}
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct SavedNextEvaluationInput {
+    pub locator: crate::research_manifest::FileRef,
+    pub components: usize,
+}
 mod saved_evaluation;
 
 pub fn prepare_input_request(c: &InputPreparation) -> Result<serde_json::Value> {
     match c {
         InputPreparation::Evaluation(config) => saved_evaluation::prepare(config),
+        InputPreparation::NextEvaluation(config) => saved_evaluation::prepare_next(config),
         InputPreparation::Ordinary(config) => prepare_inputs(config),
     }
 }

@@ -3842,6 +3842,21 @@ def native_input_preparation(experiment):
 
 
 def native_input_files(request):
+    if request.get("saved_next_evaluation") is not None:
+        settings = request["saved_next_evaluation"]
+        require(
+            set(request) == {"saved_next_evaluation", "output"}
+            and isinstance(settings, dict)
+            and set(settings) == {"locator", "components"}
+            and type(settings["components"]) is int
+            and settings["components"] == 128,
+            "one explicit completed5120 next128 evaluation request",
+        )
+        return {
+            "book": "book.json",
+            "evaluation_census": "evaluation-census.json",
+            "publication": "publication.json",
+        }
     require(
         (request.get("trajectory") is not None) != (request.get("saved_subset") is not None),
         "one native trajectory or saved-only subset request",
@@ -4577,9 +4592,9 @@ def native_input_evidence(spec, experiment, values, files):
     refs = {ref["path"]: ref for ref in files}
     for name, filename in names.items():
         actual = refs[str(Path(spec["data_root"]) / filename)]
-        if name == "selection":
+        if name in {"selection", "publication"}:
             require(
-                json.loads(values["selection"]) == result,
+                json.loads(values[name]) == result,
                 "saved selection response/publication correspondence",
             )
         else:
@@ -4587,6 +4602,69 @@ def native_input_evidence(spec, experiment, values, files):
                 canonical_sha(result[name]) == canonical_sha(actual),
                 "native input published ref differs: " + name,
             )
+    if request.get("saved_next_evaluation") is not None:
+        settings = request["saved_next_evaluation"]
+        census = json.loads(values["evaluation_census"])
+        members = census["members"]
+        require(
+            settings["locator"] in experiment["inputs"]
+            and census["schema"] == "quoridor-native-saved-evaluation-census-v1"
+            and census["producer"]["locator"] == settings["locator"]
+            and census["parent_components"] == 7615
+            and census["excluded_components"] == 5120
+            and type(census["protected_H_components"]) is int
+            and census["protected_H_components"] == 0
+            and census["eligible_named_scope"] == 2495
+            and census["selected_components"] == 128
+            and census["deficit"] == 0
+            and census["evaluation_only"] is True
+            and census["excluded_from_future_fit"] is True
+            and isinstance(members, list)
+            and len(members) == 128
+            and all(
+                type(row["family_id"]) is int
+                and type(row["native_rank"]) is int
+                and type(row["source_seed"]) is int
+                and 0 <= row["source_seed"] < 2**64
+                for row in members
+            )
+            and [row["family_id"] for row in members] == list(range(128))
+            and [row["native_rank"] for row in members] == list(range(5120, 5248))
+            and all(
+                isinstance(row[key], str) and row[key]
+                for row in members
+                for key in ("component", "observation", "source_series")
+            )
+            and all(
+                len({row[key] for row in members}) == 128
+                for key in ("component", "observation", "source_series")
+            )
+            and result["selected_components"] == 128
+            and result["eligible_named_scope"] == 2495
+            and result["excluded_components"] == 5120
+            and result["typed_context_rows"] == 128
+            and type(result["protected_H_typed_context_or_rules_audits"]) is int
+            and result["protected_H_typed_context_or_rules_audits"] == 0
+            and result["opaque_parent_JSON_read_including_protected_bytes"] is True
+            and all(
+                type(result[key]) is int and result[key] == 0
+                for key in ("generated_transitions", "search_calls", "teacher_calls", "fit_calls")
+            ),
+            "next128 native publication rank/member/source/provenance differs",
+        )
+        return {
+            "schema": "quoridor.research.generation-evidence.v1",
+            "phase": "generation",
+            "native_input_preparation": True,
+            "saved_evaluation_only": True,
+            "scientific_planned_slots": 0,
+            "numerical_qualification": None,
+            "config": experiment["config"],
+            "actual": result,
+            "native_response": response_ref,
+            "scope": "native qualified next128 evaluation book; full-parent generic JSON custody "
+            "is distinct from selected-root native audit; no Python history/rules decode",
+        }
     trajectory = request.get("trajectory")
     inherited_source = result["source_observations"] if trajectory is None else None
     require(
@@ -6964,13 +7042,22 @@ def collect_data(spec, experiment):
             if (
                 (experiment["phase"] == "materialize" and item["name"] in COMPACT_CACHE_WIDTHS)
                 or (experiment["phase"] == "corpus" and item["name"] == "pilot_stream")
-                or (native_input_preparation(experiment) and item["name"] != "selection")
+                or (
+                    native_input_preparation(experiment)
+                    and item["name"] not in {"selection", "evaluation_census", "publication"}
+                )
             ):
                 ref = artifact_ref(item["path"])
                 require(ref["bytes"] <= item["limit_B"], "declared streamed output size")
                 data["files"].append(ref)
             else:
-                ref, raw = bound(item["path"], item["limit_B"])
+                limit = item["limit_B"]
+                if native_input_preparation(experiment):
+                    if item["name"] == "evaluation_census":
+                        limit = min(limit, 4 * 1024**2)
+                    elif item["name"] == "publication":
+                        limit = min(limit, 65536)
+                ref, raw = bound(item["path"], limit)
                 data["files"].append(ref)
                 values[item["name"]] = raw
         except BaseException as error:
