@@ -539,3 +539,195 @@ class OldJointInputExclusionMetadata(unittest.TestCase):
                         owner.label_policy_values(config)
                     self.assertEqual(encoder.call_count, 1 if fault is None else 0)
                     head.assert_not_called()
+
+    def test_three_named_old_sources_preserve_chain_and_veto_before_encoder_nn0(self):
+        from contextlib import contextmanager
+        import tempfile
+        from pathlib import Path
+
+        class ExistingEncoderPath(RuntimeError):
+            pass
+
+        for fault in (
+            None,
+            "third-overlap",
+            "third-missing-source",
+            "row-chronology",
+            "broken-chain",
+            "duplicate",
+            "extra-source",
+        ):
+            with self.subTest(fault=fault), tempfile.TemporaryDirectory() as directory:
+                config, previous, bank, keys = self.fixture(Path(directory) / "output")
+                first = copy.deepcopy(config["excluded_joint_source"])
+                second = copy.deepcopy(first)
+                for field, name in (
+                    ("input_classes", "old-input-2"),
+                    ("teacher_values", "teacher-values-2.json"),
+                    ("configuration", "old-config-2"),
+                ):
+                    second[field]["path"] = "/synthetic-old-joint/" + name
+                previous2 = copy.deepcopy(previous)
+                previous2.update(
+                    input_classes=second["input_classes"],
+                    prior_actual_rows=2,
+                    inclusive_row_limit=4,
+                    excluded_joint_source=first,
+                )
+                bank2 = copy.deepcopy(bank)
+                bank2.update(
+                    input_classes=second["input_classes"],
+                    prior_actual_rows=2,
+                    inclusive_attempted_rows=4,
+                )
+                config.update(
+                    excluded_joint_source=[first, second],
+                    prior_actual_rows=4,
+                    inclusive_row_limit=6,
+                )
+                keys.update({"old-input-2": (b"e" * 28, b"f" * 28)})
+                third = copy.deepcopy(second)
+                for field, name in (
+                    ("input_classes", "old-input-3"),
+                    ("teacher_values", "teacher-values-3.json"),
+                    ("configuration", "old-config-3"),
+                ):
+                    third[field]["path"] = "/synthetic-old-joint/" + name
+                previous3 = copy.deepcopy(previous2)
+                previous3.update(
+                    input_classes=third["input_classes"],
+                    prior_actual_rows=4,
+                    inclusive_row_limit=6,
+                    excluded_joint_source=[first, second],
+                )
+                bank3 = copy.deepcopy(bank2)
+                bank3.update(
+                    input_classes=third["input_classes"],
+                    prior_actual_rows=4,
+                    inclusive_attempted_rows=6,
+                )
+                config.update(
+                    excluded_joint_source=[first, second, third],
+                    prior_actual_rows=6,
+                    inclusive_row_limit=8,
+                )
+                keys["old-input-3"] = (b"g" * 28, b"h" * 28)
+                if fault == "third-overlap":
+                    keys["new-input"] = (b"g" * 28, b"d" * 28)
+                elif fault == "third-missing-source":
+                    previous3.pop("runtime_boundary")
+                elif fault == "row-chronology":
+                    config["prior_actual_rows"] = 7
+                elif fault == "broken-chain":
+                    previous3["excluded_joint_source"] = first
+                elif fault == "duplicate":
+                    config["excluded_joint_source"][2] = first
+                elif fault == "extra-source":
+                    config["excluded_joint_source"].append(first)
+                reads = []
+
+                @contextmanager
+                def pairs(reference):
+                    reads.append(reference["path"].rsplit("/", 1)[-1])
+                    yield {}, keys[reads[-1]]
+
+                records = {
+                    "old-config": previous,
+                    "old-config-2": previous2,
+                    "teacher-values.json": bank,
+                    "teacher-values-2.json": bank2,
+                    "old-config-3": previous3,
+                    "teacher-values-3.json": bank3,
+                }
+
+                def bound(reference, maximum):
+                    name = reference["path"].rsplit("/", 1)[-1]
+                    if name in ("core", "c20"):
+                        return b""
+                    raw = json.dumps(records[name]).encode()
+                    self.assertLessEqual(len(raw), maximum)
+                    return raw
+
+                with (
+                    patch.object(owner, "input_pairs", pairs),
+                    patch.object(owner, "oriented_keys", lambda p, capacity: iter([((), (), p)])),
+                    patch.object(owner, "bound_file_bytes", bound),
+                    patch.object(
+                        owner, "cpu_policy_teacher_boundary", return_value=config["model_identity"]
+                    ),
+                    patch.object(owner, "StaticInputs", side_effect=ExistingEncoderPath) as encoder,
+                    patch.object(owner, "StaticHead") as head,
+                ):
+                    with self.assertRaises(
+                        ExistingEncoderPath if fault is None else (ValueError, KeyError)
+                    ):
+                        owner.label_policy_values(config)
+                    self.assertEqual(encoder.call_count, 1 if fault is None else 0)
+                    head.assert_not_called()
+
+                    if fault is None:
+                        for name in ("old-input", "old-input-2", "old-input-3"):
+                            self.assertEqual(reads.count(name), 1)
+                        receipt = json.loads(
+                            (Path(config["output"]) / "old-input-exclusion.json").read_text()
+                        )
+                        self.assertEqual(receipt["old_actual_orientation_rows"], 6)
+                        self.assertEqual(receipt["labels_read_or_copied"], 0)
+
+    def test_larger_input_metadata_keeps_byte_and_complete_guards_before_arrays_nn0(self):
+        import hashlib
+        import stat
+        import tempfile
+        from pathlib import Path
+        from . import static_public_corpus as corpus_owner
+
+        def reference(path):
+            raw = path.read_bytes()
+            return dict(
+                path=str(path),
+                sha256=hashlib.sha256(raw).hexdigest(),
+                bytes=len(raw),
+                mode=f"{stat.S_IMODE(path.stat().st_mode):04o}",
+            )
+
+        with tempfile.TemporaryDirectory() as directory:
+            directory = Path(directory)
+            bank = directory / "bank.json"
+            bank.write_text(json.dumps({"status": "COMPLETE"}))
+            for size in (3 * 1024**2, 8 * 1024**2 + 1):
+                with self.subTest(input_bytes=size):
+                    source = directory / "inputs.json"
+                    prefix = b'{"schema":"INVALID_INPUT_MUST_REFUSE","padding":"'
+                    suffix = b'"}'
+                    source.write_bytes(prefix + b"x" * (size - len(prefix) - len(suffix)) + suffix)
+                    input_ref = reference(source)
+                    (directory / "cache.json").write_text(
+                        json.dumps(
+                            {
+                                "schema": "quoridor-public-static-teacher-v1",
+                                "input_classes": input_ref,
+                                "teacher_values": reference(bank),
+                                "teacher": "C",
+                            }
+                        )
+                    )
+                    with (
+                        patch.object(owner.np, "memmap") as mapped,
+                        patch.object(owner, "StaticInputs") as encoder,
+                        patch.object(owner, "StaticHead") as head,
+                    ):
+                        with self.assertRaises(ValueError) as teacher_error:
+                            with owner.input_pairs(input_ref):
+                                self.fail("invalid metadata must not reach pair payload")
+                        with self.assertRaises(ValueError) as fit_error:
+                            corpus_owner.StaticTeacherCorpus(directory)
+                        if size < 8 * 1024**2:
+                            self.assertIn(
+                                "complete owning input class", str(teacher_error.exception)
+                            )
+                            self.assertIn(
+                                "complete same-input scalarbank", str(fit_error.exception)
+                            )
+                        mapped.assert_not_called()
+                        encoder.assert_not_called()
+                        head.assert_not_called()

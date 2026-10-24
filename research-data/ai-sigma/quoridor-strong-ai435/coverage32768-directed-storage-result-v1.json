@@ -1,0 +1,189 @@
+{
+  "status": "CURRENT_DIRECTED_METADATA_STORAGE_OBSERVATION",
+  "job": "e949296f-ee49-45ec-b2fc-c68e08bc4126",
+  "scope": {
+    "wall_seconds": 14.17802319698967,
+    "metadata_workers": 1,
+    "metadata_queries": 336676,
+    "metadata_cache_hits": 488283,
+    "snapshot_scope": "this invocation only; no persistent cache or atomic snapshot"
+  },
+  "roots": [
+    {
+      "name": "new coverage condition controls",
+      "category": "coverage32768-new",
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-prep-v1",
+      "logical_file_bytes": 31149,
+      "allocated_inode_bytes": 77824,
+      "overlap_allocated_bytes": 0,
+      "files": 15,
+      "symlinks": 0,
+      "missing": false
+    },
+    {
+      "name": "new flips comparison controls",
+      "category": "flips-comparison-new",
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/flips-candidate-comparison-prep-v1",
+      "logical_file_bytes": 0,
+      "allocated_inode_bytes": 4096,
+      "overlap_allocated_bytes": 0,
+      "files": 0,
+      "symlinks": 0,
+      "missing": false
+    },
+    {
+      "name": "entire project including persistent worktrees",
+      "category": "project-git-data-build-control",
+      "path": "/workspaces/quoridor",
+      "logical_file_bytes": 22760173203,
+      "allocated_inode_bytes": 23506432000,
+      "overlap_allocated_bytes": 81920,
+      "files": 238604,
+      "symlinks": 103,
+      "missing": false
+    },
+    {
+      "name": "explicit persistent worktree mount",
+      "category": "persistent-worktrees-assets",
+      "path": "/workspaces/quoridor/.worktree",
+      "logical_file_bytes": 11701318120,
+      "allocated_inode_bytes": 0,
+      "overlap_allocated_bytes": 12120522752,
+      "files": 131791,
+      "symlinks": 15,
+      "missing": false
+    },
+    {
+      "name": "named inference volume",
+      "category": "inference-dependencies-models",
+      "path": "/home/vscode/.cache/inference",
+      "logical_file_bytes": 7551833439,
+      "allocated_inode_bytes": 7665369088,
+      "overlap_allocated_bytes": 0,
+      "files": 37502,
+      "symlinks": 1083,
+      "missing": false
+    },
+    {
+      "name": "shared Cargo",
+      "category": "shared-rust",
+      "path": "/usr/local/cargo",
+      "logical_file_bytes": 388935245,
+      "allocated_inode_bytes": 436871168,
+      "overlap_allocated_bytes": 0,
+      "files": 15375,
+      "symlinks": 13,
+      "missing": false
+    },
+    {
+      "name": "shared Rustup",
+      "category": "shared-rust",
+      "path": "/usr/local/rustup",
+      "logical_file_bytes": 1422955141,
+      "allocated_inode_bytes": 1437384704,
+      "overlap_allocated_bytes": 0,
+      "files": 4032,
+      "symlinks": 0,
+      "missing": false
+    },
+    {
+      "name": "uv external cache",
+      "category": "shared-uv",
+      "path": "/home/vscode/.cache/uv",
+      "logical_file_bytes": 0,
+      "allocated_inode_bytes": 4096,
+      "overlap_allocated_bytes": 0,
+      "files": 0,
+      "symlinks": 0,
+      "missing": false
+    },
+    {
+      "name": "project external control",
+      "category": "project-external-control",
+      "path": "/home/vscode/.local/share/quoridor",
+      "logical_file_bytes": 900,
+      "allocated_inode_bytes": 16384,
+      "overlap_allocated_bytes": 0,
+      "files": 4,
+      "symlinks": 0,
+      "missing": false
+    }
+  ],
+  "metric": "unique dev/inode st_blocks; reflink shared physical extents unknown",
+  "retained_allocated_inode_bytes": 33046159360,
+  "current_plus_unused_known_bytes": 35201949696,
+  "unknown_retained_bytes": 0,
+  "cap_bytes": 50000000000,
+  "admission": "within",
+  "errors": [],
+  "measurement_limits": "Declared directed research roots, unique dev/inode allocation once, no symlink following; not a physical-reflink/peak/necessary-data/free-credit/future-quiet guarantee.",
+  "outer_seconds": 14.707808688981459,
+  "command_seconds": 14.391927276970819,
+  "cost_relation": "outer includes command; do not add nested times",
+  "full_fees": null,
+  "actual_return": {
+    "exit_code": 0,
+    "child": {
+      "pid": 1465029,
+      "start_ticks": "91422215",
+      "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+    },
+    "direct_child_reaped": true,
+    "process_cleanup_complete": true,
+    "handle_closes_complete": true,
+    "remaining": [],
+    "signal_mask_restoration": "completed",
+    "final_record_persist": "completed"
+  },
+  "disk_separate": {
+    "signal_mask_restoration": "pending",
+    "final_record_persist": "attempted"
+  },
+  "refs": [
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-prep-v1/storage-runtime/result.json",
+      "bytes": 526,
+      "mode": "0600",
+      "sha256": "fd9771146771bf13bfa222bf435bb663afb8f796d6fd0b9aab47be4008b7639c"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-prep-v1/storage-runtime/config.json",
+      "bytes": 852,
+      "mode": "0600",
+      "sha256": "e3c6ceb3902fa9459194bfb4a846f31748ea77ca53518a64cd5f17f1cf30441e"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-prep-v1/storage-runtime/output.log",
+      "bytes": 228,
+      "mode": "0644",
+      "sha256": "6126e39ab383b42a3167952a0d384a25ea013fb09e57ebc8de62562c1e49e8f9"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-prep-v1/storage-accounting.returned.json",
+      "bytes": 3611,
+      "mode": "0644",
+      "sha256": "5b3a471f25d72f39173bf0dde27ed5a2317bf4c8886b21e435916d4fb2c95ea6"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-prep-v1/current-directed-storage.json",
+      "bytes": 4496,
+      "mode": "0644",
+      "sha256": "184ca721e90e745233b38587cd96cd6b4cb25fa0ebeb1b005c10ac688825af5f"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-prep-v1/storage-roots.json",
+      "bytes": 2048,
+      "mode": "0644",
+      "sha256": "648dc726911d387a0d0c78d9b5cb77ebdfa7f31635851d34a059708c45a7330f"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-prep-v1/storage-resources.json",
+      "bytes": 840,
+      "mode": "0644",
+      "sha256": "e516c4ca1f17ecfa7c6d24af29b7e4d242c9b037060d731ff8f83ba1cefce3c9"
+    }
+  ],
+  "no_payload_read_hash_or_deletion": true,
+  "no_generation_model_NN_Search_fit_game_RNG": true,
+  "scientific_admission": null
+}

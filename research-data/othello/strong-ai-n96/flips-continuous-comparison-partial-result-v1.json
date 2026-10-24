@@ -1,0 +1,178 @@
+{
+  "status": "FAILED_FIRST_TIMED_INPUT_REFUSAL_FIXED64_VALID",
+  "job": "00f42c4f-0faa-436e-be5c-15f04888114c",
+  "originalFailurePreserved": true,
+  "originalResult": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/flips-continuous-comparison-v1/runtime/result.json",
+    "bytes": 522,
+    "mode": "0600",
+    "sha256": "dbdb3bcaa7f9f65016e6f0cc4bb6bda2b87208f7a6582ba79ff8141a06655cb8"
+  },
+  "rawSaved": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/flips-continuous-comparison-v1/results/result.json",
+    "bytes": 204673,
+    "mode": "0644",
+    "sha256": "17ceb7059738f4422fd9971dea71be847beac4f8be9d90ca4bab04d42332304c"
+  },
+  "completion": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/flips-continuous-comparison-v1/results/completion.json",
+    "bytes": 348,
+    "mode": "0644",
+    "sha256": "bd6f2ef3354dd90059935e9833fb33e3f4d9a754fa45aa91352770711e226b33"
+  },
+  "config": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/flips-continuous-comparison-v1/comparison-config.json",
+    "bytes": 24310,
+    "mode": "0644",
+    "sha256": "5ce04a2b56b880fb30b81c06ede258e64c23c8739bbabde408c1d32436d01b71"
+  },
+  "guardian": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/flips-continuous-comparison-v1/comparison.returned.json",
+    "bytes": 5654,
+    "mode": "0644",
+    "sha256": "fd873f032803a549588a4e1197a860475b7571ef3ce46a03e05f45afe84b184d"
+  },
+  "controllerSTOP": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/flips-continuous-comparison-v1/controller-STOP.json",
+    "bytes": 147,
+    "mode": "0644",
+    "sha256": "97d4e06de300f3519d213e1aab8bb26abee72f57b112a316cfa85833fca617cb"
+  },
+  "normalSourceSoftware": {
+    "path": "/workspaces/quoridor/research-data/othello/strong-ai-n96/flips-propagation-software-result-v1.json",
+    "bytes": 10524,
+    "mode": "0644",
+    "sha256": "5ff553df343e75cf6d38557a3857a6bcaf621c3b276315c84c75dc2018f3d8e2"
+  },
+  "sourceRuleReview": "SOURCE_CLEAR0/0 .33 at86998426/f4c45b59",
+  "baseline": "bd8ffc91",
+  "candidate": "b4d9850d",
+  "planned128": true,
+  "transportAttempts": 65,
+  "numericResults": 64,
+  "fixed": {
+    "completedCalls": 64,
+    "roots": 16,
+    "correlatedFamilies": 4,
+    "pairedComparisons": 32,
+    "allDeclaredFieldsEqual": true,
+    "fields": [
+      "rawScore",
+      "score",
+      "move",
+      "mustPass",
+      "nodes",
+      "completedDepth",
+      "selectivity",
+      "probability",
+      "proven",
+      "isEndSearch"
+    ],
+    "conditionalScalars": {
+      "baseline": {
+        "calls": 32,
+        "outerWallMs_sum": 20.01943811774254,
+        "outerWallMs_median": 0.5947429453954101,
+        "outerWallMs_range": [0.08398492354899645, 1.4556969981640577],
+        "engine_elapsed_ms_sum": 16.786732999999998
+      },
+      "candidate": {
+        "calls": 32,
+        "outerWallMs_sum": 18.822606070898473,
+        "outerWallMs_median": 0.602397951297462,
+        "outerWallMs_range": [0.08515804074704647, 1.2652239529415965],
+        "engine_elapsed_ms_sum": 15.599611999999999
+      }
+    },
+    "sameWorkClaim": false
+  },
+  "timed": {
+    "transportAttempts": 1,
+    "numericResults": 0,
+    "failedSlot": 64,
+    "remainingUNRUN": 63,
+    "rawError": {
+      "type": "EngineError",
+      "error": "JSONL request failed: {'error': 'depth must be1..maxDepth<=60 and selectivity0..6', 'ok': False}"
+    },
+    "wireMaxDepth": 64,
+    "normalCLIUpperMaxDepth": 60,
+    "actualEngineEntryCount": null
+  },
+  "counts": {
+    "normalSetups": 4,
+    "clears": 17,
+    "drops": 4,
+    "modelConstructorCounter": null
+  },
+  "cause": {
+    "owner": "Root config binding",
+    "description": "Requested64 was passed as wire maxDepth64 instead of normal effective60. Existing Rust FullSearch::search rejects >60 before run::search; core guard unchanged.",
+    "sourcePath": "games/othello/crates/othello-core/src/full_search/mod.rs",
+    "sourceLines": "129..153",
+    "notAnAlgorithmRegressionClaim": true
+  },
+  "costs": {
+    "outerSeconds": 1.024884526967071,
+    "commandSeconds": 0.8928183889947832,
+    "callerSeconds": 0.8537495030323043,
+    "nestedDoNotAdd": true,
+    "fullFees": null,
+    "peak": null
+  },
+  "cleanup": {
+    "normalGuardianReturn": null,
+    "actualExceptionReturn": {
+      "direct_child_reaped": true,
+      "process_cleanup_complete": true,
+      "handle_closes_complete": true,
+      "remaining": [],
+      "signal_mask_restoration": "completed",
+      "final_record_persist": "completed"
+    },
+    "diskSeparate": {
+      "signal_mask_restoration": "pending",
+      "final_record_persist": "attempted"
+    },
+    "nativeOwnedCloses": [
+      {
+        "exitCode": -15,
+        "unexpectedExit": false,
+        "directReaped": true,
+        "bytesSeen": 27773,
+        "bytesRetained": 28388,
+        "errors": []
+      },
+      {
+        "exitCode": -15,
+        "unexpectedExit": false,
+        "directReaped": true,
+        "bytesSeen": 27759,
+        "bytesRetained": 28374,
+        "errors": []
+      },
+      {
+        "exitCode": -15,
+        "unexpectedExit": false,
+        "directReaped": true,
+        "bytesSeen": 1038,
+        "bytesRetained": 1083,
+        "errors": []
+      },
+      {
+        "exitCode": -15,
+        "unexpectedExit": false,
+        "directReaped": true,
+        "bytesSeen": 599,
+        "bytesRetained": 614,
+        "errors": []
+      }
+    ],
+    "innerExplicitHandleComplete": null,
+    "outerObservedScopeOnly": true
+  },
+  "interpretation": "All fixed responses agree at the selected roots/repeats. Timed benefit unmeasured; no speed ratio/NPS/depth cause/strength/default adoption.",
+  "noAutomaticRetryRefillOrThirdProfile": true,
+  "nextOEntryAuthorized": false,
+  "independentQContinuation": "Previously selected coverage32768 teacher/fit condition remains authorized after actual compute/collection STOP."
+}

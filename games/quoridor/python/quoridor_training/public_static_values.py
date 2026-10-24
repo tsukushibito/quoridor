@@ -27,7 +27,7 @@ from .static_teacher_inputs import StaticInputs
 
 @contextmanager
 def input_pairs(ref):
-    manifest = json.loads(bound_file_bytes(ref, 2 * 1024**2))
+    manifest = json.loads(bound_file_bytes(ref, 8 * 1024**2))
     if (
         manifest["schema"] != "quoridor-public-static-input-classes-v1"
         or manifest["status"] != "COMPLETE"
@@ -974,21 +974,26 @@ def exclude_joint_source_inputs(config, pairs):
     """Veto old actual input keys; never read, copy or transform old labels."""
     source = config["excluded_joint_source"]
     if isinstance(source, list):
-        if len(source) != 2 or any(not isinstance(s, dict) for s in source):
-            raise ValueError("exact two named old joint source authorities required")
-        if source[0] == source[1]:
-            raise ValueError("duplicate old joint authority is not two sources")
-        second_config = json.loads(bound_file_bytes(source[1]["configuration"], 64 * 1024))
-        if second_config.get("excluded_joint_source") != source[0]:
-            raise ValueError("second old joint source does not bind the first named veto")
+        if len(source) not in (2, 3) or any(not isinstance(s, dict) for s in source):
+            raise ValueError("exact two or three named old joint source authorities required")
+        if any(s == earlier for i, s in enumerate(source) for earlier in source[:i]):
+            raise ValueError("duplicate named old joint source authority")
+        for i in range(1, len(source)):
+            previous_config = json.loads(bound_file_bytes(source[i]["configuration"], 64 * 1024))
+            expected = source[0] if i == 1 else source[:i]
+            if previous_config.get("excluded_joint_source") != expected:
+                raise ValueError("old joint source does not bind all preceding named vetoes")
         # Reuse each unchanged key/provenance guard exactly once, before either constructor.
         reports = [
             exclude_joint_source_inputs({**config, "excluded_joint_source": authority}, pairs)
             for authority in source
         ]
         if (
-            reports[1]["prior_actual_rows"] != reports[0]["inclusive_attempted_rows"]
-            or config["prior_actual_rows"] != reports[1]["inclusive_attempted_rows"]
+            any(
+                reports[i]["prior_actual_rows"] != reports[i - 1]["inclusive_attempted_rows"]
+                for i in range(1, len(reports))
+            )
+            or config["prior_actual_rows"] != reports[-1]["inclusive_attempted_rows"]
         ):
             raise ValueError("named old joint source actual-row chronology differs")
         return {

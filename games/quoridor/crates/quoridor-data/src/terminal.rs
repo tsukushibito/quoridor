@@ -483,10 +483,16 @@ pub fn select_series_components(
         original.partition.seed,
         original.requested,
     )?;
+    let expanded = original.requested.total()? == 32768;
     if serde_json::to_value(&reconstructed)? != serde_json::to_value(original)?
+        || (expanded
+            && (counts.train != 4096
+                || counts.validation != 1024
+                || counts.test != 0
+                || excluded_prefix_components != 0))
         || counts.train == 0
         || counts.validation == 0
-        || counts.total()? > 1408
+        || counts.total()? > if expanded { 5120 } else { 1408 }
     {
         return Err("exact parent components and bounded nonempty T/V subset required".into());
     }
@@ -543,6 +549,9 @@ pub fn select_series_components(
             return Err("rank/member/source/exposure/prospective split differs".into());
         }
         if let Some(split) = expected_split {
+            if expanded && actual_members.len() != 1 {
+                return Err("selected coverage component must be a whole singleton".into());
+            }
             selected.insert(family.clone(), split);
         }
     }
@@ -742,6 +751,84 @@ mod configured_family_tests {
 #[cfg(test)]
 mod trajectory_partition_tests {
     use super::*;
+
+    #[test]
+    fn saved32768_first5120_deficit_and_wrong_holdout_refuse_without_subset() {
+        let planned: Vec<(String, Vec<u16>)> = vec![
+            ("a".into(), vec![13]),
+            ("b".into(), vec![3]),
+            ("c".into(), vec![81]),
+        ];
+        let sources = planned
+            .iter()
+            .map(|(id, _)| (id.clone(), id.clone()))
+            .collect();
+        let original = partition_series(
+            &planned,
+            &sources,
+            4352026102423,
+            FamilySplitCounts {
+                train: 32768,
+                validation: 0,
+                test: 0,
+            },
+        )
+        .unwrap();
+        let rank = ranked_components(&original.partition);
+        let records = rank
+            .iter()
+            .enumerate()
+            .map(|(i, family)| {
+                let members = original
+                    .partition
+                    .assignments
+                    .iter()
+                    .filter(|a| &a.family == family)
+                    .map(|a| a.game.clone())
+                    .collect::<Vec<_>>();
+                let source_ids = members
+                    .iter()
+                    .map(|id| original.source_series[id].clone())
+                    .collect();
+                RankedComponentDisposition(
+                    i,
+                    family.clone(),
+                    members,
+                    source_ids,
+                    "eligible_named_scope".into(),
+                    Some(Split::Train),
+                )
+            })
+            .collect::<Vec<_>>();
+        let counts = FamilySplitCounts {
+            train: 4096,
+            validation: 1024,
+            test: 0,
+        };
+        let error = select_series_components(&original, &records, 0, counts)
+            .unwrap_err()
+            .to_string();
+        assert!(
+            error.contains(&format!(
+                "saved component selection deficit {}",
+                5120 - rank.len()
+            )),
+            "{error}"
+        );
+        let wrong_h = FamilySplitCounts {
+            train: 4096,
+            validation: 1024,
+            test: 1,
+        };
+        assert!(
+            select_series_components(&original, &records, 0, wrong_h)
+                .unwrap_err()
+                .to_string()
+                .contains("bounded nonempty T/V subset")
+        );
+        assert_eq!(original.requested.train, 32768);
+        assert_eq!(original.partition.assignments.len(), 3);
+    }
 
     #[test]
     fn saved_coverage_selection_preserves_whole_holdout_and_refuses_partial_census() {

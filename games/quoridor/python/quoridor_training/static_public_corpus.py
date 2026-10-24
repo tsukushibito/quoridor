@@ -48,7 +48,7 @@ class StaticTeacherCorpus:
         self.maps, self.streams, self.identities = {}, {}, {}
         try:
             self.input_ref = self.manifest["input_classes"]
-            inputs = json.loads(bound_file_bytes(self.input_ref, 2 * 1024**2))
+            inputs = json.loads(bound_file_bytes(self.input_ref, 8 * 1024**2))
             bank_ref = self.manifest["teacher_values"]
             bank = json.loads(bound_file_bytes(bank_ref, 131072))
             teacher = self.manifest["teacher"]

@@ -150,6 +150,9 @@ pub struct InputConfig {
     /// Completed unprotected public input classes, opaque exact/LR endpoint exclusion.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub excluded_static_inputs: Option<quoridor_data::terminal_stream::BoundJson>,
+    /// Entire qualified prior source, exclusion-only; never an evaluation/label projection.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub excluded_parent: Option<ExcludedParentInput>,
     /// Keep only the first scheduled member of each evaluation collision family.
     /// A refused slot stays missing; no new candidate or request is drawn.
     #[serde(default, skip_serializing_if = "super::false_flag")]
@@ -164,6 +167,19 @@ pub struct InputConfig {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub saved_subset: Option<SavedSubsetInput>,
     pub output: PathBuf,
+}
+
+/// Immutable full-parent custody; all members/ranks are checked before generation.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct ExcludedParentInput {
+    pub collection: crate::research_manifest::FileRef,
+    pub schedule: crate::research_manifest::FileRef,
+    pub partition: crate::research_manifest::FileRef,
+    pub source_observations: crate::research_manifest::FileRef,
+    pub census: crate::research_manifest::FileRef,
+    pub source_config: crate::research_manifest::FileRef,
+    pub exclusion_authority: crate::research_manifest::FileRef,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -184,7 +200,10 @@ impl TrajectoryInput {
                 n.checked_add(*v).ok_or("observation count overflow")
             })?;
         if c.families == 0
-            || (c.families > 1024 && (c.families != 8192 || observations != 1))
+            || (c.families > 1024 && (!matches!(c.families, 8192 | 32768) || observations != 1))
+            || (c.families == 32768
+                && (self.wall_layer_observations != [0, 1, 0] || c.excluded_parent.is_none()))
+            || (c.families != 32768 && c.excluded_parent.is_some())
             || self.max_plies == 0
             || self.max_plies > PLY_CAP
             || observations == 0
@@ -225,22 +244,35 @@ fn prepare_saved_subset(c: &InputConfig, settings: &SavedSubsetInput) -> Result<
     use quoridor_data::terminal::{
         RankedComponentDisposition, SeriesPartition, ranked_components, select_series_components,
     };
-    let coverage = c.families == 8192;
+    let expanded = c.families == 32768;
+    let coverage = c.families == 8192 || expanded;
     if c.families == 0
         || (c.families > 1024 && !coverage)
         || c.trajectory.is_some()
+        || c.excluded_parent.is_some()
         || c.repartition.is_some()
         || c.reuse_schedule.is_some()
         || !c.prefix_lengths.is_empty()
         || !c.excluded_books.is_empty()
         || c.excluded_static_inputs.is_some()
         || c.unique_families
-        || settings.census.bytes > if coverage { 4 * 1024 * 1024 } else { 65536 }
+        || settings.census.bytes
+            > if expanded {
+                16 * 1024 * 1024
+            } else if coverage {
+                4 * 1024 * 1024
+            } else {
+                65536
+            }
         || (!coverage && (settings.split_counts.test != 0 || settings.split_counts.total()? > 128))
+        || (coverage && settings.excluded_prefix_components != 0)
         || (coverage
-            && (settings.split_counts.test == 0
-                || settings.split_counts.total()? > 1408
-                || settings.excluded_prefix_components != 0))
+            && !expanded
+            && (settings.split_counts.test == 0 || settings.split_counts.total()? > 1408))
+        || (expanded
+            && (settings.split_counts.train != 4096
+                || settings.split_counts.validation != 1024
+                || settings.split_counts.test != 0))
     {
         return Err(
             "saved subset requires its exact frozen parent and explicit census, no generation"
@@ -257,7 +289,13 @@ fn prepare_saved_subset(c: &InputConfig, settings: &SavedSubsetInput) -> Result<
     )?;
     let census = read_input_reference_max(
         &settings.census,
-        if coverage { 4 * 1024 * 1024 } else { 65536 },
+        if expanded {
+            16 * 1024 * 1024
+        } else if coverage {
+            4 * 1024 * 1024
+        } else {
+            65536
+        },
     )?;
     let source_config = read_input_reference(&settings.source_config)?;
     let parent_ref: crate::research_manifest::FileRef =
@@ -347,6 +385,10 @@ fn prepare_saved_subset(c: &InputConfig, settings: &SavedSubsetInput) -> Result<
             || authority["excluded_static_inputs"].is_null()
             || source_config["trajectory"]["wall_layer_observations"]
                 != serde_json::json!([0, 1, 0])
+            || (expanded
+                && (source_config["excluded_parent"].is_null()
+                    || source_config["excluded_parent"] != authority["excluded_parent"]
+                    || schedule["excluded_parent"] != source_config["excluded_parent"]))
     } else {
         source_config["excluded_books"]
             != serde_json::json!([
@@ -480,7 +522,7 @@ fn prepare_saved_subset(c: &InputConfig, settings: &SavedSubsetInput) -> Result<
         };
     let mut partition_value = serde_json::to_value(&partition)?;
     partition_value["selection"] = serde_json::json!({
-        "schema":if coverage { "quoridor-prefix-series-saved-subset-v2" } else { "quoridor-prefix-series-saved-subset-v1" },
+        "schema":if expanded { "quoridor-prefix-series-saved-subset-v3" } else if coverage { "quoridor-prefix-series-saved-subset-v2" } else { "quoridor-prefix-series-saved-subset-v1" },
         "source_schedule":settings.schedule,"source_partition":parent_ref,
         "source_observations":source_ref,"source_config":settings.source_config,
         "census":settings.census,"exposure_parent":settings.exposure_parent,
@@ -806,6 +848,161 @@ fn choose_observations(
     selected.sort_by_key(|row| row.prefix.len());
     Ok((selected, available, repeated))
 }
+/// Generic JSON may contain protected bytes. Only identity/prefix metadata is
+/// interpreted here; no old ContextRecord/root audit, feature, labels or model.
+fn excluded_parent_prefixes(c: &InputConfig) -> Result<Option<Vec<Vec<u16>>>> {
+    use quoridor_data::terminal::{
+        RankedComponentDisposition, SeriesPartition, partition_series, ranked_components,
+    };
+    let Some(bound) = &c.excluded_parent else {
+        return Ok(None);
+    };
+    let collection = read_input_reference_max(&bound.collection, 65536)?;
+    let schedule = read_input_reference_max(&bound.schedule, 512 * 1024 * 1024)?;
+    let original: SeriesPartition = serde_json::from_value(read_input_reference_max(
+        &bound.partition,
+        512 * 1024 * 1024,
+    )?)?;
+    let census = read_input_reference_max(&bound.census, 4 * 1024 * 1024)?;
+    let source_config = read_input_reference_max(&bound.source_config, 65536)?;
+    let authority = read_input_reference_max(&bound.exclusion_authority, 65536)?;
+    let native = &collection["native"];
+    let original_books = source_config["excluded_books"]
+        .as_array()
+        .ok_or("complete prior exclusion books required")?;
+    let current_books = serde_json::to_value(&c.excluded_books)?;
+    let output = PathBuf::from(
+        source_config["output"]
+            .as_str()
+            .ok_or("prior source output required")?,
+    );
+    if bound.schedule.path != output.join("schedule.json")
+        || bound.partition.path != output.join("partition.json")
+        || bound.source_observations.path != output.join("observations.json")
+        || output.join("INCOMPLETE").exists()
+        || original_books.is_empty()
+        || source_config["excluded_static_inputs"].is_null()
+        || collection["exclusion_authority"] != serde_json::to_value(&bound.exclusion_authority)?
+        || native["schedule"] != serde_json::to_value(&bound.schedule)?
+        || native["partition"] != serde_json::to_value(&bound.partition)?
+        || native["source_observations"] != serde_json::to_value(&bound.source_observations)?
+        || collection["refs"]["input-generation.json"]
+            != serde_json::to_value(&bound.source_config)?
+        || census["sourceCollection"] != serde_json::to_value(&bound.collection)?
+        || census["publishedScheduleByRef"] != serde_json::to_value(&bound.schedule)?
+        || census["partition"] != serde_json::to_value(&bound.partition)?
+        || census["nativeInputConfig"] != serde_json::to_value(&bound.source_config)?
+        || census["sourceExclusionAuthority"] != authority
+        || census["exposureParent"] != serde_json::to_value(&bound.exclusion_authority)?
+        || census["schema"] != "research.identity-only-component-census.v2"
+        || census["columns"]
+            != serde_json::json!([
+                "rank0",
+                "component",
+                "member_ids",
+                "source_series_ids",
+                "disposition",
+                "prospective_split"
+            ])
+        || source_config["families"] != 8192
+        || source_config["trajectory"]["wall_layer_observations"] != serde_json::json!([0, 1, 0])
+        || source_config["trajectory"]["split_counts"] != serde_json::to_value(original.requested)?
+        || source_config["excluded_books"] != authority["excluded_books"]
+        || source_config["excluded_static_inputs"] != authority["excluded_static_inputs"]
+        || !original_books
+            .iter()
+            .all(|book| current_books.as_array().is_some_and(|v| v.contains(book)))
+        || serde_json::to_value(&c.excluded_static_inputs)?
+            != source_config["excluded_static_inputs"]
+        || schedule["generator_version"] != quoridor_data::common_corpus::VERSION
+        || schedule["series"].as_array().map(Vec::len) != Some(8192)
+        || schedule["partition"] != serde_json::to_value(&bound.partition)?
+        || schedule["source_observations"] != serde_json::to_value(&bound.source_observations)?
+        || schedule["prefix_seed"] != source_config["prefix_seed"]
+        || schedule["split_seed"] != source_config["split_seed"]
+        || schedule["trajectory"] != source_config["trajectory"]
+        || schedule["excluded_books"] != source_config["excluded_books"]
+        || schedule["excluded_static_inputs"] != source_config["excluded_static_inputs"]
+        || source_config["split_seed"].as_u64() != Some(original.partition.seed)
+        || census["componentRankSeed"].as_u64() != Some(original.partition.seed)
+    {
+        return Err("entire prior parent collection/config/exclusion provenance differs".into());
+    }
+    let planned = original
+        .partition
+        .assignments
+        .iter()
+        .map(|a| (a.game.clone(), a.prefix.clone()))
+        .collect::<Vec<_>>();
+    // SAME maintained closure validates full history/LR/endpoint/source components.
+    // This is exclusion-only prefix traversal, not an old-root/feature audit.
+    let reconstructed = partition_series(
+        &planned,
+        &original.source_series,
+        original.partition.seed,
+        original.requested,
+    )?;
+    let rank = ranked_components(&original.partition);
+    let records: Vec<RankedComponentDisposition> =
+        serde_json::from_value(census["records"].clone())?;
+    if serde_json::to_value(&reconstructed)? != serde_json::to_value(&original)?
+        || schedule["ranked_components"] != serde_json::to_value(&rank)?
+        || rank.len() != records.len()
+        || census["counts"]["originalSurvivors"].as_u64() != Some(u64::try_from(rank.len())?)
+        || census["counts"]["originalDeficit"].as_u64()
+            != Some(u64::try_from(original.deficits.total()?)?)
+    {
+        return Err("entire prior parent rank/member census differs".into());
+    }
+    for (i, (family, record)) in rank.iter().zip(&records).enumerate() {
+        let members = original
+            .partition
+            .assignments
+            .iter()
+            .filter(|a| &a.family == family)
+            .map(|a| a.game.clone())
+            .collect::<BTreeSet<_>>();
+        let sources = members
+            .iter()
+            .map(|id| original.source_series[id].clone())
+            .collect::<BTreeSet<_>>();
+        if record.0 != i
+            || &record.1 != family
+            || record.2.len() != members.len()
+            || record.2.iter().cloned().collect::<BTreeSet<_>>() != members
+            || record.3.len() != sources.len()
+            || record.3.iter().cloned().collect::<BTreeSet<_>>() != sources
+        {
+            return Err("entire prior parent rank/member/source differs".into());
+        }
+    }
+    let source = read_input_reference_max(&bound.source_observations, 512 * 1024 * 1024)?;
+    let rows = source["observations"]
+        .as_array()
+        .ok_or("complete prior source observations required")?;
+    if source["schema"] != "quoridor-prefix-series-full-history-v1"
+        || source["teacher_labels"] != false
+        || source["partition"] != serde_json::to_value(&bound.partition)?
+        || rows.len() != planned.len()
+    {
+        return Err("entire prior source/partition census differs".into());
+    }
+    let mut prefixes = Vec::with_capacity(rows.len());
+    for (row, a) in rows.iter().zip(&original.partition.assignments) {
+        let prefix: Vec<u16> = serde_json::from_value(row["prefix"].clone())?;
+        if row["id"] != a.game
+            || prefix != a.prefix
+            || row["family"] != a.family
+            || row["split"] != serde_json::to_value(&a.split)?
+            || row["source_series"] != original.source_series[&a.game]
+        {
+            return Err("entire prior source/member/full-prefix differs".into());
+        }
+        prefixes.push(prefix);
+    }
+    Ok(Some(prefixes))
+}
+
 fn prepare_trajectories(c: &InputConfig, settings: &TrajectoryInput) -> Result<serde_json::Value> {
     use quoridor_data::terminal::{FamilySplitCounts, partition_series};
     use std::collections::BTreeMap;
@@ -820,6 +1017,9 @@ fn prepare_trajectories(c: &InputConfig, settings: &TrajectoryInput) -> Result<s
         excluded_prefixes.push(quoridor_data::common_corpus::excluded_book_prefixes(
             &reference.read()?,
         )?);
+    }
+    if let Some(prefixes) = excluded_parent_prefixes(c)? {
+        excluded_prefixes.push(prefixes);
     }
     std::fs::create_dir(&c.output)?;
     let marker = c.output.join("INCOMPLETE");
@@ -984,9 +1184,7 @@ fn prepare_trajectories(c: &InputConfig, settings: &TrajectoryInput) -> Result<s
     };
     let fit = publish("fit-observations.json", fit)?;
     let holdout = publish("holdout-observations.json", holdout)?;
-    let schedule = write(
-        "schedule.json",
-        &serde_json::json!({
+    let mut schedule_value = serde_json::json!({
         "generator_version":quoridor_data::common_corpus::VERSION,"trajectory":settings,
         "prefix_seed":c.prefix_seed,"split_seed":c.split_seed,"series":series,
         "generated_transitions":generated_transitions,
@@ -994,8 +1192,11 @@ fn prepare_trajectories(c: &InputConfig, settings: &TrajectoryInput) -> Result<s
         "native_replay_checks":"selection/collision validation replays are separate from generated actions; no search/model",
         "excluded_books":c.excluded_books,"excluded_static_inputs":c.excluded_static_inputs,
         "excluded_observation_ids":excluded,"partition":partition_ref,
-        "source_observations":source_observations,"fit_observations":fit,"holdout_observations":holdout}),
-    )?;
+        "source_observations":source_observations,"fit_observations":fit,"holdout_observations":holdout});
+    if let Some(parent) = &c.excluded_parent {
+        schedule_value["excluded_parent"] = serde_json::to_value(parent)?;
+    }
+    let schedule = write("schedule.json", &schedule_value)?;
     std::fs::remove_file(&marker)?;
     Ok(
         serde_json::json!({"schedule":schedule,"partition":partition_ref,
@@ -1071,6 +1272,9 @@ fn filter_input_slots(
 /// Materialize the one global schedule/partition before any generation batch.
 /// Caller admission/resources apply to this configured operation as to other input work.
 pub fn prepare_inputs(c: &InputConfig) -> Result<serde_json::Value> {
+    if c.excluded_parent.is_some() && c.trajectory.is_none() {
+        return Err("full-parent exclusion belongs only to the declared trajectory input".into());
+    }
     if !c.output.is_absolute() {
         return Err("fresh absolute global input output required".into());
     }
@@ -1386,6 +1590,7 @@ mod tests {
             reuse_schedule: None,
             excluded_books: vec![],
             excluded_static_inputs: None,
+            excluded_parent: None,
             unique_families: false,
             trajectory: None,
             saved_subset: None,
@@ -1460,6 +1665,7 @@ mod tests {
             excluded_books: vec![],
             unique_families: false,
             excluded_static_inputs: None,
+            excluded_parent: None,
             output: root.join("pilot"),
             reuse_schedule: Some(BoundJson {
                 sha256: quoridor_data::file_sha(&master).unwrap(),
@@ -1576,6 +1782,256 @@ mod trajectory_input_tests {
         assert!(!c.output.exists());
         std::fs::remove_file(root.join("valid-book.json")).unwrap();
         std::fs::remove_file(root.join("malformed-book.json")).unwrap();
+        std::fs::remove_dir(root).unwrap();
+    }
+
+    #[test]
+    fn full_prior_parent_exclusion_checks_all_members_before_generation_without_old_root_decode() {
+        use quoridor_data::terminal::{FamilySplitCounts, partition_series, ranked_components};
+        for fault in [None, Some("prefix"), Some("member"), Some("drop-book")] {
+            let root = std::env::temp_dir().join(format!(
+                "full-parent-exclusion-{}-{}",
+                std::process::id(),
+                fault.unwrap_or("valid")
+            ));
+            std::fs::create_dir(&root).unwrap();
+            let write = |name: &str, value: serde_json::Value| {
+                let bound = write_input_json(&root, name, &value).unwrap();
+                let raw = std::fs::read(&bound.path).unwrap();
+                crate::research_manifest::FileRef {
+                    mode: {
+                        use std::os::unix::fs::PermissionsExt;
+                        format!(
+                            "{:04o}",
+                            std::fs::metadata(&bound.path).unwrap().permissions().mode() & 0o777
+                        )
+                    },
+                    path: bound.path,
+                    sha256: bound.sha256,
+                    bytes: raw.len() as u64,
+                }
+            };
+            let book = quoridor_data::terminal_stream::BoundJson {
+                path: root.join("inherited-book-port"),
+                sha256: "a".repeat(64),
+            };
+            let static_input = quoridor_data::terminal_stream::BoundJson {
+                path: root.join("inherited-static-port"),
+                sha256: "b".repeat(64),
+            };
+            let planned: Vec<(String, Vec<u16>)> = vec![
+                ("a".into(), vec![13]),
+                ("b".into(), vec![3]),
+                ("c".into(), vec![81]),
+            ];
+            let sources = planned
+                .iter()
+                .map(|(id, _)| (id.clone(), id.clone()))
+                .collect();
+            let original = partition_series(
+                &planned,
+                &sources,
+                19,
+                FamilySplitCounts {
+                    train: 8192,
+                    validation: 0,
+                    test: 0,
+                },
+            )
+            .unwrap();
+            let rank = ranked_components(&original.partition);
+            let partition = write("partition.json", serde_json::to_value(&original).unwrap());
+            let rows = original
+                .partition
+                .assignments
+                .iter()
+                .enumerate()
+                .map(|(i, a)| {
+                    serde_json::json!({"id":a.game,"source_series":a.game,
+                    "prefix":if fault==Some("prefix") && i==0 { vec![0] } else {a.prefix.clone()},
+                    "family":a.family,"split":a.split,
+                    "root":{"INVALID_OLD_ROOT_MUST_NOT_ENTER_CONTEXT_DECODER":true}})
+                })
+                .collect::<Vec<_>>();
+            let observations = write(
+                "observations.json",
+                serde_json::json!({
+                "schema":"quoridor-prefix-series-full-history-v1","teacher_labels":false,
+                "partition":partition,"observations":rows}),
+            );
+            let trajectory = serde_json::json!({"max_plies":200,"wall_layer_observations":[0,1,0],
+                "selection_seed":7,"split_counts":original.requested});
+            let config = write(
+                "input-generation.json",
+                serde_json::json!({
+                "families":8192,"prefix_seed":7,"split_seed":19,"trajectory":trajectory,
+                "excluded_books":[book],"excluded_static_inputs":static_input,"output":root}),
+            );
+            let authority =
+                serde_json::json!({"excluded_books":[book],"excluded_static_inputs":static_input});
+            let exclusion = write("exclusions.json", authority.clone());
+            let schedule = write(
+                "schedule.json",
+                serde_json::json!({
+                "generator_version":quoridor_data::common_corpus::VERSION,"series":vec![serde_json::json!({});8192],
+                "prefix_seed":7,"split_seed":19,"trajectory":trajectory,
+                "excluded_books":[book],"excluded_static_inputs":static_input,
+                "partition":partition,"source_observations":observations,"ranked_components":rank}),
+            );
+            let collection = write(
+                "collection.json",
+                serde_json::json!({
+                "exclusion_authority":exclusion,
+                "native":{"schedule":schedule,"partition":partition,"source_observations":observations},
+                "refs":{"input-generation.json":config}}),
+            );
+            let mut records = rank
+                .iter()
+                .enumerate()
+                .map(|(i, f)| {
+                    let members = original
+                        .partition
+                        .assignments
+                        .iter()
+                        .filter(|a| &a.family == f)
+                        .map(|a| a.game.clone())
+                        .collect::<Vec<_>>();
+                    // The prospective H identity is irrelevant to full-parent exclusion.
+                    serde_json::json!([
+                        i,
+                        f,
+                        members,
+                        members,
+                        "eligible_named_scope",
+                        if i == 2 { "test" } else { "train" }
+                    ])
+                })
+                .collect::<Vec<_>>();
+            if fault == Some("member") {
+                records[0][2] = serde_json::json!([]);
+            }
+            let census = write(
+                "census.json",
+                serde_json::json!({
+                "schema":"research.identity-only-component-census.v2",
+                "columns":["rank0","component","member_ids","source_series_ids","disposition","prospective_split"],
+                "sourceCollection":collection,"publishedScheduleByRef":schedule,"partition":partition,
+                "nativeInputConfig":config,"sourceExclusionAuthority":authority,"exposureParent":exclusion,
+                "componentRankSeed":19,
+                "counts":{"originalSurvivors":rank.len(),"originalDeficit":original.deficits.total().unwrap()},
+                "records":records}),
+            );
+            let c: InputConfig = serde_json::from_value(serde_json::json!({
+                "families":32768,"prefix_seed":4352026102421_u64,"prefix_lengths":[],
+                "split_seed":4352026102423_u64,"output":root.join("never-generated"),
+                "excluded_books":if fault==Some("drop-book") {vec![]} else {vec![book]},
+                "excluded_static_inputs":static_input,
+                "excluded_parent":{"collection":collection,"schedule":schedule,"partition":partition,
+                    "source_observations":observations,"census":census,"source_config":config,
+                    "exclusion_authority":exclusion}
+            })).unwrap();
+            let result = excluded_parent_prefixes(&c);
+            if fault.is_none() {
+                assert_eq!(
+                    result.unwrap().unwrap(),
+                    planned.iter().map(|(_, p)| p.clone()).collect::<Vec<_>>()
+                );
+            } else {
+                let error = result.unwrap_err().to_string();
+                assert!(
+                    error.contains(match fault.unwrap() {
+                        "prefix" => "source/member/full-prefix",
+                        "member" => "rank/member/source",
+                        _ => "collection/config/exclusion",
+                    }),
+                    "{error}"
+                );
+            }
+            assert!(!c.output.exists());
+            std::fs::remove_dir_all(root).unwrap();
+        }
+    }
+
+    #[test]
+    fn fixed_32768_midstock_and_saved5120_refuse_before_generation_or_publication() {
+        let root =
+            std::env::temp_dir().join(format!("coverage32768-predecode-{}", std::process::id()));
+        std::fs::create_dir(&root).unwrap();
+        let malformed = write_input_json(
+            &root,
+            "bad-book.json",
+            &serde_json::json!({"families":[], "complete":true}),
+        )
+        .unwrap();
+        let mut c: InputConfig = serde_json::from_value(serde_json::json!({
+            "families":32768,"prefix_seed":4352026102421_u64,"prefix_lengths":[],
+             "split_seed":4352026102423_u64,"excluded_books":[malformed],
+            "excluded_parent":{
+                "collection":{"path":root.join("never-opened"),"sha256":"a".repeat(64),"bytes":1,"mode":"0644"},
+                "schedule":{"path":root.join("never-opened"),"sha256":"a".repeat(64),"bytes":1,"mode":"0644"},
+                "partition":{"path":root.join("never-opened"),"sha256":"a".repeat(64),"bytes":1,"mode":"0644"},
+                "source_observations":{"path":root.join("never-opened"),"sha256":"a".repeat(64),"bytes":1,"mode":"0644"},
+                "census":{"path":root.join("never-opened"),"sha256":"a".repeat(64),"bytes":1,"mode":"0644"},
+                "source_config":{"path":root.join("never-opened"),"sha256":"a".repeat(64),"bytes":1,"mode":"0644"},
+                "exclusion_authority":{"path":root.join("never-opened"),"sha256":"a".repeat(64),"bytes":1,"mode":"0644"}
+            },
+            "output":root.join("unentered"),
+            "trajectory":{"max_plies":200,"wall_layer_observations":[0,1,0],
+                "selection_seed":4352026102422_u64,
+                "split_counts":{"train":32768,"validation":0,"test":0}}
+        })).unwrap();
+        c.trajectory.as_ref().unwrap().validate(&c).unwrap();
+        let error = prepare_inputs(&c).unwrap_err().to_string();
+        assert!(
+            error.contains("excluded book must have one complete native prefix collection"),
+            "{error}"
+        );
+        assert!(!c.output.exists());
+        c.families = 32769;
+        c.trajectory.as_mut().unwrap().split_counts.train = 32769;
+        assert!(c.trajectory.as_ref().unwrap().validate(&c).is_err());
+        c.families = 32768;
+        c.trajectory.as_mut().unwrap().split_counts.train = 32768;
+        c.trajectory.as_mut().unwrap().wall_layer_observations = [1, 0, 0];
+        assert!(c.trajectory.as_ref().unwrap().validate(&c).is_err());
+        c.trajectory = None;
+        c.excluded_parent = None;
+        c.excluded_books.clear();
+        let reference = |bytes| crate::research_manifest::FileRef {
+            path: root.join("never-opened"),
+            sha256: "a".repeat(64),
+            bytes,
+            mode: "0644".into(),
+        };
+        let settings = SavedSubsetInput {
+            exposure_parent: reference(1),
+            schedule: reference(1),
+            census: reference(16 * 1024 * 1024 + 1),
+            source_config: reference(1),
+            excluded_prefix_components: 0,
+            split_counts: quoridor_data::terminal::FamilySplitCounts {
+                train: 4096,
+                validation: 1024,
+                test: 0,
+            },
+        };
+        assert!(
+            prepare_saved_subset(&c, &settings)
+                .unwrap_err()
+                .to_string()
+                .contains("saved subset requires its exact frozen parent")
+        );
+        let mut wrong_h = settings.clone();
+        wrong_h.census = reference(1);
+        wrong_h.split_counts.test = 1;
+        assert!(
+            prepare_saved_subset(&c, &wrong_h)
+                .unwrap_err()
+                .to_string()
+                .contains("saved subset requires its exact frozen parent")
+        );
+        assert!(!c.output.exists());
+        std::fs::remove_file(root.join("bad-book.json")).unwrap();
         std::fs::remove_dir(root).unwrap();
     }
 

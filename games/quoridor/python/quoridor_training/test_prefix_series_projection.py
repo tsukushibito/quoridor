@@ -421,6 +421,187 @@ class SeriesProjection(unittest.TestCase):
         with self.assertRaises(ValueError):
             ns["series_fixture_rows"](fit, held, partition, original, wrong_schema, config)
 
+    def test_32768_first5120_singletons_and_H0_refuse_corrupt_parent_or_census_nn0(self):
+        import hashlib
+
+        source_path = Path(__file__).with_name("public_static_prepare.py")
+        names = {"prefix_fixture_rows", "series_fixture_rows", "saved_subset_fixture_authority"}
+        tree = ast.parse(source_path.read_text())
+        definitions = ast.Module(
+            body=[n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name in names],
+            type_ignores=[],
+        )
+        ns = {}
+        exec(compile(definitions, str(source_path), "exec"), ns)
+        ref = lambda name: {"path": "/synthetic/" + name, "sha256": "a" * 64}
+        old = [
+            {"game": f"m{i}", "family": f"f{i}", "prefix": [i // 209, i % 209], "split": "train"}
+            for i in range(5121)
+        ]
+        seed = 19
+        ranked = sorted(
+            [a["family"] for a in old],
+            key=lambda f: (hashlib.sha256(f"{seed}:{f}".encode()).hexdigest(), f),
+        )
+        counts = {"train": 4096, "validation": 1024, "test": 0}
+        split = {f: "train" if i < 4096 else "validation" for i, f in enumerate(ranked[:5120])}
+        original = {
+            "partition": {
+                "seed": seed,
+                "schema": "synthetic-native",
+                "rounding": "synthetic",
+                "assignments": old,
+            },
+            "source_series": {a["game"]: a["game"] for a in old},
+            "requested": {"train": 32768, "validation": 0, "test": 0},
+            "actual": {"train": 5121, "validation": 0, "test": 0},
+            "deficits": {"train": 27647, "validation": 0, "test": 0},
+        }
+        authority = {
+            "schema": "quoridor-prefix-series-saved-subset-v3",
+            "source_schedule": ref("schedule"),
+            "source_partition": ref("parent"),
+            "source_observations": ref("history"),
+            "source_config": ref("config"),
+            "census": ref("census"),
+            "exposure_parent": ref("exclusions"),
+            "excluded_prefix_components": 0,
+            "split_counts": counts,
+            "actual_observations": counts,
+        }
+        excluded = {
+            "excluded_books": [ref("all-old-prefix-components")],
+            "excluded_static_inputs": ref("old-static-inputs"),
+        }
+        excluded["excluded_parent"] = {"collection": ref("complete-old-parent-port")}
+        config = {
+            "families": 32768,
+            "split_seed": seed,
+            "trajectory": {
+                "split_counts": original["requested"],
+                "wall_layer_observations": [0, 1, 0],
+            },
+            **excluded,
+        }
+        synthetic_member = {a["family"]: a["game"] for a in old}
+        census = {
+            "schema": "research.identity-only-component-census.v2",
+            "columns": [
+                "rank0",
+                "component",
+                "member_ids",
+                "source_series_ids",
+                "disposition",
+                "prospective_split",
+            ],
+            "exposureParent": authority["exposure_parent"],
+            "partition": authority["source_partition"],
+            "publishedScheduleByRef": authority["source_schedule"],
+            "nativeInputConfig": authority["source_config"],
+            "componentRankSeed": seed,
+            "sourceExclusionAuthority": excluded,
+            "counts": {
+                "originalSurvivors": 5121,
+                "originalDeficit": 27647,
+                "excludedComponents": 0,
+                "eligibleNamedScope": 5121,
+            },
+            "prospective": {
+                "selected": 5120,
+                "train": 4096,
+                "validation": 1024,
+                "holdout": 0,
+                "deficitWithinNamedScope": 0,
+            },
+            "records": [
+                [
+                    i,
+                    f,
+                    [synthetic_member[f]],
+                    [synthetic_member[f]],
+                    "eligible_named_scope",
+                    split.get(f),
+                ]
+                for i, f in enumerate(ranked)
+            ],
+        }
+        chosen = [{**a, "split": split[a["family"]]} for a in old if a["family"] in split]
+        partition = {
+            **original,
+            "partition": {**original["partition"], "assignments": chosen},
+            "source_series": {a["game"]: original["source_series"][a["game"]] for a in chosen},
+            "requested": counts,
+            "actual": counts,
+            "deficits": {"train": 0, "validation": 0, "test": 0},
+            "selection": authority,
+        }
+        rows = [
+            {
+                "id": a["game"],
+                "source_series": a["game"],
+                "prefix": a["prefix"],
+                "family": a["family"],
+                "split": a["split"],
+            }
+            for a in chosen
+        ]
+        base = {
+            "schema": "quoridor-prefix-series-observations-v1",
+            "partition": ref("selected"),
+            "source_observations": ref("history"),
+            "teacher_labels": False,
+        }
+        fit = {**base, "observations": [a for a in rows if a["split"] != "test"]}
+        held = {**base, "observations": [a for a in rows if a["split"] == "test"]}
+        result, protected, lineage = ns["series_fixture_rows"](
+            fit, held, partition, original, census, config
+        )
+        self.assertEqual(len(result), 5120)
+        self.assertEqual(len(protected), 0)
+        self.assertFalse(lineage["H_teacher_labels"])
+
+        self.assertEqual(sum(r["functional_split"] == "T" for r in result), 4096)
+        self.assertEqual(sum(r["functional_split"] == "V" for r in result), 1024)
+        self.assertEqual(len(set(r["family"] for r in result)), 5120)
+        # This is a labelled synthetic metadata port, never a geometry proof.
+        for fault in (
+            "rank",
+            "source",
+            "partial-member",
+            "new-H",
+            "missing-fit",
+            "multimember",
+            "wrong-old-schema",
+        ):
+            with self.subTest(fault=fault):
+                f, h, p, o, c, cfg = copy.deepcopy((fit, held, partition, original, census, config))
+                if fault == "rank":
+                    c["records"][0][0] = 1
+                elif fault == "source":
+                    c["records"][0][3] = ["wrong-source"]
+                elif fault == "partial-member":
+                    c["records"][0][2] = []
+                elif fault == "new-H":
+                    p["selection"]["split_counts"]["test"] = 1
+                elif fault == "missing-fit":
+                    f["observations"].pop()
+                elif fault == "wrong-old-schema":
+                    p["selection"]["schema"] = "quoridor-prefix-series-saved-subset-v2"
+                else:
+                    family = ranked[0]
+                    member = {
+                        "game": "extra-member",
+                        "family": family,
+                        "prefix": [7, 8],
+                        "split": "train",
+                    }
+                    o["partition"]["assignments"].append(member)
+                    o["source_series"]["extra-member"] = "extra-member"
+                    c["records"][0][2].append("extra-member")
+                    c["records"][0][3].append("extra-member")
+                with self.assertRaises(ValueError):
+                    ns["series_fixture_rows"](f, h, p, o, c, cfg)
+
 
 if __name__ == "__main__":
     unittest.main()
