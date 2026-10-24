@@ -1,0 +1,95 @@
+{
+  "schema": "quoridor-coverage32768-teacher-result-v1",
+  "status": "NEW5120_JOINT_TEACHER_COMPLETE_H0_NOT_FIT_OR_STRENGTH",
+  "job": "708f0f64-c18f-406e-9277-0cf49200d9f0",
+  "originalObservations": {
+    "train": 4096,
+    "validation": 1024,
+    "H": 0
+  },
+  "inputPairRows": 5120,
+  "actualNewOrientedRows": 10240,
+  "priorActualRows": 5990,
+  "inclusiveActualRows": 16230,
+  "publication": {
+    "cache": {
+      "path": "/workspaces/quoridor/.worktree/assets/inputs/quoridor-strong435/coverage32768-policy-values10240-v1/cache.json",
+      "sha256": "2cc5e30648830879ed2940dfe5aa58012150fcf8d8816cc94d3833895eae676a",
+      "bytes": 627,
+      "mode": "0600"
+    },
+    "bank": {
+      "path": "/workspaces/quoridor/.worktree/assets/inputs/quoridor-strong435/coverage32768-policy-values10240-v1/teacher-values.json",
+      "sha256": "6285809d1c5a2b75883ec91058122a89d57fe99ba5154b6801beee8738c7307d",
+      "bytes": 25620,
+      "mode": "0600"
+    }
+  },
+  "inputCollection": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/quoridor-strong-ai435/coverage32768-classes5120-result-v1.json",
+    "bytes": 4200,
+    "mode": "0644",
+    "sha256": "5c6f19e01c875009bf2ee703e6dfdbf1a46eb6fb4f39af59a532c87b74940796"
+  },
+  "head": {
+    "device": "cpu",
+    "fp32": true,
+    "autocast": false,
+    "constructor_model_calls": 0,
+    "calls_attempted": 40,
+    "logical_rows_attempted": 10240,
+    "finite_rows_returned": 10240,
+    "failed_attempted_rows": 0,
+    "head_seconds": 115.02082227903884
+  },
+  "sameForwardPolicyAndValue": true,
+  "oldInputExclusion": {
+    "priorSources": [3174, 256, 2560],
+    "actualKeyMatches": 0,
+    "oldLabelPayloadsRead": 0,
+    "labelsCopiedOrReused": 0,
+    "scope": "Existing old class/PAIR37 metadata and bank headers for provenance/key veto before StaticInputs/Torch/head; no old-label array/scientific metrics/H source body opened by collection."
+  },
+  "costs": {
+    "outerSeconds": 120.30065356299747,
+    "commandSeconds": 117.93574168393388,
+    "headSeconds": 115.02082227903884,
+    "nesting": "outer includes command includes head; nonadditive"
+  },
+  "cleanup": {
+    "actualReturned": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/teacher-stage-v1/actual-returned-STOP.json",
+      "bytes": 3319,
+      "mode": "0644",
+      "sha256": "6a58021858042326888e222bca7acfa504a3d007c68144037291fdbf0fc38b18"
+    },
+    "directChildReaped": true,
+    "processAndHandlesComplete": true,
+    "remaining": [],
+    "signalMaskAndPersist": "completed",
+    "diskSnapshot": {
+      "signalMaskRestoration": "pending",
+      "finalRecordPersist": "attempted"
+    }
+  },
+  "retainedTMP": [],
+  "affectedStorage": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/teacher-stage-v1/affected-storage-point.json",
+    "bytes": 588,
+    "mode": "0644",
+    "sha256": "426ce7739574472999852f0f8df310bb2bb90720383b84290a102bbc6fb972ab"
+  },
+  "collectionSTOP": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/completion-708f0f64/collection-STOP.json",
+    "bytes": 577,
+    "mode": "0644",
+    "sha256": "29e375cc5397d5b78dfcb014223d7624926e4f7d6805619d504deaa373e9fc4c"
+  },
+  "fitUpdates": 0,
+  "Search": 0,
+  "games": 0,
+  "H_labels_features_fit_selector": 0,
+  "globalExposureIndependence": "UNKNOWN; no global H-decode-zero claim",
+  "noRefill": true,
+  "strengthOrDefaultClaim": false
+}
