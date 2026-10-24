@@ -4839,3 +4839,9 @@ Oの新16/native64設定はSOURCE_STOP受領済みで、追加source修正/test/
 同じ現役analysis phaseを既に扱うnormal direct RUNと既存phase-admission契約へ、fresh common/saved-analysis-v2として結び直した。元のscience config/16 closed producer FileRefs/seed4352026102441/10000x128/linear95/全数pair条件/CPU12G18/lib1G0/family2GiB/host4/whole比較2GiBを維持し、code・guard・threshold・schemaは変えていない。admissionは統合担当が発行するexact intent/support/Plan/limitsの権限参照であり、実RAM/CPU/source/runtime/origin/FS/cancel/cleanupのPASSを先取りしない。通常executeが実入場で再確認する。limits=None、skipflag、native artifactへの偽装、統計の再計算は使わない。
 
 metadata helperをstdlib Pythonから呼んだ際に、通常project_interpreterが必要とするQUORIDOR_PROJECT_ROOT未設定でKeyErrorとなった。このhelper失敗・stderr・normal guardian/cleanup API NULLも別に保持し、既存project-env.sh pythonから残りのmetadata checkだけを完了した。NumPy/archive/NN/Search/game/RNGはまだ実行していない。これは一回の未実行saved analysisの具体的pre-command補正であり、旧native256局やbootstrapを再発行・refinalizeするものではない。Oの既承認source/configと両goal・pause/seal/H/default/foreign/50GB条件は維持する。
+
+### 2026-10-24: direct analysis holding refused before ownership; strict-child binding corrected
+
+同aff5fa2aはouter .242429430s・exit1/actual outer cleanup completeで、Limits初期化の`charged_roots`にて`exclusive operation must be below owner`となった。holding全体PREPをowner自身かつowned_outputsへ置いた統合側のpath束縛誤りである。checks[]、operation/data未生成、normal analysis guardian return/reader/RNG counters NULLを保持し、原FAILED/log/partial factsを変更・finalizeしない。outer回収と、未生成のnormal operation cleanupは区別する。
+
+fresh saved-analysis-v3ではnamespace ownerを既存holdingの直上へ結び、書込み・課金対象は同じPREP一か所・同じwhole2GiBに限定した。既存charged_rootsが正確に[PREP]を返し、全出力がownerの厳密な子pathであることを起動前に確認した。出力範囲・cap・source/schema・guard・science config/seed/元256局は変えず、project_interpreter/arena_analysis_check/numerical_check/CPUPlanの通常metadata検査を通した。これは保存分析の入場前path補正で、archive decode・RNG・新対局/NN/Searchや旧統計の再実行ではない。実runtime admissionと正式なWDL/pair/intervalは未観測のまま、通常entryが所有する。
