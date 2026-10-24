@@ -97,6 +97,12 @@ STM/盤面向き/色、raw STEP単位、disc単位、丸め、clamp段階と外�
 
 source/light prepはQuoridor435と並行する。soleMain/Git/index/sharedCargoは実行・統合324。実build/GPU/大きいIO/公平時計だけを実STOP・実CPU/RAMで調停し、新しい恒久roleや監視frameworkを設けない。source作業は明示CPUPlan、GPU0、library1、各family2GiB/host reserve4GiBを既存CycleResources/executeへ結合する。大容量段階の具体保持は50GB内で別に解決する。
 
+## packed候補の次の有限development比較
+
+[次条件](../../../research-data/othello/strong-ai-n96/packed-new-development64-condition-v1.json)では、有限ABBAを終えたpackedbd8ffc91を研究用候補として固定する。同じABBAや旧scalar/本家の成功検査は再演せず、既存担当が新development16生成と通常64局の設定を準備する。seeds2026102403001..3016、mandatory pass後16placements、各128actions上限、全16完成・衝突/lineage資格を対局前に凍結し、deficit時は補充しない。固定Console7.8.1/Edax4.7へ各両色32局、同1秒+100ms transport・1thread・activeTT上限32MiBとする。新sharedPCG64 seed2026102403064/10000×16/linear95を保存解析で一度だけ使い、相手ごとに不完全ならその区間はNULLとする。別bookの旧12勝2分18敗との差を対応効果、二つの95%記述区間を同時優越検定とは扱わない。
+
+[追加除外identity](../../../research-data/othello/strong-ai-n96/native64-recorded-identity-exclusion-v1.json)は旧native64-prospectiveの保存済み144訪問点と16 endpoint記録を現typed入口へ結ぶ。canonical再計算や旧対局再演は行わず、endpoints-only/historyUNKNOWNを保持する。practical197の被覆は既存四familyの開始点系譜であり、別native64のf01開始は追加packageへ属する。後続対局・内部Search・child局面の全identity被覆はUNKNOWNのまま。現在はsource/config準備と依存配送のみで、新生成/64局/統計は未発行。実行中Quoridor A256の元runtimeは変更・pollせず、重い工程は実STOP後の通常資源窓で進める。製品default・モデル・棋力認定は変更しない。
+
 ## 既往の結果と退役境界
 
 以下は完了済みの履歴で、cloneの将来指示や再実行条件ではない。元RAW/モデル/入力/FAILED/UNKNOWN費とGit上の旧設計は保存する。
