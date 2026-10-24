@@ -1,0 +1,670 @@
+{
+  "status": "FINITE_VALUE_SELECTED_FIT_EARLY_STOPPED_NOT_GENERAL_CONVERGENCE_OR_STRENGTH",
+  "jobId": "c1c0d84f-6dd4-4425-96cf-b36584f1ea80",
+  "originalResult": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-value-selected-fit4096-v1/result.json",
+    "bytes": 4705,
+    "mode": "0644",
+    "sha256": "d123774aa38df65d6407d39aba3dab76ba93cf2145aae6f05ced6634aceb06b7"
+  },
+  "outerResult": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-value-selected-fit4096-v1/runtime/result.json",
+    "bytes": 526,
+    "mode": "0600",
+    "sha256": "d0119786ec6fe75f09597fab379f829561f69522d20d4fde0a74d05a7af05c0d"
+  },
+  "runtimeConfig": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-value-selected-fit4096-v1/runtime/config.json",
+    "bytes": 836,
+    "mode": "0600",
+    "sha256": "2a2fd8617c1107a54cbceacf47feb041502e34ead157cab46113baaf191afd36"
+  },
+  "resources": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-value-selected-fit4096-v1/resources.json",
+    "bytes": 2381,
+    "mode": "0644",
+    "sha256": "6c1b42fb476f55fd58b4f0e46a16b234db454f36b741c1cee64d0c7878df06a4"
+  },
+  "freeze": {
+    "path": "/workspaces/quoridor/.worktree/assets/checkpoints/quoridor-strong435/coverage8192-value-selected-fit4096-v1/joint/freeze.json",
+    "bytes": 5446,
+    "mode": "0600",
+    "sha256": "c415c662de55e17da52e68de1ed63a0b0059b7aabb37a169aa599752f613cbd2"
+  },
+  "runStatus": {
+    "path": "/workspaces/quoridor/.worktree/assets/checkpoints/quoridor-strong435/coverage8192-value-selected-fit4096-v1/joint/run-status.json",
+    "bytes": 2347,
+    "mode": "0600",
+    "sha256": "6f3ab2738fbe5d0272453eadc890a1f57d7e19d7276616cc14522cda54776714"
+  },
+  "tuple": {
+    "checkpoint": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/quoridor-strong435/coverage8192-value-selected-fit4096-v1/joint/best.pt",
+      "bytes": 605319,
+      "mode": "0644",
+      "sha256": "0a4f75cf1a41691e3bc444a4e6af27a23cdbb6787a10a01265171d015588dcc2"
+    },
+    "descriptor": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/quoridor-strong435/coverage8192-value-selected-fit4096-v1/joint/best-model/manifest.json",
+      "bytes": 680,
+      "mode": "0600",
+      "sha256": "d6aaf0004b672e9fadec39de30bad972eacbabb7c5a35b28624b491d60d8c76d"
+    },
+    "weights": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/quoridor-strong435/coverage8192-value-selected-fit4096-v1/joint/best-model/weights.f32",
+      "bytes": 49284,
+      "mode": "0644",
+      "sha256": "15a727b9f06ff116671d59c7c381c049a0aa21c2228bc461587fb52d7d4e8a30"
+    },
+    "policy": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/quoridor-strong435/coverage8192-value-selected-fit4096-v1/joint/best-model/policy-head/manifest.json",
+      "bytes": 461,
+      "mode": "0600",
+      "sha256": "7248935ac81f9b15a8d0aee5f85a95393ac80c60f77b3f24f7d000f4c604fef3"
+    },
+    "policyWeights": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/quoridor-strong435/coverage8192-value-selected-fit4096-v1/joint/best-model/policy-head/policy.f32",
+      "bytes": 27588,
+      "mode": "0644",
+      "sha256": "9be1377ff171d7abd44bb70358ea929ace6d194f6ba7587144a8b9313d4db25e"
+    }
+  },
+  "selectedFingerprints": {
+    "shared": "67b236e4159472f35d4ae7db4013ceb4881521d16721e1fd3536dfa4b5bf2425",
+    "policy": "a046bcb5098cede0e7442c21c0b7c8ed02e02cb85e50304ff126b19356ba8fae"
+  },
+  "counts": {
+    "updates": 3584,
+    "trainingDraws": 917504,
+    "logicalRows": 991744,
+    "fullSelectors": 29,
+    "fullSelectorRows": 74240,
+    "canonicalT": 1024,
+    "selectionV": 256,
+    "H": 0,
+    "nativeIdentityConstructors": 107,
+    "nativeIdentityHeadRows": 0
+  },
+  "selection": {
+    "initial": {
+      "step": 0,
+      "training_seen": 0,
+      "samples": 2560,
+      "lr": [3e-5],
+      "joint_overfit_observations": 0,
+      "train": {
+        "target_mse": 0.19229001149227126,
+        "target_mae": 0.33068031948985777,
+        "decisive_sign_accuracy": 0.7783203125,
+        "policy_cross_entropy": 1.5535870746680303,
+        "teacher_entropy": 1.0458094094792614,
+        "policy_kl": 0.50777766534884,
+        "policy_top1": 0.77490234375,
+        "policy_top3": 0.974609375,
+        "joint_objective": 0.3476487189590743,
+        "rows": 1024.0,
+        "input_classes": 1024,
+        "actual_logical_rows": 2048
+      },
+      "validation": {
+        "target_mse": 0.18997263106741263,
+        "target_mae": 0.32928601209289354,
+        "decisive_sign_accuracy": 0.798828125,
+        "policy_cross_entropy": 1.5332939470536076,
+        "teacher_entropy": 1.0399445049697533,
+        "policy_kl": 0.49334944208385423,
+        "policy_top1": 0.798828125,
+        "policy_top3": 0.96875,
+        "joint_objective": 0.3433020257727734,
+        "rows": 256.0,
+        "input_classes": 256,
+        "actual_logical_rows": 512
+      }
+    },
+    "best": {
+      "step": 2560,
+      "training_seen": 655360,
+      "samples": 709120,
+      "lr": [3e-5],
+      "joint_overfit_observations": 0,
+      "train": {
+        "target_mse": 0.042511064346674204,
+        "target_mae": 0.15805451227740264,
+        "decisive_sign_accuracy": 0.9140625,
+        "policy_cross_entropy": 1.4804193349118577,
+        "teacher_entropy": 1.0458094094792614,
+        "policy_kl": 0.434609925490804,
+        "policy_top1": 0.77685546875,
+        "policy_top3": 0.990234375,
+        "joint_objective": 0.19055299783785998,
+        "rows": 1024.0,
+        "input_classes": 1024,
+        "actual_logical_rows": 2048
+      },
+      "validation": {
+        "target_mse": 0.08823825311555794,
+        "target_mae": 0.22125850863824326,
+        "decisive_sign_accuracy": 0.841796875,
+        "policy_cross_entropy": 1.4820481516071595,
+        "teacher_entropy": 1.0399445049697533,
+        "policy_kl": 0.44210364628816023,
+        "policy_top1": 0.802734375,
+        "policy_top3": 0.986328125,
+        "joint_objective": 0.2364430682762739,
+        "rows": 256.0,
+        "input_classes": 256,
+        "actual_logical_rows": 512
+      }
+    },
+    "last": {
+      "step": 3584,
+      "training_seen": 917504,
+      "samples": 991744,
+      "lr": [1e-6],
+      "joint_overfit_observations": 0,
+      "train": {
+        "target_mse": 0.03960850351538309,
+        "target_mae": 0.15266074389813866,
+        "decisive_sign_accuracy": 0.9189453125,
+        "policy_cross_entropy": 1.4776755807397421,
+        "teacher_entropy": 1.0458094094792614,
+        "policy_kl": 0.43186617096944246,
+        "policy_top1": 0.77734375,
+        "policy_top3": 0.990234375,
+        "joint_objective": 0.1873760615893573,
+        "rows": 1024.0,
+        "input_classes": 1024,
+        "actual_logical_rows": 2048
+      },
+      "validation": {
+        "target_mse": 0.088325692609557,
+        "target_mae": 0.22168940742210452,
+        "decisive_sign_accuracy": 0.845703125,
+        "policy_cross_entropy": 1.480113599798642,
+        "teacher_entropy": 1.0399445049697533,
+        "policy_kl": 0.44016909413039684,
+        "policy_top1": 0.798828125,
+        "policy_top3": 0.986328125,
+        "joint_objective": 0.23633705258942123,
+        "rows": 256.0,
+        "input_classes": 256,
+        "actual_logical_rows": 512
+      }
+    }
+  },
+  "savedFullSelectorScalars": [
+    {
+      "step": 0,
+      "draws": 0,
+      "VtargetMSE": 0.18997263106741263,
+      "TtargetMSE": 0.19229001149227126,
+      "TjointObjective": 0.3476487189590743,
+      "VjointObjective": 0.3433020257727734,
+      "lr": [3e-5],
+      "overfit": 0
+    },
+    {
+      "step": 128,
+      "draws": 32768,
+      "VtargetMSE": 0.13292579667042798,
+      "TtargetMSE": 0.11672206496987772,
+      "TjointObjective": 0.2707669818537454,
+      "VjointObjective": 0.28544996303837605,
+      "lr": [3e-5],
+      "overfit": 0
+    },
+    {
+      "step": 256,
+      "draws": 65536,
+      "VtargetMSE": 0.12060910748537636,
+      "TtargetMSE": 0.10161496576624784,
+      "TjointObjective": 0.2548725438741255,
+      "VjointObjective": 0.2726212829466537,
+      "lr": [3e-5],
+      "overfit": 0
+    },
+    {
+      "step": 384,
+      "draws": 98304,
+      "VtargetMSE": 0.11687938557477545,
+      "TtargetMSE": 0.09361942051693375,
+      "TjointObjective": 0.2462710137384599,
+      "VjointObjective": 0.26846713203593037,
+      "lr": [3e-5],
+      "overfit": 0
+    },
+    {
+      "step": 512,
+      "draws": 131072,
+      "VtargetMSE": 0.11300882929904589,
+      "TtargetMSE": 0.08740903525417923,
+      "TjointObjective": 0.2395781160123555,
+      "VjointObjective": 0.26424349944541436,
+      "lr": [3e-5],
+      "overfit": 0
+    },
+    {
+      "step": 640,
+      "draws": 163840,
+      "VtargetMSE": 0.11008963858456564,
+      "TtargetMSE": 0.08213031901864434,
+      "TjointObjective": 0.2338765981057366,
+      "VjointObjective": 0.2609788922474648,
+      "lr": [3e-5],
+      "overfit": 0
+    },
+    {
+      "step": 768,
+      "draws": 196608,
+      "VtargetMSE": 0.10816489480213576,
+      "TtargetMSE": 0.07754774376565321,
+      "TjointObjective": 0.22890429080483002,
+      "VjointObjective": 0.25875890055914724,
+      "lr": [3e-5],
+      "overfit": 0
+    },
+    {
+      "step": 896,
+      "draws": 229376,
+      "VtargetMSE": 0.10538549431576255,
+      "TtargetMSE": 0.07332092975719051,
+      "TjointObjective": 0.22432878484267194,
+      "VjointObjective": 0.2557216446518419,
+      "lr": [3e-5],
+      "overfit": 0
+    },
+    {
+      "step": 1024,
+      "draws": 262144,
+      "VtargetMSE": 0.10213985799454464,
+      "TtargetMSE": 0.06969975576541795,
+      "TjointObjective": 0.22038277680296628,
+      "VjointObjective": 0.2522435800125016,
+      "lr": [3e-5],
+      "overfit": 0
+    },
+    {
+      "step": 1152,
+      "draws": 294912,
+      "VtargetMSE": 0.10092818679861493,
+      "TtargetMSE": 0.06615594571643091,
+      "TjointObjective": 0.21653961985296852,
+      "VjointObjective": 0.2508088334974903,
+      "lr": [3e-5],
+      "overfit": 0
+    },
+    {
+      "step": 1280,
+      "draws": 327680,
+      "VtargetMSE": 0.09944373908096438,
+      "TtargetMSE": 0.06289527757212945,
+      "TjointObjective": 0.21299523131343032,
+      "VjointObjective": 0.2491585370082639,
+      "lr": [3e-5],
+      "overfit": 0
+    },
+    {
+      "step": 1408,
+      "draws": 360448,
+      "VtargetMSE": 0.09799129604996074,
+      "TtargetMSE": 0.060014460039963344,
+      "TjointObjective": 0.2098411920107881,
+      "VjointObjective": 0.2474867866496172,
+      "lr": [3e-5],
+      "overfit": 0
+    },
+    {
+      "step": 1536,
+      "draws": 393216,
+      "VtargetMSE": 0.09600193527024298,
+      "TtargetMSE": 0.05738239770625683,
+      "TjointObjective": 0.20696286691718002,
+      "VjointObjective": 0.24530464297006896,
+      "lr": [3e-5],
+      "overfit": 0
+    },
+    {
+      "step": 1664,
+      "draws": 425984,
+      "VtargetMSE": 0.09482271005603271,
+      "TtargetMSE": 0.05519299689193291,
+      "TjointObjective": 0.20453920968728642,
+      "VjointObjective": 0.243951589924691,
+      "lr": [3e-5],
+      "overfit": 0
+    },
+    {
+      "step": 1792,
+      "draws": 458752,
+      "VtargetMSE": 0.09290471125285982,
+      "TtargetMSE": 0.05281984264380375,
+      "TjointObjective": 0.20193318624165918,
+      "VjointObjective": 0.241890829760897,
+      "lr": [3e-5],
+      "overfit": 0
+    },
+    {
+      "step": 1920,
+      "draws": 491520,
+      "VtargetMSE": 0.09251070289534749,
+      "TtargetMSE": 0.05061522213402718,
+      "TjointObjective": 0.19952100508128573,
+      "VjointObjective": 0.2413360831014556,
+      "lr": [3e-5],
+      "overfit": 0
+    },
+    {
+      "step": 2048,
+      "draws": 524288,
+      "VtargetMSE": 0.09171476836231904,
+      "TtargetMSE": 0.04878226793532076,
+      "TjointObjective": 0.19749048563696261,
+      "VjointObjective": 0.2403933865894507,
+      "lr": [3e-5],
+      "overfit": 0
+    },
+    {
+      "step": 2176,
+      "draws": 557056,
+      "VtargetMSE": 0.09032931699621079,
+      "TtargetMSE": 0.04704265216158563,
+      "TjointObjective": 0.1955600968768387,
+      "VjointObjective": 0.23887280566122904,
+      "lr": [3e-5],
+      "overfit": 0
+    },
+    {
+      "step": 2304,
+      "draws": 589824,
+      "VtargetMSE": 0.09010297857847636,
+      "TtargetMSE": 0.04540392102533774,
+      "TjointObjective": 0.1937539590802608,
+      "VjointObjective": 0.23852897983550664,
+      "lr": [3e-5],
+      "overfit": 0
+    },
+    {
+      "step": 2432,
+      "draws": 622592,
+      "VtargetMSE": 0.08939376282534262,
+      "TtargetMSE": 0.04387857738631851,
+      "TjointObjective": 0.1920668077452558,
+      "VjointObjective": 0.2377013842752732,
+      "lr": [3e-5],
+      "overfit": 0
+    },
+    {
+      "step": 2560,
+      "draws": 655360,
+      "VtargetMSE": 0.08823825311555794,
+      "TtargetMSE": 0.042511064346674204,
+      "TjointObjective": 0.19055299783785998,
+      "VjointObjective": 0.2364430682762739,
+      "lr": [3e-5],
+      "overfit": 0
+    },
+    {
+      "step": 2688,
+      "draws": 688128,
+      "VtargetMSE": 0.0882402256982233,
+      "TtargetMSE": 0.041251847447108365,
+      "TjointObjective": 0.18915599209225306,
+      "VjointObjective": 0.2363647116617132,
+      "lr": [1.5e-5],
+      "overfit": 0
+    },
+    {
+      "step": 2816,
+      "draws": 720896,
+      "VtargetMSE": 0.08868059351395943,
+      "TtargetMSE": 0.040377664607804765,
+      "TjointObjective": 0.1882143550635381,
+      "VjointObjective": 0.2367383798426775,
+      "lr": [7.5e-6],
+      "overfit": 0
+    },
+    {
+      "step": 2944,
+      "draws": 753664,
+      "VtargetMSE": 0.08853641299077089,
+      "TtargetMSE": 0.0400254468955784,
+      "TjointObjective": 0.18783018706000737,
+      "VjointObjective": 0.23657943605224382,
+      "lr": [3.75e-6],
+      "overfit": 0
+    },
+    {
+      "step": 3072,
+      "draws": 786432,
+      "VtargetMSE": 0.08848561008010225,
+      "TtargetMSE": 0.03985739508346832,
+      "TjointObjective": 0.18764603918528827,
+      "VjointObjective": 0.23651444931413212,
+      "lr": [1.875e-6],
+      "overfit": 0
+    },
+    {
+      "step": 3200,
+      "draws": 819200,
+      "VtargetMSE": 0.08844734019785125,
+      "TtargetMSE": 0.03975194467390453,
+      "TjointObjective": 0.1875320681593314,
+      "VjointObjective": 0.2364671607368992,
+      "lr": [1e-6],
+      "overfit": 0
+    },
+    {
+      "step": 3328,
+      "draws": 851968,
+      "VtargetMSE": 0.08841746321941557,
+      "TtargetMSE": 0.03970865531353359,
+      "TjointObjective": 0.18748462270503247,
+      "VjointObjective": 0.23643481498529967,
+      "lr": [1e-6],
+      "overfit": 0
+    },
+    {
+      "step": 3456,
+      "draws": 884736,
+      "VtargetMSE": 0.08831923351903198,
+      "TtargetMSE": 0.039656161043422865,
+      "TjointObjective": 0.18742795927337383,
+      "VjointObjective": 0.2363344473757384,
+      "lr": [1e-6],
+      "overfit": 0
+    },
+    {
+      "step": 3584,
+      "draws": 917504,
+      "VtargetMSE": 0.088325692609557,
+      "TtargetMSE": 0.03960850351538309,
+      "TjointObjective": 0.1873760615893573,
+      "VjointObjective": 0.23633705258942123,
+      "lr": [1e-6],
+      "overfit": 0
+    }
+  ],
+  "actualLR": {
+    "segments": [
+      {
+        "firstUpdate": 1,
+        "lastUpdate": 2688,
+        "updates": 2688,
+        "draws": 688128,
+        "lr": [3e-5]
+      },
+      {
+        "firstUpdate": 2689,
+        "lastUpdate": 2816,
+        "updates": 128,
+        "draws": 32768,
+        "lr": [1.5e-5]
+      },
+      {
+        "firstUpdate": 2817,
+        "lastUpdate": 2944,
+        "updates": 128,
+        "draws": 32768,
+        "lr": [7.5e-6]
+      },
+      {
+        "firstUpdate": 2945,
+        "lastUpdate": 3072,
+        "updates": 128,
+        "draws": 32768,
+        "lr": [3.75e-6]
+      },
+      {
+        "firstUpdate": 3073,
+        "lastUpdate": 3200,
+        "updates": 128,
+        "draws": 32768,
+        "lr": [1.875e-6]
+      },
+      {
+        "firstUpdate": 3201,
+        "lastUpdate": 3584,
+        "updates": 384,
+        "draws": 98304,
+        "lr": [1e-6]
+      }
+    ],
+    "floorUpdates": 384,
+    "floorDraws": 98304
+  },
+  "actualPrepared": {
+    "receipt": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-value-selected-fit4096-v1/joint-prepared.json",
+      "bytes": 1516,
+      "mode": "0644",
+      "sha256": "4bbf8bdd53b1a93b653368ab33dd1a028702e3e64f38fc46019822772feae4b8"
+    },
+    "inputBinding": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/quoridor-strong435/coverage8192-value-selected-fit4096-v1/joint-inputs/input-binding.json",
+      "sha256": "8c0d0e42df46509ee9add8c3ce1a2c5c1cd5aa7b39223197ab3bc272be06ac8c",
+      "bytes": 2443,
+      "mode": "0600"
+    },
+    "scale": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/quoridor-strong435/coverage8192-value-selected-fit4096-v1/joint-inputs/scale.json",
+      "sha256": "271db6d05cccfbda44d93bbf4b7b710b50a8ad7f1b811b0b7694e43a41e186ca",
+      "bytes": 142,
+      "mode": "0600"
+    },
+    "constantRef": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/quoridor-strong435/coverage8192-value-selected-fit4096-v1/joint-inputs/constant.json",
+      "sha256": "5409ee0bccd5e80abe2b0a0fd63c6066309c2556ef65fc793165096328c929de",
+      "bytes": 237,
+      "mode": "0600"
+    },
+    "constant": {
+      "row_mean_constant": 0.19895382496594038,
+      "binding": {
+        "dataset_sha": "429e1fe946d59022e55d1fb82ade09d1e338c326bef9df3ead241d6b2b3eb646",
+        "partition": "train",
+        "teacher": "same-forward C STM value, not outcome z"
+      }
+    }
+  },
+  "stop": {
+    "initial_Tpanel_mse": 0.19229001149227126,
+    "minimum_observed_Tpanel_mse": 0.03960850351538309,
+    "parameters_changed": true,
+    "joint_overfit_observations": 0,
+    "joint_previous_observation": {
+      "validation": 0.088325692609557,
+      "train": 0.1873760615893573,
+      "draws": 917504
+    },
+    "adequate_learning": true,
+    "horizon": "EARLY_STOPPED",
+    "minimum_completed_draws": 131072,
+    "maximum_draws": 1048576,
+    "completed_draws": 917504,
+    "stopping_significant_reference": 0.08823825311555794,
+    "significant_stale_checkpoints": 8,
+    "endpoint_actual_minimum_full_precision_V_MSE": 0.08823825311555794,
+    "sufficiency": true,
+    "claim": "operational finite curve criterion, never global objective optimum"
+  },
+  "selector": "StrictV pure target_mse BEST/scheduler/significant-stale. Loss remains value1+policy.1. Overfit compares previousV selected metric and previousTpanel JOINT objective; not pureT/best-relative.",
+  "operationalSufficiencyNotGlobal": true,
+  "exportsChanged": true,
+  "costs": {
+    "outerSecondsOnce": 22.5220984040061,
+    "prepareSecondsNested": 0.1549949540058151,
+    "fitCommandSecondsNested": 21.514022126910277,
+    "fitFreezeWallSecondsNested": 20.938724744017236,
+    "fitStatusWallSecondsNested": 20.959826463018544,
+    "notAdded": true,
+    "phaseSecondsInclusive": {
+      "initialization": 1.31576506793499,
+      "transfer": 2.390099009615369,
+      "synchronization": 0.0,
+      "inference": 4.136169087141752,
+      "update": 5.882773108896799,
+      "logging": 0.593612308613956,
+      "full_selector": 2.237762931967154,
+      "fixed_diagnostic": 0.0,
+      "export": 1.451849834062159
+    }
+  },
+  "actualReturnedRecords": [
+    {
+      "label": "joint-prepare",
+      "returnedRef": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-value-selected-fit4096-v1/joint-prepare.returned.json",
+        "bytes": 3341,
+        "mode": "0644",
+        "sha256": "aff44596e774d0ff7cd50c96a26112c9ee26ef0298c32e441985ff11cdbd29fa"
+      },
+      "child": {
+        "pid": 3901087,
+        "start_ticks": "87015959",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "sameIdentityAlive": false,
+      "wallSecondsNested": 0.1549949540058151,
+      "actualMask": "completed",
+      "actualPersist": "completed",
+      "diskMask": "pending",
+      "diskPersist": "attempted"
+    },
+    {
+      "label": "joint-fit",
+      "returnedRef": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-value-selected-fit4096-v1/joint-fit.returned.json",
+        "bytes": 4111,
+        "mode": "0644",
+        "sha256": "3a5c6ae35ec9b8752b8c378e47eb4169626ddd9ab13563195dbe79a516ad1175"
+      },
+      "child": {
+        "pid": 3901094,
+        "start_ticks": "87015976",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "sameIdentityAlive": false,
+      "wallSecondsNested": 21.514022126910277,
+      "actualMask": "completed",
+      "actualPersist": "completed",
+      "diskMask": "pending",
+      "diskPersist": "attempted"
+    }
+  ],
+  "affectedStoragePoint": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-value-selected-fit4096-v1/affected-storage-point.json",
+    "bytes": 531,
+    "mode": "0644",
+    "sha256": "c634faffdc080a50a024c41fc85a357bc256522eda1c6e96409b8835226711ff"
+  },
+  "afterActualReturnEmptyTMPOnlyRemoved": [
+    "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-value-selected-fit4096-v1/TMP/torchinductor_vscode",
+    "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-value-selected-fit4096-v1/TMP"
+  ],
+  "TMPAbsent": true,
+  "caseIndependence": "NewV256 is repeatedly selected development; compare its ownINITIAL/BEST only, not oldV32/V192 denominator. Historical exposure completeness/fit independence UNKNOWN beyond named native scopes. H128 remains frozen and unused.",
+  "noOldTMixture": true,
+  "noTeacherReplay": true,
+  "noAutomaticExtension": true,
+  "allFailuresPausesSealsDefaultModelsForeignCosts50GBPreserved": true
+}
