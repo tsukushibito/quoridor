@@ -1,0 +1,459 @@
+{
+  "schema": "quoridor.next128-build-collection.v1",
+  "job": "91a96510-2d68-49d7-8b32-e7fdb64701db",
+  "status": "PASS_SOFTWARE_ONLY",
+  "manifest": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-next128-affected-build-v1/operation/manifest.json",
+    "bytes": 47321,
+    "mode": "0644",
+    "sha256": "f38b81a1f076ea70e916e77cd4f1acb2043feb527eb2e245ffb2e5e7f193a5c6"
+  },
+  "artifact": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-next128-affected-build-v1/image/quoridor-runner",
+    "sha256": "a26387ebb52d6ef570b009fef98e2341a1130dac02d4379ad8ff1e9cb639b444",
+    "bytes": 10865136,
+    "mode": "0755"
+  },
+  "sourceCommit": "64638865492865d43b8a9b91396ec1c7c3c867ce",
+  "sourceComposition": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-next128-affected-build-v1/source-composition.json",
+    "bytes": 6139,
+    "mode": "0644",
+    "sha256": "ee2adb3792d46b7026a86a5bfdce6d4d7e42733a5ccfbd3d848009e192e08839"
+  },
+  "sourceAdoption": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-next128-affected-build-v1/source-adoption.json",
+    "bytes": 2943,
+    "mode": "0644",
+    "sha256": "77fae47a89bc0f2211d572b3d48a15f962cac575043a9e96bea00023456a4c79"
+  },
+  "checks": [
+    {
+      "name": "version-cargo",
+      "role": "version",
+      "status": "PASS",
+      "wallSeconds": 0.009234031080268323,
+      "argv": [
+        "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+        "--version"
+      ],
+      "actualReturn": {
+        "child": {
+          "pid": 1593529,
+          "start_ticks": "92725200",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "direct_child_reaped": true,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "remaining": [],
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed"
+      },
+      "fullLog": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-next128-affected-build-v1/operation/version-cargo.full.log",
+        "sha256": "c35608815f43d0b8788a9b826fad2bb17384f49fb328dc4fe64da9db5f5ef4d6",
+        "bytes": 36,
+        "mode": "0644"
+      },
+      "exactTestCount": null,
+      "skip": null
+    },
+    {
+      "name": "version-rustc",
+      "role": "version",
+      "status": "PASS",
+      "wallSeconds": 0.01223211595788598,
+      "argv": [
+        "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustc",
+        "--version"
+      ],
+      "actualReturn": {
+        "child": {
+          "pid": 1593530,
+          "start_ticks": "92725201",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "direct_child_reaped": true,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "remaining": [],
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed"
+      },
+      "fullLog": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-next128-affected-build-v1/operation/version-rustc.full.log",
+        "sha256": "55cd0529c005d3f62869ea6e2271bfa9d5196f56dc65a8be00a371af114a4a98",
+        "bytes": 36,
+        "mode": "0644"
+      },
+      "exactTestCount": null,
+      "skip": null
+    },
+    {
+      "name": "version-rustdoc",
+      "role": "version",
+      "status": "PASS",
+      "wallSeconds": 0.010104032000526786,
+      "argv": [
+        "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustdoc",
+        "--version"
+      ],
+      "actualReturn": {
+        "child": {
+          "pid": 1593532,
+          "start_ticks": "92725205",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "direct_child_reaped": true,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "remaining": [],
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed"
+      },
+      "fullLog": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-next128-affected-build-v1/operation/version-rustdoc.full.log",
+        "sha256": "e0fb153c65bc8c6f00c7bfeb2e7f4737c6740929229a5469e0fb26f1d7feacfe",
+        "bytes": 38,
+        "mode": "0644"
+      },
+      "exactTestCount": null,
+      "skip": null
+    },
+    {
+      "name": "version-cc",
+      "role": "version",
+      "status": "PASS",
+      "wallSeconds": 0.010147106950171292,
+      "argv": ["/usr/bin/x86_64-linux-gnu-gcc-12", "--version"],
+      "actualReturn": {
+        "child": {
+          "pid": 1593533,
+          "start_ticks": "92725207",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "direct_child_reaped": true,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "remaining": [],
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed"
+      },
+      "fullLog": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-next128-affected-build-v1/operation/version-cc.full.log",
+        "sha256": "ba4aa3688542d944b584afa84a6332469bed71c19d3c72e5bbdb069972d6db1d",
+        "bytes": 260,
+        "mode": "0644"
+      },
+      "exactTestCount": null,
+      "skip": null
+    },
+    {
+      "name": "version-cxx",
+      "role": "version",
+      "status": "PASS",
+      "wallSeconds": 0.00911940902005881,
+      "argv": ["/usr/bin/x86_64-linux-gnu-g++-12", "--version"],
+      "actualReturn": {
+        "child": {
+          "pid": 1593534,
+          "start_ticks": "92725209",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "direct_child_reaped": true,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "remaining": [],
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed"
+      },
+      "fullLog": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-next128-affected-build-v1/operation/version-cxx.full.log",
+        "sha256": "44c362af33f02d0f97e55219a8e35ba8374b0bf61352141287b86ac131355d36",
+        "bytes": 260,
+        "mode": "0644"
+      },
+      "exactTestCount": null,
+      "skip": null
+    },
+    {
+      "name": "version-ar",
+      "role": "version",
+      "status": "PASS",
+      "wallSeconds": 0.01441195304505527,
+      "argv": ["/usr/bin/x86_64-linux-gnu-ar", "--version"],
+      "actualReturn": {
+        "child": {
+          "pid": 1593535,
+          "start_ticks": "92725211",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "direct_child_reaped": true,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "remaining": [],
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed"
+      },
+      "fullLog": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-next128-affected-build-v1/operation/version-ar.full.log",
+        "sha256": "d47749e5767b07210b628729d75fba5e16927cb4a7fd943cd6da87f60a335874",
+        "bytes": 283,
+        "mode": "0644"
+      },
+      "exactTestCount": null,
+      "skip": null
+    },
+    {
+      "name": "version-python",
+      "role": "version",
+      "status": "PASS",
+      "wallSeconds": 0.008246692945249379,
+      "argv": [
+        "/home/vscode/.cache/inference/python/cpython-3.14.7-linux-x86_64-gnu/bin/python3.14",
+        "--version"
+      ],
+      "actualReturn": {
+        "child": {
+          "pid": 1593536,
+          "start_ticks": "92725217",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "direct_child_reaped": true,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "remaining": [],
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed"
+      },
+      "fullLog": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-next128-affected-build-v1/operation/version-python.full.log",
+        "sha256": "0366d77cc1f1ac88ea458231ba4f639323d5caf34de0d50b7618277fd4395f1f",
+        "bytes": 14,
+        "mode": "0644"
+      },
+      "exactTestCount": null,
+      "skip": null
+    },
+    {
+      "name": "new-next128-boundary-1",
+      "role": "test",
+      "status": "PASS",
+      "wallSeconds": 9.797212500940077,
+      "argv": [
+        "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "/workspaces/quoridor/Cargo.toml",
+        "-j1",
+        "--message-format=json-render-diagnostics",
+        "-p",
+        "quoridor-runner",
+        "--lib",
+        "--features",
+        "measurement",
+        "teacher_pilot::depth6::saved_evaluation::tests::next5120_exact_window_preserves_members_and_refuses_corruption",
+        "--",
+        "--exact",
+        "--test-threads=1"
+      ],
+      "actualReturn": {
+        "child": {
+          "pid": 1593537,
+          "start_ticks": "92725219",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "direct_child_reaped": true,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "remaining": [],
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed"
+      },
+      "fullLog": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-next128-affected-build-v1/operation/new-next128-boundary-1.full.log",
+        "sha256": "0e1931fcd6aface184eee862806b703fdf33bb59fab87a191851adf1ab405130",
+        "bytes": 85487,
+        "mode": "0644"
+      },
+      "exactTestCount": 1,
+      "skip": 0
+    },
+    {
+      "name": "new-next128-boundary-2",
+      "role": "test",
+      "status": "PASS",
+      "wallSeconds": 0.060287291067652404,
+      "argv": [
+        "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "/workspaces/quoridor/Cargo.toml",
+        "-j1",
+        "--message-format=json-render-diagnostics",
+        "-p",
+        "quoridor-runner",
+        "--lib",
+        "--features",
+        "measurement",
+        "teacher_pilot::depth6::saved_evaluation::tests::next5120_count_refuses_before_locator_read_or_output",
+        "--",
+        "--exact",
+        "--test-threads=1"
+      ],
+      "actualReturn": {
+        "child": {
+          "pid": 1593747,
+          "start_ticks": "92726199",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "direct_child_reaped": true,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "remaining": [],
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed"
+      },
+      "fullLog": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-next128-affected-build-v1/operation/new-next128-boundary-2.full.log",
+        "sha256": "858df3b537786b9d31442fd592f835802c79e42b8961052b87865b4e71d60d60",
+        "bytes": 85379,
+        "mode": "0644"
+      },
+      "exactTestCount": 1,
+      "skip": 0
+    },
+    {
+      "name": "next128-affected-runner-Clippy",
+      "role": "lint",
+      "status": "PASS",
+      "wallSeconds": 7.669566015014425,
+      "argv": [
+        "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+        "clippy",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "/workspaces/quoridor/Cargo.toml",
+        "-j1",
+        "--message-format=json-render-diagnostics",
+        "-p",
+        "quoridor-runner",
+        "--features",
+        "measurement",
+        "--all-targets",
+        "--no-deps",
+        "--",
+        "-Dwarnings"
+      ],
+      "actualReturn": {
+        "child": {
+          "pid": 1593759,
+          "start_ticks": "92726206",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "direct_child_reaped": true,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "remaining": [],
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed"
+      },
+      "fullLog": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-next128-affected-build-v1/operation/next128-affected-runner-Clippy.full.log",
+        "sha256": "5cd8bedc7d12ae90edd626d3175949e8df8ff7f01de4a3f791855fd448d4e01e",
+        "bytes": 86960,
+        "mode": "0644"
+      },
+      "exactTestCount": null,
+      "skip": null
+    },
+    {
+      "name": "next128-normal-release",
+      "role": "build",
+      "status": "PASS",
+      "wallSeconds": 76.25550224096514,
+      "argv": [
+        "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+        "build",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "/workspaces/quoridor/Cargo.toml",
+        "-j1",
+        "--message-format=json-render-diagnostics",
+        "-p",
+        "quoridor-runner",
+        "--features",
+        "measurement",
+        "--release",
+        "--bin",
+        "quoridor-runner"
+      ],
+      "actualReturn": {
+        "child": {
+          "pid": 1593859,
+          "start_ticks": "92726974",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "direct_child_reaped": true,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "remaining": [],
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed"
+      },
+      "fullLog": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-next128-affected-build-v1/operation/next128-normal-release.full.log",
+        "sha256": "36cf9312b7c422a82c354c02e40bf81657a8fc967af764e0cac4697bd0dd7ac1",
+        "bytes": 87820,
+        "mode": "0644"
+      },
+      "exactTestCount": null,
+      "skip": null
+    }
+  ],
+  "NEW_Rust": 2,
+  "NEW_Python_AlreadyPASS": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-next128-affected-build-v1/python-unit-qualification.json",
+    "bytes": 934,
+    "mode": "0644",
+    "sha256": "8fc4a4b59648ed05062f72107fc505a1f3be99b0c2ac91eff1e5859cc0399219"
+  },
+  "oldUnrelatedSuitesRepeated": 0,
+  "costs": {
+    "outerSeconds": 94.45019077404868,
+    "finalizerSeparateSeconds": 0.2811786689562723,
+    "nestedCommandSpansNotAdded": true
+  },
+  "actualFinalizer": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-next128-affected-build-v1/finalize-returned.json",
+    "bytes": 3770,
+    "mode": "0644",
+    "sha256": "895225a9a57c2e274f4fced2e89610eb6b0bd0164f8d971842b72ef8c93dd217"
+  },
+  "storagePoint": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-next128-affected-build-v1/operation/storage-usage.json",
+    "bytes": 996,
+    "mode": "0644",
+    "sha256": "04c03f87d7da77d6bad9e91be93c3e08ea0dec15f3076427e33002d8ff58821c"
+  },
+  "storagePointAllocatedB": 2385563648,
+  "storagePointNotGlobalPeakOrCredit": true,
+  "collectionSTOP": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-next128-affected-build-v1/completion-91a96510/collection-STOP.json",
+    "bytes": 1291,
+    "mode": "0644",
+    "sha256": "6e0a561fa46acf22f49029b17351784b14f4ce81898ea7a0524b4d3a30dd03bb"
+  },
+  "currentNativeBookEligibility": null,
+  "actualLoadedValueIdentities": null,
+  "AlphaGames": null,
+  "teacherFitParityModelForwardSearch": 0,
+  "scope": "Source/NEW2 Rust+NEW1 Python/Clippy/current normal measurement release only; no numerical/book/history/strength/default qualification"
+}
