@@ -1,0 +1,61 @@
+{
+  "status": "NEW3_MODEL_FREE_SAMPLER_LIFECYCLE_PASS_NOT_PERF_OR_SEARCH",
+  "issue": "quoridor-n96.1",
+  "packet": {
+    "path": "/workspaces/quoridor/.worktree/othello-core-n96/.artifacts/othello-full-search-n96/packed-normal-one-request-flat-sampling-source-v1/packet-refs.json",
+    "bytes": 7176,
+    "mode": "0644",
+    "sha256": "550c023cfadf33d3647c91350ba731f604ebfa4f6d04a7faabe7154bdd2fdc5c"
+  },
+  "staged": [
+    {
+      "path": "/workspaces/quoridor/games/othello/python/othello_arena/protocol.py",
+      "bytes": 8775,
+      "mode": "0644",
+      "sha256": "c3e2111a5f044fecb30902dcd9686de7c5cffb96c3dfa4aff3a6f30c1f62e0d6"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-normal-one-request-flat-sampling-software-v1/sample_one.py",
+      "bytes": 18526,
+      "mode": "0644",
+      "sha256": "3dfdf028a3b6f717c485da231439f7eae993a0c3512c7d2591e49dfedfefed81"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-normal-one-request-flat-sampling-software-v1/test_sampling_lifecycle.py",
+      "bytes": 3906,
+      "mode": "0644",
+      "sha256": "3cf54070d8a6044e4a5ee8798d52ee980ad43de28b6de42ae464ceac658626d0"
+    }
+  ],
+  "receipt": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-normal-one-request-flat-sampling-software-v1/software-returned.json",
+    "bytes": 4192,
+    "mode": "0644",
+    "sha256": "8d4e0cd5e1575571c85a6f1d35446a84868571b5f9732ec459d7430d591f9e08"
+  },
+  "log": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-normal-one-request-flat-sampling-software-v1/new-only-tests.log",
+    "bytes": 669,
+    "mode": "0644",
+    "sha256": "5712173e70c20ca3e5d7926c5f9a7c4efaa73892262f0afa193be8bc6d8b4aa8"
+  },
+  "selected": 3,
+  "passed": 3,
+  "ignored": 0,
+  "guardedWallSeconds": 0.06094372400548309,
+  "actualMaskPersist": [
+    "completed",
+    "completed"
+  ],
+  "actualCleanup": {
+    "directReaped": true,
+    "processAndHandlesClosed": true,
+    "remaining": []
+  },
+  "scope": "Default stdin behavior and opt-in redaction preserve byte count; exactly one fake choose bracketed enable/disable including failure; failed enable dispatches no fake choose. No real perf/native/model/input/weight body operations, no old tests replay.",
+  "toolKernelContainerSupport": null,
+  "samplingAdmission": null,
+  "authorPackagingFailureAndTail": "Original missing-import/returnedNULL and later zero-byte-lock assertion preserved in author final-stop-tail; no blanket mask/persist success.",
+  "holding": "One directed actual point after new3STOP; immutable source/tools/input/model byref and no global audit.",
+  "affectedAllocatedB": 57344
+}

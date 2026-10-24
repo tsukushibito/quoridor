@@ -18,9 +18,12 @@ class EngineError(RuntimeError):
 class Process:
     """Own one direct child; the outer execute guardian owns its descendants."""
 
-    def __init__(self, argv, *, cwd, log, cancelled=lambda: False, limit=65536):
+    def __init__(self, argv, *, cwd, log, cancelled=lambda: False, limit=65536, record_stdin=True):
         if not argv or len(argv) > 64 or any(len(str(x)) > 4096 for x in argv):
             raise ValueError("bounded argv required")
+        if type(record_stdin) is not bool:
+            raise ValueError("record_stdin must be a boolean")
+        self.record_stdin = record_stdin
         self.log = Path(log)
         self.cancelled = cancelled
         self.limit = limit
@@ -47,6 +50,8 @@ class Process:
 
     def _record(self, direction, data):
         self.bytes_seen += len(data)
+        if direction == "stdin" and not self.record_stdin:
+            data = f"<request body redacted; {len(data)} bytes>\n".encode()
         self.tail.extend(direction.encode() + b": " + data)
         del self.tail[: max(0, len(self.tail) - self.limit)]
 
