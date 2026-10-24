@@ -1,0 +1,134 @@
+{
+  "scope": "SAVED_NEW_CANDIDATE_128SEARCH_COLLECTION_ONLY",
+  "jobId": "e0156386-8a62-4f56-99af-3942bed5e2cd",
+  "collection": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/feature-update-packed-continuous-comparison-v1/completion-e0156386/collection.json",
+    "bytes": 24422,
+    "mode": "0644",
+    "sha256": "3343114b19d1e7b8f94b065ad867806c4a6f7536f0591954e98514279b019d0f"
+  },
+  "scalarResults": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/feature-update-packed-continuous-comparison-v1/completion-e0156386/slot-scalars.json",
+    "bytes": 87642,
+    "mode": "0644",
+    "sha256": "8a348923066c317db43b90939bcf956b20b8f7716a65a3e16d248951e37f033f"
+  },
+  "planned": 128,
+  "completed": 128,
+  "remainingUNRUN": 0,
+  "firstError": null,
+  "paired": {
+    "fixed": {
+      "pairs": 32,
+      "differences": {
+        "rawScore": 0,
+        "score": 0,
+        "move": 0,
+        "mustPass": 0,
+        "nodes": 0,
+        "completedDepth": 0,
+        "selectivity": 0,
+        "probability": 0,
+        "proven": 0,
+        "isEndSearch": 0
+      },
+      "savedRequestEquality": true
+    },
+    "timed": {
+      "pairs": 32,
+      "differences": {
+        "rawScore": 2,
+        "score": 2,
+        "move": 0,
+        "mustPass": 0,
+        "nodes": 16,
+        "completedDepth": 4,
+        "selectivity": 2,
+        "probability": 2,
+        "proven": 0,
+        "isEndSearch": 0
+      },
+      "savedRequestEquality": true
+    }
+  },
+  "aggregates": {
+    "fixed/baseline": {
+      "calls": 32,
+      "outerMeanMs": 0.7439859618898481,
+      "engineMeanMs": 0.630592625,
+      "outerTotalMs": 23.80755078047514,
+      "nodesTotal": 81058,
+      "completedDepthMedian": 6.0,
+      "childCPUdeltaSeconds": 0.03,
+      "stopped": {
+        "None": 32
+      },
+      "outerMaxMs": 1.816891017369926
+    },
+    "fixed/candidate": {
+      "calls": 32,
+      "outerMeanMs": 0.6883943387947511,
+      "engineMeanMs": 0.57843034375,
+      "outerTotalMs": 22.028618841432035,
+      "nodesTotal": 81058,
+      "completedDepthMedian": 6.0,
+      "childCPUdeltaSeconds": 0.009999999999999981,
+      "stopped": {
+        "None": 32
+      },
+      "outerMaxMs": 2.830252982676029
+    },
+    "timed/baseline": {
+      "calls": 32,
+      "outerMeanMs": 501.6454414726468,
+      "engineMeanMs": 501.451779375,
+      "outerTotalMs": 16052.654127124697,
+      "nodesTotal": 87118496,
+      "completedDepthMedian": 10.0,
+      "childCPUdeltaSeconds": 16.02,
+      "stopped": {
+        "timeout": 16,
+        "None": 16
+      },
+      "outerMaxMs": 1000.4656530218199
+    },
+    "timed/candidate": {
+      "calls": 32,
+      "outerMeanMs": 501.4319204019557,
+      "engineMeanMs": 501.244202375,
+      "outerTotalMs": 16045.821452862583,
+      "nodesTotal": 110078232,
+      "completedDepthMedian": 12.0,
+      "childCPUdeltaSeconds": 15.99,
+      "stopped": {
+        "timeout": 16,
+        "None": 16
+      },
+      "outerMaxMs": 1000.6531149847433
+    }
+  },
+  "costs": {
+    "outerJobSeconds": 33.605893081985414,
+    "nestedGuardSeconds": 33.352637197007425,
+    "nestedComparisonSeconds": 33.31075058504939,
+    "nestedNotAdded": true
+  },
+  "controls": {
+    "actualMask": "completed",
+    "actualPersist": "completed",
+    "diskMask": "pending",
+    "diskPersist": "attempted",
+    "directReaped": true,
+    "handlesClosed": true,
+    "remaining": [],
+    "TMPAbsent": true
+  },
+  "interpretation": "Fixed32 paired numeric outputs and reported node work match; wall differences are conditional to these four correlated practical families and this once-ABBA image/host condition. Timed differences are reported without isolated update cost, common-work throughput, last-started iteration, general speed/strength or depth-gap cause. Mixed early-end placements prevent interpreting the about500ms mean as a halved one-second budget.",
+  "limits": "Four correlated practical development families, not16independent samples. No restoration replyflag or fullTT/enginePID identity evidence. Same-time reported work changes are not same-work throughput/strength/default evidence. All previous FAILED/NULL/UNKNOWN/costs/pauses/seals/models retained.",
+  "transparency": {
+    "currentCollection": "Only scalar result fields/control metadata exported; inline request.state was compared transiently for exact pairing but not printed or mirrored. No separate roots/state/history file opened, no producer/geometry/model/RNG/Search replay.",
+    "historicalIncidents": "Prior fcbdd inline-state schema preview and context-ordering miss remain preserved in original result record; not relabeled unread or current failures.",
+    "context": "Actual SAME Sol6.1/high/Main/fullnever turn_context verified BEFORE first ordinary command of this completion turn."
+  },
+  "goalsComplete": false
+}
