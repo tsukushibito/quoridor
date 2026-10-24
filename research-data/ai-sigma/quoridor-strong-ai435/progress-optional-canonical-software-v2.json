@@ -1,0 +1,96 @@
+{
+  "status": "ONE_NEW_PROGRESS_NN0_CAUSAL_V2_PASS_PRIVATE_NOT_ADOPTED",
+  "issue": "quoridor-4lc.435.1",
+  "originalPacket": {
+    "path": "/workspaces/quoridor/.worktree/quoridor-strong435/.artifacts/quoridor-strong435/progress-lineage-causal-source-v1/packet.json",
+    "bytes": 6299,
+    "mode": "0644",
+    "sha256": "8baee69b2f1ebb4058fddecca651e1978059b487d97b6ff68ab2583f40b451ee"
+  },
+  "fixedPacket": {
+    "path": "/workspaces/quoridor/.worktree/quoridor-strong435/.artifacts/quoridor-strong435/progress-lineage-causal-source-v2/packet.json",
+    "bytes": 6093,
+    "mode": "0644",
+    "sha256": "3e828f265faf412c005bf6c9c0ea990962a83105ed012abaf11479f52d4d3c20"
+  },
+  "originalFailed": {
+    "log": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/progress-optional-canonical-new-only-software-v1/software.log",
+      "bytes": 2573,
+      "mode": "0644",
+      "sha256": "1d4d9ff54766b64d546f7cc89ae9b77a572fdcfa302ab0036ab2219929c0db5b"
+    },
+    "actualExceptionAndDisk": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/progress-optional-canonical-new-only-software-v1/software.returned.json",
+      "bytes": 5790,
+      "mode": "0644",
+      "sha256": "afa77ad3e76a3de6bd55458287c701b12428cc8295c5468a045896598f3068ac"
+    },
+    "definitionsExecuted": 1,
+    "positiveSubcaseFailures": 2,
+    "guardSeconds": 0.29397436196450144,
+    "nestedTestSeconds": 0.232,
+    "nestedNotAdded": true,
+    "actualReturnedNormal": false,
+    "actualExceptionReapAndHandles": true,
+    "parentGuardAssertion1Preserved": true,
+    "actualMask": "completed",
+    "actualPersist": "completed",
+    "diskMask": "pending",
+    "diskPersist": "attempted",
+    "knownIdentity": {
+      "identity": {
+        "pid": 3796479,
+        "start_ticks": "86062814",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "currentStartTicks": null,
+      "exactIdentityAbsentOrDifferent": true
+    }
+  },
+  "causalChange": "Existing arena_cohort_progress local boolean settled shadowed global settled(returned) guardian validator. V2 renames only3 local boolean uses to initial_settled; optional canonical_family get remains; global checker/assertions/fixture byteexact.",
+  "fixedSoftware": {
+    "log": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/progress-optional-canonical-new-only-software-v2/software.log",
+      "bytes": 310,
+      "mode": "0644",
+      "sha256": "6172da5fc187aba01cc835d4b28132fc3113fdc3ec0a523fb911a36ad8037df9"
+    },
+    "actualReturned": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/progress-optional-canonical-new-only-software-v2/software.returned.json",
+      "bytes": 3411,
+      "mode": "0644",
+      "sha256": "578a7a40802e045462c0eaaef364f9213361d911429f5ae9f780bb7931ef9cce"
+    },
+    "definitionsExecuted": 1,
+    "passed": 1,
+    "skipped": 0,
+    "subcases": 4,
+    "guardSeconds": 0.27978410304058343,
+    "directReaped": true,
+    "processAndHandlesClosed": true,
+    "remaining": [],
+    "knownIdentity": {
+      "identity": {
+        "pid": 3799640,
+        "start_ticks": "86093410",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "currentStartTicks": null,
+      "exactIdentityAbsentOrDifferent": true
+    },
+    "actualMask": "completed",
+    "actualPersist": "completed"
+  },
+  "totalActualDefinitionExecutions": 2,
+  "uniqueNewDefinitions": 1,
+  "oldSuiteExecutions": 0,
+  "fakeNotificationOnly": true,
+  "nativeModelInputRNGNumPyStatisticsGames": 0,
+  "currentMainLC": "7b6ce0eb unchanged, current analysis reader protected",
+  "productionCandidate": "bb440a11 private; optional identity NULL retained, required family_id/exact1lineage/census/completeness/returned-guardian checks preserved",
+  "TMPAbsent": true,
+  "adopted": false,
+  "next": "CAS/format/one affected qualified definition bytes already tested; adopt only after current saved-analysis reader actualSTOP. No old full suite or scientific replay; not O64/B gate.",
+  "allOriginalKeyErrorsFailureFeesAndUnknownFactsPreserved": true
+}
