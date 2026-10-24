@@ -1,0 +1,139 @@
+{
+  "scope": "SAVED_NEW_CANDIDATE_128SEARCH_COLLECTION_ONLY",
+  "jobId": "fcbdd196-c2c9-4385-81ba-e1ee188eb352",
+  "collection": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/midgame-vector-continuous-comparison-v1/completion-fcbdd196/collection.json",
+    "bytes": 24397,
+    "mode": "0644",
+    "sha256": "b724108cf44725b600cf01ac57391d562f999d6655be622d709186d7cacf2778"
+  },
+  "scalarResults": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/midgame-vector-continuous-comparison-v1/completion-fcbdd196/slot-scalars.json",
+    "bytes": 87597,
+    "mode": "0644",
+    "sha256": "b331bacd6a7899364c1ba11bc9aa3008568f611d0f0ab0bc1caf71baf9ae9867"
+  },
+  "planned": 128,
+  "completed": 128,
+  "remainingUNRUN": 0,
+  "firstError": null,
+  "paired": {
+    "fixed": {
+      "pairs": 32,
+      "differences": {
+        "rawScore": 0,
+        "score": 0,
+        "move": 0,
+        "mustPass": 0,
+        "nodes": 0,
+        "completedDepth": 0,
+        "selectivity": 0,
+        "probability": 0,
+        "proven": 0,
+        "isEndSearch": 0
+      },
+      "savedRequestEquality": true
+    },
+    "timed": {
+      "pairs": 32,
+      "differences": {
+        "rawScore": 0,
+        "score": 0,
+        "move": 0,
+        "mustPass": 0,
+        "nodes": 16,
+        "completedDepth": 0,
+        "selectivity": 0,
+        "probability": 0,
+        "proven": 0,
+        "isEndSearch": 0
+      },
+      "savedRequestEquality": true
+    }
+  },
+  "aggregates": {
+    "fixed/baseline": {
+      "calls": 32,
+      "outerMeanMs": 0.8348721203219611,
+      "engineMeanMs": 0.7331534375,
+      "outerTotalMs": 26.715907850302756,
+      "nodesTotal": 81058,
+      "completedDepthMedian": 6.0,
+      "childCPUdeltaSeconds": 0.04000000000000001,
+      "stopped": {
+        "None": 32
+      },
+      "outerMaxMs": 2.0008469000458717
+    },
+    "fixed/candidate": {
+      "calls": 32,
+      "outerMeanMs": 0.6886240989842918,
+      "engineMeanMs": 0.59041078125,
+      "outerTotalMs": 22.035971167497337,
+      "nodesTotal": 81058,
+      "completedDepthMedian": 6.0,
+      "childCPUdeltaSeconds": 0.020000000000000018,
+      "stopped": {
+        "None": 32
+      },
+      "outerMaxMs": 1.7523709684610367
+    },
+    "timed/baseline": {
+      "calls": 32,
+      "outerMeanMs": 501.7306707704847,
+      "engineMeanMs": 501.53584040625003,
+      "outerTotalMs": 16055.381464655511,
+      "nodesTotal": 72231410,
+      "completedDepthMedian": 10.0,
+      "childCPUdeltaSeconds": 15.96,
+      "stopped": {
+        "timeout": 16,
+        "None": 16
+      },
+      "outerMaxMs": 1000.4837838932872
+    },
+    "timed/candidate": {
+      "calls": 32,
+      "outerMeanMs": 501.92368387797615,
+      "engineMeanMs": 501.71913303125,
+      "outerTotalMs": 16061.557884095237,
+      "nodesTotal": 88886427,
+      "completedDepthMedian": 10.0,
+      "childCPUdeltaSeconds": 16.02,
+      "stopped": {
+        "timeout": 16,
+        "None": 16
+      },
+      "outerMaxMs": 1000.3326870501041
+    }
+  },
+  "costs": {
+    "outerJobSeconds": 33.70385908999015,
+    "nestedGuardSeconds": 33.43530310096685,
+    "nestedComparisonSeconds": 33.395270868903026,
+    "nestedNotAdded": true
+  },
+  "controls": {
+    "actualMask": "completed",
+    "actualPersist": "completed",
+    "diskMask": "pending",
+    "diskPersist": "attempted",
+    "directReaped": true,
+    "handlesClosed": true,
+    "remaining": [],
+    "TMPAbsent": true
+  },
+  "interpretation": "Fixed32 paired outputs and node work match; observed lower fixed mean time is conditional to these four correlated practical families and this once-ABBA image/host condition. Timed extra reported nodes do not change completed depth/selected outputs; no isolated kernel/update cost, last-started iteration, general speed/strength or depth-gap cause is established. Late-game solved placements make the 32-call mean about500ms; not a halving of a one-second budget.",
+  "limits": "Four correlated practical development families, not16independent samples. No restoration replyflag or fullTT/enginePID identity evidence. Same-time reported work changes are not same-work throughput/strength/default evidence. All previous FAILED/NULL/UNKNOWN/costs/pauses/seals/models retained.",
+  "transparency": {
+    "initialSchemaPreview": "Eight saved slot previews accidentally included inline request.state boards. Tool history preserved; no separate roots/state/history body opened, no reconstruction/selection/science use. All exported artifacts here are scalar-only and reference original result.",
+    "context": "Actual SAME Sol6.1/high/Main/fullnever turn_context verified after initial metadata/source locator command rather than before it. No numerical execution or issue mutation preceded verification. Ordering miss retained, not retroactively PASS."
+  },
+  "goalsComplete": false,
+  "nextDeliveries": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/continuation-20261024-vector-search-result-v1/accepted-next-deliveries.json",
+    "bytes": 3060,
+    "mode": "0644",
+    "sha256": "99401602ca12397bbd93263f7374cfbab8ec4aac62bb8258ddb142346b47253a"
+  }
+}

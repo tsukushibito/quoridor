@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-// Incremental scalar feature indices for the exact pinned Egaroucid geometry.
+// Incremental feature indices for the exact pinned Egaroucid geometry.
 
 use crate::{BLACK, RuleError, bitboard::Position};
 
@@ -7,6 +7,12 @@ use super::{
     N_FEATURES,
     geometry::{CELL_OFFSETS, CONTRIBUTIONS, FEATURE_CELLS},
 };
+
+#[cfg(all(target_arch = "x86_64", target_endian = "little"))]
+mod avx2;
+
+#[cfg(test)]
+mod tests;
 
 /// Two small absolute-color index views avoid weight duplication and make pass
 /// O(1). Initialization/reference recomputation visits the board; updates touch
@@ -89,6 +95,26 @@ impl FeatureState {
 
     // Digits here are always from the absolute black perspective.
     fn change(&mut self, cell: u8, from: i32, to: i32) {
+        #[cfg(all(target_arch = "x86_64", target_endian = "little"))]
+        if std::is_x86_feature_detected!("avx2") {
+            // SAFETY: CPU/OS capability is checked here. The private owner uses
+            // four exact unaligned 16-lane reads/writes per 64-element view.
+            unsafe {
+                avx2::change(
+                    &mut self.black_indices,
+                    &mut self.white_indices,
+                    cell,
+                    from,
+                    to,
+                );
+            }
+            return;
+        }
+        self.change_scalar(cell, from, to);
+    }
+
+    // Active portable/non-AVX2 owner; same sparse integer operations.
+    fn change_scalar(&mut self, cell: u8, from: i32, to: i32) {
         let white_from = if from == 2 { 2 } else { 1 - from };
         let white_to = if to == 2 { 2 } else { 1 - to };
         for c in &CONTRIBUTIONS[CELL_OFFSETS[cell as usize]..CELL_OFFSETS[cell as usize + 1]] {
