@@ -105,6 +105,8 @@ source/light prepはQuoridor435と並行する。soleMain/Git/index/sharedCargo�
 
 [次のfull-model browser33条件](../../../research-data/othello/strong-ai-n96/packed-full-browser33-source-condition-v1.json)はSAME A16/B21へsource/config準備を配分した。既存practical16の最初の保存packed固定passを基準に、現役FullSearchModel/moduleWorkerで16固定D6/D4・16通常1秒・取消1回以下、計33 Search attemptsを上限とする。取消は既存preCall権限失効・timer/listener除去・Worker terminate/recreateを使い、replacement Searchは0。現在portable wasm828883d3はbuilt/UNRUNで、実際に対応する生成webJS/dtsを束縛するまでは旧consumerと組にしない。必要なら現役web --no-opt buildを一度行うが、nativeの成功suite/ABBA/対局を再演しない。Pinned Playwright1.64.1/Chromium156.0.8078.4 revision1248のsandbox有効・local loopbackでのみ資格化し、weight公開・製品default・一般棋力へ広げない。現在は実browser/runtime/inputs/resources/admissionが未発行で、source準備とQuoridor通常入力を並行し、heavy区間だけ実STOPで直列化する。
 
+[固定browser33ソースと関連レビュー](../../../research-data/othello/strong-ai-n96/packed-browser33-fixed-source-and-review-issued-v1.json)を既存担当から回収し、SAMEレビュワー.30へWorkerの結果権限・取消・有限設定の変更境界だけを渡した。保存nativeのscoreKind/terminal/scoreUnitsは未報告なので実測一致を捏造せず、保存raw/score/proven/end/mustPassと、別名の現行source分類・合法性/status確認を区別する。B21の保存3127一度のscalar censusは64完了・2815選択+40強制pass、全選択1100ms以内を示したが、異種engineのnode定義や内部TT・損因を埋める証拠ではない。JSONの未使用state/responseが一時decodeされた事実も保持する。現browser実行はまだ未発行で、現在sourceに対応するwebJS/dts/Wasmの一組を通常release/no-optで束縛してから、元の33上限で資格化する。
+
 ## 既往の結果と退役境界
 
 以下は完了済みの履歴で、cloneの将来指示や再実行条件ではない。元RAW/モデル/入力/FAILED/UNKNOWN費とGit上の旧設計は保存する。
