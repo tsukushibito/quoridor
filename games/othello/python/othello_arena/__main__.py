@@ -85,6 +85,9 @@ def development_families(config):
         or any(o["protocol"] == "gtp" and o.get("engine") != "edax" for o in config["opponents"])
     ):
         raise ValueError("explicit normal external development condition required")
+    statistics = config["statisticsContract"]
+    if type(statistics["seed"]) is not int or statistics["seed"] < 0:
+        raise ValueError("explicit nonnegative shared bootstrap seed required")
     spec = config["candidate"]
     argv = spec["argv"]
     flags = [
@@ -344,7 +347,9 @@ def run(config, output):
             if any(item["gamesQualifiedForCI"] for item in comparisons.values()):
                 try:
                     shared = family_bootstrap_table(
-                        [f["id"] for f in families], output / "bootstrap-indices.i64le"
+                        [f["id"] for f in families],
+                        output / "bootstrap-indices.i64le",
+                        seed=config["statisticsContract"]["seed"],
                     )
                     comparisons = {
                         o["id"]: summarize_external(o, shared) for o in config["opponents"]

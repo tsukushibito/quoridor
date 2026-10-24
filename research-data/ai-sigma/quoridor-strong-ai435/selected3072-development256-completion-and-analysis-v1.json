@@ -1,0 +1,71 @@
+{
+  "status": "ORIGINAL_A256_COLLECTED_NORMAL_SAVED_ANALYSIS_ISSUED",
+  "issue": "quoridor-4lc.435",
+  "originalJob": "a003cfc2-72be-4577-9300-5de284539528",
+  "originalCollection": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected3072-development256-analysis-v1/original-completion-collection.json",
+    "bytes": 40025,
+    "mode": "0644",
+    "sha256": "cf786e2e35e86650ceeb85ee83123388c969ac11b06db5eb07944a90a4c22bd6"
+  },
+  "originalOperations": 16,
+  "publishedSlots": 256,
+  "scientificWDLOrCI": "Not yet collected; publication completeness is not outcome/strength qualification",
+  "originalOuterSeconds": 1086.586294530076,
+  "nestedLaneSeconds": 1085.719092396088,
+  "nestedNativeGuardSeconds": 1038.865219998057,
+  "nestedNotAdded": true,
+  "preservedProgressErrors": {
+    "count": 16,
+    "kind": "KeyError canonical_family in terminal-progress output",
+    "originalSequence": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected3072-development256-entry-v1/lane-0/sequence/result.json",
+      "bytes": 17505,
+      "mode": "0644",
+      "sha256": "f2c126728d6e2ce7da781565fcd26fee21eae0f1722c6334195390867abcab8c"
+    },
+    "notErasedOrPromotedToScientificSuccess": true
+  },
+  "analysis": {
+    "jobId": "ec8e768d-fa69-43c9-85d8-2aba5e0269d4",
+    "submission": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected3072-development256-analysis-v1/submission.json",
+      "bytes": 1892,
+      "mode": "0644",
+      "sha256": "24a264f284d8f8b51969f7dc6ff244fec21014c31890a9f1022c74dae353a111"
+    },
+    "prepared": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected3072-development256-analysis-v1/binding-v2/prepared.json",
+      "bytes": 2176,
+      "mode": "0644",
+      "sha256": "99ded347036b0d0838afc8588091b0a4ab734f7849acf201977b8925310db738"
+    },
+    "config": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected3072-development256-analysis-v1/binding-v2/analysis-config.json",
+      "bytes": 6713,
+      "mode": "0644",
+      "sha256": "9ca924ffdd58c6fbb46ba098dd5dc85a477b06861312a18bd3e3d37ba4278f1f"
+    },
+    "intent": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected3072-development256-analysis-v1/binding-v2/RUN.json",
+      "bytes": 4760,
+      "mode": "0644",
+      "sha256": "113a35796d5c1d56430a40ba99a2ded93503c0de8877a8034408a320430add9c"
+    },
+    "planned": 256,
+    "contrasts": 2,
+    "families": 64,
+    "seed": 4352026102404,
+    "resamples": 10000,
+    "linearCentralInterval": "97.5%",
+    "quantiles": [0.0125, 0.9875],
+    "anyIncompletePairWithholdsBothIntervals": true,
+    "resources": "CPU12/G18/lib1/G0/family2GiBincl64MiBcontroller/host4;command240s/parent300s;NEWwhole64MiB/nooldunusedcredit",
+    "runtimeRead": "Starting submission only; await original completion event"
+  },
+  "preparationCorrection": "Unsubmitted V1 inherited stale intent/admission fields. Detected before submit/statistics; V1 retained. Formatted V2 removes inherited fields and passes canonical digest and normal arena_analysis_check. No science rerun.",
+  "oldModelsTablesCIsOrNativeReplay": 0,
+  "otherReady": "Oseed source exactCAS adopted/NEW2fakePASS retained; new16 generation normal entry prepared awaiting analysis actualSTOP. B6posts remain unadopted until this saved-readerSTOP, not waiting wholegoal.",
+  "goalsComplete": false,
+  "preserved": "All original costs/FAILEDNULLUNKNOWN,323/342.17USERPAUSE,seals,newE,oldfits96,defaults/models,foreign/decimal50GB"
+}

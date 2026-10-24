@@ -101,7 +101,7 @@ source/light prepはQuoridor435と並行する。soleMain/Git/index/sharedCargo�
 
 [次条件](../../../research-data/othello/strong-ai-n96/packed-new-development64-condition-v1.json)では、有限ABBAを終えたpackedbd8ffc91を研究用候補として固定する。同じABBAや旧scalar/本家の成功検査は再演せず、既存担当が新development16生成と通常64局の設定を準備する。seeds2026102403001..3016、mandatory pass後16placements、各128actions上限、全16完成・衝突/lineage資格を対局前に凍結し、deficit時は補充しない。固定Console7.8.1/Edax4.7へ各両色32局、同1秒+100ms transport・1thread・activeTT上限32MiBとする。新sharedPCG64 seed2026102403064/10000×16/linear95を保存解析で一度だけ使い、相手ごとに不完全ならその区間はNULLとする。別bookの旧12勝2分18敗との差を対応効果、二つの95%記述区間を同時優越検定とは扱わない。
 
-[追加除外identity](../../../research-data/othello/strong-ai-n96/native64-recorded-identity-exclusion-v1.json)は旧native64-prospectiveの保存済み144訪問点と16 endpoint記録を現typed入口へ結ぶ。canonical再計算や旧対局再演は行わず、endpoints-only/historyUNKNOWNを保持する。practical197の被覆は既存四familyの開始点系譜であり、別native64のf01開始は追加packageへ属する。後続対局・内部Search・child局面の全identity被覆はUNKNOWNのまま。現在はsource/config準備と依存配送のみで、新生成/64局/統計は未発行。実行中Quoridor A256の元runtimeは変更・pollせず、重い工程は実STOP後の通常資源窓で進める。製品default・モデル・棋力認定は変更しない。
+[追加除外identity](../../../research-data/othello/strong-ai-n96/native64-recorded-identity-exclusion-v1.json)は旧native64-prospectiveの保存済み144訪問点と16 endpoint記録を現typed入口へ結ぶ。canonical再計算や旧対局再演は行わず、endpoints-only/historyUNKNOWNを保持する。practical197の被覆は既存四familyの開始点系譜であり、別native64のf01開始は追加packageへ属する。後続対局・内部Search・child局面の全identity被覆はUNKNOWNのまま。[正常入口の準備](../../../research-data/othello/strong-ai-n96/packed-development64-normal-preparation-v1.json)で、seedを明示伝達する既存二ownerとNEW回帰検査をMainへCAS採用し、fake-only二検査の実2PASSを保持した。既存rules550b正本の限定対応と新生成の資源・出力を束縛済みだが、新生成/64局/その統計は未発行。Quoridor A256の元完了を回収し、その通常保存解析readerの実STOP後に重い生成/buildへ進める。製品default・モデル・棋力認定は変更しない。
 
 ## 既往の結果と退役境界
 

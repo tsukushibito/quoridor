@@ -281,7 +281,7 @@ def comparison_summary(
 ):
     """CI uses ALL original32 games/16 family means, never a completed-pair subset.
 
-    External development uses the explicit shared PCG64 table (seed2026102302064)
+    External development uses one explicitly seeded shared PCG64 table
     and NumPy linear quantiles. Legacy same-native evidence retains its own method:
     Python random.Random (MT19937), seed2026102203;10000 independent resamples
     of16 family means with replacement via randrange(16). Percentiles use linear
@@ -416,21 +416,23 @@ def comparison_summary(
     return summary
 
 
-def family_bootstrap_table(family_ids, path):
+def family_bootstrap_table(family_ids, path, *, seed=2026102302064):
     """One future-runtime PCG64 table shared by both external opponents."""
+    if type(seed) is not int or seed < 0:
+        raise ValueError("shared bootstrap seed must be an explicit nonnegative integer")
     import numpy as np
 
     if len(family_ids) != 16 or len(set(family_ids)) != 16:
         raise ValueError("shared bootstrap requires the original16 ordered family IDs")
     indices = (
-        np.random.Generator(np.random.PCG64(2026102302064))
+        np.random.Generator(np.random.PCG64(seed))
         .integers(0, 16, size=(10000, 16), dtype=np.int64)
         .astype("<i8", copy=False)
     )
     raw = indices.tobytes(order="C")
     path.write_bytes(raw)
     metadata = {
-        "seed": 2026102302064,
+        "seed": seed,
         "rng": "NumPy Generator(PCG64)",
         "numpyVersion": np.__version__,
         "indexShape": list(indices.shape),
@@ -455,7 +457,8 @@ def _shared_family_interval(means, family_ids, shared):
     metadata, indices = shared["metadata"], shared["indices"]
     if (
         metadata["familyOrder"] != family_ids
-        or metadata["seed"] != 2026102302064
+        or type(metadata["seed"]) is not int
+        or metadata["seed"] < 0
         or metadata["indexShape"] != [10000, 16]
         or metadata["indexDtype"] != "<i8"
         or tuple(indices.shape) != (10000, 16)
