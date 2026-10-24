@@ -1,0 +1,82 @@
+{
+  "scope": "SOURCE_PREPARATION_AND_RELATED_UNSAFE_REVIEW_DISPATCH_ONLY",
+  "candidatePacket": {
+    "path": "/workspaces/quoridor/.worktree/othello-core-n96/.artifacts/othello-full-search-n96/midgame-owner-vector-source-v1/source-packet.json",
+    "bytes": 5654,
+    "mode": "0644",
+    "sha256": "06692c51652f7e062db3899954c068be982b36b82b09f0d3046fb2d46024612a"
+  },
+  "candidateStop": {
+    "path": "/workspaces/quoridor/.worktree/othello-core-n96/.artifacts/othello-full-search-n96/midgame-owner-vector-source-v1/source-stop.json",
+    "bytes": 11537,
+    "mode": "0644",
+    "sha256": "bb663133574e30a60f52709cd24bc4e3db82eef23840763f3b0d5ce110ce954b"
+  },
+  "postimages": [
+    {
+      "path": "/workspaces/quoridor/.worktree/othello-core-n96/.artifacts/othello-full-search-n96/midgame-owner-vector-source-v1/postimages/full_eval/mod.rs",
+      "bytes": 9526,
+      "mode": "0644",
+      "sha256": "0e72e4e0623c8457c8f3625a731408f84be2452499b4a977c16010c72c83374d"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/othello-core-n96/.artifacts/othello-full-search-n96/midgame-owner-vector-source-v1/postimages/full_eval/avx2.rs",
+      "bytes": 4537,
+      "mode": "0644",
+      "sha256": "ea80bc33582384e33a27ef973b1ce46f5fb10e63add42175860ad9bd314d88cb"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/othello-core-n96/.artifacts/othello-full-search-n96/midgame-owner-vector-source-v1/postimages/full_eval/tests.rs",
+      "bytes": 15809,
+      "mode": "0644",
+      "sha256": "f28b970ebf8a8054acf9e766556712989d06ba59e118da161704aa479702a2c1"
+    }
+  ],
+  "reviewIssue": "quoridor-n96.1.27",
+  "held": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/midgame-vector-boundary-review-v1/held-source.json",
+    "bytes": 835,
+    "mode": "0644",
+    "sha256": "2a4c46c486667a3d7f6d5871d809865a6b8ab8c645b934c06806731e2d68989e"
+  },
+  "dispatch": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/midgame-vector-boundary-review-v1/dispatch.json",
+    "bytes": 157,
+    "mode": "0644",
+    "sha256": "cb616e8a79d2eadb53eab61ab03729b4c6a4754972179dba6d2227c7c23bd620"
+  },
+  "reviewStatus": "IN_PROGRESS_NO_CONCLUSION_OR_ADOPTION",
+  "comparisonPacket": {
+    "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-selective-reference-n96/rust-candidate-continuous-entry-source-v1/packet-refs.json",
+    "bytes": 3494,
+    "mode": "0644",
+    "sha256": "4f479e9e87dd80a4485a84f707ebf17d7915d97264a17f8892f83fe416a15fd2"
+  },
+  "comparator": {
+    "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-selective-reference-n96/rust-candidate-continuous-entry-source-v1/compare_continuous16.post.py",
+    "bytes": 17820,
+    "mode": "0644",
+    "sha256": "5e177630de400223050835c7c7b67bab8a0d1dc892d3b800ae4721a3057f954b"
+  },
+  "comparisonConfig": {
+    "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-selective-reference-n96/rust-candidate-continuous-entry-source-v1/comparison-config.unrun.json",
+    "bytes": 15662,
+    "mode": "0644",
+    "sha256": "12ea4cf6885005820e53349b314b0e2f9fdd1af6d37d7a2453a225cad8b79656"
+  },
+  "comparisonTests": "Four NEW fake definitions UNRUN; legacy original owner/finally protected by author proofs, no target runtime",
+  "normalRestoration": "Normal FullSearchResult has no restoration reply flag: observedNULL, never silentPASS; normal error firstSTOP",
+  "future": {
+    "maximumSearchCalls": 128,
+    "profiles": [
+      "fixedD6/four-emptyD4/statisticalMPCoff/exactcutsretained",
+      "timed1000ms+100mstransport/maxDepth60"
+    ],
+    "families": 4,
+    "roots": 16,
+    "order": "A-B-B-A"
+  },
+  "candidateImage": null,
+  "runtimeAdmission": null,
+  "limits": "No sourceCLEAR/performance/cure/unsafe/numerical grant from sourceauthor; current evaluator/weights/layout/API/FeatureState/Search/TT/clock unchanged outside private candidate; future new-onlysoftware and baseline/candidate search separately bound"
+}

@@ -1,0 +1,229 @@
+{
+  "scope": "DIRECT_JOINT4096_OPERATIONAL_FINITE_CURVE_STOP_NOT_STRENGTH",
+  "collection": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/expanded-coverage128-direct-joint4096-v1/completion-9c8526f5/collection.json",
+    "bytes": 12901,
+    "mode": "0644",
+    "sha256": "d8a3f67f8602b592c163c16edbd2b185c664fdf3654fc53488e47bd033490d10"
+  },
+  "accepted": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/expanded-coverage128-direct-joint4096-v1/completion-9c8526f5/accepted-selected3072-export.json",
+    "bytes": 8212,
+    "mode": "0644",
+    "sha256": "a59a6e86b9ad0c850d84a7f200f5282e5008dc420e9057c47dbb97b74d633d51"
+  },
+  "counts": {
+    "updates": 4096,
+    "trainingDraws": 1048576,
+    "logicalRows": 1057024,
+    "fullSelectors": 33,
+    "fullSelectorRows": 8448,
+    "canonicalT": 96,
+    "selectionV": 32,
+    "H": 0,
+    "nativeIdentityConstructors": 123,
+    "nativeIdentityHeadRows": 0
+  },
+  "selectedStep": 3072,
+  "initial": {
+    "step": 0,
+    "training_seen": 0,
+    "samples": 256,
+    "lr": [3e-5],
+    "joint_overfit_observations": 0,
+    "train": {
+      "target_mse": 0.11269199645724193,
+      "target_mae": 0.26336226216881187,
+      "decisive_sign_accuracy": 0.8072916666666666,
+      "policy_cross_entropy": 4.670874997973442,
+      "teacher_entropy": 1.0467410891627271,
+      "policy_kl": 3.6241339072585106,
+      "policy_top1": 0.0,
+      "policy_top3": 0.0,
+      "joint_objective": 0.5797794962545861,
+      "rows": 96.0,
+      "input_classes": 96,
+      "actual_logical_rows": 192
+    },
+    "validation": {
+      "target_mse": 0.15375550792258635,
+      "target_mae": 0.2909122134442441,
+      "decisive_sign_accuracy": 0.875,
+      "policy_cross_entropy": 4.670250944793224,
+      "teacher_entropy": 1.0551208420656621,
+      "policy_kl": 3.6151301115751266,
+      "policy_top1": 0.0,
+      "policy_top3": 0.0,
+      "joint_objective": 0.6207806024019088,
+      "rows": 32.0,
+      "input_classes": 32,
+      "actual_logical_rows": 64
+    }
+  },
+  "selected": {
+    "step": 3072,
+    "training_seen": 786432,
+    "samples": 792832,
+    "lr": [3e-5],
+    "joint_overfit_observations": 0,
+    "train": {
+      "target_mse": 0.00020722637450606185,
+      "target_mae": 0.004124549969371098,
+      "decisive_sign_accuracy": 1.0,
+      "policy_cross_entropy": 1.4263035263866186,
+      "teacher_entropy": 1.0467410891627271,
+      "policy_kl": 0.37956243691345054,
+      "policy_top1": 0.796875,
+      "policy_top3": 0.9895833333333334,
+      "joint_objective": 0.14283757901316793,
+      "rows": 96.0,
+      "input_classes": 96,
+      "actual_logical_rows": 192
+    },
+    "validation": {
+      "target_mse": 0.2358105345450374,
+      "target_mae": 0.3627301089290995,
+      "decisive_sign_accuracy": 0.75,
+      "policy_cross_entropy": 1.6455216510221362,
+      "teacher_entropy": 1.0551208420656621,
+      "policy_kl": 0.5904008112847805,
+      "policy_top1": 0.640625,
+      "policy_top3": 0.96875,
+      "joint_objective": 0.400362699647251,
+      "rows": 32.0,
+      "input_classes": 32,
+      "actual_logical_rows": 64
+    }
+  },
+  "last": {
+    "step": 4096,
+    "training_seen": 1048576,
+    "samples": 1057024,
+    "lr": [1e-6],
+    "joint_overfit_observations": 0,
+    "train": {
+      "target_mse": 0.00018031548869137923,
+      "target_mae": 0.00318062700292406,
+      "decisive_sign_accuracy": 1.0,
+      "policy_cross_entropy": 1.4159393093238275,
+      "teacher_entropy": 1.0467410891627271,
+      "policy_kl": 0.36919821985065937,
+      "policy_top1": 0.8072916666666666,
+      "policy_top3": 0.9895833333333334,
+      "joint_objective": 0.14177424642107414,
+      "rows": 96.0,
+      "input_classes": 96,
+      "actual_logical_rows": 192
+    },
+    "validation": {
+      "target_mse": 0.23712615515733956,
+      "target_mae": 0.36460852036543656,
+      "decisive_sign_accuracy": 0.75,
+      "policy_cross_entropy": 1.6406729500740767,
+      "teacher_entropy": 1.0551208420656621,
+      "policy_kl": 0.5855521084740758,
+      "policy_top1": 0.65625,
+      "policy_top3": 0.96875,
+      "joint_objective": 0.4011934501647473,
+      "rows": 32.0,
+      "input_classes": 32,
+      "actual_logical_rows": 64
+    }
+  },
+  "actualLR": {
+    "segments": [
+      {
+        "firstUpdate": 1,
+        "lastUpdate": 3200,
+        "updates": 3200,
+        "rows": 819200,
+        "lr": [3e-5]
+      },
+      {
+        "firstUpdate": 3201,
+        "lastUpdate": 3328,
+        "updates": 128,
+        "rows": 32768,
+        "lr": [1.5e-5]
+      },
+      {
+        "firstUpdate": 3329,
+        "lastUpdate": 3456,
+        "updates": 128,
+        "rows": 32768,
+        "lr": [7.5e-6]
+      },
+      {
+        "firstUpdate": 3457,
+        "lastUpdate": 3584,
+        "updates": 128,
+        "rows": 32768,
+        "lr": [3.75e-6]
+      },
+      {
+        "firstUpdate": 3585,
+        "lastUpdate": 3712,
+        "updates": 128,
+        "rows": 32768,
+        "lr": [1.875e-6]
+      },
+      {
+        "firstUpdate": 3713,
+        "lastUpdate": 4096,
+        "updates": 384,
+        "rows": 98304,
+        "lr": [1e-6]
+      }
+    ],
+    "floorUpdates": 384,
+    "floorDraws": 98304,
+    "firstFloorUpdate": 3713
+  },
+  "reportedStop": {
+    "initial_Tpanel_mse": 0.11269199645724193,
+    "minimum_observed_Tpanel_mse": 0.00018031548869137923,
+    "parameters_changed": true,
+    "joint_overfit_observations": 0,
+    "joint_previous_observation": {
+      "validation": 0.4011934501647473,
+      "train": 0.14177424642107414,
+      "draws": 1048576
+    },
+    "adequate_learning": true,
+    "horizon": "EARLY_STOPPED",
+    "minimum_completed_draws": 131072,
+    "maximum_draws": 1048576,
+    "completed_draws": 1048576,
+    "stopping_significant_reference": 0.400362699647251,
+    "significant_stale_checkpoints": 8,
+    "endpoint_actual_minimum_full_precision_V_MSE": 0.400362699647251,
+    "sufficiency": true,
+    "claim": "operational finite curve criterion, never global objective optimum"
+  },
+  "stopInterpretation": "EARLY_STOPPED with8significant-stale fullselectors at the same4096update cap endpoint; operational finite-curve sufficiency reportedtrue is not globalconvergence/generalization/teacherquality/strength/default sufficiency. No overfit criterion triggered; actualT/V gap still reported.",
+  "time": {
+    "outerSeconds": 23.702558521996252,
+    "commandSeconds": {
+      "joint-prepare": 0.1595175430411473,
+      "joint-fit": 22.908297065994702
+    },
+    "trainerFreezeSeconds": 22.389884993084706,
+    "trainerStatusSeconds": 22.410956239094958,
+    "phaseSecondsInclusive": {
+      "initialization": 1.3295718040317297,
+      "transfer": 2.4360427770297974,
+      "synchronization": 0.0,
+      "inference": 3.856663132784888,
+      "update": 6.311180574586615,
+      "logging": 0.6499853068962693,
+      "full_selector": 2.442205017548986,
+      "fixed_diagnostic": 0.0,
+      "export": 2.3341408919077367
+    },
+    "nestedNotAdded": true
+  },
+  "limits": "Same repeatedly exposedT96/V32; no oldV192/original293 denominator alias, no heldout/generalization/strength/teacherquality orpure-duration-only cause. No model/policyarray inference, NumPy/RNG/bootstrap/fit replay in collection; savedaggregate/scalarLR parsing and bytecustody only. All oldfees/failures/pauses/seals/defaults/models/50GB held.",
+  "exportsChanged": true,
+  "newTupleParity": null,
+  "goalsComplete": false
+}

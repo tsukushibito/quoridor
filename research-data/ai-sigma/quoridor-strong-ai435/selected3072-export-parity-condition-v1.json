@@ -1,0 +1,72 @@
+{
+  "scope": "NEW_CHANGED_SELECTED3072_FORWARD_ONLY_ON_RETAINED16CASES",
+  "job": {
+    "schema_version": 1,
+    "job_id": "8a6de9d1-161f-4cc9-9b8f-983d09663617",
+    "issue": "quoridor-4lc.435",
+    "thread_id": "01a1376a-bfd3-75d2-bd64-61e9416b3b13",
+    "phase": "starting",
+    "created_at": "2026-10-24T00:18:22.826106+00:00",
+    "config_sha256": "c24454200feaec4fca78f93db0fa79555245c364525c2e5920aae466b697e5e8",
+    "supervisor": {
+      "pid": 3682172,
+      "start_ticks": "84942966",
+      "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+    },
+    "launch": {
+      "job_id": "8a6de9d1-161f-4cc9-9b8f-983d09663617",
+      "config_sha256": "c24454200feaec4fca78f93db0fa79555245c364525c2e5920aae466b697e5e8",
+      "owner": {
+        "pid": 3682127,
+        "start_ticks": "84942731",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "launcher": {
+        "pid": 3682160,
+        "start_ticks": "84942961",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "supervisor": {
+        "pid": 3682172,
+        "start_ticks": "84942966",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      }
+    },
+    "updated_at": "2026-10-24T00:18:22.996873+00:00"
+  },
+  "entry": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected3072-export-parity-v1/entry-binding.json",
+    "bytes": 2619,
+    "mode": "0644",
+    "sha256": "a2618443647473ab3a39f8092a6c4a3b2d1b238d21375f2357f5853235323ff9"
+  },
+  "resources": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected3072-export-parity-v1/resources.json",
+    "bytes": 2008,
+    "mode": "0644",
+    "sha256": "c7f0c11c3ade1c55ccd044d1633cf5db7905f597eaedb014c8e2d9e1687b222f"
+  },
+  "nativeInput": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected3072-export-parity-v1/native-input.json",
+    "bytes": 2943,
+    "mode": "0644",
+    "sha256": "fb7a6e5f9f5b4ea8af480495a3db78e03909a2b4635482df70f6dd4013532997"
+  },
+  "identityProjection": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected3072-export-parity-v1/selected3072-identity-projection.json",
+    "bytes": 2568,
+    "mode": "0644",
+    "sha256": "664c26dca66622ccc9964e315f1a817290ac2fb0febc0ccb7cabe39de94081c1"
+  },
+  "counts": {
+    "native": 32,
+    "python": 32,
+    "wasm": 32,
+    "total": 96,
+    "H": 0
+  },
+  "caseReuse": "Exact retained selected24 first8T+first8V frozen contexts by reference, original plus trueLR; no case reselection, copied histories or old tuple result replay",
+  "result": "UNREAD_PENDING_ORIGINAL_COMPLETION_EVENT",
+  "limits": "Existing normal three selectors and unchanged1e-5+1e-4abs tolerance; source/model/ABI finite compatibility only, no strength/default/fit sufficiency grant",
+  "noRetry": true
+}
