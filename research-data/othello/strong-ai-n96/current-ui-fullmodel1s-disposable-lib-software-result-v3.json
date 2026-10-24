@@ -1,0 +1,388 @@
+{
+  "status": "STANDALONE_REAL_GENERATED_TYPES_PASS_WEB_HOST_OPTIONAL_PROPERTY_FAILED",
+  "jobId": "425dd4c8-129a-4609-928c-450a0f377631",
+  "outerWallSecondsOnce": 1.2267990119289607,
+  "nestedClocksNotAdded": true,
+  "commands": [
+    {
+      "name": "bridge-real-generated-declarations",
+      "normalReturn": {
+        "command": [
+          "/home/vscode/.local/opt/node/v24.22.0/bin/node",
+          "node_modules/typescript/bin/tsc",
+          "--noEmit",
+          "--strict",
+          "--target",
+          "ES2022",
+          "--module",
+          "ESNext",
+          "--moduleResolution",
+          "Bundler",
+          "--lib",
+          "ES2022,DOM,ESNext.Disposable",
+          "--types",
+          "vite/client",
+          "games/othello/bridge/src/index.ts"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 4007115,
+          "start_ticks": "88167615",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "probe": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "probe",
+        "log_bytes_seen": 0,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 0,
+        "wall_seconds": 0.2572487430879846,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "actualReturn": {
+        "command": [
+          "/home/vscode/.local/opt/node/v24.22.0/bin/node",
+          "node_modules/typescript/bin/tsc",
+          "--noEmit",
+          "--strict",
+          "--target",
+          "ES2022",
+          "--module",
+          "ESNext",
+          "--moduleResolution",
+          "Bundler",
+          "--lib",
+          "ES2022,DOM,ESNext.Disposable",
+          "--types",
+          "vite/client",
+          "games/othello/bridge/src/index.ts"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 4007115,
+          "start_ticks": "88167615",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "probe": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "probe",
+        "log_bytes_seen": 0,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 0,
+        "wall_seconds": 0.2572487430879846,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "disk": {
+        "command": [
+          "/home/vscode/.local/opt/node/v24.22.0/bin/node",
+          "node_modules/typescript/bin/tsc",
+          "--noEmit",
+          "--strict",
+          "--target",
+          "ES2022",
+          "--module",
+          "ESNext",
+          "--moduleResolution",
+          "Bundler",
+          "--lib",
+          "ES2022,DOM,ESNext.Disposable",
+          "--types",
+          "vite/client",
+          "games/othello/bridge/src/index.ts"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 4007115,
+          "start_ticks": "88167615",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "probe": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "probe",
+        "log_bytes_seen": 0,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 0,
+        "wall_seconds": 0.2572487430879846,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted",
+        "finalization_errors": []
+      },
+      "receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel1s-affected-software-v1/disposable-lib-software-v3/bridge-real-generated-declarations.returned.json",
+        "bytes": 3350,
+        "mode": "0644",
+        "sha256": "e2a75e2dc3db76df449ff97e26464a58dd5654733174d2964799a2e3af179a36"
+      },
+      "log": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel1s-affected-software-v1/disposable-lib-software-v3/bridge-real-generated-declarations.log",
+        "bytes": 0,
+        "mode": "0644",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "sameIdentityPresent": false
+    },
+    {
+      "name": "affected-web-types",
+      "normalReturn": null,
+      "actualReturn": {
+        "command": [
+          "/home/vscode/.local/opt/node/v24.22.0/bin/node",
+          "node_modules/typescript/bin/tsc",
+          "--noEmit",
+          "-p",
+          "apps/web/tsconfig.json"
+        ],
+        "status": "failed",
+        "child": {
+          "pid": 4007127,
+          "start_ticks": "88167642",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "probe": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "probe",
+        "log_bytes_seen": 522,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "error": "cycle child failed: ['/home/vscode/.local/opt/node/v24.22.0/bin/node', 'node_modules/typescript/bin/tsc', '--noEmit', '-p', 'apps/web/tsconfig.json']: 1",
+        "reason": "CycleStopped",
+        "exit_code": 1,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 522,
+        "wall_seconds": 0.5600667480612174,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": {
+          "type": "CycleStopped",
+          "message": "cycle child failed: ['/home/vscode/.local/opt/node/v24.22.0/bin/node', 'node_modules/typescript/bin/tsc', '--noEmit', '-p', 'apps/web/tsconfig.json']: 1"
+        },
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "disk": {
+        "command": [
+          "/home/vscode/.local/opt/node/v24.22.0/bin/node",
+          "node_modules/typescript/bin/tsc",
+          "--noEmit",
+          "-p",
+          "apps/web/tsconfig.json"
+        ],
+        "status": "failed",
+        "child": {
+          "pid": 4007127,
+          "start_ticks": "88167642",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "probe": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "probe",
+        "log_bytes_seen": 522,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "error": "cycle child failed: ['/home/vscode/.local/opt/node/v24.22.0/bin/node', 'node_modules/typescript/bin/tsc', '--noEmit', '-p', 'apps/web/tsconfig.json']: 1",
+        "reason": "CycleStopped",
+        "exit_code": 1,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 522,
+        "wall_seconds": 0.5600667480612174,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": {
+          "type": "CycleStopped",
+          "message": "cycle child failed: ['/home/vscode/.local/opt/node/v24.22.0/bin/node', 'node_modules/typescript/bin/tsc', '--noEmit', '-p', 'apps/web/tsconfig.json']: 1"
+        },
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted",
+        "finalization_errors": []
+      },
+      "receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel1s-affected-software-v1/disposable-lib-software-v3/affected-web-types.returned.json",
+        "bytes": 4091,
+        "mode": "0644",
+        "sha256": "241849d24213afe8b8f95baa6b4376e0119b8a7c8183c4ab6e761f1c0555b35b"
+      },
+      "log": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel1s-affected-software-v1/disposable-lib-software-v3/affected-web-types.log",
+        "bytes": 522,
+        "mode": "0644",
+        "sha256": "cc6df01484c6ca9fdc0b79bd79e722f9a58c9a4c20e0489e1ff344295ffb5362"
+      },
+      "sameIdentityPresent": false
+    }
+  ],
+  "remainingUNRUN": [
+    "one-current-app-bundle"
+  ],
+  "previousSuccessfulTestsClippyWasm": "held byref, not replayed",
+  "productCause": "host passes model: undefined to exact optional model?: FullModelSpec; runtime/data/model changes not inferred",
+  "modelSearchBrowser": 0,
+  "TMPAbsent": true,
+  "fullFeesContinuousPeak": null,
+  "actualSourceContext": "Sol6.1/high/Main/danger-full-access/never turn01a16d33 before ordinary commands",
+  "collectorPrecommandFailure": "One functions JavaScript SyntaxError occurred before any command/body/source write. Corrected orchestration uses this formatted standalone helper; no target retry.",
+  "sourceRepair": {
+    "packet": "f194b1d5f9a951b69d8e9599edcac3cf5e6f0f39b47bb3148355a4d4b970e930",
+    "actualHostAfterCAS": "4c32ca8fe3ab0e4be1da5b5ec44206dc9fdbbc71dc6f6bc7f63b1157388f30ef",
+    "semantics": "Only model undefined omitted, supplied spec reference preserved",
+    "authorExecution": "UNRUN",
+    "RootSoftware": "separate pending job"
+  }
+}
