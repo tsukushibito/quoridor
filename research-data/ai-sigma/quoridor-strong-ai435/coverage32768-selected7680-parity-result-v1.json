@@ -1,0 +1,190 @@
+{
+  "schema": "quoridor-selected-joint-forward-parity-result-v1",
+  "job": "de5e05ef-90f2-4620-941f-76aff9a66e28",
+  "status": "QUALIFIED_NEW_SELECTED7680_EXPORT_FORWARD_PARITY_ONLY",
+  "selectedStep": 7680,
+  "fitResult": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/quoridor-strong-ai435/coverage32768-selected7680-fit-result-v1.json",
+    "bytes": 11608,
+    "mode": "0644",
+    "sha256": "181c3166f37bf784fe534aa38cecf1239066e823c1e7fa6ae4205551914f32fc"
+  },
+  "nativeIdentities": {
+    "shared": "fab69d6de32ec2e2de703a089fef1a43adfb995246aa2463e4baa609385b4fd3",
+    "policy": "09b611430cb22123e8f1d9e387c9e7ed7c1e02775846ccfae3ec69b8d202d6a3"
+  },
+  "nativeProviderIdentity": "nnue-mcts-core209:sha256:ee39c087b96dcdf813f779ffb0a3ba342d9ae753c44b7ee31bdfabe8fbe61277",
+  "nativeSelectorSIMD": false,
+  "backends": {
+    "native": {
+      "status": "COMPLETE",
+      "constructors": 1,
+      "headAttempted": 32,
+      "headReturned": 32,
+      "H_rows": 0,
+      "Search_calls": 0,
+      "result": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/selected7680-parity-stage-v1/native-result.json",
+        "bytes": 211772,
+        "mode": "0644",
+        "sha256": "9b11b2a670be37315d59feaa5c346a7ed4a2307bfa66820f56a74a6b71b81a93"
+      },
+      "contextAttempted": 32,
+      "contextReturned": 32,
+      "headFailed": 0,
+      "simd": false,
+      "providerIdentity": "nnue-mcts-core209:sha256:ee39c087b96dcdf813f779ffb0a3ba342d9ae753c44b7ee31bdfabe8fbe61277",
+      "shared": "fab69d6de32ec2e2de703a089fef1a43adfb995246aa2463e4baa609385b4fd3",
+      "policy": "09b611430cb22123e8f1d9e387c9e7ed7c1e02775846ccfae3ec69b8d202d6a3"
+    },
+    "python": {
+      "status": "COMPLETE",
+      "constructors": 1,
+      "headAttempted": 32,
+      "headReturned": 32,
+      "H_rows": 0,
+      "Search_calls": 0,
+      "result": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/selected7680-parity-stage-v1/python-result.json",
+        "bytes": 139134,
+        "mode": "0644",
+        "sha256": "44778b9069e0595e16a4c2989ac456ab3a21cb44d454a5a258f884479c33ce1c"
+      },
+      "backwardCalls": 0
+    },
+    "wasm": {
+      "status": "COMPLETE",
+      "constructors": 1,
+      "headAttempted": 32,
+      "headReturned": 32,
+      "H_rows": 0,
+      "Search_calls": 0,
+      "result": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/selected7680-parity-stage-v1/wasm-result.json",
+        "bytes": 152013,
+        "mode": "0644",
+        "sha256": "6d8e8a313379e8f73d0cbbb9d41764ff9c243ad7f8d220bd7f94df693fa6526f"
+      }
+    }
+  },
+  "actualJointForwards": 96,
+  "fixedCases": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected24-export-parity-v1/frozen-new-tv-receipts.json",
+    "bytes": 12641,
+    "mode": "0644",
+    "sha256": "bdeacb541671eefc765c6c85508b974853c81ec307747911db0519e8e9511e9d"
+  },
+  "caseScope": "SAME earlier frozen first8T+8V original+trueLR32; reused exposed development inputs, not newV1024 performance",
+  "unchangedSoftwareSource": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/selected7680-parity-stage-v1/current-source-correspondence.json",
+    "bytes": 11254,
+    "mode": "0644",
+    "sha256": "841452579faed7508a92a680539eca8e84a432267a282754d9e75b08610b13b8"
+  },
+  "qualification": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/selected7680-parity-stage-v1/qualification.json",
+    "bytes": 4322,
+    "mode": "0644",
+    "sha256": "d13775002c9d21c42601d5f842bf9bcf771f0c0f46b106c9c771b7465c2577a0"
+  },
+  "tolerance": {
+    "atol": 1e-5,
+    "rtol": 0.0001
+  },
+  "noLearnedLRInvarianceClaim": true,
+  "H": 0,
+  "Search": 0,
+  "teacher": 0,
+  "fitUpdates": 0,
+  "games": 0,
+  "backward": 0,
+  "cleanup": {
+    "native": {
+      "actualReturn": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/selected7680-parity-stage-v1/native.returned.json",
+        "bytes": 3249,
+        "mode": "0644",
+        "sha256": "af0f279fc7f5094b520fcf3ab04c47f0930906aef1a926d997f591c5eefb89d9"
+      },
+      "wallSeconds": 0.019243599963374436,
+      "child": {
+        "pid": 1561153,
+        "start_ticks": "92419746",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "actualDirectReapProcessHandlesComplete": true,
+      "remaining": [],
+      "returnedMaskPersist": "completed",
+      "diskMaskPersist": ["pending", "attempted"]
+    },
+    "python": {
+      "actualReturn": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/selected7680-parity-stage-v1/python.returned.json",
+        "bytes": 3105,
+        "mode": "0644",
+        "sha256": "d70916b86ef9b0cc83891962b6a9dca1abf702407436520c9d099b64e066b647"
+      },
+      "wallSeconds": 1.4665930710034445,
+      "child": {
+        "pid": 1561155,
+        "start_ticks": "92419749",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "actualDirectReapProcessHandlesComplete": true,
+      "remaining": [],
+      "returnedMaskPersist": "completed",
+      "diskMaskPersist": ["pending", "attempted"]
+    },
+    "wasm": {
+      "actualReturn": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/selected7680-parity-stage-v1/wasm.returned.json",
+        "bytes": 3557,
+        "mode": "0644",
+        "sha256": "936753741eb23fbec8713bb3aaf9c31a1ef6b53651ad9691c29317ffcd174545"
+      },
+      "wallSeconds": 0.1261561409337446,
+      "child": {
+        "pid": 1561172,
+        "start_ticks": "92419898",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "actualDirectReapProcessHandlesComplete": true,
+      "remaining": [],
+      "returnedMaskPersist": "completed",
+      "diskMaskPersist": ["pending", "attempted"]
+    }
+  },
+  "outer": {
+    "result": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/selected7680-parity-stage-v1/runtime/result.json",
+      "bytes": 528,
+      "mode": "0600",
+      "sha256": "0858a41ff5d6d5fec4bc1602df199d87d9d78de8fd2ff1a29778560c09f3dd3b"
+    },
+    "wallSeconds": 2.6461668181000277,
+    "actualDirectReap": true,
+    "remaining": [],
+    "cleanupComplete": true
+  },
+  "costs": {
+    "nativeCommandSeconds": 0.019243599963374436,
+    "pythonCommandSeconds": 1.4665930710034445,
+    "wasmCommandSeconds": 0.1261561409337446,
+    "nesting": "Outer includes sequential backend commands; setup/loader/transport included, no speed-ratio or pure-head timing claim"
+  },
+  "collectionSTOP": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/completion-de5e05ef/collection-STOP.json",
+    "bytes": 3411,
+    "mode": "0644",
+    "sha256": "1dd8b3c9d4b5c86da38edbe1cbd46b7a905a9df38616ab5a1daddb41f09d0b8a"
+  },
+  "affectedStorage": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/completion-de5e05ef/affected-storage-point.json",
+    "bytes": 2113,
+    "mode": "0644",
+    "sha256": "be209f1be6cda8bc9e92b41e0cc76dc46486d5093e6665558ae1137f09f3daac"
+  },
+  "noSourceBuildOrOldTupleReplay": true,
+  "strengthDefaultConvergenceSufficiencyClaim": false,
+  "originalFailuresCostsPausesHAndDefaultsUnchanged": true
+}
