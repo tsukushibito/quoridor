@@ -1,0 +1,291 @@
+{
+  "schema": "quoridor-newcoverage-finite-joint-fit-result-v1",
+  "job": "20bf932f-bb96-4e8f-82f7-c87a97ab867a",
+  "status": "FINITE_CAP_COMPLETE_NOT_CONVERGED_NOT_STRENGTH",
+  "canonicalTrain": 4096,
+  "canonicalSelectionV": 1024,
+  "H": 0,
+  "INITIAL_BEST_LAST": {
+    "INITIAL": {
+      "step": 0,
+      "draws": 0,
+      "rowExposure": 0.0,
+      "lr": [3e-5],
+      "train": {
+        "rows": 4096.0,
+        "input_classes": 4096,
+        "target_mse": 0.08839200888938317,
+        "target_mae": 0.2188848987935117,
+        "decisive_sign_accuracy": 0.848876953125,
+        "actual_logical_rows": 8192,
+        "policy_cross_entropy": 1.4658622311362706,
+        "teacher_entropy": 1.0260699517566536,
+        "policy_kl": 0.439792279539688,
+        "policy_top1": 0.7891845703125,
+        "policy_top3": 0.9892578125,
+        "joint_objective": 0.23497823200301024
+      },
+      "validation": {
+        "rows": 1024.0,
+        "input_classes": 1024,
+        "target_mse": 0.094062455322655,
+        "target_mae": 0.22728926201087063,
+        "decisive_sign_accuracy": 0.83642578125,
+        "actual_logical_rows": 2048,
+        "policy_cross_entropy": 1.4574615979654482,
+        "teacher_entropy": 1.0286990374443121,
+        "policy_kl": 0.4287625603901688,
+        "policy_top1": 0.796875,
+        "policy_top3": 0.99169921875,
+        "joint_objective": 0.23980861511919982
+      }
+    },
+    "BEST": {
+      "step": 7680,
+      "draws": 1966080,
+      "rowExposure": 480.0,
+      "lr": [1.875e-6],
+      "train": {
+        "rows": 4096.0,
+        "input_classes": 4096,
+        "target_mse": 0.044159381634840296,
+        "target_mae": 0.15553910565351714,
+        "decisive_sign_accuracy": 0.8990478515625,
+        "actual_logical_rows": 8192,
+        "policy_cross_entropy": 1.4384475933438807,
+        "teacher_entropy": 1.0260699517566536,
+        "policy_kl": 0.41237764168181457,
+        "policy_top1": 0.7947998046875,
+        "policy_top3": 0.9893798828125,
+        "joint_objective": 0.18800414096922838
+      },
+      "validation": {
+        "rows": 1024.0,
+        "input_classes": 1024,
+        "target_mse": 0.05936294650622238,
+        "target_mae": 0.18020955472555045,
+        "decisive_sign_accuracy": 0.86083984375,
+        "actual_logical_rows": 2048,
+        "policy_cross_entropy": 1.4344123410701286,
+        "teacher_entropy": 1.0286990374443121,
+        "policy_kl": 0.4057133035676088,
+        "policy_top1": 0.8046875,
+        "policy_top3": 0.9912109375,
+        "joint_objective": 0.20280418061323524
+      }
+    },
+    "LAST": {
+      "step": 8192,
+      "draws": 2097152,
+      "rowExposure": 512.0,
+      "lr": [1e-6],
+      "train": {
+        "rows": 4096.0,
+        "input_classes": 4096,
+        "target_mse": 0.04410918423468251,
+        "target_mae": 0.1554435171437838,
+        "decisive_sign_accuracy": 0.898681640625,
+        "actual_logical_rows": 8192,
+        "policy_cross_entropy": 1.4383492929737258,
+        "teacher_entropy": 1.0260699517566536,
+        "policy_kl": 0.412279341428075,
+        "policy_top1": 0.794921875,
+        "policy_top3": 0.9896240234375,
+        "joint_objective": 0.18794411353205512
+      },
+      "validation": {
+        "rows": 1024.0,
+        "input_classes": 1024,
+        "target_mse": 0.05937910690273825,
+        "target_mae": 0.18024391941808915,
+        "decisive_sign_accuracy": 0.8603515625,
+        "actual_logical_rows": 2048,
+        "policy_cross_entropy": 1.4343291688128375,
+        "teacher_entropy": 1.0286990374443121,
+        "policy_kl": 0.40563013131031767,
+        "policy_top1": 0.80419921875,
+        "policy_top3": 0.9912109375,
+        "joint_objective": 0.20281202378402202
+      }
+    }
+  },
+  "selector": "pure full-newV value_mse; joint/CE/KL/topk separate same-forward diagnostics",
+  "optimizer": {
+    "name": "freshAdam",
+    "lr": 3e-5,
+    "batch256": true,
+    "restart": null,
+    "freeze": "none",
+    "headWarmup": false,
+    "oldTMixture": false
+  },
+  "optimizerSteps": 8192,
+  "trainingDraws": 2097152,
+  "logicalModelRows": 2435072,
+  "fullSelectors": 33,
+  "selectedStep": 7680,
+  "selectedDraws": 1966080,
+  "selectedExposure": 480.0,
+  "endingExposure": 512.0,
+  "stop": {
+    "initial_Tpanel_mse": 0.08839200888938317,
+    "minimum_observed_Tpanel_mse": 0.04410918423468251,
+    "parameters_changed": true,
+    "joint_overfit_observations": 0,
+    "joint_previous_observation": {
+      "validation": 0.05937910690273825,
+      "train": 0.18794411353205512,
+      "draws": 2097152
+    },
+    "adequate_learning": true,
+    "horizon": "NOT_CONVERGED/NEEDED_WORK",
+    "minimum_completed_draws": 262144,
+    "maximum_draws": 2097152,
+    "completed_draws": 2097152,
+    "stopping_significant_reference": 0.05936294650622238,
+    "significant_stale_checkpoints": 2,
+    "endpoint_actual_minimum_full_precision_V_MSE": 0.05936294650622238,
+    "sufficiency": false,
+    "claim": "operational finite curve criterion, never global objective optimum"
+  },
+  "initialBothHeads": {
+    "initial_model": {
+      "descriptor": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/quoridor-strong435/coverage8192-value-selected-fit4096-v1/joint/best-model/manifest.json",
+        "bytes": 680,
+        "mode": "0600",
+        "sha256": "d6aaf0004b672e9fadec39de30bad972eacbabb7c5a35b28624b491d60d8c76d"
+      },
+      "weights": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/quoridor-strong435/coverage8192-value-selected-fit4096-v1/joint/best-model/weights.f32",
+        "bytes": 49284,
+        "mode": "0644",
+        "sha256": "15a727b9f06ff116671d59c7c381c049a0aa21c2228bc461587fb52d7d4e8a30"
+      }
+    },
+    "initial_policy": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/quoridor-strong435/coverage8192-value-selected-fit4096-v1/joint/best-model/policy-head/manifest.json",
+      "bytes": 461,
+      "mode": "0600",
+      "sha256": "7248935ac81f9b15a8d0aee5f85a95393ac80c60f77b3f24f7d000f4c604fef3"
+    },
+    "core_library": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/nnue-policy-value-training-v1/prefix-software-v1/private-library/libquoridor_data.so",
+      "sha256": "4e2c4081627b00fee92f1714859103f2e2a8a7ae5f9b1a73894ad695a1db3a27",
+      "bytes": 985712,
+      "mode": "0755"
+    },
+    "restart": null
+  },
+  "nativeIdentities": {
+    "INITIAL": {
+      "shared": "67b236e4159472f35d4ae7db4013ceb4881521d16721e1fd3536dfa4b5bf2425",
+      "policy": "a046bcb5098cede0e7442c21c0b7c8ed02e02cb85e50304ff126b19356ba8fae"
+    },
+    "BEST": {
+      "shared": "fab69d6de32ec2e2de703a089fef1a43adfb995246aa2463e4baa609385b4fd3",
+      "policy": "09b611430cb22123e8f1d9e387c9e7ed7c1e02775846ccfae3ec69b8d202d6a3"
+    },
+    "LAST": {
+      "shared": "6bf2847c9afcb15d1b0b22c5a92492505a3024c169e54ce193e1e07cc563b93a",
+      "policy": "5988f0c6368ba68307a0b5fc4711430124cb041687a352a39d88deb73b53b1a0"
+    }
+  },
+  "selectedValue": {
+    "path": "/workspaces/quoridor/.worktree/assets/checkpoints/quoridor-strong435/coverage32768-value-selected-fit8192-v1/joint/best-model/manifest.json",
+    "bytes": 680,
+    "mode": "0600",
+    "sha256": "e7ebb4fa868a7ef38989325b1b7639a079bc303e1c4fb6d0ec4bee92657b8091"
+  },
+  "selectedWeights": {
+    "path": "/workspaces/quoridor/.worktree/assets/checkpoints/quoridor-strong435/coverage32768-value-selected-fit8192-v1/joint/best-model/weights.f32",
+    "bytes": 49284,
+    "mode": "0644",
+    "sha256": "aced4284229b1bf847aa7e7eb5a7fb0fa0d818e92ecf0b9db3dcb154a8a4a679"
+  },
+  "selectedPolicy": {
+    "path": "/workspaces/quoridor/.worktree/assets/checkpoints/quoridor-strong435/coverage32768-value-selected-fit8192-v1/joint/best-model/policy-head/manifest.json",
+    "bytes": 461,
+    "mode": "0600",
+    "sha256": "08bc252b60d9f5a5c425a94aae7788a0177335b582569f840b5c5d46b464d7a6"
+  },
+  "selectedPolicyWeights": {
+    "path": "/workspaces/quoridor/.worktree/assets/checkpoints/quoridor-strong435/coverage32768-value-selected-fit8192-v1/joint/best-model/policy-head/policy.f32",
+    "bytes": 27588,
+    "mode": "0644",
+    "sha256": "fa97e1c9e90f8622f2c48f1dc9abcaafb6d8f332ba301aac18ff9655b8c946e1"
+  },
+  "freeze": {
+    "path": "/workspaces/quoridor/.worktree/assets/checkpoints/quoridor-strong435/coverage32768-value-selected-fit8192-v1/joint/freeze.json",
+    "bytes": 5450,
+    "mode": "0600",
+    "sha256": "a85fbc8cb2be0048658eec4a90b187d028acc18bb8875eae3612804ab58a5d4b"
+  },
+  "runStatus": {
+    "path": "/workspaces/quoridor/.worktree/assets/checkpoints/quoridor-strong435/coverage32768-value-selected-fit8192-v1/joint/run-status.json",
+    "bytes": 2374,
+    "mode": "0600",
+    "sha256": "554e23dd508ec3b38b96fc75b719117d96b1da0a7d5edb8ff8b3067c949a5886"
+  },
+  "compactSelectors": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/completion-20bf932f/compact-selector33.json",
+    "bytes": 38387,
+    "mode": "0644",
+    "sha256": "12e1fa2cc386300ea263079a9fd655c8075fda8170243752cf6e79e2922b6a07"
+  },
+  "collectionSTOP": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/completion-20bf932f/collection-STOP.json",
+    "bytes": 2349,
+    "mode": "0644",
+    "sha256": "af713a7f59aa864d221b427568de41cb176334245206899d399187ec572ca6b5"
+  },
+  "costs": {
+    "outerSeconds": 46.23914229194634,
+    "preparationSeconds": 0.16362223506439477,
+    "fitCommandSeconds": 45.070899287005886,
+    "freezeBodySeconds": 44.49893881299067,
+    "runStatusBodySeconds": 44.51965066289995,
+    "nonadditive": "Outer includes prep+fit. Fit command includes body and nested/inclusive phases; clocks use different endpoints."
+  },
+  "cleanup": {
+    "joint-prepare": {
+      "actualReturn": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/fit-stage-v1/joint-prepare.returned.json",
+        "bytes": 3361,
+        "mode": "0644",
+        "sha256": "c11af7ff31f93442505d9b7d5e6e910d53cac07011da9ebc4436b4baa57b6aff"
+      },
+      "wallSeconds": 0.16362223506439477,
+      "actualDirectReapProcessHandlesComplete": true,
+      "remaining": [],
+      "returnedMaskPersist": "completed",
+      "diskMaskPersist": ["pending", "attempted"]
+    },
+    "joint-fit": {
+      "actualReturn": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/fit-stage-v1/joint-fit.returned.json",
+        "bytes": 4121,
+        "mode": "0644",
+        "sha256": "e6d3568102af0678325c07ea89af62f2e6b05c9cbdb1ccf26040dec7c762abbf"
+      },
+      "wallSeconds": 45.070899287005886,
+      "actualDirectReapProcessHandlesComplete": true,
+      "remaining": [],
+      "returnedMaskPersist": "completed",
+      "diskMaskPersist": ["pending", "attempted"]
+    }
+  },
+  "affectedStorage": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/fit-stage-v1/affected-storage-point.json",
+    "bytes": 541,
+    "mode": "0644",
+    "sha256": "3e4ea4d857922b87b9337f4135d3b0cf7feaa2622135ed053e3613e320e60ed6"
+  },
+  "nativeIdentityConstructors": 127,
+  "nativeIdentityHeadRows": 0,
+  "changedTupleParity": "AUTHORIZED_ONCE_UNISSUED",
+  "strengthDefaultConvergenceClaim": false,
+  "historicalExposureIndependence": "UNKNOWN; V1024 is selection development data",
+  "previousConditionsRemainSeparate": true,
+  "originalHolding2GiBAndGlobal50GBUnchanged": true
+}
