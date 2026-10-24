@@ -1,0 +1,267 @@
+{
+  "condition": "Pinned original general Flip port, sourceb6ebf04b; ordinary affected software only",
+  "job": "318b3261-a79a-4d6a-b23d-a8e8ee98ff1a",
+  "status": "PASS_AFFECTED3_CLIPPY_NATIVE_WASM",
+  "qualification": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/flips-original-port-affected-software-v1/qualification.json",
+    "bytes": 13912,
+    "mode": "0644",
+    "sha256": "98245c099adda990391059a8bec6d9c09ae966d10f78aa6fb870b68ba8c0552d"
+  },
+  "config": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/flips-original-port-affected-software-v1/config.json",
+    "bytes": 15171,
+    "mode": "0644",
+    "sha256": "54c9c7f6617bda14de0dad5f0f8e69e28e90f7a0001153ad50d2219ebbd7cd99"
+  },
+  "sourceAdoption": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/flips-original-port-affected-software-v1/source-adoption.json",
+    "bytes": 3965,
+    "mode": "0644",
+    "sha256": "91edf8b4e751032dd9b394bfd35026b44698e8500e2c8a5d2eedda73634fb105"
+  },
+  "sourceCommit": "25ba3648",
+  "relatedSourceReview": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/flips-original-port-boundary-review-v1/reviewer/minimum.json",
+    "bytes": 3141,
+    "mode": "0644",
+    "sha256": "1000085af73b914fdb109eaa94a432ae3efe910910592ed452c1d99731dc034f"
+  },
+  "outerResult": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/flips-original-port-affected-software-v1/runtime/result.json",
+    "bytes": 528,
+    "mode": "0600",
+    "sha256": "bcffd2743a535f52df1cf1713e9df1c1df9a2d62841f0e573907d4ad57ba6afb"
+  },
+  "outerWallSeconds": 24.130195414065383,
+  "commands": [
+    {
+      "name": "affected-three-flip-oracle",
+      "receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/flips-original-port-affected-software-v1/affected-three-flip-oracle.returned.json",
+        "bytes": 3814,
+        "mode": "0644",
+        "sha256": "acdea92cd641ebd98576569b4aa6c7ca29e385219a4fbb042b3f228bbc9e4528"
+      },
+      "actual": {
+        "child": {
+          "pid": 1582570,
+          "start_ticks": "92629744",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "exit_code": 0,
+        "wall_seconds": 13.099357497994788,
+        "direct_child_reaped": true,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "remaining": [],
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed"
+      },
+      "diskFinalization": {
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted"
+      },
+      "exactChildIdentityCurrent": false
+    },
+    {
+      "name": "affected-core-wasm-Clippy",
+      "receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/flips-original-port-affected-software-v1/affected-core-wasm-Clippy.returned.json",
+        "bytes": 3780,
+        "mode": "0644",
+        "sha256": "d84d6f8b3d6b8312c4ed09b2153a83f75500afba0c4e74791624280a6d1f183b"
+      },
+      "actual": {
+        "child": {
+          "pid": 1582726,
+          "start_ticks": "92631055",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "exit_code": 0,
+        "wall_seconds": 1.6830371930263937,
+        "direct_child_reaped": true,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "remaining": [],
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed"
+      },
+      "diskFinalization": {
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted"
+      },
+      "exactChildIdentityCurrent": false
+    },
+    {
+      "name": "native-release",
+      "receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/flips-original-port-affected-software-v1/native-release.returned.json",
+        "bytes": 3664,
+        "mode": "0644",
+        "sha256": "37139e0a3616b62583806ce1ff34821e057154c943c4f57da2215c22d03a8a0a"
+      },
+      "actual": {
+        "child": {
+          "pid": 1582768,
+          "start_ticks": "92631225",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "exit_code": 0,
+        "wall_seconds": 4.849672602023929,
+        "direct_child_reaped": true,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "remaining": [],
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed"
+      },
+      "diskFinalization": {
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted"
+      },
+      "exactChildIdentityCurrent": false
+    },
+    {
+      "name": "wasm-release",
+      "receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/flips-original-port-affected-software-v1/wasm-release.returned.json",
+        "bytes": 3672,
+        "mode": "0644",
+        "sha256": "5047b224e90eedf1d2e976f0f5981f05911ef4a008934ffde0d5754d62beb60e"
+      },
+      "actual": {
+        "child": {
+          "pid": 1582866,
+          "start_ticks": "92631711",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "exit_code": 0,
+        "wall_seconds": 4.116870419005863,
+        "direct_child_reaped": true,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "remaining": [],
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed"
+      },
+      "diskFinalization": {
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted"
+      },
+      "exactChildIdentityCurrent": false
+    }
+  ],
+  "newTestDefinitions": 0,
+  "affectedExistingDefinitionsRepeated": 3,
+  "unrelatedOldTestsRepeated": 0,
+  "selectors": [
+    "bitboard::flips_tests::flips_propagation_every_ternary_ray_matches_rules_mask_and_play",
+    "bitboard::flips_tests::flips_propagation_composed_rays_and_edge_wrap_match_rules",
+    "bitboard::flips_tests::flips_propagation_invalid_origins_and_pass_guards_match_rules"
+  ],
+  "independentOracle": "Maintained GameState coordinate rays/full mask/play; direct real cursor fallback and normal Position dispatch",
+  "analyticalCaseUpperBound": 2243596,
+  "actualCaseCount": null,
+  "softwareCPUKernelAvx2": {
+    "4": true
+  },
+  "executedISAReceipt": null,
+  "portableCursorTested": true,
+  "actualWasmExecution": 0,
+  "portableWasmReleaseBuild": true,
+  "images": {
+    "native-release": {
+      "image": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/flips-original-port-affected-software-v1/othello-full-search-original-flip",
+        "bytes": 799112,
+        "mode": "0555",
+        "sha256": "d1106b89d596ee9c1085793efed63617c47b32795c13a46cd2e6d6890aab637d"
+      },
+      "cargoArtifact": {
+        "reason": "compiler-artifact",
+        "package_id": "path+file:///workspaces/quoridor/games/othello/crates/othello-core#0.1.0",
+        "manifest_path": "/workspaces/quoridor/games/othello/crates/othello-core/Cargo.toml",
+        "target": {
+          "kind": ["bin"],
+          "crate_types": ["bin"],
+          "name": "othello-full-search",
+          "src_path": "/workspaces/quoridor/games/othello/crates/othello-core/src/bin/othello-full-search.rs",
+          "edition": "2024",
+          "doc": true,
+          "doctest": false,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "3",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": false
+        },
+        "features": [],
+        "filenames": [
+          "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target/release/othello-full-search"
+        ],
+        "executable": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target/release/othello-full-search",
+        "fresh": false
+      }
+    },
+    "wasm-release": {
+      "image": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/flips-original-port-affected-software-v1/othello-original-flip.wasm",
+        "bytes": 626529,
+        "mode": "0555",
+        "sha256": "68ae025850433ff5ff7378a84e12ae77eee879211927f2ea28f3e9f7edc161dd"
+      },
+      "cargoArtifact": {
+        "reason": "compiler-artifact",
+        "package_id": "path+file:///workspaces/quoridor/games/othello/crates/othello-wasm#0.1.0",
+        "manifest_path": "/workspaces/quoridor/games/othello/crates/othello-wasm/Cargo.toml",
+        "target": {
+          "kind": ["cdylib", "rlib"],
+          "crate_types": ["cdylib", "rlib"],
+          "name": "othello_wasm",
+          "src_path": "/workspaces/quoridor/games/othello/crates/othello-wasm/src/lib.rs",
+          "edition": "2024",
+          "doc": true,
+          "doctest": true,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "3",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": false
+        },
+        "features": [],
+        "filenames": [
+          "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target/wasm32-unknown-unknown/release/othello_wasm.wasm",
+          "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target/wasm32-unknown-unknown/release/libothello_wasm.rlib"
+        ],
+        "executable": null,
+        "fresh": false
+      }
+    }
+  },
+  "Search": 0,
+  "modelInputWeightReads": 0,
+  "actualCleanupSTOP": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/flips-original-port-affected-software-v1/software-STOP.json",
+    "bytes": 157,
+    "mode": "0644",
+    "sha256": "b72d998c011eae98967dc4b38f87af59db48a3ac76c701c76d289925d9c6e7f3"
+  },
+  "affectedStoragePoint": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/flips-original-port-affected-software-v1/completion-318b3261/affected-storage-point.json",
+    "bytes": 1084,
+    "mode": "0644",
+    "sha256": "f0f1fd14a65fceae69ae393d78b5acf1a78e787c4d03c6000a20b32b31e8d088"
+  },
+  "TMPExists": false,
+  "sourceLeases": [],
+  "costMeaning": "Outer includes four command/compiler/test/link scopes; do not add nested spans. These are affected-test repeats, not NEW definitions or numerical performance observations.",
+  "scope": "Software/source qualification only; no Search, engine performance, strength, default adoption, minimum memory, continuous peak, or whole-host cleanup claim.",
+  "history": "Prior prefix nonadoption and every old FAILED/raw/NULL/UNKNOWN/cost remain separate unchanged; cursor portable fallback is required current product."
+}
