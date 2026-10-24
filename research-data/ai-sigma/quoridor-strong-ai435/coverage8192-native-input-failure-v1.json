@@ -1,0 +1,131 @@
+{
+  "status": "FAILED_POST_GENERATION_EXCLUSION_GRAMMAR_NO_PUBLISHED_POOL",
+  "jobId": "559b152e-ef2b-46c9-8ac3-57fa0f5425f1",
+  "issue": "quoridor-4lc.435",
+  "outerResult": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-native-input-v1/runtime/result.json",
+    "bytes": 523,
+    "mode": "0600",
+    "sha256": "4d59342aba5d3d1a09b8714be2f3ca58c50407321f8820eabfef5cebdc1276df"
+  },
+  "outerLog": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-native-input-v1/runtime/output.log",
+    "bytes": 786,
+    "mode": "0644",
+    "sha256": "22b8b758dd5b7a161aa90bc9fe0b9187877c6658f89d4dad2fc67d7be22f92c5"
+  },
+  "nativeError": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-native-input-v1/native-inputs.log",
+    "bytes": 62,
+    "mode": "0644",
+    "sha256": "6dc503153983929f6f65fed2c44d0803fe26edd64ae82b230f8e0654aa15a76e"
+  },
+  "actualAfterFinally": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-native-input-v1/actual-returned-STOP.json",
+    "bytes": 6021,
+    "mode": "0644",
+    "sha256": "4dbc146389eac18e7205aee099e65caff5f3838c0f85f07356c57ea1b9bd15e6"
+  },
+  "originalAffectedStoragePoint": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-native-input-v1/affected-storage-point.json",
+    "bytes": 513,
+    "mode": "0644",
+    "sha256": "1cfb7c884df0c9af5e3b076bb2c4517b6147957d7bfc1dc4aef6da07c485b676"
+  },
+  "config": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-native-input-v1/input-generation.json",
+    "bytes": 1715,
+    "mode": "0644",
+    "sha256": "8f1a58be63a6ae8406a197d1aaae6b6af3703cea13b68ef6f235289c0b60b9fd"
+  },
+  "bindings": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-native-input-v1/bindings.json",
+    "bytes": 5187,
+    "mode": "0644",
+    "sha256": "bf3eacc4d57efc8fade0cad3f98124d90f5df30b742ac8becee2c7e8eec8d2f2"
+  },
+  "source": {
+    "producer": "Build412af718/image1a730575",
+    "prepareTrajectories": {
+      "path": "/workspaces/quoridor/games/quoridor/crates/quoridor-runner/src/teacher_pilot/depth6.rs",
+      "bytes": 67060,
+      "mode": "0644",
+      "sha256": "cab76761fa8e7c6bc7dfc83f6f08d5d940365c2a905aa55e18bc14154101a11b"
+    },
+    "excludedBookReader": {
+      "path": "/workspaces/quoridor/games/quoridor/crates/quoridor-data/src/common_corpus.rs",
+      "bytes": 15268,
+      "mode": "0644",
+      "sha256": "6cd18a14874b18ef523317ee711f842e49e4757c6d1bf53360b8b6e53fde600a"
+    }
+  },
+  "failure": "excluded_book_prefixes rejects a referenced book shape; exact offending member not emitted",
+  "phaseCorrespondence": "Current producer generates fixed8192 series before iterating excluded_books. This error belongs to that post-loop exclusion reader. It is not a pre-generation/zero-RNG failure. No actions/counts/observations or full pool were published; their numerical values remain UNKNOWN.",
+  "plannedSeries": 8192,
+  "maxActionsEach": 200,
+  "maxTransitions": 1638400,
+  "actualGeneratedTransitions": null,
+  "actualObservations": null,
+  "actualComponents": null,
+  "actualSplits": null,
+  "retainedCompletePool": false,
+  "publishedFiles": [],
+  "retainedPartialMarker": {
+    "path": "/workspaces/quoridor/.worktree/assets/inputs/quoridor-strong435/coverage8192-midstock-v1/INCOMPLETE",
+    "bytes": 65,
+    "mode": "0644",
+    "sha256": "e325ce28ca9a08b49bf49e28ce7f1f47720a120a9c0ab3aedbf56abd6f4d71eb"
+  },
+  "rawPoolRecoverySource": null,
+  "newTeacherFitSearchGames": 0,
+  "normalReturn": null,
+  "actualExceptionCleanup": {
+    "directReaped": true,
+    "processAndHandlesClosed": true,
+    "remaining": [],
+    "knownIdentity": {
+      "recorded": {
+        "pid": 3817237,
+        "start_ticks": "86273094",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "sameIdentityAlive": false
+    },
+    "mask": "completed",
+    "persist": "completed"
+  },
+  "diskSnapshot": {
+    "mask": "pending",
+    "persist": "attempted"
+  },
+  "TMPAbsent": true,
+  "outerWallSeconds": 18.277872815961018,
+  "innerWallSeconds": 18.051808428019285,
+  "nestedNotAdded": true,
+  "wrapperAssertion1Preserved": true,
+  "noAutomaticRegenerationOrRefillOrReseed": true,
+  "next": "Ready O64 independent normal comparison takes fresh actual window. SAME C435 bounded source/config causal analysis only; SAME judgement receives actual post-generation failure before any further scientific generation choice. No guard weakening/shape flags/claim complete/no automatic rerun.",
+  "allFailuresCostsPausesSealsDefaultsModelsForeignAnd50GBPreserved": true,
+  "goalsComplete": false,
+  "collection": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-native-input-v1/failure-559b152e/collection.json",
+    "bytes": 4905,
+    "mode": "0644",
+    "sha256": "eb0bc857774cc4c89f2a07b5497b6d65b4e2f6f351fa62e85fad9151062640d7"
+  },
+  "sameAuthorCausalTask": {
+    "body": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-native-input-v1/failure-559b152e/C435-causal-task.txt",
+      "bytes": 3899,
+      "mode": "0644",
+      "sha256": "b6e2558321e87c4f7c3551ba1f6cec781b0393e5c2d9c039a7a47796d3fb563e"
+    },
+    "dispatch": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-native-input-v1/failure-559b152e/C435-dispatch.json",
+      "bytes": 157,
+      "mode": "0644",
+      "sha256": "fa853a953c26afd002ba69360967ab3d7f787cba00ce1f39a61f176850433bde"
+    },
+    "scope": "source/config only; no exclusion payload access/new source guard weakening/new numerical permission"
+  }
+}
