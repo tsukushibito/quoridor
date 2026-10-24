@@ -1,0 +1,169 @@
+{
+  "schema": "quoridor.research.saved5120-input-result.v1",
+  "condition": "Same one32768 coverage static-teacher/same-model freshfit condition, native FIRST5120 singleton selection only",
+  "status": "SAVED_SUBSET_NATIVE_AND_NORMAL_DATA_PASS",
+  "jobId": "dc81f018-4f65-4859-8857-49a3b74ffcf0",
+  "normalManifest": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/saved-subset-stage-v1/sequence/run-000/operation/manifest.json",
+    "bytes": 11861,
+    "mode": "0644",
+    "sha256": "b8ed117427bf9b37c21ca12f29160612f865a438708f8c3fe5aa900e9d40c7a0"
+  },
+  "sequenceResult": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/saved-subset-stage-v1/sequence/result.json",
+    "bytes": 2669,
+    "mode": "0644",
+    "sha256": "91b6132101a5055303b09ece7dfa69859dd67d0f965ddaa2ef2330047b801028"
+  },
+  "outerResult": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/saved-subset-stage-v1/runtime/result.json",
+    "bytes": 522,
+    "mode": "0600",
+    "sha256": "ce98b8c5e7b565cee3e041f47bd9e6495bf60a416b64563dc741f6cd9f3e0442"
+  },
+  "config": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/saved-subset-stage-v1/control/input-saved-subset.json",
+    "bytes": 1672,
+    "mode": "0644",
+    "sha256": "2a2f230509ada459bdaadaebff61e7520776ce7c03acce6433171ac106f5ba64"
+  },
+  "poolResult": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/quoridor-strong-ai435/coverage32768-native-pool-result-v1.json",
+    "bytes": 5448,
+    "mode": "0644",
+    "sha256": "7346c74714a02aa7a55114b1ba8073561b5dce7bc2ef75768ba6f83d71a9d6ae"
+  },
+  "actualComponents": {
+    "test": 0,
+    "train": 4096,
+    "validation": 1024
+  },
+  "componentDeficits": {
+    "test": 0,
+    "train": 0,
+    "validation": 0
+  },
+  "actualNewFiles": [
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/inputs/quoridor-strong435/coverage32768-selected5120-v1/partition.json",
+      "sha256": "2b3c5d3006e0ea07aeb8162ae391b9716fbecc1beb43e9bbf8e7570961037e93",
+      "bytes": 1241759,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/inputs/quoridor-strong435/coverage32768-selected5120-v1/fit-observations.json",
+      "sha256": "73af79035e0cab959e9be9d3f73233a9227f70c8aed19137147b25a7e3106eeb",
+      "bytes": 1163302,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/inputs/quoridor-strong435/coverage32768-selected5120-v1/holdout-observations.json",
+      "sha256": "f1d32f9b8097fb5bd796205981527e0e4ddac681d8c48aeaee04409b5a97d2d4",
+      "bytes": 577,
+      "mode": "0644"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/inputs/quoridor-strong435/coverage32768-selected5120-v1/selection.json",
+      "sha256": "a1922a2ed77d64da829e5d6df8f3f075c489b182905ec4c23fb5e07d2160c918",
+      "bytes": 1571,
+      "mode": "0644"
+    }
+  ],
+  "inheritedSourceByRef": {
+    "bytes": 9099164,
+    "mode": "0644",
+    "path": "/workspaces/quoridor/.worktree/assets/inputs/quoridor-strong435/coverage32768-midstock-v1/observations.json",
+    "sha256": "768309a77ed943e8af177ad1f1ea7f3520d07d8b690dbdaea08994b2c46f6181"
+  },
+  "rankCensusByRef": {
+    "bytes": 1860690,
+    "mode": "0644",
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/completion-7365a7de/ranked-component-census-v2.json",
+    "sha256": "3d934d29521f286cb9294ae20cf47e610a8e00f6bfee7e6c20a07c9bf47113b2"
+  },
+  "countsScope": "5120 whole singleton components, first4096T/next1024selectionV/newH0, remaining2495 frozen unassigned. Native producer validates actual source/member/wholecomponent correspondence; classes/orientations/labels/fit not yet qualified.",
+  "nativeCounters": {
+    "generated_transitions": 0,
+    "search_calls": 0,
+    "teacher_calls": 0,
+    "outcomes_selected": false,
+    "model_constructor_count": null
+  },
+  "costs": {
+    "outerSeconds": 12.533263536985032,
+    "innerJobIncludedSeconds": 5.639658206957392,
+    "nativeCommandIncludedSeconds": 5.272081825998612,
+    "nestedAddedSeconds": 0,
+    "fullFees": null
+  },
+  "returnedBoundary": {
+    "sequenceReaderSTOP": "2026-10-24T20:14:50.790432+00:00",
+    "guardianActualReturn": {
+      "command": [
+        "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-clippy-causal-build-v2/image/quoridor-runner",
+        "teacher-pilot",
+        "--prepare-inputs",
+        "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/saved-subset-stage-v1/control/input-saved-subset.json",
+        "--input-sha256",
+        "2a2f230509ada459bdaadaebff61e7520776ce7c03acce6433171ac106f5ba64"
+      ],
+      "status": "complete",
+      "child": {
+        "pid": 1532839,
+        "start_ticks": "92122986",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "cpu_plan": {
+        "management": [18],
+        "commands": {
+          "run": [12],
+          "test": [12]
+        },
+        "allocation": [12, 18],
+        "resource_CPUs": 2,
+        "worker_CPUs": 1,
+        "library_threads": 1
+      },
+      "command_cpu_scope": "run",
+      "log_bytes_seen": 1851,
+      "scope": "session group and periodically recorded descendants; no daemon adoption",
+      "exit_code": 0,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "cleanup_complete": true,
+      "log_bytes_retained": 1851,
+      "wall_seconds": 5.272081825998612,
+      "handle_closes_attempted": ["selector_close", "pipe_close", "pidfd_close", "log_close"],
+      "primary_error": null,
+      "process_cleanup_complete": true,
+      "handle_closes_complete": true,
+      "signal_mask_restoration": "completed",
+      "final_record_persist": "completed",
+      "finalization_errors": []
+    },
+    "diskReceipt": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/saved-subset-stage-v1/sequence/run-000/operation/run.process.json",
+      "bytes": 1659,
+      "mode": "0600",
+      "sha256": "5d11553b4761b2d338b9b84ec8f08c1aeb2e13e16e7fc969ddcb7191fe8aebd7"
+    },
+    "actualMaskPersist": ["completed", "completed"],
+    "diskMaskPersist": ["pending", "attempted"],
+    "outerCleanupComplete": true,
+    "remaining": []
+  },
+  "currentAffectedStorage": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/saved-subset-stage-v1/sequence/run-000/operation/storage-usage.json",
+    "bytes": 1114,
+    "mode": "0644",
+    "sha256": "78da19f3395853fe4776a28205d2deb5dc940c2923ff0ba9b469e0ccf12ae491"
+  },
+  "holding": "Same new wholepipeline2GiB;183721984B post-subset point is not peak/global occupancy/refund; native512MiB cap unchanged/globaldecimal50GB.",
+  "collectorScope": "Read only compact normal manifest/process/result metadata. No schedule/partition/source/history/model/label/cache payload decode/hash or recomputed rules/rank/statistics by collector.",
+  "limitations": "No teacher truth, new teacher labels/fit/strength/default promotion. Same old failed/NULL/UNKNOWN costs/pause323342.17/seals/newE/oldfits96/H128/defaultmodels/foreign retained."
+}
