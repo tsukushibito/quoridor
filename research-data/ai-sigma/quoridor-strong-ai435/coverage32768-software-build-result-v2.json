@@ -1,0 +1,287 @@
+{
+  "scope": "Affected ordinary software only, no input/teacher/model/Search/fit qualification",
+  "job": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-clippy-causal-build-v2/runtime/result.json",
+    "bytes": 521,
+    "mode": "0600",
+    "sha256": "5351ad9ec42051aa3fbae77b27cb668eb7d7a15b1a06028689ea8a1d249cd704"
+  },
+  "config": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-clippy-causal-build-v2/runtime/config.json",
+    "bytes": 925,
+    "mode": "0600",
+    "sha256": "cfd383d91abdb02b2f6b6f19c8c5735073def6ede99163ee542933964e6b1880"
+  },
+  "intent": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-clippy-causal-build-v2/intent.json",
+    "bytes": 10622,
+    "mode": "0644",
+    "sha256": "3cd41b4d439bc2952ff1d6abfab82834600ca46f928f550a49f45250c7b29e5f"
+  },
+  "manifest": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-clippy-causal-build-v2/operation/manifest.json",
+    "bytes": 42265,
+    "mode": "0644",
+    "sha256": "30ab90331cd3bfe0cbed4e153b3b32794df1d23383393c5791dfb533658690ac"
+  },
+  "artifact": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-clippy-causal-build-v2/image/quoridor-runner",
+    "sha256": "1c23bcfd3d76254c7ed10e80d90aa1d8c795aee4912c75c7ce3a37f8ae64c56a",
+    "bytes": 10825288,
+    "mode": "0755"
+  },
+  "checks": [
+    {
+      "name": "new-coverage-boundary-1",
+      "role": "test",
+      "status": "PASS",
+      "guardian_return": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "test",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "/workspaces/quoridor/Cargo.toml",
+          "-j1",
+          "--message-format=json-render-diagnostics",
+          "-p",
+          "quoridor-runner",
+          "--lib",
+          "--features",
+          "measurement",
+          "teacher_pilot::depth6::trajectory_input_tests::full_prior_parent_exclusion_checks_all_members_before_generation_without_old_root_decode",
+          "--",
+          "--exact",
+          "--test-threads=1"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 1507357,
+          "start_ticks": "91849313",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [18],
+          "commands": {
+            "run": [12],
+            "test": [12]
+          },
+          "allocation": [12, 18],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "test",
+        "log_bytes_seen": 85512,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 85512,
+        "wall_seconds": 8.834271542029455,
+        "handle_closes_attempted": ["selector_close", "pipe_close", "pidfd_close", "log_close"],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "full_log": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-clippy-causal-build-v2/operation/new-coverage-boundary-1.full.log",
+        "sha256": "2b09495f5e0e6a28f5333def7af31a6c68aa49dde4ebfa5d065a91041c603394",
+        "bytes": 85512,
+        "mode": "0644"
+      },
+      "persisted_process_receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-clippy-causal-build-v2/operation/new-coverage-boundary-1.process.json",
+        "sha256": "ce6c5a01494de015cc453e6874f012a8c44f03c50634e689c45d32762ac31341",
+        "bytes": 1714,
+        "mode": "0600"
+      },
+      "capture_complete": true
+    },
+    {
+      "name": "coverage-affected-Clippy",
+      "role": "lint",
+      "status": "PASS",
+      "guardian_return": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "clippy",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "/workspaces/quoridor/Cargo.toml",
+          "-j1",
+          "--message-format=json-render-diagnostics",
+          "-p",
+          "quoridor-data",
+          "-p",
+          "quoridor-runner",
+          "--features",
+          "quoridor-runner/measurement",
+          "--all-targets",
+          "--no-deps",
+          "--",
+          "-Dwarnings"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 1507455,
+          "start_ticks": "91850198",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [18],
+          "commands": {
+            "run": [12],
+            "test": [12]
+          },
+          "allocation": [12, 18],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "run",
+        "log_bytes_seen": 92456,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 92456,
+        "wall_seconds": 8.55171244603116,
+        "handle_closes_attempted": ["selector_close", "pipe_close", "pidfd_close", "log_close"],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "full_log": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-clippy-causal-build-v2/operation/coverage-affected-Clippy.full.log",
+        "sha256": "dce14605f19233f6770f7c1ccc64a92cdd7854b5f2855c2968fad3af06cc188e",
+        "bytes": 92456,
+        "mode": "0644"
+      },
+      "persisted_process_receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-clippy-causal-build-v2/operation/coverage-affected-Clippy.process.json",
+        "sha256": "ba9a7f397b2d7e69f68adf3bb85823e03bc655c17c782e163b1e202c4060d320",
+        "bytes": 1622,
+        "mode": "0600"
+      },
+      "capture_complete": true
+    },
+    {
+      "name": "coverage-normal-release",
+      "role": "build",
+      "status": "PASS",
+      "guardian_return": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "build",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "/workspaces/quoridor/Cargo.toml",
+          "-j1",
+          "--message-format=json-render-diagnostics",
+          "-p",
+          "quoridor-runner",
+          "--features",
+          "measurement",
+          "--release",
+          "--bin",
+          "quoridor-runner"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 1507589,
+          "start_ticks": "91851054",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [18],
+          "commands": {
+            "run": [12],
+            "test": [12]
+          },
+          "allocation": [12, 18],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "run",
+        "log_bytes_seen": 87914,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 87914,
+        "wall_seconds": 89.431715251063,
+        "handle_closes_attempted": ["selector_close", "pipe_close", "pidfd_close", "log_close"],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "full_log": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-clippy-causal-build-v2/operation/coverage-normal-release.full.log",
+        "sha256": "31fd7f129868839389ebc909dd61489f3a6a3c511522a8cb9e1d34f0307f762e",
+        "bytes": 87914,
+        "mode": "0644"
+      },
+      "persisted_process_receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-clippy-causal-build-v2/operation/coverage-normal-release.process.json",
+        "sha256": "a93776e1597b2f825e2fb9222ee423b6538ec720f2d623662a9f2d0084e22142",
+        "bytes": 1560,
+        "mode": "0600"
+      },
+      "capture_complete": true
+    }
+  ],
+  "normalFinalizeExit": 0,
+  "INCOMPLETEAbsent": true,
+  "actualCleanupComplete": true,
+  "remaining": [],
+  "wallSeconds": 107.5598582229577,
+  "costsAreNestedNotAdded": true,
+  "oldSuccessfulOtherRust2AndPython3Replayed": 0,
+  "originalFailedBuildByRef": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/quoridor-strong-ai435/coverage32768-software-build-failure-v1.json",
+    "bytes": 15157,
+    "mode": "0644",
+    "sha256": "f2e3fecfcbcbb8fee290be79585a458b1f08ffa389936444386ee456d2dcfe6b"
+  },
+  "sourceReview21OnlyScopeByRef": true,
+  "currentLifecycleInputInlet": "Source/software under same435.22 related review; original native unchanged, data generation stillUNISSUED",
+  "storagePoint": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-clippy-causal-build-v2/operation/storage-usage.json",
+    "bytes": 990,
+    "mode": "0644",
+    "sha256": "b71cabe0bcabc6c757aa5bdbfd64e032ab3d18e59e93f4f1014059386f1fad62"
+  },
+  "globalPeakAndFullFees": null
+}

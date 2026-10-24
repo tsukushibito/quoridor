@@ -434,7 +434,38 @@ def execute(
             message = str(error)
         except BaseException:
             message = "<exception stringification failed>"
-        return {"type": type(error).__name__, "message": message}
+        fact = {"type": type(error).__name__, "message": message}
+        try:
+            notes = getattr(error, "__notes__", None)
+        except BaseException:
+            fact["notes_unknown"] = True
+            return fact
+        if notes is not None:
+            if type(notes) is not list:
+                fact["notes_unknown"] = True
+                return fact
+            retained, used, processed, unknown = [], 0, 0, 0
+            truncated = False
+            for note in notes[:8]:
+                processed += 1
+                if type(note) is not str:
+                    unknown += 1
+                    continue
+                raw = note.encode("utf-8", errors="replace")
+                prefix = raw[: 32768 - used].decode("utf-8", errors="ignore")
+                retained.append(prefix)
+                used += len(prefix.encode("utf-8"))
+                truncated |= prefix != note
+                if used == 32768:
+                    break
+            fact.update(
+                notes=retained,
+                notes_utf8_bytes=used,
+                notes_omitted=len(notes) - processed,
+                notes_unknown=unknown,
+                notes_truncated=truncated or processed < len(notes) or unknown > 0,
+            )
+        return fact
 
     def final_error_facts():
         return [{"stage": stage, **error_fact(error)} for stage, error in final_errors]

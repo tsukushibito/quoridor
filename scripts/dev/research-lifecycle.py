@@ -2197,7 +2197,12 @@ def operation_cpu_plan(spec):
         test = _build_test_cpu_cores(spec)
     if spec["kind"] == "run":
         phase = document(spec["experiment"])["phase"]
-        if phase == "analysis":
+        if phase == "generation" and native_input_preparation(document(spec["experiment"])):
+            require(
+                spec.get("child_cpu_cores") == cores,
+                "native input uses its single declared worker; no management widening",
+            )
+        elif phase == "analysis":
             require(
                 spec.get("child_cpu_cores") == cores,
                 "saved analysis uses its single declared Python worker",
@@ -3828,6 +3833,29 @@ def canonical_sha(value):
     return sha(json.dumps(value, sort_keys=True, separators=(",", ":")).encode())
 
 
+def native_input_preparation(experiment):
+    """The maintained model-free native input owner, including saved-only selection."""
+    return experiment["phase"] == "generation" and experiment["argv"][1:3] == [
+        "teacher-pilot",
+        "--prepare-inputs",
+    ]
+
+
+def native_input_files(request):
+    require(
+        (request.get("trajectory") is not None) != (request.get("saved_subset") is not None),
+        "one native trajectory or saved-only subset request",
+    )
+    common = {
+        "partition": "partition.json",
+        "fit_observations": "fit-observations.json",
+        "holdout_observations": "holdout-observations.json",
+    }
+    if request.get("trajectory") is not None:
+        return {**common, "source_observations": "observations.json", "schedule": "schedule.json"}
+    return {**common, "selection": "selection.json"}
+
+
 def experiment_phase_check(experiment):
     phase = experiment["phase"]
     require(
@@ -3895,6 +3923,22 @@ def experiment_phase_check(experiment):
         and experiment.get("batch") is None,
         "generation-only model-free non-game bootstrap",
     )
+    if native_input_preparation(experiment):
+        require(
+            experiment["argv"][1:]
+            == [
+                "teacher-pilot",
+                "--prepare-inputs",
+                experiment["config"]["path"],
+                "--input-sha256",
+                experiment["config"]["sha256"],
+            ]
+            and experiment["rules"] == "research-standard-2p-threefold-goal-first-v1"
+            and experiment["distance_units"] == "wall-distance/80"
+            and experiment["value_perspective"] == "side-to-move",
+            "native input exact config/hash argv and scientific identity",
+        )
+        return
     require(
         len(experiment["argv"]) == 6
         and experiment["argv"][1:]
@@ -3918,6 +3962,26 @@ def experiment_phase_check(experiment):
 
 def generation_check(spec, experiment):
     request = document(experiment["config"])
+    if native_input_preparation(experiment):
+        names = native_input_files(request)
+        plan = document(spec["approved_plan"])
+        require(
+            plan["input_request"] == experiment["config"]
+            and plan["native_exclusions"]
+            == {
+                key: request.get(key)
+                for key in ("excluded_books", "excluded_static_inputs", "excluded_parent")
+            }
+            and request["output"] == spec["data_root"],
+            "native input plan/config/exclusion/output correspondence",
+        )
+        require(
+            {item["name"]: item["path"] for item in spec["data"]}
+            == {name: str(Path(spec["data_root"]) / filename) for name, filename in names.items()}
+            and len(spec["data"]) == len(names),
+            "native input complete durable files and original full response capture",
+        )
+        return
     require(set(request) == {"plan", "old_prefixes", "output"}, "generation request shape")
     require(request["output"] == spec["data_root"], "generation owned output binding")
     require(len(experiment["inputs"]) == 2, "generation exact two inputs")
@@ -4488,6 +4552,78 @@ def copy_artifact(src, dst, *, resources=None):
     if resources is not None:
         resources.check()
     return actual
+
+
+def native_input_evidence(spec, experiment, values, files):
+    """Join native-published refs, without decoding histories or exclusion payloads."""
+    request = document(experiment["config"])
+    names = native_input_files(request)
+    require(
+        not (Path(spec["data_root"]) / "INCOMPLETE").exists(),
+        "native input publication remains incomplete",
+    )
+    # Normal command() already owns and closes this full capture under the charged
+    # operation directory. It is not a native output or an arbitrary data-root escape.
+    response_ref, response_raw = bound(
+        owned(Path(spec["output"]) / "run.full.log", spec["owner"]), spec["limits"]["log_B"]
+    )
+    response = json.loads(response_raw)
+    require(
+        canonical_sha(response["config"])
+        == canonical_sha({k: experiment["config"][k] for k in ("path", "sha256")}),
+        "native input returned bound config identity differs",
+    )
+    result = response["result"]
+    refs = {ref["path"]: ref for ref in files}
+    for name, filename in names.items():
+        actual = refs[str(Path(spec["data_root"]) / filename)]
+        if name == "selection":
+            require(
+                json.loads(values["selection"]) == result,
+                "saved selection response/publication correspondence",
+            )
+        else:
+            require(
+                canonical_sha(result[name]) == canonical_sha(actual),
+                "native input published ref differs: " + name,
+            )
+    trajectory = request.get("trajectory")
+    inherited_source = result["source_observations"] if trajectory is None else None
+    require(
+        trajectory is not None
+        or (
+            isinstance(inherited_source, dict)
+            and set(inherited_source) == {"path", "sha256", "bytes", "mode"}
+        ),
+        "saved subset retains its inherited source FileRef byref only",
+    )
+    settings = trajectory if trajectory is not None else request["saved_subset"]
+    transitions = result["generated_transitions"]
+    require(
+        result["requested_components"] == settings["split_counts"]
+        and type(transitions) is int
+        and 0 <= transitions <= (request["families"] * trajectory["max_plies"] if trajectory else 0)
+        and type(result["search_calls"]) is int
+        and result["search_calls"] == 0
+        and type(result["teacher_calls"]) is int
+        and result["teacher_calls"] == 0
+        and result["outcomes_selected"] is False,
+        "native input actual counts/model-free/no-outcome-selection",
+    )
+    return {
+        "schema": "quoridor.research.generation-evidence.v1",
+        "phase": "generation",
+        "native_input_preparation": True,
+        "saved_subset_only": trajectory is None,
+        "scientific_planned_slots": 0,
+        "numerical_qualification": None,
+        "config": experiment["config"],
+        "actual": result,
+        "model_constructor_count": None,
+        "native_response": response_ref,
+        "inherited_source_observations": inherited_source,
+        "scope": "native-published input metadata only; deficits retained, no downstream class/teacher/fit qualification; histories/exclusion payloads not Python-decoded",
+    }
 
 
 def generation_evidence(experiment, values):
@@ -6825,8 +6961,10 @@ def collect_data(spec, experiment):
     for item in spec["data"]:
         try:
             owned(item["path"], spec["owner"])
-            if (experiment["phase"] == "materialize" and item["name"] in COMPACT_CACHE_WIDTHS) or (
-                experiment["phase"] == "corpus" and item["name"] == "pilot_stream"
+            if (
+                (experiment["phase"] == "materialize" and item["name"] in COMPACT_CACHE_WIDTHS)
+                or (experiment["phase"] == "corpus" and item["name"] == "pilot_stream")
+                or (native_input_preparation(experiment) and item["name"] != "selection")
             ):
                 ref = artifact_ref(item["path"])
                 require(ref["bytes"] <= item["limit_B"], "declared streamed output size")
@@ -6932,10 +7070,14 @@ def collect_data(spec, experiment):
             "schema": "quoridor.research.generation-evidence.v1",
             "phase": "generation",
             "numerical_qualification": None,
-            "scientific_planned_slots": 512,
+            "scientific_planned_slots": 0 if native_input_preparation(experiment) else 512,
         }
         try:
-            data["generation"] = generation_evidence(experiment, values)
+            data["generation"] = (
+                native_input_evidence(spec, experiment, values, data["files"])
+                if native_input_preparation(experiment)
+                else generation_evidence(experiment, values)
+            )
             data["generation"]["experiment"] = spec["experiment"]
         except BaseException as error:
             data["errors"].append({"stage": "generation_metadata", **error_fact(error)})
