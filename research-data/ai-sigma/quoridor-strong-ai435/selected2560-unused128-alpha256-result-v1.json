@@ -1,0 +1,667 @@
+{
+  "status": "FINALIZED_SAVED_RESULT_PENDING_FINITE_CONCLUSION_REVIEW",
+  "originalGameJob": "a063da13-f6bd-4a58-aa32-8e829eb94225",
+  "savedAnalysisJob": "1238164c-47fc-459a-9b93-65476d130173",
+  "soleManifest": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-unused128-alpha256-entry-v1/common/saved-analysis-v1/operation/manifest.json",
+    "bytes": 7446,
+    "mode": "0644",
+    "sha256": "bc80336ed863e5ca0492d4128b0a53be125e7822bf31994192d04d2a21a16073"
+  },
+  "soleSummary": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-unused128-alpha256-entry-v1/common/saved-analysis-v1/data/summary.json",
+    "bytes": 37040,
+    "mode": "0644",
+    "sha256": "1a2026717057f9621cb6479d5e3e0df33f154cf32e51c0448d4f05d1422f18c8"
+  },
+  "savedReport": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-unused128-alpha256-entry-v1/common/saved-analysis-v1/data/report.md",
+    "bytes": 774,
+    "mode": "0644",
+    "sha256": "1ad1ebfba994a9f5493b21bf5057508ad25b39eef379bc84740a3db145e67758"
+  },
+  "originalCollection": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-unused128-alpha256-entry-v1/common/saved-analysis-v1/original-completion-collection.json",
+    "bytes": 40164,
+    "mode": "0644",
+    "sha256": "bc9fd25a982ef06c764e81703fa37789617eed00b18e36713c01ee01d6dd5fcc"
+  },
+  "outerResult": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-unused128-alpha256-entry-v1/common/saved-analysis-v1/runtime/result.json",
+    "bytes": 522,
+    "mode": "0600",
+    "sha256": "619b0354200304ced4c982fb0ae1e6f6c6579d1180850d422d24e48c115e0e47"
+  },
+  "experiment": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-unused128-alpha256-entry-v1/common/saved-analysis-v1/experiment.json",
+    "bytes": 96226,
+    "mode": "0644",
+    "sha256": "77d6b89e1cfcfdfd4bf5353890af96e497075473ca47dc6cfd8a7c39a5dfd21b"
+  },
+  "analysisConfig": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-unused128-alpha256-entry-v1/common/saved-analysis-v1/analysis-config.json",
+    "bytes": 6779,
+    "mode": "0644",
+    "sha256": "dd243c204a4d41cb28705c6b80a52b34eb05b7cf205a5a53e3080eb61a2fa8f0"
+  },
+  "plan": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-unused128-alpha256-entry-v1/common/binding-v3/plan.json",
+    "bytes": 15126,
+    "mode": "0644",
+    "sha256": "00f5af80b4838d8a9ffa58589fc0bde47483885073e3e3cf4cbe077a0bb1acf1"
+  },
+  "schedule": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-unused128-alpha256-entry-v1/common/binding-v3/schedule.json",
+    "bytes": 32633,
+    "mode": "0644",
+    "sha256": "2630093c2922b1b9f829717e2e53c9be40111351649bd25a0819712dfbf3cc4b"
+  },
+  "condition": "LEFT selected2560 normal Alpha policyOFF versus RIGHT preserved original Cedar Alpha;100ms reserve5/max200ply/128 native-ranked prospectively unused named-scope components/both colours",
+  "modelsByRef": [
+    {
+      "descriptor": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/quoridor-strong435/coverage8192-value-selected-fit4096-v1/joint/best-model/manifest.json",
+        "bytes": 680,
+        "mode": "0600",
+        "sha256": "d6aaf0004b672e9fadec39de30bad972eacbabb7c5a35b28624b491d60d8c76d"
+      },
+      "weights": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/quoridor-strong435/coverage8192-value-selected-fit4096-v1/joint/best-model/weights.f32",
+        "bytes": 49284,
+        "mode": "0644",
+        "sha256": "15a727b9f06ff116671d59c7c381c049a0aa21c2228bc461587fb52d7d4e8a30"
+      },
+      "evaluator_sha256": "fb7d124603ad6637e2395a919fe74909b6d76d933b26bd96849469be1239c7e2"
+    },
+    {
+      "descriptor": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/static-teachers-low-lr-v1/fit-C-v1/best-model/manifest.json",
+        "sha256": "a486633087a49fe10c96594bd5b37c0fff31e5a54ac7f678dfb45f3dbacb4e83",
+        "bytes": 680,
+        "mode": "0600"
+      },
+      "weights": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/static-teachers-low-lr-v1/fit-C-v1/best-model/weights.f32",
+        "sha256": "35cbb976be12e24ac6ff8204bf1937fd79673484ddc792065b6aabb6cbb36f0e",
+        "bytes": 49284,
+        "mode": "0644"
+      },
+      "evaluator_sha256": "eb0fbc9357252e916b1c6314bee6f6c76d975828c15cc439cceb9766309fb5b9"
+    }
+  ],
+  "counts": {
+    "planned": 256,
+    "started": 256,
+    "goal_first": 116,
+    "goal_second": 139,
+    "true_draw": 1,
+    "forfeit": 0,
+    "cap": 0,
+    "late": 0,
+    "illegal": 0,
+    "error": 0,
+    "unfinished": 0,
+    "unknown": 0,
+    "missing": 0
+  },
+  "planned": 256,
+  "completed": 256,
+  "completeColourPairs": 128,
+  "score": 0.455078125,
+  "conditional95Interval": [
+    0.40234375,
+    0.5078125
+  ],
+  "familyResampling": {
+    "method": "shared_pcg64_linear",
+    "family_order": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100,
+      101,
+      102,
+      103,
+      104,
+      105,
+      106,
+      107,
+      108,
+      109,
+      110,
+      111,
+      112,
+      113,
+      114,
+      115,
+      116,
+      117,
+      118,
+      119,
+      120,
+      121,
+      122,
+      123,
+      124,
+      125,
+      126,
+      127
+    ],
+    "index_shape": [
+      10000,
+      128
+    ],
+    "index_dtype": "<u8",
+    "index_sha256": "6c866fb36d6ac4e6b8cacb5467d230d4256575b0af484c3433c15545d93e7d6d",
+    "numpy_version": "2.5.3",
+    "all_planned_pairs_complete": true,
+    "simultaneous_interpretation": "Bonferroni nominal alpha allocation across the predeclared contrasts; conditional approximate bootstrap, no IID/population coverage guarantee"
+  },
+  "interpretation": "This fixed prospective development contrast does not establish selected2560 superiority to Cedar; interval includes0.5. It does not establish equivalence/no-harm, general strength, unseen/IID/fit-independent qualification, data-only improvement, old-book paired change or default adoption.",
+  "bootstrap": {
+    "seed": 4352026102405,
+    "resamples": 10000,
+    "familyCount": 128,
+    "tableShape": [
+      10000,
+      128
+    ],
+    "indexSHA256": "6c866fb36d6ac4e6b8cacb5467d230d4256575b0af484c3433c15545d93e7d6d",
+    "NumPy": "2.5.3",
+    "quantile": "linear",
+    "tails": [
+      0.025,
+      0.975
+    ],
+    "tables": 1,
+    "allPlannedPairsComplete": true,
+    "genericSummaryMultiplicityText": "Maintained summary uses generic Bonferroni contrast wording; this study has one predeclared contrast and nominal95% conditional descriptive interval, not two-contrast inference."
+  },
+  "nativeReportedCosts": [
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-unused128-alpha256-entry-v1/lane-0/sequence/run-000/operation/manifest.json",
+        "sha256": "dcc0e292af3f9b672a56117d199e1453f8f0281b596035333ccb2178b1f8c07a",
+        "bytes": 7991,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 67.835700962,
+      "encoding_sync_verify_seconds": 0.136328034,
+      "canonical_compressed_bytes": 516045,
+      "canonical_raw_bytes": 3280056,
+      "canonical_allocated_bytes": 516096,
+      "compression_ratio_raw_over_compressed": 6.3561433595907335,
+      "native_peak_rss_observation_bytes": 198524928,
+      "evaluator_setup_seconds": 0.000634441,
+      "backend_setup_seconds": 1.91e-07,
+      "backend_cleanup_seconds": 0.006950389,
+      "thinking_seconds": 39.895914106,
+      "classification_seconds": 0,
+      "scope": "nested source spans, not additive all-work fees; continuous working set/worker UTC STOP UNKNOWN"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-unused128-alpha256-entry-v1/lane-1/sequence/run-000/operation/manifest.json",
+        "sha256": "94b3e0463f33af5b3769e2be311267e10afd934df48e22276f31a8860661ebe0",
+        "bytes": 8001,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 70.736074047,
+      "encoding_sync_verify_seconds": 0.126223335,
+      "canonical_compressed_bytes": 530453,
+      "canonical_raw_bytes": 3328107,
+      "canonical_allocated_bytes": 532480,
+      "compression_ratio_raw_over_compressed": 6.274084603159941,
+      "native_peak_rss_observation_bytes": 198553600,
+      "evaluator_setup_seconds": 0.000544969,
+      "backend_setup_seconds": 5.4e-08,
+      "backend_cleanup_seconds": 0.0071779389999999995,
+      "thinking_seconds": 42.369505358,
+      "classification_seconds": 0,
+      "scope": "nested source spans, not additive all-work fees; continuous working set/worker UTC STOP UNKNOWN"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-unused128-alpha256-entry-v1/lane-0/sequence/run-001/operation/manifest.json",
+        "sha256": "23bd8ca2b36b060ed0566aa5b6a3353115f03085ed37c03bbf297bc297a8c06b",
+        "bytes": 8002,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 63.026624081,
+      "encoding_sync_verify_seconds": 0.107615401,
+      "canonical_compressed_bytes": 474368,
+      "canonical_raw_bytes": 2972781,
+      "canonical_allocated_bytes": 475136,
+      "compression_ratio_raw_over_compressed": 6.266824490690771,
+      "native_peak_rss_observation_bytes": 197054464,
+      "evaluator_setup_seconds": 0.00038308799999999996,
+      "backend_setup_seconds": 5.3e-08,
+      "backend_cleanup_seconds": 0.006968446999999999,
+      "thinking_seconds": 36.990833927,
+      "classification_seconds": 0,
+      "scope": "nested source spans, not additive all-work fees; continuous working set/worker UTC STOP UNKNOWN"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-unused128-alpha256-entry-v1/lane-1/sequence/run-001/operation/manifest.json",
+        "sha256": "f77f1a5ea1dce594349791ca0ba0de7deb55b2435137393350e989ca378988d3",
+        "bytes": 8001,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 64.033044058,
+      "encoding_sync_verify_seconds": 0.119506921,
+      "canonical_compressed_bytes": 480491,
+      "canonical_raw_bytes": 3028163,
+      "canonical_allocated_bytes": 483328,
+      "compression_ratio_raw_over_compressed": 6.302226264383724,
+      "native_peak_rss_observation_bytes": 197074944,
+      "evaluator_setup_seconds": 0.00036144599999999997,
+      "backend_setup_seconds": 5.4e-08,
+      "backend_cleanup_seconds": 0.008095318,
+      "thinking_seconds": 35.746967645,
+      "classification_seconds": 0,
+      "scope": "nested source spans, not additive all-work fees; continuous working set/worker UTC STOP UNKNOWN"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-unused128-alpha256-entry-v1/lane-0/sequence/run-002/operation/manifest.json",
+        "sha256": "ea21dfd6f3e7b364b89fea4ac557a4c966ff36fffc2cf365738551c3824c321f",
+        "bytes": 8001,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 69.994950136,
+      "encoding_sync_verify_seconds": 0.143254907,
+      "canonical_compressed_bytes": 530776,
+      "canonical_raw_bytes": 3358770,
+      "canonical_allocated_bytes": 532480,
+      "compression_ratio_raw_over_compressed": 6.328036685908933,
+      "native_peak_rss_observation_bytes": 198856704,
+      "evaluator_setup_seconds": 0.00037397099999999996,
+      "backend_setup_seconds": 1.0800000000000001e-07,
+      "backend_cleanup_seconds": 0.006062629,
+      "thinking_seconds": 37.858252898,
+      "classification_seconds": 0,
+      "scope": "nested source spans, not additive all-work fees; continuous working set/worker UTC STOP UNKNOWN"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-unused128-alpha256-entry-v1/lane-1/sequence/run-002/operation/manifest.json",
+        "sha256": "5b7cf5768f0e97334fdf1a49aa1d83ef55a079948cab37cfcd3e8f8ec527c938",
+        "bytes": 8001,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 65.193115739,
+      "encoding_sync_verify_seconds": 0.10072632,
+      "canonical_compressed_bytes": 494035,
+      "canonical_raw_bytes": 3100817,
+      "canonical_allocated_bytes": 495616,
+      "compression_ratio_raw_over_compressed": 6.276512797676278,
+      "native_peak_rss_observation_bytes": 197644288,
+      "evaluator_setup_seconds": 0.000365048,
+      "backend_setup_seconds": 8.199999999999999e-08,
+      "backend_cleanup_seconds": 0.006684481,
+      "thinking_seconds": 37.142923593,
+      "classification_seconds": 0,
+      "scope": "nested source spans, not additive all-work fees; continuous working set/worker UTC STOP UNKNOWN"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-unused128-alpha256-entry-v1/lane-0/sequence/run-003/operation/manifest.json",
+        "sha256": "4a63a4b1aaa221fa87202b65676b35444dda8635f26280c5784679fad5614aa3",
+        "bytes": 8014,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 60.883959879,
+      "encoding_sync_verify_seconds": 0.104521595,
+      "canonical_compressed_bytes": 457458,
+      "canonical_raw_bytes": 2878254,
+      "canonical_allocated_bytes": 458752,
+      "compression_ratio_raw_over_compressed": 6.291843185603924,
+      "native_peak_rss_observation_bytes": 196513792,
+      "evaluator_setup_seconds": 0.000439368,
+      "backend_setup_seconds": 6.6e-08,
+      "backend_cleanup_seconds": 0.010854638,
+      "thinking_seconds": 33.695610761,
+      "classification_seconds": 0,
+      "scope": "nested source spans, not additive all-work fees; continuous working set/worker UTC STOP UNKNOWN"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-unused128-alpha256-entry-v1/lane-1/sequence/run-003/operation/manifest.json",
+        "sha256": "5874556edcb7329262c43591f2738566af6b15f30e315effaf818e97d3385dbc",
+        "bytes": 8017,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 66.053860835,
+      "encoding_sync_verify_seconds": 0.138244596,
+      "canonical_compressed_bytes": 500155,
+      "canonical_raw_bytes": 3177713,
+      "canonical_allocated_bytes": 503808,
+      "compression_ratio_raw_over_compressed": 6.353456428507163,
+      "native_peak_rss_observation_bytes": 198389760,
+      "evaluator_setup_seconds": 0.000362385,
+      "backend_setup_seconds": 5.4e-08,
+      "backend_cleanup_seconds": 0.007565863000000001,
+      "thinking_seconds": 36.145242765,
+      "classification_seconds": 0,
+      "scope": "nested source spans, not additive all-work fees; continuous working set/worker UTC STOP UNKNOWN"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-unused128-alpha256-entry-v1/lane-0/sequence/run-004/operation/manifest.json",
+        "sha256": "faab2b9db0f2df1359e6ce8a77e27cde5c15683fe5481121873443881be75793",
+        "bytes": 8017,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 69.911068681,
+      "encoding_sync_verify_seconds": 0.115904459,
+      "canonical_compressed_bytes": 527675,
+      "canonical_raw_bytes": 3326713,
+      "canonical_allocated_bytes": 528384,
+      "compression_ratio_raw_over_compressed": 6.3044733974510825,
+      "native_peak_rss_observation_bytes": 199057408,
+      "evaluator_setup_seconds": 0.000365516,
+      "backend_setup_seconds": 5.4e-08,
+      "backend_cleanup_seconds": 0.006544980000000001,
+      "thinking_seconds": 40.552287849,
+      "classification_seconds": 0,
+      "scope": "nested source spans, not additive all-work fees; continuous working set/worker UTC STOP UNKNOWN"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-unused128-alpha256-entry-v1/lane-1/sequence/run-004/operation/manifest.json",
+        "sha256": "aecb7c77490919854e7d32ed5e6075b31986fc8dc5f927c871ab8fb0512dec6e",
+        "bytes": 8017,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 59.621556192,
+      "encoding_sync_verify_seconds": 0.118564401,
+      "canonical_compressed_bytes": 456861,
+      "canonical_raw_bytes": 2886513,
+      "canonical_allocated_bytes": 458752,
+      "compression_ratio_raw_over_compressed": 6.318142717369178,
+      "native_peak_rss_observation_bytes": 196177920,
+      "evaluator_setup_seconds": 0.000376639,
+      "backend_setup_seconds": 5.6e-08,
+      "backend_cleanup_seconds": 0.007356742,
+      "thinking_seconds": 34.249013894,
+      "classification_seconds": 0,
+      "scope": "nested source spans, not additive all-work fees; continuous working set/worker UTC STOP UNKNOWN"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-unused128-alpha256-entry-v1/lane-0/sequence/run-005/operation/manifest.json",
+        "sha256": "6ba15f5874bc9a57e8bf7888fc2a4e1785d341563b71b5691f05324b47927b45",
+        "bytes": 8019,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 61.731812506,
+      "encoding_sync_verify_seconds": 0.103451534,
+      "canonical_compressed_bytes": 477342,
+      "canonical_raw_bytes": 3024376,
+      "canonical_allocated_bytes": 479232,
+      "compression_ratio_raw_over_compressed": 6.335868203510271,
+      "native_peak_rss_observation_bytes": 196952064,
+      "evaluator_setup_seconds": 0.000370083,
+      "backend_setup_seconds": 5.3e-08,
+      "backend_cleanup_seconds": 0.005770005999999999,
+      "thinking_seconds": 37.320398361,
+      "classification_seconds": 0,
+      "scope": "nested source spans, not additive all-work fees; continuous working set/worker UTC STOP UNKNOWN"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-unused128-alpha256-entry-v1/lane-1/sequence/run-005/operation/manifest.json",
+        "sha256": "3b99fb3a029bf1fbbfe43dde2e912bd1916845276f0266466d65508fdf57bd33",
+        "bytes": 8018,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 67.930891567,
+      "encoding_sync_verify_seconds": 0.137293793,
+      "canonical_compressed_bytes": 524120,
+      "canonical_raw_bytes": 3339456,
+      "canonical_allocated_bytes": 524288,
+      "compression_ratio_raw_over_compressed": 6.371548500343433,
+      "native_peak_rss_observation_bytes": 198619136,
+      "evaluator_setup_seconds": 0.000356402,
+      "backend_setup_seconds": 6.8e-08,
+      "backend_cleanup_seconds": 0.0058271320000000005,
+      "thinking_seconds": 40.215363529,
+      "classification_seconds": 0,
+      "scope": "nested source spans, not additive all-work fees; continuous working set/worker UTC STOP UNKNOWN"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-unused128-alpha256-entry-v1/lane-0/sequence/run-006/operation/manifest.json",
+        "sha256": "6609e3e83e88853f083c7da846a555b9b3da89ac7619931a6b44d92991e910d6",
+        "bytes": 8018,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 63.711922857,
+      "encoding_sync_verify_seconds": 0.1232273,
+      "canonical_compressed_bytes": 497749,
+      "canonical_raw_bytes": 3185883,
+      "canonical_allocated_bytes": 499712,
+      "compression_ratio_raw_over_compressed": 6.4005814175417735,
+      "native_peak_rss_observation_bytes": 197910528,
+      "evaluator_setup_seconds": 0.000560354,
+      "backend_setup_seconds": 2.46e-07,
+      "backend_cleanup_seconds": 0.007972935,
+      "thinking_seconds": 37.243889232,
+      "classification_seconds": 0,
+      "scope": "nested source spans, not additive all-work fees; continuous working set/worker UTC STOP UNKNOWN"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-unused128-alpha256-entry-v1/lane-1/sequence/run-006/operation/manifest.json",
+        "sha256": "832cf05daed65289f93901a0e4f67509289acb3859c10b727fac4843d3babfc0",
+        "bytes": 8018,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 67.407129572,
+      "encoding_sync_verify_seconds": 0.143946127,
+      "canonical_compressed_bytes": 515284,
+      "canonical_raw_bytes": 3270996,
+      "canonical_allocated_bytes": 516096,
+      "compression_ratio_raw_over_compressed": 6.3479479277447,
+      "native_peak_rss_observation_bytes": 198774784,
+      "evaluator_setup_seconds": 0.00038013900000000004,
+      "backend_setup_seconds": 5.6e-08,
+      "backend_cleanup_seconds": 0.006155911,
+      "thinking_seconds": 39.051143818,
+      "classification_seconds": 0,
+      "scope": "nested source spans, not additive all-work fees; continuous working set/worker UTC STOP UNKNOWN"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-unused128-alpha256-entry-v1/lane-0/sequence/run-007/operation/manifest.json",
+        "sha256": "795ffc6897fdc4ac5b3543471e5704b7d63ff340d6c3c3e312b1304caea2dbe9",
+        "bytes": 8018,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 69.207474159,
+      "encoding_sync_verify_seconds": 0.110341385,
+      "canonical_compressed_bytes": 526774,
+      "canonical_raw_bytes": 3352681,
+      "canonical_allocated_bytes": 528384,
+      "compression_ratio_raw_over_compressed": 6.364552920227649,
+      "native_peak_rss_observation_bytes": 198688768,
+      "evaluator_setup_seconds": 0.00035945,
+      "backend_setup_seconds": 5.4e-08,
+      "backend_cleanup_seconds": 0.006556463,
+      "thinking_seconds": 40.339204561,
+      "classification_seconds": 0,
+      "scope": "nested source spans, not additive all-work fees; continuous working set/worker UTC STOP UNKNOWN"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-unused128-alpha256-entry-v1/lane-1/sequence/run-007/operation/manifest.json",
+        "sha256": "c28629638be00bc3b51db56eaf320f71ceb9622585d03b31d9c6145c72f0cf6c",
+        "bytes": 8018,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 66.637680136,
+      "encoding_sync_verify_seconds": 0.141451519,
+      "canonical_compressed_bytes": 510138,
+      "canonical_raw_bytes": 3207762,
+      "canonical_allocated_bytes": 512000,
+      "compression_ratio_raw_over_compressed": 6.288027945379485,
+      "native_peak_rss_observation_bytes": 198369280,
+      "evaluator_setup_seconds": 0.00035639799999999996,
+      "backend_setup_seconds": 5.4e-08,
+      "backend_cleanup_seconds": 0.005736296,
+      "thinking_seconds": 40.899691603,
+      "classification_seconds": 0,
+      "scope": "nested source spans, not additive all-work fees; continuous working set/worker UTC STOP UNKNOWN"
+    }
+  ],
+  "costs": {
+    "originalCohortOuterSecondsOnce": 557.1176794359926,
+    "parallelNestedNativeGuardianSumSeparate": 1058.3891433400568,
+    "analysisOuterSecondsOnce": 1.6347252209670842,
+    "analysisInnerSeconds": 0.8862399809295312,
+    "nestedParallelNotAdded": true,
+    "fullFeesContinuousPeak": null
+  },
+  "actualReaderSTOP": {
+    "directReaped": true,
+    "processAndHandlesClosed": true,
+    "remaining": [],
+    "knownIdentities": [
+      {
+        "identity": {
+          "pid": 4133374,
+          "start_ticks": "88608552",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "currentStartTicks": null,
+        "exactAbsentOrDifferent": true
+      },
+      {
+        "identity": {
+          "pid": 4133339,
+          "start_ticks": "88608525",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "currentStartTicks": null,
+        "exactAbsentOrDifferent": true
+      }
+    ],
+    "actualMask": "completed",
+    "actualPersist": "completed"
+  },
+  "persistedSnapshot": {
+    "mask": "pending",
+    "persist": "attempted"
+  },
+  "ordinaryFinalization": {
+    "firstRefusedOutsideScope": "Initial collector12,18 refused before publication; collection requires management18 only. Original finalize-once.log/error retained.",
+    "correctedManagementCPU": [
+      18
+    ],
+    "correctedExit": 0,
+    "scientificReexecutions": 0
+  },
+  "payloadJournalArrayRNGModelNativeGameReplayDuringCollection": 0,
+  "H128": "Protected native identity/component exclusion retained; no typed H observations/labels used by collection or games",
+  "historicalExposure": "UNKNOWN beyond named full-prefix/native component scopes",
+  "goalsComplete": false,
+  "oldFailuresCostsPausesSealsDefaultsModelsForeignAnd50GB": "Preserved"
+}
