@@ -1,0 +1,123 @@
+{
+  "status": "FAILED_PRE_OWNERSHIP_NATIVE_UNRUN",
+  "job": "0a04dfc0-338f-4a4d-a692-c8633c24c24b",
+  "innerJob": "254c9f81-31e5-4578-ae15-ad15cf28705f",
+  "outerResult": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/common/book-publication-stage-v1/runtime/result.json",
+    "bytes": 523,
+    "mode": "0600",
+    "sha256": "af413a86d7f12aee8d5eb72291e38bde8c63632dec73f2cdbf99e4f7f0935286"
+  },
+  "innerResult": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/common/book-publication-stage-v1/sequence/run-000/runtime/result.json",
+    "bytes": 525,
+    "mode": "0600",
+    "sha256": "75ea0cc8cdbc288b9ca3a98191cf46105abfc3cfab818d7389e9bde7cc100632"
+  },
+  "sequenceResult": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/common/book-publication-stage-v1/sequence/result.json",
+    "bytes": 2501,
+    "mode": "0644",
+    "sha256": "edeb1c8e4d4a387285b06afa08e2aa9ffcc4ca22517eee413669b227f0c5ae44"
+  },
+  "sourcePrimary": {
+    "type": "TypeError",
+    "message": "'NoneType' object is not subscriptable",
+    "notes": []
+  },
+  "sourcePartialFacts": {
+    "schema": "quoridor.research.completion.v1",
+    "kind": "run",
+    "status": "FAILED",
+    "intent": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/common/book-publication-stage-v1/sequence/run-000/intent.json",
+      "sha256": "0b3be493bfbf992c25ad9cf0badeadae28882eecd1ba8aab9a90eb6aeeb07de6",
+      "bytes": 6743,
+      "mode": "0644"
+    },
+    "started_at": "2026-10-24T22:06:47.750587+00:00",
+    "checks": [],
+    "primary": {
+      "type": "TypeError",
+      "message": "'NoneType' object is not subscriptable",
+      "notes": []
+    },
+    "secondary": [],
+    "cleanup_complete": false,
+    "remaining": [],
+    "owed_finalizers": [],
+    "originating_job": {
+      "runtime": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/common/book-publication-stage-v1/sequence/run-000/runtime",
+      "job_id": "254c9f81-31e5-4578-ae15-ad15cf28705f",
+      "config": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/common/book-publication-stage-v1/sequence/run-000/runtime/config.json",
+        "sha256": "52259df99f3c27f7e40447f3f0660ca1ce11e0c1320f42fe8dd01087c57ecb0b",
+        "bytes": 1063,
+        "mode": "0600"
+      },
+      "config_sha256": "bbf1fab80dc9438b4ab2a2b1e068b45120723b58695606b95a7d93623365c4bb",
+      "supervisor": {
+        "pid": 1601111,
+        "start_ticks": "92794851",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "child": {
+        "pid": 1601189,
+        "start_ticks": "92795366",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      }
+    },
+    "finished_at": "2026-10-24T22:06:47.766976+00:00",
+    "process_cleanup_complete": false
+  },
+  "cause": "Experiment.schedule was None; unchanged normal experiment_check puts it in required FileRef list and reads ref[path], raising TypeError before claim/native execute.",
+  "originalConfig": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/common/book-publication-stage-v1/control/Experiment.json",
+    "bytes": 1976,
+    "mode": "0644",
+    "sha256": "b97b3a161e648e76610c016c3b4b07c80073c46005476526a9bfa82669210d1f"
+  },
+  "normalPlan": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/common/book-publication-stage-v1/control/Plan.json",
+    "bytes": 935,
+    "mode": "0644",
+    "sha256": "da5907b509b7f9af37b5043174738ad7950ded10fe0d319a827c688b6ee4dade"
+  },
+  "nativeArtifact": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-next128-affected-build-v1/image/quoridor-runner",
+    "sha256": "a26387ebb52d6ef570b009fef98e2341a1130dac02d4379ad8ff1e9cb639b444",
+    "bytes": 10865136,
+    "mode": "0755"
+  },
+  "book": {
+    "plannedComponents": 128,
+    "status": "UNRUN",
+    "actualComponents": null
+  },
+  "nativeCounterReceipt": null,
+  "nativeDirectReturn": null,
+  "sourceControlFlowProvesNoNativeDispatch": true,
+  "normalOperationReturn": null,
+  "operationOwnershipAcquired": false,
+  "dataRootPresent": false,
+  "cleanup": {
+    "outer": true,
+    "inner": true,
+    "sequence": true,
+    "remaining": [],
+    "native": null
+  },
+  "costs": {
+    "outerSeconds": 5.6529438979923725,
+    "innerIncludedSeconds": 0.2425961729604751,
+    "nestedAdded": false
+  },
+  "nextRepair": "Fresh immutable controls bind existing fixed128 identity receipt as publication input schedule, same native selection/guard/image; do not invent a game schedule or rerun completed work.",
+  "originalFailedAndCostsImmutable": true,
+  "collectionSTOP": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/common/book-publication-stage-v1/completion-0a04dfc0/collection-STOP.json",
+    "bytes": 2127,
+    "mode": "0644",
+    "sha256": "a65fcec3357bb0ead706ac68ee2ec7c809ac635829f3c2d7dbd1d1991f7ed39c"
+  }
+}
