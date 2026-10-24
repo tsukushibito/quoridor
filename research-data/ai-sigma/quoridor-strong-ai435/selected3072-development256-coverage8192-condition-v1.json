@@ -1,0 +1,278 @@
+{
+  "scope": "HUMAN_RELAYED_SAME_JUDGEMENT_FINITE_CONDITION_A256_AND_B8192_NO_RUNTIME_ADMISSION_YET",
+  "issuer": "integration324 only",
+  "decisionActor": "01a14947-3833-7aa2-a221-4dd909785e35",
+  "selectedExport": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/expanded-coverage128-direct-joint4096-v1/completion-9c8526f5/accepted-selected3072-export.json",
+    "bytes": 8212,
+    "mode": "0644",
+    "sha256": "a59a6e86b9ad0c850d84a7f200f5282e5008dc420e9057c47dbb97b74d633d51"
+  },
+  "finiteParity": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected3072-export-parity-v1/completion-8a6de9d1/accepted-selected3072-forward-parity.json",
+    "bytes": 4299,
+    "mode": "0644",
+    "sha256": "7fa84c20b49b305a09fd5cd4f74fdff85ac7a833fd0e505caddd9f68c9aa71e8"
+  },
+  "selectedTuple": {
+    "checkpoint": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/quoridor-strong435/expanded-coverage128-direct-joint4096-v1/joint/best.pt",
+      "bytes": 597575,
+      "mode": "0644",
+      "sha256": "6141f918f7bef5911592edc5e3a8017ef2909a3261a6f9b8712cdd8f4ea4ac61"
+    },
+    "descriptor": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/quoridor-strong435/expanded-coverage128-direct-joint4096-v1/joint/best-model/manifest.json",
+      "bytes": 680,
+      "mode": "0600",
+      "sha256": "ebc1e576317531d6f7ba078f832d9c9710bced2fe4f5bd82355478cdb72d2974"
+    },
+    "weights": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/quoridor-strong435/expanded-coverage128-direct-joint4096-v1/joint/best-model/weights.f32",
+      "bytes": 49284,
+      "mode": "0644",
+      "sha256": "ad5203de5b5e8a08d7a2cc776c86302c5bebc8598384968e123c084a14b3964b"
+    },
+    "policy": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/quoridor-strong435/expanded-coverage128-direct-joint4096-v1/joint/best-model/policy-head/manifest.json",
+      "bytes": 461,
+      "mode": "0600",
+      "sha256": "e2d2d0c3c66cdad39bba9f45a01c6608288dffeb1713de5b9d15f9e5d3562e20"
+    },
+    "policyWeights": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/quoridor-strong435/expanded-coverage128-direct-joint4096-v1/joint/best-model/policy-head/policy.f32",
+      "bytes": 27588,
+      "mode": "0644",
+      "sha256": "1878f04994e4ee469e93061d77cf6628bcc87a252446d3c30ef9b1813e107ae1"
+    }
+  },
+  "fingerprints": {
+    "shared": "d3c78f62b6486f184b8ba134cbe04543e8070c116f46fdb149227f86cf8ec8a9",
+    "policy": "f20f94f7814e058966a865a42523b95991a2a4272a36cc654ed355c0620d1eea"
+  },
+  "providerIdentity": "nnue-mcts-core209:sha256:dd8a94b52ea9063942bd06190242314c47737c7bede24bf7b16ed9b41289c524",
+  "acceptedObservation": "4096updates/1048576draws/33selectors/BEST3072/8stale at cap/floor384; operational sufficiencytrue not generalconvergence; policy improves but exposedVvalueMSE/sign worse and T/Vgap, no single cause established",
+  "A": {
+    "purpose": [
+      "A0 newvalue Alpha policyOFF vs originalCedar Alpha",
+      "B0 newlearnedprior MCTS vs samevalue explicituniform MCTS"
+    ],
+    "book": "SAME64 EXPOSED mid-stock5..10 full-history development families; same fixedfamily order both contrasts",
+    "contrasts": ["A0", "B0"],
+    "gamesPerContrast": 128,
+    "maximumGames": 256,
+    "colourPairsPerContrast": 64,
+    "operations": {
+      "perContrast": 8,
+      "gamesPerOperation": 16,
+      "total": 16,
+      "defaultLanes": 1
+    },
+    "normal": {
+      "timeMs": 100,
+      "reserveMs": 5,
+      "threads": 1,
+      "maxPlies": 200,
+      "book": false,
+      "ponder": false,
+      "ControlLMRpathTailPUCT": "existing current normal typed configs unchanged",
+      "MCTS": {
+        "K": 16384,
+        "nodeCap": 3424257,
+        "treeBytesPerEngine": 1073741824,
+        "providerRowsPerEngineLifetime": 26216000,
+        "independentProviders": true,
+        "gamesPerLifetime": 16
+      }
+    },
+    "statistics": {
+      "method": "existing conditional family bootstrap",
+      "generator": "PCG64",
+      "seed": 4352026102404,
+      "replicates": 10000,
+      "families": 64,
+      "sharedIndexTables": 1,
+      "quantiles": [0.0125, 0.9875],
+      "quantileMethod": "linear",
+      "confidence": 0.975,
+      "allocation": "two-comparison Bonferroni descriptive allocation",
+      "completeness": "ANY incomplete colourpair in eithercontrast =>BOTH formal intervalsNULL; all256 planned denominators retained, missing/UNKNOWN/FAILED never dropped or refilled",
+      "oldTableOrCIReuse": false
+    },
+    "limits": [
+      "No transitive MCTSvsCedar winrate",
+      "Uniform skips policyhead: prior plus implementationcost contrast, no extra dummyforward or prior-only cause",
+      "Conditional fixed exposed development book only, no unseen/independent/generalstrength/Elo/default/strongest proof"
+    ],
+    "resourceProposal": {
+      "hostReserveB": 4294967296,
+      "GPU": 0,
+      "libraryThreads": 1,
+      "twoMCTSFam6GiB": "starting proposal only, highestDBauthority/aggregate fresh admission required",
+      "nativeOperationSeconds": 420,
+      "commandSeconds": 480,
+      "serialParentSeconds": 8400,
+      "wholeOutputB": 2147483648,
+      "dataB": 1610612736,
+      "controlB": 268435456,
+      "headroomB": 268435456
+    },
+    "actualPlan": null,
+    "actualResources": null,
+    "actualOutput": null,
+    "admission": null
+  },
+  "B": {
+    "purpose": "Increase mid-stock whole-family coverage and select with value_mse using unchanged architecture/teacher",
+    "input": {
+      "sourceTrajectories": 8192,
+      "maxActionsPerTrajectory": 200,
+      "maximumTransitions": 1638400,
+      "observationsPerTrajectory": 1,
+      "stockBand": [5, 10],
+      "prefixSourceSeed": 4352026102401,
+      "selectionSeed": 4352026102402,
+      "splitRankSeed": 4352026102403,
+      "freezeBeforeRankSelection": true,
+      "selection": "native published order FIRST1408 eligible WHOLE components, one root/component",
+      "splitCounts": {
+        "T": 1024,
+        "selectionV": 256,
+        "H": 128
+      },
+      "requiredComponents": 1408,
+      "deficit": "eligible<1408 or crosssplit/lineage mismatch =>STOP; no refill/newseed/poolregeneration/resultdependent reselection",
+      "exclusions": [
+        "All named oldT/V/H exclusion-only authorities",
+        "dev4/clock",
+        "old252 wholeparent incldev64/new128/unused60",
+        "all previously evaluated books/cases"
+      ],
+      "H": "Existing protected exclusion identity-only; no sealedH/newE/oldfits96/paused payload investigation. NewH128 frozen bynative then excluded from teacher/features/loss/selector/fit and A",
+      "historyCoverage": "UNKNOWN remains UNKNOWN, no global unseen/completeindependence claim",
+      "sourceBoundary": "Existing TrajectoryInput/SavedSubsetInput finite8192/explicit split/rank/member/exclusion/bytes extension; current1024/64KiB refusal evidence retained, no fakefamily/complete/guardbypass/newgenerator/registry/mirror",
+      "censusMaximumB": 4194304,
+      "wholeInputMaximumB": 536870912
+    },
+    "teacher": {
+      "champion": "fixed Claustrophobia821bd",
+      "device": "CPU FP32",
+      "view": "rawSTM/posttanh/legal209/temperature1 same-forwardpolicy+value",
+      "observations": 1280,
+      "maximumNewOrientations": 2560,
+      "maximumNewActualRows": 2560,
+      "batch": 256,
+      "maximumBatches": 10,
+      "HRows": 0,
+      "priorActualRows": 3430,
+      "priorComponents": [3174, 256],
+      "namedCollisionRefusals": ["original3174 jointsource", "new256 jointsource"],
+      "provenance": "actual closed matchingproducer/input/oriented-key authorities before head; use complete upstream sameguarantee once, missing/mismatch/overlap STOP/UNKNOWN, no forwardfallback/refill",
+      "forbidden": ["old label copy", "array merge", "oldlabel reinference"]
+    },
+    "fit": {
+      "initial": "both actual selected3072 value and matchingpolicy load",
+      "freeze": "none",
+      "restart": null,
+      "optimizerState": "freshAdam/newINITIAL, no oldcheckpointresume or Cedar splice",
+      "selector": "value_mse",
+      "loss": {
+        "valueWeight": 1,
+        "policyWeight": 0.1,
+        "temperature": 1
+      },
+      "model": "same QF1/FT32/H32/FP32/bypassOFF/rawSTM/legal209",
+      "Adam": {
+        "lr": 3e-5,
+        "betas": [0.9, 0.999],
+        "eps": 1e-8,
+        "weightDecay": 0
+      },
+      "batch": 256,
+      "sampling": "row",
+      "lossWeighting": "row",
+      "reflectionProbability": 0.5,
+      "trainingSeed": 4352026102411,
+      "reflectionSeed": 4352026102412,
+      "TpanelSeed": 4352026102413,
+      "maximumUpdates": 4096,
+      "maximumTrainingDraws": 1048576,
+      "minimumTrainingDraws": 131072,
+      "checkpoints": [
+        0, 128, 256, 384, 512, 640, 768, 896, 1024, 1152, 1280, 1408, 1536, 1664, 1792, 1920, 2048,
+        2176, 2304, 2432, 2560, 2688, 2816, 2944, 3072, 3200, 3328, 3456, 3584, 3712, 3840, 3968,
+        4096
+      ],
+      "fullSelectionV": 256,
+      "Tpanel": 1024,
+      "diagnosticRows": 1024,
+      "maximumOrientationRowsPerSelector": 2560,
+      "maximumLogicalRows": 1133056,
+      "LR": {
+        "schedule": "plateau",
+        "factor": 0.5,
+        "patience": 0,
+        "floor": 1e-6,
+        "warmup": 0
+      },
+      "stop": {
+        "significantStale": 8,
+        "minDelta": 1e-5,
+        "minDeltaRelative": 0.0001,
+        "minimumFloorTrainingDraws": 0,
+        "overfitObservations": 3,
+        "validationAbs": 0.002,
+        "validationRelative": 0.01,
+        "trainAbs": 1e-5,
+        "trainRelative": 0.0001,
+        "metric": "report actual value_mse selector Tpanel/stop source semantics; do not invent pureT/bestrelative rule"
+      },
+      "outputs": "3named checkpoints+3exports only",
+      "best_validation_mse": "pure target_mse on this value_mse selector; joint_objective separate",
+      "changedExportParityMaximumRows": 96,
+      "forbidden": [
+        "extra fit on96/32",
+        "oldoptimizerresume",
+        "capextension",
+        "oldT1440 auto mixture",
+        "compare oldV32/192 as same denominator"
+      ]
+    },
+    "resourceProposal": {
+      "inputFamilyB": 4294967296,
+      "inputNativeB": 3221225472,
+      "inputAuthorityB": 1073741824,
+      "hostReserveB": 4294967296,
+      "inputCommandSeconds": 1200,
+      "inputParentSeconds": 1260,
+      "teacherFitFamilyB": 3221225472,
+      "teacherFitAuthorityB": 1073741824,
+      "teacherFitCommandTreeB": 2147483648,
+      "wrapperB": 67108864,
+      "GPU": 0,
+      "libraryThreads": 1,
+      "teacherCommandSeconds": 600,
+      "teacherParentSeconds": 660,
+      "fitBodySeconds": 900,
+      "fitCommandSeconds": 1020,
+      "fitParentSeconds": 1080,
+      "inputWholeB": 536870912,
+      "classTeacherFitWholeB": 134217728
+    },
+    "actualInputs": null,
+    "actualComponentsAndOrientations": null,
+    "actualTeacherRows": null,
+    "actualResources": null,
+    "actualOutputs": null,
+    "admission": null
+  },
+  "preserved": [
+    "USERPAUSE323/342.17",
+    "seals/newE/oldfits96",
+    "defaults/models/foreign",
+    "all originalFAILED/NULL/UNKNOWN fees",
+    "decimal50000000000B globalcap, no oldunusedrefund/lending"
+  ],
+  "scheduling": "Source/config independent in sameowners; heavy timing/build/fit/largeIO serialize by actualSTOP. Othello ready candidate software/128Search receives next resourcewindow, not Qall-stages gate. No permanentrole/session/poller/newledger/humanACK/parentclose gate",
+  "goalsComplete": false
+}

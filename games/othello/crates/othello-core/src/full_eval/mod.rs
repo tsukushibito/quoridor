@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-// Scalar port of Egaroucid Console 7.8.1 evaluation conventions.
+// Portable port of Egaroucid Console 7.8.1 evaluation conventions.
 // Upstream: Takuto Yamana / Egaroucid Project, evaluate_common.hpp and
 // evaluate_generic.hpp, commit 570d5e0a478c9d720d75de06a5d31995f412704a.
 // Weight redistribution is not authorized by this source module.
 
-//! Exact 16-shape / 64-occurrence / 60-placement-phase scalar boundary.
+//! Exact 16-shape / 64-occurrence / 60-placement-phase integer boundary.
 //! Upstream codes are player=0, opponent=1, empty=2, first listed cell most
 //! significant. Our board remains row-major A1=bit0; upstream A1=bit63.
 //! Scores here are upstream engine discs (STEP=32), never centidiscs.
@@ -12,6 +12,8 @@
 use crate::bitboard::Position;
 use serde::Serialize;
 
+#[cfg(all(target_arch = "x86_64", target_endian = "little"))]
+mod avx2;
 mod features;
 pub mod geometry;
 mod weights;
@@ -29,7 +31,8 @@ pub const STONE_VALUES: usize = 65;
 
 /// Generic reads raw i16 tables. The upstream SIMD loader clips pattern values
 /// to +/-4092 and ordering values to +/-16380 before its unsigned bias/gathers.
-/// This scalar interpretation reproduces that clipping without a second table.
+/// Simd preserves that clipping on the raw table: runtime AVX2 where available,
+/// with the same scalar portable fallback and no second table.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub enum TableInterpretation {
@@ -110,8 +113,29 @@ impl<'a> FullEvaluator<'a> {
     pub fn midgame_raw(&self, state: &FeatureState) -> Result<MidgameRaw, InvalidPhase> {
         let phase = placement_phase(state.occupied()).ok_or(InvalidPhase)?;
         let start = usize::from(phase) * PHASE_VALUES;
+        let pattern_raw = self.pattern_raw(start, state.indices());
+        Ok(self.finish_midgame_raw(state, phase, start, pattern_raw))
+    }
+
+    fn pattern_raw(&self, start: usize, indices: &[u16; N_FEATURES]) -> i32 {
+        // SAFETY: runtime detection includes OS support for AVX2 register state.
+        // The private target-feature owner additionally checks every widened
+        // gather against the exact borrowed phase slice before loading.
+        #[cfg(all(target_arch = "x86_64", target_endian = "little"))]
+        if self.interpretation == TableInterpretation::Simd
+            && std::is_x86_feature_detected!("avx2")
+            && let Some(phase) = self.weights.midgame.get(start..start + PHASE_VALUES)
+            && let Some(sum) = unsafe { avx2::pattern_sum(phase, indices) }
+        {
+            return sum;
+        }
+        self.scalar_pattern_raw(start, indices)
+    }
+
+    // Active Generic implementation and portable/non-AVX2 Simd fallback.
+    fn scalar_pattern_raw(&self, start: usize, indices: &[u16; N_FEATURES]) -> i32 {
         let mut pattern_raw = 0;
-        for (feature, &index) in state.indices().iter().enumerate() {
+        for (feature, &index) in indices.iter().enumerate() {
             let offset = geometry::TABLE_OFFSETS[feature / 4];
             let value = i32::from(self.weights.midgame[start + offset + usize::from(index)]);
             pattern_raw += match self.interpretation {
@@ -119,20 +143,30 @@ impl<'a> FullEvaluator<'a> {
                 TableInterpretation::Simd => value.clamp(-4092, 4092),
             };
         }
+        pattern_raw
+    }
+
+    fn finish_midgame_raw(
+        &self,
+        state: &FeatureState,
+        phase: u8,
+        start: usize,
+        pattern_raw: i32,
+    ) -> MidgameRaw {
         // Upstream SIMD leaves this auxiliary table unmodified.
         let auxiliary_raw = i32::from(
             self.weights.midgame[start + PATTERN_VALUES + usize::from(state.own_count())],
         );
         let total_raw = pattern_raw + auxiliary_raw;
         let rounded = round_discs(total_raw);
-        Ok(MidgameRaw {
+        MidgameRaw {
             phase,
             pattern_raw,
             auxiliary_raw,
             total_raw,
             rounded,
             clamped: rounded.clamp(-64, 64),
-        })
+        }
     }
 
     /// Shapes 8..11 / features 32..47. Upstream does NOT SCORE_MAX-clamp this

@@ -1,0 +1,99 @@
+{
+  "scope": "SOURCE_CLEAR_CAS_ADOPTED_NEW_AFFECTED_SOFTWARE_SUBMITTED_ONLY",
+  "sourceAdoption": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/midgame-vector-affected-software-v1/source-adoption.json",
+    "bytes": 2199,
+    "mode": "0644",
+    "sha256": "23192dc0253ff7317ae3bc6e03aab20982ae9d9c17b675022aa6ed16b892ff00"
+  },
+  "sourcePacket": {
+    "path": "/workspaces/quoridor/.worktree/othello-core-n96/.artifacts/othello-full-search-n96/midgame-owner-vector-source-v1/source-packet.json",
+    "bytes": 5654,
+    "mode": "0644",
+    "sha256": "06692c51652f7e062db3899954c068be982b36b82b09f0d3046fb2d46024612a"
+  },
+  "reviewAcceptance": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/midgame-vector-boundary-review-v1/Root-acceptance.json",
+    "bytes": 2161,
+    "mode": "0644",
+    "sha256": "830a3e52a825d1c336a1b02669aa7af53d435fa72a54ba0f562ebecf6cd675e2"
+  },
+  "staged": [
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_eval/mod.rs",
+      "bytes": 9526,
+      "mode": "0644",
+      "sha256": "0e72e4e0623c8457c8f3625a731408f84be2452499b4a977c16010c72c83374d"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_eval/avx2.rs",
+      "bytes": 4537,
+      "mode": "0644",
+      "sha256": "ea80bc33582384e33a27ef973b1ce46f5fb10e63add42175860ad9bd314d88cb"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_eval/tests.rs",
+      "bytes": 15809,
+      "mode": "0644",
+      "sha256": "f28b970ebf8a8054acf9e766556712989d06ba59e118da161704aa479702a2c1"
+    }
+  ],
+  "configuration": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/midgame-vector-affected-software-v1/config.json",
+    "bytes": 13436,
+    "mode": "0644",
+    "sha256": "c14baccc00fb099b20bff376205297dce0697d693a3cf28cef33807de3b5b1ef"
+  },
+  "resources": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/midgame-vector-affected-software-v1/resources.json",
+    "bytes": 1746,
+    "mode": "0644",
+    "sha256": "6aba45ed9a9740b0938d4d4c61d9c4fe1239a8c30bde3bc04f20706a241556eb"
+  },
+  "job": {
+    "schema_version": 1,
+    "job_id": "42e9c001-438d-4692-a9dd-b2be3aae3022",
+    "issue": "quoridor-n96.1",
+    "thread_id": "01a1376a-bfd3-75d2-bd64-61e9416b3b13",
+    "phase": "starting",
+    "created_at": "2026-10-24T00:38:28.593934+00:00",
+    "config_sha256": "d13694d6b5386128477ae576551a9cc20f99052561383c7b1ffe90cc1270acbe",
+    "supervisor": {
+      "pid": 3695087,
+      "start_ticks": "85063582",
+      "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+    },
+    "launch": {
+      "job_id": "42e9c001-438d-4692-a9dd-b2be3aae3022",
+      "config_sha256": "d13694d6b5386128477ae576551a9cc20f99052561383c7b1ffe90cc1270acbe",
+      "owner": {
+        "pid": 3695040,
+        "start_ticks": "85063330",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "launcher": {
+        "pid": 3695075,
+        "start_ticks": "85063577",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "supervisor": {
+        "pid": 3695087,
+        "start_ticks": "85063582",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      }
+    },
+    "updated_at": "2026-10-24T00:38:28.774724+00:00"
+  },
+  "planned": {
+    "newPortableTests": 2,
+    "newIgnoredAVX2Tests": 2,
+    "oldTests": 0,
+    "nativeCLI": true,
+    "affectedClippy": true,
+    "WasmConsumerBuild": true
+  },
+  "compilerAndTestResult": "PENDING_UNREAD_ORIGINAL_COMPLETION",
+  "realWeightsOrSearchAdmission": null,
+  "performance": null,
+  "limits": "Scalar portability remains active; sourceclear is not actualcodegen/realweight/performance proof. Only exact new synthetic4tests and affectedsoftware; future normal128Search separately bound, no oldsuccessfulsuite replay. Originalreviewfailures/costs preserved, adminclosure independent."
+}
