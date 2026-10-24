@@ -4377,7 +4377,7 @@ Qは同じnative128/selected2560 AlphaOFF対original Cedar256の通常2lane pare
 
 外側233.599611048sはcommand230.922081028sを内包し加算しない。normalreturnNULLと実exception directreap/process+handles/remaining[]/maskpersistcompletedを確認し、元disk pending/attemptedは別に保持した。既知command identityは終了済み。OWN TMPのplaywright-transform-cache-1000は未削除で課金を保持し、実影響tree479232B allocatedとserved bundle35672064Bを一度だけ記録した（metadata tail別、global/peak/全費用UNKNOWN）。証拠は[元セットアップ失敗結果](../research-data/othello/strong-ai-n96/current-ui-fullmodel4-setup-failure-result-v1.json)。実commandと収集STOP後、既に準備済みのQ selected2560 AlphaOFF/Cedar・未使用128component/256局の通常親を次のfresh資源枠へ進める。O全goal・返信・親closeを入口にしない。
 
-### 2026-10-24: selected2560 unused128 Alpha contrast completed; finite interpretation under review
+### 2026-10-24: selected2560 unused128 Alpha contrast completed; finite interpretation accepted
 
 原a063da13は正常cohortの2lanes・16operationsで全256局を公開し、原1238164cの保存解析は128完全色ペア・UNKNOWN/欠測/forfeit/cap/late/illegal/errorすべて0を返した。LEFT selected2560 Alpha policyOFF対RIGHT original Cedar Alpha、同100ms/reserve5/max200plyの結果は116勝1分139敗、score .455078125、95%条件付きfamily bootstrap区間[.40234375,.5078125]である。今回一度の新PCG64 seed4352026102405・10000x128・NumPy2.5.3・linear(.025,.975)、index SHA6c866fb3を保存し、旧table/CIや対局を再演していない。元summaryのBonferroni汎用文言にかかわらず、この計画は一つの事前固定対照である。
 
@@ -4386,3 +4386,13 @@ Qは同じnative128/selected2560 AlphaOFF対original Cedar256の通常2lane pare
 cohort外側557.117679436sと並列native guardian合計1058.389143340sは異なる範囲で加算しない。保存解析外側1.634725221sも内部commandを内包する。16nativeと解析childのactual directreap/process+handles/remaining[]/maskpersistcompleted、元disk pending/attemptedを区別した。解析finalizeの初回CPU12,18はmanagement18だけというcollection規則でpublication前に拒否され、同じ未確定結果を正しい18で一度確定した（統計command再実行0、元拒否log保持）。実Qwhole保持pointはSTOP後の一度で15,015,936B allocated、small tail別、global/continuous peak/fullfees UNKNOWN。全旧FAILED/RAW/UNKNOWN費と50GB制約は維持する。
 
 Oの同B21は現役Vite preview argvの具体的誤りや支持されるconfig修復を見つけなかった。pinned Playwright sourceは最初のURL availability待ちがwebServer30s raceより前にあり、該当HTTP経路にsocketTimeout指定がないが、これは実c7 phase/proxy/network原因の確定ではない。元guarded final記録はPlaywright child identityとremaining[]を保持するだけでVite descendant argv/time履歴を持たず、起動のfirst/last観測は提供不能だった。Viteが未起動だったという証明にはしない。新probe/browser再実行/timeout拡大はせず、限定診断packet671ff273/report10d6bc9fと依存projection a8785e4bを既存判断へ渡す。
+
+同Maxの.435.16は固定input48bdf967/collection9098fd67にCONCLUSION_CLEAR・essential0/ordinary0を返し、Rootがreport2de16c26/minimum08546d3aとactual readerSTOP385c013bを受け入れた。exact `/config` 投影089aa386が正常解析argvのexperiment77d6b89e→configdd243c20を結ぶ。優位の未実証は同等/no-harmでも逆方向の95%優位でもなく、今回の一対照・条件付きdevelopment記述だけである。レビュワー自身のglobal/local slots取り違えによる.033587115s失敗・normalreturn/cleanupAPI NULL・maskpersist UNKNOWNは成功した9 reader/report返却と別に保持した。通常own closeは新工程のgateにしない。
+
+### 2026-10-24: one setup-only diagnostic and direct uniform-MCTS/Cedar condition assigned
+
+研究判断の新しい一度の継続として、同B21へ現役Playwright1.64.1の同webServer/Vite/current bundleによるsetup-only fixtureを配分した。標準test importとscalar setup markerだけでpage/context/browser/navigation/app/File/model/Worker/Searchを使わず、新診断のmodel/Searchは0という明示条件である。旧c7の実counter NULLは変えない。pinned sourceで資格を確認した公式DEBUG=pw:webserverだけを使い、元webServer30s/global230sの意味・proxy/network/flags/configを変えず、raw logを有界に保持する。数値提案はONE90s command/150s parent、CPU4/G18/lib1/G0、family2GiB(common768MiB+command1280MiB)/host4/fresh6GiB、NEWwhole16MiB/log合計1MiB。外側90sは診断上限であり修復ではない。実phaseの帰属を得てもnested setupがFAILEDならそのまま保持し、二回目や実app4の自動再試行はしない。
+
+同C435.1へselected2560 explicit-uniform MCTS対original Cedar Alphaの直接256局を配分した。元a063と全く同じnative128componentと色順を再用し、今はEXPOSED DEVELOPMENTとして扱う。新pool/publication/selection/fit/teacher/architecture/PUCT/prior gridは足さず、H128と1408除外・今128のfuture-fit除外を維持する。MCTSは現役のK16384/node3424257/tree1GiB/provider26216000rows・persistent16game owner、policy logitsをloadせず人工policy forwardも足さない。learned composite Provider4dc25は将来uniform constructorのidentityと同一視しない。normal100ms/reserve5/one-thread/max200と元Cedar設定を固定する。探索方式とvalue利用費の同時差を測り、prior-only原因や旧対照からの推移的勝率を作らない。
+
+QはONE256planned/128色ペア・16x16 operations、新PCG64seed4352026102406/10000x128/NumPy2.5.3/linear95(.025,.975)を結果前に固定し、全完了のみCI、欠測は全256分母・UNKNOWN/CI NULL・補充なしである。数値提案は既存factoryのserial AI12/main18/lib1/G0、family6GiB(common1+native5)/host4/fresh10GiB、native420s/op480s/parent8400s、NEWwhole2GiB。実uniform tuple/source/Build/image/serializer/CPU/RAM/physicalpeer/最高authority/holding/origin/outputは324が通常入口で束縛する。提案はpeak/予約/quiet保証ではない。短いO診断がreadyなら先行し、未readyならQをO全goalや返信へ待たせず、heavyだけactualSTOPで直列にする。両配送はacceptedであり、source実開始や数値STARTを認定しない。旧FAILED/NULL/UNKNOWN費・pause/seal/H/default/foreign/50GBは不変で、Cedarだけから最強を認定しない。
