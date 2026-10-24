@@ -1,0 +1,384 @@
+{
+  "schema": "quoridor.uniform-first-native16-finalization-failure-collection.v1",
+  "status": "PARENT_FAILED_AFTER_NATIVE16_EXIT0_CONFIG_CLOSURE_REFUSAL",
+  "jobID": "73952f8f-0cb3-452b-849d-3cea1800dd78",
+  "parentResult": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-launch-restored-entry-v3/common/parent-runtime/result.json",
+    "bytes": 2114,
+    "mode": "0600",
+    "sha256": "9dffbb4656a1788352ccfbc9fbe90e019400d5ce58ffd9342d740584078597b0"
+  },
+  "laneResult": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-launch-restored-entry-v3/lane-0/outer-runtime/result.json",
+    "bytes": 522,
+    "mode": "0600",
+    "sha256": "0c5bf1365e1675cd993a8cb7c3a6a92c8ff6da520d4729a8859c449df92eb366"
+  },
+  "sequenceResult": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-launch-restored-entry-v3/lane-0/sequence/result.json",
+    "bytes": 2769,
+    "mode": "0644",
+    "sha256": "a321ed74f5d0896a31e66f0eb0eaa1f3f81b4379391b4667e92c8ef92dc5744d"
+  },
+  "failedNormalManifest": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-launch-restored-entry-v3/lane-0/sequence/run-000/operation/manifest.json",
+    "bytes": 9878,
+    "mode": "0644",
+    "sha256": "8b55d6e285435c22240c8689bd00a6edd8a7eb07ce7c8d01b123eab95bb69a92"
+  },
+  "nativeFiles": {
+    "result.json": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-launch-restored-entry-v3/lane-0/data/batch-000/result.json",
+      "bytes": 5888,
+      "mode": "0644",
+      "sha256": "ae0a7e99af635518b99bf51bbfb77bfd5ba72633a12c9a44e6c2dcf215f69f4d"
+    },
+    "manifest.json": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-launch-restored-entry-v3/lane-0/data/batch-000/manifest.json",
+      "bytes": 50211,
+      "mode": "0644",
+      "sha256": "85fd9e47ec6e93bcbf0ff7146d9967860ac5a46cf619fc86854014591dbf3a01"
+    },
+    "config.json": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-launch-restored-entry-v3/lane-0/data/batch-000/config.json",
+      "bytes": 26823,
+      "mode": "0644",
+      "sha256": "c4b5a8aacf8b9adfd126d2a69800e33136feff33d8d47dd72f17e36ae74cf110"
+    },
+    "games.csv": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-launch-restored-entry-v3/lane-0/data/batch-000/games.csv",
+      "bytes": 1238,
+      "mode": "0644",
+      "sha256": "e60ad3194f7e3f49abedb251104bb7ad7465fe736ab506e32de30cb4c601f78d"
+    },
+    "evaluator-identities.json": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-launch-restored-entry-v3/lane-0/data/batch-000/evaluator-identities.json",
+      "bytes": 490,
+      "mode": "0644",
+      "sha256": "5f8a897a04f57dd1bbfc37301ff80778e3a8ada419a18dc4947373d35d30bfa4"
+    },
+    "completed.jsonl.gz": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-launch-restored-entry-v3/lane-0/data/batch-000/completed.jsonl.gz",
+      "bytes": 485171,
+      "mode": "0644",
+      "sha256": "e3ac3dba3e1778287a2ea0d127b45b3ed51f8394af5f850e81f8a7b92f469216"
+    }
+  },
+  "nativeLog": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-launch-restored-entry-v3/lane-0/sequence/run-000/operation/run.full.log",
+    "bytes": 565,
+    "mode": "0644",
+    "sha256": "3bed7151c43c011849ff8dc260aaa03d95545eddadd6c9a058689e21780445d1"
+  },
+  "nativePartial": {
+    "status": "RETAINED_NATIVE_SCALARS_PENDING_NORMAL_FINALIZATION",
+    "started": 16,
+    "completed": 16,
+    "completePairs": 8,
+    "unknown": 0,
+    "wins": 4,
+    "draws": 0,
+    "losses": 12,
+    "score": 0.25,
+    "fullCampaignDenominator": 256,
+    "CI": null,
+    "nativeStopped": null,
+    "failureAttribution": null,
+    "loadedEvaluators": [
+      {
+        "kind": "nnue-mcts-core209",
+        "content_sha256": "1a1191e634baa8b75a21cddf937f84d650be2443e157d4d4c8e0644b1e5a5ae1",
+        "row_identity": "nnue-mcts-core209:sha256:1a1191e634baa8b75a21cddf937f84d650be2443e157d4d4c8e0644b1e5a5ae1"
+      },
+      {
+        "kind": "nnue-residual-f32",
+        "content_sha256": "eb0fbc9357252e916b1c6314bee6f6c76d975828c15cc439cceb9766309fb5b9",
+        "row_identity": "nnue-residual-f32:sha256:eb0fbc9357252e916b1c6314bee6f6c76d975828c15cc439cceb9766309fb5b9"
+      }
+    ],
+    "nnCalls": 1076966,
+    "nativeReportedBatchSizes": {
+      "1": 1076966
+    },
+    "reportedAllocatedNodesPeak": 397517,
+    "reportedPeakRSS": 164380672,
+    "globalOrFamilyContinuousPeak": null,
+    "rawArchiveBytes": 2357853,
+    "noNewBootstrapOrRNG": true
+  },
+  "campaign": {
+    "planned": 256,
+    "plannedFamilies": 128,
+    "attemptedNormalOperations": 1,
+    "normalCompletedOperations": 0,
+    "nativeCompletedGames": 16,
+    "remainingOperationsUNRUN": 15,
+    "remainingGamesUNRUN": 240,
+    "normalFinalizedOutcomes": 0,
+    "normalUnknownDenominator": 256,
+    "overallWDL": null,
+    "CI": null,
+    "firstBatchRejectedByNormalClosure": true,
+    "noDropOrImputation": true
+  },
+  "cause": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-launch-restored-entry-v3/common/failure-73952f8f/exact-config-cause.json",
+    "bytes": 1120,
+    "mode": "0644",
+    "sha256": "3c566caabd9cba389fbc935b9c3ddd34d4503548c84eb52accb8248b9e853cf9"
+  },
+  "preparedUnissuedSupplement": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-launch-restored-entry-v3/common/failure-73952f8f/lmr-false-supplement/packet.json",
+    "bytes": 13907,
+    "mode": "0644",
+    "sha256": "d2a0a9a6e7ce929b5f43cc350ea434538bf94a5b68ad282f2a551b3c60b1d1e6"
+  },
+  "cleanup": {
+    "parent": {
+      "job_id": "73952f8f-0cb3-452b-849d-3cea1800dd78",
+      "outcome": "failed",
+      "error": "{\"type\": \"Refused\", \"message\": \"finite cohort stopped: declared lane failed; {\\\"result\\\": {\\\"path\\\": \\\"/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-launch-restored-entry-v3/lane-0/outer-runtime/result.json\\\", \\\"sha256\\\": \\\"0c5bf1365e1675cd993a8cb7c3a6a92c8ff6da520d4729a8859c449df92eb366\\\", \\\"bytes\\\": 522, \\\"mode\\\": \\\"0600\\\"}, \\\"state\\\": {\\\"path\\\": \\\"/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-launch-restored-entry-v3/lane-0/outer-runtime/state.json\\\", \\\"sha256\\\": \\\"8b023bd4d0489523eaf29ade373a0c656e71fcb0986b2fb5c698c73ca3246bb3\\\", \\\"bytes\\\": 2076, \\\"mode\\\": \\\"0600\\\"}}\", \"notes\": []}",
+      "error_notes": [],
+      "exit_code": 1,
+      "finished_at": "2026-10-24T12:11:31.772246+00:00",
+      "wall_seconds": 62.33524390403181,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+      "cleanup_complete": true,
+      "cleanup_errors": [],
+      "log_bytes_seen": 1068,
+      "log_bytes_retained": 1068,
+      "cohort_primary": {
+        "type": "Refused",
+        "message": "finite cohort stopped: declared lane failed; {\"result\": {\"path\": \"/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-launch-restored-entry-v3/lane-0/outer-runtime/result.json\", \"sha256\": \"0c5bf1365e1675cd993a8cb7c3a6a92c8ff6da520d4729a8859c449df92eb366\", \"bytes\": 522, \"mode\": \"0600\"}, \"state\": {\"path\": \"/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-launch-restored-entry-v3/lane-0/outer-runtime/state.json\", \"sha256\": \"8b023bd4d0489523eaf29ade373a0c656e71fcb0986b2fb5c698c73ca3246bb3\", \"bytes\": 2076, \"mode\": \"0600\"}}",
+        "notes": []
+      },
+      "cohort_secondary": []
+    },
+    "lane": {
+      "job_id": "ef7c602d-a992-4df6-8a0f-b977ade7ca8a",
+      "outcome": "failed",
+      "error": null,
+      "error_notes": [],
+      "exit_code": 1,
+      "finished_at": "2026-10-24T12:11:31.527686+00:00",
+      "wall_seconds": 61.45719286194071,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+      "cleanup_complete": true,
+      "cleanup_errors": [],
+      "log_bytes_seen": 729,
+      "log_bytes_retained": 729
+    },
+    "nativeActualNormalReturn": {
+      "command": [
+        "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/unused128-evaluation-import-software-v2/image/quoridor-runner",
+        "arena",
+        "--experiment",
+        "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-launch-restored-entry-v3/lane-0/sequence/run-000/experiment.json",
+        "--experiment-sha256",
+        "8b5a0790696902b1dfed21fb2bbb8d84d7af35073e3d0704dc0d7830cbcb8d62"
+      ],
+      "status": "complete",
+      "child": {
+        "pid": 447882,
+        "start_ticks": "89216980",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "cpu_plan": {
+        "management": [
+          18
+        ],
+        "commands": {
+          "run": [
+            12,
+            18
+          ],
+          "test": [
+            12
+          ]
+        },
+        "allocation": [
+          12,
+          18
+        ],
+        "resource_CPUs": 2,
+        "worker_CPUs": 1,
+        "library_threads": 1
+      },
+      "command_cpu_scope": "run",
+      "log_bytes_seen": 565,
+      "scope": "session group and periodically recorded descendants; no daemon adoption",
+      "exit_code": 0,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "cleanup_complete": true,
+      "log_bytes_retained": 565,
+      "wall_seconds": 60.1975473620696,
+      "handle_closes_attempted": [
+        "selector_close",
+        "pipe_close",
+        "pidfd_close",
+        "log_close"
+      ],
+      "primary_error": null,
+      "process_cleanup_complete": true,
+      "handle_closes_complete": true,
+      "signal_mask_restoration": "completed",
+      "final_record_persist": "completed",
+      "finalization_errors": []
+    },
+    "diskSnapshot": {
+      "command": [
+        "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/unused128-evaluation-import-software-v2/image/quoridor-runner",
+        "arena",
+        "--experiment",
+        "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-launch-restored-entry-v3/lane-0/sequence/run-000/experiment.json",
+        "--experiment-sha256",
+        "8b5a0790696902b1dfed21fb2bbb8d84d7af35073e3d0704dc0d7830cbcb8d62"
+      ],
+      "status": "complete",
+      "child": {
+        "pid": 447882,
+        "start_ticks": "89216980",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "cpu_plan": {
+        "management": [
+          18
+        ],
+        "commands": {
+          "run": [
+            12,
+            18
+          ],
+          "test": [
+            12
+          ]
+        },
+        "allocation": [
+          12,
+          18
+        ],
+        "resource_CPUs": 2,
+        "worker_CPUs": 1,
+        "library_threads": 1
+      },
+      "command_cpu_scope": "run",
+      "log_bytes_seen": 565,
+      "scope": "session group and periodically recorded descendants; no daemon adoption",
+      "exit_code": 0,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "cleanup_complete": true,
+      "log_bytes_retained": 565,
+      "wall_seconds": 60.1975473620696,
+      "handle_closes_attempted": [
+        "selector_close",
+        "pipe_close",
+        "pidfd_close",
+        "log_close"
+      ],
+      "primary_error": null,
+      "process_cleanup_complete": true,
+      "handle_closes_complete": true,
+      "signal_mask_restoration": "pending",
+      "final_record_persist": "attempted",
+      "finalization_errors": []
+    },
+    "exactKnownIdentities": [
+      {
+        "identity": {
+          "pid": 447137,
+          "start_ticks": "89216506",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "observed": "absent"
+      },
+      {
+        "identity": {
+          "pid": 447679,
+          "start_ticks": "89216854",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "observed": "absent"
+      },
+      {
+        "identity": {
+          "pid": 447748,
+          "start_ticks": "89216889",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "observed": "absent"
+      },
+      {
+        "identity": {
+          "pid": 447805,
+          "start_ticks": "89216918",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "observed": "absent"
+      },
+      {
+        "identity": {
+          "pid": 447856,
+          "start_ticks": "89216957",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "observed": "absent"
+      },
+      {
+        "identity": {
+          "pid": 447882,
+          "start_ticks": "89216980",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "observed": "absent"
+      }
+    ],
+    "originalFailedManifestStatus": "FAILED",
+    "failedManifestProcessCleanup": true,
+    "maskPersistActual": "completed",
+    "maskPersistDisk": {
+      "signal_mask_restoration": "pending",
+      "final_record_persist": "attempted"
+    }
+  },
+  "costs": {
+    "parentWallSeconds": 62.33524390403181,
+    "laneWallSeconds": 61.45719286194071,
+    "operationWallSeconds": 60.63529313507024,
+    "nativeGuardianSeconds": 60.1975473620696,
+    "nativeReportedSeconds": 60.0067669,
+    "accounting": "Nested same serial lifetime, never sum; reportedSearch/inference/init/archive spans also nested",
+    "fullFees": null
+  },
+  "collectionLimits": "No raw archive body decompression/replay, rules/model/Search/bootstrap/index recomputation or finalizer rerun by this collection. Native scalar CSV read1238B for WDL. Generic native manifest/config JSON parsing transiently decoded selected evaluation prefix/history; an earlier scalar projection accidentally printed planned_slots and tool output was truncated. No zero-payload-decode claim; no H source opened and no printed state used for new scientific selection.",
+  "affectedPoint": {
+    "root": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-launch-restored-entry-v3",
+    "logicalBytes": 1870920,
+    "allocatedBytes": 2134016,
+    "newOwnedCeilingB": 2113929216,
+    "old69ReserveB": 16777216,
+    "old195ReserveB": 16777216,
+    "combinedOriginalCeilingB": 2147483648,
+    "scope": "One current post-STOP directed point after supplement, before collection/admin tails; no globalinventory/peak claim",
+    "globalActual": null
+  },
+  "next": "Return actual partial native16 and metadata-only cause to existing judgement; acceptedparent spent, no automatic replay/remaining15/refill/reseed/nextparent/analysis. Independent Osource continues; heavysoftware may use next realSTOP window when fixedsource ready.",
+  "preservation": "All69f9/195e/7395/sourcecontrolfailures/fees/NULL/disk-vs-returned/323342.17USERPAUSE/seals/newE/oldfits96/H128/defaultmodels/foreign/decimal50GB held; no strength/default/causal/fullcampaign claim"
+}

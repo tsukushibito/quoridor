@@ -6007,12 +6007,49 @@ def arena_reference_report(config, files, values=None, expected_build=None):
     for flag in ("disable_continuation_static_ordering", "decision_only"):
         if serialized_config["arena"].get(flag) is False:
             del serialized_config["arena"][flag]
+    # Engine.lmr is serde(default), without skip_serializing_if. Only omission
+    # receives false; explicit null, true and non-boolean values remain distinct.
+    for engine in serialized_config["engines"]:
+        engine.setdefault("lmr", False)
+
+    def first_difference(expected, actual, path="/config"):
+        if isinstance(expected, dict) and isinstance(actual, dict):
+            for key in sorted(expected.keys() | actual.keys()):
+                child = path + "/" + key.replace("~", "~0").replace("/", "~1")
+                if key not in expected or key not in actual:
+                    return child + (" unexpected" if key not in expected else " missing")
+                difference = first_difference(expected[key], actual[key], child)
+                if difference:
+                    return difference
+            return None
+        if isinstance(expected, list) and isinstance(actual, list):
+            if len(expected) != len(actual):
+                return f"{path} length expected={len(expected)} actual={len(actual)}"
+            for index, (left, right) in enumerate(zip(expected, actual)):
+                difference = first_difference(left, right, f"{path}/{index}")
+                if difference:
+                    return difference
+            return None
+        # Python's False == 0 must not hide a malformed boolean setting.
+        if expected == actual and (type(expected) is bool) == (type(actual) is bool):
+            return None
+
+        def brief(value):
+            return type(value).__name__ + ":" + repr(value)[:120]
+
+        return f"{path} expected={brief(expected)} actual={brief(actual)}"
+
+    prefix = "closed native manifest/summary/config/cleanup correspondence: "
+    require(manifest["result"] == publication, prefix + "/result differs")
+    difference = first_difference(serialized_config, manifest["binding"]["config"])
+    require(difference is None, prefix + (difference or ""))
     require(
-        manifest["result"] == publication
-        and manifest["binding"]["config"] == serialized_config
-        and manifest["cleanup"]["archive_closed_verified"] is True
-        and manifest["cleanup"]["all_workers_joined"] == report["all_workers_joined"],
-        "closed native manifest/summary/config/cleanup correspondence",
+        manifest["cleanup"]["archive_closed_verified"] is True,
+        prefix + "/cleanup/archive_closed_verified is not true",
+    )
+    require(
+        manifest["cleanup"]["all_workers_joined"] == report["all_workers_joined"],
+        prefix + "/cleanup/all_workers_joined differs from report",
     )
     for name, filename in required.items():
         if name == "native_manifest":
