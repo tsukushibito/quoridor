@@ -1,0 +1,2085 @@
+{
+  "status": "FINITE_CURRENT_FULLMODEL_BROWSER_FUNCTION_TIME_LIFECYCLE_ACCEPTED_NOT_STRENGTH",
+  "jobId": "130a1469-52db-43fe-8d15-3c092dcf9bfe",
+  "originalResult": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-browser33-normal-entry-v1/data/actual-result.json",
+    "bytes": 155427,
+    "mode": "0600",
+    "sha256": "029f7ce31caa9dab449484a6e37f335c424e6efa37fb16071c9a13434ad91b21"
+  },
+  "controllerReceipt": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-browser33-normal-entry-v1/data/controller-receipt.json",
+    "bytes": 52056,
+    "mode": "0600",
+    "sha256": "dad55dd919bea6673b73e0ab36aabff4bdbc196337244594cce2030333b359c9"
+  },
+  "outerResult": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-browser33-normal-entry-v1/runtime/result.json",
+    "bytes": 528,
+    "mode": "0600",
+    "sha256": "cdbd135aa41b968d57e1c0e5ed1abd81d717edaa23f948579bde269ab56342c6"
+  },
+  "runtimeConfig": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-browser33-normal-entry-v1/runtime/config.json",
+    "bytes": 821,
+    "mode": "0600",
+    "sha256": "09a84be8e2ce3d4feece4dfee3e8b6bebba20a9e787b0c2f9da7ccfcca865ce8"
+  },
+  "resources": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-browser33-normal-entry-v1/resources.json",
+    "bytes": 2006,
+    "mode": "0644",
+    "sha256": "e6195daf4960f8d9171b02a447ce50e2ff2be235d448a82aa1b5296685ee8572"
+  },
+  "originalSTOP": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-browser33-normal-entry-v1/Root-controller-STOP.json",
+    "bytes": 2515,
+    "mode": "0644",
+    "sha256": "17eab97f5fc291e848a3da17116bf96e1254ee4d6d7f49839f4af35679c4188d"
+  },
+  "actualReturned": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-browser33-normal-entry-v1/actual-browser.returned.json",
+    "bytes": 3297,
+    "mode": "0644",
+    "sha256": "837d1bdbba9c3b72067ab924a6e556754dc939438d7ad4256c994b3318eaf193"
+  },
+  "actualABI": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-browser33-normal-entry-v1/actual-ABI-source-receipt.json",
+    "bytes": 2679,
+    "mode": "0644",
+    "sha256": "c769f224302abb43eed411c2a67f87c8e60bd0c3fb6db332d0124768108941dd"
+  },
+  "kindCompiledLineage": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-browser33-normal-entry-v1/native-kind-compiled-lineage.json",
+    "bytes": 2623,
+    "mode": "0644",
+    "sha256": "33274a89dd3f28d9874303e459c45d01a0e5ec2fd25614b87567a67f2c9c1efb"
+  },
+  "planned": 33,
+  "attempted": 33,
+  "completedNumeric": 32,
+  "revokedRequest": 1,
+  "remainingUNRUN": 0,
+  "firstError": null,
+  "fixed": [
+    {
+      "caseId": "development/continuous16-practical-v1/f0/p16",
+      "engineElapsedMs": 8.100000023841858,
+      "parentReplyMs": 11.799999952316284,
+      "workerSearchSpanMs": 8.700000047683716,
+      "rawScore": 22,
+      "score": 22,
+      "scoreKind": "heuristic",
+      "proven": false,
+      "end": false,
+      "mustPass": false,
+      "terminal": false,
+      "move": 12,
+      "nodes": 5546,
+      "depth": 6,
+      "stopped": null,
+      "ttBytes": 25165872,
+      "comparisons": {
+        "rawScore": {
+          "actual": 22,
+          "native": 22,
+          "equal": true
+        },
+        "score": {
+          "actual": 22,
+          "native": 22,
+          "equal": true
+        },
+        "proven": {
+          "actual": false,
+          "native": false,
+          "equal": true
+        },
+        "isEndSearch": {
+          "actual": false,
+          "native": false,
+          "equal": true
+        },
+        "mustPass": {
+          "actual": false,
+          "native": false,
+          "equal": true
+        }
+      },
+      "sourceKindOnly": {
+        "actual": "heuristic",
+        "nativeObserved": null,
+        "observedEquality": null,
+        "sourceDerivedExpected": "heuristic",
+        "sourceViewEqual": true,
+        "provenance": "CURRENT_OWNER_CLASSIFICATION_SOURCE_FOR_COMPLETED_NONTERMINAL_INPUT",
+        "sourceFileRef": {
+          "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_search/run.rs",
+          "bytes": 49106,
+          "mode": "0644",
+          "sha256": "f872229dac6b6715ca31827db801bab82a87a8c8efc19a2b9d2b19f6c56f2165"
+        },
+        "inputTerminalNativeObserved": null
+      },
+      "actionDifference": false,
+      "work": {
+        "move": {
+          "actual": 12,
+          "native": 12
+        },
+        "nodes": {
+          "actual": 5546,
+          "native": 5546
+        },
+        "completedDepth": {
+          "actual": 6,
+          "native": 6
+        },
+        "selectivity": {
+          "actual": 6,
+          "native": 6
+        },
+        "probability": {
+          "actual": 100,
+          "native": 100
+        }
+      }
+    },
+    {
+      "caseId": "development/continuous16-practical-v1/f0/p32",
+      "engineElapsedMs": 4.100000023841858,
+      "parentReplyMs": 4.399999976158142,
+      "workerSearchSpanMs": 4.200000047683716,
+      "rawScore": 35,
+      "score": 35,
+      "scoreKind": "heuristic",
+      "proven": false,
+      "end": false,
+      "mustPass": false,
+      "terminal": false,
+      "move": 2,
+      "nodes": 7250,
+      "depth": 6,
+      "stopped": null,
+      "ttBytes": 25165872,
+      "comparisons": {
+        "rawScore": {
+          "actual": 35,
+          "native": 35,
+          "equal": true
+        },
+        "score": {
+          "actual": 35,
+          "native": 35,
+          "equal": true
+        },
+        "proven": {
+          "actual": false,
+          "native": false,
+          "equal": true
+        },
+        "isEndSearch": {
+          "actual": false,
+          "native": false,
+          "equal": true
+        },
+        "mustPass": {
+          "actual": false,
+          "native": false,
+          "equal": true
+        }
+      },
+      "sourceKindOnly": {
+        "actual": "heuristic",
+        "nativeObserved": null,
+        "observedEquality": null,
+        "sourceDerivedExpected": "heuristic",
+        "sourceViewEqual": true,
+        "provenance": "CURRENT_OWNER_CLASSIFICATION_SOURCE_FOR_COMPLETED_NONTERMINAL_INPUT",
+        "sourceFileRef": {
+          "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_search/run.rs",
+          "bytes": 49106,
+          "mode": "0644",
+          "sha256": "f872229dac6b6715ca31827db801bab82a87a8c8efc19a2b9d2b19f6c56f2165"
+        },
+        "inputTerminalNativeObserved": null
+      },
+      "actionDifference": false,
+      "work": {
+        "move": {
+          "actual": 2,
+          "native": 2
+        },
+        "nodes": {
+          "actual": 7250,
+          "native": 7250
+        },
+        "completedDepth": {
+          "actual": 6,
+          "native": 6
+        },
+        "selectivity": {
+          "actual": 6,
+          "native": 6
+        },
+        "probability": {
+          "actual": 100,
+          "native": 100
+        }
+      }
+    },
+    {
+      "caseId": "development/continuous16-practical-v1/f0/p48",
+      "engineElapsedMs": 0.3999999761581421,
+      "parentReplyMs": 1.1999999284744263,
+      "workerSearchSpanMs": 0.3999999761581421,
+      "rawScore": 27,
+      "score": 27,
+      "scoreKind": "heuristic",
+      "proven": false,
+      "end": false,
+      "mustPass": false,
+      "terminal": false,
+      "move": 41,
+      "nodes": 426,
+      "depth": 6,
+      "stopped": null,
+      "ttBytes": 25165872,
+      "comparisons": {
+        "rawScore": {
+          "actual": 27,
+          "native": 27,
+          "equal": true
+        },
+        "score": {
+          "actual": 27,
+          "native": 27,
+          "equal": true
+        },
+        "proven": {
+          "actual": false,
+          "native": false,
+          "equal": true
+        },
+        "isEndSearch": {
+          "actual": false,
+          "native": false,
+          "equal": true
+        },
+        "mustPass": {
+          "actual": false,
+          "native": false,
+          "equal": true
+        }
+      },
+      "sourceKindOnly": {
+        "actual": "heuristic",
+        "nativeObserved": null,
+        "observedEquality": null,
+        "sourceDerivedExpected": "heuristic",
+        "sourceViewEqual": true,
+        "provenance": "CURRENT_OWNER_CLASSIFICATION_SOURCE_FOR_COMPLETED_NONTERMINAL_INPUT",
+        "sourceFileRef": {
+          "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_search/run.rs",
+          "bytes": 49106,
+          "mode": "0644",
+          "sha256": "f872229dac6b6715ca31827db801bab82a87a8c8efc19a2b9d2b19f6c56f2165"
+        },
+        "inputTerminalNativeObserved": null
+      },
+      "actionDifference": false,
+      "work": {
+        "move": {
+          "actual": 41,
+          "native": 41
+        },
+        "nodes": {
+          "actual": 426,
+          "native": 426
+        },
+        "completedDepth": {
+          "actual": 6,
+          "native": 6
+        },
+        "selectivity": {
+          "actual": 6,
+          "native": 6
+        },
+        "probability": {
+          "actual": 100,
+          "native": 100
+        }
+      }
+    },
+    {
+      "caseId": "development/continuous16-practical-v1/f0/p56",
+      "engineElapsedMs": 0.30000007152557373,
+      "parentReplyMs": 0.5,
+      "workerSearchSpanMs": 0.40000009536743164,
+      "rawScore": 14,
+      "score": 14,
+      "scoreKind": "terminalEmptyAward",
+      "proven": true,
+      "end": true,
+      "mustPass": false,
+      "terminal": false,
+      "move": 56,
+      "nodes": 21,
+      "depth": 4,
+      "stopped": null,
+      "ttBytes": 25165872,
+      "comparisons": {
+        "rawScore": {
+          "actual": 14,
+          "native": 14,
+          "equal": true
+        },
+        "score": {
+          "actual": 14,
+          "native": 14,
+          "equal": true
+        },
+        "proven": {
+          "actual": true,
+          "native": true,
+          "equal": true
+        },
+        "isEndSearch": {
+          "actual": true,
+          "native": true,
+          "equal": true
+        },
+        "mustPass": {
+          "actual": false,
+          "native": false,
+          "equal": true
+        }
+      },
+      "sourceKindOnly": {
+        "actual": "terminalEmptyAward",
+        "nativeObserved": null,
+        "observedEquality": null,
+        "sourceDerivedExpected": "terminalEmptyAward",
+        "sourceViewEqual": true,
+        "provenance": "CURRENT_OWNER_CLASSIFICATION_SOURCE_FOR_COMPLETED_NONTERMINAL_INPUT",
+        "sourceFileRef": {
+          "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_search/run.rs",
+          "bytes": 49106,
+          "mode": "0644",
+          "sha256": "f872229dac6b6715ca31827db801bab82a87a8c8efc19a2b9d2b19f6c56f2165"
+        },
+        "inputTerminalNativeObserved": null
+      },
+      "actionDifference": false,
+      "work": {
+        "move": {
+          "actual": 56,
+          "native": 56
+        },
+        "nodes": {
+          "actual": 21,
+          "native": 21
+        },
+        "completedDepth": {
+          "actual": 4,
+          "native": 4
+        },
+        "selectivity": {
+          "actual": 6,
+          "native": 6
+        },
+        "probability": {
+          "actual": 100,
+          "native": 100
+        }
+      }
+    },
+    {
+      "caseId": "development/continuous16-practical-v1/f1/p16",
+      "engineElapsedMs": 1.6999999284744263,
+      "parentReplyMs": 2,
+      "workerSearchSpanMs": 1.6999999284744263,
+      "rawScore": -14,
+      "score": -14,
+      "scoreKind": "heuristic",
+      "proven": false,
+      "end": false,
+      "mustPass": false,
+      "terminal": false,
+      "move": 45,
+      "nodes": 3346,
+      "depth": 6,
+      "stopped": null,
+      "ttBytes": 25165872,
+      "comparisons": {
+        "rawScore": {
+          "actual": -14,
+          "native": -14,
+          "equal": true
+        },
+        "score": {
+          "actual": -14,
+          "native": -14,
+          "equal": true
+        },
+        "proven": {
+          "actual": false,
+          "native": false,
+          "equal": true
+        },
+        "isEndSearch": {
+          "actual": false,
+          "native": false,
+          "equal": true
+        },
+        "mustPass": {
+          "actual": false,
+          "native": false,
+          "equal": true
+        }
+      },
+      "sourceKindOnly": {
+        "actual": "heuristic",
+        "nativeObserved": null,
+        "observedEquality": null,
+        "sourceDerivedExpected": "heuristic",
+        "sourceViewEqual": true,
+        "provenance": "CURRENT_OWNER_CLASSIFICATION_SOURCE_FOR_COMPLETED_NONTERMINAL_INPUT",
+        "sourceFileRef": {
+          "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_search/run.rs",
+          "bytes": 49106,
+          "mode": "0644",
+          "sha256": "f872229dac6b6715ca31827db801bab82a87a8c8efc19a2b9d2b19f6c56f2165"
+        },
+        "inputTerminalNativeObserved": null
+      },
+      "actionDifference": false,
+      "work": {
+        "move": {
+          "actual": 45,
+          "native": 45
+        },
+        "nodes": {
+          "actual": 3346,
+          "native": 3346
+        },
+        "completedDepth": {
+          "actual": 6,
+          "native": 6
+        },
+        "selectivity": {
+          "actual": 6,
+          "native": 6
+        },
+        "probability": {
+          "actual": 100,
+          "native": 100
+        }
+      }
+    },
+    {
+      "caseId": "development/continuous16-practical-v1/f1/p32",
+      "engineElapsedMs": 3.5,
+      "parentReplyMs": 4.100000023841858,
+      "workerSearchSpanMs": 3.899999976158142,
+      "rawScore": 8,
+      "score": 8,
+      "scoreKind": "heuristic",
+      "proven": false,
+      "end": false,
+      "mustPass": false,
+      "terminal": false,
+      "move": 0,
+      "nodes": 3889,
+      "depth": 6,
+      "stopped": null,
+      "ttBytes": 25165872,
+      "comparisons": {
+        "rawScore": {
+          "actual": 8,
+          "native": 8,
+          "equal": true
+        },
+        "score": {
+          "actual": 8,
+          "native": 8,
+          "equal": true
+        },
+        "proven": {
+          "actual": false,
+          "native": false,
+          "equal": true
+        },
+        "isEndSearch": {
+          "actual": false,
+          "native": false,
+          "equal": true
+        },
+        "mustPass": {
+          "actual": false,
+          "native": false,
+          "equal": true
+        }
+      },
+      "sourceKindOnly": {
+        "actual": "heuristic",
+        "nativeObserved": null,
+        "observedEquality": null,
+        "sourceDerivedExpected": "heuristic",
+        "sourceViewEqual": true,
+        "provenance": "CURRENT_OWNER_CLASSIFICATION_SOURCE_FOR_COMPLETED_NONTERMINAL_INPUT",
+        "sourceFileRef": {
+          "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_search/run.rs",
+          "bytes": 49106,
+          "mode": "0644",
+          "sha256": "f872229dac6b6715ca31827db801bab82a87a8c8efc19a2b9d2b19f6c56f2165"
+        },
+        "inputTerminalNativeObserved": null
+      },
+      "actionDifference": false,
+      "work": {
+        "move": {
+          "actual": 0,
+          "native": 0
+        },
+        "nodes": {
+          "actual": 3889,
+          "native": 3889
+        },
+        "completedDepth": {
+          "actual": 6,
+          "native": 6
+        },
+        "selectivity": {
+          "actual": 6,
+          "native": 6
+        },
+        "probability": {
+          "actual": 100,
+          "native": 100
+        }
+      }
+    },
+    {
+      "caseId": "development/continuous16-practical-v1/f1/p48",
+      "engineElapsedMs": 0.9000000953674316,
+      "parentReplyMs": 1,
+      "workerSearchSpanMs": 0.9000000953674316,
+      "rawScore": 15,
+      "score": 15,
+      "scoreKind": "heuristic",
+      "proven": false,
+      "end": false,
+      "mustPass": false,
+      "terminal": false,
+      "move": 55,
+      "nodes": 936,
+      "depth": 6,
+      "stopped": null,
+      "ttBytes": 25165872,
+      "comparisons": {
+        "rawScore": {
+          "actual": 15,
+          "native": 15,
+          "equal": true
+        },
+        "score": {
+          "actual": 15,
+          "native": 15,
+          "equal": true
+        },
+        "proven": {
+          "actual": false,
+          "native": false,
+          "equal": true
+        },
+        "isEndSearch": {
+          "actual": false,
+          "native": false,
+          "equal": true
+        },
+        "mustPass": {
+          "actual": false,
+          "native": false,
+          "equal": true
+        }
+      },
+      "sourceKindOnly": {
+        "actual": "heuristic",
+        "nativeObserved": null,
+        "observedEquality": null,
+        "sourceDerivedExpected": "heuristic",
+        "sourceViewEqual": true,
+        "provenance": "CURRENT_OWNER_CLASSIFICATION_SOURCE_FOR_COMPLETED_NONTERMINAL_INPUT",
+        "sourceFileRef": {
+          "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_search/run.rs",
+          "bytes": 49106,
+          "mode": "0644",
+          "sha256": "f872229dac6b6715ca31827db801bab82a87a8c8efc19a2b9d2b19f6c56f2165"
+        },
+        "inputTerminalNativeObserved": null
+      },
+      "actionDifference": false,
+      "work": {
+        "move": {
+          "actual": 55,
+          "native": 55
+        },
+        "nodes": {
+          "actual": 936,
+          "native": 936
+        },
+        "completedDepth": {
+          "actual": 6,
+          "native": 6
+        },
+        "selectivity": {
+          "actual": 6,
+          "native": 6
+        },
+        "probability": {
+          "actual": 100,
+          "native": 100
+        }
+      }
+    },
+    {
+      "caseId": "development/continuous16-practical-v1/f1/p56",
+      "engineElapsedMs": 0,
+      "parentReplyMs": 0.20000004768371582,
+      "workerSearchSpanMs": 0.0,
+      "rawScore": -16,
+      "score": -16,
+      "scoreKind": "terminalEmptyAward",
+      "proven": true,
+      "end": true,
+      "mustPass": false,
+      "terminal": false,
+      "move": 56,
+      "nodes": 25,
+      "depth": 4,
+      "stopped": null,
+      "ttBytes": 25165872,
+      "comparisons": {
+        "rawScore": {
+          "actual": -16,
+          "native": -16,
+          "equal": true
+        },
+        "score": {
+          "actual": -16,
+          "native": -16,
+          "equal": true
+        },
+        "proven": {
+          "actual": true,
+          "native": true,
+          "equal": true
+        },
+        "isEndSearch": {
+          "actual": true,
+          "native": true,
+          "equal": true
+        },
+        "mustPass": {
+          "actual": false,
+          "native": false,
+          "equal": true
+        }
+      },
+      "sourceKindOnly": {
+        "actual": "terminalEmptyAward",
+        "nativeObserved": null,
+        "observedEquality": null,
+        "sourceDerivedExpected": "terminalEmptyAward",
+        "sourceViewEqual": true,
+        "provenance": "CURRENT_OWNER_CLASSIFICATION_SOURCE_FOR_COMPLETED_NONTERMINAL_INPUT",
+        "sourceFileRef": {
+          "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_search/run.rs",
+          "bytes": 49106,
+          "mode": "0644",
+          "sha256": "f872229dac6b6715ca31827db801bab82a87a8c8efc19a2b9d2b19f6c56f2165"
+        },
+        "inputTerminalNativeObserved": null
+      },
+      "actionDifference": false,
+      "work": {
+        "move": {
+          "actual": 56,
+          "native": 56
+        },
+        "nodes": {
+          "actual": 25,
+          "native": 25
+        },
+        "completedDepth": {
+          "actual": 4,
+          "native": 4
+        },
+        "selectivity": {
+          "actual": 6,
+          "native": 6
+        },
+        "probability": {
+          "actual": 100,
+          "native": 100
+        }
+      }
+    },
+    {
+      "caseId": "development/continuous16-practical-v1/f2/p16",
+      "engineElapsedMs": 2.399999976158142,
+      "parentReplyMs": 2.799999952316284,
+      "workerSearchSpanMs": 2.5,
+      "rawScore": -27,
+      "score": -27,
+      "scoreKind": "heuristic",
+      "proven": false,
+      "end": false,
+      "mustPass": false,
+      "terminal": false,
+      "move": 45,
+      "nodes": 5641,
+      "depth": 6,
+      "stopped": null,
+      "ttBytes": 25165872,
+      "comparisons": {
+        "rawScore": {
+          "actual": -27,
+          "native": -27,
+          "equal": true
+        },
+        "score": {
+          "actual": -27,
+          "native": -27,
+          "equal": true
+        },
+        "proven": {
+          "actual": false,
+          "native": false,
+          "equal": true
+        },
+        "isEndSearch": {
+          "actual": false,
+          "native": false,
+          "equal": true
+        },
+        "mustPass": {
+          "actual": false,
+          "native": false,
+          "equal": true
+        }
+      },
+      "sourceKindOnly": {
+        "actual": "heuristic",
+        "nativeObserved": null,
+        "observedEquality": null,
+        "sourceDerivedExpected": "heuristic",
+        "sourceViewEqual": true,
+        "provenance": "CURRENT_OWNER_CLASSIFICATION_SOURCE_FOR_COMPLETED_NONTERMINAL_INPUT",
+        "sourceFileRef": {
+          "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_search/run.rs",
+          "bytes": 49106,
+          "mode": "0644",
+          "sha256": "f872229dac6b6715ca31827db801bab82a87a8c8efc19a2b9d2b19f6c56f2165"
+        },
+        "inputTerminalNativeObserved": null
+      },
+      "actionDifference": false,
+      "work": {
+        "move": {
+          "actual": 45,
+          "native": 45
+        },
+        "nodes": {
+          "actual": 5641,
+          "native": 5641
+        },
+        "completedDepth": {
+          "actual": 6,
+          "native": 6
+        },
+        "selectivity": {
+          "actual": 6,
+          "native": 6
+        },
+        "probability": {
+          "actual": 100,
+          "native": 100
+        }
+      }
+    },
+    {
+      "caseId": "development/continuous16-practical-v1/f2/p32",
+      "engineElapsedMs": 1.399999976158142,
+      "parentReplyMs": 1.600000023841858,
+      "workerSearchSpanMs": 1.5,
+      "rawScore": -38,
+      "score": -38,
+      "scoreKind": "heuristic",
+      "proven": false,
+      "end": false,
+      "mustPass": false,
+      "terminal": false,
+      "move": 43,
+      "nodes": 2891,
+      "depth": 6,
+      "stopped": null,
+      "ttBytes": 25165872,
+      "comparisons": {
+        "rawScore": {
+          "actual": -38,
+          "native": -38,
+          "equal": true
+        },
+        "score": {
+          "actual": -38,
+          "native": -38,
+          "equal": true
+        },
+        "proven": {
+          "actual": false,
+          "native": false,
+          "equal": true
+        },
+        "isEndSearch": {
+          "actual": false,
+          "native": false,
+          "equal": true
+        },
+        "mustPass": {
+          "actual": false,
+          "native": false,
+          "equal": true
+        }
+      },
+      "sourceKindOnly": {
+        "actual": "heuristic",
+        "nativeObserved": null,
+        "observedEquality": null,
+        "sourceDerivedExpected": "heuristic",
+        "sourceViewEqual": true,
+        "provenance": "CURRENT_OWNER_CLASSIFICATION_SOURCE_FOR_COMPLETED_NONTERMINAL_INPUT",
+        "sourceFileRef": {
+          "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_search/run.rs",
+          "bytes": 49106,
+          "mode": "0644",
+          "sha256": "f872229dac6b6715ca31827db801bab82a87a8c8efc19a2b9d2b19f6c56f2165"
+        },
+        "inputTerminalNativeObserved": null
+      },
+      "actionDifference": false,
+      "work": {
+        "move": {
+          "actual": 43,
+          "native": 43
+        },
+        "nodes": {
+          "actual": 2891,
+          "native": 2891
+        },
+        "completedDepth": {
+          "actual": 6,
+          "native": 6
+        },
+        "selectivity": {
+          "actual": 6,
+          "native": 6
+        },
+        "probability": {
+          "actual": 100,
+          "native": 100
+        }
+      }
+    },
+    {
+      "caseId": "development/continuous16-practical-v1/f2/p48",
+      "engineElapsedMs": 0.6999999284744263,
+      "parentReplyMs": 0.8999999761581421,
+      "workerSearchSpanMs": 0.6999999284744263,
+      "rawScore": -4,
+      "score": -4,
+      "scoreKind": "heuristic",
+      "proven": false,
+      "end": false,
+      "mustPass": false,
+      "terminal": false,
+      "move": 10,
+      "nodes": 1322,
+      "depth": 6,
+      "stopped": null,
+      "ttBytes": 25165872,
+      "comparisons": {
+        "rawScore": {
+          "actual": -4,
+          "native": -4,
+          "equal": true
+        },
+        "score": {
+          "actual": -4,
+          "native": -4,
+          "equal": true
+        },
+        "proven": {
+          "actual": false,
+          "native": false,
+          "equal": true
+        },
+        "isEndSearch": {
+          "actual": false,
+          "native": false,
+          "equal": true
+        },
+        "mustPass": {
+          "actual": false,
+          "native": false,
+          "equal": true
+        }
+      },
+      "sourceKindOnly": {
+        "actual": "heuristic",
+        "nativeObserved": null,
+        "observedEquality": null,
+        "sourceDerivedExpected": "heuristic",
+        "sourceViewEqual": true,
+        "provenance": "CURRENT_OWNER_CLASSIFICATION_SOURCE_FOR_COMPLETED_NONTERMINAL_INPUT",
+        "sourceFileRef": {
+          "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_search/run.rs",
+          "bytes": 49106,
+          "mode": "0644",
+          "sha256": "f872229dac6b6715ca31827db801bab82a87a8c8efc19a2b9d2b19f6c56f2165"
+        },
+        "inputTerminalNativeObserved": null
+      },
+      "actionDifference": false,
+      "work": {
+        "move": {
+          "actual": 10,
+          "native": 10
+        },
+        "nodes": {
+          "actual": 1322,
+          "native": 1322
+        },
+        "completedDepth": {
+          "actual": 6,
+          "native": 6
+        },
+        "selectivity": {
+          "actual": 6,
+          "native": 6
+        },
+        "probability": {
+          "actual": 100,
+          "native": 100
+        }
+      }
+    },
+    {
+      "caseId": "development/continuous16-practical-v1/f2/p56",
+      "engineElapsedMs": 0,
+      "parentReplyMs": 0.20000004768371582,
+      "workerSearchSpanMs": 0.0,
+      "rawScore": 0,
+      "score": 0,
+      "scoreKind": "terminalEmptyAward",
+      "proven": true,
+      "end": true,
+      "mustPass": false,
+      "terminal": false,
+      "move": 63,
+      "nodes": 26,
+      "depth": 4,
+      "stopped": null,
+      "ttBytes": 25165872,
+      "comparisons": {
+        "rawScore": {
+          "actual": 0,
+          "native": 0,
+          "equal": true
+        },
+        "score": {
+          "actual": 0,
+          "native": 0,
+          "equal": true
+        },
+        "proven": {
+          "actual": true,
+          "native": true,
+          "equal": true
+        },
+        "isEndSearch": {
+          "actual": true,
+          "native": true,
+          "equal": true
+        },
+        "mustPass": {
+          "actual": false,
+          "native": false,
+          "equal": true
+        }
+      },
+      "sourceKindOnly": {
+        "actual": "terminalEmptyAward",
+        "nativeObserved": null,
+        "observedEquality": null,
+        "sourceDerivedExpected": "terminalEmptyAward",
+        "sourceViewEqual": true,
+        "provenance": "CURRENT_OWNER_CLASSIFICATION_SOURCE_FOR_COMPLETED_NONTERMINAL_INPUT",
+        "sourceFileRef": {
+          "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_search/run.rs",
+          "bytes": 49106,
+          "mode": "0644",
+          "sha256": "f872229dac6b6715ca31827db801bab82a87a8c8efc19a2b9d2b19f6c56f2165"
+        },
+        "inputTerminalNativeObserved": null
+      },
+      "actionDifference": false,
+      "work": {
+        "move": {
+          "actual": 63,
+          "native": 63
+        },
+        "nodes": {
+          "actual": 26,
+          "native": 26
+        },
+        "completedDepth": {
+          "actual": 4,
+          "native": 4
+        },
+        "selectivity": {
+          "actual": 6,
+          "native": 6
+        },
+        "probability": {
+          "actual": 100,
+          "native": 100
+        }
+      }
+    },
+    {
+      "caseId": "development/continuous16-practical-v1/f3/p16",
+      "engineElapsedMs": 1.600000023841858,
+      "parentReplyMs": 1.7000000476837158,
+      "workerSearchSpanMs": 1.600000023841858,
+      "rawScore": 24,
+      "score": 24,
+      "scoreKind": "heuristic",
+      "proven": false,
+      "end": false,
+      "mustPass": false,
+      "terminal": false,
+      "move": 18,
+      "nodes": 3198,
+      "depth": 6,
+      "stopped": null,
+      "ttBytes": 25165872,
+      "comparisons": {
+        "rawScore": {
+          "actual": 24,
+          "native": 24,
+          "equal": true
+        },
+        "score": {
+          "actual": 24,
+          "native": 24,
+          "equal": true
+        },
+        "proven": {
+          "actual": false,
+          "native": false,
+          "equal": true
+        },
+        "isEndSearch": {
+          "actual": false,
+          "native": false,
+          "equal": true
+        },
+        "mustPass": {
+          "actual": false,
+          "native": false,
+          "equal": true
+        }
+      },
+      "sourceKindOnly": {
+        "actual": "heuristic",
+        "nativeObserved": null,
+        "observedEquality": null,
+        "sourceDerivedExpected": "heuristic",
+        "sourceViewEqual": true,
+        "provenance": "CURRENT_OWNER_CLASSIFICATION_SOURCE_FOR_COMPLETED_NONTERMINAL_INPUT",
+        "sourceFileRef": {
+          "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_search/run.rs",
+          "bytes": 49106,
+          "mode": "0644",
+          "sha256": "f872229dac6b6715ca31827db801bab82a87a8c8efc19a2b9d2b19f6c56f2165"
+        },
+        "inputTerminalNativeObserved": null
+      },
+      "actionDifference": false,
+      "work": {
+        "move": {
+          "actual": 18,
+          "native": 18
+        },
+        "nodes": {
+          "actual": 3198,
+          "native": 3198
+        },
+        "completedDepth": {
+          "actual": 6,
+          "native": 6
+        },
+        "selectivity": {
+          "actual": 6,
+          "native": 6
+        },
+        "probability": {
+          "actual": 100,
+          "native": 100
+        }
+      }
+    },
+    {
+      "caseId": "development/continuous16-practical-v1/f3/p32",
+      "engineElapsedMs": 2.299999952316284,
+      "parentReplyMs": 2.5,
+      "workerSearchSpanMs": 2.299999952316284,
+      "rawScore": 24,
+      "score": 24,
+      "scoreKind": "heuristic",
+      "proven": false,
+      "end": false,
+      "mustPass": false,
+      "terminal": false,
+      "move": 31,
+      "nodes": 5150,
+      "depth": 6,
+      "stopped": null,
+      "ttBytes": 25165872,
+      "comparisons": {
+        "rawScore": {
+          "actual": 24,
+          "native": 24,
+          "equal": true
+        },
+        "score": {
+          "actual": 24,
+          "native": 24,
+          "equal": true
+        },
+        "proven": {
+          "actual": false,
+          "native": false,
+          "equal": true
+        },
+        "isEndSearch": {
+          "actual": false,
+          "native": false,
+          "equal": true
+        },
+        "mustPass": {
+          "actual": false,
+          "native": false,
+          "equal": true
+        }
+      },
+      "sourceKindOnly": {
+        "actual": "heuristic",
+        "nativeObserved": null,
+        "observedEquality": null,
+        "sourceDerivedExpected": "heuristic",
+        "sourceViewEqual": true,
+        "provenance": "CURRENT_OWNER_CLASSIFICATION_SOURCE_FOR_COMPLETED_NONTERMINAL_INPUT",
+        "sourceFileRef": {
+          "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_search/run.rs",
+          "bytes": 49106,
+          "mode": "0644",
+          "sha256": "f872229dac6b6715ca31827db801bab82a87a8c8efc19a2b9d2b19f6c56f2165"
+        },
+        "inputTerminalNativeObserved": null
+      },
+      "actionDifference": false,
+      "work": {
+        "move": {
+          "actual": 31,
+          "native": 31
+        },
+        "nodes": {
+          "actual": 5150,
+          "native": 5150
+        },
+        "completedDepth": {
+          "actual": 6,
+          "native": 6
+        },
+        "selectivity": {
+          "actual": 6,
+          "native": 6
+        },
+        "probability": {
+          "actual": 100,
+          "native": 100
+        }
+      }
+    },
+    {
+      "caseId": "development/continuous16-practical-v1/f3/p48",
+      "engineElapsedMs": 0.5,
+      "parentReplyMs": 0.6000000238418579,
+      "workerSearchSpanMs": 0.6000000238418579,
+      "rawScore": -5,
+      "score": -5,
+      "scoreKind": "heuristic",
+      "proven": false,
+      "end": false,
+      "mustPass": false,
+      "terminal": false,
+      "move": 7,
+      "nodes": 836,
+      "depth": 6,
+      "stopped": null,
+      "ttBytes": 25165872,
+      "comparisons": {
+        "rawScore": {
+          "actual": -5,
+          "native": -5,
+          "equal": true
+        },
+        "score": {
+          "actual": -5,
+          "native": -5,
+          "equal": true
+        },
+        "proven": {
+          "actual": false,
+          "native": false,
+          "equal": true
+        },
+        "isEndSearch": {
+          "actual": false,
+          "native": false,
+          "equal": true
+        },
+        "mustPass": {
+          "actual": false,
+          "native": false,
+          "equal": true
+        }
+      },
+      "sourceKindOnly": {
+        "actual": "heuristic",
+        "nativeObserved": null,
+        "observedEquality": null,
+        "sourceDerivedExpected": "heuristic",
+        "sourceViewEqual": true,
+        "provenance": "CURRENT_OWNER_CLASSIFICATION_SOURCE_FOR_COMPLETED_NONTERMINAL_INPUT",
+        "sourceFileRef": {
+          "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_search/run.rs",
+          "bytes": 49106,
+          "mode": "0644",
+          "sha256": "f872229dac6b6715ca31827db801bab82a87a8c8efc19a2b9d2b19f6c56f2165"
+        },
+        "inputTerminalNativeObserved": null
+      },
+      "actionDifference": false,
+      "work": {
+        "move": {
+          "actual": 7,
+          "native": 7
+        },
+        "nodes": {
+          "actual": 836,
+          "native": 836
+        },
+        "completedDepth": {
+          "actual": 6,
+          "native": 6
+        },
+        "selectivity": {
+          "actual": 6,
+          "native": 6
+        },
+        "probability": {
+          "actual": 100,
+          "native": 100
+        }
+      }
+    },
+    {
+      "caseId": "development/continuous16-practical-v1/f3/p56",
+      "engineElapsedMs": 0.09999990463256836,
+      "parentReplyMs": 0.19999992847442627,
+      "workerSearchSpanMs": 0.09999990463256836,
+      "rawScore": -20,
+      "score": -20,
+      "scoreKind": "terminalEmptyAward",
+      "proven": true,
+      "end": true,
+      "mustPass": false,
+      "terminal": false,
+      "move": 14,
+      "nodes": 26,
+      "depth": 4,
+      "stopped": null,
+      "ttBytes": 25165872,
+      "comparisons": {
+        "rawScore": {
+          "actual": -20,
+          "native": -20,
+          "equal": true
+        },
+        "score": {
+          "actual": -20,
+          "native": -20,
+          "equal": true
+        },
+        "proven": {
+          "actual": true,
+          "native": true,
+          "equal": true
+        },
+        "isEndSearch": {
+          "actual": true,
+          "native": true,
+          "equal": true
+        },
+        "mustPass": {
+          "actual": false,
+          "native": false,
+          "equal": true
+        }
+      },
+      "sourceKindOnly": {
+        "actual": "terminalEmptyAward",
+        "nativeObserved": null,
+        "observedEquality": null,
+        "sourceDerivedExpected": "terminalEmptyAward",
+        "sourceViewEqual": true,
+        "provenance": "CURRENT_OWNER_CLASSIFICATION_SOURCE_FOR_COMPLETED_NONTERMINAL_INPUT",
+        "sourceFileRef": {
+          "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_search/run.rs",
+          "bytes": 49106,
+          "mode": "0644",
+          "sha256": "f872229dac6b6715ca31827db801bab82a87a8c8efc19a2b9d2b19f6c56f2165"
+        },
+        "inputTerminalNativeObserved": null
+      },
+      "actionDifference": false,
+      "work": {
+        "move": {
+          "actual": 14,
+          "native": 14
+        },
+        "nodes": {
+          "actual": 26,
+          "native": 26
+        },
+        "completedDepth": {
+          "actual": 4,
+          "native": 4
+        },
+        "selectivity": {
+          "actual": 6,
+          "native": 6
+        },
+        "probability": {
+          "actual": 100,
+          "native": 100
+        }
+      }
+    }
+  ],
+  "normal": [
+    {
+      "caseId": "development/continuous16-practical-v1/f0/p16",
+      "engineElapsedMs": 1000,
+      "parentReplyMs": 1000.3999999761581,
+      "workerSearchSpanMs": 1000.1000000238419,
+      "rawScore": 21,
+      "score": 24,
+      "scoreKind": "heuristic",
+      "proven": false,
+      "end": false,
+      "mustPass": false,
+      "terminal": false,
+      "move": 37,
+      "nodes": 2377650,
+      "depth": 10,
+      "stopped": "timeout",
+      "ttBytes": 25165872
+    },
+    {
+      "caseId": "development/continuous16-practical-v1/f0/p32",
+      "engineElapsedMs": 1000,
+      "parentReplyMs": 1000.3000000715256,
+      "workerSearchSpanMs": 1000.0,
+      "rawScore": 38,
+      "score": 39,
+      "scoreKind": "heuristic",
+      "proven": false,
+      "end": false,
+      "mustPass": false,
+      "terminal": false,
+      "move": 2,
+      "nodes": 2296849,
+      "depth": 10,
+      "stopped": "timeout",
+      "ttBytes": 25165872
+    },
+    {
+      "caseId": "development/continuous16-practical-v1/f0/p48",
+      "engineElapsedMs": 7,
+      "parentReplyMs": 7.399999976158142,
+      "workerSearchSpanMs": 7.0,
+      "rawScore": 34,
+      "score": 34,
+      "scoreKind": "terminalEmptyAward",
+      "proven": true,
+      "end": true,
+      "mustPass": false,
+      "terminal": false,
+      "move": 41,
+      "nodes": 15686,
+      "depth": 12,
+      "stopped": null,
+      "ttBytes": 25165872
+    },
+    {
+      "caseId": "development/continuous16-practical-v1/f0/p56",
+      "engineElapsedMs": 0,
+      "parentReplyMs": 0.5,
+      "workerSearchSpanMs": 0.0,
+      "rawScore": 14,
+      "score": 14,
+      "scoreKind": "terminalEmptyAward",
+      "proven": true,
+      "end": true,
+      "mustPass": false,
+      "terminal": false,
+      "move": 56,
+      "nodes": 53,
+      "depth": 4,
+      "stopped": null,
+      "ttBytes": 25165872
+    },
+    {
+      "caseId": "development/continuous16-practical-v1/f1/p16",
+      "engineElapsedMs": 1000,
+      "parentReplyMs": 1000.1000000238419,
+      "workerSearchSpanMs": 1000.0,
+      "rawScore": -14,
+      "score": -13,
+      "scoreKind": "heuristic",
+      "proven": false,
+      "end": false,
+      "mustPass": false,
+      "terminal": false,
+      "move": 25,
+      "nodes": 2293403,
+      "depth": 16,
+      "stopped": "timeout",
+      "ttBytes": 25165872
+    },
+    {
+      "caseId": "development/continuous16-practical-v1/f1/p32",
+      "engineElapsedMs": 1000,
+      "parentReplyMs": 1000.5999999046326,
+      "workerSearchSpanMs": 1000.2000000476837,
+      "rawScore": 7,
+      "score": 8,
+      "scoreKind": "heuristic",
+      "proven": false,
+      "end": false,
+      "mustPass": false,
+      "terminal": false,
+      "move": 0,
+      "nodes": 2481183,
+      "depth": 16,
+      "stopped": "timeout",
+      "ttBytes": 25165872
+    },
+    {
+      "caseId": "development/continuous16-practical-v1/f1/p48",
+      "engineElapsedMs": 16.700000047683716,
+      "parentReplyMs": 17,
+      "workerSearchSpanMs": 16.700000047683716,
+      "rawScore": 16,
+      "score": 16,
+      "scoreKind": "terminalEmptyAward",
+      "proven": true,
+      "end": true,
+      "mustPass": false,
+      "terminal": false,
+      "move": 55,
+      "nodes": 42890,
+      "depth": 12,
+      "stopped": null,
+      "ttBytes": 25165872
+    },
+    {
+      "caseId": "development/continuous16-practical-v1/f1/p56",
+      "engineElapsedMs": 0,
+      "parentReplyMs": 0.20000004768371582,
+      "workerSearchSpanMs": 0.10000002384185791,
+      "rawScore": -16,
+      "score": -16,
+      "scoreKind": "terminalEmptyAward",
+      "proven": true,
+      "end": true,
+      "mustPass": false,
+      "terminal": false,
+      "move": 56,
+      "nodes": 52,
+      "depth": 4,
+      "stopped": null,
+      "ttBytes": 25165872
+    },
+    {
+      "caseId": "development/continuous16-practical-v1/f2/p16",
+      "engineElapsedMs": 1000,
+      "parentReplyMs": 1000.2999999523163,
+      "workerSearchSpanMs": 1000.0,
+      "rawScore": -26,
+      "score": -26,
+      "scoreKind": "heuristic",
+      "proven": false,
+      "end": false,
+      "mustPass": false,
+      "terminal": false,
+      "move": 45,
+      "nodes": 2023236,
+      "depth": 10,
+      "stopped": "timeout",
+      "ttBytes": 25165872
+    },
+    {
+      "caseId": "development/continuous16-practical-v1/f2/p32",
+      "engineElapsedMs": 1000,
+      "parentReplyMs": 1000.5,
+      "workerSearchSpanMs": 1000.0,
+      "rawScore": -36,
+      "score": -36,
+      "scoreKind": "heuristic",
+      "proven": false,
+      "end": false,
+      "mustPass": false,
+      "terminal": false,
+      "move": 43,
+      "nodes": 2322039,
+      "depth": 16,
+      "stopped": "timeout",
+      "ttBytes": 25165872
+    },
+    {
+      "caseId": "development/continuous16-practical-v1/f2/p48",
+      "engineElapsedMs": 13.399999976158142,
+      "parentReplyMs": 13.800000071525574,
+      "workerSearchSpanMs": 13.600000023841858,
+      "rawScore": -4,
+      "score": -4,
+      "scoreKind": "terminalEmptyAward",
+      "proven": true,
+      "end": true,
+      "mustPass": false,
+      "terminal": false,
+      "move": 25,
+      "nodes": 42437,
+      "depth": 12,
+      "stopped": null,
+      "ttBytes": 25165872
+    },
+    {
+      "caseId": "development/continuous16-practical-v1/f2/p56",
+      "engineElapsedMs": 0.10000002384185791,
+      "parentReplyMs": 0.19999992847442627,
+      "workerSearchSpanMs": 0.10000002384185791,
+      "rawScore": 0,
+      "score": 0,
+      "scoreKind": "terminalEmptyAward",
+      "proven": true,
+      "end": true,
+      "mustPass": false,
+      "terminal": false,
+      "move": 63,
+      "nodes": 37,
+      "depth": 4,
+      "stopped": null,
+      "ttBytes": 25165872
+    },
+    {
+      "caseId": "development/continuous16-practical-v1/f3/p16",
+      "engineElapsedMs": 1000,
+      "parentReplyMs": 1000.5,
+      "workerSearchSpanMs": 1000.0,
+      "rawScore": 22,
+      "score": 22,
+      "scoreKind": "heuristic",
+      "proven": false,
+      "end": false,
+      "mustPass": false,
+      "terminal": false,
+      "move": 18,
+      "nodes": 2126216,
+      "depth": 10,
+      "stopped": "timeout",
+      "ttBytes": 25165872
+    },
+    {
+      "caseId": "development/continuous16-practical-v1/f3/p32",
+      "engineElapsedMs": 1000,
+      "parentReplyMs": 1000.5,
+      "workerSearchSpanMs": 1000,
+      "rawScore": 22,
+      "score": 23,
+      "scoreKind": "heuristic",
+      "proven": false,
+      "end": false,
+      "mustPass": false,
+      "terminal": false,
+      "move": 31,
+      "nodes": 2171635,
+      "depth": 10,
+      "stopped": "timeout",
+      "ttBytes": 25165872
+    },
+    {
+      "caseId": "development/continuous16-practical-v1/f3/p48",
+      "engineElapsedMs": 14.800000071525574,
+      "parentReplyMs": 15.199999928474426,
+      "workerSearchSpanMs": 14.800000071525574,
+      "rawScore": -8,
+      "score": -8,
+      "scoreKind": "terminalEmptyAward",
+      "proven": true,
+      "end": true,
+      "mustPass": false,
+      "terminal": false,
+      "move": 7,
+      "nodes": 41054,
+      "depth": 12,
+      "stopped": null,
+      "ttBytes": 25165872
+    },
+    {
+      "caseId": "development/continuous16-practical-v1/f3/p56",
+      "engineElapsedMs": 0,
+      "parentReplyMs": 0.20000004768371582,
+      "workerSearchSpanMs": 0.0,
+      "rawScore": -20,
+      "score": -20,
+      "scoreKind": "terminalEmptyAward",
+      "proven": true,
+      "end": true,
+      "mustPass": false,
+      "terminal": false,
+      "move": 14,
+      "nodes": 43,
+      "depth": 4,
+      "stopped": null,
+      "ttBytes": 25165872
+    }
+  ],
+  "normalTiming": {
+    "engine": {
+      "min": 0,
+      "max": 1000,
+      "mean": 503.2500000074506
+    },
+    "parent": {
+      "min": 0.19999992847442627,
+      "max": 1000.5999999046326,
+      "mean": 503.60624999552965
+    },
+    "workerSpan": {
+      "min": 0.0,
+      "max": 1000.2000000476837,
+      "mean": 503.2875000163913
+    },
+    "completedEarly": 8,
+    "depth": [10, 10, 12, 4, 16, 16, 12, 4, 10, 16, 12, 4, 10, 10, 12, 4],
+    "clockRealmsSeparate": true,
+    "noNativeBrowserMultiplier": true
+  },
+  "lifecycle": {
+    "ordinary": {
+      "ready": {
+        "token": {
+          "generation": 20261024034,
+          "request": 1
+        },
+        "packet": {
+          "version": 1,
+          "kind": "ready",
+          "token": {
+            "generation": 20261024034,
+            "request": 1
+          },
+          "workerMs": 207.30000007152557,
+          "counts": {
+            "constructor": 1,
+            "clear": 1,
+            "search": 0,
+            "coefficients": 1,
+            "legal": 0,
+            "status": 0,
+            "free": 0
+          },
+          "mode": "batch",
+          "stages": {
+            "module": {
+              "startMs": 6,
+              "endMs": 16.300000071525574
+            },
+            "weightFetch": {
+              "startMs": 16.300000071525574,
+              "endMs": 92
+            },
+            "construct": {
+              "startMs": 92.5,
+              "endMs": 204.60000002384186,
+              "returned": true
+            },
+            "initialClear": {
+              "startMs": 204.60000002384186,
+              "endMs": 207.20000004768372,
+              "returned": true
+            }
+          },
+          "coefficientBits": {
+            "a": "3fe7631d1e111b71",
+            "b": "c0124888431d25ff",
+            "c": "3ff18a86980a8cf3",
+            "d": "bfeac25b4f16e3d3",
+            "e": "401270a865a3e477",
+            "f": "400e8c750beb542c",
+            "g": "3ffc70a545d535a4"
+          },
+          "coreRestoration": null,
+          "pool": null
+        },
+        "preCall": null,
+        "dispatchedMs": 4.899999976158142,
+        "receivedMs": 222.70000004768372,
+        "parentReplyMs": 217.80000007152557
+      },
+      "disposed": {
+        "token": {
+          "generation": 20261024034,
+          "request": 41
+        },
+        "packet": {
+          "version": 1,
+          "kind": "disposed",
+          "token": {
+            "generation": 20261024034,
+            "request": 41
+          },
+          "workerMs": 8316.899999976158,
+          "counts": {
+            "constructor": 1,
+            "clear": 8,
+            "search": 32,
+            "coefficients": 1,
+            "legal": 32,
+            "status": 32,
+            "free": 1
+          },
+          "disposal": {
+            "startMs": 8316.800000071526,
+            "endMs": 8316.899999976158,
+            "returned": true
+          }
+        },
+        "preCall": null,
+        "dispatchedMs": 8331.700000047684,
+        "receivedMs": 8331.899999976158,
+        "parentReplyMs": 0.19999992847442627
+      },
+      "cleanup": {
+        "generation": 20261024034,
+        "reason": "ordinaryModelFreed",
+        "revokedMs": 8331.899999976158,
+        "pendingListenersRemoved": false,
+        "timerCleared": false,
+        "terminateCalled": true,
+        "terminateError": null,
+        "workerCloseObserved": null,
+        "oldMemoryReclaimed": null
+      }
+    },
+    "cancel": {
+      "token": {
+        "generation": 20261024035,
+        "request": 43
+      },
+      "preCall": {
+        "version": 1,
+        "kind": "preCall",
+        "token": {
+          "generation": 20261024035,
+          "request": 43
+        },
+        "workerMs": 213.29999995231628,
+        "counts": {
+          "constructor": 1,
+          "clear": 1,
+          "search": 0,
+          "coefficients": 1,
+          "legal": 0,
+          "status": 0,
+          "free": 0
+        },
+        "caseId": "development/continuous16-practical-v1/f0/p16",
+        "profile": "cancel",
+        "options": {
+          "timeMs": 1000,
+          "maxDepth": 60,
+          "fixedDepth": null,
+          "selectivity": null,
+          "mpc": true,
+          "etc": true,
+          "stability": true,
+          "parity": true,
+          "shallowOrdering": true
+        },
+        "internalCallEntered": null,
+        "actualSearchCalls": null
+      },
+      "cleanup": {
+        "generation": 20261024035,
+        "reason": "cancelAfterObservedPreCall",
+        "revokedMs": 8565,
+        "pendingListenersRemoved": true,
+        "timerCleared": true,
+        "terminateCalled": true,
+        "terminateError": null,
+        "workerCloseObserved": null,
+        "oldMemoryReclaimed": null
+      },
+      "parentCancelMs": 8565,
+      "acceptedMoveBefore": 14,
+      "acceptedMoveAfter": 14,
+      "unfinishedScore": null,
+      "internalCallEntered": null,
+      "activeInterruption": null,
+      "oldFree": null,
+      "oldMessagesAfterListenerRemoval": null,
+      "memoryReclaimed": null,
+      "ready": {
+        "token": {
+          "generation": 20261024035,
+          "request": 42
+        },
+        "packet": {
+          "version": 1,
+          "kind": "ready",
+          "token": {
+            "generation": 20261024035,
+            "request": 42
+          },
+          "workerMs": 210.20000004768372,
+          "counts": {
+            "constructor": 1,
+            "clear": 1,
+            "search": 0,
+            "coefficients": 1,
+            "legal": 0,
+            "status": 0,
+            "free": 0
+          },
+          "mode": "cancel",
+          "stages": {
+            "module": {
+              "startMs": 10.200000047683716,
+              "endMs": 23.5
+            },
+            "weightFetch": {
+              "startMs": 23.600000023841858,
+              "endMs": 100.5
+            },
+            "construct": {
+              "startMs": 100.89999997615814,
+              "endMs": 207.60000002384186,
+              "returned": true
+            },
+            "initialClear": {
+              "startMs": 207.60000002384186,
+              "endMs": 210.10000002384186,
+              "returned": true
+            }
+          },
+          "coefficientBits": {
+            "a": "3fe7631d1e111b71",
+            "b": "c0124888431d25ff",
+            "c": "3ff18a86980a8cf3",
+            "d": "bfeac25b4f16e3d3",
+            "e": "401270a865a3e477",
+            "f": "400e8c750beb542c",
+            "g": "3ffc70a545d535a4"
+          },
+          "coreRestoration": null,
+          "pool": null
+        },
+        "preCall": null,
+        "dispatchedMs": 8333.399999976158,
+        "receivedMs": 8562,
+        "parentReplyMs": 228.60000002384186
+      }
+    },
+    "replacement": {
+      "ready": {
+        "token": {
+          "generation": 20261024036,
+          "request": 44
+        },
+        "packet": {
+          "version": 1,
+          "kind": "ready",
+          "token": {
+            "generation": 20261024036,
+            "request": 44
+          },
+          "workerMs": 324.89999997615814,
+          "counts": {
+            "constructor": 1,
+            "clear": 1,
+            "search": 0,
+            "coefficients": 1,
+            "legal": 0,
+            "status": 0,
+            "free": 0
+          },
+          "mode": "readyOnly",
+          "stages": {
+            "module": {
+              "startMs": 5.799999952316284,
+              "endMs": 25.699999928474426
+            },
+            "weightFetch": {
+              "startMs": 25.699999928474426,
+              "endMs": 135.10000002384186
+            },
+            "construct": {
+              "startMs": 135.29999995231628,
+              "endMs": 320.2999999523163,
+              "returned": true
+            },
+            "initialClear": {
+              "startMs": 320.2999999523163,
+              "endMs": 324.7999999523163,
+              "returned": true
+            }
+          },
+          "coefficientBits": {
+            "a": "3fe7631d1e111b71",
+            "b": "c0124888431d25ff",
+            "c": "3ff18a86980a8cf3",
+            "d": "bfeac25b4f16e3d3",
+            "e": "401270a865a3e477",
+            "f": "400e8c750beb542c",
+            "g": "3ffc70a545d535a4"
+          },
+          "coreRestoration": null,
+          "pool": null
+        },
+        "preCall": null,
+        "dispatchedMs": 8565.200000047684,
+        "receivedMs": 8910.800000071526,
+        "parentReplyMs": 345.60000002384186
+      },
+      "disposed": {
+        "token": {
+          "generation": 20261024036,
+          "request": 45
+        },
+        "packet": {
+          "version": 1,
+          "kind": "disposed",
+          "token": {
+            "generation": 20261024036,
+            "request": 45
+          },
+          "workerMs": 330.60000002384186,
+          "counts": {
+            "constructor": 1,
+            "clear": 1,
+            "search": 0,
+            "coefficients": 1,
+            "legal": 0,
+            "status": 0,
+            "free": 1
+          },
+          "disposal": {
+            "startMs": 330.5,
+            "endMs": 330.60000002384186,
+            "returned": true
+          }
+        },
+        "preCall": null,
+        "dispatchedMs": 8910.800000071526,
+        "receivedMs": 8912.800000071526,
+        "parentReplyMs": 2
+      },
+      "cleanup": {
+        "generation": 20261024036,
+        "reason": "replacementFreedWithoutSearch",
+        "revokedMs": 8912.899999976158,
+        "pendingListenersRemoved": false,
+        "timerCleared": false,
+        "terminateCalled": true,
+        "terminateError": null,
+        "workerCloseObserved": null,
+        "oldMemoryReclaimed": null
+      }
+    },
+    "workersCreated": 3,
+    "discardedMessagesObserved": 0,
+    "oldMessagesAfterListenerRemoval": null,
+    "memoryReclamation": null,
+    "coreRestoration": null,
+    "fullTT": null
+  },
+  "costs": {
+    "outerSecondsOnce": 11.067493772949092,
+    "commandSecondsNested": 10.332807666040026,
+    "parentBrowserMsNested": 8912.899999976158,
+    "nonAdditive": true
+  },
+  "cleanup": {
+    "actualProcessAndHandles": true,
+    "remaining": [],
+    "recordedChildSameIdentityAlive": false,
+    "actualMask": "completed",
+    "actualPersist": "completed",
+    "originalDiskMask": "pending",
+    "originalDiskPersist": "attempted",
+    "controllerCleanup": {
+      "page": {
+        "attempted": true,
+        "returned": true
+      },
+      "context": {
+        "attempted": true,
+        "returned": true
+      },
+      "browser": {
+        "attempted": true,
+        "returned": true
+      },
+      "server": {
+        "attempted": true,
+        "returned": true
+      }
+    }
+  },
+  "affectedStorage": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-browser33-normal-entry-v1/completion-130a1469/affected-storage-point.json",
+    "bytes": 638,
+    "mode": "0644",
+    "sha256": "9e41611d5e1f2a31efc3ee83bfbca9f84ea76e30a784d2f919cdeeae9c8d5387"
+  },
+  "limits": "Same4correlated DEVELOPMENT families/16 chronological practical roots. Native scoreKind/terminal/scoreUnits observedNULL; source-view kind is labelled separately. Cancellation preCall is not internal entry/active interruption/old free/physical memory reclamation proof. Functional --no-opt matched consumer; no browser strength/general correctness/default promotion/fair speed multiplier.",
+  "allOldFailuresPausesSealsModelsForeignCosts50GBPreserved": true
+}

@@ -1,0 +1,84 @@
+{
+  "status": "ONE_NORMAL_PREPARE_AND_VALUE_SELECTED_FIT_SUBMITTED_RESULTS_UNOBSERVED",
+  "jobId": "c1c0d84f-6dd4-4425-96cf-b36584f1ea80",
+  "submission": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-value-selected-fit4096-v1/submission.json",
+    "bytes": 1074,
+    "mode": "0644",
+    "sha256": "53fb0176e3e21424b8059b7e7e4c098edec630cfe9940782155fa4364addb1c0"
+  },
+  "jobConfig": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-value-selected-fit4096-v1/job.json",
+    "bytes": 836,
+    "mode": "0644",
+    "sha256": "2a2fd8617c1107a54cbceacf47feb041502e34ead157cab46113baaf191afd36"
+  },
+  "bindings": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-value-selected-fit4096-v1/bindings.json",
+    "bytes": 17174,
+    "mode": "0644",
+    "sha256": "cc7f42f5d3a55a5216d2b6f7d309a775c97728f4052042ee6a6c347b67ea0872"
+  },
+  "fitConfig": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-value-selected-fit4096-v1/joint-fit-config.json",
+    "bytes": 4095,
+    "mode": "0644",
+    "sha256": "0e7f6b386a25b0e475032bdbcafde005d2c769882420de42b7aeb45449cbefff"
+  },
+  "preparationTemplate": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-value-selected-fit4096-v1/joint-prepare-template.json",
+    "bytes": 1985,
+    "mode": "0644",
+    "sha256": "bc3eb073b273dea56e1d552d4c5afb48025531a22b1e1a98c9cc39763fc3658d"
+  },
+  "pipeline": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-value-selected-fit4096-v1/pipeline.json",
+    "bytes": 2433,
+    "mode": "0644",
+    "sha256": "7b1daaa0a5cbd351a40d1cadbc7305c4abf7726c99e91439fd9fbf4e777937b3"
+  },
+  "resources": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-value-selected-fit4096-v1/resources.json",
+    "bytes": 2381,
+    "mode": "0644",
+    "sha256": "6c1b42fb476f55fd58b4f0e46a16b234db454f36b741c1cee64d0c7878df06a4"
+  },
+  "admission": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-value-selected-fit4096-v1/Root-admission.json",
+    "bytes": 2083,
+    "mode": "0644",
+    "sha256": "5ac36c2627f7fba990cbed1ccf65714c9920212d9980e2d68536cbb7b0becc3d"
+  },
+  "sourcePacket": {
+    "path": "/workspaces/quoridor/.worktree/quoridor-strong435/.artifacts/quoridor-strong435/coverage8192-fit-actual-entry-v1/packet.json",
+    "bytes": 3177,
+    "mode": "0644",
+    "sha256": "fc440019a6a8425940025ece362935a187bbb68951a30443678c325fe05c4659"
+  },
+  "browserCollection": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-browser33-normal-entry-v1/completion-130a1469/accepted-browser33.json",
+    "bytes": 56282,
+    "mode": "0644",
+    "sha256": "8332f94a28d58c4db00593c6b2f8a0cb4418acc396baf44c4d9a64e7d8ac3e0a"
+  },
+  "canonicalT": 1024,
+  "selectionV": 256,
+  "Hfit": 0,
+  "selector": "value_mse",
+  "maximumUpdates": 4096,
+  "minimumUpdates": 512,
+  "maximumDraws": 1048576,
+  "maximumLogicalRows": 1133056,
+  "explicitSelectorCheckpoints": [
+    0, 128, 256, 384, 512, 640, 768, 896, 1024, 1152, 1280, 1408, 1536, 1664, 1792, 1920, 2048,
+    2176, 2304, 2432, 2560, 2688, 2816, 2944, 3072, 3200, 3328, 3456, 3584, 3712, 3840, 3968, 4096
+  ],
+  "initializer": "selected3072 value+matchingpolicy BOTHload/freezeNONE/restartNone/freshAdam/newINITIAL0; no headwarmup",
+  "stop": "firsterror/nonfinite/provenance/cancel/resources; originalpartials/failedcosts retained; no retry/refill/capextension",
+  "selectionCaveat": "OwnnewV256 INITIAL/BEST same denominator, selection development only. Jointloss1+.1 retained; VpureMSE BEST/scheduler/stale; previousTpanelJOINT overfit comparator remains.",
+  "noOldTMixture": true,
+  "actualPreparedConstantScaleBinding": null,
+  "actualFitResult": null,
+  "actualAdmissionResults": null,
+  "allOldFailuresPausesSealsDefaultModelsForeignAnd50GBPreserved": true
+}
