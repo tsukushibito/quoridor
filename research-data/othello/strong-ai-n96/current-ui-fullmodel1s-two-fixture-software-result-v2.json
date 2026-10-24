@@ -1,0 +1,706 @@
+{
+  "status": "EXACT2_FIXTURES_CLIPPY_MATCHED_WEB_BUILD_PASS_STANDALONE_TYPING_FAILED",
+  "jobId": "0e7a0dd2-9db7-4609-ad5b-98df510cf632",
+  "outerRuntime": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel1s-affected-software-v1/two-fixture-software-v2/runtime/result.json",
+    "bytes": 521,
+    "mode": "0600",
+    "sha256": "1191e4138bde3968c6f9f5e355045eb988f115e0ca49e2657648f5f0ad3f5ccf"
+  },
+  "outerOutput": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel1s-affected-software-v1/two-fixture-software-v2/runtime/output.log",
+    "bytes": 743,
+    "mode": "0644",
+    "sha256": "d12d2d5d9985debe1504da72252c020abce219aeee425855d1ebf0fdebeb3286"
+  },
+  "outerWallSecondsOnce": 5.25845100893639,
+  "innerClocksIncludedNotAdded": true,
+  "commands": [
+    {
+      "name": "affected-two-lifecycle-fixtures",
+      "return": {
+        "command": [
+          "/home/vscode/.local/opt/node/v24.22.0/bin/node",
+          "--test-reporter=tap",
+          "--experimental-vm-modules",
+          "--test",
+          "--test-name-pattern",
+          "^(Worker entry echoes Rust ownership and calls only the unchanged simple policy|mount owns teardown before asynchronous initialization and clears the DOM exactly once)$",
+          "tests/unit/othello-lifecycle.test.mjs"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 4003489,
+          "start_ticks": "88132640",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "probe": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "probe",
+        "log_bytes_seen": 881,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 881,
+        "wall_seconds": 0.15577065502293408,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "normalReturn": true,
+      "disk": {
+        "command": [
+          "/home/vscode/.local/opt/node/v24.22.0/bin/node",
+          "--test-reporter=tap",
+          "--experimental-vm-modules",
+          "--test",
+          "--test-name-pattern",
+          "^(Worker entry echoes Rust ownership and calls only the unchanged simple policy|mount owns teardown before asynchronous initialization and clears the DOM exactly once)$",
+          "tests/unit/othello-lifecycle.test.mjs"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 4003489,
+          "start_ticks": "88132640",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "probe": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "probe",
+        "log_bytes_seen": 881,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 881,
+        "wall_seconds": 0.15577065502293408,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted",
+        "finalization_errors": []
+      },
+      "receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel1s-affected-software-v1/two-fixture-software-v2/affected-two-lifecycle-fixtures.returned.json",
+        "bytes": 3380,
+        "mode": "0644",
+        "sha256": "26629970413407a4b50c6d36b26ca137a016cd1737e39e160da3cc8f7526f487"
+      },
+      "log": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel1s-affected-software-v1/two-fixture-software-v2/affected-two-lifecycle-fixtures.log",
+        "bytes": 881,
+        "mode": "0644",
+        "sha256": "9de81e687e7785f7aae0ccdd8b7058c7450c31ab6db8ec047ba38dae665e7d34"
+      },
+      "ended": {
+        "recorded": {
+          "pid": 4003489,
+          "start_ticks": "88132640",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "sameIdentityPresent": false
+      }
+    },
+    {
+      "name": "affected-wasm-clippy",
+      "return": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "clippy",
+          "--locked",
+          "--offline",
+          "-p",
+          "othello-wasm",
+          "--all-targets",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 4003514,
+          "start_ticks": "88132657",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "probe": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "probe",
+        "log_bytes_seen": 252,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 252,
+        "wall_seconds": 0.8841098239645362,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "normalReturn": true,
+      "disk": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "clippy",
+          "--locked",
+          "--offline",
+          "-p",
+          "othello-wasm",
+          "--all-targets",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 4003514,
+          "start_ticks": "88132657",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "probe": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "probe",
+        "log_bytes_seen": 252,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 252,
+        "wall_seconds": 0.8841098239645362,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted",
+        "finalization_errors": []
+      },
+      "receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel1s-affected-software-v1/two-fixture-software-v2/affected-wasm-clippy.returned.json",
+        "bytes": 3062,
+        "mode": "0644",
+        "sha256": "ee3a3341f55afdbae595d6fa967c756aa80a07f976bf46ad4f7c15a48de13ce9"
+      },
+      "log": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel1s-affected-software-v1/two-fixture-software-v2/affected-wasm-clippy.log",
+        "bytes": 252,
+        "mode": "0644",
+        "sha256": "b284dd1ec832282132bf59fe500cda16dac9ef273ee4de2d5f735b0baa80d238"
+      },
+      "ended": {
+        "recorded": {
+          "pid": 4003514,
+          "start_ticks": "88132657",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "sameIdentityPresent": false
+      }
+    },
+    {
+      "name": "one-current-maintained-othello-web-no-opt",
+      "return": {
+        "command": [
+          "/usr/local/cargo/bin/wasm-pack",
+          "build",
+          "/workspaces/quoridor/games/othello/crates/othello-wasm",
+          "--target",
+          "web",
+          "--release",
+          "--mode",
+          "no-install",
+          "--no-opt",
+          "--out-dir",
+          "/workspaces/quoridor/games/othello/bridge/wasm",
+          "--out-name",
+          "othello",
+          "--locked",
+          "--offline",
+          "--no-default-features",
+          "-j1"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 4003529,
+          "start_ticks": "88132747",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "probe": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "probe",
+        "log_bytes_seen": 656,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 656,
+        "wall_seconds": 3.486020506010391,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "normalReturn": true,
+      "disk": {
+        "command": [
+          "/usr/local/cargo/bin/wasm-pack",
+          "build",
+          "/workspaces/quoridor/games/othello/crates/othello-wasm",
+          "--target",
+          "web",
+          "--release",
+          "--mode",
+          "no-install",
+          "--no-opt",
+          "--out-dir",
+          "/workspaces/quoridor/games/othello/bridge/wasm",
+          "--out-name",
+          "othello",
+          "--locked",
+          "--offline",
+          "--no-default-features",
+          "-j1"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 4003529,
+          "start_ticks": "88132747",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "probe": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "probe",
+        "log_bytes_seen": 656,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 656,
+        "wall_seconds": 3.486020506010391,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted",
+        "finalization_errors": []
+      },
+      "receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel1s-affected-software-v1/two-fixture-software-v2/one-current-maintained-othello-web-no-opt.returned.json",
+        "bytes": 3428,
+        "mode": "0644",
+        "sha256": "53ecd729a84cbcfc66618e64e13274c92d5f5c8e28aa9a5feafc9a2aa0a6858b"
+      },
+      "log": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel1s-affected-software-v1/two-fixture-software-v2/one-current-maintained-othello-web-no-opt.log",
+        "bytes": 656,
+        "mode": "0644",
+        "sha256": "611e33dd1aa9286367245af188ac7362825fdc97f3f2c36aa71e88ba4ba0d0f5"
+      },
+      "ended": {
+        "recorded": {
+          "pid": 4003529,
+          "start_ticks": "88132747",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "sameIdentityPresent": false
+      }
+    },
+    {
+      "name": "bridge-real-generated-declarations",
+      "return": {
+        "command": [
+          "/home/vscode/.local/opt/node/v24.22.0/bin/node",
+          "node_modules/typescript/bin/tsc",
+          "--noEmit",
+          "--strict",
+          "--target",
+          "ES2022",
+          "--module",
+          "ESNext",
+          "--moduleResolution",
+          "Bundler",
+          "--lib",
+          "ES2022,DOM",
+          "--types",
+          "vite/client",
+          "games/othello/bridge/src/index.ts"
+        ],
+        "status": "failed",
+        "child": {
+          "pid": 4003623,
+          "start_ticks": "88133096",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "probe": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "probe",
+        "log_bytes_seen": 684,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "error": "cycle child failed: ['/home/vscode/.local/opt/node/v24.22.0/bin/node', 'node_modules/typescript/bin/tsc', '--noEmit', '--strict', '--target', 'ES2022', '--module', 'ESNext', '--moduleResolution', 'Bundler', '--lib', 'ES2022,DOM', '--types', 'vite/client', 'games/othello/bridge/src/index.ts']: 1",
+        "reason": "CycleStopped",
+        "exit_code": 1,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 684,
+        "wall_seconds": 0.2799079769756645,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": {
+          "type": "CycleStopped",
+          "message": "cycle child failed: ['/home/vscode/.local/opt/node/v24.22.0/bin/node', 'node_modules/typescript/bin/tsc', '--noEmit', '--strict', '--target', 'ES2022', '--module', 'ESNext', '--moduleResolution', 'Bundler', '--lib', 'ES2022,DOM', '--types', 'vite/client', 'games/othello/bridge/src/index.ts']: 1"
+        },
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "normalReturn": false,
+      "disk": {
+        "command": [
+          "/home/vscode/.local/opt/node/v24.22.0/bin/node",
+          "node_modules/typescript/bin/tsc",
+          "--noEmit",
+          "--strict",
+          "--target",
+          "ES2022",
+          "--module",
+          "ESNext",
+          "--moduleResolution",
+          "Bundler",
+          "--lib",
+          "ES2022,DOM",
+          "--types",
+          "vite/client",
+          "games/othello/bridge/src/index.ts"
+        ],
+        "status": "failed",
+        "child": {
+          "pid": 4003623,
+          "start_ticks": "88133096",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "probe": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "probe",
+        "log_bytes_seen": 684,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "error": "cycle child failed: ['/home/vscode/.local/opt/node/v24.22.0/bin/node', 'node_modules/typescript/bin/tsc', '--noEmit', '--strict', '--target', 'ES2022', '--module', 'ESNext', '--moduleResolution', 'Bundler', '--lib', 'ES2022,DOM', '--types', 'vite/client', 'games/othello/bridge/src/index.ts']: 1",
+        "reason": "CycleStopped",
+        "exit_code": 1,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 684,
+        "wall_seconds": 0.2799079769756645,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": {
+          "type": "CycleStopped",
+          "message": "cycle child failed: ['/home/vscode/.local/opt/node/v24.22.0/bin/node', 'node_modules/typescript/bin/tsc', '--noEmit', '--strict', '--target', 'ES2022', '--module', 'ESNext', '--moduleResolution', 'Bundler', '--lib', 'ES2022,DOM', '--types', 'vite/client', 'games/othello/bridge/src/index.ts']: 1"
+        },
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted",
+        "finalization_errors": []
+      },
+      "receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel1s-affected-software-v1/two-fixture-software-v2/bridge-real-generated-declarations.returned.json",
+        "bytes": 5232,
+        "mode": "0644",
+        "sha256": "8f98590036725958edceb2092c3fab477ffa5ce6673e544be44bd87ef98000bd"
+      },
+      "log": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel1s-affected-software-v1/two-fixture-software-v2/bridge-real-generated-declarations.log",
+        "bytes": 684,
+        "mode": "0644",
+        "sha256": "4447896e986e6ba64cb64cf2529b4264e8bc9c6f14dcfd2195bb4ddfbb2d4075"
+      },
+      "ended": {
+        "recorded": {
+          "pid": 4003623,
+          "start_ticks": "88133096",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "sameIdentityPresent": false
+      }
+    }
+  ],
+  "executedFixtureDefinitions": 2,
+  "passedFixtureDefinitions": 2,
+  "skippedFixtureDefinitions": 0,
+  "remainingUNRUN": [
+    "affected-web-types",
+    "one-current-app-bundle"
+  ],
+  "matchedGeneratedArtifactsBuiltNotYetTypingQualified": [
+    {
+      "path": "/workspaces/quoridor/games/othello/bridge/wasm/othello.js",
+      "bytes": 20055,
+      "mode": "0644",
+      "sha256": "0f02912f9c194f4e65c3ff2ab4c79b6b34fdc0cf2e471a7656a5f031ca67d1d4"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/bridge/wasm/othello_bg.wasm",
+      "bytes": 578700,
+      "mode": "0644",
+      "sha256": "e73a8c3dfae480b7c6f60ea192991403d64a8310093f984ce53a72a275c2ef8d"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/bridge/wasm/othello.d.ts",
+      "bytes": 5374,
+      "mode": "0644",
+      "sha256": "2ddb72d582659a725c8485a419e8fa65035a13951c65737bed7d2258dff0a5ab"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/bridge/wasm/othello_bg.wasm.d.ts",
+      "bytes": 2200,
+      "mode": "0644",
+      "sha256": "34ff74d6d4cd6a356843a80c6878f69591f912da54ea6441677b0d29e04f0e1b"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/bridge/wasm/package.json",
+      "bytes": 276,
+      "mode": "0644",
+      "sha256": "e24914fb5f178d25e51a0b2b7ed9aea2a285225974a5aa7f638d6c95334c1a6b"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target/wasm32-unknown-unknown/release/othello_wasm.wasm",
+      "bytes": 626529,
+      "mode": "0755",
+      "sha256": "27b11fd4b2040231bee3f91fc67a988af86e629b8ceeaea5a8bcf78ca4211027"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target/wasm32-unknown-unknown/release/othello_wasm.d",
+      "bytes": 1534,
+      "mode": "0644",
+      "sha256": "82e2be82deffad2400a4093b77ac3637ef3e80edcafddb0686c55054e47160d9"
+    }
+  ],
+  "cause": "Generated wasm-bindgen declarations use Symbol.dispose; standalone --lib ES2022,DOM omitted the installed ESNext.Disposable standard library. Product code, generated declarations and runtime/free semantics unchanged.",
+  "repair": "Add ESNext.Disposable only to failed standalone typecheck --lib; then originalUNRUN Web typing and bundle. No skipLibCheck/suppression/shim/generated edit, old successful tests/Clippy/Wasm not repeated.",
+  "originalRust20OtherSuccessfulJS": "retained byref, not replayed",
+  "actualBrowserModelSearch": 0,
+  "TMPAbsent": true,
+  "returnedAndDiskSnapshotsDistinct": true,
+  "fullFeesContinuousPeak": null
+}

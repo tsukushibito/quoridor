@@ -4350,3 +4350,9 @@ C435のimport-only修復3729e204はBTreeMap import一行だけで、Rootが削�
 原job外側.436067940sはnative .271384906sを内包し加算しない。actual directreap/process+handles/remaining[]/mask+persist completedを確認し、disk pending/attemptedは別に保持した。実影響範囲の保持pointを保存し、global全域walk/peak/fee推定は行っていない。旧559b lost pool/FAILED、8192 target deficit6216、元H/oldcostsは不変。証拠はresearch-data/ai-sigma/quoridor-strong-ai435/selected2560-unused128-publication-result-v1.json。
 
 次はこの固定128を用いたselected2560 Alpha policyOFF対original Cedarの正常256局だけ。100ms/reserve5/max200/両色128pairs、共有PCG64 seed4352026102405の新10000x128/linear95は結果前に固定し、全256完了だけでCI、欠測はUNKNOWN/CI NULL、補充・再試行・MCTS/fit/新poolなし。通常factory/Plan/currentimage/model/resource/origin admissionが必要で、公開だけで対局START/strengthを認定しない。Oの修復exact2と元UNRUN5ソフトウェアがreadyとなり、先に短い窓を配分する。全pause/seal/H/default/foreign/FAILEDNULLUNKNOWN費/decimal50GB維持。
+
+### 2026-10-24: current UI fixture repair passes; remaining declaration check stopped
+
+原0e7a0dd2は修復対象2定義が2実行/2PASS/0skip・非同期after-test errorなし、affected Clippyと現在maintained web/no-opt Wasm生成もPASSだった。成功済みRust20/他JSと今回の2定義/Clippy/Wasmは再演しない。実生成宣言にSymbol.disposeがあり、単独bridge型検査の--lib ES2022,DOM不足で3件TS2550となり、Web型検査/bundleはUNRUNのまま停止した。生成物/API/free/製品コードの故障へ言い換えず、同じ導入済みTypeScript7.0.2の標準ESNext.Disposableを検査argvへ一つ追加する。suppression/skipLibCheck/shimや生成宣言の手編集は行わない。
+
+外側5.258451009sは内側各commandを内包し加算しない。失敗normal return NULLと実exception cleanup directreap/process+handles/remaining[]/mask+persist completed、disk pending/attemptedを分けて保持した。モデル/Search/browser0。原失敗/capacity/source/費は不変。証拠はresearch-data/othello/strong-ai-n96/current-ui-fullmodel1s-two-fixture-software-result-v2.json。次は失敗した型検査と元UNRUN2のみで、actual current-app4の資格は別。Qの正常256局準備も同担当で維持し、O全goalや受領ACKを待たせない。
