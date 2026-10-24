@@ -1356,9 +1356,523 @@ def label_policy_values(config):
             )
 
 
+def _selection_identity_rows(authority):
+    """Bound identity-only V-first16 authority, never select from values/results."""
+    rows = authority["rows"]
+    if not isinstance(rows, list) or len(rows) != 16:
+        raise ValueError("exact FIRST16 validation components required")
+    seen, ranks = set(), []
+    for i, row in enumerate(rows):
+        if (
+            type(row["validationOrdinal0"]) is not int
+            or row["validationOrdinal0"] != i
+            or type(row["nativeRank0"]) is not int
+            or type(row["split"]) is not int
+            or row["split"] != 1
+            or row["selfLR"] is not False
+            or type(row["pairIndex"]) is not int
+            or not 0 <= row["pairIndex"] < authority["shape"]["values"][0]
+            or row["originalMultiplicity"] != 1
+            or row["component"] in seen
+            or len(row["views"]) != 2
+        ):
+            raise ValueError("V wholecomponent/order/multiplicity authority differs")
+        seen.add(row["component"])
+        ranks.append(row["nativeRank0"])
+        keys = [row["originalKey"], row["trueLRKey"]]
+        if any(len(bytes.fromhex(key)) != 28 for key in keys) or keys[0] == keys[1]:
+            raise ValueError("two distinct exact native input keys required")
+        if row["canonicalKey"] != min(keys):
+            raise ValueError("saved canonical/native key correspondence")
+        for j, view in enumerate(row["views"]):
+            orientation = view["bankOrientation"]
+            flat = 2 * row["pairIndex"] + orientation
+            if (
+                view["view"] != ("original", "trueLR")[j]
+                or type(orientation) is not int
+                or orientation not in (0, 1)
+                or (orientation == 0) != (keys[j] == row["canonicalKey"])
+                or view["orientedRow0"] != flat
+                or view["valueByteOffset"] != 4 * flat
+                or view["policyByteOffset"] != 4 * 209 * flat
+                or view["maskByteOffset"] != 209 * flat
+            ):
+                raise ValueError("saved bank orientation/row-offset authority differs")
+    if ranks != sorted(set(ranks)) or len({r["pairIndex"] for r in rows}) != 16:
+        raise ValueError("native rank/pair identity order differs")
+    return rows
+
+
+def _selection_frame_join(authority, views):
+    """Compare native observations to saved identities; no coordinate inference."""
+    rows = _selection_identity_rows(authority)
+    if not isinstance(views, list) or len(views) != 32:
+        raise ValueError("exact32 actual native input views")
+    joined = []
+    for i, row in enumerate(rows):
+        for j, expected in enumerate((row["originalKey"], row["trueLRKey"])):
+            view = views[2 * i + j]
+            if (
+                view["key"] != expected
+                or type(view["side"]) is not int
+                or view["side"] not in (0, 1)
+                or len(view["action_to_key"]) != 209
+                or any(type(a) is not int for a in view["action_to_key"])
+                or sorted(view["action_to_key"]) != list(range(209))
+                or len(view["legal_in_key"]) != 209
+                or any(type(a) is not int or a not in (0, 1) for a in view["legal_in_key"])
+                or not any(view["legal_in_key"])
+            ):
+                raise ValueError("actual native STM/key/action frame mismatch")
+            joined.append((row, row["views"][j], view))
+    return joined
+
+
+def _selection_native_parents(authority, library):
+    from .static_teacher_inputs import native_prefix_views
+
+    rows = _selection_identity_rows(authority)
+    # Maintained input manifest is T/V only. Generic JSON transiently parses all
+    # source receipts; only these16 histories are used; H source is never opened.
+    source = json.loads(bound_file_bytes(authority["inputManifest"], 2 * 1024**2))
+    if source["status"] != "COMPLETE" or source["schema"] != (
+        "quoridor-public-static-input-classes-v1"
+    ):
+        raise ValueError("complete adopted T/V source authority required")
+    histories = []
+    for row in rows:
+        parts = row["sourceReceiptPointer"].split("/")
+        if len(parts) != 3 or parts[1] != "source_receipts":
+            raise ValueError("exact source receipt pointer required")
+        receipt = source["source_receipts"][int(parts[2])]
+        if (
+            receipt["functional_split"] != "V"
+            or receipt["family"] != row["publisherSourceSeriesOrdinal"]
+            or receipt["fixture"] != int(parts[2])
+            or row["fullHistoryByrefPointer"] != row["sourceReceiptPointer"] + "/history"
+            or receipt["original_key"] != row["originalKey"]
+            or receipt["reflected_key"] != row["trueLRKey"]
+            or receipt["canonical_key"] != row["canonicalKey"]
+        ):
+            raise ValueError("source receipt/key/validation lineage mismatch")
+        histories.append(receipt["history"])
+    views = native_prefix_views(histories, library)
+    _selection_frame_join(authority, views)
+    return views
+
+
+def selection_parents(config):
+    """Publish a normal compare Book from native actual original/trueLR contexts."""
+    authority = json.loads(bound_file_bytes(config["row_authority"], 65536))
+    bound_file_bytes(config["core_library"], 16 * 1024**2)
+    views = _selection_native_parents(authority, config["core_library"]["path"])
+    openings = []
+    for i, (row, saved_view, actual) in enumerate(_selection_frame_join(authority, views)):
+        openings.append(
+            dict(
+                id=f"selection-v16-view-{i:02}",
+                cohort="tactical_diagnostic",
+                lineage=row["component"],
+                siblings=[],
+                original_seed=None,
+                reference=dict(
+                    source_sha256=config["row_authority"]["sha256"],
+                    model_sha256=None,
+                    settings=dict(
+                        family_id=i,
+                        component=row["component"],
+                        member=row["member"],
+                        view=saved_view["view"],
+                        actual_native_stm=actual["side"],
+                    ),
+                    q_definition=None,
+                    q_perspective=None,
+                    q_aggregation=None,
+                    q=None,
+                ),
+                selection_reason="fixed FIRST16 exposed selectionV original/trueLR, no outcomes",
+                candidate_pool_size=16,
+                prefix=actual["prefix"],
+            )
+        )
+    output = Path(config["output"])
+    output.mkdir(exist_ok=False)
+    book = output / "book.json"
+    write_json(
+        book,
+        dict(
+            id="selection-v16-original-trueLR32",
+            usage="functional",
+            frozen_before_candidate_results=True,
+            independence="16 correlated EXPOSED selectionV components; not IID/holdout",
+            openings=openings,
+        ),
+    )
+    result = dict(
+        status="COMPLETE",
+        row_authority=config["row_authority"],
+        core_library=config["core_library"],
+        book=file_ref(book),
+        components=16,
+        views=32,
+        new_teacher_forward=0,
+        new_joint_forward=0,
+        Search=0,
+        games=0,
+        transient_manifest_scope="whole adopted T/V source-receipts JSON parsed;16 V histories used",
+        H_source_opened=False,
+    )
+    write_json(output / "receipt.json", result)
+    return result
+
+
+def _selection_decision_join(report, configuration, book, views):
+    """Join sole normal decisions producer, never call Search or accept a late move."""
+    if (
+        report["schema"] != "quoridor-decisions-v1"
+        or report["run_id"] != configuration["run_id"]
+        or report["planned"] != 32
+        or len(report["outcomes"]) != 32
+        or report["stopped"] is not None
+        or report["all_workers_joined"] is not True
+        or report["rows"] != 0
+        or report["dataset"] is not None
+        or report["score"] is not None
+        or configuration["games"] != 32
+        or configuration["arena"]["decision_only"] is not True
+        or configuration["arena"].get("game_selection") is not None
+        or configuration["arena"]["comparison"] != "whole_wall_time"
+        or configuration["arena"]["clock_policy"] != "strict_unknown"
+        or configuration["arena"]["return_reserve_ms"] != 5
+        or configuration["ruleset"] != "standard_2p_threefold"
+        or configuration["arena"]["book"] != book
+        or len(configuration["engines"]) != 1
+    ):
+        raise ValueError("sole normal decisions/book/no-game census mismatch")
+    outcomes = sorted(report["outcomes"], key=lambda row: row["game"])
+    observations = []
+    for i, outcome in enumerate(outcomes):
+        if (
+            outcome["game"] != i
+            or outcome["family"] != f"{report['run_id']}-family-{i:06}"
+            or outcome["moves"] != views[i]["prefix"]
+            or outcome["winner"] is not None
+            or outcome["status"] != "decision"
+            or outcome["failure"] is not None
+            or len(outcome["observations"]) != 1
+        ):
+            raise ValueError("missing/unknown/changed parent; remaining diagnostic rows UNRUN")
+        observation = outcome["observations"][0]
+        action = observation["action"]
+        counters = observation["counters"]
+        receipt = counters.get("authority_receipt_ns")
+        deadline = observation["deadline_ns"]
+        if (
+            observation["accepted"] is not True
+            or observation["failure"] is not None
+            or observation["engine_error"] is not None
+            or observation["side"] != views[i]["side"]
+            or observation["engine_index"] != 0
+            or type(action) is not int
+            or not 0 <= action < 209
+            or not views[i]["legal_in_key"][views[i]["action_to_key"][action]]
+            or type(receipt) is not int
+            or type(deadline) is not int
+            or deadline - observation["caller_started_ns"] != 100_000_000
+            or receipt >= deadline
+            or counters.get("inflight_after_drain") != 0
+            or counters.get("drain_finished_ns") != observation["returned_ns"]
+        ):
+            raise ValueError("actual native action/frame/authority receipt mismatch")
+        observations.append(observation)
+    return observations
+
+
+def _selection_producer(source, book_ref):
+    """Join the normal finalizer's sole producer byrefs; never open its journal."""
+    completion = json.loads(bound_file_bytes(source["completion"], 2 * 1024**2))
+    if (
+        completion["schema"] != "quoridor.research.completion.v1"
+        or completion["kind"] != "run"
+        or completion["status"] != "PASS"
+        or completion["primary"] is not None
+        or completion["secondary"]
+        or completion["cleanup_complete"] is not True
+        or completion["remaining"] != []
+        or Path(source["completion"]["path"]).with_name("INCOMPLETE").exists()
+    ):
+        raise ValueError("settled sole normal decisions completion required")
+    experiment = json.loads(bound_file_bytes(completion["experiment"], 2 * 1024**2))
+    origin = json.loads(bound_file_bytes(completion["intent"], 2 * 1024**2))
+    plan_ref = origin["approved_plan"]
+    plan = json.loads(bound_file_bytes(plan_ref, 2 * 1024**2))
+    inventory = {ref["path"]: ref for ref in completion["data"]["files"]}
+    if (
+        len(inventory) != len(completion["data"]["files"])
+        or inventory.get(source["report"]["path"]) != source["report"]
+        or experiment["config"] != source["configuration"]
+        or experiment["phase"] != "compare"
+        or experiment["canonical_plan_sha256"] != plan_ref["sha256"]
+        or origin["experiment"] != completion["experiment"]
+        or plan["phase"] != "compare"
+        or plan["book"] != book_ref
+    ):
+        raise ValueError("normal producer/config/Plan/book/result identity mismatch")
+    # The maintained normal entry already owns full Plan/engine/clock validation.
+    # This is a byref join, not a substitute normal finalizer or journal qualifier.
+    return completion
+
+
+def selection_diagnostic(config):
+    """Saved bank + two normal decisions + one current joint batch; no Search/teacher."""
+    from .static_public_corpus import StaticTeacherCorpus
+    from .policy_value_training import native_identity, policy_diagnostics
+    from .residual_model import DistanceResidualModel, load_policy_head
+    from .scaled_model import validate_statistics
+    from .train import restore_warmstart_parameters
+    import torch
+
+    output = Path(config["output"])
+    output.mkdir(exist_ok=False)
+    marker = output / "INCOMPLETE"
+    marker.write_text("selection diagnostic incomplete; no replacement/retry\n")
+    corpus = None
+    work = dict(joint_attempted_rows=0, joint_completed_rows=0, new_teacher_rows=0, Search=0)
+    result = dict(status="INCOMPLETE", rows=[], work=work, remaining_rows=32)
+    started = time.monotonic()
+    try:
+        authority = json.loads(bound_file_bytes(config["row_authority"], 65536))
+        parent = json.loads(bound_file_bytes(config["parents_receipt"], 65536))
+        if (
+            parent["status"] != "COMPLETE"
+            or parent["row_authority"] != config["row_authority"]
+            or parent["core_library"] != config["core_library"]
+            or parent["book"] != config["book"]
+        ):
+            raise ValueError("native parent producer correspondence differs")
+        book = json.loads(bound_file_bytes(config["book"], 262144))
+        if len(book["openings"]) != 32:
+            raise ValueError("exact32 normal diagnostic parents")
+        # Actual native authority is rechecked for the saved normal book, with
+        # no teacher/model forward. It does not decode any H or other source.
+        from .static_teacher_inputs import native_prefix_views
+
+        bound_file_bytes(config["core_library"], 16 * 1024**2)
+        views = native_prefix_views(
+            [book["openings"][i]["prefix"] for i in range(0, 32, 2)],
+            config["core_library"]["path"],
+        )
+        joined = _selection_frame_join(authority, views)
+        if any(b["prefix"] != v["prefix"] for b, v in zip(book["openings"], views)):
+            raise ValueError("normal book original/trueLR chronology differs")
+        decisions = {}
+        for name in ("selected_alpha", "cedar_alpha"):
+            source = config["decisions"][name]
+            _selection_producer(source, config["book"])
+            cfg = json.loads(bound_file_bytes(source["configuration"], 524288))
+            report = json.loads(bound_file_bytes(source["report"], 4 * 1024**2))
+            if Path(source["report"]["path"]) != Path(cfg["output"]) / "result.json":
+                raise ValueError("decision result path differs from normal producer")
+            if cfg["arena"]["evaluator_sha256"] != [source["evaluator_sha256"]]:
+                raise ValueError("decision evaluator identity differs from normal binding")
+            if cfg["engines"][0]["model"] != source["descriptor"]["path"]:
+                raise ValueError("decision value descriptor differs from normal binding")
+            decisions[name] = _selection_decision_join(report, cfg, book, views)
+        current = config["current"]
+        if config["decisions"]["selected_alpha"]["descriptor"] != current["descriptor"]:
+            raise ValueError("joint/current Alpha value descriptor differs")
+        # Do not rehash the bank arrays. Existing reader retains its normal
+        # SAME-input, six-field custody, COMPLETE, finite/shape admission.
+        cache = authority["cache"]
+        directory = Path(cache["path"]).parent
+        if config["cache_directory"] != str(directory):
+            raise ValueError("adopted cache DIRECTORY required, not cache.json")
+        bound_file_bytes(cache, 65536)
+        corpus = StaticTeacherCorpus(directory)
+        if (
+            corpus.input_ref != authority["inputManifest"]
+            or corpus.manifest["teacher_values"] != authority["teacherBank"]
+            or not corpus.policy_value
+            or corpus.policy_temperature != 1
+        ):
+            raise ValueError("same adopted rawSTM/temp1 joint bank required")
+        pair, orientation = [], []
+        for row, saved_view, view in joined:
+            index = row["pairIndex"]
+            if (
+                bytes(corpus.pairs["key"][index]).hex() != row["canonicalKey"]
+                or int(corpus.pairs["split"][index]) != 1
+            ):
+                raise ValueError("V-only sorted pair/row correspondence differs")
+            pair.append(index)
+            orientation.append(saved_view["bankOrientation"])
+        pair, orientation = np.array(pair), np.array(orientation)
+        target, legal = corpus.policy_targets(pair, orientation)
+        z = np.asarray(corpus.values[pair, orientation]).copy()
+        if not np.array_equal(legal, np.asarray([v["legal_in_key"] for v in views], dtype=bool)):
+            raise ValueError("teacher/native actual public-frame legal masks differ")
+        descriptor = json.loads(bound_file_bytes(current["descriptor"], 65536))
+        if (
+            descriptor["schema"] != "quoridor-nnue-distance-residual-v3"
+            or descriptor["feature"] != "QF1-route4-f32-STM-scaled-residual-v3"
+            or descriptor["topology"] != {"ft_width": 32, "hidden_width": 32}
+            or descriptor["route_mode"] != "zero4"
+            or descriptor["distance_fit"] != {"a": 0, "b": 0}
+            or descriptor["value_perspective"] != "side-to-move"
+            or descriptor["weights_SHA"] != current["weights"]["sha256"]
+            or descriptor["weights_B"] != 49284
+            or (Path(current["descriptor"]["path"]).parent / descriptor["weights"]).resolve()
+            != Path(current["weights"]["path"]).resolve()
+        ):
+            raise ValueError("same current joint FP32 value descriptor required")
+        identity_start = time.monotonic()
+        identity = native_identity(
+            config["core_library"]["path"],
+            current["descriptor"]["path"],
+            current["policy"]["path"],
+        )
+        work["native_identity_seconds"] = time.monotonic() - identity_start
+        work["native_identity_pair_calls"] = 1
+        work["native_value_loads"] = 1
+        work["native_policy_loads"] = 1
+        work["native_identity_forward_rows"] = 0
+        if identity != {"shared": current["shared"], "policy": current["policy_fingerprint"]}:
+            raise ValueError("current native shared/policy identity differs")
+        bound_file_bytes(current["policy"], 65536)
+        torch.set_num_threads(1)
+        if torch.get_num_interop_threads() != 1:
+            torch.set_num_interop_threads(1)
+        init_start = time.monotonic()
+        model = DistanceResidualModel(
+            {"transformer_width": 32, "hidden_width": 32, "dropout": 0},
+            validate_statistics(descriptor),
+            a=0,
+            b=0,
+        )
+        restore_warmstart_parameters(model, current["weights"])
+        load_policy_head(model, current["policy"]["path"], shared_fingerprint=identity["shared"])
+        model.eval()
+        work["python_joint_constructors"] = 1
+        setup_seconds = time.monotonic() - init_start
+        x = torch.tensor([v["qf1"] for v in views], dtype=torch.float32).reshape(32, 2, 312)
+        distance = torch.tensor([v["distance"] for v in views], dtype=torch.float32)
+        side = torch.tensor([v["side"] + 1 for v in views], dtype=torch.long)
+        permutation = torch.tensor([v["action_to_key"] for v in views], dtype=torch.long)
+        forward_start = time.monotonic()
+        work["joint_attempted_rows"] = 32
+        work["joint_forward_calls"] = 1
+        with torch.inference_mode():
+            value, absolute_logits = model.forward_policy_value(x, distance, side)
+            work["joint_forward_seconds"] = time.monotonic() - forward_start
+            metrics_start = time.monotonic()
+            if not torch.isfinite(value).all() or not torch.isfinite(absolute_logits).all():
+                raise ValueError("current actual-view joint output nonfinite")
+            work["joint_completed_rows"] = 32
+            # Scatter by the observed native bijection, not a Python geometry rule.
+            logits = torch.empty_like(absolute_logits).scatter_(1, permutation, absolute_logits)
+            queries = {
+                name: [v["action_to_key"][o["action"]] for v, o in zip(views, observations)]
+                for name, observations in decisions.items()
+            }
+            metrics = policy_diagnostics(
+                logits,
+                torch.from_numpy(target),
+                torch.from_numpy(legal),
+                torch.ones(32),
+                action_queries=queries,
+            )
+        work["query_metrics_seconds"] = time.monotonic() - metrics_start
+        for i, (row, saved_view, view) in enumerate(joined):
+            record = dict(
+                group=i // 2,
+                component=row["component"],
+                view=saved_view["view"],
+                actual_native_stm=view["side"],
+                current_raw_stm_posttanh=float(value[i]),
+                saved_teacher_raw_stm_posttanh=float(z[i]),
+                **metrics["selection_rows"][i],
+                normal_decisions={},
+            )
+            for name, observations in decisions.items():
+                o = observations[i]
+                record["normal_decisions"][name] = {
+                    k: o.get(k)
+                    for k in (
+                        "action",
+                        "accepted",
+                        "failure",
+                        "stop",
+                        "completed_depth",
+                        "value_stm",
+                        "caller_started_ns",
+                        "deadline_ns",
+                        "returned_ns",
+                        "admission_checked_ns",
+                        "accepted_ns",
+                        "caller_seconds",
+                        "thinking_seconds",
+                        "last_completed_iteration_ns",
+                        "completed_iteration_counters",
+                        "counters",
+                    )
+                }
+            result["rows"].append(record)
+        corpus.verify_binding()
+        result.update(
+            status="COMPLETE",
+            remaining_rows=0,
+            components=16,
+            current_identity=identity,
+            joint_setup_seconds=setup_seconds,
+            decisions_byref=config["decisions"],
+            row_authority=config["row_authority"],
+            book=config["book"],
+            reader_scope=dict(
+                adopted_bank_openings=1,
+                transient_TV_maps_and_validation_rows=len(corpus.pairs) * 2,
+                scientific_V_rows=32,
+                scientific_T_rows=0,
+                H_source_or_labels_opened=False,
+            ),
+            units="raw STM posttanh values; Alpha value_stm is LEGACY search score, not a label",
+            frame="actual joint view -> native Sigma public-key frame; no learned LR invariance",
+            condition="EXPOSED selectionV descriptive queries, no causal/strength/calibration claim",
+        )
+        del model
+    except BaseException as error:
+        result["error"] = error_details(error)
+        raise
+    finally:
+        primary = sys.exception()
+        try:
+            failures = []
+            if corpus is not None:
+                for close in (corpus.verify_binding, corpus.close):
+                    try:
+                        close()
+                    except BaseException as error:
+                        failures.append(error)
+            if failures:
+                close_error = BaseExceptionGroup(
+                    "selection diagnostic original/custody/close failures",
+                    ([primary] if primary else []) + failures,
+                )
+                result["close_error"] = error_details(close_error)
+                result["status"] = "INCOMPLETE"
+                raise close_error
+        finally:
+            result["wall_seconds"] = time.monotonic() - started
+            write_json(output / "result.json", result)
+    marker.unlink()
+    return dict(result=file_ref(output / "result.json"), status=result["status"])
+
+
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("mode", choices=("qualify", "labels", "policy-values"))
+    parser.add_argument(
+        "mode",
+        choices=("qualify", "labels", "policy-values", "selection-parents", "selection-diagnostic"),
+    )
     parser.add_argument("--config", required=True)
     args = parser.parse_args()
     from quoridor_runtime.cycle_process import cancellation_signals
@@ -1369,6 +1883,8 @@ def main():
             "qualify": qualify_values,
             "labels": label_values,
             "policy-values": label_policy_values,
+            "selection-parents": selection_parents,
+            "selection-diagnostic": selection_diagnostic,
         }[args.mode](config)
     print(json.dumps(result, separators=(",", ":")))
 

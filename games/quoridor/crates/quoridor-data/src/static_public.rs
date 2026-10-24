@@ -232,6 +232,130 @@ pub unsafe extern "C" fn quoridor_public_prefix_keys(
     0
 }
 
+/// One actual chronological input view. The key uses the existing Sigma STM
+/// owner; QF1/side are the actual absolute board used by normal NNUE. These are
+/// deliberately separate frames, not an assertion of learned LR invariance.
+#[repr(C)]
+#[derive(Clone, Copy)]
+pub struct PublicPrefixView {
+    pub key: [u8; 28],
+    pub side: u8,
+    pub qf1: [u8; 624],
+    pub distance: [f32; 2],
+    /// Absolute core ActionID -> this public key's canonical STM ActionID.
+    pub action_to_key: [u16; 209],
+    pub legal_in_key: [u8; 209],
+    pub prefix: [u16; 200],
+    pub prefix_len: u16,
+}
+impl PublicPrefixView {
+    fn from_context(history: &[u16]) -> crate::Result<Self> {
+        let context = quoridor_core::research::SigmaContext::from_prefix(history)?;
+        if context.terminal_value().is_some() {
+            return Err("diagnostic prefix must be genuinely nonterminal".into());
+        }
+        let board = context.position();
+        let input = quoridor_nnue::encode_qf1(board)?;
+        let mut view = Self {
+            key: context_model_key(&context)?,
+            side: input.side,
+            qf1: [0; 624],
+            distance: input.distance,
+            action_to_key: [0; 209],
+            legal_in_key: [0; 209],
+            prefix: [0; 200],
+            prefix_len: history.len() as u16,
+        };
+        view.prefix[..history.len()].copy_from_slice(history);
+        for (player, ids) in input.ids.iter().enumerate() {
+            for &id in ids {
+                view.qf1[player * 312 + usize::from(id)] = 1;
+            }
+        }
+        for action in 0..209_u16 {
+            // Sigma features normalize the goal direction by a row reflection.
+            // Compose the maintained rotation and LR owners; no new geometry.
+            view.action_to_key[usize::from(action)] = if board.turn == 0 {
+                action
+            } else {
+                crate::terminal::reflect_action(quoridor_nnue::policy::rotate_action(action)?)?
+            };
+        }
+        for action in board.legal_action_ids() {
+            view.legal_in_key[usize::from(view.action_to_key[usize::from(action)])] = 1;
+        }
+        let canonical = position(&view.key).ok_or("native diagnostic key refused")?;
+        let mut expected = [0_u8; 209];
+        for action in canonical.legal_action_ids() {
+            expected[usize::from(action)] = 1;
+        }
+        if expected != view.legal_in_key || !expected.contains(&1) {
+            return Err("actual/public action frame legal-mask mismatch".into());
+        }
+        Ok(view)
+    }
+}
+
+/// Native actual inputs plus original/true-LR histories, at most16 parents.
+/// Successful parent i writes views 2*i and 2*i+1; status is per parent.
+/// A rejected sibling never supplies a usable view. No model or search is loaded.
+///
+/// # Safety
+/// actions: actions_len live u16 (nonnull even empty); offsets: rows+1 usize;
+/// output: 2*rows writable PublicPrefixView; status: rows writable bytes.
+/// All buffers must be disjoint and live for the call.
+#[unsafe(no_mangle)]
+pub unsafe extern "C" fn quoridor_public_prefix_views(
+    actions: *const u16,
+    actions_len: usize,
+    offsets: *const usize,
+    rows: usize,
+    output: *mut PublicPrefixView,
+    status: *mut u8,
+) -> i32 {
+    if actions.is_null()
+        || offsets.is_null()
+        || output.is_null()
+        || status.is_null()
+        || rows == 0
+        || rows > 16
+        || actions_len > rows * 200
+    {
+        return 1;
+    }
+    let actions = unsafe { std::slice::from_raw_parts(actions, actions_len) };
+    let offsets = unsafe { std::slice::from_raw_parts(offsets, rows + 1) };
+    if offsets[0] != 0
+        || offsets[rows] != actions_len
+        || offsets.windows(2).any(|v| v[0] > v[1] || v[1] - v[0] > 200)
+    {
+        return 2;
+    }
+    let status = unsafe { std::slice::from_raw_parts_mut(status, rows) };
+    status.fill(1);
+    for i in 0..rows {
+        let result = (|| -> crate::Result<[PublicPrefixView; 2]> {
+            let prefix = &actions[offsets[i]..offsets[i + 1]];
+            let reflected = prefix
+                .iter()
+                .map(|&a| crate::terminal::reflect_action(a))
+                .collect::<crate::Result<Vec<_>>>()?;
+            Ok([
+                PublicPrefixView::from_context(prefix)?,
+                PublicPrefixView::from_context(&reflected)?,
+            ])
+        })();
+        if let Ok(views) = result {
+            unsafe {
+                output.add(2 * i).write(views[0]);
+                output.add(2 * i + 1).write(views[1]);
+            }
+            status[i] = 0;
+        }
+    }
+    0
+}
+
 /// Opaque, SHA-bound unprotected public T/V input classes. No labels/history.
 /// PAIR37 belongs to the completed static-public input owner, not a book codec.
 pub struct StaticInputExclusions {
@@ -377,6 +501,89 @@ impl StaticInputExclusions {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn diagnostic_prefix_views_bind_actual_stm_and_public_action_frame_nn0() {
+        let histories = [vec![3], vec![3, 67]];
+        let actions: Vec<_> = histories.iter().flatten().copied().collect();
+        let offsets = [0, 1, 3];
+        let mut views = std::mem::MaybeUninit::<[PublicPrefixView; 4]>::uninit();
+        let mut status = [255_u8; 2];
+        assert_eq!(
+            unsafe {
+                quoridor_public_prefix_views(
+                    actions.as_ptr(),
+                    actions.len(),
+                    offsets.as_ptr(),
+                    2,
+                    views.as_mut_ptr().cast(),
+                    status.as_mut_ptr(),
+                )
+            },
+            0
+        );
+        assert_eq!(status, [0, 0]);
+        let views = unsafe { views.assume_init() };
+        assert_eq!(views[0].side, 1);
+        assert_eq!(views[2].side, 0);
+        assert_eq!(&views[0].prefix[..1], &[3]);
+        assert_eq!(&views[1].prefix[..1], &[5]);
+        for view in &views {
+            let prefix = &view.prefix[..usize::from(view.prefix_len)];
+            let context = quoridor_core::research::SigmaContext::from_prefix(prefix).unwrap();
+            let native = quoridor_nnue::encode_qf1(context.position()).unwrap();
+            assert_eq!(view.side, native.side);
+            assert_eq!(view.distance, native.distance);
+            assert_eq!(view.key, context_model_key(&context).unwrap());
+            let permutation: std::collections::BTreeSet<_> =
+                view.action_to_key.into_iter().collect();
+            assert_eq!(permutation.len(), 209);
+            for action in 0..209_u16 {
+                let in_key = view.action_to_key[usize::from(action)];
+                assert_eq!(
+                    view.legal_in_key[usize::from(in_key)] == 1,
+                    context.play(action).is_ok()
+                );
+            }
+            for (player, ids) in native.ids.iter().enumerate() {
+                for id in 0..312_u16 {
+                    assert_eq!(
+                        view.qf1[player * 312 + usize::from(id)] == 1,
+                        ids.contains(&id)
+                    );
+                }
+            }
+        }
+        assert_eq!(
+            unsafe {
+                quoridor_public_prefix_views(
+                    std::ptr::null(),
+                    0,
+                    offsets.as_ptr(),
+                    2,
+                    std::ptr::null_mut(),
+                    status.as_mut_ptr(),
+                )
+            },
+            1
+        );
+        let bad = [209_u16];
+        let mut sentinel = std::mem::MaybeUninit::<[PublicPrefixView; 2]>::uninit();
+        assert_eq!(
+            unsafe {
+                quoridor_public_prefix_views(
+                    bad.as_ptr(),
+                    1,
+                    [0, 1].as_ptr(),
+                    1,
+                    sentinel.as_mut_ptr().cast(),
+                    status.as_mut_ptr(),
+                )
+            },
+            0
+        );
+        assert_eq!(status[0], 1); // rejected output is never read
+    }
 
     fn key(p: Position) -> [u8; 28] {
         let mut out = [0; 28];
