@@ -4599,3 +4599,40 @@ caller補正の初回2配送は、Rootが親issue435（owner324）を指定し�
 これはEXPOSEDな反復selectionVの16相関成分/32viewの対応観測であり、Cedar手の正解性、教師品質、先行対局の敗因、学習済LR不変性、独立汎化・棋力・causal効果を示さない。search-derived teacherを次に検討するかは別の有限判断とし、追加fit/標本/対局/model/defaultを自動投入しない。重要な教師選択・尺度の結論だけを同じ既存Maxの有限結果解釈.435.20へ渡した（通常配送accepted、実reader STARTは未確認）。既資格frame/math/sourceや旧suiteを再確認させず、結果配送やordinary依存をその返答のgateにしない。
 
 今回outer1.629651482sはcommand1.367464015s、その内部diagnostic .150476950s・joint forward .001797061sを内包する。同pilotの元command合計8.507882029sと元outer合計25.440341891sには保存した失敗phaseを各一度含め、内包時間を加算しない。実returnはdirectreap/process+handles/remaining[]/mask-persist completed・TMP無し、元disk pending/attemptedと中間STOPのqualification NULLは変更せず、別の最終wrapper qualificationを根拠にした。元d097/881/source/software/control/delivery失敗、NULL/UNKNOWNと費用は保持する。collection初回metadata commandのPATH python不在exit127を絶対/usr/bin/python3へ訂正したが、科学処理やarchive/modelを再実行していない。global peak/fullfeesはUNKNOWN。O標準attachはsource/software資格だけで、新O runtime/Profile/Search/parserは発行していない。両strongest goal、323/342.17 USERPAUSE、H128、seals/defaultmodelsは不変である。
+
+同Max .435.20は元canonical03108a0c/compact93ff9dd2の有限解釈をCONCLUSION_CLEAR essential0/ordinary0とした。[固定レポート](../.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-result-boundary-review-v1/reviewer/report.md)8298e9fb・minimum5ff733ee・実STOP3ef1aff9を照合した。source/frame/math、archive/bank/model/Hを再開かず、64の保存receipt/namespaceと記述的結論の対応を確認したものである。higher teacher/current-policy probabilityをCedarの正解性・教師品質へ読み替えず、unitNULLとnested費用・原失敗を維持する。同ownerの通常closeを受入れ、次仕事や親goalのgateにはしない。
+
+### 2026-10-24: finite saved component table and one standard-enabled profile selected
+
+次の明示判断はteacher/fit/追加対局を選ばず、同C435.1に元93ff9dd2の既保存scalarだけから全16成分のoriginal/trueLR表を一回作る仕事を配分した。元native順で全32を保持し、両action・teacher top1/合法rank/probability・current policyの両rank/probability・同posttanh STM valueのsigned/absolute誤差を並べる。teacher top1のboth/selected-only/Cedar-only/neitherと手一致/不一致別の単純平均/範囲に限定し、geometry/全209argmax/scale fit/CI/新標本/NN/Searchや元readerの再演を行わない。欠測はNULL、raw search scoreはunitNULLの別domainとする。元archive/bank/label/model/H/partitionを追わず、既finite guard内30s/CPU10/G18/F2GiB/host4での保存passを許可した。通常配送acceptedは実pass START/STOPの証拠とは分ける。
+
+同時にOはsource39180d63/entrycc59ecd4/NEW2PASSba50321eを再用する標準enabled attachの実profile一回を明示選択した。Rootは新namespace `packed-standard-attach-flat-sampling-entry-v2` に通常wrapperを変更せず束縛した。元と同じadmitted-root2a2aの実名はdevelopment/continuous16-practical-v1/f0/p16であり、native64contest f01へ置換しない。normal bd8 CLI/固定pair/1init+clear/1000ms/max60/1thread/TTupper32MiB/1100ms返信を保ち、owned PID/start/bootへcpu-clock:u/499Hzを一回attachする。返却後にperfを先にstop/reapしnativeをclose、その新profileだけoffline report一回。FIFO/ACK/probe/旧profile parseや別Searchは足さない。source393という判断文中の表記は同39180d63の誤記として訂正され、別sourceを探さない。
+
+このwindowはasynchronous attach/request入出力/待機/overheadを含み、kernel開始・sampling readiness・fullSearch coverageはUNKNOWNである。失敗・sample無し・帰属不能はそのまま保存し、自動第三attempt/flag grid/permission変更をしない。元18feb raw12964BとFAILED/費/実ACK原因UNKNOWNを保持し、rawを再読/hash/parseしていない。旧namespaceのdirected allocated point1,462,272Bに将来tail512KiBを見込み、新output13,742,080Bとfinal tail1MiBを同16MiB内へ束縛した。資産はbyref、CPU4/G18/lib1/GPU0/F2GiB64+1984/host4/fresh6/command60/parent120の通常実入場guardsは別に必要であり、prep metadataはadmissionPASSではない。短いQ保存passの実STOP後に直列で一回発行する。両strongest goalと全pause/seal/H/defaultmodel/50GB条件は不変である。
+
+### 2026-10-24: all16 saved component table completed before the one standard-attach profile
+
+同C435.1の保存passは元93ff9dd2を一度だけwhole-JSON parseし、linked archive/bank/model/H/partitionや元diagnosticを呼ばず、[全16成分・32view表](../research-data/ai-sigma/quoridor-strong-ai435/teacher-selection-v16-component-table-v1.json)を49,795Bで完成した。[packet/STOP/費と限定解釈](../research-data/ai-sigma/quoridor-strong-ai435/teacher-selection-v16-component-table-result-v1.json)。teacher exacttop1分類はboth15/selected-only4/Cedar-only6/neither7/UNKNOWN0、成分presence10/4/6/6はview間で重複し、独立26成分ではない。手一致21行のvalue絶対誤差平均.2035343981、不一致11行は.2597723237、不一致行のteacher/current-policy確率差（selected−Cedar）平均は−.1519491207/−.0998738588だった。group11の2viewには絶対誤差.9751435220/.775249が保存されているが、除外・正解・敗因・LR不変性の主張へ変換しない。全16順序と全32を保持し、raw search値のunitNULLとcompetition rankのtieを維持する。
+
+保存guard .025808436sはparse .001384413s/read-parse-table .002062677sを内包し、元pilot8.507882029command/25.440341891outerとは別scopeである。最初のPath.open(opener=...) TypeErrorは対象openより前の.034267922sであり、元失敗script/log/marker/normalreturnNULL/diskpendingattemptedを保持して標準openのportだけ補正した。唯一の実対象読出し成功と実reap/process+handles/remaining[]/maskpersistcomplete・空TMPを確認した後、Rootは元診断を開かず、表/packet/STOPを照合して表をbyteexactに統合した。新teacher/forward/Search/fit/game/RNG/CIは0である。Max20は元有限解釈の通常closeを一度だけ完了し、同originalassignee・stored reason exactbytes/finalLFを確認した。表待ちの再reviewや親goal closeへ広げない。
+
+### 2026-10-24: one normal native response and439 saved flat samples, with original collector FAILED retained
+
+実Q保存pass STOP後に発行した4e1e2434は、bd8通常CLI/固定pair/同f0p16をinit1/clear1し、標準enabled perfをowned PIDへattachしてSearch一回を正常返却した。合法move37、completed depth10、nodes6,460,909、engine elapsed1000.000053ms/親owner call1004.238640ms、timeout、TT25,165,872Bを観測した。native scoreKind heuristic/provenfalse/engine-disc等は今回のnative実応答であり、旧browser33のNULLや未露出fieldを補う証拠ではない。記録perf一回・offline perf report一回は実行され、reportはexit0だった。しかし私有parse_flatが5列固定を要求し、実reportが自動IPC/Coverage列（全行unavailable markers）を含む6列だったため、元driver/jobはFAILED1・samplingNULLのままである。保存されたprimaryはRuntimeError/kindNULL/message未保存であり、列数拒否は固定sourceと実header/最初のdata行から特定した。元jobをrefinalize/retroPASSせず、新Search/perf/reportを発行しなかった。
+
+Rootはその保存済み6,646Bのreportテキストだけを明示header/全行field数・user-mode・未使用IPC markers・sample/period総数と照合し、最初の成功compact集計を一度得た。[元FAILED・実応答・実cleanupとsaved-only集計](../research-data/othello/strong-ai-n96/packed-standard-attach-flat-sampling-result-v1.json)。cpu-clock:u439samples/22flat rows、reported lost0、approx event period879,759,512を保存し、event periodをwall秒へ同一視しない。flat self top8は以下の通りで、parent/inclusive時間を足していない。
+
+| Emitted symbol | Samples | Emitted self |
+| --- | ---: | ---: |
+| Position::flips | 83 | 18.91% |
+| full_eval::avx2::pattern_sum | 54 | 12.30% |
+| Run::pvs | 52 | 11.85% |
+| full_eval::features::avx2::change | 52 | 11.85% |
+| FeatureState::play | 41 | 9.34% |
+| Run::eval_two_nws | 33 | 7.52% |
+| vdso unresolved/UNKNOWN | 31 | 7.06% |
+| FullEvaluator::midgame_raw | 19 | 4.33% |
+
+全reportの未解決address bucketは37samples/3行で、inlining/ISAの帰属も未証明である。サンプルが無いsymbolをhotでないとはしない。次のsource調査候補は最大self bucketのPosition::flips一箇所だけとし、最適化実装・数学/model変更・速度効果や追加実験は選んでいない。recorder phase1.072604876sはasynchronous attach・入出力/待機・owner処理・停止費を含み、exact kernel window/readiness/fullSearch coverageとsampling overheadはUNKNOWN。純tree時間・NPS・17vs21の原因・棋力/他owner速度比へ広げない。
+
+新outer1.632006865sはcommand1.365664868s/driver1.330970405s、init .160631998s、clear .002055467s、perf stop .067811633s、offline reportと元format失敗 .043327210s等を内包し加算しない。perf/nativeは通常owned closeのTERM−15、offline reportは0、各directReaped/errors[]/unexpectedExitfalseを記録した。外側actual exception returnはdirectreap/process+handles/remaining[]/maskpersistcomplete、元normalreturnNULL/diskpendingattemptedと中間sampling acceptanceNULLを保持した。内側ownerごとの未emit handle-completeや正常flush/物理回収/全host状態は補わない。新raw26,100Bはwrapperが一度hashしたbyrefのみを使い、Root collectorによるraw read/hash/parseは0、旧18feb rawも追加処理0である。原source/microcontrol/費とfullfees/globalpeakUNKNOWN、全pause/seal/H/defaults/50GBを維持し、自動第三attemptは行わない。

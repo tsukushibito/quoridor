@@ -1,0 +1,405 @@
+{
+  "status": "ORIGINAL_JOB_FAILED_AFTER_ONE_NORMAL_RESPONSE_AND_OFFLINE_REPORT;SAVED_TEXT_AGGREGATE_COMPLETE",
+  "job": {
+    "job_id": "4e1e2434-7c91-4782-a4f9-7659e236232d",
+    "outcome": "failed",
+    "error": null,
+    "error_notes": [],
+    "exit_code": 1,
+    "finished_at": "2026-10-24T17:34:12.565064+00:00",
+    "wall_seconds": 1.6320068649947643,
+    "remaining": [],
+    "direct_child_reaped": true,
+    "descendant_visibility": "observed",
+    "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+    "cleanup_complete": true,
+    "cleanup_errors": [],
+    "log_bytes_seen": 841,
+    "log_bytes_retained": 841
+  },
+  "normal_guardian_return": null,
+  "actual_guardian_exception_return": {
+    "command": [
+      "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+      "-B",
+      "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-standard-attach-software-v1/postimages/sample_one.py",
+      "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-standard-attach-flat-sampling-entry-v2/sampling-config.json",
+      "c06d2aae9bf29c871beafc1248d2fa473d69f0860d2419b4d963189d68a7b13b"
+    ],
+    "status": "failed",
+    "child": {
+      "pid": 1442995,
+      "start_ticks": "91159336",
+      "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+    },
+    "launch_policy": {
+      "no_new_privs_requested": false,
+      "verified_before_exec": null
+    },
+    "cpu_plan": {
+      "management": [
+        18
+      ],
+      "commands": {
+        "sample": [
+          4
+        ]
+      },
+      "allocation": [
+        4,
+        18
+      ],
+      "resource_CPUs": 2,
+      "worker_CPUs": 1,
+      "library_threads": 1
+    },
+    "command_cpu_scope": "sample",
+    "log_bytes_seen": 0,
+    "scope": "session group and periodically recorded descendants; no daemon adoption",
+    "error": "cycle child failed: ['/home/vscode/.cache/inference/envs/quoridor-training/bin/python', '-B', '/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-standard-attach-software-v1/postimages/sample_one.py', '/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-standard-attach-flat-sampling-entry-v2/sampling-config.json', 'c06d2aae9bf29c871beafc1248d2fa473d69f0860d2419b4d963189d68a7b13b']: 1",
+    "reason": "CycleStopped",
+    "exit_code": 1,
+    "remaining": [],
+    "direct_child_reaped": true,
+    "descendant_visibility": "observed",
+    "cleanup_complete": true,
+    "log_bytes_retained": 0,
+    "wall_seconds": 1.365664868033491,
+    "handle_closes_attempted": [
+      "selector_close",
+      "pipe_close",
+      "pidfd_close",
+      "log_close"
+    ],
+    "primary_error": {
+      "type": "CycleStopped",
+      "message": "cycle child failed: ['/home/vscode/.cache/inference/envs/quoridor-training/bin/python', '-B', '/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-standard-attach-software-v1/postimages/sample_one.py', '/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-standard-attach-flat-sampling-entry-v2/sampling-config.json', 'c06d2aae9bf29c871beafc1248d2fa473d69f0860d2419b4d963189d68a7b13b']: 1"
+    },
+    "process_cleanup_complete": true,
+    "handle_closes_complete": true,
+    "signal_mask_restoration": "completed",
+    "final_record_persist": "completed",
+    "finalization_errors": []
+  },
+  "original_disk_mask_persist": {
+    "mask": "pending",
+    "persist": "attempted"
+  },
+  "actual_work": {
+    "native_initializations": 1,
+    "clears": 1,
+    "normal_Search_attempts": 1,
+    "normal_numeric_replies": 1,
+    "live_recorders": 1,
+    "offline_perf_report_processes": 1,
+    "unrun_requests": 0,
+    "no_new_Search_recorder_report_or_model_run_by_collector": true
+  },
+  "normal_response": {
+    "coefficients": {
+      "a": 0.7308488452189136,
+      "b": -4.5708322989025865,
+      "c": 1.096319765006055,
+      "d": -0.8362251801219095,
+      "e": 4.610017383697701,
+      "f": 3.818582623595395,
+      "g": 1.7775013664098447
+    },
+    "completedDepth": 10,
+    "elapsedMs": 1000.0000529999999,
+    "interpretation": "simd",
+    "isEndSearch": false,
+    "move": 37,
+    "mustPass": false,
+    "nodes": 6460909,
+    "probability": 100.0,
+    "proven": false,
+    "rawScore": 21,
+    "score": 24,
+    "scoreKind": "heuristic",
+    "scoreUnits": "engine-disc",
+    "selectivity": 6,
+    "stopped": "timeout",
+    "terminal": false,
+    "ttBytes": 25165872
+  },
+  "actual_startup": {
+    "coefficients": {
+      "a": 0.7308488452189136,
+      "b": -4.5708322989025865,
+      "c": 1.096319765006055,
+      "d": -0.8362251801219095,
+      "e": 4.610017383697701,
+      "f": 3.818582623595395,
+      "g": 1.7775013664098447
+    },
+    "engine": "console7.8.1-rust-singlethread-source-port",
+    "hashLevel": 20,
+    "hashSeed": 20261022,
+    "identityBinding": "callerVerified",
+    "interpretation": "simd",
+    "midgameId": "sha256:0a8acbcbc23067933627f1bcc83c3f7ae6b7ff3e603d174a3364271fcaeeef2f",
+    "ok": true,
+    "orderingId": "sha256:bd908885e8bb85e72a9be2b0399f8ca52ed40a138bcaaecca3d13710945b9a93",
+    "upstreamCommit": "570d5e0a478c9d720d75de06a5d31995f412704a",
+    "workerPool": 0
+  },
+  "root_id": "development/continuous16-practical-v1/f0/p16",
+  "input_scope": "Same fixed original practical f0/p16; no replacement root, geometry, RNG or H.",
+  "native_identity": {
+    "pid": 1442996,
+    "start_ticks": "91159342",
+    "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+  },
+  "recorder_identity": {
+    "pid": 1442997,
+    "start_ticks": "91159358",
+    "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+  },
+  "offline_parser_identity": {
+    "pid": 1443002,
+    "start_ticks": "91159466",
+    "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+  },
+  "process_close_records": [
+    {
+      "owner": "offlineParser",
+      "identity": {
+        "pid": 1443002,
+        "start_ticks": "91159466",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "returnedCleanup": {
+        "exitCode": 0,
+        "unexpectedExit": false,
+        "directReaped": true,
+        "bytesSeen": 6646,
+        "bytesRetained": 6670,
+        "errors": []
+      },
+      "closeError": null
+    },
+    {
+      "owner": "recorder",
+      "identity": {
+        "pid": 1442997,
+        "start_ticks": "91159358",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "returnedCleanup": {
+        "exitCode": -15,
+        "unexpectedExit": false,
+        "directReaped": true,
+        "bytesSeen": 237,
+        "bytesRetained": 245,
+        "errors": []
+      },
+      "closeError": null
+    },
+    {
+      "owner": "native",
+      "identity": {
+        "pid": 1442996,
+        "start_ticks": "91159342",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "returnedCleanup": {
+        "exitCode": -15,
+        "unexpectedExit": false,
+        "directReaped": true,
+        "bytesSeen": 1487,
+        "bytesRetained": 1266,
+        "errors": []
+      },
+      "closeError": null
+    }
+  ],
+  "per_inner_owner_explicit_handle_complete_field": null,
+  "outer_guardian_handles_complete": true,
+  "direct_controlled_TERM_is_not_flush_or_physical_reclamation_proof": true,
+  "sampling": {
+    "status": "SAVED_TEXT_COMPACT_AGGREGATION_COMPLETE_ORIGINAL_JOB_STAYS_FAILED",
+    "event": "cpu-clock:u",
+    "observed_sample_count": 439,
+    "reported_lost_samples": 0,
+    "reported_approx_event_count": 879759512,
+    "event_count_unit": "cpu-clock event period; not measured wall time",
+    "flat_rows": 22,
+    "flat_self_top8": [
+      {
+        "self_percent_emitted": 18.91,
+        "samples": 83,
+        "event_period": 166332664,
+        "dso": "othello-full-search-vector",
+        "symbol": "<othello_core::bitboard::Position>::flips",
+        "symbol_status": "EMITTED_SYMBOL_inlining_unknown",
+        "source_line": 15
+      },
+      {
+        "self_percent_emitted": 12.3,
+        "samples": 54,
+        "event_period": 108216432,
+        "dso": "othello-full-search-vector",
+        "symbol": "othello_core::full_eval::avx2::pattern_sum",
+        "symbol_status": "EMITTED_SYMBOL_inlining_unknown",
+        "source_line": 30
+      },
+      {
+        "self_percent_emitted": 11.85,
+        "samples": 52,
+        "event_period": 104208416,
+        "dso": "othello-full-search-vector",
+        "symbol": "<othello_core::full_search::run::Run<<othello_core::full_search::FullSearch>::search_native::{closure#0}, <othello_core::full_search::FullSearch>::search_native::{closure#1}>>::pvs",
+        "symbol_status": "EMITTED_SYMBOL_inlining_unknown",
+        "source_line": 24
+      },
+      {
+        "self_percent_emitted": 11.85,
+        "samples": 52,
+        "event_period": 104208416,
+        "dso": "othello-full-search-vector",
+        "symbol": "othello_core::full_eval::features::avx2::change",
+        "symbol_status": "EMITTED_SYMBOL_inlining_unknown",
+        "source_line": 31
+      },
+      {
+        "self_percent_emitted": 9.34,
+        "samples": 41,
+        "event_period": 82164328,
+        "dso": "othello-full-search-vector",
+        "symbol": "<othello_core::full_eval::features::FeatureState>::play",
+        "symbol_status": "EMITTED_SYMBOL_inlining_unknown",
+        "source_line": 19
+      },
+      {
+        "self_percent_emitted": 7.52,
+        "samples": 33,
+        "event_period": 66132264,
+        "dso": "othello-full-search-vector",
+        "symbol": "<othello_core::full_search::run::Run<<othello_core::full_search::FullSearch>::search_native::{closure#0}, <othello_core::full_search::FullSearch>::search_native::{closure#1}>>::eval_two_nws",
+        "symbol_status": "EMITTED_SYMBOL_inlining_unknown",
+        "source_line": 21
+      },
+      {
+        "self_percent_emitted": 7.06,
+        "samples": 31,
+        "event_period": 62124248,
+        "dso": "[vdso]",
+        "symbol": null,
+        "symbol_status": "UNKNOWN_unresolved_address",
+        "source_line": 12
+      },
+      {
+        "self_percent_emitted": 4.33,
+        "samples": 19,
+        "event_period": 38076152,
+        "dso": "othello-full-search-vector",
+        "symbol": "<othello_core::full_eval::FullEvaluator>::midgame_raw",
+        "symbol_status": "EMITTED_SYMBOL_inlining_unknown",
+        "source_line": 17
+      }
+    ],
+    "unresolved_address_samples": 37,
+    "unresolved_address_rows": 3,
+    "unknown": "Exact kernel window, attach readiness, full Search coverage, inlined attribution and continuous peak remain UNKNOWN.",
+    "unused_IPC": "Actual automatic sixth IPC/Coverage column contains only unavailable markers; not measured or imputed.",
+    "original_failure": "Original strict parse_flat required five columns; actual report header and every data row have six. No successful compact aggregate existed in original driver.",
+    "original_error_message": null,
+    "cause_basis": "Source-derived first-row field-count refusal after actual offline perf report exit0; original stored primary RuntimeError has no message/kind.",
+    "saved_text": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-standard-attach-flat-sampling-entry-v2/data/flat-report.txt",
+      "bytes": 6646,
+      "mode": "0644",
+      "sha256": "04a3c615c90f91741d4f8b8bfc95b278de2b800b82b10714a18af9da2f5ccb03"
+    },
+    "raw_perf_read_hash_parse_by_collector": 0,
+    "offline_perf_report_executions_by_collector": 0,
+    "original_offline_report_executions": 1,
+    "compact_aggregation_passes_by_collector": 1,
+    "initial_saved_text_inspection_before_this_aggregation": 1
+  },
+  "observed_clock_scopes": {
+    "engine_elapsed_ms": 1000.0000529999999,
+    "normal_owner_call_wall_ms": 1004.2386400746182,
+    "whole_driver_seconds": 1.3309704050188884,
+    "outer_seconds": 1.6320068649947643,
+    "command_seconds": 1.365664868033491,
+    "preflight_seconds": 0.043997597065754235,
+    "native_launch_init_seconds": 0.1606319979764521,
+    "clear_seconds": 0.0020554669899865985,
+    "recorder_launch_identity_seconds": 0.0003969260724261403,
+    "recorder_phase_seconds": 1.07260487601161,
+    "perf_setup_request_seconds": 1.0046984470682219,
+    "perf_stop_close_seconds": 0.06781163299456239,
+    "native_close_seconds": 0.007877349969930947,
+    "offline_report_plus_failed_format_collection_seconds": 0.04332721000537276,
+    "cleanup_seconds": 7.104198448359966e-05,
+    "nonadditive": "These inner durations are nested in driver, command and outer; do not add inclusive scopes.",
+    "saved_collection_seconds_so_far": 0.0008618459105491638
+  },
+  "limitations": {
+    "sampling_scope": "coarse owned userspace; request I/O/wait, asynchronous attach and overhead",
+    "exact_kernel_window": null,
+    "readiness": null,
+    "full_search_coverage": null,
+    "profiler_overhead": null,
+    "continuous_peak": null,
+    "full_fees": null,
+    "no_pure_tree_time_speed_ratio_NPS_depth_cause_strength_or_default_claim": true,
+    "original_browser33_NULL_and_app4_unexposed_fields_unchanged": true,
+    "unknown_symbols_not_evidence_of_not_hot": true,
+    "emitted_symbol_labels_not_executed_ISA_or_inlining_proof": true
+  },
+  "proposed_next_location": {
+    "function": "<othello_core::bitboard::Position>::flips",
+    "reason": "Largest observed flat self bucket in this one coarse owned-user profile:83/439 emitted samples,18.91% emitted self.",
+    "scope": "One candidate for source investigation only; no implementation, math/model change, speed benefit or future campaign selected."
+  },
+  "evidence": {
+    "driver_result": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-standard-attach-flat-sampling-entry-v2/data/result.json",
+      "bytes": 5103,
+      "mode": "0644",
+      "sha256": "f023b9f0ffa35c3508525a4fc79c83c81b550617ffb7e0726d1f32c99d5e7fef"
+    },
+    "original_runtime": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-standard-attach-flat-sampling-entry-v2/runtime/result.json",
+      "bytes": 523,
+      "mode": "0600",
+      "sha256": "ba2a91bc028fa4f0b967d7c4a2360eedc6ffb356fe9a25c35b32d1ac33f5924a"
+    },
+    "actual_return": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-standard-attach-flat-sampling-entry-v2/sample-command.returned.json",
+      "bytes": 6262,
+      "mode": "0644",
+      "sha256": "00e19622ecbafa14be305b3a263f88813213d9925f9480639a4f21ce526bf3f9"
+    },
+    "original_controller_STOP": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-standard-attach-flat-sampling-entry-v2/Root-controller-STOP.json",
+      "bytes": 6104,
+      "mode": "0644",
+      "sha256": "23d2e4e66f971a96fa3411caac6620200d667bf6577bbc8adc18630c8dbe6e9f"
+    },
+    "saved_text_aggregate": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-standard-attach-flat-sampling-entry-v2/completion-4e1e2434/saved-flat-aggregate.json",
+      "bytes": 4164,
+      "mode": "0644",
+      "sha256": "e9eb5d86bd2b03e43b0d6cd3352ccd8b4e129b8cedbdedfcaec1edcad8d7b7ba"
+    },
+    "raw_perf_byref_only": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-standard-attach-flat-sampling-entry-v2/data/perf.data",
+      "bytes": 26100,
+      "mode": "0600",
+      "sha256": "56833463657d1dc4fedc6a7c2e6ce1442de9fc7c22240a6edf7c0035d1830a31"
+    }
+  },
+  "preserved": {
+    "original_job_state_unmodified": true,
+    "original_driver_sampling_remains_null": true,
+    "old18feb_raw_no_additional_read_hash_or_parse": true,
+    "old_ACK_bytes_and_cause_stay_unknown": true,
+    "automatic_replacement": 0,
+    "new_events_or_permission_changes": 0,
+    "USERPAUSE_323_342_17_H128_seals_defaults_foreign_50GB_unchanged": true
+  }
+}

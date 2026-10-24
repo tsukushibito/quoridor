@@ -71,6 +71,8 @@ STM/盤面向き/色、raw STEP単位、disc単位、丸め、clamp段階と外�
 
 ## 最初の受入単位と検証
 
+現行packed通常nativeの一要求で得た[有限flat user-space profile](../../../research-data/othello/strong-ai-n96/packed-standard-attach-flat-sampling-result-v1.json)は439samplesを保存した。Searchは一回正常返却したが、私有report集計器の列数不一致で元jobはFAILEDのまま保持し、保存済みtextから一度だけcompact集計した。最大self bucketはPosition::flipsの83samples/18.91%で、次のsource調査候補をこの一箇所に限る。asynchronous attach・入出力/待機・sampling overheadと未解決symbolを含むため、純tree時間、他engine/browserとの速度比、depth差の原因、棋力や新たな最適化の効果は認定しない。旧profileの再処理・追加Search・model/default変更は行っていない。
+
 最初の一まとまりは「全16形状・64配置・60段階のRust評価器、実weight読込、incremental更新、原engineとの数値一致」。同じ課題の既存core作者と基準接続作者を再用し、共通format/phase境界を先に固定する。core作者はRust実装、基準接続作者は外部static oracle・format/由来を担当する。sourceの実編集から進め、設計完成・親close・Root/人間ACKを入口にしない。
 
 受入れでは同じ実weightで全phase、盤面向き/色反転、pass、terminal近傍を含む静的照合、full recompute対incremental、packing/符号/丸め/clampを確認する。native/Wasmで同じweightと演算意味を確認する。厳密小終盤は独立全探索/外部参照でWDL・実石差・early terminal・empty割当を分ける。固定深さ・選択pruningOFFのscore差から順に切り分け、tieの別着手を数値不一致と扱わない。
