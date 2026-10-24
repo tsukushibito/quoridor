@@ -5,7 +5,7 @@ import type {
   UiToken,
   UiView,
 } from '../../../../../games/othello/bridge/src';
-import type { AIClient } from './ai-client';
+import type { AIClient, ModelFiles } from './ai-client';
 import type { Repository } from './storage';
 
 export function createHost(ports: {
@@ -15,8 +15,10 @@ export function createHost(ports: {
   confirm(message: string): boolean;
   render(view: UiView): void;
   failure(message: string): void;
+  clearModelFiles?(): void;
 }) {
   let owner: UiController | undefined;
+  let selected: ModelFiles = { main: null, ending: null };
   let closed = false;
   let boot = 0; // async import ownership only; game/request ownership lives in Rust
   let generation = -1;
@@ -36,8 +38,22 @@ export function createHost(ports: {
       ports.ai.cancel();
       return;
     }
+    if (effect.kind === 'resetModel') {
+      ports.ai.reset();
+      return;
+    }
+    if (effect.kind === 'forgetModel') {
+      ports.ai.forget();
+      selected = { main: null, ending: null };
+      ports.clearModelFiles?.();
+      return;
+    }
     if (!(final && effect.kind === 'writeSave') && !owned(effect.token)) return;
-    if (effect.kind === 'writeSave') {
+    if (effect.kind === 'loadModel') {
+      ports.ai.load(selected, effect.token, effect.spec, (reply) => {
+        if (owned(effect.token)) dispatch({ kind: 'modelReply', token: effect.token, ...reply });
+      });
+    } else if (effect.kind === 'writeSave') {
       let error: string | null = null;
       try {
         ports.repository.write(effect.key, effect.raw);
@@ -72,11 +88,26 @@ export function createHost(ports: {
         );
     } else if (effect.kind === 'think') {
       ports.ai.run(
-        { token: effect.token, state: effect.state, strategy: effect.strategy },
+        {
+          token: effect.token,
+          state: effect.state,
+          strategy: effect.strategy,
+          ...(effect.model === undefined ? {} : { model: effect.model }),
+        },
         (reply) => {
           if (!owned(effect.token)) return;
           try {
-            dispatch({ kind: 'aiReply', ...reply });
+            dispatch({
+              kind: 'aiReply',
+              token: reply.token,
+              state: reply.state,
+              strategy: reply.strategy,
+              move: reply.move,
+              searchResult: reply.searchResult,
+              fullResult: reply.fullResult ?? null,
+              modelIdentity: reply.modelIdentity ?? null,
+              error: reply.error,
+            });
           } catch (e) {
             dispatch({
               kind: 'aiReply',
@@ -89,44 +120,58 @@ export function createHost(ports: {
             });
           }
         },
+        (phase, modelIdentity) => {
+          if (owned(effect.token))
+            dispatch({ kind: 'aiPhase', token: effect.token, phase, modelIdentity });
+        },
       );
     }
   }
-  return {
-    send(action: UiAction): void {
-      if (closed) return;
-      if (owner) {
+  function send(action: UiAction): void {
+    if (closed) return;
+    if (owner) {
+      dispatch(action);
+      return;
+    }
+    const ticket = ++boot;
+    ports.ai.cancel();
+    void ports
+      .createUI()
+      .then((ui) => {
+        if (closed || ticket !== boot) {
+          ui.free();
+          return;
+        }
+        owner = ui;
         dispatch(action);
-        return;
-      }
-      const ticket = ++boot;
-      ports.ai.cancel();
-      void ports
-        .createUI()
-        .then((ui) => {
-          if (closed || ticket !== boot) {
-            ui.free();
-            return;
-          }
-          owner = ui;
-          dispatch(action);
-        })
-        .catch((e) => {
-          if (!closed && ticket === boot)
-            ports.failure(`Othelloを読み込めませんでした。再試行できます。${detail(e)}`);
-        });
+      })
+      .catch((e) => {
+        if (!closed && ticket === boot)
+          ports.failure('Othelloを読み込めませんでした。再試行できます。' + detail(e));
+      });
+  }
+  return {
+    send,
+    selectModelFiles(value: ModelFiles): void {
+      if (closed) return;
+      selected = value;
+      send({ kind: 'modelFilesChanged' });
     },
     dispose(): void {
       if (closed) return;
       closed = true;
       boot++;
-      ports.ai.cancel();
-      if (owner) {
-        try {
-          dispatch({ kind: 'dispose' }, true);
-        } finally {
-          owner.free();
-          owner = undefined;
+      try {
+        ports.ai.dispose();
+      } finally {
+        selected = { main: null, ending: null };
+        if (owner) {
+          try {
+            dispatch({ kind: 'dispose' }, true);
+          } finally {
+            owner.free();
+            owner = undefined;
+          }
         }
       }
     },

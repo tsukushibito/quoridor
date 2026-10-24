@@ -2,6 +2,7 @@
 //! browser effects; asynchronous completions carry Rust-issued ownership tokens.
 
 use othello_core::GameState;
+use othello_core::full_search::{FullSearchOptions, MpcCoefficients};
 use othello_core::search::{ScoreKind, SearchResult};
 use serde::{Deserialize, Serialize};
 
@@ -18,6 +19,7 @@ enum Strategy {
     #[default]
     Simple,
     SearchV1,
+    FullModel,
 }
 
 impl Strategy {
@@ -25,14 +27,69 @@ impl Strategy {
         match self {
             Self::Simple => "簡易AI（非学習）",
             Self::SearchV1 => "探索AI（非学習・1秒）",
+            Self::FullModel => "フル探索AI（評価ファイル使用・1秒）",
         }
     }
     fn short_label(self) -> &'static str {
         match self {
             Self::Simple => "簡易AI",
             Self::SearchV1 => "探索AI（1秒）",
+            Self::FullModel => "フル探索AI（1秒）",
         }
     }
+}
+
+const MAIN_BYTES: u64 = 38_243_826;
+const ENDING_BYTES: u64 = 472_392;
+const MAIN_SHA: &str = "0a8acbcbc23067933627f1bcc83c3f7ae6b7ff3e603d174a3364271fcaeeef2f";
+const ENDING_SHA: &str = "bd908885e8bb85e72a9be2b0399f8ca52ed40a138bcaaecca3d13710945b9a93";
+const SELECT_MODEL: &str = "フル探索AIには、この端末の評価ファイル2点を選択・確認してください。";
+const RESELECT_MODEL: &str =
+    "フル探索AIには、この端末の評価ファイル2点を再選択してください。元の保存は保持しています。";
+
+#[derive(Clone, Debug, PartialEq, Eq, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+struct ModelIdentity {
+    version: u8,
+    main_sha256: String,
+    ending_sha256: String,
+}
+fn fixed_identity() -> ModelIdentity {
+    ModelIdentity {
+        version: 1,
+        main_sha256: MAIN_SHA.into(),
+        ending_sha256: ENDING_SHA.into(),
+    }
+}
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct ModelSpec {
+    identity: ModelIdentity,
+    main_bytes: u64,
+    ending_bytes: u64,
+    interpretation: &'static str,
+    hash_level: u8,
+    ready_timeout_ms: u32,
+    reply_timeout_ms: u32,
+    options: FullSearchOptions,
+}
+fn model_spec() -> ModelSpec {
+    ModelSpec {
+        identity: fixed_identity(),
+        main_bytes: MAIN_BYTES,
+        ending_bytes: ENDING_BYTES,
+        interpretation: "simd",
+        hash_level: 20,
+        ready_timeout_ms: 30_000,
+        reply_timeout_ms: 1_100,
+        options: FullSearchOptions::default(),
+    }
+}
+#[derive(Clone, Copy, Deserialize)]
+#[serde(rename_all = "camelCase")]
+enum AiPhase {
+    Initializing,
+    Thinking,
 }
 
 #[derive(Clone, Deserialize, Serialize)]
@@ -45,6 +102,8 @@ struct SavedGame {
     // Version1 saves made before strategy selection deliberately mean Simple.
     #[serde(default)]
     strategy: Strategy,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    model_identity: Option<ModelIdentity>,
     state: GameState,
 }
 
@@ -97,12 +156,33 @@ enum Action {
     Cancel {},
     AiReply {
         token: Token,
-        state: GameState,
+        state: serde_json::Value,
         strategy: Strategy,
         r#move: Option<u32>,
         #[serde(rename = "searchResult")]
         search_result: Option<serde_json::Value>,
+        #[serde(rename = "fullResult")]
+        full_result: Option<serde_json::Value>,
+        #[serde(rename = "modelIdentity")]
+        model_identity: Option<serde_json::Value>,
         error: Option<String>,
+    },
+    ModelFilesChanged {},
+    LoadModel {},
+    ModelReply {
+        token: Token,
+        identity: Option<ModelIdentity>,
+        #[serde(rename = "mainBytes")]
+        main_bytes: Option<u64>,
+        #[serde(rename = "endingBytes")]
+        ending_bytes: Option<u64>,
+        error: Option<String>,
+    },
+    AiPhase {
+        token: Token,
+        phase: AiPhase,
+        #[serde(rename = "modelIdentity")]
+        model_identity: Option<ModelIdentity>,
     },
     Save {},
     Dispose {},
@@ -112,6 +192,12 @@ enum Action {
 #[serde(tag = "kind", rename_all = "camelCase")]
 enum Effect {
     CancelWorker,
+    ResetModel,
+    ForgetModel,
+    LoadModel {
+        token: Token,
+        spec: ModelSpec,
+    },
     Confirm {
         token: Token,
         message: &'static str,
@@ -129,6 +215,8 @@ enum Effect {
         token: Token,
         state: GameState,
         strategy: Strategy,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        model: Option<ModelSpec>,
     },
 }
 
@@ -167,6 +255,10 @@ struct View {
     strategy: Strategy,
     busy: bool,
     thinking: bool,
+    ai_phase: &'static str,
+    model_required: bool,
+    model_status: &'static str,
+    model_message: String,
     error: String,
     save_message: String,
     notice: String,
@@ -208,6 +300,13 @@ pub struct Controller {
     writing: Option<Token>,
     ai: Option<(Token, GameState, Strategy)>,
     paused: bool,
+    model_identity: Option<ModelIdentity>,
+    model_loading: Option<Token>,
+    model_block_save: bool,
+    model_failed: bool,
+    model_message: String,
+    ai_model: Option<ModelIdentity>,
+    ai_started: bool,
     exit_warning: Option<String>,
 }
 
@@ -256,6 +355,92 @@ fn validate_search_result(
     Ok(())
 }
 
+// Actual full-owner schema, kept distinct from baseline SearchResult.
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+struct FullReply {
+    r#move: Option<u32>,
+    raw_score: Option<i32>,
+    score: Option<i32>,
+    score_units: String,
+    score_kind: String,
+    proven: bool,
+    completed_depth: u8,
+    selectivity: u8,
+    probability: Option<f64>,
+    is_end_search: bool,
+    nodes: u64,
+    elapsed_ms: f64,
+    stopped: Option<String>,
+    interpretation: String,
+    tt_bytes: usize,
+    coefficients: MpcCoefficients,
+    must_pass: bool,
+    terminal: bool,
+}
+fn validate_full_result(
+    state: &GameState,
+    index: Option<u32>,
+    raw: Option<serde_json::Value>,
+) -> Result<(), String> {
+    let r: FullReply = serde_json::from_value(raw.ok_or("フル探索の結果がありません。")?)
+        .map_err(|_| "フル探索の結果形式を確認できません。")?;
+    let status = state.status();
+    let defaults = MpcCoefficients::default();
+    let got = [
+        r.coefficients.a,
+        r.coefficients.b,
+        r.coefficients.c,
+        r.coefficients.d,
+        r.coefficients.e,
+        r.coefficients.f,
+        r.coefficients.g,
+    ];
+    let expected = [
+        defaults.a, defaults.b, defaults.c, defaults.d, defaults.e, defaults.f, defaults.g,
+    ];
+    let uncompleted = r.completed_depth == 0
+        && r.raw_score.is_none()
+        && r.score.is_none()
+        && r.score_kind == "uncompleted"
+        && !r.proven
+        && !r.is_end_search
+        && r.stopped.as_deref() == Some("timeout");
+    let completed = r.completed_depth > 0
+        && r.raw_score.is_some_and(|v| (-64..=64).contains(&v))
+        && r.score.is_some_and(|v| (-64..=64).contains(&v))
+        && if r.proven {
+            r.is_end_search && r.selectivity == 6 && r.score_kind == "terminalEmptyAward"
+        } else {
+            r.score_kind == "heuristic"
+        };
+    if r.r#move != index
+        || r.score_units != "engine-disc"
+        || r.interpretation != "simd"
+        || r.completed_depth > 60
+        || r.selectivity > 6
+        || r.tt_bytes == 0
+        || r.tt_bytes > 32 * 1024 * 1024
+        || !r.elapsed_ms.is_finite()
+        || r.elapsed_ms < 0.0
+        || r.probability
+            .is_some_and(|p| !p.is_finite() || !(0.0..=100.0).contains(&p))
+        || r.stopped.as_deref().is_some_and(|s| s != "timeout")
+        || !got
+            .iter()
+            .zip(expected)
+            .all(|(a, b)| a.to_bits() == b.to_bits())
+        || r.must_pass != status.must_pass
+        || r.terminal != status.terminal
+        || !(uncompleted || completed)
+    {
+        return Err("フル探索の応答が一致しません。再試行できます。".into());
+    }
+    // Actual nodes/score kind/proof are retained as their own schema, not recast.
+    let _ = r.nodes;
+    Ok(())
+}
+
 impl Controller {
     fn token(&mut self) -> Token {
         self.request = self
@@ -268,7 +453,7 @@ impl Controller {
         }
     }
 
-    fn invalidate(&mut self, effects: &mut Vec<Effect>) {
+    fn revoke_requests(&mut self) {
         self.generation = self
             .generation
             .checked_add(1)
@@ -277,19 +462,47 @@ impl Controller {
         self.reading = None;
         self.writing = None;
         self.ai = None;
+        self.ai_model = None;
+        self.ai_started = false;
+        if self.model_loading.is_some() {
+            self.model_message =
+                "評価ファイルの準備を中断しました。もう一度確認・準備できます。".into();
+        }
+        self.model_loading = None;
+    }
+    fn invalidate(&mut self, effects: &mut Vec<Effect>) {
+        self.revoke_requests();
         effects.push(Effect::CancelWorker);
+    }
+    fn advance(&mut self, effects: &mut Vec<Effect>) {
+        if self
+            .game
+            .as_ref()
+            .is_some_and(|g| g.strategy == Strategy::FullModel)
+        {
+            self.revoke_requests();
+        } else {
+            self.invalidate(effects);
+        }
     }
 
     fn busy(&self) -> bool {
-        self.confirmation.is_some() || self.reading.is_some() || self.ai.is_some()
+        self.confirmation.is_some()
+            || self.reading.is_some()
+            || self.ai.is_some()
+            || self.model_loading.is_some()
     }
     fn can_save(&self) -> bool {
-        self.game.is_some() && !self.preserve_save && !self.busy() && !self.disposed
+        self.game.is_some()
+            && !self.preserve_save
+            && !self.model_block_save
+            && !self.busy()
+            && !self.disposed
     }
 
     fn save(&mut self, effects: &mut Vec<Effect>) {
         if !self.can_save() {
-            if self.preserve_save {
+            if self.preserve_save || self.model_block_save {
                 self.exit_warning = Some(KEEP_SAVE.into());
                 self.save_message = KEEP_SAVE.into();
             }
@@ -313,12 +526,29 @@ impl Controller {
     }
 
     fn think(&mut self, effects: &mut Vec<Effect>) {
-        if self.disposed || self.busy() || self.paused || self.preserve_save || self.human_turn() {
+        if self.disposed
+            || self.busy()
+            || self.paused
+            || self.preserve_save
+            || self.model_block_save
+            || self.human_turn()
+        {
             return;
         }
         let Some(game) = self.game.as_ref() else {
             return;
         };
+        if game.strategy == Strategy::FullModel
+            && self.model_identity.as_ref() != game.model_identity.as_ref()
+        {
+            self.model_message = if self.model_block_save {
+                RESELECT_MODEL
+            } else {
+                SELECT_MODEL
+            }
+            .into();
+            return;
+        }
         let status = game.state.status();
         if status.terminal {
             return;
@@ -333,18 +563,25 @@ impl Controller {
         } else {
             let state = game.state.clone();
             let strategy = game.strategy;
+            self.ai_model = if strategy == Strategy::FullModel {
+                self.model_identity.clone()
+            } else {
+                None
+            };
+            self.ai_started = false;
             let token = self.token();
             self.ai = Some((token, state.clone(), strategy));
             effects.push(Effect::Think {
                 token,
                 state,
                 strategy,
+                model: (strategy == Strategy::FullModel).then(model_spec),
             });
         }
     }
 
     fn commit_state(&mut self, state: GameState, notice: String, effects: &mut Vec<Effect>) {
-        self.invalidate(effects);
+        self.advance(effects);
         self.game.as_mut().expect("confirmed game").state = state;
         self.notice = notice;
         self.error.clear();
@@ -358,7 +595,15 @@ impl Controller {
         let previous_paused = self.paused;
         let previous_warning = self.exit_warning.clone();
         let previous_message = self.save_message.clone();
-        self.invalidate(effects);
+        let keep_idle = self.ai.is_none()
+            && self.model_loading.is_none()
+            && self.model_identity.is_some()
+            && matches!(&action, Confirmation::New(Mode::Ai, _, Strategy::FullModel));
+        if keep_idle {
+            self.revoke_requests();
+        } else {
+            self.invalidate(effects);
+        }
         self.preserve_save = true;
         self.exit_warning = Some(KEEP_SAVE.into());
         self.save_message = KEEP_SAVE.into();
@@ -407,6 +652,12 @@ impl Controller {
                 if !matches!(human_side, 1 | 2) {
                     return Err("担当する色を確認できません。".into());
                 }
+                // Local two-player games never require evaluation Files.
+                let strategy = if mode == Mode::Local && strategy == Strategy::FullModel {
+                    Strategy::Simple
+                } else {
+                    strategy
+                };
                 self.draft_mode = Some(mode);
                 self.draft_side = Some(human_side);
                 self.draft_strategy = Some(strategy);
@@ -420,6 +671,12 @@ impl Controller {
                 if !matches!(human_side, 1 | 2) {
                     return Err("担当する色を確認できません。".into());
                 }
+                // Local two-player games never require evaluation Files.
+                let strategy = if mode == Mode::Local && strategy == Strategy::FullModel {
+                    Strategy::Simple
+                } else {
+                    strategy
+                };
                 self.draft_mode = Some(mode);
                 self.draft_side = Some(human_side);
                 self.draft_strategy = Some(strategy);
@@ -456,9 +713,19 @@ impl Controller {
                                 mode,
                                 human_side,
                                 strategy,
+                                model_identity: (strategy == Strategy::FullModel)
+                                    .then(fixed_identity),
                                 state: GameState::new(),
                             });
                             self.preserve_save = false;
+                            self.model_block_save = false;
+                            if strategy == Strategy::FullModel {
+                                if self.model_identity.is_none() {
+                                    self.model_failed = false;
+                                    self.model_message = SELECT_MODEL.into();
+                                }
+                                effects.push(Effect::ResetModel);
+                            }
                             self.paused = false;
                             self.error.clear();
                             self.notice = "新しい対局です。黒から始めます。".into();
@@ -491,6 +758,12 @@ impl Controller {
                 if saved.version != 1
                     || saved.game != "othello"
                     || !matches!(saved.human_side, 1 | 2)
+                    || (saved.mode == Mode::Local && saved.strategy == Strategy::FullModel)
+                    || if saved.strategy == Strategy::FullModel {
+                        saved.model_identity.as_ref() != Some(&fixed_identity())
+                    } else {
+                        saved.model_identity.is_some()
+                    }
                 {
                     return Err("保存のバージョン・対戦方式・担当する色を確認できません。".into());
                 }
@@ -498,8 +771,16 @@ impl Controller {
                 self.draft_mode = Some(saved.mode);
                 self.draft_side = Some(saved.human_side);
                 self.draft_strategy = Some(saved.strategy);
+                let needs_files = saved.strategy == Strategy::FullModel;
                 self.game = Some(saved);
                 self.preserve_save = false;
+                self.model_block_save = needs_files;
+                if needs_files {
+                    self.model_identity = None;
+                    self.model_failed = false;
+                    self.model_message = RESELECT_MODEL.into();
+                    effects.push(Effect::ForgetModel);
+                }
                 self.paused = false;
                 self.error.clear();
                 self.notice = "保存した対局を再開しました。".into();
@@ -508,7 +789,12 @@ impl Controller {
                 focus = true;
             }
             Action::Play { index } => {
-                if self.busy() || self.paused || !self.human_turn() || self.preserve_save {
+                if self.busy()
+                    || self.paused
+                    || !self.human_turn()
+                    || self.preserve_save
+                    || self.model_block_save
+                {
                     return Ok(false);
                 }
                 let game = self.game.as_ref().ok_or("対局を選んでください。")?;
@@ -521,7 +807,12 @@ impl Controller {
                 focus = true;
             }
             Action::Pass {} => {
-                if self.busy() || self.paused || !self.human_turn() || self.preserve_save {
+                if self.busy()
+                    || self.paused
+                    || !self.human_turn()
+                    || self.preserve_save
+                    || self.model_block_save
+                {
                     return Ok(false);
                 }
                 let game = self.game.as_ref().ok_or("対局を選んでください。")?;
@@ -539,26 +830,79 @@ impl Controller {
                 strategy,
                 r#move,
                 search_result,
+                full_result,
+                model_identity,
                 error,
             } => {
                 if self.ai.as_ref().map(|p| p.0) != Some(token) {
                     return Ok(false);
                 }
                 let (_, expected, expected_strategy) = self.ai.take().expect("owned worker");
-                effects.push(Effect::CancelWorker);
+                let expected_model = self.ai_model.take();
+                self.ai_started = false;
+                if expected_strategy != Strategy::FullModel {
+                    effects.push(Effect::CancelWorker);
+                }
+                let parsed: Result<GameState, _> = serde_json::from_value(state);
+                let state = match parsed {
+                    Ok(state) => state,
+                    Err(_) => {
+                        effects.push(Effect::CancelWorker);
+                        return Err("AIの応答局面の形式を確認できません。再試行できます。".into());
+                    }
+                };
+                let parsed_identity: Result<Option<ModelIdentity>, _> =
+                    model_identity.map(serde_json::from_value).transpose();
+                let model_identity = match parsed_identity {
+                    Ok(identity) => identity,
+                    Err(_) => {
+                        effects.push(Effect::CancelWorker);
+                        return Err("AIの評価ファイル識別子の形式を確認できません。".into());
+                    }
+                };
                 if strategy != expected_strategy
                     || state != expected
                     || self.game.as_ref().map(|g| (&g.state, g.strategy))
                         != Some((&expected, expected_strategy))
                 {
+                    effects.push(Effect::CancelWorker);
                     return Err("AIの応答局面・方式が一致しません。再試行できます。".into());
                 }
                 if let Some(error) = error {
+                    effects.push(Effect::CancelWorker);
                     return Err(error);
                 }
-                validate_search_result(strategy, r#move, search_result)?;
-                let index = r#move.ok_or("AIが手を返しませんでした。再試行できます。")?;
-                let next = expected.play(index).map_err(|e| e.to_string())?;
+                let checked = if strategy == Strategy::FullModel {
+                    if model_identity != expected_model
+                        || model_identity != self.model_identity
+                        || self.game.as_ref().and_then(|g| g.model_identity.as_ref())
+                            != model_identity.as_ref()
+                        || search_result.is_some()
+                    {
+                        Err("フル探索の評価ファイルidentityが一致しません。".into())
+                    } else {
+                        validate_full_result(&expected, r#move, full_result)
+                    }
+                } else if full_result.is_some() || model_identity.is_some() {
+                    Err("AIの応答方式が混在しています。".into())
+                } else {
+                    validate_search_result(strategy, r#move, search_result)
+                };
+                if let Err(error) = checked {
+                    effects.push(Effect::CancelWorker);
+                    return Err(error);
+                }
+                let next = r#move
+                    .ok_or("AIが手を返しませんでした。再試行できます。".to_string())
+                    .and_then(|index| expected.play(index).map_err(|e| e.to_string()));
+                let next = match next {
+                    Ok(next) => next,
+                    Err(error) => {
+                        effects.push(Effect::CancelWorker);
+                        return Err(error);
+                    }
+                };
+                let index = r#move.expect("validated move");
                 self.commit_state(
                     next,
                     format!(
@@ -569,6 +913,78 @@ impl Controller {
                     effects,
                 );
                 focus = true;
+            }
+            Action::ModelFilesChanged {} => {
+                self.invalidate(effects);
+                self.model_identity = None;
+                self.model_failed = false;
+                self.model_block_save = self.game.is_some();
+                self.model_message =
+                    "評価ファイル2点を選び、「評価ファイルを確認・準備」を押してください。".into();
+                self.error.clear();
+            }
+            Action::LoadModel {} => {
+                self.invalidate(effects);
+                self.model_identity = None;
+                self.model_failed = false;
+                self.model_block_save = self.game.is_some();
+                self.model_message = "評価ファイルを確認・準備しています…".into();
+                self.error.clear();
+                let token = self.token();
+                self.model_loading = Some(token);
+                effects.push(Effect::LoadModel {
+                    token,
+                    spec: model_spec(),
+                });
+            }
+            Action::ModelReply {
+                token,
+                identity,
+                main_bytes,
+                ending_bytes,
+                error,
+            } => {
+                if self.model_loading != Some(token) {
+                    return Ok(false);
+                }
+                self.model_loading = None;
+                let error = error.or_else(|| {
+                    (identity.as_ref() != Some(&fixed_identity())
+                        || main_bytes != Some(MAIN_BYTES)
+                        || ending_bytes != Some(ENDING_BYTES))
+                    .then(|| "指定の評価ファイル2点を確認できません。".into())
+                });
+                if let Some(error) = error {
+                    self.model_failed = true;
+                    self.model_message = error.clone();
+                    effects.push(Effect::CancelWorker);
+                    return Err(error);
+                }
+                self.model_identity = identity;
+                self.model_failed = false;
+                self.model_block_save = false;
+                self.model_message =
+                    "この画面内で評価ファイルを選択済みです。フル探索は1手1秒です。".into();
+                if self
+                    .game
+                    .as_ref()
+                    .is_some_and(|g| g.strategy == Strategy::FullModel)
+                {
+                    self.save(effects);
+                    self.think(effects);
+                }
+            }
+            Action::AiPhase {
+                token,
+                phase,
+                model_identity,
+            } => {
+                if self.ai.as_ref().map(|a| a.0) == Some(token)
+                    && self.ai_model == model_identity
+                    && model_identity.is_some()
+                {
+                    self.ai_started = matches!(phase, AiPhase::Thinking);
+                }
             }
             Action::RetryAi {} => {
                 self.invalidate(effects);
@@ -583,8 +999,14 @@ impl Controller {
             }
             Action::Save {} => self.save(effects),
             Action::Dispose {} => {
-                let eligible = self.can_save() || (self.ai.is_some() && !self.preserve_save);
+                let eligible = self.can_save()
+                    || (self.ai.is_some() && !self.preserve_save && !self.model_block_save);
+                let had_model = self.model_identity.is_some() || self.model_loading.is_some();
                 self.invalidate(effects);
+                if had_model {
+                    effects.push(Effect::ForgetModel);
+                }
+                self.model_identity = None;
                 if eligible {
                     self.save(effects);
                 } else if self.preserve_save {
@@ -613,6 +1035,32 @@ impl Controller {
             strategy,
             busy,
             thinking,
+            ai_phase: if !thinking {
+                "idle"
+            } else if self.ai_model.is_some() && !self.ai_started {
+                "initializing"
+            } else {
+                "thinking"
+            },
+            model_required: strategy == Strategy::FullModel
+                || self
+                    .game
+                    .as_ref()
+                    .is_some_and(|g| g.strategy == Strategy::FullModel),
+            model_status: if self.model_loading.is_some() {
+                "loading"
+            } else if self.model_identity.is_some() {
+                "ready"
+            } else if self.model_failed {
+                "error"
+            } else {
+                "unloaded"
+            },
+            model_message: if self.model_message.is_empty() {
+                "ローカルの評価ファイル2点が必要です。".into()
+            } else {
+                self.model_message.clone()
+            },
             error: self.error.clone(),
             save_message: self.save_message.clone(),
             notice: self.notice.clone(),
@@ -624,7 +1072,7 @@ impl Controller {
             pass_visible: false,
             pass_disabled: true,
             retry_ai_visible: false,
-            cancel_visible: thinking,
+            cancel_visible: thinking || self.model_loading.is_some(),
             save_disabled: !self.can_save(),
             focus_turn,
             exit_warning: self.exit_warning.clone(),
@@ -640,7 +1088,11 @@ impl Controller {
                     "{}の手番{}",
                     color(game.state.to_move()),
                     if thinking {
-                        format!(" · {}が考えています…", game.strategy.short_label())
+                        if self.ai_model.is_some() && !self.ai_started {
+                            " · 評価ファイルを準備しています…".into()
+                        } else {
+                            format!(" · {}が考えています…", game.strategy.short_label())
+                        }
                     } else {
                         String::new()
                     }
@@ -660,6 +1112,15 @@ impl Controller {
             view.score = format!("黒 {} 石 ／ 白 {} 石", status.black, status.white);
             view.guide = if status.terminal {
                 "対局が終わりました。新しい対局を選べます。".into()
+            } else if game.strategy == Strategy::FullModel
+                && (self.model_identity.is_none() || self.model_block_save)
+            {
+                if self.model_block_save {
+                    RESELECT_MODEL
+                } else {
+                    SELECT_MODEL
+                }
+                .into()
             } else if self.paused {
                 "対局を中断しています。新しい対局・続きから・AIの再試行を選べます。".into()
             } else if status.must_pass {
@@ -671,8 +1132,13 @@ impl Controller {
                 "印のあるマスに置けます。Tabまたは矢印キーで移動し、Enter・Spaceで置きます。".into()
             };
             view.pass_visible = status.must_pass && human;
-            view.pass_disabled = busy || self.paused || self.preserve_save;
-            view.retry_ai_visible = !human && !status.terminal && !busy && !self.preserve_save;
+            view.pass_disabled = busy || self.paused || self.preserve_save || self.model_block_save;
+            view.retry_ai_visible = !human
+                && !status.terminal
+                && !busy
+                && !self.preserve_save
+                && !self.model_block_save
+                && (game.strategy != Strategy::FullModel || self.model_identity.is_some());
             view.cells = game
                 .state
                 .board()
@@ -684,7 +1150,12 @@ impl Controller {
                         index: i as u32,
                         stone,
                         legal,
-                        enabled: legal && human && !busy && !self.paused && !self.preserve_save,
+                        enabled: legal
+                            && human
+                            && !busy
+                            && !self.paused
+                            && !self.preserve_save
+                            && !self.model_block_save,
                         label: format!(
                             "{} {}{}",
                             coordinate(i as u32),
@@ -1200,5 +1671,201 @@ mod tests {
             assert!(!has(&send(&mut ui, json!({"kind":"save"})), "writeSave"));
             assert!(!has(&send(&mut ui, json!({"kind":"dispose"})), "writeSave"));
         }
+    }
+
+    // Model-free controller fixtures: these prove UI decisions, not engine numerics.
+    fn fixture_model_ready(ui: &mut Controller) -> Value {
+        let loading = send(ui, json!({"kind":"loadModel"}));
+        send(
+            ui,
+            json!({"kind":"modelReply", "token":effect(&loading,"loadModel")["token"],
+            "identity":fixed_identity(), "mainBytes":MAIN_BYTES, "endingBytes":ENDING_BYTES, "error":null}),
+        )
+    }
+    fn fixture_full_start(ui: &mut Controller) -> Value {
+        fixture_model_ready(ui);
+        let asking = send(
+            ui,
+            json!({"kind":"new","mode":"ai","humanSide":2,"strategy":"fullModel"}),
+        );
+        send(
+            ui,
+            json!({"kind":"confirm","token":effect(&asking,"confirm")["token"],"accepted":true}),
+        )
+    }
+    fn fixture_full_reply(think: &Value) -> Value {
+        let state: GameState = serde_json::from_value(think["state"].clone()).unwrap();
+        let index = state.status().legal_moves[0];
+        json!({"kind":"aiReply","token":think["token"],"state":think["state"],
+            "strategy":"fullModel","move":index,"modelIdentity":fixed_identity(),"error":null,"searchResult":null,
+            "fullResult":{"move":index,"rawScore":0,"score":0,"scoreUnits":"engine-disc","scoreKind":"heuristic",
+                "proven":false,"completedDepth":1,"selectivity":0,"probability":74.0,"isEndSearch":false,
+                "nodes":7,"elapsedMs":1.0,"stopped":null,"interpretation":"simd","ttBytes":25165872,
+                "coefficients":MpcCoefficients::default(),"mustPass":false,"terminal":false}})
+    }
+
+    #[test]
+    fn ui_full_model_fixture_normal_reply_and_human_move_keep_idle_owner() {
+        let mut ui = Controller::default();
+        let initial = fixture_full_start(&mut ui);
+        assert!(has(&initial, "resetModel"));
+        let think = effect(&initial, "think");
+        let spec = &think["model"];
+        assert_eq!(spec["options"]["timeMs"], 1000);
+        assert_eq!(spec["options"]["maxDepth"], 60);
+        assert_eq!(spec["options"]["fixedDepth"], Value::Null);
+        assert_eq!(spec["readyTimeoutMs"], 30000);
+        assert_eq!(spec["replyTimeoutMs"], 1100);
+        let moved = send(&mut ui, fixture_full_reply(&think));
+        assert!(!has(&moved, "cancelWorker") && !has(&moved, "resetModel"));
+        assert!(has(&moved, "writeSave"));
+        assert!(ui.ai.is_none());
+        let human = ui.game.as_ref().unwrap().state.status().legal_moves[0];
+        let next = send(&mut ui, json!({"kind":"play","index":human}));
+        assert!(has(&next, "think"));
+        assert!(!has(&next, "cancelWorker") && !has(&next, "resetModel"));
+        assert_ne!(effect(&next, "think")["token"], think["token"]);
+        assert_eq!(
+            effect(&next, "think")["model"]["identity"],
+            spec["identity"]
+        );
+    }
+
+    #[test]
+    fn ui_full_model_fixture_cancel_reset_dispose_revoke_old_authority() {
+        let mut ui = Controller::default();
+        let initial = fixture_full_start(&mut ui);
+        let think = effect(&initial, "think");
+        let before = ui.game.as_ref().unwrap().state.clone();
+        let cancelled = send(&mut ui, json!({"kind":"cancel"}));
+        assert!(has(&cancelled, "cancelWorker"));
+        let stale = send(&mut ui, fixture_full_reply(&think));
+        assert!(!has(&stale, "writeSave"));
+        assert_eq!(ui.game.as_ref().unwrap().state, before);
+        let retried = send(&mut ui, json!({"kind":"retryAi"}));
+        let fresh = effect(&retried, "think");
+        assert_ne!(fresh["token"], think["token"]);
+        let asking = send(
+            &mut ui,
+            json!({"kind":"new","mode":"ai","humanSide":2,"strategy":"fullModel"}),
+        );
+        assert!(has(&asking, "cancelWorker"));
+        let reset = send(
+            &mut ui,
+            json!({"kind":"confirm","token":effect(&asking,"confirm")["token"],"accepted":true}),
+        );
+        assert!(has(&reset, "resetModel"));
+        assert!(!has(
+            &send(&mut ui, fixture_full_reply(&fresh)),
+            "writeSave"
+        ));
+        let current = effect(&reset, "think");
+        let stopped = send(&mut ui, json!({"kind":"dispose"}));
+        assert!(has(&stopped, "cancelWorker") && has(&stopped, "forgetModel"));
+        assert!(!has(
+            &send(&mut ui, fixture_full_reply(&current)),
+            "writeSave"
+        ));
+    }
+
+    #[test]
+    fn ui_full_model_fixture_resume_reselect_and_identity_only_save() {
+        let mut source = Controller::default();
+        let initial = fixture_full_start(&mut source);
+        let raw = effect(&initial, "writeSave")["raw"]
+            .as_str()
+            .unwrap()
+            .to_owned();
+        let stored: Value = serde_json::from_str(&raw).unwrap();
+        assert_eq!(stored["strategy"], "fullModel");
+        assert_eq!(stored["modelIdentity"], json!(fixed_identity()));
+        assert!(stored.get("files").is_none() && stored.get("weights").is_none());
+        let mut ui = Controller::default();
+        let token = resume(&mut ui);
+        let loaded = send(
+            &mut ui,
+            json!({"kind":"loaded","token":token,"raw":raw,"error":null}),
+        );
+        assert!(has(&loaded, "forgetModel"));
+        assert!(!has(&loaded, "think") && !has(&loaded, "writeSave"));
+        assert!(loaded["view"]["saveDisabled"].as_bool().unwrap());
+        assert!(!has(&send(&mut ui, json!({"kind":"retryAi"})), "think"));
+        assert!(!has(&send(&mut ui, json!({"kind":"save"})), "writeSave"));
+        let ready = fixture_model_ready(&mut ui);
+        assert!(has(&ready, "writeSave") && has(&ready, "think"));
+        let mut unselected = Controller::default();
+        let token = resume(&mut unselected);
+        send(
+            &mut unselected,
+            json!({"kind":"loaded","token":token,"raw":stored.to_string(),"error":null}),
+        );
+        assert!(!has(
+            &send(&mut unselected, json!({"kind":"dispose"})),
+            "writeSave"
+        ));
+    }
+
+    #[test]
+    fn ui_full_model_fixture_wrong_pair_and_malformed_reply_refuse_without_fallback() {
+        let mut ui = Controller::default();
+        let initial = fixture_full_start(&mut ui);
+        let think = effect(&initial, "think");
+        let before = ui.game.as_ref().unwrap().state.clone();
+        let mut bad = fixture_full_reply(&think);
+        bad["modelIdentity"]["mainSha256"] = json!("wrong");
+        let refused = send(&mut ui, bad);
+        assert!(has(&refused, "cancelWorker") && !has(&refused, "writeSave"));
+        assert_eq!(ui.game.as_ref().unwrap().state, before);
+        let retried = send(&mut ui, json!({"kind":"retryAi"}));
+        let mut malformed = fixture_full_reply(&effect(&retried, "think"));
+        malformed["state"] = json!({"invalid":"wire board"});
+        let refused = send(&mut ui, malformed);
+        assert!(has(&refused, "cancelWorker") && !refused["view"]["thinking"].as_bool().unwrap());
+        send(&mut ui, json!({"kind":"modelFilesChanged"}));
+        let loading = send(&mut ui, json!({"kind":"loadModel"}));
+        let bad_pair = send(
+            &mut ui,
+            json!({"kind":"modelReply","token":effect(&loading,"loadModel")["token"],
+            "identity":fixed_identity(),"mainBytes":1,"endingBytes":ENDING_BYTES,"error":null}),
+        );
+        assert_eq!(bad_pair["view"]["modelStatus"], "error");
+        assert!(!has(&bad_pair, "think") && !has(&bad_pair, "writeSave"));
+        assert!(!has(&send(&mut ui, json!({"kind":"dispose"})), "writeSave"));
+    }
+
+    #[test]
+    fn ui_full_model_fixture_pending_and_corrupt_resume_survive_model_preparation() {
+        for raw in [
+            "{bad".to_string(),
+            json!({"version":1,"game":"othello","mode":"ai","humanSide":2,
+            "strategy":"unknownFull","state":GameState::new()})
+            .to_string(),
+        ] {
+            let mut ui = Controller::default();
+            start(&mut ui, "local", 1);
+            let before = ui.game.as_ref().unwrap().state.clone();
+            let token = resume(&mut ui);
+            assert!(!has(&send(&mut ui, json!({"kind":"save"})), "writeSave"));
+            let loaded = send(
+                &mut ui,
+                json!({"kind":"loaded","token":token,"raw":raw,"error":null}),
+            );
+            assert!(!has(&loaded, "writeSave"));
+            let ready = fixture_model_ready(&mut ui);
+            assert!(!has(&ready, "writeSave") && !has(&ready, "think"));
+            assert_eq!(ui.game.as_ref().unwrap().state, before);
+            assert!(!has(&send(&mut ui, json!({"kind":"dispose"})), "writeSave"));
+        }
+        let mut local = Controller::default();
+        let ask = send(
+            &mut local,
+            json!({"kind":"new","mode":"local","humanSide":1,"strategy":"fullModel"}),
+        );
+        let started = send(
+            &mut local,
+            json!({"kind":"confirm","token":effect(&ask,"confirm")["token"],"accepted":true}),
+        );
+        assert_eq!(started["view"]["strategy"], "simple");
+        assert!(!has(&started, "think") && !has(&started, "loadModel"));
     }
 }

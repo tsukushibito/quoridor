@@ -39,8 +39,14 @@ export function mountOthello(
       confirm: (message) => window.confirm(message),
       render: (state) => view?.render(state),
       failure: (message) => view?.failure(message),
+      clearModelFiles: () => view?.clearModelFiles(),
     });
-    view = createView(root, lifetime.signal, (action) => host?.send(action));
+    view = createView(
+      root,
+      lifetime.signal,
+      (action) => host?.send(action),
+      (files) => host?.selectModelFiles(files),
+    );
     return handle;
   } catch (error) {
     dispose();

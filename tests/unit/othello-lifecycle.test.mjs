@@ -46,6 +46,9 @@ function fixture(script) {
   const ports = {
     createUI: async () => ui,
     ai: {
+      dispose() {
+        cancelled++;
+      },
       cancel() {
         cancelled++;
       },
@@ -380,6 +383,10 @@ test('Worker entry echoes Rust ownership and calls only the unchanged simple pol
     {
       '../../../../../games/othello/bridge/src': {
         chooseMove: async () => 19,
+        // Unused fullmodel fixture port: this simple-policy test must never load a model.
+        createFullModel: () => {
+          throw Error('unexpected fullmodel in simple-policy fixture');
+        },
         search: () => {
           throw Error('unexpected search');
         },
@@ -402,7 +409,8 @@ test('mount owns teardown before asynchronous initialization and clears the DOM 
     viewDisposed = 0,
     freed = 0,
     cleared = 0,
-    rendered = 0;
+    rendered = 0,
+    aiDisposed = 0;
   const root = {
     replaceChildren() {
       cleared++;
@@ -416,6 +424,9 @@ test('mount owns teardown before asynchronous initialization and clears the DOM 
       './ai-client': {
         createAIClient: () => ({
           cancel() {},
+          dispose() {
+            aiDisposed++;
+          },
           run() {
             throw Error('unexpected AI');
           },
@@ -455,6 +466,9 @@ test('mount owns teardown before asynchronous initialization and clears the DOM 
   mountOthello(root, route.signal);
   action({ kind: 'resume' });
   route.abort();
+  // Observe the synchronous disposal and its event turn before releasing the late import.
+  assert.equal(aiDisposed, 1);
+  await new Promise((resolve) => setImmediate(resolve));
   pending.resolve({
     dispatch() {
       throw Error('late dispatch');
@@ -473,7 +487,9 @@ test('mount owns teardown before asynchronous initialization and clears the DOM 
   const aborted = new AbortController();
   aborted.abort();
   mountOthello(root, aborted.signal);
+  await new Promise((resolve) => setImmediate(resolve));
   assert.equal(cleared, 2);
+  assert.equal(aiDisposed, 1);
 });
 
 test('DOM projection uses Rust labels/eligibility and releases listeners on abort', async () => {
@@ -515,7 +531,12 @@ test('DOM projection uses Rust labels/eligibility and releases listeners on abor
   );
   const lifetime = new AbortController(),
     actions = [];
-  const view = createView(root, lifetime.signal, (action) => actions.push(action));
+  const view = createView(
+    root,
+    lifetime.signal,
+    (action) => actions.push(action),
+    () => {},
+  );
   assert.match(root.innerHTML, /簡易AI（非学習）/);
   assert.match(root.innerHTML, /role="alert"/);
   assert.match(root.innerHTML, /aria-live="polite"/);
@@ -524,6 +545,10 @@ test('DOM projection uses Rust labels/eligibility and releases listeners on abor
   view.render({
     hasGame: true,
     strategy: 'simple',
+    aiPhase: 'idle',
+    modelRequired: false,
+    modelStatus: 'unloaded',
+    modelMessage: '',
     mode: 'ai',
     humanSide: 2,
     busy: false,

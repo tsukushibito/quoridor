@@ -1,0 +1,644 @@
+{
+  "status": "CURRENT_UI_AFFECTED_SOFTWARE_COMPOSITE_QUALIFIED_NOT_BROWSER_OR_MODEL_EXECUTION",
+  "jobId": "251aa790-e209-429b-872d-c99a168ff63a",
+  "outerRuntime": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel1s-affected-software-v1/host-optional-model-software-v4/runtime/result.json",
+    "bytes": 526,
+    "mode": "0600",
+    "sha256": "e0579021b569b74126f5bd935c64649509555200a04d61767444191028829707"
+  },
+  "outerOutput": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel1s-affected-software-v1/host-optional-model-software-v4/runtime/output.log",
+    "bytes": 153,
+    "mode": "0644",
+    "sha256": "02293114083c287a88ccbde101e8238939e51e87b3d818820b7a5ad49783c425"
+  },
+  "outerWallSecondsOnce": 4.2401754800230265,
+  "nestedCommandsNotAdded": true,
+  "commands": [
+    {
+      "name": "affected-host-optional-model-fixtures",
+      "wallSeconds": 0.20104034000542015,
+      "log": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel1s-affected-software-v1/host-optional-model-software-v4/affected-host-optional-model-fixtures.log",
+        "bytes": 1195,
+        "mode": "0644",
+        "sha256": "c95fa8258ab2e1c7e8ed38298d2781a54ffab85fc06d4d1409e618ad2f3f5027"
+      },
+      "receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel1s-affected-software-v1/host-optional-model-software-v4/affected-host-optional-model-fixtures.returned.json",
+        "bytes": 3538,
+        "mode": "0644",
+        "sha256": "985d2df46317eb68c5f842cebefff7debb8cfbfb876bd9c4a76e5dde06454d0a"
+      },
+      "actualReturn": {
+        "command": [
+          "/home/vscode/.local/opt/node/v24.22.0/bin/node",
+          "--test-reporter=tap",
+          "--experimental-vm-modules",
+          "--test",
+          "--test-name-pattern",
+          "^(fixture host carries Rust model effects and strips transport-only spec before dispatch|thin host forwards Rust strategy and synchronously cancels/discards revoked completion)$",
+          "games/othello/tests/unit/full-model-ui.test.mjs",
+          "games/othello/tests/unit/browser-search.test.mjs"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 4017647,
+          "start_ticks": "88267169",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "probe": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "probe",
+        "log_bytes_seen": 1195,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 1195,
+        "wall_seconds": 0.20104034000542015,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "persistedSnapshot": {
+        "command": [
+          "/home/vscode/.local/opt/node/v24.22.0/bin/node",
+          "--test-reporter=tap",
+          "--experimental-vm-modules",
+          "--test",
+          "--test-name-pattern",
+          "^(fixture host carries Rust model effects and strips transport-only spec before dispatch|thin host forwards Rust strategy and synchronously cancels/discards revoked completion)$",
+          "games/othello/tests/unit/full-model-ui.test.mjs",
+          "games/othello/tests/unit/browser-search.test.mjs"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 4017647,
+          "start_ticks": "88267169",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "probe": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "probe",
+        "log_bytes_seen": 1195,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 1195,
+        "wall_seconds": 0.20104034000542015,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted",
+        "finalization_errors": []
+      },
+      "ended": {
+        "recorded": {
+          "pid": 4017647,
+          "start_ticks": "88267169",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "sameIdentityPresent": false
+      }
+    },
+    {
+      "name": "affected-web-types",
+      "wallSeconds": 0.4438213880639523,
+      "log": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel1s-affected-software-v1/host-optional-model-software-v4/affected-web-types.log",
+        "bytes": 0,
+        "mode": "0644",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel1s-affected-software-v1/host-optional-model-software-v4/affected-web-types.returned.json",
+        "bytes": 2908,
+        "mode": "0644",
+        "sha256": "f19decd135ebb50b2abb9613cc17a0aa65ba4a3fd3eda77f37075b7a759dbec9"
+      },
+      "actualReturn": {
+        "command": [
+          "/home/vscode/.local/opt/node/v24.22.0/bin/node",
+          "node_modules/typescript/bin/tsc",
+          "--noEmit",
+          "-p",
+          "apps/web/tsconfig.json"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 4017667,
+          "start_ticks": "88267190",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "probe": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "probe",
+        "log_bytes_seen": 0,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 0,
+        "wall_seconds": 0.4438213880639523,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "persistedSnapshot": {
+        "command": [
+          "/home/vscode/.local/opt/node/v24.22.0/bin/node",
+          "node_modules/typescript/bin/tsc",
+          "--noEmit",
+          "-p",
+          "apps/web/tsconfig.json"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 4017667,
+          "start_ticks": "88267190",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "probe": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "probe",
+        "log_bytes_seen": 0,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 0,
+        "wall_seconds": 0.4438213880639523,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted",
+        "finalization_errors": []
+      },
+      "ended": {
+        "recorded": {
+          "pid": 4017667,
+          "start_ticks": "88267190",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "sameIdentityPresent": false
+      }
+    },
+    {
+      "name": "one-current-app-bundle",
+      "wallSeconds": 3.148553476901725,
+      "log": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel1s-affected-software-v1/host-optional-model-software-v4/one-current-app-bundle.log",
+        "bytes": 4292,
+        "mode": "0644",
+        "sha256": "a296d704d12c0d7e1d7d4c334ce5246ebb14486642160cfe90f1fb3f34cc080f"
+      },
+      "receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel1s-affected-software-v1/host-optional-model-software-v4/one-current-app-bundle.returned.json",
+        "bytes": 3004,
+        "mode": "0644",
+        "sha256": "e3300a1bcccdb80ce37faf439b38c9f8e98211f056e7a4cb86eee79551ce0c9a"
+      },
+      "actualReturn": {
+        "command": [
+          "/home/vscode/.local/opt/node/v24.22.0/bin/node",
+          "/home/vscode/.local/opt/node/v24.22.0/lib/node_modules/npm/bin/npm-cli.js",
+          "run",
+          "build",
+          "-w",
+          "@quoridor/web"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 4017680,
+          "start_ticks": "88267236",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "probe": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "probe",
+        "log_bytes_seen": 4292,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 4292,
+        "wall_seconds": 3.148553476901725,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "persistedSnapshot": {
+        "command": [
+          "/home/vscode/.local/opt/node/v24.22.0/bin/node",
+          "/home/vscode/.local/opt/node/v24.22.0/lib/node_modules/npm/bin/npm-cli.js",
+          "run",
+          "build",
+          "-w",
+          "@quoridor/web"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 4017680,
+          "start_ticks": "88267236",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "probe": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "probe",
+        "log_bytes_seen": 4292,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 4292,
+        "wall_seconds": 3.148553476901725,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted",
+        "finalization_errors": []
+      },
+      "ended": {
+        "recorded": {
+          "pid": 4017680,
+          "start_ticks": "88267236",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "sameIdentityPresent": false
+      }
+    }
+  ],
+  "currentSourceAdoption": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel1s-affected-software-v1/host-optional-model-software-v4/adoption.json",
+    "bytes": 2053,
+    "mode": "0644",
+    "sha256": "abdef49141fac678617049292bee11d055a7058d259fb754d6ec48db99effd0f"
+  },
+  "scope": "Exact current host fixtures2 +Web typing+bundle PASS. Prior Rust20/scoped JS/repaired2/Clippy/current matched web build/standalone real generated typing held by exact refs and unchanged source; no claim of a fresh whole suite execution.",
+  "priorSuccessfulSoftware": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel1s-affected-software-v1/disposable-lib-software-v3/completion-425dd4c8/collection.json",
+    "bytes": 12517,
+    "mode": "0644",
+    "sha256": "8a582a1292e6f3ed0dfeb93fdbe94565f9b5eb48ce8ad2bea067f00fdde8981b"
+  },
+  "rawCompilerWasm": {
+    "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target/wasm32-unknown-unknown/release/othello_wasm.wasm",
+    "bytes": 626529,
+    "mode": "0755",
+    "sha256": "27b11fd4b2040231bee3f91fc67a988af86e629b8ceeaea5a8bcf78ca4211027"
+  },
+  "matchedGeneratedArtifacts": [
+    {
+      "path": "/workspaces/quoridor/games/othello/bridge/wasm/othello.js",
+      "bytes": 20055,
+      "mode": "0644",
+      "sha256": "0f02912f9c194f4e65c3ff2ab4c79b6b34fdc0cf2e471a7656a5f031ca67d1d4"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/bridge/wasm/othello_bg.wasm",
+      "bytes": 578700,
+      "mode": "0644",
+      "sha256": "e73a8c3dfae480b7c6f60ea192991403d64a8310093f984ce53a72a275c2ef8d"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/bridge/wasm/othello.d.ts",
+      "bytes": 5374,
+      "mode": "0644",
+      "sha256": "2ddb72d582659a725c8485a419e8fa65035a13951c65737bed7d2258dff0a5ab"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/bridge/wasm/othello_bg.wasm.d.ts",
+      "bytes": 2200,
+      "mode": "0644",
+      "sha256": "34ff74d6d4cd6a356843a80c6878f69591f912da54ea6441677b0d29e04f0e1b"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/bridge/wasm/package.json",
+      "bytes": 276,
+      "mode": "0644",
+      "sha256": "e24914fb5f178d25e51a0b2b7ed9aea2a285225974a5aa7f638d6c95334c1a6b"
+    }
+  ],
+  "actualPackageDependencies": [
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/bitboard.rs",
+      "bytes": 4172,
+      "mode": "0644",
+      "sha256": "c995c904587deaf33d3b27c762b7e73ed579b2e9ff8a3a731cf5b58001771fd4"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_eval/features.rs",
+      "bytes": 7046,
+      "mode": "0644",
+      "sha256": "e1e50451786181e82736616201a406da8b0e657e1e8ff00e74f8593f20b3c35f"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_eval/geometry.rs",
+      "bytes": 7211,
+      "mode": "0644",
+      "sha256": "86ed88b4962ae945b403c55d1aa8a6abaa89c95411bc1288ce0b4bd7f20f6e84"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_eval/mod.rs",
+      "bytes": 9526,
+      "mode": "0644",
+      "sha256": "0e72e4e0623c8457c8f3625a731408f84be2452499b4a977c16010c72c83374d"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_eval/weights.rs",
+      "bytes": 3583,
+      "mode": "0644",
+      "sha256": "3cd789631165524f26bc243ffaca6d7036b86edf1b584e540bf55f8a931ee3e6"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_search/end_table.rs",
+      "bytes": 2217,
+      "mode": "0644",
+      "sha256": "9b3c15cee673df0411df9583732a5de83d39c2156bfc64356f74161158add8cc"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_search/last.rs",
+      "bytes": 9506,
+      "mode": "0644",
+      "sha256": "d63e7ead279563271b20230e6b33a7c6ef2e0e5170440b0b81e1443a07b90db5"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_search/mod.rs",
+      "bytes": 5550,
+      "mode": "0644",
+      "sha256": "b107332cbbf68c44768f082e2e50347f160567bc7f9665c922dc4a5e60b197b8"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_search/mpc.rs",
+      "bytes": 3246,
+      "mode": "0644",
+      "sha256": "d95e0a6231e84b90f6eb302b7f49268674a4667bf9c9a16acea65556a056d2f0"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_search/run.rs",
+      "bytes": 49106,
+      "mode": "0644",
+      "sha256": "f872229dac6b6715ca31827db801bab82a87a8c8efc19a2b9d2b19f6c56f2165"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_search/stability.rs",
+      "bytes": 4909,
+      "mode": "0644",
+      "sha256": "bb290330e468b722834e90b8bae364709f20a6e26e388ba84c95e639e5f7e90a"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_search/tt.rs",
+      "bytes": 14186,
+      "mode": "0644",
+      "sha256": "0bdb7626b68834b18beef1e9a540d4cc447973c566c1e4e5e90c482c5d4dd772"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/heuristic.rs",
+      "bytes": 815,
+      "mode": "0644",
+      "sha256": "6dd62ea17ff06675c1e2d8d5a0453530e32588d469bf6aaae5a14e72ab5244b8"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/lib.rs",
+      "bytes": 6832,
+      "mode": "0644",
+      "sha256": "06dbe4edb57068c227535ba2ebaa0af0981a284d93bb3f34cd3714565813103d"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/search.rs",
+      "bytes": 11267,
+      "mode": "0644",
+      "sha256": "7f971fbeb5c550e4e2d981a9fcb45fdfee2194c83628d6e554f4c7e7355ba968"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-wasm/src/full_search.rs",
+      "bytes": 2265,
+      "mode": "0644",
+      "sha256": "aba11b5994849d7b1b2b5b6c6768bf49494606eca5a74ea21b295caabd21c183"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-wasm/src/lib.rs",
+      "bytes": 4143,
+      "mode": "0644",
+      "sha256": "113d33c08205fe2ca9361c30b597f2b25e704cccdc490f026ecf8329aad3a1c1"
+    },
+    {
+      "path": "/workspaces/quoridor/games/othello/crates/othello-wasm/src/ui.rs",
+      "bytes": 72219,
+      "mode": "0644",
+      "sha256": "c2123fc67ed81ed9b3478d6eb829367f503c31ffe1f5707bb775793b1645e89d"
+    }
+  ],
+  "staticABI": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel1s-affected-software-v1/host-optional-model-software-v4/completion-251aa790/matched-static-ABI.json",
+    "bytes": 1088,
+    "mode": "0644",
+    "sha256": "13861dd6dae21be62897980f14864a85c1c602d6a1aee5301079cd00476c8eb2"
+  },
+  "servedBundle": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel1s-affected-software-v1/host-optional-model-software-v4/completion-251aa790/served-bundle-manifest.json",
+    "bytes": 12792,
+    "mode": "0644",
+    "sha256": "e6065ecd0735268c5275a4777adf74fe4e3ea6c96e0ce4f1c52b94ad820e4aaa"
+  },
+  "currentAppBundle": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel1s-affected-software-v1/host-optional-model-software-v4/bundle",
+  "profile": {
+    "target": "wasm32-unknown-unknown",
+    "bindings": "web",
+    "rustOptLevel": 3,
+    "LTO": "thin",
+    "codegenUnits": 1,
+    "debug": 0,
+    "defaultFeatures": false,
+    "binaryenPass": false,
+    "binaryenReason": "Explicit supported --no-opt functional profile uses installed offline compiler/bindgen, no Binaryen pass/tool/model download or optimized-product/browser performance claim."
+  },
+  "actualAffectedStorage": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel1s-affected-software-v1/host-optional-model-software-v4/completion-251aa790/affected-storage-point.json",
+    "bytes": 870,
+    "mode": "0644",
+    "sha256": "e521ff777c5b954305b41ee92cb84d7acb1b169b7709e46d2d8cf0da895a3576"
+  },
+  "realModelConstructorSearchBrowser": 0,
+  "actualAppAdmission": null,
+  "allOriginalFailuresCosts": "retained and unrefunded",
+  "continuousPeakFullFees": null,
+  "sourceReview": "Accepted .31 source plusR1v4; fixture/export-port and optional-property causal repairs do not alter accepted authority/load/save/cancel math boundary"
+}

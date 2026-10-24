@@ -1,6 +1,8 @@
 // No Wasm import or initialization runs until an exported operation is requested.
-import type { UiController } from "./ui";
+import type { UiController } from './ui';
 export type {
+  ModelIdentity,
+  FullModelSpec,
   UiAction,
   UiController,
   UiEffect,
@@ -9,19 +11,10 @@ export type {
   UiStrategy,
   UiToken,
   UiView,
-} from "./ui";
+} from './ui';
 export type Side = 1 | 2;
 type Row = [number, number, number, number, number, number, number, number];
-export type Board = [
-  ...Row,
-  ...Row,
-  ...Row,
-  ...Row,
-  ...Row,
-  ...Row,
-  ...Row,
-  ...Row,
-];
+export type Board = [...Row, ...Row, ...Row, ...Row, ...Row, ...Row, ...Row, ...Row];
 export type GameState = { version: 1; board: Board; toMove: Side };
 export type Status = {
   black: number;
@@ -41,7 +34,7 @@ export type SearchOptions = {
 export type SearchResult = {
   move: number | null;
   score: number;
-  scoreKind: "heuristic" | "discDifference";
+  scoreKind: 'heuristic' | 'discDifference';
   completedDepth: number;
   nodes: number;
   elapsedMs: number;
@@ -49,15 +42,53 @@ export type SearchResult = {
   cancelled: boolean;
   proven: boolean;
 };
-type Wasm = typeof import("../wasm/othello.js");
+// Full engine scores remain engine-disc, separate from baseline centidiscs.
+export type FullSearchOptions = {
+  timeMs: number;
+  maxDepth: number;
+  fixedDepth: number | null;
+  selectivity: number | null;
+  mpc: boolean;
+  etc: boolean;
+  stability: boolean;
+  parity: boolean;
+  shallowOrdering: boolean;
+};
+export type FullSearchResult = {
+  move: number | null;
+  rawScore: number | null;
+  score: number | null;
+  scoreUnits: 'engine-disc';
+  scoreKind: 'uncompleted' | 'heuristic' | 'terminalEmptyAward';
+  proven: boolean;
+  completedDepth: number;
+  selectivity: number;
+  probability: number | null;
+  isEndSearch: boolean;
+  nodes: number;
+  elapsedMs: number;
+  stopped: string | null;
+  interpretation: 'simd';
+  ttBytes: number;
+  coefficients: { a: number; b: number; c: number; d: number; e: number; f: number; g: number };
+  mustPass: boolean;
+  terminal: boolean;
+};
+export type FullModel = {
+  clear(): void;
+  search(state: GameState, options: FullSearchOptions): FullSearchResult;
+  free(): void;
+};
+
+type Wasm = typeof import('../wasm/othello.js');
 let loaded: Promise<Wasm> | undefined;
 
 function load(): Promise<Wasm> {
   if (!loaded) {
     loaded = (async () => {
       const [wasm, url] = await Promise.all([
-        import("../wasm/othello.js"),
-        import("../wasm/othello_bg.wasm?url"),
+        import('../wasm/othello.js'),
+        import('../wasm/othello_bg.wasm?url'),
       ]);
       await wasm.default({ module_or_path: url.default });
       return wasm;
@@ -78,7 +109,7 @@ export async function createUI(): Promise<UiController> {
   let freed = false;
   return {
     dispatch(action) {
-      if (freed) throw new Error("Othello UI has been freed");
+      if (freed) throw new Error('Othello UI has been freed');
       return JSON.parse(owner.dispatch_json(JSON.stringify(action)));
     },
     free() {
@@ -91,40 +122,27 @@ export async function createUI(): Promise<UiController> {
 }
 
 export async function legalMoves(state: GameState): Promise<number[]> {
-  return JSON.parse(
-    (await load()).legal_moves_json(JSON.stringify(state)),
-  ) as number[];
+  return JSON.parse((await load()).legal_moves_json(JSON.stringify(state))) as number[];
 }
 
-export async function play(
-  state: GameState,
-  index: number,
-): Promise<GameState> {
+export async function play(state: GameState, index: number): Promise<GameState> {
   // JS-to-Wasm u32 coercion must not turn negative/fractional/overflow input into a move.
   if (!Number.isInteger(index) || index < 0 || index > 0xffff_ffff) {
-    throw new RangeError("move index must be an unsigned 32-bit integer");
+    throw new RangeError('move index must be an unsigned 32-bit integer');
   }
-  return JSON.parse(
-    (await load()).apply_move_json(JSON.stringify(state), index),
-  ) as GameState;
+  return JSON.parse((await load()).apply_move_json(JSON.stringify(state), index)) as GameState;
 }
 
 export async function pass(state: GameState): Promise<GameState> {
-  return JSON.parse(
-    (await load()).pass_turn_json(JSON.stringify(state)),
-  ) as GameState;
+  return JSON.parse((await load()).pass_turn_json(JSON.stringify(state))) as GameState;
 }
 
 export async function status(state: GameState): Promise<Status> {
-  return JSON.parse(
-    (await load()).status_json(JSON.stringify(state)),
-  ) as Status;
+  return JSON.parse((await load()).status_json(JSON.stringify(state))) as Status;
 }
 
 export async function chooseMove(state: GameState): Promise<number | null> {
-  const choice = JSON.parse(
-    (await load()).choose_move_json(JSON.stringify(state)),
-  ) as {
+  const choice = JSON.parse((await load()).choose_move_json(JSON.stringify(state))) as {
     move: number | null;
   };
   return choice.move;
@@ -132,10 +150,7 @@ export async function chooseMove(state: GameState): Promise<number | null> {
 
 // This awaits synchronous Wasm. Worker lifecycle cancellation belongs to the UI
 // host; postMessage alone does not interrupt this search inside that Worker.
-export async function search(
-  state: GameState,
-  options: SearchOptions = {},
-): Promise<SearchResult> {
+export async function search(state: GameState, options: SearchOptions = {}): Promise<SearchResult> {
   const encodedOptions = optionsJson(options);
   return JSON.parse(
     (await load()).search_json(JSON.stringify(state), encodedOptions),
@@ -144,18 +159,55 @@ export async function search(
 
 function optionsJson(options: SearchOptions): string {
   for (const [name, maximum] of [
-    ["timeMs", Number.MAX_SAFE_INTEGER],
-    ["ttMiB", 128],
-    ["maxDepth", 64],
-    ["exactEmpties", 64],
+    ['timeMs', Number.MAX_SAFE_INTEGER],
+    ['ttMiB', 128],
+    ['maxDepth', 64],
+    ['exactEmpties', 64],
   ] as const) {
     const value = options[name];
-    if (
-      value !== undefined &&
-      (!Number.isSafeInteger(value) || value < 0 || value > maximum)
-    ) {
+    if (value !== undefined && (!Number.isSafeInteger(value) || value < 0 || value > maximum)) {
       throw new RangeError(`${name} must be an integer in 0..${maximum}`);
     }
   }
   return JSON.stringify(options);
+}
+
+// Explicit local File caller owns verification/identity. This never switches
+// baseline search or global defaults, and never fetches evaluation weights.
+export async function createFullModel(
+  main: Uint8Array,
+  ending: Uint8Array,
+  spec: { interpretation: 'simd'; hashLevel: number },
+): Promise<FullModel> {
+  const wasm = await load();
+  const coefficients = wasm.original_mpc_coefficients_json();
+  const owner = new wasm.FullSearchModel(
+    main,
+    ending,
+    spec.interpretation,
+    spec.hashLevel,
+    coefficients,
+  );
+  let freed = false;
+  const live = () => {
+    if (freed) throw new Error('評価ファイルの所有者は終了しています。');
+  };
+  return {
+    clear() {
+      live();
+      owner.clear();
+    },
+    search(state, options) {
+      live();
+      return JSON.parse(
+        owner.search_json(JSON.stringify(state), JSON.stringify(options)),
+      ) as FullSearchResult;
+    },
+    free() {
+      if (!freed) {
+        freed = true;
+        owner.free();
+      }
+    },
+  };
 }

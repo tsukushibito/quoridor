@@ -148,3 +148,17 @@
     box-sizing: border-box;
   }
 }
+
+#othello-full-files {
+  flex-basis: 100%;
+  border: 1px solid var(--border, #64748b);
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+#othello-full-files label {
+  display: block;
+  margin-block: 0.5rem;
+}
+#othello-full-files input {
+  max-width: 100%;
+}

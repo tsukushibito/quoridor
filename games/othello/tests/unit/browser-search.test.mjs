@@ -28,7 +28,12 @@ async function worker(port) {
     scope = { onmessage: null, postMessage: (value) => replies.push(value) };
   await loadTs(
     source('ai.worker'),
-    { '../../../../../games/othello/bridge/src': port },
+    {
+      '../../../../../games/othello/bridge/src': {
+        createFullModel: () => assert.fail('unexpected full model in baseline fixture'),
+        ...port,
+      },
+    },
     { self: scope },
   );
   return {
@@ -192,6 +197,9 @@ test('thin host forwards Rust strategy and synchronously cancels/discards revoke
       },
     }),
     ai: {
+      dispose() {
+        cancelled++;
+      },
       cancel() {
         cancelled++;
       },
