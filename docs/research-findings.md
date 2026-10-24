@@ -4831,3 +4831,11 @@ outer6.637789366sはnative .964314923sを内包する。actual returnのdirectre
 次は同common/saved-analysis-v1に固定した一回のnormal保存分析を実行する。現役arena_reference_report/arena_score_tablesを用い、元16 producerのclosed archiveとnative manifestを新しい分析目的で読む。新対局/NN/Search/model/教師/fitや旧条件のbootstrapは再実行しない。PCG64 seed4352026102441・10000x128・元book順・little-endian uint64/C-order index hash・linear95 tails(.025,.975)を保持し、全256の合法terminal/128 colour pairs以外は正式CI NULLとplanned missingnessを残す。一対比だけで、別対比へのBonferroni配分は行わない。現役ownerのgeneric simultaneous表現を追加対比の存在や調整の証明には使わない。保存解析のsource/runtime/config FileRef correspondenceは通常entryで確認し、統計・loaded identity・deadline/work分布の結果を未実行の段階で推定しない。
 
 Oの新16/native64設定はSOURCE_STOP受領済みで、追加source修正/test/reviewを要しないconfig-onlyである。Oの正常resource/controller bindingとQの短いsaved analysisは独立に準備でき、重いentryは実command/reader STOPでだけ直列にする。新O generationと64局、Qの追加fit/対局/教師変更はこの回収から自動発行しない。両strongest goal未達、旧failed/NULL/UNKNOWN/費用・pause/seal/H128/default/foreign・decimal50GBを維持する。
+
+### 2026-10-24: saved analysis refused before command; normal direct-RUN binding repaired
+
+同78a39cf3は`not_started`で、`one issued serial family and actual native command paths`を返した。Pythonの保存分析をnative command専用のSequenceResources入口へ束縛したことが原因であり、command exit/wall/reader/RNGの実counterはNULL、output.log・operation・分析dataは未生成だった。元not_started/configとcleanup_completeを保持し、未開始を統計成功や費用0へ読み替えない。
+
+同じ現役analysis phaseを既に扱うnormal direct RUNと既存phase-admission契約へ、fresh common/saved-analysis-v2として結び直した。元のscience config/16 closed producer FileRefs/seed4352026102441/10000x128/linear95/全数pair条件/CPU12G18/lib1G0/family2GiB/host4/whole比較2GiBを維持し、code・guard・threshold・schemaは変えていない。admissionは統合担当が発行するexact intent/support/Plan/limitsの権限参照であり、実RAM/CPU/source/runtime/origin/FS/cancel/cleanupのPASSを先取りしない。通常executeが実入場で再確認する。limits=None、skipflag、native artifactへの偽装、統計の再計算は使わない。
+
+metadata helperをstdlib Pythonから呼んだ際に、通常project_interpreterが必要とするQUORIDOR_PROJECT_ROOT未設定でKeyErrorとなった。このhelper失敗・stderr・normal guardian/cleanup API NULLも別に保持し、既存project-env.sh pythonから残りのmetadata checkだけを完了した。NumPy/archive/NN/Search/game/RNGはまだ実行していない。これは一回の未実行saved analysisの具体的pre-command補正であり、旧native256局やbootstrapを再発行・refinalizeするものではない。Oの既承認source/configと両goal・pause/seal/H/default/foreign/50GB条件は維持する。
