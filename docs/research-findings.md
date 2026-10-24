@@ -4476,3 +4476,11 @@ Oの受付済みcbde7b5cはrun.pyのFileRef検査で、非実行のbrowser-searc
 C435のsource確認はbankのcanonical pair順とnative component順が異なること、normal decisionsにcurrent-policy raw診断のcaller gapがあることを示した。324は既存identity censusとclass provenanceからFIRST16 V→32 bank viewの対応receipt2eb19b48を固定した。native rank/member/source、既存publisher source ordinal、provenance locator、original/trueLR/canonical key、pair indexとbank orientationを結び、label配列・モデル・nativeを開かず実行しない。STM/action座標の実観測はNULLで、現役native ownerでの対応をpilotで束縛する。
 
 対応調査のpartition構造確認では、不要なprotected H prefix listまでgeneric JSONで一時decodeした。これは読取範囲の誤りとしてreceiptへ残し、Hの内容を出力・再生・変換・科学的選択・metrics・fitに使わず、追加のpartition/H読取を止めた。class manifestの全T/V provenance/history一時decodeも明示する。no-H-decodeという主張で隠さず、authorへ渡すreceiptはidentityだけとする。source/config準備は同じ仕事として続き、新sample・別task・fit・gameを発行しない。Oの実資源窓と必要なQ software/pilotはactual STOPで直列にし、light sourceを並行する。
+
+### 2026-10-24: own launch processes were rejected as CPU peers before payload entry
+
+補正後の2becd25aもexecuteより前で停止した。run.pyの独自検査が「CPU4のsiblingに狭いaffinityを持つprocess」を一律に競合と扱い、保存stateにある同job自身のlauncher1262649・supervisor1262661・command child1263035を拒否リストへ含めた。残る1262658/1263045は当時のstart/boot/ancestryが未保存であり、全5PIDが自分だったとは補わない。[元peer入場失敗](../research-data/othello/strong-ai-n96/current-ui-owned-http-peer-admission-failure-v1.json)にexit1・outer1.824680985s・directreap/cleanuptrue/remaining[]、inner guardian/HTTP/browser/app/Search/constructor/remaining NULL、元raw488Bを保存した。測定counter0や実HTTP失敗とはしない。
+
+修復はこの私有wrapperの独自affinity分類を撤去し、現役cycle_process.compute_peers(top, plan.all, normal_names)へ揃える。通常のexact root/実ancestryによるown判別と、foreign named compute・owned CPU割当検査を再用し、CPUPlan physical/RAM/family/hostreserve/FS/CANCEL/execute/cleanupは保持する。新しいmodel-free回帰1定義は、snapshot後の正当なchild ancestryの受入れ、同affinity foreign・古いPID identity・割当外maskの拒否を確認してPASS（guarded .079893253s）した。実Vite/HTTP/browser/model/Searchや旧成功suiteの再演は0で、c449 owned HTTP/spec/core境界は変えない。
+
+最新の同条件判断は実payload入場前の具体的なcontrol修復とfresh namespaceでの通常継続を明示しているため、新たな研究grantを要求せず、元失敗を保持して同じ未入場actual-app4へ進む。v4は全体128MiB内で旧2tree/controlを2MiBに計上し、byref bundle35,672,064Bを保持して新output上限を96,448,512Bへ減らした。旧treeのaffected allocated point合計598,016Bはpeakではなく、旧費用の返金・quota貸与・model/tool copyはない。新しい実HTTP/browser/app段階へ入った後の失敗または部分実行不明ではfirsterror停止・残UNRUNとし、4要求を自動補充しない。
