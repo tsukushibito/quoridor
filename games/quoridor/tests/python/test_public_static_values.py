@@ -395,5 +395,305 @@ class SelectionDiagnosticJoinBoundary(unittest.TestCase):
         )
 
 
+class SelectionDiagnosticPublicationBoundary(unittest.TestCase):
+    def test_diagnostic_publication_faults_preserve_partial_rows_and_primary_nn0(self):
+        """Actual caller/funnel fault injection; all model/native/decision ports are fake."""
+        from contextlib import ExitStack, nullcontext
+        import tempfile
+
+        from quoridor_training import policy_value_training, static_teacher_inputs
+
+        class Tensor:
+            def reshape(self, *args):
+                return self
+
+            def scatter_(self, *args):
+                return self
+
+            def all(self):
+                return True
+
+            def __getitem__(self, index):
+                return 0.0
+
+        class Model:
+            def __init__(self, *args, **kwargs):
+                pass
+
+            def eval(self):
+                pass
+
+            def forward_policy_value(self, *args):
+                return Tensor(), Tensor()
+
+        tensor = lambda *args, **kwargs: Tensor()
+        torch = types.ModuleType("torch")
+        torch.tensor = torch.empty_like = torch.from_numpy = torch.ones = torch.isfinite = tensor
+        torch.float32, torch.long = "fake-f32", "fake-long"
+        torch.set_num_threads = lambda _: None
+        torch.get_num_interop_threads = lambda: 1
+        torch.inference_mode = nullcontext
+        residual = types.ModuleType("quoridor_training.residual_model")
+        residual.DistanceResidualModel = Model
+        residual.load_policy_head = lambda *args, **kwargs: None
+        train = types.ModuleType("quoridor_training.train")
+        train.restore_warmstart_parameters = lambda *args: None
+        scaled = types.ModuleType("quoridor_training.scaled_model")
+        scaled.validate_statistics = lambda _: {}
+        corpus_module = types.ModuleType("quoridor_training.static_public_corpus")
+
+        def leaves(error):
+            return (
+                [leaf for child in error.exceptions for leaf in leaves(child)]
+                if isinstance(error, BaseExceptionGroup)
+                else [error]
+            )
+
+        for mode in (
+            "success",
+            "cancel_after_7_rows",
+            "cancel_after_metadata",
+            "cancel_after_complete",
+            "close_failure",
+            "close_cancel",
+            "cancel_after_7_rows_and_close_failure",
+            "custody_failure",
+        ):
+            with self.subTest(mode=mode), tempfile.TemporaryDirectory() as temporary:
+                authority, views = SelectionDiagnosticJoinBoundary.fixture()
+                for view in views:
+                    view.update(qf1=[0] * 624, distance=[0.0, 0.0])
+                authority.update(
+                    inputManifest={"path": "/synthetic/input"},
+                    teacherBank={"path": "/synthetic/bank"},
+                    cache={"path": "/synthetic/cache/cache.json"},
+                )
+                reference = lambda path: {"path": path}
+                current = dict(
+                    descriptor=reference("/synthetic/model/manifest.json"),
+                    weights=dict(path="/synthetic/model/weights.f32", sha256="0" * 64),
+                    policy=reference("/synthetic/model/policy.json"),
+                    shared="s",
+                    policy_fingerprint="p",
+                )
+                book = {"openings": [{"prefix": view["prefix"]} for view in views]}
+                config = dict(
+                    row_authority=reference("/synthetic/authority"),
+                    parents_receipt=reference("/synthetic/parents"),
+                    book=reference("/synthetic/book"),
+                    core_library=reference("/synthetic/library"),
+                    current=current,
+                    cache_directory="/synthetic/cache",
+                    output=str(Path(temporary) / "diagnostic"),
+                    decisions={},
+                )
+                descriptor = dict(
+                    schema="quoridor-nnue-distance-residual-v3",
+                    feature="QF1-route4-f32-STM-scaled-residual-v3",
+                    topology=dict(ft_width=32, hidden_width=32),
+                    route_mode="zero4",
+                    distance_fit=dict(a=0, b=0),
+                    value_perspective="side-to-move",
+                    weights_SHA="0" * 64,
+                    weights_B=49284,
+                    weights="weights.f32",
+                )
+                documents = {
+                    "/synthetic/authority": authority,
+                    "/synthetic/parents": dict(
+                        status="COMPLETE",
+                        row_authority=config["row_authority"],
+                        core_library=config["core_library"],
+                        book=config["book"],
+                    ),
+                    "/synthetic/book": book,
+                    "/synthetic/library": {},
+                    "/synthetic/cache/cache.json": {},
+                    "/synthetic/model/manifest.json": descriptor,
+                    "/synthetic/model/policy.json": {},
+                }
+                for name in ("selected_alpha", "cedar_alpha"):
+                    source = dict(
+                        configuration=reference(f"/synthetic/{name}-config"),
+                        report=reference(f"/synthetic/{name}/result.json"),
+                        evaluator_sha256=name,
+                        descriptor=current["descriptor"]
+                        if name == "selected_alpha"
+                        else reference("/synthetic/cedar/manifest.json"),
+                    )
+                    config["decisions"][name] = source
+                    documents[source["configuration"]["path"]] = dict(
+                        output=f"/synthetic/{name}",
+                        arena=dict(evaluator_sha256=[name]),
+                        engines=[dict(model=source["descriptor"]["path"])],
+                    )
+                    documents[source["report"]["path"]] = {}
+                primary = KeyboardInterrupt("synthetic body cancellation")
+                close_error = RuntimeError("synthetic close failure")
+                close_cancel = KeyboardInterrupt("synthetic close cancellation")
+                custody_error = RuntimeError("synthetic custody failure")
+                state = dict(closed=False, verifies=0, fired=False, publications=[])
+
+                class Corpus:
+                    def __init__(self, directory):
+                        self.input_ref = authority["inputManifest"]
+                        self.manifest = dict(teacher_values=authority["teacherBank"])
+                        self.policy_value, self.policy_temperature = True, 1
+                        self.pairs = np.zeros(16, dtype=[("key", "V28"), ("split", "u1")])
+                        for i, row in enumerate(authority["rows"]):
+                            self.pairs["key"][i] = bytes.fromhex(row["canonicalKey"])
+                        self.pairs["split"] = 1
+                        self.values = np.zeros((16, 2), dtype=np.float32)
+
+                    def policy_targets(self, pair, orientation):
+                        probability = np.zeros((32, 209), dtype=np.float32)
+                        probability[:, 0] = 1
+                        return probability, probability.astype(bool)
+
+                    def verify_binding(self):
+                        state["verifies"] += 1
+                        if mode == "custody_failure" and state["verifies"] == 2:
+                            raise custody_error
+
+                    def close(self):
+                        state["closed"] = True
+                        if mode in ("close_failure", "cancel_after_7_rows_and_close_failure"):
+                            raise close_error
+                        if mode == "close_cancel":
+                            raise close_cancel
+
+                corpus_module.StaticTeacherCorpus = Corpus
+                original_write = values.write_json
+
+                def publish(path, result):
+                    if result["status"] == "COMPLETE":
+                        self.assertTrue(state["closed"])
+                        self.assertEqual(state["verifies"], 2)
+                    state["publications"].append(result["status"])
+                    original_write(path, result)
+
+                def trace(frame, event, arg):
+                    if frame.f_code is values.selection_diagnostic.__code__ and event == "line":
+                        result = frame.f_locals.get("result")
+                        if result is not None and not state["fired"]:
+                            partial = (
+                                mode
+                                in ("cancel_after_7_rows", "cancel_after_7_rows_and_close_failure")
+                                and len(result["rows"]) == 7
+                            )
+                            metadata = (
+                                mode == "cancel_after_metadata" and "current_identity" in result
+                            )
+                            complete = (
+                                mode == "cancel_after_complete" and result["status"] == "COMPLETE"
+                            )
+                            if partial or metadata or complete:
+                                state["fired"] = True
+                                raise primary
+                    return trace
+
+                modules = {
+                    "torch": torch,
+                    "quoridor_training.residual_model": residual,
+                    "quoridor_training.train": train,
+                    "quoridor_training.scaled_model": scaled,
+                    "quoridor_training.static_public_corpus": corpus_module,
+                }
+                with ExitStack() as stack:
+                    stack.enter_context(patch.dict(sys.modules, modules))
+                    stack.enter_context(
+                        patch.object(
+                            values,
+                            "bound_file_bytes",
+                            side_effect=lambda ref, maximum: json.dumps(
+                                documents[ref["path"]]
+                            ).encode(),
+                        )
+                    )
+                    stack.enter_context(patch.object(values, "_selection_producer"))
+                    stack.enter_context(
+                        patch.object(
+                            values,
+                            "_selection_decision_join",
+                            return_value=[{"action": 0} for _ in range(32)],
+                        )
+                    )
+                    stack.enter_context(
+                        patch.object(
+                            static_teacher_inputs, "native_prefix_views", return_value=views
+                        )
+                    )
+                    stack.enter_context(
+                        patch.object(
+                            policy_value_training,
+                            "native_identity",
+                            return_value=dict(shared="s", policy="p"),
+                        )
+                    )
+                    stack.enter_context(
+                        patch.object(
+                            policy_value_training,
+                            "policy_diagnostics",
+                            return_value=dict(selection_rows=[{} for _ in range(32)]),
+                        )
+                    )
+                    stack.enter_context(patch.object(values, "write_json", side_effect=publish))
+                    previous_trace = sys.gettrace()
+                    sys.settrace(trace)
+                    try:
+                        if mode == "success":
+                            values.selection_diagnostic(config)
+                            caught = None
+                        else:
+                            with self.assertRaises(BaseException) as raised:
+                                values.selection_diagnostic(config)
+                            caught = raised.exception
+                    finally:
+                        sys.settrace(previous_trace)
+                saved = json.loads((Path(config["output"]) / "result.json").read_bytes())
+                k = (
+                    7
+                    if mode in ("cancel_after_7_rows", "cancel_after_7_rows_and_close_failure")
+                    else 32
+                )
+                self.assertEqual(len(saved["rows"]), k)
+                self.assertEqual(saved["remaining_rows"], 32 - k)
+                self.assertEqual(saved["work"]["joint_attempted_rows"], 32)
+                self.assertEqual(saved["work"]["joint_completed_rows"], 32)
+                self.assertEqual(saved["work"]["joint_forward_calls"], 1)
+                self.assertTrue(state["closed"])
+                marker = Path(config["output"]) / "INCOMPLETE"
+                if mode == "success":
+                    self.assertEqual(saved["status"], "COMPLETE")
+                    self.assertNotIn("error", saved)
+                    self.assertFalse(marker.exists())
+                    self.assertEqual(state["publications"], ["COMPLETE"])
+                else:
+                    self.assertEqual(saved["status"], "INCOMPLETE")
+                    self.assertIn("error", saved)
+                    self.assertTrue(marker.exists())
+                    self.assertNotIn("COMPLETE", state["publications"])
+                    expected = (
+                        [primary, close_error]
+                        if mode == "cancel_after_7_rows_and_close_failure"
+                        else [close_error]
+                        if mode == "close_failure"
+                        else [close_cancel]
+                        if mode == "close_cancel"
+                        else [custody_error]
+                        if mode == "custody_failure"
+                        else [primary]
+                    )
+                    self.assertEqual(leaves(caught), expected)
+
+                    def types_in(record):
+                        return [record["type"]] + [
+                            kind for child in record.get("errors", []) for kind in types_in(child)
+                        ]
+
+                    for error in expected:
+                        self.assertIn(type(error).__name__, types_in(saved["error"]))
+
+
 if __name__ == "__main__":
     unittest.main()
