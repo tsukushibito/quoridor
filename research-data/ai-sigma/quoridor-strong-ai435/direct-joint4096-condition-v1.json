@@ -1,0 +1,271 @@
+{
+  "scope": "ONE_SUPPORTED_DIRECT_JOINT4096_CONDITION_SUBMITTED_NOT_RESULT",
+  "job": "9c8526f5-94a3-4fef-9037-18adbe41a3f8",
+  "createdAt": "2026-10-24T00:00:02.026306+00:00",
+  "submission": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/expanded-coverage128-direct-joint4096-v1/submission.json",
+    "bytes": 1074,
+    "mode": "0644",
+    "sha256": "7f3915869506aad34a152b104117b2adb78cf599552400f12dc32c83832abc22"
+  },
+  "bindings": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/expanded-coverage128-direct-joint4096-v1/bindings.json",
+    "bytes": 17059,
+    "mode": "0644",
+    "sha256": "8f9c351d34b2e7e984ed940f8dc55df7fc28e25c6b1df2bcf18dcf925bb55088"
+  },
+  "pipeline": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/expanded-coverage128-direct-joint4096-v1/pipeline.json",
+    "bytes": 2381,
+    "mode": "0644",
+    "sha256": "d2a897268c091dd66cf94478d3217d384dfdd70cc4f374967a073731e4b9b547"
+  },
+  "fitConfig": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/expanded-coverage128-direct-joint4096-v1/joint-fit-config.json",
+    "bytes": 3281,
+    "mode": "0644",
+    "sha256": "0598a0a3fba24c3238861f87e23474e3ef54ed2cbb4806ee867dfd99cf108762"
+  },
+  "normalResolvedConfiguration": {
+    "model": {
+      "feature_version": "QF1",
+      "architecture": "distance_residual",
+      "distance_a": 0.0,
+      "distance_b": 0.0,
+      "transformer_width": 32,
+      "hidden_width": 32,
+      "dropout": 0.0
+    },
+    "optimizer": {
+      "name": "adam",
+      "lr": 3e-5,
+      "weight_decay": 0,
+      "momentum": 0.0,
+      "betas": [0.9, 0.999],
+      "eps": 1e-8
+    },
+    "training": {
+      "steps": 4096,
+      "batch_size": 256,
+      "seed": 4351025,
+      "target": "static_teacher",
+      "sampling": "row",
+      "loss_weighting": "row",
+      "scheduler": "plateau",
+      "warmup_steps": 0,
+      "lr_decay_factor": 0.5,
+      "lr_decay_patience": 0,
+      "min_lr": 1e-6,
+      "reflection_probability": 0.5,
+      "supply_workers": 0,
+      "reflection_seed": 4351026,
+      "device": "cpu",
+      "threads": 1
+    },
+    "evaluation": {
+      "interval": 128,
+      "checkpoints": [
+        0, 128, 256, 384, 512, 640, 768, 896, 1024, 1152, 1280, 1408, 1536, 1664, 1792, 1920, 2048,
+        2176, 2304, 2432, 2560, 2688, 2816, 2944, 3072, 3200, 3328, 3456, 3584, 3712, 3840, 3968,
+        4096
+      ],
+      "batch_size": 1024,
+      "monitor": "row",
+      "early_stopping_patience": 8,
+      "early_stopping_unit": "observation",
+      "min_delta": 1e-5,
+      "min_delta_relative": 0.0001,
+      "diagnostic_rows": 96,
+      "diagnostic_interval": 128,
+      "diagnostic_checkpoints": [],
+      "full_train": false,
+      "full_train_checkpoints": [],
+      "full_train_every_epochs": 0
+    },
+    "limits": {
+      "seconds": 900,
+      "samples": 1057024
+    },
+    "data": {
+      "overlap_policy": "error"
+    },
+    "artifacts": {
+      "mode": "native",
+      "save_scheduled": false,
+      "checkpoint_steps": []
+    },
+    "experiment": {
+      "study": null,
+      "teacher_mapping": null,
+      "draw_policy": null,
+      "warm_start": null,
+      "condition": null,
+      "main_volume_N": null,
+      "main_volume_manifest": null,
+      "main_volume_manifest_sha256": null
+    },
+    "static_teacher": {
+      "maximum_training_draws": 1048576,
+      "minimum_training_draws": 131072,
+      "minimum_floor_training_draws": 0,
+      "overfit_observations": 3,
+      "overfit_validation_absolute": 0.002,
+      "overfit_validation_relative": 0.01,
+      "overfit_training_absolute": 1e-5,
+      "overfit_training_relative": 0.0001,
+      "progress_absolute": 0.0,
+      "progress_relative": 0.0,
+      "initializer_seed": 4351025,
+      "panel_seed": 4351024,
+      "state_checkpoint_steps": []
+    },
+    "mixture": {
+      "train_family_row_cap": null,
+      "train_stock_strata": null,
+      "added_rows": null,
+      "public_rows": null,
+      "added_exposures": null,
+      "added_sampling_seed": null,
+      "public_sampling_seed": null,
+      "added_reflection_probability": null,
+      "added_reflection_seed": null,
+      "public_reflection_probability": null,
+      "public_reflection_seed": null,
+      "diagnostic_seed": null,
+      "public_membership": null,
+      "public_acceptance": null,
+      "selector": null,
+      "output_limit_bytes": null,
+      "public_file_decay": null,
+      "public_evaluation": null,
+      "public_acceptance_seed": null,
+      "training_rows": null,
+      "training_view": null,
+      "teacher_values": null
+    },
+    "policy_value": {
+      "value_weight": 1.0,
+      "policy_weight": 0.1,
+      "temperature": 1.0,
+      "initial_head": "load",
+      "freeze": "none",
+      "selector": "joint_loss",
+      "checkpoint_bytes": 4194304
+    }
+  },
+  "normalPreparation": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/expanded-coverage128-direct-joint4096-v1/joint-prepare-template.json",
+    "bytes": 1960,
+    "mode": "0644",
+    "sha256": "4ffb86f89963450803a7d5e26952ce5c1dfc83f02e81c1f6e7cbc3235c8cd9a4"
+  },
+  "resources": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/expanded-coverage128-direct-joint4096-v1/resources.json",
+    "bytes": 2100,
+    "mode": "0644",
+    "sha256": "170be9042a467a9d510228d7ad5e032db3a7772ec764bc80dce4e643fb8889ea"
+  },
+  "capacityAndHolding": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/expanded-coverage128-direct-joint4096-v1/capacity-and-holding.json",
+    "bytes": 829,
+    "mode": "0644",
+    "sha256": "50e37442bc98fdac7475e2da0c02b7c8a4ca906a538e4d972aac7f2ae93e2e1b"
+  },
+  "admission": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/expanded-coverage128-direct-joint4096-v1/Root-admission.json",
+    "bytes": 3052,
+    "mode": "0644",
+    "sha256": "e1340a74322906c5baa8bd2fd59f4fc8ad6fbad8989498de7b15457c8b9e1b13"
+  },
+  "sourceRuntimeCorrespondence": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/expanded-coverage128-direct-joint4096-v1/current-training-correspondence.json",
+    "bytes": 11977,
+    "mode": "0644",
+    "sha256": "b87c98da2b95b08731f436a5bcbad35d55ec9deb4bb6bd2ca0c64f053070b4d1"
+  },
+  "staticChecks": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/expanded-coverage128-direct-joint4096-v1/static-binding-checks.json",
+    "bytes": 388,
+    "mode": "0644",
+    "sha256": "c5f2069ed567e4a3121e6202de7fc9146fff867ffe67292b6645a91609443327"
+  },
+  "sourceContract": {
+    "path": "/workspaces/quoridor/.worktree/quoridor-strong435/.artifacts/quoridor-strong435/next-joint-schedule-entry-prep-v1/packet.json",
+    "bytes": 5868,
+    "mode": "0644",
+    "sha256": "ac3a57f7d985e4f060e931ef05d5f866bd82ac8beea194c14db0a8fbeacb0cd8"
+  },
+  "initialTuple": {
+    "descriptor": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/quoridor-strong435/expanded-coverage128-joint-v1/joint/best-model/manifest.json",
+      "bytes": 680,
+      "mode": "0600",
+      "sha256": "aa477514048d4ac38133fd2a983451f9993f6ad1836e146c833457aa6a9e3756"
+    },
+    "weights": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/quoridor-strong435/expanded-coverage128-joint-v1/joint/best-model/weights.f32",
+      "bytes": 49284,
+      "mode": "0644",
+      "sha256": "59cc7bea12c6ad199cd0bc873a8cd1decf51e3025732a8747efec58a090d278a"
+    }
+  },
+  "initialPolicy": {
+    "path": "/workspaces/quoridor/.worktree/assets/checkpoints/quoridor-strong435/expanded-coverage128-joint-v1/joint/best-model/policy-head/manifest.json",
+    "bytes": 461,
+    "mode": "0600",
+    "sha256": "41c61730e7913ff6ff1d177af8d4caa09bc89103990a3721e49823fa7aeb3b2f"
+  },
+  "dataset": {
+    "canonicalT": 96,
+    "selectionV": 32,
+    "H": 0,
+    "PAIR37classes": 128,
+    "teacherOrientations": 256,
+    "cache": {
+      "path": "/workspaces/quoridor/.worktree/assets/inputs/quoridor-strong435/expanded-coverage128-policy-values-v1/cache.json",
+      "sha256": "f06b6c38b6f6d9bbe700c4ce0bcc4f0a0be8079920663d29e7fc1ee862875ccf",
+      "bytes": 630,
+      "mode": "0600"
+    },
+    "bank": {
+      "path": "/workspaces/quoridor/.worktree/assets/inputs/quoridor-strong435/expanded-coverage128-policy-values-v1/teacher-values.json",
+      "sha256": "7dfd46b0fd1e9789c9be8b654969e7b10ae0e41e3498163ead1f77f0f03a5a3f",
+      "bytes": 25608,
+      "mode": "0600"
+    }
+  },
+  "optimizerState": "New INITIAL0/freshAdam/scheduler/stoppers/training+reflection seeds, BOTH selected24 exports loaded; oldcompleted24.pt/optimizer/RNG/scheduler notresumed",
+  "headWarmupOrTeacherReplay": false,
+  "logicalRowsUpper": 1057024,
+  "stopSemantics": "Explicit0..4096step128checkpoints33fullV+all96Tpanel observations; minimum512updates; significantstale8 separateLRpatience0/factor.5/floor1e-6; current consecutive T-improve/V-worsen overfit3. Firsterror/nonfinite/provenance/cancel/resources retainpartial/FAILED/UNRUN/no retry/refill. Capwhileimproving remainsNOT_CONVERGED/NEEDED_WORK/sufficiencyfalse.",
+  "holding": {
+    "wholeB": 67108864,
+    "dataB": 50331648,
+    "controlTMPB": 16777216,
+    "namedCheckpoints": 3,
+    "nativeTuples": 3,
+    "eachCheckpointB": 4194304,
+    "atomicPartial": 1,
+    "no33models": true
+  },
+  "supersededUnissued": ["head1024/joint2048", "8runABBAwarm"],
+  "actualPreparedBindingOrFitResult": null,
+  "next": "Collect soleoriginalcompletion, report actualT/Vjoint andpuremetrics/policy/LR/floorupdates/stop/draws/fees tosamejudgement. Changedexport only permits ONE normal <=32x3 newtupleparity using existingcases/selectors; identicalexport no replay. No newgames/teacher/automaticcap extension.",
+  "limits": "Reused exposeddevelopment96T/32selectionV/smallfamilies/allmidstockdiagnostic scope; noindependence/generalization/strength/teacherqualitycause/LRoptimality or pure-duration-only cause. Legacybest_validation_mse/endpointV_MSE arejointobjective; puretarget_mse separate. Olda101/c476/teacherfees kept, noallowance/reset/refund.",
+  "OthelloParallel": {
+    "A16steer": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/continuation-20261023-practical-v1/after-selected24/A16-fixed-comparison-steer-dispatch.json",
+      "bytes": 157,
+      "mode": "0644",
+      "sha256": "778d2177effed6f974a82740bd2d0e741d1faf999e81c0cd5ca01a1faee62f64"
+    },
+    "B21normalEntryDispatch": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/continuation-20261023-practical-v1/after-selected24/B21-rust-candidate-entry-dispatch.json",
+      "bytes": 157,
+      "mode": "0644",
+      "sha256": "4d133b796acf46530cef8e2b2cbd08677b742177a6ce6abcbcd120d7b99e785b"
+    },
+    "futureABBA128": "Actualcandidate NEWsoftware+changedboundaryqualification then16roots*4ABBA*2fixed/timedprofiles; Rootbinds allresources/output, heavyfit andfairclock serializeactualSTOP"
+  },
+  "goalsComplete": false
+}
