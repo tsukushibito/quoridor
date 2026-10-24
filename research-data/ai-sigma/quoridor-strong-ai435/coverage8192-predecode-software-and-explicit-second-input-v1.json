@@ -1,0 +1,116 @@
+{
+  "issue": "quoridor-4lc.435",
+  "status": "PREDECODE_SOFTWARE_PASS_ONE_EXPLICIT_SECOND_GENERATION_SUBMITTED_OUTCOME_UNKNOWN",
+  "softwareJob": "accb9809-7a2c-497b-a290-61612137048e",
+  "sourceCommit": "6428b06b",
+  "manifest": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-predecode-affected-software-v1/operation/manifest.json",
+    "sha256": "bc32a27b8eb5dd295a67103301b33cafc2f23cca894d21269a44358a710dc4f2",
+    "bytes": 41990,
+    "mode": "0644"
+  },
+  "image": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-predecode-affected-software-v1/image/quoridor-runner",
+    "sha256": "dfc36ccd195868ee3e16400e398a2d27daed928ec4beb55c594c9a6b7634326a",
+    "bytes": 10675024,
+    "mode": "0755"
+  },
+  "softwareCollection": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-predecode-affected-software-v1/completion-accb9809/collection.json",
+    "bytes": 32971,
+    "mode": "0644",
+    "sha256": "441d4966fba983a3496196d55ad08f4ce3e938c69e505bc19f7d712fcf99648d"
+  },
+  "newExactDefinition": "teacher_pilot::depth6::trajectory_input_tests::malformed_trajectory_exclusion_refuses_before_output_and_generation",
+  "newExecutedPassedIgnored": [1, 1, 0],
+  "affectedClippy": "PASS",
+  "normalMeasurementRelease": "PASS",
+  "outerSoftwareSeconds": 91.30476504692342,
+  "nestedClocksNotAdded": true,
+  "previousSuccessfulScopes": "Old B2 Rust/Python2 retained byref; no replay",
+  "prelaunchAuthorityRefusal": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-predecode-affected-software-v1/submission-prelaunch-refusal.json",
+    "bytes": 1127,
+    "mode": "0644",
+    "sha256": "2d62cbc5b074423f24be52c791245f84062332260373ba1dcde7bd1ab9095f3f"
+  },
+  "repair": "Only current own dashboard evidence pointers compacted; exact prior metadata archived and Beads history retained; no authority/read cap increase or guard/source workaround",
+  "actualSoftwareSTOP": {
+    "directReaped": true,
+    "processAndHandlesClosed": true,
+    "remaining": [],
+    "lifecycleIdentity": {
+      "recorded": {
+        "pid": 3848542,
+        "start_ticks": "86514762",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "sameIdentityAlive": false
+    }
+  },
+  "TMPAbsent": true,
+  "affectedBuildStoragePoint": [
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-predecode-affected-software-v1/image",
+      "files": 1,
+      "logicalBytes": 10675024,
+      "allocatedBytes": 10678272
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target",
+      "files": 7961,
+      "logicalBytes": 2431602776,
+      "allocatedBytes": 2453544960
+    }
+  ],
+  "originalFailure": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-native-input-v1/failure-559b152e/collection.json",
+    "bytes": 4905,
+    "mode": "0644",
+    "sha256": "eb0bc857774cc4c89f2a07b5497b6d65b4e2f6f351fa62e85fad9151062640d7"
+  },
+  "coverageDominance": {
+    "path": "/workspaces/quoridor/.worktree/quoridor-strong435/.artifacts/quoridor-strong435/coverage8192-exclusion-predecode-source-v1/full-prefix-history-transform-dominance.json",
+    "bytes": 5421,
+    "mode": "0644",
+    "sha256": "cb72d38e4106ca8ff695453b100a7beba468793d97de9008b90efc2ee24cae36"
+  },
+  "newJob": "cf083150-0b43-49b5-8d70-f843de331f94",
+  "submission": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-native-input-explicit-second-v1/submission.json",
+    "bytes": 1074,
+    "mode": "0644",
+    "sha256": "0f90b6df4a0261d7368c129f3ae9f0f88042e2c15630aa0ae5203fae0f2ad670"
+  },
+  "inputConfig": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-native-input-explicit-second-v1/input-generation.json",
+    "bytes": 1491,
+    "mode": "0644",
+    "sha256": "ae14aada6badba625472bbfe42d8c66d628e6da886bd13197a6e5287f5f5bf34"
+  },
+  "normalEntryBinding": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-native-input-explicit-second-v1/bindings.json",
+    "bytes": 7555,
+    "mode": "0644",
+    "sha256": "2c089bd9a481d8fbdf9c2e46a38881c5474e9af871ae79817d8a2d55f438cecf"
+  },
+  "resources": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-native-input-explicit-second-v1/resources.json",
+    "bytes": 3453,
+    "mode": "0644",
+    "sha256": "29dc4c1f271b4af6de0b4ce16a7f9f8ccaa412bcda86f4ebc19f573ad953914b"
+  },
+  "holding": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-native-input-explicit-second-v1/capacity-and-holding.json",
+    "bytes": 771,
+    "mode": "0644",
+    "sha256": "3ae514c1254488938238635f570f39bbb9552d876f968e16af5f2f7f23a534f4"
+  },
+  "output": "/workspaces/quoridor/.worktree/assets/inputs/quoridor-strong435/coverage8192-midstock-explicit-second-v1",
+  "actualNewCountsAndSelection": null,
+  "condition": "ONE additional8192/max200/1638400transition ceiling/same seeds4352026102401/02/03; strict referenced exclusions identity/decode before RNG/orderedprefixreuse; freezefullpool thenFIRST1408wholecomponents1024T256V128H. Deficit/multi-member/errorSTOP/no third/refill/reseed. NewH128 excluded from teacher/features/loss/selector/fit; historical exposure completenessUNKNOWN.",
+  "fees": "Original559b post-generation/lost unpublished pool/FAILED/UNKNOWN costs preserved and spent; new generation separately charged, no unused quota loan/refund/no science-replay0 claim",
+  "downstream": "Existing fixed same-teacher dual-old veto/selected3072 warmstart freshAdam value_mse4096 finite condition only after actual qualified newT/V. No oldT mixture/newmodel/default/pause changes.",
+  "noACKGate": true,
+  "goalsComplete": false
+}
