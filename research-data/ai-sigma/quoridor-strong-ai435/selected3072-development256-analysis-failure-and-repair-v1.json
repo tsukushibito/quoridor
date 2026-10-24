@@ -1,0 +1,72 @@
+{
+  "status": "FAILED_PRECOMMAND_ANALYSIS_PRESERVED_CAUSAL_REPAIR_PREPARED",
+  "issue": "quoridor-4lc.435",
+  "originalFailedJob": "ec8e768d-fa69-43c9-85d8-2aba5e0269d4",
+  "failure": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected3072-development256-analysis-v1/failure-ec8e768d/collection.json",
+    "bytes": 4017,
+    "mode": "0644",
+    "sha256": "dd1b5c4a51c123038bf2c91e4f3378f89c486503937f5f78a5640e32155df5f6"
+  },
+  "originalOuterWallSeconds": 0.24738983798306435,
+  "primary": {
+    "type": "Refused",
+    "message": "bound qualified training interpreter",
+    "notes": []
+  },
+  "originalInnerCleanupFalseRetained": true,
+  "actualOuterDirectReapCleanupComplete": true,
+  "statisticalCommandExecutions": 0,
+  "bootstrapTablesProduced": 0,
+  "CIProduced": 0,
+  "actualScientificWDL": null,
+  "causalRepair": {
+    "prepared": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected3072-development256-analysis-v1/interpreter-binding-repair-v3/prepared.json",
+      "bytes": 49380,
+      "mode": "0644",
+      "sha256": "94a565e17eedd9c4f8e60db2481bcbea98bceb9099449009ac249b0271b25931"
+    },
+    "job": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected3072-development256-analysis-v1/interpreter-binding-repair-v3/job.json",
+      "bytes": 987,
+      "mode": "0644",
+      "sha256": "736bd0dbfa1cbca7ef7e5d821044a77b524fde74b1b21604d0d069c83a89ffa7"
+    },
+    "source": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected3072-development256-analysis-v1/interpreter-binding-repair-v3/prepare-runtime-input-repair.py",
+      "bytes": 5515,
+      "mode": "0644",
+      "sha256": "0377b2eec2ec2c38069ebb7c8b538d55ddce6202c5d1f98b83f202f7de68460b"
+    },
+    "cause": "Qualified runtime closure metadata was bound indirectly but the current project_interpreter requires direct CPython/pyvenv inputs. Assembly omission, not missing Python installation, NumPy failure or statistical result.",
+    "change": "Add169 exact direct runtime inputs from already-bound current closure; retain unchanged Plan/16originalpublications/selected3072models/seed4352026102404/method/denominators; recompute numerical correspondence and intent in unique new owner.",
+    "normalMetadataChecks": "project_interpreter,arena_analysis_check,numerical_check,canonical digest PASS; no targetstatistics/NumPy/RNG",
+    "submitted": false,
+    "wholeRetention": "NEW64MiB/oldFAILEDholding preserved/no unused credit or refund"
+  },
+  "independentNext": {
+    "generationJob": "9e9450fd-400f-42b5-9800-f1c455d55c57",
+    "submission": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-development64-generation-v1/submission.json",
+      "bytes": 1072,
+      "mode": "0644",
+      "sha256": "4b50c69685df0328be384107179061a5eb6b1b0c7a5e2b601d7f1ab3b761d491"
+    },
+    "purpose": "ONE already-authorized new16 development generation; only starting submission read"
+  },
+  "nextResourceOrder": "Collect original Onew16 event/actualSTOP; issue corrected normal saved analysis. B reviewed6posts/newsoftware proceed after actual savedreaderSTOP/source-custody release; no whole-goal/ACK gate.",
+  "goalsComplete": false,
+  "preserved": "All old native games/results/FAILEDNULLUNKNOWNcosts/323-342.17USERPAUSE/seals/newE/oldfits96/defaults/models/foreign/decimal50GB",
+  "independentOperationalRepair": {
+    "issue": "quoridor-4lc.435.1",
+    "dispatch": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected3072-development256-analysis-v1/failure-ec8e768d/C435-progress-causal-dispatch.json",
+      "bytes": 157,
+      "mode": "0644",
+      "sha256": "bbe3dff7e121b439b638e08984dc98aa0787f075079111fbb0c066718cd11c1c"
+    },
+    "accepted": true,
+    "purpose": "SAME C435 progress-only optional canonical_family missing-metadata source proposal; no payload read/normalLC/Main mutation or science; actual adoption after corrected savedreaderSTOP, not a numerical gate"
+  }
+}
