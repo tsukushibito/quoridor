@@ -40,9 +40,9 @@ fn prepare_teacher_inputs(args: &[String]) -> Result<serde_json::Value> {
         path: argument(args, "--prepare-inputs")?.into(),
         sha256: argument(args, "--input-sha256")?,
     };
-    let config: quoridor_runner::teacher_pilot::depth6::InputConfig =
+    let config: quoridor_runner::teacher_pilot::depth6::InputPreparation =
         serde_json::from_value(bound.read()?)?;
-    let result = quoridor_runner::teacher_pilot::depth6::prepare_inputs(&config)?;
+    let result = quoridor_runner::teacher_pilot::depth6::prepare_input_request(&config)?;
     Ok(serde_json::json!({"config": bound, "result": result}))
 }
 

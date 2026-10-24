@@ -4334,3 +4334,11 @@ Qのnormal BUILD0a519bccは最初のnew-evaluation-boundary-1をcompile中にE04
 元lifecycle candidateのcleanup_complete/process_cleanup_complete=false・failed guardian normalreturnNULLは書き換えず、実exception recordのdirectreap/process+handles/remaining[]/maskpersistcompleted、外側jobcleanuptrue、既知8子identity不在を別に確認した。元diskpendingattemptedもそのまま保持する。実128 eligibility/Family7 book/256局はNULLで、568の差引きを資格としない。先のQsubmitはCPU18のみの発行ownerが設定12/18に収まらずdirectory/child前で拒否され、発行affinityだけ既設定12/18へ合わせたもの。実行CPU条件の拡張や起動済みジョブの再発行ではなく、元0Bstdout/拒否tool記録も保持した。
 
 Oの同A16 fixture-only修復は継続中で、Rust20と影響のないJS成功を再演しない。両existing writerの固定修復後に新immutable software namespaceへ進め、重い窓はactualSTOPで交互にする。実app4Search/2constructors、Q128book/256局はいずれも未発行。元3af3/0a519・source/typing/launch refusal/全費/NULL/UNKNOWN、323/342.17USERPAUSE・seals/newE/oldfits96/protectedH128/defaults/models/foreign/decimal50GBは維持する。
+
+### 2026-10-24: evaluation-only new3 software and normal BUILD qualified
+
+C435のimport-only修復3729e204はBTreeMap import一行だけで、Rootが削除inverseの全byte一致を確認して35796e25へCASした（adoption0320abbf）。原0a519 compiler101・cleanupfalse/normalreturnNULL・費と元sourceを保持する。Authorの実cwdはMainで指定strong435 WTと異なっていた事実も保存し、private OWN-only・Main不変/Root CAS前exactを独立確認した。実権限fullneverは確認済みで、cwdをexactWTへ読み替えず、将来配送は--cwdを明示する。選択/guard/typed-H/fixture assertionは変更せず、旧.435.15の限定source確認を再演しない。
+
+新normal BUILD9c8caa1bは3個の新exact --lib/measurement検査が各1実行/1PASS/0ignored、affected ClippyとnormalreleaseもPASSだった。実directreap/process+handles/remaining[]/maskpersistcompleted、全bounded fullcapture、origin/directwait/state対応を確認して通常finalizeを一度行い、manifestを公開した。imagea39a470b/10781128B/0755、opt3/debug0/default+measurementはactual Cargo artifactで、native/モデルを起動した資格ではない。外側95.110251630sはtest/Clippy/release等を内包し加算せず、continuouspeak/fullfeesはUNKNOWN。通常finalizeの対象保持pointを再用し、global容量を全域走査していない。証拠はresearch-data/ai-sigma/quoridor-strong-ai435/unused128-evaluation-import-software-result-v2.json。
+
+実128 eligibility/Family7 book/256局はまだNULL。次は同1976 frozen parentから保護1408/Hを排除し、元native rankのFIRST128 whole componentsだけを既存native ownerで公開する一回の有限entryへ、この新Buildを束縛する。新trajectory/teacher/fit/RNG/追加選抜/refillは0、Hはopaque parent bytecustodyとtyped使用を分ける。O同A16 fixture修復を独立継続し、重い窓は実STOPで交互にする。全pause/seal/default/model/FAILEDNULLUNKNOWN費とdecimal50GBは維持する。

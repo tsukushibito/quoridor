@@ -105,6 +105,36 @@ pub fn validate(c: &PilotConfig) -> Result<()> {
     Ok(())
 }
 
+/// The existing normal preparation CLI accepts one explicit purpose. The ordinary
+/// InputConfig and all training subset/repartition contracts remain unchanged.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum InputPreparation {
+    Evaluation(Box<EvaluationInputConfig>),
+    Ordinary(Box<InputConfig>),
+}
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct EvaluationInputConfig {
+    pub saved_evaluation: SavedEvaluationInput,
+    pub output: PathBuf,
+}
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct SavedEvaluationInput {
+    pub authority: crate::research_manifest::FileRef,
+    pub checked_dispositions: crate::research_manifest::FileRef,
+    pub components: usize,
+}
+mod saved_evaluation;
+
+pub fn prepare_input_request(c: &InputPreparation) -> Result<serde_json::Value> {
+    match c {
+        InputPreparation::Evaluation(config) => saved_evaluation::prepare(config),
+        InputPreparation::Ordinary(config) => prepare_inputs(config),
+    }
+}
+
 /// Normal input preparation settings. No batch outcome or search can select roots.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
