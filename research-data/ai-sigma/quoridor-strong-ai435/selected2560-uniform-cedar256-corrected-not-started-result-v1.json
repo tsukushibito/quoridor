@@ -1,0 +1,182 @@
+{
+  "schema": "quoridor.corrected-uniform-parent-not-started-collection.v1",
+  "status": "NOT_STARTED_NORMAL_LAUNCH_CONTRACT_MISSING",
+  "issue": "quoridor-4lc.435",
+  "job": "195e925a-5f2b-42a1-8137-c5a9544a05ac",
+  "originalResult": {
+    "job_id": "195e925a-5f2b-42a1-8137-c5a9544a05ac",
+    "outcome": "not_started",
+    "error": "[Errno 2] No such file or directory: '/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-corrected-config-prep-v2/common/control/launch.json'",
+    "error_notes": [],
+    "exit_code": null,
+    "finished_at": "2026-10-24T11:46:07.020818+00:00",
+    "cleanup_complete": true
+  },
+  "files": {
+    "result.json": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-corrected-config-prep-v2/common/parent-runtime/result.json",
+      "bytes": 424,
+      "mode": "0600",
+      "sha256": "c46f4db8f468e142de4728d3d65b133ddc7c186403a2d397bb1005798288b25d"
+    },
+    "config.json": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-corrected-config-prep-v2/common/parent-runtime/config.json",
+      "bytes": 1001,
+      "mode": "0600",
+      "sha256": "497778a4667984a3cbfbef3314f98230282b379d5e23633e2584dc4f5ab23228"
+    },
+    "state.json": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-corrected-config-prep-v2/common/parent-runtime/state.json",
+      "bytes": 1903,
+      "mode": "0600",
+      "sha256": "cb6a846b600603ff5ecc84da68e7a1fb4db0baab2da90d85a2375484ab037082"
+    },
+    "supervisor.log": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-corrected-config-prep-v2/common/parent-runtime/supervisor.log",
+      "bytes": 291,
+      "mode": "0644",
+      "sha256": "9cf79bf6933ffea4aa0b8ad6213060943151519b780cbd3d6687ed42f6cf7d9e"
+    }
+  },
+  "originalSubmission": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-corrected-config-prep-v2/common/submission-v3.json",
+    "bytes": 1875,
+    "mode": "0644",
+    "sha256": "8b1f275c62926ed7935cc864bbaa5fe84a4427fe1a35839968f08fc8aedcb3d4"
+  },
+  "authority": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-corrected-config-prep-v2/common/explicit-corrected-entry-decision-v2.json",
+    "bytes": 2327,
+    "mode": "0644",
+    "sha256": "c1bb2b8a545f8ff53760c96a69dfffffc00b54b5a42f96ec59c1cf693cc26af5"
+  },
+  "normalParentJob": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-corrected-config-prep-v2/common/parent-job-v3.json",
+    "bytes": 1001,
+    "mode": "0644",
+    "sha256": "497778a4667984a3cbfbef3314f98230282b379d5e23633e2584dc4f5ab23228"
+  },
+  "sourceQualification": {
+    "researchJob": {
+      "path": "/workspaces/quoridor/scripts/dev/research-job.py",
+      "bytes": 55090,
+      "mode": "0644",
+      "sha256": "92d0edce9f5760ef9eba965f4bdaa2f27bf6959f65831925eafbf6de8e3be9b7"
+    },
+    "researchLifecycle": {
+      "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+      "bytes": 400943,
+      "mode": "0644",
+      "sha256": "bb440a115fae9fa0847337d94b2571105cb7e819e5f38c8de00577accee47b1c"
+    },
+    "branch": "research-job.run enters configured_arena_resources before authority/command-spawn else branch; resources checks normal arena_cohort_lifetime requiring control/launch.json; exception yields not_started. Source qualification plus absent state.child/output/process/lane/data; not hidden engine counters."
+  },
+  "causalContract": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-corrected-config-prep-v2/common/failure-195e925a/normal-launch-contract-cause.json",
+    "bytes": 3613,
+    "mode": "0644",
+    "sha256": "919c4296787d34642c782ec6dd8ead581e1da89022ada63239cbe6e6c64b4add"
+  },
+  "integrationResponsibility": "Required normal launch.json was omitted when integration changed its filename to conditional pointers. Prior metadata Plan/Experiment checks did not verify this pre-spawn resource contract. Original failure is retained, no retroPASS.",
+  "absenceFacts": [
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-corrected-config-prep-v2/common/control/launch.json",
+      "absent": true
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-corrected-config-prep-v2/common/parent-runtime/output.log",
+      "absent": true
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-corrected-config-prep-v2/common/parent-runtime/process.json",
+      "absent": true
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-corrected-config-prep-v2/common/parent-operation",
+      "absent": true
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-corrected-config-prep-v2/lane-0/outer-runtime",
+      "absent": true
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-corrected-config-prep-v2/lane-0/data",
+      "absent": true
+    }
+  ],
+  "plannedGames": 256,
+  "plannedOperations": 16,
+  "completedOperations": 0,
+  "allPlannedGamesUNRUN": 256,
+  "empiricalOutcomesPublished": 0,
+  "plannedOutcomeUnknown": 256,
+  "WDL": null,
+  "interval": null,
+  "savedStatisticalAnalysisExecuted": false,
+  "actualNativeGameSearchModelCounters": null,
+  "actualLoadedUniformIdentity": null,
+  "commandSpawned": "not_started branch/source/state absence qualify no numerical command spawn",
+  "cleanup": {
+    "jobCleanupComplete": true,
+    "exactKnownIdentities": [
+      {
+        "identity": {
+          "pid": 281771,
+          "start_ticks": "89070556",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "collectionObservation": "absent"
+      },
+      {
+        "identity": {
+          "pid": 281733,
+          "start_ticks": "89070531",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "collectionObservation": "absent"
+      },
+      {
+        "identity": {
+          "pid": 281759,
+          "start_ticks": "89070552",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "collectionObservation": "absent"
+      }
+    ],
+    "directChildReaped": null,
+    "handlesClosed": null,
+    "commandGuardianReturn": null,
+    "commandMaskPersist": null,
+    "knownCommandRemaining": "No command child recorded/spawned; no blanket guardian cleanup values invented"
+  },
+  "costs": {
+    "wallSeconds": null,
+    "fullFees": null,
+    "timestampIntervalIsNotEmittedWall": true,
+    "acceptedSubmissionCount": 1,
+    "acceptedGrantSpentNoAutomaticReplacement": true
+  },
+  "affectedOwnedPoint": {
+    "root": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-corrected-config-prep-v2",
+    "logicalBytes": 1352443,
+    "allocatedBytes": 1593344,
+    "scope": "One current corrected-owned tree point, structural directories/inodes counted once; collection/admin tails excluded",
+    "oldFailedReservedB": 16777216,
+    "newOwnedCeilingB": 2130706432,
+    "combinedOriginalCeilingB": 2147483648,
+    "globalActualOccupancy": null,
+    "globalCapB": 50000000000
+  },
+  "ownMetadataReadFailure": {
+    "exitCode": 1,
+    "error": "FileNotFoundError output.log after original result was read",
+    "source": "Initial completion reader assumed output.log exists for not_started",
+    "wallSeconds": null,
+    "cleanupAPI": null,
+    "scienceOperations": 0,
+    "corrected": "Only missing-aware metadata reader used; absence itself retained, no job rerun"
+  },
+  "preservation": "Original69f9 FAILED and195e not_started, all metadata/source/control failures/NULL costs/pauses323342.17/seals/newE/oldfits96/H128/defaultmodels/foreign/decimal50GB unchanged; O source gap no new runtime",
+  "next": "Existing judgement chooses one next finite continuation after concrete control-cause report; no automatic parent retry/analysis/refill/reseed or new actor/source task"
+}
