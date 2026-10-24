@@ -87,9 +87,15 @@ STM/盤面向き/色、raw STEP単位、disc単位、丸め、clamp段階と外�
 
 ## 性能・棋力・browserへの接続
 
-評価単位の成立後、初期化を再用した連続探索でSearch時間、NPS、完成深度、全仕事、メモリを記録する。同実時間対局を主要評価とし、小さいprotocol/評価一致から有限なdevelopment対戦へ進む。後続の独立確認では未使用開始familyの両色で固定EgaroucidとEdaxへ進む。1thread・同TT上限・book/ponder OFF・実時計を固定adapterに結合する。原engineより弱くても小型評価へ戻さず、評価一致・探索条件・処理速度を分けて改善する。新たな対局量/停止/判定は入口ごとの実費と資源で結果前に固定し、設定だけから優越を主張しない。
+2026-10-24の人間による優先順位変更を採用する。大きな対局比較の頻度を下げ、固定本家Console7.8.1に対する固定深さの時間・ノード数・値/手と、同持時間の完成深度差を先に詰める。保存済み比較を再利用し、序盤・中盤・終盤を含む同一局面群について不足する観測だけを小規模に測る。実測で大きな費用差を一つ選び、現役ownerで改善し、初期化を再用した同条件の連続探索で再比較する。新たな監督session・恒常mirror・重複task一覧や全検査の再演は設けない。
 
-2026-10-23の最初の同時間native比較は、未使用・未見・fit独立を認定しないprospective development対戦とする。性能比較の4系列とは別に、seed2026102302001..2016、mandatory pass後の16placement、各128actions上限・no refillで新16familyを準備する。利用可能なtyped endpointとHのidentity-only除外、新cohort内のplacement8以降のpass-inclusive identity・self/inter-family衝突停止を保持し、historical full-history coverageはUNKNOWNと明記する。古い全履歴の復元を入口にしない。
+盤面/手番/持時間/スレッド数/TT容量・cold-warm条件/選択探索設定を揃え、各局面の完成深度の増減と段階別分布を示す。枝刈りを強めて名目深度だけ上げることは目標にしない。固定深さで同じ仕事を行う改善と、探索木の変化によるノード減を区別する。本家のclog等pre-searchは実用時間へ含め、分離できるときだけ内訳も示す。node定義の違いと未観測内部字段を明記し、共通NPSを捏造せず、定義の完全統一を大きな準備gateにしない。
+
+深度差が縮まった段階、又は改善が停滞した段階で少数対局へ進み、有望な版を大きな棋力比較へ接続する。全局面で同深度になるまで対局禁止という絶対条件にはしない。1thread・同TT上限・book/ponder OFF・実時計を固定adapterに結合し、原engineより弱くても小型評価へ戻さず、評価一致・探索条件・処理速度・棋力を分けて判断する。新たな対局量/停止/判定は入口ごとの実費と資源で結果前に固定し、性能だけから棋力やdefault昇格を主張しない。
+
+直近のnew16生成8de2e9e8は元completionを回収し、既知identityとの衝突により11/16で停止した。一回の生成を消費済みとして元FAILED/凍結設定/費用を保持し、再生成・差替えや部分11のbook採用は行わない。未入場の次native64対局はこの新方針により後段へ回す。旧`/tmp/othello-ready-continuation-20261024/task.md`及び旧native64-first source templatesはこの優先順位を上書きしない。既に資格化されたpractical16等は元用途・制約に適合する性能比較へ再用できるが、未見・独立strength Hにはしない。現在はSAME B21が保存比較の再利用と現d110対固定本家の不足分の通常source/configを準備し、具体的費用差の改善にはSAME A16を再用する。追加の人間/Root返信・親close・Quoridor全goalをgateにしない。
+
+以下の2026-10-23の最初の同時間native比較は履歴として保持し、新優先順位の先行gateにはしない。未使用・未見・fit独立を認定しないprospective development対戦として、性能比較の4系列とは別にseed2026102302001..2016、mandatory pass後16placement、各128actions上限・no refillを固定した。利用可能なtyped endpointとHのidentity-only除外、新cohort内のplacement8以降のpass-inclusive identity・self/inter-family衝突停止を保持し、historical full-history coverageはUNKNOWNと明記した。古い全履歴の復元を入口にしない。
 
 同日のrules-only生成b0788be4は16/16root・deficitなしで完了し、元packageを上記development範囲だけで採用した。[入力資格と元証拠](../../../research-data/othello/strong-ai-n96/native64-development16-generation-completion-v2.json)にfamily順・source・除外範囲・cleanupを固定し、未見性や対戦の実入場資格とは分ける。[現役native64 configへの実入力束縛](../../../research-data/othello/strong-ai-n96/native64-actual16-source-binding-v1.json)後、[通常64局条件ab830115](../../../research-data/othello/strong-ai-n96/native64-normal-condition-v1.json)を一度提出した。元完了イベントの回収では64/64局が完了し、各相手とも12勝2分18敗、得点率0.40625、保存95%区間[0.3125,0.484375]だった。[保存結果](../../../research-data/othello/strong-ai-n96/native64-normal-result-v1.json)はdevelopmentの観測に限定し、一般棋力・同等性・原因は未認定とする。結果解釈と時計・探索量の保存記録確認を既存担当へ配分した。
 

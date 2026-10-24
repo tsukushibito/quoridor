@@ -4867,3 +4867,15 @@ Q分析command/readers/collection STOP後の窓に、一回の通常rules-only�
 outer .448583278sはgeneration command .101704692sを内包し、合算しない。正常guardian returnはNULL、actual exception outcomeではdirectreap/process+handles/remaining[]/signal mask・persist完了を確認し、元disk pending/attemptedは別に保持した。rules Process自身のdirectReaped/exit-15/errors[]は保存されているが、native handles/remaining/正確identityの未発行字段を埋めない。実child不在と返却後にowned0B uv lockだけを除去してTMPを撤去した。指定holding rootの一回の保持点409600 allocated Bは非原子的なその時点の値で、global/peak/free creditではない。
 
 collectorはresult scalar containerを二回whole JSON decodeし、未使用canonicalKeyも一時decodeした範囲を正直に残した。generated roots/evidence/protocol body・linked old exclusion/model/Hを再開かず、canonical/ルール/RNG/NN/Search/game/validatorを再演していない。追加source監査/reviewer/A16/profile/管理役は作らず、既存issueとjudgementへ実STOPを配送する。全旧FAILED/NULL/UNKNOWN費・pause/seal/H128/default/foreign・decimal50GBと両goal未達を維持する。
+
+### 2026-10-24: human selects performance-gap work before larger Othello contests
+
+人間の「その方針で進めて」を受け、大きい対局比較の頻度を下げ、固定本家Console7.8.1との固定深さ時間/ノード/値/手と同持時間の完成深度差を先に詰める優先順位へ変更した。[現役設計](../games/othello/docs/strong-ai.md#性能棋力browserへの接続)へ反映する。元job・凍結設定・成功/失敗結果は取消・再演せず、未入場のnative64は後段へ回す。8de2の実衝突・消費済み生成・11/16を保持し、再生成や部分book採用で埋めない。旧temporary native64-first taskやconfig templatesを新優先順位の入口にしない。
+
+次の実操作としてSAME B21 .21へ、保存済みcompact比較の再利用と、現d110対固定本家の不足分の既存continuous ownerによるsource/config bindingを配送した。元のexact baseline worktree/Sol6.1high/fullnever/CPU8G18/lib1G0/family2GiB/host4/180sを維持し、受付turn01a17041-49c0-7982-b731-d75b0b61ac00を得た。受付は実source commandや新Searchの証明ではない。新actor/監督/恒常mirror/重複一覧・全software再演・新profilerを作らず、既qualified practical16（四family、placement16/32/48/56）と同じweight pair/source authorityを再用する。source authorはmodel/inputs/H body・旧raw/archiveを開かず、必要scalar/provenanceと実ownerだけを扱う。現在の新数値比較は未発行である。
+
+不足する現cross-owner観測は、既存fixed D6/D4・normal1000ms/wire60・二profile/ABBA2の最大128要求を小規模な候補上限とし、保存済みで答えられる内容は再実行しない。新しいreference要求が必要なら同じ初期化・実条件における意図した再測定と明記し、未実行やゼロreplayとはしない。浅いfixed観測の小さな時計を通常1秒Searchの利益へ広げない。必要な通常caller差分だけを修復し、actual normal original Console routeが対応しない場合は正確なinlet gapを扱う。独立した新generator/Search/benchmark frameworkや全域source監査を増やさない。
+
+同盤面/手番/持時間/スレッド数/TT容量・cold-warm条件/選択探索設定を揃え、各局面の完成深度差と序盤/中盤/終盤の分布を示す。固定深さのsame-work改善と木の変化・ノード減を区別し、枝刈り強化による名目深度だけを目的にしない。本家clog等pre-searchを実用時間に含め、露出する場合だけ内訳を分ける。node定義差は明記し、共通NPSや未観測内部仕事を作らず、その完全統一を大型gateにしない。実測から一つの大きい費用差を選んだ時にSAME A16で改善し、同条件・初期化再用の連続探索へ戻す。差が縮まるか改善が停滞した段階で少数対局、有望な版を大きな棋力比較へ進める。全局面の同深度を対局の絶対条件にしない。
+
+これは人間による優先順位の変更であり、architecture/default/models/weights/pauseを変えない。既存n96/n96.1と統合issueへ同じ決定・実配送を記録し、追加の人間/Root返信や親closeを実行gateにしない。Quoridorの学習・検証は独立に継続し、実競合する重い時計/NumPy/共有Cargo等だけ既存のactual STOP・資源guardで分離する。全旧RAW/FAILED/NULL/UNKNOWN費・USERPAUSE323/342.17・seals/newE/oldfits96/H128/default/foreign・decimal50GBは維持する。
