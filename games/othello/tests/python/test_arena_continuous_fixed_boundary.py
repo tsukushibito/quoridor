@@ -34,7 +34,15 @@ def result():
 
 
 class ContinuousFixedBoundary(unittest.TestCase):
-    def run_owner(self, directory, *, mismatch):
+    def run_owner(
+        self,
+        directory,
+        *,
+        mismatch,
+        selected_profiles=("fixed", "timed"),
+        timed_options=None,
+        search_requests=None,
+    ):
         root = Path(directory)
         out = root / "out"
         out.mkdir()
@@ -81,13 +89,13 @@ class ContinuousFixedBoundary(unittest.TestCase):
         roots_path = root / "roots.json"
         roots_path.write_text(json.dumps(dict(admitted=True, H=0, families=families)))
         profiles = {}
-        for profile in ("fixed", "timed"):
+        for profile in selected_profiles:
             definition = dict(
                 expectedInfo={owner: info for owner in ("baseline", "candidate")},
                 qualifiedBuilds={
                     owner: dict(path="/synthetic/build") for owner in ("baseline", "candidate")
                 },
-                options={},
+                options=dict(timed_options or {}) if profile == "timed" else {},
             )
             for owner in ("baseline", "candidate"):
                 definition[owner] = dict(
@@ -146,6 +154,8 @@ class ContinuousFixedBoundary(unittest.TestCase):
                     return dict(info)
                 if op == "clear":
                     return dict(ok=True)
+                if search_requests is not None:
+                    search_requests.append((self.owner, self.profile, request))
                 row = result()
                 if self.owner == "candidate":
                     if self.profile == "fixed" and mismatch:
@@ -249,6 +259,55 @@ class ContinuousFixedBoundary(unittest.TestCase):
                 if row["profile"] == "timed"
             )
         )
+
+    def test_timed_only_preserves_logical_slots_order_wire_and_selected_owners(self):
+        requests = []
+        with tempfile.TemporaryDirectory() as directory:
+            trace, saved, completion = self.run_owner(
+                directory,
+                mismatch=False,
+                selected_profiles=("timed",),
+                timed_options=dict(maxDepth=60, timeMs=1000),
+                search_requests=requests,
+            )
+        expected = [
+            (family, block, owner, repeat, root)
+            for family in range(4)
+            for block, owner, repeat in (
+                (0, "baseline", 0),
+                (1, "candidate", 0),
+                (2, "candidate", 1),
+                (3, "baseline", 1),
+            )
+            for root in range(4)
+        ]
+        self.assertEqual([slot["index"] for slot in saved["slots"]], list(range(64, 128)))
+        self.assertEqual(
+            [(s["family"], s["block"], s["owner"], s["repeat"], s["root"]) for s in saved["slots"]],
+            [(f"f{f}", b, o, r, f"f{f}r{i}") for f, b, o, r, i in expected],
+        )
+        self.assertTrue(all(profile == "timed" for _, _, profile in trace))
+        self.assertEqual(len(requests), 64)
+        self.assertTrue(
+            all(
+                p == "timed" and r["options"] == {"maxDepth": 60, "timeMs": 1000}
+                for _, p, r in requests
+            )
+        )
+        self.assertEqual([owner for owner, _, _ in requests], [o for _, _, o, _, _ in expected])
+        self.assertEqual(sum(op == "init" for op, _, _ in trace), 2)
+        self.assertEqual(sum(op == "clear" for op, _, _ in trace), 16)
+        self.assertEqual(sum(op == "close" for op, _, _ in trace), 2)
+        self.assertEqual(saved["plannedCalls"], 64)
+        self.assertEqual(saved["attemptedCalls"], 64)
+        self.assertEqual(saved["completedCalls"], 64)
+        self.assertTrue(all(s["status"] == "COMPLETE" for s in saved["slots"]))
+        self.assertEqual(sum("pairedComparison" in s for s in saved["slots"]), 32)
+        self.assertEqual(completion["planned"], 64)
+        self.assertEqual(completion["attempted"], 64)
+        self.assertEqual(completion["remainingUNRUN"], 0)
+        self.assertIsNone(completion["firstError"])
+        self.assertTrue(completion["complete"])
 
 
 if __name__ == "__main__":

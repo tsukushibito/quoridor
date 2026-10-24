@@ -4535,7 +4535,6 @@ C435のsource確認はbankのcanonical pair順とnative component順が異なる
 
 同A16にはretained source/manに限るACK framing/early-error保存の有限source-only確認を返した。実ACKやperf.dataを再現して埋める新runtimeは許可せず、sourceで支持できない点はUNKNOWNとする。このO commandとcollectionは停止したので、独立Q teacherV16の同b44fに戻る。最初の通常入力準備は、固定FIRST16 V original/trueLR32を既存native prefix ownerで公開するものに限り、model/forward/Search/game/selection RNGや新poolを加えない。入力準備の元実wallを同pilotのcommand180/parent240から一度だけ控除して後続のnormal32+32要求と必要joint<=32へ束縛し、source/LLM準備時間は計算枠と混同しない。H128保護・Tの科学利用0・必要な全T/V transient reader範囲の開示、全pause/seal/default/model/FAILEDNULLUNKNOWN費/50GBは保持する。
 
-
 ### 2026-10-24: teacherV16 parent publication failed on a missing output parent
 
 同b44fの入力準備d09719d2は、Root binderがdata親directoryを用意していなかったため、現役selection_parentsのoutput.mkdir(exist_ok=False)でFileNotFoundErrorとなった。source controlflow上、固定16V historyから32 actual native viewsの対応検証を終えていたが、book/receiptは未公開で実view payloadも保存されていない。bank/model/joint/teacher/Search/gameには進まない入力準備であり、棋力やデータ適格性の失敗ではない。[元FAILED・実cleanup・費用](../research-data/ai-sigma/quoridor-strong-ai435/teacher-selection-v16-parent-publication-failure-v1.json)。whole T/V source-receipts JSONの通常parseと固定16V history利用を開示し、H sourceを開かない。
@@ -4543,7 +4542,6 @@ C435のsource確認はbankのcanonical pair順とnative component順が異なる
 元parent .4230864329729229sにcommand .13907775492407382sが含まれ、加算しない。normal return NULLと例外実返却のdirectreap/process+handles/remaining[]/mask-persist完了、元disk pending/attemptedを分けて保持した。新namespaceではdata親だけ事前作成し、同identity2eb19b48/core55f7540cの未完了入力公開を続ける。保存actual viewsがないため同じnative対応検証は再度必要だが、再選択・Search再演・標本補充ではない。元失敗保持1,323,008Bに小さいtail reserveを取り、同whole16MiBから控除した新上限14,143,488Bと最後1MiBを設定した。command残179.86092224507593s、parent残239.57691356702708sから整数239sへ切り下げる。submitが整数を要求した最初のmetadata拒否と0Bstdoutは保持し、runtime未作成を確認後に整数jobを通常発行した。受入れは入力公開・model/Search成功ではなく、元completion通知で回収する。prep helperのunused-import F401も保持し、不要importだけ除いて限定format/F,E9を通し、helperを再実行しなかった。
 
 Oは消費済み18feb FAILEDのまま、新profile/Search/parserを発行しない。同A16のsource-only仕事はenable/ACK channelを増やす案から、init+clear後の正確なowned PIDへ標準enabled attachし、通常一要求の後にperfを先に停止/reapする一案の確認へ絞った。request入出力・待機・attach uncertaintyとsampling overheadを含むwindowであり、純tree時間や元ACK失敗の治癒証明にはしない。未実行ACK専用fixtureを件数のために走らせず、元raw/profile/hash/費とUNKNOWNを保持する。
-
 
 ### 2026-10-24: teacherV16 native parents published; sole normal decision producers issued
 
@@ -4554,7 +4552,6 @@ Oは消費済み18feb FAILEDのまま、新profile/Search/parserを発行しな�
 原入力2工程の実費を一度控除し、command残179.72705436812248s、parent残239.1355903830845sに対してwhole sequence outer179sをより狭い上限とした。現normal per-operation119sと60s回収余裕を維持し、command/outerの実費は後続diagnostic前に再び一度だけ控除する。common1+native3=family4GiB/host4、AI12/main18/lib1/GPU0を通常ownerが実入場で確認する。同whole16MiBの旧保持reserve2,039,808B、future diagnostic1MiB、top/tail512KiBを分け、新owned上限13,164,544Bとした。元failure保持を削除せずcap refundも行わない。accepted dispatchは64要求完了の証明ではなく、firsterror/UNKNOWN/残UNRUNをそのまま元completionで回収する。
 
 Oの標準attach source39180d63/entrycc59ecd4は、init+clear後のowned PIDへのenabled attachへ絞りFIFO/ACK経路を外した私有候補である。NEW2 changed-lifecycle定義はまだUNRUNで、旧ACK3や旧3の成功を再演しない。sourceを受け取っても消費済み18feb FAILEDから新O runtime/Search/offline parserへ自動延長しない。
-
 
 ### 2026-10-24: teacherV16 stopped before Search by per-operation output admission
 
@@ -4570,7 +4567,6 @@ A16のstandard-attach entrycc59ecd4/new tests7561e098を私有software域へexac
 
 新prospective私有bindingはFIFO/enable-ACKを含まないsource/testだけを使い、歴史的post/ACK案/原18feb raw・hash・費は削除・再読・再parseしない。kernel sampling readiness/window/fullSearch coverageや正常flushは未資格であり、source/software成功は旧失敗のcureでも新O数値実行許可でもない。
 
-
 ### 2026-10-24: teacherV16 normal producers completed; saved diagnostic representation gap found before entry
 
 7f1496edはnormal sequenceの2operationと両finalizerがPASSし、selectedAlpha/Cedarそれぞれ32 unique records・missing[]・data errors[]・worker join・実guardiansのreap/process+handles/remaining[]/mask-persist完了を保存した。[二つのnormal producer結果](../research-data/ai-sigma/quoridor-strong-ai435/teacher-selection-v16-normal-producers-result-v1.json)。Rootのこの回収では圧縮detailを展開せず、64 recordsを64 accepted replyやUNKNOWN0と読み替えない。per-request action/receipt/stopは次の既存saved diagnosticが元archiveからconsumeする。
@@ -4580,7 +4576,6 @@ A16のstandard-attach entrycc59ecd4/new tests7561e098を私有software域へexac
 入場前の実形式照合で、current618aの診断callerがplain quoridor-decisions-v1/outcomes32を期待する一方、実normal result.jsonはquoridor.arena.reference-result.v1・report.outcomes空・outcome_count32・元gzip archive参照であることが分かった。source/control上の未接続であり、保存診断を試しに失敗させたりSearchを再発行したりしない。同C435.1へ、このcompletion inventoryを現役arena_reference_reportへ渡す最小owner補正とactual compact形式を使うNEW model-free確認を返した。gzip規則の複製、別展開cache/registry/framework、新sample/teacher/forwardは加えない。既R1 fault fixtureのmock配線だけが因果的に影響する場合は元assertions/scenariosを保持して機械的に補正し、そのaffected regressionだけRootが確認する。新reviewerや成功suite再演/Root ACKを入口にしない。
 
 caller補正の初回2配送は、Rootが親issue435（owner324）を指定したためRPC前のowner照合に拒否された。元0Bstdoutと失敗を保持し、既存子435.1の同C owner/in_progressを通常wrapperで確認して一つの合流bodyを送達した。新actor/task/数値実行は作らず、この配送受付をsource作業開始や資格成功とは扱わない。
-
 
 ### 2026-10-24: teacherV16 saved-format caller repaired using the maintained lossless reader
 
@@ -4622,16 +4617,16 @@ caller補正の初回2配送は、Rootが親issue435（owner324）を指定し�
 
 Rootはその保存済み6,646Bのreportテキストだけを明示header/全行field数・user-mode・未使用IPC markers・sample/period総数と照合し、最初の成功compact集計を一度得た。[元FAILED・実応答・実cleanupとsaved-only集計](../research-data/othello/strong-ai-n96/packed-standard-attach-flat-sampling-result-v1.json)。cpu-clock:u439samples/22flat rows、reported lost0、approx event period879,759,512を保存し、event periodをwall秒へ同一視しない。flat self top8は以下の通りで、parent/inclusive時間を足していない。
 
-| Emitted symbol | Samples | Emitted self |
-| --- | ---: | ---: |
-| Position::flips | 83 | 18.91% |
-| full_eval::avx2::pattern_sum | 54 | 12.30% |
-| Run::pvs | 52 | 11.85% |
-| full_eval::features::avx2::change | 52 | 11.85% |
-| FeatureState::play | 41 | 9.34% |
-| Run::eval_two_nws | 33 | 7.52% |
-| vdso unresolved/UNKNOWN | 31 | 7.06% |
-| FullEvaluator::midgame_raw | 19 | 4.33% |
+| Emitted symbol                    | Samples | Emitted self |
+| --------------------------------- | ------: | -----------: |
+| Position::flips                   |      83 |       18.91% |
+| full_eval::avx2::pattern_sum      |      54 |       12.30% |
+| Run::pvs                          |      52 |       11.85% |
+| full_eval::features::avx2::change |      52 |       11.85% |
+| FeatureState::play                |      41 |        9.34% |
+| Run::eval_two_nws                 |      33 |        7.52% |
+| vdso unresolved/UNKNOWN           |      31 |        7.06% |
+| FullEvaluator::midgame_raw        |      19 |        4.33% |
 
 全reportの未解決address bucketは37samples/3行で、inlining/ISAの帰属も未証明である。サンプルが無いsymbolをhotでないとはしない。次のsource調査候補は最大self bucketのPosition::flips一箇所だけとし、最適化実装・数学/model変更・速度効果や追加実験は選んでいない。recorder phase1.072604876sはasynchronous attach・入出力/待機・owner処理・停止費を含み、exact kernel window/readiness/fullSearch coverageとsampling overheadはUNKNOWN。純tree時間・NPS・17vs21の原因・棋力/他owner速度比へ広げない。
 
@@ -4676,3 +4671,9 @@ O Cargoの実STOP後、同Cの7postをMainへexact CASし限定整形した。�
 固定32要求ずつのcaller wall合計はbaseline20.019438ms/candidate18.822606ms、中央値.594743/.602398msであり、この微小固定depthの条件付き観測だけを保存する。比率/NPS・通常1秒探索の改善・depth差の原因・棋力・既定採用へ広げず、timedの効果は未測定とする。実setup4/clear17/drop4を確認し、独立したmodel constructor/内部engine-entry counterは未emitのNULLを保つ。outer1.024884527sはcommand .892818389s/caller .853749503sを内包する。native4ownerはcontrolled TERM/directreaped/errors[]、outerとactual exception guardianのreap/process+handles/remaining[]/maskpersist完了、normalreturnNULL/diskpendingattemptedを区別した。原比較をrefinalize/retroPASSせず、独立Qは実commandとcollection STOPで資源を解放して続ける。
 
 同Max .435.21は元非指摘部分を再用し、selector/fixture/数量predicateの有限補正をSOURCE_CLEAR essential0/ordinary0とした（関連report5dec35e1/minimum1fda36a9/readerSTOP42b07caf）。Rootはexact refsを照合してsource-onlyとして受け入れた。データ・教師・fit資格ではない。新Python3の元成功を再演せず、次は新Rust3/影響Clippy/通常release Buildを既存lifecycleで資格化する。O再入場の返答や.21の通常closeはQの入口にしない。
+
+### 2026-10-24: coverage boundary tests passed; test-only Clippy repair and timed-only completion prepared
+
+Q Build2a05cfdbでは新Rust3定義を各1件/skip0で実行し全PASSした。Clippyが新fault fixture内のis_none確認後unwrapを拒否し、release buildは未実行のままFAILED停止した。通常finalizeはFAILEDを公開し、原normalreturnNULLとactual exceptionのreap/process+handles/remaining[]/maskpersist完了、manifest cleanupfalse/capturefalse、disk pending/attemptedを区別して保持する。[元software結果と各return](../research-data/ai-sigma/quoridor-strong-ai435/coverage32768-software-build-failure-v1.json)。outer23.516108663sは各nested commandを内包する。productionには触れず同testをif letへ直し、assertionを保持した。変更した1定義・失敗Clippy・未実行releaseだけを次の通常Buildで扱い、他のRust2/Python3成功を再演しない。入力生成・教師・fitは未発行である。
+
+同じ判断担当は旧00f42c4fの固定64結果を再用し、未完了timed logical64..127だけを一度実行する条件を明示選択した。既存continuous callerを全128 logical index確定後にcanonical fixed/timed名で絞る最小変更とした。timed単独のNEW1 controlled testはPASS（.100031074s、実Search/model0）し、slot64..127の元ABBA順、wire/effective maxDepth60、fixed呼出0、planned64/setup2/clear16/close2を確認した。旧成功NEW2は再演しない。nominal requested64はunsupportedな説明metadataに分離する。実timed64はfresh admission待ちであり、旧FAILED/拒否transportと費を消さず、全完了時にもlogical128/numeric128対physical transports129を区別する。実payloadの最初の失敗・部分不明で残UNRUN、補充しない。Qのsource/softwareとOのfair timingは実STOPだけで直列にする。

@@ -87,6 +87,9 @@ def main():
     assert len(raw) <= 128 * 1024 and hashlib.sha256(raw).hexdigest() == sys.argv[2]
     config = json.loads(raw)
     assert config["admitted"] is True
+    profiles = config["profiles"]
+    assert profiles and set(profiles) <= {"fixed", "timed"}
+    selected_profiles = tuple(profile for profile in ("fixed", "timed") if profile in profiles)
     owners = comparison_owners(config)
     same_rust = owners == ("baseline", "candidate")
     if same_rust:
@@ -171,6 +174,8 @@ def main():
                         }
                     )
     assert len(slots) == 128
+    slots = [slot for slot in slots if slot["profile"] in selected_profiles]
+    assert len(slots) == 64 * len(selected_profiles)
     setup, resets, shutdown, processes = [], [], [], {}
     seen, primary, current = {}, None, None
     attempted = 0
@@ -185,7 +190,7 @@ def main():
                 "status": "STOP"
                 if primary
                 else ("COMPLETE" if all(s["status"] == "COMPLETE" for s in slots) else "PARTIAL"),
-                "plannedCalls": 128,
+                "plannedCalls": len(slots),
                 "attemptedCalls": attempted,
                 "completedCalls": sum(s["status"] == "COMPLETE" for s in slots),
                 "failed": primary,
@@ -203,7 +208,7 @@ def main():
         )
 
     try:
-        for profile in ("fixed", "timed"):
+        for profile in selected_profiles:
             definition = config["profiles"][profile]
             if same_rust:
                 for owner in owners:
@@ -413,7 +418,7 @@ def main():
         out / "completion.json",
         {
             "complete": complete,
-            "planned": 128,
+            "planned": len(slots),
             "attempted": attempted,
             "remainingUNRUN": sum(s["status"] == "UNRUN" for s in slots),
             "firstError": primary,

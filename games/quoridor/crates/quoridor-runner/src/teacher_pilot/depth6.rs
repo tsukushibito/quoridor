@@ -1931,20 +1931,20 @@ mod trajectory_input_tests {
                     "exclusion_authority":exclusion}
             })).unwrap();
             let result = excluded_parent_prefixes(&c);
-            if fault.is_none() {
-                assert_eq!(
-                    result.unwrap().unwrap(),
-                    planned.iter().map(|(_, p)| p.clone()).collect::<Vec<_>>()
-                );
-            } else {
+            if let Some(fault) = fault {
                 let error = result.unwrap_err().to_string();
                 assert!(
-                    error.contains(match fault.unwrap() {
+                    error.contains(match fault {
                         "prefix" => "source/member/full-prefix",
                         "member" => "rank/member/source",
                         _ => "collection/config/exclusion",
                     }),
                     "{error}"
+                );
+            } else {
+                assert_eq!(
+                    result.unwrap().unwrap(),
+                    planned.iter().map(|(_, p)| p.clone()).collect::<Vec<_>>()
                 );
             }
             assert!(!c.output.exists());

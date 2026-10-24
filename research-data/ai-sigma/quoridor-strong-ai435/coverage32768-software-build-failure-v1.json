@@ -1,0 +1,377 @@
+{
+  "scope": "ordinary software only; no generation/teacher/fit/Search/model execution",
+  "job": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-affected-build-v1/runtime-v2/result.json",
+    "bytes": 527,
+    "mode": "0600",
+    "sha256": "e2016b4f707b670d38b1e3d64ffe92e30e5883aa08a8c2593c5b7478be330bd7"
+  },
+  "jobConfig": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-affected-build-v1/runtime-v2/config.json",
+    "bytes": 915,
+    "mode": "0600",
+    "sha256": "8c191e59175c29a08912c872abb7d40cb282d31c50c7acc84ff203e71795ec43"
+  },
+  "intent": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-affected-build-v1/intent.json",
+    "bytes": 11855,
+    "mode": "0644",
+    "sha256": "4ee8c555848a404dcfc9a24b3295e95d8df4f6cbd07a0b0c1369f30f2e893ec5"
+  },
+  "manifest": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-affected-build-v1/operation/manifest.json",
+    "bytes": 43420,
+    "mode": "0644",
+    "sha256": "36b00e6712aef87a5eb6b1d4ccc6b0d7e3eb80cb4ff81c137c26b0bd325cec76"
+  },
+  "candidate": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-affected-build-v1/operation/candidate.json",
+    "bytes": 41246,
+    "mode": "0644",
+    "sha256": "e358a31595983cc2fa9bc502904c8e88742fd56ee0888b6f01b2790953529c2f"
+  },
+  "commands": [
+    {
+      "name": "new-coverage-boundary-1",
+      "status": "PASS",
+      "guardian_return": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "test",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "/workspaces/quoridor/Cargo.toml",
+          "-j1",
+          "--message-format=json-render-diagnostics",
+          "-p",
+          "quoridor-runner",
+          "--lib",
+          "--features",
+          "measurement",
+          "teacher_pilot::depth6::trajectory_input_tests::full_prior_parent_exclusion_checks_all_members_before_generation_without_old_root_decode",
+          "--",
+          "--exact",
+          "--test-threads=1"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 1493608,
+          "start_ticks": "91721066",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [18],
+          "commands": {
+            "run": [12],
+            "test": [12]
+          },
+          "allocation": [12, 18],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "test",
+        "log_bytes_seen": 85607,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 85607,
+        "wall_seconds": 12.114883230999112,
+        "handle_closes_attempted": ["selector_close", "pipe_close", "pidfd_close", "log_close"],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "full_log": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-affected-build-v1/operation/new-coverage-boundary-1.full.log",
+        "sha256": "bbe6bd0056bb7c991e82805f6f781f833f1ab43b6da28d13ef8ad98386dec6af",
+        "bytes": 85607,
+        "mode": "0644"
+      },
+      "persisted_process_receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-affected-build-v1/operation/new-coverage-boundary-1.process.json",
+        "sha256": "a17e9667bd08661b71e2f9b99d1974cfb46b61a1ace090c962f30c34d697f86b",
+        "bytes": 1715,
+        "mode": "0600"
+      },
+      "capture_complete": true
+    },
+    {
+      "name": "new-coverage-boundary-2",
+      "status": "PASS",
+      "guardian_return": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "test",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "/workspaces/quoridor/Cargo.toml",
+          "-j1",
+          "--message-format=json-render-diagnostics",
+          "-p",
+          "quoridor-runner",
+          "--lib",
+          "--features",
+          "measurement",
+          "teacher_pilot::depth6::trajectory_input_tests::fixed_32768_midstock_and_saved5120_refuse_before_generation_or_publication",
+          "--",
+          "--exact",
+          "--test-threads=1"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 1493758,
+          "start_ticks": "91722278",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [18],
+          "commands": {
+            "run": [12],
+            "test": [12]
+          },
+          "allocation": [12, 18],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "test",
+        "log_bytes_seen": 85400,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 85400,
+        "wall_seconds": 0.06430039403494447,
+        "handle_closes_attempted": ["selector_close", "pipe_close", "pidfd_close", "log_close"],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "full_log": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-affected-build-v1/operation/new-coverage-boundary-2.full.log",
+        "sha256": "0409c0ae7885f9ffeba365132c7e37d51f213445da65360e72323cbb0f0fc1e3",
+        "bytes": 85400,
+        "mode": "0644"
+      },
+      "persisted_process_receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-affected-build-v1/operation/new-coverage-boundary-2.process.json",
+        "sha256": "4da7dffdb463eccc66566f1a9da33a4366079a36b8ef6776caa0d399c3e059d7",
+        "bytes": 1702,
+        "mode": "0600"
+      },
+      "capture_complete": true
+    },
+    {
+      "name": "new-coverage-boundary-3",
+      "status": "PASS",
+      "guardian_return": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "test",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "/workspaces/quoridor/Cargo.toml",
+          "-j1",
+          "--message-format=json-render-diagnostics",
+          "-p",
+          "quoridor-data",
+          "--lib",
+          "terminal::trajectory_partition_tests::saved32768_first5120_deficit_and_wrong_holdout_refuse_without_subset",
+          "--",
+          "--exact",
+          "--test-threads=1"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 1493770,
+          "start_ticks": "91722285",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [18],
+          "commands": {
+            "run": [12],
+            "test": [12]
+          },
+          "allocation": [12, 18],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "test",
+        "log_bytes_seen": 82136,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 82136,
+        "wall_seconds": 2.1297693050000817,
+        "handle_closes_attempted": ["selector_close", "pipe_close", "pidfd_close", "log_close"],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "full_log": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-affected-build-v1/operation/new-coverage-boundary-3.full.log",
+        "sha256": "f8003de8efaf50a368eeb7b746e6e3d93b230bdc677a60c245148079016c1240",
+        "bytes": 82136,
+        "mode": "0644"
+      },
+      "persisted_process_receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-affected-build-v1/operation/new-coverage-boundary-3.process.json",
+        "sha256": "9f424899d8adbb0109c8cbbb70b40934677689c21dad3eeb8e31c80b26b486dd",
+        "bytes": 1647,
+        "mode": "0600"
+      },
+      "capture_complete": true
+    },
+    {
+      "name": "coverage-affected-Clippy",
+      "status": "FAILED",
+      "guardian_return": null,
+      "guardian_exception_outcome": {
+        "normal_return": false,
+        "record": {
+          "command": [
+            "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+            "clippy",
+            "--offline",
+            "--locked",
+            "--manifest-path",
+            "/workspaces/quoridor/Cargo.toml",
+            "-j1",
+            "--message-format=json-render-diagnostics",
+            "-p",
+            "quoridor-data",
+            "-p",
+            "quoridor-runner",
+            "--features",
+            "quoridor-runner/measurement",
+            "--all-targets",
+            "--no-deps",
+            "--",
+            "-Dwarnings"
+          ],
+          "status": "failed",
+          "child": {
+            "pid": 1493823,
+            "start_ticks": "91722500",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "launch_policy": {
+            "no_new_privs_requested": false,
+            "verified_before_exec": null
+          },
+          "cpu_plan": {
+            "management": [18],
+            "commands": {
+              "run": [12],
+              "test": [12]
+            },
+            "allocation": [12, 18],
+            "resource_CPUs": 2,
+            "worker_CPUs": 1,
+            "library_threads": 1
+          },
+          "command_cpu_scope": "run",
+          "log_bytes_seen": 86988,
+          "scope": "session group and periodically recorded descendants; no daemon adoption",
+          "error": "cycle child failed: ['/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo', 'clippy', '--offline', '--locked', '--manifest-path', '/workspaces/quoridor/Cargo.toml', '-j1', '--message-format=json-render-diagnostics', '-p', 'quoridor-data', '-p', 'quoridor-runner', '--features', 'quoridor-runner/measurement', '--all-targets', '--no-deps', '--', '-Dwarnings']: 101",
+          "reason": "CycleStopped",
+          "exit_code": 101,
+          "remaining": [],
+          "direct_child_reaped": true,
+          "descendant_visibility": "observed",
+          "cleanup_complete": true,
+          "log_bytes_retained": 86988,
+          "wall_seconds": 8.54909092001617,
+          "handle_closes_attempted": ["selector_close", "pipe_close", "pidfd_close", "log_close"],
+          "primary_error": {
+            "type": "CycleStopped",
+            "message": "cycle child failed: ['/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo', 'clippy', '--offline', '--locked', '--manifest-path', '/workspaces/quoridor/Cargo.toml', '-j1', '--message-format=json-render-diagnostics', '-p', 'quoridor-data', '-p', 'quoridor-runner', '--features', 'quoridor-runner/measurement', '--all-targets', '--no-deps', '--', '-Dwarnings']: 101"
+          },
+          "process_cleanup_complete": true,
+          "handle_closes_complete": true,
+          "signal_mask_restoration": "completed",
+          "final_record_persist": "completed",
+          "finalization_errors": []
+        }
+      },
+      "full_log": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-affected-build-v1/operation/coverage-affected-Clippy.full.log",
+        "sha256": "fe4d23cf8906ecb525671076b6c62e3e1677e98b28538f00cc045e9fc774daad",
+        "bytes": 86988,
+        "mode": "0644"
+      },
+      "persisted_process_receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-affected-build-v1/operation/coverage-affected-Clippy.process.json",
+        "sha256": "d3cffb39df7831746ff588f621822f563ae8571ce9af51cf93d078a5302ad024",
+        "bytes": 2476,
+        "mode": "0600"
+      },
+      "capture_complete": false
+    }
+  ],
+  "normalFinalize": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-affected-build-v1/completion-collection.json",
+    "bytes": 1136,
+    "mode": "0644",
+    "sha256": "8525c4f2b085655bb3c5e210efde1747a85445667628f552111a29576ee04506"
+  },
+  "softwareTestCounts": [
+    {
+      "name": "new-coverage-boundary-1",
+      "passed": 1,
+      "ignored": 0
+    },
+    {
+      "name": "new-coverage-boundary-2",
+      "passed": 1,
+      "ignored": 0
+    },
+    {
+      "name": "new-coverage-boundary-3",
+      "passed": 1,
+      "ignored": 0
+    }
+  ],
+  "result": "FAILED at Clippy unnecessary_unwrap within NEW test; release UNRUN",
+  "repair": "test-only if let Some(fault), preserves all assertions and production bytes",
+  "next": "recheck changed1 only + failedClippy + unrunrelease; new generation remains unissued",
+  "normalFailedManifestPreserved": true,
+  "outerVsNestedCosts": "outer23.516108662937768 includes version/test/Clippy work; do not add nested intervals",
+  "actualVsDisk": "original failed command normalreturnNULL; actual exception reaped/process+handles/remaining[]/maskpersistcomplete; original manifest cleanupfalse/process_cleanupfalse/capturefalse unchanged",
+  "collectorMetadataFailure": "initial commands-key lookup failed before publication; corrected actual checks field, no software replay"
+}
