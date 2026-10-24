@@ -1,0 +1,65 @@
+{
+  "scope": "ACCEPTED_NEW_AFFECTED_VECTOR_SOFTWARE_ONLY",
+  "jobId": "42e9c001-438d-4692-a9dd-b2be3aae3022",
+  "collection": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/midgame-vector-affected-software-v1/completion-42e9c001/collection.json",
+    "bytes": 9601,
+    "mode": "0644",
+    "sha256": "1616d4d0257df6be3e317e50e1beae1ea0a7151e99784f3cb3c94b31c435c9e8"
+  },
+  "accepted": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/midgame-vector-affected-software-v1/completion-42e9c001/accepted-candidate-software.json",
+    "bytes": 3192,
+    "mode": "0644",
+    "sha256": "ae114623368d27ba5d41247e16a4c22d0159851b97a9679ce99bcc8d151d83ef"
+  },
+  "candidate": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/midgame-vector-affected-software-v1/othello-full-search-vector",
+    "bytes": 781392,
+    "mode": "0555",
+    "sha256": "f6afa8c9c1e57a4eeb99bf4de4d9c3abf49b44f85f82906d0da861d86310291b"
+  },
+  "actualNewTests": 4,
+  "oldTests": 0,
+  "actualSearchCalls": 0,
+  "actualWeightInputReads": 0,
+  "costs": {
+    "outerSeconds": 34.126134086051024,
+    "commands": [
+      {
+        "name": "build-vector-core-libtest",
+        "wallSeconds": 13.325047931983136
+      },
+      {
+        "name": "new-portable-two",
+        "wallSeconds": 0.013113101944327354
+      },
+      {
+        "name": "new-explicit-avx2-two",
+        "wallSeconds": 0.01392831897828728
+      },
+      {
+        "name": "build-vector-normal-cli",
+        "wallSeconds": 4.893380846013315
+      },
+      {
+        "name": "affected-core-wasm-clippy",
+        "wallSeconds": 9.284131763037294
+      },
+      {
+        "name": "build-wasm-consumer",
+        "wallSeconds": 3.7283691520569846
+      }
+    ],
+    "nestedNotAdded": true
+  },
+  "cleanup": {
+    "allSixActualReturnedAndReaped": true,
+    "allHandlesClosed": true,
+    "remaining": [],
+    "TMPAbsent": true,
+    "diskPendingAttemptedPreserved": true
+  },
+  "limits": "Synthetic sixtyphase/bothSTM/clip/tail/unaligned/aux boundaries and affected release/nativeCLI/Wasm compilation only; direct explicitAVX2 tests actually ran with no skip. No realweight/fullSearch/performance/strength/default qualification or old successful suite replay. CompiledWasm not executed. Originalreviewfailures/NULL/costs preserved.",
+  "goalsComplete": false
+}

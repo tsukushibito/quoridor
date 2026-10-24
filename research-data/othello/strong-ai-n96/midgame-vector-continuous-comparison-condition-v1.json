@@ -1,0 +1,98 @@
+{
+  "scope": "ONE_NEW_AFFECTED_CANDIDATE_CONTINUOUS_SEARCH_COMPARISON",
+  "jobId": "fcbdd196-c2c9-4385-81ba-e1ee188eb352",
+  "submission": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/midgame-vector-continuous-comparison-v1/submission.json",
+    "bytes": 1072,
+    "mode": "0644",
+    "sha256": "dba718ef2a7325f8f9636d279d297983169c8b899409a916eff5c4408c1a3241"
+  },
+  "admission": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/midgame-vector-continuous-comparison-v1/Root-admission.json",
+    "bytes": 3173,
+    "mode": "0644",
+    "sha256": "186fb96496bcf9bd112f2efcd61b3f168ac7bf1b9bae028282297b6a6ef3a9b1"
+  },
+  "config": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/midgame-vector-continuous-comparison-v1/comparison-config.json",
+    "bytes": 30507,
+    "mode": "0644",
+    "sha256": "e3fae7716b8415ec4c3b9cd560d99d8961d9f59232eb941d361498de46063e54"
+  },
+  "parameters": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/midgame-vector-continuous-comparison-v1/parameters.json",
+    "bytes": 5340,
+    "mode": "0644",
+    "sha256": "aafb0ae9f96e8f8208c4db32d42ba35fd27dab873bec640da638139a102d53c4"
+  },
+  "resources": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/midgame-vector-continuous-comparison-v1/resources.json",
+    "bytes": 1835,
+    "mode": "0644",
+    "sha256": "d15573de8bbfb86c45416d995667132e3b4f27e441a733783100bd31211fea0b"
+  },
+  "acceptedSoftware": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/midgame-vector-affected-software-v1/completion-42e9c001/accepted-candidate-software.json",
+    "bytes": 3192,
+    "mode": "0644",
+    "sha256": "ae114623368d27ba5d41247e16a4c22d0159851b97a9679ce99bcc8d151d83ef"
+  },
+  "callerSoftware": {
+    "path": "/workspaces/quoridor/research-data/othello/strong-ai-n96/rust-candidate-continuous-new-only-software-v1.json",
+    "bytes": 3088,
+    "mode": "0644",
+    "sha256": "24e8a319a016df3ae6ac9b59a89333ace9382377cb4bde2770b2736481ee6374"
+  },
+  "images": {
+    "baseline": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/remaining17-cli-software-v1/othello-full-search",
+      "bytes": 780312,
+      "mode": "0555",
+      "sha256": "942c13600637c7c3c53ddfa0b976ec295e57b1ace25c31690360736352760996"
+    },
+    "candidate": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/midgame-vector-affected-software-v1/othello-full-search-vector",
+      "bytes": 781392,
+      "mode": "0555",
+      "sha256": "f6afa8c9c1e57a4eeb99bf4de4d9c3abf49b44f85f82906d0da861d86310291b"
+    }
+  },
+  "input": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/continuous-practical-generation-v1/accepted/admitted-roots.json",
+    "bytes": 17721,
+    "mode": "0644",
+    "sha256": "2a2a2510d73b49ed55e46b58b7899f86f0fd6d72e1a2b8b10267bb9b99efcc05"
+  },
+  "planned": {
+    "SearchCalls": 128,
+    "profiles": [
+      "fixedD6/fourEmptyD4/statisticalMPC_OFF/exactCutsRetained",
+      "normalTimed1000ms/transport100ms/maxDepth60"
+    ],
+    "roots": 16,
+    "correlatedFamilies": 4,
+    "placementOrder": [16, 32, 48, 56],
+    "ownerOrder": "A-B-B-A once for each chronological four-root family and profile",
+    "setups": 4,
+    "clears": 32,
+    "drops": 4
+  },
+  "controls": {
+    "CPU": 4,
+    "managementCPU": 18,
+    "libraryThreads": 1,
+    "GPU": 0,
+    "familyGiB": 3,
+    "hostReserveGiB": 4,
+    "commandSeconds": 1200,
+    "parentSeconds": 1260,
+    "wholeOutputMiB": 8,
+    "freshResourcesBoundAtLaunch": true,
+    "firstError": "fixedraw/legality/normalownererror/timeout/cancel/resource => remainingUNRUN, no retry/refill"
+  },
+  "normalObservedRestoration": null,
+  "runtimeResultsRead": false,
+  "interpretation": "Source/affected software qualifies four new synthetic tests and current native/Wasm builds. Realweight Search effect unobserved at submission. Same weights/options/initialization/clear/hash/normal request owner; no original engine, old successful suite, warm repeat, new game or production promotion. Timed raw/policy/work/depth differences remain descriptive; no samework/kernelcost/NPS-only success or wholeTT/restoration proof.",
+  "goalsComplete": false,
+  "preserved": "All priorFAILED/NULL/UNKNOWN costs, pauses323/342.17, seals/newE/oldfits96/defaults/models/foreign/decimal50GB. Heavy fit/build/IO serializes with actual timing STOP; LIGHT source/config/review continues."
+}
