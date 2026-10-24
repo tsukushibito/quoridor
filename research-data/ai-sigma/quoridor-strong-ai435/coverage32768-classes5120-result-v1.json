@@ -1,0 +1,92 @@
+{
+  "schema": "quoridor.research.coverage32768-classes-result.v1",
+  "status": "ACTUAL_INPUT_CLASSES_COMPLETE_NOT_TEACHER_OR_FIT",
+  "jobId": "0fdfebca-3fad-4229-829b-c87db7893de6",
+  "published": {
+    "manifest": {
+      "path": "/workspaces/quoridor/.worktree/assets/inputs/quoridor-strong435/coverage32768-input-classes5120-v1/cache.json",
+      "sha256": "94d58bad63611be36c7fdcd4bcb6aae337f345438d9c1d65d1796873a28c0571",
+      "bytes": 3267580,
+      "mode": "0600"
+    },
+    "counts": {
+      "qualified_original_observations": 5120,
+      "protected_original_observations": 0,
+      "protected_by_bits": {
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "train": 4096,
+      "validation": 1024,
+      "pair_rows": 5120
+    }
+  },
+  "classResult": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/class-publication-stage-v1/result.json",
+    "bytes": 1775,
+    "mode": "0644",
+    "sha256": "0c14baaa28e83ca9aa75a382eea5ee84aeddf7d99493069613d5c5dd14c9a221"
+  },
+  "classConfig": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/class-publication-stage-v1/class-publication.json",
+    "bytes": 1386,
+    "mode": "0644",
+    "sha256": "2ccea388e4ef50523035e568d220d31f1474256d053c85dcb86638defb2aeb6e"
+  },
+  "actualReturn": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/class-publication-stage-v1/actual-returned-STOP.json",
+    "bytes": 3291,
+    "mode": "0644",
+    "sha256": "58ae24b7c14b8dbfa231c6e0277f272665026744cc06e3e44abe8d0522438964"
+  },
+  "outerResult": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/class-publication-stage-v1/runtime/result.json",
+    "bytes": 525,
+    "mode": "0600",
+    "sha256": "88f0217cd09429f063065bf068898fc476cce2519a4fcb64664f70538231fcec"
+  },
+  "nativeLibraryBinding": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/class-publication-stage-v1/current-prefix-library-binding.json",
+    "bytes": 2773,
+    "mode": "0644",
+    "sha256": "0fe89bf9a9566323d585905229545054cbc627da24419fa5c757864175d710cd"
+  },
+  "normalSourceReview": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-data-boundary-review-v1/reviewer/related-causal-v2/minimum.json",
+    "bytes": 1173,
+    "mode": "0644",
+    "sha256": "1fda36a915e5b9bdbe91c6aaa826461ea9e51adaca27a29be3eafdf893431096"
+  },
+  "selectedOriginals": {
+    "train": 4096,
+    "validation": 1024,
+    "H": 0
+  },
+  "actualDistinctClasses": 5120,
+  "selfLRClasses": 0,
+  "actualTeacherOrientations": 10240,
+  "oldPoolDeficitRetained": 25153,
+  "oldH128": "protected/unplayed/unfit, old protected source remains native-exclusion-only",
+  "costs": {
+    "outerSeconds": 1.020872488967143,
+    "classCommandIncludedSeconds": 0.41719017399009317,
+    "nestedAddedSeconds": 0,
+    "fullFees": null
+  },
+  "returnedBoundary": {
+    "actualDirectReaped": true,
+    "actualProcessHandlesComplete": true,
+    "remaining": [],
+    "actualMaskPersist": ["completed", "completed"],
+    "diskMaskPersist": ["pending", "attempted"]
+  },
+  "affectedStorage": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/class-publication-stage-v1/affected-storage-point.json",
+    "bytes": 567,
+    "mode": "0644",
+    "sha256": "9e5e39fdea30c26c81a40ea30dcc6865b189ba8cf3107684b43949d9ce07e7e2"
+  },
+  "collectionScope": "Only compact publication/result/process metadata consumed; class/source/PAIR37/model/label bodies not reopened by this collector. Native prefix and NumPy class qualification belongs to the actual normal publication.",
+  "limitations": "No teacher/model/strength/default/fit qualification, no new pool or old success replay. All prior failures/NULL/UNKNOWN costs/pauses/seals/H/defaults/foreign/globaldecimal50GB remain."
+}
