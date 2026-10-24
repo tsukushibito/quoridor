@@ -1,0 +1,327 @@
+{
+  "status": "FAILED_INITIAL_ENABLE_CONTROL_NO_SEARCH_NO_ATTRIBUTION",
+  "issue": "quoridor-n96.1",
+  "jobId": "18feb5b7-c815-47fa-80e0-e62cb380b5c8",
+  "outerResult": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-normal-one-request-flat-sampling-entry-v1/runtime/result.json",
+    "bytes": 522,
+    "mode": "0600",
+    "sha256": "1be35b734b93cdcfcde8ee5de3708ee3acd933e19d210a28aef748240fb067a8"
+  },
+  "driverResult": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-normal-one-request-flat-sampling-entry-v1/data/result.json",
+    "bytes": 2974,
+    "mode": "0644",
+    "sha256": "3f8ae0484329cc1fa6b952077382cab2e2ab2fee57c908efbb99f6a40b944f7f"
+  },
+  "innerReceipt": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-normal-one-request-flat-sampling-entry-v1/sample-command.returned.json",
+    "bytes": 6325,
+    "mode": "0644",
+    "sha256": "8cca4b926ccfe35b3e6a20d1db132078389de9e0cdfcefb69363f8c1884938e6"
+  },
+  "normalReturn": null,
+  "actualExceptionReturnCleanup": {
+    "command": [
+      "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+      "-B",
+      "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-normal-one-request-flat-sampling-software-v1/sample_one.py",
+      "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-normal-one-request-flat-sampling-entry-v1/sampling-config.json",
+      "c36cbfdcf7d19f33f488586338d64ac73b30576f76298d263e7dc7877c7ae670"
+    ],
+    "status": "failed",
+    "child": {
+      "pid": 1379019,
+      "start_ticks": "90421061",
+      "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+    },
+    "launch_policy": {
+      "no_new_privs_requested": false,
+      "verified_before_exec": null
+    },
+    "cpu_plan": {
+      "management": [
+        18
+      ],
+      "commands": {
+        "sample": [
+          4
+        ]
+      },
+      "allocation": [
+        4,
+        18
+      ],
+      "resource_CPUs": 2,
+      "worker_CPUs": 1,
+      "library_threads": 1
+    },
+    "command_cpu_scope": "sample",
+    "log_bytes_seen": 0,
+    "scope": "session group and periodically recorded descendants; no daemon adoption",
+    "error": "cycle child failed: ['/home/vscode/.cache/inference/envs/quoridor-training/bin/python', '-B', '/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-normal-one-request-flat-sampling-software-v1/sample_one.py', '/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-normal-one-request-flat-sampling-entry-v1/sampling-config.json', 'c36cbfdcf7d19f33f488586338d64ac73b30576f76298d263e7dc7877c7ae670']: 1",
+    "reason": "CycleStopped",
+    "exit_code": 1,
+    "remaining": [],
+    "direct_child_reaped": true,
+    "descendant_visibility": "observed",
+    "cleanup_complete": true,
+    "log_bytes_retained": 0,
+    "wall_seconds": 1.394196082954295,
+    "handle_closes_attempted": [
+      "selector_close",
+      "pipe_close",
+      "pidfd_close",
+      "log_close"
+    ],
+    "primary_error": {
+      "type": "CycleStopped",
+      "message": "cycle child failed: ['/home/vscode/.cache/inference/envs/quoridor-training/bin/python', '-B', '/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-normal-one-request-flat-sampling-software-v1/sample_one.py', '/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-normal-one-request-flat-sampling-entry-v1/sampling-config.json', 'c36cbfdcf7d19f33f488586338d64ac73b30576f76298d263e7dc7877c7ae670']: 1"
+    },
+    "process_cleanup_complete": true,
+    "handle_closes_complete": true,
+    "signal_mask_restoration": "completed",
+    "final_record_persist": "completed",
+    "finalization_errors": []
+  },
+  "originalDiskPendingAttempted": {
+    "command": [
+      "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+      "-B",
+      "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-normal-one-request-flat-sampling-software-v1/sample_one.py",
+      "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-normal-one-request-flat-sampling-entry-v1/sampling-config.json",
+      "c36cbfdcf7d19f33f488586338d64ac73b30576f76298d263e7dc7877c7ae670"
+    ],
+    "status": "failed",
+    "child": {
+      "pid": 1379019,
+      "start_ticks": "90421061",
+      "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+    },
+    "launch_policy": {
+      "no_new_privs_requested": false,
+      "verified_before_exec": null
+    },
+    "cpu_plan": {
+      "management": [
+        18
+      ],
+      "commands": {
+        "sample": [
+          4
+        ]
+      },
+      "allocation": [
+        4,
+        18
+      ],
+      "resource_CPUs": 2,
+      "worker_CPUs": 1,
+      "library_threads": 1
+    },
+    "command_cpu_scope": "sample",
+    "log_bytes_seen": 0,
+    "scope": "session group and periodically recorded descendants; no daemon adoption",
+    "error": "cycle child failed: ['/home/vscode/.cache/inference/envs/quoridor-training/bin/python', '-B', '/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-normal-one-request-flat-sampling-software-v1/sample_one.py', '/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-normal-one-request-flat-sampling-entry-v1/sampling-config.json', 'c36cbfdcf7d19f33f488586338d64ac73b30576f76298d263e7dc7877c7ae670']: 1",
+    "reason": "CycleStopped",
+    "exit_code": 1,
+    "remaining": [],
+    "direct_child_reaped": true,
+    "descendant_visibility": "observed",
+    "cleanup_complete": true,
+    "log_bytes_retained": 0,
+    "wall_seconds": 1.394196082954295,
+    "handle_closes_attempted": [
+      "selector_close",
+      "pipe_close",
+      "pidfd_close",
+      "log_close"
+    ],
+    "primary_error": {
+      "type": "CycleStopped",
+      "message": "cycle child failed: ['/home/vscode/.cache/inference/envs/quoridor-training/bin/python', '-B', '/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-normal-one-request-flat-sampling-software-v1/sample_one.py', '/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-normal-one-request-flat-sampling-entry-v1/sampling-config.json', 'c36cbfdcf7d19f33f488586338d64ac73b30576f76298d263e7dc7877c7ae670']: 1"
+    },
+    "process_cleanup_complete": true,
+    "handle_closes_complete": true,
+    "signal_mask_restoration": "pending",
+    "final_record_persist": "attempted",
+    "finalization_errors": []
+  },
+  "sourceConfig": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-normal-one-request-flat-sampling-entry-v1/sampling-config.json",
+    "bytes": 10190,
+    "mode": "0644",
+    "sha256": "c36cbfdcf7d19f33f488586338d64ac73b30576f76298d263e7dc7877c7ae670"
+  },
+  "wrapperConfig": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-normal-one-request-flat-sampling-entry-v1/config.json",
+    "bytes": 4362,
+    "mode": "0644",
+    "sha256": "7c0539b90946ff176747158fb7f6d0db755ea8b03090e0b3a2651ec8092d15ed"
+  },
+  "resources": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-normal-one-request-flat-sampling-entry-v1/resources.json",
+    "bytes": 1332,
+    "mode": "0644",
+    "sha256": "a9c18b10ff1a150964f5b16de6f6d4ac651a5d88e81950d0ae76495b5f572c81"
+  },
+  "nativeStartup": {
+    "coefficients": {
+      "a": 0.7308488452189136,
+      "b": -4.5708322989025865,
+      "c": 1.096319765006055,
+      "d": -0.8362251801219095,
+      "e": 4.610017383697701,
+      "f": 3.818582623595395,
+      "g": 1.7775013664098447
+    },
+    "engine": "console7.8.1-rust-singlethread-source-port",
+    "hashLevel": 20,
+    "hashSeed": 20261022,
+    "identityBinding": "callerVerified",
+    "interpretation": "simd",
+    "midgameId": "sha256:0a8acbcbc23067933627f1bcc83c3f7ae6b7ff3e603d174a3364271fcaeeef2f",
+    "ok": true,
+    "orderingId": "sha256:bd908885e8bb85e72a9be2b0399f8ca52ed40a138bcaaecca3d13710945b9a93",
+    "upstreamCommit": "570d5e0a478c9d720d75de06a5d31995f412704a",
+    "workerPool": 0
+  },
+  "nativeIdentity": {
+    "pid": 1379020,
+    "start_ticks": "90421070",
+    "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+  },
+  "recorderIdentity": {
+    "pid": 1379021,
+    "start_ticks": "90421087",
+    "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+  },
+  "parserIdentity": null,
+  "observedNativeThreadsBeforeRequest": 1,
+  "actual": {
+    "nativeProcesses": 1,
+    "normalInitializeCompleted": 1,
+    "clearCompleted": 1,
+    "normalSearchCalls": 0,
+    "normalNumericReplies": 0,
+    "liveRecorders": 1,
+    "offlineParsers": 0,
+    "plannedSearches": 1,
+    "remainingSearchUNRUN": 1
+  },
+  "missing": {
+    "move": null,
+    "depth": null,
+    "nodes": null,
+    "searchStop": null,
+    "sampleCount": null,
+    "samplePeriod": null,
+    "flatSelfTop8": null,
+    "physicalNNISA": null,
+    "fullTT": null,
+    "restoration": null,
+    "continuousPeak": null,
+    "modelConstructorCountIndependentObservation": null,
+    "exactAckBytes": null,
+    "exactPrimaryMessage": null,
+    "exactPrimaryBranch": null
+  },
+  "failureBoundary": "Existing control(enable) before accepted enableAckMonotonic and before choose/attemptedSearches increment. Primary RuntimeError type retained; its message and actual FIFO bytes not retained. No exact ACK framing/permission branch asserted.",
+  "perfLog": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-normal-one-request-flat-sampling-entry-v1/data/perf-record.log",
+    "bytes": 929,
+    "mode": "0644",
+    "sha256": "e7dbc9510a7daa524652852ff9ea7d114d479a1c19c9cee6735516893188054b"
+  },
+  "perfFacts": "Saved stderr says Events disabled/Events enabled plus kernel-symbol restriction warning. This is partial setup evidence, not valid samples or a cpu-clock:u permission rejection. Native/recorder direct close -15 after firsterror, not successful perf finalisation.",
+  "rawProfileByref": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-normal-one-request-flat-sampling-entry-v1/data/perf.data",
+    "bytes": 12964,
+    "mode": "0600",
+    "sha256": "0ee0dd22950690a453cd9c7a71ba2bf16de6dfe97e88b5188427c442657d8409"
+  },
+  "rawProfileRootReadHashParse": 0,
+  "profileAggregation": "UNRUN by firsterror; no second recorder/parser/Search/probe or event/permission workaround.",
+  "inputScope": "Normal child verified+parsed entire17721B admitted practical JSON; only existing f0/p16 selected, choose never entered. Collection does not reopen input/state/weights/model/profile. No new board/history science.",
+  "costs": {
+    "parentWallSeconds": 1.622957578045316,
+    "innerGuardWallSeconds": 1.394196082954295,
+    "driverWholeSeconds": 1.3514979040483013,
+    "nativeLaunchInitSeconds": 0.16795671894215047,
+    "clearSeconds": 0.0020876239286735654,
+    "recorderPhaseSeconds": 1.109474117984064,
+    "cleanupSeconds": 0.9332728179870173,
+    "preflightSeconds": 0.07156377995852381,
+    "nestedOverlappingNotAdded": true,
+    "fullFees": null
+  },
+  "cleanup": {
+    "outerDirectReaped": true,
+    "outerRemaining": [],
+    "innerDirectReaped": true,
+    "innerProcessAndHandlesClosed": true,
+    "innerRemaining": [],
+    "actualMaskPersistCompleted": true,
+    "diskPendingAttemptedPreserved": true,
+    "ownedNativeAndRecorder": [
+      {
+        "owner": "recorder",
+        "identity": {
+          "pid": 1379021,
+          "start_ticks": "90421087",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "sameIdentityPresent": false,
+        "reportedClose": {
+          "exitCode": -15,
+          "unexpectedExit": false,
+          "directReaped": true,
+          "bytesSeen": 897,
+          "bytesRetained": 929,
+          "errors": []
+        }
+      },
+      {
+        "owner": "native",
+        "identity": {
+          "pid": 1379020,
+          "start_ticks": "90421070",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "sameIdentityPresent": false,
+        "reportedClose": {
+          "exitCode": -15,
+          "unexpectedExit": false,
+          "directReaped": true,
+          "bytesSeen": 626,
+          "bytesRetained": 695,
+          "errors": []
+        }
+      }
+    ],
+    "TMPAbsent": true,
+    "allHostOrDaemonReclamation": null
+  },
+  "actualDirectedStoragePoint": {
+    "allocatedB": 1429504,
+    "wholeB": 16777216,
+    "finalTinyTailReserveB": 1048576,
+    "globalActualOrPeak": null
+  },
+  "earlierAuthorityRefusal": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-normal-one-request-flat-sampling-entry-v1/submission-authority-refusal.json",
+    "bytes": 571,
+    "mode": "0644",
+    "sha256": "074a107e6f4820f6cee1fa0395a21e46e768f76c8e77bb28260c254535f88050"
+  },
+  "metadataSimplification": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-normal-one-request-flat-sampling-entry-v1/metadata-prune-receipt.json",
+    "bytes": 357,
+    "mode": "0644",
+    "sha256": "4536af8ea36f02ddbeff90cf666bf07b91d58411c66b463ce6a09c5408e0b9e1"
+  },
+  "sourceFollowup": "SAMEA16 bounded source-only framing/early-error investigation; actual bytes unknown. No new runtime grant. QteacherV16 proceeds independently after this command+collectionSTOP.",
+  "precommandOrchestrationError": "One JS String.raw backtick SyntaxError before shell launch while preparing source handoff; no commands/numerical work spawned by that failed orchestration; corrected same send once.",
+  "optimizationTarget": null,
+  "preservation": "Original failures/RAW/NULL/disk-v-returned/costs, source proofs/H128/defaultmodels/foreign/323342.17USERPAUSE/seals/newE/oldfits96/globaldecimal50GB unchanged."
+}
