@@ -1,0 +1,384 @@
+{
+  "status": "COMPLETE_DESCRIPTIVE_EXPOSED_V16_ONLY",
+  "rows": 32,
+  "components": 16,
+  "views_per_component": 2,
+  "independent_samples": null,
+  "groups_with_engine_action_agreement_both_views": 6,
+  "engine_action_agreement_rows": 21,
+  "engine_action_disagreement_rows": 11,
+  "teacher_entropy_nats": {
+    "count": 32,
+    "mean": 1.130774480290711,
+    "minimum": 0.35866644978523254,
+    "maximum": 1.9839155673980713
+  },
+  "engines": {
+    "selected_alpha": {
+      "requests": 32,
+      "accepted": 32,
+      "failures": 0,
+      "unknown": 0,
+      "teacher_exact_top1_actions": 19,
+      "teacher_legal_rank1_actions": 19,
+      "teacher_legal_ranks": {
+        "1": 19,
+        "2": 7,
+        "3": 2,
+        "4": 2,
+        "19": 1,
+        "25": 1
+      },
+      "teacher_probability": {
+        "count": 32,
+        "mean": 0.4978658041691233,
+        "minimum": 0.0009733071783557534,
+        "maximum": 0.9573735594749451
+      },
+      "current_legal_rank1_actions": 14,
+      "current_exact_argmax_actions": null,
+      "current_legal_ranks": {
+        "1": 14,
+        "2": 12,
+        "3": 3,
+        "12": 1,
+        "30": 1,
+        "83": 1
+      },
+      "current_probability": {
+        "count": 32,
+        "mean": 0.37992581515754864,
+        "minimum": 0.0004383257473818958,
+        "maximum": 0.8206719756126404
+      },
+      "completed_depths": {
+        "4": 32
+      },
+      "stops": {
+        "internal_time_limit": 32
+      },
+      "caller_seconds": {
+        "count": 32,
+        "mean": 0.09961775221875,
+        "minimum": 0.099225827,
+        "maximum": 0.102002527
+      },
+      "thinking_seconds": {
+        "count": 32,
+        "mean": 0.06864052903125,
+        "minimum": 0.058619232,
+        "maximum": 0.090957316
+      },
+      "authority_receipt_before_deadline": 32,
+      "legal_authority": 32,
+      "matching_terminal_collected": 32,
+      "inflight_after_drain": 0,
+      "emitted_search_score": {
+        "field": "value_stm",
+        "units": null,
+        "perspective": "STM by source field",
+        "raw": {
+          "count": 32,
+          "mean": -0.19234563290625,
+          "minimum": -0.994752,
+          "maximum": 0.875543
+        },
+        "comparable_to_static_posttanh": false
+      },
+      "actual_evaluator_namespaces": [
+        "nnue-residual-f32:sha256:fb7d124603ad6637e2395a919fe74909b6d76d933b26bd96849469be1239c7e2:simd=false"
+      ],
+      "whole_search_nodes": 1591127,
+      "whole_search_static_evaluations": 1225929,
+      "whole_search_policy_calls": 0,
+      "physical_nn_calls": null,
+      "scope": "Existing emitted work counters only; no speed or same-work comparison."
+    },
+    "cedar_alpha": {
+      "requests": 32,
+      "accepted": 32,
+      "failures": 0,
+      "unknown": 0,
+      "teacher_exact_top1_actions": 21,
+      "teacher_legal_rank1_actions": 21,
+      "teacher_legal_ranks": {
+        "1": 21,
+        "2": 8,
+        "3": 2,
+        "18": 1
+      },
+      "teacher_probability": {
+        "count": 32,
+        "mean": 0.5500983144083875,
+        "minimum": 0.0008241848554462194,
+        "maximum": 0.9573735594749451
+      },
+      "current_legal_rank1_actions": 17,
+      "current_exact_argmax_actions": null,
+      "current_legal_ranks": {
+        "1": 17,
+        "2": 12,
+        "3": 1,
+        "9": 1,
+        "83": 1
+      },
+      "current_probability": {
+        "count": 32,
+        "mean": 0.4142574541237991,
+        "minimum": 0.0004383257473818958,
+        "maximum": 0.8206719756126404
+      },
+      "completed_depths": {
+        "3": 1,
+        "4": 31
+      },
+      "stops": {
+        "internal_time_limit": 32
+      },
+      "caller_seconds": {
+        "count": 32,
+        "mean": 0.09963225115625,
+        "minimum": 0.099213635,
+        "maximum": 0.102504327
+      },
+      "thinking_seconds": {
+        "count": 32,
+        "mean": 0.06814983459375,
+        "minimum": 0.060123503,
+        "maximum": 0.077689093
+      },
+      "authority_receipt_before_deadline": 32,
+      "legal_authority": 32,
+      "matching_terminal_collected": 32,
+      "inflight_after_drain": 0,
+      "emitted_search_score": {
+        "field": "value_stm",
+        "units": null,
+        "perspective": "STM by source field",
+        "raw": {
+          "count": 32,
+          "mean": -0.09090306075,
+          "minimum": -0.96134293,
+          "maximum": 0.64141506
+        },
+        "comparable_to_static_posttanh": false
+      },
+      "actual_evaluator_namespaces": [
+        "nnue-residual-f32:sha256:eb0fbc9357252e916b1c6314bee6f6c76d975828c15cc439cceb9766309fb5b9:simd=false"
+      ],
+      "whole_search_nodes": 1579910,
+      "whole_search_static_evaluations": 1231051,
+      "whole_search_policy_calls": 0,
+      "physical_nn_calls": null,
+      "scope": "Existing emitted work counters only; no speed or same-work comparison."
+    }
+  },
+  "static_value_description": {
+    "units": "raw STM posttanh for both current and saved static teacher",
+    "current": {
+      "count": 32,
+      "mean": -0.1073477947502397,
+      "minimum": -0.9633805155754089,
+      "maximum": 0.826219379901886
+    },
+    "saved_teacher": {
+      "count": 32,
+      "mean": -0.21571044439042453,
+      "minimum": -0.9272356629371643,
+      "maximum": 0.6947568655014038
+    },
+    "mae": 0.22286618505313527,
+    "mse": 0.08970936952683632,
+    "sign_agreement_rows": 26,
+    "scope": "Repeated selection-development descriptive subset; teacher is not truth; no calibration or generalization."
+  },
+  "ranking": "Legal competition rank with ties; current rank1 is co-best, not exported exact argmax.",
+  "work": {
+    "joint_attempted_rows": 32,
+    "joint_completed_rows": 32,
+    "new_teacher_rows": 0,
+    "Search": 0,
+    "native_identity_seconds": 0.000773731037043035,
+    "native_identity_pair_calls": 1,
+    "native_value_loads": 1,
+    "native_policy_loads": 1,
+    "native_identity_forward_rows": 0,
+    "python_joint_constructors": 1,
+    "joint_forward_calls": 1,
+    "joint_forward_seconds": 0.0017970610642805696,
+    "query_metrics_seconds": 0.0012966670328751206
+  },
+  "reader_scope": {
+    "adopted_bank_openings": 1,
+    "transient_TV_maps_and_validation_rows": 2560,
+    "scientific_V_rows": 32,
+    "scientific_T_rows": 0,
+    "H_source_or_labels_opened": false
+  },
+  "current_identity": {
+    "shared": "67b236e4159472f35d4ae7db4013ceb4881521d16721e1fd3536dfa4b5bf2425",
+    "policy": "a046bcb5098cede0e7442c21c0b7c8ed02e02cb85e50304ff126b19356ba8fae"
+  },
+  "row_authority": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-root-binding-v1/first16-nativeV-bank32-identity.json",
+    "bytes": 26585,
+    "mode": "0644",
+    "sha256": "2eb19b480f5c161dddf932ac504d0569d834ade0f6693e70940c390e310ddb70"
+  },
+  "book": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-parent-directory-entry-v2/data/parents/book.json",
+    "sha256": "9e2a667aa09292faa20b717073297900de4b1c809454351c95d9c963696f768d",
+    "bytes": 33980,
+    "mode": "0600"
+  },
+  "decisions_byref": {
+    "selected_alpha": {
+      "configuration": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-decisions64-output-bound-entry-v2/control/selected_alpha.config.json",
+        "sha256": "6aff09461f2505c62c4cb17cac4086f099312ad6048c0992fb70318ffa34fb1a",
+        "bytes": 41012,
+        "mode": "0644"
+      },
+      "report": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-decisions64-output-bound-entry-v2/data/selected_alpha/result.json",
+        "sha256": "5bac91be8e2516f422ffa0d80dae5da9fb7e08741a3c9f090a22d09b89dfca0e",
+        "bytes": 4297,
+        "mode": "0644"
+      },
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-decisions64-output-bound-entry-v2/sequence/run-000/operation/manifest.json",
+        "bytes": 8515,
+        "mode": "0644",
+        "sha256": "2efb9c03f437a35cf8e2b60dbdc9fc417f3e102644a28901a7ec54b137ca6bc7"
+      },
+      "descriptor": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/quoridor-strong435/coverage8192-value-selected-fit4096-v1/joint/best-model/manifest.json",
+        "sha256": "d6aaf0004b672e9fadec39de30bad972eacbabb7c5a35b28624b491d60d8c76d",
+        "bytes": 680,
+        "mode": "0600"
+      },
+      "evaluator_sha256": "fb7d124603ad6637e2395a919fe74909b6d76d933b26bd96849469be1239c7e2"
+    },
+    "cedar_alpha": {
+      "configuration": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-decisions64-output-bound-entry-v2/control/cedar_alpha.config.json",
+        "sha256": "a94ca6f36d29e16347ac0c68e826d849c055481151bbfd2af154ad0da2a140b9",
+        "bytes": 40977,
+        "mode": "0644"
+      },
+      "report": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-decisions64-output-bound-entry-v2/data/cedar_alpha/result.json",
+        "sha256": "172d655d34d47c22a5bf7409c37463d850027000b4529da90541a8093cfe2f4d",
+        "bytes": 4283,
+        "mode": "0644"
+      },
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-decisions64-output-bound-entry-v2/sequence/run-001/operation/manifest.json",
+        "bytes": 8506,
+        "mode": "0644",
+        "sha256": "12bb4370f99c478b438aa72755e938ff7fede0cabfc54a13bc6a388a379ac530"
+      },
+      "descriptor": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/static-teachers-low-lr-v1/fit-C-v1/best-model/manifest.json",
+        "sha256": "a486633087a49fe10c96594bd5b37c0fff31e5a54ac7f678dfb45f3dbacb4e83",
+        "bytes": 680,
+        "mode": "0600"
+      },
+      "evaluator_sha256": "eb0fbc9357252e916b1c6314bee6f6c76d975828c15cc439cceb9766309fb5b9"
+    }
+  },
+  "frame": "actual joint view -> native Sigma public-key frame; no learned LR invariance",
+  "condition": "EXPOSED selectionV descriptive queries, no causal/strength/calibration claim",
+  "costs": {
+    "current_phase_outer_seconds": 1.6296514819841832,
+    "current_phase_command_seconds": 1.3674640150275081,
+    "nested_diagnostic_seconds": 0.15047694998793304,
+    "joint_setup_seconds": 0.00925599702168256,
+    "cumulative_pilot_command_seconds": 8.507882028934546,
+    "cumulative_pilot_parent_seconds": 25.44034189078957,
+    "nonadditive": "Diagnostic, joint setup/forward/metrics are nested in command, nested in outer. Cumulative totals use each original command/outer exactly once.",
+    "full_fees": null,
+    "global_peak": null
+  },
+  "actual_cleanup": {
+    "direct_child_reaped": true,
+    "process_complete": true,
+    "handles_complete": true,
+    "remaining": [],
+    "TMP_absent": true,
+    "signal_mask_restoration": "completed",
+    "final_record_persist": "completed",
+    "scope": "session group and periodically recorded descendants; no daemon adoption",
+    "disk_mask": "pending",
+    "disk_persist": "attempted"
+  },
+  "evidence": {
+    "raw_compact_result": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-saved-diagnostic-entry-v1/data/diagnostic/result.json",
+      "bytes": 466193,
+      "mode": "0600",
+      "sha256": "93ff9dd218e0a1a9cc65bac4c0d22e430a51ef7f82f5a90d4afa9bfbf2ea27e8"
+    },
+    "runtime_result": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-saved-diagnostic-entry-v1/runtime/result.json",
+      "bytes": 522,
+      "mode": "0600",
+      "sha256": "c957b5ac4a310ae9c653fab0355f5d17436849a0754dd5fa5125732bb6e35d24"
+    },
+    "actual_return": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-saved-diagnostic-entry-v1/saved-diagnostic.returned.json",
+      "bytes": 3354,
+      "mode": "0644",
+      "sha256": "c386abd0e10f23f9604fe76985f12ff802a652afb535c4e060fa7855e1b5e177"
+    },
+    "final_wrapper_qualification": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-saved-diagnostic-entry-v1/qualified-saved-diagnostic.json",
+      "bytes": 485,
+      "mode": "0644",
+      "sha256": "76cdefd7e0e602f85a69b78dbc989eecfe128a00443ef94eac9493b800535837"
+    },
+    "diagnostic_config": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-saved-diagnostic-entry-v1/selection-diagnostic.config.json",
+      "bytes": 5903,
+      "mode": "0644",
+      "sha256": "c2fcd9c2df036f2a6d94c0b84e2e1a551841a39bf65b9de73fee885a041d9256"
+    },
+    "resource_contract": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-saved-diagnostic-entry-v1/resources.json",
+      "bytes": 2638,
+      "mode": "0644",
+      "sha256": "5b1c73b93adc94eae4f42eb6ca28a129b467d048ab9fd0612b61785481bf9195"
+    }
+  },
+  "preserved_failures": [
+    "d097 parent publication missing directory: original FAILED retained; uncompleted publication corrected, no Search replay.",
+    "881 output forecast admission: original FAILED/model and Search runtime counters NULL; no entered requests.",
+    "Normal producer detail-pending13973945 historical; now maintained reader accepted both original archives once each.",
+    "Source/delivery/lint/metadata/control failures retained by historical source/software/phase refs; no retroPASS.",
+    "Current collection first metadata helper used missing PATH python and exited127; corrected to absolute /usr/bin/python3, no scientific command."
+  ],
+  "collector_operations": {
+    "saved_scalar_json_only": true,
+    "original_archive_decode": 0,
+    "bank_or_model_read": 0,
+    "joint_forward": 0,
+    "Search": 0,
+    "teacher_forward": 0,
+    "fit": 0,
+    "games": 0,
+    "RNG": 0,
+    "CI": 0
+  },
+  "interpretation": {
+    "supported": "Descriptive correspondence of saved static teacher, current joint policy/value, and two normal Alpha actions on fixed EXPOSED V16/32 views.",
+    "not_established": [
+      "Cedar action as correct label or teacher truth",
+      "teacher quality or explanation of prior losses",
+      "search-score to static-value calibration",
+      "strength, causal effect or generalization",
+      "learned LR invariance",
+      "automatic fit, model/default promotion or another campaign"
+    ],
+    "future_decision": "Whether and how to investigate search-derived teachers remains a separate finite research choice."
+  }
+}
