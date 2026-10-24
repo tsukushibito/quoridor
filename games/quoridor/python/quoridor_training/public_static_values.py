@@ -973,6 +973,32 @@ def cpu_policy_teacher_boundary(config):
 def exclude_joint_source_inputs(config, pairs):
     """Veto old actual input keys; never read, copy or transform old labels."""
     source = config["excluded_joint_source"]
+    if isinstance(source, list):
+        if len(source) != 2 or any(not isinstance(s, dict) for s in source):
+            raise ValueError("exact two named old joint source authorities required")
+        if source[0] == source[1]:
+            raise ValueError("duplicate old joint authority is not two sources")
+        second_config = json.loads(bound_file_bytes(source[1]["configuration"], 64 * 1024))
+        if second_config.get("excluded_joint_source") != source[0]:
+            raise ValueError("second old joint source does not bind the first named veto")
+        # Reuse each unchanged key/provenance guard exactly once, before either constructor.
+        reports = [
+            exclude_joint_source_inputs({**config, "excluded_joint_source": authority}, pairs)
+            for authority in source
+        ]
+        if (
+            reports[1]["prior_actual_rows"] != reports[0]["inclusive_attempted_rows"]
+            or config["prior_actual_rows"] != reports[1]["inclusive_attempted_rows"]
+        ):
+            raise ValueError("named old joint source actual-row chronology differs")
+        return {
+            "excluded_joint_sources": source,
+            "source_reports": reports,
+            "old_actual_orientation_rows": sum(r["old_actual_orientation_rows"] for r in reports),
+            "current_actual_orientation_rows": reports[0]["current_actual_orientation_rows"],
+            "overlapping_actual_input_keys": 0,
+            "labels_read_or_copied": 0,
+        }
     if not isinstance(source, dict) or set(source) != {
         "input_classes",
         "teacher_values",
@@ -982,7 +1008,7 @@ def exclude_joint_source_inputs(config, pairs):
     previous = json.loads(bound_file_bytes(source["configuration"], 64 * 1024))
     bank = json.loads(bound_file_bytes(source["teacher_values"], 64 * 1024))
     if (
-        set(previous) != set(config) - {"excluded_joint_source"}
+        set(previous) - {"excluded_joint_source"} != set(config) - {"excluded_joint_source"}
         or previous["input_classes"] != source["input_classes"]
         or bank["schema"] != "quoridor-public-static-teacher-values-v1"
         or bank["status"] != "COMPLETE"
@@ -1116,6 +1142,8 @@ def exclude_joint_source_inputs(config, pairs):
     return dict(
         excluded_joint_source=source,
         old_actual_orientation_rows=old_rows,
+        prior_actual_rows=prior,
+        inclusive_attempted_rows=inclusive,
         current_actual_orientation_rows=current_rows,
         overlapping_actual_input_keys=0,
         labels_read_or_copied=0,

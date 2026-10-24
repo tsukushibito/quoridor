@@ -1,0 +1,102 @@
+{
+  "status": "SOURCE_ADOPTED_NEW_PYTHON2_PASS_RUST_AND_BUILD_UNRUN",
+  "issue": "quoridor-4lc.435",
+  "sourceComposition": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-affected-software-v1/source-composition.json",
+    "sha256": "9a81638036b1f0e11d3424d6cc1d34d93b76c726e3b04b297d62bfa71fd38cc9",
+    "bytes": 7907,
+    "mode": "0644"
+  },
+  "sourceReview": {
+    "issue": "quoridor-4lc.435.12",
+    "scope": "accepted fixed8c84637b source only; original report/negative evidence preserved"
+  },
+  "progressQualification": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/quoridor-strong-ai435/progress-optional-canonical-software-v2.json",
+    "sha256": "4c9862859636fd59dc434f319ce6329f82e8a3042744b3e93e3c59477f85c099",
+    "bytes": 4195,
+    "mode": "0644"
+  },
+  "analysisActualReaderSTOP": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected3072-development256-analysis-v1/interpreter-binding-repair-v3/completion-35e0603f/collection.json",
+    "sha256": "0114a4e884447d9b7e542ddc3342a16248efe20621d0ff3712be307045878e18",
+    "bytes": 8976,
+    "mode": "0644"
+  },
+  "newPythonSoftware": {
+    "actualReturned": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-new-python-software-v1/software.returned.json",
+      "sha256": "3451d5b843ec06f164a6ff1fe818284cdfae9b97ed2cb42181c0888115183433",
+      "bytes": 3485,
+      "mode": "0644"
+    },
+    "log": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage8192-new-python-software-v1/software.log",
+      "sha256": "e354715f5f46d1660f2ed0edf5c76559f3c2339919e4e09e65a5a8e425c922d7",
+      "bytes": 553,
+      "mode": "0644"
+    },
+    "executed": 2,
+    "passed": 2,
+    "skipped": 0,
+    "wallSeconds": 0.1862787379650399,
+    "directReaped": true,
+    "processAndHandlesClosed": true,
+    "remaining": [],
+    "actualMask": "completed",
+    "actualPersist": "completed",
+    "persistedSnapshot": {
+      "command": [
+        "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+        "-B",
+        "-m",
+        "unittest",
+        "quoridor_training.test_prefix_series_projection.SeriesProjection.test_coverage_saved_subset_preserves_H_and_refuses_rank_or_partial_H_nn0",
+        "quoridor_training.test_cpu_policy_teacher_boundary.OldJointInputExclusionMetadata.test_two_named_old_sources_validate_once_each_and_refuse_before_encoder",
+        "-v"
+      ],
+      "status": "complete",
+      "child": {
+        "pid": 3808437,
+        "start_ticks": "86192474",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "cpu_plan": {
+        "management": [18],
+        "commands": {
+          "metadata": [6]
+        },
+        "allocation": [6, 18],
+        "resource_CPUs": 2,
+        "worker_CPUs": 1,
+        "library_threads": 1
+      },
+      "command_cpu_scope": "metadata",
+      "log_bytes_seen": 553,
+      "scope": "session group and periodically recorded descendants; no daemon adoption",
+      "exit_code": 0,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "cleanup_complete": true,
+      "log_bytes_retained": 553,
+      "wall_seconds": 0.1862787379650399,
+      "handle_closes_attempted": ["selector_close", "pipe_close", "pidfd_close", "log_close"],
+      "primary_error": null,
+      "process_cleanup_complete": true,
+      "handle_closes_complete": true,
+      "signal_mask_restoration": "pending",
+      "final_record_persist": "attempted",
+      "finalization_errors": []
+    },
+    "TMPAbsent": true
+  },
+  "next": "ONE normal BUILD: exactly two new Rust definitions, affected Clippy, current normal measurement release. Then normal8192 input with declared caps/exclusions and ready O64 in actual serial resource windows.",
+  "noOldSuccessfulSuitesOrParityOrScienceReplay": true,
+  "actual8192InputsTeacherFit": "UNRUN/NULL",
+  "goalsComplete": false
+}

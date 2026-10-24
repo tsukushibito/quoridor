@@ -269,6 +269,158 @@ class SeriesProjection(unittest.TestCase):
             with self.subTest(mutation=mutation), self.assertRaises(ValueError):
                 project(fit, holdout, bad_partition, original, bad_census, source_config)
 
+    def test_coverage_saved_subset_preserves_H_and_refuses_rank_or_partial_H_nn0(self):
+        import hashlib
+
+        source_path = Path(__file__).with_name("public_static_prepare.py")
+        names = {"prefix_fixture_rows", "series_fixture_rows", "saved_subset_fixture_authority"}
+        tree = ast.parse(source_path.read_text())
+        definitions = ast.Module(
+            body=[n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name in names],
+            type_ignores=[],
+        )
+        ns = {}
+        exec(compile(definitions, str(source_path), "exec"), ns)
+        ref = lambda name: {"path": "/synthetic/" + name, "sha256": "a" * 64}
+        old = [
+            {"game": f"m{i}", "family": f"f{i}", "prefix": [13 + i], "split": "train"}
+            for i in range(3)
+        ]
+        seed = 19
+        ranked = sorted(
+            [a["family"] for a in old],
+            key=lambda f: (hashlib.sha256(f"{seed}:{f}".encode()).hexdigest(), f),
+        )
+        counts = {"train": 1, "validation": 1, "test": 1}
+        split = dict(zip(ranked, ("train", "validation", "test"), strict=True))
+        original = {
+            "partition": {
+                "seed": seed,
+                "schema": "synthetic-native",
+                "rounding": "synthetic",
+                "assignments": old,
+            },
+            "source_series": {a["game"]: a["game"] for a in old},
+            "requested": {"train": 8192, "validation": 0, "test": 0},
+            "actual": {"train": 3, "validation": 0, "test": 0},
+            "deficits": {"train": 8189, "validation": 0, "test": 0},
+        }
+        authority = {
+            "schema": "quoridor-prefix-series-saved-subset-v2",
+            "source_schedule": ref("schedule"),
+            "source_partition": ref("parent"),
+            "source_observations": ref("history"),
+            "source_config": ref("config"),
+            "census": ref("census"),
+            "exposure_parent": ref("exclusions"),
+            "excluded_prefix_components": 0,
+            "split_counts": counts,
+            "actual_observations": counts,
+        }
+        excluded = {
+            "excluded_books": [ref("all-old-prefix-components")],
+            "excluded_static_inputs": ref("old-static-inputs"),
+        }
+        config = {
+            "families": 8192,
+            "split_seed": seed,
+            "trajectory": {
+                "split_counts": original["requested"],
+                "wall_layer_observations": [0, 1, 0],
+            },
+            **excluded,
+        }
+        census = {
+            "schema": "research.identity-only-component-census.v2",
+            "columns": [
+                "rank0",
+                "component",
+                "member_ids",
+                "source_series_ids",
+                "disposition",
+                "prospective_split",
+            ],
+            "exposureParent": authority["exposure_parent"],
+            "partition": authority["source_partition"],
+            "publishedScheduleByRef": authority["source_schedule"],
+            "nativeInputConfig": authority["source_config"],
+            "componentRankSeed": seed,
+            "sourceExclusionAuthority": excluded,
+            "counts": {
+                "originalSurvivors": 3,
+                "originalDeficit": 8189,
+                "excludedComponents": 0,
+                "eligibleNamedScope": 3,
+            },
+            "prospective": {
+                "selected": 3,
+                "train": 1,
+                "validation": 1,
+                "holdout": 1,
+                "deficitWithinNamedScope": 0,
+            },
+            "records": [
+                [
+                    i,
+                    f,
+                    [next(a["game"] for a in old if a["family"] == f)],
+                    [next(a["game"] for a in old if a["family"] == f)],
+                    "eligible_named_scope",
+                    split[f],
+                ]
+                for i, f in enumerate(ranked)
+            ],
+        }
+        chosen = [{**a, "split": split[a["family"]]} for a in old]
+        partition = {
+            **original,
+            "partition": {**original["partition"], "assignments": chosen},
+            "requested": counts,
+            "actual": counts,
+            "deficits": {"train": 0, "validation": 0, "test": 0},
+            "selection": authority,
+        }
+        rows = [
+            {
+                "id": a["game"],
+                "source_series": a["game"],
+                "prefix": a["prefix"],
+                "family": a["family"],
+                "split": a["split"],
+            }
+            for a in chosen
+        ]
+        base = {
+            "schema": "quoridor-prefix-series-observations-v1",
+            "partition": ref("selected"),
+            "source_observations": ref("history"),
+            "teacher_labels": False,
+        }
+        fit = {**base, "observations": [a for a in rows if a["split"] != "test"]}
+        held = {**base, "observations": [a for a in rows if a["split"] == "test"]}
+        result, protected, lineage = ns["series_fixture_rows"](
+            fit, held, partition, original, census, config
+        )
+        self.assertEqual(len(result), 2)
+        self.assertEqual(len(protected), 1)
+        self.assertFalse(lineage["H_teacher_labels"])
+        missing = {**held, "observations": []}
+        with self.assertRaises(ValueError):
+            ns["series_fixture_rows"](fit, missing, partition, original, census, config)
+        wrong = copy.deepcopy(census)
+        wrong["records"][2][5] = "train"
+        with self.assertRaises(ValueError):
+            ns["series_fixture_rows"](fit, held, partition, original, wrong, config)
+
+        changed = copy.deepcopy(config)
+        changed["excluded_books"] = []
+        with self.assertRaises(ValueError):
+            ns["series_fixture_rows"](fit, held, partition, original, census, changed)
+        wrong_schema = copy.deepcopy(census)
+        wrong_schema["schema"] = "research.identity-only-component-census.v1"
+        with self.assertRaises(ValueError):
+            ns["series_fixture_rows"](fit, held, partition, original, wrong_schema, config)
+
 
 if __name__ == "__main__":
     unittest.main()

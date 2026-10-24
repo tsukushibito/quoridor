@@ -1,0 +1,205 @@
+{
+  "UTC": "2026-10-24T03:43:48.638284+00:00",
+  "status": "SAVED_ANALYSIS_FINALIZED_PASS_FINITE_DEVELOPMENT_ONLY",
+  "jobId": "35e0603f-b074-49db-a241-c60465fc35ba",
+  "manifest": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected3072-development256-analysis-v1/interpreter-binding-repair-v3/operation/manifest.json",
+    "bytes": 7496,
+    "mode": "0644",
+    "sha256": "5fc6eaab25d4e5079477615cfae691edeecd6660f7986307c6f0b6180d653cdb"
+  },
+  "summary": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected3072-development256-analysis-v1/interpreter-binding-repair-v3/data/summary.json",
+    "bytes": 38116,
+    "mode": "0644",
+    "sha256": "5e7a7ab299c25d2848d4ff3b14b51c321dcf7aa75ad6d653c4ec2f060760354f"
+  },
+  "report": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected3072-development256-analysis-v1/interpreter-binding-repair-v3/data/report.md",
+    "bytes": 821,
+    "mode": "0644",
+    "sha256": "44aea0fc6b21ab1a3d35ba1583d41fa6be7182b5272b6733146257bcee1520f2"
+  },
+  "outerResult": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected3072-development256-analysis-v1/interpreter-binding-repair-v3/runtime/result.json",
+    "bytes": 522,
+    "mode": "0600",
+    "sha256": "ab905e50f2a6577e32013f1b591de04fef762d97d93686992da0905a32768880"
+  },
+  "experiment": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected3072-development256-analysis-v1/interpreter-binding-repair-v3/experiment.json",
+    "bytes": 95982,
+    "mode": "0644",
+    "sha256": "8a35f9cfe9c9c01a9ad6cfa9231c065fbced341e27088d44d95675eb33bc1932"
+  },
+  "analysisConfig": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected3072-development256-analysis-v1/binding-v2/analysis-config.json",
+    "bytes": 6713,
+    "mode": "0644",
+    "sha256": "9ca924ffdd58c6fbb46ba098dd5dc85a477b06861312a18bd3e3d37ba4278f1f"
+  },
+  "matchups": [
+    {
+      "matchup": 0,
+      "condition": "selected3072 Alpha policyOFF vs original Cedar Alpha",
+      "counts": {
+        "planned": 128,
+        "started": 128,
+        "goal_first": 53,
+        "goal_second": 74,
+        "true_draw": 1,
+        "forfeit": 0,
+        "cap": 0,
+        "late": 0,
+        "illegal": 0,
+        "error": 0,
+        "unfinished": 0,
+        "unknown": 0,
+        "missing": 0
+      },
+      "completeColourPairs": 64,
+      "score": 0.41796875,
+      "conditional975Interval": [0.3125, 0.5234375],
+      "familyResampling": {
+        "method": "shared_pcg64_linear",
+        "family_order": [
+          0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
+          25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46,
+          47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63
+        ],
+        "index_shape": [10000, 64],
+        "index_dtype": "<u8",
+        "index_sha256": "8fd631b7a36da602d167c38d8ebca596bd6210b6c91e6f11faa623188983426c",
+        "numpy_version": "2.5.3",
+        "all_planned_pairs_complete": true,
+        "simultaneous_interpretation": "Bonferroni nominal alpha allocation across the predeclared contrasts; conditional approximate bootstrap, no IID/population coverage guarantee"
+      }
+    },
+    {
+      "matchup": 1,
+      "condition": "selected3072 learned MCTS vs same selected3072 explicit-uniform MCTS",
+      "counts": {
+        "planned": 128,
+        "started": 128,
+        "goal_first": 31,
+        "goal_second": 95,
+        "true_draw": 2,
+        "forfeit": 0,
+        "cap": 0,
+        "late": 0,
+        "illegal": 0,
+        "error": 0,
+        "unfinished": 0,
+        "unknown": 0,
+        "missing": 0
+      },
+      "completeColourPairs": 64,
+      "score": 0.25,
+      "conditional975Interval": [0.17578125, 0.32421875],
+      "familyResampling": {
+        "method": "shared_pcg64_linear",
+        "family_order": [
+          0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
+          25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46,
+          47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63
+        ],
+        "index_shape": [10000, 64],
+        "index_dtype": "<u8",
+        "index_sha256": "8fd631b7a36da602d167c38d8ebca596bd6210b6c91e6f11faa623188983426c",
+        "numpy_version": "2.5.3",
+        "all_planned_pairs_complete": true,
+        "simultaneous_interpretation": "Bonferroni nominal alpha allocation across the predeclared contrasts; conditional approximate bootstrap, no IID/population coverage guarantee"
+      }
+    }
+  ],
+  "planned": 256,
+  "completed": 256,
+  "unknown": 0,
+  "missing": 0,
+  "bootstrap": {
+    "seed": 4352026102404,
+    "resamples": 10000,
+    "tableShape": [10000, 64],
+    "sharedTables": 1,
+    "indexSHA": "8fd631b7a36da602d167c38d8ebca596bd6210b6c91e6f11faa623188983426c",
+    "numpy": "2.5.3",
+    "quantile": "linear",
+    "tails": [0.0125, 0.9875],
+    "allContrastCompleteness": true
+  },
+  "scope": "Same64 EXPOSED development families; approximate conditional family bootstrap. Nominal Bonferroni allocation is not IID/population/Elo/general-strength coverage.",
+  "interpretation": "A0 does not establish selected3072 superiority to Cedar; interval includes .5. B0 favors explicit-uniform in this fixed condition, where prior and omitted policy-head compute cost differ together. No prior-only cause or transitive MCTS/Cedar win rate.",
+  "costs": {
+    "originalAOuterSeconds": 1086.586294530076,
+    "originalANativeGuardSeconds": 1038.865219998057,
+    "analysisOuterSeconds": 1.4304884509183466,
+    "analysisInnerSeconds": 0.807725424063392,
+    "nestedNotAdded": true,
+    "originalFailedAnalysisSeconds": 0.24738983798306435,
+    "fullFeesAndContinuousPeak": "UNKNOWN"
+  },
+  "actualReaderSTOP": {
+    "directReaped": true,
+    "processAndHandlesClosed": true,
+    "remaining": [],
+    "knownIdentities": [
+      {
+        "recorded": {
+          "pid": 3795400,
+          "start_ticks": "86050565",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "sameIdentityAlive": false,
+        "observation": "absent"
+      },
+      {
+        "recorded": {
+          "pid": 3795394,
+          "start_ticks": "86050541",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "sameIdentityAlive": false,
+        "observation": "absent"
+      }
+    ],
+    "mask": "completed",
+    "persist": "completed"
+  },
+  "persistedSnapshot": {
+    "mask": "pending",
+    "persist": "attempted"
+  },
+  "ordinaryFinalization": {
+    "firstScopeRefusal": {
+      "exit": 1,
+      "reason": "collector outside assigned CPU scope:12,18 wider than management18",
+      "beforeFinalizingMarker": true,
+      "noScientificCommand": true
+    },
+    "correctedManagementCPU": [18],
+    "exit": 0,
+    "scientificCommandReruns": 0
+  },
+  "originalProgressKeyErrors": 16,
+  "originalFailuresCostsPausesSealsDefaultsModelsAnd50GBPreserved": true,
+  "payloadJournalArrayRNGModelNativeReplayDuringCollection": 0,
+  "next": "Same judgement and one finite independent result interpretation; after this actual reader STOP CAS qualified progress and reviewed B six posts, NEW affected software and normal input resource window; ready O64 does not wait for B whole pipeline or ACK.",
+  "goalsComplete": false,
+  "collection": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected3072-development256-analysis-v1/interpreter-binding-repair-v3/completion-35e0603f/collection.json",
+    "sha256": "0114a4e884447d9b7e542ddc3342a16248efe20621d0ff3712be307045878e18",
+    "bytes": 8976,
+    "mode": "0644"
+  },
+  "independentResultReview": {
+    "issue": "quoridor-4lc.435.13",
+    "inputs": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected3072-development256-analysis-v1/interpreter-binding-repair-v3/completion-35e0603f/bounded-result-review-inputs.json",
+      "sha256": "a46d79ff022f52dadaefbff762de1441522c453f61347bf832b5b127829e482e",
+      "bytes": 9456,
+      "mode": "0644"
+    },
+    "status": "one finite related review requested, not an execution/ACK gate"
+  },
+  "progressSourceAdoption": "bb440a11 and unchanged b19344bf exact CAS adopted only after this reader STOP; previous private qualification/failed v1 retained"
+}

@@ -154,7 +154,7 @@ impl TrajectoryInput {
                 n.checked_add(*v).ok_or("observation count overflow")
             })?;
         if c.families == 0
-            || c.families > 1024
+            || (c.families > 1024 && (c.families != 8192 || observations != 1))
             || self.max_plies == 0
             || self.max_plies > PLY_CAP
             || observations == 0
@@ -195,8 +195,9 @@ fn prepare_saved_subset(c: &InputConfig, settings: &SavedSubsetInput) -> Result<
     use quoridor_data::terminal::{
         RankedComponentDisposition, SeriesPartition, ranked_components, select_series_components,
     };
+    let coverage = c.families == 8192;
     if c.families == 0
-        || c.families > 1024
+        || (c.families > 1024 && !coverage)
         || c.trajectory.is_some()
         || c.repartition.is_some()
         || c.reuse_schedule.is_some()
@@ -204,21 +205,43 @@ fn prepare_saved_subset(c: &InputConfig, settings: &SavedSubsetInput) -> Result<
         || !c.excluded_books.is_empty()
         || c.excluded_static_inputs.is_some()
         || c.unique_families
-        || settings.census.bytes > 65536
+        || settings.census.bytes > if coverage { 4 * 1024 * 1024 } else { 65536 }
+        || (!coverage && (settings.split_counts.test != 0 || settings.split_counts.total()? > 128))
+        || (coverage
+            && (settings.split_counts.test == 0
+                || settings.split_counts.total()? > 1408
+                || settings.excluded_prefix_components != 0))
     {
         return Err(
             "saved subset requires its exact frozen parent and explicit census, no generation"
                 .into(),
         );
     }
-    let schedule = read_input_reference(&settings.schedule)?;
-    let census = read_input_reference(&settings.census)?;
+    let schedule = read_input_reference_max(
+        &settings.schedule,
+        if coverage {
+            512 * 1024 * 1024
+        } else {
+            64 * 1024 * 1024
+        },
+    )?;
+    let census = read_input_reference_max(
+        &settings.census,
+        if coverage { 4 * 1024 * 1024 } else { 65536 },
+    )?;
     let source_config = read_input_reference(&settings.source_config)?;
     let parent_ref: crate::research_manifest::FileRef =
         serde_json::from_value(schedule["partition"].clone())?;
     let source_ref: crate::research_manifest::FileRef =
         serde_json::from_value(schedule["source_observations"].clone())?;
-    let original: SeriesPartition = serde_json::from_value(read_input_reference(&parent_ref)?)?;
+    let original: SeriesPartition = serde_json::from_value(read_input_reference_max(
+        &parent_ref,
+        if coverage {
+            512 * 1024 * 1024
+        } else {
+            64 * 1024 * 1024
+        },
+    )?)?;
     let rank = ranked_components(&original.partition);
     let columns = serde_json::json!([
         "rank0",
@@ -239,9 +262,18 @@ fn prepare_saved_subset(c: &InputConfig, settings: &SavedSubsetInput) -> Result<
         || source_config["trajectory"]["split_counts"] != serde_json::to_value(original.requested)?
         || original.partition.seed != c.split_seed
         || schedule["ranked_components"] != serde_json::to_value(&rank)?
-        || census["schema"] != "research.identity-only-component-census.v1"
+        || census["schema"]
+            != if coverage {
+                "research.identity-only-component-census.v2"
+            } else {
+                "research.identity-only-component-census.v1"
+            }
         || census["columns"] != columns
-        || census["selected64"] != serde_json::to_value(&settings.exposure_parent)?
+        || census[if coverage {
+            "exposureParent"
+        } else {
+            "selected64"
+        }] != serde_json::to_value(&settings.exposure_parent)?
         || census["partition"] != serde_json::to_value(&parent_ref)?
         || census["publishedScheduleByRef"] != serde_json::to_value(&settings.schedule)?
         || census["nativeInputConfig"] != serde_json::to_value(&settings.source_config)?
@@ -255,7 +287,11 @@ fn prepare_saved_subset(c: &InputConfig, settings: &SavedSubsetInput) -> Result<
         return Err("bounded original pool collection required".into());
     }
     let collection = read_input_reference(&collection_ref)?;
-    if collection["selected64_map"] != serde_json::to_value(&settings.exposure_parent)?
+    if collection[if coverage {
+        "exclusion_authority"
+    } else {
+        "selected64_map"
+    }] != serde_json::to_value(&settings.exposure_parent)?
         || collection["native"]["schedule"] != serde_json::to_value(&settings.schedule)?
         || collection["native"]["partition"] != serde_json::to_value(&parent_ref)?
         || collection["native"]["source_observations"] != serde_json::to_value(&source_ref)?
@@ -270,12 +306,27 @@ fn prepare_saved_subset(c: &InputConfig, settings: &SavedSubsetInput) -> Result<
             "path":value["path"],"sha256":value["sha256"]
         })
     };
-    if source_config["excluded_books"]
-        != serde_json::json!([
-            bound(&authority["prefixProjection"]),
-            bound(&authority["clockBook"])
-        ])
-        || source_config["excluded_static_inputs"] != bound(&authority["staticExclusionManifest"])
+    let authority_differs = if coverage {
+        let declared = read_input_reference(&settings.exposure_parent)?;
+        declared != *authority
+            || source_config["excluded_books"] != authority["excluded_books"]
+            || source_config["excluded_static_inputs"] != authority["excluded_static_inputs"]
+            || authority["excluded_books"]
+                .as_array()
+                .is_none_or(Vec::is_empty)
+            || authority["excluded_static_inputs"].is_null()
+            || source_config["trajectory"]["wall_layer_observations"]
+                != serde_json::json!([0, 1, 0])
+    } else {
+        source_config["excluded_books"]
+            != serde_json::json!([
+                bound(&authority["prefixProjection"]),
+                bound(&authority["clockBook"])
+            ])
+            || source_config["excluded_static_inputs"]
+                != bound(&authority["staticExclusionManifest"])
+    };
+    if authority_differs
         || schedule["excluded_books"] != source_config["excluded_books"]
         || schedule["excluded_static_inputs"] != source_config["excluded_static_inputs"]
     {
@@ -291,7 +342,7 @@ fn prepare_saved_subset(c: &InputConfig, settings: &SavedSubsetInput) -> Result<
     if census["counts"]
         != serde_json::json!({
             "originalSurvivors":rank.len(),"originalDeficit":original.deficits.total()?,
-            "excludedDev64":settings.excluded_prefix_components,"eligibleNamedScope":eligible
+            (if coverage { "excludedComponents" } else { "excludedDev64" }):settings.excluded_prefix_components,"eligibleNamedScope":eligible
         })
         || census["prospective"]
             != serde_json::json!({
@@ -308,7 +359,14 @@ fn prepare_saved_subset(c: &InputConfig, settings: &SavedSubsetInput) -> Result<
         settings.excluded_prefix_components,
         settings.split_counts,
     )?;
-    let source = read_input_reference(&source_ref)?;
+    let source = read_input_reference_max(
+        &source_ref,
+        if coverage {
+            512 * 1024 * 1024
+        } else {
+            64 * 1024 * 1024
+        },
+    )?;
     let rows = source["observations"]
         .as_array()
         .ok_or("original observations missing")?;
@@ -316,7 +374,7 @@ fn prepare_saved_subset(c: &InputConfig, settings: &SavedSubsetInput) -> Result<
         || source["teacher_labels"] != false
         || source["partition"] != serde_json::to_value(&parent_ref)?
         || rows.len() != original.partition.assignments.len()
-        || rows.len() > c.families * 64
+        || rows.len() > c.families * if coverage { 1 } else { 64 }
     {
         return Err("original full-history source census differs".into());
     }
@@ -327,7 +385,8 @@ fn prepare_saved_subset(c: &InputConfig, settings: &SavedSubsetInput) -> Result<
         .map(|a| (a.game.as_str(), a))
         .collect::<std::collections::BTreeMap<_, _>>();
     let mut projected = Vec::new();
-    let mut counts = [0usize; 2];
+    let mut protected = Vec::new();
+    let mut counts = [0usize; 3];
     for (value, old) in rows.iter().zip(&original.partition.assignments) {
         let row: InputObservation = serde_json::from_value(value.clone())?;
         if row.id != old.game
@@ -347,13 +406,18 @@ fn prepare_saved_subset(c: &InputConfig, settings: &SavedSubsetInput) -> Result<
             let index = match new.split {
                 quoridor_data::Split::Train => 0,
                 quoridor_data::Split::Validation => 1,
-                quoridor_data::Split::Test => return Err("saved subset has no H labels".into()),
+                quoridor_data::Split::Test => 2,
             };
             counts[index] += 1;
-            projected.push(serde_json::json!({
+            let projection = serde_json::json!({
                 "id":row.id,"source_series":row.source_series,"prefix":row.prefix,
                 "family":new.family,"split":new.split
-            }));
+            });
+            if index == 2 {
+                protected.push(projection);
+            } else {
+                projected.push(projection);
+            }
         }
     }
     // One existing root per selected WHOLE component, never a picked partial component.
@@ -361,6 +425,7 @@ fn prepare_saved_subset(c: &InputConfig, settings: &SavedSubsetInput) -> Result<
         != [
             settings.split_counts.train,
             settings.split_counts.validation,
+            settings.split_counts.test,
         ]
     {
         return Err("saved subset requires one original observation per whole component".into());
@@ -385,13 +450,13 @@ fn prepare_saved_subset(c: &InputConfig, settings: &SavedSubsetInput) -> Result<
         };
     let mut partition_value = serde_json::to_value(&partition)?;
     partition_value["selection"] = serde_json::json!({
-        "schema":"quoridor-prefix-series-saved-subset-v1",
+        "schema":if coverage { "quoridor-prefix-series-saved-subset-v2" } else { "quoridor-prefix-series-saved-subset-v1" },
         "source_schedule":settings.schedule,"source_partition":parent_ref,
         "source_observations":source_ref,"source_config":settings.source_config,
         "census":settings.census,"exposure_parent":settings.exposure_parent,
         "excluded_prefix_components":settings.excluded_prefix_components,
         "split_counts":settings.split_counts,
-        "actual_observations":{"train":counts[0],"validation":counts[1],"test":0}
+        "actual_observations":{"train":counts[0],"validation":counts[1],"test":counts[2]}
     });
     let partition_ref = write("partition.json", &partition_value)?;
     let publish = |name: &str, rows: &Vec<serde_json::Value>| {
@@ -403,7 +468,7 @@ fn prepare_saved_subset(c: &InputConfig, settings: &SavedSubsetInput) -> Result<
             }),
         )
     };
-    let holdout = publish("holdout-observations.json", &Vec::new())?;
+    let holdout = publish("holdout-observations.json", &protected)?;
     let fit = publish("fit-observations.json", &projected)?;
     let report = serde_json::json!({
         "partition":partition_ref,"fit_observations":fit,"holdout_observations":holdout,
@@ -420,7 +485,17 @@ fn prepare_saved_subset(c: &InputConfig, settings: &SavedSubsetInput) -> Result<
 fn read_input_reference(
     reference: &crate::research_manifest::FileRef,
 ) -> Result<serde_json::Value> {
+    read_input_reference_max(reference, 64 * 1024 * 1024)
+}
+fn read_input_reference_max(
+    reference: &crate::research_manifest::FileRef,
+    maximum: u64,
+) -> Result<serde_json::Value> {
+    use std::io::Read;
     use std::os::unix::fs::PermissionsExt;
+    if maximum == 0 || maximum > 512 * 1024 * 1024 || reference.bytes > maximum {
+        return Err("finite native input byte ceiling".into());
+    }
     let before = std::fs::symlink_metadata(&reference.path)?;
     if !reference.path.is_absolute()
         || reference.path.canonicalize()? != reference.path
@@ -430,12 +505,15 @@ fn read_input_reference(
     {
         return Err("bound regular input length/mode/path differs".into());
     }
-    // BoundJson reads/hash-checks one bounded stream, including the original full history.
-    let value = quoridor_data::terminal_stream::BoundJson {
-        path: reference.path.clone(),
-        sha256: reference.sha256.clone(),
+    // One bounded read/hash over the actual parent; no history mirror or second archive.
+    let mut raw = Vec::new();
+    std::fs::File::open(&reference.path)?
+        .take(maximum + 1)
+        .read_to_end(&mut raw)?;
+    if raw.len() as u64 != reference.bytes || quoridor_data::hex_digest(&raw) != reference.sha256 {
+        return Err("bounded native input SHA/length differs".into());
     }
-    .read()?;
+    let value = serde_json::from_slice(&raw)?;
     use std::os::unix::fs::MetadataExt;
     let after = std::fs::symlink_metadata(&reference.path)?;
     if (
@@ -645,7 +723,14 @@ fn write_input_json(
         .create_new(true)
         .write(true)
         .open(&path)?;
-    f.write_all(&serde_json::to_vec(value)?)?;
+    let raw = serde_json::to_vec(value)?;
+    if (raw.len() as u64)
+        .checked_add(crate::resources::directory_bytes(output)?)
+        .is_none_or(|total| total > 512 * 1024 * 1024)
+    {
+        return Err("native input whole publication byte ceiling".into());
+    }
+    f.write_all(&raw)?;
     f.sync_all()?;
     Ok(quoridor_data::terminal_stream::BoundJson {
         sha256: quoridor_data::file_sha(&path)?,
@@ -1437,6 +1522,48 @@ mod trajectory_input_tests {
         c.trajectory.as_mut().unwrap().split_counts.train = 1024;
         c.trajectory.as_mut().unwrap().max_plies = 201;
         assert!(c.trajectory.as_ref().unwrap().validate(&c).is_err());
+    }
+    #[test]
+    fn fixed_8192_single_observation_boundary_refuses_overflow_and_extra_observations() {
+        let mut c: InputConfig = serde_json::from_value(serde_json::json!({
+            "families":8192,"prefix_seed":4352026102401_u64,"prefix_lengths":[],
+            "split_seed":4352026102403_u64,"excluded_books":[],"output":"/synthetic-coverage",
+            "trajectory":{"max_plies":200,"wall_layer_observations":[0,1,0],
+            "selection_seed":4352026102402_u64,
+            "split_counts":{"train":8192,"validation":0,"test":0}}
+        }))
+        .unwrap();
+        c.trajectory.as_ref().unwrap().validate(&c).unwrap();
+        c.families = 8193;
+        c.trajectory.as_mut().unwrap().split_counts.train = 8193;
+        assert!(c.trajectory.as_ref().unwrap().validate(&c).is_err());
+        c.families = 8192;
+        c.trajectory.as_mut().unwrap().split_counts.train = 8192;
+        c.trajectory.as_mut().unwrap().wall_layer_observations = [0, 2, 0];
+        assert!(c.trajectory.as_ref().unwrap().validate(&c).is_err());
+        let reference = |bytes: u64| crate::research_manifest::FileRef {
+            path: "/synthetic-coverage/never-opened".into(),
+            sha256: "a".repeat(64),
+            bytes,
+            mode: "0644".into(),
+        };
+        assert!(
+            read_input_reference_max(&reference(512 * 1024 * 1024 + 1), 512 * 1024 * 1024).is_err()
+        );
+        c.trajectory = None;
+        let settings = SavedSubsetInput {
+            exposure_parent: reference(1),
+            schedule: reference(1),
+            census: reference(4 * 1024 * 1024 + 1),
+            source_config: reference(1),
+            excluded_prefix_components: 0,
+            split_counts: quoridor_data::terminal::FamilySplitCounts {
+                train: 1024,
+                validation: 256,
+                test: 128,
+            },
+        };
+        assert!(prepare_saved_subset(&c, &settings).is_err());
     }
     #[test]
     fn trajectory_metadata_limits_reject_root_mix_and_keep_exact_layer_deficits() {

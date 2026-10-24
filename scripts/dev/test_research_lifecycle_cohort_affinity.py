@@ -232,6 +232,153 @@ class CohortControllerAffinity(unittest.TestCase):
                     "PASS",
                 )
 
+    def test_progress_retains_identity_with_optional_canonical_and_refuses_ambiguous_lineage(self):
+        loader = importlib.util.spec_from_file_location(
+            "lc_progress_optional_canonical", Path(__file__).with_name("research-lifecycle.py")
+        )
+        lc = importlib.util.module_from_spec(loader)
+        loader.loader.exec_module(lc)
+        returned = dict(
+            status="complete",
+            exit_code=0,
+            direct_child_reaped=True,
+            handle_closes_complete=True,
+            cleanup_complete=True,
+            remaining=[],
+            finalization_errors=[],
+            signal_mask_restoration="completed",
+            final_record_persist="completed",
+        )
+        for case in ("absent", "recorded", "ambiguous-lineage", "missing-family-id"):
+            with self.subTest(case=case), tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+                control = root / "control"
+                control.mkdir()
+                output = root / "sequence"
+                operation = output / "run-000" / "operation"
+                operation.mkdir(parents=True)
+                native = root / "native"
+                native.mkdir()
+
+                def save(path, value):
+                    lc.new_json(path, value)
+                    return lc.bound(path)[0]
+
+                identity = {"family_id": 7}
+                if case == "recorded":
+                    identity["canonical_family"] = "recorded-native-canonical-identity"
+                elif case == "missing-family-id":
+                    identity.pop("family_id")
+                opening = dict(
+                    id="original-request-id",
+                    lineage="original-lineage",
+                    reference=dict(settings=identity),
+                )
+                openings = [opening]
+                if case == "ambiguous-lineage":
+                    openings.append({**opening, "id": "different-request-same-lineage"})
+                config = dict(
+                    games=2,
+                    run_id="synthetic-progress",
+                    output=str(native),
+                    arena=dict(book=dict(openings=openings)),
+                )
+                config_ref = save(root / "config.json", config)
+                experiment_ref = save(root / "experiment.json", dict(config=config_ref))
+                settings_ref = save(
+                    root / "settings.json", dict(runs=[dict(experiment=experiment_ref)])
+                )
+                save(operation / "manifest.json", {})
+                publication_ref = save(
+                    native / "result.json",
+                    dict(
+                        outcome_count=2,
+                        report=dict(
+                            run_id=config["run_id"],
+                            planned=2,
+                            arena_summary=dict(
+                                census=dict(
+                                    planned_games=2,
+                                    started_games=2,
+                                    completed_games=2,
+                                    unknown_games=0,
+                                    complete_pairs=1,
+                                ),
+                                pairs=[dict(lineage="original-lineage", family="native-pair-id")],
+                            ),
+                        ),
+                    ),
+                )
+                member = dict(
+                    lane=0,
+                    output=str(output),
+                    settings_path=settings_ref["path"],
+                    job_runtime=str(root / "unentered-outer"),
+                )
+                cohort = dict(
+                    control_root=str(control),
+                    members=[member],
+                    notify=dict(thread_id="synthetic", issue="synthetic"),
+                    global_controller_cpu=18,
+                )
+                spec = dict(arena_cohort={"synthetic": True}, cwd=tmp)
+                with (
+                    patch.object(lc, "arena_cohort", return_value=(cohort, member)),
+                    patch.object(
+                        lc,
+                        "arena_cohort_lifetime",
+                        return_value=dict(origins={}, clock=lc.time.monotonic() - 1),
+                    ),
+                    patch.object(lc, "ArenaCohortResources", return_value=object()),
+                    patch.object(lc.process, "execute", return_value=returned) as notify,
+                ):
+                    if case == "ambiguous-lineage":
+                        with self.assertRaisesRegex(
+                            lc.Refused, "complete pair joins exact family lineage"
+                        ):
+                            lc.arena_cohort_progress(spec)
+                    elif case == "missing-family-id":
+                        with self.assertRaisesRegex(KeyError, "family_id"):
+                            lc.arena_cohort_progress(spec)
+                    else:
+                        lc.arena_cohort_progress(spec)
+                        notify.assert_called_once()
+                if case in ("ambiguous-lineage", "missing-family-id"):
+                    notify.assert_not_called()
+                    self.assertFalse((control / "first-progress.json").exists())
+                    self.assertFalse((control / "first-progress-pairs.json").exists())
+                    continue
+                pairs = json.loads((control / "first-progress-pairs.json").read_text())
+                self.assertEqual(
+                    pairs,
+                    [
+                        dict(
+                            lane=0,
+                            operation=0,
+                            family_id=7,
+                            request_id="original-request-id",
+                            canonical_family=(
+                                "recorded-native-canonical-identity" if case == "recorded" else None
+                            ),
+                            candidate_colors=[0, 1],
+                            native_family="native-pair-id",
+                            lineage="original-lineage",
+                            publication=publication_ref,
+                        )
+                    ],
+                )
+                packet = json.loads((control / "first-progress.json").read_text())
+                self.assertEqual(packet["counts"]["planned_games"], 2)
+                self.assertEqual(packet["counts"]["completed_games_known"], 2)
+                self.assertEqual(packet["counts"]["complete_pairs_known"], 1)
+                self.assertEqual(packet["counts"]["scientific_outcome_UNKNOWN_slots"], 0)
+                notification = json.loads(
+                    (control / "first-progress-notification.json").read_text()
+                )
+                self.assertEqual(notification["returned"], returned)
+                self.assertIsNone(notification["failure"])
+                self.assertEqual(notification["secondary"], [])
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -1402,14 +1402,14 @@ def arena_cohort_progress(spec):
                 "terminal lane result joins its actual declared original submission",
             )
         first = output / "run-000"
-        settled = (first / "operation/manifest.json").exists() and not (
+        initial_settled = (first / "operation/manifest.json").exists() and not (
             first / "operation/INCOMPLETE"
         ).exists()
         inner = first / "runtime/result.json"
         inner_failed = False
         if inner.exists():
             result = document(bound(inner)[0])
-            settled |= result.get("cleanup_complete") is True
+            initial_settled |= result.get("cleanup_complete") is True
             inner_failed = result["outcome"] != "succeeded"
         outer = Path(member["job_runtime"]) / "result.json"
         outer_failure = None
@@ -1427,7 +1427,7 @@ def arena_cohort_progress(spec):
             or (terminal is not None and terminal["status"] != "PASS")
             or outer_failure is not None
         )
-        if not (settled or failed):
+        if not (initial_settled or failed):
             return
         lanes.append(
             dict(
@@ -1520,7 +1520,7 @@ def arena_cohort_progress(spec):
                                     operation=index,
                                     family_id=source["family_id"],
                                     request_id=joined[0]["id"],
-                                    canonical_family=source["canonical_family"],
+                                    canonical_family=source.get("canonical_family"),
                                     candidate_colors=[0, 1],
                                     native_family=pair["family"],
                                     lineage=pair["lineage"],

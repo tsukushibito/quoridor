@@ -458,3 +458,84 @@ class OldJointInputExclusionMetadata(unittest.TestCase):
             self.assertEqual(receipt["current_actual_orientation_rows"], 2)
             self.assertEqual(receipt["overlapping_actual_input_keys"], 0)
             self.assertEqual(receipt["labels_read_or_copied"], 0)
+
+    def test_two_named_old_sources_validate_once_each_and_refuse_before_encoder(self):
+        from contextlib import contextmanager
+        import tempfile
+        from pathlib import Path
+
+        class ExistingEncoderPath(RuntimeError):
+            pass
+
+        for fault in (None, "second-overlap", "second-missing-source", "row-chronology"):
+            with self.subTest(fault=fault), tempfile.TemporaryDirectory() as directory:
+                config, previous, bank, keys = self.fixture(Path(directory) / "output")
+                first = copy.deepcopy(config["excluded_joint_source"])
+                second = copy.deepcopy(first)
+                for field, name in (
+                    ("input_classes", "old-input-2"),
+                    ("teacher_values", "teacher-values-2.json"),
+                    ("configuration", "old-config-2"),
+                ):
+                    second[field]["path"] = "/synthetic-old-joint/" + name
+                previous2 = copy.deepcopy(previous)
+                previous2.update(
+                    input_classes=second["input_classes"],
+                    prior_actual_rows=2,
+                    inclusive_row_limit=4,
+                    excluded_joint_source=first,
+                )
+                bank2 = copy.deepcopy(bank)
+                bank2.update(
+                    input_classes=second["input_classes"],
+                    prior_actual_rows=2,
+                    inclusive_attempted_rows=4,
+                )
+                config.update(
+                    excluded_joint_source=[first, second],
+                    prior_actual_rows=4,
+                    inclusive_row_limit=6,
+                )
+                keys.update({"old-input-2": (b"e" * 28, b"f" * 28)})
+                if fault == "second-overlap":
+                    keys["new-input"] = (b"e" * 28, b"d" * 28)
+                if fault == "second-missing-source":
+                    previous2.pop("runtime_boundary")
+                if fault == "row-chronology":
+                    config["prior_actual_rows"] = 5
+
+                @contextmanager
+                def pairs(reference):
+                    yield {}, keys[reference["path"].rsplit("/", 1)[-1]]
+
+                records = {
+                    "old-config": previous,
+                    "old-config-2": previous2,
+                    "teacher-values.json": bank,
+                    "teacher-values-2.json": bank2,
+                }
+
+                def bound(reference, maximum):
+                    name = reference["path"].rsplit("/", 1)[-1]
+                    if name in ("core", "c20"):
+                        return b""
+                    raw = json.dumps(records[name]).encode()
+                    self.assertLessEqual(len(raw), maximum)
+                    return raw
+
+                with (
+                    patch.object(owner, "input_pairs", pairs),
+                    patch.object(owner, "oriented_keys", lambda p, capacity: iter([((), (), p)])),
+                    patch.object(owner, "bound_file_bytes", bound),
+                    patch.object(
+                        owner, "cpu_policy_teacher_boundary", return_value=config["model_identity"]
+                    ),
+                    patch.object(owner, "StaticInputs", side_effect=ExistingEncoderPath) as encoder,
+                    patch.object(owner, "StaticHead") as head,
+                ):
+                    with self.assertRaises(
+                        ExistingEncoderPath if fault is None else (ValueError, KeyError)
+                    ):
+                        owner.label_policy_values(config)
+                    self.assertEqual(encoder.call_count, 1 if fault is None else 0)
+                    head.assert_not_called()

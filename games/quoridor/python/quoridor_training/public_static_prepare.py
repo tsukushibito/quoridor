@@ -53,8 +53,10 @@ def file_identity(path):
     return IndexedPublicCorpus.identity(Path(path).stat())
 
 
-def prefix_fixture_rows(source):
+def prefix_fixture_rows(source, *, maximum_families=512):
     """Validate explicit isolated fixture histories without generating new states."""
+    if type(maximum_families) is not int or not 1 <= maximum_families <= 1408:
+        raise ValueError("bounded native publication family count")
     rows = source.get("fixed_prefixes")
     if not isinstance(rows, list) or not 1 <= len(rows) <= 32768:
         raise ValueError("bounded fixed prefix fixture required")
@@ -90,7 +92,11 @@ def prefix_fixture_rows(source):
             family_splits[family] = row["functional_split"]
             histories = family_histories.setdefault(family, set())
             history = tuple(row["history"])
-            if history in histories or len(histories) >= 64 or len(family_splits) > 512:
+            if (
+                history in histories
+                or len(histories) >= 64
+                or len(family_splits) > maximum_families
+            ):
                 raise ValueError("at most512 families/64 unique prefixes each; no duplicate refill")
             histories.add(history)
         seen.add(row["fixture"])
@@ -277,6 +283,7 @@ def saved_subset_fixture_authority(source, holdout, partition, original, census,
     import hashlib
 
     authority = partition["selection"]
+    coverage = authority.get("schema") == "quoridor-prefix-series-saved-subset-v2"
     fields = {
         "schema",
         "source_schedule",
@@ -295,8 +302,14 @@ def saved_subset_fixture_authority(source, holdout, partition, original, census,
         or source_config is None
         or set(authority) != fields
         or "repartition" in partition
-        or authority["schema"] != "quoridor-prefix-series-saved-subset-v1"
-        or census.get("schema") != "research.identity-only-component-census.v1"
+        or authority["schema"]
+        not in ("quoridor-prefix-series-saved-subset-v1", "quoridor-prefix-series-saved-subset-v2")
+        or census.get("schema")
+        != (
+            "research.identity-only-component-census.v2"
+            if coverage
+            else "research.identity-only-component-census.v1"
+        )
         or census["columns"]
         != [
             "rank0",
@@ -306,7 +319,7 @@ def saved_subset_fixture_authority(source, holdout, partition, original, census,
             "disposition",
             "prospective_split",
         ]
-        or authority["exposure_parent"] != census["selected64"]
+        or authority["exposure_parent"] != census["exposureParent" if coverage else "selected64"]
         or authority["source_partition"] != census["partition"]
         or authority["source_schedule"] != census["publishedScheduleByRef"]
         or authority["source_config"] != census["nativeInputConfig"]
@@ -322,7 +335,18 @@ def saved_subset_fixture_authority(source, holdout, partition, original, census,
     def bound(ref):
         return {key: ref[key] for key in ("path", "sha256")}
 
-    if source_config["excluded_books"] != [
+    if coverage:
+        if (
+            source_config["families"] != 8192
+            or source_config["trajectory"]["wall_layer_observations"] != [0, 1, 0]
+            or source_config["excluded_books"] != excluded_authority["excluded_books"]
+            or not excluded_authority["excluded_books"]
+            or source_config["excluded_static_inputs"]
+            != excluded_authority["excluded_static_inputs"]
+            or excluded_authority["excluded_static_inputs"] is None
+        ):
+            raise ValueError("coverage source/exclusion authority differs")
+    elif source_config["excluded_books"] != [
         bound(excluded_authority["prefixProjection"]),
         bound(excluded_authority["clockBook"]),
     ] or source_config["excluded_static_inputs"] != bound(
@@ -365,8 +389,9 @@ def saved_subset_fixture_authority(source, holdout, partition, original, census,
         or any(type(v) is not int for v in counts.values())
         or counts["train"] <= 0
         or counts["validation"] <= 0
-        or counts["test"] != 0
-        or not 0 < sum(counts.values()) <= 128
+        or (counts["test"] <= 0 if coverage else counts["test"] != 0)
+        or not 0 < sum(counts.values()) <= (1408 if coverage else 128)
+        or (coverage and excluded != 0)
         or len(ranked) - excluded < sum(counts.values())
     ):
         raise ValueError("bounded nonempty T/V whole-component subset or deficit")
@@ -376,7 +401,7 @@ def saved_subset_fixture_authority(source, holdout, partition, original, census,
         != {
             "originalSurvivors": len(ranked),
             "originalDeficit": sum(original["deficits"].values()),
-            "excludedDev64": excluded,
+            ("excludedComponents" if coverage else "excludedDev64"): excluded,
             "eligibleNamedScope": len(ranked) - excluded,
         }
         or census["prospective"]
@@ -384,7 +409,7 @@ def saved_subset_fixture_authority(source, holdout, partition, original, census,
             "selected": total,
             "train": counts["train"],
             "validation": counts["validation"],
-            "holdout": 0,
+            "holdout": counts["test"],
             "deficitWithinNamedScope": 0,
         }
         or len(census["records"]) != len(ranked)
@@ -394,7 +419,15 @@ def saved_subset_fixture_authority(source, holdout, partition, original, census,
     for rank, (family, record) in enumerate(zip(ranked, census["records"], strict=True)):
         selected = excluded <= rank < excluded + total
         split = (
-            ("train" if rank < excluded + counts["train"] else "validation") if selected else None
+            (
+                "train"
+                if rank < excluded + counts["train"]
+                else "validation"
+                if rank < excluded + counts["train"] + counts["validation"]
+                else "test"
+            )
+            if selected
+            else None
         )
         if (
             not isinstance(record, list)
@@ -421,7 +454,7 @@ def saved_subset_fixture_authority(source, holdout, partition, original, census,
         or partition["actual"] != counts
         or partition["deficits"] != {"train": 0, "validation": 0, "test": 0}
         or authority["actual_observations"] != counts
-        or holdout["observations"]
+        or len(holdout["observations"]) != counts["test"]
     ):
         raise ValueError(
             "subset cuts/changes parent members, exposes excluded components or changes split"
@@ -460,7 +493,10 @@ def series_fixture_rows(
     if len(by_id) != len(assignments) or set(sources) != set(by_id):
         raise ValueError("complete unique native component/source assignments required")
     series = sorted(set(sources.values()))
-    if not 1 <= len(series) <= 512:
+    coverage = (
+        partition.get("selection", {}).get("schema") == "quoridor-prefix-series-saved-subset-v2"
+    )
+    if not 1 <= len(series) <= (8192 if coverage else 512):
         raise ValueError("bounded native source series required")
     series_ids = {value: i for i, value in enumerate(series)}
     family_splits, source_families, seen = {}, {}, set()
@@ -515,7 +551,9 @@ def series_fixture_rows(
     ):
         raise ValueError("native component counts/deficits differ")
     # Only T/V is passed to the existing class publisher. H has no labels/classes.
-    rows = prefix_fixture_rows({"fixed_prefixes": projected[0]})
+    rows = prefix_fixture_rows(
+        {"fixed_prefixes": projected[0]}, maximum_families=1408 if coverage else 512
+    )
     return (
         rows,
         projected[1],
@@ -574,7 +612,12 @@ def prepare_prefix_fixture(config):
             selection = partition["selection"]
             if config.get("selection_census") != selection["census"]:
                 raise ValueError("explicit saved-selection census FileRef differs")
-            census_raw = bound_file_bytes(config["selection_census"], 65536)
+            census_raw = bound_file_bytes(
+                config["selection_census"],
+                4 * 1024**2
+                if selection["schema"] == "quoridor-prefix-series-saved-subset-v2"
+                else 65536,
+            )
             source_config_raw = bound_file_bytes(selection["source_config"], 65536)
             selection_census = json.loads(census_raw)
             source_config = json.loads(source_config_raw)
