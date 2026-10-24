@@ -4845,3 +4845,25 @@ metadata helperをstdlib Pythonから呼んだ際に、通常project_interpreter
 同aff5fa2aはouter .242429430s・exit1/actual outer cleanup completeで、Limits初期化の`charged_roots`にて`exclusive operation must be below owner`となった。holding全体PREPをowner自身かつowned_outputsへ置いた統合側のpath束縛誤りである。checks[]、operation/data未生成、normal analysis guardian return/reader/RNG counters NULLを保持し、原FAILED/log/partial factsを変更・finalizeしない。outer回収と、未生成のnormal operation cleanupは区別する。
 
 fresh saved-analysis-v3ではnamespace ownerを既存holdingの直上へ結び、書込み・課金対象は同じPREP一か所・同じwhole2GiBに限定した。既存charged_rootsが正確に[PREP]を返し、全出力がownerの厳密な子pathであることを起動前に確認した。出力範囲・cap・source/schema・guard・science config/seed/元256局は変えず、project_interpreter/arena_analysis_check/numerical_check/CPUPlanの通常metadata検査を通した。これは保存分析の入場前path補正で、archive decode・RNG・新対局/NN/Searchや旧統計の再実行ではない。実runtime admissionと正式なWDL/pair/intervalは未観測のまま、通常entryが所有する。
+
+### 2026-10-24: selected7680 Alpha256 saved analysis complete; O new16 dispatched
+
+同117d2d16の一回の保存分析と通常finalizerはmanifest/data PASSとなり、256局・128 colour pairsすべてcompleteを確認した。[正式結果・index identity・producer対応・実費・回収](../research-data/ai-sigma/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-result-v1.json)。BEST7680対INITIAL/incumbent2560は100勝2分154敗、score .39453125、条件付きfamily95%区間[.34375,.447265625]だった。forfeit/cap/late/illegal/error/unfinished/unknown/missingは全て0。PCG64 seed4352026102441、10000x128、元book順、`<u8`/C-orderの保存index SHAはebec14d43fb16a96439a174e97bc4c26aaa56a7cb5436802721f3c3fcc8850b6である。単一対比の区間であり、現役ownerのgeneric simultaneous/Bonferroni文言を別対比や追加調整の証明に使わない。
+
+この固定development Alpha条件ではBEST7680を優位とする結果ではなかった。一般棋力・教師品質・data-only/policy原因・収束・同等性・no-harm・default変更へ広げず、追加fit/対局は自動発行しない。保存ownerが併記したstate_strataは原reportに保持し、この有限判断では使わない。collectorはsummary全JSONの未使用metadata/strataも一時decodeしたが、archive/native-manifest/model/Hを再開かず、validator/RNG/NN/Search/gameを再演しなかった。
+
+analysis outer7.273406273sはcommand .861548397sを含み、別の通常finalizer .221860621sを分けて保存した。原ゲームouter1136.499406741sとその内側のnative合計1089.491742682sも非加算である。actual directreap/process+handles/remaining[]/maskpersist完了・元disk pending/attempted・normalTMP撤去を区別した。現在の比較holding点15519744 allocated Bは指定rootの非原子的観測で、global/peak/free creditではない。旧not_started/strict-child FAILEDと全費用は不変である。
+
+Oは同B21のconfig-only fbea5fabをそのまま採用し、新source監査/reviewer/A16/profileを追加せず通常controller/resource bindingを完了した。既存CPUPlan/CycleResources/compute_peers/executeによる最高親のdisjoint common/command/aggregate accountingを用い、旧generation wrapperのad-hoc affinity分類は再用しない。新16 seeds2026102405001..5016、八つのtyped exclusions、rules550b限定purpose、target16/mandatory-pass/max128/no-refill、common64MiB+command1984MiB/host4/fresh6/CPU4G18/300command360parent、同aggregate64MiBを固定した。
+
+Q分析command/readers/collection STOP後の窓に、一回の通常rules-only生成8de2e9e8を新rules-generation-entry-v1/runtimeへsubmitした。受付は実RNG/入力成功/16資格の代用ではない。元完了イベントで結果・除外・actual cleanupを回収し、全16を凍結・資格化した後だけ既許可のd110対固定Console/Edax計64局・統計seed2026102405064へ進む。native64はまだ未発行であり、生成の実partial/失敗は補充しない。Q全goal/解析の追加承認/旧parentclose/human ACKをOのgateにしない。両strongest goal未達、全旧failed/NULL/UNKNOWN費・pause/seal/H128/default/foreign・decimal50GBは維持する。
+
+### 2026-10-24: new16 actual generation collision; native64 not admitted
+
+同8de2e9e8は実rules-only生成中に既知除外identityとの衝突で停止した。[元FAILED・collision・11/16・費用・回収](../research-data/othello/strong-ai-n96/retained-original-flip-new16-generation-collision-result-v1.json)。八つのtyped exclusion metadataは通常decoderで資格化され、family f12のplacement8でpriorExposure=trueとなった。rootsComplete11、root deficit5（f12..f16）、freshHistoryComplete=falseであり、全16のbook資格は成立しない。どの旧packageが一致したか、実rules request/RNG draw総数、native PID/start/bootは未発行字段のままNULLを保持する。collision digestだけをcompact結果へ残し、盤面・prefix/historyを本文へ出さない。
+
+これはguardが選択どおり実行した有限生成の失敗であり、pre-payload binding defectではない。一回の生成は消費済みで、再seed/refill/差替え・部分11の流用は行わない。新native64は未発行、全64 plannedはUNRUNのままである。ルール/Flip/modelの誤り、一般棋力、default変更の根拠にはせず、次のbook条件はこの実衝突を保持した別の研究判断になる。
+
+outer .448583278sはgeneration command .101704692sを内包し、合算しない。正常guardian returnはNULL、actual exception outcomeではdirectreap/process+handles/remaining[]/signal mask・persist完了を確認し、元disk pending/attemptedは別に保持した。rules Process自身のdirectReaped/exit-15/errors[]は保存されているが、native handles/remaining/正確identityの未発行字段を埋めない。実child不在と返却後にowned0B uv lockだけを除去してTMPを撤去した。指定holding rootの一回の保持点409600 allocated Bは非原子的なその時点の値で、global/peak/free creditではない。
+
+collectorはresult scalar containerを二回whole JSON decodeし、未使用canonicalKeyも一時decodeした範囲を正直に残した。generated roots/evidence/protocol body・linked old exclusion/model/Hを再開かず、canonical/ルール/RNG/NN/Search/game/validatorを再演していない。追加source監査/reviewer/A16/profile/管理役は作らず、既存issueとjudgementへ実STOPを配送する。全旧FAILED/NULL/UNKNOWN費・pause/seal/H128/default/foreign・decimal50GBと両goal未達を維持する。

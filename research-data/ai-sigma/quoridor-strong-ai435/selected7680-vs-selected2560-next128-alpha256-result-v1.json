@@ -1,0 +1,989 @@
+{
+  "status": "FINITE_DIRECT_ALPHA256_COMPLETE",
+  "originalGamesJob": "1a6c882b-45c2-4020-857d-1555d435b1b1",
+  "originalAnalysisJob": "117d2d16-0ef3-4921-9ae1-64b0549b0352",
+  "analysisManifest": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/common/saved-analysis-v3/operation/manifest.json",
+    "bytes": 7710,
+    "mode": "0644",
+    "sha256": "a10ecf5c6315a0320251d77aae7f3e7c1265ce1ef85ef70f1fa8446c36ad9e67"
+  },
+  "summary": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/common/saved-analysis-v3/data/summary.json",
+    "bytes": 37663,
+    "mode": "0644",
+    "sha256": "0cbaf5dc0a332f06a827f1ea3f52af43bb9dcb856974af8ac9754204ba6dab1b"
+  },
+  "report": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/common/saved-analysis-v3/data/report.md",
+    "bytes": 773,
+    "mode": "0644",
+    "sha256": "701cb2ce51972eac9a6e60f10c652a860b0be311c8b00046eb45782b991d9088"
+  },
+  "condition": {
+    "left": "BEST7680 value-only Alpha; matching policy inactive",
+    "right": "INITIAL/incumbent selected2560 value-only Alpha; matching policy inactive",
+    "declaredModels": [
+      {
+        "descriptor": {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/quoridor-strong435/coverage32768-value-selected-fit8192-v1/joint/best-model/manifest.json",
+          "bytes": 680,
+          "mode": "0600",
+          "sha256": "e7ebb4fa868a7ef38989325b1b7639a079bc303e1c4fb6d0ec4bee92657b8091"
+        },
+        "weights": {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/quoridor-strong435/coverage32768-value-selected-fit8192-v1/joint/best-model/weights.f32",
+          "bytes": 49284,
+          "mode": "0644",
+          "sha256": "aced4284229b1bf847aa7e7eb5a7fb0fa0d818e92ecf0b9db3dcb154a8a4a679"
+        },
+        "evaluator_sha256": "089fcb277345b38345732bec9424cba2f150ebfa321fbc83b89a951c616ec2ad"
+      },
+      {
+        "descriptor": {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/quoridor-strong435/coverage8192-value-selected-fit4096-v1/joint/best-model/manifest.json",
+          "bytes": 680,
+          "mode": "0600",
+          "sha256": "d6aaf0004b672e9fadec39de30bad972eacbabb7c5a35b28624b491d60d8c76d"
+        },
+        "weights": {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/quoridor-strong435/coverage8192-value-selected-fit4096-v1/joint/best-model/weights.f32",
+          "bytes": 49284,
+          "mode": "0644",
+          "sha256": "15a727b9f06ff116671d59c7c381c049a0aa21c2228bc461587fb52d7d4e8a30"
+        },
+        "evaluator_sha256": "fb7d124603ad6637e2395a919fe74909b6d76d933b26bd96849469be1239c7e2"
+      }
+    ],
+    "loadedIdentityQualification": "The maintained saved reader checked every actual observation against the original current native config/value identity and authority/deadline correspondence. This collector opens no model or game archive and does not mint a composite provider.",
+    "constructorOrExecutedISAUnemitted": null,
+    "arenaPlan": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/common/alpha-binding-v1/plan.json",
+      "bytes": 15917,
+      "mode": "0644",
+      "sha256": "5781f67fff2183bec7f86d05bd906a7f2313617e81e315e15ae8a025907e2e9d"
+    },
+    "book": {
+      "bytes": 115245,
+      "mode": "0644",
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/common/native-next128-book-v2/book.json",
+      "sha256": "99777cf618877ae5f7cd5bc734c6f4a107fab79445824a083632cf7ae96e8a1c"
+    },
+    "publication": {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/quoridor-strong-ai435/selected7680-next128-publication-result-v1.json",
+      "bytes": 10103,
+      "mode": "0644",
+      "sha256": "cdc58d4a353001dfd16cb34b2988308f7ff7613dff1988621b4c69e203c4b4d7"
+    },
+    "bookRankWindow": [5120, 5247],
+    "development": true,
+    "historicalGlobalExposureAndFitIndependence": "UNKNOWN",
+    "policiesActive": false,
+    "timeMs": 100,
+    "reserveMs": 5,
+    "maxPlies": 200,
+    "matchSeed": 4352026102440,
+    "serialOperations": 16,
+    "plannedSlots": 256,
+    "families": 128
+  },
+  "matchup": {
+    "matchup": 0,
+    "counts": {
+      "planned": 256,
+      "started": 256,
+      "goal_first": 100,
+      "goal_second": 154,
+      "true_draw": 2,
+      "forfeit": 0,
+      "cap": 0,
+      "late": 0,
+      "illegal": 0,
+      "error": 0,
+      "unfinished": 0,
+      "unknown": 0,
+      "missing": 0
+    },
+    "complete_colour_pairs": 128,
+    "complete_pair_mean": 0.39453125,
+    "planned_game_missingness_bounds": [0.39453125, 0.39453125],
+    "empty_family_resamples": 0,
+    "conditional_interval_unavailable_reason": null,
+    "conditional_complete_pair_interval": [0.34375, 0.447265625],
+    "family_resampling": {
+      "method": "shared_pcg64_linear",
+      "family_order": [
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
+        25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47,
+        48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70,
+        71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93,
+        94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112,
+        113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127
+      ],
+      "index_shape": [10000, 128],
+      "index_dtype": "<u8",
+      "index_sha256": "ebec14d43fb16a96439a174e97bc4c26aaa56a7cb5436802721f3c3fcc8850b6",
+      "numpy_version": "2.5.3",
+      "all_planned_pairs_complete": true,
+      "interpretation": "ONE single contrast conditional descriptive95; no second-contrast Bonferroni allocation, IID/population/Elo or simultaneous superiority claim."
+    }
+  },
+  "savedNativeCosts": [
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-000/operation/manifest.json",
+        "sha256": "f91193dac0d4a4cccb2d49eafe6b5d2f7a9c979d5c68c030e544535fe0e1cee5",
+        "bytes": 8274,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 59.894004638,
+      "encoding_sync_verify_seconds": 0.084554177,
+      "canonical_compressed_bytes": 465314,
+      "canonical_raw_bytes": 2911863,
+      "canonical_allocated_bytes": 466944,
+      "compression_ratio_raw_over_compressed": 6.257845239988481,
+      "native_peak_rss_observation_bytes": 196677632,
+      "evaluator_setup_seconds": 0.000575364,
+      "backend_setup_seconds": 9.100000000000001e-8,
+      "backend_cleanup_seconds": 0.005555835,
+      "thinking_seconds": 33.044964739,
+      "classification_seconds": 0,
+      "scope": "nested source spans, not additive all-work fees; continuous working set/worker UTC STOP UNKNOWN"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-001/operation/manifest.json",
+        "sha256": "588b2d4f55ef69b008d070390ba425b3c89cd86336299875a21a9a04b541ec8d",
+        "bytes": 8284,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 68.310645021,
+      "encoding_sync_verify_seconds": 0.163033821,
+      "canonical_compressed_bytes": 519437,
+      "canonical_raw_bytes": 3271459,
+      "canonical_allocated_bytes": 520192,
+      "compression_ratio_raw_over_compressed": 6.298086197171168,
+      "native_peak_rss_observation_bytes": 198377472,
+      "evaluator_setup_seconds": 0.000379334,
+      "backend_setup_seconds": 8e-8,
+      "backend_cleanup_seconds": 0.007101414,
+      "thinking_seconds": 37.415019417,
+      "classification_seconds": 0,
+      "scope": "nested source spans, not additive all-work fees; continuous working set/worker UTC STOP UNKNOWN"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-002/operation/manifest.json",
+        "sha256": "879d28d13088df09574b7562141943073fd62bfc5e7938dc93a0a1a97e014545",
+        "bytes": 8284,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 72.579832306,
+      "encoding_sync_verify_seconds": 0.109546531,
+      "canonical_compressed_bytes": 554866,
+      "canonical_raw_bytes": 3486832,
+      "canonical_allocated_bytes": 557056,
+      "compression_ratio_raw_over_compressed": 6.284097421719839,
+      "native_peak_rss_observation_bytes": 199127040,
+      "evaluator_setup_seconds": 0.000365141,
+      "backend_setup_seconds": 6.1e-8,
+      "backend_cleanup_seconds": 0.006201065,
+      "thinking_seconds": 42.684749112,
+      "classification_seconds": 0,
+      "scope": "nested source spans, not additive all-work fees; continuous working set/worker UTC STOP UNKNOWN"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-003/operation/manifest.json",
+        "sha256": "634d00fbd392d08a7c345814afc0ca11200422095aec0f541889c32a86602b2f",
+        "bytes": 8284,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 64.325613646,
+      "encoding_sync_verify_seconds": 0.095756654,
+      "canonical_compressed_bytes": 489645,
+      "canonical_raw_bytes": 3048220,
+      "canonical_allocated_bytes": 491520,
+      "compression_ratio_raw_over_compressed": 6.2253673579838456,
+      "native_peak_rss_observation_bytes": 197062656,
+      "evaluator_setup_seconds": 0.000390454,
+      "backend_setup_seconds": 8.3e-8,
+      "backend_cleanup_seconds": 0.005876997,
+      "thinking_seconds": 37.2367835,
+      "classification_seconds": 0,
+      "scope": "nested source spans, not additive all-work fees; continuous working set/worker UTC STOP UNKNOWN"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-004/operation/manifest.json",
+        "sha256": "2a12c6d3cfa24435b69a3f5fb28f017fe6d4b003bc7443d623f507277a7e9b93",
+        "bytes": 8284,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 74.794324361,
+      "encoding_sync_verify_seconds": 0.121648486,
+      "canonical_compressed_bytes": 581199,
+      "canonical_raw_bytes": 3666550,
+      "canonical_allocated_bytes": 581632,
+      "compression_ratio_raw_over_compressed": 6.308596539223227,
+      "native_peak_rss_observation_bytes": 200531968,
+      "evaluator_setup_seconds": 0.000358759,
+      "backend_setup_seconds": 6.8e-8,
+      "backend_cleanup_seconds": 0.013609123,
+      "thinking_seconds": 43.303427036,
+      "classification_seconds": 0,
+      "scope": "nested source spans, not additive all-work fees; continuous working set/worker UTC STOP UNKNOWN"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-005/operation/manifest.json",
+        "sha256": "e5e17c7ba667a37a298fc7eb224ac6cf5e5b996ea0887ffe8d21f152017b0ea5",
+        "bytes": 8284,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 67.006110542,
+      "encoding_sync_verify_seconds": 0.107134168,
+      "canonical_compressed_bytes": 519076,
+      "canonical_raw_bytes": 3289839,
+      "canonical_allocated_bytes": 520192,
+      "compression_ratio_raw_over_compressed": 6.337875378557283,
+      "native_peak_rss_observation_bytes": 198782976,
+      "evaluator_setup_seconds": 0.00040697499999999996,
+      "backend_setup_seconds": 1.75e-7,
+      "backend_cleanup_seconds": 0.006145884,
+      "thinking_seconds": 38.936376147,
+      "classification_seconds": 0,
+      "scope": "nested source spans, not additive all-work fees; continuous working set/worker UTC STOP UNKNOWN"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-006/operation/manifest.json",
+        "sha256": "239bf9414272c60f1dd8ee259a68952ae394e65744a98e4b1bacb189635d246d",
+        "bytes": 8296,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 76.467795641,
+      "encoding_sync_verify_seconds": 0.104259776,
+      "canonical_compressed_bytes": 582153,
+      "canonical_raw_bytes": 3667344,
+      "canonical_allocated_bytes": 585728,
+      "compression_ratio_raw_over_compressed": 6.29962226425012,
+      "native_peak_rss_observation_bytes": 200069120,
+      "evaluator_setup_seconds": 0.000359152,
+      "backend_setup_seconds": 7.9e-8,
+      "backend_cleanup_seconds": 0.006769255,
+      "thinking_seconds": 41.908687735,
+      "classification_seconds": 0,
+      "scope": "nested source spans, not additive all-work fees; continuous working set/worker UTC STOP UNKNOWN"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-007/operation/manifest.json",
+        "sha256": "5c794c535a4f43ef0ad63a774d6df63e02c9c28127d8be6d34c336db07c58a5e",
+        "bytes": 8300,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 73.226261685,
+      "encoding_sync_verify_seconds": 0.105906588,
+      "canonical_compressed_bytes": 566441,
+      "canonical_raw_bytes": 3568753,
+      "canonical_allocated_bytes": 569344,
+      "compression_ratio_raw_over_compressed": 6.300308416940158,
+      "native_peak_rss_observation_bytes": 199684096,
+      "evaluator_setup_seconds": 0.000475937,
+      "backend_setup_seconds": 7.1e-8,
+      "backend_cleanup_seconds": 0.005701421,
+      "thinking_seconds": 41.856106968,
+      "classification_seconds": 0,
+      "scope": "nested source spans, not additive all-work fees; continuous working set/worker UTC STOP UNKNOWN"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-008/operation/manifest.json",
+        "sha256": "34f8bb6536f28e7624dd2a05975cb5debe7ee22b8040e673f558cb12072ac992",
+        "bytes": 8300,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 67.974843574,
+      "encoding_sync_verify_seconds": 0.094663247,
+      "canonical_compressed_bytes": 515887,
+      "canonical_raw_bytes": 3213374,
+      "canonical_allocated_bytes": 516096,
+      "compression_ratio_raw_over_compressed": 6.228833058402325,
+      "native_peak_rss_observation_bytes": 197976064,
+      "evaluator_setup_seconds": 0.000358107,
+      "backend_setup_seconds": 5.4e-8,
+      "backend_cleanup_seconds": 0.005724951000000001,
+      "thinking_seconds": 39.491734701,
+      "classification_seconds": 0,
+      "scope": "nested source spans, not additive all-work fees; continuous working set/worker UTC STOP UNKNOWN"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-009/operation/manifest.json",
+        "sha256": "facf3caff9b0c5b24796492282840bf6b30a4ac55258522f54f31b06415f662a",
+        "bytes": 8301,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 59.949958893,
+      "encoding_sync_verify_seconds": 0.083969324,
+      "canonical_compressed_bytes": 467939,
+      "canonical_raw_bytes": 2919542,
+      "canonical_allocated_bytes": 471040,
+      "compression_ratio_raw_over_compressed": 6.239150829488459,
+      "native_peak_rss_observation_bytes": 196726784,
+      "evaluator_setup_seconds": 0.00035844800000000003,
+      "backend_setup_seconds": 1.13e-7,
+      "backend_cleanup_seconds": 0.005399974,
+      "thinking_seconds": 36.195918712,
+      "classification_seconds": 0,
+      "scope": "nested source spans, not additive all-work fees; continuous working set/worker UTC STOP UNKNOWN"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-010/operation/manifest.json",
+        "sha256": "adb93e9f037ce9036a1a013d3fb1bd5070a1aff989f2ccd60b7f45519dc26dac",
+        "bytes": 8301,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 71.294973914,
+      "encoding_sync_verify_seconds": 0.100614631,
+      "canonical_compressed_bytes": 546547,
+      "canonical_raw_bytes": 3437039,
+      "canonical_allocated_bytes": 548864,
+      "compression_ratio_raw_over_compressed": 6.288643062719217,
+      "native_peak_rss_observation_bytes": 199237632,
+      "evaluator_setup_seconds": 0.000352934,
+      "backend_setup_seconds": 5.5e-8,
+      "backend_cleanup_seconds": 0.005506011,
+      "thinking_seconds": 40.423696573,
+      "classification_seconds": 0,
+      "scope": "nested source spans, not additive all-work fees; continuous working set/worker UTC STOP UNKNOWN"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-011/operation/manifest.json",
+        "sha256": "26ce0aad7a34236df8f834e1d91fcb0cefc4c4b33d61ec9bdfa8a52101d8ab96",
+        "bytes": 8300,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 65.204460852,
+      "encoding_sync_verify_seconds": 0.105384442,
+      "canonical_compressed_bytes": 500432,
+      "canonical_raw_bytes": 3148368,
+      "canonical_allocated_bytes": 503808,
+      "compression_ratio_raw_over_compressed": 6.291300316526521,
+      "native_peak_rss_observation_bytes": 197902336,
+      "evaluator_setup_seconds": 0.000364609,
+      "backend_setup_seconds": 5.4e-8,
+      "backend_cleanup_seconds": 0.005720249,
+      "thinking_seconds": 36.9355234,
+      "classification_seconds": 0,
+      "scope": "nested source spans, not additive all-work fees; continuous working set/worker UTC STOP UNKNOWN"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-012/operation/manifest.json",
+        "sha256": "e3c1cc1321bd3b9e0b5af988c07beeff7adc6cf36e42531da12d3352ead9301b",
+        "bytes": 8301,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 65.038968832,
+      "encoding_sync_verify_seconds": 0.123793844,
+      "canonical_compressed_bytes": 496357,
+      "canonical_raw_bytes": 3087622,
+      "canonical_allocated_bytes": 499712,
+      "compression_ratio_raw_over_compressed": 6.220567051537502,
+      "native_peak_rss_observation_bytes": 197013504,
+      "evaluator_setup_seconds": 0.000392124,
+      "backend_setup_seconds": 8.199999999999999e-8,
+      "backend_cleanup_seconds": 0.006021651,
+      "thinking_seconds": 37.526470247,
+      "classification_seconds": 0,
+      "scope": "nested source spans, not additive all-work fees; continuous working set/worker UTC STOP UNKNOWN"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-013/operation/manifest.json",
+        "sha256": "36f570c7ce52375f57ac816c4bb1cf45fa82e104c4342f2e3159f9223ab509a4",
+        "bytes": 8301,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 63.177073223,
+      "encoding_sync_verify_seconds": 0.086384359,
+      "canonical_compressed_bytes": 489315,
+      "canonical_raw_bytes": 3085611,
+      "canonical_allocated_bytes": 491520,
+      "compression_ratio_raw_over_compressed": 6.305980809907728,
+      "native_peak_rss_observation_bytes": 197341184,
+      "evaluator_setup_seconds": 0.000405372,
+      "backend_setup_seconds": 2.1300000000000001e-7,
+      "backend_cleanup_seconds": 0.005796731,
+      "thinking_seconds": 37.067589334,
+      "classification_seconds": 0,
+      "scope": "nested source spans, not additive all-work fees; continuous working set/worker UTC STOP UNKNOWN"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-014/operation/manifest.json",
+        "sha256": "662041261d83d8311b9baab9235df0e3a8097809ea11ca093bb340998682dec1",
+        "bytes": 8302,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 63.67235667,
+      "encoding_sync_verify_seconds": 0.107019962,
+      "canonical_compressed_bytes": 486644,
+      "canonical_raw_bytes": 3027007,
+      "canonical_allocated_bytes": 487424,
+      "compression_ratio_raw_over_compressed": 6.2201671036733215,
+      "native_peak_rss_observation_bytes": 197087232,
+      "evaluator_setup_seconds": 0.00036440400000000003,
+      "backend_setup_seconds": 6.3e-8,
+      "backend_cleanup_seconds": 0.005721308,
+      "thinking_seconds": 37.928133511,
+      "classification_seconds": 0,
+      "scope": "nested source spans, not additive all-work fees; continuous working set/worker UTC STOP UNKNOWN"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-015/operation/manifest.json",
+        "sha256": "ed87408cb63ca0005a308a534c58a03967d21548cd74545853034e505b32347e",
+        "bytes": 8301,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 72.713131125,
+      "encoding_sync_verify_seconds": 0.110880005,
+      "canonical_compressed_bytes": 555302,
+      "canonical_raw_bytes": 3502519,
+      "canonical_allocated_bytes": 557056,
+      "compression_ratio_raw_over_compressed": 6.307412903249043,
+      "native_peak_rss_observation_bytes": 199430144,
+      "evaluator_setup_seconds": 0.000367851,
+      "backend_setup_seconds": 5.6e-8,
+      "backend_cleanup_seconds": 0.006016132,
+      "thinking_seconds": 39.98334896,
+      "classification_seconds": 0,
+      "scope": "nested source spans, not additive all-work fees; continuous working set/worker UTC STOP UNKNOWN"
+    }
+  ],
+  "operationProvenance": [
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-000/operation/manifest.json",
+        "sha256": "f91193dac0d4a4cccb2d49eafe6b5d2f7a9c979d5c68c030e544535fe0e1cee5",
+        "bytes": 8274,
+        "mode": "0644"
+      },
+      "producer_build": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-next128-affected-build-v1/operation/manifest.json",
+        "bytes": 47321,
+        "mode": "0644",
+        "sha256": "f38b81a1f076ea70e916e77cd4f1acb2043feb527eb2e245ffb2e5e7f193a5c6"
+      },
+      "status": "PASS",
+      "primary": null,
+      "secondary_count": 0,
+      "cleanup_complete": true,
+      "remaining": [],
+      "command_wall_seconds": [60.09238128492143],
+      "cost_scope": "original command walls only; nested/controller/admin/continuous peaks not manufactured"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-001/operation/manifest.json",
+        "sha256": "588b2d4f55ef69b008d070390ba425b3c89cd86336299875a21a9a04b541ec8d",
+        "bytes": 8284,
+        "mode": "0644"
+      },
+      "producer_build": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-next128-affected-build-v1/operation/manifest.json",
+        "bytes": 47321,
+        "mode": "0644",
+        "sha256": "f38b81a1f076ea70e916e77cd4f1acb2043feb527eb2e245ffb2e5e7f193a5c6"
+      },
+      "status": "PASS",
+      "primary": null,
+      "secondary_count": 0,
+      "cleanup_complete": true,
+      "remaining": [],
+      "command_wall_seconds": [68.59368997905403],
+      "cost_scope": "original command walls only; nested/controller/admin/continuous peaks not manufactured"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-002/operation/manifest.json",
+        "sha256": "879d28d13088df09574b7562141943073fd62bfc5e7938dc93a0a1a97e014545",
+        "bytes": 8284,
+        "mode": "0644"
+      },
+      "producer_build": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-next128-affected-build-v1/operation/manifest.json",
+        "bytes": 47321,
+        "mode": "0644",
+        "sha256": "f38b81a1f076ea70e916e77cd4f1acb2043feb527eb2e245ffb2e5e7f193a5c6"
+      },
+      "status": "PASS",
+      "primary": null,
+      "secondary_count": 0,
+      "cleanup_complete": true,
+      "remaining": [],
+      "command_wall_seconds": [72.82378840097226],
+      "cost_scope": "original command walls only; nested/controller/admin/continuous peaks not manufactured"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-003/operation/manifest.json",
+        "sha256": "634d00fbd392d08a7c345814afc0ca11200422095aec0f541889c32a86602b2f",
+        "bytes": 8284,
+        "mode": "0644"
+      },
+      "producer_build": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-next128-affected-build-v1/operation/manifest.json",
+        "bytes": 47321,
+        "mode": "0644",
+        "sha256": "f38b81a1f076ea70e916e77cd4f1acb2043feb527eb2e245ffb2e5e7f193a5c6"
+      },
+      "status": "PASS",
+      "primary": null,
+      "secondary_count": 0,
+      "cleanup_complete": true,
+      "remaining": [],
+      "command_wall_seconds": [64.54650776297785],
+      "cost_scope": "original command walls only; nested/controller/admin/continuous peaks not manufactured"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-004/operation/manifest.json",
+        "sha256": "2a12c6d3cfa24435b69a3f5fb28f017fe6d4b003bc7443d623f507277a7e9b93",
+        "bytes": 8284,
+        "mode": "0644"
+      },
+      "producer_build": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-next128-affected-build-v1/operation/manifest.json",
+        "bytes": 47321,
+        "mode": "0644",
+        "sha256": "f38b81a1f076ea70e916e77cd4f1acb2043feb527eb2e245ffb2e5e7f193a5c6"
+      },
+      "status": "PASS",
+      "primary": null,
+      "secondary_count": 0,
+      "cleanup_complete": true,
+      "remaining": [],
+      "command_wall_seconds": [75.06384195899591],
+      "cost_scope": "original command walls only; nested/controller/admin/continuous peaks not manufactured"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-005/operation/manifest.json",
+        "sha256": "e5e17c7ba667a37a298fc7eb224ac6cf5e5b996ea0887ffe8d21f152017b0ea5",
+        "bytes": 8284,
+        "mode": "0644"
+      },
+      "producer_build": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-next128-affected-build-v1/operation/manifest.json",
+        "bytes": 47321,
+        "mode": "0644",
+        "sha256": "f38b81a1f076ea70e916e77cd4f1acb2043feb527eb2e245ffb2e5e7f193a5c6"
+      },
+      "status": "PASS",
+      "primary": null,
+      "secondary_count": 0,
+      "cleanup_complete": true,
+      "remaining": [],
+      "command_wall_seconds": [67.26746496499982],
+      "cost_scope": "original command walls only; nested/controller/admin/continuous peaks not manufactured"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-006/operation/manifest.json",
+        "sha256": "239bf9414272c60f1dd8ee259a68952ae394e65744a98e4b1bacb189635d246d",
+        "bytes": 8296,
+        "mode": "0644"
+      },
+      "producer_build": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-next128-affected-build-v1/operation/manifest.json",
+        "bytes": 47321,
+        "mode": "0644",
+        "sha256": "f38b81a1f076ea70e916e77cd4f1acb2043feb527eb2e245ffb2e5e7f193a5c6"
+      },
+      "status": "PASS",
+      "primary": null,
+      "secondary_count": 0,
+      "cleanup_complete": true,
+      "remaining": [],
+      "command_wall_seconds": [76.70158081501722],
+      "cost_scope": "original command walls only; nested/controller/admin/continuous peaks not manufactured"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-007/operation/manifest.json",
+        "sha256": "5c794c535a4f43ef0ad63a774d6df63e02c9c28127d8be6d34c336db07c58a5e",
+        "bytes": 8300,
+        "mode": "0644"
+      },
+      "producer_build": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-next128-affected-build-v1/operation/manifest.json",
+        "bytes": 47321,
+        "mode": "0644",
+        "sha256": "f38b81a1f076ea70e916e77cd4f1acb2043feb527eb2e245ffb2e5e7f193a5c6"
+      },
+      "status": "PASS",
+      "primary": null,
+      "secondary_count": 0,
+      "cleanup_complete": true,
+      "remaining": [],
+      "command_wall_seconds": [73.47578948398586],
+      "cost_scope": "original command walls only; nested/controller/admin/continuous peaks not manufactured"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-008/operation/manifest.json",
+        "sha256": "34f8bb6536f28e7624dd2a05975cb5debe7ee22b8040e673f558cb12072ac992",
+        "bytes": 8300,
+        "mode": "0644"
+      },
+      "producer_build": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-next128-affected-build-v1/operation/manifest.json",
+        "bytes": 47321,
+        "mode": "0644",
+        "sha256": "f38b81a1f076ea70e916e77cd4f1acb2043feb527eb2e245ffb2e5e7f193a5c6"
+      },
+      "status": "PASS",
+      "primary": null,
+      "secondary_count": 0,
+      "cleanup_complete": true,
+      "remaining": [],
+      "command_wall_seconds": [68.21099432604387],
+      "cost_scope": "original command walls only; nested/controller/admin/continuous peaks not manufactured"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-009/operation/manifest.json",
+        "sha256": "facf3caff9b0c5b24796492282840bf6b30a4ac55258522f54f31b06415f662a",
+        "bytes": 8301,
+        "mode": "0644"
+      },
+      "producer_build": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-next128-affected-build-v1/operation/manifest.json",
+        "bytes": 47321,
+        "mode": "0644",
+        "sha256": "f38b81a1f076ea70e916e77cd4f1acb2043feb527eb2e245ffb2e5e7f193a5c6"
+      },
+      "status": "PASS",
+      "primary": null,
+      "secondary_count": 0,
+      "cleanup_complete": true,
+      "remaining": [],
+      "command_wall_seconds": [60.169057811028324],
+      "cost_scope": "original command walls only; nested/controller/admin/continuous peaks not manufactured"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-010/operation/manifest.json",
+        "sha256": "adb93e9f037ce9036a1a013d3fb1bd5070a1aff989f2ccd60b7f45519dc26dac",
+        "bytes": 8301,
+        "mode": "0644"
+      },
+      "producer_build": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-next128-affected-build-v1/operation/manifest.json",
+        "bytes": 47321,
+        "mode": "0644",
+        "sha256": "f38b81a1f076ea70e916e77cd4f1acb2043feb527eb2e245ffb2e5e7f193a5c6"
+      },
+      "status": "PASS",
+      "primary": null,
+      "secondary_count": 0,
+      "cleanup_complete": true,
+      "remaining": [],
+      "command_wall_seconds": [71.53323568601627],
+      "cost_scope": "original command walls only; nested/controller/admin/continuous peaks not manufactured"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-011/operation/manifest.json",
+        "sha256": "26ce0aad7a34236df8f834e1d91fcb0cefc4c4b33d61ec9bdfa8a52101d8ab96",
+        "bytes": 8300,
+        "mode": "0644"
+      },
+      "producer_build": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-next128-affected-build-v1/operation/manifest.json",
+        "bytes": 47321,
+        "mode": "0644",
+        "sha256": "f38b81a1f076ea70e916e77cd4f1acb2043feb527eb2e245ffb2e5e7f193a5c6"
+      },
+      "status": "PASS",
+      "primary": null,
+      "secondary_count": 0,
+      "cleanup_complete": true,
+      "remaining": [],
+      "command_wall_seconds": [65.4342602059478],
+      "cost_scope": "original command walls only; nested/controller/admin/continuous peaks not manufactured"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-012/operation/manifest.json",
+        "sha256": "e3c1cc1321bd3b9e0b5af988c07beeff7adc6cf36e42531da12d3352ead9301b",
+        "bytes": 8301,
+        "mode": "0644"
+      },
+      "producer_build": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-next128-affected-build-v1/operation/manifest.json",
+        "bytes": 47321,
+        "mode": "0644",
+        "sha256": "f38b81a1f076ea70e916e77cd4f1acb2043feb527eb2e245ffb2e5e7f193a5c6"
+      },
+      "status": "PASS",
+      "primary": null,
+      "secondary_count": 0,
+      "cleanup_complete": true,
+      "remaining": [],
+      "command_wall_seconds": [65.28121417795774],
+      "cost_scope": "original command walls only; nested/controller/admin/continuous peaks not manufactured"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-013/operation/manifest.json",
+        "sha256": "36f570c7ce52375f57ac816c4bb1cf45fa82e104c4342f2e3159f9223ab509a4",
+        "bytes": 8301,
+        "mode": "0644"
+      },
+      "producer_build": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-next128-affected-build-v1/operation/manifest.json",
+        "bytes": 47321,
+        "mode": "0644",
+        "sha256": "f38b81a1f076ea70e916e77cd4f1acb2043feb527eb2e245ffb2e5e7f193a5c6"
+      },
+      "status": "PASS",
+      "primary": null,
+      "secondary_count": 0,
+      "cleanup_complete": true,
+      "remaining": [],
+      "command_wall_seconds": [63.40672793495469],
+      "cost_scope": "original command walls only; nested/controller/admin/continuous peaks not manufactured"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-014/operation/manifest.json",
+        "sha256": "662041261d83d8311b9baab9235df0e3a8097809ea11ca093bb340998682dec1",
+        "bytes": 8302,
+        "mode": "0644"
+      },
+      "producer_build": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-next128-affected-build-v1/operation/manifest.json",
+        "bytes": 47321,
+        "mode": "0644",
+        "sha256": "f38b81a1f076ea70e916e77cd4f1acb2043feb527eb2e245ffb2e5e7f193a5c6"
+      },
+      "status": "PASS",
+      "primary": null,
+      "secondary_count": 0,
+      "cleanup_complete": true,
+      "remaining": [],
+      "command_wall_seconds": [63.906866281991825],
+      "cost_scope": "original command walls only; nested/controller/admin/continuous peaks not manufactured"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-015/operation/manifest.json",
+        "sha256": "ed87408cb63ca0005a308a534c58a03967d21548cd74545853034e505b32347e",
+        "bytes": 8301,
+        "mode": "0644"
+      },
+      "producer_build": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-next128-affected-build-v1/operation/manifest.json",
+        "bytes": 47321,
+        "mode": "0644",
+        "sha256": "f38b81a1f076ea70e916e77cd4f1acb2043feb527eb2e245ffb2e5e7f193a5c6"
+      },
+      "status": "PASS",
+      "primary": null,
+      "secondary_count": 0,
+      "cleanup_complete": true,
+      "remaining": [],
+      "command_wall_seconds": [72.98434160707984],
+      "cost_scope": "original command walls only; nested/controller/admin/continuous peaks not manufactured"
+    }
+  ],
+  "analysisErrors": [],
+  "requestedDiagnosticBranch": false,
+  "unusedLegacyStrata": "The existing analysis owner also emitted its built-in descriptive state_strata. They are retained in raw summary, not used/interpreted for this finite decision; no additional census or outcome-conditioned rerun was issued.",
+  "genericOwnerSimultaneousTextRetainedOnlyByref": "Bonferroni nominal alpha allocation across the predeclared contrasts; conditional approximate bootstrap, no IID/population coverage guarantee",
+  "interpretation": "On this fixed named-scope DEVELOPMENT Alpha condition, BEST7680 scored100W2D154L/0.39453125 and did not outperform its INITIAL/incumbent2560. Conditional family95 is descriptive, not IID/population/general strength, data-only/teacher/policy cause, global convergence, equivalence/no-harm or default adoption.",
+  "actualCleanup": {
+    "originalAnalysisOuter": {
+      "job_id": "117d2d16-0ef3-4921-9ae1-64b0549b0352",
+      "outcome": "succeeded",
+      "error": null,
+      "error_notes": [],
+      "exit_code": 0,
+      "finished_at": "2026-10-24T23:08:19.343867+00:00",
+      "wall_seconds": 7.273406272986904,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+      "cleanup_complete": true,
+      "cleanup_errors": [],
+      "log_bytes_seen": 0,
+      "log_bytes_retained": 0
+    },
+    "analysis": {
+      "command": [
+        "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+        "-B",
+        "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+        "arena-analysis",
+        "--experiment",
+        "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/common/saved-analysis-v3/experiment.json",
+        "--experiment-sha256",
+        "3a8ed5d14acd00c453dafc3a2c109267c08494fb18bcf5f72c8239a5dae35a95"
+      ],
+      "status": "complete",
+      "child": {
+        "pid": 1636887,
+        "start_ticks": "93163986",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "cpu_plan": {
+        "management": [18],
+        "commands": {
+          "run": [12],
+          "test": [12]
+        },
+        "allocation": [12, 18],
+        "resource_CPUs": 2,
+        "worker_CPUs": 1,
+        "library_threads": 1
+      },
+      "command_cpu_scope": "run",
+      "log_bytes_seen": 134,
+      "scope": "session group and periodically recorded descendants; no daemon adoption",
+      "exit_code": 0,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "cleanup_complete": true,
+      "log_bytes_retained": 134,
+      "wall_seconds": 0.8615483971079811,
+      "handle_closes_attempted": ["selector_close", "pipe_close", "pidfd_close", "log_close"],
+      "primary_error": null,
+      "process_cleanup_complete": true,
+      "handle_closes_complete": true,
+      "signal_mask_restoration": "completed",
+      "final_record_persist": "completed",
+      "finalization_errors": []
+    },
+    "finalizer": {
+      "command": [
+        "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+        "-B",
+        "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+        "finalize",
+        "--operation",
+        "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/common/saved-analysis-v3/operation",
+        "--job-result",
+        "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/common/saved-analysis-v3/runtime/result.json",
+        "--sha256",
+        "ba8e3c11767a670a903e20f639d66f76d7874280dceb9d542d71352c13af7946"
+      ],
+      "status": "complete",
+      "child": {
+        "pid": 1640648,
+        "start_ticks": "93190878",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "cpu_plan": {
+        "management": [18],
+        "commands": {
+          "finalize": [18]
+        },
+        "allocation": [18],
+        "resource_CPUs": 1,
+        "worker_CPUs": 0,
+        "library_threads": 1
+      },
+      "command_cpu_scope": "finalize",
+      "log_bytes_seen": 0,
+      "scope": "session group and periodically recorded descendants; no daemon adoption",
+      "exit_code": 0,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "cleanup_complete": true,
+      "log_bytes_retained": 0,
+      "wall_seconds": 0.22186062100809067,
+      "handle_closes_attempted": ["selector_close", "pipe_close", "pidfd_close", "log_close"],
+      "primary_error": null,
+      "process_cleanup_complete": true,
+      "handle_closes_complete": true,
+      "signal_mask_restoration": "completed",
+      "final_record_persist": "completed",
+      "finalization_errors": []
+    },
+    "remaining": [],
+    "sourceLeases": [],
+    "TMPRemoved": true,
+    "actualKnownChildrenAbsent": true,
+    "diskPendingAttemptedSeparate": true
+  },
+  "costs": {
+    "originalGameOuterSeconds": 1136.4994067410007,
+    "originalNativeCommandSumSeconds": 1089.4917426819447,
+    "analysisOuterSeconds": 7.273406272986904,
+    "analysisCommandSeconds": 0.8615483971079811,
+    "finalizerSeconds": 0.22186062100809067,
+    "nestedSpansNotAdded": true,
+    "globalFullFeesAndContinuousPeak": null
+  },
+  "storagePoint": {
+    "observed_at": "2026-10-24T23:12:41.867069+00:00",
+    "roots": [
+      "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1"
+    ],
+    "allocated_B": 15519744,
+    "storage_budget_B": 2147483648,
+    "FS_free_B": 473808371712,
+    "global_actual_B": null,
+    "scope": "Current directed retention after manifest publication/cleanup, before final INCOMPLETE removal; not historical peak, forecast support, or a whole-global inventory. Serial TMP is counted only if retained now. This receipt is published after the observation."
+  },
+  "priorFailures": {
+    "notStarted78a": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/common/saved-analysis-v1/runtime/result.json",
+      "bytes": 277,
+      "mode": "0600",
+      "sha256": "24026224d2ea25d84afc159b1f337f15955797232acc84110148b55b430d2da4"
+    },
+    "preOwnershipAff5": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/common/saved-analysis-v2/runtime/result.json",
+      "bytes": 526,
+      "mode": "0600",
+      "sha256": "65681260c73792740087c5f3bb4505b02975a933d5686736d9efa470fd5293a4"
+    },
+    "metadataHelper": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/common/saved-analysis-v2/preparation-environment-failure.json",
+      "bytes": 843,
+      "mode": "0644",
+      "sha256": "d8bb515c51f8e76222abfbc28dfaf1f91e17a42568a32c3e7f5fb850423cc89f"
+    },
+    "allImmutable": true,
+    "noRefundRefinalizeOrReplay": true
+  },
+  "collection": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/common/saved-analysis-v3/completion-117d2d16/collection-STOP.json",
+    "bytes": 6037,
+    "mode": "0644",
+    "sha256": "56210a6c11b7391b2ba378d6a4526eef099e095c22d17c5a7bfb70373abf8bf0"
+  },
+  "newModelNativeSearchGameTeacherFit": 0,
+  "newBootstrapOrValidatorExecutionByCollector": 0,
+  "allPausesSealsH128DefaultsForeign50GBUnchanged": true,
+  "strongestGoalsComplete": false
+}

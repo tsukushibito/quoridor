@@ -1,0 +1,205 @@
+{
+  "status": "FAILED_FINITE_GENERATION_COLLISION_NO_CONTEST_ADMISSION",
+  "issue": "quoridor-n96.1",
+  "originalJob": "8de2e9e8-d794-4660-9f47-b3b8b89343b0",
+  "originalResult": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/rules-generation-entry-v1/runtime/result.json",
+    "bytes": 525,
+    "mode": "0600",
+    "sha256": "0dadca7833626daf5e62d344dcbe743a66098abc41d22bf44c7796414495f1f8"
+  },
+  "originalConfig": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/rules-generation-entry-v1/generation-config.json",
+    "bytes": 15929,
+    "mode": "0644",
+    "sha256": "9e399385b8cfd6978ea62d2e85adc9800a28877f1f404905e3ce8bdaf5520731"
+  },
+  "originalGenerationResult": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/generation/result.json",
+    "bytes": 3048,
+    "mode": "0644",
+    "sha256": "70504740ee72d8111cfcd75dd1b52b2cf973f1cc4a94c572bb1e9a175535ec98"
+  },
+  "sourcePacket": {
+    "path": "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-selective-reference-n96/packed-original-flip-native64-source-v1/packet-refs.json",
+    "bytes": 4399,
+    "mode": "0644",
+    "sha256": "fbea5fabe979d8348b5a246ae0b4c5bdf6b7ecdd077f022693900364beb945bc"
+  },
+  "condition": {
+    "namespace": "development/native64-original-flip-20261024",
+    "seeds": [
+      2026102405001, 2026102405002, 2026102405003, 2026102405004, 2026102405005, 2026102405006,
+      2026102405007, 2026102405008, 2026102405009, 2026102405010, 2026102405011, 2026102405012,
+      2026102405013, 2026102405014, 2026102405015, 2026102405016
+    ],
+    "targetPlacements": 16,
+    "afterMandatoryPass": true,
+    "maxPassInclusiveActionsPerFamily": 128,
+    "declaredExclusionPackages": 8,
+    "sourcePurpose": "Qualified immutable550b GameState new/status/play/pass only; no Search/model"
+  },
+  "observed": {
+    "rootsPlanned": 16,
+    "rootsComplete": 11,
+    "rootDeficitCount": 5,
+    "rootDeficits": [
+      "development/native64-original-flip-20261024/f12/p16",
+      "development/native64-original-flip-20261024/f13/p16",
+      "development/native64-original-flip-20261024/f14/p16",
+      "development/native64-original-flip-20261024/f15/p16",
+      "development/native64-original-flip-20261024/f16/p16"
+    ],
+    "collision": {
+      "canonicalSha256": "d3c2c186a7b68fe97096463f22eb6bb01ab7b4087934e134e4ac37165a4eaaf6",
+      "family": "development/native64-original-flip-20261024/f12",
+      "placement": 8,
+      "priorExposure": true,
+      "priorFamily": null
+    },
+    "endpointMetadataChecked": true,
+    "freshHistoryComplete": false,
+    "failure": {
+      "kind": "GenerationStop",
+      "message": "whole-family canonical collision; no refill"
+    },
+    "ruleRequestsOrRNGDrawsNotEmitted": null,
+    "whichPriorPackageMatchedNotEmitted": null,
+    "nativeInitOrSearchCountersNotEmitted": null
+  },
+  "native64": {
+    "status": "UNISSUED_ALL64_UNRUN",
+    "plannedGames": 64,
+    "completedGames": 0,
+    "all16Admission": false,
+    "noUseOfPartial11": true,
+    "noReplacementGeneration": true
+  },
+  "costs": {
+    "outerSeconds": 0.4485832779901102,
+    "commandSeconds": 0.10170469200238585,
+    "nestedSpansNotAdded": true,
+    "generatorBodySecondsNotEmitted": null,
+    "collectionFeesSeparate": true,
+    "globalPeakAndFullFees": null
+  },
+  "cleanup": {
+    "status": "ACTUAL_GENERATION_COLLISION_STOP",
+    "originalJob": "8de2e9e8-d794-4660-9f47-b3b8b89343b0",
+    "normalReturn": null,
+    "actualExceptionOutcome": {
+      "command": [
+        "bash",
+        "/workspaces/quoridor/scripts/dev/project-env.sh",
+        "python",
+        "-B",
+        "-c",
+        "import importlib\nimport json\nimport sys\nfrom pathlib import Path\n\nsys.path.insert(0, \"/workspaces/quoridor/games/othello/python\")\nrun = importlib.import_module(\"othello_arena.generation\").run\nreference = json.loads(sys.argv[1])\nresult = run(reference, sys.argv[2], cancelled=Path(sys.argv[3]).exists)\nraise SystemExit(0 if result[\"status\"] == \"complete\" else 1)\n",
+        "{\"path\":\"/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/rules-generation-entry-v1/generation-config.json\",\"bytes\":15929,\"mode\":\"0644\",\"sha256\":\"9e399385b8cfd6978ea62d2e85adc9800a28877f1f404905e3ce8bdaf5520731\"}",
+        "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/generation",
+        "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/rules-generation-entry-v1/CANCEL"
+      ],
+      "status": "failed",
+      "child": {
+        "pid": 1648259,
+        "start_ticks": "93245096",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "cpu_plan": {
+        "management": [18],
+        "commands": {
+          "work": [4]
+        },
+        "allocation": [4, 18],
+        "resource_CPUs": 2,
+        "worker_CPUs": 1,
+        "library_threads": 1
+      },
+      "command_cpu_scope": "work",
+      "log_bytes_seen": 0,
+      "scope": "session group and periodically recorded descendants; no daemon adoption",
+      "error": "cycle child failed: ['bash', '/workspaces/quoridor/scripts/dev/project-env.sh', 'python', '-B', '-c', 'import importlib\\nimport json\\nimport sys\\nfrom pathlib import Path\\n\\nsys.path.insert(0, \"/workspaces/quoridor/games/othello/python\")\\nrun = importlib.import_module(\"othello_arena.generation\").run\\nreference = json.loads(sys.argv[1])\\nresult = run(reference, sys.argv[2], cancelled=Path(sys.argv[3]).exists)\\nraise SystemExit(0 if result[\"status\"] == \"complete\" else 1)\\n', '{\"path\":\"/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/rules-generation-entry-v1/generation-config.json\",\"bytes\":15929,\"mode\":\"0644\",\"sha256\":\"9e399385b8cfd6978ea62d2e85adc9800a28877f1f404905e3ce8bdaf5520731\"}', '/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/generation', '/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/rules-generation-entry-v1/CANCEL']: 1",
+      "reason": "CycleStopped",
+      "exit_code": 1,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "cleanup_complete": true,
+      "log_bytes_retained": 0,
+      "wall_seconds": 0.10170469200238585,
+      "handle_closes_attempted": ["selector_close", "pipe_close", "pidfd_close", "log_close"],
+      "primary_error": {
+        "type": "CycleStopped",
+        "message": "cycle child failed: ['bash', '/workspaces/quoridor/scripts/dev/project-env.sh', 'python', '-B', '-c', 'import importlib\\nimport json\\nimport sys\\nfrom pathlib import Path\\n\\nsys.path.insert(0, \"/workspaces/quoridor/games/othello/python\")\\nrun = importlib.import_module(\"othello_arena.generation\").run\\nreference = json.loads(sys.argv[1])\\nresult = run(reference, sys.argv[2], cancelled=Path(sys.argv[3]).exists)\\nraise SystemExit(0 if result[\"status\"] == \"complete\" else 1)\\n', '{\"path\":\"/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/rules-generation-entry-v1/generation-config.json\",\"bytes\":15929,\"mode\":\"0644\",\"sha256\":\"9e399385b8cfd6978ea62d2e85adc9800a28877f1f404905e3ce8bdaf5520731\"}', '/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/generation', '/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/rules-generation-entry-v1/CANCEL']: 1"
+      },
+      "process_cleanup_complete": true,
+      "handle_closes_complete": true,
+      "signal_mask_restoration": "completed",
+      "final_record_persist": "completed",
+      "finalization_errors": []
+    },
+    "originalOuter": {
+      "job_id": "8de2e9e8-d794-4660-9f47-b3b8b89343b0",
+      "outcome": "failed",
+      "error": null,
+      "error_notes": [],
+      "exit_code": 1,
+      "finished_at": "2026-10-24T23:21:44.123023+00:00",
+      "wall_seconds": 0.4485832779901102,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+      "cleanup_complete": true,
+      "cleanup_errors": [],
+      "log_bytes_seen": 1516,
+      "log_bytes_retained": 1516
+    },
+    "actualKnownChildAbsent": true,
+    "nativeProcessCleanup": {
+      "bytesRetained": 65536,
+      "bytesSeen": 133232,
+      "directReaped": true,
+      "errors": [],
+      "exitCode": -15,
+      "unexpectedExit": false
+    },
+    "nativePIDStartBoot": null,
+    "nativeHandlesAndRemainingNotEmitted": null,
+    "historicalDiskSignalMask": "pending",
+    "historicalDiskPersist": "attempted",
+    "actualReturnedMask": "completed",
+    "actualReturnedPersist": "completed",
+    "ownedZeroByteUvLocksRemovedAfterActualReap": [
+      "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/rules-generation-entry-v1/TMP/uv-cc8f3ad7aa19080a.lock"
+    ],
+    "TMPRemoved": true,
+    "sourceLeases": [],
+    "remaining": [],
+    "noRetryReseedRefillReplacementOrGameAdmission": true,
+    "retainedBodyReadScope": "Result scalar-container whole JSON decoded twice for this collection, including unused canonicalKey; only saved scalar status/collision digest/cleanup/counts used. No roots/evidence/protocol bodies, linked exclusions, model/weights/H source, rules/canonical reconstruction/RNG/Search/game/validator replay."
+  },
+  "holdingPoint": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/rules-generation-entry-v1/completion-8de2e9e8/affected-storage-point.json",
+    "bytes": 478,
+    "mode": "0644",
+    "sha256": "8537222482cf97cc7e92701413776a38332442363846ba6fbe5acb1edb858978"
+  },
+  "interpretation": "The first actual generation encountered an already-declared canonical identity at f12/placement8. The collision guard acted as selected. This consumes ONE generation and does not qualify a complete16 book; native64 remains unissued. No rule/Flip/model/strength/default conclusion or automatic newseed/refill/contest follows.",
+  "protectedScopes": {
+    "historicalGlobalFullHistoryExposureAndFitIndependence": "UNKNOWN",
+    "HSourceOrLabelsOpened": false,
+    "allOldFailuresCostsPausesSealsH128DefaultsForeign50GBPreserved": true
+  },
+  "collection": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/rules-generation-entry-v1/completion-8de2e9e8/collection-STOP.json",
+    "bytes": 6613,
+    "mode": "0644",
+    "sha256": "23a497bf843ecb64a53a05eb29c9b9e4ba622df6e4d262f7255e9b3b2f97f2da"
+  },
+  "strongestGoalsComplete": false
+}
