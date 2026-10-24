@@ -123,3 +123,10 @@ source/light prepはQuoridor435と並行する。soleMain/Git/index/sharedCargo�
 旧residualは提案段階で採択/実装/fitされず、今回の人間選択で先行案から退けた。[退役と選択参照のsoftware資格](../../../research-data/othello/strong-ai-n96/retirement-selective-software-v1.json)で、直接比較の現役用途が無い二形状専用model API・trainer/export・専用試験と旧候補の固定launchを撤去した。旧版コードの復元元はGit履歴とし、恒久shimは置かない。共有のD4/色手番canonical処理だけをarenaへ移し、ルール・v1 heuristic・UI・取消/保存とfull evaluator/searchは維持した。元モデル・入力・実行結果・失敗費は削除していない。
 
 固定sourceの追加読取りで、初回対応表が欠落機能として挙げたparity_case/parity_ordering_shuffle_mask_last4/parity_ordering_last3は定義だけで、activeなgeneric/SIMD PVS/NWS last4から使われていないと確認した。実効経路はempty1_bbによるisolated-empty partitionである。未使用tableをport要件へ追加せず、元の誤った説明は探索software正本の訂正欄とGit履歴へ残す。この訂正で元コード・実行画像・固定深さ29件の結果を変更しない。
+
+現在のブラウザ接続は[明示的なfullModel選択とpersistent Worker](browser-search.md)を持つ。
+[有限browser33結果](../../../research-data/othello/strong-ai-n96/packed-browser33-normal-result-v1.json)は
+module Workerの固定16・通常16・取消1を検証した範囲に限る。実UIのlocal File選択、通常2手のmodel再利用、
+取消後の明示Retry、保存/再開は別の最大4 Search条件で受け入れる。
+旧setup失敗を保持し、現test ownerのowned Viteと絶対30秒direct HTTP readinessを経て同じ実UIを確認する。
+公開weight配布・棋力・本番defaultをsource/software資格から認定しない。現状と結果は[研究所見](../../../docs/research-findings.md)を参照する。

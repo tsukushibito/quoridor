@@ -50,10 +50,21 @@ fullModelだけmodelIdentity={version:1,mainSha256,endingSha256}を保存し、F
 validなfullModel再開でもlocal File再選択と確認が済むまで自動検索・保存上書き・着手を止める。
 破損・pending・失敗した再開は、手動保存やteardownでも元raw保存を維持する。
 
-新規model-free定義はRust ui::tests::ui_full_model_fixture_ と
+新規model-free定義はRust ui::tests::ui*full_model_fixture* と
 games/othello/tests/unit/full-model-ui.test.mjs。transport fixtureは実engineの証明ではない。
 既存browser-search.test.mjsのfake portはdisposeと未使用fullmodel exportを補う。
 共通othello-lifecycle.test.mjsのpostimageはRoot向けのport形状更新提案であり、既存assertionは変更しない。
-今回のsource担当はscoped rustfmt/Prettier/静的逆変換のみ。全tests/build/browserはUNRUN。
-Rootは変更UIの関連テスト、実生成宣言typing、実Workerと現在のUIからの有限条件を別途受け入れる。
+source担当はscoped rustfmt/Prettier/静的逆変換までを担当した。
+変更UIの関連software、実生成宣言typing、現在のmatched bundleは
+[通常software資格](../../../research-data/othello/strong-ai-n96/current-ui-fullmodel1s-affected-software-result-v4.json)で検証済み。
+実Workerと現在のUIを通る有限consumer条件は、softwareと別に受け入れる。
 旧core/evaluator/native18/browser33等の成功再演をこの接続の資格に代用しない。
+
+実consumer確認のtest ownerは、同じVite previewを所有して起動し、起動からHTTP body完了までの
+絶対30秒以内にdirect loopbackの実GETを確認する。status200/text-html・64KiB以下・現在のindex entrypoint
+markerを満たしてからPlaywrightを開始し、Playwright側のwebServer所有は設けない。
+whole240秒、Playwright global230秒、モデルready30秒、ready後reply1100msは別の上限である。
+leader終了後のgroup signalを止め、残descendantsは既存外側guardianの回収に従う。
+[限定source/software資格](../../../research-data/othello/strong-ai-n96/current-ui-owned-http-source-and-admission-v1.json)は、
+実appの4 Search/2 constructor、再利用・取消・Retry・保存の受入結果そのものではない。
+旧setup失敗と未報告の実Search数NULLを保持し、standalone rehearsalや自動再試行はしない。
