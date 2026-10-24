@@ -1,0 +1,235 @@
+{
+  "status": "FAILED_PLAYWRIGHT_PLUGIN_SETUP_NO_APP_RECEIPT",
+  "jobId": "c7d0ced1-c82e-4298-9bc8-ae7d9d6e70e8",
+  "originalEvidence": [
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel4-normal-entry-v1/runtime/result.json",
+      "bytes": 522,
+      "mode": "0600",
+      "sha256": "40122ff4d46d325471cc7aa514016631ea0505c0d987edbf0c217d61e8315160"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel4-normal-entry-v1/runtime/output.log",
+      "bytes": 781,
+      "mode": "0644",
+      "sha256": "5dd5342113be8654100472c39a46ed83ab4c6a0c624f3490a920137b6104e61d"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel4-normal-entry-v1/runtime/config.json",
+      "bytes": 831,
+      "mode": "0600",
+      "sha256": "0c1c810df6a012d0a2dcf1f53a8a7a6f7b5dbf5d31ce9f43c87c1ef0291a331f"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel4-normal-entry-v1/actual-app.log",
+      "bytes": 117,
+      "mode": "0644",
+      "sha256": "a8b521c5f5bb42ed26bc3ade75fe6a84d6f10662c394f5de13fd057fb445f42e"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel4-normal-entry-v1/actual-app.returned.json",
+      "bytes": 5946,
+      "mode": "0644",
+      "sha256": "775e90bef9159efe4f535a42b62a4f40fc908febd9580596c4eed09ba7490067"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel4-normal-entry-v1/Root-controller-STOP.json",
+      "bytes": 3248,
+      "mode": "0644",
+      "sha256": "c0ca26c3eb959f0fe797ac19f6d2e2daca7d64c5ee7029d822fe2e219415c698"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel4-normal-entry-v1/data/.last-run.json",
+      "bytes": 47,
+      "mode": "0644",
+      "sha256": "e064df435d67af39231c9d844518f449a684db43560da8f08833bff99a488678"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel4-normal-entry-v1/actual-entry.json",
+      "bytes": 769,
+      "mode": "0644",
+      "sha256": "55522cb5d0c5f83e8ada811cf7fcfc91bd1914fe5f73cbc73aa5ca161dbb27b1"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel4-normal-entry-v1/runtime-binding.json",
+      "bytes": 19802,
+      "mode": "0644",
+      "sha256": "29779eeee6165d1df0b9d50ebe848f9d71e2cfaf45b235a11bf9dd5164d01954"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel4-normal-entry-v1/normal-config-derivation.json",
+      "bytes": 2264,
+      "mode": "0644",
+      "sha256": "5cec898b17244fdd047c6dce5f783de108bf4e9ff8724ed1b1604cb5426f671f"
+    }
+  ],
+  "outerWallSecondsOnce": 233.5996110480046,
+  "nestedCommandWallSeconds": 230.92208102799486,
+  "nestedNotAdded": true,
+  "actualReturnedException": {
+    "command": [
+      "/home/vscode/.local/opt/node/v24.22.0/bin/node",
+      "/workspaces/quoridor/.worktree/assets/tools/othello-fullwasm-browser-v1/node_modules/playwright/cli.js",
+      "test",
+      "--config",
+      "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel4-normal-entry-v1/acceptance/playwright.full4.config.ts",
+      "--workers=1",
+      "--retries=0",
+      "--max-failures=1"
+    ],
+    "status": "failed",
+    "child": {
+      "pid": 4033561,
+      "start_ticks": "88462694",
+      "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+    },
+    "launch_policy": {
+      "no_new_privs_requested": false,
+      "verified_before_exec": null
+    },
+    "cpu_plan": {
+      "management": [
+        18
+      ],
+      "commands": {
+        "probe": [
+          4
+        ]
+      },
+      "allocation": [
+        4,
+        18
+      ],
+      "resource_CPUs": 2,
+      "worker_CPUs": 1,
+      "library_threads": 1
+    },
+    "command_cpu_scope": "probe",
+    "log_bytes_seen": 117,
+    "scope": "session group and periodically recorded descendants; no daemon adoption",
+    "error": "cycle child failed: ['/home/vscode/.local/opt/node/v24.22.0/bin/node', '/workspaces/quoridor/.worktree/assets/tools/othello-fullwasm-browser-v1/node_modules/playwright/cli.js', 'test', '--config', '/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel4-normal-entry-v1/acceptance/playwright.full4.config.ts', '--workers=1', '--retries=0', '--max-failures=1']: 1",
+    "reason": "CycleStopped",
+    "exit_code": 1,
+    "remaining": [],
+    "direct_child_reaped": true,
+    "descendant_visibility": "observed",
+    "cleanup_complete": true,
+    "log_bytes_retained": 117,
+    "wall_seconds": 230.92208102799486,
+    "handle_closes_attempted": [
+      "selector_close",
+      "pipe_close",
+      "pidfd_close",
+      "log_close"
+    ],
+    "primary_error": {
+      "type": "CycleStopped",
+      "message": "cycle child failed: ['/home/vscode/.local/opt/node/v24.22.0/bin/node', '/workspaces/quoridor/.worktree/assets/tools/othello-fullwasm-browser-v1/node_modules/playwright/cli.js', 'test', '--config', '/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel4-normal-entry-v1/acceptance/playwright.full4.config.ts', '--workers=1', '--retries=0', '--max-failures=1']: 1"
+    },
+    "process_cleanup_complete": true,
+    "handle_closes_complete": true,
+    "signal_mask_restoration": "completed",
+    "final_record_persist": "completed",
+    "finalization_errors": []
+  },
+  "persistedSnapshot": {
+    "command": [
+      "/home/vscode/.local/opt/node/v24.22.0/bin/node",
+      "/workspaces/quoridor/.worktree/assets/tools/othello-fullwasm-browser-v1/node_modules/playwright/cli.js",
+      "test",
+      "--config",
+      "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel4-normal-entry-v1/acceptance/playwright.full4.config.ts",
+      "--workers=1",
+      "--retries=0",
+      "--max-failures=1"
+    ],
+    "status": "failed",
+    "child": {
+      "pid": 4033561,
+      "start_ticks": "88462694",
+      "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+    },
+    "launch_policy": {
+      "no_new_privs_requested": false,
+      "verified_before_exec": null
+    },
+    "cpu_plan": {
+      "management": [
+        18
+      ],
+      "commands": {
+        "probe": [
+          4
+        ]
+      },
+      "allocation": [
+        4,
+        18
+      ],
+      "resource_CPUs": 2,
+      "worker_CPUs": 1,
+      "library_threads": 1
+    },
+    "command_cpu_scope": "probe",
+    "log_bytes_seen": 117,
+    "scope": "session group and periodically recorded descendants; no daemon adoption",
+    "error": "cycle child failed: ['/home/vscode/.local/opt/node/v24.22.0/bin/node', '/workspaces/quoridor/.worktree/assets/tools/othello-fullwasm-browser-v1/node_modules/playwright/cli.js', 'test', '--config', '/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel4-normal-entry-v1/acceptance/playwright.full4.config.ts', '--workers=1', '--retries=0', '--max-failures=1']: 1",
+    "reason": "CycleStopped",
+    "exit_code": 1,
+    "remaining": [],
+    "direct_child_reaped": true,
+    "descendant_visibility": "observed",
+    "cleanup_complete": true,
+    "log_bytes_retained": 117,
+    "wall_seconds": 230.92208102799486,
+    "handle_closes_attempted": [
+      "selector_close",
+      "pipe_close",
+      "pidfd_close",
+      "log_close"
+    ],
+    "primary_error": {
+      "type": "CycleStopped",
+      "message": "cycle child failed: ['/home/vscode/.local/opt/node/v24.22.0/bin/node', '/workspaces/quoridor/.worktree/assets/tools/othello-fullwasm-browser-v1/node_modules/playwright/cli.js', 'test', '--config', '/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel4-normal-entry-v1/acceptance/playwright.full4.config.ts', '--workers=1', '--retries=0', '--max-failures=1']: 1"
+    },
+    "process_cleanup_complete": true,
+    "handle_closes_complete": true,
+    "signal_mask_restoration": "pending",
+    "final_record_persist": "attempted",
+    "finalization_errors": []
+  },
+  "normalReturn": null,
+  "exactRecordedChildSameIdentityPresent": false,
+  "plannedSearchAttempts": 4,
+  "actualSearchAttempts": null,
+  "actualConstructors": null,
+  "numericResults": null,
+  "acceptedResults": null,
+  "remainingUnrun": null,
+  "scheduledDenominator": 4,
+  "countersReason": "Setup timeout and no test acceptance receipt. No constructor/Search counter observation; do not manufacture zero or completed requests.",
+  "firstError": "Playwright plugin setup timeout230s; teardown setup timeout also emitted",
+  "lastRun": {
+    "status": "timedout",
+    "failedTests": []
+  },
+  "appAcceptance": null,
+  "automaticRetry": false,
+  "noRefill": true,
+  "TMPEntries": [
+    "playwright-transform-cache-1000"
+  ],
+  "storage": {
+    "scope": "ONE affected original app entry tree after actual STOP; immutable served bundle charged separately once",
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/current-ui-fullmodel4-normal-entry-v1",
+    "logical_B": 346121,
+    "allocated_B": 479232,
+    "files": 37,
+    "servedBundleAllocated_B": 35672064,
+    "wholeCeiling_B": 134217728,
+    "metadataTailExcluded": true,
+    "globalActual_B": null
+  },
+  "limitations": "Product function/time/lifecycle not qualified by this failed entry. Internal entry/interruption/old free/reclamation/fullTT/continuous peak/runtime browser identity remain unobserved.",
+  "originalFailuresCosts": "Retained, no refund/old unused credit; failed collector bare python lookup exited127 before Python/body and was corrected to existing absolute interpreter without numerical replay."
+}
