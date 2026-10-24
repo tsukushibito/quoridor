@@ -318,8 +318,34 @@ def observe_joint_overfit(settings, state, loss, panel, draws):
     return stop
 
 
-def policy_diagnostics(logits, target, legal, weights):
+def _selection_action_queries(queries, rows):
+    """Bound already view-matched native action queries; never derive coordinates."""
+    if (
+        type(rows) is not int
+        or not 1 <= rows <= 32
+        or not isinstance(queries, dict)
+        or set(queries) != {"selected_alpha", "cedar_alpha"}
+    ):
+        raise ValueError("selection diagnostic requires two named queries and1..32 rows")
+    frozen = {}
+    for name, actions in queries.items():
+        if (
+            not isinstance(actions, list)
+            or len(actions) != rows
+            or any(type(action) is not int or not 0 <= action < 209 for action in actions)
+        ):
+            raise ValueError("complete actual action-ID209 queries in the matched input view")
+        frozen[name] = tuple(actions)
+    return frozen
+
+
+def policy_diagnostics(logits, target, legal, weights, *, action_queries=None):
     """Descriptive metrics from the already performed joint forward, no call."""
+    queries = (
+        None
+        if action_queries is None
+        else _selection_action_queries(action_queries, logits.shape[0])
+    )
     import torch
 
     logp = torch.log_softmax(logits.masked_fill(~legal, -torch.inf), dim=1)
@@ -333,9 +359,38 @@ def policy_diagnostics(logits, target, legal, weights):
     def mean(rows):
         return float(((rows * weights).sum() / mass).detach().cpu())
 
-    return dict(
+    result = dict(
         teacher_entropy=mean(entropy_rows),
         policy_kl=mean(ce_rows - entropy_rows),
         policy_top1=mean((top[:, 0] == teacher_top).to(weights.dtype)),
         policy_top3=mean((top == teacher_top[:, None]).any(1).to(weights.dtype)),
     )
+    if queries is not None:
+        probability = logp.exp().masked_fill(~legal, 0)
+        selection = [
+            {
+                "teacher_top1_in_input_view": int(teacher_top[i].detach().cpu()),
+                "teacher_entropy": float(entropy_rows[i].detach().cpu()),
+                "action_agreement": queries["selected_alpha"][i] == queries["cedar_alpha"][i],
+                "queries": {},
+            }
+            for i in range(logits.shape[0])
+        ]
+        for name, actions in queries.items():
+            index = torch.tensor(actions, dtype=torch.long, device=logits.device)[:, None]
+            if not legal.gather(1, index).all():
+                raise ValueError("selection action outside the actual matched legal mask")
+            teacher_probability = target.gather(1, index)
+            current_probability = probability.gather(1, index)
+            teacher_rank = ((target > teacher_probability) & legal).sum(1) + 1
+            current_rank = ((probability > current_probability) & legal).sum(1) + 1
+            for i, action in enumerate(actions):
+                selection[i]["queries"][name] = {
+                    "action_in_input_view": action,
+                    "teacher_probability": float(teacher_probability[i, 0].detach().cpu()),
+                    "teacher_legal_rank": int(teacher_rank[i].detach().cpu()),
+                    "current_probability": float(current_probability[i, 0].detach().cpu()),
+                    "current_legal_rank": int(current_rank[i].detach().cpu()),
+                }
+        result["selection_rows"] = selection
+    return result

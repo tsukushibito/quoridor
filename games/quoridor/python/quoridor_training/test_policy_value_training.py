@@ -547,5 +547,88 @@ class PolicyValueFunctional(unittest.TestCase):
         (output / "smoke-result.json").write_text(json.dumps(result, indent=2) + "\n")
 
 
+class SelectionQueryBoundary(unittest.TestCase):
+    def test_native_action_query_boundary_nn0(self):
+        from .policy_value_training import _selection_action_queries, policy_diagnostics
+
+        good = {"selected_alpha": [0, 208], "cedar_alpha": [208, 0]}
+        saved = copy.deepcopy(good)
+        frozen = _selection_action_queries(good, 2)
+        self.assertEqual(frozen, {name: tuple(value) for name, value in good.items()})
+        self.assertEqual(good, saved)
+        good["selected_alpha"][0] = 7
+        self.assertEqual(frozen["selected_alpha"][0], 0)
+        self.assertEqual(
+            len(
+                _selection_action_queries(
+                    {"selected_alpha": [0] * 32, "cedar_alpha": [208] * 32}, 32
+                )["cedar_alpha"]
+            ),
+            32,
+        )
+        malformed = [
+            ({}, 2),
+            ({"selected_alpha": [0, 1], "cedar_alpha": [2, 3], "extra": []}, 2),
+            ({"selected_alpha": [0], "cedar_alpha": [0, 1]}, 2),
+            ({"selected_alpha": [True, 1], "cedar_alpha": [0, 1]}, 2),
+            ({"selected_alpha": [0.0, 1], "cedar_alpha": [0, 1]}, 2),
+            ({"selected_alpha": [-1, 1], "cedar_alpha": [0, 1]}, 2),
+            ({"selected_alpha": [209, 1], "cedar_alpha": [0, 1]}, 2),
+            ({"selected_alpha": [0] * 33, "cedar_alpha": [0] * 33}, 33),
+            ({"selected_alpha": [], "cedar_alpha": []}, 0),
+            ({"selected_alpha": [0], "cedar_alpha": [0]}, True),
+        ]
+        for queries, count in malformed:
+            with self.subTest(queries=queries, count=count), self.assertRaises(ValueError):
+                _selection_action_queries(queries, count)
+        fake_logits = types.SimpleNamespace(shape=(2, 209))
+        with patch.dict("sys.modules", {"torch": None}), self.assertRaises(ValueError):
+            policy_diagnostics(fake_logits, None, None, None, action_queries={"selected_alpha": []})
+
+    def test_compact_action_metrics_use_actual_legal_distributions_nn0(self):
+        import torch
+
+        from .policy_value_training import policy_diagnostics
+
+        logits = torch.zeros((2, 209), dtype=torch.float32)
+        target = torch.zeros_like(logits)
+        legal = torch.zeros_like(logits, dtype=torch.bool)
+        legal[:, [0, 1, 208]] = True
+        target[0, 0], target[0, 1] = 0.5, 0.5
+        target[1, 208] = 1.0
+        weights = torch.ones(2)
+        plain = policy_diagnostics(logits, target, legal, weights)
+        queried = policy_diagnostics(
+            logits,
+            target,
+            legal,
+            weights,
+            action_queries={"selected_alpha": [0, 0], "cedar_alpha": [208, 0]},
+        )
+        self.assertEqual({key: queried[key] for key in plain}, plain)
+        rows = queried["selection_rows"]
+        self.assertEqual(len(rows), 2)
+        self.assertEqual(rows[0]["teacher_top1_in_input_view"], 0)
+        self.assertFalse(rows[0]["action_agreement"])
+        self.assertTrue(rows[1]["action_agreement"])
+        self.assertEqual(rows[0]["queries"]["selected_alpha"]["teacher_legal_rank"], 1)
+        self.assertEqual(rows[0]["queries"]["cedar_alpha"]["teacher_legal_rank"], 3)
+        self.assertEqual(rows[1]["queries"]["selected_alpha"]["teacher_legal_rank"], 2)
+        self.assertEqual(rows[0]["queries"]["selected_alpha"]["teacher_probability"], 0.5)
+        self.assertEqual(rows[0]["queries"]["cedar_alpha"]["teacher_probability"], 0.0)
+        for row in rows:
+            for query in row["queries"].values():
+                self.assertAlmostEqual(query["current_probability"], 1.0 / 3.0, places=6)
+                self.assertEqual(query["current_legal_rank"], 1)
+        with self.assertRaises(ValueError):
+            policy_diagnostics(
+                logits,
+                target,
+                legal,
+                weights,
+                action_queries={"selected_alpha": [2, 0], "cedar_alpha": [0, 0]},
+            )
+
+
 if __name__ == "__main__":
     unittest.main()

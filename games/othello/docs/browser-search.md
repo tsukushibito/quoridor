@@ -68,3 +68,16 @@ leader終了後のgroup signalを止め、残descendantsは既存外側guardian�
 [限定source/software資格](../../../research-data/othello/strong-ai-n96/current-ui-owned-http-source-and-admission-v1.json)は、
 実appの4 Search/2 constructor、再利用・取消・Retry・保存の受入結果そのものではない。
 旧setup失敗と未報告の実Search数NULLを保持し、standalone rehearsalや自動再試行はしない。
+
+[実UIの有限local-fullmodel4受入結果](../../../research-data/othello/strong-ai-n96/current-ui-local-fullmodel4-acceptance-result-v1.json)は、
+owned Vite/direct HTTP資格後、実DOM/File/現Workerで4要求・数値応答3件・valid constructor2を確認した。
+最初の2要求は同Worker/modelを再用し、人間の手番を挟んだ2要求目のFile読込/hash追加は0だった。
+3要求目は実UI取消で確定board/saveを維持し、Retryの4要求目は新Workerで受理された。
+Home後の再開はFile再選択を要求し、保存を維持して5要求目を発行しなかった。
+取消のpreCallはtransport観測で、内部Search entry・active interruption・旧model free・物理回収はUNKNOWNのままである。
+両Workerのterminate1回・request listener0を観測したが、free observer messageは0でありfreeの実行を認定しない。
+数値応答の親dispatch-to-replyは約1004.5/1000.1/1000.7ms、engine elapsedは各1000ms、
+TTは各25165872 bytesだった。cold ready約960.9msとfirst accepted約2067.4msは別の親観測値で、
+Worker constructor spanや純compile/decode時間と足し引きしない。
+このINSTRUMENTED_ACCEPTANCEは棋力・未変更binaryの速度・peak/RSS・weight配布・既定AIの変更を認めない。
+保存2枚の画像では日本語glyphが箱表示となるため、全面的な描画・文字表示の資格にも広げない。

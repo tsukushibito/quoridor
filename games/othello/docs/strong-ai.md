@@ -130,3 +130,10 @@ module Workerの固定16・通常16・取消1を検証した範囲に限る。�
 取消後の明示Retry、保存/再開は別の最大4 Search条件で受け入れる。
 旧setup失敗を保持し、現test ownerのowned Viteと絶対30秒direct HTTP readinessを経て同じ実UIを確認する。
 公開weight配布・棋力・本番defaultをsource/software資格から認定しない。現状と結果は[研究所見](../../../docs/research-findings.md)を参照する。
+
+同じ現役UIの[有限local-fullmodel4](../../../research-data/othello/strong-ai-n96/current-ui-local-fullmodel4-acceptance-result-v1.json)は、
+元a668bf64で4要求/3数値応答/2constructorを完了した。通常2要求の同Worker/model再用、
+実Cancelによる確定board/save維持、fresh WorkerのRetry4、Home/再開のreselect・保存維持・5要求目なしを受け入れる。
+これはローカル固定pairの実consumer機能/lifecycle確認であり、browser棋力、active interruption、
+oldfree/物理回収、未変更binaryの速度比、peak、公開weight配布やdefault採用は認定しない。
+元c7/9cb/cbde/2becのFAILED/NULL/費用は今回の成功で補完・上書きしない。
