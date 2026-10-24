@@ -1,0 +1,287 @@
+{
+  "status": "FAILED_NATIVE_CONFIG_ADMISSION_NO_DURABLE_GAME_RESULT",
+  "originalJob": "69f9dec9-0f1d-4d43-8618-8c325b0af8aa",
+  "originalParent": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-entry-v1/common/parent-runtime/result.json",
+    "bytes": 2051,
+    "mode": "0600",
+    "sha256": "9be250888b9710130008b6da6ddfd8bb09b6ad0b66271911c6cf89c920d8d7c0"
+  },
+  "parentOperation": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-entry-v1/common/parent-operation/result.json",
+    "bytes": 5671,
+    "mode": "0644",
+    "sha256": "1141a9a18a4a52eedfff0255073feb70b438d6d3c3524117a9a97310fb935ba6"
+  },
+  "laneResult": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-entry-v1/lane-0/outer-runtime/result.json",
+    "bytes": 523,
+    "mode": "0600",
+    "sha256": "c1a03a7669e887bd636ee3e42eb44ce04730f0800b2e67ab6ee966cd26cdbf70"
+  },
+  "sequenceResult": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-entry-v1/lane-0/sequence/result.json",
+    "bytes": 2687,
+    "mode": "0644",
+    "sha256": "e0585f2b175fbca4d333a58b94abbe7597bfcc2e3c403e170bb0c983057d4ded"
+  },
+  "soleOriginalFailedManifest": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-entry-v1/lane-0/sequence/run-000/operation/manifest.json",
+    "bytes": 14218,
+    "mode": "0644",
+    "sha256": "7d02415979705c3f9fb1ad57dfd270220b7727a8d8278dd3760b99fdffe0e9d4"
+  },
+  "exactNativeError": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-entry-v1/lane-0/sequence/run-000/operation/run.full.log",
+    "bytes": 85,
+    "mode": "0644",
+    "sha256": "71cef640cca1d034eb2321d85be250bb5cdede41b0553f29d34bb86e0956de21"
+  },
+  "nativeError": "arena config: search workers belong to a managed serial research alpha Control arena",
+  "engineOnlyProjection": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-entry-v1/failure-69f9dec9/engine-only-causal-projection.json",
+    "bytes": 3163,
+    "mode": "0644",
+    "sha256": "b88af19370e14963a29a512aedcce7c3b25381e87b96c866bcbedc5f6321a990"
+  },
+  "phase": "Native approved-plan Config.validate before runtime::run; no durable arena journal/result/native manifest",
+  "nativeCommandInvocations": 1,
+  "selectedOperations": 16,
+  "completedOperations": 0,
+  "attemptedOperations": 1,
+  "remainingOperationsUnrun": 15,
+  "tailSlotsUnrun": 240,
+  "scheduledDenominator": 256,
+  "publishedOutcomes": 0,
+  "firstBatchSlotsMissing": 16,
+  "unknownOutcomeDenominator": 256,
+  "actualStartedGameCounter": null,
+  "actualSearchCounter": null,
+  "actualModelConstructorCounter": null,
+  "actualLoadedUniformIdentity": null,
+  "sourceEntryQualification": "Exact error maps to Config.validate before runtime game loop/model owner creation; source order is separate from un-emitted runtime counters",
+  "WDL": null,
+  "interval": null,
+  "statisticalAnalysisExecuted": false,
+  "noAutomaticRetryOrRefill": true,
+  "noUnusedQuotaRefundOrLoan": true,
+  "actualProcessStop": {
+    "parentReaderStop": "2026-10-24T11:10:22.690729+00:00",
+    "sequenceReaderStop": "2026-10-24T11:10:22.446709+00:00",
+    "nativeExceptionReturn": {
+      "command": [
+        "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/unused128-evaluation-import-software-v2/image/quoridor-runner",
+        "arena",
+        "--experiment",
+        "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-entry-v1/lane-0/sequence/run-000/experiment.json",
+        "--experiment-sha256",
+        "77d3caaaf10f564fe0789fc44c824d31abe9dda511f1609b0e4f4a3e08d96f2c"
+      ],
+      "status": "failed",
+      "child": {
+        "pid": 79815,
+        "start_ticks": "88856046",
+        "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+      },
+      "launch_policy": {
+        "no_new_privs_requested": false,
+        "verified_before_exec": null
+      },
+      "cpu_plan": {
+        "management": [
+          18
+        ],
+        "commands": {
+          "run": [
+            12,
+            18
+          ],
+          "test": [
+            12
+          ]
+        },
+        "allocation": [
+          12,
+          18
+        ],
+        "resource_CPUs": 2,
+        "worker_CPUs": 1,
+        "library_threads": 1
+      },
+      "command_cpu_scope": "run",
+      "log_bytes_seen": 85,
+      "scope": "session group and periodically recorded descendants; no daemon adoption",
+      "error": "cycle child failed: ['/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/unused128-evaluation-import-software-v2/image/quoridor-runner', 'arena', '--experiment', '/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-entry-v1/lane-0/sequence/run-000/experiment.json', '--experiment-sha256', '77d3caaaf10f564fe0789fc44c824d31abe9dda511f1609b0e4f4a3e08d96f2c']: 1",
+      "reason": "CycleStopped",
+      "exit_code": 1,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "cleanup_complete": true,
+      "log_bytes_retained": 85,
+      "wall_seconds": 0.03322142094839364,
+      "handle_closes_attempted": [
+        "selector_close",
+        "pipe_close",
+        "pidfd_close",
+        "log_close"
+      ],
+      "primary_error": {
+        "type": "CycleStopped",
+        "message": "cycle child failed: ['/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/unused128-evaluation-import-software-v2/image/quoridor-runner', 'arena', '--experiment', '/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-entry-v1/lane-0/sequence/run-000/experiment.json', '--experiment-sha256', '77d3caaaf10f564fe0789fc44c824d31abe9dda511f1609b0e4f4a3e08d96f2c']: 1"
+      },
+      "process_cleanup_complete": true,
+      "handle_closes_complete": true,
+      "signal_mask_restoration": "completed",
+      "final_record_persist": "completed",
+      "finalization_errors": []
+    },
+    "parentOuterCleanup": true,
+    "exactKnownChildren": [
+      {
+        "recorded": {
+          "pid": 79696,
+          "start_ticks": "88855927",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "currentStartTicks": null,
+        "exactAbsentOrDifferent": true
+      },
+      {
+        "recorded": {
+          "pid": 79767,
+          "start_ticks": "88855988",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "currentStartTicks": null,
+        "exactAbsentOrDifferent": true
+      },
+      {
+        "recorded": {
+          "pid": 79794,
+          "start_ticks": "88856024",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "currentStartTicks": null,
+        "exactAbsentOrDifferent": true
+      },
+      {
+        "recorded": {
+          "pid": 79815,
+          "start_ticks": "88856046",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "currentStartTicks": null,
+        "exactAbsentOrDifferent": true
+      }
+    ]
+  },
+  "originalManifestFinalization": {
+    "cleanup_complete": false,
+    "process_cleanup_complete": false,
+    "secondary": [
+      {
+        "stage": "candidate",
+        "facts": {
+          "type": "CycleStopped",
+          "message": "cycle child failed: ['/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/unused128-evaluation-import-software-v2/image/quoridor-runner', 'arena', '--experiment', '/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-entry-v1/lane-0/sequence/run-000/experiment.json', '--experiment-sha256', '77d3caaaf10f564fe0789fc44c824d31abe9dda511f1609b0e4f4a3e08d96f2c']: 1",
+          "notes": [
+            "data finalization secondary: durable data finalization incomplete: [{\"stage\": \"journal\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-entry-v1/lane-0/data/batch-000/completed.jsonl.gz'\", \"notes\": []}, {\"stage\": \"result\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-entry-v1/lane-0/data/batch-000/result.json'\", \"notes\": []}, {\"stage\": \"native_manifest\", \"type\": \"FileNotFoundError\", \"message\": \"[Errno 2] No such file or directory: '/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-entry-v1/lane-0/data/batch-000/manifest.json'\", \"notes\": []}, {\"stage\": \"scientific_journal\", \"type\": \"StopIteration\", \"message\": \"\", \"notes\": []}]"
+          ]
+        }
+      },
+      {
+        "stage": "outer_job",
+        "type": "Refused",
+        "message": "outer job unsuccessful or not cleaned",
+        "notes": [],
+        "available_result": {
+          "job_id": "2c1638b4-8a26-424c-8baa-e5c6f5c1c7df",
+          "outcome": "failed",
+          "error": null,
+          "error_notes": [],
+          "exit_code": 1,
+          "finished_at": "2026-10-24T11:10:22.319473+00:00",
+          "wall_seconds": 0.4628604230238125,
+          "remaining": [],
+          "direct_child_reaped": true,
+          "descendant_visibility": "observed",
+          "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+          "cleanup_complete": true,
+          "cleanup_errors": [],
+          "log_bytes_seen": 11823,
+          "log_bytes_retained": 11823
+        }
+      },
+      {
+        "stage": "command_return",
+        "command": "run",
+        "type": "Refused",
+        "message": "returned command facts unavailable",
+        "notes": []
+      },
+      {
+        "stage": "data_finalization",
+        "type": "Refused",
+        "message": "data finalization missing/failed",
+        "notes": []
+      }
+    ],
+    "dataErrors": [
+      {
+        "stage": "journal",
+        "type": "FileNotFoundError",
+        "message": "[Errno 2] No such file or directory: '/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-entry-v1/lane-0/data/batch-000/completed.jsonl.gz'",
+        "notes": []
+      },
+      {
+        "stage": "result",
+        "type": "FileNotFoundError",
+        "message": "[Errno 2] No such file or directory: '/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-entry-v1/lane-0/data/batch-000/result.json'",
+        "notes": []
+      },
+      {
+        "stage": "native_manifest",
+        "type": "FileNotFoundError",
+        "message": "[Errno 2] No such file or directory: '/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-entry-v1/lane-0/data/batch-000/manifest.json'",
+        "notes": []
+      },
+      {
+        "stage": "scientific_journal",
+        "type": "StopIteration",
+        "message": "",
+        "notes": []
+      }
+    ],
+    "normalGuardianReturn": null,
+    "retainFailedFlagsWithoutRetroPass": true
+  },
+  "diskSnapshot": {
+    "mask": "pending",
+    "persist": "attempted"
+  },
+  "costs": {
+    "parentOuterSecondsOnce": 1.9071503670420498,
+    "laneNestedSeconds": 1.0792152059730142,
+    "operationNestedSeconds": 0.4628604230238125,
+    "nativeNestedSeconds": 0.03322142094839364,
+    "nestedNotAdded": true,
+    "fullFeesPeak": null
+  },
+  "affectedHoldingPoint": {
+    "scope": "ONE failed Q entry after actualnative+collectionSTOP, no globalinventory",
+    "logical_B": 1126078,
+    "allocated_B": 1462272,
+    "files": 141,
+    "wholeCeiling_B": 2147483648,
+    "metadataTailExcluded": true,
+    "globalActual_B": null
+  },
+  "TMP": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected2560-uniform-cedar256-entry-v1/lane-0/sequence/run-000/TMP",
+    "entries": null,
+    "deletedByCollector": false
+  },
+  "sourceConfigRepair": "SAMEC435 existing task, source/config only, no author numerical action; no new native validation probe",
+  "oldFailuresCostsPausesSealsHDefaultModelsForeignAnd50GB": "Preserved"
+}
