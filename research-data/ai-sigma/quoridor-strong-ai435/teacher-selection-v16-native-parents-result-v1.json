@@ -1,0 +1,126 @@
+{
+  "condition": "SAME b44f fixed FIRST16 exposedV/32original+native trueLR",
+  "status": "NATIVE_PARENT_PUBLICATION_COMPLETE_ONLY",
+  "job": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-parent-directory-entry-v2/runtime/result.json",
+    "sha256": "885db2705c7f908094c06c267589c8e7c6307ac025fe851139296757fbab66e7",
+    "bytes": 522,
+    "mode": "0600"
+  },
+  "config": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-parent-directory-entry-v2/runtime/config.json",
+    "sha256": "9312a011db1745361e512534d401f24adc8b3386fde3a0a1a5683eaffee2f6f9",
+    "bytes": 853,
+    "mode": "0600"
+  },
+  "receipt": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-parent-directory-entry-v2/data/parents/receipt.json",
+    "sha256": "809dad75297b3e91a008c21d6491cefcb8fa61190566b67e9a393f3001498d02",
+    "bytes": 1207,
+    "mode": "0600"
+  },
+  "book": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-parent-directory-entry-v2/data/parents/book.json",
+    "sha256": "9e2a667aa09292faa20b717073297900de4b1c809454351c95d9c963696f768d",
+    "bytes": 33980,
+    "mode": "0600"
+  },
+  "components": 16,
+  "views": 32,
+  "row_authority": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-root-binding-v1/first16-nativeV-bank32-identity.json",
+    "bytes": 26585,
+    "mode": "0644",
+    "sha256": "2eb19b480f5c161dddf932ac504d0569d834ade0f6693e70940c390e310ddb70"
+  },
+  "core_library": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-frame-build-v1/image/libquoridor_data.so",
+    "bytes": 995904,
+    "mode": "0755",
+    "sha256": "55f7540cc76a15f5e94b0df0838f09cbd5e2d14b4e9dd16f04fe582090000240"
+  },
+  "Search": 0,
+  "joint_forward": 0,
+  "teacher_forward": 0,
+  "games": 0,
+  "transient_manifest_scope": "whole adopted T/V source-receipts JSON parsed;16 V histories used",
+  "H_source_opened": false,
+  "actual_return": {
+    "command": [
+      "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+      "-B",
+      "-m",
+      "quoridor_training.public_static_values",
+      "selection-parents",
+      "--config",
+      "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-parent-directory-entry-v2/selection-parents.config.json"
+    ],
+    "status": "complete",
+    "child": {
+      "pid": 1398805,
+      "start_ticks": "90639812",
+      "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+    },
+    "launch_policy": {
+      "no_new_privs_requested": false,
+      "verified_before_exec": null
+    },
+    "cpu_plan": {
+      "management": [
+        18
+      ],
+      "commands": {
+        "parents": [
+          12
+        ]
+      },
+      "allocation": [
+        12,
+        18
+      ],
+      "resource_CPUs": 2,
+      "worker_CPUs": 1,
+      "library_threads": 1
+    },
+    "command_cpu_scope": "parents",
+    "log_bytes_seen": 1077,
+    "scope": "session group and periodically recorded descendants; no daemon adoption",
+    "exit_code": 0,
+    "remaining": [],
+    "direct_child_reaped": true,
+    "descendant_visibility": "observed",
+    "cleanup_complete": true,
+    "log_bytes_retained": 1077,
+    "wall_seconds": 0.13386787695344537,
+    "handle_closes_attempted": [
+      "selector_close",
+      "pipe_close",
+      "pidfd_close",
+      "log_close"
+    ],
+    "primary_error": null,
+    "process_cleanup_complete": true,
+    "handle_closes_complete": true,
+    "signal_mask_restoration": "completed",
+    "final_record_persist": "completed",
+    "finalization_errors": []
+  },
+  "original_disk_record": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-parent-directory-entry-v2/parent-input.process.json",
+    "sha256": "094ae8a03dd23c40f91d6f27b5d9868001443a3878d55c854aaf2d4ff987b497",
+    "bytes": 1512,
+    "mode": "0600"
+  },
+  "parent_wall_seconds": 0.4413231839425862,
+  "command_wall_seconds": 0.13386787695344537,
+  "nested_not_additive": true,
+  "original_failed_stage": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/quoridor-strong-ai435/teacher-selection-v16-parent-publication-failure-v1.json",
+    "sha256": "05e6474f2bd8dbac9ac8c1a507cb047b39909181a31a6ca479df60beb9951280",
+    "bytes": 5357,
+    "mode": "0644"
+  },
+  "current_model_Search_diagnostic_qualification": null,
+  "full_fees": null,
+  "peak": null
+}

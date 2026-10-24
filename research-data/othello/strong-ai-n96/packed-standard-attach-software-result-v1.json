@@ -1,0 +1,98 @@
+{
+  "status": "NEW_TWO_MODEL_FREE_LIFECYCLE_DEFINITIONS_PASS_ONLY",
+  "source_intake": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-standard-attach-software-v1/source-intake.json",
+    "bytes": 1106,
+    "mode": "0644",
+    "sha256": "f48c22e5f71d4faa39c003ec47168d6aa74dc55f3006cce652f5d74aa4aa43f9"
+  },
+  "software_returned": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-standard-attach-software-v1/software-returned.json",
+    "bytes": 4050,
+    "mode": "0644",
+    "sha256": "4ba7f67d53ee31b44541d1fe0be548f767a4a0bedc0807322a0c99f8123b2b0b"
+  },
+  "full_log": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/packed-standard-attach-software-v1/new-only-tests.log",
+    "bytes": 558,
+    "mode": "0644",
+    "sha256": "65b13d96e67e91e355db2ad7711d6f21c3ba3b3af0321b113513595506bbe5d2"
+  },
+  "actual_return": {
+    "command": [
+      "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+      "-B",
+      "-m",
+      "unittest",
+      "test_standard_attach_lifecycle.StandardAttachLifecycleFixtures.test_one_ordinary_call_preserves_reply_or_failure_and_honors_pre_dispatch_cancel",
+      "test_standard_attach_lifecycle.StandardAttachLifecycleFixtures.test_controlled_stop_uses_existing_close_once_and_rejects_early_exit_or_kill",
+      "-v"
+    ],
+    "status": "complete",
+    "child": {
+      "pid": 1405086,
+      "start_ticks": "90710210",
+      "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+    },
+    "launch_policy": {
+      "no_new_privs_requested": false,
+      "verified_before_exec": null
+    },
+    "cpu_plan": {
+      "management": [
+        18
+      ],
+      "commands": {
+        "new_only": [
+          4
+        ]
+      },
+      "allocation": [
+        4,
+        18
+      ],
+      "resource_CPUs": 2,
+      "worker_CPUs": 1,
+      "library_threads": 1
+    },
+    "command_cpu_scope": "new_only",
+    "log_bytes_seen": 558,
+    "scope": "session group and periodically recorded descendants; no daemon adoption",
+    "exit_code": 0,
+    "remaining": [],
+    "direct_child_reaped": true,
+    "descendant_visibility": "observed",
+    "cleanup_complete": true,
+    "log_bytes_retained": 558,
+    "wall_seconds": 0.060390341095626354,
+    "handle_closes_attempted": [
+      "selector_close",
+      "pipe_close",
+      "pidfd_close",
+      "log_close"
+    ],
+    "primary_error": null,
+    "process_cleanup_complete": true,
+    "handle_closes_complete": true,
+    "signal_mask_restoration": "completed",
+    "final_record_persist": "completed",
+    "finalization_errors": []
+  },
+  "source": "cc59ecd4",
+  "test_source": "7561e098",
+  "tests": 2,
+  "failures": 0,
+  "prior_success_or_ACK_fixture_replay": 0,
+  "actual_perf_native_model_Search_offline_parser": 0,
+  "scope": "Synthetic standard attach ordinary choose/cancel and existing Process close/early-exit/KILL refusal; no OS/profile/request readiness or old failure cure demonstrated",
+  "original_18feb_failure_immutable": true,
+  "original_perf_body_reread_hash_parse": 0,
+  "future_runtime_admission": null,
+  "exact_kernel_window": null,
+  "full_Search_sampling_coverage": null,
+  "flush_success": null,
+  "retained_point_allocated_B": 53248,
+  "point_not_peak": true,
+  "no_main_product_change": true,
+  "ACK_prospective_retirement": "New active private source/test intake excludes FIFO/ACK and old fixtures; original historical sources/attempts retained unchanged; no new compatibility parser"
+}

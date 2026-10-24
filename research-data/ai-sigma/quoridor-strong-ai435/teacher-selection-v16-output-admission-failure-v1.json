@@ -1,0 +1,165 @@
+{
+  "condition": "SAME b44f FIRST16V/32views/selectedAlpha32+Cedar32",
+  "status": "FAILED_BEFORE_SEARCH_OUTPUT_ADMISSION",
+  "outer_result": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-decisions64-entry-v1/runtime/result.json",
+    "sha256": "64c98cfcef7a17defe7fa77763b2b38f205ecf1e044698a6d0a5de89cf929fad",
+    "bytes": 521,
+    "mode": "0600"
+  },
+  "sequence_result": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-decisions64-entry-v1/sequence/result.json",
+    "sha256": "88ef97627d962ff5de1918069ff8a2b58a4f2cadf883daeaf6efc40c0dfa9606",
+    "bytes": 2662,
+    "mode": "0644"
+  },
+  "original_manifest": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-decisions64-entry-v1/sequence/run-000/operation/manifest.json",
+    "sha256": "cb3ee8090860484e7a7bbe8861db7edb973bcf92dfe29844cc61cb410f76f3a8",
+    "bytes": 14170,
+    "mode": "0644"
+  },
+  "native_log": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-decisions64-entry-v1/sequence/run-000/operation/run.full.log",
+    "sha256": "3c5eaeccfd4d12bd58224ddd5ad301ba58cf37235fd1c62f19668148f5ae3d8c",
+    "bytes": 47,
+    "mode": "0644"
+  },
+  "native_process_disk": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-decisions64-entry-v1/sequence/run-000/operation/run.process.json",
+    "sha256": "0924d582465a00384f21ff3b7009b4adaafb161c1b62477aaf00490620e0e5ae",
+    "bytes": 2642,
+    "mode": "0600"
+  },
+  "native_exact_error": "arena output forecast 10881627 exceeds 4194304",
+  "native_required_forecast_B": 10881627,
+  "incorrect_per_operation_B": 4194304,
+  "source_boundary": "arena::decisions_bound -> runtime::run_inner -> arena_manifest::preflight; refusal before resources admission/output acquire/EvaluationWorkers::start",
+  "scope": "native process1; no model constructor/search request reached by exact controlflow, not measured zero counter",
+  "measured_model_constructor_count": null,
+  "actual_loaded_identity": null,
+  "measured_Search_counter": null,
+  "source_pre_request_unentered": 64,
+  "original_planned_requests": 64,
+  "scientific_published_rows": 0,
+  "UNKNOWN": 64,
+  "joint_forward": 0,
+  "new_teacher_forward": 0,
+  "games": 0,
+  "original_second_operation_UNRUN": 32,
+  "first_operation_requests_UNRUN": 32,
+  "normal_guardian_return": null,
+  "actual_exception_return": {
+    "command": [
+      "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-frame-build-v1/image/quoridor-runner",
+      "decisions",
+      "--experiment",
+      "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-decisions64-entry-v1/sequence/run-000/experiment.json",
+      "--experiment-sha256",
+      "864e881b4c2b3a268250e05644188fd2e9337fed45dc233aa6bd1f7c539cf743"
+    ],
+    "status": "failed",
+    "child": {
+      "pid": 1402759,
+      "start_ticks": "90683401",
+      "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+    },
+    "launch_policy": {
+      "no_new_privs_requested": false,
+      "verified_before_exec": null
+    },
+    "cpu_plan": {
+      "management": [
+        18
+      ],
+      "commands": {
+        "run": [
+          12,
+          18
+        ],
+        "test": [
+          12
+        ]
+      },
+      "allocation": [
+        12,
+        18
+      ],
+      "resource_CPUs": 2,
+      "worker_CPUs": 1,
+      "library_threads": 1
+    },
+    "command_cpu_scope": "run",
+    "log_bytes_seen": 47,
+    "scope": "session group and periodically recorded descendants; no daemon adoption",
+    "error": "cycle child failed: ['/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-frame-build-v1/image/quoridor-runner', 'decisions', '--experiment', '/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-decisions64-entry-v1/sequence/run-000/experiment.json', '--experiment-sha256', '864e881b4c2b3a268250e05644188fd2e9337fed45dc233aa6bd1f7c539cf743']: 1",
+    "reason": "CycleStopped",
+    "exit_code": 1,
+    "remaining": [],
+    "direct_child_reaped": true,
+    "descendant_visibility": "observed",
+    "cleanup_complete": true,
+    "log_bytes_retained": 47,
+    "wall_seconds": 0.016708509996533394,
+    "handle_closes_attempted": [
+      "selector_close",
+      "pipe_close",
+      "pidfd_close",
+      "log_close"
+    ],
+    "primary_error": {
+      "type": "CycleStopped",
+      "message": "cycle child failed: ['/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-frame-build-v1/image/quoridor-runner', 'decisions', '--experiment', '/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-decisions64-entry-v1/sequence/run-000/experiment.json', '--experiment-sha256', '864e881b4c2b3a268250e05644188fd2e9337fed45dc233aa6bd1f7c539cf743']: 1"
+    },
+    "process_cleanup_complete": true,
+    "handle_closes_complete": true,
+    "signal_mask_restoration": "completed",
+    "final_record_persist": "completed",
+    "finalization_errors": []
+  },
+  "original_manifest_cleanup_complete": false,
+  "actual_exception_cleanup_complete": true,
+  "disk_pending_vs_actual_complete_preserved": true,
+  "missing_data_errors": [
+    {
+      "stage": "journal",
+      "type": "FileNotFoundError",
+      "message": "[Errno 2] No such file or directory: '/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-decisions64-entry-v1/data/selected_alpha/completed.jsonl.gz'",
+      "notes": []
+    },
+    {
+      "stage": "result",
+      "type": "FileNotFoundError",
+      "message": "[Errno 2] No such file or directory: '/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-decisions64-entry-v1/data/selected_alpha/result.json'",
+      "notes": []
+    },
+    {
+      "stage": "native_manifest",
+      "type": "FileNotFoundError",
+      "message": "[Errno 2] No such file or directory: '/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-decisions64-entry-v1/data/selected_alpha/manifest.json'",
+      "notes": []
+    },
+    {
+      "stage": "decision_metadata",
+      "type": "StopIteration",
+      "message": "",
+      "notes": []
+    }
+  ],
+  "parent_wall_seconds": 5.40192880993709,
+  "inner_lifecycle_wall_seconds": 0.2386477260151878,
+  "native_wall_seconds": 0.016708509996533394,
+  "clocks": "nested, not additive",
+  "source_locator_failure": {
+    "error": "rg supplied nonexistent src/run.rs",
+    "exit_code": 2,
+    "source_read_only": true,
+    "corrected": "restricted actual src tree; no target execution"
+  },
+  "firsterror_stopped": true,
+  "old_FAILED_unmodified": true,
+  "restart_refinalize": false,
+  "next_correction": "Per-operation output cap must cover retained native forecast while unchanged normal shared charged-root limit enforces original16MiB whole. No code/parser/guard change.",
+  "peak": null,
+  "full_fees": null
+}

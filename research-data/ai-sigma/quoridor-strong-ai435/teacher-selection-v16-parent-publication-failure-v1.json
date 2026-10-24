@@ -1,0 +1,121 @@
+{
+  "condition": "SAME b44f1162 FIRST16 native V components /32 original+trueLR views",
+  "job_id": "d09719d2-1e62-4554-b479-10333ddbc314",
+  "status": "FAILED",
+  "cause": "Root binder omitted data parent directory; current publisher mkdir(exist_ok=False) requires it",
+  "original_job_result": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-pilot-entry-v1/runtime/result.json",
+    "bytes": 523,
+    "mode": "0600",
+    "sha256": "602d5ff1a2c0cd60ab60c3200e91e3bc3398b1bd0d2077d9e78508cc9a46fd2c"
+  },
+  "original_config": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-pilot-entry-v1/runtime/config.json",
+    "bytes": 831,
+    "mode": "0600",
+    "sha256": "89aab88a3eb3f8f898c4abbcc8b10837dfb1e1f3e582c40491b353debfb58119"
+  },
+  "original_log": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-pilot-entry-v1/parent-input.log",
+    "bytes": 1076,
+    "mode": "0644",
+    "sha256": "b0c0e3feca4ad15ed2830528f59fb1cdc430d790545e928381038b427ef2a03a"
+  },
+  "original_controller_STOP": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-pilot-entry-v1/Root-controller-STOP.json",
+    "bytes": 2677,
+    "mode": "0644",
+    "sha256": "59051409be671aebd87fdfb7132ca643c68c38ded7b9c8fa08e7b0e1ba82dbbf"
+  },
+  "actual_return": {
+    "command": [
+      "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+      "-B",
+      "-m",
+      "quoridor_training.public_static_values",
+      "selection-parents",
+      "--config",
+      "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-pilot-entry-v1/selection-parents.config.json"
+    ],
+    "status": "failed",
+    "child": {
+      "pid": 1390617,
+      "start_ticks": "90557040",
+      "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+    },
+    "launch_policy": {
+      "no_new_privs_requested": false,
+      "verified_before_exec": null
+    },
+    "cpu_plan": {
+      "management": [
+        18
+      ],
+      "commands": {
+        "parents": [
+          12
+        ]
+      },
+      "allocation": [
+        12,
+        18
+      ],
+      "resource_CPUs": 2,
+      "worker_CPUs": 1,
+      "library_threads": 1
+    },
+    "command_cpu_scope": "parents",
+    "log_bytes_seen": 1076,
+    "scope": "session group and periodically recorded descendants; no daemon adoption",
+    "error": "cycle child failed: ['/home/vscode/.cache/inference/envs/quoridor-training/bin/python', '-B', '-m', 'quoridor_training.public_static_values', 'selection-parents', '--config', '/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-pilot-entry-v1/selection-parents.config.json']: 1",
+    "reason": "CycleStopped",
+    "exit_code": 1,
+    "remaining": [],
+    "direct_child_reaped": true,
+    "descendant_visibility": "observed",
+    "cleanup_complete": true,
+    "log_bytes_retained": 1076,
+    "wall_seconds": 0.13907775492407382,
+    "handle_closes_attempted": [
+      "selector_close",
+      "pipe_close",
+      "pidfd_close",
+      "log_close"
+    ],
+    "primary_error": {
+      "type": "CycleStopped",
+      "message": "cycle child failed: ['/home/vscode/.cache/inference/envs/quoridor-training/bin/python', '-B', '-m', 'quoridor_training.public_static_values', 'selection-parents', '--config', '/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-pilot-entry-v1/selection-parents.config.json']: 1"
+    },
+    "process_cleanup_complete": true,
+    "handle_closes_complete": true,
+    "signal_mask_restoration": "completed",
+    "final_record_persist": "completed",
+    "finalization_errors": []
+  },
+  "normal_return": null,
+  "disk_record_preserved_byref": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-pilot-entry-v1/parent-input.process.json",
+    "bytes": 2249,
+    "mode": "0600",
+    "sha256": "1e3209f0218ce0c5623012135191c2efb3bc8c607236fb6e6a3cdda194ef15f2"
+  },
+  "parent_wall_seconds": 0.4230864329729229,
+  "command_wall_seconds": 0.13907775492407382,
+  "clocks": "nested; not additive",
+  "source_controlflow": "Reached output.mkdir after native16 histories ->32views and identity/frame joins returned; actual row payload not saved or reconstructed",
+  "transient_decode": "Whole adopted T/V input source-receipts manifest parsed by maintained reader; fixed16V histories used. No bank arrays/model/teacher head in this stage; H source unopened.",
+  "publication": null,
+  "planned_views": 32,
+  "unpublished_views": 32,
+  "Search": 0,
+  "joint_forward": 0,
+  "teacher_forward": 0,
+  "games": 0,
+  "scientific_scope_basis": "selection-parents owner has no engine/head calls; this is not a zero counter inferred from exit status",
+  "original_failure_immutable": true,
+  "refinalization": false,
+  "reuse": "No lossless saved actual views available from failed publication; same deterministic native validation must be repeated for unfinished publication, not selection/refill/Search replay",
+  "old_allocated_B_before_collection": 1323008,
+  "peak": null,
+  "full_fees": null
+}

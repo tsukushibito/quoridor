@@ -4534,3 +4534,38 @@ C435のsource確認はbankのcanonical pair順とnative component順が異なる
 同accepted jobより前のauthority拒否は、briefにも残るdashboard過去参照313件の累積による64KiB上限超過だった。own metadata44,694Bとgoal brief19,299Bを記録し、元snapshot/0Bstdout/JSON decode失敗を保った。status/assignee/pause labelsや過去証拠・notes/historyを変えず、dashboardをactive参照9件/metadata2,150Bと既存結果索引へ整理した。authority code/上限は変えず、runtime/state/launcher作成前の拒否後に、未使用の同設定が最初のaccepted job18febとして通常入場した。新しい科学条件や失敗profileの補充ではない。source handoff準備で一度JS文字列のpre-command構文エラーも起き、command未起動の費NULLとして保持する。
 
 同A16にはretained source/manに限るACK framing/early-error保存の有限source-only確認を返した。実ACKやperf.dataを再現して埋める新runtimeは許可せず、sourceで支持できない点はUNKNOWNとする。このO commandとcollectionは停止したので、独立Q teacherV16の同b44fに戻る。最初の通常入力準備は、固定FIRST16 V original/trueLR32を既存native prefix ownerで公開するものに限り、model/forward/Search/game/selection RNGや新poolを加えない。入力準備の元実wallを同pilotのcommand180/parent240から一度だけ控除して後続のnormal32+32要求と必要joint<=32へ束縛し、source/LLM準備時間は計算枠と混同しない。H128保護・Tの科学利用0・必要な全T/V transient reader範囲の開示、全pause/seal/default/model/FAILEDNULLUNKNOWN費/50GBは保持する。
+
+
+### 2026-10-24: teacherV16 parent publication failed on a missing output parent
+
+同b44fの入力準備d09719d2は、Root binderがdata親directoryを用意していなかったため、現役selection_parentsのoutput.mkdir(exist_ok=False)でFileNotFoundErrorとなった。source controlflow上、固定16V historyから32 actual native viewsの対応検証を終えていたが、book/receiptは未公開で実view payloadも保存されていない。bank/model/joint/teacher/Search/gameには進まない入力準備であり、棋力やデータ適格性の失敗ではない。[元FAILED・実cleanup・費用](../research-data/ai-sigma/quoridor-strong-ai435/teacher-selection-v16-parent-publication-failure-v1.json)。whole T/V source-receipts JSONの通常parseと固定16V history利用を開示し、H sourceを開かない。
+
+元parent .4230864329729229sにcommand .13907775492407382sが含まれ、加算しない。normal return NULLと例外実返却のdirectreap/process+handles/remaining[]/mask-persist完了、元disk pending/attemptedを分けて保持した。新namespaceではdata親だけ事前作成し、同identity2eb19b48/core55f7540cの未完了入力公開を続ける。保存actual viewsがないため同じnative対応検証は再度必要だが、再選択・Search再演・標本補充ではない。元失敗保持1,323,008Bに小さいtail reserveを取り、同whole16MiBから控除した新上限14,143,488Bと最後1MiBを設定した。command残179.86092224507593s、parent残239.57691356702708sから整数239sへ切り下げる。submitが整数を要求した最初のmetadata拒否と0Bstdoutは保持し、runtime未作成を確認後に整数jobを通常発行した。受入れは入力公開・model/Search成功ではなく、元completion通知で回収する。prep helperのunused-import F401も保持し、不要importだけ除いて限定format/F,E9を通し、helperを再実行しなかった。
+
+Oは消費済み18feb FAILEDのまま、新profile/Search/parserを発行しない。同A16のsource-only仕事はenable/ACK channelを増やす案から、init+clear後の正確なowned PIDへ標準enabled attachし、通常一要求の後にperfを先に停止/reapする一案の確認へ絞った。request入出力・待機・attach uncertaintyとsampling overheadを含むwindowであり、純tree時間や元ACK失敗の治癒証明にはしない。未実行ACK専用fixtureを件数のために走らせず、元raw/profile/hash/費とUNKNOWNを保持する。
+
+
+### 2026-10-24: teacherV16 native parents published; sole normal decision producers issued
+
+補正した入力公開b90178b3は固定identity2eb19b48/core55f7540cに対してCOMPLETE16components/32views、book9e2a667a/receipt809dad75を返した。実command .13386787695344537sとouter .4413231839425862sは内包関係で加算しない。実directreap/process+handles/remaining[]/mask-persist完了とTMP空、元disk pending/attemptedを区別して保存した。[入力公開の有限結果](../research-data/ai-sigma/quoridor-strong-ai435/teacher-selection-v16-native-parents-result-v1.json)。元d097のFAILEDは変更せず、bank/model/joint/teacher/Search/gameはこの段階で0である。
+
+同b44fの次工程881bb316は現役sequence→prepare_selected_operation→RUN→finalizeを用い、selectedAlpha32要求、CedarAlpha32要求の順だけを固定した。各32のConfig/Plan/Experimentと同じnative book/full history/order、100ms/reserve5/1search thread、Control-LMR/path_tail/TT1M/D64/node1Mの通常対応をmetadataで確認した。normal A/B core配列は[12,12]でsole engineのAI12とmain18に解決し、workerを追加しない。current Build2fe88653とモデルの数値対応は既受入れのmath/parityのbyref範囲を維持し、新しいforwardやSearch成功をmetadataで認定しない。
+
+原入力2工程の実費を一度控除し、command残179.72705436812248s、parent残239.1355903830845sに対してwhole sequence outer179sをより狭い上限とした。現normal per-operation119sと60s回収余裕を維持し、command/outerの実費は後続diagnostic前に再び一度だけ控除する。common1+native3=family4GiB/host4、AI12/main18/lib1/GPU0を通常ownerが実入場で確認する。同whole16MiBの旧保持reserve2,039,808B、future diagnostic1MiB、top/tail512KiBを分け、新owned上限13,164,544Bとした。元failure保持を削除せずcap refundも行わない。accepted dispatchは64要求完了の証明ではなく、firsterror/UNKNOWN/残UNRUNをそのまま元completionで回収する。
+
+Oの標準attach source39180d63/entrycc59ecd4は、init+clear後のowned PIDへのenabled attachへ絞りFIFO/ACK経路を外した私有候補である。NEW2 changed-lifecycle定義はまだUNRUNで、旧ACK3や旧3の成功を再演しない。sourceを受け取っても消費済み18feb FAILEDから新O runtime/Search/offline parserへ自動延長しない。
+
+
+### 2026-10-24: teacherV16 stopped before Search by per-operation output admission
+
+元881bb316はselectedAlphaのnative processを起動したが、保存量preflightが10,881,627Bを要求し、Rootがprototypeのまま束縛した4MiBを上回って拒否した。runtime::run_innerの実行順では資源admission/output acquire/EvaluationWorkers初期化より前であり、Search/model constructorの実測counterやloadedidentityは未emitのNULLを保つ。source上64要求は未入場、公開結果0/UNKNOWN64、Cedar32はUNRUNであり、同じ要求の再選択・対局・Search補充は行っていない。[元FAILEDと保存量拒否](../research-data/ai-sigma/quoridor-strong-ai435/teacher-selection-v16-output-admission-failure-v1.json)。
+
+元parent5.40192880993709sにはinner lifecycle .2386477260151878sとnative .016708509996533394sが含まれる。outer/sequence cleanup true、normal manifestのcleanup false・guardian_return NULL・capture falseと、例外finally後の実directreap/process+handles/remaining[]/mask-persist完了を区別する。元manifestのdata欠損/decision_metadata StopIteration、disk pending/attemptedと全費を保持し、refinalize/restartしない。誤ったsrc/run.rs source locatorによるrg exit2も保持し、実src treeへ限定して訂正しただけでtargetを実行していない。
+
+同じ未入場64要求に対しnative forecast/guard/codeは変えず、11MiBのoperation上限を元whole16MiBの残holding内に束縛した。これは2つの11MiB予約や22MiB grantではなく、既存normal charged-rootsが両方の保存済み結果・controls・TMPの合計を12,808,192Bで拒否する。旧3工程保持reserve2,396,160B、future diagnostic1MiB、top/tail512KiBと合わせて元16MiBを増やさない。元native費を控除したcommand残179.71034585812595s/parent残233.7336615731474sを保持し、同じ32book/model/clock/seed/order/CPU/RAMで新namespaceの通常入場を準備する。Root内のmetadata不足の因果補正であり、新標本・新科学条件・成功の認定ではない。
+
+### 2026-10-24: standard enabled-attach source simplification passed only new model-free definitions
+
+A16のstandard-attach entrycc59ecd4/new tests7561e098を私有software域へexact stageし、新2定義だけPASS（guarded .060390341095626354s）した。通常chooseの返却/原例外/cancel前0dispatchと、既存closeの一回停止・early exit/KILL拒否を合成portsで確認した。旧3成功やACK3未実行は走らせず、actual perf/native/model/Search/offline reportは0である。[新software結果](../research-data/othello/strong-ai-n96/packed-standard-attach-software-result-v1.json)。stdin-redactionの既受入れMain変更を再演せず、製品/math/model/defaultは変えない。
+
+新prospective私有bindingはFIFO/enable-ACKを含まないsource/testだけを使い、歴史的post/ACK案/原18feb raw・hash・費は削除・再読・再parseしない。kernel sampling readiness/window/fullSearch coverageや正常flushは未資格であり、source/software成功は旧失敗のcureでも新O数値実行許可でもない。
