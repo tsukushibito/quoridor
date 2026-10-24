@@ -1,0 +1,104 @@
+{
+  "status": "NEW2_AND_CAUSALLY_AFFECTED_FAULT1_SOFTWARE_PASS_ONLY",
+  "source_cas": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-saved-format-software-v3/source-cas.json",
+    "bytes": 2528,
+    "mode": "0644",
+    "sha256": "aabee16da0edfe2aa2abbd95af9cfb45f40952d717d30a323a1521df89fbf28a"
+  },
+  "source_intake": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-saved-format-software-v3/source-intake.json",
+    "bytes": 805,
+    "mode": "0644",
+    "sha256": "1c7ebc53b53a442529494eeb25eb5c458287e4029d4812fe4f1f2d81ed8fb781"
+  },
+  "software_returned": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-saved-format-software-v3/software-returned.json",
+    "bytes": 4314,
+    "mode": "0644",
+    "sha256": "aac7207f6114e293f56097cd4b33a4a0c16890603e0bde45dca5bfda93554c34"
+  },
+  "full_log": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/teacher-selection-v16-saved-format-software-v3/new-only-tests.log",
+    "bytes": 760,
+    "mode": "0644",
+    "sha256": "804f172d880e2acb7e10a7a8a5ffce992915624d0d3fb996be5df5c72f3be57d"
+  },
+  "actual_return": {
+    "command": [
+      "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+      "-B",
+      "-m",
+      "unittest",
+      "test_public_static_values.SelectionSavedPublicationBoundary.test_compact_decisions_use_one_real_saved_decode_nn0",
+      "test_public_static_values.SelectionSavedPublicationBoundary.test_saved_producer_and_archive_correspondence_refuses_nn0",
+      "test_public_static_values.SelectionDiagnosticPublicationBoundary.test_diagnostic_publication_faults_preserve_partial_rows_and_primary_nn0",
+      "-v"
+    ],
+    "status": "complete",
+    "child": {
+      "pid": 1422268,
+      "start_ticks": "90921587",
+      "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+    },
+    "launch_policy": {
+      "no_new_privs_requested": false,
+      "verified_before_exec": null
+    },
+    "cpu_plan": {
+      "management": [
+        18
+      ],
+      "commands": {
+        "new_only": [
+          12
+        ]
+      },
+      "allocation": [
+        12,
+        18
+      ],
+      "resource_CPUs": 2,
+      "worker_CPUs": 1,
+      "library_threads": 1
+    },
+    "command_cpu_scope": "new_only",
+    "log_bytes_seen": 760,
+    "scope": "session group and periodically recorded descendants; no daemon adoption",
+    "exit_code": 0,
+    "remaining": [],
+    "direct_child_reaped": true,
+    "descendant_visibility": "observed",
+    "cleanup_complete": true,
+    "log_bytes_retained": 760,
+    "wall_seconds": 0.46608745004050434,
+    "handle_closes_attempted": [
+      "selector_close",
+      "pipe_close",
+      "pidfd_close",
+      "log_close"
+    ],
+    "primary_error": null,
+    "process_cleanup_complete": true,
+    "handle_closes_complete": true,
+    "signal_mask_restoration": "completed",
+    "final_record_persist": "completed",
+    "finalization_errors": []
+  },
+  "new_definitions": 2,
+  "affected_existing_definition": 1,
+  "unchanged_successful_suite_replay": 0,
+  "real_normal_saved_reader": "Bound current research-lifecycle.py c240c8a5 arena_reference_report on synthetic actual reference-result/archive/native manifest; not a copied decoder",
+  "actual_production_archive_decode": 0,
+  "actual_model_bank_Search_joint_teacher_game_RNG_inputs": 0,
+  "original_R1_assertions_and_scenarios_retained": true,
+  "no_new_Rust_ABI_or_parity_replay": true,
+  "source": {
+    "public_static_values": "fca903e77e8a23f53d81a3a9eee74ae439132ae6f2984643ccc264535ec18a00",
+    "test": "a0608a81a00d4e1faf0589044063c030b9ddb5470e53b6f51f560c8d8a68dd80"
+  },
+  "actual_directed_allocated_B": 28672,
+  "point_not_peak": true,
+  "numerical_admission": null,
+  "source_author_failures": "checks-01 slice proof and precommand missing guard-store retained in original source packet/STOP; not retroPASS"
+}

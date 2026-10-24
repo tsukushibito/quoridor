@@ -1623,6 +1623,36 @@ def _selection_producer(source, book_ref):
     return completion
 
 
+def _selection_saved_decision_report(source, book_ref, saved_reader_source):
+    """Use the maintained normal publication reader; no secondary archive decoder."""
+    import types
+
+    completion = _selection_producer(source, book_ref)
+    configuration = json.loads(bound_file_bytes(source["configuration"], 524288))
+    inventory = {ref["path"]: ref for ref in completion["data"]["files"]}
+    root = Path(configuration["output"])
+    required = {
+        "journal": root / "completed.jsonl.gz",
+        "result": root / "result.json",
+        "native_manifest": root / "manifest.json",
+    }
+    if any(str(path) not in inventory for path in required.values()):
+        raise ValueError("missing normal decisions canonical saved inventory")
+    files = {name: inventory[str(path)] for name, path in required.items()}
+    if files["result"] != source["report"]:
+        raise ValueError("normal decisions result inventory differs from producer")
+    experiment = json.loads(bound_file_bytes(completion["experiment"], 2 * 1024**2))
+    expected_build = json.loads(bound_file_bytes(experiment["build_manifest"], 2 * 1024**2))
+    # Execute precisely the bound maintained source bytes, not a second path read.
+    # A non-main module name imports definitions only; no lifecycle job is dispatched.
+    reader = types.ModuleType("quoridor_selection_saved_reader")
+    reader.__file__ = saved_reader_source["path"]
+    raw = bound_file_bytes(saved_reader_source, 512 * 1024)
+    exec(compile(raw, reader.__file__, "exec"), reader.__dict__)
+    report = reader.arena_reference_report(configuration, files, expected_build=expected_build)
+    return configuration, report
+
+
 def selection_diagnostic(config):
     """Saved bank + two normal decisions + one current joint batch; no Search/teacher."""
     from .static_public_corpus import StaticTeacherCorpus
@@ -1670,9 +1700,9 @@ def selection_diagnostic(config):
             decisions = {}
             for name in ("selected_alpha", "cedar_alpha"):
                 source = config["decisions"][name]
-                _selection_producer(source, config["book"])
-                cfg = json.loads(bound_file_bytes(source["configuration"], 524288))
-                report = json.loads(bound_file_bytes(source["report"], 4 * 1024**2))
+                cfg, report = _selection_saved_decision_report(
+                    source, config["book"], config["saved_reader_source"]
+                )
                 if Path(source["report"]["path"]) != Path(cfg["output"]) / "result.json":
                     raise ValueError("decision result path differs from normal producer")
                 if cfg["arena"]["evaluator_sha256"] != [source["evaluator_sha256"]]:

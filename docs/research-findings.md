@@ -4580,3 +4580,12 @@ A16のstandard-attach entrycc59ecd4/new tests7561e098を私有software域へexac
 入場前の実形式照合で、current618aの診断callerがplain quoridor-decisions-v1/outcomes32を期待する一方、実normal result.jsonはquoridor.arena.reference-result.v1・report.outcomes空・outcome_count32・元gzip archive参照であることが分かった。source/control上の未接続であり、保存診断を試しに失敗させたりSearchを再発行したりしない。同C435.1へ、このcompletion inventoryを現役arena_reference_reportへ渡す最小owner補正とactual compact形式を使うNEW model-free確認を返した。gzip規則の複製、別展開cache/registry/framework、新sample/teacher/forwardは加えない。既R1 fault fixtureのmock配線だけが因果的に影響する場合は元assertions/scenariosを保持して機械的に補正し、そのaffected regressionだけRootが確認する。新reviewerや成功suite再演/Root ACKを入口にしない。
 
 caller補正の初回2配送は、Rootが親issue435（owner324）を指定したためRPC前のowner照合に拒否された。元0Bstdoutと失敗を保持し、既存子435.1の同C owner/in_progressを通常wrapperで確認して一つの合流bodyを送達した。新actor/task/数値実行は作らず、この配送受付をsource作業開始や資格成功とは扱わない。
+
+
+### 2026-10-24: teacherV16 saved-format caller repaired using the maintained lossless reader
+
+同C435.1のc5776926/4a2e0f5cをMainの2ファイルへexact CASした。public_static_values fca903e7の新しい局所saved-reader portは、元completion/Experiment/Config/Plan/book/Build/inventoryの対応を保ち、byte-boundの現役research-lifecycle.py c240c8a5のarena_reference_reportで実compact resultとcanonical archiveをconsumeする。新しいgzip decoder、展開subcache、別producerやSearchは作らない。saved_reader_sourceの実FileRefを診断config/通常runtime依存へ束縛する。
+
+合成actual compact-publication形式を使うNEW2と、mock配線だけ機械的に追従した既存R1 fault1の計3定義がPASS（guarded .46608745004050434s）した。既存のfault/cancel/scenario/name/primary-group/remaining/cleanup assertionsは保持した。旧fake3/API2/Rust/ABI/parityや実64要求は再演していない。[限定software結果](../research-data/ai-sigma/quoridor-strong-ai435/teacher-selection-v16-saved-format-software-result-v3.json)。現在の実archive/body/bank/model/jointはこのsoftwareで開かず、normal source readerの合成portだけを検証した。元source checks-01のslice assertion失敗とguard-store precommand欠損は不変である。
+
+元64 normal producerのper-request詳細は、これから同b44f保存診断が通常readerで一度consumeする。既採用bankの必要な全T/V array parseは許可範囲として開示し、科学的利用は元16V成分32行のみ、H source/labelは開かない。current joint32が必要な同tuple/同actual-view raw保存receiptは供給されておらず、元parity出力をその代用品として読まない。最大32の目的別joint rowsだけを一回、追加Search/teacherforward/fit/gameを行わず、同pilot残command/parentとwhole16MiBへ束縛する。

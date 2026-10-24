@@ -484,6 +484,7 @@ class SelectionDiagnosticPublicationBoundary(unittest.TestCase):
                     core_library=reference("/synthetic/library"),
                     current=current,
                     cache_directory="/synthetic/cache",
+                    saved_reader_source={"path": "/synthetic/saved-reader"},
                     output=str(Path(temporary) / "diagnostic"),
                     decisions={},
                 )
@@ -610,7 +611,16 @@ class SelectionDiagnosticPublicationBoundary(unittest.TestCase):
                             ).encode(),
                         )
                     )
-                    stack.enter_context(patch.object(values, "_selection_producer"))
+                    stack.enter_context(
+                        patch.object(
+                            values,
+                            "_selection_saved_decision_report",
+                            side_effect=lambda source, book_ref, reader_source: (
+                                documents[source["configuration"]["path"]],
+                                documents[source["report"]["path"]],
+                            ),
+                        )
+                    )
                     stack.enter_context(
                         patch.object(
                             values,
@@ -693,6 +703,254 @@ class SelectionDiagnosticPublicationBoundary(unittest.TestCase):
 
                     for error in expected:
                         self.assertIn(type(error).__name__, types_in(saved["error"]))
+
+
+class SelectionSavedPublicationBoundary(unittest.TestCase):
+    """Synthetic normal files through the REAL maintained reference-result reader."""
+
+    @staticmethod
+    def fixture(root):
+        import copy
+        import gzip
+
+        root.mkdir()
+        authority, views = SelectionDiagnosticJoinBoundary.fixture()
+        book = {"openings": [{"prefix": view["prefix"]} for view in views]}
+        output = root / "data"
+        output.mkdir()
+
+        def store(path, value):
+            path.write_text(json.dumps(value, allow_nan=False))
+            path.chmod(0o644)
+            return ref(path)
+
+        book_ref = store(root / "book.json", book)
+        configuration = dict(
+            output=str(output),
+            run_id="synthetic-saved-decisions",
+            games=32,
+            max_plies=200,
+            ruleset="standard_2p_threefold",
+            arena=dict(
+                decision_only=True,
+                comparison="whole_wall_time",
+                clock_policy="strict_unknown",
+                return_reserve_ms=5,
+                retained_outcome_bytes=32768,
+                book=book,
+            ),
+            engines=[dict(kind="nnue", lmr=False)],
+            cycle=None,
+            deadline_unix_ms=0,
+            train_games=None,
+            validation_games=None,
+            mcts_max_bytes=268435456,
+            mcts_max_nodes=200000,
+            pause_file=None,
+            simulations=64,
+            temperature=1.0,
+        )
+        configuration_ref = store(root / "configuration.json", configuration)
+        build = store(root / "build.json", dict(artifact=dict(sha256="f" * 64)))
+        plan = store(root / "plan.json", dict(phase="compare", book=book_ref))
+        experiment = store(
+            root / "experiment.json",
+            dict(
+                config=configuration_ref,
+                phase="compare",
+                canonical_plan_sha256=plan["sha256"],
+                build_manifest=build,
+            ),
+        )
+        intent = store(root / "intent.json", dict(approved_plan=plan, experiment=experiment))
+        outcomes = []
+        for i, view in enumerate(views):
+            outcomes.append(
+                dict(
+                    game=i,
+                    family=f"{configuration['run_id']}-family-{i:06}",
+                    moves=view["prefix"],
+                    winner=None,
+                    status="decision",
+                    failure=None,
+                    started=True,
+                    observations=[
+                        dict(
+                            side=view["side"],
+                            engine_index=0,
+                            action=0,
+                            accepted=True,
+                            failure=None,
+                            engine_error=None,
+                            caller_started_ns=0,
+                            deadline_ns=100_000_000,
+                            returned_ns=101_000_000,
+                            counters=dict(
+                                authority_receipt_ns=99_000_000,
+                                drain_finished_ns=101_000_000,
+                                inflight_after_drain=0,
+                            ),
+                        )
+                    ],
+                )
+            )
+        raw = b"".join((json.dumps(row) + "\n").encode() for row in outcomes)
+        journal = output / "completed.jsonl.gz"
+        journal.write_bytes(gzip.compress(raw, mtime=0))
+        journal.chmod(0o644)
+        journal_ref = ref(journal)
+        report = dict(
+            schema="quoridor-decisions-v1",
+            run_id=configuration["run_id"],
+            planned=32,
+            outcomes=[],
+            stopped=None,
+            all_workers_joined=True,
+            rows=0,
+            dataset=None,
+            score=None,
+        )
+        publication = dict(
+            schema="quoridor.arena.reference-result.v1",
+            report=report,
+            archive=dict(
+                encoding="gzip-single-member-v1",
+                compressed=journal_ref,
+                raw_sha256=hashlib.sha256(raw).hexdigest(),
+                raw_bytes=len(raw),
+            ),
+            outcome_count=32,
+            journal_count=32,
+            journal_bytes=len(raw),
+            journal_sha256=hashlib.sha256(raw).hexdigest(),
+            failure_attribution=None,
+            archive_wall_seconds=0.0,
+            archive_allocated_bytes=0,
+        )
+        result_ref = store(output / "result.json", publication)
+        manifest = dict(
+            result=publication,
+            binding=dict(config=copy.deepcopy(configuration), executable_sha256="f" * 64),
+            cleanup=dict(archive_closed_verified=True, all_workers_joined=True),
+            artifacts={
+                "result.json": {k: result_ref[k] for k in ("sha256", "bytes", "mode")},
+                "completed.jsonl.gz": {k: journal_ref[k] for k in ("sha256", "bytes", "mode")},
+            },
+        )
+        native = store(output / "manifest.json", manifest)
+        completion = dict(
+            schema="quoridor.research.completion.v1",
+            kind="run",
+            status="PASS",
+            primary=None,
+            secondary=[],
+            cleanup_complete=True,
+            remaining=[],
+            experiment=experiment,
+            intent=intent,
+            data=dict(files=[journal_ref, result_ref, native]),
+        )
+        completion_path = root / "completion.json"
+        source = dict(
+            completion=store(completion_path, completion),
+            configuration=configuration_ref,
+            report=result_ref,
+        )
+        # Source dependency only. No experiment/model/library/input body is read.
+        reader = ref(Path("/workspaces/quoridor/scripts/dev/research-lifecycle.py"))
+        return dict(
+            source=source,
+            book_ref=book_ref,
+            book=book,
+            views=views,
+            reader=reader,
+            completion=completion,
+            completion_path=completion_path,
+            publication=publication,
+            manifest=manifest,
+            output=output,
+            store=store,
+        )
+
+    def test_compact_decisions_use_one_real_saved_decode_nn0(self):
+        import os
+        import tempfile
+        import zlib
+
+        with tempfile.TemporaryDirectory() as directory:
+            fixture = self.fixture(Path(directory) / "producer")
+            source = fixture["source"]
+            original = json.loads(Path(source["report"]["path"]).read_bytes())
+            self.assertEqual(original["schema"], "quoridor.arena.reference-result.v1")
+            self.assertEqual(original["report"]["outcomes"], [])
+            before = set(Path(directory).rglob("*"))
+            with (
+                patch.object(os, "open", wraps=os.open) as opened,
+                patch.object(zlib, "decompressobj", wraps=zlib.decompressobj) as decoder,
+            ):
+                config, report = values._selection_saved_decision_report(
+                    source, fixture["book_ref"], fixture["reader"]
+                )
+            self.assertEqual(decoder.call_count, 1)
+            journal = str(fixture["output"] / "completed.jsonl.gz")
+            self.assertEqual(sum(str(c.args[0]) == journal for c in opened.call_args_list), 1)
+            self.assertEqual(report["schema"], "quoridor-decisions-v1")
+            self.assertEqual(len(report["outcomes"]), 32)
+            self.assertEqual(
+                len(
+                    values._selection_decision_join(
+                        report, config, fixture["book"], fixture["views"]
+                    )
+                ),
+                32,
+            )
+            self.assertEqual(set(Path(directory).rglob("*")), before)
+            self.assertEqual(json.loads(Path(source["report"]["path"]).read_bytes()), original)
+
+    def test_saved_producer_and_archive_correspondence_refuses_nn0(self):
+        import tempfile
+
+        for cause in (
+            "missing_journal",
+            "changed_journal_sha",
+            "changed_producer",
+            "wrong_archive_ref",
+        ):
+            with self.subTest(cause=cause), tempfile.TemporaryDirectory() as directory:
+                fixture = self.fixture(Path(directory) / "producer")
+                source, completion = fixture["source"], fixture["completion"]
+                store = fixture["store"]
+                if cause == "missing_journal":
+                    completion["data"]["files"].pop(0)
+                elif cause == "changed_journal_sha":
+                    completion["data"]["files"][0] = {
+                        **completion["data"]["files"][0],
+                        "sha256": "0" * 64,
+                    }
+                elif cause == "changed_producer":
+                    source["configuration"] = store(
+                        Path(directory) / "different-configuration.json", {"synthetic": True}
+                    )
+                else:
+                    publication = fixture["publication"]
+                    publication["archive"]["compressed"] = {
+                        **publication["archive"]["compressed"],
+                        "sha256": "0" * 64,
+                    }
+                    source["report"] = store(fixture["output"] / "result.json", publication)
+                    fixture["manifest"]["result"] = publication
+                    fixture["manifest"]["artifacts"]["result.json"] = {
+                        k: source["report"][k] for k in ("sha256", "bytes", "mode")
+                    }
+                    completion["data"]["files"][1] = source["report"]
+                    completion["data"]["files"][2] = store(
+                        fixture["output"] / "manifest.json", fixture["manifest"]
+                    )
+                source["completion"] = store(fixture["completion_path"], completion)
+                with self.assertRaises(ValueError):
+                    values._selection_saved_decision_report(
+                        source, fixture["book_ref"], fixture["reader"]
+                    )
 
 
 if __name__ == "__main__":
