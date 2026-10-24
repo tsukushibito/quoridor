@@ -785,6 +785,12 @@ fn prepare_trajectories(c: &InputConfig, settings: &TrajectoryInput) -> Result<s
         .as_ref()
         .map(quoridor_data::StaticInputExclusions::from_manifest)
         .transpose()?;
+    let mut excluded_prefixes = Vec::with_capacity(c.excluded_books.len());
+    for reference in &c.excluded_books {
+        excluded_prefixes.push(quoridor_data::common_corpus::excluded_book_prefixes(
+            &reference.read()?,
+        )?);
+    }
     std::fs::create_dir(&c.output)?;
     let marker = c.output.join("INCOMPLETE");
     std::fs::write(
@@ -851,11 +857,8 @@ fn prepare_trajectories(c: &InputConfig, settings: &TrajectoryInput) -> Result<s
         .map(|row| (row.id.clone(), row.source_series.clone()))
         .collect::<BTreeMap<_, _>>();
     let generated = joined.len();
-    for (book, reference) in c.excluded_books.iter().enumerate() {
-        for (i, prefix) in quoridor_data::common_corpus::excluded_book_prefixes(&reference.read()?)?
-            .into_iter()
-            .enumerate()
-        {
+    for (book, prefixes) in excluded_prefixes.into_iter().enumerate() {
+        for (i, prefix) in prefixes.into_iter().enumerate() {
             let id = format!("excluded-book-{book}-{i}");
             sources.insert(id.clone(), id.clone());
             joined.push((id, prefix));
@@ -1503,6 +1506,48 @@ mod tests {
 #[cfg(test)]
 mod trajectory_input_tests {
     use super::*;
+
+    #[test]
+    fn malformed_trajectory_exclusion_refuses_before_output_and_generation() {
+        let root = std::env::temp_dir().join(format!(
+            "trajectory-exclusion-predecode-{}",
+            std::process::id()
+        ));
+        std::fs::create_dir(&root).unwrap();
+        let valid = write_input_json(
+            &root,
+            "valid-book.json",
+            &serde_json::json!({"openings":[]}),
+        )
+        .unwrap();
+        let malformed = write_input_json(
+            &root,
+            "malformed-book.json",
+            &serde_json::json!({"families":[], "complete":true}),
+        )
+        .unwrap();
+        let c: InputConfig = serde_json::from_value(serde_json::json!({
+            "families":1,"prefix_seed":4352026102401_u64,"prefix_lengths":[],
+            "split_seed":4352026102403_u64,"excluded_books":[valid,malformed],
+            "output":root.join("unentered-output"),
+            "trajectory":{"max_plies":1,"wall_layer_observations":[0,1,0],
+                "selection_seed":4352026102402_u64,
+                "split_counts":{"train":1,"validation":0,"test":0}}
+        }))
+        .unwrap();
+        c.trajectory.as_ref().unwrap().validate(&c).unwrap();
+        let error = prepare_inputs(&c).unwrap_err().to_string();
+        assert!(
+            error.contains("excluded book must have one complete native prefix collection"),
+            "{error}"
+        );
+        // Output creation precedes the existing RNG/generation loop. Rejection
+        // here proves a later malformed book is decoded before either boundary.
+        assert!(!c.output.exists());
+        std::fs::remove_file(root.join("valid-book.json")).unwrap();
+        std::fs::remove_file(root.join("malformed-book.json")).unwrap();
+        std::fs::remove_dir(root).unwrap();
+    }
 
     #[test]
     fn fixed_1024_midstock_pool_accepts_and_overflow_refuses_without_generation() {
