@@ -1,0 +1,108 @@
+{
+  "schema": "quoridor.research.coverage32768-generation-result.v1",
+  "condition": "SAME f6af32768 new static-teacher coverage/same-model fit pipeline; generation and saved rank qualification only",
+  "jobId": "7365a7de-7c74-418c-bfe4-bc37513b6e7a",
+  "status": "GENERATION_AND_FROZEN_RANK_COMPLETE_SUBSET_UNISSUED",
+  "normalManifest": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/sequence/run-000/operation/manifest.json",
+    "bytes": 11522,
+    "mode": "0644",
+    "sha256": "43c303609f1fa7abfdef417da0c625e04f4ee44f13dafce9e9aca1d4e1fda337"
+  },
+  "sequenceResult": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/sequence/result.json",
+    "bytes": 2572,
+    "mode": "0644",
+    "sha256": "8cd49b09a39b7ce2a8161914a1caf2893f05790b3bc8779c7d9a6251e06666ae"
+  },
+  "outerResult": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/runtime/result.json",
+    "bytes": 522,
+    "mode": "0600",
+    "sha256": "aa1bda82d1e86638185e93fbcea5341836c5c3cb5bf3e466aded5333b1afbab2"
+  },
+  "collection": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/completion-7365a7de/collection.json",
+    "bytes": 3689,
+    "mode": "0644",
+    "sha256": "e830e0157fb802c8b23015817bfabbc3032c50509fe3e26086bd1ffbccbd9cf0"
+  },
+  "rankedCensus": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/completion-7365a7de/ranked-component-census-v2.json",
+    "bytes": 1860690,
+    "mode": "0644",
+    "sha256": "3d934d29521f286cb9294ae20cf47e610a8e00f6bfee7e6c20a07c9bf47113b2"
+  },
+  "projectionReceipt": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/completion-7365a7de/metadata-projection-receipt.json",
+    "bytes": 1607,
+    "mode": "0644",
+    "sha256": "a8070038051598474bdf5011a1abe0b224f07fcea9e3dd32635dc854bdf77360"
+  },
+  "actualGenerationSTOP": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/completion-7365a7de/generation-actual-STOP.json",
+    "bytes": 3426,
+    "mode": "0644",
+    "sha256": "7ec4d805d8761399911fb862d6c5770d8bb8fc0a61cf6ce87a2927af31e9c9d9"
+  },
+  "projectionActualReturn": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/completion-7365a7de/projection-returned.json",
+    "bytes": 3246,
+    "mode": "0644",
+    "sha256": "f3dace2de59d68d96a4c3bd7c6b9dd02ba9ae1ef6388f190df7281ae809c1dea"
+  },
+  "originalFixedSeries": 32768,
+  "generatedTransitions": 1838377,
+  "sourceObservations": 7615,
+  "originalPoolComponents": {
+    "requested32768": 32768,
+    "actual": 7615,
+    "deficit": 25153
+  },
+  "prospectiveSelection": {
+    "selected": 5120,
+    "train": 4096,
+    "selectionV": 1024,
+    "H": 0,
+    "singletonMembers": 1,
+    "unassigned": 2495,
+    "deficitTo5120": 0
+  },
+  "nativeReported": {
+    "search_calls": 0,
+    "teacher_calls": 0,
+    "outcomes_selected": false,
+    "model_constructor_count": null
+  },
+  "costs": {
+    "outerSeconds": 195.39369166700635,
+    "innerJobIncludedSeconds": 186.76900243002456,
+    "nativeCommandIncludedSeconds": 186.16807471204083,
+    "projectionCommandSeparateSeconds": 1.7585953749949113,
+    "nestedAddedSeconds": 0,
+    "fullFees": null
+  },
+  "returnedBoundary": {
+    "normalSequencePASS": true,
+    "normalDataPASS": true,
+    "originalCaptureComplete": true,
+    "directReaped": true,
+    "processHandlesComplete": true,
+    "remaining": [],
+    "actualMaskPersist": ["completed", "completed"],
+    "diskMaskPersist": ["pending", "attempted"],
+    "projectionReaped": true,
+    "projectionHandlesComplete": true,
+    "projectionRemaining": []
+  },
+  "currentAffectedStorage": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/coverage32768-t4096-v1024-entry-v1/sequence/run-000/operation/storage-usage.json",
+    "bytes": 1114,
+    "mode": "0644",
+    "sha256": "27c19bd125e8057093c1292764f1845f20f5cf70a49ab580378d5e236451fa4d"
+  },
+  "holding": "Same new2GiB all input/class/teacher/fit/control/log/partial/TMP roots;179191808B point after generation before later small metadata, not peak/global occupancy/free credit. Globaldecimal50GB.",
+  "scientificScope": "Source32768 series complete;7615 native components is not final T denominator. Native saved-only selection still owns actual selected observation/source/wholecomponent checks. No label/teacher/fit/strength/default qualification.",
+  "decodeScope": "ONE whole new162421855B schedule and1835983B partition parse+same-read identity verification, full new context/history bytes transient; only published rank/member/source/count used, no geometry/rank RNG recomputation; old source/H/bank/model/labels unopened by collector. Original native excluded-parent protected metadata scope stays disclosed.",
+  "limits": "No reseed/refill/second generation; all prior failed pools/costs/pauses/seals/H128/defaultmodels/foreign retained; historical/global exposure and fit independence UNKNOWN."
+}
