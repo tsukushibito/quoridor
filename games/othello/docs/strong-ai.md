@@ -153,3 +153,5 @@ oldfree/物理回収、未変更binaryの速度比、peak、公開weight配布�
 元c7/9cb/cbde/2becのFAILED/NULL/費用は今回の成功で補完・上書きしない。
 
 2026-10-25のprepared-mask比較は[保存canonical](../../../research-data/othello/strong-ai-n96/cached-flips-continuous128-result-v1.json)で全128要求完了、固定32組は全10項目一致。同持時間は完成深度31組同じ/候補1組−1で、改善を確認できなかった。浅い固定clockや異なるtimed workから一般速度・棋力を結論せず、追加candidate/測定は自動選択しない。O reader/collection実STOP後のwindowでは、既選択Q共通root深さ4のsource準備と通常資格を進める。大きな対局よりperformance gapを先に扱う人間方針、既定モデル、全旧結果・費用は保持する。
+
+2026-10-25の工程判断はcached/prepared mask b6cbecddを非採用とし、保守するRustをD110d596へ戻した。所有する四差分だけを保存inverse/CASで撤去し、対象六sourceの元bytes一致を確認した。候補専用API/NEW2を外し、originalFlip/packed update/必須cursor fallback/現役rules testsを保持する。再buildや旧検査再演は不要で、候補のsource/画像/資格/全測定と費用は保存する。次の有限診断は保存f0/p32 gapから選んだroot mid/end driverの意味と実遷移で、同A16/B21のsource準備後に必要なら通常1000ms要求を各一回だけ行う。driver内既計算値のbounded private captureに限定し、追加clockやtree-node instrumentationは入れない。数値未発行、Q既選択96要求が先にreadyならその実windowを使う。

@@ -1,10 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Incremental feature indices for the exact pinned Egaroucid geometry.
 
-use crate::{
-    BLACK, RuleError,
-    bitboard::{Position, PreparedMove},
-};
+use crate::{BLACK, RuleError, bitboard::Position};
 
 use super::{
     N_FEATURES,
@@ -131,20 +128,13 @@ impl FeatureState {
 
     pub fn play(&mut self, index: u32) -> Result<Undo, RuleError> {
         let before = self.position;
-        let prepared = before.prepare_move(index)?;
-        Ok(self
-            .play_prepared(&prepared)
-            .expect("fresh feature parent move"))
-    }
-
-    // The Position owner validates the complete parent before any feature/count
-    // mutation. The checked full mask is shared with ordering and search children.
-    pub(crate) fn play_prepared(&mut self, prepared: &PreparedMove<'_>) -> Option<Undo> {
-        let before = self.position;
-        let after = before.play_prepared(prepared)?;
-        let index = prepared.index();
-        let own_digit = if before.to_move() == BLACK { 0 } else { 1 };
-        let flipped = prepared.flipped();
+        let after = before.play(index)?;
+        let (new_own, old_opponent, own_digit) = if before.to_move() == BLACK {
+            (after.black(), before.white(), 0)
+        } else {
+            (after.white(), before.black(), 1)
+        };
+        let flipped = new_own & old_opponent;
         self.change(index as u8, 2, own_digit);
         let mut bits = flipped;
         while bits != 0 {
@@ -160,7 +150,7 @@ impl FeatureState {
         }
         self.occupied += 1;
         self.position = after;
-        Some(Undo {
+        Ok(Undo {
             before,
             after,
             placed: Some(index as u8),
