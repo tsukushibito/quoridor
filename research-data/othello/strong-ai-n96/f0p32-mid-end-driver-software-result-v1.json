@@ -1,0 +1,430 @@
+{
+  "status": "PRIVATE_ROOT_DRIVER_SOFTWARE_QUALIFIED_MAIN_RESTORED",
+  "job": "e4f1241a-1576-405e-b1c5-4e6db66979a6",
+  "qualification": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/f0p32-mid-end-driver-diagnostic-v1/software-v1/qualification.json",
+    "bytes": 18251,
+    "mode": "0644",
+    "sha256": "ac6f2267c46067aa87352b8266604068c7b85fd796a4caea1aa0edc8170e0e55"
+  },
+  "config": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/f0p32-mid-end-driver-diagnostic-v1/software-v1/config.json",
+    "bytes": 128352,
+    "mode": "0644",
+    "sha256": "6eb5ca5dd70c5d1e9490fb61094decc7133a3760843a40370bd804b4a5b0b054"
+  },
+  "newModelFreeDefinitions": 3,
+  "oldTestsRepeated": 0,
+  "images": {
+    "rust": {
+      "image": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/f0p32-mid-end-driver-diagnostic-v1/software-v1/rust-mid-end-driver",
+        "bytes": 2246664,
+        "mode": "0555",
+        "sha256": "68878e8257727537be92412b81a83cdb517111bbaf7546c427407b21965bcbed"
+      },
+      "cargoArtifact": {
+        "reason": "compiler-artifact",
+        "package_id": "path+file:///workspaces/quoridor/games/othello/crates/othello-core#0.1.0",
+        "manifest_path": "/workspaces/quoridor/games/othello/crates/othello-core/Cargo.toml",
+        "target": {
+          "kind": [
+            "lib"
+          ],
+          "crate_types": [
+            "lib"
+          ],
+          "name": "othello_core",
+          "src_path": "/workspaces/quoridor/games/othello/crates/othello-core/src/lib.rs",
+          "edition": "2024",
+          "doc": true,
+          "doctest": true,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "3",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": true
+        },
+        "features": [],
+        "filenames": [
+          "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target/release/deps/othello_core-869a122208e5bf43"
+        ],
+        "executable": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target/release/deps/othello_core-869a122208e5bf43",
+        "fresh": false
+      },
+      "depfile": {
+        "path": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target/release/deps/othello_core-869a122208e5bf43.d",
+        "bytes": 4885,
+        "mode": "0644",
+        "sha256": "e6c1120cc9de28f8c33e6af4e78f17cdc9bdbf7b03ee47bb46da1c2944b83cda"
+      },
+      "dependencyCount": 25
+    },
+    "original": {
+      "image": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/f0p32-mid-end-driver-diagnostic-v1/software-v1/original-mid-end-driver",
+        "bytes": 961808,
+        "mode": "0555",
+        "sha256": "04e418d4d94fd359a890ee0f940b30b49ea8b66ac60687a87c54d7e749dfc6d2"
+      },
+      "depfile": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/f0p32-mid-end-driver-diagnostic-v1/software-v1/original.d",
+        "bytes": 28173,
+        "mode": "0644",
+        "sha256": "ab715b293755027db0a225d9652a208a811041390438891d5807661039a796b0"
+      },
+      "dependencyCount": 527
+    }
+  },
+  "ELFLibraryBinding": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/f0p32-mid-end-driver-diagnostic-v1/software-v1/completion-e4f1241a/ELF-library-binding.json",
+    "bytes": 5246,
+    "mode": "0644",
+    "sha256": "73a41c7113cd01c472f854490d040a7562cde7dfda41bb2d4cc5aae8be447204"
+  },
+  "actualLoadedLibraries": null,
+  "executedISA": null,
+  "asBuiltSourceRestoration": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/f0p32-mid-end-driver-diagnostic-v1/software-v1/completion-e4f1241a/source-restoration.json",
+    "bytes": 3307,
+    "mode": "0644",
+    "sha256": "dfa9569ab22915d7c21a1cee6d5672e44eab865c851fe5112a9bb979c29e4c3a"
+  },
+  "commands": [
+    {
+      "name": "rust-new-observation-fixture",
+      "receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/f0p32-mid-end-driver-diagnostic-v1/software-v1/rust-new-observation-fixture.returned.json",
+        "bytes": 4008,
+        "mode": "0644",
+        "sha256": "e8cf4efbd9256f38996b0c651963c96e048683e1d7b183d482163d5ad6d0950d"
+      },
+      "actual": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "test",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "/workspaces/quoridor/Cargo.toml",
+          "-j1",
+          "--release",
+          "--message-format=json-render-diagnostics",
+          "-p",
+          "othello-core",
+          "--lib",
+          "full_search::driver_capture::mid_end_capture_bounds_and_publication_fixture",
+          "--",
+          "--nocapture",
+          "--test-threads=1",
+          "--exact"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 1730850,
+          "start_ticks": "94064327",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "software": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "software",
+        "log_bytes_seen": 19306,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 19306,
+        "wall_seconds": 14.256774040055461,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "diskFinalization": {
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted"
+      },
+      "exactChildIdentityCurrent": false
+    },
+    {
+      "name": "compile-original-new-fixtures",
+      "receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/f0p32-mid-end-driver-diagnostic-v1/software-v1/compile-original-new-fixtures.returned.json",
+        "bytes": 3964,
+        "mode": "0644",
+        "sha256": "6cf2d348095061b0d9e988770f2ab3113a78fba1ce20b37aef5cbf1e534690fc"
+      },
+      "actual": {
+        "command": [
+          "/usr/bin/x86_64-linux-gnu-g++-12",
+          "-std=c++20",
+          "-O2",
+          "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-selective-reference-n96/f0p32-mid-end-original-driver-source-v1/driver-trace-model-free.cpp",
+          "-o",
+          "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/f0p32-mid-end-driver-diagnostic-v1/software-v1/original-observation-fixtures"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 1731002,
+          "start_ticks": "94065757",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "software": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "software",
+        "log_bytes_seen": 0,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 0,
+        "wall_seconds": 0.12847040896303952,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "diskFinalization": {
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted"
+      },
+      "exactChildIdentityCurrent": false
+    },
+    {
+      "name": "original-new-two-fixtures",
+      "receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/f0p32-mid-end-driver-diagnostic-v1/software-v1/original-new-two-fixtures.returned.json",
+        "bytes": 3438,
+        "mode": "0644",
+        "sha256": "d116031973526d9e97f11d012cc0daeabfa8e40e903f9221ca874fd9bcad0f13"
+      },
+      "actual": {
+        "command": [
+          "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/f0p32-mid-end-driver-diagnostic-v1/software-v1/original-observation-fixtures"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 1731007,
+          "start_ticks": "94065771",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "software": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "software",
+        "log_bytes_seen": 0,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 0,
+        "wall_seconds": 0.011581799946725368,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "diskFinalization": {
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted"
+      },
+      "exactChildIdentityCurrent": false
+    },
+    {
+      "name": "compile-original-driver",
+      "receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/f0p32-mid-end-driver-diagnostic-v1/software-v1/compile-original-driver.returned.json",
+        "bytes": 5004,
+        "mode": "0644",
+        "sha256": "abe0d1a216778a45f0a55a7185b0f016ab021102326b3e947a648c576f7912e2"
+      },
+      "actual": {
+        "command": [
+          "/usr/bin/x86_64-linux-gnu-g++-12",
+          "-std=c++20",
+          "-O2",
+          "-mtune=generic",
+          "-march=x86-64-v3",
+          "-pthread",
+          "-DEGAROUCID_ORACLE_SIMD",
+          "-I",
+          "/workspaces/quoridor/games/othello/tools",
+          "-I",
+          "/workspaces/quoridor/.worktree/assets/tools/othello-baselines-n96-v1/egaroucid/src",
+          "-DEGAROUCID_SEARCH_ORACLE_SELECTIVE",
+          "/workspaces/quoridor/.worktree/othello-baselines-n96/.artifacts/othello-selective-reference-n96/f0p32-mid-end-original-driver-source-v1/original-mid-end-driver.cpp",
+          "-o",
+          "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/f0p32-mid-end-driver-diagnostic-v1/software-v1/original-mid-end-driver",
+          "-MD",
+          "-MF",
+          "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/f0p32-mid-end-driver-diagnostic-v1/software-v1/original.d"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 1731008,
+          "start_ticks": "94065775",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "software": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "software",
+        "log_bytes_seen": 0,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 0,
+        "wall_seconds": 13.09552661201451,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "diskFinalization": {
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted"
+      },
+      "exactChildIdentityCurrent": false
+    }
+  ],
+  "outerSeconds": 27.916225468041375,
+  "costMeaning": "outer includes compiler/new-fixture/link spans, never add nested spans; subsequent ELF metadata separate; no numerical timing",
+  "sourceLeases": [],
+  "remaining": [],
+  "ownedTMPEntries": [],
+  "actualCleanupSTOP": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/f0p32-mid-end-driver-diagnostic-v1/software-v1/software-STOP.json",
+    "bytes": 232,
+    "mode": "0644",
+    "sha256": "21f98a3ccae16a35169c3fb782140f38dd74df7ceb3f0cd0902088ec20e7ac80"
+  },
+  "storage": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/f0p32-mid-end-driver-diagnostic-v1/software-v1/completion-e4f1241a/affected-storage-point.json",
+    "bytes": 913,
+    "mode": "0644",
+    "sha256": "cd3a50845080ab040bf274e9d6cc83ab6f4cca4da2582d00b1de797d412967dd"
+  },
+  "scientificRootQueries": 0,
+  "modelWeightInputReads": 0,
+  "compiledInstrumentedSource": true,
+  "unchangedBinaryTiming": false,
+  "performanceStrengthDefaultAdmission": null
+}
