@@ -151,3 +151,5 @@ module Workerの固定16・通常16・取消1を検証した範囲に限る。�
 これはローカル固定pairの実consumer機能/lifecycle確認であり、browser棋力、active interruption、
 oldfree/物理回収、未変更binaryの速度比、peak、公開weight配布やdefault採用は認定しない。
 元c7/9cb/cbde/2becのFAILED/NULL/費用は今回の成功で補完・上書きしない。
+
+2026-10-25のprepared-mask比較は[保存canonical](../../../research-data/othello/strong-ai-n96/cached-flips-continuous128-result-v1.json)で全128要求完了、固定32組は全10項目一致。同持時間は完成深度31組同じ/候補1組−1で、改善を確認できなかった。浅い固定clockや異なるtimed workから一般速度・棋力を結論せず、追加candidate/測定は自動選択しない。O reader/collection実STOP後のwindowでは、既選択Q共通root深さ4のsource準備と通常資格を進める。大きな対局よりperformance gapを先に扱う人間方針、既定モデル、全旧結果・費用は保持する。
