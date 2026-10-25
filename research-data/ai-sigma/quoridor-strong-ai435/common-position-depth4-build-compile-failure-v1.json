@@ -1,0 +1,223 @@
+{
+  "schema": "quoridor.common-position-depth4.software-failure.v1",
+  "issue": "quoridor-4lc.435",
+  "originalJob": "c103f88c-93d1-4b70-8dad-dffa23e8f191",
+  "status": "FAILED",
+  "originalResult": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/common-position-depth4-root32-affected-build-v1/runtime/result.json",
+    "bytes": 526,
+    "mode": "0600",
+    "sha256": "c696ff4b0514f88b9110220664ffcefb59372d3048cc6ef46cfbef1e3061e557"
+  },
+  "originalConfig": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/common-position-depth4-root32-affected-build-v1/runtime/config.json",
+    "bytes": 953,
+    "mode": "0600",
+    "sha256": "78cad1c0327b799144285291376d04af35c45d6851344620e94c4bee4ba2295f"
+  },
+  "originalLog": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/common-position-depth4-root32-affected-build-v1/runtime/output.log",
+    "bytes": 21575,
+    "mode": "0644",
+    "sha256": "ebc0d15a368b1fa211dbb783691009b19f1aa28ce88676d8b043bab564befea5"
+  },
+  "originalManifest": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/common-position-depth4-root32-affected-build-v1/operation/manifest.json",
+    "bytes": 28777,
+    "mode": "0644",
+    "sha256": "ee14ec03a3f5a0d0234fab2067561632eb12ae871e9b0b1d1beeccd5f8d8ed5e"
+  },
+  "readerCollectionSTOP": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/common-position-depth4-root32-affected-build-v1/completion-c103f88c/reader-collection-STOP.json",
+    "bytes": 3754,
+    "mode": "0644",
+    "sha256": "04c394df59ff59edc4284497b39d2e8b478ead61f3ca9471f32e50b3bf671afd"
+  },
+  "finalizer": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/common-position-depth4-root32-affected-build-v1/finalize-returned.json",
+    "bytes": 7121,
+    "mode": "0644",
+    "sha256": "cd7de4bf35b86adf35f0688e97e5c5ffd15e0e665a9f6bec406858994c64524a"
+  },
+  "compilerDiagnostic": {
+    "code": "E0308",
+    "file": "games/quoridor/crates/quoridor-runner/src/arena.rs",
+    "line": 1683,
+    "expected": "Vec<usize>",
+    "supplied": "Option<Vec<_>>",
+    "statement": "c.cpu_cores = Some(vec![12]);",
+    "fullLog": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/common-position-depth4-root32-affected-build-v1/operation/new-common32-authority-boundary.full.log",
+      "sha256": "03148304b3106543192d2cbe52155e38b75cdc4f6b9c00d1eba653ab619b3e44",
+      "bytes": 84647,
+      "mode": "0644"
+    }
+  },
+  "test": {
+    "selector": "arena::generic_arena_361_tests::native_first32_decisions_preserve_history_and_timed_horizon_nn0",
+    "compileExit": 101,
+    "bodyExecutions": 0,
+    "bodyStatus": "UNRUN",
+    "normalReturn": null,
+    "actualExceptionOutcome": {
+      "normal_return": false,
+      "record": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "test",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "/workspaces/quoridor/Cargo.toml",
+          "-j1",
+          "--message-format=json-render-diagnostics",
+          "-p",
+          "quoridor-runner",
+          "--lib",
+          "--features",
+          "measurement",
+          "arena::generic_arena_361_tests::native_first32_decisions_preserve_history_and_timed_horizon_nn0",
+          "--",
+          "--exact",
+          "--test-threads=1"
+        ],
+        "status": "failed",
+        "child": {
+          "pid": 1749803,
+          "start_ticks": "94248964",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "run": [
+              12
+            ],
+            "test": [
+              12
+            ]
+          },
+          "allocation": [
+            12,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "test",
+        "log_bytes_seen": 84647,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "error": "cycle child failed: ['/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--offline', '--locked', '--manifest-path', '/workspaces/quoridor/Cargo.toml', '-j1', '--message-format=json-render-diagnostics', '-p', 'quoridor-runner', '--lib', '--features', 'measurement', 'arena::generic_arena_361_tests::native_first32_decisions_preserve_history_and_timed_horizon_nn0', '--', '--exact', '--test-threads=1']: 101",
+        "reason": "CycleStopped",
+        "exit_code": 101,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 84647,
+        "wall_seconds": 4.02257996192202,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": {
+          "type": "CycleStopped",
+          "message": "cycle child failed: ['/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--offline', '--locked', '--manifest-path', '/workspaces/quoridor/Cargo.toml', '-j1', '--message-format=json-render-diagnostics', '-p', 'quoridor-runner', '--lib', '--features', 'measurement', 'arena::generic_arena_361_tests::native_first32_decisions_preserve_history_and_timed_horizon_nn0', '--', '--exact', '--test-threads=1']: 101"
+        },
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      }
+    },
+    "persistedReceipt": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/common-position-depth4-root32-affected-build-v1/operation/new-common32-authority-boundary.process.json",
+      "sha256": "3595edf011952de49d2438e5d9efb15d1376b45af5419b3f8e34b597e50b7b08",
+      "bytes": 2635,
+      "mode": "0600"
+    }
+  },
+  "clippy": "UNRUN",
+  "release": "UNRUN",
+  "image": null,
+  "scientificRequests": 0,
+  "PythonNEW2": {
+    "reference": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/common-position-depth4-root32-affected-build-v1/python-unit-qualification.json",
+      "bytes": 1067,
+      "mode": "0644",
+      "sha256": "af7750909d39ad316ccd00626c893490413598af1ff6b5a473b69fefcbeaf949"
+    },
+    "reused": true,
+    "repeated": false
+  },
+  "costs": {
+    "outerSeconds": 4.649910714011639,
+    "compileCommandSeconds": 4.02257996192202,
+    "finalizerSeconds": 0.3984907880658284,
+    "versionCommands": [
+      {
+        "name": "version-cargo",
+        "seconds": 0.008136606076732278
+      },
+      {
+        "name": "version-rustc",
+        "seconds": 0.013284095912240446
+      },
+      {
+        "name": "version-rustdoc",
+        "seconds": 0.021924972999840975
+      },
+      {
+        "name": "version-cc",
+        "seconds": 0.013885220978409052
+      },
+      {
+        "name": "version-cxx",
+        "seconds": 0.014669456984847784
+      },
+      {
+        "name": "version-ar",
+        "seconds": 0.010832604020833969
+      },
+      {
+        "name": "version-python",
+        "seconds": 0.008111343951895833
+      }
+    ],
+    "nestedSpansNotAdded": true
+  },
+  "originalManifestCleanupComplete": false,
+  "actualOuterCleanupComplete": true,
+  "actualFinalizerCleanupComplete": true,
+  "originalFailedNormalReturn": null,
+  "finalizerNormalReturn": false,
+  "storagePoint": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/common-position-depth4-root32-affected-build-v1/operation/storage-usage.json",
+    "bytes": 1023,
+    "mode": "0644",
+    "sha256": "67055dad40cb8ae6bbb7a4a8fcc90d0e2e66606e92ba5df9472d7e7528a1afd6"
+  },
+  "currentNormalConfigResourceContract": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/common-position-depth4-root32-affected-build-v1/intent-v2.json",
+  "controlHistory": {
+    "contextVerified": {
+      "path": "/tmp/324-c103-collection-context.json",
+      "bytes": 841,
+      "mode": "0644",
+      "sha256": "4aed4318aa14cf9479c212dcbb76446d01fcb485aa429ac027e6ef9e411dd961"
+    },
+    "contextOrdering": "Initial result/log and source locator commands preceded actual resumed-context verification; procedure gap retained, not retroactive clean-control claim.",
+    "rawCargoLogMetadataReads": "Initial diagnostic scan plus scoped rendered-error read; normal finalizer independently verified original log. No scientific payload or target rerun."
+  },
+  "outcomeLimits": "Compile failure only, no assertion failure or data/model/runtime qualification; original FAILED never refinalized as PASS. Source-only fixture repair may support a fresh immutable software continuation."
+}
