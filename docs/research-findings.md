@@ -4988,3 +4988,22 @@ captureはroot driverで既計算のkind/depth/selectivity/probability/complete/
 次の許可済み二要求は同f0/p32 original state/STMを既admitted16・native generation/exposure authorityから一つだけ通常ownerで束縛し、Rust公開FullSearch.search_nativeと本家normal tree_search_legalを各一回行う。current checked_spec/Process/execute、fresh clearと通常1000ms/wire60/1100transportを使い、info/warmup/ABBA prefix/TT復元は行わない。従って旧e546のp16経由TT履歴やdepth10/28の再現を約束しない。source/root-driverの既計算値だけ、各64iteration/32KiBのprivate packetとして通常return/cleanup後に出す。三次元盤面やhistoryを科学出力へexportせず、既root JSONのunused15 rootも通常入力ownerが一時decodeする事実を記録する。新driver/parser/geometry/clockpoll/stop probeやNPS/棋力/修復採用を選択しない。現在は束縛済みで数値結果は未観測である。
 
 current project-envのPython pathがquoridor/sharedだけである点はsubmit前のsource確認で修復し、othelloの既checked import前にその既pathを明示した。初期未発行config/jobを保持し、target import/科学payloadの再試行とはしない。同確認に含まれた不存在env-glob locatorのexit2もcontrol履歴として保持する。Qの同Max435.25はterminal最終depth4と凍結authority-selected depth3/Noneが一致しない条件では旧terminal-only gateが受理を止められないというsource R1を提示した。観測済みの実失敗や勝敗原因とはせず、同Cへ凍結snapshotをcommit前に確認する因果修正と同じNEW1の補強を返した。既clock/deadline/drain/default/fixed/no-clockを変更せず、O二要求準備と独立してsourceを続ける。
+
+### 2026-10-25: two private p32 driver requests complete; first outcome difference at depth13
+
+[元d3d62b6cの二要求](../research-data/othello/strong-ai-n96/f0p32-mid-end-driver-two-request-result-v1.json)は両ownerとも完了し、UNKNOWN/UNRUNは0、Rust5iteration/本家9iterationはtruncated=false/omitted0だった。新fresh clearの通常1000ms要求であり、旧e546のABBA p16→p32 TT履歴を再現したものではない。二つのscalar packet（3464B/2362B）を各一度だけread/hash/wholeJSON parseして保存し、linked roots/model/weights/H/旧raw/archives、ルール・NN/Search/RNG/CIやvalidatorを再読・再演していない。
+
+| root-driver観測         | D110 Rust観測版                             | pinned本家観測版                                                   |
+| ----------------------- | ------------------------------------------- | ------------------------------------------------------------------ |
+| 共通のstarted/published | mid1→4→7→10、level6/probability100          | mid1→4→7→10、level6/probability100                                 |
+| 次のstarted             | mid13/level6                                | mid13/level6                                                       |
+| depth13の結果           | PVS timeout、post-poll未呼出し、未公開      | 成功し公開、既elapsed569ms                                         |
+| その後                  | 停止、last completed/published10            | mid16/level0→end28/level0→end28/level1を公開                       |
+| 最後の試行              | mid13/level6、PVS Err timeout               | end28/level2、wait期限切れ後getは返却、search_success=false/未公開 |
+| 最終公開                | depth10/level6/prob100/endfalse/provenfalse | depth28/level1/prob88/endtrue/provenfalse                          |
+
+最初の異なる観測結果は同じmid13/level6での完了対timeoutであり、その前にdriverが別の深度/levelを選んだ不一致は確認できなかった。RustのsuccessfulPvsDiscardedByPostPollはfalseで、今回のdepth13は成功した結果がpost-pollで捨てられた形でもなかった。従ってこのtraceからmid/end transition修正を推測し、levelを早く下げたり名目depth28を強制したりしない。本家のend28/prob88もexact proofではなく、両ownerのcompleted/publication語義はsourceに結んで区別する。両方のreported clog nodes225304の一致は同一workの証明ではない。Rust copied start/after-clog samples .000354→38.669984msはexact clogwallやremaining budgetではなく、本家の既clog14ms/budget986msとkernel比やNPSへ換算しない。Rust7971157nodes/timeout対本家20197168nodes/score38/move2/rawNULLは異なる選択探索の観測であり、Rust新move/valueは未露出NULLのままである。
+
+Rustの親setup152.908343ms/Ready受領から完了1003.181900ms/helper guardian1.216662020s、本家setup3342.448899ms/通常request1003.813329ms/helper guardian4.476711171sはouter5.839882858s内のscopeで、足さない。両normalProcessはdirectreap、streams/selector closed、errors[]/unexpectedfalse、通常closeのexit−15を保持した。helper execute/outerのactual process+handles/remaining[]/maskpersistcomplete、known native/helper identity absent、TMPempty/sourceleases[]を確認し、disk pending/attemptedと分けた。fullTT/restoration/actualloadedlibs/ISA/physicalpeak/physicalNN/engine-entry countersはNULLである。観測overheadを含むprivate imageであり、unchanged-binary timing、driver原因、一般速度・棋力・修復採用は結論しない。追加要求・別candidate・profiler・対局は自動投入しない。
+
+O command/reader/collection実STOP後、Qの10c2cbe9 R1 supplementを元a5b7665dへ合成し、runtimeea09b3fb/arena7acdf16dと未変更lifecycle95169d4f/testc75d900eの四postだけをMainへexact CASした。元negative source reviewは保存し、同Max435.25へ凍結authority snapshotのtarget-complete条件だけを再確認として返した。新Python2は各1/skip0の二定義だけを通常guardで実行し、旧成功suite/原journals/NN/Searchを再演しない。NEW1 Rust/affected Clippy/現在normal releaseの準備は独立に進め、source/software成功を96要求の入場成功とはしない。incumbent2560/fitNOT_CONVERGED/default/H・全pause/seal/旧費用/decimal50GBは保持する。

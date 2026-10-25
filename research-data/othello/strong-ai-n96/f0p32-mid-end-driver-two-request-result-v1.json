@@ -1,0 +1,742 @@
+{
+  "conditionId": "f0p32-mid-end-driver-diagnostic-v1",
+  "rootId": "development/continuous16-practical-v1/f0/p32",
+  "job": "d3d62b6c-7e77-4540-8b4b-13b419ccab30",
+  "status": "TWO_DRIVER_REQUESTS_COMPLETE_SAVED_PACKETS_COLLECTED",
+  "planned": 2,
+  "complete": 2,
+  "UNKNOWN": 0,
+  "UNRUN": 0,
+  "software": {
+    "path": "/workspaces/quoridor/research-data/othello/strong-ai-n96/f0p32-mid-end-driver-software-result-v1.json",
+    "bytes": 16564,
+    "mode": "0644",
+    "sha256": "dc3671448e3c89fa251c588abeb3846a83cf8cda2d61c20eb8009b5ddb6f49bb"
+  },
+  "normalOptions": {
+    "timeMs": 1000,
+    "maxDepth": 60,
+    "fixedDepth": null,
+    "selectivity": null,
+    "mpc": true,
+    "etc": true,
+    "stability": true,
+    "parity": true,
+    "shallowOrdering": true
+  },
+  "images": {
+    "rust": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/f0p32-mid-end-driver-diagnostic-v1/software-v1/rust-mid-end-driver",
+      "bytes": 2246664,
+      "mode": "0555",
+      "sha256": "68878e8257727537be92412b81a83cdb517111bbaf7546c427407b21965bcbed"
+    },
+    "original": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/f0p32-mid-end-driver-diagnostic-v1/software-v1/original-mid-end-driver",
+      "bytes": 961808,
+      "mode": "0555",
+      "sha256": "04e418d4d94fd359a890ee0f940b30b49ea8b66ac60687a87c54d7e749dfc6d2"
+    }
+  },
+  "inputBinding": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/f0p32-mid-end-driver-diagnostic-v1/entry-v1/input-binding.json",
+    "bytes": 1861,
+    "mode": "0644",
+    "sha256": "65583fb8705b9c057fff00f3e3b68be8bfc84f535066c53856fa62e1591c297c"
+  },
+  "packets": {
+    "rust": {
+      "label": "INSTRUMENTED_CURRENT_OWNER_CFG_TEST_RELEASE",
+      "rootId": "development/continuous16-practical-v1/f0/p32",
+      "summary": {
+        "ownerEntered": true,
+        "effectiveCap": 28,
+        "initialDepth": 1,
+        "initialSelectivity": 6,
+        "beforeClog": {
+          "driverStartMs": 0.00035400000000000004,
+          "lastPollMs": 0.00035400000000000004,
+          "deadlineMs": 1000.000354,
+          "nodes": 0
+        },
+        "afterClog": {
+          "lastPollMs": 38.669984,
+          "nodes": 225304,
+          "stop": null
+        },
+        "clogWallMs": null,
+        "remainingBudgetMs": null,
+        "lastStarted": {
+          "depth": 13,
+          "selectivity": 6,
+          "isEndSearch": false
+        },
+        "lastPvsReturned": {
+          "depth": 13,
+          "selectivity": 6,
+          "isEndSearch": false
+        },
+        "lastCompleted": {
+          "depth": 10,
+          "selectivity": 6,
+          "isEndSearch": false
+        },
+        "lastPublished": {
+          "id": {
+            "depth": 10,
+            "selectivity": 6,
+            "isEndSearch": false
+          },
+          "probability": 100.0,
+          "proven": false
+        },
+        "successfulPvsDiscardedByPostPoll": false,
+        "driverStopBranch": "pvsOrPostPollStopped",
+        "returnedResult": {
+          "id": {
+            "depth": 10,
+            "selectivity": 6,
+            "isEndSearch": false
+          },
+          "probability": 100.0,
+          "proven": false
+        },
+        "finalNodes": 7971157,
+        "finalMainTtBytes": 25165872,
+        "finalOwnerElapsedMs": 1000.0,
+        "finalOwnerStop": "timeout",
+        "finishedResultSeen": true,
+        "iterationCapacityExceeded": false,
+        "initWallMs": null,
+        "setupWallMs": null,
+        "resetWallMs": null,
+        "callerRequestWallMs": null,
+        "dropWallMs": null,
+        "restorationObserved": null,
+        "poolRestorationObserved": null,
+        "loadedLibraryObserved": null,
+        "executedIsaObserved": null,
+        "physicalPeakBytes": null
+      },
+      "iterations": [
+        {
+          "id": {
+            "depth": 1,
+            "selectivity": 6,
+            "isEndSearch": false
+          },
+          "startedLastPollMs": 38.669984,
+          "pvsReturnedLastPollMs": 38.678386,
+          "pvsSuccess": true,
+          "pvsReturnedSelectivity": 6,
+          "startedProbability": null,
+          "pvsReturnedProbability": null,
+          "pvsError": null,
+          "postPollCalled": true,
+          "postPollSuccess": true,
+          "postPollError": null,
+          "postPollLastMs": 38.678762,
+          "published": true,
+          "publishedProbability": 100.0
+        },
+        {
+          "id": {
+            "depth": 4,
+            "selectivity": 6,
+            "isEndSearch": false
+          },
+          "startedLastPollMs": 38.678762,
+          "pvsReturnedLastPollMs": 38.789456,
+          "pvsSuccess": true,
+          "pvsReturnedSelectivity": 6,
+          "startedProbability": null,
+          "pvsReturnedProbability": null,
+          "pvsError": null,
+          "postPollCalled": true,
+          "postPollSuccess": true,
+          "postPollError": null,
+          "postPollLastMs": 38.789576,
+          "published": true,
+          "publishedProbability": 100.0
+        },
+        {
+          "id": {
+            "depth": 7,
+            "selectivity": 6,
+            "isEndSearch": false
+          },
+          "startedLastPollMs": 38.789576,
+          "pvsReturnedLastPollMs": 42.170438,
+          "pvsSuccess": true,
+          "pvsReturnedSelectivity": 6,
+          "startedProbability": null,
+          "pvsReturnedProbability": null,
+          "pvsError": null,
+          "postPollCalled": true,
+          "postPollSuccess": true,
+          "postPollError": null,
+          "postPollLastMs": 42.170742,
+          "published": true,
+          "publishedProbability": 100.0
+        },
+        {
+          "id": {
+            "depth": 10,
+            "selectivity": 6,
+            "isEndSearch": false
+          },
+          "startedLastPollMs": 42.170742,
+          "pvsReturnedLastPollMs": 90.894194,
+          "pvsSuccess": true,
+          "pvsReturnedSelectivity": 6,
+          "startedProbability": null,
+          "pvsReturnedProbability": null,
+          "pvsError": null,
+          "postPollCalled": true,
+          "postPollSuccess": true,
+          "postPollError": null,
+          "postPollLastMs": 90.895083,
+          "published": true,
+          "publishedProbability": 100.0
+        },
+        {
+          "id": {
+            "depth": 13,
+            "selectivity": 6,
+            "isEndSearch": false
+          },
+          "startedLastPollMs": 90.895083,
+          "pvsReturnedLastPollMs": 1000.000354,
+          "pvsSuccess": false,
+          "pvsReturnedSelectivity": 6,
+          "startedProbability": null,
+          "pvsReturnedProbability": null,
+          "pvsError": "timeout",
+          "postPollCalled": false,
+          "postPollSuccess": null,
+          "postPollError": null,
+          "postPollLastMs": null,
+          "published": false,
+          "publishedProbability": null
+        }
+      ],
+      "truncated": false,
+      "omittedIterations": 0,
+      "ordinarySearchCalls": 1,
+      "explicitClearCalls": 1,
+      "modelDropReturned": true,
+      "ordinaryOwnerError": false,
+      "sourceKind": "current D110 FullSearch.search_native -> FullSearch.search -> ordinary run::search"
+    },
+    "original": {
+      "bound": "UNKNOWN",
+      "caseId": "development/continuous16-practical-v1/f0/p32",
+      "complete": true,
+      "driver": {
+        "budgetAfterClogMs": 986,
+        "capacity": 64,
+        "clogNodes": 225304,
+        "columns": [
+          "kind",
+          "depth",
+          "selectivity",
+          "publishedProbability",
+          "asyncDispatchReturned",
+          "getReturnedNormally",
+          "getAfterStop",
+          "searchSuccess",
+          "published",
+          "waitExpired",
+          "waitBudgetMs",
+          "existingElapsedAtWaitMs",
+          "existingOwnerElapsedAfterMainMs",
+          "nextDepth",
+          "nextSelectivity"
+        ],
+        "driverBudgetMs": 986,
+        "driverMaximumDepth": 28,
+        "exitBranch": null,
+        "lastCompleted": {
+          "depth": 28,
+          "isEndSearch": true,
+          "selectivity": 1
+        },
+        "lastLoopCondition": false,
+        "lastLoopElapsedMs": 989,
+        "lastPublished": {
+          "depth": 28,
+          "isEndSearch": true,
+          "selectivity": 1
+        },
+        "lastPublishedProbability": 88,
+        "lastReturnedNormally": {
+          "depth": 28,
+          "isEndSearch": true,
+          "selectivity": 2
+        },
+        "lastStarted": {
+          "depth": 28,
+          "isEndSearch": true,
+          "selectivity": 2
+        },
+        "observationOverhead": "UNISOLATED; no added clock or engine read",
+        "omittedCount": 0,
+        "records": [
+          [
+            "mid",
+            1,
+            6,
+            100,
+            true,
+            true,
+            false,
+            true,
+            true,
+            false,
+            986,
+            0,
+            0,
+            4,
+            6
+          ],
+          [
+            "mid",
+            4,
+            6,
+            100,
+            true,
+            true,
+            false,
+            true,
+            true,
+            false,
+            986,
+            0,
+            0,
+            7,
+            6
+          ],
+          [
+            "mid",
+            7,
+            6,
+            100,
+            true,
+            true,
+            false,
+            true,
+            true,
+            false,
+            986,
+            0,
+            2,
+            10,
+            6
+          ],
+          [
+            "mid",
+            10,
+            6,
+            100,
+            true,
+            true,
+            false,
+            true,
+            true,
+            false,
+            984,
+            2,
+            28,
+            13,
+            6
+          ],
+          [
+            "mid",
+            13,
+            6,
+            100,
+            true,
+            true,
+            false,
+            true,
+            true,
+            false,
+            958,
+            28,
+            569,
+            16,
+            0
+          ],
+          [
+            "mid",
+            16,
+            0,
+            74,
+            true,
+            true,
+            false,
+            true,
+            true,
+            false,
+            417,
+            569,
+            585,
+            28,
+            0
+          ],
+          [
+            "end",
+            28,
+            0,
+            74,
+            true,
+            true,
+            false,
+            true,
+            true,
+            false,
+            401,
+            585,
+            691,
+            28,
+            1
+          ],
+          [
+            "end",
+            28,
+            1,
+            88,
+            true,
+            true,
+            false,
+            true,
+            true,
+            false,
+            295,
+            691,
+            873,
+            28,
+            2
+          ],
+          [
+            "end",
+            28,
+            2,
+            null,
+            true,
+            true,
+            true,
+            false,
+            false,
+            true,
+            113,
+            873,
+            989,
+            28,
+            3
+          ]
+        ],
+        "reportedClogMs": 14,
+        "requestBudgetMs": 1000,
+        "requestEndTarget": true,
+        "requestedDepth": 28,
+        "requestedSelectivity": 6,
+        "truncated": false,
+        "unexposed": {
+          "activeInterruption": null,
+          "actualPvsEntry": null,
+          "exactClogWallMs": null,
+          "extraTimeLeft": null,
+          "fullTTIdentity": null,
+          "partialIterationWindow": null,
+          "physicalPeak": null,
+          "restoration": null
+        }
+      },
+      "label": "INSTRUMENTED_ORIGINAL_OWNER",
+      "meaning": "normal pinned API through reversible root-driver capture",
+      "owner": "original",
+      "resultScalars": {
+        "clogNodes": 225304,
+        "completedDepth": 28,
+        "engineSearchMs": 1003.486832,
+        "isEndSearch": true,
+        "move": 2,
+        "mustPass": false,
+        "nodes": 20197168,
+        "prepareMs": 0.007618,
+        "probability": 88,
+        "proven": false,
+        "rawScore": null,
+        "reportedClogMs": 14,
+        "reportedSearchMs": 989,
+        "score": 38,
+        "scoreKind": "engine_reported_id_estimate_stm",
+        "scoreUnits": "engine-disc",
+        "selectivity": 1,
+        "terminal": false
+      },
+      "sourceRestorationClaim": null
+    }
+  },
+  "originalPacketRefs": [
+    {
+      "owner": "rust",
+      "packet": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/f0p32-mid-end-driver-diagnostic-v1/entry-v1/rust-packet.json",
+        "bytes": 3464,
+        "mode": "0644",
+        "sha256": "aad482a79a8ff653c811264c42e3311eab767c128bb84ee89634cecbcfc74fa4"
+      },
+      "wholeJSONParsedOnceForThisCollection": true,
+      "scalarFieldsOnly": true
+    },
+    {
+      "owner": "original",
+      "packet": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/f0p32-mid-end-driver-diagnostic-v1/entry-v1/original-packet.json",
+        "bytes": 2362,
+        "mode": "0644",
+        "sha256": "11b585a014d98e317462bc7345724f8ea05d68b19224756c59f8451db0a20e85"
+      },
+      "wholeJSONParsedOnceForThisCollection": true,
+      "scalarFieldsOnly": true
+    }
+  ],
+  "sourceLabels": [
+    "INSTRUMENTED_CURRENT_OWNER_CFG_TEST_RELEASE",
+    "INSTRUMENTED_ORIGINAL_OWNER"
+  ],
+  "ownerReceipts": [
+    {
+      "owner": "rust",
+      "guardian": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/f0p32-mid-end-driver-diagnostic-v1/entry-v1/rust.returned.json",
+        "bytes": 3349,
+        "mode": "0644",
+        "sha256": "715c26470b406c8be9fed1cf0e03148d67227704d447e89ebd0843b773a9d0ee"
+      },
+      "actual": {
+        "command": [
+          "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+          "-B",
+          "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/f0p32-mid-end-driver-diagnostic-v1/entry-v1/owner_once.py",
+          "76a7a16929bf7850c5351fc4743302bc52a4403df6bb9268e71efe949adb60b0",
+          "rust"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 1740732,
+          "start_ticks": "94159435",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "work": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "work",
+        "log_bytes_seen": 373,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 373,
+        "wall_seconds": 1.216662019956857,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "diskFinalization": {
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted"
+      },
+      "carrier": {
+        "owner": "rust",
+        "phase": "returned",
+        "complete": true,
+        "error": null,
+        "cleanup": {
+          "exitCode": -15,
+          "unexpectedExit": false,
+          "directReaped": true,
+          "bytesSeen": 212,
+          "bytesRetained": 300,
+          "errors": []
+        },
+        "setupMs": 152.90834300685674,
+        "requestCallerMs": 1003.1818998977542,
+        "clearAccepted": true,
+        "scalarPacket": {
+          "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/f0p32-mid-end-driver-diagnostic-v1/entry-v1/rust-packet.json",
+          "bytes": 3464,
+          "sha256": "aad482a79a8ff653c811264c42e3311eab767c128bb84ee89634cecbcfc74fa4"
+        },
+        "actualNativeLoadedWeightIdentityReceipt": null,
+        "actualLoadedLibraries": null,
+        "restoration": null,
+        "childIdentity": {
+          "pid": 1740733,
+          "start_ticks": "94159440",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "streamsClosed": true,
+        "selectorClosed": true
+      },
+      "exactKnownIdentitiesCurrent": false
+    },
+    {
+      "owner": "original",
+      "guardian": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/f0p32-mid-end-driver-diagnostic-v1/entry-v1/original.returned.json",
+        "bytes": 3361,
+        "mode": "0644",
+        "sha256": "096a3a387a10055e33b21a12fa83f9c49b9342bd9451a9171a0dccee5a018f56"
+      },
+      "actual": {
+        "command": [
+          "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+          "-B",
+          "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/f0p32-mid-end-driver-diagnostic-v1/entry-v1/owner_once.py",
+          "76a7a16929bf7850c5351fc4743302bc52a4403df6bb9268e71efe949adb60b0",
+          "original"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 1740738,
+          "start_ticks": "94159560",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "work": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "work",
+        "log_bytes_seen": 381,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 381,
+        "wall_seconds": 4.476711170980707,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "diskFinalization": {
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted"
+      },
+      "carrier": {
+        "owner": "original",
+        "phase": "returned",
+        "complete": true,
+        "error": null,
+        "cleanup": {
+          "exitCode": -15,
+          "unexpectedExit": false,
+          "directReaped": true,
+          "bytesSeen": 3663,
+          "bytesRetained": 3479,
+          "errors": []
+        },
+        "setupMs": 3342.4488990567625,
+        "requestCallerMs": 1003.8133290363476,
+        "clearAccepted": true,
+        "scalarPacket": {
+          "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/f0p32-mid-end-driver-diagnostic-v1/entry-v1/original-packet.json",
+          "bytes": 2362,
+          "sha256": "11b585a014d98e317462bc7345724f8ea05d68b19224756c59f8451db0a20e85"
+        },
+        "actualNativeLoadedWeightIdentityReceipt": null,
+        "actualLoadedLibraries": null,
+        "restoration": null,
+        "childIdentity": {
+          "pid": 1740739,
+          "start_ticks": "94159565",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "streamsClosed": true,
+        "selectorClosed": true
+      },
+      "exactKnownIdentitiesCurrent": false
+    }
+  ],
+  "outerSeconds": 5.839882857981138,
+  "costMeaning": "Outer includes sequential two helper/engine setup/request/drop/process scopes; nested spans notadded. Parent Ready/return and engine samples are distinct. Observation overhead unisolated.",
+  "history": "Fresh clear eachowner. Does not reproduce oldABBAp16 TT history or require saved10vs28. All oldrows/jobs/costs unchanged; no newroots/generation/geometry/history/validation/NNforward/Search replay.",
+  "actualLoadedLibraries": null,
+  "executedISA": null,
+  "physicalPeak": null,
+  "wholeTTIdentity": null,
+  "restoration": null,
+  "physicalNNOrEngineEntryCounters": null,
+  "performanceNPSStrengthDefaultOrCausalRepairClaim": null,
+  "actualControllerSTOP": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/f0p32-mid-end-driver-diagnostic-v1/entry-v1/controller-STOP.json",
+    "bytes": 1091,
+    "mode": "0644",
+    "sha256": "a2d13960a63563f728b451a47c87af6e731d30d83378b7a3646f9ecd89306634"
+  },
+  "storagePoint": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/f0p32-mid-end-driver-diagnostic-v1/entry-v1/completion-d3d62b6c/affected-storage-point.json",
+    "bytes": 452,
+    "mode": "0644",
+    "sha256": "9d5ca8e822eb95376881d35e9546ac55fbe9b3713634eade3cedd87f9ec7085d"
+  }
+}
