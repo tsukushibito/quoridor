@@ -4161,7 +4161,11 @@ def experiment_check(spec):
     elif mixed_outcome:
         cache_root = Path(spec["argv"][6])
         streamed_inputs |= {str(cache_root / name) for name in COMPACT_CACHE_WIDTHS}
+    deferred_saved = arena_work_clock_payload_refs(spec, experiment)
     for ref in refs:
+        if ref["path"] in deferred_saved:
+            require(ref == deferred_saved[ref["path"]], "exact one-read saved census input")
+            continue  # Custody/hash/raw framing are checked once by arena_reference_report.
         if ref["path"] in streamed_inputs:
             require(artifact_ref(ref["path"]) == ref, "actual streamed input identity")
         else:
@@ -4282,7 +4286,11 @@ def experiment_check(spec):
     return (
         experiment,
         manifest,
-        [*refs, experiment["build_manifest"], manifest["artifact"]],
+        [
+            ref
+            for ref in [*refs, experiment["build_manifest"], manifest["artifact"]]
+            if deferred_saved.get(ref["path"]) != ref
+        ],
     )
 
 
@@ -5890,7 +5898,7 @@ def arena_observation(config, row):
 ARENA_PUBLICATION = "quoridor.arena.reference-result.v1"
 
 
-def arena_reference_report(config, files, values=None, expected_build=None):
+def arena_reference_report(config, files, values=None, expected_build=None, expected_archive=None):
     """One maintained saved-result join for publication and analysis; no Search/model replay."""
     required = {
         "journal": "completed.jsonl.gz",
@@ -5905,6 +5913,12 @@ def arena_reference_report(config, files, values=None, expected_build=None):
         ),
         "exact canonical detail/summary/manifest paths",
     )
+    if expected_archive is not None:
+        require(
+            set(expected_archive) == {"compressed", "raw_bytes"}
+            and expected_archive["compressed"] == files["journal"],
+            "predeclared exact census archive identity",
+        )
     if values is None:
         values = {name: read_ref(files[name], files[name]["bytes"]) for name in required}
     for name in required:
@@ -5977,6 +5991,11 @@ def arena_reference_report(config, files, values=None, expected_build=None):
         and files["journal"]["bytes"] <= raw_cap + ((raw_cap + 8191) // 8192) * 5 + 64,
         "exact closed archive FileRef/logical envelope",
     )
+    if expected_archive is not None:
+        require(
+            content["raw_bytes"] == expected_archive["raw_bytes"],
+            "predeclared census raw byte ceiling/identity differs",
+        )
     # stdlib counterpart of the installed maintained lossless_jsonl::Reader contract.
     decoder = zlib.decompressobj(wbits=31)
     raw = decoder.decompress(values["journal"], content["raw_bytes"] + 1)
@@ -6321,8 +6340,9 @@ def interval_tail(interval):
 
 def arena_analysis_check(spec, experiment):
     config = document(experiment["config"])
+    work_clock = config.get("work_clock_census")
     require(
-        set(config) - {"linked_examples_limit", "bootstrap_method"}
+        set(config) - {"linked_examples_limit", "bootstrap_method", "work_clock_census"}
         == {
             "schema",
             "arena_plan",
@@ -6339,10 +6359,31 @@ def arena_analysis_check(spec, experiment):
     require(
         config["schema"] == "quoridor.arena-analysis.v1"
         and config["arena_plan"] == spec["approved_plan"]
-        and type(config["bootstrap_resamples"]) is int
-        and config["bootstrap_resamples"] > 0
-        and type(config["bootstrap_seed"]) is int
-        and 0 <= config["bootstrap_seed"] < 2**64
+        and (
+            (
+                work_clock is None
+                and type(config["bootstrap_resamples"]) is int
+                and config["bootstrap_resamples"] > 0
+                and type(config["bootstrap_seed"]) is int
+                and 0 <= config["bootstrap_seed"] < 2**64
+            )
+            or (
+                isinstance(work_clock, dict)
+                and set(work_clock) == {"schema", "maximum_decisions", "archive_limits"}
+                and work_clock["schema"] == "quoridor.saved-alpha-work-clock.v1"
+                and type(work_clock["maximum_decisions"]) is int
+                and work_clock["maximum_decisions"] == 51200
+                and type(config["bootstrap_resamples"]) is int
+                and config["bootstrap_resamples"] == 0
+                and config["bootstrap_seed"] is None
+                and config["central_interval"] is None
+                and config.get("bootstrap_method") is None
+                and config.get("linked_examples_limit") == 0
+                and config["decision_plan"] is None
+                and config["diagnostic_selection"] is None
+                and config["decision_batches"] == []
+            )
+        )
         and experiment["batch"] is None,
         "selected family analysis settings/authority",
     )
@@ -6359,7 +6400,8 @@ def arena_analysis_check(spec, experiment):
         ],
         "one maintained reference analysis entry",
     )
-    interval_tail(config["central_interval"])
+    if work_clock is None:
+        interval_tail(config["central_interval"])
     require(
         config.get("bootstrap_method") in (None, "shared_pcg64_linear"),
         "declared existing or shared PCG64 linear family bootstrap",
@@ -6393,6 +6435,25 @@ def arena_analysis_check(spec, experiment):
         )
 
     census(config["batches"], plan)
+    if work_clock is not None:
+        limits = work_clock["archive_limits"]
+        require(
+            plan["planned_slots"] == 256
+            and len(plan["family_ids"]) == 128
+            and len(plan["batches"]) == 16
+            and isinstance(limits, list)
+            and len(limits) == 16
+            and all(
+                set(item) == {"batch", "compressed", "raw_bytes"}
+                and type(item["batch"]) is int
+                and type(item["raw_bytes"]) is int
+                and 0 < item["raw_bytes"] <= 16 * (2 * 1024**2 + 1)
+                for item in limits
+            )
+            and {item["batch"] for item in limits} == set(range(16))
+            and all(item["completion"] is not None for item in config["batches"]),
+            "fixed sixteen original producers and predeclared compressed/raw census ceilings",
+        )
     if config["decision_plan"] is not None:
         dplan = document(config["decision_plan"])
         require(
@@ -6640,6 +6701,315 @@ def arena_score_tables(plan, schedule, observed, config):
     return tables
 
 
+def arena_work_clock_payload_refs(spec, experiment):
+    """Only this admitted saved census delegates payload custody to its sole reader."""
+    if (
+        experiment["phase"] != "analysis"
+        or len(experiment["argv"]) <= 3
+        or experiment["argv"][3] != "arena-analysis"
+        or document(experiment["config"]).get("work_clock_census") is None
+    ):
+        return {}
+    config = arena_analysis_check(spec, experiment)
+    refs = {}
+    for item in config["batches"]:
+        completion = document(item["completion"])
+        require(
+            completion["status"] == "PASS"
+            and completion["data"]["status"] == "PASS"
+            and completion["data"]["errors"] == [],
+            "complete original producer before deferred one-read custody",
+        )
+        producer = document(completion["experiment"])
+        producer_config = document(producer["config"])
+        files = {ref["path"]: ref for ref in completion["data"]["files"]}
+        require(len(files) == len(completion["data"]["files"]), "unique producer file refs")
+        limit = next(
+            row
+            for row in config["work_clock_census"]["archive_limits"]
+            if row["batch"] == item["batch"]
+        )
+        root = Path(producer_config["output"])
+        selected = [
+            files[str(root / name)]
+            for name in ("completed.jsonl.gz", "result.json", "manifest.json")
+        ]
+        require(selected[0] == limit["compressed"], "exact predeclared one-read archive")
+        for ref in selected:
+            require(ref["path"] not in refs, "disjoint sole original payload identities")
+            refs[ref["path"]] = ref
+    require(len(refs) == 48, "sixteen sole three-file saved producers")
+    return refs
+
+
+def arena_work_clock_state(plan, schedule):
+    """Scalar accumulators only; native decoded rows are never retained here."""
+    require(
+        plan["planned_slots"] == 256
+        and len(schedule) == 256
+        and len(plan["family_ids"]) == 128
+        and len(plan["matchups"]) == 1
+        and len(plan["matchups"][0]["engines"]) == 2
+        and all(e["kind"] == "nnue" for e in plan["matchups"][0]["engines"]),
+        "one fixed256 Alpha work/clock census",
+    )
+    identities = plan["matchups"][0]["evaluator_sha256"]
+    require(len(set(identities)) == 2, "two distinct exact value identities")
+    groups = {}
+    for index, identity in enumerate(identities):
+        for colour in (0, 1):
+            groups[index, colour] = dict(
+                value_identity=identity,
+                colour=colour,
+                planned_games=0,
+                recorded_games=0,
+                recorded_decisions=0,
+                accepted=0,
+                legal_authority_receipts=0,
+                legal_receipt_checks=0,
+                receipt_deadline_checks=0,
+                return_deadline_checks=0,
+                receipt_deadline_violations=0,
+                return_at_or_after_deadline=0,
+                engine_error_present=0,
+                loaded_identity_observed=0,
+                counts={},
+                numeric={},
+                configured_ceilings=[],
+            )
+    for slot in schedule:
+        for index in (0, 1):
+            colour = slot["candidate_color"] if index == 0 else 1 - slot["candidate_color"]
+            groups[index, colour]["planned_games"] += 1
+    return dict(groups=groups, decisions=0)
+
+
+def arena_work_clock_add(state, slot, row, config):
+    """Project only existing scalar clocks and separately scoped counter views."""
+    for index in (0, 1):
+        colour = slot["candidate_color"] if index == 0 else 1 - slot["candidate_color"]
+        group = state["groups"][index, colour]
+        group["recorded_games"] += 1
+        ceilings = dict(
+            depth=config["engines"][index]["depth"],
+            nodes=config["engines"][index]["max_nodes"],
+            TT_entries=config["arena"]["tt_entries"],
+            time_ms=config["engines"][index]["time_ms"],
+            return_reserve_ms=config["arena"]["return_reserve_ms"],
+            max_plies=config["max_plies"],
+        )
+        if ceilings not in group["configured_ceilings"]:
+            group["configured_ceilings"].append(ceilings)
+
+    def number(group, key, value):
+        values = group["numeric"].setdefault(key, [])
+        if value is None:
+            return
+        require(type(value) in (int, float) and math.isfinite(value), "finite census scalar")
+        values.append(value)
+
+    def count(group, key, value):
+        require(value is None or type(value) in (str, bool, int), "scalar census category")
+        cell = group["counts"].setdefault(key, {})
+        label = "NULL" if value is None else str(value)
+        require(len(label) <= 128 and (label in cell or len(cell) < 256), "bounded census category")
+        cell[label] = cell.get(label, 0) + 1
+
+    def difference(group, key, later, earlier):
+        number(group, key, later - earlier if later is not None and earlier is not None else None)
+
+    for obs in row["observations"]:
+        require(state["decisions"] < 51200, "fixed51200 recorded decision ceiling")
+        index, colour = obs["engine_index"], obs["side"]
+        require(
+            type(index) is int and type(colour) is int and (index, colour) in state["groups"],
+            "actual engine/colour census identity",
+        )
+        expected = slot["candidate_color"] if index == 0 else 1 - slot["candidate_color"]
+        require(colour == expected, "actual colour follows original schedule")
+        group = state["groups"][index, colour]
+        group["recorded_decisions"] += 1
+        state["decisions"] += 1
+        counters = obs.get("counters") or {}
+        namespace = counters.get("actual_search_namespace")
+        require(namespace is None or isinstance(namespace, dict), "emitted search namespace object")
+        evaluator = namespace.get("evaluator") if namespace is not None else None
+        require(evaluator is None or isinstance(evaluator, str), "scalar namespace evaluator")
+        group["loaded_identity_observed"] += int(
+            isinstance(evaluator, str)
+            and evaluator.startswith("nnue-residual-f32:sha256:" + group["value_identity"])
+        )
+        group["accepted"] += int(obs.get("accepted") is True)
+        receipt, deadline = counters.get("authority_receipt_ns"), obs.get("deadline_ns")
+        legal = counters.get("authority_legal")
+        group["legal_authority_receipts"] += int(type(receipt) is int and legal is True)
+        group["legal_receipt_checks"] += int(type(receipt) is int and type(legal) is bool)
+        if type(receipt) is int and type(deadline) is int:
+            group["receipt_deadline_checks"] += 1
+            group["receipt_deadline_violations"] += int(receipt >= deadline)
+        returned = obs.get("returned_ns")
+        if type(returned) is int and type(deadline) is int:
+            group["return_deadline_checks"] += 1
+            group["return_at_or_after_deadline"] += int(returned >= deadline)
+        group["engine_error_present"] += int(obs.get("engine_error") is not None)
+        for field in ("stop", "completed_depth", "failure"):
+            count(group, field, obs.get(field))
+        for field in (
+            "selection_reason",
+            "clock_contract",
+            "terminal_collected",
+            "matching_terminal_collected",
+            "inflight_after_drain",
+            "completed_snapshot_validation_failed",
+        ):
+            count(group, field, counters.get(field))
+        for field in ("caller_seconds", "thinking_seconds"):
+            number(group, field, obs.get(field))
+        number(group, "owner_search_elapsed_seconds", counters.get("search_elapsed_seconds"))
+        start = obs.get("caller_started_ns")
+        for key, later, earlier in (
+            ("authority_receipt_elapsed_ns", receipt, start),
+            ("deadline_margin_at_receipt_ns", deadline, receipt),
+            ("final_return_elapsed_ns", returned, start),
+            ("final_return_after_receipt_ns", returned, receipt),
+            ("drain_elapsed_ns", counters.get("drain_finished_ns"), start),
+            ("drain_after_receipt_ns", counters.get("drain_finished_ns"), receipt),
+            ("admission_after_return_ns", obs.get("admission_checked_ns"), returned),
+            ("acceptance_elapsed_ns", obs.get("accepted_ns"), start),
+            ("last_completed_iteration_elapsed_ns", obs.get("last_completed_iteration_ns"), start),
+            ("AI_terminal_elapsed_ns", counters.get("AI_terminal_finished_ns"), start),
+            (
+                "terminal_collection_delay_ns",
+                counters.get("terminal_collected_ns"),
+                counters.get("AI_terminal_finished_ns"),
+            ),
+        ):
+            difference(group, key, later, earlier)
+        whole = counters.get("whole_search")
+        if whole is None and "nodes" in counters:
+            whole = counters
+        views = (
+            ("selected_snapshot", obs.get("completed_iteration_counters")),
+            ("whole_invocation", whole),
+        )
+        for name, view in views:
+            require(view is None or isinstance(view, dict), "typed separate counter view")
+            for field in (
+                "nodes",
+                "static_evaluations",
+                "terminal",
+                "cutoffs",
+                "tt_probes",
+                "tt_key_hits",
+                "tt_exact_hits",
+                "tt_bound_cutoffs",
+                "tt_capacity_skips",
+                "tt_retained_bytes",
+                "tt_generation",
+                "pvs_researches",
+                "delta_updates",
+                "policy_calls",
+                "leaf_count",
+                "physical_nn_calls",
+            ):
+                number(
+                    group, name + "." + field, view.get(field) if isinstance(view, dict) else None
+                )
+
+
+def arena_work_clock_finish(state, result, observed):
+    """Deterministic descriptive summaries; no resampling/NumPy/model/board metrics."""
+
+    def summary(values):
+        if not values:
+            return None
+        ordered = sorted(values)
+        n = len(ordered)
+        middle = (ordered[(n - 1) // 2] + ordered[n // 2]) / 2
+        return dict(
+            count=n,
+            minimum=ordered[0],
+            mean=sum(ordered) / n,
+            median=middle,
+            p95=ordered[max(0, math.ceil(0.95 * n) - 1)],
+            maximum=ordered[-1],
+        )
+
+    groups = []
+    for _, cell in sorted(state["groups"].items()):
+        cell = dict(cell)
+        numeric = cell.pop("numeric")
+        cell["numeric"] = {
+            key: dict(
+                present=len(values),
+                missing=cell["recorded_decisions"] - len(values),
+                descriptive=summary(values),
+            )
+            for key, values in sorted(numeric.items())
+        }
+        # Missing physical-forward/leaf counters are explicitly NULL, not zero work.
+        for key in (
+            "selected_snapshot.physical_nn_calls",
+            "whole_invocation.physical_nn_calls",
+            "selected_snapshot.leaf_count",
+            "whole_invocation.leaf_count",
+        ):
+            cell["numeric"].setdefault(
+                key, dict(present=0, missing=cell["recorded_decisions"], descriptive=None)
+            )
+        if not cell["legal_receipt_checks"]:
+            cell["legal_authority_receipts"] = None
+        if not cell["receipt_deadline_checks"]:
+            cell["receipt_deadline_violations"] = None
+        if not cell["return_deadline_checks"]:
+            cell["return_at_or_after_deadline"] = None
+        cell["identity_scope"] = (
+            "configured exact value identity joined to original PASS producer; "
+            "loaded identity only when an emitted namespace matches"
+        )
+        cell["planned_decisions"] = None
+        cell["loaded_value_identity"] = (
+            cell["value_identity"] if cell["loaded_identity_observed"] else None
+        )
+        groups.append(cell)
+    result.update(
+        schema="quoridor.arena-work-clock.summary.v1",
+        status="COMPLETE" if len(observed) == 256 and not result["errors"] else "INCOMPLETE",
+        recorded_games=len(observed),
+        recorded_decisions=state["decisions"],
+        maximum_recorded_decisions=51200,
+        groups=groups,
+        diagnostic_planned=0,
+        bootstrap_resamples=0,
+        bootstrap_seed=None,
+        central_interval=None,
+        counter_scope="selected snapshot and whole invocation are separate; TT generation/retained "
+        "bytes are observations of retained state, never summed lifetime work; static evaluations "
+        "are not physical NN kernels; unexposed provider lifetime/row counters remain NULL",
+        decode_scope="ONE maintained reader per exact producer; whole archive JSON may transiently "
+        "instantiate unused board/context/history/action fields. Export scalar aggregates only; "
+        "no geometry/rules/Search replay or state-derived model metrics",
+        unavailable=dict(
+            provider_lifetime_rows=None,
+            allocator_or_family_peak=None,
+            NN_physical_throughput=None,
+            allocation_clock_if_unemitted=None,
+        ),
+    )
+    result["limitations"] = [
+        "New-purpose descriptive census only; no bootstrap/CI/NPS/equal-work/cause/cure/strength claim.",
+        "Receipt deadline and final return/drain clocks differ; no cleanup-under100ms promise.",
+        "Native reported RSS point maximum is not allocator/family/continuous peak.",
+        "Search value_stm is searched STM utility, not a calibrated raw teacher target.",
+    ]
+    report = (
+        "Saved Alpha work/clock census\n\n"
+        f"Recorded games: {len(observed)}/256; decisions: {state['decisions']}/51200 maximum.\n"
+        "Scalar groups use exact value identity and colour; no intervals or state payloads exported.\n"
+    )
+    return result, report
+
+
 def arena_analysis(spec, experiment):
     config = arena_analysis_check(spec, experiment)
     plan = document(config["arena_plan"])
@@ -6686,6 +7056,8 @@ def arena_analysis(spec, experiment):
             "its parent correspondence is opaque/unverified. Actual proposals retain "
             "the admitted decision book/config full-history authority."
         )
+    work_clock = config.get("work_clock_census")
+    clock_state = arena_work_clock_state(plan, schedule) if work_clock is not None else None
     observed = {}
     decision_rows = {}
     strata = {}
@@ -6726,11 +7098,32 @@ def arena_analysis(spec, experiment):
                     and e["batch"] == item["batch"],
                     "original producer/current subject correspondence",
                 )
-                planned, c = (
-                    arena_plan_check(e, document(approved))
-                    if phase == "arena"
-                    else arena_decision_plan_check(e, document(approved))
-                )
+                if clock_state is not None:
+                    approved_body = document(approved)
+                    batch = approved_body["batches"][item["batch"]]
+                    c = document(e["config"])
+                    require(
+                        completion["status"] == "PASS"
+                        and completion["data"]["status"] == "PASS"
+                        and completion["data"]["errors"] == []
+                        and e["config"] == batch["config"]
+                        and e["inputs"] == approved_body["inputs"]
+                        and e["models"] == approved_body["models"]
+                        and c["games"] == 16
+                        and c["max_plies"] == 200
+                        and c["engines"] == approved_body["matchups"][0]["engines"]
+                        and c.get("inference") is None
+                        and c["arena"]["evaluator_sha256"]
+                        == approved_body["matchups"][0]["evaluator_sha256"],
+                        "qualified producer/config/value metadata correspondence",
+                    )
+                    planned = planned_game_slice(e, schedule, approved_body)
+                else:
+                    planned, c = (
+                        arena_plan_check(e, document(approved))
+                        if phase == "arena"
+                        else arena_decision_plan_check(e, document(approved))
+                    )
                 inventory = {r["path"]: r for r in completion["data"]["files"]}
                 require(
                     len(inventory) == len(completion["data"]["files"]),
@@ -6744,39 +7137,84 @@ def arena_analysis(spec, experiment):
                         ("native_manifest", "manifest.json"),
                     )
                 }
-                native = arena_reference_report(
-                    c, files, expected_build=document(e["build_manifest"])
-                )
-                pub = json.loads(read_ref(files["result"]))
-                result["native_costs"].append(
-                    {
-                        "completion": item["completion"],
-                        "native_wall_seconds": native["wall_seconds"],
-                        "encoding_sync_verify_seconds": pub["archive_wall_seconds"],
-                        "canonical_compressed_bytes": pub["archive"]["compressed"]["bytes"],
-                        "canonical_raw_bytes": pub["archive"]["raw_bytes"],
-                        "canonical_allocated_bytes": pub["archive_allocated_bytes"],
-                        "compression_ratio_raw_over_compressed": pub["archive"]["raw_bytes"]
-                        / pub["archive"]["compressed"]["bytes"],
-                        "native_peak_rss_observation_bytes": native["peak_rss"],
-                        "evaluator_setup_seconds": native["pump"][
-                            "evaluator_initialization_seconds"
-                        ],
-                        "backend_setup_seconds": native["pump"]["backend_initialization_seconds"],
-                        "backend_cleanup_seconds": native["pump"]["backend_cleanup_seconds"],
-                        "thinking_seconds": sum(
-                            o["thinking_seconds"] or 0
-                            for row in native["outcomes"]
-                            for o in row["observations"]
-                        ),
-                        "classification_seconds": sum(
-                            o["counters"].get("parent_traits", {}).get("classification_seconds", 0)
-                            for row in native["outcomes"]
-                            for o in row["observations"]
-                        ),
-                        "scope": "nested source spans, not additive all-work fees; continuous working set/worker UTC STOP UNKNOWN",
-                    }
-                )
+                if clock_state is not None:
+                    require(
+                        completion["status"] == "PASS"
+                        and completion["data"]["status"] == "PASS"
+                        and completion["data"]["errors"] == [],
+                        "original producer complete before descriptive read",
+                    )
+                    limit = next(
+                        v for v in work_clock["archive_limits"] if v["batch"] == item["batch"]
+                    )
+                    require(
+                        files["journal"] == limit["compressed"],
+                        "exact original census archive before read",
+                    )
+                    native = arena_reference_report(
+                        c,
+                        files,
+                        expected_build=document(e["build_manifest"]),
+                        expected_archive={key: limit[key] for key in ("compressed", "raw_bytes")},
+                    )
+                else:
+                    native = arena_reference_report(
+                        c, files, expected_build=document(e["build_manifest"])
+                    )
+                pub = None if clock_state is not None else json.loads(read_ref(files["result"]))
+                if clock_state is not None:
+                    result["native_costs"].append(
+                        {
+                            "completion": item["completion"],
+                            "native_wall_seconds": native.get("wall_seconds"),
+                            "native_reported_rss_point_max": native.get("peak_rss"),
+                            "setup_and_cleanup_reported_seconds": {
+                                key: native.get("pump", {}).get(key)
+                                for key in (
+                                    "evaluator_initialization_seconds",
+                                    "backend_initialization_seconds",
+                                    "backend_cleanup_seconds",
+                                )
+                            },
+                            "compressed_bytes": files["journal"]["bytes"],
+                            "raw_bytes": limit["raw_bytes"],
+                            "scope": "reported nested cost/RSS observations, not allocator/family peak",
+                        }
+                    )
+                else:
+                    result["native_costs"].append(
+                        {
+                            "completion": item["completion"],
+                            "native_wall_seconds": native["wall_seconds"],
+                            "encoding_sync_verify_seconds": pub["archive_wall_seconds"],
+                            "canonical_compressed_bytes": pub["archive"]["compressed"]["bytes"],
+                            "canonical_raw_bytes": pub["archive"]["raw_bytes"],
+                            "canonical_allocated_bytes": pub["archive_allocated_bytes"],
+                            "compression_ratio_raw_over_compressed": pub["archive"]["raw_bytes"]
+                            / pub["archive"]["compressed"]["bytes"],
+                            "native_peak_rss_observation_bytes": native["peak_rss"],
+                            "evaluator_setup_seconds": native["pump"][
+                                "evaluator_initialization_seconds"
+                            ],
+                            "backend_setup_seconds": native["pump"][
+                                "backend_initialization_seconds"
+                            ],
+                            "backend_cleanup_seconds": native["pump"]["backend_cleanup_seconds"],
+                            "thinking_seconds": sum(
+                                o["thinking_seconds"] or 0
+                                for row in native["outcomes"]
+                                for o in row["observations"]
+                            ),
+                            "classification_seconds": sum(
+                                o["counters"]
+                                .get("parent_traits", {})
+                                .get("classification_seconds", 0)
+                                for row in native["outcomes"]
+                                for o in row["observations"]
+                            ),
+                            "scope": "nested source spans, not additive all-work fees; continuous working set/worker UTC STOP UNKNOWN",
+                        }
+                    )
                 for row in native["outcomes"]:
                     slot = next(slot for slot in planned if slot["local_game"] == row["game"])
                     require(
@@ -6798,9 +7236,27 @@ def arena_analysis(spec, experiment):
                             and len(row["observations"]) <= 1,
                             "same parent single proposal/no branch game",
                         )
-                    arena_observation(c, row)
-                    target[slot["slot"]] = (row, c)
+                    # The new-purpose census reuses archive/config custody once.
+                    # Original semantic qualification is retained byref, not replayed.
+                    if clock_state is None:
+                        arena_observation(c, row)
+                    if clock_state is not None:
+                        require(len(row["observations"]) <= 200, "per-game census decision bound")
+                        arena_work_clock_add(clock_state, slot, row, c)
+                        target[slot["slot"]] = True
+                    else:
+                        target[slot["slot"]] = (row, c)
             except BaseException as error:
+                if clock_state is not None:
+                    result["errors"].append(
+                        {
+                            "completion": item["completion"],
+                            "type": type(error).__name__,
+                            "stage": "saved_reader_or_scalar_join",
+                            "message": "maintained reader/scalar join refused; raw context not exported",
+                        }
+                    )
+                    break
                 result["errors"].append({"completion": item["completion"], **error_fact(error)})
 
     consume(config["batches"], config["arena_plan"], "arena", observed)
@@ -6811,6 +7267,8 @@ def arena_analysis(spec, experiment):
             "compare",
             decision_rows,
         )
+    if clock_state is not None:
+        return arena_work_clock_finish(clock_state, result, observed)
     tables = arena_score_tables(plan, schedule, observed, config)
     result["matchups"] = tables
     # Per-state rows are correlated exposures. Every cell retains game/family/colour denominators.
@@ -7125,28 +7583,44 @@ def collect_data(spec, experiment):
                 if selected["decision_plan"] is not None
                 else None
             )
-            require(
-                summary["schema"] == "quoridor.arena-comparison.summary.v1"
-                and summary["planned"] == plan["planned_slots"]
-                and len(summary["matchups"]) == len(plan["matchups"])
-                and {t["matchup"] for t in summary["matchups"]}
-                == {m["id"] for m in plan["matchups"]}
-                and all(
-                    t["counts"]["planned"] == 2 * len(plan["family_ids"])
-                    for t in summary["matchups"]
+            if selected.get("work_clock_census") is not None:
+                require(
+                    summary["schema"] == "quoridor.arena-work-clock.summary.v1"
+                    and summary["planned"] == plan["planned_slots"] == 256
+                    and summary["status"] == "COMPLETE"
+                    and summary["recorded_games"] == 256
+                    and summary["errors"] == []
+                    and summary["diagnostic_planned"] == 0
+                    and type(summary["recorded_decisions"]) is int
+                    and 0 <= summary["recorded_decisions"] <= 51200
+                    and summary["bootstrap_resamples"] == 0
+                    and summary["bootstrap_seed"] is None
+                    and summary["central_interval"] is None,
+                    "complete bounded descriptive work/clock output, no bootstrap",
                 )
-                and summary["diagnostic_planned"]
-                == (decisions["planned_slots"] if decisions else 0)
-                and all(
-                    summary[k] == selected[k]
-                    for k in (
-                        "bootstrap_seed",
-                        "bootstrap_resamples",
-                        "central_interval",
+            else:
+                require(
+                    summary["schema"] == "quoridor.arena-comparison.summary.v1"
+                    and summary["planned"] == plan["planned_slots"]
+                    and len(summary["matchups"]) == len(plan["matchups"])
+                    and {t["matchup"] for t in summary["matchups"]}
+                    == {m["id"] for m in plan["matchups"]}
+                    and all(
+                        t["counts"]["planned"] == 2 * len(plan["family_ids"])
+                        for t in summary["matchups"]
                     )
-                ),
-                "full conditional saved-analysis census",
-            )
+                    and summary["diagnostic_planned"]
+                    == (decisions["planned_slots"] if decisions else 0)
+                    and all(
+                        summary[k] == selected[k]
+                        for k in (
+                            "bootstrap_seed",
+                            "bootstrap_resamples",
+                            "central_interval",
+                        )
+                    ),
+                    "full conditional saved-analysis census",
+                )
             data["scope"] = (
                 "conditional/descriptive fixed analysis; native/model/default scientific scope unchanged"
             )

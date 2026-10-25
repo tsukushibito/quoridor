@@ -1,0 +1,3844 @@
+{
+  "conditionId": "current-original-continuous-entry-v1",
+  "status": "NEW_FIXED64_TIMED64_SAVED_COLLECTION_COMPLETE",
+  "job": "e5466f40-2704-448c-a536-934aa116e287",
+  "newOnly": {
+    "planned": 128,
+    "searchTransports": 128,
+    "numeric": 128,
+    "completePairs": 64,
+    "UNKNOWN": 0,
+    "UNRUN": 0,
+    "setups": 4,
+    "clears": 32,
+    "drops": 4
+  },
+  "references": {
+    "baseline": "bd8ffc91",
+    "candidate": "d1106b89",
+    "sourceReview": "b6ebf04b/Max34 SOURCE_CLEAR",
+    "software": "318b3261"
+  },
+  "fixedSavedOriginalComparatorChecks": {
+    "completePairs": 32,
+    "allDeclaredRawValuesEqual": true
+  },
+  "pairFieldComparison": {
+    "fixed": {
+      "rawScore": {
+        "equal": 32,
+        "different": 0,
+        "unexposed": 0
+      },
+      "score": {
+        "equal": 32,
+        "different": 0,
+        "unexposed": 0
+      },
+      "move": {
+        "equal": 32,
+        "different": 0,
+        "unexposed": 0
+      },
+      "mustPass": {
+        "equal": 32,
+        "different": 0,
+        "unexposed": 0
+      },
+      "nodes": {
+        "equal": 24,
+        "different": 8,
+        "unexposed": 0
+      },
+      "completedDepth": {
+        "equal": 32,
+        "different": 0,
+        "unexposed": 0
+      },
+      "selectivity": {
+        "equal": 32,
+        "different": 0,
+        "unexposed": 0
+      },
+      "probability": {
+        "equal": 0,
+        "different": 0,
+        "unexposed": 32
+      },
+      "proven": {
+        "equal": 32,
+        "different": 0,
+        "unexposed": 0
+      },
+      "isEndSearch": {
+        "equal": 0,
+        "different": 0,
+        "unexposed": 32
+      },
+      "scoreUnits": {
+        "equal": 32,
+        "different": 0,
+        "unexposed": 0
+      },
+      "stopped": {
+        "equal": 0,
+        "different": 0,
+        "unexposed": 32
+      }
+    },
+    "timed": {
+      "rawScore": {
+        "equal": 0,
+        "different": 0,
+        "unexposed": 32
+      },
+      "score": {
+        "equal": 20,
+        "different": 12,
+        "unexposed": 0
+      },
+      "move": {
+        "equal": 32,
+        "different": 0,
+        "unexposed": 0
+      },
+      "mustPass": {
+        "equal": 32,
+        "different": 0,
+        "unexposed": 0
+      },
+      "nodes": {
+        "equal": 8,
+        "different": 24,
+        "unexposed": 0
+      },
+      "completedDepth": {
+        "equal": 16,
+        "different": 16,
+        "unexposed": 0
+      },
+      "selectivity": {
+        "equal": 26,
+        "different": 6,
+        "unexposed": 0
+      },
+      "probability": {
+        "equal": 0,
+        "different": 32,
+        "unexposed": 0
+      },
+      "proven": {
+        "equal": 16,
+        "different": 16,
+        "unexposed": 0
+      },
+      "isEndSearch": {
+        "equal": 26,
+        "different": 6,
+        "unexposed": 0
+      },
+      "scoreUnits": {
+        "equal": 32,
+        "different": 0,
+        "unexposed": 0
+      },
+      "stopped": {
+        "equal": 0,
+        "different": 0,
+        "unexposed": 32
+      }
+    }
+  },
+  "byProfile": {
+    "fixed": {
+      "planned": 64,
+      "numeric": 64,
+      "completePairs": 32,
+      "UNKNOWN": 0,
+      "UNRUN": 0,
+      "byOwner": {
+        "rust": {
+          "numeric": 32,
+          "callerWallMs": {
+            "count": 32,
+            "sum": 17.181119066663086,
+            "mean": 0.5369099708332215,
+            "minimum": 0.09056099224835634,
+            "maximum": 1.2333779595792294
+          },
+          "numericFields": {
+            "rawScore": {
+              "count": 32,
+              "sum": 90,
+              "mean": 2.8125,
+              "minimum": -38,
+              "maximum": 35
+            },
+            "score": {
+              "count": 32,
+              "sum": 90,
+              "mean": 2.8125,
+              "minimum": -38,
+              "maximum": 35
+            },
+            "move": {
+              "count": 32,
+              "sum": 996,
+              "mean": 31.125,
+              "minimum": 0,
+              "maximum": 63
+            },
+            "nodes": {
+              "count": 32,
+              "sum": 81058,
+              "mean": 2533.0625,
+              "minimum": 21,
+              "maximum": 7250
+            },
+            "completedDepth": {
+              "count": 32,
+              "sum": 176,
+              "mean": 5.5,
+              "minimum": 4,
+              "maximum": 6
+            },
+            "selectivity": {
+              "count": 32,
+              "sum": 192,
+              "mean": 6.0,
+              "minimum": 6,
+              "maximum": 6
+            },
+            "probability": {
+              "count": 32,
+              "sum": 3200.0,
+              "mean": 100.0,
+              "minimum": 100.0,
+              "maximum": 100.0
+            },
+            "ttBytes": {
+              "count": 32,
+              "sum": 805307904,
+              "mean": 25165872.0,
+              "minimum": 25165872,
+              "maximum": 25165872
+            },
+            "elapsedMs": {
+              "count": 32,
+              "sum": 13.871542,
+              "mean": 0.4334856875,
+              "minimum": 0.00962,
+              "maximum": 1.108614
+            }
+          },
+          "stoppedTimeout": 0,
+          "stoppedAbsent": 0,
+          "isEndSearchTrue": 8
+        },
+        "original": {
+          "numeric": 32,
+          "callerWallMs": {
+            "count": 32,
+            "sum": 15.618472010828555,
+            "mean": 0.48807725033839233,
+            "minimum": 0.1631000777706504,
+            "maximum": 0.8750379784032702
+          },
+          "numericFields": {
+            "rawScore": {
+              "count": 32,
+              "sum": 90,
+              "mean": 2.8125,
+              "minimum": -38,
+              "maximum": 35
+            },
+            "score": {
+              "count": 32,
+              "sum": 90,
+              "mean": 2.8125,
+              "minimum": -38,
+              "maximum": 35
+            },
+            "move": {
+              "count": 32,
+              "sum": 996,
+              "mean": 31.125,
+              "minimum": 0,
+              "maximum": 63
+            },
+            "nodes": {
+              "count": 32,
+              "sum": 81086,
+              "mean": 2533.9375,
+              "minimum": 24,
+              "maximum": 7250
+            },
+            "completedDepth": {
+              "count": 32,
+              "sum": 176,
+              "mean": 5.5,
+              "minimum": 4,
+              "maximum": 6
+            },
+            "completedSelectivity": {
+              "count": 32,
+              "sum": 192,
+              "mean": 6.0,
+              "minimum": 6,
+              "maximum": 6
+            },
+            "selectivity": {
+              "count": 32,
+              "sum": 192,
+              "mean": 6.0,
+              "minimum": 6,
+              "maximum": 6
+            },
+            "ttBytes": {
+              "count": 32,
+              "sum": 805307904,
+              "mean": 25165872.0,
+              "minimum": 25165872,
+              "maximum": 25165872
+            },
+            "prepareMs": {
+              "count": 32,
+              "sum": 0.626816,
+              "mean": 0.019588,
+              "minimum": 0.016079,
+              "maximum": 0.042427
+            },
+            "engineSearchMs": {
+              "count": 32,
+              "sum": 9.746872,
+              "mean": 0.30458975,
+              "minimum": 0.008024,
+              "maximum": 0.704318
+            }
+          },
+          "stoppedTimeout": 0,
+          "stoppedAbsent": 32,
+          "isEndSearchTrue": 0
+        }
+      },
+      "byFamily": [
+        {
+          "family": "development/continuous16-practical-v1/f0",
+          "numeric": 16,
+          "completePairs": 8,
+          "byOwner": {
+            "rust": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 5.250258021987975,
+                "mean": 0.6562822527484968,
+                "minimum": 0.09238498751074076,
+                "maximum": 1.2333779595792294
+              },
+              "numericFields": {
+                "nodes": {
+                  "count": 8,
+                  "sum": 26486,
+                  "mean": 3310.75,
+                  "minimum": 21,
+                  "maximum": 7250
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 44,
+                  "mean": 5.5,
+                  "minimum": 4,
+                  "maximum": 6
+                }
+              },
+              "stoppedTimeout": 0,
+              "stoppedAbsent": 0,
+              "isEndSearchTrue": 2
+            },
+            "original": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 4.431404871866107,
+                "mean": 0.5539256089832634,
+                "minimum": 0.1640289556235075,
+                "maximum": 0.8750379784032702
+              },
+              "numericFields": {
+                "nodes": {
+                  "count": 8,
+                  "sum": 26492,
+                  "mean": 3311.5,
+                  "minimum": 24,
+                  "maximum": 7250
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 44,
+                  "mean": 5.5,
+                  "minimum": 4,
+                  "maximum": 6
+                }
+              },
+              "stoppedTimeout": 0,
+              "stoppedAbsent": 8,
+              "isEndSearchTrue": 0
+            }
+          }
+        },
+        {
+          "family": "development/continuous16-practical-v1/f1",
+          "numeric": 16,
+          "completePairs": 8,
+          "byOwner": {
+            "rust": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 3.683578106574714,
+                "mean": 0.4604472633218393,
+                "minimum": 0.10253605432808399,
+                "maximum": 0.7479810155928135
+              },
+              "numericFields": {
+                "nodes": {
+                  "count": 8,
+                  "sum": 16392,
+                  "mean": 2049.0,
+                  "minimum": 25,
+                  "maximum": 3889
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 44,
+                  "mean": 5.5,
+                  "minimum": 4,
+                  "maximum": 6
+                }
+              },
+              "stoppedTimeout": 0,
+              "stoppedAbsent": 0,
+              "isEndSearchTrue": 2
+            },
+            "original": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 3.615517052821815,
+                "mean": 0.4519396316027269,
+                "minimum": 0.1631000777706504,
+                "maximum": 0.6027210038155317
+              },
+              "numericFields": {
+                "nodes": {
+                  "count": 8,
+                  "sum": 16406,
+                  "mean": 2050.75,
+                  "minimum": 32,
+                  "maximum": 3889
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 44,
+                  "mean": 5.5,
+                  "minimum": 4,
+                  "maximum": 6
+                }
+              },
+              "stoppedTimeout": 0,
+              "stoppedAbsent": 8,
+              "isEndSearchTrue": 0
+            }
+          }
+        },
+        {
+          "family": "development/continuous16-practical-v1/f2",
+          "numeric": 16,
+          "completePairs": 8,
+          "byOwner": {
+            "rust": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 4.15763002820313,
+                "mean": 0.5197037535253912,
+                "minimum": 0.09708595462143421,
+                "maximum": 0.9977319277822971
+              },
+              "numericFields": {
+                "nodes": {
+                  "count": 8,
+                  "sum": 19760,
+                  "mean": 2470.0,
+                  "minimum": 26,
+                  "maximum": 5641
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 44,
+                  "mean": 5.5,
+                  "minimum": 4,
+                  "maximum": 6
+                }
+              },
+              "stoppedTimeout": 0,
+              "stoppedAbsent": 0,
+              "isEndSearchTrue": 2
+            },
+            "original": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 3.803939209319651,
+                "mean": 0.4754924011649564,
+                "minimum": 0.17254205886274576,
+                "maximum": 0.7612640038132668
+              },
+              "numericFields": {
+                "nodes": {
+                  "count": 8,
+                  "sum": 19770,
+                  "mean": 2471.25,
+                  "minimum": 31,
+                  "maximum": 5641
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 44,
+                  "mean": 5.5,
+                  "minimum": 4,
+                  "maximum": 6
+                }
+              },
+              "stoppedTimeout": 0,
+              "stoppedAbsent": 8,
+              "isEndSearchTrue": 0
+            }
+          }
+        },
+        {
+          "family": "development/continuous16-practical-v1/f3",
+          "numeric": 16,
+          "completePairs": 8,
+          "byOwner": {
+            "rust": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 4.089652909897268,
+                "mean": 0.5112066137371585,
+                "minimum": 0.09056099224835634,
+                "maximum": 0.9493069956079125
+              },
+              "numericFields": {
+                "nodes": {
+                  "count": 8,
+                  "sum": 18420,
+                  "mean": 2302.5,
+                  "minimum": 26,
+                  "maximum": 5150
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 44,
+                  "mean": 5.5,
+                  "minimum": 4,
+                  "maximum": 6
+                }
+              },
+              "stoppedTimeout": 0,
+              "stoppedAbsent": 0,
+              "isEndSearchTrue": 2
+            },
+            "original": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 3.7676108768209815,
+                "mean": 0.4709513596026227,
+                "minimum": 0.17791998106986284,
+                "maximum": 0.78085798304528
+              },
+              "numericFields": {
+                "nodes": {
+                  "count": 8,
+                  "sum": 18418,
+                  "mean": 2302.25,
+                  "minimum": 25,
+                  "maximum": 5150
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 44,
+                  "mean": 5.5,
+                  "minimum": 4,
+                  "maximum": 6
+                }
+              },
+              "stoppedTimeout": 0,
+              "stoppedAbsent": 8,
+              "isEndSearchTrue": 0
+            }
+          }
+        }
+      ],
+      "byPlacement": [
+        {
+          "placement": 16,
+          "byOwner": {
+            "rust": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 6.597718107514083,
+                "mean": 0.8247147634392604,
+                "minimum": 0.5473990458995104,
+                "maximum": 1.140531967394054
+              },
+              "numericFields": {
+                "rawScore": {
+                  "count": 8,
+                  "sum": 10,
+                  "mean": 1.25,
+                  "minimum": -27,
+                  "maximum": 24
+                },
+                "score": {
+                  "count": 8,
+                  "sum": 10,
+                  "mean": 1.25,
+                  "minimum": -27,
+                  "maximum": 24
+                },
+                "move": {
+                  "count": 8,
+                  "sum": 240,
+                  "mean": 30.0,
+                  "minimum": 12,
+                  "maximum": 45
+                },
+                "nodes": {
+                  "count": 8,
+                  "sum": 35462,
+                  "mean": 4432.75,
+                  "minimum": 3198,
+                  "maximum": 5641
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 48,
+                  "mean": 6.0,
+                  "minimum": 6,
+                  "maximum": 6
+                },
+                "selectivity": {
+                  "count": 8,
+                  "sum": 48,
+                  "mean": 6.0,
+                  "minimum": 6,
+                  "maximum": 6
+                },
+                "probability": {
+                  "count": 8,
+                  "sum": 800.0,
+                  "mean": 100.0,
+                  "minimum": 100.0,
+                  "maximum": 100.0
+                },
+                "ttBytes": {
+                  "count": 8,
+                  "sum": 201326976,
+                  "mean": 25165872.0,
+                  "minimum": 25165872,
+                  "maximum": 25165872
+                },
+                "elapsedMs": {
+                  "count": 8,
+                  "sum": 5.706345,
+                  "mean": 0.713293125,
+                  "minimum": 0.445754,
+                  "maximum": 0.9823189999999999
+                }
+              },
+              "stoppedTimeout": 0,
+              "stoppedAbsent": 0,
+              "isEndSearchTrue": 0
+            },
+            "original": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 5.394272971898317,
+                "mean": 0.6742841214872897,
+                "minimum": 0.53689896594733,
+                "maximum": 0.8619399741292
+              },
+              "numericFields": {
+                "rawScore": {
+                  "count": 8,
+                  "sum": 10,
+                  "mean": 1.25,
+                  "minimum": -27,
+                  "maximum": 24
+                },
+                "score": {
+                  "count": 8,
+                  "sum": 10,
+                  "mean": 1.25,
+                  "minimum": -27,
+                  "maximum": 24
+                },
+                "move": {
+                  "count": 8,
+                  "sum": 240,
+                  "mean": 30.0,
+                  "minimum": 12,
+                  "maximum": 45
+                },
+                "nodes": {
+                  "count": 8,
+                  "sum": 35462,
+                  "mean": 4432.75,
+                  "minimum": 3198,
+                  "maximum": 5641
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 48,
+                  "mean": 6.0,
+                  "minimum": 6,
+                  "maximum": 6
+                },
+                "completedSelectivity": {
+                  "count": 8,
+                  "sum": 48,
+                  "mean": 6.0,
+                  "minimum": 6,
+                  "maximum": 6
+                },
+                "selectivity": {
+                  "count": 8,
+                  "sum": 48,
+                  "mean": 6.0,
+                  "minimum": 6,
+                  "maximum": 6
+                },
+                "ttBytes": {
+                  "count": 8,
+                  "sum": 201326976,
+                  "mean": 25165872.0,
+                  "minimum": 25165872,
+                  "maximum": 25165872
+                },
+                "prepareMs": {
+                  "count": 8,
+                  "sum": 0.195262,
+                  "mean": 0.02440775,
+                  "minimum": 0.01742,
+                  "maximum": 0.042427
+                },
+                "engineSearchMs": {
+                  "count": 8,
+                  "sum": 3.79445,
+                  "mean": 0.47430625,
+                  "minimum": 0.330254,
+                  "maximum": 0.660986
+                }
+              },
+              "stoppedTimeout": 0,
+              "stoppedAbsent": 8,
+              "isEndSearchTrue": 0
+            }
+          },
+          "rustMinusOriginalDepthDeltas": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "placement": 32,
+          "byOwner": {
+            "rust": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 6.950780050829053,
+                "mean": 0.8688475063536316,
+                "minimum": 0.5899900570511818,
+                "maximum": 1.2333779595792294
+              },
+              "numericFields": {
+                "rawScore": {
+                  "count": 8,
+                  "sum": 58,
+                  "mean": 7.25,
+                  "minimum": -38,
+                  "maximum": 35
+                },
+                "score": {
+                  "count": 8,
+                  "sum": 58,
+                  "mean": 7.25,
+                  "minimum": -38,
+                  "maximum": 35
+                },
+                "move": {
+                  "count": 8,
+                  "sum": 152,
+                  "mean": 19.0,
+                  "minimum": 0,
+                  "maximum": 43
+                },
+                "nodes": {
+                  "count": 8,
+                  "sum": 38360,
+                  "mean": 4795.0,
+                  "minimum": 2891,
+                  "maximum": 7250
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 48,
+                  "mean": 6.0,
+                  "minimum": 6,
+                  "maximum": 6
+                },
+                "selectivity": {
+                  "count": 8,
+                  "sum": 48,
+                  "mean": 6.0,
+                  "minimum": 6,
+                  "maximum": 6
+                },
+                "probability": {
+                  "count": 8,
+                  "sum": 800.0,
+                  "mean": 100.0,
+                  "minimum": 100.0,
+                  "maximum": 100.0
+                },
+                "ttBytes": {
+                  "count": 8,
+                  "sum": 201326976,
+                  "mean": 25165872.0,
+                  "minimum": 25165872,
+                  "maximum": 25165872
+                },
+                "elapsedMs": {
+                  "count": 8,
+                  "sum": 6.060481,
+                  "mean": 0.757560125,
+                  "minimum": 0.48995500000000003,
+                  "maximum": 1.108614
+                }
+              },
+              "stoppedTimeout": 0,
+              "stoppedAbsent": 0,
+              "isEndSearchTrue": 0
+            },
+            "original": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 5.616776994429529,
+                "mean": 0.7020971243036911,
+                "minimum": 0.5569990025833249,
+                "maximum": 0.8750379784032702
+              },
+              "numericFields": {
+                "rawScore": {
+                  "count": 8,
+                  "sum": 58,
+                  "mean": 7.25,
+                  "minimum": -38,
+                  "maximum": 35
+                },
+                "score": {
+                  "count": 8,
+                  "sum": 58,
+                  "mean": 7.25,
+                  "minimum": -38,
+                  "maximum": 35
+                },
+                "move": {
+                  "count": 8,
+                  "sum": 152,
+                  "mean": 19.0,
+                  "minimum": 0,
+                  "maximum": 43
+                },
+                "nodes": {
+                  "count": 8,
+                  "sum": 38360,
+                  "mean": 4795.0,
+                  "minimum": 2891,
+                  "maximum": 7250
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 48,
+                  "mean": 6.0,
+                  "minimum": 6,
+                  "maximum": 6
+                },
+                "completedSelectivity": {
+                  "count": 8,
+                  "sum": 48,
+                  "mean": 6.0,
+                  "minimum": 6,
+                  "maximum": 6
+                },
+                "selectivity": {
+                  "count": 8,
+                  "sum": 48,
+                  "mean": 6.0,
+                  "minimum": 6,
+                  "maximum": 6
+                },
+                "ttBytes": {
+                  "count": 8,
+                  "sum": 201326976,
+                  "mean": 25165872.0,
+                  "minimum": 25165872,
+                  "maximum": 25165872
+                },
+                "prepareMs": {
+                  "count": 8,
+                  "sum": 0.154839,
+                  "mean": 0.019354875,
+                  "minimum": 0.016586,
+                  "maximum": 0.033547
+                },
+                "engineSearchMs": {
+                  "count": 8,
+                  "sum": 4.136397,
+                  "mean": 0.517049625,
+                  "minimum": 0.351047,
+                  "maximum": 0.704318
+                }
+              },
+              "stoppedTimeout": 0,
+              "stoppedAbsent": 8,
+              "isEndSearchTrue": 0
+            }
+          },
+          "rustMinusOriginalDepthDeltas": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "placement": 48,
+          "byOwner": {
+            "rust": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 2.843781025148928,
+                "mean": 0.355472628143616,
+                "minimum": 0.2514640800654888,
+                "maximum": 0.42982003651559353
+              },
+              "numericFields": {
+                "rawScore": {
+                  "count": 8,
+                  "sum": 66,
+                  "mean": 8.25,
+                  "minimum": -5,
+                  "maximum": 27
+                },
+                "score": {
+                  "count": 8,
+                  "sum": 66,
+                  "mean": 8.25,
+                  "minimum": -5,
+                  "maximum": 27
+                },
+                "move": {
+                  "count": 8,
+                  "sum": 226,
+                  "mean": 28.25,
+                  "minimum": 7,
+                  "maximum": 55
+                },
+                "nodes": {
+                  "count": 8,
+                  "sum": 7040,
+                  "mean": 880.0,
+                  "minimum": 426,
+                  "maximum": 1322
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 48,
+                  "mean": 6.0,
+                  "minimum": 6,
+                  "maximum": 6
+                },
+                "selectivity": {
+                  "count": 8,
+                  "sum": 48,
+                  "mean": 6.0,
+                  "minimum": 6,
+                  "maximum": 6
+                },
+                "probability": {
+                  "count": 8,
+                  "sum": 800.0,
+                  "mean": 100.0,
+                  "minimum": 100.0,
+                  "maximum": 100.0
+                },
+                "ttBytes": {
+                  "count": 8,
+                  "sum": 201326976,
+                  "mean": 25165872.0,
+                  "minimum": 25165872,
+                  "maximum": 25165872
+                },
+                "elapsedMs": {
+                  "count": 8,
+                  "sum": 2.0221780000000003,
+                  "mean": 0.25277225000000003,
+                  "minimum": 0.159519,
+                  "maximum": 0.317292
+                }
+              },
+              "stoppedTimeout": 0,
+              "stoppedAbsent": 0,
+              "isEndSearchTrue": 0
+            },
+            "original": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 3.2309009693562984,
+                "mean": 0.4038626211695373,
+                "minimum": 0.3203609958291054,
+                "maximum": 0.545384013094008
+              },
+              "numericFields": {
+                "rawScore": {
+                  "count": 8,
+                  "sum": 66,
+                  "mean": 8.25,
+                  "minimum": -5,
+                  "maximum": 27
+                },
+                "score": {
+                  "count": 8,
+                  "sum": 66,
+                  "mean": 8.25,
+                  "minimum": -5,
+                  "maximum": 27
+                },
+                "move": {
+                  "count": 8,
+                  "sum": 226,
+                  "mean": 28.25,
+                  "minimum": 7,
+                  "maximum": 55
+                },
+                "nodes": {
+                  "count": 8,
+                  "sum": 7040,
+                  "mean": 880.0,
+                  "minimum": 426,
+                  "maximum": 1322
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 48,
+                  "mean": 6.0,
+                  "minimum": 6,
+                  "maximum": 6
+                },
+                "completedSelectivity": {
+                  "count": 8,
+                  "sum": 48,
+                  "mean": 6.0,
+                  "minimum": 6,
+                  "maximum": 6
+                },
+                "selectivity": {
+                  "count": 8,
+                  "sum": 48,
+                  "mean": 6.0,
+                  "minimum": 6,
+                  "maximum": 6
+                },
+                "ttBytes": {
+                  "count": 8,
+                  "sum": 201326976,
+                  "mean": 25165872.0,
+                  "minimum": 25165872,
+                  "maximum": 25165872
+                },
+                "prepareMs": {
+                  "count": 8,
+                  "sum": 0.138494,
+                  "mean": 0.01731175,
+                  "minimum": 0.016079,
+                  "maximum": 0.018032
+                },
+                "engineSearchMs": {
+                  "count": 8,
+                  "sum": 1.727125,
+                  "mean": 0.215890625,
+                  "minimum": 0.159455,
+                  "maximum": 0.306237
+                }
+              },
+              "stoppedTimeout": 0,
+              "stoppedAbsent": 8,
+              "isEndSearchTrue": 0
+            }
+          },
+          "rustMinusOriginalDepthDeltas": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "placement": 56,
+          "byOwner": {
+            "rust": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 0.7888398831710219,
+                "mean": 0.09860498539637774,
+                "minimum": 0.09056099224835634,
+                "maximum": 0.10588695295155048
+              },
+              "numericFields": {
+                "rawScore": {
+                  "count": 8,
+                  "sum": -44,
+                  "mean": -5.5,
+                  "minimum": -20,
+                  "maximum": 14
+                },
+                "score": {
+                  "count": 8,
+                  "sum": -44,
+                  "mean": -5.5,
+                  "minimum": -20,
+                  "maximum": 14
+                },
+                "move": {
+                  "count": 8,
+                  "sum": 378,
+                  "mean": 47.25,
+                  "minimum": 14,
+                  "maximum": 63
+                },
+                "nodes": {
+                  "count": 8,
+                  "sum": 196,
+                  "mean": 24.5,
+                  "minimum": 21,
+                  "maximum": 26
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 32,
+                  "mean": 4.0,
+                  "minimum": 4,
+                  "maximum": 4
+                },
+                "selectivity": {
+                  "count": 8,
+                  "sum": 48,
+                  "mean": 6.0,
+                  "minimum": 6,
+                  "maximum": 6
+                },
+                "probability": {
+                  "count": 8,
+                  "sum": 800.0,
+                  "mean": 100.0,
+                  "minimum": 100.0,
+                  "maximum": 100.0
+                },
+                "ttBytes": {
+                  "count": 8,
+                  "sum": 201326976,
+                  "mean": 25165872.0,
+                  "minimum": 25165872,
+                  "maximum": 25165872
+                },
+                "elapsedMs": {
+                  "count": 8,
+                  "sum": 0.082538,
+                  "mean": 0.01031725,
+                  "minimum": 0.00962,
+                  "maximum": 0.011294
+                }
+              },
+              "stoppedTimeout": 0,
+              "stoppedAbsent": 0,
+              "isEndSearchTrue": 8
+            },
+            "original": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 1.3765210751444101,
+                "mean": 0.17206513439305127,
+                "minimum": 0.1631000777706504,
+                "maximum": 0.1813389826565981
+              },
+              "numericFields": {
+                "rawScore": {
+                  "count": 8,
+                  "sum": -44,
+                  "mean": -5.5,
+                  "minimum": -20,
+                  "maximum": 14
+                },
+                "score": {
+                  "count": 8,
+                  "sum": -44,
+                  "mean": -5.5,
+                  "minimum": -20,
+                  "maximum": 14
+                },
+                "move": {
+                  "count": 8,
+                  "sum": 378,
+                  "mean": 47.25,
+                  "minimum": 14,
+                  "maximum": 63
+                },
+                "nodes": {
+                  "count": 8,
+                  "sum": 224,
+                  "mean": 28.0,
+                  "minimum": 24,
+                  "maximum": 32
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 32,
+                  "mean": 4.0,
+                  "minimum": 4,
+                  "maximum": 4
+                },
+                "completedSelectivity": {
+                  "count": 8,
+                  "sum": 48,
+                  "mean": 6.0,
+                  "minimum": 6,
+                  "maximum": 6
+                },
+                "selectivity": {
+                  "count": 8,
+                  "sum": 48,
+                  "mean": 6.0,
+                  "minimum": 6,
+                  "maximum": 6
+                },
+                "ttBytes": {
+                  "count": 8,
+                  "sum": 201326976,
+                  "mean": 25165872.0,
+                  "minimum": 25165872,
+                  "maximum": 25165872
+                },
+                "prepareMs": {
+                  "count": 8,
+                  "sum": 0.138221,
+                  "mean": 0.017277625,
+                  "minimum": 0.017099,
+                  "maximum": 0.01758
+                },
+                "engineSearchMs": {
+                  "count": 8,
+                  "sum": 0.08889999999999999,
+                  "mean": 0.011112499999999999,
+                  "minimum": 0.008024,
+                  "maximum": 0.015085
+                }
+              },
+              "stoppedTimeout": 0,
+              "stoppedAbsent": 8,
+              "isEndSearchTrue": 0
+            }
+          },
+          "rustMinusOriginalDepthDeltas": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "byExposedEndFlag": {
+        "rust": {
+          "endTrue": {
+            "numeric": 8,
+            "callerWallMs": {
+              "count": 8,
+              "sum": 0.7888398831710219,
+              "mean": 0.09860498539637774,
+              "minimum": 0.09056099224835634,
+              "maximum": 0.10588695295155048
+            },
+            "numericFields": {
+              "rawScore": {
+                "count": 8,
+                "sum": -44,
+                "mean": -5.5,
+                "minimum": -20,
+                "maximum": 14
+              },
+              "score": {
+                "count": 8,
+                "sum": -44,
+                "mean": -5.5,
+                "minimum": -20,
+                "maximum": 14
+              },
+              "move": {
+                "count": 8,
+                "sum": 378,
+                "mean": 47.25,
+                "minimum": 14,
+                "maximum": 63
+              },
+              "nodes": {
+                "count": 8,
+                "sum": 196,
+                "mean": 24.5,
+                "minimum": 21,
+                "maximum": 26
+              },
+              "completedDepth": {
+                "count": 8,
+                "sum": 32,
+                "mean": 4.0,
+                "minimum": 4,
+                "maximum": 4
+              },
+              "selectivity": {
+                "count": 8,
+                "sum": 48,
+                "mean": 6.0,
+                "minimum": 6,
+                "maximum": 6
+              },
+              "probability": {
+                "count": 8,
+                "sum": 800.0,
+                "mean": 100.0,
+                "minimum": 100.0,
+                "maximum": 100.0
+              },
+              "ttBytes": {
+                "count": 8,
+                "sum": 201326976,
+                "mean": 25165872.0,
+                "minimum": 25165872,
+                "maximum": 25165872
+              },
+              "elapsedMs": {
+                "count": 8,
+                "sum": 0.082538,
+                "mean": 0.01031725,
+                "minimum": 0.00962,
+                "maximum": 0.011294
+              }
+            },
+            "stoppedTimeout": 0,
+            "stoppedAbsent": 0,
+            "isEndSearchTrue": 8
+          },
+          "endFalse": {
+            "numeric": 24,
+            "callerWallMs": {
+              "count": 24,
+              "sum": 16.392279183492064,
+              "mean": 0.6830116326455027,
+              "minimum": 0.2514640800654888,
+              "maximum": 1.2333779595792294
+            },
+            "numericFields": {
+              "rawScore": {
+                "count": 24,
+                "sum": 134,
+                "mean": 5.583333333333333,
+                "minimum": -38,
+                "maximum": 35
+              },
+              "score": {
+                "count": 24,
+                "sum": 134,
+                "mean": 5.583333333333333,
+                "minimum": -38,
+                "maximum": 35
+              },
+              "move": {
+                "count": 24,
+                "sum": 618,
+                "mean": 25.75,
+                "minimum": 0,
+                "maximum": 55
+              },
+              "nodes": {
+                "count": 24,
+                "sum": 80862,
+                "mean": 3369.25,
+                "minimum": 426,
+                "maximum": 7250
+              },
+              "completedDepth": {
+                "count": 24,
+                "sum": 144,
+                "mean": 6.0,
+                "minimum": 6,
+                "maximum": 6
+              },
+              "selectivity": {
+                "count": 24,
+                "sum": 144,
+                "mean": 6.0,
+                "minimum": 6,
+                "maximum": 6
+              },
+              "probability": {
+                "count": 24,
+                "sum": 2400.0,
+                "mean": 100.0,
+                "minimum": 100.0,
+                "maximum": 100.0
+              },
+              "ttBytes": {
+                "count": 24,
+                "sum": 603980928,
+                "mean": 25165872.0,
+                "minimum": 25165872,
+                "maximum": 25165872
+              },
+              "elapsedMs": {
+                "count": 24,
+                "sum": 13.789004,
+                "mean": 0.5745418333333333,
+                "minimum": 0.159519,
+                "maximum": 1.108614
+              }
+            },
+            "stoppedTimeout": 0,
+            "stoppedAbsent": 0,
+            "isEndSearchTrue": 0
+          },
+          "unexposed": {
+            "numeric": 0,
+            "callerWallMs": {
+              "count": 0,
+              "sum": null,
+              "mean": null,
+              "minimum": null,
+              "maximum": null
+            },
+            "numericFields": {},
+            "stoppedTimeout": 0,
+            "stoppedAbsent": 0,
+            "isEndSearchTrue": 0
+          }
+        },
+        "original": {
+          "endTrue": {
+            "numeric": 0,
+            "callerWallMs": {
+              "count": 0,
+              "sum": null,
+              "mean": null,
+              "minimum": null,
+              "maximum": null
+            },
+            "numericFields": {},
+            "stoppedTimeout": 0,
+            "stoppedAbsent": 0,
+            "isEndSearchTrue": 0
+          },
+          "endFalse": {
+            "numeric": 0,
+            "callerWallMs": {
+              "count": 0,
+              "sum": null,
+              "mean": null,
+              "minimum": null,
+              "maximum": null
+            },
+            "numericFields": {},
+            "stoppedTimeout": 0,
+            "stoppedAbsent": 0,
+            "isEndSearchTrue": 0
+          },
+          "unexposed": {
+            "numeric": 32,
+            "callerWallMs": {
+              "count": 32,
+              "sum": 15.618472010828555,
+              "mean": 0.48807725033839233,
+              "minimum": 0.1631000777706504,
+              "maximum": 0.8750379784032702
+            },
+            "numericFields": {
+              "rawScore": {
+                "count": 32,
+                "sum": 90,
+                "mean": 2.8125,
+                "minimum": -38,
+                "maximum": 35
+              },
+              "score": {
+                "count": 32,
+                "sum": 90,
+                "mean": 2.8125,
+                "minimum": -38,
+                "maximum": 35
+              },
+              "move": {
+                "count": 32,
+                "sum": 996,
+                "mean": 31.125,
+                "minimum": 0,
+                "maximum": 63
+              },
+              "nodes": {
+                "count": 32,
+                "sum": 81086,
+                "mean": 2533.9375,
+                "minimum": 24,
+                "maximum": 7250
+              },
+              "completedDepth": {
+                "count": 32,
+                "sum": 176,
+                "mean": 5.5,
+                "minimum": 4,
+                "maximum": 6
+              },
+              "completedSelectivity": {
+                "count": 32,
+                "sum": 192,
+                "mean": 6.0,
+                "minimum": 6,
+                "maximum": 6
+              },
+              "selectivity": {
+                "count": 32,
+                "sum": 192,
+                "mean": 6.0,
+                "minimum": 6,
+                "maximum": 6
+              },
+              "ttBytes": {
+                "count": 32,
+                "sum": 805307904,
+                "mean": 25165872.0,
+                "minimum": 25165872,
+                "maximum": 25165872
+              },
+              "prepareMs": {
+                "count": 32,
+                "sum": 0.626816,
+                "mean": 0.019588,
+                "minimum": 0.016079,
+                "maximum": 0.042427
+              },
+              "engineSearchMs": {
+                "count": 32,
+                "sum": 9.746872,
+                "mean": 0.30458975,
+                "minimum": 0.008024,
+                "maximum": 0.704318
+              }
+            },
+            "stoppedTimeout": 0,
+            "stoppedAbsent": 32,
+            "isEndSearchTrue": 0
+          }
+        }
+      },
+      "rootwiseDepth": [
+        {
+          "root": "development/continuous16-practical-v1/f0/p16",
+          "placement": 16,
+          "observations": [
+            {
+              "repeat": 0,
+              "rust": 6,
+              "original": 6,
+              "signedRustMinusOriginal": 0
+            },
+            {
+              "repeat": 1,
+              "rust": 6,
+              "original": 6,
+              "signedRustMinusOriginal": 0
+            }
+          ]
+        },
+        {
+          "root": "development/continuous16-practical-v1/f0/p32",
+          "placement": 32,
+          "observations": [
+            {
+              "repeat": 0,
+              "rust": 6,
+              "original": 6,
+              "signedRustMinusOriginal": 0
+            },
+            {
+              "repeat": 1,
+              "rust": 6,
+              "original": 6,
+              "signedRustMinusOriginal": 0
+            }
+          ]
+        },
+        {
+          "root": "development/continuous16-practical-v1/f0/p48",
+          "placement": 48,
+          "observations": [
+            {
+              "repeat": 0,
+              "rust": 6,
+              "original": 6,
+              "signedRustMinusOriginal": 0
+            },
+            {
+              "repeat": 1,
+              "rust": 6,
+              "original": 6,
+              "signedRustMinusOriginal": 0
+            }
+          ]
+        },
+        {
+          "root": "development/continuous16-practical-v1/f0/p56",
+          "placement": 56,
+          "observations": [
+            {
+              "repeat": 0,
+              "rust": 4,
+              "original": 4,
+              "signedRustMinusOriginal": 0
+            },
+            {
+              "repeat": 1,
+              "rust": 4,
+              "original": 4,
+              "signedRustMinusOriginal": 0
+            }
+          ]
+        },
+        {
+          "root": "development/continuous16-practical-v1/f1/p16",
+          "placement": 16,
+          "observations": [
+            {
+              "repeat": 0,
+              "rust": 6,
+              "original": 6,
+              "signedRustMinusOriginal": 0
+            },
+            {
+              "repeat": 1,
+              "rust": 6,
+              "original": 6,
+              "signedRustMinusOriginal": 0
+            }
+          ]
+        },
+        {
+          "root": "development/continuous16-practical-v1/f1/p32",
+          "placement": 32,
+          "observations": [
+            {
+              "repeat": 0,
+              "rust": 6,
+              "original": 6,
+              "signedRustMinusOriginal": 0
+            },
+            {
+              "repeat": 1,
+              "rust": 6,
+              "original": 6,
+              "signedRustMinusOriginal": 0
+            }
+          ]
+        },
+        {
+          "root": "development/continuous16-practical-v1/f1/p48",
+          "placement": 48,
+          "observations": [
+            {
+              "repeat": 0,
+              "rust": 6,
+              "original": 6,
+              "signedRustMinusOriginal": 0
+            },
+            {
+              "repeat": 1,
+              "rust": 6,
+              "original": 6,
+              "signedRustMinusOriginal": 0
+            }
+          ]
+        },
+        {
+          "root": "development/continuous16-practical-v1/f1/p56",
+          "placement": 56,
+          "observations": [
+            {
+              "repeat": 0,
+              "rust": 4,
+              "original": 4,
+              "signedRustMinusOriginal": 0
+            },
+            {
+              "repeat": 1,
+              "rust": 4,
+              "original": 4,
+              "signedRustMinusOriginal": 0
+            }
+          ]
+        },
+        {
+          "root": "development/continuous16-practical-v1/f2/p16",
+          "placement": 16,
+          "observations": [
+            {
+              "repeat": 0,
+              "rust": 6,
+              "original": 6,
+              "signedRustMinusOriginal": 0
+            },
+            {
+              "repeat": 1,
+              "rust": 6,
+              "original": 6,
+              "signedRustMinusOriginal": 0
+            }
+          ]
+        },
+        {
+          "root": "development/continuous16-practical-v1/f2/p32",
+          "placement": 32,
+          "observations": [
+            {
+              "repeat": 0,
+              "rust": 6,
+              "original": 6,
+              "signedRustMinusOriginal": 0
+            },
+            {
+              "repeat": 1,
+              "rust": 6,
+              "original": 6,
+              "signedRustMinusOriginal": 0
+            }
+          ]
+        },
+        {
+          "root": "development/continuous16-practical-v1/f2/p48",
+          "placement": 48,
+          "observations": [
+            {
+              "repeat": 0,
+              "rust": 6,
+              "original": 6,
+              "signedRustMinusOriginal": 0
+            },
+            {
+              "repeat": 1,
+              "rust": 6,
+              "original": 6,
+              "signedRustMinusOriginal": 0
+            }
+          ]
+        },
+        {
+          "root": "development/continuous16-practical-v1/f2/p56",
+          "placement": 56,
+          "observations": [
+            {
+              "repeat": 0,
+              "rust": 4,
+              "original": 4,
+              "signedRustMinusOriginal": 0
+            },
+            {
+              "repeat": 1,
+              "rust": 4,
+              "original": 4,
+              "signedRustMinusOriginal": 0
+            }
+          ]
+        },
+        {
+          "root": "development/continuous16-practical-v1/f3/p16",
+          "placement": 16,
+          "observations": [
+            {
+              "repeat": 0,
+              "rust": 6,
+              "original": 6,
+              "signedRustMinusOriginal": 0
+            },
+            {
+              "repeat": 1,
+              "rust": 6,
+              "original": 6,
+              "signedRustMinusOriginal": 0
+            }
+          ]
+        },
+        {
+          "root": "development/continuous16-practical-v1/f3/p32",
+          "placement": 32,
+          "observations": [
+            {
+              "repeat": 0,
+              "rust": 6,
+              "original": 6,
+              "signedRustMinusOriginal": 0
+            },
+            {
+              "repeat": 1,
+              "rust": 6,
+              "original": 6,
+              "signedRustMinusOriginal": 0
+            }
+          ]
+        },
+        {
+          "root": "development/continuous16-practical-v1/f3/p48",
+          "placement": 48,
+          "observations": [
+            {
+              "repeat": 0,
+              "rust": 6,
+              "original": 6,
+              "signedRustMinusOriginal": 0
+            },
+            {
+              "repeat": 1,
+              "rust": 6,
+              "original": 6,
+              "signedRustMinusOriginal": 0
+            }
+          ]
+        },
+        {
+          "root": "development/continuous16-practical-v1/f3/p56",
+          "placement": 56,
+          "observations": [
+            {
+              "repeat": 0,
+              "rust": 4,
+              "original": 4,
+              "signedRustMinusOriginal": 0
+            },
+            {
+              "repeat": 1,
+              "rust": 4,
+              "original": 4,
+              "signedRustMinusOriginal": 0
+            }
+          ]
+        }
+      ]
+    },
+    "timed": {
+      "planned": 64,
+      "numeric": 64,
+      "completePairs": 32,
+      "UNKNOWN": 0,
+      "UNRUN": 0,
+      "byOwner": {
+        "rust": {
+          "numeric": 32,
+          "callerWallMs": {
+            "count": 32,
+            "sum": 16042.968490277417,
+            "mean": 501.3427653211693,
+            "minimum": 0.14424207620322704,
+            "maximum": 1000.9594119619578
+          },
+          "numericFields": {
+            "rawScore": {
+              "count": 32,
+              "sum": 106,
+              "mean": 3.3125,
+              "minimum": -36,
+              "maximum": 38
+            },
+            "score": {
+              "count": 32,
+              "sum": 118,
+              "mean": 3.6875,
+              "minimum": -36,
+              "maximum": 39
+            },
+            "move": {
+              "count": 32,
+              "sum": 1036,
+              "mean": 32.375,
+              "minimum": 0,
+              "maximum": 63
+            },
+            "nodes": {
+              "count": 32,
+              "sum": 141505317,
+              "mean": 4422041.15625,
+              "minimum": 37,
+              "maximum": 14066506
+            },
+            "completedDepth": {
+              "count": 32,
+              "sum": 364,
+              "mean": 11.375,
+              "minimum": 4,
+              "maximum": 20
+            },
+            "selectivity": {
+              "count": 32,
+              "sum": 132,
+              "mean": 4.125,
+              "minimum": 0,
+              "maximum": 6
+            },
+            "probability": {
+              "count": 32,
+              "sum": 2940.0,
+              "mean": 91.875,
+              "minimum": 74.0,
+              "maximum": 100.0
+            },
+            "ttBytes": {
+              "count": 32,
+              "sum": 805307904,
+              "mean": 25165872.0,
+              "minimum": 25165872,
+              "maximum": 25165872
+            },
+            "elapsedMs": {
+              "count": 32,
+              "sum": 16037.142298,
+              "mean": 501.1606968125,
+              "minimum": 0.023445,
+              "maximum": 1000.648555
+            }
+          },
+          "stoppedTimeout": 16,
+          "stoppedAbsent": 0,
+          "isEndSearchTrue": 16
+        },
+        "original": {
+          "numeric": 32,
+          "callerWallMs": {
+            "count": 32,
+            "sum": 16064.01064270176,
+            "mean": 502.00033258443,
+            "minimum": 0.4524689866229892,
+            "maximum": 1008.2962879678234
+          },
+          "numericFields": {
+            "score": {
+              "count": 32,
+              "sum": 112,
+              "mean": 3.5,
+              "minimum": -36,
+              "maximum": 38
+            },
+            "move": {
+              "count": 32,
+              "sum": 1036,
+              "mean": 32.375,
+              "minimum": 0,
+              "maximum": 63
+            },
+            "nodes": {
+              "count": 32,
+              "sum": 366925231,
+              "mean": 11466413.46875,
+              "minimum": 37,
+              "maximum": 38247745
+            },
+            "completedDepth": {
+              "count": 32,
+              "sum": 500,
+              "mean": 15.625,
+              "minimum": 4,
+              "maximum": 28
+            },
+            "selectivity": {
+              "count": 32,
+              "sum": 100,
+              "mean": 3.125,
+              "minimum": 0,
+              "maximum": 6
+            },
+            "probability": {
+              "count": 32,
+              "sum": 2822,
+              "mean": 88.1875,
+              "minimum": 74,
+              "maximum": 100
+            },
+            "ttBytes": {
+              "count": 32,
+              "sum": 805307904,
+              "mean": 25165872.0,
+              "minimum": 25165872,
+              "maximum": 25165872
+            },
+            "prepareMs": {
+              "count": 32,
+              "sum": 0.255281,
+              "mean": 0.00797753125,
+              "minimum": 0.006839,
+              "maximum": 0.010838
+            },
+            "engineSearchMs": {
+              "count": 32,
+              "sum": 16055.963558,
+              "mean": 501.7488611875,
+              "minimum": 0.286681,
+              "maximum": 1008.087689
+            },
+            "reportedSearchMs": {
+              "count": 32,
+              "sum": 15866,
+              "mean": 495.8125,
+              "minimum": 0,
+              "maximum": 1001
+            },
+            "reportedClogMs": {
+              "count": 32,
+              "sum": 184,
+              "mean": 5.75,
+              "minimum": 0,
+              "maximum": 17
+            },
+            "clogNodes": {
+              "count": 32,
+              "sum": 2732076,
+              "mean": 85377.375,
+              "minimum": 29,
+              "maximum": 256630
+            }
+          },
+          "stoppedTimeout": 0,
+          "stoppedAbsent": 32,
+          "isEndSearchTrue": 22
+        }
+      },
+      "byFamily": [
+        {
+          "family": "development/continuous16-practical-v1/f0",
+          "numeric": 16,
+          "completePairs": 8,
+          "byOwner": {
+            "rust": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 4004.889566102065,
+                "mean": 500.61119576275814,
+                "minimum": 0.15293399337679148,
+                "maximum": 1000.2434479538351
+              },
+              "numericFields": {
+                "nodes": {
+                  "count": 8,
+                  "sum": 30649664,
+                  "mean": 3831208.0,
+                  "minimum": 53,
+                  "maximum": 8156537
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 72,
+                  "mean": 9.0,
+                  "minimum": 4,
+                  "maximum": 12
+                }
+              },
+              "stoppedTimeout": 4,
+              "stoppedAbsent": 0,
+              "isEndSearchTrue": 4
+            },
+            "original": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 4015.598402940668,
+                "mean": 501.9498003675835,
+                "minimum": 0.45950699131935835,
+                "maximum": 1004.4516939669847
+              },
+              "numericFields": {
+                "nodes": {
+                  "count": 8,
+                  "sum": 76494283,
+                  "mean": 9561785.375,
+                  "minimum": 53,
+                  "maximum": 22983543
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 130,
+                  "mean": 16.25,
+                  "minimum": 4,
+                  "maximum": 28
+                }
+              },
+              "stoppedTimeout": 0,
+              "stoppedAbsent": 8,
+              "isEndSearchTrue": 6
+            }
+          }
+        },
+        {
+          "family": "development/continuous16-practical-v1/f1",
+          "numeric": 16,
+          "completePairs": 8,
+          "byOwner": {
+            "rust": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 4013.4848800953478,
+                "mean": 501.68561001191847,
+                "minimum": 0.15209801495075226,
+                "maximum": 1000.9594119619578
+              },
+              "numericFields": {
+                "nodes": {
+                  "count": 8,
+                  "sum": 43425719,
+                  "mean": 5428214.875,
+                  "minimum": 52,
+                  "maximum": 14066506
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 104,
+                  "mean": 13.0,
+                  "minimum": 4,
+                  "maximum": 20
+                }
+              },
+              "stoppedTimeout": 4,
+              "stoppedAbsent": 0,
+              "isEndSearchTrue": 4
+            },
+            "original": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 4014.4992568530142,
+                "mean": 501.8124071066268,
+                "minimum": 0.46018289867788553,
+                "maximum": 1002.7636570157483
+              },
+              "numericFields": {
+                "nodes": {
+                  "count": 8,
+                  "sum": 105410191,
+                  "mean": 13176273.875,
+                  "minimum": 52,
+                  "maximum": 38247745
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 136,
+                  "mean": 17.0,
+                  "minimum": 4,
+                  "maximum": 28
+                }
+              },
+              "stoppedTimeout": 0,
+              "stoppedAbsent": 8,
+              "isEndSearchTrue": 6
+            }
+          }
+        },
+        {
+          "family": "development/continuous16-practical-v1/f2",
+          "numeric": 16,
+          "completePairs": 8,
+          "byOwner": {
+            "rust": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 4014.37944395002,
+                "mean": 501.7974304937525,
+                "minimum": 0.1509740250185132,
+                "maximum": 1000.2519849222153
+              },
+              "numericFields": {
+                "nodes": {
+                  "count": 8,
+                  "sum": 37033644,
+                  "mean": 4629205.5,
+                  "minimum": 37,
+                  "maximum": 11354286
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 102,
+                  "mean": 12.75,
+                  "minimum": 4,
+                  "maximum": 19
+                }
+              },
+              "stoppedTimeout": 4,
+              "stoppedAbsent": 0,
+              "isEndSearchTrue": 4
+            },
+            "original": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 4020.85986698512,
+                "mean": 502.60748337314,
+                "minimum": 0.4524689866229892,
+                "maximum": 1008.2962879678234
+              },
+              "numericFields": {
+                "nodes": {
+                  "count": 8,
+                  "sum": 108825365,
+                  "mean": 13603170.625,
+                  "minimum": 37,
+                  "maximum": 37268935
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 130,
+                  "mean": 16.25,
+                  "minimum": 4,
+                  "maximum": 28
+                }
+              },
+              "stoppedTimeout": 0,
+              "stoppedAbsent": 8,
+              "isEndSearchTrue": 6
+            }
+          }
+        },
+        {
+          "family": "development/continuous16-practical-v1/f3",
+          "numeric": 16,
+          "completePairs": 8,
+          "byOwner": {
+            "rust": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 4010.2146001299843,
+                "mean": 501.27682501624804,
+                "minimum": 0.14424207620322704,
+                "maximum": 1000.2193710533902
+              },
+              "numericFields": {
+                "nodes": {
+                  "count": 8,
+                  "sum": 30396290,
+                  "mean": 3799536.25,
+                  "minimum": 43,
+                  "maximum": 7844124
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 86,
+                  "mean": 10.75,
+                  "minimum": 4,
+                  "maximum": 17
+                }
+              },
+              "stoppedTimeout": 4,
+              "stoppedAbsent": 0,
+              "isEndSearchTrue": 4
+            },
+            "original": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 4013.0531159229577,
+                "mean": 501.6316394903697,
+                "minimum": 0.5359519273042679,
+                "maximum": 1004.2494930094108
+              },
+              "numericFields": {
+                "nodes": {
+                  "count": 8,
+                  "sum": 76195392,
+                  "mean": 9524424.0,
+                  "minimum": 43,
+                  "maximum": 22591474
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 104,
+                  "mean": 13.0,
+                  "minimum": 4,
+                  "maximum": 20
+                }
+              },
+              "stoppedTimeout": 0,
+              "stoppedAbsent": 8,
+              "isEndSearchTrue": 4
+            }
+          }
+        }
+      ],
+      "byPlacement": [
+        {
+          "placement": 16,
+          "byOwner": {
+            "rust": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 8001.536480151117,
+                "mean": 1000.1920600188896,
+                "minimum": 1000.1551270252094,
+                "maximum": 1000.2434479538351
+              },
+              "numericFields": {
+                "rawScore": {
+                  "count": 8,
+                  "sum": 12,
+                  "mean": 1.5,
+                  "minimum": -24,
+                  "maximum": 23
+                },
+                "score": {
+                  "count": 8,
+                  "sum": 18,
+                  "mean": 2.25,
+                  "minimum": -24,
+                  "maximum": 24
+                },
+                "move": {
+                  "count": 8,
+                  "sum": 250,
+                  "mean": 31.25,
+                  "minimum": 18,
+                  "maximum": 45
+                },
+                "nodes": {
+                  "count": 8,
+                  "sum": 62275961,
+                  "mean": 7784495.125,
+                  "minimum": 7091309,
+                  "maximum": 8156537
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 132,
+                  "mean": 16.5,
+                  "minimum": 10,
+                  "maximum": 20
+                },
+                "selectivity": {
+                  "count": 8,
+                  "sum": 12,
+                  "mean": 1.5,
+                  "minimum": 0,
+                  "maximum": 6
+                },
+                "probability": {
+                  "count": 8,
+                  "sum": 644.0,
+                  "mean": 80.5,
+                  "minimum": 74.0,
+                  "maximum": 100.0
+                },
+                "ttBytes": {
+                  "count": 8,
+                  "sum": 201326976,
+                  "mean": 25165872.0,
+                  "minimum": 25165872,
+                  "maximum": 25165872
+                },
+                "elapsedMs": {
+                  "count": 8,
+                  "sum": 8000.000266,
+                  "mean": 1000.00003325,
+                  "minimum": 1000.0000029999999,
+                  "maximum": 1000.000075
+                }
+              },
+              "stoppedTimeout": 8,
+              "stoppedAbsent": 0,
+              "isEndSearchTrue": 0
+            },
+            "original": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 8024.974763044156,
+                "mean": 1003.1218453805195,
+                "minimum": 1000.1096590422094,
+                "maximum": 1008.2962879678234
+              },
+              "numericFields": {
+                "score": {
+                  "count": 8,
+                  "sum": 12,
+                  "mean": 1.5,
+                  "minimum": -26,
+                  "maximum": 24
+                },
+                "move": {
+                  "count": 8,
+                  "sum": 250,
+                  "mean": 31.25,
+                  "minimum": 18,
+                  "maximum": 45
+                },
+                "nodes": {
+                  "count": 8,
+                  "sum": 128562956,
+                  "mean": 16070369.5,
+                  "minimum": 14460776,
+                  "maximum": 17766910
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 172,
+                  "mean": 21.5,
+                  "minimum": 20,
+                  "maximum": 24
+                },
+                "selectivity": {
+                  "count": 8,
+                  "sum": 0,
+                  "mean": 0.0,
+                  "minimum": 0,
+                  "maximum": 0
+                },
+                "probability": {
+                  "count": 8,
+                  "sum": 592,
+                  "mean": 74.0,
+                  "minimum": 74,
+                  "maximum": 74
+                },
+                "ttBytes": {
+                  "count": 8,
+                  "sum": 201326976,
+                  "mean": 25165872.0,
+                  "minimum": 25165872,
+                  "maximum": 25165872
+                },
+                "prepareMs": {
+                  "count": 8,
+                  "sum": 0.064427,
+                  "mean": 0.008053375,
+                  "minimum": 0.006839,
+                  "maximum": 0.010838
+                },
+                "engineSearchMs": {
+                  "count": 8,
+                  "sum": 8022.832674,
+                  "mean": 1002.85408425,
+                  "minimum": 999.830508,
+                  "maximum": 1008.087689
+                },
+                "reportedSearchMs": {
+                  "count": 8,
+                  "sum": 7947,
+                  "mean": 993.375,
+                  "minimum": 988,
+                  "maximum": 1001
+                },
+                "reportedClogMs": {
+                  "count": 8,
+                  "sum": 69,
+                  "mean": 8.625,
+                  "minimum": 1,
+                  "maximum": 13
+                },
+                "clogNodes": {
+                  "count": 8,
+                  "sum": 1065558,
+                  "mean": 133194.75,
+                  "minimum": 18302,
+                  "maximum": 207848
+                }
+              },
+              "stoppedTimeout": 0,
+              "stoppedAbsent": 8,
+              "isEndSearchTrue": 0
+            }
+          },
+          "rustMinusOriginalDepthDeltas": [
+            -11,
+            -11,
+            -4,
+            -4,
+            -2,
+            -2,
+            -3,
+            -3
+          ]
+        },
+        {
+          "placement": 32,
+          "byOwner": {
+            "rust": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 8002.4616728769615,
+                "mean": 1000.3077091096202,
+                "minimum": 1000.1808110391721,
+                "maximum": 1000.9594119619578
+              },
+              "numericFields": {
+                "rawScore": {
+                  "count": 8,
+                  "sum": 62,
+                  "mean": 7.75,
+                  "minimum": -36,
+                  "maximum": 38
+                },
+                "score": {
+                  "count": 8,
+                  "sum": 68,
+                  "mean": 8.5,
+                  "minimum": -36,
+                  "maximum": 39
+                },
+                "move": {
+                  "count": 8,
+                  "sum": 152,
+                  "mean": 19.0,
+                  "minimum": 0,
+                  "maximum": 43
+                },
+                "nodes": {
+                  "count": 8,
+                  "sum": 78944758,
+                  "mean": 9868094.75,
+                  "minimum": 7110744,
+                  "maximum": 14066506
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 104,
+                  "mean": 13.0,
+                  "minimum": 10,
+                  "maximum": 16
+                },
+                "selectivity": {
+                  "count": 8,
+                  "sum": 24,
+                  "mean": 3.0,
+                  "minimum": 0,
+                  "maximum": 6
+                },
+                "probability": {
+                  "count": 8,
+                  "sum": 696.0,
+                  "mean": 87.0,
+                  "minimum": 74.0,
+                  "maximum": 100.0
+                },
+                "ttBytes": {
+                  "count": 8,
+                  "sum": 201326976,
+                  "mean": 25165872.0,
+                  "minimum": 25165872,
+                  "maximum": 25165872
+                },
+                "elapsedMs": {
+                  "count": 8,
+                  "sum": 8000.648831,
+                  "mean": 1000.081103875,
+                  "minimum": 1000.0,
+                  "maximum": 1000.648555
+                }
+              },
+              "stoppedTimeout": 8,
+              "stoppedAbsent": 0,
+              "isEndSearchTrue": 0
+            },
+            "original": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 8013.673261972144,
+                "mean": 1001.709157746518,
+                "minimum": 1000.0727530568838,
+                "maximum": 1004.4516939669847
+              },
+              "numericFields": {
+                "score": {
+                  "count": 8,
+                  "sum": 68,
+                  "mean": 8.5,
+                  "minimum": -36,
+                  "maximum": 38
+                },
+                "move": {
+                  "count": 8,
+                  "sum": 152,
+                  "mean": 19.0,
+                  "minimum": 0,
+                  "maximum": 43
+                },
+                "nodes": {
+                  "count": 8,
+                  "sum": 237626665,
+                  "mean": 29703333.125,
+                  "minimum": 20424898,
+                  "maximum": 38247745
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 200,
+                  "mean": 25.0,
+                  "minimum": 16,
+                  "maximum": 28
+                },
+                "selectivity": {
+                  "count": 8,
+                  "sum": 4,
+                  "mean": 0.5,
+                  "minimum": 0,
+                  "maximum": 2
+                },
+                "probability": {
+                  "count": 8,
+                  "sum": 630,
+                  "mean": 78.75,
+                  "minimum": 74,
+                  "maximum": 93
+                },
+                "ttBytes": {
+                  "count": 8,
+                  "sum": 201326976,
+                  "mean": 25165872.0,
+                  "minimum": 25165872,
+                  "maximum": 25165872
+                },
+                "prepareMs": {
+                  "count": 8,
+                  "sum": 0.064532,
+                  "mean": 0.0080665,
+                  "minimum": 0.007293,
+                  "maximum": 0.008829
+                },
+                "engineSearchMs": {
+                  "count": 8,
+                  "sum": 8011.192942,
+                  "mean": 1001.39911775,
+                  "minimum": 999.677936,
+                  "maximum": 1004.157049
+                },
+                "reportedSearchMs": {
+                  "count": 8,
+                  "sum": 7907,
+                  "mean": 988.375,
+                  "minimum": 985,
+                  "maximum": 993
+                },
+                "reportedClogMs": {
+                  "count": 8,
+                  "sum": 105,
+                  "mean": 13.125,
+                  "minimum": 8,
+                  "maximum": 17
+                },
+                "clogNodes": {
+                  "count": 8,
+                  "sum": 1585070,
+                  "mean": 198133.75,
+                  "minimum": 124946,
+                  "maximum": 256630
+                }
+              },
+              "stoppedTimeout": 0,
+              "stoppedAbsent": 8,
+              "isEndSearchTrue": 6
+            }
+          },
+          "rustMinusOriginalDepthDeltas": [
+            -18,
+            -18,
+            -12,
+            -12,
+            -12,
+            -12,
+            -6,
+            -6
+          ]
+        },
+        {
+          "placement": 48,
+          "byOwner": {
+            "rust": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 37.61650808155537,
+                "mean": 4.702063510194421,
+                "minimum": 1.7879609949886799,
+                "maximum": 9.278632001951337
+              },
+              "numericFields": {
+                "rawScore": {
+                  "count": 8,
+                  "sum": 76,
+                  "mean": 9.5,
+                  "minimum": -8,
+                  "maximum": 34
+                },
+                "score": {
+                  "count": 8,
+                  "sum": 76,
+                  "mean": 9.5,
+                  "minimum": -8,
+                  "maximum": 34
+                },
+                "move": {
+                  "count": 8,
+                  "sum": 256,
+                  "mean": 32.0,
+                  "minimum": 7,
+                  "maximum": 55
+                },
+                "nodes": {
+                  "count": 8,
+                  "sum": 284228,
+                  "mean": 35528.5,
+                  "minimum": 15686,
+                  "maximum": 42890
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 96,
+                  "mean": 12.0,
+                  "minimum": 12,
+                  "maximum": 12
+                },
+                "selectivity": {
+                  "count": 8,
+                  "sum": 48,
+                  "mean": 6.0,
+                  "minimum": 6,
+                  "maximum": 6
+                },
+                "probability": {
+                  "count": 8,
+                  "sum": 800.0,
+                  "mean": 100.0,
+                  "minimum": 100.0,
+                  "maximum": 100.0
+                },
+                "ttBytes": {
+                  "count": 8,
+                  "sum": 201326976,
+                  "mean": 25165872.0,
+                  "minimum": 25165872,
+                  "maximum": 25165872
+                },
+                "elapsedMs": {
+                  "count": 8,
+                  "sum": 36.218265,
+                  "mean": 4.527283125,
+                  "minimum": 1.6247790000000002,
+                  "maximum": 8.993371
+                }
+              },
+              "stoppedTimeout": 0,
+              "stoppedAbsent": 0,
+              "isEndSearchTrue": 8
+            },
+            "original": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 21.17698488291353,
+                "mean": 2.6471231103641912,
+                "minimum": 1.2181589845567942,
+                "maximum": 3.4201330272480845
+              },
+              "numericFields": {
+                "score": {
+                  "count": 8,
+                  "sum": 76,
+                  "mean": 9.5,
+                  "minimum": -8,
+                  "maximum": 34
+                },
+                "move": {
+                  "count": 8,
+                  "sum": 256,
+                  "mean": 32.0,
+                  "minimum": 7,
+                  "maximum": 55
+                },
+                "nodes": {
+                  "count": 8,
+                  "sum": 735240,
+                  "mean": 91905.0,
+                  "minimum": 23574,
+                  "maximum": 134048
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 96,
+                  "mean": 12.0,
+                  "minimum": 12,
+                  "maximum": 12
+                },
+                "selectivity": {
+                  "count": 8,
+                  "sum": 48,
+                  "mean": 6.0,
+                  "minimum": 6,
+                  "maximum": 6
+                },
+                "probability": {
+                  "count": 8,
+                  "sum": 800,
+                  "mean": 100.0,
+                  "minimum": 100,
+                  "maximum": 100
+                },
+                "ttBytes": {
+                  "count": 8,
+                  "sum": 201326976,
+                  "mean": 25165872.0,
+                  "minimum": 25165872,
+                  "maximum": 25165872
+                },
+                "prepareMs": {
+                  "count": 8,
+                  "sum": 0.063893,
+                  "mean": 0.007986625,
+                  "minimum": 0.007337,
+                  "maximum": 0.009572
+                },
+                "engineSearchMs": {
+                  "count": 8,
+                  "sum": 19.322753,
+                  "mean": 2.415344125,
+                  "minimum": 1.026119,
+                  "maximum": 3.150767
+                },
+                "reportedSearchMs": {
+                  "count": 8,
+                  "sum": 10,
+                  "mean": 1.25,
+                  "minimum": 0,
+                  "maximum": 2
+                },
+                "reportedClogMs": {
+                  "count": 8,
+                  "sum": 10,
+                  "mean": 1.25,
+                  "minimum": 1,
+                  "maximum": 2
+                },
+                "clogNodes": {
+                  "count": 8,
+                  "sum": 81142,
+                  "mean": 10142.75,
+                  "minimum": 3121,
+                  "maximum": 14014
+                }
+              },
+              "stoppedTimeout": 0,
+              "stoppedAbsent": 8,
+              "isEndSearchTrue": 8
+            }
+          },
+          "rustMinusOriginalDepthDeltas": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "placement": 56,
+          "byOwner": {
+            "rust": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 1.3538291677832603,
+                "mean": 0.16922864597290754,
+                "minimum": 0.14424207620322704,
+                "maximum": 0.2358979545533657
+              },
+              "numericFields": {
+                "rawScore": {
+                  "count": 8,
+                  "sum": -44,
+                  "mean": -5.5,
+                  "minimum": -20,
+                  "maximum": 14
+                },
+                "score": {
+                  "count": 8,
+                  "sum": -44,
+                  "mean": -5.5,
+                  "minimum": -20,
+                  "maximum": 14
+                },
+                "move": {
+                  "count": 8,
+                  "sum": 378,
+                  "mean": 47.25,
+                  "minimum": 14,
+                  "maximum": 63
+                },
+                "nodes": {
+                  "count": 8,
+                  "sum": 370,
+                  "mean": 46.25,
+                  "minimum": 37,
+                  "maximum": 53
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 32,
+                  "mean": 4.0,
+                  "minimum": 4,
+                  "maximum": 4
+                },
+                "selectivity": {
+                  "count": 8,
+                  "sum": 48,
+                  "mean": 6.0,
+                  "minimum": 6,
+                  "maximum": 6
+                },
+                "probability": {
+                  "count": 8,
+                  "sum": 800.0,
+                  "mean": 100.0,
+                  "minimum": 100.0,
+                  "maximum": 100.0
+                },
+                "ttBytes": {
+                  "count": 8,
+                  "sum": 201326976,
+                  "mean": 25165872.0,
+                  "minimum": 25165872,
+                  "maximum": 25165872
+                },
+                "elapsedMs": {
+                  "count": 8,
+                  "sum": 0.274936,
+                  "mean": 0.034367,
+                  "minimum": 0.023445,
+                  "maximum": 0.051361
+                }
+              },
+              "stoppedTimeout": 0,
+              "stoppedAbsent": 0,
+              "isEndSearchTrue": 8
+            },
+            "original": {
+              "numeric": 8,
+              "callerWallMs": {
+                "count": 8,
+                "sum": 4.185632802546024,
+                "mean": 0.523204100318253,
+                "minimum": 0.4524689866229892,
+                "maximum": 0.6472349632531404
+              },
+              "numericFields": {
+                "score": {
+                  "count": 8,
+                  "sum": -44,
+                  "mean": -5.5,
+                  "minimum": -20,
+                  "maximum": 14
+                },
+                "move": {
+                  "count": 8,
+                  "sum": 378,
+                  "mean": 47.25,
+                  "minimum": 14,
+                  "maximum": 63
+                },
+                "nodes": {
+                  "count": 8,
+                  "sum": 370,
+                  "mean": 46.25,
+                  "minimum": 37,
+                  "maximum": 53
+                },
+                "completedDepth": {
+                  "count": 8,
+                  "sum": 32,
+                  "mean": 4.0,
+                  "minimum": 4,
+                  "maximum": 4
+                },
+                "selectivity": {
+                  "count": 8,
+                  "sum": 48,
+                  "mean": 6.0,
+                  "minimum": 6,
+                  "maximum": 6
+                },
+                "probability": {
+                  "count": 8,
+                  "sum": 800,
+                  "mean": 100.0,
+                  "minimum": 100,
+                  "maximum": 100
+                },
+                "ttBytes": {
+                  "count": 8,
+                  "sum": 201326976,
+                  "mean": 25165872.0,
+                  "minimum": 25165872,
+                  "maximum": 25165872
+                },
+                "prepareMs": {
+                  "count": 8,
+                  "sum": 0.062429,
+                  "mean": 0.007803625,
+                  "minimum": 0.006984,
+                  "maximum": 0.010323
+                },
+                "engineSearchMs": {
+                  "count": 8,
+                  "sum": 2.615189,
+                  "mean": 0.326898625,
+                  "minimum": 0.286681,
+                  "maximum": 0.419977
+                },
+                "reportedSearchMs": {
+                  "count": 8,
+                  "sum": 2,
+                  "mean": 0.25,
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "reportedClogMs": {
+                  "count": 8,
+                  "sum": 0,
+                  "mean": 0.0,
+                  "minimum": 0,
+                  "maximum": 0
+                },
+                "clogNodes": {
+                  "count": 8,
+                  "sum": 306,
+                  "mean": 38.25,
+                  "minimum": 29,
+                  "maximum": 45
+                }
+              },
+              "stoppedTimeout": 0,
+              "stoppedAbsent": 8,
+              "isEndSearchTrue": 8
+            }
+          },
+          "rustMinusOriginalDepthDeltas": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "byExposedEndFlag": {
+        "rust": {
+          "endTrue": {
+            "numeric": 16,
+            "callerWallMs": {
+              "count": 16,
+              "sum": 38.97033724933863,
+              "mean": 2.435646078083664,
+              "minimum": 0.14424207620322704,
+              "maximum": 9.278632001951337
+            },
+            "numericFields": {
+              "rawScore": {
+                "count": 16,
+                "sum": 32,
+                "mean": 2.0,
+                "minimum": -20,
+                "maximum": 34
+              },
+              "score": {
+                "count": 16,
+                "sum": 32,
+                "mean": 2.0,
+                "minimum": -20,
+                "maximum": 34
+              },
+              "move": {
+                "count": 16,
+                "sum": 634,
+                "mean": 39.625,
+                "minimum": 7,
+                "maximum": 63
+              },
+              "nodes": {
+                "count": 16,
+                "sum": 284598,
+                "mean": 17787.375,
+                "minimum": 37,
+                "maximum": 42890
+              },
+              "completedDepth": {
+                "count": 16,
+                "sum": 128,
+                "mean": 8.0,
+                "minimum": 4,
+                "maximum": 12
+              },
+              "selectivity": {
+                "count": 16,
+                "sum": 96,
+                "mean": 6.0,
+                "minimum": 6,
+                "maximum": 6
+              },
+              "probability": {
+                "count": 16,
+                "sum": 1600.0,
+                "mean": 100.0,
+                "minimum": 100.0,
+                "maximum": 100.0
+              },
+              "ttBytes": {
+                "count": 16,
+                "sum": 402653952,
+                "mean": 25165872.0,
+                "minimum": 25165872,
+                "maximum": 25165872
+              },
+              "elapsedMs": {
+                "count": 16,
+                "sum": 36.493201,
+                "mean": 2.2808250625,
+                "minimum": 0.023445,
+                "maximum": 8.993371
+              }
+            },
+            "stoppedTimeout": 0,
+            "stoppedAbsent": 0,
+            "isEndSearchTrue": 16
+          },
+          "endFalse": {
+            "numeric": 16,
+            "callerWallMs": {
+              "count": 16,
+              "sum": 16003.998153028078,
+              "mean": 1000.2498845642549,
+              "minimum": 1000.1551270252094,
+              "maximum": 1000.9594119619578
+            },
+            "numericFields": {
+              "rawScore": {
+                "count": 16,
+                "sum": 74,
+                "mean": 4.625,
+                "minimum": -36,
+                "maximum": 38
+              },
+              "score": {
+                "count": 16,
+                "sum": 86,
+                "mean": 5.375,
+                "minimum": -36,
+                "maximum": 39
+              },
+              "move": {
+                "count": 16,
+                "sum": 402,
+                "mean": 25.125,
+                "minimum": 0,
+                "maximum": 45
+              },
+              "nodes": {
+                "count": 16,
+                "sum": 141220719,
+                "mean": 8826294.9375,
+                "minimum": 7091309,
+                "maximum": 14066506
+              },
+              "completedDepth": {
+                "count": 16,
+                "sum": 236,
+                "mean": 14.75,
+                "minimum": 10,
+                "maximum": 20
+              },
+              "selectivity": {
+                "count": 16,
+                "sum": 36,
+                "mean": 2.25,
+                "minimum": 0,
+                "maximum": 6
+              },
+              "probability": {
+                "count": 16,
+                "sum": 1340.0,
+                "mean": 83.75,
+                "minimum": 74.0,
+                "maximum": 100.0
+              },
+              "ttBytes": {
+                "count": 16,
+                "sum": 402653952,
+                "mean": 25165872.0,
+                "minimum": 25165872,
+                "maximum": 25165872
+              },
+              "elapsedMs": {
+                "count": 16,
+                "sum": 16000.649097,
+                "mean": 1000.0405685625,
+                "minimum": 1000.0,
+                "maximum": 1000.648555
+              }
+            },
+            "stoppedTimeout": 16,
+            "stoppedAbsent": 0,
+            "isEndSearchTrue": 0
+          },
+          "unexposed": {
+            "numeric": 0,
+            "callerWallMs": {
+              "count": 0,
+              "sum": null,
+              "mean": null,
+              "minimum": null,
+              "maximum": null
+            },
+            "numericFields": {},
+            "stoppedTimeout": 0,
+            "stoppedAbsent": 0,
+            "isEndSearchTrue": 0
+          }
+        },
+        "original": {
+          "endTrue": {
+            "numeric": 22,
+            "callerWallMs": {
+              "count": 22,
+              "sum": 6038.16766361706,
+              "mean": 274.46216652804816,
+              "minimum": 0.4524689866229892,
+              "maximum": 1004.4516939669847
+            },
+            "numericFields": {
+              "score": {
+                "count": 22,
+                "sum": 56,
+                "mean": 2.5454545454545454,
+                "minimum": -36,
+                "maximum": 38
+              },
+              "move": {
+                "count": 22,
+                "sum": 724,
+                "mean": 32.90909090909091,
+                "minimum": 0,
+                "maximum": 63
+              },
+              "nodes": {
+                "count": 22,
+                "sum": 195345903,
+                "mean": 8879359.227272727,
+                "minimum": 37,
+                "maximum": 38247745
+              },
+              "completedDepth": {
+                "count": 22,
+                "sum": 296,
+                "mean": 13.454545454545455,
+                "minimum": 4,
+                "maximum": 28
+              },
+              "selectivity": {
+                "count": 22,
+                "sum": 100,
+                "mean": 4.545454545454546,
+                "minimum": 0,
+                "maximum": 6
+              },
+              "probability": {
+                "count": 22,
+                "sum": 2082,
+                "mean": 94.63636363636364,
+                "minimum": 74,
+                "maximum": 100
+              },
+              "ttBytes": {
+                "count": 22,
+                "sum": 553649184,
+                "mean": 25165872.0,
+                "minimum": 25165872,
+                "maximum": 25165872
+              },
+              "prepareMs": {
+                "count": 22,
+                "sum": 0.174373,
+                "mean": 0.007926045454545455,
+                "minimum": 0.006984,
+                "maximum": 0.010323
+              },
+              "engineSearchMs": {
+                "count": 22,
+                "sum": 6033.04199,
+                "mean": 274.22918136363637,
+                "minimum": 0.286681,
+                "maximum": 1004.157049
+              },
+              "reportedSearchMs": {
+                "count": 22,
+                "sum": 5945,
+                "mean": 270.22727272727275,
+                "minimum": 0,
+                "maximum": 993
+              },
+              "reportedClogMs": {
+                "count": 22,
+                "sum": 89,
+                "mean": 4.045454545454546,
+                "minimum": 0,
+                "maximum": 17
+              },
+              "clogNodes": {
+                "count": 22,
+                "sum": 1295208,
+                "mean": 58873.09090909091,
+                "minimum": 29,
+                "maximum": 256630
+              }
+            },
+            "stoppedTimeout": 0,
+            "stoppedAbsent": 22,
+            "isEndSearchTrue": 22
+          },
+          "endFalse": {
+            "numeric": 10,
+            "callerWallMs": {
+              "count": 10,
+              "sum": 10025.8429790847,
+              "mean": 1002.58429790847,
+              "minimum": 1000.0727530568838,
+              "maximum": 1008.2962879678234
+            },
+            "numericFields": {
+              "score": {
+                "count": 10,
+                "sum": 56,
+                "mean": 5.6,
+                "minimum": -26,
+                "maximum": 24
+              },
+              "move": {
+                "count": 10,
+                "sum": 312,
+                "mean": 31.2,
+                "minimum": 18,
+                "maximum": 45
+              },
+              "nodes": {
+                "count": 10,
+                "sum": 171579328,
+                "mean": 17157932.8,
+                "minimum": 14460776,
+                "maximum": 22591474
+              },
+              "completedDepth": {
+                "count": 10,
+                "sum": 204,
+                "mean": 20.4,
+                "minimum": 16,
+                "maximum": 24
+              },
+              "selectivity": {
+                "count": 10,
+                "sum": 0,
+                "mean": 0.0,
+                "minimum": 0,
+                "maximum": 0
+              },
+              "probability": {
+                "count": 10,
+                "sum": 740,
+                "mean": 74.0,
+                "minimum": 74,
+                "maximum": 74
+              },
+              "ttBytes": {
+                "count": 10,
+                "sum": 251658720,
+                "mean": 25165872.0,
+                "minimum": 25165872,
+                "maximum": 25165872
+              },
+              "prepareMs": {
+                "count": 10,
+                "sum": 0.080908,
+                "mean": 0.008090799999999999,
+                "minimum": 0.006839,
+                "maximum": 0.010838
+              },
+              "engineSearchMs": {
+                "count": 10,
+                "sum": 10022.921568,
+                "mean": 1002.2921567999999,
+                "minimum": 999.677936,
+                "maximum": 1008.087689
+              },
+              "reportedSearchMs": {
+                "count": 10,
+                "sum": 9921,
+                "mean": 992.1,
+                "minimum": 987,
+                "maximum": 1001
+              },
+              "reportedClogMs": {
+                "count": 10,
+                "sum": 95,
+                "mean": 9.5,
+                "minimum": 1,
+                "maximum": 13
+              },
+              "clogNodes": {
+                "count": 10,
+                "sum": 1436868,
+                "mean": 143686.8,
+                "minimum": 18302,
+                "maximum": 207848
+              }
+            },
+            "stoppedTimeout": 0,
+            "stoppedAbsent": 10,
+            "isEndSearchTrue": 0
+          },
+          "unexposed": {
+            "numeric": 0,
+            "callerWallMs": {
+              "count": 0,
+              "sum": null,
+              "mean": null,
+              "minimum": null,
+              "maximum": null
+            },
+            "numericFields": {},
+            "stoppedTimeout": 0,
+            "stoppedAbsent": 0,
+            "isEndSearchTrue": 0
+          }
+        }
+      },
+      "rootwiseDepth": [
+        {
+          "root": "development/continuous16-practical-v1/f0/p16",
+          "placement": 16,
+          "observations": [
+            {
+              "repeat": 0,
+              "rust": 10,
+              "original": 21,
+              "signedRustMinusOriginal": -11
+            },
+            {
+              "repeat": 1,
+              "rust": 10,
+              "original": 21,
+              "signedRustMinusOriginal": -11
+            }
+          ]
+        },
+        {
+          "root": "development/continuous16-practical-v1/f0/p32",
+          "placement": 32,
+          "observations": [
+            {
+              "repeat": 0,
+              "rust": 10,
+              "original": 28,
+              "signedRustMinusOriginal": -18
+            },
+            {
+              "repeat": 1,
+              "rust": 10,
+              "original": 28,
+              "signedRustMinusOriginal": -18
+            }
+          ]
+        },
+        {
+          "root": "development/continuous16-practical-v1/f0/p48",
+          "placement": 48,
+          "observations": [
+            {
+              "repeat": 0,
+              "rust": 12,
+              "original": 12,
+              "signedRustMinusOriginal": 0
+            },
+            {
+              "repeat": 1,
+              "rust": 12,
+              "original": 12,
+              "signedRustMinusOriginal": 0
+            }
+          ]
+        },
+        {
+          "root": "development/continuous16-practical-v1/f0/p56",
+          "placement": 56,
+          "observations": [
+            {
+              "repeat": 0,
+              "rust": 4,
+              "original": 4,
+              "signedRustMinusOriginal": 0
+            },
+            {
+              "repeat": 1,
+              "rust": 4,
+              "original": 4,
+              "signedRustMinusOriginal": 0
+            }
+          ]
+        },
+        {
+          "root": "development/continuous16-practical-v1/f1/p16",
+          "placement": 16,
+          "observations": [
+            {
+              "repeat": 0,
+              "rust": 20,
+              "original": 24,
+              "signedRustMinusOriginal": -4
+            },
+            {
+              "repeat": 1,
+              "rust": 20,
+              "original": 24,
+              "signedRustMinusOriginal": -4
+            }
+          ]
+        },
+        {
+          "root": "development/continuous16-practical-v1/f1/p32",
+          "placement": 32,
+          "observations": [
+            {
+              "repeat": 0,
+              "rust": 16,
+              "original": 28,
+              "signedRustMinusOriginal": -12
+            },
+            {
+              "repeat": 1,
+              "rust": 16,
+              "original": 28,
+              "signedRustMinusOriginal": -12
+            }
+          ]
+        },
+        {
+          "root": "development/continuous16-practical-v1/f1/p48",
+          "placement": 48,
+          "observations": [
+            {
+              "repeat": 0,
+              "rust": 12,
+              "original": 12,
+              "signedRustMinusOriginal": 0
+            },
+            {
+              "repeat": 1,
+              "rust": 12,
+              "original": 12,
+              "signedRustMinusOriginal": 0
+            }
+          ]
+        },
+        {
+          "root": "development/continuous16-practical-v1/f1/p56",
+          "placement": 56,
+          "observations": [
+            {
+              "repeat": 0,
+              "rust": 4,
+              "original": 4,
+              "signedRustMinusOriginal": 0
+            },
+            {
+              "repeat": 1,
+              "rust": 4,
+              "original": 4,
+              "signedRustMinusOriginal": 0
+            }
+          ]
+        },
+        {
+          "root": "development/continuous16-practical-v1/f2/p16",
+          "placement": 16,
+          "observations": [
+            {
+              "repeat": 0,
+              "rust": 19,
+              "original": 21,
+              "signedRustMinusOriginal": -2
+            },
+            {
+              "repeat": 1,
+              "rust": 19,
+              "original": 21,
+              "signedRustMinusOriginal": -2
+            }
+          ]
+        },
+        {
+          "root": "development/continuous16-practical-v1/f2/p32",
+          "placement": 32,
+          "observations": [
+            {
+              "repeat": 0,
+              "rust": 16,
+              "original": 28,
+              "signedRustMinusOriginal": -12
+            },
+            {
+              "repeat": 1,
+              "rust": 16,
+              "original": 28,
+              "signedRustMinusOriginal": -12
+            }
+          ]
+        },
+        {
+          "root": "development/continuous16-practical-v1/f2/p48",
+          "placement": 48,
+          "observations": [
+            {
+              "repeat": 0,
+              "rust": 12,
+              "original": 12,
+              "signedRustMinusOriginal": 0
+            },
+            {
+              "repeat": 1,
+              "rust": 12,
+              "original": 12,
+              "signedRustMinusOriginal": 0
+            }
+          ]
+        },
+        {
+          "root": "development/continuous16-practical-v1/f2/p56",
+          "placement": 56,
+          "observations": [
+            {
+              "repeat": 0,
+              "rust": 4,
+              "original": 4,
+              "signedRustMinusOriginal": 0
+            },
+            {
+              "repeat": 1,
+              "rust": 4,
+              "original": 4,
+              "signedRustMinusOriginal": 0
+            }
+          ]
+        },
+        {
+          "root": "development/continuous16-practical-v1/f3/p16",
+          "placement": 16,
+          "observations": [
+            {
+              "repeat": 0,
+              "rust": 17,
+              "original": 20,
+              "signedRustMinusOriginal": -3
+            },
+            {
+              "repeat": 1,
+              "rust": 17,
+              "original": 20,
+              "signedRustMinusOriginal": -3
+            }
+          ]
+        },
+        {
+          "root": "development/continuous16-practical-v1/f3/p32",
+          "placement": 32,
+          "observations": [
+            {
+              "repeat": 0,
+              "rust": 10,
+              "original": 16,
+              "signedRustMinusOriginal": -6
+            },
+            {
+              "repeat": 1,
+              "rust": 10,
+              "original": 16,
+              "signedRustMinusOriginal": -6
+            }
+          ]
+        },
+        {
+          "root": "development/continuous16-practical-v1/f3/p48",
+          "placement": 48,
+          "observations": [
+            {
+              "repeat": 0,
+              "rust": 12,
+              "original": 12,
+              "signedRustMinusOriginal": 0
+            },
+            {
+              "repeat": 1,
+              "rust": 12,
+              "original": 12,
+              "signedRustMinusOriginal": 0
+            }
+          ]
+        },
+        {
+          "root": "development/continuous16-practical-v1/f3/p56",
+          "placement": 56,
+          "observations": [
+            {
+              "repeat": 0,
+              "rust": 4,
+              "original": 4,
+              "signedRustMinusOriginal": 0
+            },
+            {
+              "repeat": 1,
+              "rust": 4,
+              "original": 4,
+              "signedRustMinusOriginal": 0
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "mainTTActualBytesByOwner": {
+    "rust": [
+      25165872
+    ],
+    "original": [
+      25165872
+    ]
+  },
+  "auxiliaryTTLayoutSource": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/current-original-continuous-entry-v1/tt-auxiliary-layout-source-clarification.json",
+    "bytes": 2529,
+    "mode": "0644",
+    "sha256": "32f1db079aaac47b26838c967b649475ee3d751e5cb5c1ea4d1d2e80455f9c5c"
+  },
+  "referenceRoute": "PRIVATE_TRANSPORT_PINNED_ORIGINAL_ENGINE_API; not stockConsoleCLI",
+  "timedIdenticalSelectiveScheduleEstablished": false,
+  "summary": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/current-original-continuous-entry-v1/collection-v2/summary.json",
+    "bytes": 133933,
+    "mode": "0644",
+    "sha256": "7f1f5ff5d54b534c1676c3fc24781e7447f0a643d8fe8b69908d6f65cea6692f"
+  },
+  "table": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/current-original-continuous-entry-v1/collection-v2/compact-table.json",
+    "bytes": 36572,
+    "mode": "0644",
+    "sha256": "89719a2da8ff13420f5685924e191f00b8007e7d3b09c77b8165c81fb6ad5003"
+  },
+  "originalResult": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/current-original-continuous-entry-v1/data/result.json",
+    "bytes": 457933,
+    "mode": "0644",
+    "sha256": "e14070214e401feecebbade464741a395f2d250080dc1df99069842fee8c67f5"
+  },
+  "costs": {
+    "outerSeconds": 35.16668262798339,
+    "commandIncludedSeconds": 35.029254244989716,
+    "comparisonIncludedSeconds": 34.98172162997071,
+    "nestedAdded": 0,
+    "actualContinuousPeak": null
+  },
+  "actualSTOP": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/current-original-continuous-entry-v1/controller-STOP.json",
+    "bytes": 146,
+    "mode": "0644",
+    "sha256": "19bbb156b2775979ad8ea812ab6d6a96a4299177714e75d9ef8b76326ebd7b0a"
+  },
+  "actualReturnReceipt": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/current-original-continuous-entry-v1/comparison.returned.json",
+    "bytes": 3458,
+    "mode": "0644",
+    "sha256": "695a2403438aab3ad91f73ad1b2bc78ad68f4e6aa674ddb09855478bdb80c660"
+  },
+  "affectedStoragePoint": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/current-original-continuous-entry-v1/collection-v2/affected-storage-point.json",
+    "bytes": 395,
+    "mode": "0644",
+    "sha256": "5e0022c872ad517ebf15b61ee6f31b58e23e28ba58a21a9da4187e1e0674070b"
+  },
+  "missingObservability": null,
+  "priorConditions": {
+    "unchanged": true,
+    "merged": false,
+    "oldFailedCampaignComplete": false,
+    "deliberateNewReferenceRemeasurements": true
+  },
+  "interpretation": "Fixed32 pairs match declared raw values under this finite condition; tie moves and node counts retained independently. Timed32 pairs are conditional correlated normal-budget observations with mixed early end/timeout/selective work; no same-work throughput/NPS/isolatedflip/strength/CI/default claim or automatic candidate/adoption decision."
+}

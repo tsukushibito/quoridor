@@ -890,6 +890,412 @@ class ConfiguredArenaPlanSelection(unittest.TestCase):
             with self.assertRaises(lc.Refused):
                 lc.native_input_files({**request, "trajectory": {"max_plies": 200}})
 
+    def test_saved_alpha_clock_scalars_keep_snapshot_whole_and_missing_units_nn0(self):
+        lc = load_lifecycle()
+        identities = ["a" * 64, "b" * 64]
+        schedule = [dict(slot=i, family_id=i // 2, candidate_color=i % 2) for i in range(256)]
+        plan = dict(
+            planned_slots=256,
+            family_ids=list(range(128)),
+            matchups=[
+                dict(engines=[dict(kind="nnue"), dict(kind="nnue")], evaluator_sha256=identities)
+            ],
+        )
+        state = lc.arena_work_clock_state(plan, schedule)
+        config = dict(
+            max_plies=200,
+            engines=[dict(depth=64, max_nodes=1000000, time_ms=100)] * 2,
+            arena=dict(tt_entries=1048576, return_reserve_ms=5),
+        )
+        observation = dict(
+            engine_index=0,
+            side=0,
+            accepted=True,
+            caller_started_ns=0,
+            deadline_ns=100_000_000,
+            returned_ns=105_000_000,
+            admission_checked_ns=106_000_000,
+            accepted_ns=107_000_000,
+            last_completed_iteration_ns=80_000_000,
+            completed_depth=4,
+            stop="internal_time_limit",
+            caller_seconds=0.107,
+            thinking_seconds=0.095,
+            completed_iteration_counters=dict(nodes=5, tt_generation=8),
+            counters=dict(
+                authority_receipt_ns=95_000_000,
+                authority_legal=True,
+                actual_search_namespace=dict(
+                    evaluator="nnue-residual-f32:sha256:" + identities[0],
+                    rules="synthetic-rules",
+                    selectivity="synthetic-control",
+                ),
+                drain_finished_ns=104_000_000,
+                whole_search=dict(nodes=9, tt_generation=8),
+            ),
+        )
+        lc.arena_work_clock_add(state, schedule[0], dict(observations=[observation]), config)
+        result, _ = lc.arena_work_clock_finish(
+            state, dict(errors=[], native_costs=[], operation_provenance=[]), {0: True}
+        )
+        cell = result["groups"][0]
+        self.assertEqual(cell["accepted"], 1)
+        self.assertEqual(cell["legal_authority_receipts"], 1)
+        self.assertEqual(cell["receipt_deadline_violations"], 0)
+        self.assertEqual(cell["return_at_or_after_deadline"], 1)
+        self.assertEqual(cell["numeric"]["selected_snapshot.nodes"]["descriptive"]["mean"], 5)
+        self.assertEqual(cell["numeric"]["whole_invocation.nodes"]["descriptive"]["mean"], 9)
+        self.assertIsNone(cell["numeric"]["whole_invocation.physical_nn_calls"]["descriptive"])
+        self.assertIsNone(cell["numeric"]["owner_search_elapsed_seconds"]["descriptive"])
+        self.assertEqual(result["status"], "INCOMPLETE")
+        self.assertIsNone(result["bootstrap_seed"])
+        self.assertNotIn("value_stm", cell)
+        state["decisions"] = 51200
+        with self.assertRaises(lc.Refused):
+            lc.arena_work_clock_add(state, schedule[0], dict(observations=[observation]), config)
+
+    def test_saved_alpha_clock_normal_caller_reads_each_producer_once_without_bootstrap_nn0(self):
+        lc = load_lifecycle()
+        identities = ["a" * 64, "b" * 64]
+        schedule = [
+            dict(
+                slot=i,
+                batch=i // 16,
+                local_game=i % 16,
+                matchup=0,
+                family_id=i // 2,
+                candidate_color=i % 2,
+            )
+            for i in range(256)
+        ]
+        engines = [dict(kind="nnue", depth=64, max_nodes=1000000, time_ms=100)] * 2
+        plan = dict(
+            phase="arena",
+            planned_slots=256,
+            family_ids=list(range(128)),
+            inputs=[],
+            models=[],
+            schedule="schedule",
+            batches=[
+                dict(batch=i, matchup=0, config=f"c{i}", slots=list(range(16 * i, 16 * i + 16)))
+                for i in range(16)
+            ],
+            matchups=[dict(id=0, engines=engines, evaluator_sha256=identities)],
+        )
+        metadata = {"plan": plan, "schedule": schedule, "build": {}}
+        batches = []
+        limits = []
+        for i in range(16):
+            completion = f"completion{i}"
+            config = dict(
+                output=f"/synthetic/{i}",
+                run_id=f"run{i}",
+                games=16,
+                max_plies=200,
+                engines=engines,
+                inference=None,
+                arena=dict(evaluator_sha256=identities, tt_entries=1048576, return_reserve_ms=5),
+            )
+            files = [
+                dict(path=f"/synthetic/{i}/{name}", bytes=17, mode="0644", sha256="c" * 64)
+                for name in ("completed.jsonl.gz", "result.json", "manifest.json")
+            ]
+            metadata.update(
+                {
+                    completion: dict(
+                        status="PASS",
+                        primary=None,
+                        secondary=[],
+                        cleanup_complete=True,
+                        remaining=[],
+                        checks=[],
+                        experiment=f"e{i}",
+                        intent=f"intent{i}",
+                        data=dict(status="PASS", errors=[], files=files),
+                    ),
+                    f"e{i}": dict(
+                        config=f"c{i}",
+                        build_manifest="build",
+                        phase="arena",
+                        batch=i,
+                        canonical_plan_sha256="plan-sha",
+                        planned_slots=256,
+                        inputs=[],
+                        models=[],
+                    ),
+                    f"intent{i}": dict(approved_plan="plan", experiment=f"e{i}"),
+                    f"c{i}": config,
+                }
+            )
+            batches.append(dict(batch=i, completion=completion))
+            limits.append(dict(batch=i, compressed=files[0], raw_bytes=100))
+        census = dict(
+            bootstrap_resamples=0,
+            bootstrap_seed=None,
+            central_interval=None,
+            arena_plan="plan",
+            diagnostic_selection=None,
+            decision_plan=None,
+            decision_batches=[],
+            batches=batches,
+            work_clock_census=dict(archive_limits=limits),
+        )
+        metadata["census-config"] = census
+        plan_ref = dict(path="plan", bytes=1, mode="0644", sha256="plan-sha")
+        census["arena_plan"] = plan_ref
+        for i in range(16):
+            metadata[f"intent{i}"]["approved_plan"] = plan_ref
+
+        read_phase = ["before"]
+        payload_reads = {}
+        metadata_reads = []
+        payload_refs = {
+            ref["path"]: ref
+            for i in range(16)
+            for ref in metadata[f"completion{i}"]["data"]["files"]
+        }
+
+        def tracked_read(ref, *_args, **_kwargs):
+            path = ref["path"]
+            if path in payload_refs:
+                self.assertEqual(read_phase[0], "sole-reader", "no lifecycle payload reread")
+                self.assertEqual(ref, payload_refs[path])
+                payload_reads[path] = payload_reads.get(path, 0) + 1
+            else:
+                metadata_reads.append((read_phase[0], path))
+            return b"synthetic metadata port"
+
+        def reader(config, files, **kwargs):
+            i = int(config["run_id"][3:])
+            read_phase[0] = "sole-reader"
+            for ref in files.values():
+                lc.read_ref(ref, ref["bytes"])
+            read_phase[0] = "between"
+            self.assertEqual(
+                kwargs["expected_archive"], {k: limits[i][k] for k in ("compressed", "raw_bytes")}
+            )
+            return dict(
+                outcomes=[
+                    dict(
+                        game=j,
+                        candidate_color=j % 2,
+                        family=f"run{i}-family-{j // 2:06}",
+                        observations=[],
+                    )
+                    for j in range(16)
+                ],
+                pump={},
+            )
+
+        with (
+            patch.object(lc, "arena_analysis_check", return_value=census),
+            patch.object(
+                lc,
+                "document",
+                side_effect=lambda ref: metadata[ref["path"] if isinstance(ref, dict) else ref],
+            ),
+            patch.object(lc, "approved_plan", return_value=plan),
+            patch.object(lc, "arena_reference_report", side_effect=reader) as reads,
+            patch.object(lc, "arena_score_tables", side_effect=AssertionError("no bootstrap")),
+            patch.object(lc, "arena_observation", side_effect=AssertionError("no requalification")),
+            patch.object(lc, "arena_plan_check", side_effect=AssertionError("no book reopen")),
+            patch.object(lc, "read_ref", side_effect=tracked_read),
+        ):
+            deferred = lc.arena_work_clock_payload_refs(
+                {},
+                dict(
+                    phase="analysis",
+                    argv=["python", "-B", "research-lifecycle.py", "arena-analysis"],
+                    config="census-config",
+                ),
+            )
+            self.assertEqual(len(deferred), 48)
+            self.assertEqual(deferred[limits[0]["compressed"]["path"]], limits[0]["compressed"])
+
+            # Real experiment_check must withhold the exact48 deferred payloads from
+            # both lifecycle scans, while retaining all metadata/caller/build guards.
+            def control_ref(path):
+                return dict(path=path, bytes=1, mode="0644", sha256="e" * 64)
+
+            config_ref = control_ref("census-config")
+            schedule_ref = control_ref("schedule")
+            build_ref = control_ref("build")
+            caller_ref = control_ref("caller")
+            extra_metadata = control_ref("producer-metadata")
+            artifact = control_ref("/synthetic/native-image")
+            python_ref = control_ref("/synthetic/python")
+            analysis_ref = control_ref("analysis-experiment")
+            metadata["build"] = dict(artifact=artifact)
+            analysis_experiment = dict(
+                schema=lc.EXPERIMENT_SCHEMA,
+                phase="analysis",
+                config=config_ref,
+                inputs=[*payload_refs.values(), extra_metadata],
+                schedule=schedule_ref,
+                build_manifest=build_ref,
+                models=[],
+                dynamic_libraries=[],
+                planned_slots=256,
+                argv=["/synthetic/python", "-B", "research-lifecycle.py", "arena-analysis"],
+            )
+            metadata["analysis-experiment"] = analysis_experiment
+            with tempfile.TemporaryDirectory() as directory:
+                spec = dict(
+                    experiment=analysis_ref,
+                    artifact=artifact,
+                    approved_plan=plan_ref,
+                    argv=analysis_experiment["argv"],
+                    data=[dict(name="summary")],
+                    data_root=str(Path(directory) / "uncreated-data"),
+                    owner="synthetic",
+                    finalizers=[],
+                )
+                with (
+                    patch.object(lc, "charged_roots"),
+                    patch.object(lc, "experiment_phase_check"),
+                    patch.object(lc, "accepted_build", return_value=metadata["build"]),
+                    patch.object(lc, "caller_source_refs", return_value=[caller_ref]),
+                    patch.object(lc, "numerical_check"),
+                    patch.object(lc, "project_interpreter", return_value=python_ref),
+                    patch.object(lc, "project_python", return_value=Path("/synthetic/python")),
+                    patch.object(lc, "owned"),
+                ):
+                    checked, manifest, lifetime = lc.experiment_check(spec)
+                self.assertEqual(checked, analysis_experiment)
+                self.assertEqual(manifest, metadata["build"])
+                self.assertTrue(set(payload_refs).isdisjoint(ref["path"] for ref in lifetime))
+                for ref in (
+                    config_ref,
+                    schedule_ref,
+                    caller_ref,
+                    extra_metadata,
+                    plan_ref,
+                    build_ref,
+                    artifact,
+                ):
+                    self.assertIn(ref, lifetime)
+                self.assertEqual(payload_reads, {})
+                for ref in (config_ref, schedule_ref, caller_ref, extra_metadata, python_ref):
+                    self.assertIn(("before", ref["path"]), metadata_reads)
+                summary, _ = lc.arena_analysis({}, {})
+                self.assertEqual(payload_reads, dict.fromkeys(payload_refs, 1))
+                # Consume experiment_check's actual returned lifecycle refs exactly as
+                # the unchanged run_operation after-command loop does.
+                read_phase[0] = "after"
+                with patch.object(lc, "artifact_ref", return_value=artifact) as artifact_check:
+                    for ref in lifetime:
+                        if ref == manifest["artifact"]:
+                            self.assertEqual(lc.artifact_ref(ref["path"]), ref)
+                        else:
+                            lc.read_ref(ref, max(lc.CONTROL_BYTES, ref["bytes"]))
+                    artifact_check.assert_called_once_with(artifact["path"])
+                self.assertEqual(payload_reads, dict.fromkeys(payload_refs, 1))
+                for ref in (config_ref, schedule_ref, caller_ref, extra_metadata, build_ref):
+                    self.assertIn(("after", ref["path"]), metadata_reads)
+        self.assertEqual(reads.call_count, 16)
+        self.assertEqual(summary["status"], "COMPLETE")
+        self.assertEqual(summary["recorded_games"], 256)
+        self.assertEqual(summary["recorded_decisions"], 0)
+        self.assertIsNone(summary["bootstrap_seed"])
+        altered = dict(limits[0]["compressed"], sha256="d" * 64)
+        with (
+            patch.object(lc, "arena_analysis_check", return_value=census),
+            patch.object(
+                lc,
+                "document",
+                side_effect=lambda ref: metadata[ref["path"] if isinstance(ref, dict) else ref],
+            ),
+            patch.object(
+                lc, "arena_reference_report", side_effect=AssertionError("no payload read")
+            ),
+        ):
+            limits[0]["compressed"] = altered
+            with self.assertRaises(lc.Refused):
+                lc.arena_work_clock_payload_refs(
+                    {},
+                    dict(
+                        phase="analysis",
+                        argv=["python", "-B", "research-lifecycle.py", "arena-analysis"],
+                        config="census-config",
+                    ),
+                )
+            limits[0]["compressed"] = metadata["completion0"]["data"]["files"][0]
+        # A changed compressed reference is rejected before any payload read.
+        config = dict(output="/synthetic/0")
+        files = {
+            name: dict(path="/synthetic/0/" + filename, bytes=1, mode="0644", sha256="a" * 64)
+            for name, filename in (
+                ("journal", "completed.jsonl.gz"),
+                ("result", "result.json"),
+                ("native_manifest", "manifest.json"),
+            )
+        }
+        with patch.object(lc, "read_ref", side_effect=AssertionError("no read on mismatch")):
+            with self.assertRaises(lc.Refused):
+                lc.arena_reference_report(
+                    config,
+                    files,
+                    expected_archive=dict(
+                        compressed=dict(files["journal"], sha256="b" * 64), raw_bytes=100
+                    ),
+                )
+
+        # Exact raw size is checked by the maintained reader before decompression.
+        config = dict(
+            output="/synthetic/0",
+            run_id="synthetic",
+            games=16,
+            max_plies=200,
+            arena=dict(
+                retained_outcome_bytes=1000,
+                game_selection=dict(selected=list(range(16)), excluded=[]),
+            ),
+        )
+        payloads = dict(journal=b"not gzip; must not decode", native_manifest=b"{}")
+        refs = {
+            name: dict(
+                path="/synthetic/0/" + filename,
+                bytes=len(payloads[name]),
+                mode="0644",
+                sha256=lc.sha(payloads[name]),
+            )
+            for name, filename in (
+                ("journal", "completed.jsonl.gz"),
+                ("native_manifest", "manifest.json"),
+            )
+        }
+        publication = dict(
+            schema=lc.ARENA_PUBLICATION,
+            report=dict(outcomes=[], run_id="synthetic", planned=16),
+            archive=dict(
+                encoding="gzip-single-member-v1",
+                compressed=refs["journal"],
+                raw_bytes=19,
+                raw_sha256="0" * 64,
+            ),
+            outcome_count=16,
+            journal_count=16,
+            journal_bytes=0,
+            journal_sha256="0" * 64,
+            failure_attribution=None,
+            archive_wall_seconds=0,
+            archive_allocated_bytes=0,
+        )
+        payloads["result"] = json.dumps(publication).encode()
+        refs["result"] = dict(
+            path="/synthetic/0/result.json",
+            bytes=len(payloads["result"]),
+            mode="0644",
+            sha256=lc.sha(payloads["result"]),
+        )
+        with self.assertRaisesRegex(lc.Refused, "predeclared census raw byte"):
+            lc.arena_reference_report(
+                config,
+                refs,
+                values=payloads,
+                expected_archive=dict(compressed=refs["journal"], raw_bytes=20),
+            )
+
 
 if __name__ == "__main__":
     unittest.main()
