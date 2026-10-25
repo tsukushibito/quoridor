@@ -47,6 +47,27 @@ pub struct Position {
     to_move: u8,
 }
 
+// Flip reuse follows pinned Console7.8.1 Flip_value/Search::move/Board::move_copy
+// (Takuto Yamana, GPL-3.0-or-later; 570d5e0a478c9d720d75de06a5d31995f412704a).
+/// A checked mask borrowed from one immutable parent, never a free mask/index pair.
+/// Fields stay in this owner; application also checks the complete parent/STM.
+#[derive(Clone, Copy, Debug)]
+pub(crate) struct PreparedMove<'parent> {
+    before: &'parent Position,
+    index: u32,
+    flipped: u64,
+}
+
+impl PreparedMove<'_> {
+    pub(crate) fn index(&self) -> u32 {
+        self.index
+    }
+
+    pub(crate) fn flipped(&self) -> u64 {
+        self.flipped
+    }
+}
+
 impl From<&GameState> for Position {
     fn from(state: &GameState) -> Self {
         let mut position = Self {
@@ -116,6 +137,12 @@ impl Position {
     }
 
     pub fn play(self, index: u32) -> Result<Self, RuleError> {
+        let prepared = self.prepare_move(index)?;
+        Ok(self.play_prepared(&prepared).expect("fresh parent move"))
+    }
+
+    // Same validation/error order as public play, with one actual flip calculation.
+    pub(crate) fn prepare_move(&self, index: u32) -> Result<PreparedMove<'_>, RuleError> {
         if index >= 64 {
             return Err(RuleError::OutOfRange);
         }
@@ -126,6 +153,20 @@ impl Position {
         if flips == 0 {
             return Err(RuleError::NoCapture);
         }
+        Ok(PreparedMove {
+            before: self,
+            index,
+            flipped: flips,
+        })
+    }
+
+    // No flip recomputation. A stale/other-color/other-board mask is refused.
+    pub(crate) fn play_prepared(self, prepared: &PreparedMove<'_>) -> Option<Self> {
+        if self != *prepared.before {
+            return None;
+        }
+        let index = prepared.index;
+        let flips = prepared.flipped;
         let mut next = self;
         if self.to_move == BLACK {
             next.black |= flips | (1 << index);
@@ -135,7 +176,7 @@ impl Position {
             next.black &= !flips;
         }
         next.to_move = 3 - self.to_move;
-        Ok(next)
+        Some(next)
     }
 
     pub(crate) fn switched(mut self) -> Self {

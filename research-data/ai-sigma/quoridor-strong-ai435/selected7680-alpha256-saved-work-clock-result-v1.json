@@ -1,0 +1,2844 @@
+{
+  "status": "FINITE_SAVED_SCALAR_CENSUS_COMPLETE",
+  "originalAnalysisJob": "ca9313c6-641e-4655-abc8-d81291871f67",
+  "originalComparison": "selected7680-vs-selected2560-next128-alpha256-result-v1.json/e45d7ec1 unchanged",
+  "summary": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/common/saved-work-clock-v1/data/summary.json",
+    "bytes": 97047,
+    "mode": "0644",
+    "sha256": "6b99dc591e311fdb9b5c67a59aa749f3281ed5a8343d00bd8b741da2f871d762"
+  },
+  "report": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/common/saved-work-clock-v1/data/report.md",
+    "bytes": 180,
+    "mode": "0644",
+    "sha256": "d9fc52bb148bced6b0bc09400ce21d17cb6ab954c61c1f1ee27d4a3bd3fdd7d3"
+  },
+  "analysisManifest": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/common/saved-work-clock-v1/operation/manifest.json",
+    "bytes": 7746,
+    "mode": "0644",
+    "sha256": "4a254dae1d8039e0f6042e9c251b0f083264607cbb93cb2ad57b0c0f1ab928a8"
+  },
+  "plannedGames": 256,
+  "completeColourPairsByOriginalQualification": 128,
+  "recordedDecisions": 11544,
+  "groups": [
+    {
+      "value_identity": "089fcb277345b38345732bec9424cba2f150ebfa321fbc83b89a951c616ec2ad",
+      "colour": 0,
+      "planned_games": 128,
+      "recorded_games": 128,
+      "recorded_decisions": 2825,
+      "accepted": 2825,
+      "legal_authority_receipts": 2825,
+      "legal_receipt_checks": 2825,
+      "receipt_deadline_checks": 2825,
+      "return_deadline_checks": 2825,
+      "receipt_deadline_violations": 0,
+      "return_at_or_after_deadline": 665,
+      "engine_error_present": 0,
+      "loaded_identity_observed": 2825,
+      "counts": {
+        "stop": {
+          "internal_time_limit": 2635,
+          "depth_cap": 189,
+          "cancelled": 1
+        },
+        "completed_depth": {
+          "4": 981,
+          "5": 339,
+          "7": 159,
+          "6": 326,
+          "8": 121,
+          "18": 30,
+          "64": 189,
+          "11": 73,
+          "12": 47,
+          "13": 39,
+          "22": 19,
+          "24": 9,
+          "14": 25,
+          "15": 22,
+          "19": 24,
+          "9": 135,
+          "10": 126,
+          "16": 20,
+          "21": 29,
+          "23": 17,
+          "3": 2,
+          "20": 34,
+          "29": 4,
+          "27": 7,
+          "33": 3,
+          "17": 21,
+          "28": 5,
+          "25": 9,
+          "26": 1,
+          "31": 4,
+          "32": 1,
+          "52": 1,
+          "62": 1,
+          "30": 1,
+          "58": 1
+        },
+        "failure": {
+          "NULL": 2825
+        },
+        "selection_reason": {
+          "completed_iteration": 2825
+        },
+        "clock_contract": {
+          "authority-action-receipt-v1": 2825
+        },
+        "terminal_collected": {
+          "True": 2825
+        },
+        "matching_terminal_collected": {
+          "True": 2825
+        },
+        "inflight_after_drain": {
+          "0": 2825
+        },
+        "completed_snapshot_validation_failed": {
+          "False": 2825
+        }
+      },
+      "configured_ceilings": [
+        {
+          "depth": 64,
+          "nodes": 1000000,
+          "TT_entries": 1048576,
+          "time_ms": 100,
+          "return_reserve_ms": 5,
+          "max_plies": 200
+        }
+      ],
+      "numeric": {
+        "AI_terminal_elapsed_ns": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 204784,
+            "mean": 93295560.7621239,
+            "median": 99623706.0,
+            "p95": 100384668,
+            "maximum": 106861660
+          }
+        },
+        "acceptance_elapsed_ns": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 458570,
+            "mean": 93538604.78725664,
+            "median": 99724121.0,
+            "p95": 101230812,
+            "maximum": 108380926
+          }
+        },
+        "admission_after_return_ns": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 37015,
+            "mean": 59846.348318584074,
+            "median": 55833.0,
+            "p95": 82874,
+            "maximum": 313432
+          }
+        },
+        "authority_receipt_elapsed_ns": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 409935,
+            "mean": 54213174.26477876,
+            "median": 57932117.0,
+            "p95": 91336395,
+            "maximum": 94989746
+          }
+        },
+        "caller_seconds": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 0.00045857,
+            "mean": 0.09353860478725665,
+            "median": 0.099724121,
+            "p95": 0.101230812,
+            "maximum": 0.108380926
+          }
+        },
+        "deadline_margin_at_receipt_ns": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 5010254,
+            "mean": 45786825.73522124,
+            "median": 42067883.0,
+            "p95": 99244333,
+            "maximum": 99590065
+          }
+        },
+        "drain_after_receipt_ns": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 5495,
+            "mean": 39265584.17415929,
+            "median": 36474617.0,
+            "p95": 72166233,
+            "maximum": 96805349
+          }
+        },
+        "drain_elapsed_ns": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 415556,
+            "mean": 93478758.43893805,
+            "median": 99666719.0,
+            "p95": 101171580,
+            "maximum": 108321819
+          }
+        },
+        "final_return_after_receipt_ns": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 5495,
+            "mean": 39265584.17415929,
+            "median": 36474617.0,
+            "p95": 72166233,
+            "maximum": 96805349
+          }
+        },
+        "final_return_elapsed_ns": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 415556,
+            "mean": 93478758.43893805,
+            "median": 99666719.0,
+            "p95": 101171580,
+            "maximum": 108321819
+          }
+        },
+        "last_completed_iteration_elapsed_ns": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 409935,
+            "mean": 54213174.26477876,
+            "median": 57932117.0,
+            "p95": 91336395,
+            "maximum": 94989746
+          }
+        },
+        "owner_search_elapsed_seconds": {
+          "present": 0,
+          "missing": 2825,
+          "descriptive": null
+        },
+        "selected_snapshot.cutoffs": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 0,
+            "mean": 11982.751150442478,
+            "median": 8918.0,
+            "p95": 28604,
+            "maximum": 72936
+          }
+        },
+        "selected_snapshot.delta_updates": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 1,
+            "mean": 40089.08884955752,
+            "median": 35596.0,
+            "p95": 77127,
+            "maximum": 102869
+          }
+        },
+        "selected_snapshot.leaf_count": {
+          "present": 0,
+          "missing": 2825,
+          "descriptive": null
+        },
+        "selected_snapshot.nodes": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 128,
+            "mean": 44201.018407079646,
+            "median": 37769.0,
+            "p95": 89864,
+            "maximum": 151206
+          }
+        },
+        "selected_snapshot.physical_nn_calls": {
+          "present": 0,
+          "missing": 2825,
+          "descriptive": null
+        },
+        "selected_snapshot.policy_calls": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "p95": 0,
+            "maximum": 0
+          }
+        },
+        "selected_snapshot.pvs_researches": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 0,
+            "mean": 11.292389380530974,
+            "median": 9.0,
+            "p95": 29,
+            "maximum": 75
+          }
+        },
+        "selected_snapshot.static_evaluations": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 1,
+            "mean": 24022.728849557523,
+            "median": 21209.0,
+            "p95": 47218,
+            "maximum": 80158
+          }
+        },
+        "selected_snapshot.terminal": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 0,
+            "mean": 1123.568849557522,
+            "median": 0.0,
+            "p95": 7540,
+            "maximum": 70686
+          }
+        },
+        "selected_snapshot.tt_bound_cutoffs": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 0,
+            "mean": 715.670796460177,
+            "median": 340.0,
+            "p95": 2390,
+            "maximum": 5213
+          }
+        },
+        "selected_snapshot.tt_capacity_skips": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "p95": 0,
+            "maximum": 0
+          }
+        },
+        "selected_snapshot.tt_exact_hits": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 3,
+            "mean": 31.823362831858407,
+            "median": 18.0,
+            "p95": 100,
+            "maximum": 476
+          }
+        },
+        "selected_snapshot.tt_generation": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 3,
+            "mean": 93.81061946902655,
+            "median": 65.0,
+            "p95": 289,
+            "maximum": 744
+          }
+        },
+        "selected_snapshot.tt_key_hits": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 87,
+            "mean": 19508.63504424779,
+            "median": 6072.0,
+            "p95": 84195,
+            "maximum": 142472
+          }
+        },
+        "selected_snapshot.tt_probes": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 127,
+            "mean": 24928.152566371682,
+            "median": 11397.0,
+            "p95": 89010,
+            "maximum": 142907
+          }
+        },
+        "selected_snapshot.tt_retained_bytes": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 83886144,
+            "mean": 83886144.0,
+            "median": 83886144.0,
+            "p95": 83886144,
+            "maximum": 83886144
+          }
+        },
+        "terminal_collection_delay_ns": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 400,
+            "mean": 182794.94867256636,
+            "median": 19865.0,
+            "p95": 1211877,
+            "maximum": 10188642
+          }
+        },
+        "thinking_seconds": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 0.000409935,
+            "mean": 0.054213174264778764,
+            "median": 0.057932117,
+            "p95": 0.091336395,
+            "maximum": 0.094989746
+          }
+        },
+        "whole_invocation.cutoffs": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 0,
+            "mean": 16658.489557522124,
+            "median": 14070.0,
+            "p95": 34626,
+            "maximum": 77527
+          }
+        },
+        "whole_invocation.delta_updates": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 1,
+            "mean": 69173.86938053097,
+            "median": 73443.0,
+            "p95": 92813,
+            "maximum": 112156
+          }
+        },
+        "whole_invocation.leaf_count": {
+          "present": 0,
+          "missing": 2825,
+          "descriptive": null
+        },
+        "whole_invocation.nodes": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 128,
+            "mean": 74116.6771681416,
+            "median": 76861.0,
+            "p95": 103065,
+            "maximum": 160715
+          }
+        },
+        "whole_invocation.physical_nn_calls": {
+          "present": 0,
+          "missing": 2825,
+          "descriptive": null
+        },
+        "whole_invocation.policy_calls": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "p95": 0,
+            "maximum": 0
+          }
+        },
+        "whole_invocation.pvs_researches": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 0,
+            "mean": 16.115044247787612,
+            "median": 14.0,
+            "p95": 41,
+            "maximum": 93
+          }
+        },
+        "whole_invocation.static_evaluations": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 1,
+            "mean": 46808.5996460177,
+            "median": 47437.0,
+            "p95": 72873,
+            "maximum": 90583
+          }
+        },
+        "whole_invocation.terminal": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 0,
+            "mean": 1405.7911504424778,
+            "median": 0.0,
+            "p95": 9160,
+            "maximum": 75010
+          }
+        },
+        "whole_invocation.tt_bound_cutoffs": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 0,
+            "mean": 1245.3313274336283,
+            "median": 1155.0,
+            "p95": 2904,
+            "maximum": 5244
+          }
+        },
+        "whole_invocation.tt_capacity_skips": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "p95": 0,
+            "maximum": 0
+          }
+        },
+        "whole_invocation.tt_exact_hits": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 6,
+            "mean": 37.38796460176991,
+            "median": 24.0,
+            "p95": 107,
+            "maximum": 476
+          }
+        },
+        "whole_invocation.tt_generation": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 4,
+            "mean": 94.7458407079646,
+            "median": 66.0,
+            "p95": 290,
+            "maximum": 744
+          }
+        },
+        "whole_invocation.tt_key_hits": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 125,
+            "mean": 25455.906194690266,
+            "median": 9043.0,
+            "p95": 98450,
+            "maximum": 149506
+          }
+        },
+        "whole_invocation.tt_probes": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 127,
+            "mean": 33406.09628318584,
+            "median": 18486.0,
+            "p95": 105989,
+            "maximum": 149955
+          }
+        },
+        "whole_invocation.tt_retained_bytes": {
+          "present": 2825,
+          "missing": 0,
+          "descriptive": {
+            "count": 2825,
+            "minimum": 83886144,
+            "mean": 83886144.0,
+            "median": 83886144.0,
+            "p95": 83886144,
+            "maximum": 83886144
+          }
+        }
+      },
+      "identity_scope": "configured exact value identity joined to original PASS producer; loaded identity only when an emitted namespace matches",
+      "planned_decisions": null,
+      "loaded_value_identity": "089fcb277345b38345732bec9424cba2f150ebfa321fbc83b89a951c616ec2ad"
+    },
+    {
+      "value_identity": "089fcb277345b38345732bec9424cba2f150ebfa321fbc83b89a951c616ec2ad",
+      "colour": 1,
+      "planned_games": 128,
+      "recorded_games": 128,
+      "recorded_decisions": 2933,
+      "accepted": 2933,
+      "legal_authority_receipts": 2933,
+      "legal_receipt_checks": 2933,
+      "receipt_deadline_checks": 2933,
+      "return_deadline_checks": 2933,
+      "receipt_deadline_violations": 0,
+      "return_at_or_after_deadline": 695,
+      "engine_error_present": 0,
+      "loaded_identity_observed": 2933,
+      "counts": {
+        "stop": {
+          "internal_time_limit": 2735,
+          "depth_cap": 195,
+          "cancelled": 3
+        },
+        "completed_depth": {
+          "4": 1079,
+          "5": 337,
+          "6": 268,
+          "9": 136,
+          "12": 58,
+          "14": 31,
+          "10": 110,
+          "16": 17,
+          "18": 51,
+          "20": 46,
+          "22": 45,
+          "25": 16,
+          "64": 195,
+          "23": 25,
+          "27": 10,
+          "8": 110,
+          "29": 1,
+          "32": 2,
+          "24": 21,
+          "21": 28,
+          "7": 111,
+          "13": 47,
+          "15": 18,
+          "19": 47,
+          "11": 68,
+          "17": 29,
+          "3": 1,
+          "35": 2,
+          "30": 3,
+          "33": 3,
+          "31": 6,
+          "52": 1,
+          "26": 5,
+          "28": 5,
+          "50": 1
+        },
+        "failure": {
+          "NULL": 2933
+        },
+        "selection_reason": {
+          "completed_iteration": 2933
+        },
+        "clock_contract": {
+          "authority-action-receipt-v1": 2933
+        },
+        "terminal_collected": {
+          "True": 2933
+        },
+        "matching_terminal_collected": {
+          "True": 2933
+        },
+        "inflight_after_drain": {
+          "0": 2933
+        },
+        "completed_snapshot_validation_failed": {
+          "False": 2933
+        }
+      },
+      "configured_ceilings": [
+        {
+          "depth": 64,
+          "nodes": 1000000,
+          "TT_entries": 1048576,
+          "time_ms": 100,
+          "return_reserve_ms": 5,
+          "max_plies": 200
+        }
+      ],
+      "numeric": {
+        "AI_terminal_elapsed_ns": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 177454,
+            "mean": 93354062.91749063,
+            "median": 99611310.0,
+            "p95": 100358588,
+            "maximum": 107150068
+          }
+        },
+        "acceptance_elapsed_ns": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 467382,
+            "mean": 93618499.44561882,
+            "median": 99728728.0,
+            "p95": 101721007,
+            "maximum": 110893055
+          }
+        },
+        "admission_after_return_ns": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 37020,
+            "mean": 62472.45721104671,
+            "median": 55987.0,
+            "p95": 82460,
+            "maximum": 5601511
+          }
+        },
+        "authority_receipt_elapsed_ns": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 420366,
+            "mean": 54499610.24207296,
+            "median": 59344484.0,
+            "p95": 90690719,
+            "maximum": 94979877
+          }
+        },
+        "caller_seconds": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 0.000467382,
+            "mean": 0.09361849944561883,
+            "median": 0.099728728,
+            "p95": 0.101721007,
+            "maximum": 0.110893055
+          }
+        },
+        "deadline_margin_at_receipt_ns": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 5020123,
+            "mean": 45500389.75792704,
+            "median": 40655516.0,
+            "p95": 99150725,
+            "maximum": 99579634
+          }
+        },
+        "drain_after_receipt_ns": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 5572,
+            "mean": 39056416.74633481,
+            "median": 35893395.0,
+            "p95": 72136288,
+            "maximum": 91441262
+          }
+        },
+        "drain_elapsed_ns": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 426246,
+            "mean": 93556026.98840778,
+            "median": 99670301.0,
+            "p95": 101624365,
+            "maximum": 110614049
+          }
+        },
+        "final_return_after_receipt_ns": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 5572,
+            "mean": 39056416.74633481,
+            "median": 35893395.0,
+            "p95": 72136288,
+            "maximum": 91441262
+          }
+        },
+        "final_return_elapsed_ns": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 426246,
+            "mean": 93556026.98840778,
+            "median": 99670301.0,
+            "p95": 101624365,
+            "maximum": 110614049
+          }
+        },
+        "last_completed_iteration_elapsed_ns": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 420366,
+            "mean": 54499610.24207296,
+            "median": 59344484.0,
+            "p95": 90690719,
+            "maximum": 94979877
+          }
+        },
+        "owner_search_elapsed_seconds": {
+          "present": 0,
+          "missing": 2933,
+          "descriptive": null
+        },
+        "selected_snapshot.cutoffs": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 0,
+            "mean": 12508.768155472213,
+            "median": 8916.0,
+            "p95": 31396,
+            "maximum": 42489
+          }
+        },
+        "selected_snapshot.delta_updates": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 1,
+            "mean": 40732.94237981589,
+            "median": 36210.0,
+            "p95": 80740,
+            "maximum": 103782
+          }
+        },
+        "selected_snapshot.leaf_count": {
+          "present": 0,
+          "missing": 2933,
+          "descriptive": null
+        },
+        "selected_snapshot.nodes": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 128,
+            "mean": 45446.46641663826,
+            "median": 39311.0,
+            "p95": 93928,
+            "maximum": 141263
+          }
+        },
+        "selected_snapshot.physical_nn_calls": {
+          "present": 0,
+          "missing": 2933,
+          "descriptive": null
+        },
+        "selected_snapshot.policy_calls": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "p95": 0,
+            "maximum": 0
+          }
+        },
+        "selected_snapshot.pvs_researches": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 0,
+            "mean": 11.003750426184794,
+            "median": 9.0,
+            "p95": 27,
+            "maximum": 84
+          }
+        },
+        "selected_snapshot.static_evaluations": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 1,
+            "mean": 23527.88578247528,
+            "median": 21190.0,
+            "p95": 45242,
+            "maximum": 82858
+          }
+        },
+        "selected_snapshot.terminal": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 0,
+            "mean": 1208.0695533583362,
+            "median": 0.0,
+            "p95": 8297,
+            "maximum": 36193
+          }
+        },
+        "selected_snapshot.tt_bound_cutoffs": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 0,
+            "mean": 618.1902488919195,
+            "median": 253.0,
+            "p95": 2254,
+            "maximum": 5995
+          }
+        },
+        "selected_snapshot.tt_capacity_skips": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "p95": 0,
+            "maximum": 0
+          }
+        },
+        "selected_snapshot.tt_exact_hits": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 3,
+            "mean": 37.310944425502896,
+            "median": 17.0,
+            "p95": 144,
+            "maximum": 421
+          }
+        },
+        "selected_snapshot.tt_generation": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 3,
+            "mean": 98.31878622570747,
+            "median": 67.0,
+            "p95": 301,
+            "maximum": 950
+          }
+        },
+        "selected_snapshot.tt_key_hits": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 99,
+            "mean": 23188.905898397545,
+            "median": 6575.0,
+            "p95": 99982,
+            "maximum": 143912
+          }
+        },
+        "selected_snapshot.tt_probes": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 127,
+            "mean": 28366.788953290146,
+            "median": 11936.0,
+            "p95": 103089,
+            "maximum": 148724
+          }
+        },
+        "selected_snapshot.tt_retained_bytes": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 83886144,
+            "mean": 83886144.0,
+            "median": 83886144.0,
+            "p95": 83886144,
+            "maximum": 83886144
+          }
+        },
+        "terminal_collection_delay_ns": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 447,
+            "mean": 201557.5097170133,
+            "median": 19981.0,
+            "p95": 1661645,
+            "maximum": 6627713
+          }
+        },
+        "thinking_seconds": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 0.000420366,
+            "mean": 0.05449961024207296,
+            "median": 0.059344484,
+            "p95": 0.090690719,
+            "maximum": 0.094979877
+          }
+        },
+        "whole_invocation.cutoffs": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 0,
+            "mean": 17052.542448005453,
+            "median": 13918.0,
+            "p95": 37761,
+            "maximum": 47041
+          }
+        },
+        "whole_invocation.delta_updates": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 1,
+            "mean": 69851.93112853734,
+            "median": 73998.0,
+            "p95": 95484,
+            "maximum": 114849
+          }
+        },
+        "whole_invocation.leaf_count": {
+          "present": 0,
+          "missing": 2933,
+          "descriptive": null
+        },
+        "whole_invocation.nodes": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 128,
+            "mean": 75485.37401977497,
+            "median": 77605.0,
+            "p95": 107681,
+            "maximum": 144380
+          }
+        },
+        "whole_invocation.physical_nn_calls": {
+          "present": 0,
+          "missing": 2933,
+          "descriptive": null
+        },
+        "whole_invocation.policy_calls": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "p95": 0,
+            "maximum": 0
+          }
+        },
+        "whole_invocation.pvs_researches": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 0,
+            "mean": 15.442209341970678,
+            "median": 13.0,
+            "p95": 39,
+            "maximum": 88
+          }
+        },
+        "whole_invocation.static_evaluations": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 1,
+            "mean": 46400.28810092056,
+            "median": 46757.0,
+            "p95": 72980,
+            "maximum": 86204
+          }
+        },
+        "whole_invocation.terminal": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 0,
+            "mean": 1516.7415615410841,
+            "median": 0.0,
+            "p95": 10343,
+            "maximum": 39859
+          }
+        },
+        "whole_invocation.tt_bound_cutoffs": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 0,
+            "mean": 1116.690419365837,
+            "median": 987.0,
+            "p95": 2733,
+            "maximum": 7250
+          }
+        },
+        "whole_invocation.tt_capacity_skips": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "p95": 0,
+            "maximum": 0
+          }
+        },
+        "whole_invocation.tt_exact_hits": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 7,
+            "mean": 43.171496760995566,
+            "median": 23.0,
+            "p95": 151,
+            "maximum": 423
+          }
+        },
+        "whole_invocation.tt_generation": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 4,
+            "mean": 99.25434708489601,
+            "median": 68.0,
+            "p95": 301,
+            "maximum": 950
+          }
+        },
+        "whole_invocation.tt_key_hits": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 125,
+            "mean": 29625.03954994886,
+            "median": 9296.0,
+            "p95": 122335,
+            "maximum": 151257
+          }
+        },
+        "whole_invocation.tt_probes": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 127,
+            "mean": 37081.61882032049,
+            "median": 18850.0,
+            "p95": 123505,
+            "maximum": 155189
+          }
+        },
+        "whole_invocation.tt_retained_bytes": {
+          "present": 2933,
+          "missing": 0,
+          "descriptive": {
+            "count": 2933,
+            "minimum": 83886144,
+            "mean": 83886144.0,
+            "median": 83886144.0,
+            "p95": 83886144,
+            "maximum": 83886144
+          }
+        }
+      },
+      "identity_scope": "configured exact value identity joined to original PASS producer; loaded identity only when an emitted namespace matches",
+      "planned_decisions": null,
+      "loaded_value_identity": "089fcb277345b38345732bec9424cba2f150ebfa321fbc83b89a951c616ec2ad"
+    },
+    {
+      "value_identity": "fb7d124603ad6637e2395a919fe74909b6d76d933b26bd96849469be1239c7e2",
+      "colour": 0,
+      "planned_games": 128,
+      "recorded_games": 128,
+      "recorded_decisions": 2941,
+      "accepted": 2941,
+      "legal_authority_receipts": 2941,
+      "legal_receipt_checks": 2941,
+      "receipt_deadline_checks": 2941,
+      "return_deadline_checks": 2941,
+      "receipt_deadline_violations": 0,
+      "return_at_or_after_deadline": 612,
+      "engine_error_present": 0,
+      "loaded_identity_observed": 2941,
+      "counts": {
+        "stop": {
+          "internal_time_limit": 2747,
+          "depth_cap": 185,
+          "cancelled": 9
+        },
+        "completed_depth": {
+          "4": 1063,
+          "5": 403,
+          "6": 190,
+          "15": 36,
+          "18": 66,
+          "7": 129,
+          "11": 66,
+          "12": 73,
+          "13": 50,
+          "16": 31,
+          "21": 33,
+          "24": 20,
+          "19": 52,
+          "20": 48,
+          "23": 33,
+          "25": 14,
+          "27": 10,
+          "64": 185,
+          "8": 148,
+          "9": 103,
+          "26": 11,
+          "29": 9,
+          "31": 3,
+          "22": 31,
+          "10": 42,
+          "14": 40,
+          "17": 32,
+          "32": 3,
+          "34": 2,
+          "30": 5,
+          "36": 2,
+          "37": 1,
+          "41": 1,
+          "28": 4,
+          "3": 1,
+          "33": 1
+        },
+        "failure": {
+          "NULL": 2941
+        },
+        "selection_reason": {
+          "completed_iteration": 2941
+        },
+        "clock_contract": {
+          "authority-action-receipt-v1": 2941
+        },
+        "terminal_collected": {
+          "True": 2941
+        },
+        "matching_terminal_collected": {
+          "True": 2941
+        },
+        "inflight_after_drain": {
+          "0": 2941
+        },
+        "completed_snapshot_validation_failed": {
+          "False": 2941
+        }
+      },
+      "configured_ceilings": [
+        {
+          "depth": 64,
+          "nodes": 1000000,
+          "TT_entries": 1048576,
+          "time_ms": 100,
+          "return_reserve_ms": 5,
+          "max_plies": 200
+        }
+      ],
+      "numeric": {
+        "AI_terminal_elapsed_ns": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 191607,
+            "mean": 93672295.44134648,
+            "median": 99598010.0,
+            "p95": 100321935,
+            "maximum": 106748180
+          }
+        },
+        "acceptance_elapsed_ns": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 466836,
+            "mean": 93911693.12376742,
+            "median": 99700955.0,
+            "p95": 101396848,
+            "maximum": 107092342
+          }
+        },
+        "admission_after_return_ns": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 36422,
+            "mean": 59557.512070724246,
+            "median": 55963.0,
+            "p95": 80475,
+            "maximum": 316698
+          }
+        },
+        "authority_receipt_elapsed_ns": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 414315,
+            "mean": 54421516.66780007,
+            "median": 58130354.0,
+            "p95": 91219297,
+            "maximum": 94956847
+          }
+        },
+        "caller_seconds": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 0.000466836,
+            "mean": 0.09391169312376742,
+            "median": 0.099700955,
+            "p95": 0.101396848,
+            "maximum": 0.107092342
+          }
+        },
+        "deadline_margin_at_receipt_ns": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 5043153,
+            "mean": 45578483.33219993,
+            "median": 41869646.0,
+            "p95": 96653005,
+            "maximum": 99585685
+          }
+        },
+        "drain_after_receipt_ns": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 5546,
+            "mean": 39430618.94389664,
+            "median": 36755702.0,
+            "p95": 72666679,
+            "maximum": 86502536
+          }
+        },
+        "drain_elapsed_ns": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 420245,
+            "mean": 93852135.6116967,
+            "median": 99642399.0,
+            "p95": 101310067,
+            "maximum": 107029140
+          }
+        },
+        "final_return_after_receipt_ns": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 5546,
+            "mean": 39430618.94389664,
+            "median": 36755702.0,
+            "p95": 72666679,
+            "maximum": 86502536
+          }
+        },
+        "final_return_elapsed_ns": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 420245,
+            "mean": 93852135.6116967,
+            "median": 99642399.0,
+            "p95": 101310067,
+            "maximum": 107029140
+          }
+        },
+        "last_completed_iteration_elapsed_ns": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 414315,
+            "mean": 54421516.66780007,
+            "median": 58130354.0,
+            "p95": 91219297,
+            "maximum": 94956847
+          }
+        },
+        "owner_search_elapsed_seconds": {
+          "present": 0,
+          "missing": 2941,
+          "descriptive": null
+        },
+        "selected_snapshot.cutoffs": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 0,
+            "mean": 12608.641278476709,
+            "median": 9157.0,
+            "p95": 31671,
+            "maximum": 68530
+          }
+        },
+        "selected_snapshot.delta_updates": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 1,
+            "mean": 40754.29887793268,
+            "median": 36971.0,
+            "p95": 80251,
+            "maximum": 112295
+          }
+        },
+        "selected_snapshot.leaf_count": {
+          "present": 0,
+          "missing": 2941,
+          "descriptive": null
+        },
+        "selected_snapshot.nodes": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 128,
+            "mean": 45319.91295477729,
+            "median": 39861.0,
+            "p95": 94201,
+            "maximum": 144676
+          }
+        },
+        "selected_snapshot.physical_nn_calls": {
+          "present": 0,
+          "missing": 2941,
+          "descriptive": null
+        },
+        "selected_snapshot.policy_calls": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "p95": 0,
+            "maximum": 0
+          }
+        },
+        "selected_snapshot.pvs_researches": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 0,
+            "mean": 12.60183611016661,
+            "median": 9.0,
+            "p95": 37,
+            "maximum": 104
+          }
+        },
+        "selected_snapshot.static_evaluations": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 1,
+            "mean": 23438.737164229853,
+            "median": 21000.0,
+            "p95": 45942,
+            "maximum": 79510
+          }
+        },
+        "selected_snapshot.terminal": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 0,
+            "mean": 1182.9282556953417,
+            "median": 0.0,
+            "p95": 7836,
+            "maximum": 67115
+          }
+        },
+        "selected_snapshot.tt_bound_cutoffs": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 0,
+            "mean": 699.0119007140429,
+            "median": 292.0,
+            "p95": 2479,
+            "maximum": 6351
+          }
+        },
+        "selected_snapshot.tt_capacity_skips": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "p95": 0,
+            "maximum": 0
+          }
+        },
+        "selected_snapshot.tt_exact_hits": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 3,
+            "mean": 39.715062903774225,
+            "median": 17.0,
+            "p95": 146,
+            "maximum": 422
+          }
+        },
+        "selected_snapshot.tt_generation": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 3,
+            "mean": 99.19245154709283,
+            "median": 68.0,
+            "p95": 306,
+            "maximum": 723
+          }
+        },
+        "selected_snapshot.tt_key_hits": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 97,
+            "mean": 23334.289357361442,
+            "median": 7068.0,
+            "p95": 101231,
+            "maximum": 145392
+          }
+        },
+        "selected_snapshot.tt_probes": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 127,
+            "mean": 28685.48316899014,
+            "median": 12736.0,
+            "p95": 102099,
+            "maximum": 145841
+          }
+        },
+        "selected_snapshot.tt_retained_bytes": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 83886144,
+            "mean": 83886144.0,
+            "median": 83886144.0,
+            "p95": 83886144,
+            "maximum": 83886144
+          }
+        },
+        "terminal_collection_delay_ns": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 594,
+            "mean": 179413.96055763346,
+            "median": 19706.0,
+            "p95": 1094467,
+            "maximum": 7317466
+          }
+        },
+        "thinking_seconds": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 0.000414315,
+            "mean": 0.05442151666780007,
+            "median": 0.058130354,
+            "p95": 0.091219297,
+            "maximum": 0.094956847
+          }
+        },
+        "whole_invocation.cutoffs": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 0,
+            "mean": 17923.581434886095,
+            "median": 15979.0,
+            "p95": 38352,
+            "maximum": 74903
+          }
+        },
+        "whole_invocation.delta_updates": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 1,
+            "mean": 69424.59945596736,
+            "median": 73136.0,
+            "p95": 96221,
+            "maximum": 119070
+          }
+        },
+        "whole_invocation.leaf_count": {
+          "present": 0,
+          "missing": 2941,
+          "descriptive": null
+        },
+        "whole_invocation.nodes": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 128,
+            "mean": 75045.43284597076,
+            "median": 77022.0,
+            "p95": 108859,
+            "maximum": 155484
+          }
+        },
+        "whole_invocation.physical_nn_calls": {
+          "present": 0,
+          "missing": 2941,
+          "descriptive": null
+        },
+        "whole_invocation.policy_calls": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "p95": 0,
+            "maximum": 0
+          }
+        },
+        "whole_invocation.pvs_researches": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 0,
+            "mean": 17.734444066644,
+            "median": 14.0,
+            "p95": 48,
+            "maximum": 123
+          }
+        },
+        "whole_invocation.static_evaluations": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 1,
+            "mean": 44995.026861611695,
+            "median": 45530.0,
+            "p95": 71141,
+            "maximum": 81564
+          }
+        },
+        "whole_invocation.terminal": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 0,
+            "mean": 1518.0397823869432,
+            "median": 0.0,
+            "p95": 9846,
+            "maximum": 73335
+          }
+        },
+        "whole_invocation.tt_bound_cutoffs": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 0,
+            "mean": 1213.4593675620538,
+            "median": 1040.0,
+            "p95": 3075,
+            "maximum": 7114
+          }
+        },
+        "whole_invocation.tt_capacity_skips": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "p95": 0,
+            "maximum": 0
+          }
+        },
+        "whole_invocation.tt_exact_hits": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 4,
+            "mean": 45.95443726623598,
+            "median": 24.0,
+            "p95": 156,
+            "maximum": 442
+          }
+        },
+        "whole_invocation.tt_generation": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 4,
+            "mean": 100.13396803808229,
+            "median": 69.0,
+            "p95": 307,
+            "maximum": 723
+          }
+        },
+        "whole_invocation.tt_key_hits": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 125,
+            "mean": 30453.29513770826,
+            "median": 9962.0,
+            "p95": 124107,
+            "maximum": 159880
+          }
+        },
+        "whole_invocation.tt_probes": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 127,
+            "mean": 38763.44100646039,
+            "median": 20913.0,
+            "p95": 125392,
+            "maximum": 160710
+          }
+        },
+        "whole_invocation.tt_retained_bytes": {
+          "present": 2941,
+          "missing": 0,
+          "descriptive": {
+            "count": 2941,
+            "minimum": 83886144,
+            "mean": 83886144.0,
+            "median": 83886144.0,
+            "p95": 83886144,
+            "maximum": 83886144
+          }
+        }
+      },
+      "identity_scope": "configured exact value identity joined to original PASS producer; loaded identity only when an emitted namespace matches",
+      "planned_decisions": null,
+      "loaded_value_identity": "fb7d124603ad6637e2395a919fe74909b6d76d933b26bd96849469be1239c7e2"
+    },
+    {
+      "value_identity": "fb7d124603ad6637e2395a919fe74909b6d76d933b26bd96849469be1239c7e2",
+      "colour": 1,
+      "planned_games": 128,
+      "recorded_games": 128,
+      "recorded_decisions": 2845,
+      "accepted": 2845,
+      "legal_authority_receipts": 2845,
+      "legal_receipt_checks": 2845,
+      "receipt_deadline_checks": 2845,
+      "return_deadline_checks": 2845,
+      "receipt_deadline_violations": 0,
+      "return_at_or_after_deadline": 618,
+      "engine_error_present": 0,
+      "loaded_identity_observed": 2845,
+      "counts": {
+        "stop": {
+          "internal_time_limit": 2657,
+          "depth_cap": 182,
+          "cancelled": 6
+        },
+        "completed_depth": {
+          "4": 1198,
+          "5": 383,
+          "7": 108,
+          "8": 136,
+          "9": 98,
+          "6": 142,
+          "15": 21,
+          "64": 182,
+          "14": 37,
+          "11": 83,
+          "21": 34,
+          "23": 11,
+          "25": 11,
+          "18": 31,
+          "13": 43,
+          "16": 15,
+          "12": 87,
+          "17": 35,
+          "19": 41,
+          "22": 29,
+          "28": 4,
+          "26": 10,
+          "32": 1,
+          "34": 1,
+          "10": 59,
+          "20": 20,
+          "24": 7,
+          "27": 9,
+          "29": 2,
+          "45": 1,
+          "33": 1,
+          "30": 2,
+          "37": 1,
+          "61": 1,
+          "40": 1
+        },
+        "failure": {
+          "NULL": 2845
+        },
+        "selection_reason": {
+          "completed_iteration": 2845
+        },
+        "clock_contract": {
+          "authority-action-receipt-v1": 2845
+        },
+        "terminal_collected": {
+          "True": 2845
+        },
+        "matching_terminal_collected": {
+          "True": 2845
+        },
+        "inflight_after_drain": {
+          "0": 2845
+        },
+        "completed_snapshot_validation_failed": {
+          "False": 2845
+        }
+      },
+      "configured_ceilings": [
+        {
+          "depth": 64,
+          "nodes": 1000000,
+          "TT_entries": 1048576,
+          "time_ms": 100,
+          "return_reserve_ms": 5,
+          "max_plies": 200
+        }
+      ],
+      "numeric": {
+        "AI_terminal_elapsed_ns": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 206305,
+            "mean": 93613760.72513181,
+            "median": 99570380.0,
+            "p95": 100340937,
+            "maximum": 106905131
+          }
+        },
+        "acceptance_elapsed_ns": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 459894,
+            "mean": 93893946.35782073,
+            "median": 99684336.0,
+            "p95": 101633144,
+            "maximum": 108116969
+          }
+        },
+        "admission_after_return_ns": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 35966,
+            "mean": 60429.37996485062,
+            "median": 56293.0,
+            "p95": 84584,
+            "maximum": 326225
+          }
+        },
+        "authority_receipt_elapsed_ns": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 413025,
+            "mean": 52332258.50052724,
+            "median": 53721572.0,
+            "p95": 91124329,
+            "maximum": 94899530
+          }
+        },
+        "caller_seconds": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 0.000459894,
+            "mean": 0.09389394635782074,
+            "median": 0.099684336,
+            "p95": 0.101633144,
+            "maximum": 0.108116969
+          }
+        },
+        "deadline_margin_at_receipt_ns": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 5100470,
+            "mean": 47667741.49947276,
+            "median": 46278428.0,
+            "p95": 95299478,
+            "maximum": 99586975
+          }
+        },
+        "drain_after_receipt_ns": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 5516,
+            "mean": 41501258.47732864,
+            "median": 39152224.0,
+            "p95": 74106249,
+            "maximum": 95039048
+          }
+        },
+        "drain_elapsed_ns": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 418541,
+            "mean": 93833516.97785589,
+            "median": 99626214.0,
+            "p95": 101563685,
+            "maximum": 107934944
+          }
+        },
+        "final_return_after_receipt_ns": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 5516,
+            "mean": 41501258.47732864,
+            "median": 39152224.0,
+            "p95": 74106249,
+            "maximum": 95039048
+          }
+        },
+        "final_return_elapsed_ns": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 418541,
+            "mean": 93833516.97785589,
+            "median": 99626214.0,
+            "p95": 101563685,
+            "maximum": 107934944
+          }
+        },
+        "last_completed_iteration_elapsed_ns": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 413025,
+            "mean": 52332258.50052724,
+            "median": 53721572.0,
+            "p95": 91124329,
+            "maximum": 94899530
+          }
+        },
+        "owner_search_elapsed_seconds": {
+          "present": 0,
+          "missing": 2845,
+          "descriptive": null
+        },
+        "selected_snapshot.cutoffs": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 0,
+            "mean": 11819.710369068542,
+            "median": 8687.0,
+            "p95": 29308,
+            "maximum": 68578
+          }
+        },
+        "selected_snapshot.delta_updates": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 1,
+            "mean": 38562.397891036904,
+            "median": 31264.0,
+            "p95": 77742,
+            "maximum": 105487
+          }
+        },
+        "selected_snapshot.leaf_count": {
+          "present": 0,
+          "missing": 2845,
+          "descriptive": null
+        },
+        "selected_snapshot.nodes": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 128,
+            "mean": 42581.395782073814,
+            "median": 32577.0,
+            "p95": 90308,
+            "maximum": 145498
+          }
+        },
+        "selected_snapshot.physical_nn_calls": {
+          "present": 0,
+          "missing": 2845,
+          "descriptive": null
+        },
+        "selected_snapshot.policy_calls": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "p95": 0,
+            "maximum": 0
+          }
+        },
+        "selected_snapshot.pvs_researches": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 0,
+            "mean": 12.325834797891037,
+            "median": 9.0,
+            "p95": 36,
+            "maximum": 88
+          }
+        },
+        "selected_snapshot.static_evaluations": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 1,
+            "mean": 22762.548681898068,
+            "median": 20077.0,
+            "p95": 43975,
+            "maximum": 74633
+          }
+        },
+        "selected_snapshot.terminal": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 0,
+            "mean": 1011.5384885764499,
+            "median": 0.0,
+            "p95": 6888,
+            "maximum": 62187
+          }
+        },
+        "selected_snapshot.tt_bound_cutoffs": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 0,
+            "mean": 661.0699472759227,
+            "median": 275.0,
+            "p95": 2296,
+            "maximum": 4662
+          }
+        },
+        "selected_snapshot.tt_capacity_skips": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "p95": 0,
+            "maximum": 0
+          }
+        },
+        "selected_snapshot.tt_exact_hits": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 3,
+            "mean": 32.437961335676626,
+            "median": 15.0,
+            "p95": 105,
+            "maximum": 422
+          }
+        },
+        "selected_snapshot.tt_generation": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 4,
+            "mean": 92.30158172231985,
+            "median": 64.0,
+            "p95": 283,
+            "maximum": 775
+          }
+        },
+        "selected_snapshot.tt_key_hits": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 125,
+            "mean": 19723.284358523724,
+            "median": 5314.0,
+            "p95": 86351,
+            "maximum": 142446
+          }
+        },
+        "selected_snapshot.tt_probes": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 127,
+            "mean": 25053.026362038665,
+            "median": 10678.0,
+            "p95": 91460,
+            "maximum": 142794
+          }
+        },
+        "selected_snapshot.tt_retained_bytes": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 83886144,
+            "mean": 83886144.0,
+            "median": 83886144.0,
+            "p95": 83886144,
+            "maximum": 83886144
+          }
+        },
+        "terminal_collection_delay_ns": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 681,
+            "mean": 219343.7251318102,
+            "median": 20062.0,
+            "p95": 1640167,
+            "maximum": 7557378
+          }
+        },
+        "thinking_seconds": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 0.000413025,
+            "mean": 0.05233225850052724,
+            "median": 0.053721572,
+            "p95": 0.091124329,
+            "maximum": 0.09489953
+          }
+        },
+        "whole_invocation.cutoffs": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 0,
+            "mean": 16870.06432337434,
+            "median": 15077.0,
+            "p95": 35463,
+            "maximum": 71502
+          }
+        },
+        "whole_invocation.delta_updates": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 1,
+            "mean": 69249.1978910369,
+            "median": 73442.0,
+            "p95": 93135,
+            "maximum": 111015
+          }
+        },
+        "whole_invocation.leaf_count": {
+          "present": 0,
+          "missing": 2845,
+          "descriptive": null
+        },
+        "whole_invocation.nodes": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 128,
+            "mean": 74182.94727592268,
+            "median": 76700.0,
+            "p95": 103582,
+            "maximum": 150824
+          }
+        },
+        "whole_invocation.physical_nn_calls": {
+          "present": 0,
+          "missing": 2845,
+          "descriptive": null
+        },
+        "whole_invocation.policy_calls": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "p95": 0,
+            "maximum": 0
+          }
+        },
+        "whole_invocation.pvs_researches": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 0,
+            "mean": 17.573989455184535,
+            "median": 14.0,
+            "p95": 48,
+            "maximum": 107
+          }
+        },
+        "whole_invocation.static_evaluations": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 1,
+            "mean": 46704.16485061512,
+            "median": 47687.0,
+            "p95": 71533,
+            "maximum": 85795
+          }
+        },
+        "whole_invocation.terminal": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 0,
+            "mean": 1302.2597539543058,
+            "median": 0.0,
+            "p95": 8885,
+            "maximum": 64756
+          }
+        },
+        "whole_invocation.tt_bound_cutoffs": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 0,
+            "mean": 1221.7978910369068,
+            "median": 1118.0,
+            "p95": 2898,
+            "maximum": 5887
+          }
+        },
+        "whole_invocation.tt_capacity_skips": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "p95": 0,
+            "maximum": 0
+          }
+        },
+        "whole_invocation.tt_exact_hits": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 4,
+            "mean": 38.16625659050967,
+            "median": 21.0,
+            "p95": 114,
+            "maximum": 422
+          }
+        },
+        "whole_invocation.tt_generation": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 5,
+            "mean": 93.23936731107206,
+            "median": 65.0,
+            "p95": 284,
+            "maximum": 775
+          }
+        },
+        "whole_invocation.tt_key_hits": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 125,
+            "mean": 26046.35149384886,
+            "median": 9105.0,
+            "p95": 108123,
+            "maximum": 149224
+          }
+        },
+        "whole_invocation.tt_probes": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 127,
+            "mean": 34267.04850615114,
+            "median": 19430.0,
+            "p95": 111458,
+            "maximum": 149543
+          }
+        },
+        "whole_invocation.tt_retained_bytes": {
+          "present": 2845,
+          "missing": 0,
+          "descriptive": {
+            "count": 2845,
+            "minimum": 83886144,
+            "mean": 83886144.0,
+            "median": 83886144.0,
+            "p95": 83886144,
+            "maximum": 83886144
+          }
+        }
+      },
+      "identity_scope": "configured exact value identity joined to original PASS producer; loaded identity only when an emitted namespace matches",
+      "planned_decisions": null,
+      "loaded_value_identity": "fb7d124603ad6637e2395a919fe74909b6d76d933b26bd96849469be1239c7e2"
+    }
+  ],
+  "nativeReportedCosts": [
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-000/operation/manifest.json",
+        "sha256": "f91193dac0d4a4cccb2d49eafe6b5d2f7a9c979d5c68c030e544535fe0e1cee5",
+        "bytes": 8274,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 59.894004638,
+      "native_reported_rss_point_max": 196677632,
+      "setup_and_cleanup_reported_seconds": {
+        "evaluator_initialization_seconds": 0.000575364,
+        "backend_initialization_seconds": 9.100000000000001e-08,
+        "backend_cleanup_seconds": 0.005555835
+      },
+      "compressed_bytes": 465314,
+      "raw_bytes": 2911863,
+      "scope": "reported nested cost/RSS observations, not allocator/family peak"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-001/operation/manifest.json",
+        "sha256": "588b2d4f55ef69b008d070390ba425b3c89cd86336299875a21a9a04b541ec8d",
+        "bytes": 8284,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 68.310645021,
+      "native_reported_rss_point_max": 198377472,
+      "setup_and_cleanup_reported_seconds": {
+        "evaluator_initialization_seconds": 0.000379334,
+        "backend_initialization_seconds": 8e-08,
+        "backend_cleanup_seconds": 0.007101414
+      },
+      "compressed_bytes": 519437,
+      "raw_bytes": 3271459,
+      "scope": "reported nested cost/RSS observations, not allocator/family peak"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-002/operation/manifest.json",
+        "sha256": "879d28d13088df09574b7562141943073fd62bfc5e7938dc93a0a1a97e014545",
+        "bytes": 8284,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 72.579832306,
+      "native_reported_rss_point_max": 199127040,
+      "setup_and_cleanup_reported_seconds": {
+        "evaluator_initialization_seconds": 0.000365141,
+        "backend_initialization_seconds": 6.1e-08,
+        "backend_cleanup_seconds": 0.006201065
+      },
+      "compressed_bytes": 554866,
+      "raw_bytes": 3486832,
+      "scope": "reported nested cost/RSS observations, not allocator/family peak"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-003/operation/manifest.json",
+        "sha256": "634d00fbd392d08a7c345814afc0ca11200422095aec0f541889c32a86602b2f",
+        "bytes": 8284,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 64.325613646,
+      "native_reported_rss_point_max": 197062656,
+      "setup_and_cleanup_reported_seconds": {
+        "evaluator_initialization_seconds": 0.000390454,
+        "backend_initialization_seconds": 8.3e-08,
+        "backend_cleanup_seconds": 0.005876997
+      },
+      "compressed_bytes": 489645,
+      "raw_bytes": 3048220,
+      "scope": "reported nested cost/RSS observations, not allocator/family peak"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-004/operation/manifest.json",
+        "sha256": "2a12c6d3cfa24435b69a3f5fb28f017fe6d4b003bc7443d623f507277a7e9b93",
+        "bytes": 8284,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 74.794324361,
+      "native_reported_rss_point_max": 200531968,
+      "setup_and_cleanup_reported_seconds": {
+        "evaluator_initialization_seconds": 0.000358759,
+        "backend_initialization_seconds": 6.8e-08,
+        "backend_cleanup_seconds": 0.013609123
+      },
+      "compressed_bytes": 581199,
+      "raw_bytes": 3666550,
+      "scope": "reported nested cost/RSS observations, not allocator/family peak"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-005/operation/manifest.json",
+        "sha256": "e5e17c7ba667a37a298fc7eb224ac6cf5e5b996ea0887ffe8d21f152017b0ea5",
+        "bytes": 8284,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 67.006110542,
+      "native_reported_rss_point_max": 198782976,
+      "setup_and_cleanup_reported_seconds": {
+        "evaluator_initialization_seconds": 0.00040697499999999996,
+        "backend_initialization_seconds": 1.75e-07,
+        "backend_cleanup_seconds": 0.006145884
+      },
+      "compressed_bytes": 519076,
+      "raw_bytes": 3289839,
+      "scope": "reported nested cost/RSS observations, not allocator/family peak"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-006/operation/manifest.json",
+        "sha256": "239bf9414272c60f1dd8ee259a68952ae394e65744a98e4b1bacb189635d246d",
+        "bytes": 8296,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 76.467795641,
+      "native_reported_rss_point_max": 200069120,
+      "setup_and_cleanup_reported_seconds": {
+        "evaluator_initialization_seconds": 0.000359152,
+        "backend_initialization_seconds": 7.9e-08,
+        "backend_cleanup_seconds": 0.006769255
+      },
+      "compressed_bytes": 582153,
+      "raw_bytes": 3667344,
+      "scope": "reported nested cost/RSS observations, not allocator/family peak"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-007/operation/manifest.json",
+        "sha256": "5c794c535a4f43ef0ad63a774d6df63e02c9c28127d8be6d34c336db07c58a5e",
+        "bytes": 8300,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 73.226261685,
+      "native_reported_rss_point_max": 199684096,
+      "setup_and_cleanup_reported_seconds": {
+        "evaluator_initialization_seconds": 0.000475937,
+        "backend_initialization_seconds": 7.1e-08,
+        "backend_cleanup_seconds": 0.005701421
+      },
+      "compressed_bytes": 566441,
+      "raw_bytes": 3568753,
+      "scope": "reported nested cost/RSS observations, not allocator/family peak"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-008/operation/manifest.json",
+        "sha256": "34f8bb6536f28e7624dd2a05975cb5debe7ee22b8040e673f558cb12072ac992",
+        "bytes": 8300,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 67.974843574,
+      "native_reported_rss_point_max": 197976064,
+      "setup_and_cleanup_reported_seconds": {
+        "evaluator_initialization_seconds": 0.000358107,
+        "backend_initialization_seconds": 5.4e-08,
+        "backend_cleanup_seconds": 0.005724951000000001
+      },
+      "compressed_bytes": 515887,
+      "raw_bytes": 3213374,
+      "scope": "reported nested cost/RSS observations, not allocator/family peak"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-009/operation/manifest.json",
+        "sha256": "facf3caff9b0c5b24796492282840bf6b30a4ac55258522f54f31b06415f662a",
+        "bytes": 8301,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 59.949958893,
+      "native_reported_rss_point_max": 196726784,
+      "setup_and_cleanup_reported_seconds": {
+        "evaluator_initialization_seconds": 0.00035844800000000003,
+        "backend_initialization_seconds": 1.13e-07,
+        "backend_cleanup_seconds": 0.005399974
+      },
+      "compressed_bytes": 467939,
+      "raw_bytes": 2919542,
+      "scope": "reported nested cost/RSS observations, not allocator/family peak"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-010/operation/manifest.json",
+        "sha256": "adb93e9f037ce9036a1a013d3fb1bd5070a1aff989f2ccd60b7f45519dc26dac",
+        "bytes": 8301,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 71.294973914,
+      "native_reported_rss_point_max": 199237632,
+      "setup_and_cleanup_reported_seconds": {
+        "evaluator_initialization_seconds": 0.000352934,
+        "backend_initialization_seconds": 5.5e-08,
+        "backend_cleanup_seconds": 0.005506011
+      },
+      "compressed_bytes": 546547,
+      "raw_bytes": 3437039,
+      "scope": "reported nested cost/RSS observations, not allocator/family peak"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-011/operation/manifest.json",
+        "sha256": "26ce0aad7a34236df8f834e1d91fcb0cefc4c4b33d61ec9bdfa8a52101d8ab96",
+        "bytes": 8300,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 65.204460852,
+      "native_reported_rss_point_max": 197902336,
+      "setup_and_cleanup_reported_seconds": {
+        "evaluator_initialization_seconds": 0.000364609,
+        "backend_initialization_seconds": 5.4e-08,
+        "backend_cleanup_seconds": 0.005720249
+      },
+      "compressed_bytes": 500432,
+      "raw_bytes": 3148368,
+      "scope": "reported nested cost/RSS observations, not allocator/family peak"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-012/operation/manifest.json",
+        "sha256": "e3c1cc1321bd3b9e0b5af988c07beeff7adc6cf36e42531da12d3352ead9301b",
+        "bytes": 8301,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 65.038968832,
+      "native_reported_rss_point_max": 197013504,
+      "setup_and_cleanup_reported_seconds": {
+        "evaluator_initialization_seconds": 0.000392124,
+        "backend_initialization_seconds": 8.199999999999999e-08,
+        "backend_cleanup_seconds": 0.006021651
+      },
+      "compressed_bytes": 496357,
+      "raw_bytes": 3087622,
+      "scope": "reported nested cost/RSS observations, not allocator/family peak"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-013/operation/manifest.json",
+        "sha256": "36f570c7ce52375f57ac816c4bb1cf45fa82e104c4342f2e3159f9223ab509a4",
+        "bytes": 8301,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 63.177073223,
+      "native_reported_rss_point_max": 197341184,
+      "setup_and_cleanup_reported_seconds": {
+        "evaluator_initialization_seconds": 0.000405372,
+        "backend_initialization_seconds": 2.1300000000000001e-07,
+        "backend_cleanup_seconds": 0.005796731
+      },
+      "compressed_bytes": 489315,
+      "raw_bytes": 3085611,
+      "scope": "reported nested cost/RSS observations, not allocator/family peak"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-014/operation/manifest.json",
+        "sha256": "662041261d83d8311b9baab9235df0e3a8097809ea11ca093bb340998682dec1",
+        "bytes": 8302,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 63.67235667,
+      "native_reported_rss_point_max": 197087232,
+      "setup_and_cleanup_reported_seconds": {
+        "evaluator_initialization_seconds": 0.00036440400000000003,
+        "backend_initialization_seconds": 6.3e-08,
+        "backend_cleanup_seconds": 0.005721308
+      },
+      "compressed_bytes": 486644,
+      "raw_bytes": 3027007,
+      "scope": "reported nested cost/RSS observations, not allocator/family peak"
+    },
+    {
+      "completion": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/lane-0/sequence/run-015/operation/manifest.json",
+        "sha256": "ed87408cb63ca0005a308a534c58a03967d21548cd74545853034e505b32347e",
+        "bytes": 8301,
+        "mode": "0644"
+      },
+      "native_wall_seconds": 72.713131125,
+      "native_reported_rss_point_max": 199430144,
+      "setup_and_cleanup_reported_seconds": {
+        "evaluator_initialization_seconds": 0.000367851,
+        "backend_initialization_seconds": 5.6e-08,
+        "backend_cleanup_seconds": 0.006016132
+      },
+      "compressed_bytes": 555302,
+      "raw_bytes": 3502519,
+      "scope": "reported nested cost/RSS observations, not allocator/family peak"
+    }
+  ],
+  "counterScope": "selected snapshot and whole invocation are separate; TT generation/retained bytes are observations of retained state, never summed lifetime work; static evaluations are not physical NN kernels; unexposed provider lifetime/row counters remain NULL",
+  "decodeScope": "ONE maintained reader per exact producer; whole archive JSON may transiently instantiate unused board/context/history/action fields. Export scalar aggregates only; no geometry/rules/Search replay or state-derived model metrics",
+  "unavailable": {
+    "provider_lifetime_rows": null,
+    "allocator_or_family_peak": null,
+    "NN_physical_throughput": null,
+    "allocation_clock_if_unemitted": null
+  },
+  "limitations": [
+    "New-purpose descriptive census only; no bootstrap/CI/NPS/equal-work/cause/cure/strength claim.",
+    "Receipt deadline and final return/drain clocks differ; no cleanup-under100ms promise.",
+    "Native reported RSS point maximum is not allocator/family/continuous peak.",
+    "Search value_stm is searched STM utility, not a calibrated raw teacher target."
+  ],
+  "bootstrapResamples": 0,
+  "seed": null,
+  "interval": null,
+  "scoreUnitSourceContract": {
+    "path": "/workspaces/quoridor/.worktree/quoridor-strong435/.artifacts/quoridor-strong435/selected7680-vs-selected2560-alpha256-saved-work-clock-prep-v1/score-unit-contract.md",
+    "bytes": 3326,
+    "mode": "0644",
+    "sha256": "e58ee906e4eaef1cb81cbde436487e92eb1100e093642b3b7743ab710b6a8a84"
+  },
+  "scoreSourceRefs": {
+    "path": "/workspaces/quoridor/.worktree/quoridor-strong435/.artifacts/quoridor-strong435/selected7680-vs-selected2560-alpha256-saved-work-clock-prep-v1/score-source-refs.json",
+    "bytes": 2851,
+    "mode": "0644",
+    "sha256": "e33490124afb05d6906e5a549bb0f49dacc9006e2e3fb629d05f4935c73c20ef"
+  },
+  "scoreMeaning": "Nonterminal leaf posttanh +/-1; legacy terminal/proof +/-2; negamax/root STM searched utility. Search value_stm is not calibrated teacher target or win probability.",
+  "archiveScope": {
+    "producers": 16,
+    "payloadFileRefs": 48,
+    "compressedB": 8336554,
+    "rawB": 52331942,
+    "maximumDecisions": 51200,
+    "originalMaintainedReaderPasses": 1,
+    "collectorOrFinalizerArchiveReopens": 0,
+    "transientUnusedBoardContextDecode": true
+  },
+  "costs": {
+    "outerSeconds": 1.8336571949766949,
+    "readerCommandIncludedSeconds": 0.8416862590238452,
+    "ordinaryFinalizerSeconds": 0.16373390995431691,
+    "nestedSpansNotAdded": true,
+    "physicalPeakAndGlobalFullFees": null
+  },
+  "actualSTOP": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/common/saved-work-clock-v1/completion-ca9313c6/reader-collection-STOP.json",
+    "bytes": 6262,
+    "mode": "0644",
+    "sha256": "1a5ec128f3713994d36281ac94ce6c81f7759f615f21345bf5f0c56d8a46f90e"
+  },
+  "storagePoint": {
+    "observed_at": "2026-10-25T00:25:43.366314+00:00",
+    "roots": [
+      "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1"
+    ],
+    "allocated_B": 15908864,
+    "storage_budget_B": 2147483648,
+    "FS_free_B": 473693302784,
+    "global_actual_B": null,
+    "scope": "Current directed retention after manifest publication/cleanup, before final INCOMPLETE removal; not historical peak, forecast support, or a whole-global inventory. Serial TMP is counted only if retained now. This receipt is published after the observation."
+  },
+  "priorControlFailure": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/quoridor-strong-ai435/selected7680-vs-selected2560-next128-alpha256-prep-v1/entry-v1/common/saved-work-clock-v1/pre-submit-affinity-refusal.json",
+    "bytes": 842,
+    "mode": "0644",
+    "sha256": "eb803870cc4cc77d3b98d815cce0c2b8eaa057af1942a05f6c25337e9fcaa80b"
+  },
+  "engineeringDecision": "Keep selected2560 research incumbent from original exposed-development Alpha256. This descriptive census selects no cause/cure, longer fit, new teacher, game, model or default change.",
+  "oldResultFitNOT_CONVERGEDFailuresCostsPausesSealsH128DefaultsForeign50GBUnchanged": true,
+  "strongestGoalsComplete": false
+}

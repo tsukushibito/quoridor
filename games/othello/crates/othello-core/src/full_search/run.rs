@@ -11,7 +11,7 @@ use super::{
 };
 use crate::{
     GameState,
-    bitboard::Position,
+    bitboard::{Position, PreparedMove},
     full_eval::{FeatureState, FullEvaluator, terminal_discs},
 };
 
@@ -29,15 +29,22 @@ pub(super) const STATIC_PRIORITY: [u64; 5] = [
 ];
 
 #[derive(Clone, Copy)]
-struct Move {
+struct Move<'parent> {
     cell: u8,
     value: i32,
     done: bool,
+    prepared: Option<PreparedMove<'parent>>,
 }
-const EMPTY_MOVE: Move = Move {
+impl<'parent> Move<'parent> {
+    fn prepared(self) -> PreparedMove<'parent> {
+        self.prepared.expect("populated legal move")
+    }
+}
+const EMPTY_MOVE: Move<'static> = Move {
     cell: NO_MOVE,
     value: 0,
     done: false,
+    prepared: None,
 };
 
 struct Run<'a, C, K> {
@@ -86,11 +93,18 @@ impl<C: FnMut() -> f64, K: FnMut() -> bool> Run<'_, C, K> {
             .expect("qualified nonterminal phase")
             .clamped
     }
-    fn child(&mut self, cell: u8, alpha: i32, beta: i32, depth: u8, end: bool) -> TreeResult {
+    fn child(
+        &mut self,
+        prepared: &PreparedMove<'_>,
+        alpha: i32,
+        beta: i32,
+        depth: u8,
+        end: bool,
+    ) -> TreeResult {
         let undo = self
             .state
-            .play(u32::from(cell))
-            .expect("generated legal move");
+            .play_prepared(prepared)
+            .expect("generated move belongs to feature parent");
         let result = self.pvs(alpha, beta, depth, end, false, false, None);
         self.state.undo(undo).expect("LIFO child undo");
         result
@@ -201,7 +215,10 @@ impl<C: FnMut() -> f64, K: FnMut() -> bool> Run<'_, C, K> {
         while bits != 0 {
             let cell = (63 - bits.leading_zeros()) as u8;
             bits &= !(1_u64 << cell);
-            if position.flips(u32::from(cell)) == position.sides().1 {
+            let prepared = position
+                .prepare_move(u32::from(cell))
+                .expect("generated legal move");
+            if prepared.flipped() == position.sides().1 {
                 if root {
                     self.root_move = cell;
                 }
@@ -211,6 +228,7 @@ impl<C: FnMut() -> f64, K: FnMut() -> bool> Run<'_, C, K> {
                 cell,
                 value: 0,
                 done: false,
+                prepared: Some(prepared),
             };
             count += 1;
         }
@@ -231,7 +249,9 @@ impl<C: FnMut() -> f64, K: FnMut() -> bool> Run<'_, C, K> {
         if !root && self.options.etc && depth >= 16 {
             for mv in &mut moves[..count] {
                 self.poll()?;
-                let child = position.play(u32::from(mv.cell)).expect("legal ETC child");
+                let child = position
+                    .play_prepared(&mv.prepared())
+                    .expect("legal ETC parent");
                 if let Some(e) = self.table.find(child) {
                     // has_node_any_level_get_bounds also grants an ordering
                     // bonus when a board exists but its bounds are too shallow.
@@ -276,7 +296,7 @@ impl<C: FnMut() -> f64, K: FnMut() -> bool> Run<'_, C, K> {
             {
                 mv.done = true;
                 let cell = mv.cell;
-                let score = -self.child(cell, -beta, -alpha, depth - 1, end)?;
+                let score = -self.child(&mv.prepared(), -beta, -alpha, depth - 1, end)?;
                 if score > value {
                     value = score;
                     best = cell;
@@ -308,11 +328,11 @@ impl<C: FnMut() -> f64, K: FnMut() -> bool> Run<'_, C, K> {
                     }
                     let mut score;
                     if value == -INF || nws {
-                        score = -self.child(mv.cell, -beta, -alpha, depth - 1, end)?;
+                        score = -self.child(&mv.prepared(), -beta, -alpha, depth - 1, end)?;
                     } else {
-                        score = -self.child(mv.cell, -alpha - 1, -alpha, depth - 1, end)?;
+                        score = -self.child(&mv.prepared(), -alpha - 1, -alpha, depth - 1, end)?;
                         if alpha < score && score < beta {
-                            score = -self.child(mv.cell, -beta, -score, depth - 1, end)?;
+                            score = -self.child(&mv.prepared(), -beta, -score, depth - 1, end)?;
                         }
                     }
                     if score > value {
@@ -362,7 +382,8 @@ impl<C: FnMut() -> f64, K: FnMut() -> bool> Run<'_, C, K> {
     }
 
     fn eval_two_nws(&mut self, alpha: i32, legal: u64) -> TreeResult {
-        let entry = self.table.find(self.state.position());
+        let position = self.state.position();
+        let entry = self.table.find(position);
         if let Some(e) = entry.filter(|e| e.qualified(2, self.level)) {
             if e.upper <= alpha as i8 || e.lower == e.upper {
                 return Ok(i32::from(e.upper));
@@ -375,7 +396,10 @@ impl<C: FnMut() -> f64, K: FnMut() -> bool> Run<'_, C, K> {
         let mut remaining = legal;
         for cell in entry.map_or([NO_MOVE; 2], |e| e.moves) {
             if cell < 64 && remaining & (1_u64 << cell) != 0 {
-                value = value.max(-self.child(cell, -alpha - 1, -alpha, 1, false)?);
+                let prepared = position
+                    .prepare_move(u32::from(cell))
+                    .expect("eval2 legal move");
+                value = value.max(-self.child(&prepared, -alpha - 1, -alpha, 1, false)?);
                 remaining &= !(1_u64 << cell);
                 if value > alpha {
                     return Ok(value);
@@ -387,7 +411,10 @@ impl<C: FnMut() -> f64, K: FnMut() -> bool> Run<'_, C, K> {
             while bits != 0 {
                 let cell = (63 - bits.leading_zeros()) as u8;
                 bits &= !(1_u64 << cell);
-                value = value.max(-self.child(cell, -alpha - 1, -alpha, 1, false)?);
+                let prepared = position
+                    .prepare_move(u32::from(cell))
+                    .expect("eval2 legal move");
+                value = value.max(-self.child(&prepared, -alpha - 1, -alpha, 1, false)?);
                 if value > alpha {
                     return Ok(value);
                 }
@@ -482,7 +509,7 @@ impl<C: FnMut() -> f64, K: FnMut() -> bool> Run<'_, C, K> {
 
     fn order(
         &mut self,
-        moves: &mut [Move],
+        moves: &mut [Move<'_>],
         tt: [u8; 2],
         depth: u8,
         end: bool,
@@ -518,8 +545,8 @@ impl<C: FnMut() -> f64, K: FnMut() -> bool> Run<'_, C, K> {
             self.poll()?;
             let undo = self
                 .state
-                .play(u32::from(mv.cell))
-                .expect("legal ordering child");
+                .play_prepared(&mv.prepared())
+                .expect("legal ordering parent");
             let result: TreeResult = (|| {
                 let child = self.state.position();
                 let legal = child.legal_moves();
@@ -584,10 +611,18 @@ impl<C: FnMut() -> f64, K: FnMut() -> bool> Run<'_, C, K> {
         })
     }
 
-    fn end_child(&mut self, position: Position, cell: u8, alpha: i32) -> TreeResult {
-        let child = position.play(u32::from(cell)).expect("end legal child");
+    fn end_child(
+        &mut self,
+        position: Position,
+        prepared: &PreparedMove<'_>,
+        alpha: i32,
+    ) -> TreeResult {
+        let child = position.play_prepared(prepared).expect("end legal parent");
         if child.empties() >= 11 {
-            let undo = self.state.play(u32::from(cell)).expect("end feature child");
+            let undo = self
+                .state
+                .play_prepared(prepared)
+                .expect("end feature parent");
             let result = self.end_nws(child, -alpha - 1, false);
             self.state.undo(undo).expect("LIFO end feature undo");
             result.map(|v| -v)
@@ -640,7 +675,10 @@ impl<C: FnMut() -> f64, K: FnMut() -> bool> Run<'_, C, K> {
                 while bits != 0 {
                     let cell = (63 - bits.leading_zeros()) as u8;
                     bits &= !(1_u64 << cell);
-                    best = best.max(self.end_child(position, cell, alpha)?);
+                    let prepared = position
+                        .prepare_move(u32::from(cell))
+                        .expect("small end legal move");
+                    best = best.max(self.end_child(position, &prepared, alpha)?);
                     if best > alpha {
                         return Ok(best);
                     }
@@ -659,13 +697,17 @@ impl<C: FnMut() -> f64, K: FnMut() -> bool> Run<'_, C, K> {
         while bits != 0 {
             let cell = (63 - bits.leading_zeros()) as u8;
             bits &= !(1_u64 << cell);
-            if position.flips(u32::from(cell)) == position.sides().1 {
+            let prepared = position
+                .prepare_move(u32::from(cell))
+                .expect("generated legal move");
+            if prepared.flipped() == position.sides().1 {
                 return Ok(64);
             }
             moves[count] = Move {
                 cell,
                 value: 0,
                 done: false,
+                prepared: Some(prepared),
             };
             count += 1;
         }
@@ -673,8 +715,8 @@ impl<C: FnMut() -> f64, K: FnMut() -> bool> Run<'_, C, K> {
             for mv in &mut moves[..count] {
                 self.poll()?;
                 let child = position
-                    .play(u32::from(mv.cell))
-                    .expect("end ordering child");
+                    .play_prepared(&mv.prepared())
+                    .expect("end ordering parent");
                 if let Some(entry) = self.end_table.find(child) {
                     if entry.lower > alpha {
                         return Ok(entry.lower);
@@ -688,7 +730,7 @@ impl<C: FnMut() -> f64, K: FnMut() -> bool> Run<'_, C, K> {
                 let next = child.legal_moves();
                 let mobility = next.count_ones() as i32 + (next & CORNERS).count_ones() as i32;
                 if mobility <= 1 {
-                    let value = self.end_child(position, mv.cell, alpha)?;
+                    let value = self.end_child(position, &mv.prepared(), alpha)?;
                     self.end_table.register(child, value, alpha);
                     best = best.max(value);
                     mv.done = true;
@@ -703,8 +745,8 @@ impl<C: FnMut() -> f64, K: FnMut() -> bool> Run<'_, C, K> {
                 } else {
                     let undo = self
                         .state
-                        .play(u32::from(mv.cell))
-                        .expect("end ordering features");
+                        .play_prepared(&mv.prepared())
+                        .expect("end ordering feature parent");
                     let ordering = self.evaluator.ordering(&self.state);
                     self.state.undo(undo).expect("LIFO end ordering undo");
                     mv.value = (38 - mobility) * 40 + (38 - ordering) * 12;
@@ -723,8 +765,10 @@ impl<C: FnMut() -> f64, K: FnMut() -> bool> Run<'_, C, K> {
             if mv.done {
                 continue;
             }
-            let value = self.end_child(position, mv.cell, alpha)?;
-            let child = position.play(u32::from(mv.cell)).expect("end TT child");
+            let value = self.end_child(position, &mv.prepared(), alpha)?;
+            let child = position
+                .play_prepared(&mv.prepared())
+                .expect("end TT parent");
             self.poll()?;
             self.end_table.register(child, value, alpha);
             best = best.max(value);
@@ -735,8 +779,15 @@ impl<C: FnMut() -> f64, K: FnMut() -> bool> Run<'_, C, K> {
         Ok(best)
     }
 
-    fn clog_child(&mut self, cell: u8, depth: u8) -> Result<Option<i32>, &'static str> {
-        let undo = self.state.play(u32::from(cell)).expect("clog legal child");
+    fn clog_child(
+        &mut self,
+        prepared: &PreparedMove<'_>,
+        depth: u8,
+    ) -> Result<Option<i32>, &'static str> {
+        let undo = self
+            .state
+            .play_prepared(prepared)
+            .expect("clog legal parent");
         let result = self.clog(depth);
         self.state.undo(undo).expect("LIFO clog child undo");
         result.map(|value| value.map(|score| -score))
@@ -764,13 +815,17 @@ impl<C: FnMut() -> f64, K: FnMut() -> bool> Run<'_, C, K> {
         while bits != 0 {
             let cell = (63 - bits.leading_zeros()) as u8;
             bits &= !(1_u64 << cell);
-            if position.flips(u32::from(cell)) == position.sides().1 {
+            let prepared = position
+                .prepare_move(u32::from(cell))
+                .expect("generated legal move");
+            if prepared.flipped() == position.sides().1 {
                 return Ok(Some(64));
             }
             moves[count] = Move {
                 cell,
                 value: 0,
                 done: false,
+                prepared: Some(prepared),
             };
             count += 1;
         }
@@ -798,7 +853,7 @@ impl<C: FnMut() -> f64, K: FnMut() -> bool> Run<'_, C, K> {
                 }
             }
             moves.swap(index, next);
-            match self.clog_child(moves[index].cell, depth - 1)? {
+            match self.clog_child(&moves[index].prepared(), depth - 1)? {
                 Some(value) => best = best.max(value),
                 None => uncertain = true,
             }
@@ -916,8 +971,9 @@ pub(super) fn search<C: FnMut() -> f64, K: FnMut() -> bool>(
         while bits != 0 {
             let cell = 63 - bits.leading_zeros();
             bits &= !(1_u64 << cell);
+            let prepared = position.prepare_move(cell).expect("root clog legal move");
             match run.clog_child(
-                cell as u8,
+                &prepared,
                 if fixed.is_some() { depth.min(5) - 1 } else { 4 },
             ) {
                 Ok(value) => run.clogs[cell as usize] = value,
@@ -997,7 +1053,10 @@ pub(super) fn search<C: FnMut() -> f64, K: FnMut() -> bool>(
                         while bits != 0 {
                             let cell = (63 - bits.leading_zeros()) as u8;
                             bits &= !(1_u64 << cell);
-                            match run.child(cell, -alpha - 1, -alpha, depth - 1, end) {
+                            let prepared = position
+                                .prepare_move(u32::from(cell))
+                                .expect("second-best legal move");
+                            match run.child(&prepared, -alpha - 1, -alpha, depth - 1, end) {
                                 Ok(v) => second = second.max(-v),
                                 Err(stop) => {
                                     stopped = Some(stop);
@@ -1147,7 +1206,11 @@ mod kernel_tests {
         while legal != 0 {
             let cell = (63 - legal.leading_zeros()) as u8;
             legal &= !(1 << cell);
-            moves[length] = Move { cell, ..EMPTY_MOVE };
+            moves[length] = Move {
+                cell,
+                prepared: Some(position.prepare_move(u32::from(cell)).unwrap()),
+                ..EMPTY_MOVE
+            };
             length += 1;
         }
         assert_eq!(length, 4);

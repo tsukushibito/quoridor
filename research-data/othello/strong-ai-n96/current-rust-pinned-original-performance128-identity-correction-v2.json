@@ -1,0 +1,210 @@
+{
+  "status": "ADDITIVE_ENGINE_IDENTITY_LABEL_CORRECTION",
+  "originalCanonical": {
+    "path": "/workspaces/quoridor/research-data/othello/strong-ai-n96/current-rust-pinned-original-performance128-result-v1.json",
+    "bytes": 110534,
+    "mode": "0644",
+    "sha256": "d47f0ecb34893a0fee4ee3b9a22e1af4ad4d8b3c059d1ca37ad6af5f3b82ee2e"
+  },
+  "originalErroneousField": {
+    "references.baseline": "bd8ffc91",
+    "references.candidate": "d1106b89"
+  },
+  "error": "Inherited Rust-vs-Rust display labels in scalar collector; they do not identify the legs of original e546 rust-original experiment.",
+  "actualComparisonKind": "rust-original",
+  "actualLegs": [
+    {
+      "profile": "fixed",
+      "owner": "rust",
+      "id": "retained-original-flip-fullsearch-d1106b89",
+      "binary": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/flips-original-port-affected-software-v1/othello-full-search-original-flip",
+        "bytes": 799112,
+        "mode": "0555",
+        "sha256": "d1106b89d596ee9c1085793efed63617c47b32795c13a46cd2e6d6890aab637d"
+      },
+      "actualObservedInit": {
+        "engine": "console7.8.1-rust-singlethread-source-port",
+        "hashLevel": 20,
+        "hashSeed": 20261022,
+        "identityBinding": "callerVerified",
+        "interpretation": "simd",
+        "midgameId": "sha256:0a8acbcbc23067933627f1bcc83c3f7ae6b7ff3e603d174a3364271fcaeeef2f",
+        "ok": true,
+        "orderingId": "sha256:bd908885e8bb85e72a9be2b0399f8ca52ed40a138bcaaecca3d13710945b9a93",
+        "upstreamCommit": "570d5e0a478c9d720d75de06a5d31995f412704a",
+        "workerPool": 0
+      },
+      "sourceEntry": "normal Rust FullSearch CLI"
+    },
+    {
+      "profile": "fixed",
+      "owner": "original",
+      "id": "console7.8.1-engine-continuous-fixed",
+      "binary": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/continuous-practical-software-v1/original-continuous-fixed",
+        "bytes": 914848,
+        "mode": "0555",
+        "sha256": "baaed0773991f9bef0daef11d2f5b4f9cf64fe3880e5ad91be82d89d86c76141"
+      },
+      "actualObservedInit": {
+        "activeTTBytes": 25165872,
+        "alpha": -64,
+        "beta": 64,
+        "blockSize": 4,
+        "clock": "external10s; no original internal fixed timer",
+        "controls": {
+          "aspiration": false,
+          "book": false,
+          "compiledMpc": false,
+          "etc": true,
+          "last4Stability": false,
+          "lastParity": true,
+          "parity": true,
+          "ponder": false,
+          "probabilityPercent": 100,
+          "selectivity": 6,
+          "shallowOrdering": true,
+          "stability": true,
+          "useMultiThread": false,
+          "workerPool": 0
+        },
+        "engineCommit": "570d5e0a478c9d720d75de06a5d31995f412704a",
+        "engineTag": "console_v7.8.1",
+        "entry": "first_nega_scout_legal",
+        "evaluationImplementation": "evaluate_simd.hpp",
+        "hashLevel": 20,
+        "hashSeed": 20261022,
+        "label": "Console7.8.1-engine + fixed-depth AVX2 MPC-off reference",
+        "maximumSearchCalls": 32,
+        "ok": true,
+        "profile": "continuous16-fixed-d6-mpc-off",
+        "protocol": "egaroucid-continuous16-v1",
+        "pruningOffMeaning": "compile MID_MPC OFF, including shallow ordering; exact cuts remain",
+        "requestWallMs": 0.042625,
+        "staticTTVirtualBytes": 805306416,
+        "weightIdentity": {
+          "callerVerified": true,
+          "expectedMidgameSha256": "0a8acbcbc23067933627f1bcc83c3f7ae6b7ff3e603d174a3364271fcaeeef2f",
+          "expectedOrderingSha256": "bd908885e8bb85e72a9be2b0399f8ca52ed40a138bcaaecca3d13710945b9a93",
+          "midgameId": "sha256:0a8acbcbc23067933627f1bcc83c3f7ae6b7ff3e603d174a3364271fcaeeef2f",
+          "midgamePath": "/workspaces/quoridor/.worktree/assets/tools/othello-baselines-n96-v1/egaroucid/bin/resources/eval.egev2",
+          "orderingId": "sha256:bd908885e8bb85e72a9be2b0399f8ca52ed40a138bcaaecca3d13710945b9a93",
+          "orderingPath": "/workspaces/quoridor/.worktree/assets/tools/othello-baselines-n96-v1/egaroucid/bin/resources/eval_move_ordering_end.egev"
+        }
+      },
+      "sourceEntry": "first_nega_scout_legal"
+    },
+    {
+      "profile": "timed",
+      "owner": "rust",
+      "id": "retained-original-flip-fullsearch-d1106b89",
+      "binary": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/flips-original-port-affected-software-v1/othello-full-search-original-flip",
+        "bytes": 799112,
+        "mode": "0555",
+        "sha256": "d1106b89d596ee9c1085793efed63617c47b32795c13a46cd2e6d6890aab637d"
+      },
+      "actualObservedInit": {
+        "engine": "console7.8.1-rust-singlethread-source-port",
+        "hashLevel": 20,
+        "hashSeed": 20261022,
+        "identityBinding": "callerVerified",
+        "interpretation": "simd",
+        "midgameId": "sha256:0a8acbcbc23067933627f1bcc83c3f7ae6b7ff3e603d174a3364271fcaeeef2f",
+        "ok": true,
+        "orderingId": "sha256:bd908885e8bb85e72a9be2b0399f8ca52ed40a138bcaaecca3d13710945b9a93",
+        "upstreamCommit": "570d5e0a478c9d720d75de06a5d31995f412704a",
+        "workerPool": 0
+      },
+      "sourceEntry": "normal Rust FullSearch CLI"
+    },
+    {
+      "profile": "timed",
+      "owner": "original",
+      "id": "console7.8.1-engine-continuous-timed",
+      "binary": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/continuous-practical-software-v1/original-continuous-timed",
+        "bytes": 924280,
+        "mode": "0555",
+        "sha256": "6b3e2227c47156a1f0d270993307c3885299a7347b34d37d1e77e05174a4c36c"
+      },
+      "actualObservedInit": {
+        "activeTTBytes": 25165872,
+        "alpha": -64,
+        "beta": 64,
+        "blockSize": 4,
+        "clock": "original1000ms per-search ID; outer1100ms includes transport/join",
+        "controls": {
+          "aspiration": false,
+          "book": false,
+          "clogSearchUseMultiThread": true,
+          "compiledMpc": true,
+          "etc": true,
+          "last4Stability": false,
+          "lastParity": true,
+          "orderingSelectivity": 0,
+          "parity": true,
+          "ponder": false,
+          "probabilityPercent": null,
+          "selectivity": null,
+          "selectivityDomain": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "shallowOrdering": true,
+          "stability": true,
+          "useMultiThread": false,
+          "workerPool": 0
+        },
+        "engineCommit": "570d5e0a478c9d720d75de06a5d31995f412704a",
+        "engineTag": "console_v7.8.1",
+        "entry": "tree_search_legal(time_limit)",
+        "evaluationImplementation": "evaluate_simd.hpp",
+        "hashLevel": 20,
+        "hashSeed": 20261022,
+        "label": "Console7.8.1-engine + selective fixed-depth AVX2 reference",
+        "maximumSearchCalls": 32,
+        "ok": true,
+        "profile": "continuous16-normal-id-1000ms",
+        "protocol": "egaroucid-continuous16-v1",
+        "pruningOffMeaning": "normal pinned active flags; original ID selectivity schedule",
+        "requestWallMs": 0.050374,
+        "staticTTVirtualBytes": 805306416,
+        "weightIdentity": {
+          "callerVerified": true,
+          "expectedMidgameSha256": "0a8acbcbc23067933627f1bcc83c3f7ae6b7ff3e603d174a3364271fcaeeef2f",
+          "expectedOrderingSha256": "bd908885e8bb85e72a9be2b0399f8ca52ed40a138bcaaecca3d13710945b9a93",
+          "midgameId": "sha256:0a8acbcbc23067933627f1bcc83c3f7ae6b7ff3e603d174a3364271fcaeeef2f",
+          "midgamePath": "/workspaces/quoridor/.worktree/assets/tools/othello-baselines-n96-v1/egaroucid/bin/resources/eval.egev2",
+          "orderingId": "sha256:bd908885e8bb85e72a9be2b0399f8ca52ed40a138bcaaecca3d13710945b9a93",
+          "orderingPath": "/workspaces/quoridor/.worktree/assets/tools/othello-baselines-n96-v1/egaroucid/bin/resources/eval_move_ordering_end.egev"
+        }
+      },
+      "sourceEntry": "tree_search_legal(time_limit)"
+    }
+  ],
+  "frozenConfig": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/current-original-continuous-entry-v1/comparison-config.json",
+    "bytes": 29343,
+    "mode": "0644",
+    "sha256": "ef269336540979ec7f54073627f9f6b77ff40760fd0f8e002c4ee1c9801726de"
+  },
+  "retainedScalarSetup": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/retained-original-flip-new16-native64-prep-v1/current-original-continuous-entry-v1/collection-v2/summary.json",
+    "bytes": 133933,
+    "mode": "0644",
+    "sha256": "7f1f5ff5d54b534c1676c3fc24781e7447f0a643d8fe8b69908d6f65cea6692f"
+  },
+  "normalInitMeaning": "Existing normal init/weight identities and immutable config correspondence; no fresh engine/probe/load/hash of images/assets, no emitted native PID or executed-ISA proof.",
+  "referenceRoute": "PRIVATE_TRANSPORT_PINNED_ORIGINAL_ENGINE_API; fixed first_nega_scout_legal / timed normal tree_search_legal, not stock Console CLI",
+  "oldBd8D110Comparison": "separate original005985f3, not this experiment",
+  "oldCanonicalResultCostsRowsAndFailedCollectorsUnchanged": true,
+  "newSearchModelRulesValidatorOrCollectorReplay": 0,
+  "scope": "Read only frozen comparison config and already-retained scalar setup; no457933B original result/roots/weights/H reopened."
+}

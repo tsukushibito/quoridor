@@ -1,0 +1,304 @@
+{
+  "condition": "Origin-bound prepared-move/fullmask reuse, source2b77445a; ordinary affected software only",
+  "job": "afde7077-5d5a-494c-8d5b-26ac2f837945",
+  "status": "PASS_NEW2_AFFECTED1_CLIPPY_NATIVE_WASM",
+  "qualification": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/cached-flips-affected-software-v1/qualification.json",
+    "bytes": 14236,
+    "mode": "0644",
+    "sha256": "eaf603c24b2d417229fed21fd61691800cd548d1d2e6f060620dca8672934872"
+  },
+  "config": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/cached-flips-affected-software-v1/config.json",
+    "bytes": 16786,
+    "mode": "0644",
+    "sha256": "71ed70f7b01f204ed514d2e883d364c6580ba8b3548fdf1945437738bee4e9b8"
+  },
+  "sourceAdoption": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/cached-flips-affected-software-v1/source-adoption.json",
+    "bytes": 5227,
+    "mode": "0644",
+    "sha256": "e4b08d40ee53d02589ba74b75c7f44782bc9057e11f42bd64cd36e8b85a37cab"
+  },
+  "sourceBaseCommit": "4d0417ec; exact four current uncommitted posts in sourceAdoption",
+  "relatedSourceReview": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/cached-flips-boundary-review-v1/reviewer/minimum.json",
+    "bytes": 3980,
+    "mode": "0644",
+    "sha256": "4dc473e180865caa4c46f6c49a43476b78e7bbbf7149fa77084ea077f3000e97"
+  },
+  "outerResult": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/cached-flips-affected-software-v1/runtime/result.json",
+    "bytes": 528,
+    "mode": "0600",
+    "sha256": "373ecab95bb9daf39e1f83995c69b77c383c2a20257ad1341b2ba6983996dddb"
+  },
+  "outerWallSeconds": 24.698218401987106,
+  "commands": [
+    {
+      "name": "new-two-cached-move-oracle",
+      "receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/cached-flips-affected-software-v1/new-two-cached-move-oracle.returned.json",
+        "bytes": 3865,
+        "mode": "0644",
+        "sha256": "dad3bdefa44cab05d3483662b723241b362db6a43b395109d14129a9f6e727ba"
+      },
+      "actual": {
+        "child": {
+          "pid": 1696081,
+          "start_ticks": "93693303",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "exit_code": 0,
+        "wall_seconds": 13.45070324698463,
+        "direct_child_reaped": true,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "remaining": [],
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed"
+      },
+      "diskFinalization": {
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted"
+      },
+      "exactChildIdentityCurrent": false
+    },
+    {
+      "name": "affected-clog-order-cancel",
+      "receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/cached-flips-affected-software-v1/affected-clog-order-cancel.returned.json",
+        "bytes": 3985,
+        "mode": "0644",
+        "sha256": "ef4584cc1531baaa9559de701a5bda123a5f7cdeed1ba8da81ef22e2c9917244"
+      },
+      "actual": {
+        "child": {
+          "pid": 1696261,
+          "start_ticks": "93694650",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "exit_code": 0,
+        "wall_seconds": 0.08727050304878503,
+        "direct_child_reaped": true,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "remaining": [],
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed"
+      },
+      "diskFinalization": {
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted"
+      },
+      "exactChildIdentityCurrent": false
+    },
+    {
+      "name": "affected-core-wasm-Clippy",
+      "receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/cached-flips-affected-software-v1/affected-core-wasm-Clippy.returned.json",
+        "bytes": 3773,
+        "mode": "0644",
+        "sha256": "c41339ca8187a105572fb55ec44aa5611259a4d06ce0bcb82460a98981106e50"
+      },
+      "actual": {
+        "child": {
+          "pid": 1696285,
+          "start_ticks": "93694659",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "exit_code": 0,
+        "wall_seconds": 1.7210468169068918,
+        "direct_child_reaped": true,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "remaining": [],
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed"
+      },
+      "diskFinalization": {
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted"
+      },
+      "exactChildIdentityCurrent": false
+    },
+    {
+      "name": "native-release",
+      "receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/cached-flips-affected-software-v1/native-release.returned.json",
+        "bytes": 3657,
+        "mode": "0644",
+        "sha256": "a72c9ff3e2ba3a2ff683079d20e59909a148a65b3de61e2f204444e7b91ffce1"
+      },
+      "actual": {
+        "child": {
+          "pid": 1696328,
+          "start_ticks": "93694833",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "exit_code": 0,
+        "wall_seconds": 4.890312468982302,
+        "direct_child_reaped": true,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "remaining": [],
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed"
+      },
+      "diskFinalization": {
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted"
+      },
+      "exactChildIdentityCurrent": false
+    },
+    {
+      "name": "wasm-release",
+      "receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/cached-flips-affected-software-v1/wasm-release.returned.json",
+        "bytes": 3665,
+        "mode": "0644",
+        "sha256": "ef50696fce0d44595c7749a91dbb339c09c6d2439e8068df03ffb4046599ced7"
+      },
+      "actual": {
+        "child": {
+          "pid": 1696422,
+          "start_ticks": "93695323",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "exit_code": 0,
+        "wall_seconds": 4.129130343906581,
+        "direct_child_reaped": true,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "remaining": [],
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed"
+      },
+      "diskFinalization": {
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted"
+      },
+      "exactChildIdentityCurrent": false
+    }
+  ],
+  "newTestDefinitions": 2,
+  "affectedExistingDefinitionsRepeated": 1,
+  "unrelatedOldTestsRepeated": 0,
+  "selectors": [
+    "full_eval::features::tests::full_feature_cached_move_masks_play_undo_match_coordinate_oracle",
+    "full_eval::features::tests::full_feature_cached_move_refuses_other_parent_side_and_keeps_public_errors",
+    "full_search::run::kernel_tests::full_search_kernel_v6_clog_shallow_tt_order_and_cancel_restore"
+  ],
+  "independentOracle": "Maintained GameState coordinate rays/full mask/play and fresh FeatureState reconstruction, origin/STM/no-mutation refusal; one affected synthetic clog/order/cancel fixture",
+  "firstNEWSourceExpectedCases": 896,
+  "actualCaseCount": null,
+  "softwareCPUKernelAvx2": null,
+  "executedISAReceipt": null,
+  "unchangedPortableCursorMathRepeated": false,
+  "actualWasmExecution": 0,
+  "portableWasmReleaseBuild": true,
+  "images": {
+    "native-release": {
+      "image": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/cached-flips-affected-software-v1/othello-full-search-cached-flips",
+        "bytes": 800296,
+        "mode": "0555",
+        "sha256": "b6cbecdd31c0008bb0b45ab660c184702718a0ff25214e2e1b44356ced69fc6b"
+      },
+      "cargoArtifact": {
+        "reason": "compiler-artifact",
+        "package_id": "path+file:///workspaces/quoridor/games/othello/crates/othello-core#0.1.0",
+        "manifest_path": "/workspaces/quoridor/games/othello/crates/othello-core/Cargo.toml",
+        "target": {
+          "kind": [
+            "bin"
+          ],
+          "crate_types": [
+            "bin"
+          ],
+          "name": "othello-full-search",
+          "src_path": "/workspaces/quoridor/games/othello/crates/othello-core/src/bin/othello-full-search.rs",
+          "edition": "2024",
+          "doc": true,
+          "doctest": false,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "3",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": false
+        },
+        "features": [],
+        "filenames": [
+          "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target/release/othello-full-search"
+        ],
+        "executable": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target/release/othello-full-search",
+        "fresh": false
+      }
+    },
+    "wasm-release": {
+      "image": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/cached-flips-affected-software-v1/othello-cached-flips.wasm",
+        "bytes": 629208,
+        "mode": "0555",
+        "sha256": "c537813c5418f64b7646a2c1747eced0c3e0a54935fcaf40cc535a6e04004f47"
+      },
+      "cargoArtifact": {
+        "reason": "compiler-artifact",
+        "package_id": "path+file:///workspaces/quoridor/games/othello/crates/othello-wasm#0.1.0",
+        "manifest_path": "/workspaces/quoridor/games/othello/crates/othello-wasm/Cargo.toml",
+        "target": {
+          "kind": [
+            "cdylib",
+            "rlib"
+          ],
+          "crate_types": [
+            "cdylib",
+            "rlib"
+          ],
+          "name": "othello_wasm",
+          "src_path": "/workspaces/quoridor/games/othello/crates/othello-wasm/src/lib.rs",
+          "edition": "2024",
+          "doc": true,
+          "doctest": true,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "3",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": false
+        },
+        "features": [],
+        "filenames": [
+          "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target/wasm32-unknown-unknown/release/othello_wasm.wasm",
+          "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target/wasm32-unknown-unknown/release/libothello_wasm.rlib"
+        ],
+        "executable": null,
+        "fresh": false
+      }
+    }
+  },
+  "scientificSearchRequests": 0,
+  "modelInputWeightReads": 0,
+  "actualCleanupSTOP": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/cached-flips-affected-software-v1/software-STOP.json",
+    "bytes": 157,
+    "mode": "0644",
+    "sha256": "a48eeb150fd31d8e263c60da5e280f2bcb2a605d714872c772faf62788ae96f2"
+  },
+  "affectedStoragePoint": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/cached-flips-affected-software-v1/completion-afde7077/affected-storage-point.json",
+    "bytes": 1077,
+    "mode": "0644",
+    "sha256": "1e2392a33cef6f580b84347f8c7ef8f9d507624338fad97915cb47f3e6e1e3a5"
+  },
+  "TMPExists": false,
+  "sourceLeases": [],
+  "costMeaning": "Outer includes five command/compiler/test/link scopes; do not add nested spans. Actual NEW2 and affected1 costs are distinct; no numerical performance observations.",
+  "scope": "Software/source qualification only; no Search, engine performance, strength, default adoption, minimum memory, continuous peak, or whole-host cleanup claim.",
+  "history": "Prior prefix nonadoption and every old FAILED/raw/NULL/UNKNOWN/cost remain separate unchanged; cursor portable fallback is required current product."
+}
