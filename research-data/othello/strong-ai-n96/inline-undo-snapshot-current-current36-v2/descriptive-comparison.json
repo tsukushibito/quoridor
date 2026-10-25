@@ -1,0 +1,3178 @@
+{
+  "status": "COMPLETE_FINITE_CURRENT_CURRENT36",
+  "originalJob": "93259f62-ab32-4804-b79d-f4b68630e871",
+  "counts": {
+    "calls": 36,
+    "pairs": 18,
+    "UNKNOWN": 0,
+    "UNRUN": 0,
+    "setups": 4,
+    "nonemptyClears": 12,
+    "drops": 4,
+    "matchingSettles": 36
+  },
+  "fixedPairs": [
+    {
+      "profile": "fixed",
+      "family": "development/continuous16-practical-v1/f0",
+      "root": "development/continuous16-practical-v1/f0/p32",
+      "repeat": 0,
+      "baselineIndex": 1,
+      "candidateIndex": 5,
+      "baselineCompleted": true,
+      "candidateCompleted": true,
+      "baselineDepth": 13,
+      "candidateDepth": 13,
+      "candidateMinusBaselineDepth": 0,
+      "baselineCallerMs": 746.6584129724652,
+      "candidateCallerMs": 739.3180310027674,
+      "candidateMinusBaselineCallerMs": -7.3403819696977735,
+      "baselineProcessCPUSeconds": 0.74,
+      "candidateProcessCPUSeconds": 0.74,
+      "baselineMove": 2,
+      "candidateMove": 2,
+      "baselineRaw": 40,
+      "candidateRaw": 40,
+      "baselineSelectedNodes": 8684965,
+      "candidateSelectedNodes": 8684965,
+      "baselineSettledWholeNodes": 8684965,
+      "candidateSettledWholeNodes": 8684965,
+      "baselineWorkerSpanMs": 746.4063239999999,
+      "candidateWorkerSpanMs": 739.1051610000001,
+      "baselineReplyToSettleReceiptCallerMs": 0.18722796812653542,
+      "candidateReplyToSettleReceiptCallerMs": 0.17459201626479626,
+      "baselineFields": {
+        "rawScore": 40,
+        "score": 40,
+        "move": 2,
+        "mustPass": false,
+        "nodes": 8684965,
+        "completedDepth": 13,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": false,
+        "isEndSearch": false,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      },
+      "candidateFields": {
+        "rawScore": 40,
+        "score": 40,
+        "move": 2,
+        "mustPass": false,
+        "nodes": 8684965,
+        "completedDepth": 13,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": false,
+        "isEndSearch": false,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      },
+      "strictTenPlusUnitsStoppedDifferences": [],
+      "candidateMinusBaselineWorkerSpanMs": -7.30116299999986,
+      "sameTreeProof": false
+    },
+    {
+      "profile": "fixed",
+      "family": "development/continuous16-practical-v1/f0",
+      "root": "development/continuous16-practical-v1/f0/p32",
+      "repeat": 1,
+      "baselineIndex": 13,
+      "candidateIndex": 9,
+      "baselineCompleted": true,
+      "candidateCompleted": true,
+      "baselineDepth": 13,
+      "candidateDepth": 13,
+      "candidateMinusBaselineDepth": 0,
+      "baselineCallerMs": 762.2923100134358,
+      "candidateCallerMs": 723.7779860151932,
+      "candidateMinusBaselineCallerMs": -38.51432399824262,
+      "baselineProcessCPUSeconds": 0.7699999999999999,
+      "candidateProcessCPUSeconds": 0.7200000000000001,
+      "baselineMove": 2,
+      "candidateMove": 2,
+      "baselineRaw": 40,
+      "candidateRaw": 40,
+      "baselineSelectedNodes": 8684965,
+      "candidateSelectedNodes": 8684965,
+      "baselineSettledWholeNodes": 8684965,
+      "candidateSettledWholeNodes": 8684965,
+      "baselineWorkerSpanMs": 761.970152,
+      "candidateWorkerSpanMs": 723.5614990000001,
+      "baselineReplyToSettleReceiptCallerMs": 0.329823000356555,
+      "candidateReplyToSettleReceiptCallerMs": 0.14048698358237743,
+      "baselineFields": {
+        "rawScore": 40,
+        "score": 40,
+        "move": 2,
+        "mustPass": false,
+        "nodes": 8684965,
+        "completedDepth": 13,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": false,
+        "isEndSearch": false,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      },
+      "candidateFields": {
+        "rawScore": 40,
+        "score": 40,
+        "move": 2,
+        "mustPass": false,
+        "nodes": 8684965,
+        "completedDepth": 13,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": false,
+        "isEndSearch": false,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      },
+      "strictTenPlusUnitsStoppedDifferences": [],
+      "candidateMinusBaselineWorkerSpanMs": -38.408652999999845,
+      "sameTreeProof": false
+    }
+  ],
+  "timedRootwise": [
+    {
+      "root": "development/continuous16-practical-v1/f0/p16",
+      "pairs": 2,
+      "candidateMinusBaselineDepth": [
+        0,
+        0
+      ],
+      "actionsAgree": [
+        true,
+        true
+      ],
+      "baseline": {
+        "completedDepth": [
+          20,
+          20
+        ],
+        "selectivity": [
+          0,
+          0
+        ],
+        "probability": [
+          74.0,
+          74.0
+        ],
+        "end": [
+          false,
+          false
+        ],
+        "proven": [
+          false,
+          false
+        ],
+        "stopped": [
+          "timeout",
+          "timeout"
+        ],
+        "raw": [
+          23,
+          23
+        ],
+        "score": [
+          24,
+          24
+        ],
+        "move": [
+          37,
+          37
+        ],
+        "selectedNodes": [
+          11994257,
+          11994257
+        ],
+        "callerMs": [
+          1000.320197083056,
+          1000.3521249163896
+        ],
+        "settledWholeNodes": [
+          12925440,
+          12837120
+        ],
+        "replyToSettleReceiptCallerMs": [
+          0.15983800403773785,
+          0.19445607904344797
+        ]
+      },
+      "candidate": {
+        "completedDepth": [
+          20,
+          20
+        ],
+        "selectivity": [
+          0,
+          0
+        ],
+        "probability": [
+          74.0,
+          74.0
+        ],
+        "end": [
+          false,
+          false
+        ],
+        "proven": [
+          false,
+          false
+        ],
+        "stopped": [
+          "timeout",
+          "timeout"
+        ],
+        "raw": [
+          23,
+          23
+        ],
+        "score": [
+          24,
+          24
+        ],
+        "move": [
+          37,
+          37
+        ],
+        "selectedNodes": [
+          11994257,
+          11994257
+        ],
+        "callerMs": [
+          1000.2747270045802,
+          1000.2554020611569
+        ],
+        "settledWholeNodes": [
+          12839168,
+          12865792
+        ],
+        "replyToSettleReceiptCallerMs": [
+          5.22479007486254,
+          0.13946997933089733
+        ]
+      }
+    },
+    {
+      "root": "development/continuous16-practical-v1/f0/p32",
+      "pairs": 2,
+      "candidateMinusBaselineDepth": [
+        0,
+        0
+      ],
+      "actionsAgree": [
+        true,
+        true
+      ],
+      "baseline": {
+        "completedDepth": [
+          28,
+          28
+        ],
+        "selectivity": [
+          0,
+          0
+        ],
+        "probability": [
+          74.0,
+          74.0
+        ],
+        "end": [
+          true,
+          true
+        ],
+        "proven": [
+          false,
+          false
+        ],
+        "stopped": [
+          "timeout",
+          "timeout"
+        ],
+        "raw": [
+          40,
+          40
+        ],
+        "score": [
+          40,
+          40
+        ],
+        "move": [
+          2,
+          2
+        ],
+        "selectedNodes": [
+          9868077,
+          9867114
+        ],
+        "callerMs": [
+          1000.2748830011114,
+          1000.2371369628236
+        ],
+        "settledWholeNodes": [
+          13577216,
+          13658624
+        ],
+        "replyToSettleReceiptCallerMs": [
+          0.18115004058927298,
+          5.682796938344836
+        ]
+      },
+      "candidate": {
+        "completedDepth": [
+          28,
+          28
+        ],
+        "selectivity": [
+          0,
+          0
+        ],
+        "probability": [
+          74.0,
+          74.0
+        ],
+        "end": [
+          true,
+          true
+        ],
+        "proven": [
+          false,
+          false
+        ],
+        "stopped": [
+          "timeout",
+          "timeout"
+        ],
+        "raw": [
+          40,
+          40
+        ],
+        "score": [
+          40,
+          40
+        ],
+        "move": [
+          2,
+          2
+        ],
+        "selectedNodes": [
+          9867128,
+          9867307
+        ],
+        "callerMs": [
+          1000.2887930022553,
+          1000.2694310387596
+        ],
+        "settledWholeNodes": [
+          14760704,
+          14467840
+        ],
+        "replyToSettleReceiptCallerMs": [
+          0.18913100939244032,
+          0.17918995581567287
+        ]
+      }
+    },
+    {
+      "root": "development/continuous16-practical-v1/f0/p48",
+      "pairs": 2,
+      "candidateMinusBaselineDepth": [
+        0,
+        0
+      ],
+      "actionsAgree": [
+        true,
+        true
+      ],
+      "baseline": {
+        "completedDepth": [
+          12,
+          12
+        ],
+        "selectivity": [
+          6,
+          6
+        ],
+        "probability": [
+          100.0,
+          100.0
+        ],
+        "end": [
+          true,
+          true
+        ],
+        "proven": [
+          true,
+          true
+        ],
+        "stopped": [
+          null,
+          null
+        ],
+        "raw": [
+          34,
+          34
+        ],
+        "score": [
+          34,
+          34
+        ],
+        "move": [
+          41,
+          41
+        ],
+        "selectedNodes": [
+          15686,
+          15686
+        ],
+        "callerMs": [
+          1.7753499560058117,
+          1.3872230192646384
+        ],
+        "settledWholeNodes": [
+          15686,
+          15686
+        ],
+        "replyToSettleReceiptCallerMs": [
+          0.17638003919273615,
+          0.12874789535999298
+        ]
+      },
+      "candidate": {
+        "completedDepth": [
+          12,
+          12
+        ],
+        "selectivity": [
+          6,
+          6
+        ],
+        "probability": [
+          100.0,
+          100.0
+        ],
+        "end": [
+          true,
+          true
+        ],
+        "proven": [
+          true,
+          true
+        ],
+        "stopped": [
+          null,
+          null
+        ],
+        "raw": [
+          34,
+          34
+        ],
+        "score": [
+          34,
+          34
+        ],
+        "move": [
+          41,
+          41
+        ],
+        "selectedNodes": [
+          15686,
+          15686
+        ],
+        "callerMs": [
+          1.2311800383031368,
+          1.362673006951809
+        ],
+        "settledWholeNodes": [
+          15686,
+          15686
+        ],
+        "replyToSettleReceiptCallerMs": [
+          0.09863602463155985,
+          0.11747702956199646
+        ]
+      }
+    },
+    {
+      "root": "development/continuous16-practical-v1/f0/p56",
+      "pairs": 2,
+      "candidateMinusBaselineDepth": [
+        0,
+        0
+      ],
+      "actionsAgree": [
+        true,
+        true
+      ],
+      "baseline": {
+        "completedDepth": [
+          4,
+          4
+        ],
+        "selectivity": [
+          6,
+          6
+        ],
+        "probability": [
+          100.0,
+          100.0
+        ],
+        "end": [
+          true,
+          true
+        ],
+        "proven": [
+          true,
+          true
+        ],
+        "stopped": [
+          null,
+          null
+        ],
+        "raw": [
+          14,
+          14
+        ],
+        "score": [
+          14,
+          14
+        ],
+        "move": [
+          56,
+          56
+        ],
+        "selectedNodes": [
+          53,
+          53
+        ],
+        "callerMs": [
+          0.39439601823687553,
+          5.169973010197282
+        ],
+        "settledWholeNodes": [
+          53,
+          53
+        ],
+        "replyToSettleReceiptCallerMs": [
+          0.16585399862378836,
+          0.14682498294860125
+        ]
+      },
+      "candidate": {
+        "completedDepth": [
+          4,
+          4
+        ],
+        "selectivity": [
+          6,
+          6
+        ],
+        "probability": [
+          100.0,
+          100.0
+        ],
+        "end": [
+          true,
+          true
+        ],
+        "proven": [
+          true,
+          true
+        ],
+        "stopped": [
+          null,
+          null
+        ],
+        "raw": [
+          14,
+          14
+        ],
+        "score": [
+          14,
+          14
+        ],
+        "move": [
+          56,
+          56
+        ],
+        "selectedNodes": [
+          53,
+          53
+        ],
+        "callerMs": [
+          0.20354508887976408,
+          2.060470054857433
+        ],
+        "settledWholeNodes": [
+          53,
+          53
+        ],
+        "replyToSettleReceiptCallerMs": [
+          0.09578396566212177,
+          4.226472927257419
+        ]
+      }
+    },
+    {
+      "root": "development/continuous16-practical-v1/f1/p16",
+      "pairs": 2,
+      "candidateMinusBaselineDepth": [
+        0,
+        0
+      ],
+      "actionsAgree": [
+        true,
+        true
+      ],
+      "baseline": {
+        "completedDepth": [
+          22,
+          23
+        ],
+        "selectivity": [
+          0,
+          0
+        ],
+        "probability": [
+          74.0,
+          74.0
+        ],
+        "end": [
+          false,
+          false
+        ],
+        "proven": [
+          false,
+          false
+        ],
+        "stopped": [
+          "timeout",
+          "timeout"
+        ],
+        "raw": [
+          -14,
+          -13
+        ],
+        "score": [
+          -14,
+          -13
+        ],
+        "move": [
+          25,
+          25
+        ],
+        "selectedNodes": [
+          10581889,
+          11965775
+        ],
+        "callerMs": [
+          1002.3881510132924,
+          1000.2835700288415
+        ],
+        "settledWholeNodes": [
+          11600128,
+          12061952
+        ],
+        "replyToSettleReceiptCallerMs": [
+          0.2666329964995384,
+          0.14456803910434246
+        ]
+      },
+      "candidate": {
+        "completedDepth": [
+          22,
+          23
+        ],
+        "selectivity": [
+          0,
+          0
+        ],
+        "probability": [
+          74.0,
+          74.0
+        ],
+        "end": [
+          false,
+          false
+        ],
+        "proven": [
+          false,
+          false
+        ],
+        "stopped": [
+          "timeout",
+          "timeout"
+        ],
+        "raw": [
+          -14,
+          -13
+        ],
+        "score": [
+          -14,
+          -13
+        ],
+        "move": [
+          25,
+          25
+        ],
+        "selectedNodes": [
+          10581889,
+          11965775
+        ],
+        "callerMs": [
+          1000.2795739565045,
+          1000.2647589426488
+        ],
+        "settledWholeNodes": [
+          11759360,
+          12173312
+        ],
+        "replyToSettleReceiptCallerMs": [
+          0.1374769490212202,
+          0.19842199981212616
+        ]
+      }
+    },
+    {
+      "root": "development/continuous16-practical-v1/f1/p32",
+      "pairs": 2,
+      "candidateMinusBaselineDepth": [
+        0,
+        0
+      ],
+      "actionsAgree": [
+        true,
+        true
+      ],
+      "baseline": {
+        "completedDepth": [
+          16,
+          16
+        ],
+        "selectivity": [
+          0,
+          0
+        ],
+        "probability": [
+          74.0,
+          74.0
+        ],
+        "end": [
+          false,
+          false
+        ],
+        "proven": [
+          false,
+          false
+        ],
+        "stopped": [
+          "timeout",
+          "timeout"
+        ],
+        "raw": [
+          7,
+          7
+        ],
+        "score": [
+          8,
+          8
+        ],
+        "move": [
+          0,
+          0
+        ],
+        "selectedNodes": [
+          1291518,
+          1291540
+        ],
+        "callerMs": [
+          1000.2950570778921,
+          1000.2640059683472
+        ],
+        "settledWholeNodes": [
+          23117568,
+          23792384
+        ],
+        "replyToSettleReceiptCallerMs": [
+          0.18648093100637197,
+          0.184657983481884
+        ]
+      },
+      "candidate": {
+        "completedDepth": [
+          16,
+          16
+        ],
+        "selectivity": [
+          0,
+          0
+        ],
+        "probability": [
+          74.0,
+          74.0
+        ],
+        "end": [
+          false,
+          false
+        ],
+        "proven": [
+          false,
+          false
+        ],
+        "stopped": [
+          "timeout",
+          "timeout"
+        ],
+        "raw": [
+          7,
+          7
+        ],
+        "score": [
+          8,
+          8
+        ],
+        "move": [
+          0,
+          0
+        ],
+        "selectedNodes": [
+          1291535,
+          1291567
+        ],
+        "callerMs": [
+          1000.3699120134115,
+          1001.7816949402913
+        ],
+        "settledWholeNodes": [
+          23764992,
+          24673280
+        ],
+        "replyToSettleReceiptCallerMs": [
+          0.1448080874979496,
+          0.13417599257081747
+        ]
+      }
+    },
+    {
+      "root": "development/continuous16-practical-v1/f1/p48",
+      "pairs": 2,
+      "candidateMinusBaselineDepth": [
+        0,
+        0
+      ],
+      "actionsAgree": [
+        true,
+        true
+      ],
+      "baseline": {
+        "completedDepth": [
+          12,
+          12
+        ],
+        "selectivity": [
+          6,
+          6
+        ],
+        "probability": [
+          100.0,
+          100.0
+        ],
+        "end": [
+          true,
+          true
+        ],
+        "proven": [
+          true,
+          true
+        ],
+        "stopped": [
+          null,
+          null
+        ],
+        "raw": [
+          16,
+          16
+        ],
+        "score": [
+          16,
+          16
+        ],
+        "move": [
+          55,
+          55
+        ],
+        "selectedNodes": [
+          42890,
+          42890
+        ],
+        "callerMs": [
+          3.3593749394640326,
+          3.219229052774608
+        ],
+        "settledWholeNodes": [
+          42890,
+          42890
+        ],
+        "replyToSettleReceiptCallerMs": [
+          0.1658900873735547,
+          0.11326198000460863
+        ]
+      },
+      "candidate": {
+        "completedDepth": [
+          12,
+          12
+        ],
+        "selectivity": [
+          6,
+          6
+        ],
+        "probability": [
+          100.0,
+          100.0
+        ],
+        "end": [
+          true,
+          true
+        ],
+        "proven": [
+          true,
+          true
+        ],
+        "stopped": [
+          null,
+          null
+        ],
+        "raw": [
+          16,
+          16
+        ],
+        "score": [
+          16,
+          16
+        ],
+        "move": [
+          55,
+          55
+        ],
+        "selectedNodes": [
+          42890,
+          42890
+        ],
+        "callerMs": [
+          3.1668649753555655,
+          3.129012999124825
+        ],
+        "settledWholeNodes": [
+          42890,
+          42890
+        ],
+        "replyToSettleReceiptCallerMs": [
+          0.1147011062130332,
+          0.1029319828376174
+        ]
+      }
+    },
+    {
+      "root": "development/continuous16-practical-v1/f1/p56",
+      "pairs": 2,
+      "candidateMinusBaselineDepth": [
+        0,
+        0
+      ],
+      "actionsAgree": [
+        true,
+        true
+      ],
+      "baseline": {
+        "completedDepth": [
+          4,
+          4
+        ],
+        "selectivity": [
+          6,
+          6
+        ],
+        "probability": [
+          100.0,
+          100.0
+        ],
+        "end": [
+          true,
+          true
+        ],
+        "proven": [
+          true,
+          true
+        ],
+        "stopped": [
+          null,
+          null
+        ],
+        "raw": [
+          -16,
+          -16
+        ],
+        "score": [
+          -16,
+          -16
+        ],
+        "move": [
+          56,
+          56
+        ],
+        "selectedNodes": [
+          52,
+          52
+        ],
+        "callerMs": [
+          0.27237599715590477,
+          0.7994739571586251
+        ],
+        "settledWholeNodes": [
+          52,
+          52
+        ],
+        "replyToSettleReceiptCallerMs": [
+          0.10118610225617886,
+          0.10825204662978649
+        ]
+      },
+      "candidate": {
+        "completedDepth": [
+          4,
+          4
+        ],
+        "selectivity": [
+          6,
+          6
+        ],
+        "probability": [
+          100.0,
+          100.0
+        ],
+        "end": [
+          true,
+          true
+        ],
+        "proven": [
+          true,
+          true
+        ],
+        "stopped": [
+          null,
+          null
+        ],
+        "raw": [
+          -16,
+          -16
+        ],
+        "score": [
+          -16,
+          -16
+        ],
+        "move": [
+          56,
+          56
+        ],
+        "selectedNodes": [
+          52,
+          52
+        ],
+        "callerMs": [
+          0.16653595957905054,
+          1.748366979882121
+        ],
+        "settledWholeNodes": [
+          52,
+          52
+        ],
+        "replyToSettleReceiptCallerMs": [
+          0.0773801002651453,
+          0.1599700190126896
+        ]
+      }
+    }
+  ],
+  "pairRows": [
+    {
+      "profile": "fixed",
+      "family": "development/continuous16-practical-v1/f0",
+      "root": "development/continuous16-practical-v1/f0/p32",
+      "repeat": 0,
+      "baselineIndex": 1,
+      "candidateIndex": 5,
+      "baselineCompleted": true,
+      "candidateCompleted": true,
+      "baselineDepth": 13,
+      "candidateDepth": 13,
+      "candidateMinusBaselineDepth": 0,
+      "baselineCallerMs": 746.6584129724652,
+      "candidateCallerMs": 739.3180310027674,
+      "candidateMinusBaselineCallerMs": -7.3403819696977735,
+      "baselineProcessCPUSeconds": 0.74,
+      "candidateProcessCPUSeconds": 0.74,
+      "baselineMove": 2,
+      "candidateMove": 2,
+      "baselineRaw": 40,
+      "candidateRaw": 40,
+      "baselineSelectedNodes": 8684965,
+      "candidateSelectedNodes": 8684965,
+      "baselineSettledWholeNodes": 8684965,
+      "candidateSettledWholeNodes": 8684965,
+      "baselineWorkerSpanMs": 746.4063239999999,
+      "candidateWorkerSpanMs": 739.1051610000001,
+      "baselineReplyToSettleReceiptCallerMs": 0.18722796812653542,
+      "candidateReplyToSettleReceiptCallerMs": 0.17459201626479626,
+      "baselineFields": {
+        "rawScore": 40,
+        "score": 40,
+        "move": 2,
+        "mustPass": false,
+        "nodes": 8684965,
+        "completedDepth": 13,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": false,
+        "isEndSearch": false,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      },
+      "candidateFields": {
+        "rawScore": 40,
+        "score": 40,
+        "move": 2,
+        "mustPass": false,
+        "nodes": 8684965,
+        "completedDepth": 13,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": false,
+        "isEndSearch": false,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      },
+      "strictTenPlusUnitsStoppedDifferences": [],
+      "candidateMinusBaselineWorkerSpanMs": -7.30116299999986,
+      "sameTreeProof": false
+    },
+    {
+      "profile": "fixed",
+      "family": "development/continuous16-practical-v1/f0",
+      "root": "development/continuous16-practical-v1/f0/p32",
+      "repeat": 1,
+      "baselineIndex": 13,
+      "candidateIndex": 9,
+      "baselineCompleted": true,
+      "candidateCompleted": true,
+      "baselineDepth": 13,
+      "candidateDepth": 13,
+      "candidateMinusBaselineDepth": 0,
+      "baselineCallerMs": 762.2923100134358,
+      "candidateCallerMs": 723.7779860151932,
+      "candidateMinusBaselineCallerMs": -38.51432399824262,
+      "baselineProcessCPUSeconds": 0.7699999999999999,
+      "candidateProcessCPUSeconds": 0.7200000000000001,
+      "baselineMove": 2,
+      "candidateMove": 2,
+      "baselineRaw": 40,
+      "candidateRaw": 40,
+      "baselineSelectedNodes": 8684965,
+      "candidateSelectedNodes": 8684965,
+      "baselineSettledWholeNodes": 8684965,
+      "candidateSettledWholeNodes": 8684965,
+      "baselineWorkerSpanMs": 761.970152,
+      "candidateWorkerSpanMs": 723.5614990000001,
+      "baselineReplyToSettleReceiptCallerMs": 0.329823000356555,
+      "candidateReplyToSettleReceiptCallerMs": 0.14048698358237743,
+      "baselineFields": {
+        "rawScore": 40,
+        "score": 40,
+        "move": 2,
+        "mustPass": false,
+        "nodes": 8684965,
+        "completedDepth": 13,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": false,
+        "isEndSearch": false,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      },
+      "candidateFields": {
+        "rawScore": 40,
+        "score": 40,
+        "move": 2,
+        "mustPass": false,
+        "nodes": 8684965,
+        "completedDepth": 13,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": false,
+        "isEndSearch": false,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      },
+      "strictTenPlusUnitsStoppedDifferences": [],
+      "candidateMinusBaselineWorkerSpanMs": -38.408652999999845,
+      "sameTreeProof": false
+    },
+    {
+      "profile": "timed",
+      "family": "development/continuous16-practical-v1/f0",
+      "root": "development/continuous16-practical-v1/f0/p16",
+      "repeat": 0,
+      "baselineIndex": 64,
+      "candidateIndex": 68,
+      "baselineCompleted": true,
+      "candidateCompleted": true,
+      "baselineDepth": 20,
+      "candidateDepth": 20,
+      "candidateMinusBaselineDepth": 0,
+      "baselineCallerMs": 1000.320197083056,
+      "candidateCallerMs": 1000.2747270045802,
+      "candidateMinusBaselineCallerMs": -0.045470078475773335,
+      "baselineProcessCPUSeconds": 0.9999999999999999,
+      "candidateProcessCPUSeconds": 0.9999999999999999,
+      "baselineMove": 37,
+      "candidateMove": 37,
+      "baselineRaw": 23,
+      "candidateRaw": 23,
+      "baselineSelectedNodes": 11994257,
+      "candidateSelectedNodes": 11994257,
+      "baselineSettledWholeNodes": 12925440,
+      "candidateSettledWholeNodes": 12839168,
+      "baselineWorkerSpanMs": 1000.096195,
+      "candidateWorkerSpanMs": 1000.108162,
+      "baselineReplyToSettleReceiptCallerMs": 0.15983800403773785,
+      "candidateReplyToSettleReceiptCallerMs": 5.22479007486254,
+      "baselineFields": {
+        "rawScore": 23,
+        "score": 24,
+        "move": 37,
+        "mustPass": false,
+        "nodes": 11994257,
+        "completedDepth": 20,
+        "selectivity": 0,
+        "probability": 74.0,
+        "proven": false,
+        "isEndSearch": false,
+        "scoreUnits": "engine-disc",
+        "stopped": "timeout"
+      },
+      "candidateFields": {
+        "rawScore": 23,
+        "score": 24,
+        "move": 37,
+        "mustPass": false,
+        "nodes": 11994257,
+        "completedDepth": 20,
+        "selectivity": 0,
+        "probability": 74.0,
+        "proven": false,
+        "isEndSearch": false,
+        "scoreUnits": "engine-disc",
+        "stopped": "timeout"
+      }
+    },
+    {
+      "profile": "timed",
+      "family": "development/continuous16-practical-v1/f0",
+      "root": "development/continuous16-practical-v1/f0/p32",
+      "repeat": 0,
+      "baselineIndex": 65,
+      "candidateIndex": 69,
+      "baselineCompleted": true,
+      "candidateCompleted": true,
+      "baselineDepth": 28,
+      "candidateDepth": 28,
+      "candidateMinusBaselineDepth": 0,
+      "baselineCallerMs": 1000.2748830011114,
+      "candidateCallerMs": 1000.2887930022553,
+      "candidateMinusBaselineCallerMs": 0.013910001143813133,
+      "baselineProcessCPUSeconds": 1.0000000000000002,
+      "candidateProcessCPUSeconds": 1.0000000000000002,
+      "baselineMove": 2,
+      "candidateMove": 2,
+      "baselineRaw": 40,
+      "candidateRaw": 40,
+      "baselineSelectedNodes": 9868077,
+      "candidateSelectedNodes": 9867128,
+      "baselineSettledWholeNodes": 13577216,
+      "candidateSettledWholeNodes": 14760704,
+      "baselineWorkerSpanMs": 1000.0972919999999,
+      "candidateWorkerSpanMs": 1000.0916480000001,
+      "baselineReplyToSettleReceiptCallerMs": 0.18115004058927298,
+      "candidateReplyToSettleReceiptCallerMs": 0.18913100939244032,
+      "baselineFields": {
+        "rawScore": 40,
+        "score": 40,
+        "move": 2,
+        "mustPass": false,
+        "nodes": 9868077,
+        "completedDepth": 28,
+        "selectivity": 0,
+        "probability": 74.0,
+        "proven": false,
+        "isEndSearch": true,
+        "scoreUnits": "engine-disc",
+        "stopped": "timeout"
+      },
+      "candidateFields": {
+        "rawScore": 40,
+        "score": 40,
+        "move": 2,
+        "mustPass": false,
+        "nodes": 9867128,
+        "completedDepth": 28,
+        "selectivity": 0,
+        "probability": 74.0,
+        "proven": false,
+        "isEndSearch": true,
+        "scoreUnits": "engine-disc",
+        "stopped": "timeout"
+      }
+    },
+    {
+      "profile": "timed",
+      "family": "development/continuous16-practical-v1/f0",
+      "root": "development/continuous16-practical-v1/f0/p48",
+      "repeat": 0,
+      "baselineIndex": 66,
+      "candidateIndex": 70,
+      "baselineCompleted": true,
+      "candidateCompleted": true,
+      "baselineDepth": 12,
+      "candidateDepth": 12,
+      "candidateMinusBaselineDepth": 0,
+      "baselineCallerMs": 1.7753499560058117,
+      "candidateCallerMs": 1.2311800383031368,
+      "candidateMinusBaselineCallerMs": -0.5441699177026749,
+      "baselineProcessCPUSeconds": 0.009999999999999787,
+      "candidateProcessCPUSeconds": 0.0,
+      "baselineMove": 41,
+      "candidateMove": 41,
+      "baselineRaw": 34,
+      "candidateRaw": 34,
+      "baselineSelectedNodes": 15686,
+      "candidateSelectedNodes": 15686,
+      "baselineSettledWholeNodes": 15686,
+      "candidateSettledWholeNodes": 15686,
+      "baselineWorkerSpanMs": 1.6028499999999999,
+      "candidateWorkerSpanMs": 1.082699,
+      "baselineReplyToSettleReceiptCallerMs": 0.17638003919273615,
+      "candidateReplyToSettleReceiptCallerMs": 0.09863602463155985,
+      "baselineFields": {
+        "rawScore": 34,
+        "score": 34,
+        "move": 41,
+        "mustPass": false,
+        "nodes": 15686,
+        "completedDepth": 12,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": true,
+        "isEndSearch": true,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      },
+      "candidateFields": {
+        "rawScore": 34,
+        "score": 34,
+        "move": 41,
+        "mustPass": false,
+        "nodes": 15686,
+        "completedDepth": 12,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": true,
+        "isEndSearch": true,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      }
+    },
+    {
+      "profile": "timed",
+      "family": "development/continuous16-practical-v1/f0",
+      "root": "development/continuous16-practical-v1/f0/p56",
+      "repeat": 0,
+      "baselineIndex": 67,
+      "candidateIndex": 71,
+      "baselineCompleted": true,
+      "candidateCompleted": true,
+      "baselineDepth": 4,
+      "candidateDepth": 4,
+      "candidateMinusBaselineDepth": 0,
+      "baselineCallerMs": 0.39439601823687553,
+      "candidateCallerMs": 0.20354508887976408,
+      "candidateMinusBaselineCallerMs": -0.19085092935711145,
+      "baselineProcessCPUSeconds": 0.0,
+      "candidateProcessCPUSeconds": 0.0,
+      "baselineMove": 56,
+      "candidateMove": 56,
+      "baselineRaw": 14,
+      "candidateRaw": 14,
+      "baselineSelectedNodes": 53,
+      "candidateSelectedNodes": 53,
+      "baselineSettledWholeNodes": 53,
+      "candidateSettledWholeNodes": 53,
+      "baselineWorkerSpanMs": 0.11959399999999998,
+      "candidateWorkerSpanMs": 0.070142,
+      "baselineReplyToSettleReceiptCallerMs": 0.16585399862378836,
+      "candidateReplyToSettleReceiptCallerMs": 0.09578396566212177,
+      "baselineFields": {
+        "rawScore": 14,
+        "score": 14,
+        "move": 56,
+        "mustPass": false,
+        "nodes": 53,
+        "completedDepth": 4,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": true,
+        "isEndSearch": true,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      },
+      "candidateFields": {
+        "rawScore": 14,
+        "score": 14,
+        "move": 56,
+        "mustPass": false,
+        "nodes": 53,
+        "completedDepth": 4,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": true,
+        "isEndSearch": true,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      }
+    },
+    {
+      "profile": "timed",
+      "family": "development/continuous16-practical-v1/f0",
+      "root": "development/continuous16-practical-v1/f0/p16",
+      "repeat": 1,
+      "baselineIndex": 76,
+      "candidateIndex": 72,
+      "baselineCompleted": true,
+      "candidateCompleted": true,
+      "baselineDepth": 20,
+      "candidateDepth": 20,
+      "candidateMinusBaselineDepth": 0,
+      "baselineCallerMs": 1000.3521249163896,
+      "candidateCallerMs": 1000.2554020611569,
+      "candidateMinusBaselineCallerMs": -0.096722855232656,
+      "baselineProcessCPUSeconds": 1.0,
+      "candidateProcessCPUSeconds": 1.0,
+      "baselineMove": 37,
+      "candidateMove": 37,
+      "baselineRaw": 23,
+      "candidateRaw": 23,
+      "baselineSelectedNodes": 11994257,
+      "candidateSelectedNodes": 11994257,
+      "baselineSettledWholeNodes": 12837120,
+      "candidateSettledWholeNodes": 12865792,
+      "baselineWorkerSpanMs": 1000.1081520000001,
+      "candidateWorkerSpanMs": 1000.1101279999999,
+      "baselineReplyToSettleReceiptCallerMs": 0.19445607904344797,
+      "candidateReplyToSettleReceiptCallerMs": 0.13946997933089733,
+      "baselineFields": {
+        "rawScore": 23,
+        "score": 24,
+        "move": 37,
+        "mustPass": false,
+        "nodes": 11994257,
+        "completedDepth": 20,
+        "selectivity": 0,
+        "probability": 74.0,
+        "proven": false,
+        "isEndSearch": false,
+        "scoreUnits": "engine-disc",
+        "stopped": "timeout"
+      },
+      "candidateFields": {
+        "rawScore": 23,
+        "score": 24,
+        "move": 37,
+        "mustPass": false,
+        "nodes": 11994257,
+        "completedDepth": 20,
+        "selectivity": 0,
+        "probability": 74.0,
+        "proven": false,
+        "isEndSearch": false,
+        "scoreUnits": "engine-disc",
+        "stopped": "timeout"
+      }
+    },
+    {
+      "profile": "timed",
+      "family": "development/continuous16-practical-v1/f0",
+      "root": "development/continuous16-practical-v1/f0/p32",
+      "repeat": 1,
+      "baselineIndex": 77,
+      "candidateIndex": 73,
+      "baselineCompleted": true,
+      "candidateCompleted": true,
+      "baselineDepth": 28,
+      "candidateDepth": 28,
+      "candidateMinusBaselineDepth": 0,
+      "baselineCallerMs": 1000.2371369628236,
+      "candidateCallerMs": 1000.2694310387596,
+      "candidateMinusBaselineCallerMs": 0.032294075936079025,
+      "baselineProcessCPUSeconds": 1.0000000000000004,
+      "candidateProcessCPUSeconds": 0.9999999999999996,
+      "baselineMove": 2,
+      "candidateMove": 2,
+      "baselineRaw": 40,
+      "candidateRaw": 40,
+      "baselineSelectedNodes": 9867114,
+      "candidateSelectedNodes": 9867307,
+      "baselineSettledWholeNodes": 13658624,
+      "candidateSettledWholeNodes": 14467840,
+      "baselineWorkerSpanMs": 1000.105747,
+      "candidateWorkerSpanMs": 1000.0961750000001,
+      "baselineReplyToSettleReceiptCallerMs": 5.682796938344836,
+      "candidateReplyToSettleReceiptCallerMs": 0.17918995581567287,
+      "baselineFields": {
+        "rawScore": 40,
+        "score": 40,
+        "move": 2,
+        "mustPass": false,
+        "nodes": 9867114,
+        "completedDepth": 28,
+        "selectivity": 0,
+        "probability": 74.0,
+        "proven": false,
+        "isEndSearch": true,
+        "scoreUnits": "engine-disc",
+        "stopped": "timeout"
+      },
+      "candidateFields": {
+        "rawScore": 40,
+        "score": 40,
+        "move": 2,
+        "mustPass": false,
+        "nodes": 9867307,
+        "completedDepth": 28,
+        "selectivity": 0,
+        "probability": 74.0,
+        "proven": false,
+        "isEndSearch": true,
+        "scoreUnits": "engine-disc",
+        "stopped": "timeout"
+      }
+    },
+    {
+      "profile": "timed",
+      "family": "development/continuous16-practical-v1/f0",
+      "root": "development/continuous16-practical-v1/f0/p48",
+      "repeat": 1,
+      "baselineIndex": 78,
+      "candidateIndex": 74,
+      "baselineCompleted": true,
+      "candidateCompleted": true,
+      "baselineDepth": 12,
+      "candidateDepth": 12,
+      "candidateMinusBaselineDepth": 0,
+      "baselineCallerMs": 1.3872230192646384,
+      "candidateCallerMs": 1.362673006951809,
+      "candidateMinusBaselineCallerMs": -0.024550012312829494,
+      "baselineProcessCPUSeconds": 0.0,
+      "candidateProcessCPUSeconds": 0.010000000000000675,
+      "baselineMove": 41,
+      "candidateMove": 41,
+      "baselineRaw": 34,
+      "candidateRaw": 34,
+      "baselineSelectedNodes": 15686,
+      "candidateSelectedNodes": 15686,
+      "baselineSettledWholeNodes": 15686,
+      "candidateSettledWholeNodes": 15686,
+      "baselineWorkerSpanMs": 1.1967660000000002,
+      "candidateWorkerSpanMs": 1.2353560000000001,
+      "baselineReplyToSettleReceiptCallerMs": 0.12874789535999298,
+      "candidateReplyToSettleReceiptCallerMs": 0.11747702956199646,
+      "baselineFields": {
+        "rawScore": 34,
+        "score": 34,
+        "move": 41,
+        "mustPass": false,
+        "nodes": 15686,
+        "completedDepth": 12,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": true,
+        "isEndSearch": true,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      },
+      "candidateFields": {
+        "rawScore": 34,
+        "score": 34,
+        "move": 41,
+        "mustPass": false,
+        "nodes": 15686,
+        "completedDepth": 12,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": true,
+        "isEndSearch": true,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      }
+    },
+    {
+      "profile": "timed",
+      "family": "development/continuous16-practical-v1/f0",
+      "root": "development/continuous16-practical-v1/f0/p56",
+      "repeat": 1,
+      "baselineIndex": 79,
+      "candidateIndex": 75,
+      "baselineCompleted": true,
+      "candidateCompleted": true,
+      "baselineDepth": 4,
+      "candidateDepth": 4,
+      "candidateMinusBaselineDepth": 0,
+      "baselineCallerMs": 5.169973010197282,
+      "candidateCallerMs": 2.060470054857433,
+      "candidateMinusBaselineCallerMs": -3.109502955339849,
+      "baselineProcessCPUSeconds": 0.0,
+      "candidateProcessCPUSeconds": 0.0,
+      "baselineMove": 56,
+      "candidateMove": 56,
+      "baselineRaw": 14,
+      "candidateRaw": 14,
+      "baselineSelectedNodes": 53,
+      "candidateSelectedNodes": 53,
+      "baselineSettledWholeNodes": 53,
+      "candidateSettledWholeNodes": 53,
+      "baselineWorkerSpanMs": 0.112347,
+      "candidateWorkerSpanMs": 0.086682,
+      "baselineReplyToSettleReceiptCallerMs": 0.14682498294860125,
+      "candidateReplyToSettleReceiptCallerMs": 4.226472927257419,
+      "baselineFields": {
+        "rawScore": 14,
+        "score": 14,
+        "move": 56,
+        "mustPass": false,
+        "nodes": 53,
+        "completedDepth": 4,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": true,
+        "isEndSearch": true,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      },
+      "candidateFields": {
+        "rawScore": 14,
+        "score": 14,
+        "move": 56,
+        "mustPass": false,
+        "nodes": 53,
+        "completedDepth": 4,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": true,
+        "isEndSearch": true,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      }
+    },
+    {
+      "profile": "timed",
+      "family": "development/continuous16-practical-v1/f1",
+      "root": "development/continuous16-practical-v1/f1/p16",
+      "repeat": 0,
+      "baselineIndex": 80,
+      "candidateIndex": 84,
+      "baselineCompleted": true,
+      "candidateCompleted": true,
+      "baselineDepth": 22,
+      "candidateDepth": 22,
+      "candidateMinusBaselineDepth": 0,
+      "baselineCallerMs": 1002.3881510132924,
+      "candidateCallerMs": 1000.2795739565045,
+      "candidateMinusBaselineCallerMs": -2.108577056787908,
+      "baselineProcessCPUSeconds": 1.0,
+      "candidateProcessCPUSeconds": 1.0,
+      "baselineMove": 25,
+      "candidateMove": 25,
+      "baselineRaw": -14,
+      "candidateRaw": -14,
+      "baselineSelectedNodes": 10581889,
+      "candidateSelectedNodes": 10581889,
+      "baselineSettledWholeNodes": 11600128,
+      "candidateSettledWholeNodes": 11759360,
+      "baselineWorkerSpanMs": 1000.0782189999999,
+      "candidateWorkerSpanMs": 1000.1024029999999,
+      "baselineReplyToSettleReceiptCallerMs": 0.2666329964995384,
+      "candidateReplyToSettleReceiptCallerMs": 0.1374769490212202,
+      "baselineFields": {
+        "rawScore": -14,
+        "score": -14,
+        "move": 25,
+        "mustPass": false,
+        "nodes": 10581889,
+        "completedDepth": 22,
+        "selectivity": 0,
+        "probability": 74.0,
+        "proven": false,
+        "isEndSearch": false,
+        "scoreUnits": "engine-disc",
+        "stopped": "timeout"
+      },
+      "candidateFields": {
+        "rawScore": -14,
+        "score": -14,
+        "move": 25,
+        "mustPass": false,
+        "nodes": 10581889,
+        "completedDepth": 22,
+        "selectivity": 0,
+        "probability": 74.0,
+        "proven": false,
+        "isEndSearch": false,
+        "scoreUnits": "engine-disc",
+        "stopped": "timeout"
+      }
+    },
+    {
+      "profile": "timed",
+      "family": "development/continuous16-practical-v1/f1",
+      "root": "development/continuous16-practical-v1/f1/p32",
+      "repeat": 0,
+      "baselineIndex": 81,
+      "candidateIndex": 85,
+      "baselineCompleted": true,
+      "candidateCompleted": true,
+      "baselineDepth": 16,
+      "candidateDepth": 16,
+      "candidateMinusBaselineDepth": 0,
+      "baselineCallerMs": 1000.2950570778921,
+      "candidateCallerMs": 1000.3699120134115,
+      "candidateMinusBaselineCallerMs": 0.07485493551939726,
+      "baselineProcessCPUSeconds": 1.0,
+      "candidateProcessCPUSeconds": 0.9899999999999993,
+      "baselineMove": 0,
+      "candidateMove": 0,
+      "baselineRaw": 7,
+      "candidateRaw": 7,
+      "baselineSelectedNodes": 1291518,
+      "candidateSelectedNodes": 1291535,
+      "baselineSettledWholeNodes": 23117568,
+      "candidateSettledWholeNodes": 23764992,
+      "baselineWorkerSpanMs": 1000.087543,
+      "candidateWorkerSpanMs": 1000.104935,
+      "baselineReplyToSettleReceiptCallerMs": 0.18648093100637197,
+      "candidateReplyToSettleReceiptCallerMs": 0.1448080874979496,
+      "baselineFields": {
+        "rawScore": 7,
+        "score": 8,
+        "move": 0,
+        "mustPass": false,
+        "nodes": 1291518,
+        "completedDepth": 16,
+        "selectivity": 0,
+        "probability": 74.0,
+        "proven": false,
+        "isEndSearch": false,
+        "scoreUnits": "engine-disc",
+        "stopped": "timeout"
+      },
+      "candidateFields": {
+        "rawScore": 7,
+        "score": 8,
+        "move": 0,
+        "mustPass": false,
+        "nodes": 1291535,
+        "completedDepth": 16,
+        "selectivity": 0,
+        "probability": 74.0,
+        "proven": false,
+        "isEndSearch": false,
+        "scoreUnits": "engine-disc",
+        "stopped": "timeout"
+      }
+    },
+    {
+      "profile": "timed",
+      "family": "development/continuous16-practical-v1/f1",
+      "root": "development/continuous16-practical-v1/f1/p48",
+      "repeat": 0,
+      "baselineIndex": 82,
+      "candidateIndex": 86,
+      "baselineCompleted": true,
+      "candidateCompleted": true,
+      "baselineDepth": 12,
+      "candidateDepth": 12,
+      "candidateMinusBaselineDepth": 0,
+      "baselineCallerMs": 3.3593749394640326,
+      "candidateCallerMs": 3.1668649753555655,
+      "candidateMinusBaselineCallerMs": -0.1925099641084671,
+      "baselineProcessCPUSeconds": 0.0,
+      "candidateProcessCPUSeconds": 0.010000000000000675,
+      "baselineMove": 55,
+      "candidateMove": 55,
+      "baselineRaw": 16,
+      "candidateRaw": 16,
+      "baselineSelectedNodes": 42890,
+      "candidateSelectedNodes": 42890,
+      "baselineSettledWholeNodes": 42890,
+      "candidateSettledWholeNodes": 42890,
+      "baselineWorkerSpanMs": 3.1814660000000003,
+      "candidateWorkerSpanMs": 3.039254,
+      "baselineReplyToSettleReceiptCallerMs": 0.1658900873735547,
+      "candidateReplyToSettleReceiptCallerMs": 0.1147011062130332,
+      "baselineFields": {
+        "rawScore": 16,
+        "score": 16,
+        "move": 55,
+        "mustPass": false,
+        "nodes": 42890,
+        "completedDepth": 12,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": true,
+        "isEndSearch": true,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      },
+      "candidateFields": {
+        "rawScore": 16,
+        "score": 16,
+        "move": 55,
+        "mustPass": false,
+        "nodes": 42890,
+        "completedDepth": 12,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": true,
+        "isEndSearch": true,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      }
+    },
+    {
+      "profile": "timed",
+      "family": "development/continuous16-practical-v1/f1",
+      "root": "development/continuous16-practical-v1/f1/p56",
+      "repeat": 0,
+      "baselineIndex": 83,
+      "candidateIndex": 87,
+      "baselineCompleted": true,
+      "candidateCompleted": true,
+      "baselineDepth": 4,
+      "candidateDepth": 4,
+      "candidateMinusBaselineDepth": 0,
+      "baselineCallerMs": 0.27237599715590477,
+      "candidateCallerMs": 0.16653595957905054,
+      "candidateMinusBaselineCallerMs": -0.10584003757685423,
+      "baselineProcessCPUSeconds": 0.0,
+      "candidateProcessCPUSeconds": 0.0,
+      "baselineMove": 56,
+      "candidateMove": 56,
+      "baselineRaw": -16,
+      "candidateRaw": -16,
+      "baselineSelectedNodes": 52,
+      "candidateSelectedNodes": 52,
+      "baselineSettledWholeNodes": 52,
+      "candidateSettledWholeNodes": 52,
+      "baselineWorkerSpanMs": 0.09145400000000001,
+      "candidateWorkerSpanMs": 0.059148,
+      "baselineReplyToSettleReceiptCallerMs": 0.10118610225617886,
+      "candidateReplyToSettleReceiptCallerMs": 0.0773801002651453,
+      "baselineFields": {
+        "rawScore": -16,
+        "score": -16,
+        "move": 56,
+        "mustPass": false,
+        "nodes": 52,
+        "completedDepth": 4,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": true,
+        "isEndSearch": true,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      },
+      "candidateFields": {
+        "rawScore": -16,
+        "score": -16,
+        "move": 56,
+        "mustPass": false,
+        "nodes": 52,
+        "completedDepth": 4,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": true,
+        "isEndSearch": true,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      }
+    },
+    {
+      "profile": "timed",
+      "family": "development/continuous16-practical-v1/f1",
+      "root": "development/continuous16-practical-v1/f1/p16",
+      "repeat": 1,
+      "baselineIndex": 92,
+      "candidateIndex": 88,
+      "baselineCompleted": true,
+      "candidateCompleted": true,
+      "baselineDepth": 23,
+      "candidateDepth": 23,
+      "candidateMinusBaselineDepth": 0,
+      "baselineCallerMs": 1000.2835700288415,
+      "candidateCallerMs": 1000.2647589426488,
+      "candidateMinusBaselineCallerMs": -0.01881108619272709,
+      "baselineProcessCPUSeconds": 1.0,
+      "candidateProcessCPUSeconds": 1.0,
+      "baselineMove": 25,
+      "candidateMove": 25,
+      "baselineRaw": -13,
+      "candidateRaw": -13,
+      "baselineSelectedNodes": 11965775,
+      "candidateSelectedNodes": 11965775,
+      "baselineSettledWholeNodes": 12061952,
+      "candidateSettledWholeNodes": 12173312,
+      "baselineWorkerSpanMs": 1000.0926850000002,
+      "candidateWorkerSpanMs": 1000.108951,
+      "baselineReplyToSettleReceiptCallerMs": 0.14456803910434246,
+      "candidateReplyToSettleReceiptCallerMs": 0.19842199981212616,
+      "baselineFields": {
+        "rawScore": -13,
+        "score": -13,
+        "move": 25,
+        "mustPass": false,
+        "nodes": 11965775,
+        "completedDepth": 23,
+        "selectivity": 0,
+        "probability": 74.0,
+        "proven": false,
+        "isEndSearch": false,
+        "scoreUnits": "engine-disc",
+        "stopped": "timeout"
+      },
+      "candidateFields": {
+        "rawScore": -13,
+        "score": -13,
+        "move": 25,
+        "mustPass": false,
+        "nodes": 11965775,
+        "completedDepth": 23,
+        "selectivity": 0,
+        "probability": 74.0,
+        "proven": false,
+        "isEndSearch": false,
+        "scoreUnits": "engine-disc",
+        "stopped": "timeout"
+      }
+    },
+    {
+      "profile": "timed",
+      "family": "development/continuous16-practical-v1/f1",
+      "root": "development/continuous16-practical-v1/f1/p32",
+      "repeat": 1,
+      "baselineIndex": 93,
+      "candidateIndex": 89,
+      "baselineCompleted": true,
+      "candidateCompleted": true,
+      "baselineDepth": 16,
+      "candidateDepth": 16,
+      "candidateMinusBaselineDepth": 0,
+      "baselineCallerMs": 1000.2640059683472,
+      "candidateCallerMs": 1001.7816949402913,
+      "candidateMinusBaselineCallerMs": 1.5176889719441533,
+      "baselineProcessCPUSeconds": 1.0,
+      "candidateProcessCPUSeconds": 1.0,
+      "baselineMove": 0,
+      "candidateMove": 0,
+      "baselineRaw": 7,
+      "candidateRaw": 7,
+      "baselineSelectedNodes": 1291540,
+      "candidateSelectedNodes": 1291567,
+      "baselineSettledWholeNodes": 23792384,
+      "candidateSettledWholeNodes": 24673280,
+      "baselineWorkerSpanMs": 1000.098528,
+      "candidateWorkerSpanMs": 1000.07699,
+      "baselineReplyToSettleReceiptCallerMs": 0.184657983481884,
+      "candidateReplyToSettleReceiptCallerMs": 0.13417599257081747,
+      "baselineFields": {
+        "rawScore": 7,
+        "score": 8,
+        "move": 0,
+        "mustPass": false,
+        "nodes": 1291540,
+        "completedDepth": 16,
+        "selectivity": 0,
+        "probability": 74.0,
+        "proven": false,
+        "isEndSearch": false,
+        "scoreUnits": "engine-disc",
+        "stopped": "timeout"
+      },
+      "candidateFields": {
+        "rawScore": 7,
+        "score": 8,
+        "move": 0,
+        "mustPass": false,
+        "nodes": 1291567,
+        "completedDepth": 16,
+        "selectivity": 0,
+        "probability": 74.0,
+        "proven": false,
+        "isEndSearch": false,
+        "scoreUnits": "engine-disc",
+        "stopped": "timeout"
+      }
+    },
+    {
+      "profile": "timed",
+      "family": "development/continuous16-practical-v1/f1",
+      "root": "development/continuous16-practical-v1/f1/p48",
+      "repeat": 1,
+      "baselineIndex": 94,
+      "candidateIndex": 90,
+      "baselineCompleted": true,
+      "candidateCompleted": true,
+      "baselineDepth": 12,
+      "candidateDepth": 12,
+      "candidateMinusBaselineDepth": 0,
+      "baselineCallerMs": 3.219229052774608,
+      "candidateCallerMs": 3.129012999124825,
+      "candidateMinusBaselineCallerMs": -0.09021605364978313,
+      "baselineProcessCPUSeconds": 0.0,
+      "candidateProcessCPUSeconds": 0.0,
+      "baselineMove": 55,
+      "candidateMove": 55,
+      "baselineRaw": 16,
+      "candidateRaw": 16,
+      "baselineSelectedNodes": 42890,
+      "candidateSelectedNodes": 42890,
+      "baselineSettledWholeNodes": 42890,
+      "candidateSettledWholeNodes": 42890,
+      "baselineWorkerSpanMs": 3.070289,
+      "candidateWorkerSpanMs": 3.003034,
+      "baselineReplyToSettleReceiptCallerMs": 0.11326198000460863,
+      "candidateReplyToSettleReceiptCallerMs": 0.1029319828376174,
+      "baselineFields": {
+        "rawScore": 16,
+        "score": 16,
+        "move": 55,
+        "mustPass": false,
+        "nodes": 42890,
+        "completedDepth": 12,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": true,
+        "isEndSearch": true,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      },
+      "candidateFields": {
+        "rawScore": 16,
+        "score": 16,
+        "move": 55,
+        "mustPass": false,
+        "nodes": 42890,
+        "completedDepth": 12,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": true,
+        "isEndSearch": true,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      }
+    },
+    {
+      "profile": "timed",
+      "family": "development/continuous16-practical-v1/f1",
+      "root": "development/continuous16-practical-v1/f1/p56",
+      "repeat": 1,
+      "baselineIndex": 95,
+      "candidateIndex": 91,
+      "baselineCompleted": true,
+      "candidateCompleted": true,
+      "baselineDepth": 4,
+      "candidateDepth": 4,
+      "candidateMinusBaselineDepth": 0,
+      "baselineCallerMs": 0.7994739571586251,
+      "candidateCallerMs": 1.748366979882121,
+      "candidateMinusBaselineCallerMs": 0.948893022723496,
+      "baselineProcessCPUSeconds": 0.0,
+      "candidateProcessCPUSeconds": 0.0,
+      "baselineMove": 56,
+      "candidateMove": 56,
+      "baselineRaw": -16,
+      "candidateRaw": -16,
+      "baselineSelectedNodes": 52,
+      "candidateSelectedNodes": 52,
+      "baselineSettledWholeNodes": 52,
+      "candidateSettledWholeNodes": 52,
+      "baselineWorkerSpanMs": 0.11657699999999999,
+      "candidateWorkerSpanMs": 0.06294300000000001,
+      "baselineReplyToSettleReceiptCallerMs": 0.10825204662978649,
+      "candidateReplyToSettleReceiptCallerMs": 0.1599700190126896,
+      "baselineFields": {
+        "rawScore": -16,
+        "score": -16,
+        "move": 56,
+        "mustPass": false,
+        "nodes": 52,
+        "completedDepth": 4,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": true,
+        "isEndSearch": true,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      },
+      "candidateFields": {
+        "rawScore": -16,
+        "score": -16,
+        "move": 56,
+        "mustPass": false,
+        "nodes": 52,
+        "completedDepth": 4,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": true,
+        "isEndSearch": true,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      }
+    }
+  ],
+  "stages": [
+    {
+      "placement": 16,
+      "pairs": 4,
+      "baselineDepth": {
+        "count": 4,
+        "missing": 0,
+        "minimum": 20,
+        "median": 21.0,
+        "maximum": 23,
+        "mean": 21.25,
+        "sum": 85
+      },
+      "candidateDepth": {
+        "count": 4,
+        "missing": 0,
+        "minimum": 20,
+        "median": 21.0,
+        "maximum": 23,
+        "mean": 21.25,
+        "sum": 85
+      },
+      "candidateMinusBaselineDepth": {
+        "count": 4,
+        "missing": 0,
+        "minimum": 0,
+        "median": 0.0,
+        "maximum": 0,
+        "mean": 0,
+        "sum": 0
+      },
+      "higher": 0,
+      "equal": 4,
+      "lower": 0,
+      "missing": 0,
+      "distribution": {
+        "0": 4
+      }
+    },
+    {
+      "placement": 32,
+      "pairs": 4,
+      "baselineDepth": {
+        "count": 4,
+        "missing": 0,
+        "minimum": 16,
+        "median": 22.0,
+        "maximum": 28,
+        "mean": 22,
+        "sum": 88
+      },
+      "candidateDepth": {
+        "count": 4,
+        "missing": 0,
+        "minimum": 16,
+        "median": 22.0,
+        "maximum": 28,
+        "mean": 22,
+        "sum": 88
+      },
+      "candidateMinusBaselineDepth": {
+        "count": 4,
+        "missing": 0,
+        "minimum": 0,
+        "median": 0.0,
+        "maximum": 0,
+        "mean": 0,
+        "sum": 0
+      },
+      "higher": 0,
+      "equal": 4,
+      "lower": 0,
+      "missing": 0,
+      "distribution": {
+        "0": 4
+      }
+    },
+    {
+      "placement": 48,
+      "pairs": 4,
+      "baselineDepth": {
+        "count": 4,
+        "missing": 0,
+        "minimum": 12,
+        "median": 12.0,
+        "maximum": 12,
+        "mean": 12,
+        "sum": 48
+      },
+      "candidateDepth": {
+        "count": 4,
+        "missing": 0,
+        "minimum": 12,
+        "median": 12.0,
+        "maximum": 12,
+        "mean": 12,
+        "sum": 48
+      },
+      "candidateMinusBaselineDepth": {
+        "count": 4,
+        "missing": 0,
+        "minimum": 0,
+        "median": 0.0,
+        "maximum": 0,
+        "mean": 0,
+        "sum": 0
+      },
+      "higher": 0,
+      "equal": 4,
+      "lower": 0,
+      "missing": 0,
+      "distribution": {
+        "0": 4
+      }
+    },
+    {
+      "placement": 56,
+      "pairs": 4,
+      "baselineDepth": {
+        "count": 4,
+        "missing": 0,
+        "minimum": 4,
+        "median": 4.0,
+        "maximum": 4,
+        "mean": 4,
+        "sum": 16
+      },
+      "candidateDepth": {
+        "count": 4,
+        "missing": 0,
+        "minimum": 4,
+        "median": 4.0,
+        "maximum": 4,
+        "mean": 4,
+        "sum": 16
+      },
+      "candidateMinusBaselineDepth": {
+        "count": 4,
+        "missing": 0,
+        "minimum": 0,
+        "median": 0.0,
+        "maximum": 0,
+        "mean": 0,
+        "sum": 0
+      },
+      "higher": 0,
+      "equal": 4,
+      "lower": 0,
+      "missing": 0,
+      "distribution": {
+        "0": 4
+      }
+    }
+  ],
+  "earlyMidDisposition": {
+    "pairs": 8,
+    "higher": 0,
+    "equal": 8,
+    "lower": 0,
+    "missing": 0
+  },
+  "allTimedDisposition": {
+    "pairs": 16,
+    "higher": 0,
+    "equal": 16,
+    "lower": 0,
+    "missing": 0
+  },
+  "actionsAgreeTimed": 16,
+  "aggregates": {
+    "fixed": {
+      "baseline": {
+        "requests": 2,
+        "processCPUSeconds": {
+          "count": 2,
+          "missing": 0,
+          "minimum": 0.74,
+          "median": 0.7549999999999999,
+          "maximum": 0.7699999999999999,
+          "mean": 0.7549999999999999,
+          "sum": 1.5099999999999998
+        },
+        "completedDepth": {
+          "count": 2,
+          "missing": 0,
+          "minimum": 13,
+          "median": 13.0,
+          "maximum": 13,
+          "mean": 13,
+          "sum": 26
+        },
+        "selectedNodes": {
+          "count": 2,
+          "missing": 0,
+          "minimum": 8684965,
+          "median": 8684965.0,
+          "maximum": 8684965,
+          "mean": 8684965,
+          "sum": 17369930
+        },
+        "settledWholeNodes": {
+          "count": 2,
+          "missing": 0,
+          "minimum": 8684965,
+          "median": 8684965.0,
+          "maximum": 8684965,
+          "mean": 8684965,
+          "sum": 17369930
+        },
+        "completed": 2,
+        "legalFallbacks": 0,
+        "nativeWorkerSpanMs": {
+          "count": 2,
+          "missing": 0,
+          "minimum": 746.4063239999999,
+          "median": 754.188238,
+          "maximum": 761.970152,
+          "mean": 754.188238,
+          "sum": 1508.376476
+        },
+        "nativeDecisionToWorkerSettleMs": {
+          "count": 2,
+          "missing": 0,
+          "minimum": 0.0,
+          "median": 0.01562199999995073,
+          "maximum": 0.03124399999990146,
+          "mean": 0.01562199999995073,
+          "sum": 0.03124399999990146
+        },
+        "nativeDeadlineOvershootMs": {
+          "count": 2,
+          "missing": 0,
+          "minimum": 0.0,
+          "median": 0.0,
+          "maximum": 0.0,
+          "mean": 0.0,
+          "sum": 0.0
+        },
+        "callerMs": {
+          "count": 2,
+          "missing": 0,
+          "minimum": 746.6584129724652,
+          "median": 754.4753614929505,
+          "maximum": 762.2923100134358,
+          "mean": 754.4753614929505,
+          "sum": 1508.950722985901
+        },
+        "replyToSettleReceiptCallerMs": {
+          "count": 2,
+          "missing": 0,
+          "minimum": 0.18722796812653542,
+          "median": 0.2585254842415452,
+          "maximum": 0.329823000356555,
+          "mean": 0.2585254842415452,
+          "sum": 0.5170509684830904
+        },
+        "requestToSettleReceiptCallerMs": {
+          "count": 2,
+          "missing": 0,
+          "minimum": 746.8456409405917,
+          "median": 754.733886977192,
+          "maximum": 762.6221330137923,
+          "mean": 754.733886977192,
+          "sum": 1509.467773954384
+        }
+      },
+      "candidate": {
+        "requests": 2,
+        "processCPUSeconds": {
+          "count": 2,
+          "missing": 0,
+          "minimum": 0.7200000000000001,
+          "median": 0.73,
+          "maximum": 0.74,
+          "mean": 0.73,
+          "sum": 1.46
+        },
+        "completedDepth": {
+          "count": 2,
+          "missing": 0,
+          "minimum": 13,
+          "median": 13.0,
+          "maximum": 13,
+          "mean": 13,
+          "sum": 26
+        },
+        "selectedNodes": {
+          "count": 2,
+          "missing": 0,
+          "minimum": 8684965,
+          "median": 8684965.0,
+          "maximum": 8684965,
+          "mean": 8684965,
+          "sum": 17369930
+        },
+        "settledWholeNodes": {
+          "count": 2,
+          "missing": 0,
+          "minimum": 8684965,
+          "median": 8684965.0,
+          "maximum": 8684965,
+          "mean": 8684965,
+          "sum": 17369930
+        },
+        "completed": 2,
+        "legalFallbacks": 0,
+        "nativeWorkerSpanMs": {
+          "count": 2,
+          "missing": 0,
+          "minimum": 723.5614990000001,
+          "median": 731.3333300000002,
+          "maximum": 739.1051610000001,
+          "mean": 731.3333300000002,
+          "sum": 1462.6666600000003
+        },
+        "nativeDecisionToWorkerSettleMs": {
+          "count": 2,
+          "missing": 0,
+          "minimum": 0.0,
+          "median": 0.0,
+          "maximum": 0.0,
+          "mean": 0.0,
+          "sum": 0.0
+        },
+        "nativeDeadlineOvershootMs": {
+          "count": 2,
+          "missing": 0,
+          "minimum": 0.0,
+          "median": 0.0,
+          "maximum": 0.0,
+          "mean": 0.0,
+          "sum": 0.0
+        },
+        "callerMs": {
+          "count": 2,
+          "missing": 0,
+          "minimum": 723.7779860151932,
+          "median": 731.5480085089803,
+          "maximum": 739.3180310027674,
+          "mean": 731.5480085089803,
+          "sum": 1463.0960170179605
+        },
+        "replyToSettleReceiptCallerMs": {
+          "count": 2,
+          "missing": 0,
+          "minimum": 0.14048698358237743,
+          "median": 0.15753949992358685,
+          "maximum": 0.17459201626479626,
+          "mean": 0.15753949992358685,
+          "sum": 0.3150789998471737
+        },
+        "requestToSettleReceiptCallerMs": {
+          "count": 2,
+          "missing": 0,
+          "minimum": 723.9184729987755,
+          "median": 731.7055480089039,
+          "maximum": 739.4926230190322,
+          "mean": 731.7055480089039,
+          "sum": 1463.4110960178077
+        }
+      }
+    },
+    "timed": {
+      "baseline": {
+        "requests": 16,
+        "processCPUSeconds": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 0.0,
+          "median": 0.5049999999999999,
+          "maximum": 1.0000000000000004,
+          "mean": 0.500625,
+          "sum": 8.01
+        },
+        "completedDepth": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 4,
+          "median": 14.0,
+          "maximum": 28,
+          "mean": 14.8125,
+          "sum": 237
+        },
+        "selectedNodes": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 52,
+          "median": 667204.0,
+          "maximum": 11994257,
+          "mean": 4310736.8125,
+          "sum": 68971789
+        },
+        "settledWholeNodes": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 52,
+          "median": 5821509.0,
+          "maximum": 23792384,
+          "mean": 7730487.125,
+          "sum": 123687794
+        },
+        "completed": 16,
+        "legalFallbacks": 0,
+        "nativeWorkerSpanMs": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 0.09145400000000001,
+          "median": 501.62984249999994,
+          "maximum": 1000.1081520000001,
+          "mean": 500.6409815,
+          "sum": 8010.255704
+        },
+        "nativeDecisionToWorkerSettleMs": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 0.0,
+          "median": 0.03021700000005012,
+          "maximum": 0.07015899999999986,
+          "mean": 0.03089568749999452,
+          "sum": 0.4943309999999123
+        },
+        "nativeDeadlineOvershootMs": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 0.0,
+          "median": 0.030867999999941276,
+          "maximum": 0.06440599999996266,
+          "mean": 0.03154793749999385,
+          "sum": 0.5047669999999016
+        },
+        "callerMs": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 0.27237599715590477,
+          "median": 502.7035549865104,
+          "maximum": 1002.3881510132924,
+          "mean": 501.2995326251257,
+          "sum": 8020.7925220020115
+        },
+        "replyToSettleReceiptCallerMs": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 0.10118610225617886,
+          "median": 0.16587204299867153,
+          "maximum": 5.682796938344836,
+          "mean": 0.5066861340310425,
+          "sum": 8.10697814449668
+        },
+        "requestToSettleReceiptCallerMs": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 0.3735620994120836,
+          "median": 502.87246803054586,
+          "maximum": 1005.9199339011684,
+          "mean": 501.80621875915676,
+          "sum": 8028.899500146508
+        },
+        "callerOvershootOf1000Ms": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 0,
+          "median": 0.11856848141178489,
+          "maximum": 2.3881510132923722,
+          "mean": 0.27594537823460996,
+          "sum": 4.415126051753759
+        }
+      },
+      "candidate": {
+        "requests": 16,
+        "processCPUSeconds": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 0.0,
+          "median": 0.5,
+          "maximum": 1.0000000000000002,
+          "mean": 0.500625,
+          "sum": 8.01
+        },
+        "completedDepth": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 4,
+          "median": 14.0,
+          "maximum": 28,
+          "mean": 14.8125,
+          "sum": 237
+        },
+        "selectedNodes": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 52,
+          "median": 667212.5,
+          "maximum": 11994257,
+          "mean": 4310692.3125,
+          "sum": 68971077
+        },
+        "settledWholeNodes": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 52,
+          "median": 5901125.0,
+          "maximum": 24673280,
+          "mean": 7963863.125,
+          "sum": 127421810
+        },
+        "completed": 16,
+        "legalFallbacks": 0,
+        "nativeWorkerSpanMs": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 0.059148,
+          "median": 501.558122,
+          "maximum": 1000.1101279999999,
+          "mean": 500.589915625,
+          "sum": 8009.43865
+        },
+        "nativeDecisionToWorkerSettleMs": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 0.0,
+          "median": 0.022633999999935095,
+          "maximum": 0.05649299999993218,
+          "mean": 0.026064499999975232,
+          "sum": 0.4170319999996037
+        },
+        "nativeDeadlineOvershootMs": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 0.0,
+          "median": 0.030166000000065196,
+          "maximum": 0.07693700000004355,
+          "mean": 0.0322108750000325,
+          "sum": 0.51537400000052
+        },
+        "callerMs": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 0.16653595957905054,
+          "median": 501.71113351825625,
+          "maximum": 1001.7816949402913,
+          "mean": 501.05330887890887,
+          "sum": 8016.852942062542
+        },
+        "replyToSettleReceiptCallerMs": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 0.0773801002651453,
+          "median": 0.13847346417605877,
+          "maximum": 5.22479007486254,
+          "mean": 0.7088010752340779,
+          "sum": 11.340817203745246
+        },
+        "requestToSettleReceiptCallerMs": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 0.24391605984419584,
+          "median": 503.34090751130134,
+          "maximum": 1005.4995170794427,
+          "mean": 501.76210995414294,
+          "sum": 8028.193759266287
+        },
+        "callerOvershootOf1000Ms": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 0,
+          "median": 0.12770103057846427,
+          "maximum": 1.7816949402913451,
+          "mean": 0.2365183099755086,
+          "sum": 3.7842929596081376
+        }
+      }
+    }
+  },
+  "loadedIdentities": [
+    {
+      "profile": "fixed",
+      "owner": "baseline",
+      "actualInfo": {
+        "coefficients": {
+          "a": 0.7308488452189136,
+          "b": -4.5708322989025865,
+          "c": 1.096319765006055,
+          "d": -0.8362251801219095,
+          "e": 4.610017383697701,
+          "f": 3.818582623595395,
+          "g": 1.7775013664098447
+        },
+        "completionProtocol": "full-search-worker-v1",
+        "computeWorkers": 1,
+        "engine": "console7.8.1-rust-singlethread-source-port",
+        "hashLevel": 20,
+        "hashSeed": 20261022,
+        "identityBinding": "callerVerified",
+        "idle": true,
+        "interpretation": "simd",
+        "midgameId": "sha256:0a8acbcbc23067933627f1bcc83c3f7ae6b7ff3e603d174a3364271fcaeeef2f",
+        "ok": true,
+        "orderingId": "sha256:bd908885e8bb85e72a9be2b0399f8ca52ed40a138bcaaecca3d13710945b9a93",
+        "processId": 2485176,
+        "processThreadCount": 2,
+        "stopVisitInterval": 256,
+        "ttBytes": 25165872,
+        "upstreamCommit": "570d5e0a478c9d720d75de06a5d31995f412704a",
+        "workerLifetime": "process",
+        "workerPool": 0,
+        "workerRustThreadId": "ThreadId(2)"
+      },
+      "expectedInfoMatched": true,
+      "binary": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/feature-flipped-walk-transpose-software-v1/othello-full-search-feature-flipped-walk-transpose",
+        "bytes": 963280,
+        "mode": "0555",
+        "sha256": "f2ef1326bca72342c42131eefb882b11fe92a992d7e6eb0bed8ce70fc9825be6"
+      },
+      "buildQualification": {
+        "path": "/workspaces/quoridor/research-data/othello/strong-ai-n96/feature-flipped-walk-transpose-software-result-v1.json",
+        "bytes": 16019,
+        "mode": "0644",
+        "sha256": "8e7a9ba4bf47b5c84ebe07314f0f0e97cb043e57674495a8dcfa0ac5e3c865f1"
+      }
+    },
+    {
+      "profile": "fixed",
+      "owner": "candidate",
+      "actualInfo": {
+        "coefficients": {
+          "a": 0.7308488452189136,
+          "b": -4.5708322989025865,
+          "c": 1.096319765006055,
+          "d": -0.8362251801219095,
+          "e": 4.610017383697701,
+          "f": 3.818582623595395,
+          "g": 1.7775013664098447
+        },
+        "completionProtocol": "full-search-worker-v1",
+        "computeWorkers": 1,
+        "engine": "console7.8.1-rust-singlethread-source-port",
+        "hashLevel": 20,
+        "hashSeed": 20261022,
+        "identityBinding": "callerVerified",
+        "idle": true,
+        "interpretation": "simd",
+        "midgameId": "sha256:0a8acbcbc23067933627f1bcc83c3f7ae6b7ff3e603d174a3364271fcaeeef2f",
+        "ok": true,
+        "orderingId": "sha256:bd908885e8bb85e72a9be2b0399f8ca52ed40a138bcaaecca3d13710945b9a93",
+        "processId": 2485178,
+        "processThreadCount": 2,
+        "stopVisitInterval": 256,
+        "ttBytes": 25165872,
+        "upstreamCommit": "570d5e0a478c9d720d75de06a5d31995f412704a",
+        "workerLifetime": "process",
+        "workerPool": 0,
+        "workerRustThreadId": "ThreadId(2)"
+      },
+      "expectedInfoMatched": true,
+      "binary": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/inline-undo-snapshot-software-v1/othello-full-search-inline-undo-snapshot",
+        "bytes": 967840,
+        "mode": "0555",
+        "sha256": "0bcd5815ba496bc5be0d532be4c19c1555ada34d4bf1ff930ddae48e857d5764"
+      },
+      "buildQualification": {
+        "path": "/workspaces/quoridor/research-data/othello/strong-ai-n96/inline-undo-snapshot-software-result-v1.json",
+        "bytes": 16070,
+        "mode": "0644",
+        "sha256": "d2b5e46c8e4497e09070f4eb0cbcb1dc0c0cbf9f24327326ce388f1009aefa06"
+      }
+    },
+    {
+      "profile": "timed",
+      "owner": "baseline",
+      "actualInfo": {
+        "coefficients": {
+          "a": 0.7308488452189136,
+          "b": -4.5708322989025865,
+          "c": 1.096319765006055,
+          "d": -0.8362251801219095,
+          "e": 4.610017383697701,
+          "f": 3.818582623595395,
+          "g": 1.7775013664098447
+        },
+        "completionProtocol": "full-search-worker-v1",
+        "computeWorkers": 1,
+        "engine": "console7.8.1-rust-singlethread-source-port",
+        "hashLevel": 20,
+        "hashSeed": 20261022,
+        "identityBinding": "callerVerified",
+        "idle": true,
+        "interpretation": "simd",
+        "midgameId": "sha256:0a8acbcbc23067933627f1bcc83c3f7ae6b7ff3e603d174a3364271fcaeeef2f",
+        "ok": true,
+        "orderingId": "sha256:bd908885e8bb85e72a9be2b0399f8ca52ed40a138bcaaecca3d13710945b9a93",
+        "processId": 2485208,
+        "processThreadCount": 2,
+        "stopVisitInterval": 256,
+        "ttBytes": 25165872,
+        "upstreamCommit": "570d5e0a478c9d720d75de06a5d31995f412704a",
+        "workerLifetime": "process",
+        "workerPool": 0,
+        "workerRustThreadId": "ThreadId(2)"
+      },
+      "expectedInfoMatched": true,
+      "binary": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/feature-flipped-walk-transpose-software-v1/othello-full-search-feature-flipped-walk-transpose",
+        "bytes": 963280,
+        "mode": "0555",
+        "sha256": "f2ef1326bca72342c42131eefb882b11fe92a992d7e6eb0bed8ce70fc9825be6"
+      },
+      "buildQualification": {
+        "path": "/workspaces/quoridor/research-data/othello/strong-ai-n96/feature-flipped-walk-transpose-software-result-v1.json",
+        "bytes": 16019,
+        "mode": "0644",
+        "sha256": "8e7a9ba4bf47b5c84ebe07314f0f0e97cb043e57674495a8dcfa0ac5e3c865f1"
+      }
+    },
+    {
+      "profile": "timed",
+      "owner": "candidate",
+      "actualInfo": {
+        "coefficients": {
+          "a": 0.7308488452189136,
+          "b": -4.5708322989025865,
+          "c": 1.096319765006055,
+          "d": -0.8362251801219095,
+          "e": 4.610017383697701,
+          "f": 3.818582623595395,
+          "g": 1.7775013664098447
+        },
+        "completionProtocol": "full-search-worker-v1",
+        "computeWorkers": 1,
+        "engine": "console7.8.1-rust-singlethread-source-port",
+        "hashLevel": 20,
+        "hashSeed": 20261022,
+        "identityBinding": "callerVerified",
+        "idle": true,
+        "interpretation": "simd",
+        "midgameId": "sha256:0a8acbcbc23067933627f1bcc83c3f7ae6b7ff3e603d174a3364271fcaeeef2f",
+        "ok": true,
+        "orderingId": "sha256:bd908885e8bb85e72a9be2b0399f8ca52ed40a138bcaaecca3d13710945b9a93",
+        "processId": 2485210,
+        "processThreadCount": 2,
+        "stopVisitInterval": 256,
+        "ttBytes": 25165872,
+        "upstreamCommit": "570d5e0a478c9d720d75de06a5d31995f412704a",
+        "workerLifetime": "process",
+        "workerPool": 0,
+        "workerRustThreadId": "ThreadId(2)"
+      },
+      "expectedInfoMatched": true,
+      "binary": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/inline-undo-snapshot-software-v1/othello-full-search-inline-undo-snapshot",
+        "bytes": 967840,
+        "mode": "0555",
+        "sha256": "0bcd5815ba496bc5be0d532be4c19c1555ada34d4bf1ff930ddae48e857d5764"
+      },
+      "buildQualification": {
+        "path": "/workspaces/quoridor/research-data/othello/strong-ai-n96/inline-undo-snapshot-software-result-v1.json",
+        "bytes": 16070,
+        "mode": "0644",
+        "sha256": "d2b5e46c8e4497e09070f4eb0cbcb1dc0c0cbf9f24327326ce388f1009aefa06"
+      }
+    }
+  ],
+  "lifecycle": {
+    "setups": [
+      {
+        "profile": "fixed",
+        "owner": "baseline",
+        "launchAndReadyMs": 144.6872109081596,
+        "pureModelParseMs": null,
+        "preMainMs": null,
+        "childCPUSecondsAtReady": 0.13
+      },
+      {
+        "profile": "fixed",
+        "owner": "candidate",
+        "launchAndReadyMs": 170.27154297102243,
+        "pureModelParseMs": null,
+        "preMainMs": null,
+        "childCPUSecondsAtReady": 0.16
+      },
+      {
+        "profile": "timed",
+        "owner": "baseline",
+        "launchAndReadyMs": 152.23202295601368,
+        "pureModelParseMs": null,
+        "preMainMs": null,
+        "childCPUSecondsAtReady": 0.14
+      },
+      {
+        "profile": "timed",
+        "owner": "candidate",
+        "launchAndReadyMs": 153.2166089164093,
+        "pureModelParseMs": null,
+        "preMainMs": null,
+        "childCPUSecondsAtReady": 0.14
+      }
+    ],
+    "clears": [
+      {
+        "profile": "fixed",
+        "family": "development/continuous16-practical-v1/f0",
+        "block": 0,
+        "owner": "baseline",
+        "outerMs": 2.347729983739555,
+        "cpuBefore": 0.13,
+        "cpuAfter": 0.14
+      },
+      {
+        "profile": "fixed",
+        "family": "development/continuous16-practical-v1/f0",
+        "block": 1,
+        "owner": "candidate",
+        "outerMs": 1.9451540429145098,
+        "cpuBefore": 0.16,
+        "cpuAfter": 0.16
+      },
+      {
+        "profile": "fixed",
+        "family": "development/continuous16-practical-v1/f0",
+        "block": 2,
+        "owner": "candidate",
+        "outerMs": 1.9122989615425467,
+        "cpuBefore": 0.9,
+        "cpuAfter": 0.9
+      },
+      {
+        "profile": "fixed",
+        "family": "development/continuous16-practical-v1/f0",
+        "block": 3,
+        "owner": "baseline",
+        "outerMs": 2.117436029948294,
+        "cpuBefore": 0.88,
+        "cpuAfter": 0.88
+      },
+      {
+        "profile": "timed",
+        "family": "development/continuous16-practical-v1/f0",
+        "block": 0,
+        "owner": "baseline",
+        "outerMs": 2.007903065532446,
+        "cpuBefore": 0.14,
+        "cpuAfter": 0.14
+      },
+      {
+        "profile": "timed",
+        "family": "development/continuous16-practical-v1/f0",
+        "block": 1,
+        "owner": "candidate",
+        "outerMs": 2.3123060818761587,
+        "cpuBefore": 0.14,
+        "cpuAfter": 0.14
+      },
+      {
+        "profile": "timed",
+        "family": "development/continuous16-practical-v1/f0",
+        "block": 2,
+        "owner": "candidate",
+        "outerMs": 1.763050095178187,
+        "cpuBefore": 2.14,
+        "cpuAfter": 2.14
+      },
+      {
+        "profile": "timed",
+        "family": "development/continuous16-practical-v1/f0",
+        "block": 3,
+        "owner": "baseline",
+        "outerMs": 1.9504799274727702,
+        "cpuBefore": 2.15,
+        "cpuAfter": 2.15
+      },
+      {
+        "profile": "timed",
+        "family": "development/continuous16-practical-v1/f1",
+        "block": 0,
+        "owner": "baseline",
+        "outerMs": 2.1550870733335614,
+        "cpuBefore": 4.15,
+        "cpuAfter": 4.15
+      },
+      {
+        "profile": "timed",
+        "family": "development/continuous16-practical-v1/f1",
+        "block": 1,
+        "owner": "candidate",
+        "outerMs": 2.549976110458374,
+        "cpuBefore": 4.15,
+        "cpuAfter": 4.15
+      },
+      {
+        "profile": "timed",
+        "family": "development/continuous16-practical-v1/f1",
+        "block": 2,
+        "owner": "candidate",
+        "outerMs": 1.7932270420715213,
+        "cpuBefore": 6.15,
+        "cpuAfter": 6.15
+      },
+      {
+        "profile": "timed",
+        "family": "development/continuous16-practical-v1/f1",
+        "block": 3,
+        "owner": "baseline",
+        "outerMs": 1.969228032976389,
+        "cpuBefore": 6.15,
+        "cpuAfter": 6.15
+      }
+    ],
+    "drops": [
+      {
+        "profile": "fixed",
+        "owner": "baseline",
+        "cleanup": {
+          "exitCode": -15,
+          "unexpectedExit": false,
+          "directReaped": true,
+          "bytesSeen": 4445,
+          "bytesRetained": 4550,
+          "errors": []
+        },
+        "dropMs": 4.821424023248255,
+        "childCPUSecondsBeforeDrop": 1.65,
+        "CPUAfterDrop": null
+      },
+      {
+        "profile": "fixed",
+        "owner": "candidate",
+        "cleanup": {
+          "exitCode": -15,
+          "unexpectedExit": false,
+          "directReaped": true,
+          "bytesSeen": 4375,
+          "bytesRetained": 4480,
+          "errors": []
+        },
+        "dropMs": 7.463500020094216,
+        "childCPUSecondsBeforeDrop": 1.62,
+        "CPUAfterDrop": null
+      },
+      {
+        "profile": "timed",
+        "owner": "baseline",
+        "cleanup": {
+          "exitCode": -15,
+          "unexpectedExit": false,
+          "directReaped": true,
+          "bytesSeen": 29823,
+          "bytesRetained": 30378,
+          "errors": []
+        },
+        "dropMs": 3.3726940164342523,
+        "childCPUSecondsBeforeDrop": 8.15,
+        "CPUAfterDrop": null
+      },
+      {
+        "profile": "timed",
+        "owner": "candidate",
+        "cleanup": {
+          "exitCode": -15,
+          "unexpectedExit": false,
+          "directReaped": true,
+          "bytesSeen": 29661,
+          "bytesRetained": 30216,
+          "errors": []
+        },
+        "dropMs": 7.560017053037882,
+        "childCPUSecondsBeforeDrop": 8.15,
+        "CPUAfterDrop": null
+      }
+    ],
+    "CPUClockTicksPerSecond": 100,
+    "CPUCounterScope": "owned PID utime+stime; all threads; no descendants"
+  },
+  "missingness": {
+    "baselineFallbacks": 0,
+    "candidateFallbacks": 0,
+    "exclusivePostDeadlineVisits": null,
+    "physicalNN": null,
+    "ISA": null,
+    "loadedLibraries": null,
+    "fullTT": null,
+    "restoration": null,
+    "allocatorTLS": null,
+    "continuousPeak": null
+  },
+  "scope": {
+    "newRawReadHashParse": 1,
+    "originalRawResultBytes": 160901,
+    "transientDecode": "whole new scalar request/result/context JSON; no linked input/model/weight/H/perf or prior scientific body opened",
+    "scientificRows": 36,
+    "pairs": 18,
+    "distinctRootStates": 8,
+    "correlatedFamilies": 2,
+    "independence": "not asserted; two repeats/root in two correlated development families; fixed reuses one of those roots",
+    "fixedPairs": 2,
+    "timedPairs": 16,
+    "canonicalOutOfScope": 92,
+    "noSearchOrNumericalReplay": true,
+    "inputRuntime": "normal maintained owner whole-JSON decoded admitted16; unused8 state/history may transiently decode, no Root/source-author input body open",
+    "CPU": "owned PID utime+stime/all native threads/no descendants; two boundary samples, CPU-after only after matching settle",
+    "CPUClockTicksPerSecond": 100,
+    "clocks": "Python caller/action receipt, native request Instant completion/receipt/decision/worker-settle, Python settle receipt and process CPU separate; nested spans not added; elapsedMs not whole runtime",
+    "nodes": "each owner selected snapshot versus settled whole invocation includes partial/discarded work; not isolated after-deadline visits",
+    "exclusivePostDeadlineVisits": null,
+    "physicalNN": null,
+    "ISA": null,
+    "loadedLibraries": null,
+    "fullTT": null,
+    "restoration": null,
+    "continuousPeak": null,
+    "strengthClaim": false,
+    "confidenceIntervals": null,
+    "NPS": null,
+    "historical": "old960/19fb68 DEFERRED_UNENTERED; prior28a/1402/9e7998/4699 retained separately without spliced clocks/results. This condition is heldf2ef versus qualified inlineUndo0bcd5815; originalab5 remains unentered and separate; resource-only capacity-binding-v2 at96MiB, no CXX/browser/profile/game",
+    "savedScalarFinalization": "Only saved scalar-table/summary/lifecycle read; original new result FileRef carried without reopening/rehashing body. No prior result/input/model/weight/H/perf replay."
+  },
+  "costs": {
+    "normalOwnerWholeSeconds": 19.942980185966007,
+    "originalOuterJobSeconds": 20.299474630039185,
+    "guardianCommandSeconds": 20.012979795923457,
+    "nestedSpansAreNotAdded": true,
+    "scalarCollectorSeconds": 0.09506568999495357,
+    "softwareOriginalOuterSeconds": 32.59072712692432,
+    "callerSoftware": "Previously qualified unchanged ad8c caller/fixture byref; no new caller software execution",
+    "priorCosts": "separately retained, not added again or refunded"
+  }
+}
