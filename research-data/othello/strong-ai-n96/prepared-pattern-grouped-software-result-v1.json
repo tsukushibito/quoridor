@@ -1,0 +1,1218 @@
+{
+  "status": "PASS_AFFECTED3_CLIPPY_NATIVE_PORTABLE_RELEASE",
+  "condition": "Prepared-pattern/grouped source45 plus test-only same-slice Clippy fix over retained Undo0bcd; candidate not adopted",
+  "originalFailedJob": "02ccc6e2-0ccd-4c4d-bf23-4bb3f9f4e418",
+  "residualJob": "f45b5b54-aca5-4eeb-8b46-5897846c7065",
+  "originalFailure": {
+    "path": "/workspaces/quoridor/research-data/othello/strong-ai-n96/prepared-pattern-grouped-software-first-attempt-failure-v1.json",
+    "bytes": 32741,
+    "mode": "0644",
+    "sha256": "cc7eb53c61e6700b6ae4240954ebb1945fc5077facd3423c9075902c439ad07b"
+  },
+  "residualOuter": {
+    "job_id": "f45b5b54-aca5-4eeb-8b46-5897846c7065",
+    "outcome": "succeeded",
+    "error": null,
+    "error_notes": [],
+    "exit_code": 0,
+    "finished_at": "2026-10-26T01:16:35.411940+00:00",
+    "wall_seconds": 28.919220297946595,
+    "remaining": [],
+    "direct_child_reaped": true,
+    "descendant_visibility": "observed",
+    "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+    "cleanup_complete": true,
+    "cleanup_errors": [],
+    "log_bytes_seen": 2777,
+    "log_bytes_retained": 2777
+  },
+  "residualSTOP": {
+    "primary": null,
+    "attemptedChecks": 5,
+    "actualCleanupSettled": true,
+    "TMPentries": [],
+    "sourceLeaseReleased": true,
+    "noAutomaticRetry": true
+  },
+  "overallUniqueAffectedDefinitions": 3,
+  "actualTestExecutions": 4,
+  "originalPasses": 3,
+  "originalFailedChecks": 1,
+  "residualPassedChecks": 5,
+  "totalActualCommandAttempts": 9,
+  "successfulOriginalFullRawAndAuxiliaryByref": [
+    {
+      "name": "prepared-full-raw-all-phases",
+      "receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/prepared-pattern-grouped-software-v1/prepared-full-raw-all-phases.returned.json",
+        "bytes": 3978,
+        "mode": "0644",
+        "sha256": "f7ad75a4f7bbdd57ddbafb4896fffc72e7d81a6603db6b160c2c7ffa4f41cdea"
+      },
+      "normalReturn": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "test",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "/workspaces/quoridor/Cargo.toml",
+          "-j1",
+          "--release",
+          "--message-format=json-render-diagnostics",
+          "-p",
+          "othello-core",
+          "--lib",
+          "full_eval::tests::full_eval_avx2_forced_full_raw_all_phases_both_stm",
+          "--",
+          "--nocapture",
+          "--test-threads=1",
+          "--ignored",
+          "--exact"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 2533543,
+          "start_ticks": "102522528",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "software": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "software",
+        "log_bytes_seen": 19299,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 19299,
+        "wall_seconds": 16.305886823916808,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "exceptionOutcome": null,
+      "error": null,
+      "actualRecord": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "test",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "/workspaces/quoridor/Cargo.toml",
+          "-j1",
+          "--release",
+          "--message-format=json-render-diagnostics",
+          "-p",
+          "othello-core",
+          "--lib",
+          "full_eval::tests::full_eval_avx2_forced_full_raw_all_phases_both_stm",
+          "--",
+          "--nocapture",
+          "--test-threads=1",
+          "--ignored",
+          "--exact"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 2533543,
+          "start_ticks": "102522528",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "software": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "software",
+        "log_bytes_seen": 19299,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 19299,
+        "wall_seconds": 16.305886823916808,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "originalDiskSnapshot": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "test",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "/workspaces/quoridor/Cargo.toml",
+          "-j1",
+          "--release",
+          "--message-format=json-render-diagnostics",
+          "-p",
+          "othello-core",
+          "--lib",
+          "full_eval::tests::full_eval_avx2_forced_full_raw_all_phases_both_stm",
+          "--",
+          "--nocapture",
+          "--test-threads=1",
+          "--ignored",
+          "--exact"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 2533543,
+          "start_ticks": "102522528",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "software": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "software",
+        "log_bytes_seen": 19299,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 19299,
+        "wall_seconds": 16.305886823916808,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted",
+        "finalization_errors": []
+      },
+      "passedDefinition": true,
+      "exactKnownChildAbsentOrDifferent": true
+    },
+    {
+      "name": "prepared-aux-signed-rounding",
+      "receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/prepared-pattern-grouped-software-v1/prepared-aux-signed-rounding.returned.json",
+        "bytes": 3952,
+        "mode": "0644",
+        "sha256": "8d6d1e55eaa5208f59456f9e24c03e5bbbbd6bc6f529eedf1a228127cd32aaa2"
+      },
+      "normalReturn": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "test",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "/workspaces/quoridor/Cargo.toml",
+          "-j1",
+          "--release",
+          "--message-format=json-render-diagnostics",
+          "-p",
+          "othello-core",
+          "--lib",
+          "full_eval::tests::full_eval_vector_auxiliary_unclipped_and_signed_rounding",
+          "--",
+          "--nocapture",
+          "--test-threads=1",
+          "--exact"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 2533785,
+          "start_ticks": "102524208",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "software": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "software",
+        "log_bytes_seen": 19213,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 19213,
+        "wall_seconds": 0.4231361639685929,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "exceptionOutcome": null,
+      "error": null,
+      "actualRecord": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "test",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "/workspaces/quoridor/Cargo.toml",
+          "-j1",
+          "--release",
+          "--message-format=json-render-diagnostics",
+          "-p",
+          "othello-core",
+          "--lib",
+          "full_eval::tests::full_eval_vector_auxiliary_unclipped_and_signed_rounding",
+          "--",
+          "--nocapture",
+          "--test-threads=1",
+          "--exact"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 2533785,
+          "start_ticks": "102524208",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "software": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "software",
+        "log_bytes_seen": 19213,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 19213,
+        "wall_seconds": 0.4231361639685929,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "originalDiskSnapshot": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "test",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "/workspaces/quoridor/Cargo.toml",
+          "-j1",
+          "--release",
+          "--message-format=json-render-diagnostics",
+          "-p",
+          "othello-core",
+          "--lib",
+          "full_eval::tests::full_eval_vector_auxiliary_unclipped_and_signed_rounding",
+          "--",
+          "--nocapture",
+          "--test-threads=1",
+          "--exact"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 2533785,
+          "start_ticks": "102524208",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "software": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "software",
+        "log_bytes_seen": 19213,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 19213,
+        "wall_seconds": 0.4231361639685929,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted",
+        "finalization_errors": []
+      },
+      "passedDefinition": true,
+      "exactKnownChildAbsentOrDifferent": true
+    }
+  ],
+  "residualChecks": [
+    {
+      "name": "prepared-exact-slice-edges",
+      "receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/prepared-pattern-grouped-software-v1/causal-lint-repair-v2/prepared-exact-slice-edges.returned.json",
+        "bytes": 3998,
+        "mode": "0644",
+        "sha256": "50fcae89ab8483120dffa05ed95ef9bf14c090ba6ee578156cfe9d2f068dea4d"
+      },
+      "actualReturn": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "test",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "/workspaces/quoridor/Cargo.toml",
+          "-j1",
+          "--release",
+          "--message-format=json-render-diagnostics",
+          "-p",
+          "othello-core",
+          "--lib",
+          "full_eval::tests::full_eval_avx2_exact_slice_tail_unaligned_i16_edges",
+          "--",
+          "--nocapture",
+          "--test-threads=1",
+          "--ignored",
+          "--exact"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 2538892,
+          "start_ticks": "102572657",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "software": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "software",
+        "log_bytes_seen": 19842,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 19842,
+        "wall_seconds": 16.608783186995424,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "originalDiskFinalization": {
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted"
+      },
+      "fullLog": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/prepared-pattern-grouped-software-v1/causal-lint-repair-v2/prepared-exact-slice-edges.full.log",
+        "bytes": 19842,
+        "mode": "0644",
+        "sha256": "738730176285ef2422cef437ac3ac1e12341db1ed3295e85be1b34f8550facd1"
+      },
+      "exactKnownIdentityAbsentOrDifferent": true
+    },
+    {
+      "name": "affected-core-wasm-Clippy",
+      "receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/prepared-pattern-grouped-software-v1/causal-lint-repair-v2/affected-core-wasm-Clippy.returned.json",
+        "bytes": 3800,
+        "mode": "0644",
+        "sha256": "f4b714cf8354977247ff08b6fc92589c8b4d25d5cee286cf74938a856265d3f3"
+      },
+      "actualReturn": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "clippy",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "/workspaces/quoridor/Cargo.toml",
+          "-j1",
+          "--release",
+          "--message-format=json-render-diagnostics",
+          "-p",
+          "othello-core",
+          "-p",
+          "othello-wasm",
+          "--all-targets",
+          "--",
+          "-Dwarnings"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 2539088,
+          "start_ticks": "102574324",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "software": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "software",
+        "log_bytes_seen": 39245,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 39245,
+        "wall_seconds": 0.5825956759508699,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "originalDiskFinalization": {
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted"
+      },
+      "fullLog": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/prepared-pattern-grouped-software-v1/causal-lint-repair-v2/affected-core-wasm-Clippy.full.log",
+        "bytes": 39245,
+        "mode": "0644",
+        "sha256": "a32ab3467142b0a353c05d96e7db3390b162f0418e20ce5c6af37aeeaf262a5d"
+      },
+      "exactKnownIdentityAbsentOrDifferent": true
+    },
+    {
+      "name": "affected-portable-target-Clippy",
+      "receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/prepared-pattern-grouped-software-v1/causal-lint-repair-v2/affected-portable-target-Clippy.returned.json",
+        "bytes": 3826,
+        "mode": "0644",
+        "sha256": "168ed1d42aebdb7de5068e81179035e4b73a815f4eb6bf735e011a2a20a5c39f"
+      },
+      "actualReturn": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "clippy",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "/workspaces/quoridor/Cargo.toml",
+          "-j1",
+          "--release",
+          "--message-format=json-render-diagnostics",
+          "-p",
+          "othello-wasm",
+          "--lib",
+          "--target",
+          "wasm32-unknown-unknown",
+          "--",
+          "-Dwarnings"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 2539126,
+          "start_ticks": "102574388",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "software": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "software",
+        "log_bytes_seen": 32042,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 32042,
+        "wall_seconds": 0.618000942049548,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "originalDiskFinalization": {
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted"
+      },
+      "fullLog": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/prepared-pattern-grouped-software-v1/causal-lint-repair-v2/affected-portable-target-Clippy.full.log",
+        "bytes": 32042,
+        "mode": "0644",
+        "sha256": "4c43a026e14a59d931f71b2179d3a0da9e0f34f41b3313f4a868babd9a4c3416"
+      },
+      "exactKnownIdentityAbsentOrDifferent": true
+    },
+    {
+      "name": "native-release",
+      "receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/prepared-pattern-grouped-software-v1/causal-lint-repair-v2/native-release.returned.json",
+        "bytes": 3684,
+        "mode": "0644",
+        "sha256": "5b89dbca282286de2ab4364fbb51339fbd6dfc7f2d3141479013d6214f5efda0"
+      },
+      "actualReturn": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "build",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "/workspaces/quoridor/Cargo.toml",
+          "-j1",
+          "--release",
+          "--message-format=json-render-diagnostics",
+          "-p",
+          "othello-core",
+          "--bin",
+          "othello-full-search"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 2539168,
+          "start_ticks": "102574456",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "software": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "software",
+        "log_bytes_seen": 19848,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 19848,
+        "wall_seconds": 5.991796749993227,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "originalDiskFinalization": {
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted"
+      },
+      "fullLog": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/prepared-pattern-grouped-software-v1/causal-lint-repair-v2/native-release.full.log",
+        "bytes": 19848,
+        "mode": "0644",
+        "sha256": "26cf2af2b2f266c6017afdeee2a232b19559e3db15384321aebc6f5f864e4659"
+      },
+      "exactKnownIdentityAbsentOrDifferent": true
+    },
+    {
+      "name": "wasm-release",
+      "receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/prepared-pattern-grouped-software-v1/causal-lint-repair-v2/wasm-release.returned.json",
+        "bytes": 3694,
+        "mode": "0644",
+        "sha256": "a0f32dc7dd478242a2518dc27087f1a4ea158db2d8bd0448455423e6a613268d"
+      },
+      "actualReturn": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "build",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "/workspaces/quoridor/Cargo.toml",
+          "-j1",
+          "--release",
+          "--message-format=json-render-diagnostics",
+          "-p",
+          "othello-wasm",
+          "--target",
+          "wasm32-unknown-unknown"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 2539295,
+          "start_ticks": "102575061",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "software": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "software",
+        "log_bytes_seen": 34573,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 34573,
+        "wall_seconds": 4.3972561759874225,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "originalDiskFinalization": {
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted"
+      },
+      "fullLog": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/prepared-pattern-grouped-software-v1/causal-lint-repair-v2/wasm-release.full.log",
+        "bytes": 34573,
+        "mode": "0644",
+        "sha256": "39dae7e9a58a90d3ab185b35755c02a054ef7973938c4b908ac03dfe95961aae"
+      },
+      "exactKnownIdentityAbsentOrDifferent": true
+    }
+  ],
+  "exactFinalSelectors": [
+    "prepared-full-raw-all-phases",
+    "full_eval::tests::full_eval_avx2_exact_slice_tail_unaligned_i16_edges",
+    "prepared-aux-signed-rounding"
+  ],
+  "newTestDefinitions": 0,
+  "originalFailedNormalReturnNULLAndDiskFactsPreserved": true,
+  "images": {
+    "native-release": {
+      "image": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/prepared-pattern-grouped-software-v1/causal-lint-repair-v2/othello-full-search-prepared-pattern-grouped",
+        "bytes": 968920,
+        "mode": "0555",
+        "sha256": "daddd1c0ecca49a689019d35a9e8b86003ad09487396bcec7430cd3efb34ee09"
+      },
+      "cargoArtifact": {
+        "reason": "compiler-artifact",
+        "package_id": "path+file:///workspaces/quoridor/games/othello/crates/othello-core#0.1.0",
+        "manifest_path": "/workspaces/quoridor/games/othello/crates/othello-core/Cargo.toml",
+        "target": {
+          "kind": [
+            "bin"
+          ],
+          "crate_types": [
+            "bin"
+          ],
+          "name": "othello-full-search",
+          "src_path": "/workspaces/quoridor/games/othello/crates/othello-core/src/bin/othello-full-search.rs",
+          "edition": "2024",
+          "doc": true,
+          "doctest": false,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "3",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": false
+        },
+        "features": [],
+        "filenames": [
+          "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target/release/othello-full-search"
+        ],
+        "executable": "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target/release/othello-full-search",
+        "fresh": false
+      }
+    },
+    "wasm-release": {
+      "image": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/prepared-pattern-grouped-software-v1/causal-lint-repair-v2/othello-prepared-pattern-grouped.wasm",
+        "bytes": 693049,
+        "mode": "0555",
+        "sha256": "778ca1850122f1870aaeab4ea4db92f7e72417eb085247efe87ff09bcaa0822f"
+      },
+      "cargoArtifact": {
+        "reason": "compiler-artifact",
+        "package_id": "path+file:///workspaces/quoridor/games/othello/crates/othello-wasm#0.1.0",
+        "manifest_path": "/workspaces/quoridor/games/othello/crates/othello-wasm/Cargo.toml",
+        "target": {
+          "kind": [
+            "cdylib",
+            "rlib"
+          ],
+          "crate_types": [
+            "cdylib",
+            "rlib"
+          ],
+          "name": "othello_wasm",
+          "src_path": "/workspaces/quoridor/games/othello/crates/othello-wasm/src/lib.rs",
+          "edition": "2024",
+          "doc": true,
+          "doctest": true,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "3",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": false
+        },
+        "features": [],
+        "filenames": [
+          "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target/wasm32-unknown-unknown/release/othello_wasm.wasm",
+          "/workspaces/quoridor/.worktree/value-search-strength-arena355/.artifacts/value-search-strength355/maintained-build-v1/target/wasm32-unknown-unknown/release/libothello_wasm.rlib"
+        ],
+        "executable": null,
+        "fresh": false
+      }
+    }
+  },
+  "nativeImageDistinctFromBaseline": true,
+  "baselineImage": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/inline-undo-snapshot-software-v1/othello-full-search-inline-undo-snapshot",
+    "bytes": 967840,
+    "mode": "0555",
+    "sha256": "0bcd5815ba496bc5be0d532be4c19c1555ada34d4bf1ff930ddae48e857d5764"
+  },
+  "sourceAdoption": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/prepared-pattern-grouped-software-v1/causal-lint-repair-v2/source-adoption.json",
+    "bytes": 4402,
+    "mode": "0644",
+    "sha256": "d94a6082fb11acf22ef8e04b7150be105ed110b02bd5a4d181cbc31df0b1133d"
+  },
+  "sourceProvenance": {
+    "workspace": "/workspaces/quoridor",
+    "commit": "a31b0a32c2d16432f30f4d5afb4a02410cd3c037",
+    "patch": {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/prepared-pattern-grouped-software-v1/causal-lint-repair-v2/current-source.delta.patch",
+      "bytes": 451243,
+      "mode": "0644",
+      "sha256": "7e712a6663cad2ab767ea9f6eb75b23c18aca6b7073d0d1979ad2ca3403ac961"
+    },
+    "untracked_inputs": [
+      {
+        "path": "/workspaces/quoridor/games/othello/crates/othello-core/src/full_search/native.rs",
+        "bytes": 28792,
+        "mode": "0644",
+        "sha256": "7974765a160e01d7124e1cfa93b683e69906628767a04e1674f456771ebec6c0"
+      }
+    ],
+    "manifest": {
+      "path": "/workspaces/quoridor/Cargo.toml",
+      "bytes": 465,
+      "mode": "0644",
+      "sha256": "7c2fbb4e536c3ff1803dd0a0fe4e1025e286922a1de33cae07beb898611a94e3"
+    },
+    "lock": {
+      "path": "/workspaces/quoridor/Cargo.lock",
+      "bytes": 27809,
+      "mode": "0644",
+      "sha256": "34a1b67c91690d3b83a6b0e3734029e0d815e23f78b26444b60095e5511084d5"
+    },
+    "cargo_configs": [
+      {
+        "path": "/.cargo/config",
+        "file": null
+      },
+      {
+        "path": "/.cargo/config.toml",
+        "file": null
+      },
+      {
+        "path": "/usr/local/cargo/config",
+        "file": null
+      },
+      {
+        "path": "/usr/local/cargo/config.toml",
+        "file": null
+      },
+      {
+        "path": "/workspaces/.cargo/config",
+        "file": null
+      },
+      {
+        "path": "/workspaces/.cargo/config.toml",
+        "file": null
+      },
+      {
+        "path": "/workspaces/quoridor/.cargo/config",
+        "file": null
+      },
+      {
+        "path": "/workspaces/quoridor/.cargo/config.toml",
+        "file": null
+      }
+    ]
+  },
+  "source": [
+    {
+      "path": "/workspaces/quoridor/scripts/dev/research-lifecycle.py",
+      "bytes": 498284,
+      "mode": "0644",
+      "sha256": "dd5452acb9b49b55caec7847e64e9fc5e0c2d7d5f5d99214c5633f8b2e5515ec"
+    },
+    {
+      "path": "/workspaces/quoridor/shared/python/quoridor_runtime/cycle_process.py",
+      "bytes": 32545,
+      "mode": "0644",
+      "sha256": "afcfdb120b505963275c028bf174bd63113127b6d390403b5b1f60c380ca0db3"
+    },
+    {
+      "path": "/workspaces/quoridor/scripts/dev/project-env.sh",
+      "bytes": 4698,
+      "mode": "0644",
+      "sha256": "a8d9a87eaa714ae4df425fb8120cb06c32b6a34aef12e5396f9fe3e09735bbaa"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/prepared-pattern-grouped-software-v1/causal-lint-repair-v2/run.py",
+      "bytes": 10180,
+      "mode": "0644",
+      "sha256": "f352857f9940c127153f00047bb8fd2e0879b2fff68bdc2f715f662d743ac558"
+    }
+  ],
+  "tools": [
+    {
+      "path": "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+      "bytes": 36148320,
+      "mode": "0755",
+      "sha256": "a670e02cfa39ac2e53f77a2d911ca1fc9e2c479b0603ec956625be1daf24e3af"
+    },
+    {
+      "path": "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustc",
+      "bytes": 648536,
+      "mode": "0755",
+      "sha256": "b53b780f77f952062f8ca8a3b70aef2390b1e45ad91939be94afdc9543026853"
+    },
+    {
+      "path": "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustdoc",
+      "bytes": 12570304,
+      "mode": "0755",
+      "sha256": "832e53ca262db3d3fcaca659dc6e71f0f5a924a48adc580ee4278acac75f3e80"
+    },
+    {
+      "path": "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo-clippy",
+      "bytes": 1223088,
+      "mode": "0755",
+      "sha256": "4255f7671a17fba900ffd84a20f1dd0c986d52a2404496d3b7518f5044de5663"
+    },
+    {
+      "path": "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/clippy-driver",
+      "bytes": 16295440,
+      "mode": "0755",
+      "sha256": "89b6cc8d0d988b00a3f65bc90c76fedbaedb6bcb442b34563aefe3621f26544b"
+    }
+  ],
+  "sourceComposition": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/prepared-pattern-grouped-software-v1/source-composition.json",
+    "bytes": 7453,
+    "mode": "0644",
+    "sha256": "1cfe8bd6327b81b4ca0609548257da1ff4df9f3d98fba5f26fb057230b459e41"
+  },
+  "causalSourceFix": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/prepared-pattern-grouped-software-v1/causal-lint-repair-v2/causal-source-fix.json",
+    "bytes": 2564,
+    "mode": "0644",
+    "sha256": "83e281c13180878cbc45622ab4ec888792e6baa8e87df9d565fbcb3fd92cf1bc"
+  },
+  "relatedSourceReview": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/prepared-pattern-grouped-software-v1/review-acceptance.json",
+    "bytes": 2087,
+    "mode": "0644",
+    "sha256": "c80f445699ce4bb96994ca2ac91a3eca18f51b4a37ce4d4873a4894dda1a47d4"
+  },
+  "actualReviewerSourceSTOP": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/prepared-pattern-grouped-boundary-review-v1/reviewer/SOURCE-REPORT-STOP.json",
+    "bytes": 34225,
+    "mode": "0644",
+    "sha256": "325ef3e683f8737254a6f8c5fd5c5f7d7fbbf17e4e2b17d5437aea41f05d5158"
+  },
+  "resourceContract": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/prepared-pattern-grouped-software-v1/causal-lint-repair-v2/resources.json",
+    "bytes": 1889,
+    "mode": "0644",
+    "sha256": "c725c1a5d154de4b77ec939bc2dfae3964c4cb47a825722270db162aa530ca15"
+  },
+  "actualWasmExecution": 0,
+  "browserQualification": null,
+  "actualISA": null,
+  "actualPhysicalNN": null,
+  "actualAllocator": null,
+  "actualPeak": null,
+  "scientificRetainedModelRootSearchRequests": 0,
+  "syntheticModelPreparationAndEvaluationWorkExecuted": true,
+  "executedSyntheticTupleCounters": null,
+  "costs": {
+    "originalInclusiveOuterSeconds": 19.484486913890578,
+    "residualInclusiveOuterSeconds": 28.919220297946595,
+    "inclusiveSoftwareTotalSeconds": 48.40370721183717,
+    "originalBudgetWholeSeconds": 840,
+    "originalBudgetParentSeconds": 900,
+    "residualBoundWholeSeconds": 820,
+    "residualBoundParentSeconds": 880,
+    "innerCheckSecondsIncludedNotAdded": true,
+    "sourceRepairCollectionAndPublicationCostsSeparate": true
+  },
+  "allOldFailuresFeesAndPendingAtWriteUnchanged": true,
+  "actualNumericalAdmission": null,
+  "actualPerformance": null,
+  "engineeringAdoption": null
+}

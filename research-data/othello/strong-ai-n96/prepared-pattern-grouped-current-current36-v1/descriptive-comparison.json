@@ -1,0 +1,3308 @@
+{
+  "status": "COMPLETE_FINITE_CURRENT_CURRENT36",
+  "originalJob": "d7266ebf-1e14-4205-bef8-d76ec711a26c",
+  "counts": {
+    "calls": 36,
+    "pairs": 18,
+    "UNKNOWN": 0,
+    "UNRUN": 0,
+    "setups": 4,
+    "nonemptyClears": 12,
+    "drops": 4,
+    "matchingSettles": 36
+  },
+  "fixedPairs": [
+    {
+      "profile": "fixed",
+      "family": "development/continuous16-practical-v1/f0",
+      "root": "development/continuous16-practical-v1/f0/p32",
+      "repeat": 0,
+      "baselineIndex": 1,
+      "candidateIndex": 5,
+      "baselineCompleted": true,
+      "candidateCompleted": true,
+      "baselineDepth": 13,
+      "candidateDepth": 13,
+      "candidateMinusBaselineDepth": 0,
+      "baselineCallerMs": 724.1635050158948,
+      "candidateCallerMs": 724.7283380711451,
+      "candidateMinusBaselineCallerMs": 0.5648330552503467,
+      "baselineProcessCPUSeconds": 0.72,
+      "candidateProcessCPUSeconds": 0.72,
+      "baselineMove": 2,
+      "candidateMove": 2,
+      "baselineRaw": 40,
+      "candidateRaw": 40,
+      "baselineSelectedNodes": 8684965,
+      "candidateSelectedNodes": 8684965,
+      "baselineSettledWholeNodes": 8684965,
+      "candidateSettledWholeNodes": 8684965,
+      "baselineWorkerSpanMs": 724.0049409999999,
+      "candidateWorkerSpanMs": 724.5047920000001,
+      "baselineReplyToSettleReceiptCallerMs": 0.18212501890957355,
+      "candidateReplyToSettleReceiptCallerMs": 0.23465394042432308,
+      "baselineFields": {
+        "rawScore": 40,
+        "score": 40,
+        "move": 2,
+        "mustPass": false,
+        "nodes": 8684965,
+        "completedDepth": 13,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": false,
+        "isEndSearch": false,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      },
+      "candidateFields": {
+        "rawScore": 40,
+        "score": 40,
+        "move": 2,
+        "mustPass": false,
+        "nodes": 8684965,
+        "completedDepth": 13,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": false,
+        "isEndSearch": false,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      },
+      "strictTenPlusUnitsStoppedDifferences": [],
+      "candidateMinusBaselineWorkerSpanMs": 0.4998510000001488,
+      "sameTreeProof": false
+    },
+    {
+      "profile": "fixed",
+      "family": "development/continuous16-practical-v1/f0",
+      "root": "development/continuous16-practical-v1/f0/p32",
+      "repeat": 1,
+      "baselineIndex": 13,
+      "candidateIndex": 9,
+      "baselineCompleted": true,
+      "candidateCompleted": true,
+      "baselineDepth": 13,
+      "candidateDepth": 13,
+      "candidateMinusBaselineDepth": 0,
+      "baselineCallerMs": 756.5781560260803,
+      "candidateCallerMs": 726.9003039691597,
+      "candidateMinusBaselineCallerMs": -29.67785205692053,
+      "baselineProcessCPUSeconds": 0.7599999999999999,
+      "candidateProcessCPUSeconds": 0.7299999999999999,
+      "baselineMove": 2,
+      "candidateMove": 2,
+      "baselineRaw": 40,
+      "candidateRaw": 40,
+      "baselineSelectedNodes": 8684965,
+      "candidateSelectedNodes": 8684965,
+      "baselineSettledWholeNodes": 8684965,
+      "candidateSettledWholeNodes": 8684965,
+      "baselineWorkerSpanMs": 756.428095,
+      "candidateWorkerSpanMs": 726.675669,
+      "baselineReplyToSettleReceiptCallerMs": 1.6172740142792463,
+      "candidateReplyToSettleReceiptCallerMs": 0.18653797451406717,
+      "baselineFields": {
+        "rawScore": 40,
+        "score": 40,
+        "move": 2,
+        "mustPass": false,
+        "nodes": 8684965,
+        "completedDepth": 13,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": false,
+        "isEndSearch": false,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      },
+      "candidateFields": {
+        "rawScore": 40,
+        "score": 40,
+        "move": 2,
+        "mustPass": false,
+        "nodes": 8684965,
+        "completedDepth": 13,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": false,
+        "isEndSearch": false,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      },
+      "strictTenPlusUnitsStoppedDifferences": [],
+      "candidateMinusBaselineWorkerSpanMs": -29.752426000000014,
+      "sameTreeProof": false
+    }
+  ],
+  "timedRootwise": [
+    {
+      "root": "development/continuous16-practical-v1/f0/p16",
+      "pairs": 2,
+      "candidateMinusBaselineDepth": [
+        0,
+        0
+      ],
+      "actionsAgree": [
+        true,
+        true
+      ],
+      "baseline": {
+        "completedDepth": [
+          20,
+          20
+        ],
+        "selectivity": [
+          0,
+          0
+        ],
+        "probability": [
+          74.0,
+          74.0
+        ],
+        "end": [
+          false,
+          false
+        ],
+        "proven": [
+          false,
+          false
+        ],
+        "stopped": [
+          "timeout",
+          "timeout"
+        ],
+        "raw": [
+          23,
+          23
+        ],
+        "score": [
+          24,
+          24
+        ],
+        "scoreUnits": [
+          "engine-disc",
+          "engine-disc"
+        ],
+        "mustPass": [
+          false,
+          false
+        ],
+        "move": [
+          37,
+          37
+        ],
+        "selectedNodes": [
+          11994257,
+          11994257
+        ],
+        "callerMs": [
+          1000.2858099760488,
+          1000.2848280128092
+        ],
+        "settledWholeNodes": [
+          12443904,
+          12732160
+        ],
+        "replyToSettleReceiptCallerMs": [
+          0.20377500914037228,
+          0.14643499162048101
+        ]
+      },
+      "candidate": {
+        "completedDepth": [
+          20,
+          20
+        ],
+        "selectivity": [
+          0,
+          0
+        ],
+        "probability": [
+          74.0,
+          74.0
+        ],
+        "end": [
+          false,
+          false
+        ],
+        "proven": [
+          false,
+          false
+        ],
+        "stopped": [
+          "timeout",
+          "timeout"
+        ],
+        "raw": [
+          23,
+          23
+        ],
+        "score": [
+          24,
+          24
+        ],
+        "scoreUnits": [
+          "engine-disc",
+          "engine-disc"
+        ],
+        "mustPass": [
+          false,
+          false
+        ],
+        "move": [
+          37,
+          37
+        ],
+        "selectedNodes": [
+          11994257,
+          11994257
+        ],
+        "callerMs": [
+          1000.3031590022147,
+          1000.307067995891
+        ],
+        "settledWholeNodes": [
+          12813824,
+          12436224
+        ],
+        "replyToSettleReceiptCallerMs": [
+          0.19151100423187017,
+          0.27814297936856747
+        ]
+      }
+    },
+    {
+      "root": "development/continuous16-practical-v1/f0/p32",
+      "pairs": 2,
+      "candidateMinusBaselineDepth": [
+        0,
+        0
+      ],
+      "actionsAgree": [
+        true,
+        true
+      ],
+      "baseline": {
+        "completedDepth": [
+          28,
+          28
+        ],
+        "selectivity": [
+          0,
+          0
+        ],
+        "probability": [
+          74.0,
+          74.0
+        ],
+        "end": [
+          true,
+          true
+        ],
+        "proven": [
+          false,
+          false
+        ],
+        "stopped": [
+          "timeout",
+          "timeout"
+        ],
+        "raw": [
+          38,
+          38
+        ],
+        "score": [
+          38,
+          38
+        ],
+        "scoreUnits": [
+          "engine-disc",
+          "engine-disc"
+        ],
+        "mustPass": [
+          false,
+          false
+        ],
+        "move": [
+          2,
+          2
+        ],
+        "selectedNodes": [
+          11014741,
+          11014777
+        ],
+        "callerMs": [
+          1000.2614690456539,
+          1000.2675929572433
+        ],
+        "settledWholeNodes": [
+          13604608,
+          13961216
+        ],
+        "replyToSettleReceiptCallerMs": [
+          0.15225692186504602,
+          0.18830900080502033
+        ]
+      },
+      "candidate": {
+        "completedDepth": [
+          28,
+          28
+        ],
+        "selectivity": [
+          0,
+          0
+        ],
+        "probability": [
+          74.0,
+          74.0
+        ],
+        "end": [
+          true,
+          true
+        ],
+        "proven": [
+          false,
+          false
+        ],
+        "stopped": [
+          "timeout",
+          "timeout"
+        ],
+        "raw": [
+          38,
+          38
+        ],
+        "score": [
+          38,
+          38
+        ],
+        "scoreUnits": [
+          "engine-disc",
+          "engine-disc"
+        ],
+        "mustPass": [
+          false,
+          false
+        ],
+        "move": [
+          2,
+          2
+        ],
+        "selectedNodes": [
+          11015513,
+          11014757
+        ],
+        "callerMs": [
+          1000.3429759526625,
+          1000.3023450262845
+        ],
+        "settledWholeNodes": [
+          12682496,
+          14144256
+        ],
+        "replyToSettleReceiptCallerMs": [
+          0.19827799405902624,
+          0.147887971252203
+        ]
+      }
+    },
+    {
+      "root": "development/continuous16-practical-v1/f0/p48",
+      "pairs": 2,
+      "candidateMinusBaselineDepth": [
+        0,
+        0
+      ],
+      "actionsAgree": [
+        true,
+        true
+      ],
+      "baseline": {
+        "completedDepth": [
+          12,
+          12
+        ],
+        "selectivity": [
+          6,
+          6
+        ],
+        "probability": [
+          100.0,
+          100.0
+        ],
+        "end": [
+          true,
+          true
+        ],
+        "proven": [
+          true,
+          true
+        ],
+        "stopped": [
+          null,
+          null
+        ],
+        "raw": [
+          34,
+          34
+        ],
+        "score": [
+          34,
+          34
+        ],
+        "scoreUnits": [
+          "engine-disc",
+          "engine-disc"
+        ],
+        "mustPass": [
+          false,
+          false
+        ],
+        "move": [
+          41,
+          41
+        ],
+        "selectedNodes": [
+          15686,
+          15686
+        ],
+        "callerMs": [
+          1.23552605509758,
+          1.1936250375583768
+        ],
+        "settledWholeNodes": [
+          15686,
+          15686
+        ],
+        "replyToSettleReceiptCallerMs": [
+          0.10308902710676193,
+          0.10181195102632046
+        ]
+      },
+      "candidate": {
+        "completedDepth": [
+          12,
+          12
+        ],
+        "selectivity": [
+          6,
+          6
+        ],
+        "probability": [
+          100.0,
+          100.0
+        ],
+        "end": [
+          true,
+          true
+        ],
+        "proven": [
+          true,
+          true
+        ],
+        "stopped": [
+          null,
+          null
+        ],
+        "raw": [
+          34,
+          34
+        ],
+        "score": [
+          34,
+          34
+        ],
+        "scoreUnits": [
+          "engine-disc",
+          "engine-disc"
+        ],
+        "mustPass": [
+          false,
+          false
+        ],
+        "move": [
+          41,
+          41
+        ],
+        "selectedNodes": [
+          15686,
+          15686
+        ],
+        "callerMs": [
+          1.4064160641282797,
+          1.2301449896767735
+        ],
+        "settledWholeNodes": [
+          15686,
+          15686
+        ],
+        "replyToSettleReceiptCallerMs": [
+          0.20950590260326862,
+          0.10031205601990223
+        ]
+      }
+    },
+    {
+      "root": "development/continuous16-practical-v1/f0/p56",
+      "pairs": 2,
+      "candidateMinusBaselineDepth": [
+        0,
+        0
+      ],
+      "actionsAgree": [
+        true,
+        true
+      ],
+      "baseline": {
+        "completedDepth": [
+          4,
+          4
+        ],
+        "selectivity": [
+          6,
+          6
+        ],
+        "probability": [
+          100.0,
+          100.0
+        ],
+        "end": [
+          true,
+          true
+        ],
+        "proven": [
+          true,
+          true
+        ],
+        "stopped": [
+          null,
+          null
+        ],
+        "raw": [
+          14,
+          14
+        ],
+        "score": [
+          14,
+          14
+        ],
+        "scoreUnits": [
+          "engine-disc",
+          "engine-disc"
+        ],
+        "mustPass": [
+          false,
+          false
+        ],
+        "move": [
+          56,
+          56
+        ],
+        "selectedNodes": [
+          53,
+          53
+        ],
+        "callerMs": [
+          0.17960404511541128,
+          0.3185280365869403
+        ],
+        "settledWholeNodes": [
+          53,
+          53
+        ],
+        "replyToSettleReceiptCallerMs": [
+          0.08072599302977324,
+          0.08950196206569672
+        ]
+      },
+      "candidate": {
+        "completedDepth": [
+          4,
+          4
+        ],
+        "selectivity": [
+          6,
+          6
+        ],
+        "probability": [
+          100.0,
+          100.0
+        ],
+        "end": [
+          true,
+          true
+        ],
+        "proven": [
+          true,
+          true
+        ],
+        "stopped": [
+          null,
+          null
+        ],
+        "raw": [
+          14,
+          14
+        ],
+        "score": [
+          14,
+          14
+        ],
+        "scoreUnits": [
+          "engine-disc",
+          "engine-disc"
+        ],
+        "mustPass": [
+          false,
+          false
+        ],
+        "move": [
+          56,
+          56
+        ],
+        "selectedNodes": [
+          53,
+          53
+        ],
+        "callerMs": [
+          0.2469539176672697,
+          3.179675084538758
+        ],
+        "settledWholeNodes": [
+          53,
+          53
+        ],
+        "replyToSettleReceiptCallerMs": [
+          4.76981105748564,
+          0.1733439275994897
+        ]
+      }
+    },
+    {
+      "root": "development/continuous16-practical-v1/f1/p16",
+      "pairs": 2,
+      "candidateMinusBaselineDepth": [
+        0,
+        0
+      ],
+      "actionsAgree": [
+        true,
+        true
+      ],
+      "baseline": {
+        "completedDepth": [
+          22,
+          22
+        ],
+        "selectivity": [
+          0,
+          0
+        ],
+        "probability": [
+          74.0,
+          74.0
+        ],
+        "end": [
+          false,
+          false
+        ],
+        "proven": [
+          false,
+          false
+        ],
+        "stopped": [
+          "timeout",
+          "timeout"
+        ],
+        "raw": [
+          -14,
+          -14
+        ],
+        "score": [
+          -14,
+          -14
+        ],
+        "scoreUnits": [
+          "engine-disc",
+          "engine-disc"
+        ],
+        "mustPass": [
+          false,
+          false
+        ],
+        "move": [
+          25,
+          25
+        ],
+        "selectedNodes": [
+          10581889,
+          10581889
+        ],
+        "callerMs": [
+          1000.2616610145196,
+          1001.3314270181581
+        ],
+        "settledWholeNodes": [
+          11834880,
+          10888448
+        ],
+        "replyToSettleReceiptCallerMs": [
+          0.13882701750844717,
+          0.18543400801718235
+        ]
+      },
+      "candidate": {
+        "completedDepth": [
+          22,
+          22
+        ],
+        "selectivity": [
+          0,
+          0
+        ],
+        "probability": [
+          74.0,
+          74.0
+        ],
+        "end": [
+          false,
+          false
+        ],
+        "proven": [
+          false,
+          false
+        ],
+        "stopped": [
+          "timeout",
+          "timeout"
+        ],
+        "raw": [
+          -14,
+          -14
+        ],
+        "score": [
+          -14,
+          -14
+        ],
+        "scoreUnits": [
+          "engine-disc",
+          "engine-disc"
+        ],
+        "mustPass": [
+          false,
+          false
+        ],
+        "move": [
+          25,
+          25
+        ],
+        "selectedNodes": [
+          10581889,
+          10581889
+        ],
+        "callerMs": [
+          1000.2474170178175,
+          1003.7286899751052
+        ],
+        "settledWholeNodes": [
+          11590912,
+          11167744
+        ],
+        "replyToSettleReceiptCallerMs": [
+          2.329131937585771,
+          0.22184301633387804
+        ]
+      }
+    },
+    {
+      "root": "development/continuous16-practical-v1/f1/p32",
+      "pairs": 2,
+      "candidateMinusBaselineDepth": [
+        0,
+        0
+      ],
+      "actionsAgree": [
+        true,
+        true
+      ],
+      "baseline": {
+        "completedDepth": [
+          16,
+          16
+        ],
+        "selectivity": [
+          0,
+          0
+        ],
+        "probability": [
+          74.0,
+          74.0
+        ],
+        "end": [
+          false,
+          false
+        ],
+        "proven": [
+          false,
+          false
+        ],
+        "stopped": [
+          "timeout",
+          "timeout"
+        ],
+        "raw": [
+          7,
+          7
+        ],
+        "score": [
+          8,
+          8
+        ],
+        "scoreUnits": [
+          "engine-disc",
+          "engine-disc"
+        ],
+        "mustPass": [
+          false,
+          false
+        ],
+        "move": [
+          0,
+          0
+        ],
+        "selectedNodes": [
+          1291540,
+          1291438
+        ],
+        "callerMs": [
+          1000.3205850953236,
+          1000.3543299390003
+        ],
+        "settledWholeNodes": [
+          23410944,
+          22597376
+        ],
+        "replyToSettleReceiptCallerMs": [
+          0.19311194773763418,
+          0.1543400576338172
+        ]
+      },
+      "candidate": {
+        "completedDepth": [
+          16,
+          16
+        ],
+        "selectivity": [
+          0,
+          0
+        ],
+        "probability": [
+          74.0,
+          74.0
+        ],
+        "end": [
+          false,
+          false
+        ],
+        "proven": [
+          false,
+          false
+        ],
+        "stopped": [
+          "timeout",
+          "timeout"
+        ],
+        "raw": [
+          7,
+          7
+        ],
+        "score": [
+          8,
+          8
+        ],
+        "scoreUnits": [
+          "engine-disc",
+          "engine-disc"
+        ],
+        "mustPass": [
+          false,
+          false
+        ],
+        "move": [
+          0,
+          0
+        ],
+        "selectedNodes": [
+          1291518,
+          1291476
+        ],
+        "callerMs": [
+          1000.261252047494,
+          1004.412250011228
+        ],
+        "settledWholeNodes": [
+          23565312,
+          22573056
+        ],
+        "replyToSettleReceiptCallerMs": [
+          4.468441940844059,
+          0.3491649404168129
+        ]
+      }
+    },
+    {
+      "root": "development/continuous16-practical-v1/f1/p48",
+      "pairs": 2,
+      "candidateMinusBaselineDepth": [
+        0,
+        0
+      ],
+      "actionsAgree": [
+        true,
+        true
+      ],
+      "baseline": {
+        "completedDepth": [
+          12,
+          12
+        ],
+        "selectivity": [
+          6,
+          6
+        ],
+        "probability": [
+          100.0,
+          100.0
+        ],
+        "end": [
+          true,
+          true
+        ],
+        "proven": [
+          true,
+          true
+        ],
+        "stopped": [
+          null,
+          null
+        ],
+        "raw": [
+          16,
+          16
+        ],
+        "score": [
+          16,
+          16
+        ],
+        "scoreUnits": [
+          "engine-disc",
+          "engine-disc"
+        ],
+        "mustPass": [
+          false,
+          false
+        ],
+        "move": [
+          55,
+          55
+        ],
+        "selectedNodes": [
+          42890,
+          42890
+        ],
+        "callerMs": [
+          3.2320619793608785,
+          3.3634939463809133
+        ],
+        "settledWholeNodes": [
+          42890,
+          42890
+        ],
+        "replyToSettleReceiptCallerMs": [
+          0.09992800187319517,
+          0.10882504284381866
+        ]
+      },
+      "candidate": {
+        "completedDepth": [
+          12,
+          12
+        ],
+        "selectivity": [
+          6,
+          6
+        ],
+        "probability": [
+          100.0,
+          100.0
+        ],
+        "end": [
+          true,
+          true
+        ],
+        "proven": [
+          true,
+          true
+        ],
+        "stopped": [
+          null,
+          null
+        ],
+        "raw": [
+          16,
+          16
+        ],
+        "score": [
+          16,
+          16
+        ],
+        "scoreUnits": [
+          "engine-disc",
+          "engine-disc"
+        ],
+        "mustPass": [
+          false,
+          false
+        ],
+        "move": [
+          55,
+          55
+        ],
+        "selectedNodes": [
+          42890,
+          42890
+        ],
+        "callerMs": [
+          3.384646028280258,
+          6.0075229266658425
+        ],
+        "settledWholeNodes": [
+          42890,
+          42890
+        ],
+        "replyToSettleReceiptCallerMs": [
+          0.18345098942518234,
+          0.12787198647856712
+        ]
+      }
+    },
+    {
+      "root": "development/continuous16-practical-v1/f1/p56",
+      "pairs": 2,
+      "candidateMinusBaselineDepth": [
+        0,
+        0
+      ],
+      "actionsAgree": [
+        true,
+        true
+      ],
+      "baseline": {
+        "completedDepth": [
+          4,
+          4
+        ],
+        "selectivity": [
+          6,
+          6
+        ],
+        "probability": [
+          100.0,
+          100.0
+        ],
+        "end": [
+          true,
+          true
+        ],
+        "proven": [
+          true,
+          true
+        ],
+        "stopped": [
+          null,
+          null
+        ],
+        "raw": [
+          -16,
+          -16
+        ],
+        "score": [
+          -16,
+          -16
+        ],
+        "scoreUnits": [
+          "engine-disc",
+          "engine-disc"
+        ],
+        "mustPass": [
+          false,
+          false
+        ],
+        "move": [
+          56,
+          56
+        ],
+        "selectedNodes": [
+          52,
+          52
+        ],
+        "callerMs": [
+          0.20760600455105305,
+          6.186896003782749
+        ],
+        "settledWholeNodes": [
+          52,
+          52
+        ],
+        "replyToSettleReceiptCallerMs": [
+          0.11663790792226791,
+          0.1290289219468832
+        ]
+      },
+      "candidate": {
+        "completedDepth": [
+          4,
+          4
+        ],
+        "selectivity": [
+          6,
+          6
+        ],
+        "probability": [
+          100.0,
+          100.0
+        ],
+        "end": [
+          true,
+          true
+        ],
+        "proven": [
+          true,
+          true
+        ],
+        "stopped": [
+          null,
+          null
+        ],
+        "raw": [
+          -16,
+          -16
+        ],
+        "score": [
+          -16,
+          -16
+        ],
+        "scoreUnits": [
+          "engine-disc",
+          "engine-disc"
+        ],
+        "mustPass": [
+          false,
+          false
+        ],
+        "move": [
+          56,
+          56
+        ],
+        "selectedNodes": [
+          52,
+          52
+        ],
+        "callerMs": [
+          0.30483806040138006,
+          2.3988530738279223
+        ],
+        "settledWholeNodes": [
+          52,
+          52
+        ],
+        "replyToSettleReceiptCallerMs": [
+          0.14632893726229668,
+          0.11669297236949205
+        ]
+      }
+    }
+  ],
+  "pairRows": [
+    {
+      "profile": "fixed",
+      "family": "development/continuous16-practical-v1/f0",
+      "root": "development/continuous16-practical-v1/f0/p32",
+      "repeat": 0,
+      "baselineIndex": 1,
+      "candidateIndex": 5,
+      "baselineCompleted": true,
+      "candidateCompleted": true,
+      "baselineDepth": 13,
+      "candidateDepth": 13,
+      "candidateMinusBaselineDepth": 0,
+      "baselineCallerMs": 724.1635050158948,
+      "candidateCallerMs": 724.7283380711451,
+      "candidateMinusBaselineCallerMs": 0.5648330552503467,
+      "baselineProcessCPUSeconds": 0.72,
+      "candidateProcessCPUSeconds": 0.72,
+      "baselineMove": 2,
+      "candidateMove": 2,
+      "baselineRaw": 40,
+      "candidateRaw": 40,
+      "baselineSelectedNodes": 8684965,
+      "candidateSelectedNodes": 8684965,
+      "baselineSettledWholeNodes": 8684965,
+      "candidateSettledWholeNodes": 8684965,
+      "baselineWorkerSpanMs": 724.0049409999999,
+      "candidateWorkerSpanMs": 724.5047920000001,
+      "baselineReplyToSettleReceiptCallerMs": 0.18212501890957355,
+      "candidateReplyToSettleReceiptCallerMs": 0.23465394042432308,
+      "baselineFields": {
+        "rawScore": 40,
+        "score": 40,
+        "move": 2,
+        "mustPass": false,
+        "nodes": 8684965,
+        "completedDepth": 13,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": false,
+        "isEndSearch": false,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      },
+      "candidateFields": {
+        "rawScore": 40,
+        "score": 40,
+        "move": 2,
+        "mustPass": false,
+        "nodes": 8684965,
+        "completedDepth": 13,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": false,
+        "isEndSearch": false,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      },
+      "strictTenPlusUnitsStoppedDifferences": [],
+      "candidateMinusBaselineWorkerSpanMs": 0.4998510000001488,
+      "sameTreeProof": false
+    },
+    {
+      "profile": "fixed",
+      "family": "development/continuous16-practical-v1/f0",
+      "root": "development/continuous16-practical-v1/f0/p32",
+      "repeat": 1,
+      "baselineIndex": 13,
+      "candidateIndex": 9,
+      "baselineCompleted": true,
+      "candidateCompleted": true,
+      "baselineDepth": 13,
+      "candidateDepth": 13,
+      "candidateMinusBaselineDepth": 0,
+      "baselineCallerMs": 756.5781560260803,
+      "candidateCallerMs": 726.9003039691597,
+      "candidateMinusBaselineCallerMs": -29.67785205692053,
+      "baselineProcessCPUSeconds": 0.7599999999999999,
+      "candidateProcessCPUSeconds": 0.7299999999999999,
+      "baselineMove": 2,
+      "candidateMove": 2,
+      "baselineRaw": 40,
+      "candidateRaw": 40,
+      "baselineSelectedNodes": 8684965,
+      "candidateSelectedNodes": 8684965,
+      "baselineSettledWholeNodes": 8684965,
+      "candidateSettledWholeNodes": 8684965,
+      "baselineWorkerSpanMs": 756.428095,
+      "candidateWorkerSpanMs": 726.675669,
+      "baselineReplyToSettleReceiptCallerMs": 1.6172740142792463,
+      "candidateReplyToSettleReceiptCallerMs": 0.18653797451406717,
+      "baselineFields": {
+        "rawScore": 40,
+        "score": 40,
+        "move": 2,
+        "mustPass": false,
+        "nodes": 8684965,
+        "completedDepth": 13,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": false,
+        "isEndSearch": false,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      },
+      "candidateFields": {
+        "rawScore": 40,
+        "score": 40,
+        "move": 2,
+        "mustPass": false,
+        "nodes": 8684965,
+        "completedDepth": 13,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": false,
+        "isEndSearch": false,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      },
+      "strictTenPlusUnitsStoppedDifferences": [],
+      "candidateMinusBaselineWorkerSpanMs": -29.752426000000014,
+      "sameTreeProof": false
+    },
+    {
+      "profile": "timed",
+      "family": "development/continuous16-practical-v1/f0",
+      "root": "development/continuous16-practical-v1/f0/p16",
+      "repeat": 0,
+      "baselineIndex": 64,
+      "candidateIndex": 68,
+      "baselineCompleted": true,
+      "candidateCompleted": true,
+      "baselineDepth": 20,
+      "candidateDepth": 20,
+      "candidateMinusBaselineDepth": 0,
+      "baselineCallerMs": 1000.2858099760488,
+      "candidateCallerMs": 1000.3031590022147,
+      "candidateMinusBaselineCallerMs": 0.017349026165902615,
+      "baselineProcessCPUSeconds": 0.9999999999999999,
+      "candidateProcessCPUSeconds": 1.0,
+      "baselineMove": 37,
+      "candidateMove": 37,
+      "baselineRaw": 23,
+      "candidateRaw": 23,
+      "baselineSelectedNodes": 11994257,
+      "candidateSelectedNodes": 11994257,
+      "baselineSettledWholeNodes": 12443904,
+      "candidateSettledWholeNodes": 12813824,
+      "baselineWorkerSpanMs": 1000.10242,
+      "candidateWorkerSpanMs": 1000.1160390000001,
+      "baselineReplyToSettleReceiptCallerMs": 0.20377500914037228,
+      "candidateReplyToSettleReceiptCallerMs": 0.19151100423187017,
+      "baselineFields": {
+        "rawScore": 23,
+        "score": 24,
+        "move": 37,
+        "mustPass": false,
+        "nodes": 11994257,
+        "completedDepth": 20,
+        "selectivity": 0,
+        "probability": 74.0,
+        "proven": false,
+        "isEndSearch": false,
+        "scoreUnits": "engine-disc",
+        "stopped": "timeout"
+      },
+      "candidateFields": {
+        "rawScore": 23,
+        "score": 24,
+        "move": 37,
+        "mustPass": false,
+        "nodes": 11994257,
+        "completedDepth": 20,
+        "selectivity": 0,
+        "probability": 74.0,
+        "proven": false,
+        "isEndSearch": false,
+        "scoreUnits": "engine-disc",
+        "stopped": "timeout"
+      }
+    },
+    {
+      "profile": "timed",
+      "family": "development/continuous16-practical-v1/f0",
+      "root": "development/continuous16-practical-v1/f0/p32",
+      "repeat": 0,
+      "baselineIndex": 65,
+      "candidateIndex": 69,
+      "baselineCompleted": true,
+      "candidateCompleted": true,
+      "baselineDepth": 28,
+      "candidateDepth": 28,
+      "candidateMinusBaselineDepth": 0,
+      "baselineCallerMs": 1000.2614690456539,
+      "candidateCallerMs": 1000.3429759526625,
+      "candidateMinusBaselineCallerMs": 0.08150690700858831,
+      "baselineProcessCPUSeconds": 0.9900000000000002,
+      "candidateProcessCPUSeconds": 1.0000000000000002,
+      "baselineMove": 2,
+      "candidateMove": 2,
+      "baselineRaw": 38,
+      "candidateRaw": 38,
+      "baselineSelectedNodes": 11014741,
+      "candidateSelectedNodes": 11015513,
+      "baselineSettledWholeNodes": 13604608,
+      "candidateSettledWholeNodes": 12682496,
+      "baselineWorkerSpanMs": 1000.0914210000001,
+      "candidateWorkerSpanMs": 1000.1023639999999,
+      "baselineReplyToSettleReceiptCallerMs": 0.15225692186504602,
+      "candidateReplyToSettleReceiptCallerMs": 0.19827799405902624,
+      "baselineFields": {
+        "rawScore": 38,
+        "score": 38,
+        "move": 2,
+        "mustPass": false,
+        "nodes": 11014741,
+        "completedDepth": 28,
+        "selectivity": 0,
+        "probability": 74.0,
+        "proven": false,
+        "isEndSearch": true,
+        "scoreUnits": "engine-disc",
+        "stopped": "timeout"
+      },
+      "candidateFields": {
+        "rawScore": 38,
+        "score": 38,
+        "move": 2,
+        "mustPass": false,
+        "nodes": 11015513,
+        "completedDepth": 28,
+        "selectivity": 0,
+        "probability": 74.0,
+        "proven": false,
+        "isEndSearch": true,
+        "scoreUnits": "engine-disc",
+        "stopped": "timeout"
+      }
+    },
+    {
+      "profile": "timed",
+      "family": "development/continuous16-practical-v1/f0",
+      "root": "development/continuous16-practical-v1/f0/p48",
+      "repeat": 0,
+      "baselineIndex": 66,
+      "candidateIndex": 70,
+      "baselineCompleted": true,
+      "candidateCompleted": true,
+      "baselineDepth": 12,
+      "candidateDepth": 12,
+      "candidateMinusBaselineDepth": 0,
+      "baselineCallerMs": 1.23552605509758,
+      "candidateCallerMs": 1.4064160641282797,
+      "candidateMinusBaselineCallerMs": 0.17089000903069973,
+      "baselineProcessCPUSeconds": 0.0,
+      "candidateProcessCPUSeconds": 0.0,
+      "baselineMove": 41,
+      "candidateMove": 41,
+      "baselineRaw": 34,
+      "candidateRaw": 34,
+      "baselineSelectedNodes": 15686,
+      "candidateSelectedNodes": 15686,
+      "baselineSettledWholeNodes": 15686,
+      "candidateSettledWholeNodes": 15686,
+      "baselineWorkerSpanMs": 1.1060269999999999,
+      "candidateWorkerSpanMs": 1.148003,
+      "baselineReplyToSettleReceiptCallerMs": 0.10308902710676193,
+      "candidateReplyToSettleReceiptCallerMs": 0.20950590260326862,
+      "baselineFields": {
+        "rawScore": 34,
+        "score": 34,
+        "move": 41,
+        "mustPass": false,
+        "nodes": 15686,
+        "completedDepth": 12,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": true,
+        "isEndSearch": true,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      },
+      "candidateFields": {
+        "rawScore": 34,
+        "score": 34,
+        "move": 41,
+        "mustPass": false,
+        "nodes": 15686,
+        "completedDepth": 12,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": true,
+        "isEndSearch": true,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      }
+    },
+    {
+      "profile": "timed",
+      "family": "development/continuous16-practical-v1/f0",
+      "root": "development/continuous16-practical-v1/f0/p56",
+      "repeat": 0,
+      "baselineIndex": 67,
+      "candidateIndex": 71,
+      "baselineCompleted": true,
+      "candidateCompleted": true,
+      "baselineDepth": 4,
+      "candidateDepth": 4,
+      "candidateMinusBaselineDepth": 0,
+      "baselineCallerMs": 0.17960404511541128,
+      "candidateCallerMs": 0.2469539176672697,
+      "candidateMinusBaselineCallerMs": 0.06734987255185843,
+      "baselineProcessCPUSeconds": 0.0,
+      "candidateProcessCPUSeconds": 0.0,
+      "baselineMove": 56,
+      "candidateMove": 56,
+      "baselineRaw": 14,
+      "candidateRaw": 14,
+      "baselineSelectedNodes": 53,
+      "candidateSelectedNodes": 53,
+      "baselineSettledWholeNodes": 53,
+      "candidateSettledWholeNodes": 53,
+      "baselineWorkerSpanMs": 0.072851,
+      "candidateWorkerSpanMs": 0.13026,
+      "baselineReplyToSettleReceiptCallerMs": 0.08072599302977324,
+      "candidateReplyToSettleReceiptCallerMs": 4.76981105748564,
+      "baselineFields": {
+        "rawScore": 14,
+        "score": 14,
+        "move": 56,
+        "mustPass": false,
+        "nodes": 53,
+        "completedDepth": 4,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": true,
+        "isEndSearch": true,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      },
+      "candidateFields": {
+        "rawScore": 14,
+        "score": 14,
+        "move": 56,
+        "mustPass": false,
+        "nodes": 53,
+        "completedDepth": 4,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": true,
+        "isEndSearch": true,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      }
+    },
+    {
+      "profile": "timed",
+      "family": "development/continuous16-practical-v1/f0",
+      "root": "development/continuous16-practical-v1/f0/p16",
+      "repeat": 1,
+      "baselineIndex": 76,
+      "candidateIndex": 72,
+      "baselineCompleted": true,
+      "candidateCompleted": true,
+      "baselineDepth": 20,
+      "candidateDepth": 20,
+      "candidateMinusBaselineDepth": 0,
+      "baselineCallerMs": 1000.2848280128092,
+      "candidateCallerMs": 1000.307067995891,
+      "candidateMinusBaselineCallerMs": 0.022239983081817627,
+      "baselineProcessCPUSeconds": 1.0,
+      "candidateProcessCPUSeconds": 1.0,
+      "baselineMove": 37,
+      "candidateMove": 37,
+      "baselineRaw": 23,
+      "candidateRaw": 23,
+      "baselineSelectedNodes": 11994257,
+      "candidateSelectedNodes": 11994257,
+      "baselineSettledWholeNodes": 12732160,
+      "candidateSettledWholeNodes": 12436224,
+      "baselineWorkerSpanMs": 1000.101868,
+      "candidateWorkerSpanMs": 1000.112112,
+      "baselineReplyToSettleReceiptCallerMs": 0.14643499162048101,
+      "candidateReplyToSettleReceiptCallerMs": 0.27814297936856747,
+      "baselineFields": {
+        "rawScore": 23,
+        "score": 24,
+        "move": 37,
+        "mustPass": false,
+        "nodes": 11994257,
+        "completedDepth": 20,
+        "selectivity": 0,
+        "probability": 74.0,
+        "proven": false,
+        "isEndSearch": false,
+        "scoreUnits": "engine-disc",
+        "stopped": "timeout"
+      },
+      "candidateFields": {
+        "rawScore": 23,
+        "score": 24,
+        "move": 37,
+        "mustPass": false,
+        "nodes": 11994257,
+        "completedDepth": 20,
+        "selectivity": 0,
+        "probability": 74.0,
+        "proven": false,
+        "isEndSearch": false,
+        "scoreUnits": "engine-disc",
+        "stopped": "timeout"
+      }
+    },
+    {
+      "profile": "timed",
+      "family": "development/continuous16-practical-v1/f0",
+      "root": "development/continuous16-practical-v1/f0/p32",
+      "repeat": 1,
+      "baselineIndex": 77,
+      "candidateIndex": 73,
+      "baselineCompleted": true,
+      "candidateCompleted": true,
+      "baselineDepth": 28,
+      "candidateDepth": 28,
+      "candidateMinusBaselineDepth": 0,
+      "baselineCallerMs": 1000.2675929572433,
+      "candidateCallerMs": 1000.3023450262845,
+      "candidateMinusBaselineCallerMs": 0.03475206904113293,
+      "baselineProcessCPUSeconds": 1.0000000000000004,
+      "candidateProcessCPUSeconds": 0.9999999999999996,
+      "baselineMove": 2,
+      "candidateMove": 2,
+      "baselineRaw": 38,
+      "candidateRaw": 38,
+      "baselineSelectedNodes": 11014777,
+      "candidateSelectedNodes": 11014757,
+      "baselineSettledWholeNodes": 13961216,
+      "candidateSettledWholeNodes": 14144256,
+      "baselineWorkerSpanMs": 1000.096657,
+      "candidateWorkerSpanMs": 1000.091934,
+      "baselineReplyToSettleReceiptCallerMs": 0.18830900080502033,
+      "candidateReplyToSettleReceiptCallerMs": 0.147887971252203,
+      "baselineFields": {
+        "rawScore": 38,
+        "score": 38,
+        "move": 2,
+        "mustPass": false,
+        "nodes": 11014777,
+        "completedDepth": 28,
+        "selectivity": 0,
+        "probability": 74.0,
+        "proven": false,
+        "isEndSearch": true,
+        "scoreUnits": "engine-disc",
+        "stopped": "timeout"
+      },
+      "candidateFields": {
+        "rawScore": 38,
+        "score": 38,
+        "move": 2,
+        "mustPass": false,
+        "nodes": 11014757,
+        "completedDepth": 28,
+        "selectivity": 0,
+        "probability": 74.0,
+        "proven": false,
+        "isEndSearch": true,
+        "scoreUnits": "engine-disc",
+        "stopped": "timeout"
+      }
+    },
+    {
+      "profile": "timed",
+      "family": "development/continuous16-practical-v1/f0",
+      "root": "development/continuous16-practical-v1/f0/p48",
+      "repeat": 1,
+      "baselineIndex": 78,
+      "candidateIndex": 74,
+      "baselineCompleted": true,
+      "candidateCompleted": true,
+      "baselineDepth": 12,
+      "candidateDepth": 12,
+      "candidateMinusBaselineDepth": 0,
+      "baselineCallerMs": 1.1936250375583768,
+      "candidateCallerMs": 1.2301449896767735,
+      "candidateMinusBaselineCallerMs": 0.03651995211839676,
+      "baselineProcessCPUSeconds": 0.0,
+      "candidateProcessCPUSeconds": 0.0,
+      "baselineMove": 41,
+      "candidateMove": 41,
+      "baselineRaw": 34,
+      "candidateRaw": 34,
+      "baselineSelectedNodes": 15686,
+      "candidateSelectedNodes": 15686,
+      "baselineSettledWholeNodes": 15686,
+      "candidateSettledWholeNodes": 15686,
+      "baselineWorkerSpanMs": 1.079191,
+      "candidateWorkerSpanMs": 1.088182,
+      "baselineReplyToSettleReceiptCallerMs": 0.10181195102632046,
+      "candidateReplyToSettleReceiptCallerMs": 0.10031205601990223,
+      "baselineFields": {
+        "rawScore": 34,
+        "score": 34,
+        "move": 41,
+        "mustPass": false,
+        "nodes": 15686,
+        "completedDepth": 12,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": true,
+        "isEndSearch": true,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      },
+      "candidateFields": {
+        "rawScore": 34,
+        "score": 34,
+        "move": 41,
+        "mustPass": false,
+        "nodes": 15686,
+        "completedDepth": 12,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": true,
+        "isEndSearch": true,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      }
+    },
+    {
+      "profile": "timed",
+      "family": "development/continuous16-practical-v1/f0",
+      "root": "development/continuous16-practical-v1/f0/p56",
+      "repeat": 1,
+      "baselineIndex": 79,
+      "candidateIndex": 75,
+      "baselineCompleted": true,
+      "candidateCompleted": true,
+      "baselineDepth": 4,
+      "candidateDepth": 4,
+      "candidateMinusBaselineDepth": 0,
+      "baselineCallerMs": 0.3185280365869403,
+      "candidateCallerMs": 3.179675084538758,
+      "candidateMinusBaselineCallerMs": 2.8611470479518175,
+      "baselineProcessCPUSeconds": 0.0,
+      "candidateProcessCPUSeconds": 0.0,
+      "baselineMove": 56,
+      "candidateMove": 56,
+      "baselineRaw": 14,
+      "candidateRaw": 14,
+      "baselineSelectedNodes": 53,
+      "candidateSelectedNodes": 53,
+      "baselineSettledWholeNodes": 53,
+      "candidateSettledWholeNodes": 53,
+      "baselineWorkerSpanMs": 0.07941900000000002,
+      "candidateWorkerSpanMs": 0.07196499999999999,
+      "baselineReplyToSettleReceiptCallerMs": 0.08950196206569672,
+      "candidateReplyToSettleReceiptCallerMs": 0.1733439275994897,
+      "baselineFields": {
+        "rawScore": 14,
+        "score": 14,
+        "move": 56,
+        "mustPass": false,
+        "nodes": 53,
+        "completedDepth": 4,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": true,
+        "isEndSearch": true,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      },
+      "candidateFields": {
+        "rawScore": 14,
+        "score": 14,
+        "move": 56,
+        "mustPass": false,
+        "nodes": 53,
+        "completedDepth": 4,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": true,
+        "isEndSearch": true,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      }
+    },
+    {
+      "profile": "timed",
+      "family": "development/continuous16-practical-v1/f1",
+      "root": "development/continuous16-practical-v1/f1/p16",
+      "repeat": 0,
+      "baselineIndex": 80,
+      "candidateIndex": 84,
+      "baselineCompleted": true,
+      "candidateCompleted": true,
+      "baselineDepth": 22,
+      "candidateDepth": 22,
+      "candidateMinusBaselineDepth": 0,
+      "baselineCallerMs": 1000.2616610145196,
+      "candidateCallerMs": 1000.2474170178175,
+      "candidateMinusBaselineCallerMs": -0.01424399670213461,
+      "baselineProcessCPUSeconds": 1.0,
+      "candidateProcessCPUSeconds": 1.0,
+      "baselineMove": 25,
+      "candidateMove": 25,
+      "baselineRaw": -14,
+      "candidateRaw": -14,
+      "baselineSelectedNodes": 10581889,
+      "candidateSelectedNodes": 10581889,
+      "baselineSettledWholeNodes": 11834880,
+      "candidateSettledWholeNodes": 11590912,
+      "baselineWorkerSpanMs": 1000.114766,
+      "candidateWorkerSpanMs": 1000.0754850000001,
+      "baselineReplyToSettleReceiptCallerMs": 0.13882701750844717,
+      "candidateReplyToSettleReceiptCallerMs": 2.329131937585771,
+      "baselineFields": {
+        "rawScore": -14,
+        "score": -14,
+        "move": 25,
+        "mustPass": false,
+        "nodes": 10581889,
+        "completedDepth": 22,
+        "selectivity": 0,
+        "probability": 74.0,
+        "proven": false,
+        "isEndSearch": false,
+        "scoreUnits": "engine-disc",
+        "stopped": "timeout"
+      },
+      "candidateFields": {
+        "rawScore": -14,
+        "score": -14,
+        "move": 25,
+        "mustPass": false,
+        "nodes": 10581889,
+        "completedDepth": 22,
+        "selectivity": 0,
+        "probability": 74.0,
+        "proven": false,
+        "isEndSearch": false,
+        "scoreUnits": "engine-disc",
+        "stopped": "timeout"
+      }
+    },
+    {
+      "profile": "timed",
+      "family": "development/continuous16-practical-v1/f1",
+      "root": "development/continuous16-practical-v1/f1/p32",
+      "repeat": 0,
+      "baselineIndex": 81,
+      "candidateIndex": 85,
+      "baselineCompleted": true,
+      "candidateCompleted": true,
+      "baselineDepth": 16,
+      "candidateDepth": 16,
+      "candidateMinusBaselineDepth": 0,
+      "baselineCallerMs": 1000.3205850953236,
+      "candidateCallerMs": 1000.261252047494,
+      "candidateMinusBaselineCallerMs": -0.059333047829568386,
+      "baselineProcessCPUSeconds": 1.0,
+      "candidateProcessCPUSeconds": 1.0,
+      "baselineMove": 0,
+      "candidateMove": 0,
+      "baselineRaw": 7,
+      "candidateRaw": 7,
+      "baselineSelectedNodes": 1291540,
+      "candidateSelectedNodes": 1291518,
+      "baselineSettledWholeNodes": 23410944,
+      "candidateSettledWholeNodes": 23565312,
+      "baselineWorkerSpanMs": 1000.112766,
+      "candidateWorkerSpanMs": 1000.0740529999999,
+      "baselineReplyToSettleReceiptCallerMs": 0.19311194773763418,
+      "candidateReplyToSettleReceiptCallerMs": 4.468441940844059,
+      "baselineFields": {
+        "rawScore": 7,
+        "score": 8,
+        "move": 0,
+        "mustPass": false,
+        "nodes": 1291540,
+        "completedDepth": 16,
+        "selectivity": 0,
+        "probability": 74.0,
+        "proven": false,
+        "isEndSearch": false,
+        "scoreUnits": "engine-disc",
+        "stopped": "timeout"
+      },
+      "candidateFields": {
+        "rawScore": 7,
+        "score": 8,
+        "move": 0,
+        "mustPass": false,
+        "nodes": 1291518,
+        "completedDepth": 16,
+        "selectivity": 0,
+        "probability": 74.0,
+        "proven": false,
+        "isEndSearch": false,
+        "scoreUnits": "engine-disc",
+        "stopped": "timeout"
+      }
+    },
+    {
+      "profile": "timed",
+      "family": "development/continuous16-practical-v1/f1",
+      "root": "development/continuous16-practical-v1/f1/p48",
+      "repeat": 0,
+      "baselineIndex": 82,
+      "candidateIndex": 86,
+      "baselineCompleted": true,
+      "candidateCompleted": true,
+      "baselineDepth": 12,
+      "candidateDepth": 12,
+      "candidateMinusBaselineDepth": 0,
+      "baselineCallerMs": 3.2320619793608785,
+      "candidateCallerMs": 3.384646028280258,
+      "candidateMinusBaselineCallerMs": 0.1525840489193797,
+      "baselineProcessCPUSeconds": 0.0,
+      "candidateProcessCPUSeconds": 0.0,
+      "baselineMove": 55,
+      "candidateMove": 55,
+      "baselineRaw": 16,
+      "candidateRaw": 16,
+      "baselineSelectedNodes": 42890,
+      "candidateSelectedNodes": 42890,
+      "baselineSettledWholeNodes": 42890,
+      "candidateSettledWholeNodes": 42890,
+      "baselineWorkerSpanMs": 3.128266,
+      "candidateWorkerSpanMs": 3.173013,
+      "baselineReplyToSettleReceiptCallerMs": 0.09992800187319517,
+      "candidateReplyToSettleReceiptCallerMs": 0.18345098942518234,
+      "baselineFields": {
+        "rawScore": 16,
+        "score": 16,
+        "move": 55,
+        "mustPass": false,
+        "nodes": 42890,
+        "completedDepth": 12,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": true,
+        "isEndSearch": true,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      },
+      "candidateFields": {
+        "rawScore": 16,
+        "score": 16,
+        "move": 55,
+        "mustPass": false,
+        "nodes": 42890,
+        "completedDepth": 12,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": true,
+        "isEndSearch": true,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      }
+    },
+    {
+      "profile": "timed",
+      "family": "development/continuous16-practical-v1/f1",
+      "root": "development/continuous16-practical-v1/f1/p56",
+      "repeat": 0,
+      "baselineIndex": 83,
+      "candidateIndex": 87,
+      "baselineCompleted": true,
+      "candidateCompleted": true,
+      "baselineDepth": 4,
+      "candidateDepth": 4,
+      "candidateMinusBaselineDepth": 0,
+      "baselineCallerMs": 0.20760600455105305,
+      "candidateCallerMs": 0.30483806040138006,
+      "candidateMinusBaselineCallerMs": 0.09723205585032701,
+      "baselineProcessCPUSeconds": 0.0,
+      "candidateProcessCPUSeconds": 0.0,
+      "baselineMove": 56,
+      "candidateMove": 56,
+      "baselineRaw": -16,
+      "candidateRaw": -16,
+      "baselineSelectedNodes": 52,
+      "candidateSelectedNodes": 52,
+      "baselineSettledWholeNodes": 52,
+      "candidateSettledWholeNodes": 52,
+      "baselineWorkerSpanMs": 0.074639,
+      "candidateWorkerSpanMs": 0.156923,
+      "baselineReplyToSettleReceiptCallerMs": 0.11663790792226791,
+      "candidateReplyToSettleReceiptCallerMs": 0.14632893726229668,
+      "baselineFields": {
+        "rawScore": -16,
+        "score": -16,
+        "move": 56,
+        "mustPass": false,
+        "nodes": 52,
+        "completedDepth": 4,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": true,
+        "isEndSearch": true,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      },
+      "candidateFields": {
+        "rawScore": -16,
+        "score": -16,
+        "move": 56,
+        "mustPass": false,
+        "nodes": 52,
+        "completedDepth": 4,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": true,
+        "isEndSearch": true,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      }
+    },
+    {
+      "profile": "timed",
+      "family": "development/continuous16-practical-v1/f1",
+      "root": "development/continuous16-practical-v1/f1/p16",
+      "repeat": 1,
+      "baselineIndex": 92,
+      "candidateIndex": 88,
+      "baselineCompleted": true,
+      "candidateCompleted": true,
+      "baselineDepth": 22,
+      "candidateDepth": 22,
+      "candidateMinusBaselineDepth": 0,
+      "baselineCallerMs": 1001.3314270181581,
+      "candidateCallerMs": 1003.7286899751052,
+      "candidateMinusBaselineCallerMs": 2.3972629569470882,
+      "baselineProcessCPUSeconds": 1.0099999999999998,
+      "candidateProcessCPUSeconds": 1.0,
+      "baselineMove": 25,
+      "candidateMove": 25,
+      "baselineRaw": -14,
+      "candidateRaw": -14,
+      "baselineSelectedNodes": 10581889,
+      "candidateSelectedNodes": 10581889,
+      "baselineSettledWholeNodes": 10888448,
+      "candidateSettledWholeNodes": 11167744,
+      "baselineWorkerSpanMs": 1000.1040869999999,
+      "candidateWorkerSpanMs": 1000.112852,
+      "baselineReplyToSettleReceiptCallerMs": 0.18543400801718235,
+      "candidateReplyToSettleReceiptCallerMs": 0.22184301633387804,
+      "baselineFields": {
+        "rawScore": -14,
+        "score": -14,
+        "move": 25,
+        "mustPass": false,
+        "nodes": 10581889,
+        "completedDepth": 22,
+        "selectivity": 0,
+        "probability": 74.0,
+        "proven": false,
+        "isEndSearch": false,
+        "scoreUnits": "engine-disc",
+        "stopped": "timeout"
+      },
+      "candidateFields": {
+        "rawScore": -14,
+        "score": -14,
+        "move": 25,
+        "mustPass": false,
+        "nodes": 10581889,
+        "completedDepth": 22,
+        "selectivity": 0,
+        "probability": 74.0,
+        "proven": false,
+        "isEndSearch": false,
+        "scoreUnits": "engine-disc",
+        "stopped": "timeout"
+      }
+    },
+    {
+      "profile": "timed",
+      "family": "development/continuous16-practical-v1/f1",
+      "root": "development/continuous16-practical-v1/f1/p32",
+      "repeat": 1,
+      "baselineIndex": 93,
+      "candidateIndex": 89,
+      "baselineCompleted": true,
+      "candidateCompleted": true,
+      "baselineDepth": 16,
+      "candidateDepth": 16,
+      "candidateMinusBaselineDepth": 0,
+      "baselineCallerMs": 1000.3543299390003,
+      "candidateCallerMs": 1004.412250011228,
+      "candidateMinusBaselineCallerMs": 4.0579200722277164,
+      "baselineProcessCPUSeconds": 1.0,
+      "candidateProcessCPUSeconds": 0.9999999999999991,
+      "baselineMove": 0,
+      "candidateMove": 0,
+      "baselineRaw": 7,
+      "candidateRaw": 7,
+      "baselineSelectedNodes": 1291438,
+      "candidateSelectedNodes": 1291476,
+      "baselineSettledWholeNodes": 22597376,
+      "candidateSettledWholeNodes": 22573056,
+      "baselineWorkerSpanMs": 1000.120003,
+      "candidateWorkerSpanMs": 1000.08716,
+      "baselineReplyToSettleReceiptCallerMs": 0.1543400576338172,
+      "candidateReplyToSettleReceiptCallerMs": 0.3491649404168129,
+      "baselineFields": {
+        "rawScore": 7,
+        "score": 8,
+        "move": 0,
+        "mustPass": false,
+        "nodes": 1291438,
+        "completedDepth": 16,
+        "selectivity": 0,
+        "probability": 74.0,
+        "proven": false,
+        "isEndSearch": false,
+        "scoreUnits": "engine-disc",
+        "stopped": "timeout"
+      },
+      "candidateFields": {
+        "rawScore": 7,
+        "score": 8,
+        "move": 0,
+        "mustPass": false,
+        "nodes": 1291476,
+        "completedDepth": 16,
+        "selectivity": 0,
+        "probability": 74.0,
+        "proven": false,
+        "isEndSearch": false,
+        "scoreUnits": "engine-disc",
+        "stopped": "timeout"
+      }
+    },
+    {
+      "profile": "timed",
+      "family": "development/continuous16-practical-v1/f1",
+      "root": "development/continuous16-practical-v1/f1/p48",
+      "repeat": 1,
+      "baselineIndex": 94,
+      "candidateIndex": 90,
+      "baselineCompleted": true,
+      "candidateCompleted": true,
+      "baselineDepth": 12,
+      "candidateDepth": 12,
+      "candidateMinusBaselineDepth": 0,
+      "baselineCallerMs": 3.3634939463809133,
+      "candidateCallerMs": 6.0075229266658425,
+      "candidateMinusBaselineCallerMs": 2.6440289802849293,
+      "baselineProcessCPUSeconds": 0.0,
+      "candidateProcessCPUSeconds": 0.009999999999999787,
+      "baselineMove": 55,
+      "candidateMove": 55,
+      "baselineRaw": 16,
+      "candidateRaw": 16,
+      "baselineSelectedNodes": 42890,
+      "candidateSelectedNodes": 42890,
+      "baselineSettledWholeNodes": 42890,
+      "candidateSettledWholeNodes": 42890,
+      "baselineWorkerSpanMs": 3.227453,
+      "candidateWorkerSpanMs": 4.269215,
+      "baselineReplyToSettleReceiptCallerMs": 0.10882504284381866,
+      "candidateReplyToSettleReceiptCallerMs": 0.12787198647856712,
+      "baselineFields": {
+        "rawScore": 16,
+        "score": 16,
+        "move": 55,
+        "mustPass": false,
+        "nodes": 42890,
+        "completedDepth": 12,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": true,
+        "isEndSearch": true,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      },
+      "candidateFields": {
+        "rawScore": 16,
+        "score": 16,
+        "move": 55,
+        "mustPass": false,
+        "nodes": 42890,
+        "completedDepth": 12,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": true,
+        "isEndSearch": true,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      }
+    },
+    {
+      "profile": "timed",
+      "family": "development/continuous16-practical-v1/f1",
+      "root": "development/continuous16-practical-v1/f1/p56",
+      "repeat": 1,
+      "baselineIndex": 95,
+      "candidateIndex": 91,
+      "baselineCompleted": true,
+      "candidateCompleted": true,
+      "baselineDepth": 4,
+      "candidateDepth": 4,
+      "candidateMinusBaselineDepth": 0,
+      "baselineCallerMs": 6.186896003782749,
+      "candidateCallerMs": 2.3988530738279223,
+      "candidateMinusBaselineCallerMs": -3.788042929954827,
+      "baselineProcessCPUSeconds": 0.0,
+      "candidateProcessCPUSeconds": 0.0,
+      "baselineMove": 56,
+      "candidateMove": 56,
+      "baselineRaw": -16,
+      "candidateRaw": -16,
+      "baselineSelectedNodes": 52,
+      "candidateSelectedNodes": 52,
+      "baselineSettledWholeNodes": 52,
+      "candidateSettledWholeNodes": 52,
+      "baselineWorkerSpanMs": 0.08848299999999999,
+      "candidateWorkerSpanMs": 0.10539299999999999,
+      "baselineReplyToSettleReceiptCallerMs": 0.1290289219468832,
+      "candidateReplyToSettleReceiptCallerMs": 0.11669297236949205,
+      "baselineFields": {
+        "rawScore": -16,
+        "score": -16,
+        "move": 56,
+        "mustPass": false,
+        "nodes": 52,
+        "completedDepth": 4,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": true,
+        "isEndSearch": true,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      },
+      "candidateFields": {
+        "rawScore": -16,
+        "score": -16,
+        "move": 56,
+        "mustPass": false,
+        "nodes": 52,
+        "completedDepth": 4,
+        "selectivity": 6,
+        "probability": 100.0,
+        "proven": true,
+        "isEndSearch": true,
+        "scoreUnits": "engine-disc",
+        "stopped": null
+      }
+    }
+  ],
+  "stages": [
+    {
+      "placement": 16,
+      "pairs": 4,
+      "baselineDepth": {
+        "count": 4,
+        "missing": 0,
+        "minimum": 20,
+        "median": 21.0,
+        "maximum": 22,
+        "mean": 21,
+        "sum": 84
+      },
+      "candidateDepth": {
+        "count": 4,
+        "missing": 0,
+        "minimum": 20,
+        "median": 21.0,
+        "maximum": 22,
+        "mean": 21,
+        "sum": 84
+      },
+      "candidateMinusBaselineDepth": {
+        "count": 4,
+        "missing": 0,
+        "minimum": 0,
+        "median": 0.0,
+        "maximum": 0,
+        "mean": 0,
+        "sum": 0
+      },
+      "higher": 0,
+      "equal": 4,
+      "lower": 0,
+      "missing": 0,
+      "distribution": {
+        "0": 4
+      }
+    },
+    {
+      "placement": 32,
+      "pairs": 4,
+      "baselineDepth": {
+        "count": 4,
+        "missing": 0,
+        "minimum": 16,
+        "median": 22.0,
+        "maximum": 28,
+        "mean": 22,
+        "sum": 88
+      },
+      "candidateDepth": {
+        "count": 4,
+        "missing": 0,
+        "minimum": 16,
+        "median": 22.0,
+        "maximum": 28,
+        "mean": 22,
+        "sum": 88
+      },
+      "candidateMinusBaselineDepth": {
+        "count": 4,
+        "missing": 0,
+        "minimum": 0,
+        "median": 0.0,
+        "maximum": 0,
+        "mean": 0,
+        "sum": 0
+      },
+      "higher": 0,
+      "equal": 4,
+      "lower": 0,
+      "missing": 0,
+      "distribution": {
+        "0": 4
+      }
+    },
+    {
+      "placement": 48,
+      "pairs": 4,
+      "baselineDepth": {
+        "count": 4,
+        "missing": 0,
+        "minimum": 12,
+        "median": 12.0,
+        "maximum": 12,
+        "mean": 12,
+        "sum": 48
+      },
+      "candidateDepth": {
+        "count": 4,
+        "missing": 0,
+        "minimum": 12,
+        "median": 12.0,
+        "maximum": 12,
+        "mean": 12,
+        "sum": 48
+      },
+      "candidateMinusBaselineDepth": {
+        "count": 4,
+        "missing": 0,
+        "minimum": 0,
+        "median": 0.0,
+        "maximum": 0,
+        "mean": 0,
+        "sum": 0
+      },
+      "higher": 0,
+      "equal": 4,
+      "lower": 0,
+      "missing": 0,
+      "distribution": {
+        "0": 4
+      }
+    },
+    {
+      "placement": 56,
+      "pairs": 4,
+      "baselineDepth": {
+        "count": 4,
+        "missing": 0,
+        "minimum": 4,
+        "median": 4.0,
+        "maximum": 4,
+        "mean": 4,
+        "sum": 16
+      },
+      "candidateDepth": {
+        "count": 4,
+        "missing": 0,
+        "minimum": 4,
+        "median": 4.0,
+        "maximum": 4,
+        "mean": 4,
+        "sum": 16
+      },
+      "candidateMinusBaselineDepth": {
+        "count": 4,
+        "missing": 0,
+        "minimum": 0,
+        "median": 0.0,
+        "maximum": 0,
+        "mean": 0,
+        "sum": 0
+      },
+      "higher": 0,
+      "equal": 4,
+      "lower": 0,
+      "missing": 0,
+      "distribution": {
+        "0": 4
+      }
+    }
+  ],
+  "earlyMidDisposition": {
+    "pairs": 8,
+    "higher": 0,
+    "equal": 8,
+    "lower": 0,
+    "missing": 0
+  },
+  "allTimedDisposition": {
+    "pairs": 16,
+    "higher": 0,
+    "equal": 16,
+    "lower": 0,
+    "missing": 0
+  },
+  "actionsAgreeTimed": 16,
+  "aggregates": {
+    "fixed": {
+      "baseline": {
+        "requests": 2,
+        "processCPUSeconds": {
+          "count": 2,
+          "missing": 0,
+          "minimum": 0.72,
+          "median": 0.74,
+          "maximum": 0.7599999999999999,
+          "mean": 0.74,
+          "sum": 1.48
+        },
+        "completedDepth": {
+          "count": 2,
+          "missing": 0,
+          "minimum": 13,
+          "median": 13.0,
+          "maximum": 13,
+          "mean": 13,
+          "sum": 26
+        },
+        "selectedNodes": {
+          "count": 2,
+          "missing": 0,
+          "minimum": 8684965,
+          "median": 8684965.0,
+          "maximum": 8684965,
+          "mean": 8684965,
+          "sum": 17369930
+        },
+        "settledWholeNodes": {
+          "count": 2,
+          "missing": 0,
+          "minimum": 8684965,
+          "median": 8684965.0,
+          "maximum": 8684965,
+          "mean": 8684965,
+          "sum": 17369930
+        },
+        "completed": 2,
+        "legalFallbacks": 0,
+        "nativeWorkerSpanMs": {
+          "count": 2,
+          "missing": 0,
+          "minimum": 724.0049409999999,
+          "median": 740.216518,
+          "maximum": 756.428095,
+          "mean": 740.216518,
+          "sum": 1480.433036
+        },
+        "nativeDecisionToWorkerSettleMs": {
+          "count": 2,
+          "missing": 0,
+          "minimum": 0.02119900000002417,
+          "median": 0.02266250000002401,
+          "maximum": 0.02412600000002385,
+          "mean": 0.02266250000002401,
+          "sum": 0.04532500000004802
+        },
+        "nativeDeadlineOvershootMs": {
+          "count": 2,
+          "missing": 0,
+          "minimum": 0.0,
+          "median": 0.0,
+          "maximum": 0.0,
+          "mean": 0.0,
+          "sum": 0.0
+        },
+        "callerMs": {
+          "count": 2,
+          "missing": 0,
+          "minimum": 724.1635050158948,
+          "median": 740.3708305209875,
+          "maximum": 756.5781560260803,
+          "mean": 740.3708305209875,
+          "sum": 1480.741661041975
+        },
+        "replyToSettleReceiptCallerMs": {
+          "count": 2,
+          "missing": 0,
+          "minimum": 0.18212501890957355,
+          "median": 0.8996995165944099,
+          "maximum": 1.6172740142792463,
+          "mean": 0.8996995165944099,
+          "sum": 1.7993990331888199
+        },
+        "requestToSettleReceiptCallerMs": {
+          "count": 2,
+          "missing": 0,
+          "minimum": 724.3456300348043,
+          "median": 741.2705300375819,
+          "maximum": 758.1954300403595,
+          "mean": 741.2705300375819,
+          "sum": 1482.5410600751638
+        }
+      },
+      "candidate": {
+        "requests": 2,
+        "processCPUSeconds": {
+          "count": 2,
+          "missing": 0,
+          "minimum": 0.72,
+          "median": 0.7249999999999999,
+          "maximum": 0.7299999999999999,
+          "mean": 0.7249999999999999,
+          "sum": 1.4499999999999997
+        },
+        "completedDepth": {
+          "count": 2,
+          "missing": 0,
+          "minimum": 13,
+          "median": 13.0,
+          "maximum": 13,
+          "mean": 13,
+          "sum": 26
+        },
+        "selectedNodes": {
+          "count": 2,
+          "missing": 0,
+          "minimum": 8684965,
+          "median": 8684965.0,
+          "maximum": 8684965,
+          "mean": 8684965,
+          "sum": 17369930
+        },
+        "settledWholeNodes": {
+          "count": 2,
+          "missing": 0,
+          "minimum": 8684965,
+          "median": 8684965.0,
+          "maximum": 8684965,
+          "mean": 8684965,
+          "sum": 17369930
+        },
+        "completed": 2,
+        "legalFallbacks": 0,
+        "nativeWorkerSpanMs": {
+          "count": 2,
+          "missing": 0,
+          "minimum": 724.5047920000001,
+          "median": 725.5902305,
+          "maximum": 726.675669,
+          "mean": 725.5902305,
+          "sum": 1451.180461
+        },
+        "nativeDecisionToWorkerSettleMs": {
+          "count": 2,
+          "missing": 0,
+          "minimum": 0.03234500000007756,
+          "median": 0.03532100000001037,
+          "maximum": 0.03829699999994318,
+          "mean": 0.03532100000001037,
+          "sum": 0.07064200000002074
+        },
+        "nativeDeadlineOvershootMs": {
+          "count": 2,
+          "missing": 0,
+          "minimum": 0.0,
+          "median": 0.0,
+          "maximum": 0.0,
+          "mean": 0.0,
+          "sum": 0.0
+        },
+        "callerMs": {
+          "count": 2,
+          "missing": 0,
+          "minimum": 724.7283380711451,
+          "median": 725.8143210201524,
+          "maximum": 726.9003039691597,
+          "mean": 725.8143210201524,
+          "sum": 1451.6286420403048
+        },
+        "replyToSettleReceiptCallerMs": {
+          "count": 2,
+          "missing": 0,
+          "minimum": 0.18653797451406717,
+          "median": 0.21059595746919513,
+          "maximum": 0.23465394042432308,
+          "mean": 0.21059595746919513,
+          "sum": 0.42119191493839025
+        },
+        "requestToSettleReceiptCallerMs": {
+          "count": 2,
+          "missing": 0,
+          "minimum": 724.9629920115694,
+          "median": 726.0249169776216,
+          "maximum": 727.0868419436738,
+          "mean": 726.0249169776216,
+          "sum": 1452.0498339552432
+        }
+      }
+    },
+    "timed": {
+      "baseline": {
+        "requests": 16,
+        "processCPUSeconds": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 0.0,
+          "median": 0.4950000000000001,
+          "maximum": 1.0099999999999998,
+          "mean": 0.5,
+          "sum": 8.0
+        },
+        "completedDepth": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 4,
+          "median": 14.0,
+          "maximum": 28,
+          "mean": 14.75,
+          "sum": 236
+        },
+        "selectedNodes": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 52,
+          "median": 667164.0,
+          "maximum": 11994257,
+          "mean": 4367634.375,
+          "sum": 69882150
+        },
+        "settledWholeNodes": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 52,
+          "median": 5465669.0,
+          "maximum": 23410944,
+          "mean": 7599431.125,
+          "sum": 121590898
+        },
+        "completed": 16,
+        "legalFallbacks": 0,
+        "nativeWorkerSpanMs": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 0.072851,
+          "median": 501.659437,
+          "maximum": 1000.120003,
+          "mean": 500.6062698125,
+          "sum": 8009.700317
+        },
+        "nativeDecisionToWorkerSettleMs": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 0.0,
+          "median": 0.030654000000001957,
+          "maximum": 0.066667999999936,
+          "mean": 0.03019812500002983,
+          "sum": 0.4831700000004773
+        },
+        "nativeDeadlineOvershootMs": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 0.0,
+          "median": 0.03095649999994521,
+          "maximum": 0.06567099999995207,
+          "mean": 0.031676624999981584,
+          "sum": 0.5068259999997053
+        },
+        "callerMs": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 0.17960404511541128,
+          "median": 503.22418252471834,
+          "maximum": 1001.3314270181581,
+          "mean": 501.2053152604494,
+          "sum": 8019.285044167191
+        },
+        "replyToSettleReceiptCallerMs": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 0.08072599302977324,
+          "median": 0.13392796972766519,
+          "maximum": 0.20377500914037228,
+          "mean": 0.13700236013391986,
+          "sum": 2.192037762142718
+        },
+        "requestToSettleReceiptCallerMs": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 0.2603300381451845,
+          "median": 503.35820647887886,
+          "maximum": 1001.5168610261753,
+          "mean": 501.34231762058334,
+          "sum": 8021.4770819293335
+        },
+        "callerOvershootOf1000Ms": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 0,
+          "median": 0.13073452282696962,
+          "maximum": 1.3314270181581378,
+          "mean": 0.2104814411723055,
+          "sum": 3.367703058756888
+        }
+      },
+      "candidate": {
+        "requests": 16,
+        "processCPUSeconds": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 0.0,
+          "median": 0.5049999999999994,
+          "maximum": 1.0000000000000002,
+          "mean": 0.5006249999999999,
+          "sum": 8.009999999999998
+        },
+        "completedDepth": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 4,
+          "median": 14.0,
+          "maximum": 28,
+          "mean": 14.75,
+          "sum": 236
+        },
+        "selectedNodes": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 52,
+          "median": 667183.0,
+          "maximum": 11994257,
+          "mean": 4367682.375,
+          "sum": 69882918
+        },
+        "settledWholeNodes": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 52,
+          "median": 5605317.0,
+          "maximum": 23565312,
+          "mean": 7568199.125,
+          "sum": 121091186
+        },
+        "completed": 16,
+        "legalFallbacks": 0,
+        "nativeWorkerSpanMs": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 0.07196499999999999,
+          "median": 502.171634,
+          "maximum": 1000.1160390000001,
+          "mean": 500.6821845625,
+          "sum": 8010.914953
+        },
+        "nativeDecisionToWorkerSettleMs": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 0.0,
+          "median": 0.024803999999916074,
+          "maximum": 0.06073400000013862,
+          "mean": 0.028003499999996365,
+          "sum": 0.44805599999994183
+        },
+        "nativeDeadlineOvershootMs": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 0.0,
+          "median": 0.028986500000030446,
+          "maximum": 0.07238799999993262,
+          "mean": 0.03153262500000409,
+          "sum": 0.5045220000000654
+        },
+        "callerMs": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 0.2469539176672697,
+          "median": 503.12746997224167,
+          "maximum": 1004.412250011228,
+          "mean": 501.75401294836774,
+          "sum": 8028.064207173884
+        },
+        "replyToSettleReceiptCallerMs": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 0.10031205601990223,
+          "median": 0.1948944991454482,
+          "maximum": 4.76981105748564,
+          "mean": 0.8757324758335017,
+          "sum": 14.011719613336027
+        },
+        "requestToSettleReceiptCallerMs": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 0.45116699766367674,
+          "median": 503.29281395534053,
+          "maximum": 1004.7614149516448,
+          "mean": 502.62974542420125,
+          "sum": 8042.07592678722
+        },
+        "callerOvershootOf1000Ms": {
+          "count": 16,
+          "missing": 0,
+          "minimum": 0,
+          "median": 0.12370850890874863,
+          "maximum": 4.412250011228025,
+          "mean": 0.6190723142935894,
+          "sum": 9.905157028697431
+        }
+      }
+    }
+  },
+  "loadedIdentities": [
+    {
+      "profile": "fixed",
+      "owner": "baseline",
+      "actualInfo": {
+        "coefficients": {
+          "a": 0.7308488452189136,
+          "b": -4.5708322989025865,
+          "c": 1.096319765006055,
+          "d": -0.8362251801219095,
+          "e": 4.610017383697701,
+          "f": 3.818582623595395,
+          "g": 1.7775013664098447
+        },
+        "completionProtocol": "full-search-worker-v1",
+        "computeWorkers": 1,
+        "engine": "console7.8.1-rust-singlethread-source-port",
+        "hashLevel": 20,
+        "hashSeed": 20261022,
+        "identityBinding": "callerVerified",
+        "idle": true,
+        "interpretation": "simd",
+        "midgameId": "sha256:0a8acbcbc23067933627f1bcc83c3f7ae6b7ff3e603d174a3364271fcaeeef2f",
+        "ok": true,
+        "orderingId": "sha256:bd908885e8bb85e72a9be2b0399f8ca52ed40a138bcaaecca3d13710945b9a93",
+        "processId": 2546914,
+        "processThreadCount": 2,
+        "stopVisitInterval": 256,
+        "ttBytes": 25165872,
+        "upstreamCommit": "570d5e0a478c9d720d75de06a5d31995f412704a",
+        "workerLifetime": "process",
+        "workerPool": 0,
+        "workerRustThreadId": "ThreadId(2)"
+      },
+      "expectedInfoMatched": true,
+      "binary": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/inline-undo-snapshot-software-v1/othello-full-search-inline-undo-snapshot",
+        "bytes": 967840,
+        "mode": "0555",
+        "sha256": "0bcd5815ba496bc5be0d532be4c19c1555ada34d4bf1ff930ddae48e857d5764"
+      },
+      "buildQualification": {
+        "path": "/workspaces/quoridor/research-data/othello/strong-ai-n96/inline-undo-snapshot-software-result-v1.json",
+        "bytes": 16070,
+        "mode": "0644",
+        "sha256": "d2b5e46c8e4497e09070f4eb0cbcb1dc0c0cbf9f24327326ce388f1009aefa06"
+      }
+    },
+    {
+      "profile": "fixed",
+      "owner": "candidate",
+      "actualInfo": {
+        "coefficients": {
+          "a": 0.7308488452189136,
+          "b": -4.5708322989025865,
+          "c": 1.096319765006055,
+          "d": -0.8362251801219095,
+          "e": 4.610017383697701,
+          "f": 3.818582623595395,
+          "g": 1.7775013664098447
+        },
+        "completionProtocol": "full-search-worker-v1",
+        "computeWorkers": 1,
+        "engine": "console7.8.1-rust-singlethread-source-port",
+        "hashLevel": 20,
+        "hashSeed": 20261022,
+        "identityBinding": "callerVerified",
+        "idle": true,
+        "interpretation": "simd",
+        "midgameId": "sha256:0a8acbcbc23067933627f1bcc83c3f7ae6b7ff3e603d174a3364271fcaeeef2f",
+        "ok": true,
+        "orderingId": "sha256:bd908885e8bb85e72a9be2b0399f8ca52ed40a138bcaaecca3d13710945b9a93",
+        "processId": 2546916,
+        "processThreadCount": 2,
+        "stopVisitInterval": 256,
+        "ttBytes": 25165872,
+        "upstreamCommit": "570d5e0a478c9d720d75de06a5d31995f412704a",
+        "workerLifetime": "process",
+        "workerPool": 0,
+        "workerRustThreadId": "ThreadId(2)"
+      },
+      "expectedInfoMatched": true,
+      "binary": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/prepared-pattern-grouped-software-v1/causal-lint-repair-v2/othello-full-search-prepared-pattern-grouped",
+        "bytes": 968920,
+        "mode": "0555",
+        "sha256": "daddd1c0ecca49a689019d35a9e8b86003ad09487396bcec7430cd3efb34ee09"
+      },
+      "buildQualification": {
+        "path": "/workspaces/quoridor/research-data/othello/strong-ai-n96/prepared-pattern-grouped-software-result-v2.json",
+        "bytes": 39924,
+        "mode": "0644",
+        "sha256": "48039cdad7e3bd48c1f96d2a965e60a952ad4bff75dd6644b433d6eb519e68ee"
+      }
+    },
+    {
+      "profile": "timed",
+      "owner": "baseline",
+      "actualInfo": {
+        "coefficients": {
+          "a": 0.7308488452189136,
+          "b": -4.5708322989025865,
+          "c": 1.096319765006055,
+          "d": -0.8362251801219095,
+          "e": 4.610017383697701,
+          "f": 3.818582623595395,
+          "g": 1.7775013664098447
+        },
+        "completionProtocol": "full-search-worker-v1",
+        "computeWorkers": 1,
+        "engine": "console7.8.1-rust-singlethread-source-port",
+        "hashLevel": 20,
+        "hashSeed": 20261022,
+        "identityBinding": "callerVerified",
+        "idle": true,
+        "interpretation": "simd",
+        "midgameId": "sha256:0a8acbcbc23067933627f1bcc83c3f7ae6b7ff3e603d174a3364271fcaeeef2f",
+        "ok": true,
+        "orderingId": "sha256:bd908885e8bb85e72a9be2b0399f8ca52ed40a138bcaaecca3d13710945b9a93",
+        "processId": 2546927,
+        "processThreadCount": 2,
+        "stopVisitInterval": 256,
+        "ttBytes": 25165872,
+        "upstreamCommit": "570d5e0a478c9d720d75de06a5d31995f412704a",
+        "workerLifetime": "process",
+        "workerPool": 0,
+        "workerRustThreadId": "ThreadId(2)"
+      },
+      "expectedInfoMatched": true,
+      "binary": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/inline-undo-snapshot-software-v1/othello-full-search-inline-undo-snapshot",
+        "bytes": 967840,
+        "mode": "0555",
+        "sha256": "0bcd5815ba496bc5be0d532be4c19c1555ada34d4bf1ff930ddae48e857d5764"
+      },
+      "buildQualification": {
+        "path": "/workspaces/quoridor/research-data/othello/strong-ai-n96/inline-undo-snapshot-software-result-v1.json",
+        "bytes": 16070,
+        "mode": "0644",
+        "sha256": "d2b5e46c8e4497e09070f4eb0cbcb1dc0c0cbf9f24327326ce388f1009aefa06"
+      }
+    },
+    {
+      "profile": "timed",
+      "owner": "candidate",
+      "actualInfo": {
+        "coefficients": {
+          "a": 0.7308488452189136,
+          "b": -4.5708322989025865,
+          "c": 1.096319765006055,
+          "d": -0.8362251801219095,
+          "e": 4.610017383697701,
+          "f": 3.818582623595395,
+          "g": 1.7775013664098447
+        },
+        "completionProtocol": "full-search-worker-v1",
+        "computeWorkers": 1,
+        "engine": "console7.8.1-rust-singlethread-source-port",
+        "hashLevel": 20,
+        "hashSeed": 20261022,
+        "identityBinding": "callerVerified",
+        "idle": true,
+        "interpretation": "simd",
+        "midgameId": "sha256:0a8acbcbc23067933627f1bcc83c3f7ae6b7ff3e603d174a3364271fcaeeef2f",
+        "ok": true,
+        "orderingId": "sha256:bd908885e8bb85e72a9be2b0399f8ca52ed40a138bcaaecca3d13710945b9a93",
+        "processId": 2546932,
+        "processThreadCount": 2,
+        "stopVisitInterval": 256,
+        "ttBytes": 25165872,
+        "upstreamCommit": "570d5e0a478c9d720d75de06a5d31995f412704a",
+        "workerLifetime": "process",
+        "workerPool": 0,
+        "workerRustThreadId": "ThreadId(2)"
+      },
+      "expectedInfoMatched": true,
+      "binary": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/prepared-pattern-grouped-software-v1/causal-lint-repair-v2/othello-full-search-prepared-pattern-grouped",
+        "bytes": 968920,
+        "mode": "0555",
+        "sha256": "daddd1c0ecca49a689019d35a9e8b86003ad09487396bcec7430cd3efb34ee09"
+      },
+      "buildQualification": {
+        "path": "/workspaces/quoridor/research-data/othello/strong-ai-n96/prepared-pattern-grouped-software-result-v2.json",
+        "bytes": 39924,
+        "mode": "0644",
+        "sha256": "48039cdad7e3bd48c1f96d2a965e60a952ad4bff75dd6644b433d6eb519e68ee"
+      }
+    }
+  ],
+  "lifecycle": {
+    "setups": [
+      {
+        "profile": "fixed",
+        "owner": "baseline",
+        "launchAndReadyMs": 170.55368702858686,
+        "pureModelParseMs": null,
+        "preMainMs": null,
+        "childCPUSecondsAtReady": 0.15
+      },
+      {
+        "profile": "fixed",
+        "owner": "candidate",
+        "launchAndReadyMs": 194.71702107694,
+        "pureModelParseMs": null,
+        "preMainMs": null,
+        "childCPUSecondsAtReady": 0.19
+      },
+      {
+        "profile": "timed",
+        "owner": "baseline",
+        "launchAndReadyMs": 151.5115750953555,
+        "pureModelParseMs": null,
+        "preMainMs": null,
+        "childCPUSecondsAtReady": 0.14
+      },
+      {
+        "profile": "timed",
+        "owner": "candidate",
+        "launchAndReadyMs": 186.78898096550256,
+        "pureModelParseMs": null,
+        "preMainMs": null,
+        "childCPUSecondsAtReady": 0.18
+      }
+    ],
+    "clears": [
+      {
+        "profile": "fixed",
+        "family": "development/continuous16-practical-v1/f0",
+        "block": 0,
+        "owner": "baseline",
+        "outerMs": 2.150287968106568,
+        "cpuBefore": 0.15,
+        "cpuAfter": 0.16
+      },
+      {
+        "profile": "fixed",
+        "family": "development/continuous16-practical-v1/f0",
+        "block": 1,
+        "owner": "candidate",
+        "outerMs": 2.001401036977768,
+        "cpuBefore": 0.19,
+        "cpuAfter": 0.19
+      },
+      {
+        "profile": "fixed",
+        "family": "development/continuous16-practical-v1/f0",
+        "block": 2,
+        "owner": "candidate",
+        "outerMs": 2.150577027350664,
+        "cpuBefore": 0.91,
+        "cpuAfter": 0.91
+      },
+      {
+        "profile": "fixed",
+        "family": "development/continuous16-practical-v1/f0",
+        "block": 3,
+        "owner": "baseline",
+        "outerMs": 2.1634389413520694,
+        "cpuBefore": 0.88,
+        "cpuAfter": 0.89
+      },
+      {
+        "profile": "timed",
+        "family": "development/continuous16-practical-v1/f0",
+        "block": 0,
+        "owner": "baseline",
+        "outerMs": 2.200552960857749,
+        "cpuBefore": 0.14,
+        "cpuAfter": 0.15
+      },
+      {
+        "profile": "timed",
+        "family": "development/continuous16-practical-v1/f0",
+        "block": 1,
+        "owner": "candidate",
+        "outerMs": 1.929810969159007,
+        "cpuBefore": 0.18,
+        "cpuAfter": 0.18
+      },
+      {
+        "profile": "timed",
+        "family": "development/continuous16-practical-v1/f0",
+        "block": 2,
+        "owner": "candidate",
+        "outerMs": 1.935787033289671,
+        "cpuBefore": 2.18,
+        "cpuAfter": 2.18
+      },
+      {
+        "profile": "timed",
+        "family": "development/continuous16-practical-v1/f0",
+        "block": 3,
+        "owner": "baseline",
+        "outerMs": 2.141710021533072,
+        "cpuBefore": 2.14,
+        "cpuAfter": 2.15
+      },
+      {
+        "profile": "timed",
+        "family": "development/continuous16-practical-v1/f1",
+        "block": 0,
+        "owner": "baseline",
+        "outerMs": 2.0469779847189784,
+        "cpuBefore": 4.15,
+        "cpuAfter": 4.15
+      },
+      {
+        "profile": "timed",
+        "family": "development/continuous16-practical-v1/f1",
+        "block": 1,
+        "owner": "candidate",
+        "outerMs": 2.0387449767440557,
+        "cpuBefore": 4.18,
+        "cpuAfter": 4.19
+      },
+      {
+        "profile": "timed",
+        "family": "development/continuous16-practical-v1/f1",
+        "block": 2,
+        "owner": "candidate",
+        "outerMs": 1.9111529691144824,
+        "cpuBefore": 6.19,
+        "cpuAfter": 6.19
+      },
+      {
+        "profile": "timed",
+        "family": "development/continuous16-practical-v1/f1",
+        "block": 3,
+        "owner": "baseline",
+        "outerMs": 6.391495931893587,
+        "cpuBefore": 6.15,
+        "cpuAfter": 6.15
+      }
+    ],
+    "drops": [
+      {
+        "profile": "fixed",
+        "owner": "baseline",
+        "cleanup": {
+          "exitCode": -15,
+          "unexpectedExit": false,
+          "directReaped": true,
+          "bytesSeen": 4418,
+          "bytesRetained": 4523,
+          "errors": []
+        },
+        "dropMs": 3.430810058489442,
+        "childCPUSecondsBeforeDrop": 1.65,
+        "CPUAfterDrop": null
+      },
+      {
+        "profile": "fixed",
+        "owner": "candidate",
+        "cleanup": {
+          "exitCode": -15,
+          "unexpectedExit": false,
+          "directReaped": true,
+          "bytesSeen": 4435,
+          "bytesRetained": 4540,
+          "errors": []
+        },
+        "dropMs": 7.516543962992728,
+        "childCPUSecondsBeforeDrop": 1.64,
+        "CPUAfterDrop": null
+      },
+      {
+        "profile": "timed",
+        "owner": "baseline",
+        "cleanup": {
+          "exitCode": -15,
+          "unexpectedExit": false,
+          "directReaped": true,
+          "bytesSeen": 29640,
+          "bytesRetained": 30195,
+          "errors": []
+        },
+        "dropMs": 7.871219888329506,
+        "childCPUSecondsBeforeDrop": 8.16,
+        "CPUAfterDrop": null
+      },
+      {
+        "profile": "timed",
+        "owner": "candidate",
+        "cleanup": {
+          "exitCode": -15,
+          "unexpectedExit": false,
+          "directReaped": true,
+          "bytesSeen": 29804,
+          "bytesRetained": 30359,
+          "errors": []
+        },
+        "dropMs": 15.71220497135073,
+        "childCPUSecondsBeforeDrop": 8.2,
+        "CPUAfterDrop": null
+      }
+    ],
+    "CPUClockTicksPerSecond": 100,
+    "CPUCounterScope": "owned PID utime+stime; all threads; no descendants"
+  },
+  "missingness": {
+    "baselineFallbacks": 0,
+    "candidateFallbacks": 0,
+    "exclusivePostDeadlineVisits": null,
+    "physicalNN": null,
+    "ISA": null,
+    "loadedLibraries": null,
+    "fullTT": null,
+    "restoration": null,
+    "allocatorTLS": null,
+    "continuousPeak": null
+  },
+  "scope": {
+    "newRawReadHashParse": 1,
+    "originalRawResultBytes": 160924,
+    "transientDecode": "whole new scalar request/result/context JSON; no linked input/model/weight/H/perf or prior scientific body opened",
+    "scientificRows": 36,
+    "pairs": 18,
+    "distinctRootStates": 8,
+    "correlatedFamilies": 2,
+    "independence": "not asserted; two repeats/root in two correlated development families; fixed reuses one of those roots",
+    "fixedPairs": 2,
+    "timedPairs": 16,
+    "canonicalOutOfScope": 92,
+    "noSearchOrNumericalReplay": true,
+    "inputRuntime": "normal maintained owner whole-JSON decoded admitted16; unused8 state/history may transiently decode, no Root/source-author input body open",
+    "CPU": "owned PID utime+stime/all native threads/no descendants; two boundary samples, CPU-after only after matching settle",
+    "CPUClockTicksPerSecond": 100,
+    "clocks": "Python caller/action receipt, native request Instant completion/receipt/decision/worker-settle, Python settle receipt and process CPU separate; nested spans not added; elapsedMs not whole runtime",
+    "nodes": "each owner selected snapshot versus settled whole invocation includes partial/discarded work; not isolated after-deadline visits",
+    "exclusivePostDeadlineVisits": null,
+    "physicalNN": null,
+    "ISA": null,
+    "loadedLibraries": null,
+    "fullTT": null,
+    "restoration": null,
+    "continuousPeak": null,
+    "strengthClaim": false,
+    "confidenceIntervals": null,
+    "NPS": null,
+    "historical": "old960/19fb68 DEFERRED_UNENTERED; prior28a/1402/9e7998/4699 retained separately without spliced clocks/results. This condition is retained inlineUndo0bcd versus qualified prepared-pattern/grouped daddd1c0 only; old Undo/ab5 and software failure/costs remain separate; corrected origin-binding-v2 within new same4MiB/O96MiB, no CXX/browser/profile/game",
+    "savedScalarFinalization": "Only saved scalar-table/summary/lifecycle read; original new result FileRef carried without reopening/rehashing body. No prior result/input/model/weight/H/perf replay."
+  },
+  "costs": {
+    "normalOwnerWholeSeconds": 20.02773338800762,
+    "originalOuterJobSeconds": 20.308244436979294,
+    "guardianCommandSeconds": 20.080766199040227,
+    "nestedSpansAreNotAdded": true,
+    "scalarCollectorSeconds": 0.03525783296208829,
+    "softwareOriginalOuterSeconds": 19.484486913890578,
+    "softwareResidualOuterSeconds": 28.919220297946595,
+    "softwareInclusiveTotalSeconds": 48.40370721183717,
+    "callerSoftware": "Previously qualified unchanged ad8c caller/fixture byref; no new caller software execution",
+    "priorCosts": "separately retained, not added again or refunded"
+  }
+}

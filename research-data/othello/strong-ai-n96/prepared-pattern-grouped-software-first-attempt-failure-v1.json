@@ -1,0 +1,993 @@
+{
+  "condition": "Prepared-pattern/grouped source45 first software attempt; no numerical request or scientific result",
+  "job": "02ccc6e2-0ccd-4c4d-bf23-4bb3f9f4e418",
+  "outer": {
+    "job_id": "02ccc6e2-0ccd-4c4d-bf23-4bb3f9f4e418",
+    "outcome": "failed",
+    "error": null,
+    "error_notes": [],
+    "exit_code": 1,
+    "finished_at": "2026-10-26T01:08:04.731959+00:00",
+    "wall_seconds": 19.484486913890578,
+    "remaining": [],
+    "direct_child_reaped": true,
+    "descendant_visibility": "observed",
+    "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+    "cleanup_complete": true,
+    "cleanup_errors": [],
+    "log_bytes_seen": 741,
+    "log_bytes_retained": 741
+  },
+  "softwareSTOP": {
+    "primary": {
+      "type": "AssertionError",
+      "message": "('affected-core-wasm-Clippy', {'type': 'CycleStopped', 'message': \"cycle child failed: ['/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo', 'clippy', '--offline', '--locked', '--manifest-path', '/workspaces/quoridor/Cargo.toml', '-j1', '--release', '--message-format=json-render-diagnostics', '-p', 'othello-core', '-p', 'othello-wasm', '--all-targets', '--', '-Dwarnings']: 101\"})"
+    },
+    "attemptedChecks": 4,
+    "actualCleanupSettled": true,
+    "TMPentries": [],
+    "sourceLeaseReleased": true,
+    "noAutomaticRetry": true
+  },
+  "checks": [
+    {
+      "name": "prepared-full-raw-all-phases",
+      "receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/prepared-pattern-grouped-software-v1/prepared-full-raw-all-phases.returned.json",
+        "bytes": 3978,
+        "mode": "0644",
+        "sha256": "f7ad75a4f7bbdd57ddbafb4896fffc72e7d81a6603db6b160c2c7ffa4f41cdea"
+      },
+      "normalReturn": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "test",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "/workspaces/quoridor/Cargo.toml",
+          "-j1",
+          "--release",
+          "--message-format=json-render-diagnostics",
+          "-p",
+          "othello-core",
+          "--lib",
+          "full_eval::tests::full_eval_avx2_forced_full_raw_all_phases_both_stm",
+          "--",
+          "--nocapture",
+          "--test-threads=1",
+          "--ignored",
+          "--exact"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 2533543,
+          "start_ticks": "102522528",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "software": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "software",
+        "log_bytes_seen": 19299,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 19299,
+        "wall_seconds": 16.305886823916808,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "exceptionOutcome": null,
+      "error": null,
+      "actualRecord": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "test",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "/workspaces/quoridor/Cargo.toml",
+          "-j1",
+          "--release",
+          "--message-format=json-render-diagnostics",
+          "-p",
+          "othello-core",
+          "--lib",
+          "full_eval::tests::full_eval_avx2_forced_full_raw_all_phases_both_stm",
+          "--",
+          "--nocapture",
+          "--test-threads=1",
+          "--ignored",
+          "--exact"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 2533543,
+          "start_ticks": "102522528",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "software": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "software",
+        "log_bytes_seen": 19299,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 19299,
+        "wall_seconds": 16.305886823916808,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "originalDiskSnapshot": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "test",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "/workspaces/quoridor/Cargo.toml",
+          "-j1",
+          "--release",
+          "--message-format=json-render-diagnostics",
+          "-p",
+          "othello-core",
+          "--lib",
+          "full_eval::tests::full_eval_avx2_forced_full_raw_all_phases_both_stm",
+          "--",
+          "--nocapture",
+          "--test-threads=1",
+          "--ignored",
+          "--exact"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 2533543,
+          "start_ticks": "102522528",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "software": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "software",
+        "log_bytes_seen": 19299,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 19299,
+        "wall_seconds": 16.305886823916808,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted",
+        "finalization_errors": []
+      },
+      "passedDefinition": true,
+      "exactKnownChildAbsentOrDifferent": true
+    },
+    {
+      "name": "prepared-exact-slice-edges",
+      "receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/prepared-pattern-grouped-software-v1/prepared-exact-slice-edges.returned.json",
+        "bytes": 3976,
+        "mode": "0644",
+        "sha256": "4e10c825b1ad04b1079a41d63e45d242d8a979ea8c34bc554342594cfd7e8d4a"
+      },
+      "normalReturn": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "test",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "/workspaces/quoridor/Cargo.toml",
+          "-j1",
+          "--release",
+          "--message-format=json-render-diagnostics",
+          "-p",
+          "othello-core",
+          "--lib",
+          "full_eval::tests::full_eval_avx2_exact_slice_tail_unaligned_i16_edges",
+          "--",
+          "--nocapture",
+          "--test-threads=1",
+          "--ignored",
+          "--exact"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 2533741,
+          "start_ticks": "102524164",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "software": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "software",
+        "log_bytes_seen": 19750,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 19750,
+        "wall_seconds": 0.3645527090411633,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "exceptionOutcome": null,
+      "error": null,
+      "actualRecord": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "test",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "/workspaces/quoridor/Cargo.toml",
+          "-j1",
+          "--release",
+          "--message-format=json-render-diagnostics",
+          "-p",
+          "othello-core",
+          "--lib",
+          "full_eval::tests::full_eval_avx2_exact_slice_tail_unaligned_i16_edges",
+          "--",
+          "--nocapture",
+          "--test-threads=1",
+          "--ignored",
+          "--exact"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 2533741,
+          "start_ticks": "102524164",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "software": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "software",
+        "log_bytes_seen": 19750,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 19750,
+        "wall_seconds": 0.3645527090411633,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "originalDiskSnapshot": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "test",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "/workspaces/quoridor/Cargo.toml",
+          "-j1",
+          "--release",
+          "--message-format=json-render-diagnostics",
+          "-p",
+          "othello-core",
+          "--lib",
+          "full_eval::tests::full_eval_avx2_exact_slice_tail_unaligned_i16_edges",
+          "--",
+          "--nocapture",
+          "--test-threads=1",
+          "--ignored",
+          "--exact"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 2533741,
+          "start_ticks": "102524164",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "software": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "software",
+        "log_bytes_seen": 19750,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 19750,
+        "wall_seconds": 0.3645527090411633,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted",
+        "finalization_errors": []
+      },
+      "passedDefinition": true,
+      "exactKnownChildAbsentOrDifferent": true
+    },
+    {
+      "name": "prepared-aux-signed-rounding",
+      "receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/prepared-pattern-grouped-software-v1/prepared-aux-signed-rounding.returned.json",
+        "bytes": 3952,
+        "mode": "0644",
+        "sha256": "8d6d1e55eaa5208f59456f9e24c03e5bbbbd6bc6f529eedf1a228127cd32aaa2"
+      },
+      "normalReturn": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "test",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "/workspaces/quoridor/Cargo.toml",
+          "-j1",
+          "--release",
+          "--message-format=json-render-diagnostics",
+          "-p",
+          "othello-core",
+          "--lib",
+          "full_eval::tests::full_eval_vector_auxiliary_unclipped_and_signed_rounding",
+          "--",
+          "--nocapture",
+          "--test-threads=1",
+          "--exact"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 2533785,
+          "start_ticks": "102524208",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "software": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "software",
+        "log_bytes_seen": 19213,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 19213,
+        "wall_seconds": 0.4231361639685929,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "exceptionOutcome": null,
+      "error": null,
+      "actualRecord": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "test",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "/workspaces/quoridor/Cargo.toml",
+          "-j1",
+          "--release",
+          "--message-format=json-render-diagnostics",
+          "-p",
+          "othello-core",
+          "--lib",
+          "full_eval::tests::full_eval_vector_auxiliary_unclipped_and_signed_rounding",
+          "--",
+          "--nocapture",
+          "--test-threads=1",
+          "--exact"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 2533785,
+          "start_ticks": "102524208",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "software": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "software",
+        "log_bytes_seen": 19213,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 19213,
+        "wall_seconds": 0.4231361639685929,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "originalDiskSnapshot": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "test",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "/workspaces/quoridor/Cargo.toml",
+          "-j1",
+          "--release",
+          "--message-format=json-render-diagnostics",
+          "-p",
+          "othello-core",
+          "--lib",
+          "full_eval::tests::full_eval_vector_auxiliary_unclipped_and_signed_rounding",
+          "--",
+          "--nocapture",
+          "--test-threads=1",
+          "--exact"
+        ],
+        "status": "complete",
+        "child": {
+          "pid": 2533785,
+          "start_ticks": "102524208",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "software": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "software",
+        "log_bytes_seen": 19213,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "exit_code": 0,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 19213,
+        "wall_seconds": 0.4231361639685929,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": null,
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted",
+        "finalization_errors": []
+      },
+      "passedDefinition": true,
+      "exactKnownChildAbsentOrDifferent": true
+    },
+    {
+      "name": "affected-core-wasm-Clippy",
+      "receipt": {
+        "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/prepared-pattern-grouped-software-v1/affected-core-wasm-Clippy.returned.json",
+        "bytes": 5884,
+        "mode": "0644",
+        "sha256": "2ede3e6030eda83f557b915f5a9202cfa2b8fe3f066e39f6fdad9876fc62cc7b"
+      },
+      "normalReturn": null,
+      "exceptionOutcome": {
+        "normal_return": false,
+        "record": {
+          "command": [
+            "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+            "clippy",
+            "--offline",
+            "--locked",
+            "--manifest-path",
+            "/workspaces/quoridor/Cargo.toml",
+            "-j1",
+            "--release",
+            "--message-format=json-render-diagnostics",
+            "-p",
+            "othello-core",
+            "-p",
+            "othello-wasm",
+            "--all-targets",
+            "--",
+            "-Dwarnings"
+          ],
+          "status": "failed",
+          "child": {
+            "pid": 2533839,
+            "start_ticks": "102524258",
+            "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+          },
+          "launch_policy": {
+            "no_new_privs_requested": false,
+            "verified_before_exec": null
+          },
+          "cpu_plan": {
+            "management": [
+              18
+            ],
+            "commands": {
+              "software": [
+                4
+              ]
+            },
+            "allocation": [
+              4,
+              18
+            ],
+            "resource_CPUs": 2,
+            "worker_CPUs": 1,
+            "library_threads": 1
+          },
+          "command_cpu_scope": "software",
+          "log_bytes_seen": 39208,
+          "scope": "session group and periodically recorded descendants; no daemon adoption",
+          "error": "cycle child failed: ['/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo', 'clippy', '--offline', '--locked', '--manifest-path', '/workspaces/quoridor/Cargo.toml', '-j1', '--release', '--message-format=json-render-diagnostics', '-p', 'othello-core', '-p', 'othello-wasm', '--all-targets', '--', '-Dwarnings']: 101",
+          "reason": "CycleStopped",
+          "exit_code": 101,
+          "remaining": [],
+          "direct_child_reaped": true,
+          "descendant_visibility": "observed",
+          "cleanup_complete": true,
+          "log_bytes_retained": 39208,
+          "wall_seconds": 1.8405766659416258,
+          "handle_closes_attempted": [
+            "selector_close",
+            "pipe_close",
+            "pidfd_close",
+            "log_close"
+          ],
+          "primary_error": {
+            "type": "CycleStopped",
+            "message": "cycle child failed: ['/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo', 'clippy', '--offline', '--locked', '--manifest-path', '/workspaces/quoridor/Cargo.toml', '-j1', '--release', '--message-format=json-render-diagnostics', '-p', 'othello-core', '-p', 'othello-wasm', '--all-targets', '--', '-Dwarnings']: 101"
+          },
+          "process_cleanup_complete": true,
+          "handle_closes_complete": true,
+          "signal_mask_restoration": "completed",
+          "final_record_persist": "completed",
+          "finalization_errors": []
+        }
+      },
+      "error": {
+        "type": "CycleStopped",
+        "message": "cycle child failed: ['/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo', 'clippy', '--offline', '--locked', '--manifest-path', '/workspaces/quoridor/Cargo.toml', '-j1', '--release', '--message-format=json-render-diagnostics', '-p', 'othello-core', '-p', 'othello-wasm', '--all-targets', '--', '-Dwarnings']: 101"
+      },
+      "actualRecord": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "clippy",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "/workspaces/quoridor/Cargo.toml",
+          "-j1",
+          "--release",
+          "--message-format=json-render-diagnostics",
+          "-p",
+          "othello-core",
+          "-p",
+          "othello-wasm",
+          "--all-targets",
+          "--",
+          "-Dwarnings"
+        ],
+        "status": "failed",
+        "child": {
+          "pid": 2533839,
+          "start_ticks": "102524258",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "software": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "software",
+        "log_bytes_seen": 39208,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "error": "cycle child failed: ['/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo', 'clippy', '--offline', '--locked', '--manifest-path', '/workspaces/quoridor/Cargo.toml', '-j1', '--release', '--message-format=json-render-diagnostics', '-p', 'othello-core', '-p', 'othello-wasm', '--all-targets', '--', '-Dwarnings']: 101",
+        "reason": "CycleStopped",
+        "exit_code": 101,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 39208,
+        "wall_seconds": 1.8405766659416258,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": {
+          "type": "CycleStopped",
+          "message": "cycle child failed: ['/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo', 'clippy', '--offline', '--locked', '--manifest-path', '/workspaces/quoridor/Cargo.toml', '-j1', '--release', '--message-format=json-render-diagnostics', '-p', 'othello-core', '-p', 'othello-wasm', '--all-targets', '--', '-Dwarnings']: 101"
+        },
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "completed",
+        "final_record_persist": "completed",
+        "finalization_errors": []
+      },
+      "originalDiskSnapshot": {
+        "command": [
+          "/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+          "clippy",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "/workspaces/quoridor/Cargo.toml",
+          "-j1",
+          "--release",
+          "--message-format=json-render-diagnostics",
+          "-p",
+          "othello-core",
+          "-p",
+          "othello-wasm",
+          "--all-targets",
+          "--",
+          "-Dwarnings"
+        ],
+        "status": "failed",
+        "child": {
+          "pid": 2533839,
+          "start_ticks": "102524258",
+          "boot_id": "6c2e177d-29e9-4a05-ad60-026060b53fb9"
+        },
+        "launch_policy": {
+          "no_new_privs_requested": false,
+          "verified_before_exec": null
+        },
+        "cpu_plan": {
+          "management": [
+            18
+          ],
+          "commands": {
+            "software": [
+              4
+            ]
+          },
+          "allocation": [
+            4,
+            18
+          ],
+          "resource_CPUs": 2,
+          "worker_CPUs": 1,
+          "library_threads": 1
+        },
+        "command_cpu_scope": "software",
+        "log_bytes_seen": 39208,
+        "scope": "session group and periodically recorded descendants; no daemon adoption",
+        "error": "cycle child failed: ['/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo', 'clippy', '--offline', '--locked', '--manifest-path', '/workspaces/quoridor/Cargo.toml', '-j1', '--release', '--message-format=json-render-diagnostics', '-p', 'othello-core', '-p', 'othello-wasm', '--all-targets', '--', '-Dwarnings']: 101",
+        "reason": "CycleStopped",
+        "exit_code": 101,
+        "remaining": [],
+        "direct_child_reaped": true,
+        "descendant_visibility": "observed",
+        "cleanup_complete": true,
+        "log_bytes_retained": 39208,
+        "wall_seconds": 1.8405766659416258,
+        "handle_closes_attempted": [
+          "selector_close",
+          "pipe_close",
+          "pidfd_close",
+          "log_close"
+        ],
+        "primary_error": {
+          "type": "CycleStopped",
+          "message": "cycle child failed: ['/usr/local/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo', 'clippy', '--offline', '--locked', '--manifest-path', '/workspaces/quoridor/Cargo.toml', '-j1', '--release', '--message-format=json-render-diagnostics', '-p', 'othello-core', '-p', 'othello-wasm', '--all-targets', '--', '-Dwarnings']: 101"
+        },
+        "process_cleanup_complete": true,
+        "handle_closes_complete": true,
+        "signal_mask_restoration": "pending",
+        "final_record_persist": "attempted",
+        "finalization_errors": []
+      },
+      "passedDefinition": false,
+      "exactKnownChildAbsentOrDifferent": true
+    }
+  ],
+  "status": "FAILED_CLIPPY_AFTER_THREE_TEST_PASSES",
+  "successfulUniqueDefinitions": 3,
+  "failedCheck": "affected-core-wasm-Clippy",
+  "laterUnrun": [
+    "affected-portable-target-Clippy",
+    "native-release",
+    "wasm-release"
+  ],
+  "config": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/prepared-pattern-grouped-software-v1/config.json",
+    "bytes": 14070,
+    "mode": "0644",
+    "sha256": "af15b8781c6c8e449985344de06f686938c6761746fa837e195db791c386a118"
+  },
+  "resourceContract": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/integration324/othello-strong-ai-n96/prepared-pattern-grouped-software-v1/resources.json",
+    "bytes": 1722,
+    "mode": "0644",
+    "sha256": "4a284f76b2cd2f128f798bc2a571d61cf16eadba083277a472e549bc40fecc82"
+  },
+  "qualification": null,
+  "image": null,
+  "numericalRequests": 0,
+  "scientificRetainedInputModelReads": 0,
+  "genuineSyntheticEvaluationWorkExecuted": true,
+  "noAutomaticRetry": true,
+  "originalNormalVsExceptionVsDiskPreserved": true,
+  "notificationSupervisorLifetime": "Separate from reaped software command/source reader; no disappearance gate",
+  "costs": {
+    "originalInclusiveOuterSeconds": 19.484486913890578,
+    "innerCheckSeconds": [
+      16.305886823916808,
+      0.3645527090411633,
+      0.4231361639685929,
+      1.8405766659416258
+    ],
+    "innerChecksIncludedInOuter": true,
+    "originalWhole": 840,
+    "originalParent": 900,
+    "conservativeFreshWhole": 820,
+    "conservativeFreshParent": 880
+  },
+  "laterAdminClosureByref": "Max45 CLOSED exactly once; source-only, no software/image/performance grant"
+}
